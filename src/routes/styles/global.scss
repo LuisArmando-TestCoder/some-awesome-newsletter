@@ -1,0 +1,70 @@
+/* Jost Black */
+@font-face {
+  font-family: "Spartan Black";
+  font-weight: bold;
+  src: url("./LeagueSpartan-Black.ttf") format("truetype");
+}
+
+/* Jost */
+@font-face {
+  font-family: "Jost";
+  font-weight: normal;
+  src: url("./Jost-Light.ttf") format("truetype");
+}
+
+/* Kiona */
+@font-face {
+  font-family: "Kiona Regular";
+  font-weight: normal;
+  src: url("./Kiona-Regular.ttf") format("truetype");
+}
+
+:global(:root) {
+  --color-foreground: #181818;
+  --color-outline: #ccff0d;
+  --color-background: #ffffff; // #f1e9e4
+
+  --font-title: "Kiona Regular", serif;
+  --font-subtitle: "Spartan Black", serif;
+  --font-paragraph: "Jost", sans-serif;
+
+  --transition-short-duration: 1s;
+  --transition-shortest-duration: .3s;
+
+  --ham-size: calc(clamp(100px, 30vw, 200px) / 4);
+
+  interpolate-size: allow-keywords;
+}
+
+// Set the width and color of the scrollbar
+:global(::-webkit-scrollbar) {
+  width: 5px;
+  height: 0;
+}
+:global(::-webkit-scrollbar-track) {
+  background: var(--color-background);
+}
+:global(::-webkit-scrollbar-thumb) {
+  background: var(--color-background-inversion);
+  border-radius: 5px;
+}
+:global(::-webkit-scrollbar-thumb:hover) {
+  background: var(--color-outline);
+}
+
+:global(body) {
+  overflow-x: hidden;
+  background-color: var(--color-background-inversion);
+  color: var(--color-foreground);
+  background: var(--color-x-gradient);
+}
+
+:global(*) {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+:global(h1, h2, h3, h4, h5, h6, span, section) {
+  transition: color 0.35s, background-color 0.35s, fill 0.35s, stroke 0.35s;
+  scroll-behavior: smooth;
+}

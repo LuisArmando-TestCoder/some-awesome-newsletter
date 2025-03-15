@@ -1,0 +1,76 @@
+<script lang="ts">
+  import { onMount } from "svelte";
+  import { themeIndex } from "./Store.ts";
+
+  let isDarkTheme = false;
+
+  // Check localStorage for theme preference
+  onMount(() => {
+    const storedTheme = localStorage.getItem("theme");
+    if (storedTheme) {
+      isDarkTheme = storedTheme === "dark";
+    }
+    updateTheme();
+  });
+
+  const toggleTheme = () => {
+    isDarkTheme = !isDarkTheme;
+    localStorage.setItem("theme", isDarkTheme ? "dark" : "light");
+    updateTheme();
+  };
+
+  function setThemeCSSVar(varName: string, values: string[]) {
+    document.documentElement.style.setProperty(
+      `--${varName}`,
+      isDarkTheme ? values[0] : values[1]
+    );
+    document.documentElement.style.setProperty(
+      `--${varName}-inversion`,
+      isDarkTheme ? values[1] : values[0]
+    );
+  }
+
+  const updateTheme = () => {
+    themeIndex.set(+isDarkTheme);
+    setThemeCSSVar("color-background", ["#fff", "#181818"]);
+    setThemeCSSVar("color-foreground", ["#ccff0d", "#181818"]);
+    setThemeCSSVar("color-foreground-inversion", ["#ccff0d", "#fff"]);
+    setThemeCSSVar("color-outline", ["#181818", "#fff"]);
+    setThemeCSSVar("color-untamed", ["#000", "#f5f5f5"]);
+    setThemeCSSVar("color-tamed", ["#262626", "#d2d2d2"]);
+    setThemeCSSVar("color-opaque-background", ["#fff2", "#aaa2"]);
+    setThemeCSSVar("bg-filter", [
+      "contrast(-55%) brightness(4.25)",
+      "contrast(10.5%) brightness(2.2)",
+    ]);
+    setThemeCSSVar("contrast", ["contrast(.9)", "contrast(.9)"]);
+    setThemeCSSVar("contrast-inversion", ["contrast(1.2)", "contrast(.9)"]);
+    setThemeCSSVar("color-variable", [
+      "var(--color-background-inversion)",
+      "var(--color-background)",
+    ]);
+    setThemeCSSVar("theme", ["dark", "light"]);
+    setThemeCSSVar("color-x-gradient", [
+      "linear-gradient(90deg, rgba(24,23,23,1) 0%, rgba(20,20,20,1) 22%, rgba(0,0,0,1) 100%)",
+      "linear-gradient(90deg, rgba(248, 248, 248, 1) 0%, rgba(245, 244, 244, 1) 11%, rgba(227, 227, 227, 1) 100%)",
+    ]);
+  };
+
+  export let visible: boolean;
+</script>
+
+{#key visible}
+  <div class="theme-changer">
+    <button
+      aria-label="Change theme from dark to light"
+      class="theme-toggle {isDarkTheme ? 'dark' : 'light'}"
+      on:click={toggleTheme}
+    >
+      <div class="icon"></div>
+    </button>
+  </div>
+{/key}
+
+<style lang="scss">
+  @use "./ThemeChanger.scss";
+</style>

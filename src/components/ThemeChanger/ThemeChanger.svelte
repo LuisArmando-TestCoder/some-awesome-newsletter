@@ -40,7 +40,7 @@
     setThemeCSSVar("color-tamed", ["#262626", "#d2d2d2"]);
     setThemeCSSVar("color-opaque-background", ["#fff2", "#aaa2"]);
     setThemeCSSVar("bg-filter", [
-      "contrast(-55%) brightness(4.25)",
+      "contrast(85%) brightness(25%)",
       "contrast(10.5%) brightness(2.2)",
     ]);
     setThemeCSSVar("contrast", ["contrast(.9)", "contrast(.9)"]);

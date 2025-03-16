@@ -2,26 +2,26 @@
 @font-face {
   font-family: "Spartan Black";
   font-weight: bold;
-  src: url("./LeagueSpartan-Black.ttf") format("truetype");
+  src: url("./fonts/League_Spartan/static/LeagueSpartan-Black.ttf") format("truetype");
 }
 
 /* Jost */
 @font-face {
   font-family: "Jost";
   font-weight: normal;
-  src: url("./Jost-Light.ttf") format("truetype");
+  src: url("./fonts/JOST/Jost-Light.ttf") format("truetype");
 }
 
 /* Kiona */
 @font-face {
   font-family: "Kiona Regular";
   font-weight: normal;
-  src: url("./Kiona-Regular.ttf") format("truetype");
+  src: url("./fonts/KIONA/Kiona-Regular.ttf") format("truetype");
 }
 
 :global(:root) {
   --color-foreground: #181818;
-  --color-outline: #ccff0d;
+  --color-outline: #03a9f4;
   --color-background: #ffffff; // #f1e9e4
 
   --font-title: "Kiona Regular", serif;

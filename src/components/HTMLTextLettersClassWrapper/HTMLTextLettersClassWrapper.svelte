@@ -4,7 +4,7 @@
 
     export let HTMLText: string;
     const innerText = writable<string>();
-    export const transitionSpeed: number = 1;
+    export const transitionSpeed: number = .5;
 
     onMount(() => {
         const GhostHTML = document.createElement("DIV");

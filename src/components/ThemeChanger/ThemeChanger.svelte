@@ -33,15 +33,16 @@
   const updateTheme = () => {
     themeIndex.set(+isDarkTheme);
     setThemeCSSVar("color-background", ["#fff", "#181818"]);
-    setThemeCSSVar("color-foreground", ["#ccff0d", "#181818"]);
-    setThemeCSSVar("color-foreground-inversion", ["#ccff0d", "#fff"]);
+    setThemeCSSVar("color-background-opaque", ["#fff8", "#18181888"]);
+    setThemeCSSVar("color-background-very-opaque", ["#ffffff0f", "#1818180f"]);
+    setThemeCSSVar("color-foreground", ["#03a9f4", "#00bcd4"]);
+    setThemeCSSVar("color-foreground-inversion", ["#03a9f4", "#fff"]);
     setThemeCSSVar("color-outline", ["#181818", "#fff"]);
     setThemeCSSVar("color-untamed", ["#000", "#f5f5f5"]);
     setThemeCSSVar("color-tamed", ["#262626", "#d2d2d2"]);
-    setThemeCSSVar("color-opaque-background", ["#fff2", "#aaa2"]);
     setThemeCSSVar("bg-filter", [
       "contrast(85%) brightness(25%)",
-      "contrast(10.5%) brightness(2.2)",
+      "contrast(15%) brightness(200%)",
     ]);
     setThemeCSSVar("contrast", ["contrast(.9)", "contrast(.9)"]);
     setThemeCSSVar("contrast-inversion", ["contrast(1.2)", "contrast(.9)"]);

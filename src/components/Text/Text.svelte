@@ -1,0 +1,24 @@
+<script lang="ts">
+  import RevealText from "../RevealText/RevealText.svelte";
+  import TextTypes from "../TextTypes/TextTypes.svelte";
+  import type { TextType } from "../types.ts";
+
+  export let text: string = "";
+  export let type: TextType = "paragraph";
+  export let block: boolean = false;
+  export let canReveal = false;
+</script>
+
+<span class="text" class:block>
+  <TextTypes {type}>
+    <RevealText {text} {canReveal} />
+  </TextTypes>
+</span>
+
+<style lang="scss">
+  .text {
+    &.block {
+        display: block;
+    }
+  }
+</style>

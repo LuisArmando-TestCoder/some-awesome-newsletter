@@ -1,0 +1,41 @@
+.text-type {
+  line-height: 1.5;
+
+  &--paragraph {
+    font-family: var(--font-paragraph);
+    font-size: 18px;
+    color: var(--color-background);
+  }
+
+  &--sub-italic {
+    font-family: var(--font-paragraph);
+    font-size: 12px;
+    font-style: italic;
+    color: var(--color-background);
+  }
+
+  &--sub-highlight-italic {
+    font-family: var(--font-paragraph);
+    font-size: 12px;
+    font-style: italic;
+    color: var(--color-foreground);
+  }
+
+  &--highlight {
+    font-family: var(--font-paragraph);
+    font-size: 18px;
+    color: var(--color-foreground);
+  }
+
+  &--title {
+    font-family: var(--font-title);
+    font-size: 30px;
+    color: var(--color-foreground);
+  }
+
+  &--subtitle {
+    font-family: var(--font-title);
+    font-size: 19px;
+    color: var(--color-background);
+  }
+}

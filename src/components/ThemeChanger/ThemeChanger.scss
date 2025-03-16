@@ -1,4 +1,9 @@
 .theme-changer {
+  z-index: 1;
+  position: fixed;
+  top: 15px;
+  right: 15px;
+
   .theme-toggle {
     background: transparent;
     position: relative;
@@ -45,6 +50,6 @@
     border-radius: 50%;
     transition: 0.75s;
     transition-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1);
-    box-shadow: inset -40px -3px 0 4px var(--color-foreground);
+    box-shadow: inset -40px -3px 0 4px var(--color-background);
   }
 }

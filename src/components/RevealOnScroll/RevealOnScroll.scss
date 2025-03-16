@@ -1,6 +1,7 @@
 .reveal-on-scroll {
   position: relative;
   overflow: hidden;
+  display: inline-block;
 
   & :global(*.wrapper-letter) {
     transition: 1s, 

@@ -19,11 +19,15 @@
     [({ value }: Store) => value === 3, B],
   ]);
 
+  const goNext = () => {
+    if ($store.value <= 1) {
+      store.set({ value: Math.min($store.value + 1, slotCallbacks.size) });
+    }
+  };
+
   onMount(() => {
-    setTimeout(() => {
-      if ($store.value === 0)
-        store.set({ value: Math.min($store.value + 1, slotCallbacks.size) });
-    }, 5e3);
+    setTimeout(goNext, 5e3);
+    setTimeout(goNext, 5e3 + 13.5e3);
   });
 </script>
 

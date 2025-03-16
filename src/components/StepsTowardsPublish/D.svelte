@@ -7,5 +7,5 @@
 <MarkdownText {canReveal}>
     --Let's start with your lead--
 
-    ### Where do you want to take your clients?
+    ### Where do you want to **lead** your clients?
 </MarkdownText>

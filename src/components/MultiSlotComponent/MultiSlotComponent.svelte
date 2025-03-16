@@ -37,5 +37,5 @@
 </div>
 
 <style lang="scss">
-  @use "./multiSlotComponent.scss";
+  @use "./MultiSlotComponent.scss";
 </style>

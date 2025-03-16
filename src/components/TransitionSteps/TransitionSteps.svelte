@@ -16,6 +16,8 @@
     direction={direction as -1 | 1}
     callback={() => {
       store.set({
+        ...$store,
+        hasInteracted: true,
         value: canProceed()
           ? Math.min(
               Math.max(

@@ -86,7 +86,7 @@
 </div>
 
 <!-- Render the parsed blocks -->
-<div>
+<div class="markdown-text">
   {#each blocks as block}
     {#if block.header}
       <!-- Headers always get their own line -->
@@ -100,3 +100,9 @@
     <br />
   {/each}
 </div>
+
+<style lang="scss">
+  .markdown-text {
+    user-select: none;
+  }
+</style>

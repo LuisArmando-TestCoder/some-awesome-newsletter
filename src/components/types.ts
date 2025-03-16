@@ -20,6 +20,7 @@ export type Block = {
 
 export type Store = {
   value: number;
+  hasInteracted: boolean;
 };
 
 export type SvelteComp<

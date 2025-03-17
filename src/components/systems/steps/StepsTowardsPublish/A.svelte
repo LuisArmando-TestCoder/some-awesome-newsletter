@@ -5,7 +5,7 @@
 </script>
 
 <MarkdownText {canReveal}>
-    ## Get a newsletter **from where** **there** isn't one
+    ## Get a newsletter **where** **there** isn't one
 
     ### This is your **AI-powered** newsletter **translator**
 </MarkdownText>

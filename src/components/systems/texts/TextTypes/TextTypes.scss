@@ -46,14 +46,14 @@
   }
 
   &--title-sub-italic {
-    font-family: var(--font-paragraph);
+    font-family: var(--font-title);
     font-size: var(--unit-5);
     font-style: italic;
     color: var(--color-foreground);
   }
 
   &--title-sub-highlight-italic {
-    font-family: var(--font-paragraph);
+    font-family: var(--font-title);
     font-size: var(--unit-5);
     font-style: italic;
     color: var(--color-background);
@@ -72,14 +72,14 @@
   }
 
   &--subtitle-sub-italic {
-    font-family: var(--font-paragraph);
+    font-family: var(--font-title);
     font-size: var(--unit-2);
     font-style: italic;
     color: var(--color-background);
   }
 
   &--subtitle-sub-highlight-italic {
-    font-family: var(--font-paragraph);
+    font-family: var(--font-title);
     font-size: var(--unit-2);
     font-style: italic;
     color: var(--color-foreground);

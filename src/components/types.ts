@@ -1,3 +1,5 @@
+import type { SvelteComponent } from "svelte";
+
 export type TextType =
   | "paragraph"
   | "sub-italic"
@@ -23,17 +25,27 @@ export type Store = {
   hasInteracted: boolean;
 };
 
-export type SvelteComp<
-  P extends Record<string, any>,
-  E extends Record<string, any>,
-  S extends Record<string, any>,
-  T = string
-> = __sveltets_2_IsomorphicComponent<P, E, S, {}, T>;
+export type RevealMap = Map<(store: Store) => boolean, typeof SvelteComponent>;
 
-export type RevealComponent = SvelteComp<
-  { canReveal?: boolean },
-  { [evt: string]: CustomEvent<any> },
-  {}
->;
+export interface Country {
+  code: string;
+  name: string;
+  flag: string;
+}
 
-export type RevealMap = Map<(store: Store) => boolean, RevealComponent>;
+export type Language = {
+  code: string;
+  name: string;
+};
+
+export interface Card {
+  id: string;
+  title: string;
+  description?: string;
+  selected: boolean;
+}
+
+export type ComponentSteps = [
+  (store: Store) => boolean,
+  SvelteComponent
+][];

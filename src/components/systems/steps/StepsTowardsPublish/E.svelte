@@ -6,8 +6,8 @@
 </script>
 
 <MarkdownText {canReveal}>
-  --Let's start with your lead--
+  --Now... for your newsletter feed--
   
-  ### Where do you want to **lead** your clients?
+  ### From which **blog** or **news site** do you want to **generate** your **content?**
 </MarkdownText>
-<Link placeholder="Your website's URL"/>
+<Link placeholder="The news site or blog"/>

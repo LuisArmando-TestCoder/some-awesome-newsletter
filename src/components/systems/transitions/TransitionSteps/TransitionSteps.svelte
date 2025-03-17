@@ -1,7 +1,7 @@
 <script lang="ts">
   import store from "../../../store.ts";
   import type { RevealMap } from "../../../types.ts";
-  import TransitionButton from "../TransitionButton/TransitionButton.svelte";
+  import TransitionButton from "../../buttons/TransitionButton/TransitionButton.svelte";
 
   export let slotCallbacks: RevealMap;
 
@@ -11,7 +11,8 @@
 
 {#each [-1, 1] as direction}
   <TransitionButton
-    active={$store.value + direction >= 0 &&
+    active={canProceed() &&
+      $store.value + direction >= 0 &&
       $store.value + direction < slotCallbacks.size}
     direction={direction as -1 | 1}
     callback={() => {

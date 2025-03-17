@@ -23,7 +23,7 @@
   }}
 >
   <MarkdownText {canReveal}>
-    -- - You can always ask for a new one here--
+    -- - You can always get a new one here--
   </MarkdownText>
 </button>
 

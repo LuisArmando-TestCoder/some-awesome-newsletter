@@ -1,34 +1,30 @@
 <script lang="ts">
   import store from "../../../store.ts";
-  import type { RevealMap } from "../../../types.ts";
   import TransitionButton from "../../buttons/TransitionButton/TransitionButton.svelte";
 
-  export let slotCallbacks: RevealMap;
+  export let components: any[];
 
-  const canProceed = () =>
-    [...slotCallbacks.entries()][$store.value][0]($store);
+  const canShow = (
+    direction: -1 | 0 | 1,
+    isComingFromValidStep?: (v: any) => boolean
+  ) =>
+    components[$store.value + direction]?.[0]?.({
+      ...$store,
+      isComingFromValidStep,
+    });
 </script>
 
 {#each [-1, 1] as direction}
   <TransitionButton
-    active={canProceed() &&
-      $store.value + direction >= 0 &&
-      $store.value + direction < slotCallbacks.size}
+    active={canShow(direction as -1 | 1)}
     direction={direction as -1 | 1}
     callback={() => {
+      canShow(direction as -1 | 1, canShow(direction as -1 | 1));
+
       store.set({
         ...$store,
         hasInteracted: true,
-        value: canProceed()
-          ? Math.min(
-              Math.max(
-                (slotCallbacks.size + ($store.value + direction)) %
-                  slotCallbacks.size,
-                0
-              ),
-              slotCallbacks.size
-            )
-          : $store.value,
+        value: $store.value + direction,
       });
     }}
   />

@@ -4,7 +4,7 @@
 
   type Callback = (state: any) => boolean;
 
-  export let slotCallbacks: Map<Callback, any>;
+  export let steps: [Callback, any][];
   export let sharedStore: Writable<any>;
 
   let storeValue: any = writable();
@@ -19,7 +19,7 @@
 </script>
 
 <div class="multi-slot-component">
-  {#each Array.from(slotCallbacks.entries()) as [callback, Component]}
+  {#each steps as [callback, Component]}
     <div
       class="multi-slot-component--component-slot"
       class:active={!!callback($storeValue)}

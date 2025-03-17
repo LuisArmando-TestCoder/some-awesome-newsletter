@@ -20,10 +20,7 @@ export type Block = {
   segments?: TextNode[];
 };
 
-export type Store = {
-  value: number;
-  hasInteracted: boolean;
-};
+export type Store = { [index: string]: any };
 
 export type RevealMap = Map<(store: Store) => boolean, typeof SvelteComponent>;
 
@@ -45,7 +42,4 @@ export interface Card {
   selected: boolean;
 }
 
-export type ComponentSteps = [
-  (store: Store) => boolean,
-  SvelteComponent
-][];
+export type ComponentSteps = [(store: Store) => boolean, SvelteComponent][];

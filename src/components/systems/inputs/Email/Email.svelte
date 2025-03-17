@@ -21,7 +21,10 @@
     value = target.value;
     valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
     emailStore.set(value);
-    onChange(value);
+
+    if (valid) return onChange(value);
+
+    return onChange("");
   }
 </script>
 
@@ -46,7 +49,6 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    
   }
 
   input {

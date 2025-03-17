@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { onMount } from "svelte";
   import type { SvelteComponent } from "svelte";
   import MultiSlotComponent from "./MultiSlotComponent/MultiSlotComponent.svelte";
   import TransitionSteps from "../transitions/TransitionSteps/TransitionSteps.svelte";
@@ -9,20 +8,18 @@
   export let components: ComponentSteps;
 
   const steps: [(store: Store) => boolean, SvelteComponent][] = components.map(
-    ([callback, component], index) => {
+    ([_, component], index) => {
       return [
         (store: Store) => {
           const canReveal = store.value === index;
 
-          return callback(store) && canReveal;
+          return canReveal;
         },
-        component,
+        component
       ];
     }
   );
-
-  const slotCallbacks = new Map(steps);
 </script>
 
-<MultiSlotComponent {slotCallbacks} sharedStore={store} />
-<TransitionSteps {slotCallbacks} />
+<MultiSlotComponent {steps} sharedStore={store} />
+<TransitionSteps {components} />

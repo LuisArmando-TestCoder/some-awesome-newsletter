@@ -6,8 +6,6 @@
   export let placeholder: string = "Enter your URL...";
   export let label: string = "";
 
-  let lastValue: string;
-
   // Callback to be invoked when the input changes.
   export let onChange: (newValue: string) => void = () => {};
 
@@ -95,13 +93,13 @@
     // Consider an empty string as valid.
     valid = value === "" || isValidURL(value);
 
-    lastValue = value;
-
     urlStore.set(value);
 
     if (isValidURL(value)) {
-      onChange(value);
+      return onChange(value);
     }
+
+    return onChange("");
   }
 </script>
 
@@ -126,7 +124,6 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    
   }
 
   .input-label {

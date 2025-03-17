@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
   import { themeIndex } from "./Store.ts";
 
-  let isDarkTheme = false;
+  let isDarkTheme = true;
 
   // Check localStorage for theme preference
   onMount(() => {

@@ -1,6 +1,6 @@
 <script lang="ts">
-  import Code from "../../inputs/Code/Code.svelte";
-  import MarkdownText from "../../texts/MarkdownText/MarkdownText.svelte";
+  import Code from "../../../inputs/Code/Code.svelte";
+  import MarkdownText from "../../../texts/MarkdownText/MarkdownText.svelte";
 
   export let canReveal = false;
 </script>

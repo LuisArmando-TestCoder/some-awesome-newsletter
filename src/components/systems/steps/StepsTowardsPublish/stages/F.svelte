@@ -1,7 +1,7 @@
 <script lang="ts">
-  import MarkdownText from "../../texts/MarkdownText/MarkdownText.svelte";
-  import Email from "../../inputs/Email/Email.svelte";
-  import store from "../../../store.ts";
+  import MarkdownText from "../../../texts/MarkdownText/MarkdownText.svelte";
+  import Email from "../../../inputs/Email/Email.svelte";
+  import store from "../../../../store.ts";
 
   export let canReveal = false;
 </script>

@@ -32,6 +32,7 @@
   // fill them all out in one go.
   function handlePaste(event: ClipboardEvent) {
     event.preventDefault();
+    console.log("pasted", event.clipboardData?.getData("text"));
     const pasteData = event.clipboardData?.getData("text") ?? "";
 
     // Check if the pasted string is exactly the full length and all digits:
@@ -67,7 +68,10 @@
     // Update the store with the current code value
     const code = digits.join("");
     authCode.set(code);
-    onChange(code);
+    if (digits.every((n) => n)) {
+      return onChange(code);
+    }
+    return onChange("");
   }
 
   // Handle backspace: if empty, move focus to previous input.

@@ -1,13 +1,13 @@
 <script lang="ts">
-  import A from "./A.svelte";
-  import B from "./B.svelte";
-  import C from "./C.svelte";
-  import D from "./D.svelte";
-  import E from "./E.svelte";
-  import F from "./F.svelte";
-  import G from "./G.svelte";
-  import H from "./H.svelte";
-  import ZtepsTowardsPublish from "./ZtepsTowardsPublish.svelte";
+  import A from "./stages/A.svelte";
+  import B from "./stages/B.svelte";
+  import C from "./stages/C.svelte";
+  import D from "./stages/D.svelte";
+  import E from "./stages/E.svelte";
+  import F from "./stages/F.svelte";
+  import G from "./stages/G.svelte";
+  import H from "./stages/H.svelte";
+  import ZtepsTowardsPublish from "./StepsTowardsPublish.svelte";
 
   const t = () => true;
 

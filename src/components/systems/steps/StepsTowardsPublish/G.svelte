@@ -5,11 +5,15 @@
   export let canReveal = false;
 </script>
 
-<MarkdownText {canReveal}>
-  ## **We** sent **an** auth code **to your** email
-</MarkdownText>
+<div class="center">
+  <MarkdownText {canReveal}>
+    ## **We** sent **an** auth code **to your** email
+  </MarkdownText>
+</div>
 <Code />
-<MarkdownText {canReveal}>Now you can **login** at **any time**</MarkdownText>
+<div class="center">
+  <MarkdownText {canReveal}>Now you can **login** at **any time**</MarkdownText>
+</div>
 
 <button
   aria-label="Request a new code"
@@ -19,18 +23,26 @@
   }}
 >
   <MarkdownText {canReveal}>
-    -- - And you can always ask for a new code--
+    -- - You can always ask for a new one here--
   </MarkdownText>
 </button>
 
 <style lang="scss">
+  .center {
+    display: grid;
+    place-items: center;
+    width: 100%;
+  }
+
   .resend {
     padding: 0;
     margin: 0;
     border: 0;
     background: none;
     cursor: pointer;
-    display: inline-block;
+    display: flex;
+    justify-content: end;
+    width: 100%;
 
     &:hover {
       & :global(div span) {

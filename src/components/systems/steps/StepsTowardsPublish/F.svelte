@@ -8,6 +8,6 @@
 <MarkdownText {canReveal}>
   --The email your clients will see...--
   
-  ### On behalf of **whom** do we send the **newsletter**?
+  ### On behalf of **whom** do we **send** the **newsletter**?
 </MarkdownText>
 <Email placeholder="Your email or your organization's"/>

@@ -22,28 +22,6 @@
   );
 
   const slotCallbacks = new Map(steps);
-
-  const goNext = (currentIndex: number) => () => {
-    if (
-      !$store.hasInteracted &&
-      $store.value < currentIndex &&
-      $store.value + 1 === currentIndex
-    ) {
-      store.set({
-        ...$store,
-        value: Math.min($store.value + 1, slotCallbacks.size),
-      });
-    }
-  };
-
-  onMount(() => {
-    const timings = [6.5e3, 8e3, 12e3];
-
-    timings.forEach((_, index) => {
-      const summation = timings.slice(0, index + 1).reduce((a, b) => a + b);
-      setTimeout(goNext(index + 1), summation);
-    });
-  });
 </script>
 
 <MultiSlotComponent {slotCallbacks} sharedStore={store} />

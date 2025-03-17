@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import Text from "../Text/Text.svelte";
-  import type { Block, TextNode } from "../types.ts";
+  import type { Block, TextNode } from "../../../types.ts";
 
   let blocks: Block[] = [];
   let slotContainer: HTMLDivElement;
@@ -68,7 +68,7 @@
   function parseMarkdown(md: string) {
     const rawBlocks = md.split(/\n\s*\n/);
 
-    blocks = rawBlocks.map((block) => {
+    (blocks as any) = rawBlocks.map((block) => {
       const trimmed = block.trim();
 
       // Level 2 header => title

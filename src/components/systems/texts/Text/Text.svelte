@@ -1,7 +1,7 @@
 <script lang="ts">
+  import type { TextType } from "../../../types.ts";
   import RevealText from "../RevealText/RevealText.svelte";
   import TextTypes from "../TextTypes/TextTypes.svelte";
-  import type { TextType } from "../types.ts";
 
   export let text: string = "";
   export let type: TextType = "paragraph";

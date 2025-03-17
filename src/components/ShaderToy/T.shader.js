@@ -36,7 +36,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
 
     // Center UV coordinates and add a swirl effect
     vec2 p = uv - 0.5;
-    float t = iTime * 0.005;
+    float t = iTime * 0.01;
     float angle = fbm(p * 2.0 + t) * 6.28318;
     float radius = length(p);
     p = vec2(

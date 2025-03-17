@@ -35,6 +35,8 @@
     setThemeCSSVar("color-background", ["#fff", "#181818"]);
     setThemeCSSVar("color-background-opaque", ["#fff8", "#18181888"]);
     setThemeCSSVar("color-background-very-opaque", ["#ffffff0f", "#1818180f"]);
+    setThemeCSSVar("color-foreground-opaque", ["03a9f488", "#00bcd488"]);
+    setThemeCSSVar("color-foreground-very-opaque", ["#00bcd40f", "#00bcd40f"]);
     setThemeCSSVar("color-foreground", ["#03a9f4", "#00bcd4"]);
     setThemeCSSVar("color-foreground-inversion", ["#03a9f4", "#fff"]);
     setThemeCSSVar("color-outline", ["#181818", "#fff"]);

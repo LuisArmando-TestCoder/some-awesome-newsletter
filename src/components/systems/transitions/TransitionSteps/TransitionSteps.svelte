@@ -1,6 +1,6 @@
 <script lang="ts">
-  import store from "../store.ts";
-  import type { RevealMap } from "../types.ts";
+  import store from "../../../store.ts";
+  import type { RevealMap } from "../../../types.ts";
   import TransitionButton from "../TransitionButton/TransitionButton.svelte";
 
   export let slotCallbacks: RevealMap;

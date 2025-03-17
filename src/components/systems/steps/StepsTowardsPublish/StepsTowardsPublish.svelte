@@ -1,13 +1,13 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import MultiSlotComponent from "../MultiSlotComponent/MultiSlotComponent.svelte";
-  import store from "../store.ts";
   import A from "./A.svelte";
   import B from "./B.svelte";
   import C from "./C.svelte";
   import D from "./D.svelte";
-  import type { Store } from "../types.ts";
-  import TransitionSteps from "../TransitionSteps/TransitionSteps.svelte";
+  import TransitionSteps from "../../transitions/TransitionSteps/TransitionSteps.svelte";
+  import store from "../../../store.ts";
+  import type { Store } from "../../../types.ts";
 
   const slotCallbacks = new Map([
     [
@@ -35,7 +35,7 @@
   };
 
   onMount(() => {
-    const timings = [6.5e3, 8e3, 9e3];
+    const timings = [6.5e3, 8e3, 12e3];
 
     timings.forEach((_, index) => {
       const summation = timings.slice(0, index + 1).reduce((a, b) => a + b);

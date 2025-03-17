@@ -1,5 +1,5 @@
 <script lang="ts">
-    import MarkdownText from "../MarkdownText/MarkdownText.svelte";
+  import MarkdownText from "../../texts/MarkdownText/MarkdownText.svelte";
 
     export let canReveal = false;
 </script>

@@ -60,20 +60,22 @@
   button {
     position: absolute;
     background: var(--color-background-very-opaque); // Glassmorphism effect
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(6px);
     padding: 0.5rem 5rem;
     opacity: 0.75; // Base opacity
     transition: 0.3s;
-    box-shadow: 0 0 10px -8px var(--color-background);
+    box-shadow: 0 0 10px -6.5px var(--color-background);
     border: 0;
     cursor: pointer;
 
     &:hover {
-      background: var(--color-background); // Glassmorphism effect
+      background: var(--color-background-very-opaque-inversion); // Glassmorphism effect
+
+      box-shadow: 0 0 10px -8px var(--color-background);
 
       .arrow svg path {
         fill: var(
-          --color-background-inversion
+          --color-background
         ); // Arrow color transitions to pure white on hover
       }
     }

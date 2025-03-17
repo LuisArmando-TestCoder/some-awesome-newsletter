@@ -1,4 +1,5 @@
 <script lang="ts">
+  import sendAuthCode from "../../requests/sendAuthCode.ts";
   import A from "./stages/A.svelte";
   import B from "./stages/B.svelte";
   import C from "./stages/C.svelte";
@@ -23,29 +24,10 @@
         if (
           configuratorEmail &&
           isComingFromValidStep &&
-          !localStorage.getItem("has-email-been-sent")
+          !localStorage.getItem("has-email-auth-code-been-sent")
         ) {
-          (async () => {
-            const response = await fetch(
-              `https://ai-newsletter-translated.onrender.com/auth/${
-                configuratorEmail
-              }`,
-              {
-                method: "POST",
-              }
-            );
-
-            console.log(response);
-
-            const { success } = await response.json();
-
-            if (success) {
-              localStorage.setItem("has-email-been-sent", "1");
-              console.log(configuratorEmail);
-            }
-          })();
         }
-
+          sendAuthCode();
         return configuratorEmail;
       },
       G,

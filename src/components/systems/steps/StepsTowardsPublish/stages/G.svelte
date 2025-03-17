@@ -1,5 +1,6 @@
 <script lang="ts">
   import Code from "../../../inputs/Code/Code.svelte";
+  import sendAuthCode from "../../../requests/sendAuthCode.ts";
   import MarkdownText from "../../../texts/MarkdownText/MarkdownText.svelte";
 
   export let canReveal = false;
@@ -19,7 +20,7 @@
   aria-label="Request a new code"
   class="resend"
   onclick={() => {
-    // https://ai-newsletter-translated.onrender.com/
+    sendAuthCode();
   }}
 >
   <MarkdownText {canReveal}>

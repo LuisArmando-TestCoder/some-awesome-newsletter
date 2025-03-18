@@ -22,9 +22,7 @@
     valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
     emailStore.set(value);
 
-    if (valid) return onChange(value);
-
-    return onChange("");
+    onChange(value);
   }
 </script>
 

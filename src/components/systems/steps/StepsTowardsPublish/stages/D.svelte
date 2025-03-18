@@ -1,17 +1,23 @@
 <script lang="ts">
   import MarkdownText from "../../../texts/MarkdownText/MarkdownText.svelte";
   import Link from "../../../inputs/Link/Link.svelte";
-  import store from "../../../../store.ts";
+  import store, { saveToStore } from "../../../../store.ts";
 
   export let canReveal = false;
 </script>
 
 <MarkdownText {canReveal}>
   --Let's start with your lead--
-  
+</MarkdownText>
+
+<MarkdownText {canReveal}>
   ### Where do you want to **lead** your clients?
 </MarkdownText>
-<Link placeholder="Your website's URL" onChange={lead => store.set({
-  ...$store,
-  lead
-})}/>
+<Link
+  placeholder="Your website's URL"
+  value={$store.lead}
+  onChange={(lead) =>
+    saveToStore({
+      lead,
+    })}
+/>

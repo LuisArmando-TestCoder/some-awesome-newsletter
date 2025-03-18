@@ -1,10 +1,29 @@
-import { writable } from "svelte/store";
+import { get, writable } from "svelte/store";
 import type { Store } from "./types.ts";
 
-export default writable<Store>({
-  value: 0,
-  hasInteracted: false,
-  configuratorEmail: '',
-  newsSource: '',
-  hasEmailCodeBeenSent: false
+const store = writable<Store>({
+  stepsIndex: 0,
+  hasInteracted: false, // don't save
+  configuratorEmail: "",
+  newsSource: "",
+  lead: "",
+  hasEmailCodeBeenSent: false,
+  authCode: "",
+  keysToSave: [
+    "stepsIndex",
+    "configuratorEmail",
+    "newsSource",
+    "hasEmailCodeBeenSent",
+    "lead",
+    "authCode",
+  ],
 });
+
+export default store;
+
+export function saveToStore(objectValue: { [index: string]: any }) {
+  store.set({
+    ...get(store),
+    ...objectValue,
+  });
+}

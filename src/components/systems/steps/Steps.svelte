@@ -14,7 +14,7 @@
       components.map(([_, component], index) => {
         return [
           (store: Store) => {
-            const canReveal = store.value === index;
+            const canReveal = store.stepsIndex === index;
 
             const getAreAllPreviousValid = () => components
               .slice(0, index + 1)

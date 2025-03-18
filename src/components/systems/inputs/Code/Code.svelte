@@ -37,7 +37,7 @@
 
     // Check if the pasted string is exactly the full length and all digits:
     if (pasteData.trim().length === length && /^\d+$/.test(pasteData)) {
-      digits = pasteData.replace(/[^0-9]/g, '').split("");
+      digits = pasteData.replace(/[^0-9]/g, "").split("");
       // Update each input field
       digits.forEach((digit, i) => {
         inputRefs[i].value = digit;
@@ -68,10 +68,7 @@
     // Update the store with the current code value
     const code = digits.join("");
     authCode.set(code);
-    if (digits.every((n) => n)) {
-      return onChange(code);
-    }
-    return onChange("");
+    onChange(code);
   }
 
   // Handle backspace: if empty, move focus to previous input.

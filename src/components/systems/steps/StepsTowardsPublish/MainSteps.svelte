@@ -10,7 +10,7 @@
   import F from "./stages/F.svelte";
   import G from "./stages/G.svelte";
   import H from "./stages/H.svelte";
-  import ZtepsTowardsPublish from "./StepsTowardsPublish.svelte";
+  import StepsTowardsPublish from "./StepsTowardsPublish.svelte";
 
   const t = () => true;
 
@@ -42,4 +42,4 @@
   ];
 </script>
 
-<ZtepsTowardsPublish {components} />
+<StepsTowardsPublish {components} />

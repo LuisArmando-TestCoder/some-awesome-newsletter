@@ -1,30 +1,65 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import store from "../../../store.ts";
+  import store, { saveToStore } from "../../../store.ts";
   import Steps from "../Steps.svelte";
+  import type { Store } from "../../../types.ts";
 
   export let components;
 
   const goNext = (currentIndex: number) => () => {
     if (
       !$store.hasInteracted &&
-      $store.value < currentIndex &&
-      $store.value + 1 === currentIndex
+      $store.stepsIndex < currentIndex &&
+      $store.stepsIndex + 1 === currentIndex
     ) {
-      store.set({
-        ...$store,
-        value: Math.min($store.value + 1, components.length),
+      saveToStore({
+        stepsIndex: Math.min($store.stepsIndex + 1, components.length),
       });
     }
   };
 
-  onMount(() => {
-    const timings = [6.5e3, 8e3, 9e3];
+  function setStorageFromKeysToSave() {
+    for (const key of $store.keysToSave) {
+      try {
+        const value = JSON.parse(localStorage.getItem(key) || "");
 
-    timings.forEach((_, index) => {
-      const summation = timings.slice(0, index + 1).reduce((a, b) => a + b);
-      setTimeout(goNext(index + 1), summation);
+        if (!value) continue;
+
+        saveToStore({
+          [key]: value,
+        });
+      } catch {
+        continue;
+      }
+    }
+  }
+
+  function setInitialNonInteractiveSlidesAutomaticSlideTime() {
+    const timings = [6.5e3, 8e3, 9e3];
+    let timing = 0;
+
+    timings.forEach((waitDuration, index) => {
+      if (index < $store.stepsIndex) return;
+
+      timing += waitDuration;
+      console.log("index", index, $store.stepsIndex, timing, waitDuration);
+
+      setTimeout(goNext(index + 1), timing);
     });
+  }
+
+  function saveAllKeysToSaveInLocalStorage() {
+    store.subscribe((currentStore: Store) => {
+      for (const key of currentStore.keysToSave) {
+        localStorage.setItem(key, JSON.stringify(currentStore[key]));
+      }
+    });
+  }
+
+  onMount(() => {
+    setStorageFromKeysToSave();
+    setInitialNonInteractiveSlidesAutomaticSlideTime();
+    saveAllKeysToSaveInLocalStorage();
   });
 </script>
 

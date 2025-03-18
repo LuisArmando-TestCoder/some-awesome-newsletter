@@ -1,6 +1,5 @@
 <script lang="ts">
-  import { get } from "svelte/store";
-  import store from "../../../store.ts";
+  import store, { saveToStore } from "../../../store.ts";
   import TransitionButton from "../../buttons/TransitionButton/TransitionButton.svelte";
 
   export let components: any[];
@@ -9,7 +8,7 @@
     direction: -1 | 0 | 1,
     isComingFromValidStep?: (v: any) => boolean
   ) =>
-    components[$store.value + direction]?.[0]?.({
+    components[$store.stepsIndex + direction]?.[0]?.({
       ...$store,
       isComingFromValidStep,
     });
@@ -22,10 +21,9 @@
     callback={() => {
       canShow(direction as -1 | 1, canShow(direction as -1 | 1));
 
-      store.set({
-        ...$store,
+      saveToStore({
         hasInteracted: true,
-        value: $store.value + direction,
+        stepsIndex: $store.stepsIndex + direction,
       });
     }}
   />

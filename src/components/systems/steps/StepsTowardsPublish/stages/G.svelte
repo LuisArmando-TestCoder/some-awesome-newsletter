@@ -1,4 +1,5 @@
 <script lang="ts">
+  import store, { saveToStore } from "../../../../store.ts";
   import Code from "../../../inputs/Code/Code.svelte";
   import sendAuthCode from "../../../requests/sendAuthCode.ts";
   import MarkdownText from "../../../texts/MarkdownText/MarkdownText.svelte";
@@ -11,7 +12,13 @@
     ## **We** sent **an** auth code **to your** email
   </MarkdownText>
 </div>
-<Code />
+<Code
+  onChange={(authCode) => {
+    saveToStore({
+      authCode,
+    });
+  }}
+/>
 <div class="center">
   <MarkdownText {canReveal}>Now you can **login** at **any time**</MarkdownText>
 </div>

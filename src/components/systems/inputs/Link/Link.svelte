@@ -95,11 +95,7 @@
 
     urlStore.set(value);
 
-    if (isValidURL(value)) {
-      return onChange(value);
-    }
-
-    return onChange("");
+    onChange(value);
   }
 </script>
 

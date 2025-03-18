@@ -24,14 +24,15 @@
       console.log("some", authCode);
 
       if (authCode) {
+        saveToStore({
+          hasNewEmailCodeBeenSent: true,
+        });
         askIsAuthCodeValid();
       }
     }}
   />
   {#if $store.isAuthCodeValid === false && $store.authCode.length === 6}
-    <div class="error center">
-      Invalid auth code provided
-    </div>
+    <div class="error center">Invalid auth code provided</div>
   {:else}
     <div class="center">
       <MarkdownText {canReveal}

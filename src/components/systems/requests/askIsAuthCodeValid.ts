@@ -8,10 +8,15 @@ export default async () => {
     }?code=${get(store).authCode}`
   );
 
-  if (response.ok) {
-    console.log("fetch sent, code is valid")
+  saveToStore({
+    isAuthCodeValid: response.ok,
+  });
+
+  if (response.ok && get(store).hasNewEmailCodeBeenSent) {
     saveToStore({
-      isAuthCodeValid: true
+      hasNewEmailCodeBeenSent: false,
+      stepsIndex: get(store).stepsIndex + 1,
+    //   directionsThatShouldDisappear: [-1],
     });
   }
 };

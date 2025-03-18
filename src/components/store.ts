@@ -10,8 +10,7 @@ const store = writable<Store>({
   hasNewEmailCodeBeenSent: false,
   authCode: "",
   directionsThatShouldDisappear: [],
-  isAuthCodeValid: false,
-  canAddSubscriptionFromInitialLogin: true,
+  isAuthCodeValid: '',
   keysToSave: [
     "stepsIndex",
     "configuratorEmail",

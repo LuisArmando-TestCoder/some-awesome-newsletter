@@ -30,17 +30,6 @@
         ) {
           saveToStore({ hasNewEmailCodeBeenSent: true });
           askForNewAuthCode();
-          if (store.canAddSubscriptionFromInitialLogin) {
-            theStoreWritable.subscribe((store) => {
-              if (store.isAuthCodeValid) {
-                console.log("very hea 1");
-                saveToStore({
-                  stepsIndex: Math.min(store.stepsIndex + 1, components.length),
-                });
-              }
-            });
-            saveToStore({ canAddSubscriptionFromInitialLogin: false });
-          }
         }
         return store.configuratorEmail;
       },

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { saveToStore } from "../../../../store.ts";
+  import store, { saveToStore } from "../../../../store.ts";
   import Code from "../../../inputs/Code/Code.svelte";
   import askIsAuthCodeValid from "../../../requests/askIsAuthCodeValid.ts";
   import askForNewAuthCode from "../../../requests/askForNewAuthCode.ts";
@@ -45,9 +45,16 @@
       -- - If you didn't receive the email, click here--
     </MarkdownText>
   </button>
+  <div class="error">
+    {$store.isAuthCodeValid === false ? "Invalid auth code provided" : ''}
+  </div>
 </Centered>
 
 <style lang="scss">
+  .error {
+    color: red;
+  }
+
   .center {
     display: grid;
     place-items: center;

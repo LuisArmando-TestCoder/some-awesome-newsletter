@@ -20,7 +20,7 @@
               .slice(0, index + 1)
               .every(([callback]) => callback(store));
 
-            return areAllPreviousValid && canReveal;
+            return canReveal && areAllPreviousValid;
           },
           component,
         ];

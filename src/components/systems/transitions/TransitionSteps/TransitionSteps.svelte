@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { get } from "svelte/store";
   import store from "../../../store.ts";
   import TransitionButton from "../../buttons/TransitionButton/TransitionButton.svelte";
 

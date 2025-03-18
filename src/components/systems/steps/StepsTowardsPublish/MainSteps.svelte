@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Store } from "../../../types.ts";
+  import theStoreWritable from "../../../store.ts";
   import sendAuthCode from "../../requests/sendAuthCode.ts";
   import A from "./stages/A.svelte";
   import B from "./stages/B.svelte";
@@ -18,7 +19,7 @@
     [t, B],
     [t, C],
     [t, D],
-    [({ lead }: { lead: string }) => lead, E],
+    [(store: Store) => store.lead, E],
     [(store: Store) => store.newsSource, F],
     [
       (store: Store) => {
@@ -27,7 +28,7 @@
           store.isComingFromValidStep &&
           !store.hasEmailCodeBeenSent
         ) {
-          store.update((currentStore: Store) => ({
+          theStoreWritable.update((currentStore: Store) => ({
             ...currentStore,
             hasEmailCodeBeenSent: true,
           }));

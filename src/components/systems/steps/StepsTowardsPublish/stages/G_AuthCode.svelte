@@ -22,11 +22,10 @@
         authCode,
       });
 
-      console.log("some", authCode);
-
       if (authCode) {
         saveToStore({
           hasNewEmailCodeBeenSent: true,
+          isAuthCodeValid: true
         });
         askIsAuthCodeValid();
       }
@@ -34,14 +33,16 @@
   />
   {#if !$store.isAuthCodeValid && $store.authCode && $store.hasNewEmailCodeBeenSent}
     <div class="error center">Invalid auth code provided</div>
+    {:else}
+
+    <div class="center">
+      <MarkdownText
+        {canReveal}
+        >Now you can **login** at **any time**</MarkdownText
+      >
+    </div>
   {/if}
 
-  <div class="center">
-    <MarkdownText
-      canReveal={$store.isAuthCodeValid || $store.authCode === ""}
-      >Now you can **login** at **any time**</MarkdownText
-    >
-  </div>
 
   <button
     aria-label="Request a new code"

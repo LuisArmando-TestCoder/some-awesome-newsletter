@@ -11,10 +11,11 @@
 
 <Centered>
   <div class="center">
-    <MarkdownText {canReveal}>
+    <MarkdownText canReveal={$store.hasNewEmailCodeBeenSent}>
       ## **We** sent **an** auth code **to your** email
     </MarkdownText>
   </div>
+
   <Code
     onChange={(authCode) => {
       saveToStore({
@@ -31,15 +32,16 @@
       }
     }}
   />
-  {#if $store.isAuthCodeValid === false && $store.authCode.length === 6}
+  {#if !$store.isAuthCodeValid && $store.authCode && $store.hasNewEmailCodeBeenSent}
     <div class="error center">Invalid auth code provided</div>
-  {:else}
-    <div class="center">
-      <MarkdownText {canReveal}
-        >Now you can **login** at **any time**</MarkdownText
-      >
-    </div>
   {/if}
+
+  <div class="center">
+    <MarkdownText
+      canReveal={$store.isAuthCodeValid || $store.authCode === ""}
+      >Now you can **login** at **any time**</MarkdownText
+    >
+  </div>
 
   <button
     aria-label="Request a new code"

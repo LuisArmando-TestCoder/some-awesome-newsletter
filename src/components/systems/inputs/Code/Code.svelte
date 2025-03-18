@@ -68,9 +68,8 @@
     // Update the store with the current code value
     const code = digits.join("");
 
-    
     if (/^\d{6}$/.test(code)) {
-      console.log("we got here")
+      console.log("we got here");
       authCode.set(code);
 
       return onChange(code);
@@ -84,8 +83,21 @@
   // Handle backspace: if empty, move focus to previous input.
   function handleKeyDown(index: number, event: KeyboardEvent) {
     const target = event.target as HTMLInputElement;
+
     if (event.key === "Backspace" && !target.value && index > 0) {
       inputRefs[index - 1]?.focus();
+    }
+
+    if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+      if (index > 0) {
+        inputRefs[index - 1]?.focus();
+      }
+    }
+
+    if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+      if (index < length - 1) {
+        inputRefs[index + 1]?.focus();
+      }
     }
   }
 </script>

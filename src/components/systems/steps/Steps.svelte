@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount, type SvelteComponent } from "svelte";
   import MultiSlotComponent from "../wrappers/MultiSlotComponent/MultiSlotComponent.svelte";
-  import TransitionSteps from "../transitions/TransitionSteps/TransitionSteps.svelte";
+  import TransitionSteps from "./TransitionSteps/TransitionSteps.svelte";
   import store from "../../store.ts";
   import type { ComponentSteps, Store } from "../../types.ts";
   import { writable } from "svelte/store";

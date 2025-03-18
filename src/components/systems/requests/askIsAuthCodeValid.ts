@@ -12,6 +12,8 @@ export default async () => {
     isAuthCodeValid: response.ok,
   });
 
+  console.log("is ok", response.ok, get(store).hasNewEmailCodeBeenSent)
+
   if (response.ok && get(store).hasNewEmailCodeBeenSent) {
     saveToStore({
       hasNewEmailCodeBeenSent: false,

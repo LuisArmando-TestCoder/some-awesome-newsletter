@@ -11,5 +11,9 @@ export default async () => {
     }
   );
 
-  const { success } = await response.json();
+  if (response.ok) {
+    saveToStore({
+      hasNewEmailCodeBeenSent: true,
+    });
+  }
 };

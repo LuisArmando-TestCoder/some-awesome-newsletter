@@ -15,7 +15,6 @@ const store = writable<Store>({
     "stepsIndex",
     "configuratorEmail",
     "newsSource",
-    "hasNewEmailCodeBeenSent",
     "lead",
     "authCode",
     "isAuthCodeValid",

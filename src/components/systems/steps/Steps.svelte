@@ -11,7 +11,7 @@
 
   onMount(() => {
     steps.set(
-      components.map(([callback, component], index) => {
+      components.map(([_, component], index) => {
         return [
           (store: Store) => {
             const canReveal = store.value === index;

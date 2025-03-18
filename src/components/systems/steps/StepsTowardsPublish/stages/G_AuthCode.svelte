@@ -21,18 +21,24 @@
         authCode,
       });
 
-      console.log("some", authCode)
+      console.log("some", authCode);
 
       if (authCode) {
         askIsAuthCodeValid();
       }
     }}
   />
-  <div class="center">
-    <MarkdownText {canReveal}
-      >Now you can **login** at **any time**</MarkdownText
-    >
-  </div>
+  {#if $store.isAuthCodeValid === false && $store.authCode.length === 6}
+    <div class="error center">
+      Invalid auth code provided
+    </div>
+  {:else}
+    <div class="center">
+      <MarkdownText {canReveal}
+        >Now you can **login** at **any time**</MarkdownText
+      >
+    </div>
+  {/if}
 
   <button
     aria-label="Request a new code"
@@ -42,12 +48,9 @@
     }}
   >
     <MarkdownText {canReveal}>
-      -- - If you didn't receive the email, click here--
+      -- - If you didn't receive the email, you can regenerate the code here--
     </MarkdownText>
   </button>
-  <div class="error">
-    {$store.isAuthCodeValid === false ? "Invalid auth code provided" : ''}
-  </div>
 </Centered>
 
 <style lang="scss">

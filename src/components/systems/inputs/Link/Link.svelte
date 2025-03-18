@@ -8,6 +8,7 @@
 
   // Callback to be invoked when the input changes.
   export let onChange: (newValue: string) => void = () => {};
+  export let onEnter: (isValid: boolean) => void = () => {};
 
   // Create a writable store for the URL input value.
   export const urlStore = writable(value);
@@ -97,6 +98,14 @@
 
     onChange(value);
   }
+
+  function handleKeyDown(event: KeyboardEvent) {
+    if (event.key === "Enter") {
+      // If you want to prevent the default form submission (if inside a <form>), uncomment:
+      // event.preventDefault();
+      onEnter(valid);
+    }
+  }
 </script>
 
 <div class="url-input-wrapper">
@@ -107,6 +116,7 @@
     bind:value
     {placeholder}
     on:input={handleInput}
+    on:keydown={handleKeyDown}
     aria-label={label}
     class:invalid={!valid && value !== ""}
   />

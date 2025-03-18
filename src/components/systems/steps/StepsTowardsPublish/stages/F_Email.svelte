@@ -21,5 +21,11 @@
         configuratorEmail: value,
       });
     }}
+    onEnter={(isValid) => {
+      if (isValid)
+        saveToStore({
+          stepsIndex: $store.stepsIndex + 1,
+        });
+    }}
   />
 </Centered>

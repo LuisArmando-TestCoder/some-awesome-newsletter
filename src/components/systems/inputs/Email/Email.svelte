@@ -5,6 +5,7 @@
   export let value: string = "";
   export let placeholder: string = "Enter your email...";
   export let label: string = "";
+  export let onEnter: (isValid: boolean) => void = () => {};
 
   // Callback to be invoked when the input changes.
   export let onChange: (newValue: string) => void = () => {};
@@ -24,6 +25,14 @@
 
     onChange(value);
   }
+
+  function handleKeyDown(event: KeyboardEvent) {
+    if (event.key === "Enter") {
+      // If you want to prevent the default form submission (if inside a <form>), uncomment:
+      // event.preventDefault();
+      onEnter(valid);
+    }
+  }
 </script>
 
 <div class="email-input-wrapper">
@@ -34,6 +43,7 @@
     bind:value
     {placeholder}
     on:input={handleInput}
+    on:keydown={handleKeyDown}
     aria-label={label}
     class:invalid={!valid && value !== ""}
   />

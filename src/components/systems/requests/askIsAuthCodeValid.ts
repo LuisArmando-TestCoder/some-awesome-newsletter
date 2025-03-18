@@ -16,7 +16,9 @@ export default async () => {
     saveToStore({
       hasNewEmailCodeBeenSent: false,
       stepsIndex: get(store).stepsIndex + 1,
-    //   directionsThatShouldDisappear: [-1],
+      //   directionsThatShouldDisappear: [-1],
     });
   }
+
+  return response.ok;
 };

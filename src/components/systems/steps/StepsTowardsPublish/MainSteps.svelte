@@ -11,6 +11,9 @@
   import G_AuthCode from "./stages/G_AuthCode.svelte";
   import H_Dashboard from "./stages/H_Dashboard.svelte";
   import StepsTowardsPublish from "./StepsTowardsPublish.svelte";
+  import askIsAuthCodeValid from "../../requests/askIsAuthCodeValid.ts";
+  import { onMount } from "svelte";
+  import { get } from "svelte/store";
 
   const t = () => true;
 
@@ -26,7 +29,8 @@
         if (
           store.configuratorEmail &&
           store.isComingFromValidStep &&
-          !store.hasNewEmailCodeBeenSent
+          !store.hasNewEmailCodeBeenSent &&
+          !store.isAuthCodeValid
         ) {
           saveToStore({ hasNewEmailCodeBeenSent: true });
           askForNewAuthCode();
@@ -48,6 +52,12 @@
       H_Dashboard,
     ],
   ];
+
+  onMount(() => {
+    if (get(theStoreWritable).authCode) {
+      askIsAuthCodeValid();
+    }
+  });
 </script>
 
 <StepsTowardsPublish {components} />

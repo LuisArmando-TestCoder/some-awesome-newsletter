@@ -9,9 +9,10 @@
 
 <Centered>
   <MarkdownText {canReveal}>--Now... for your newsletter feed--</MarkdownText>
-  
+
   <MarkdownText {canReveal}>
-    ### From which **blog** or **news site** do you want to **generate** your **content?**
+    ### From which **blog** or **news site** do you want to **generate** your
+    **content?**
   </MarkdownText>
   <Link
     placeholder="The news site or blog"
@@ -20,5 +21,11 @@
       saveToStore({
         newsSource,
       })}
+    onEnter={(isValid) => {
+      if (isValid)
+        saveToStore({
+          stepsIndex: $store.stepsIndex + 1,
+        });
+    }}
   />
 </Centered>

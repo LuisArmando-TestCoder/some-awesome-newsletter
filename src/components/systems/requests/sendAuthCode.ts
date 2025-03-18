@@ -16,7 +16,6 @@ export default async () => {
   const { success } = await response.json();
 
   if (success) {
-    localStorage.setItem("has-email-auth-code-been-sent", "1");
     console.log(get(store).configuratorEmail);
   }
 };

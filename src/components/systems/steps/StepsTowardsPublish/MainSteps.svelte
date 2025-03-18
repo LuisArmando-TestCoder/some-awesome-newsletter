@@ -1,4 +1,5 @@
 <script lang="ts">
+  import type { Store } from "../../../types.ts";
   import sendAuthCode from "../../requests/sendAuthCode.ts";
   import A from "./stages/A.svelte";
   import B from "./stages/B.svelte";
@@ -18,17 +19,21 @@
     [t, C],
     [t, D],
     [({ lead }: { lead: string }) => lead, E],
-    [({ newsSource }: { newsSource: string }) => newsSource, F],
+    [(store: Store) => store.newsSource, F],
     [
-      ({ configuratorEmail, isComingFromValidStep }: any) => {
+      (store: Store) => {
         if (
-          configuratorEmail &&
-          isComingFromValidStep &&
-          !localStorage.getItem("has-email-auth-code-been-sent")
+          store.configuratorEmail &&
+          store.isComingFromValidStep &&
+          !store.hasEmailCodeBeenSent
         ) {
         }
-          sendAuthCode();
-        return configuratorEmail;
+        store.update((currentStore: Store) => ({
+          ...currentStore,
+          hasEmailCodeBeenSent: true,
+        }));
+        sendAuthCode();
+        return store.configuratorEmail;
       },
       G,
     ],

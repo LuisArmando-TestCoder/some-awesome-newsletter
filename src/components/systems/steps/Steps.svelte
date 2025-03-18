@@ -1,25 +1,33 @@
 <script lang="ts">
-  import type { SvelteComponent } from "svelte";
+  import { onMount, type SvelteComponent } from "svelte";
   import MultiSlotComponent from "./MultiSlotComponent/MultiSlotComponent.svelte";
   import TransitionSteps from "../transitions/TransitionSteps/TransitionSteps.svelte";
   import store from "../../store.ts";
   import type { ComponentSteps, Store } from "../../types.ts";
+  import { writable } from "svelte/store";
 
   export let components: ComponentSteps;
+  let steps = writable<[(store: Store) => boolean, SvelteComponent][]>([]);
 
-  const steps: [(store: Store) => boolean, SvelteComponent][] = components.map(
-    ([_, component], index) => {
-      return [
-        (store: Store) => {
-          const canReveal = store.value === index;
+  onMount(() => {
+    steps.set(
+      components.map(([callback, component], index) => {
+        return [
+          (store: Store) => {
+            const canReveal = store.value === index;
 
-          return canReveal;
-        },
-        component
-      ];
-    }
-  );
+            const areAllPreviousValid = components
+              .slice(0, index + 1)
+              .every(([callback]) => callback(store));
+
+            return areAllPreviousValid && canReveal;
+          },
+          component,
+        ];
+      })
+    );
+  });
 </script>
 
-<MultiSlotComponent {steps} sharedStore={store} />
+<MultiSlotComponent steps={$steps} sharedStore={store} />
 <TransitionSteps {components} />

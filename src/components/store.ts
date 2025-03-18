@@ -5,5 +5,6 @@ export default writable<Store>({
   value: 0,
   hasInteracted: false,
   configuratorEmail: '',
-  newsSource: ''
+  newsSource: '',
+  hasEmailCodeBeenSent: false
 });

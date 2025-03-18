@@ -36,8 +36,8 @@
     const pasteData = event.clipboardData?.getData("text") ?? "";
 
     // Check if the pasted string is exactly the full length and all digits:
-    if (pasteData.length === length && /^\d+$/.test(pasteData)) {
-      digits = pasteData.split("");
+    if (pasteData.trim().length === length && /^\d+$/.test(pasteData)) {
+      digits = pasteData.replace(/[^0-9]/g, '').split("");
       // Update each input field
       digits.forEach((digit, i) => {
         inputRefs[i].value = digit;

@@ -27,12 +27,12 @@
           store.isComingFromValidStep &&
           !store.hasEmailCodeBeenSent
         ) {
+          store.update((currentStore: Store) => ({
+            ...currentStore,
+            hasEmailCodeBeenSent: true,
+          }));
+          sendAuthCode();
         }
-        store.update((currentStore: Store) => ({
-          ...currentStore,
-          hasEmailCodeBeenSent: true,
-        }));
-        sendAuthCode();
         return store.configuratorEmail;
       },
       G,

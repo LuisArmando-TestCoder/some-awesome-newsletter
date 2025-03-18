@@ -16,11 +16,11 @@
           (store: Store) => {
             const canReveal = store.value === index;
 
-            const areAllPreviousValid = components
+            const getAreAllPreviousValid = () => components
               .slice(0, index + 1)
               .every(([callback]) => callback(store));
 
-            return canReveal && areAllPreviousValid;
+            return canReveal && getAreAllPreviousValid();
           },
           component,
         ];

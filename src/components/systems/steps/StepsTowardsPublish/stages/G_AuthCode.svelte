@@ -1,0 +1,73 @@
+<script lang="ts">
+  import { saveToStore } from "../../../../store.ts";
+  import Code from "../../../inputs/Code/Code.svelte";
+  import askIsAuthCodeValid from "../../../requests/askIsAuthCodeValid.ts";
+  import askForNewAuthCode from "../../../requests/askForNewAuthCode.ts";
+  import MarkdownText from "../../../texts/MarkdownText/MarkdownText.svelte";
+  import Centered from "../../../wrappers/Centered/Centered.svelte";
+
+  export let canReveal = false;
+</script>
+
+<Centered>
+  <div class="center">
+    <MarkdownText {canReveal}>
+      ## **We** sent **an** auth code **to your** email
+    </MarkdownText>
+  </div>
+  <Code
+    onChange={(authCode) => {
+      saveToStore({
+        authCode,
+      });
+
+      console.log("some", authCode)
+
+      if (authCode) {
+        askIsAuthCodeValid();
+      }
+    }}
+  />
+  <div class="center">
+    <MarkdownText {canReveal}
+      >Now you can **login** at **any time**</MarkdownText
+    >
+  </div>
+
+  <button
+    aria-label="Request a new code"
+    class="resend"
+    onclick={() => {
+      askForNewAuthCode();
+    }}
+  >
+    <MarkdownText {canReveal}>
+      -- - If you didn't receive the email, click here--
+    </MarkdownText>
+  </button>
+</Centered>
+
+<style lang="scss">
+  .center {
+    display: grid;
+    place-items: center;
+    width: 100%;
+  }
+
+  .resend {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: end;
+    width: 100%;
+
+    &:hover {
+      & :global(div span) {
+        text-decoration: underline;
+      }
+    }
+  }
+</style>

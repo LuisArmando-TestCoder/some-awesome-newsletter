@@ -42,9 +42,11 @@
       if (index < $store.stepsIndex) return;
 
       timing += waitDuration;
+
+      const wait = timing;
       console.log("index", index, $store.stepsIndex, timing, waitDuration);
 
-      setTimeout(goNext(index + 1), timing);
+      setTimeout(goNext(index + 1), wait);
     });
   }
 

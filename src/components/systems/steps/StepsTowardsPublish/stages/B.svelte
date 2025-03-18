@@ -1,9 +1,0 @@
-<script lang="ts">
-  import MarkdownText from "../../../texts/MarkdownText/MarkdownText.svelte";
-
-    export let canReveal = false;
-</script>
-
-<MarkdownText {canReveal}>  
-    Our **vertical AI** agent-powered **newsletter.** Just give it a ==website to feed from,== then **your lead,** and then **the users you want to reach**—it's that easy.
-</MarkdownText>

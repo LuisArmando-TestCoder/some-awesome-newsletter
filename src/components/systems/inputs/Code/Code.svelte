@@ -36,7 +36,7 @@
     const pasteData = event.clipboardData?.getData("text") ?? "";
 
     // Check if the pasted string is exactly the full length and all digits:
-    if (pasteData.trim().length === length && /^\d+$/.test(pasteData)) {
+    if (pasteData.trim().length === length && /^\d+$/.test(pasteData.trim())) {
       digits = pasteData.replace(/[^0-9]/g, "").split("");
       // Update each input field
       digits.forEach((digit, i) => {
@@ -67,8 +67,18 @@
 
     // Update the store with the current code value
     const code = digits.join("");
-    authCode.set(code);
-    onChange(code);
+
+    
+    if (/^\d{6}$/.test(code)) {
+      console.log("we got here")
+      authCode.set(code);
+
+      return onChange(code);
+    }
+
+    authCode.set("");
+
+    return onChange("");
   }
 
   // Handle backspace: if empty, move focus to previous input.

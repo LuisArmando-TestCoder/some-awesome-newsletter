@@ -16,7 +16,7 @@
 
 {#each [-1, 1] as direction}
   <TransitionButton
-    active={canShow(direction as -1 | 1)}
+    active={!$store.directionsThatShouldDisappear?.includes(direction) && canShow(direction as -1 | 1)}
     direction={direction as -1 | 1}
     callback={() => {
       canShow(direction as -1 | 1, canShow(direction as -1 | 1));

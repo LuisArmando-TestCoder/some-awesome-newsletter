@@ -1,5 +1,5 @@
 import { get } from "svelte/store";
-import store from "../../store.ts";
+import store, { saveToStore } from "../../store.ts";
 
 export default async () => {
   const response = await fetch(
@@ -11,11 +11,5 @@ export default async () => {
     }
   );
 
-  console.log(response);
-
   const { success } = await response.json();
-
-  if (success) {
-    console.log(get(store).configuratorEmail);
-  }
 };

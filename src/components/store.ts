@@ -7,15 +7,19 @@ const store = writable<Store>({
   configuratorEmail: "",
   newsSource: "",
   lead: "",
-  hasEmailCodeBeenSent: false,
+  hasNewEmailCodeBeenSent: false,
   authCode: "",
+  directionsThatShouldDisappear: [],
+  isAuthCodeValid: false,
+  canAddSubscriptionFromInitialLogin: true,
   keysToSave: [
     "stepsIndex",
     "configuratorEmail",
     "newsSource",
-    "hasEmailCodeBeenSent",
+    "hasNewEmailCodeBeenSent",
     "lead",
     "authCode",
+    "isAuthCodeValid",
   ],
 });
 

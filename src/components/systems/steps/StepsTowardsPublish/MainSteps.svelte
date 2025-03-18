@@ -1,44 +1,63 @@
 <script lang="ts">
   import type { Store } from "../../../types.ts";
-  import theStoreWritable from "../../../store.ts";
-  import sendAuthCode from "../../requests/sendAuthCode.ts";
-  import A from "./stages/A.svelte";
-  import B from "./stages/B.svelte";
-  import C from "./stages/C.svelte";
-  import D from "./stages/D.svelte";
-  import E from "./stages/E.svelte";
-  import F from "./stages/F.svelte";
-  import G from "./stages/G.svelte";
-  import H from "./stages/H.svelte";
+  import theStoreWritable, { saveToStore } from "../../../store.ts";
+  import askForNewAuthCode from "../../requests/askForNewAuthCode.ts";
+  import A_Welcome1 from "./stages/A_Welcome1.svelte";
+  import B_Welcome2 from "./stages/B_Welcome2.svelte";
+  import C_Welcome3 from "./stages/C_Welcome3.svelte";
+  import D_Lead from "./stages/D_Lead.svelte";
+  import E_NewsSource from "./stages/E_NewsSource.svelte";
+  import F_Email from "./stages/F_Email.svelte";
+  import G_AuthCode from "./stages/G_AuthCode.svelte";
+  import H_Dashboard from "./stages/H_Dashboard.svelte";
   import StepsTowardsPublish from "./StepsTowardsPublish.svelte";
 
   const t = () => true;
 
   const components = [
-    [t, A],
-    [t, B],
-    [t, C],
-    [t, D],
-    [(store: Store) => store.lead, E],
-    [(store: Store) => store.newsSource, F],
+    [t, A_Welcome1],
+    [t, B_Welcome2],
+    [t, C_Welcome3],
+    [t, D_Lead],
+    [(store: Store) => store.lead, E_NewsSource],
+    [(store: Store) => store.newsSource, F_Email],
     [
       (store: Store) => {
         if (
           store.configuratorEmail &&
           store.isComingFromValidStep &&
-          !store.hasEmailCodeBeenSent
+          !store.hasNewEmailCodeBeenSent
         ) {
-          theStoreWritable.update((currentStore: Store) => ({
-            ...currentStore,
-            hasEmailCodeBeenSent: true,
-          }));
-          sendAuthCode();
+          saveToStore({ hasNewEmailCodeBeenSent: true });
+          askForNewAuthCode();
+          if (store.canAddSubscriptionFromInitialLogin) {
+            theStoreWritable.subscribe((store) => {
+              if (store.isAuthCodeValid) {
+                console.log("very hea 1");
+                saveToStore({
+                  stepsIndex: Math.min(store.stepsIndex + 1, components.length),
+                });
+              }
+            });
+            saveToStore({ canAddSubscriptionFromInitialLogin: false });
+          }
         }
         return store.configuratorEmail;
       },
-      G,
+      G_AuthCode,
     ],
-    [t, H],
+    [
+      (store: Store) => {
+        if (store.isAuthCodeValid && store.isComingFromValidStep) {
+          // saveToStore({ directionsThatShouldDisappear: [-1] });
+          // Todo: Request everything
+          console.log("hey");
+        }
+
+        return store.isAuthCodeValid;
+      },
+      H_Dashboard,
+    ],
   ];
 </script>
 

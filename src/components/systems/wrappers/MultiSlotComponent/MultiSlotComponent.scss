@@ -4,13 +4,6 @@
   height: 100vh;
 
   &--component-slot {
-    display: grid;
-    place-items: center;
-    justify-content: center;
-    height: 100%;
-    width: min(640px, 100%);
-    padding: 0 25px;
-    margin: auto;
     transition: 0.75s cubic-bezier(0.35, 0.23, 0.54, 1);
     position: absolute;
     top: 0;

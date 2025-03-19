@@ -14,6 +14,7 @@
   import askIsAuthCodeValid from "../../requests/askIsAuthCodeValid.ts";
   import { onMount } from "svelte";
   import { get } from "svelte/store";
+  import getConfiguratorSession from "../../requests/getConfiguratorSession.ts";
 
   const t = () => true;
 
@@ -44,6 +45,8 @@
         if (store.isAuthCodeValid && store.isComingFromValidStep) {
           // saveToStore({ directionsThatShouldDisappear: [-1] });
           // Todo: Request everything
+          getConfiguratorSession();
+
           console.log("hey");
         }
 

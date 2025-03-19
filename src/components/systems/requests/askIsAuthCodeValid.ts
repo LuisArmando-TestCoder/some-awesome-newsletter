@@ -3,13 +3,14 @@ import store, { saveToStore } from "../../store.ts";
 
 export default async () => {
   const response = await fetch(
-    `https://ai-newsletter-translated.onrender.com/auth/${
-      get(store).configuratorEmail
-    }?code=${get(store).authCode}`
+    `${get(store).apiURL}/auth/${get(store).configuratorEmail}?code=${
+      get(store).authCode
+    }`
   );
 
   saveToStore({
     isAuthCodeValid: response.ok,
+    stepsIndex: 6, // todo: review: this is hard coded => if you change the position of the auth, you will be taken aback
   });
 
   console.log("is ok", response.ok, get(store).hasNewEmailCodeBeenSent);

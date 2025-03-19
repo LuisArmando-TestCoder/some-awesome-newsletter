@@ -22,8 +22,6 @@ export type Block = {
 
 export type Store = { [index: string]: any };
 
-export type RevealMap = Map<(store: Store) => boolean, typeof SvelteComponent>;
-
 export interface Country {
   code: string;
   name: string;
@@ -43,3 +41,84 @@ export interface Card {
 }
 
 export type ComponentSteps = [(store: Store) => boolean, SvelteComponent][];
+
+export interface Article {
+  title: string;
+  content: string;
+  link: string;
+  community: string;
+  lead: string;
+}
+
+export interface NewsSource {
+  type: string;
+  url: string;
+  titleSelector: string;
+  contentSelector: string;
+  linkSelector: string;
+  country: string;
+  community: string;
+  lead: string;
+  id: string;
+  subscribersIDs?: string[];
+  scheduleTime: string;
+  personality: string;
+  email?: EmailConfig;
+  openAiApiKey?: string;
+}
+
+export interface EmailAuth {
+  user: string;
+  pass: string;
+}
+
+export interface EmailConfig {
+  host: string;
+  auth: EmailAuth;
+  senderName: string;
+  senderEmail: string;
+  newsletterSubject: string;
+  newsletterTitle: string;
+}
+
+export interface Config {
+  newsSources?: NewsSource[];
+  openAiApiKey?: string;
+  email: EmailConfig;
+  configuratorId?: string;
+  brandColor?: string;
+}
+
+export interface NewsletterUser {
+  email: string;
+  name: string;
+  bio: string;
+  language: string; // ISO 639-1 language code
+  countryOfResidence: string; // Alpha-2 country code
+  newsSourcesConfigTuples: {
+    newsSourceId: string;
+    configId: string;
+  }[];
+}
+
+export interface MailConfigPack {
+  host: string;
+  auth: {
+    user: string;
+    pass?: string;
+  };
+  senderName: string;
+  senderEmail: string;
+  newsletterSubject: string;
+  transporter: any;
+}
+
+export interface SystemConfig {
+  email: EmailConfig;
+  openAiApiKey: string;
+}
+
+export type Populator<T extends object> = (
+  propertyPath: string,
+  value: any
+) => T;

@@ -1,6 +1,10 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import store, { saveToStore } from "../../../store.ts";
+  import store, {
+    getFromStore,
+    populateToStore,
+    saveToStore,
+  } from "../../../store.ts";
   import Steps from "../Steps.svelte";
   import type { Store } from "../../../types.ts";
 
@@ -25,9 +29,7 @@
 
         if (!value) continue;
 
-        saveToStore({
-          [key]: value,
-        });
+        populateToStore(key, value);
       } catch {
         continue;
       }
@@ -53,7 +55,7 @@
   function saveAllKeysToSaveInLocalStorage() {
     store.subscribe((currentStore: Store) => {
       for (const key of currentStore.keysToSave) {
-        localStorage.setItem(key, JSON.stringify(currentStore[key]));
+        localStorage.setItem(key, JSON.stringify(getFromStore(key)));
       }
     });
   }

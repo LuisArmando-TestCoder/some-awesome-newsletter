@@ -3,8 +3,8 @@
 
   // Props for the plain text input.
   export let value: string = "";
-  export let placeholder: string = "Enter text...";
-  export let label: string = "Text";
+  export let placeholder: string = "";
+  export let label: string = "";
 
   // Callback to be invoked when the input changes.
   export let onChange: (newValue: string) => void = () => {};
@@ -54,7 +54,7 @@
     border-radius: 8px;
     padding: 0.75rem 1rem;
     font-size: 1rem;
-    color: var(--color-foreground);
+    color: var(--color-foreground-inversion);
     transition:
       border 0.3s ease,
       box-shadow 0.3s ease;

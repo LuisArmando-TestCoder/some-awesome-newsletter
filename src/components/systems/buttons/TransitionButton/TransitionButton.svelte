@@ -67,6 +67,7 @@
     box-shadow: 0 0 10px -6.5px var(--color-background);
     border: 0;
     cursor: pointer;
+    border-radius: 5px;
 
     &:hover {
       background: var(--color-background-very-opaque-inversion); // Glassmorphism effect

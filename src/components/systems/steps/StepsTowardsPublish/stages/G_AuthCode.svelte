@@ -5,8 +5,11 @@
   import askForNewAuthCode from "../../../requests/askForNewAuthCode.ts";
   import MarkdownText from "../../../texts/MarkdownText/MarkdownText.svelte";
   import Centered from "../../../wrappers/Centered/Centered.svelte";
+  import type { Writable } from "svelte/store";
 
   export let canReveal = false;
+
+  let externalAuthCode: Writable<string>;
 </script>
 
 <Centered>
@@ -17,6 +20,7 @@
   </div>
 
   <Code
+    bind:authCode={externalAuthCode}
     onChange={(authCode) => {
       saveToStore({
         authCode,
@@ -25,24 +29,23 @@
       if (authCode) {
         saveToStore({
           hasNewEmailCodeBeenSent: true,
-          isAuthCodeValid: true
+          isAuthCodeValid: true,
         });
-        askIsAuthCodeValid();
+        askIsAuthCodeValid(() => {
+          externalAuthCode.set("");
+        });
       }
     }}
   />
   {#if !$store.isAuthCodeValid && $store.authCode && $store.hasNewEmailCodeBeenSent}
     <div class="error center">Invalid auth code provided</div>
-    {:else}
-
+  {:else}
     <div class="center">
-      <MarkdownText
-        {canReveal}
+      <MarkdownText {canReveal}
         >Now you can **login** at **any time**</MarkdownText
       >
     </div>
   {/if}
-
 
   <button
     aria-label="Request a new code"

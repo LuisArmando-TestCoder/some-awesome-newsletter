@@ -29,6 +29,8 @@ const store = writable<Store>({
   config: {},
 });
 
+export const emptyStoreSnapshot = JSON.parse(JSON.stringify(get(store)));
+
 export default store;
 
 export function saveToStore(objectValue: { [index: string]: any }) {

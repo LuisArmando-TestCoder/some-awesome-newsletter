@@ -1,10 +1,32 @@
 <script lang="ts">
+  import Date from "../../buttons/Date/Date.svelte";
+  import Number from "../../inputs/Number/Number.svelte";
+  import PlainText from "../../inputs/PlainText/PlainText.svelte";
+  import MarkdownText from "../../texts/MarkdownText/MarkdownText.svelte";
+  import Switch from "../Switch/Switch.svelte";
+
   export let data: any;
 
   import JsonViewer from "./JsonViewer.svelte";
 
+  export let canReveal = false;
+
   function isDate(val: any): boolean {
     return val instanceof Date;
+  }
+
+  function camelCaseToCapitalized(text: string): string {
+    // Insert a space before each uppercase letter that follows a lowercase letter.
+    const spaced = text.replace(/([a-z])([A-Z])/g, "$1 $2");
+
+    // Split the text by spaces, then capitalize the first letter of each word.
+    const words = spaced.split(" ");
+    const capitalizedWords = words.map(
+      (word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+    );
+
+    // Join the capitalized words back into a single string.
+    return capitalizedWords.join(" ");
   }
 </script>
 
@@ -14,7 +36,11 @@
       <ul class="json-array">
         {#each data as item, index}
           <li>
-            <span class="json-index">{index}:</span>
+            <span class="json-index">
+              <MarkdownText {canReveal}>
+                **{index}**
+              </MarkdownText>
+            </span>
             <!-- Recursively render each array item using svelte:component -->
             <svelte:component this={JsonViewer} data={item} />
           </li>
@@ -24,7 +50,11 @@
       <div class="json-object">
         {#each Object.entries(data) as [key, value]}
           <div class="json-property">
-            <span class="json-key">{key}:</span>
+            <span class="json-key">
+              <MarkdownText {canReveal}>
+                {camelCaseToCapitalized(key)}
+              </MarkdownText>
+            </span>
             <!-- Recursively render each property value using svelte:component -->
             <svelte:component this={JsonViewer} data={value} />
           </div>
@@ -32,13 +62,19 @@
       </div>
     {/if}
   {:else if typeof data === "number"}
-    <span class="json-number">{data}</span>
+    <span class="json-number">
+      <Number value={String(data)} />
+    </span>
   {:else if typeof data === "string"}
-    <span class="json-string">"{data}"</span>
+    <span class="json-string">
+      <PlainText value={data} />
+    </span>
   {:else if typeof data === "boolean"}
-    <span class="json-boolean">{data ? "true" : "false"}</span>
+    <span class="json-boolean">
+      <Switch toggled={data} />
+    </span>
   {:else if isDate(data)}
-    <span class="json-date">{data.toLocaleString()}</span>
+    <Date value={data.toLocaleString()} />
   {:else if data === null}
     <span class="json-null">null</span>
   {:else}
@@ -50,11 +86,12 @@
   .json-viewer {
     font-family: monospace;
     color: var(--color-foreground);
+    margin-bottom: 2rem;
   }
   .json-object {
-    margin-left: 1rem;
+    margin-left: 0rem;
     border-left: 2px solid var(--color-background);
-    padding-left: 0.5rem;
+    padding-left: 1rem;
   }
   .json-array {
     margin-left: 1rem;
@@ -63,6 +100,9 @@
   }
   .json-property {
     margin-bottom: 0.25rem;
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
   .json-key {
     font-weight: bold;
@@ -81,7 +121,7 @@
     color: #ff9800;
   }
   .json-null {
-    color: #9e9e9e;
+    color: red;
     font-style: italic;
   }
   .json-unknown {

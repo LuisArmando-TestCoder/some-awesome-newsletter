@@ -14,6 +14,36 @@
   import CountrySelector from "../../../selectors/Country/Country.svelte";
   import CardComponent from "../../../selectors/Card/Card.svelte";
   import Centered from "../../../wrappers/Centered/Centered.svelte";
+  import logout from "../../../requests/logout.ts";
+  import store from "../../../../store.ts";
+
+  export let canReveal = false;
 </script>
 
-HI
+{#key $store?.config}
+  <div class="pad">
+    <CardComponent {canReveal} label="Config">
+        Hi
+    </CardComponent>
+  </div>
+  <div class="pad center">
+    <SubmitButton callback={logout} label="sign out" />
+  </div>
+{/key}
+
+<style lang="scss">
+  .pad {
+    padding: 25px;
+    margin: 25px;
+  }
+
+  .center {
+    display: flex;
+    justify-content: center;
+  }
+
+  .right {
+    display: flex;
+    justify-content: right;
+  }
+</style>

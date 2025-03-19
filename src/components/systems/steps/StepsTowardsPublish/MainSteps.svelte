@@ -47,7 +47,7 @@
           // Todo: Request everything
           getConfiguratorSession();
 
-          console.log("hey");
+          saveToStore({ directionsThatShouldDisappear: [-1] });
         }
 
         return store.isAuthCodeValid;

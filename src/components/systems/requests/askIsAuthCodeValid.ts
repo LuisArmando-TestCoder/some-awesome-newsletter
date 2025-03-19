@@ -1,7 +1,7 @@
 import { get } from "svelte/store";
 import store, { saveToStore } from "../../store.ts";
 
-export default async () => {
+export default async (onSuccessCallback?: Function) => {
   const response = await fetch(
     `${get(store).apiURL}/auth/${get(store).configuratorEmail}?code=${
       get(store).authCode
@@ -10,8 +10,13 @@ export default async () => {
 
   saveToStore({
     isAuthCodeValid: response.ok,
-    stepsIndex: 6, // todo: review: this is hard coded => if you change the position of the auth, you will be taken aback
   });
+
+  if (!response.ok) {
+    saveToStore({
+      stepsIndex: 6, // todo: review: this is hard coded => if you change the position of the auth, you will be taken aback
+    });
+  }
 
   console.log("is ok", response.ok, get(store).hasNewEmailCodeBeenSent);
 
@@ -19,8 +24,11 @@ export default async () => {
     saveToStore({
       hasNewEmailCodeBeenSent: false,
       stepsIndex: get(store).stepsIndex + 1,
-      //   directionsThatShouldDisappear: [-1],
     });
+  }
+
+  if (response.ok) {
+    onSuccessCallback?.();
   }
 
   return response.ok;

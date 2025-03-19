@@ -35,8 +35,18 @@
 >
   <div class="switch-track">
     <div class="switch-knob {toggled ? 'toggled' : ''}"></div>
+    <div
+      class="switch-knob {toggled ? 'toggled' : ''}"
+      style="transition-delay: .225s;"
+    ></div>
   </div>
 </div>
+
+<filter id="goo">
+  <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" width="0" height="0" />
+  <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+  <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
+</filter>
 
 <style lang="scss">
   .glass-switch {
@@ -46,7 +56,6 @@
     outline: none;
 
     &:focus {
-      box-shadow: 0 0 0 3px var(--color-foreground);
     }
   }
 
@@ -61,6 +70,7 @@
       background 0.3s ease,
       box-shadow 0.3s ease;
     box-shadow: 0 0 10px -6.5px var(--color-background);
+    filter: url("#goo");
 
     &:hover {
       box-shadow: 0 0 10px -3px var(--color-background);
@@ -68,9 +78,10 @@
   }
 
   .switch-knob {
-    width: 20px;
-    height: 20px;
-    background: var(--color-foreground);
+    --unit: 20px;
+    width: var(--unit);
+    height: var(--unit);
+    background: var(--color-background);
     border-radius: 50%;
     position: absolute;
     top: 2px;
@@ -78,7 +89,6 @@
     transition:
       transform 0.3s ease,
       box-shadow 0.3s ease;
-    box-shadow: 0 0 5px var(--color-foreground-opaque);
 
     &.toggled {
       transform: translateX(26px);

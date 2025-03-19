@@ -24,6 +24,7 @@
   <div class="pad">
     <CardComponent {canReveal} label="Config">
         Hi
+        <Switch />
     </CardComponent>
   </div>
   <div class="pad center">

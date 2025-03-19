@@ -1,6 +1,18 @@
 import { get, writable } from "svelte/store";
 import type { Populator, Store } from "./types.ts";
 
+const colorPalette = [
+  "#e91e63",
+  "#2196f3",
+  "#03a9f4",
+  "#00bcd4",
+  "#4caf50",
+  "#8bc34a",
+  "#cddc39",
+  "#ffc107",
+  "#ff5722",
+];
+
 const store = writable<Store>({
   keysToSave: [
     "stepsIndex",
@@ -15,6 +27,7 @@ const store = writable<Store>({
     "config.senderName",
     "config.newsletterTitle",
   ],
+  colorPalette,
   stepsIndex: 0,
   hasInteracted: false, // don't save
   configuratorEmail: "",

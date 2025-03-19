@@ -2,16 +2,18 @@ import { get } from "svelte/store";
 import store, { saveToStore } from "../../store.ts";
 
 export default async () => {
+  const authHeaders = {
+    "x-auth-email": get(store).configuratorEmail,
+    "x-auth-code": get(store).authCode,
+    "Content-Type": "application/json",
+  };
   let response = await fetch(
     `${get(store).apiURL}/private-config?documentId=${
       get(store).configuratorEmail
     }`,
     {
       method: "GET",
-      headers: {
-        "x-auth-email": get(store).configuratorEmail,
-        "x-auth-code": get(store).authCode,
-      },
+      headers: authHeaders,
     }
   );
   let json;
@@ -24,16 +26,16 @@ export default async () => {
       `${get(store).apiURL}/config?documentId=${get(store).configuratorEmail}`,
       {
         method: "POST",
-        headers: {
-          "x-auth-email": get(store).configuratorEmail,
-          "x-auth-code": get(store).authCode,
-          "Content-Type": "application/json",
-        },
+        headers: authHeaders,
         body: JSON.stringify({
           newsletterSubject: "Daily News",
           newsletterTitle: "Morning Bulletin",
           senderName: get(store).configuratorEmail.split("@")[0],
           scheduleTime: "0 12 * * *",
+          brandColor:
+            get(store).colorPalette[
+              Math.floor(Math.random() * get(store).colorPalette.length)
+            ],
         }),
       }
     );

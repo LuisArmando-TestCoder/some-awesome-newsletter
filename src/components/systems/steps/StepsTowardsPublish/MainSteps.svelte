@@ -46,8 +46,6 @@
           // saveToStore({ directionsThatShouldDisappear: [-1] });
           // Todo: Request everything
           getConfiguratorSession();
-
-          saveToStore({ directionsThatShouldDisappear: [-1] });
         }
 
         return store.isAuthCodeValid;
@@ -58,7 +56,9 @@
 
   onMount(() => {
     if (get(theStoreWritable).authCode) {
-      askIsAuthCodeValid();
+      askIsAuthCodeValid(() => {
+        saveToStore({ directionsThatShouldDisappear: [-1] });
+      });
     }
   });
 </script>

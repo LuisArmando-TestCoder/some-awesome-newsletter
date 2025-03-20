@@ -1,5 +1,10 @@
 import { get } from "svelte/store";
 import store, { saveToStore } from "../../store.ts";
+import {
+  foregroundColor,
+  complementaryColor,
+} from "../../ThemeChanger/store.ts";
+import { getComplementaryColor } from "../inputs/ColorPicker/getColorSuggestions.ts";
 
 export default async () => {
   const authHeaders = {
@@ -50,6 +55,9 @@ export default async () => {
   saveToStore({
     config: json,
   });
+
+  foregroundColor.set(json.brandColor);
+  complementaryColor.set(getComplementaryColor(json.brandColor));
 
   console.log("json", json);
 

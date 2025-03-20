@@ -1,5 +1,9 @@
 // colorSuggestions.ts
 
+import { get } from "svelte/store";
+import { complementaryColor } from "../../../ThemeChanger/store.ts";
+import store from "../../../store.ts";
+
 // -----------------------------
 // Helper Functions: HEX ↔ HSL
 // -----------------------------
@@ -365,4 +369,16 @@ export function getContrastColor(hexColor: string) {
 
   // Return black for light backgrounds and white for dark backgrounds
   return yiq >= 128 ? "#000000" : "#FFFFFF";
+}
+
+export function getComplementaryColor(selectedColor: string) {
+  return (
+    getColorSuggestions(get(store).colorPalette, selectedColor).filter(
+      ({ scheme, candidate }) => {
+        return (
+          scheme === "Analogous" && getContrastColor(candidate) === "#FFFFFF"
+        );
+      }
+    )[0].candidate || get(complementaryColor)
+  );
 }

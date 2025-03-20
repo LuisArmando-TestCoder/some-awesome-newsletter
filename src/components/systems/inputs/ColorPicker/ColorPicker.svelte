@@ -2,12 +2,11 @@
   import { writable } from "svelte/store";
   import { onMount, onDestroy } from "svelte";
   import getColorSuggestions, {
+  getComplementaryColor,
     getContrastColor,
   } from "./getColorSuggestions.ts";
   import type { CandidateScore } from "./getColorSuggestions.ts";
   import store from "../../../store.ts";
-  import MarkdownText from "../../texts/MarkdownText/MarkdownText.svelte";
-
   // Import the color picker library
   import ColorPicker from "svelte-awesome-color-picker";
   import {
@@ -24,12 +23,7 @@
   let pickerRef: HTMLElement;
 
   // Default palette from global store
-  let palette: string[] = $store.colorPalette || [
-    "#6C48EA",
-    "#EACD48",
-    "#48EAE1",
-    "#FF4081",
-  ];
+  let palette: string[] = $store.colorPalette;
 
   // For drag and drop reordering of palette items
   let dragIndex: number | null = null;
@@ -188,15 +182,7 @@
 
   function setStoreColor() {
     foregroundColor.set(selectedColor);
-    complementaryColor.set(
-      getColorSuggestions(palette, selectedColor).filter(
-        ({ scheme, candidate }) => {
-          return (
-            scheme === "Analogous" && getContrastColor(candidate) === "#FFFFFF"
-          );
-        }
-      )[0].candidate || $complementaryColor
-    );
+    complementaryColor.set(getComplementaryColor(selectedColor));
   }
 </script>
 
@@ -292,8 +278,9 @@
   .color-picker {
     position: relative;
     display: flex;
-    flex-direction: column;
     gap: 1rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
     z-index: 1;
   }
 
@@ -366,6 +353,8 @@
 
   .suggestion-panel {
     animation: fadeSlide 0.5s ease-out;
+    max-height: 200px;
+    overflow: auto;
   }
 
   .suggestion-panel h3 {

@@ -42,6 +42,8 @@
 <style lang="scss">
   .dashboard {
     padding: 50px 0;
+    max-height: 100vh;
+    overflow: auto;
   }
 
   .grid {

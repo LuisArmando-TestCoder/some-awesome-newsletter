@@ -1,37 +1,51 @@
 <script lang="ts">
   import { writable } from "svelte/store";
   import { onMount, onDestroy } from "svelte";
+  import getColorSuggestions, {
+    getContrastColor,
+  } from "./getColorSuggestions.ts";
+  import type { CandidateScore } from "./getColorSuggestions.ts";
+  import store from "../../../store.ts";
+  import MarkdownText from "../../texts/MarkdownText/MarkdownText.svelte";
 
-  // Props for the color picker.
+  // Import the color picker library
+  import ColorPicker from "svelte-awesome-color-picker";
+  import {
+    complementaryColor,
+    foregroundColor,
+  } from "../../../ThemeChanger/store.ts";
+
+  // Props & Stores
   export let selectedColor: string = "#03a9f4";
   export let onChange: (newColor: string) => void = () => {};
-
-  // Export a writable store for the selected color.
   export const selectedColorStore = writable(selectedColor);
 
   let open = false;
   let pickerRef: HTMLElement;
 
-  // A default palette for selection.
-  const palette: string[] = [
-    "#03a9f4",
-    "#00bcd4",
-    "#ff5722",
-    "#4caf50",
-    "#9c27b0",
-    "#f44336",
-    "#ffc107",
-    "#2196f3",
-    "#e91e63",
-    "#673ab7",
+  // Default palette from global store
+  let palette: string[] = $store.colorPalette || [
+    "#6C48EA",
+    "#EACD48",
+    "#48EAE1",
+    "#FF4081",
   ];
 
-  // Toggle dropdown open/close.
+  // For drag and drop reordering of palette items
+  let dragIndex: number | null = null;
+
+  // Reactive smart suggestions update on changes
+  $: suggestions = getColorSuggestions(
+    palette,
+    selectedColor
+  ) as CandidateScore[];
+
+  // Toggle the palette dropdown open/close
   function togglePicker() {
     open = !open;
   }
 
-  // Handle selecting a color: update the selected value, update the store, close dropdown, and call onChange.
+  // Update selection and propagate change
   function selectColor(color: string) {
     selectedColor = color;
     selectedColorStore.set(color);
@@ -39,7 +53,29 @@
     onChange(color);
   }
 
-  // Close dropdown if a click occurs outside the component.
+  // -----------------------------
+  // Drag and Drop for Palette Reordering
+  // -----------------------------
+  function handleDragStart(e: DragEvent, index: number) {
+    dragIndex = index;
+    e.dataTransfer?.setData("text/plain", index.toString());
+  }
+
+  function handleDragOver(e: DragEvent) {
+    e.preventDefault();
+  }
+
+  function handleDrop(e: DragEvent, dropIndex: number) {
+    e.preventDefault();
+    if (dragIndex === null || dragIndex === dropIndex) return;
+    const updatedPalette = [...palette];
+    const [removed] = updatedPalette.splice(dragIndex, 1);
+    updatedPalette.splice(dropIndex, 0, removed);
+    palette = updatedPalette;
+    dragIndex = null;
+  }
+
+  // Close the picker if click occurs outside the component
   function handleClickOutside(event: MouseEvent) {
     if (pickerRef && !pickerRef.contains(event.target as Node)) {
       open = false;
@@ -49,132 +85,236 @@
   onMount(() => {
     document.addEventListener("click", handleClickOutside);
   });
-
   onDestroy(() => {
     document.removeEventListener("click", handleClickOutside);
   });
+
+  // -----------------------------
+  // Drag & Input for Color Wheel Functionality
+  // -----------------------------
+  let dragStartX = 0;
+  let dragStartY = 0;
+  let potentialDragging = false;
+  let isDragging = false;
+  let wasDragging = false;
+
+  function handleMouseDown(event: MouseEvent) {
+    dragStartX = event.clientX;
+    dragStartY = event.clientY;
+    potentialDragging = true;
+    isDragging = false;
+    wasDragging = false;
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
+  }
+
+  function handleMouseMove(event: MouseEvent) {
+    if (!potentialDragging) return;
+    // Start drag if movement exceeds threshold
+    if (
+      !isDragging &&
+      Math.hypot(event.clientX - dragStartX, event.clientY - dragStartY) > 5
+    ) {
+      isDragging = true;
+      wasDragging = true;
+    }
+    if (isDragging) {
+      updateColorFromDrag(event);
+    }
+  }
+
+  function handleMouseUp(event: MouseEvent) {
+    potentialDragging = false;
+    if (isDragging) {
+      isDragging = false;
+    }
+    document.removeEventListener("mousemove", handleMouseMove);
+    document.removeEventListener("mouseup", handleMouseUp);
+  }
+
+  function updateColorFromDrag(event: MouseEvent) {
+    const dx = event.clientX - dragStartX;
+    const dy = event.clientY - dragStartY;
+    const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+    let hue = angle < 0 ? angle + 360 : angle;
+    const hex = hslToHex(hue, 100, 50);
+    selectedColor = hex;
+    selectedColorStore.set(hex);
+    onChange(hex);
+  }
+
+  // Basic HSL to Hex conversion
+  function hslToHex(h: number, s: number, l: number): string {
+    s /= 100;
+    l /= 100;
+    const c = (1 - Math.abs(2 * l - 1)) * s;
+    const x = c * (1 - Math.abs(((h / 60) % 2) - 1));
+    const m = l - c / 2;
+    let r = 0,
+      g = 0,
+      b = 0;
+    if (0 <= h && h < 60) {
+      r = c;
+      g = x;
+    } else if (60 <= h && h < 120) {
+      r = x;
+      g = c;
+    } else if (120 <= h && h < 180) {
+      g = c;
+      b = x;
+    } else if (180 <= h && h < 240) {
+      g = x;
+      b = c;
+    } else if (240 <= h && h < 300) {
+      r = x;
+      b = c;
+    } else if (300 <= h && h < 360) {
+      r = c;
+      b = x;
+    }
+    const toHex = (n: number) => {
+      const hex = Math.round((n + m) * 255).toString(16);
+      return hex.length === 1 ? "0" + hex : hex;
+    };
+    return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+  }
+
+  // (The original handleInputChange is now not needed since the library handles input.)
+  function handleClick(event: MouseEvent) {
+    if (!wasDragging) {
+      togglePicker();
+    }
+  }
+
+  function setStoreColor() {
+    foregroundColor.set(selectedColor);
+    complementaryColor.set(
+      getColorSuggestions(palette, selectedColor).filter(
+        ({ scheme, candidate }) => {
+          return (
+            scheme === "Analogous" && getContrastColor(candidate) === "#FFFFFF"
+          );
+        }
+      )[0].candidate || $complementaryColor
+    );
+  }
 </script>
 
 <div class="color-picker" bind:this={pickerRef}>
-  <!-- The toggle button for the color picker -->
-  <button
-    type="button"
-    class="color-preview"
-    on:click={togglePicker}
-    aria-haspopup="listbox"
-    aria-expanded={open}
-    style="background: {selectedColor};"
-  >
-    <span class="color-label">{selectedColor}</span>
-  </button>
+  <!-- Replacing the text input with svelte-awesome-color-picker.
+       We attach on:mousedown and on:click to keep the drag functionality.
+       The on:input event updates the selectedColor state and triggers onChange. -->
+  <ColorPicker
+    bind:hex={selectedColor}
+    position="responsive"
+    on:input={(e) => {
+      selectedColor = e.detail.hex || $foregroundColor;
+      selectedColorStore.set(selectedColor);
+      onChange(selectedColor);
+      setStoreColor();
+    }}
+    on:mousedown={handleMouseDown}
+    on:click={handleClick}
+  />
 
   {#if open}
-    <!-- Dropdown list rendered as a listbox -->
+    <!-- Palette Dropdown with Drag-and-Drop Reordering -->
     <ul class="color-dropdown" role="listbox" tabindex="-1">
-      {#each palette as color}
+      {#each palette as color, index (color)}
         <li
+          class="swatch-item"
           role="option"
-          tabindex="0"
-          class="color-swatch"
-          style="background: {color};"
           aria-selected={color === selectedColor}
-          on:click={() => selectColor(color)}
-          on:keydown={(e) => {
-            if (e.key === "Enter" || e.key === " ") {
-              e.preventDefault();
-              selectColor(color);
-            }
-          }}
         >
-          {#if color === selectedColor}
-            <svg class="checkmark" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M20 6L9 17l-5-5z" />
-            </svg>
-          {/if}
+          <button
+            class="color-swatch"
+            style="background: {color};"
+            draggable="true"
+            on:dragstart={(e) => handleDragStart(e, index)}
+            on:dragover={handleDragOver}
+            on:drop={(e) => handleDrop(e, index)}
+            on:click={() => selectColor(color)}
+            on:keydown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                selectColor(color);
+                setStoreColor();
+              }
+            }}
+          >
+            {#if color === selectedColor}
+              <svg class="checkmark" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20 6L9 17l-5-5z" />
+              </svg>
+            {/if}
+          </button>
         </li>
       {/each}
     </ul>
   {/if}
+
+  <!-- AI-Powered Smart Suggestions Panel -->
+  <section class="suggestion-panel" aria-label="Smart Color Suggestions">
+    <ul class="suggestion-list">
+      {#each suggestions as suggestion, index (suggestion.candidate + "-" + index)}
+        <li class="suggestion-item">
+          <button
+            class="suggestion-btn"
+            on:click={() => selectColor(suggestion.candidate)}
+            on:keydown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                selectColor(suggestion.candidate);
+                setStoreColor();
+              }
+            }}
+          >
+            <div
+              class="suggestion-swatch"
+              style="background: {suggestion.candidate};"
+            >
+              <span
+                class="suggestion-scheme"
+                style="color: {getContrastColor(suggestion.candidate)};"
+              >
+                {suggestion.scheme}
+                {suggestion.candidate}
+              </span>
+            </div>
+          </button>
+        </li>
+      {/each}
+    </ul>
+  </section>
 </div>
 
 <style lang="scss">
   .color-picker {
     position: relative;
-    width: 200px;
-  }
-
-  .color-preview {
-    background: var(--color-background-very-opaque);
-    backdrop-filter: blur(6px);
-    border: 1px solid var(--color-background);
-    border-radius: 8px;
-    padding: 0.75rem;
-    cursor: pointer;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    transition:
-      box-shadow 0.3s ease,
-      border 0.3s ease;
-    text-align: center;
-    /* Remove default button styles */
-    border: none;
-    outline: none;
+    flex-direction: column;
+    gap: 1rem;
+    z-index: 1;
   }
 
-  .color-preview:focus {
-    box-shadow: 0 0 0 3px var(--color-foreground);
-  }
+  /* Optionally, you may remove or adjust styles for the removed .color-preview */
 
-  .color-label {
-    color: var(--color-foreground-inversion);
-    font-weight: bold;
-    text-shadow: 0 0 5px var(--color-background);
-  }
-
+  /* Dropdown Palette */
   .color-dropdown {
     position: absolute;
-    top: calc(100% + 0.5rem);
+    top: calc(100% + 0.75rem);
     left: 0;
     right: 0;
     background: var(--color-background-very-opaque);
-    backdrop-filter: blur(6px);
+    backdrop-filter: blur(8px);
     border: 1px solid var(--color-background);
-    border-radius: 8px;
-    padding: 0.5rem;
+    border-radius: 12px;
+    padding: 0.75rem;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(30px, 1fr));
-    gap: 0.5rem;
-    z-index: 10;
+    grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+    gap: 0.75rem;
+    z-index: 20;
     animation: fadeSlide 0.3s ease-out;
-  }
-
-  .color-swatch {
-    width: 30px;
-    height: 30px;
-    border-radius: 4px;
-    cursor: pointer;
-    position: relative;
-    transition:
-      transform 0.3s ease,
-      box-shadow 0.3s ease;
-  }
-
-  .color-swatch:hover,
-  .color-swatch:focus {
-    transform: scale(1.1);
-    box-shadow: 0 0 10px -4px var(--color-foreground-opaque);
-    outline: none;
-  }
-
-  .checkmark {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 16px;
-    height: 16px;
-    fill: var(--color-foreground-inversion);
   }
 
   @keyframes fadeSlide {
@@ -186,5 +326,122 @@
       opacity: 1;
       transform: translateY(0);
     }
+  }
+
+  .swatch-item button {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+    background: transparent;
+    padding: 0;
+  }
+
+  .color-swatch {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+  }
+
+  .swatch-item button:hover,
+  .swatch-item button:focus {
+    transform: scale(1.15);
+    box-shadow: 0 0 10px var(--neon-pink);
+    outline: none;
+  }
+
+  .checkmark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    fill: var(--color-foreground-inversion);
+  }
+
+  .suggestion-panel {
+    animation: fadeSlide 0.5s ease-out;
+  }
+
+  .suggestion-panel h3 {
+    color: var(--color-background);
+    margin: 0 0 0.5rem;
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  .suggestion-list {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .suggestion-item button {
+    display: flex;
+    align-items: center;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 8px;
+    transition:
+      transform 0.2s ease,
+      background 0.2s ease;
+  }
+
+  .suggestion-item button:hover,
+  .suggestion-item button:focus {
+    transform: scale(1.05);
+    background: var(--color-background-very-opaque);
+    outline: none;
+  }
+
+  .suggestion-swatch {
+    border-radius: 6px;
+    padding: 5px 10px;
+  }
+
+  .suggestion-scheme {
+    color: var(--color-background-inversion);
+    font-size: 0.8rem;
+    text-shadow: 0 0 4px var(--color-background-inversion);
+  }
+
+  .preview-panel {
+    background: var(--color-background-very-opaque);
+    backdrop-filter: blur(8px);
+    border-radius: 12px;
+    padding: 0.75rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    animation: fadeSlide 0.5s ease-out;
+  }
+
+  .preview-panel h3 {
+    color: var(--color-background);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .preview-mockup {
+    background: var(--color-background);
+    border-radius: 8px;
+    padding: 1rem;
+    color: #333;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+  }
+
+  .preview-mockup:hover {
+    transform: scale(1.03);
   }
 </style>

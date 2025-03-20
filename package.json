@@ -81,6 +81,7 @@
     "postcss": "^8.5.1",
     "scene-preset": "^2.4.19",
     "smui": "^1.0.5",
+    "svelte-awesome-color-picker": "^3.1.4",
     "svelte-calendar": "^3.1.6",
     "svelte-forms-lib": "^2.0.1",
     "svelte-material-ui": "^8.0.0-beta.3",

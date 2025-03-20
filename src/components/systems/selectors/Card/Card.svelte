@@ -9,7 +9,7 @@
 
 <div class="card {selected ? 'selected' : ''}">
   {#if label}
-    <MarkdownText {canReveal}>{label}</MarkdownText>
+    <MarkdownText {canReveal}>## **{label}**</MarkdownText>
   {/if}
   <!-- Render the passed JSON object recursively -->
   <slot />

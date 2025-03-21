@@ -20,12 +20,5 @@ export default async (config: { [index: string]: string }) => {
 
   console.log("response", response.ok, response);
 
-  if (response.ok) {
-    saveToStore({
-      config,
-    });
-    // json = await response.json();
-  }
-
   return response.ok;
 };

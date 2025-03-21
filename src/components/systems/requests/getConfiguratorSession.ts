@@ -31,8 +31,6 @@ export default async () => {
   let response = await getConfigFetchResponse(authHeaders);
   let json;
 
-  console.log("response", response.ok, response);
-
   if (!response.ok) {
     const body = {
       newsletterSubject: "Daily News",
@@ -60,16 +58,12 @@ export default async () => {
 
   json = await response.json();
 
-  console.log("response json", json);
-
   saveToStore({
     config: json,
   });
 
   foregroundColor.set(json.brandColor);
   complementaryColor.set(getComplementaryColor(json.brandColor));
-
-  console.log("json", json);
 
   return response.ok;
 };

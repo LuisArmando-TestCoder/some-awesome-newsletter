@@ -38,10 +38,14 @@
     margin: 1rem 0;
     overflow: hidden;
     box-shadow: 0 0 10px -9px var(--color-background);
-    transition: .5s;
+    transition: 0.1s;
 
     &:hover {
-      box-shadow: 0 0 12px -5px var(--color-background);
+      box-shadow: 0 0 5px -5px var(--color-background);
+      .arrow {
+        border-right: 2px solid var(--color-background);
+        border-bottom: 2px solid var(--color-background);
+      }
     }
   }
 
@@ -58,13 +62,15 @@
   }
 
   .arrow {
+    border-right: 2px solid var(--color-background);
+    border-bottom: 2px solid var(--color-background);
     display: inline-block;
     width: 1rem;
     height: 1rem;
     border-right: 2px solid #333;
     border-bottom: 2px solid #333;
     transform: rotate(45deg);
-    transition: transform .5s ease;
+    transition: transform 0.5s ease;
   }
   .arrow.open {
     transform: rotate(225deg);

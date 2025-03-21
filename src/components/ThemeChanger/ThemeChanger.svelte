@@ -58,8 +58,12 @@
     ]);
     setThemeCSSVar("theme", ["dark", "light"]);
     setThemeCSSVar("color-x-gradient", [
-      "linear-gradient(90deg, rgba(24,23,23,1) 0%, rgba(20,20,20,1) 22%, rgba(0,0,0,1) 100%)",
+      "linear-gradient(90deg, rgba(24, 23, 23, 1) 0%, rgba(20, 20, 20, 1) 22%, rgba(0, 0, 0, 1) 100%)",
       "linear-gradient(90deg, rgba(248, 248, 248, 1) 0%, rgba(245, 244, 244, 1) 11%, rgba(227, 227, 227, 1) 100%)",
+    ]);
+    setThemeCSSVar("color-x-gradient-opaque", [
+      "linear-gradient(180deg, rgba(24, 23, 23, 0.1) 0%, rgba(20, 20, 20, .5) 22%, rgba(0, 0, 0, .7) 100%)",
+      "linear-gradient(180deg, rgba(248, 248, 248, 0.1) 0%, rgba(245, 244, 244, .5) 11%, rgba(227, 227, 227, .7) 100%)",
     ]);
   };
 

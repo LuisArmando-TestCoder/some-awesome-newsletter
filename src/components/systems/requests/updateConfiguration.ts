@@ -18,7 +18,5 @@ export default async (config: { [index: string]: string }) => {
     }
   );
 
-  console.log("response", response.ok, response);
-
   return response.ok;
 };

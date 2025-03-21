@@ -175,7 +175,7 @@
   }
   .dashboard {
     padding: 50px 0;
-    max-height: 100vh;
+    height: 100vh;
     overflow: auto;
   }
   .grid {
@@ -188,7 +188,10 @@
   }
   .pad {
     padding: 25px;
-    margin: 25px;
+    
+    @media (min-width: 720px) {
+      margin: 25px;
+    }
   }
   .center {
     display: flex;

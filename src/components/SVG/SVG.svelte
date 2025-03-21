@@ -27,7 +27,7 @@
 
       console.log("liquidAssetURL", liquidAssetURL)
 
-      const response = await fetch(liquidAssetURL!);
+      const response = await fetch(liquidAssetURL || src);
 
       if (!response.ok) {
         throw new Error(`Failed to fetch SVG: ${response.status} ${response.statusText}`);

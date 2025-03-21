@@ -22,6 +22,10 @@
   }
 }
 
+:global(svg) {
+  fill: var(--color-foreground);
+}
+
 @keyframes dots {
   0% {
     content: '.';

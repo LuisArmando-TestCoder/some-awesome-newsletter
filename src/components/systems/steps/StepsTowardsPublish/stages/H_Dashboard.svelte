@@ -31,7 +31,7 @@
 
 <div class="dashboard">
   <div class="pad grid">
-    <CardComponent {canReveal} label="Global Configuration">
+    <CardComponent {canReveal} label="**Brand Configuration**">
       <div class="group">
         <ToggleCard
           {canReveal}

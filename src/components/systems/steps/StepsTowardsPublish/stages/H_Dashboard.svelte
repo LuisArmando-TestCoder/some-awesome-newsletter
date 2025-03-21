@@ -15,7 +15,7 @@
   import CardComponent from "../../../selectors/Card/Card.svelte";
   import Centered from "../../../wrappers/Centered/Centered.svelte";
   import logout from "../../../requests/logout.ts";
-  import store from "../../../../store.ts";
+  import store, { populateToStore } from "../../../../store.ts";
   import MarkdownText from "../../../texts/MarkdownText/MarkdownText.svelte";
   import ToggleCard from "../../../buttons/ToggleCard/ToggleCard.svelte";
 
@@ -26,47 +26,63 @@
   {#key $store?.config}
     <div class="pad grid">
       <CardComponent {canReveal} label="Global Configuration">
-        {JSON.stringify($store.config)}
         {#key $store.config}
           <div class="group">
             <ToggleCard {canReveal} cardTitle="Current **brand color**">
               <MarkdownText {canReveal}>
                 --This is the color your newsletters will present in their highlighted words--</MarkdownText
               >
-              <ColorPicker />
+              <ColorPicker 
+                selectedColor={$store.config.brandColor}
+                onChange={(value) => {
+                  // populateToStore("config.brandColor", value);
+                }}
+              />
             </ToggleCard>
-            <ToggleCard {canReveal} cardTitle="Newsletter Subject">
+            <ToggleCard {canReveal} cardTitle="Newsletter **Subject**">
               <PlainText
                 placeholder="Change your newsletter subject"
                 value={$store.config.newsletterSubject}
+                onChange={(value) => {
+                  populateToStore("config.newsletterSubject", value);
+                }}
               />
               <MarkdownText {canReveal}
                 >--Keep it concise, clear, and curiosity-driven—use power words, or cliffhangers to make the reader eager to open the email--</MarkdownText
               >
             </ToggleCard>
-            <ToggleCard {canReveal} cardTitle="Newsletter Title">
+            <ToggleCard {canReveal} cardTitle="Newsletter **Title**">
               <MarkdownText {canReveal}></MarkdownText>
               <PlainText
                 placeholder="Change your newsletter title"
                 value={$store.config.newsletterTitle}
+                onChange={(value) => {
+                  populateToStore("config.newsletterTitle", value);
+                }}
               />
               <MarkdownText {canReveal}
                 >--Make it feel personal, like a message from a friend, not a brand--</MarkdownText
               >
             </ToggleCard>
-            <ToggleCard {canReveal} cardTitle="Sender Name">
+            <ToggleCard {canReveal} cardTitle="Sender **Name**">
               <PlainText
                 placeholder="Change your email sender name"
                 value={$store.config.senderName}
+                onChange={(value) => {
+                  populateToStore("config.senderName", value);
+                }}
               />
               <MarkdownText {canReveal}
                 >--Indicating who the email is from helps establish trust and encourage engagement--</MarkdownText
               >
             </ToggleCard>
-            <ToggleCard {canReveal} cardTitle="Email Signature">
+            <ToggleCard {canReveal} cardTitle="Email **Signature**">
               <PlainText
                 placeholder="Change your email signature"
                 value={$store.config.emailSignature}
+                onChange={(value) => {
+                  populateToStore("config.emailSignature", value);
+                }}
               />
               <MarkdownText {canReveal}
                 >--Email signatures instil brand trust--</MarkdownText

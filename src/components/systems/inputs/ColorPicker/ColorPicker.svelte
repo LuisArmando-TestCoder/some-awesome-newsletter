@@ -2,7 +2,7 @@
   import { writable } from "svelte/store";
   import { onMount, onDestroy } from "svelte";
   import getColorSuggestions, {
-  getComplementaryColor,
+    getComplementaryColor,
     getContrastColor,
   } from "./getColorSuggestions.ts";
   import type { CandidateScore } from "./getColorSuggestions.ts";
@@ -15,7 +15,7 @@
   } from "../../../ThemeChanger/store.ts";
 
   // Props & Stores
-  export let selectedColor: string = "#03a9f4";
+  export let selectedColor: string = $foregroundColor;
   export let onChange: (newColor: string) => void = () => {};
   export const selectedColorStore = writable(selectedColor);
 
@@ -196,8 +196,10 @@
     on:input={(e) => {
       selectedColor = e.detail.hex || $foregroundColor;
       selectedColorStore.set(selectedColor);
-      onChange(selectedColor);
-      setStoreColor();
+      if (!isDragging) {
+        onChange(selectedColor);
+        setStoreColor();
+      }
     }}
     on:mousedown={handleMouseDown}
     on:click={handleClick}

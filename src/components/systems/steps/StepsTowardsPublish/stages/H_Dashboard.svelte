@@ -30,8 +30,8 @@
 </script>
 
 <div class="dashboard">
-  <div class="pad grid">
-    <CardComponent {canReveal} svg="user-gear-solid" label="**Brand Configuration**">
+  <div class="pad grid scenario">
+    <CardComponent collapsed={true} {canReveal} svg="user-gear-solid" label="**Brand Configuration**">
       <div class="group">
         <ToggleCard
           {canReveal}
@@ -152,6 +152,7 @@
         />
       </div>
     </CardComponent>
+    <CardComponent collapsed={true} {canReveal} svg="idea" label="**News Sources**"></CardComponent>
   </div>
   <div class="pad center">
     <SubmitButton callback={logout} label="sign out" />
@@ -166,6 +167,10 @@
     font-style: italic;
   }
 
+  .scenario {
+    height: 100vh;
+  }
+
   .highlight {
     color: var(--color-foreground);
   }
@@ -174,24 +179,27 @@
     margin-right: 25px;
   }
   .dashboard {
-    padding: 50px 0;
     height: 100vh;
     overflow: auto;
   }
   .grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 25px;
+    display: flex;
+    gap: 25px;
+    place-content: center;
+    justify-content: center;
     place-items: center;
+
+    
     @media (max-width: 720px) {
-      grid-template-columns: 1fr;
+      flex-direction: column;
     }
   }
   .pad {
-    padding: 25px;
+    padding: 25px 0;
+    box-sizing: border-box;
     
     @media (min-width: 720px) {
-      margin: 25px;
+      padding: 25px;
     }
   }
   .center {

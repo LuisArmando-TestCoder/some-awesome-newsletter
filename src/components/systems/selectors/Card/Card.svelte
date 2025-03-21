@@ -8,7 +8,7 @@
   export let canReveal = false;
 
   // 'collapsed' determines whether the card is in its compact state.
-  let collapsed = false;
+  export let collapsed = false;
 
   // Toggle collapse when the title button is clicked.
   function toggleCollapse() {
@@ -63,7 +63,7 @@
   .card {
     background: var(--color-x-gradient-opaque);
     backdrop-filter: blur(6px);
-    border-radius: 10px;
+    border-radius: 7px;
     padding: 1rem 2rem;
     cursor: pointer;
     text-align: left;
@@ -71,7 +71,6 @@
     overflow: hidden;
     /* Horizontal expansion: expanded state happens immediately, collapsed state waits 0.5s */
     &.expanded {
-      border: 1px solid var(--color-background-opaque);
       width: 100%;
       transition:
         transform 0.6s ease,
@@ -83,7 +82,6 @@
 
     &.collapsed {
       padding: 1rem 3rem;
-      border: 1px solid var(--color-background);
       width: 150px; /* Adjust as needed */
       height: 150px; /* Square ratio */
       transition:
@@ -101,7 +99,6 @@
   }
 
   .card.selected {
-    border-color: var(--color-foreground);
     box-shadow: 0 0 10px -2px var(--color-foreground);
   }
 

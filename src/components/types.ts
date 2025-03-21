@@ -6,7 +6,13 @@ export type TextType =
   | "sub-highlight-italic"
   | "highlight"
   | "title"
-  | "subtitle";
+  | "title-highlight"
+  | "title-sub-italic"
+  | "title-sub-highlight-italic"
+  | "subtitle"
+  | "subtitle-highlight"
+  | "subtitle-sub-italic"
+  | "subtitle-sub-highlight-italic";
 
 export type TextNode = {
   text: string;

@@ -33,12 +33,12 @@
   on:click={toggle}
   on:keydown={handleKeyDown}
 >
-  <div class="switch-track">
-    <div class="switch-knob {toggled ? 'toggled' : ''}"></div>
+  <div class="switch-track" class:toggled>
+    <div class="switch-knob" class:toggled></div>
     <div
-      class="switch-knob {toggled ? 'toggled' : ''}"
-      style="transition-delay: .225s;"
-    ></div>
+      class="switch-knob" class:toggled
+      style="transition-delay: .175s; transform: translateX(0);"
+    >{["○", "|"][+toggled]}</div>
   </div>
 </div>
 
@@ -120,12 +120,14 @@
     position: absolute;
     top: 2px;
     left: 2px;
-    transition:
-      transform 0.3s ease,
-      box-shadow 0.3s ease;
+    transition: .5s;
+    transition-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1);
+    text-align: center;
 
     &.toggled {
-      transform: translateX(26px);
+      transform: translateX(26px) !important;
+      background: var(--color-foreground);
+      color: var(--color-background);
     }
   }
 </style>

@@ -2,7 +2,6 @@
   import { onMount } from "svelte";
   import { complementaryColor, foregroundColor, themeIndex } from "./store.ts";
 
-
   let isDarkTheme = true;
 
   // Check localStorage for theme preference

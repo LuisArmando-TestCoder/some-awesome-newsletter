@@ -41,6 +41,7 @@ export default async () => {
             get(store).colorPalette[
               Math.floor(Math.random() * get(store).colorPalette.length)
             ],
+          emailSignature: "I translated this news article for you, dearly "
         }),
       }
     );

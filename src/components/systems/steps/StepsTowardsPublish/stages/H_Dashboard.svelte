@@ -23,16 +23,39 @@
 
 <div class="dashboard">
   {#key $store?.config}
-    <div class="pad grid">
-      <CardComponent {canReveal} label="Global Configuration">
+  <div class="pad grid">
+    <CardComponent {canReveal} label="Global Configuration">
+      {#key $store.config}
         <div class="group">
-            <MarkdownText {canReveal}>Your current **brand color**</MarkdownText>
-            <ColorPicker />
-            <MarkdownText {canReveal}>--This is the color your newsletters will present in their highlighted words--</MarkdownText>
-          <!-- <Switch /> -->
+          <MarkdownText {canReveal}>Current **brand color**</MarkdownText>
+          <MarkdownText {canReveal}>
+            --This is the color your newsletters will present in their highlighted words--</MarkdownText
+          >
+          <ColorPicker />
+          <br />
+          <MarkdownText {canReveal}>Newsletter Subject</MarkdownText>
+          <PlainText placeholder="Change your newsletter subject" value={$store.config.newsletterSubject} />
+          {$store.config.newsletterSubject}
+          <MarkdownText {canReveal}>--Keep it concise, clear, and curiosity-driven—use power words, or cliffhangers to make the reader eager to open the email--</MarkdownText>
+          <br/>
+          <MarkdownText {canReveal}>Newsletter Title</MarkdownText>
+          <PlainText placeholder="Change your newsletter title" value={$store.config.newsletterTitle} />
+          {$store.config.newsletterTitle}
+          <MarkdownText {canReveal}>--Make it feel personal, like a message from a friend, not a brand--</MarkdownText>
+          <br/>
+          <MarkdownText {canReveal}>Sender Name</MarkdownText>
+          <PlainText placeholder="Change your email sender name" value={$store.config.senderName} />
+          {$store.config.senderName}
+          <MarkdownText {canReveal}>--Indicating who the email is from helps establish trust and encourage engagement--</MarkdownText>
+          <br/>
+          <MarkdownText {canReveal}>Email Signature</MarkdownText>
+          <PlainText placeholder="Change your email signature" value={$store.config.emailSignature} />
+          <MarkdownText {canReveal}>--Email signatures instil brand trust--</MarkdownText>
+          <br/>
         </div>
-      </CardComponent>
-    </div>
+      {/key}
+    </CardComponent>
+  </div>
     <div class="pad center">
       <SubmitButton callback={logout} label="sign out" />
     </div>
@@ -48,8 +71,12 @@
 
   .grid {
     display: grid;
-    // grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: 1fr 1fr;
     grid-gap: 25px;
+
+    @media (max-width: 720px) {
+      grid-template-columns: 1fr;
+    }
   }
 
   .pad {

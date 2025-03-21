@@ -31,6 +31,18 @@
       }
     }
   };
+  function isScrollable(el) {
+    const style = getComputedStyle(el);
+    return (
+      (el.scrollHeight > el.clientHeight || el.scrollWidth > el.clientWidth) &&
+      (style.overflow === "auto" ||
+        style.overflow === "scroll" ||
+        style.overflowY === "auto" ||
+        style.overflowY === "scroll" ||
+        style.overflowX === "auto" ||
+        style.overflowX === "scroll")
+    );
+  }
   // Check initially in case the element is already in view
   onMount(async () => {
     setTimeout(async () => {
@@ -38,8 +50,14 @@
     }, 1000);
     await scrollHandler();
     // Add scroll event listener
-    window.addEventListener("scroll", async () => {
-      await scrollHandler();
+
+    const allElements = document.querySelectorAll("*");
+    allElements.forEach((el) => {
+      if (isScrollable(el)) {
+        el.addEventListener("scroll", async () => {
+          await scrollHandler();
+        });
+      }
     });
   });
 

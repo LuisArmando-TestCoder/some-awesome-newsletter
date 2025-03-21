@@ -371,7 +371,7 @@ export function getContrastColor(hexColor: string) {
   return yiq >= 128 ? "#000000" : "#FFFFFF";
 }
 
-export function getComplementaryColor(selectedColor: string) {
+export function getComplementaryColor(selectedColor: string): string {
   return (
     getColorSuggestions(get(store).colorPalette, selectedColor).filter(
       ({ scheme, candidate }) => {
@@ -379,6 +379,6 @@ export function getComplementaryColor(selectedColor: string) {
           scheme === "Analogous" && getContrastColor(candidate) === "#FFFFFF"
         );
       }
-    )[0].candidate || get(complementaryColor)
+    )[0]?.candidate || get(complementaryColor)
   );
 }

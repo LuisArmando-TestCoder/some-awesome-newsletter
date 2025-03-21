@@ -53,7 +53,7 @@ function hexToHsl(hex: string): { h: number; s: number; l: number } {
  * @param l - Lightness (0-100)
  * @returns The HEX color string (e.g., "#6C48EA").
  */
-function hslToHex(h: number, s: number, l: number): string {
+export function hslToHex(h: number, s: number, l: number): string {
   s /= 100;
   l /= 100;
 

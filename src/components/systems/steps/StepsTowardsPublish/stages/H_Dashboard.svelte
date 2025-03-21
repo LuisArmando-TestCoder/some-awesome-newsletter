@@ -43,6 +43,7 @@
             --This is the color your newsletters will present in their highlighted words--
           </MarkdownText>
           <ColorPicker
+            canReveal={canReveal && $store.toggles?.brandColor}
             selectedColor={$store.config.brandColor}
             onChange={(value) => {
               saveToConfig({

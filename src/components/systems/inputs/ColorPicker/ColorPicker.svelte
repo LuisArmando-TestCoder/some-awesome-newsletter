@@ -4,6 +4,7 @@
   import getColorSuggestions, {
     getComplementaryColor,
     getContrastColor,
+    hslToHex,
   } from "./getColorSuggestions.ts";
   import type { CandidateScore } from "./getColorSuggestions.ts";
   import store from "../../../store.ts";
@@ -13,10 +14,12 @@
     complementaryColor,
     foregroundColor,
   } from "../../../ThemeChanger/store.ts";
+  import MarkdownText from "../../texts/MarkdownText/MarkdownText.svelte";
 
   // Props & Stores
   export let selectedColor: string = $foregroundColor;
   export let onChange: (newColor: string) => void = () => {};
+  export let canReveal = false;
   export const selectedColorStore = writable(selectedColor);
 
   let open = false;
@@ -137,42 +140,6 @@
     onChange(hex);
   }
 
-  // Basic HSL to Hex conversion
-  function hslToHex(h: number, s: number, l: number): string {
-    s /= 100;
-    l /= 100;
-    const c = (1 - Math.abs(2 * l - 1)) * s;
-    const x = c * (1 - Math.abs(((h / 60) % 2) - 1));
-    const m = l - c / 2;
-    let r = 0,
-      g = 0,
-      b = 0;
-    if (0 <= h && h < 60) {
-      r = c;
-      g = x;
-    } else if (60 <= h && h < 120) {
-      r = x;
-      g = c;
-    } else if (120 <= h && h < 180) {
-      g = c;
-      b = x;
-    } else if (180 <= h && h < 240) {
-      g = x;
-      b = c;
-    } else if (240 <= h && h < 300) {
-      r = x;
-      b = c;
-    } else if (300 <= h && h < 360) {
-      r = c;
-      b = x;
-    }
-    const toHex = (n: number) => {
-      const hex = Math.round((n + m) * 255).toString(16);
-      return hex.length === 1 ? "0" + hex : hex;
-    };
-    return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
-  }
-
   // (The original handleInputChange is now not needed since the library handles input.)
   function handleClick(event: MouseEvent) {
     if (!wasDragging) {
@@ -274,6 +241,10 @@
       {/each}
     </ul>
   </section>
+  
+  <MarkdownText {canReveal}>
+    ==Related colors== for different types of color ==palettes==.
+  </MarkdownText>
 </div>
 
 <style lang="scss">

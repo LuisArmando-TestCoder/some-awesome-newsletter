@@ -92,9 +92,6 @@
         width 0.4s ease 0.5s,
         height 0.4s ease 0.5s,
         padding 0.4s ease 0.5s;
-
-      .card-title {
-      }
     }
   }
 

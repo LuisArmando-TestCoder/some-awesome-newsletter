@@ -36,14 +36,14 @@
         <ToggleCard
           {canReveal}
           cardTitle="Current **brand color**"
-          isOpen={$store.toggles?.brandColor || false}
+          isOpen={!!$store.toggles?.brandColor}
           onChange={(isOpen) => updateToggle("brandColor", isOpen)}
         >
-          <MarkdownText canReveal={canReveal && $store.toggles?.brandColor}>
+          <MarkdownText canReveal={canReveal}>
             --This is the color your newsletters will present in their highlighted words--
           </MarkdownText>
           <ColorPicker
-            canReveal={canReveal && $store.toggles?.brandColor}
+            canReveal={canReveal}
             selectedColor={$store.config.brandColor}
             onChange={(value) => {
               saveToConfig({
@@ -55,7 +55,7 @@
         <ToggleCard
           {canReveal}
           cardTitle="Newsletter **Subject**"
-          isOpen={$store.toggles?.newsletterSubject || false}
+          isOpen={!!$store.toggles?.newsletterSubject}
           onChange={(isOpen) => updateToggle("newsletterSubject", isOpen)}
         >
           <PlainText
@@ -67,14 +67,14 @@
               });
             }}
           />
-          <MarkdownText canReveal={canReveal && $store.toggles?.newsletterSubject}>
+          <MarkdownText canReveal={canReveal}>
             --Keep it concise, clear, and curiosity-driven—use power words, or cliffhangers to make the reader eager to open the email--
           </MarkdownText>
         </ToggleCard>
         <ToggleCard
           {canReveal}
           cardTitle="Newsletter **Title**"
-          isOpen={$store.toggles?.newsletterTitle || false}
+          isOpen={!!$store.toggles?.newsletterTitle}
           onChange={(isOpen) => updateToggle("newsletterTitle", isOpen)}
         >
           <PlainText
@@ -86,14 +86,14 @@
               });
             }}
           />
-          <MarkdownText canReveal={canReveal && $store.toggles?.newsletterTitle}>
+          <MarkdownText canReveal={canReveal}>
             --Make it feel personal, like a message from a friend, not a brand--
           </MarkdownText>
         </ToggleCard>
         <ToggleCard
           {canReveal}
           cardTitle="Sender **Name**"
-          isOpen={$store.toggles?.senderName || false}
+          isOpen={!!$store.toggles?.senderName}
           onChange={(isOpen) => updateToggle("senderName", isOpen)}
         >
           <PlainText
@@ -105,14 +105,14 @@
               });
             }}
           />
-          <MarkdownText canReveal={canReveal && $store.toggles?.senderName}>
+          <MarkdownText canReveal={canReveal}>
             --Indicating who the email is from helps establish trust and encourage engagement--
           </MarkdownText>
         </ToggleCard>
         <ToggleCard
           {canReveal}
           cardTitle="Email **Signature**"
-          isOpen={$store.toggles?.emailSignature || false}
+          isOpen={!!$store.toggles?.emailSignature}
           onChange={(isOpen) => updateToggle("emailSignature", isOpen)}
         >
           <PlainText
@@ -124,7 +124,7 @@
               });
             }}
           />
-          <MarkdownText canReveal={canReveal && $store.toggles?.emailSignature}>
+          <MarkdownText canReveal={canReveal}>
             --Email signatures instil brand trust--
           </MarkdownText>
         </ToggleCard>

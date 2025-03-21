@@ -14,7 +14,6 @@
   import askIsAuthCodeValid from "../../requests/askIsAuthCodeValid.ts";
   import { onMount } from "svelte";
   import { get } from "svelte/store";
-  import getConfiguratorSession from "../../requests/getConfiguratorSession.ts";
 
   const t = () => true;
 

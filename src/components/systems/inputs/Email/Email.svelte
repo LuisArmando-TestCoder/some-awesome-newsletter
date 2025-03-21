@@ -14,7 +14,7 @@
   export const emailStore = writable(value);
 
   // Track validation state.
-  let valid = true;
+  let valid = false;
 
   // Validate email format on input, update the store, and call onChange.
   function handleInput(event: Event) {

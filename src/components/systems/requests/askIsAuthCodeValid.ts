@@ -1,5 +1,6 @@
 import { get } from "svelte/store";
 import store, { saveToStore } from "../../store.ts";
+import getConfiguratorSession from "./getConfiguratorSession.ts";
 
 export default async (onSuccessCallback?: Function) => {
   const response = await fetch(
@@ -29,6 +30,11 @@ export default async (onSuccessCallback?: Function) => {
 
   if (response.ok) {
     onSuccessCallback?.();
+    getConfiguratorSession();
+    saveToStore({
+      directionsThatShouldDisappear: [-1],
+      hasNewEmailCodeBeenSent: false,
+    });
   }
 
   return response.ok;

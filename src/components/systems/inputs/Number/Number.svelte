@@ -15,7 +15,7 @@
   export const numberStore = writable(value);
 
   // Track validation state.
-  let valid = true;
+  let valid = false;
 
   // Checks if the string is a valid number.
   function isValidNumber(str: string): boolean {

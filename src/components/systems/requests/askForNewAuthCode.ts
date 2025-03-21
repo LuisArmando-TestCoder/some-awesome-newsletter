@@ -1,7 +1,7 @@
 import { get } from "svelte/store";
 import store, { saveToStore } from "../../store.ts";
 
-export default async function ask(tries?: number) {
+export default async function ask() {
   saveToStore({
     hasNewEmailCodeBeenSent: true,
   });
@@ -14,9 +14,6 @@ export default async function ask(tries?: number) {
   );
 
   if (response.ok) {
-    if (tries === undefined) return ask(3);
-    else if (tries > 0) return ask(tries - 1);
-
     saveToStore({
       hasNewEmailCodeBeenSent: false,
       hasAuthCodeAskFailed: true,

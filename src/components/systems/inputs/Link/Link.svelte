@@ -14,7 +14,7 @@
   export const urlStore = writable(value);
 
   // Track validation state.
-  let valid = true;
+  let valid = false;
 
   function isValidURL(str: string): boolean {
     try {

@@ -6,12 +6,9 @@ import {
 } from "../../ThemeChanger/store.ts";
 import { getComplementaryColor } from "../inputs/ColorPicker/getColorSuggestions.ts";
 
-export default async () => {
-  const authHeaders = {
-    "x-auth-email": get(store).configuratorEmail,
-    "x-auth-code": get(store).authCode,
-    "Content-Type": "application/json",
-  };
+async function getConfigFetchResponse(authHeaders: {
+  [index: string]: string;
+}) {
   let response = await fetch(
     `${get(store).apiURL}/private-config?documentId=${
       get(store).configuratorEmail
@@ -21,37 +18,49 @@ export default async () => {
       headers: authHeaders,
     }
   );
+
+  return response;
+}
+
+export default async () => {
+  const authHeaders = {
+    "x-auth-email": get(store).configuratorEmail,
+    "x-auth-code": get(store).authCode,
+    "Content-Type": "application/json",
+  };
+  let response = await getConfigFetchResponse(authHeaders);
   let json;
 
   console.log("response", response.ok, response);
 
   if (!response.ok) {
-    // first news source protocol
-    response = await fetch(
+    const body = {
+      newsletterSubject: "Daily News",
+      newsletterTitle: "Morning Bulletin",
+      senderName: get(store).configuratorEmail.split("@")[0],
+      scheduleTime: "0 12 * * *",
+      brandColor:
+        get(store).colorPalette[
+          Math.floor(Math.random() * get(store).colorPalette.length)
+        ],
+      emailSignature: "Translated this news article for you",
+    };
+
+    await fetch(
       `${get(store).apiURL}/config?documentId=${get(store).configuratorEmail}`,
       {
         method: "POST",
         headers: authHeaders,
-        body: JSON.stringify({
-          newsletterSubject: "Daily News",
-          newsletterTitle: "Morning Bulletin",
-          senderName: get(store).configuratorEmail.split("@")[0],
-          scheduleTime: "0 12 * * *",
-          brandColor:
-            get(store).colorPalette[
-              Math.floor(Math.random() * get(store).colorPalette.length)
-            ],
-          emailSignature: "I translated this news article for you, dearly "
-        }),
+        body: JSON.stringify(body),
       }
     );
 
-    console.log("response", response.ok);
-
-    return;
+    response = await getConfigFetchResponse(authHeaders);
   }
 
   json = await response.json();
+
+  console.log("response json", json);
 
   saveToStore({
     config: json,

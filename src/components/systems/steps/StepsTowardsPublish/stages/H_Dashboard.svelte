@@ -17,45 +17,65 @@
   import logout from "../../../requests/logout.ts";
   import store from "../../../../store.ts";
   import MarkdownText from "../../../texts/MarkdownText/MarkdownText.svelte";
+  import ToggleCard from "../../../buttons/ToggleCard/ToggleCard.svelte";
 
   export let canReveal = false;
 </script>
 
 <div class="dashboard">
   {#key $store?.config}
-  <div class="pad grid">
-    <CardComponent {canReveal} label="Global Configuration">
-      {#key $store.config}
-        <div class="group">
-          <MarkdownText {canReveal}>Current **brand color**</MarkdownText>
-          <MarkdownText {canReveal}>
-            --This is the color your newsletters will present in their highlighted words--</MarkdownText
-          >
-          <ColorPicker />
-          <br />
-          <MarkdownText {canReveal}>Newsletter Subject</MarkdownText>
-          <PlainText placeholder="Change your newsletter subject" value={$store.config.newsletterSubject} />
-          {$store.config.newsletterSubject}
-          <MarkdownText {canReveal}>--Keep it concise, clear, and curiosity-driven—use power words, or cliffhangers to make the reader eager to open the email--</MarkdownText>
-          <br/>
-          <MarkdownText {canReveal}>Newsletter Title</MarkdownText>
-          <PlainText placeholder="Change your newsletter title" value={$store.config.newsletterTitle} />
-          {$store.config.newsletterTitle}
-          <MarkdownText {canReveal}>--Make it feel personal, like a message from a friend, not a brand--</MarkdownText>
-          <br/>
-          <MarkdownText {canReveal}>Sender Name</MarkdownText>
-          <PlainText placeholder="Change your email sender name" value={$store.config.senderName} />
-          {$store.config.senderName}
-          <MarkdownText {canReveal}>--Indicating who the email is from helps establish trust and encourage engagement--</MarkdownText>
-          <br/>
-          <MarkdownText {canReveal}>Email Signature</MarkdownText>
-          <PlainText placeholder="Change your email signature" value={$store.config.emailSignature} />
-          <MarkdownText {canReveal}>--Email signatures instil brand trust--</MarkdownText>
-          <br/>
-        </div>
-      {/key}
-    </CardComponent>
-  </div>
+    <div class="pad grid">
+      <CardComponent {canReveal} label="Global Configuration">
+        {JSON.stringify($store.config)}
+        {#key $store.config}
+          <div class="group">
+            <ToggleCard {canReveal} cardTitle="Current **brand color**">
+              <MarkdownText {canReveal}>
+                --This is the color your newsletters will present in their highlighted words--</MarkdownText
+              >
+              <ColorPicker />
+            </ToggleCard>
+            <ToggleCard {canReveal} cardTitle="Newsletter Subject">
+              <PlainText
+                placeholder="Change your newsletter subject"
+                value={$store.config.newsletterSubject}
+              />
+              <MarkdownText {canReveal}
+                >--Keep it concise, clear, and curiosity-driven—use power words, or cliffhangers to make the reader eager to open the email--</MarkdownText
+              >
+            </ToggleCard>
+            <ToggleCard {canReveal} cardTitle="Newsletter Title">
+              <MarkdownText {canReveal}></MarkdownText>
+              <PlainText
+                placeholder="Change your newsletter title"
+                value={$store.config.newsletterTitle}
+              />
+              <MarkdownText {canReveal}
+                >--Make it feel personal, like a message from a friend, not a brand--</MarkdownText
+              >
+            </ToggleCard>
+            <ToggleCard {canReveal} cardTitle="Sender Name">
+              <PlainText
+                placeholder="Change your email sender name"
+                value={$store.config.senderName}
+              />
+              <MarkdownText {canReveal}
+                >--Indicating who the email is from helps establish trust and encourage engagement--</MarkdownText
+              >
+            </ToggleCard>
+            <ToggleCard {canReveal} cardTitle="Email Signature">
+              <PlainText
+                placeholder="Change your email signature"
+                value={$store.config.emailSignature}
+              />
+              <MarkdownText {canReveal}
+                >--Email signatures instil brand trust--</MarkdownText
+              >
+            </ToggleCard>
+          </div>
+        {/key}
+      </CardComponent>
+    </div>
     <div class="pad center">
       <SubmitButton callback={logout} label="sign out" />
     </div>

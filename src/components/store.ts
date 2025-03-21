@@ -26,6 +26,7 @@ const store = writable<Store>({
     "config.scheduleTime",
     "config.senderName",
     "config.newsletterTitle",
+    "config.emailSignature"
   ],
   colorPalette,
   stepsIndex: 0,

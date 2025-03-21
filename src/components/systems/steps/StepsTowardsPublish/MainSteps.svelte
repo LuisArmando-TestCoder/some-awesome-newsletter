@@ -33,6 +33,7 @@
           !store.hasNewEmailCodeBeenSent &&
           !store.isAuthCodeValid
         ) {
+          console.log("hey");
           saveToStore({ hasNewEmailCodeBeenSent: true });
           askForNewAuthCode();
         }
@@ -40,25 +41,15 @@
       },
       G_AuthCode,
     ],
-    [
-      (store: Store) => {
-        if (store.isAuthCodeValid && store.isComingFromValidStep) {
-          // saveToStore({ directionsThatShouldDisappear: [-1] });
-          // Todo: Request everything
-          getConfiguratorSession();
-        }
-
-        return store.isAuthCodeValid;
-      },
-      H_Dashboard,
-    ],
+    [(store: Store) => store.isAuthCodeValid, H_Dashboard],
   ];
 
   onMount(() => {
-    if (get(theStoreWritable).authCode) {
-      askIsAuthCodeValid(() => {
-        saveToStore({ directionsThatShouldDisappear: [-1] });
-      });
+    if (
+      get(theStoreWritable).authCode &&
+      !get(theStoreWritable).hasNewEmailCodeBeenSent
+    ) {
+      askIsAuthCodeValid();
     }
   });
 </script>

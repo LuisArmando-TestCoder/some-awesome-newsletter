@@ -22,7 +22,7 @@
   }
 }
 
-:global(svg) {
+:global(svg), :global(path) {
   fill: var(--color-foreground);
 }
 

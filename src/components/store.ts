@@ -70,14 +70,16 @@ export function getFromStore(propertyPath: string) {
 }
 
 export function saveToConfig(config: { [index: string]: any }) {
-  saveToStore({
-    config: {
-      ...get(store).config,
-      ...config,
-    },
-  });
-
-  updateConfiguration(config);
+  if (get(store).isAuthCodeValid) {
+    saveToStore({
+      config: {
+        ...get(store).config,
+        ...config,
+      },
+    });
+  
+    updateConfiguration(config);
+  }
 }
 
 function createObjectPopulator<T extends object>(obj: T): Populator<T> {

@@ -3,6 +3,7 @@
   import SVG from "../../../SVG/SVG.svelte";
 
   export let label: string = "";
+  export let svg: string = "user-gear-solid";
   export let selected = false;
   export let canReveal = false;
 
@@ -49,7 +50,7 @@
         <MarkdownText {canReveal}>## {label}</MarkdownText>
       </span>
       <span class="card-title-icon {collapsed ? 'visible' : 'hidden'}">
-        <SVG src="icons/user-gear-solid.svg" />
+        <SVG src="icons/{svg}.svg" />
       </span>
     </button>
   </div>

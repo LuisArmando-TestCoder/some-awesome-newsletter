@@ -34,7 +34,7 @@
   // Reactive smart suggestions update on changes
   $: suggestions = getColorSuggestions(
     palette,
-    selectedColor
+    selectedColor || "#000000"
   ) as CandidateScore[];
 
   // Toggle the palette dropdown open/close

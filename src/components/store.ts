@@ -1,5 +1,6 @@
 import { get, writable } from "svelte/store";
-import type { Populator, Store } from "./types.ts";
+import type { Config, Populator, Store } from "./types.ts";
+import updateConfiguration from "./systems/requests/updateConfiguration.ts";
 
 const colorPalette = [
   "#e91e63",
@@ -21,13 +22,17 @@ const store = writable<Store>({
     "lead",
     "authCode",
     "isAuthCodeValid",
+    "autoCollapse",
+    "toggles",
     "config.brandColor",
     "config.newsletterSubject",
     "config.scheduleTime",
     "config.senderName",
     "config.newsletterTitle",
-    "config.emailSignature"
+    "config.emailSignature",
   ],
+  autoCollapse: false,
+  toggles: {},
   colorPalette,
   stepsIndex: 0,
   hasInteracted: false, // don't save
@@ -62,6 +67,17 @@ export function populateToStore(propertyPath: string, value: any) {
 
 export function getFromStore(propertyPath: string) {
   return createObjectGetter(get(store))(propertyPath);
+}
+
+export function saveToConfig(config: { [index: string]: any }) {
+  saveToStore({
+    config: {
+      ...get(store).config,
+      ...config,
+    },
+  });
+
+  updateConfiguration(config);
 }
 
 function createObjectPopulator<T extends object>(obj: T): Populator<T> {

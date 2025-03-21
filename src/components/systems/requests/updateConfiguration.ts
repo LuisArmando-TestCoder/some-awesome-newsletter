@@ -13,7 +13,7 @@ export default async (config: { [index: string]: string }) => {
       method: "PUT",
       headers: authHeaders,
       body: JSON.stringify({
-        ...get(store),
+        ...get(store).config,
       }),
     }
   );

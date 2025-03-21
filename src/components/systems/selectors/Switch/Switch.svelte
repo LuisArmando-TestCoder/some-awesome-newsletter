@@ -38,7 +38,7 @@
     <div
       class="switch-knob" class:toggled
       style="transition-delay: .175s; transform: translateX(0);"
-    >{["○", "|"][+toggled]}</div>
+    >{["○", "ı"][+toggled]}</div>
   </div>
 </div>
 

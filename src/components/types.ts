@@ -93,6 +93,7 @@ export interface Config {
   email: EmailConfig;
   configuratorId?: string;
   brandColor?: string;
+  emailSignature?: string;
 }
 
 export interface NewsletterUser {

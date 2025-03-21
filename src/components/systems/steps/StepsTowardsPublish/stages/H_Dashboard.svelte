@@ -39,7 +39,7 @@
           isOpen={$store.toggles?.brandColor || false}
           onChange={(isOpen) => updateToggle("brandColor", isOpen)}
         >
-          <MarkdownText {canReveal}>
+          <MarkdownText canReveal={canReveal && $store.toggles?.brandColor}>
             --This is the color your newsletters will present in their highlighted words--
           </MarkdownText>
           <ColorPicker
@@ -66,7 +66,7 @@
               });
             }}
           />
-          <MarkdownText {canReveal}>
+          <MarkdownText canReveal={canReveal && $store.toggles?.newsletterSubject}>
             --Keep it concise, clear, and curiosity-driven—use power words, or cliffhangers to make the reader eager to open the email--
           </MarkdownText>
         </ToggleCard>
@@ -76,7 +76,6 @@
           isOpen={$store.toggles?.newsletterTitle || false}
           onChange={(isOpen) => updateToggle("newsletterTitle", isOpen)}
         >
-          <MarkdownText {canReveal}></MarkdownText>
           <PlainText
             placeholder="Change your newsletter title"
             value={$store.config.newsletterTitle}
@@ -86,7 +85,7 @@
               });
             }}
           />
-          <MarkdownText {canReveal}>
+          <MarkdownText canReveal={canReveal && $store.toggles?.newsletterTitle}>
             --Make it feel personal, like a message from a friend, not a brand--
           </MarkdownText>
         </ToggleCard>
@@ -105,7 +104,7 @@
               });
             }}
           />
-          <MarkdownText {canReveal}>
+          <MarkdownText canReveal={canReveal && $store.toggles?.senderName}>
             --Indicating who the email is from helps establish trust and encourage engagement--
           </MarkdownText>
         </ToggleCard>
@@ -124,7 +123,7 @@
               });
             }}
           />
-          <MarkdownText {canReveal}>
+          <MarkdownText canReveal={canReveal && $store.toggles?.emailSignature}>
             --Email signatures instil brand trust--
           </MarkdownText>
         </ToggleCard>

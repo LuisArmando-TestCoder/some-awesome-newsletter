@@ -31,7 +31,7 @@ const store = writable<Store>({
     "config.newsletterTitle",
     "config.emailSignature",
   ],
-  autoCollapse: false,
+  autoCollapse: true,
   toggles: {},
   colorPalette,
   stepsIndex: 0,

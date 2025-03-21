@@ -38,6 +38,11 @@
     margin: 1rem 0;
     overflow: hidden;
     box-shadow: 0 0 10px -9px var(--color-background);
+    transition: .5s;
+
+    &:hover {
+      box-shadow: 0 0 12px -5px var(--color-background);
+    }
   }
 
   .card-header {

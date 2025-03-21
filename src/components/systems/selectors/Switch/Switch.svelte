@@ -1,5 +1,7 @@
 <script lang="ts">
   import { writable } from "svelte/store";
+  import { getContrastColor } from "../../inputs/ColorPicker/getColorSuggestions.ts";
+  import { foregroundColor } from "../../../ThemeChanger/store.ts";
 
   // Prop: initial state of the switch (default: false)
   export let toggled: boolean = false;
@@ -36,9 +38,14 @@
   <div class="switch-track" class:toggled>
     <div class="switch-knob" class:toggled></div>
     <div
-      class="switch-knob" class:toggled
-      style="transition-delay: .175s; transform: translateX(0);"
-    >{["○", "ı"][+toggled]}</div>
+      class="switch-knob"
+      class:toggled
+      style="transition-delay: .175s; transform: translateX(0); color: {toggled
+        ? getContrastColor($foregroundColor)
+        : 'var(--color-background-inversion)'};"
+    >
+      {["○", "ı"][+toggled]}
+    </div>
   </div>
 </div>
 
@@ -77,9 +84,20 @@
   </defs>
 </svg>
 <filter id="goo">
-  <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" width="0" height="0" />
-  <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
-  <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
+  <feGaussianBlur
+    in="SourceGraphic"
+    stdDeviation="10"
+    result="blur"
+    width="0"
+    height="0"
+  />
+  <feColorMatrix
+    in="blur"
+    type="matrix"
+    values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9"
+    result="goo"
+  />
+  <feComposite in="SourceGraphic" in2="goo" operator="atop" />
 </filter>
 
 <style lang="scss">
@@ -120,7 +138,7 @@
     position: absolute;
     top: 2px;
     left: 2px;
-    transition: .5s;
+    transition: 0.5s;
     transition-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1);
     text-align: center;
 

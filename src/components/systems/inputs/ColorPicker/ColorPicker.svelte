@@ -9,7 +9,7 @@
   import type { CandidateScore } from "./getColorSuggestions.ts";
   import store from "../../../store.ts";
   // Import the color picker library
-  import ColorPicker from "svelte-awesome-color-picker";
+  import ColorPicker, { A11yVariant } from "svelte-awesome-color-picker";
   import {
     complementaryColor,
     foregroundColor,

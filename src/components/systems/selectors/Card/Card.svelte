@@ -38,6 +38,7 @@
   class="card {selected ? 'selected' : ''} {collapsed
     ? 'collapsed'
     : 'expanded'}"
+  on:click|stopPropagation={toggleCollapse}
 >
   <div class="card-title">
     <button
@@ -71,13 +72,15 @@
     overflow: hidden;
     /* Horizontal expansion: expanded state happens immediately, collapsed state waits 0.5s */
     &.expanded {
+      overflow: auto;
       width: 100%;
       transition:
         transform 0.6s ease,
         box-shadow 0.6s ease,
         border-color 0.6s ease,
         width 0.4s ease 0.3s,
-        height 0.4s ease 0.3s;
+        height 0.4s ease 0.3s,
+        overflow 0s ease 0.6s;
     }
 
     &.collapsed {
@@ -90,7 +93,8 @@
         border-color 0.3s ease,
         width 0.4s ease 0.5s,
         height 0.4s ease 0.5s,
-        padding 0.4s ease 0.5s;
+        padding 0.4s ease 0.5s,
+        overflow 0.4s ease;
     }
   }
 
@@ -159,7 +163,7 @@
     transition:
       max-height 0.4s ease 0.5s,
       opacity 0.4s ease 0.5s;
-    max-height: 1000px; /* Adjust based on expected content height */
+    max-height: auto; /* Adjust based on expected content height */
     opacity: 1;
   }
 

@@ -32,6 +32,28 @@
 <div class="dashboard">
   <div class="pad grid scenario">
     <CardComponent collapsed={true} {canReveal} svg="user-gear-solid" label="**Brand Configuration**">
+      <div class="horizontal">
+        <div class="pad-right">
+          <Text
+            text="Auto collapse is"
+            type="sub-italic"
+            {canReveal}
+          />
+          <span class="text-space" class:highlight={$store.autoCollapse}>
+            {#key $store.autoCollapse}
+              {$store.autoCollapse ? "on" : "off"}
+            {/key}
+          </span>
+        </div>
+        <Switch
+          toggled={$store.autoCollapse}
+          onChange={(autoCollapse) => {
+            saveToStore({
+              autoCollapse,
+            });
+          }}
+        />
+      </div>
       <div class="group">
         <ToggleCard
           {canReveal}
@@ -129,30 +151,8 @@
           </MarkdownText>
         </ToggleCard>
       </div>
-      <div class="horizontal">
-        <div class="pad-right">
-          <Text
-            text="Auto collapse is"
-            type="sub-italic"
-            {canReveal}
-          />
-          <span class="text-space" class:highlight={$store.autoCollapse}>
-            {#key $store.autoCollapse}
-              {$store.autoCollapse ? "on" : "off"}
-            {/key}
-          </span>
-        </div>
-        <Switch
-          toggled={$store.autoCollapse}
-          onChange={(autoCollapse) => {
-            saveToStore({
-              autoCollapse,
-            });
-          }}
-        />
-      </div>
     </CardComponent>
-    <CardComponent collapsed={true} {canReveal} svg="idea" label="**News Sources**"></CardComponent>
+    <CardComponent collapsed={false} {canReveal} svg="idea" label="**News Sources**"></CardComponent>
   </div>
   <div class="pad center">
     <SubmitButton callback={logout} label="sign out" />
@@ -185,21 +185,18 @@
   .grid {
     display: flex;
     gap: 25px;
-    place-content: center;
     justify-content: center;
-    place-items: center;
-
-    
     @media (max-width: 720px) {
       flex-direction: column;
+      place-items: center;
     }
   }
   .pad {
-    padding: 25px 0;
+    padding: 100px 0;
     box-sizing: border-box;
     
     @media (min-width: 720px) {
-      padding: 25px;
+      padding: 100px 25px;
     }
   }
   .center {
@@ -214,5 +211,6 @@
     display: flex;
     place-content: center;
     justify-content: end;
+    user-select: none;
   }
 </style>

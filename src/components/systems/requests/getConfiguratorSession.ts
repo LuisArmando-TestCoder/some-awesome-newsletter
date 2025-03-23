@@ -36,7 +36,7 @@ export default async () => {
       newsletterSubject: "Daily News",
       newsletterTitle: "Morning Bulletin",
       senderName: get(store).configuratorEmail.split("@")[0],
-      scheduleTime: "0 12 * * *",
+      // scheduleTime: "0 12 * * *", // in newsSources
       brandColor:
         get(store).colorPalette[
           Math.floor(Math.random() * get(store).colorPalette.length)

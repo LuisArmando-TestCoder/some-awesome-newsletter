@@ -34,11 +34,14 @@
   }
 </script>
 
+<!-- svelte-ignore a11y_click_events_have_key_events -->
+<!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
   class="card {selected ? 'selected' : ''} {collapsed
     ? 'collapsed'
     : 'expanded'}"
   on:click|stopPropagation={toggleCollapse}
+  aria-expanded={!collapsed}
 >
   <div class="card-title">
     <button
@@ -55,6 +58,7 @@
       </span>
     </button>
   </div>
+  <!-- svelte-ignore a11y_no_static_element_interactions -->
   <div class="card-body" on:click|stopPropagation>
     <slot />
   </div>

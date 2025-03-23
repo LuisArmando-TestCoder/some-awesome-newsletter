@@ -1,5 +1,5 @@
 <script lang="ts">
-  import MarkdownText from "../../texts/MarkdownText/MarkdownText.svelte";
+  import TextTypes from "../../texts/TextTypes/TextTypes.svelte";
 
   export let cardTitle: string;
   export let canReveal = false;
@@ -21,7 +21,14 @@
     aria-expanded={isOpen}
     type="button"
   >
-    <MarkdownText {canReveal}>{cardTitle}</MarkdownText>
+    <span>
+      <TextTypes type="paragraph">
+        {cardTitle.split(" ")[0]}
+      </TextTypes>
+      <TextTypes type="highlight">
+        {cardTitle.split(" ")[1]}
+      </TextTypes>
+    </span>
     <span class="arrow" class:open={isOpen}></span>
   </button>
   <div class="content-wrapper" bind:this={contentEl} class:open={isOpen}>

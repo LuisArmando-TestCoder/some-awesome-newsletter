@@ -8,9 +8,9 @@
   import store, { saveToConfig, saveToStore } from "../../../../store.ts";
   import MarkdownText from "../../../texts/MarkdownText/MarkdownText.svelte";
   import ToggleCard from "../../../buttons/ToggleCard/ToggleCard.svelte";
-  import Text from "../../../texts/Text/Text.svelte";
+  import TextTypes from "../../../texts/TextTypes/TextTypes.svelte";
 
-  export let canReveal = false;
+  export let canReveal = true;
   function updateToggle(key: string, newState: boolean) {
     const currentStore = $store;
     const autoCollapse = currentStore.autoCollapse;
@@ -34,11 +34,9 @@
     <CardComponent collapsed={true} {canReveal} svg="user-gear-solid" label="**Brand Configuration**">
       <div class="horizontal">
         <div class="pad-right">
-          <Text
-            text="Auto collapse is"
+          <TextTypes
             type="sub-italic"
-            {canReveal}
-          />
+          >Auto collapse is</TextTypes>
           <span class="text-space" class:highlight={$store.autoCollapse}>
             {#key $store.autoCollapse}
               {$store.autoCollapse ? "on" : "off"}
@@ -57,7 +55,7 @@
       <div class="group">
         <ToggleCard
           {canReveal}
-          cardTitle="Current **brand color**"
+          cardTitle="Current brand color"
           isOpen={!!$store.toggles?.brandColor}
           onChange={(isOpen) => updateToggle("brandColor", isOpen)}
         >
@@ -76,7 +74,7 @@
         </ToggleCard>
         <ToggleCard
           {canReveal}
-          cardTitle="Newsletter **Subject**"
+          cardTitle="Newsletter Subject"
           isOpen={!!$store.toggles?.newsletterSubject}
           onChange={(isOpen) => updateToggle("newsletterSubject", isOpen)}
         >
@@ -95,7 +93,7 @@
         </ToggleCard>
         <ToggleCard
           {canReveal}
-          cardTitle="Newsletter **Title**"
+          cardTitle="Newsletter Title"
           isOpen={!!$store.toggles?.newsletterTitle}
           onChange={(isOpen) => updateToggle("newsletterTitle", isOpen)}
         >
@@ -114,7 +112,7 @@
         </ToggleCard>
         <ToggleCard
           {canReveal}
-          cardTitle="Sender **Name**"
+          cardTitle="Sender Name"
           isOpen={!!$store.toggles?.senderName}
           onChange={(isOpen) => updateToggle("senderName", isOpen)}
         >
@@ -133,7 +131,7 @@
         </ToggleCard>
         <ToggleCard
           {canReveal}
-          cardTitle="Email **Signature**"
+          cardTitle="Email Signature"
           isOpen={!!$store.toggles?.emailSignature}
           onChange={(isOpen) => updateToggle("emailSignature", isOpen)}
         >
@@ -152,7 +150,7 @@
         </ToggleCard>
       </div>
     </CardComponent>
-    <CardComponent collapsed={false} {canReveal} svg="idea" label="**News Sources**"></CardComponent>
+    <CardComponent collapsed={false} {canReveal} svg="idea" label="News Sources"></CardComponent>
   </div>
   <div class="pad center">
     <SubmitButton callback={logout} label="sign out" />

@@ -108,6 +108,8 @@
   onMount(() => {
     processSlot();
   });
+
+  $: canReveal;
 </script>
 
 <!-- Hidden container for the slotted text -->

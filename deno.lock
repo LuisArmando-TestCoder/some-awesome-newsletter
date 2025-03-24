@@ -57,6 +57,7 @@
         "npm:scene-preset@^2.4.19",
         "npm:smui-theme@^8.0.0-beta.3",
         "npm:smui@^1.0.5",
+        "npm:svelte-awesome-color-picker@^3.1.4",
         "npm:svelte-calendar@^3.1.6",
         "npm:svelte-check@4",
         "npm:svelte-forms-lib@^2.0.1",

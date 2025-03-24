@@ -32,7 +32,7 @@
       }
     }
   };
-  function isScrollable(el) {
+  function isScrollable(el: Element) {
     const style = getComputedStyle(el);
     return (
       (el.scrollHeight > el.clientHeight || el.scrollWidth > el.clientWidth) &&

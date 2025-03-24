@@ -4,9 +4,11 @@
 
   export let text: string;
   export let canReveal = false;
+
+  $: canReveal;
 </script>
 
-<RevealOnScroll canReveal={canReveal}>
+<RevealOnScroll {canReveal}>
   <HTMLTextLettersClassWrapper HTMLText={text} />
 </RevealOnScroll>
 

@@ -27,7 +27,7 @@
   // Validate date on input, update the store, and call the onChange callback.
   function handleInput(event: Event) {
     const target = event.target as HTMLInputElement;
-    value = target.value.trim();
+    value = target.value?.trim();
 
     // Consider an empty string as valid.
     valid = value === "" || isValidDate(value);

@@ -5,6 +5,7 @@ import {
   complementaryColor,
 } from "../../ThemeChanger/store.ts";
 import { getComplementaryColor } from "../inputs/ColorPicker/getColorSuggestions.ts";
+import createInitialConfiguratorConfig from "./createInitialConfiguratorConfig.ts";
 
 async function getConfigFetchResponse(authHeaders: {
   [index: string]: string;
@@ -28,35 +29,15 @@ export default async () => {
     "x-auth-code": get(store).authCode,
     "Content-Type": "application/json",
   };
+
   let response = await getConfigFetchResponse(authHeaders);
-  let json;
 
   if (!response.ok) {
-    const body = {
-      newsletterSubject: "Daily News",
-      newsletterTitle: "Morning Bulletin",
-      senderName: get(store).configuratorEmail.split("@")[0],
-      // scheduleTime: "0 12 * * *", // in newsSources
-      brandColor:
-        get(store).colorPalette[
-          Math.floor(Math.random() * get(store).colorPalette.length)
-        ],
-      emailSignature: "Translated this news article for you",
-    };
-
-    await fetch(
-      `${get(store).apiURL}/config?documentId=${get(store).configuratorEmail}`,
-      {
-        method: "POST",
-        headers: authHeaders,
-        body: JSON.stringify(body),
-      }
-    );
-
+    await createInitialConfiguratorConfig(authHeaders);
     response = await getConfigFetchResponse(authHeaders);
   }
 
-  json = await response.json();
+  const json = await response.json();
 
   saveToStore({
     config: json,

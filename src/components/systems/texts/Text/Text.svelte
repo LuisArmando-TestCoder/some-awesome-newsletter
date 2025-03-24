@@ -7,6 +7,8 @@
   export let type: TextType = "paragraph";
   export let block: boolean = false;
   export let canReveal = false;
+
+  $: canReveal;
 </script>
 
 <span class="text" class:block>
@@ -18,7 +20,7 @@
 <style lang="scss">
   .text {
     &.block {
-        display: block;
+      display: block;
     }
   }
 </style>

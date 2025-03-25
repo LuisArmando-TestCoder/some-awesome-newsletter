@@ -34,7 +34,7 @@ export default async function updateNewsSource(
     source.id === json?.newsSource.id ? json?.newsSource : source
   );
   saveToConfig({
-    config: { ...get(store).config, newsSources: updatedSources },
+    newsSources: updatedSources,
   });
 
   return json?.newsSource;

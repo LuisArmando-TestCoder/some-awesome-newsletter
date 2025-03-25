@@ -27,10 +27,10 @@
   }
 }
 .pad {
-  padding: 100px 0;
+  padding: 100px 0 50px;
   box-sizing: border-box;
   @media (min-width: 720px) {
-    padding: 100px 25px;
+    padding: 100px 25px 50px;
   }
 }
 .center {

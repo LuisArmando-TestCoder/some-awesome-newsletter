@@ -1,32 +1,57 @@
 <script lang="ts">
-  import { writable } from "svelte/store";
   import { onMount, onDestroy } from "svelte";
+  import { writable } from "svelte/store";
   import type { Country } from "../../../types.ts";
-  import countries from "./countries.ts";
+  import countries from "./countries.ts"; // Exports an array of country objects
 
-  // The initially selected country can be set internally or left null.
+  // Accept a default country code as a prop.
+  export let defaultCountryCode: string | null = null;
+
+  // Initially no country is selected.
   let selectedCountry: Country | null = null;
-
-  // Create a writable store for the selected country.
   export const selectedCountryStore = writable<Country | null>(selectedCountry);
 
-  // Callback to be invoked when a country is selected.
-  export let onSelect: (selected: Country) => void = () => {};
+  // onSelect now sends the country code (string) only.
+  export let onSelect: (selectedCode: string) => void = () => {};
 
   let open = false;
   let dropdownRef: HTMLElement;
+
+  // Helper function to find a country based on its code.
+  function findCountryByCode(code: string): Country | null {
+    return countries.find((country) => country.code === code) || null;
+  }
+
+  // When the component mounts, if a default code is provided, set the corresponding country.
+  onMount(() => {
+    if (defaultCountryCode) {
+      const defaultCountry = findCountryByCode(defaultCountryCode);
+      if (defaultCountry) {
+        selectedCountry = defaultCountry;
+        selectedCountryStore.set(defaultCountry);
+      }
+    }
+
+    // Attach click handler for outside clicks
+    document.addEventListener("click", handleClickOutside);
+  });
+
+  onDestroy(() => {
+    // Cleanup outside click handler
+    document.removeEventListener("click", handleClickOutside);
+  });
 
   // Toggle dropdown open/close.
   function toggleOpen() {
     open = !open;
   }
 
-  // Handle selecting a country: update the selected value, update the store, close the dropdown, and call onSelect.
+  // When a country is selected, update state, store, close dropdown, and call onSelect with the code.
   function selectCountry(country: Country) {
     selectedCountry = country;
     selectedCountryStore.set(country);
     open = false;
-    onSelect(country);
+    onSelect(country.code);
   }
 
   // Close dropdown if a click occurs outside the component.
@@ -35,14 +60,6 @@
       open = false;
     }
   }
-
-  onMount(() => {
-    document.addEventListener("click", handleClickOutside);
-  });
-
-  onDestroy(() => {
-    document.removeEventListener("click", handleClickOutside);
-  });
 </script>
 
 <div class="dropdown" bind:this={dropdownRef}>
@@ -54,8 +71,6 @@
     aria-expanded={open}
   >
     {#if selectedCountry}
-      <span class="country-flag" aria-hidden="true">{selectedCountry.flag}</span
-      >
       <span class="country-code">{selectedCountry.code}</span>
       <span class="country-name">{selectedCountry.name}</span>
     {:else}
@@ -71,6 +86,7 @@
       <path d="M7 10l5 5 5-5z" />
     </svg>
   </button>
+
   {#if open}
     <ul class="dropdown-menu" role="listbox" tabindex="-1">
       {#each countries as country (country.code)}
@@ -89,7 +105,6 @@
           }}
         >
           <span class="country-flag" aria-hidden="true">{country.flag}</span>
-          <span class="country-code">{country.code}</span>
           <span class="country-name">{country.name}</span>
         </li>
       {/each}
@@ -103,8 +118,9 @@
     display: inline-block;
 
     .dropdown-toggle {
-      background: var(--color-background-very-opaque);
-      backdrop-filter: blur(6px);
+      /* Updated to use var(--color-background) */
+      background: var(--color-background);
+      color: var(--color-foreground);
       border: 1px solid var(--color-background);
       padding: 0.5rem 1rem;
       border-radius: 8px;
@@ -117,8 +133,6 @@
         background 0.3s ease,
         box-shadow 0.3s ease;
       text-align: left;
-      /* Remove default button styles */
-      border: none;
       outline: none;
     }
 
@@ -150,16 +164,16 @@
     }
 
     .dropdown-menu {
+      /* Updated to use var(--color-background) */
+      background: var(--color-background);
+      border: 1px solid var(--color-background);
       position: absolute;
       top: calc(100% + 0.5rem);
       left: 0;
       right: 0;
-      background: var(--color-background-very-opaque);
-      backdrop-filter: blur(6px);
-      border: 1px solid var(--color-background);
       border-radius: 8px;
-      padding: 0.5rem;
-      max-height: 200px;
+      padding: 0rem;
+      max-height: 300px;
       overflow-y: auto;
       box-shadow: 0 0 10px -6.5px var(--color-background);
       animation: fadeSlide 0.3s ease-out;
@@ -172,10 +186,12 @@
       align-items: center;
       cursor: pointer;
       transition: background 0.3s ease;
+      background: var(--color-x-gradient-inversion);
 
       &:hover,
       &:focus {
-        background: var(--color-background-opaque);
+        background: var(--color-x-gradient);
+        color: var(--color-background);
         outline: none;
       }
 

@@ -1,6 +1,6 @@
 import { get } from "svelte/store";
 import store, { saveToConfig } from "../../store.ts";
-import type NewsSource from "../steps/StepsTowardsPublish/stages/H_Dashboard/NewsSource.svelte";
+import type NewsSource from "../steps/StepsTowardsPublish/stages/H_Dashboard/NewsSource/NewsSource.svelte";
 
 export default async function updateNewsSource(
   updateData: { [index: string]: string },

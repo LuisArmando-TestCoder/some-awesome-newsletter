@@ -2,7 +2,7 @@
   import SubmitButton from "../../../../buttons/SubmitButton/SubmitButton.svelte";
   import logout from "../../../../requests/logout.ts";
   import Config from "./Config/Config.svelte";
-  import NewsSource from "./NewsSource.svelte";
+  import NewsSource from "./NewsSource/NewsSource.svelte";
 
   export let canReveal = true;
 

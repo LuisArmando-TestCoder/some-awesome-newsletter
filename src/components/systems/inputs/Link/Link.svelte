@@ -88,7 +88,7 @@
       value = "https://";
     }
     if (value !== "" && !/^https?:\/\//i.test(value)) {
-      value = "https://" + value || "";
+      value = "https://" + (value || "");
     }
 
     // Consider an empty string as valid.

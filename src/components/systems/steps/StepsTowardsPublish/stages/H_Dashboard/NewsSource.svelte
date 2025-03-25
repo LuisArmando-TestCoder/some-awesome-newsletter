@@ -315,7 +315,8 @@
       />
       <SubmitButton
         disabled={isAdding}
-        label={isAdding ? "Adding..." : "Upload News Source"}
+        loading={isAdding}
+        label={isAdding ? "Adding" : "Upload News Source"}
         callback={handleAddNewsSource}
       />
       {#if addErrorMessage}
@@ -407,7 +408,7 @@
         </ToggleCard>
       {/each}
     {:else}
-      <p>We are creating your first news source</p>
+      <p class="loading">We are obtaining your news sources</p>
     {/if}
   </div>
 </CardComponent>

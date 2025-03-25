@@ -13,6 +13,10 @@
     foregroundColor.subscribe(() => {
       updateTheme();
     });
+
+    complementaryColor.subscribe(() => {
+      updateTheme();
+    });
   });
 
   const toggleTheme = () => {

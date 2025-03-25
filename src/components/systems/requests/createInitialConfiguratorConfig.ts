@@ -1,6 +1,5 @@
 import { get } from "svelte/store";
 import store from "../../store.ts";
-import createNewsSource from "./createNewsSource.ts";
 
 export default async function createInitialConfiguratorConfig(authHeaders: {
   [index: string]: string;
@@ -31,16 +30,6 @@ export default async function createInitialConfiguratorConfig(authHeaders: {
     console.error("Failed to create initial configuration.");
     return false;
   }
-
-  await createNewsSource({
-    type: "website",
-    url: get(store).newsSource,
-    country: "US",
-    community: "Expats from US",
-    lead: get(store).lead,
-    scheduleTime: "0 6 * * *",
-    personality: "Warm and professional journalist voice.",
-  });
 
   return true;
 }

@@ -3,6 +3,7 @@
 
   // Props for the glassmorphic submit button
   export let disabled: boolean = false;
+  export let loading: boolean = false;
   export let active: boolean = true;
   export let label: string = "Submit";
   export let callback: MouseEventHandler<HTMLButtonElement> = () => {};
@@ -12,6 +13,7 @@
   {disabled}
   class="submit-button {active ? 'active' : 'inactive'}"
   on:click={callback}
+  class:loading
 >
   {label}
 </button>
@@ -31,7 +33,6 @@
     color: var(--color-background-inversion);
     display: flex;
     align-items: center;
-    gap: 15px;
     font-size: 18px;
     border-radius: 30px;
     background:  var(--color-background);

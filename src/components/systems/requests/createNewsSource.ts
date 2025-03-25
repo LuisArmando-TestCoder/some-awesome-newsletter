@@ -66,7 +66,7 @@ export default async function createNewsSource(newsSource: {
   );
   const updatedSources = currentSources.filter(source => source.id !== newsSource.id);
   updatedSources.push(newsSource);
-  saveToConfig({ config: { ...get(store).config, newsSources: updatedSources } });
+  saveToConfig({ newsSources: updatedSources });
 
   console.log("[CREATE-NEWSOURCE] Updated store with new news source.");
 

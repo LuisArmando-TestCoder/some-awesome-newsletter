@@ -1,11 +1,12 @@
 import { get } from "svelte/store";
-import store, { saveToStore } from "../../store.ts";
+import store, { saveToConfig, saveToStore } from "../../store.ts";
 import {
   foregroundColor,
   complementaryColor,
 } from "../../ThemeChanger/store.ts";
 import { getComplementaryColor } from "../inputs/ColorPicker/getColorSuggestions.ts";
 import createInitialConfiguratorConfig from "./createInitialConfiguratorConfig.ts";
+import createNewsSource from "./createNewsSource.ts";
 
 async function getConfigFetchResponse(authHeaders: {
   [index: string]: string;
@@ -43,6 +44,18 @@ export default async () => {
   saveToStore({
     config: json,
   });
+
+  if (!json.newsSources || json.newsSources.length === 0) {
+    createNewsSource({
+      type: "website",
+      url: get(store).newsSource,
+      country: "US",
+      community: "Expats from US",
+      lead: get(store).lead,
+      scheduleTime: "0 6 * * *",
+      personality: "Warm and professional journalist voice.",
+    });
+  }
 
   foregroundColor.set(json.brandColor);
   complementaryColor.set(getComplementaryColor(json.brandColor));

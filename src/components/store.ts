@@ -1,6 +1,11 @@
 import { get, writable } from "svelte/store";
-import type { Config, Populator, Store } from "./types.ts";
+import type { Populator, Store } from "./types.ts";
+import type { Socket } from "socket.io-client";
 import updateConfiguration from "./systems/requests/updateConfiguration.ts";
+
+export const latestMessage = writable<string>("");
+
+export const socket = writable<Socket | null>(null);
 
 const colorPalette = [
   "#e91e63",
@@ -77,8 +82,8 @@ export function saveToConfig(config: { [index: string]: any }) {
         ...config,
       },
     });
-  
-    updateConfiguration(config);
+
+    updateConfiguration(get(store).config);
   }
 }
 

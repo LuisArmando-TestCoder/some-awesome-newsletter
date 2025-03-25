@@ -5,18 +5,22 @@ import sveltePreprocess from "svelte-preprocess";
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-  // Combine the existing vitePreprocess with additional options for SCSS and TS
   preprocess: [
     vitePreprocess(),
     sveltePreprocess({
-      scss: {
-        includePaths: ["src"],
-      },
+      scss: { includePaths: ["src"] },
       typescript: true,
     }),
   ],
   kit: {
     adapter: adapter(),
+  },
+  vite: {
+    resolve: {
+      alias: {
+        "xmlhttprequest-ssl": "./node_modules/engine.io-client/lib/xmlhttprequest.js",
+      },
+    },
   },
 };
 

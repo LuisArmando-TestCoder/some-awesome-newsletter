@@ -55,18 +55,18 @@ export default async function createNewsSource(newsSource: {
   }
 
   const json = await response.json();
-  console.log("[CREATE-NEWSOURCE] Parsed response JSON:", json);
-  console.log("[CREATE-NEWSOURCE] newsSource from JSON:", json?.newsSource);
+  const newsSourceFromResponse = json?.newsSource;
+  console.log("[CREATE-NEWSOURCE] newsSource from JSON:", newsSourceFromResponse);
 
-  // Save the returned news source (note singular property)
+  // Save the returned news source to the store if it's the first one
   const currentSources = get(store).config.newsSources || [];
-  console.log(
-    "[CREATE-NEWSOURCE] Current newsSources in store:",
-    currentSources
-  );
-  const updatedSources = currentSources.filter(source => source.id !== newsSource.id);
-  updatedSources.push(newsSource);
-  saveToConfig({ newsSources: updatedSources });
+  console.log("[CREATE-NEWSOURCE] Current newsSources in store:", currentSources);
+
+  if (currentSources.length === 0 && newsSourceFromResponse) {
+    // No need to filter an empty array—just push the complete object from the server.
+    saveToConfig({ newsSources: [newsSourceFromResponse] });
+  }
+
 
   console.log("[CREATE-NEWSOURCE] Updated store with new news source.");
 

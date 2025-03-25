@@ -2,13 +2,14 @@
   import SubmitButton from "../../../../buttons/SubmitButton/SubmitButton.svelte";
   import PlainText from "../../../../inputs/PlainText/PlainText.svelte";
   import CardComponent from "../../../../selectors/Card/Card.svelte";
-  import store, { saveToStore } from "../../../../../store.ts";
+  import store, { latestMessage, saveToStore } from "../../../../../store.ts";
   import ScheduleTime from "../../../../inputs/ScheduleTime/ScheduleTime.svelte";
   import createNewsSource from "../../../../requests/createNewsSource.ts";
   import updateNewsSource from "../../../../requests/updateNewsSource.ts";
   import Link from "../../../../inputs/Link/Link.svelte";
   import ToggleCard from "../../../../buttons/ToggleCard/ToggleCard.svelte";
   import type { NewsSource } from "../../../../../types.ts";
+  import TextTypes from "../../../../texts/TextTypes/TextTypes.svelte";
 
   export let canReveal = true;
 
@@ -313,6 +314,9 @@
           addNewsSourceUrl = val;
         }}
       />
+      {#if isAdding}
+        <TextTypes type="sub-highlight-italic">{$latestMessage}</TextTypes>
+      {/if}
       <SubmitButton
         disabled={isAdding}
         loading={isAdding}
@@ -408,7 +412,12 @@
         </ToggleCard>
       {/each}
     {:else}
-      <p class="loading">We are obtaining your news sources</p>
+      <p class="loading">
+        <TextTypes type="sub-highlight-italic"
+          >We are obtaining your news sources</TextTypes
+        >
+      </p>
+      <TextTypes type="sub-highlight-italic">{$latestMessage}</TextTypes>
     {/if}
   </div>
 </CardComponent>

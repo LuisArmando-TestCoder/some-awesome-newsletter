@@ -10,6 +10,7 @@ import createInitialConfiguratorConfig from "./createInitialConfiguratorConfig.t
 async function getConfigFetchResponse(authHeaders: {
   [index: string]: string;
 }) {
+  console.log(get(store).apiURL, get(store).configuratorEmail);
   let response = await fetch(
     `${get(store).apiURL}/private-config?documentId=${
       get(store).configuratorEmail

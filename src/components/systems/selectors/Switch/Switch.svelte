@@ -1,7 +1,7 @@
 <script lang="ts">
   import { writable } from "svelte/store";
   import { getContrastColor } from "../../inputs/ColorPicker/getColorSuggestions.ts";
-  import { foregroundColor } from "../../../ThemeChanger/store.ts";
+  import { complementaryColor, foregroundColor, themeIndex } from "../../../ThemeChanger/store.ts";
 
   // Prop: initial state of the switch (default: false)
   export let toggled: boolean = false;
@@ -41,7 +41,7 @@
       class="switch-knob"
       class:toggled
       style="transition-delay: .175s; transform: translateX(0); color: {toggled
-        ? getContrastColor($foregroundColor)
+        ? getContrastColor([$foregroundColor, $complementaryColor][$themeIndex])
         : 'var(--color-background-inversion)'};"
     >
       {["○", "ı"][+toggled]}

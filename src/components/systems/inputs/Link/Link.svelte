@@ -87,8 +87,8 @@
     if (value?.trim() === "https:/") {
       value = "https://";
     }
-    if (value !== "" && !/^https?:\/\//i.test(value) && typeof newValue === "string") {
-      value = "https://" + value;
+    if (value !== "" && !/^https?:\/\//i.test(value)) {
+      value = "https://" + value || "";
     }
 
     // Consider an empty string as valid.
@@ -117,7 +117,7 @@
 </script>
 
 <div class="url-input-wrapper">
-  <label class="input-label" for="url-input">{label}</label>
+  <label class="input-label" for="url-input">{value ? label || placeholder : label}</label>
   <input
     id="url-input"
     type="url"

@@ -1,14 +1,12 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { complementaryColor, foregroundColor, themeIndex } from "./store.ts";
-
-  let isDarkTheme = true;
+  import { complementaryColor, foregroundColor, isDarkTheme, themeIndex } from "./store.ts";
 
   // Check localStorage for theme preference
   onMount(() => {
     const storedTheme = localStorage.getItem("theme");
     if (storedTheme) {
-      isDarkTheme = storedTheme === "dark";
+      isDarkTheme.set(storedTheme === "dark");
     }
     updateTheme();
 
@@ -18,31 +16,31 @@
   });
 
   const toggleTheme = () => {
-    isDarkTheme = !isDarkTheme;
-    localStorage.setItem("theme", isDarkTheme ? "dark" : "light");
+    isDarkTheme.set(!$isDarkTheme);
+    localStorage.setItem("theme", $isDarkTheme ? "dark" : "light");
     updateTheme();
   };
 
   function setThemeCSSVar(varName: string, values: string[]) {
     document.documentElement.style.setProperty(
       `--${varName}`,
-      isDarkTheme ? values[0] : values[1]
+      $isDarkTheme ? values[0] : values[1]
     );
     document.documentElement.style.setProperty(
       `--${varName}-inversion`,
-      isDarkTheme ? values[1] : values[0]
+      $isDarkTheme ? values[1] : values[0]
     );
   }
 
   const updateTheme = () => {
-    themeIndex.set(+isDarkTheme);
+    themeIndex.set(+$isDarkTheme);
     setThemeCSSVar("color-background", ["#fff", "#181818"]);
     setThemeCSSVar("color-background-opaque", ["#fff8", "#18181888"]);
     setThemeCSSVar("color-background-very-opaque", ["#ffffff0f", "#1818180f"]);
-    setThemeCSSVar("color-foreground-opaque", [$foregroundColor + "88", $complementaryColor + "88"]);
-    setThemeCSSVar("color-foreground-very-opaque", [$complementaryColor + "0f", $complementaryColor + "0f"]);
-    setThemeCSSVar("color-foreground", [$foregroundColor, $complementaryColor]);
-    setThemeCSSVar("color-foreground-inversion", [$foregroundColor, "#fff"]);
+    setThemeCSSVar("color-foreground-opaque", [$complementaryColor + "88", $foregroundColor + "88"]);
+    setThemeCSSVar("color-foreground-very-opaque", [$foregroundColor + "0f", $foregroundColor + "0f"]);
+    setThemeCSSVar("color-foreground", [$complementaryColor, $foregroundColor]);
+    setThemeCSSVar("color-foreground-inversion", [$complementaryColor, "#fff"]);
     setThemeCSSVar("color-outline", ["#181818", "#fff"]);
     setThemeCSSVar("color-untamed", ["#000", "#f5f5f5"]);
     setThemeCSSVar("color-tamed", ["#262626", "#d2d2d2"]);
@@ -68,13 +66,23 @@
   };
 
   export let visible: boolean;
+
+  let canSet = false;
+
+  onMount(() => {
+    canSet = true;
+  });
+
+  $: isDarkTheme.subscribe(() => {
+    if (canSet) updateTheme();
+  });
 </script>
 
 {#key visible}
   <div class="theme-changer">
     <button
       aria-label="Change theme from dark to light"
-      class="theme-toggle {isDarkTheme ? 'dark' : 'light'}"
+      class="theme-toggle {$isDarkTheme ? 'dark' : 'light'}"
       on:click={toggleTheme}
     >
       <div class="icon"></div>

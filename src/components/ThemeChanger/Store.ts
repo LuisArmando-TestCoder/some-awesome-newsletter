@@ -8,3 +8,4 @@ export const foregroundColor = writable<string>(COLOR_1);
 export const foregroundColorSnapshot = COLOR_1;
 export const complementaryColor = writable<string>(COLOR_2);
 export const complementaryColorSnapshot = COLOR_2;
+export const isDarkTheme = writable<boolean>(true);

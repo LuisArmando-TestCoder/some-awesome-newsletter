@@ -38,7 +38,7 @@
 </script>
 
 <div class="schedule-input-wrapper">
-  <label for="schedule-input" class="input-label">{label}</label>
+  <label for="schedule-input" class="input-label">{value && cronExpression ? label || placeholder : label}</label>
   <input
     id="schedule-input"
     type="text"
@@ -50,7 +50,7 @@
   />
   {#if value}
     <div class="cron-output">
-      Cron Expression: <code>{cronExpression}</code>
+      Cron Expression: <code style="background-color: var(--color-background);">{cronExpression}</code>
     </div>
   {/if}
   <div class="helper-text">
@@ -109,7 +109,6 @@
   }
 
   .cron-output code {
-    background: var(--color-background-opaque);
     padding: 0.2rem 0.5rem;
     border-radius: 4px;
   }

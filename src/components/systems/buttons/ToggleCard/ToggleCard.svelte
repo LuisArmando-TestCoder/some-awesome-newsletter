@@ -4,6 +4,7 @@
   export let cardTitle: string;
   export let canReveal = false;
   export let isOpen = false;
+  export let expanded = false;
   let contentEl: HTMLDivElement;
 
   function toggle() {
@@ -26,13 +27,13 @@
         {cardTitle.split(" ")[0]}
       </TextTypes>
       <TextTypes type="highlight">
-        {cardTitle.split(" ")[1]}
+        {cardTitle.split(" ").slice(1).join(" ")}
       </TextTypes>
     </span>
     <span class="arrow" class:open={isOpen}></span>
   </button>
   <div class="content-wrapper" bind:this={contentEl} class:open={isOpen}>
-    <div class="content">
+    <div class="content" class:expanded>
       <slot></slot>
     </div>
   </div>
@@ -93,6 +94,10 @@
   }
 
   .content {
-    padding: 0.5rem 1rem 10rem;
+    padding: 0.5rem 1rem;
+
+    &.expanded {
+      padding: 0.5rem 1rem 10rem;
+    }
   }
 </style>

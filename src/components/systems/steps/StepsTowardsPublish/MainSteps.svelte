@@ -9,7 +9,7 @@
   import E_NewsSource from "./stages/E_NewsSource.svelte";
   import F_Email from "./stages/F_Email.svelte";
   import G_AuthCode from "./stages/G_AuthCode.svelte";
-  import H_Dashboard from "./stages/H_Dashboard.svelte";
+  import H_Dashboard from "./stages/H_Dashboard/H_Dashboard.svelte";
   import StepsTowardsPublish from "./StepsTowardsPublish.svelte";
   import askIsAuthCodeValid from "../../requests/askIsAuthCodeValid.ts";
   import { onMount } from "svelte";

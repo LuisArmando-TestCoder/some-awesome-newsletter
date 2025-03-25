@@ -2,12 +2,14 @@
   import type { MouseEventHandler } from "svelte/elements";
 
   // Props for the glassmorphic submit button
+  export let disabled: boolean = false;
   export let active: boolean = true;
   export let label: string = "Submit";
   export let callback: MouseEventHandler<HTMLButtonElement> = () => {};
 </script>
 
 <button
+  {disabled}
   class="submit-button {active ? 'active' : 'inactive'}"
   on:click={callback}
 >
@@ -33,11 +35,11 @@
     font-size: 18px;
     border-radius: 30px;
     background:  var(--color-background);
-    box-shadow: 0 0 17px -3px var(--color-background);
+    box-shadow: 0 0 10px -7px var(--color-background);
     
-    &:hover {
+    &:not(&:disabled):hover {
       opacity: 1;
-      box-shadow: 0px 0px 15px -7.5px var(--color-background);
+      box-shadow: 0px 0px 10px -7.5px var(--color-background);
       color: var(--color-background);
       background: var(--color-background-inversion);
       padding: 0.75rem 1.75rem;

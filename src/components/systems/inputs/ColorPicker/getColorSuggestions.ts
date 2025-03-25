@@ -376,7 +376,7 @@ export function getComplementaryColor(selectedColor: string): string {
     getColorSuggestions(get(store).colorPalette, selectedColor).filter(
       ({ scheme, candidate }) => {
         return (
-          scheme === "Analogous" && getContrastColor(candidate) === "#FFFFFF"
+          scheme === "Analogous" && getContrastColor(candidate) === "#000000"
         );
       }
     )[0]?.candidate || get(complementaryColor)

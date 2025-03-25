@@ -22,7 +22,7 @@
 </script>
 
 <div class="text-input-wrapper">
-  <label class="input-label" for="text-input">{label}</label>
+  <label class="input-label" for="text-input">{value ? label || placeholder : label}</label>
   <input
     id="text-input"
     type="text"
@@ -54,7 +54,7 @@
     border-radius: 8px;
     padding: 0.75rem 1rem;
     font-size: 1rem;
-    color: var(--color-foreground-inversion);
+    color: var(--color-background);
     transition:
       border 0.3s ease,
       box-shadow 0.3s ease;

@@ -36,7 +36,7 @@
 </script>
 
 <div class="email-input-wrapper">
-  <label class="input-label" for="email-input">{label}</label>
+  <label class="input-label" for="email-input">{value ? label || placeholder : label}</label>
   <input
     id="email-input"
     type="email"

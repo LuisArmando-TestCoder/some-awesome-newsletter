@@ -208,6 +208,10 @@
     </ul>
   {/if}
 
+  <MarkdownText {canReveal}>
+    ==Related colors== for different types of color ==palettes==.
+  </MarkdownText>
+
   <!-- AI-Powered Smart Suggestions Panel -->
   <section class="suggestion-panel" aria-label="Smart Color Suggestions">
     <ul class="suggestion-list">
@@ -241,10 +245,6 @@
       {/each}
     </ul>
   </section>
-  
-  <MarkdownText {canReveal}>
-    ==Related colors== for different types of color ==palettes==.
-  </MarkdownText>
 </div>
 
 <style lang="scss">

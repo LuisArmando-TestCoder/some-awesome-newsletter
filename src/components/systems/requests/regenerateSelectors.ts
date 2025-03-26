@@ -1,5 +1,6 @@
 import { get } from "svelte/store";
-import store from "../../store.ts";
+import store, { saveToConfig } from "../../store.ts";
+import type { NewsSource } from "../../types.ts";
 
 export default async function regenerateSelectors(configId: string, newsSourceId: string, newUrl?: string) {
   const response = await fetch(
@@ -21,5 +22,17 @@ export default async function regenerateSelectors(configId: string, newsSourceId
 
   if (!response.ok) return null;
 
-  return await response.json(); // contiene `message` y `newsSource`
+  const json = await response.json();
+  console.log("json?.newsSource", json?.newsSource, response);
+
+  // Replace the existing news source with the updated one
+  const currentSources = get(store).config.newsSources || [];
+  const updatedSources = currentSources.map((source: NewsSource) =>
+    source.id === json?.newsSource.id ? json?.newsSource : source
+  );
+  saveToConfig({
+    newsSources: updatedSources,
+  });
+
+  return json?.newsSource;
 }

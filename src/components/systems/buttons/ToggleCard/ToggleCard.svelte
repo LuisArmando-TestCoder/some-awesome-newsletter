@@ -9,7 +9,7 @@
 
   function toggle() {
     isOpen = !isOpen;
-    onChange(isOpen);
+    onChange?.(isOpen);
   }
 
   export let onChange: (isOpen: boolean) => void;

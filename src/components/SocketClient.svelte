@@ -67,6 +67,7 @@
     const unsubscribe = store.subscribe(() => {
       const { isAuthCodeValid, configuratorEmail, authCode } = get(store);
       if (isAuthCodeValid && configuratorEmail && authCode) {
+        console.log(isAuthCodeValid, configuratorEmail, authCode, "SocketClient");
         console.log("Starting socket connection for", configuratorEmail);
         startSocket();
       }

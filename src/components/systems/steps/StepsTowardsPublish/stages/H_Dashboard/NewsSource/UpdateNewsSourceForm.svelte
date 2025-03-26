@@ -13,6 +13,8 @@
   import updateNewsSource from "../../../../../requests/updateNewsSource.ts";
   import { processNewsSourceAction } from "./newsSourceActions.ts";
   import Link from "../../../../../inputs/Link/Link.svelte";
+  import regenerateSelectors from "../../../../../requests/regenerateSelectors.ts";
+  import store, { latestMessage } from "../../../../../../store.ts";
 
   // The news source to update
   export let newsSource: NewsSource;
@@ -70,53 +72,94 @@
       }
     );
   }
+
+  const isRegenerating = writable(false);
+  const errorRegeneratingSelectors = writable(false);
+
+  $: updateFields;
+  $: $store;
 </script>
 
 <form class="news-source-update-form" on:submit|preventDefault={handleUpdate}>
   <!-- Non-selector fields -->
-  <PlainText
-    label="Community"
-    placeholder="e.g. 'Expats from US'"
-    value={updateFields.community}
-    onChange={(val) => (updateFields.community = val)}
-  />
+  <ToggleCard {canReveal} cardTitle="Basic Settings" isOpen={false}>
+    <div class="selectors-group">
+      <PlainText
+        label="Community"
+        placeholder="e.g. 'Expats from US'"
+        value={updateFields.community}
+        onChange={(val) => (updateFields.community = val)}
+      />
 
-  <Country
-    defaultCountryCode={updateFields.country}
-    onSelect={(code) => (updateFields.country = code)}
-  />
+      <Country
+        defaultCountryCode={updateFields.country}
+        onSelect={(code) => (updateFields.country = code)}
+      />
 
-  <Link
-    label="Lead"
-    placeholder="Destination URL or text"
-    value={updateFields.lead}
-    onChange={(val) => (updateFields.lead = val)}
-  />
+      <Link
+        label="Lead"
+        placeholder="Destination URL or text"
+        value={updateFields.lead}
+        onChange={(val) => (updateFields.lead = val)}
+      />
 
-  <Link
-    label="News Source URL"
-    placeholder="Your news source URL"
-    value={updateFields.url}
-    onChange={(val) => (updateFields.url = val)}
-  />
+      <Link
+        label="News Source URL"
+        placeholder="Your news source URL"
+        value={updateFields.url}
+        onChange={(val) => (updateFields.url = val)}
+      />
 
-  <PlainText
-    label="Personality"
-    placeholder="Tone (e.g. 'Warm and professional')"
-    value={updateFields.personality}
-    onChange={(val) => (updateFields.personality = val)}
-  />
+      <PlainText
+        label="Personality"
+        placeholder="Tone (e.g. 'Warm and professional')"
+        value={updateFields.personality}
+        onChange={(val) => (updateFields.personality = val)}
+      />
 
-  <ScheduleTime
-    label="Schedule Time"
-    placeholder="e.g., 'every Monday at 9 AM'"
-    value={updateFields.scheduleTime}
-    onChange={(_, cron) => (updateFields.scheduleTime = cron)}
-  />
+      <ScheduleTime
+        label="Schedule Time"
+        placeholder="e.g., 'every Monday at 9 AM'"
+        value={updateFields.scheduleTime}
+        onChange={(_, cron) => (updateFields.scheduleTime = cron)}
+      />
+    </div>
+  </ToggleCard>
 
   <!-- Advanced Scrape Selectors -->
   <ToggleCard {canReveal} cardTitle="Advanced Scrape Selectors" isOpen={false}>
     <div class="selectors-group">
+      <SubmitButton
+        disabled={$isRegenerating}
+        loading={$isRegenerating}
+        label="Regenerate Selectors"
+        callback={async () => {
+          isRegenerating.set(true);
+          errorRegeneratingSelectors.set(false);
+          const response = await regenerateSelectors(
+            $store.configuratorEmail,
+            updateFields.id,
+            updateFields.url
+          );
+
+          errorRegeneratingSelectors.set(!response);
+          isRegenerating.set(false);
+
+          if (response) {
+            updateFields.titleSelector = response.titleSelector;
+            updateFields.contentSelector = response.contentSelector;
+            updateFields.linkSelector = response.linkSelector;
+          }
+        }}
+      />
+      <div class={$isRegenerating ? "loading" : "none"}>
+        {$isRegenerating ? $latestMessage : ""}
+      </div>
+      <div class={$errorRegeneratingSelectors ? "error" : "none"}>
+        {$errorRegeneratingSelectors
+          ? `Error regenerating selectors at: ${$latestMessage}`
+          : ""}
+      </div>
       <PlainText
         label="Title Selector"
         placeholder="CSS selector for article title"

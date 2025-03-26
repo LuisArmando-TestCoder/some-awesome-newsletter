@@ -15,6 +15,7 @@
   import Link from "../../../../../inputs/Link/Link.svelte";
   import regenerateSelectors from "../../../../../requests/regenerateSelectors.ts";
   import store, { latestMessage } from "../../../../../../store.ts";
+  import IconButton from "../../../../../buttons/IconButton/IconButton.svelte";
 
   // The news source to update
   export let newsSource: NewsSource;
@@ -129,7 +130,8 @@
   <!-- Advanced Scrape Selectors -->
   <ToggleCard {canReveal} cardTitle="Advanced Scrape Selectors" isOpen={false}>
     <div class="selectors-group">
-      <SubmitButton
+      <IconButton
+        src="./icons/refresh.svg"
         disabled={$isRegenerating}
         loading={$isRegenerating}
         label="Regenerate Selectors"

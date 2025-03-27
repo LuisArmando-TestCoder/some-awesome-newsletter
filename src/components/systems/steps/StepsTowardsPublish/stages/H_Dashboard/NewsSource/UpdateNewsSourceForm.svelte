@@ -27,8 +27,6 @@
     lead: string;
     personality: string;
     scheduleTime: string;
-    titleSelector: string;
-    contentSelector: string;
     linkSelector: string;
     url: string;
     id: string;
@@ -53,8 +51,6 @@
       lead: updateFields.lead,
       personality: updateFields.personality,
       scheduleTime: updateFields.scheduleTime,
-      titleSelector: updateFields.titleSelector,
-      contentSelector: updateFields.contentSelector,
       linkSelector: updateFields.linkSelector,
       url: updateFields.url,
       id: updateFields.id,
@@ -148,8 +144,6 @@
           isRegenerating.set(false);
 
           if (response) {
-            updateFields.titleSelector = response.titleSelector;
-            updateFields.contentSelector = response.contentSelector;
             updateFields.linkSelector = response.linkSelector;
           }
         }}
@@ -162,18 +156,6 @@
           ? `Error regenerating selectors at: ${$latestMessage}`
           : ""}
       </div>
-      <PlainText
-        label="Title Selector"
-        placeholder="CSS selector for article title"
-        value={updateFields.titleSelector}
-        onChange={(val) => (updateFields.titleSelector = val)}
-      />
-      <PlainText
-        label="Content Selector"
-        placeholder="CSS selector for article content"
-        value={updateFields.contentSelector}
-        onChange={(val) => (updateFields.contentSelector = val)}
-      />
       <PlainText
         label="Link Selector"
         placeholder="CSS selector for article link"

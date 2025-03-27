@@ -8,6 +8,10 @@
   height: 100vh;
   margin-top: 30vh;
   padding-bottom: 10vh;
+
+  @media (max-width: 720px) {
+    margin-top: 0;
+  }
 }
 .highlight {
   color: var(--color-foreground);

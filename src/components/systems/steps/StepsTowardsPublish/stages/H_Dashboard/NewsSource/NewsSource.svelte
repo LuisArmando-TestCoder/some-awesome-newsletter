@@ -23,8 +23,6 @@
       lead: string;
       personality: string;
       scheduleTime: string;
-      titleSelector: string;
-      contentSelector: string;
       linkSelector: string;
       url: string;
       id: string;
@@ -42,8 +40,6 @@
           lead: ns.lead || "",
           personality: ns.personality || "",
           scheduleTime: ns.scheduleTime || "",
-          titleSelector: ns.titleSelector || "",
-          contentSelector: ns.contentSelector || "",
           linkSelector: ns.linkSelector || "",
           url: ns.url || "",
           id: ns.id,

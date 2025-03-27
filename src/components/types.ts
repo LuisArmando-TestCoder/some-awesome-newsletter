@@ -59,8 +59,6 @@ export interface Article {
 export interface NewsSource {
   type: string;
   url: string;
-  titleSelector: string;
-  contentSelector: string;
   linkSelector: string;
   country: string;
   community: string;

@@ -10,9 +10,11 @@
 </script>
 
 <div class="dashboard">
-  <div class="pad grid scenario">
-    <Config {canReveal} />
-    <NewsSource {canReveal} />
+  <div class="pad">
+    <a href="#dashboard" id="dashboard" class="grid scenario">
+      <Config {canReveal} />
+      <NewsSource {canReveal} />
+    </a>
   </div>
   <div class="pad center">
     <SubmitButton callback={logout} label="sign out" />

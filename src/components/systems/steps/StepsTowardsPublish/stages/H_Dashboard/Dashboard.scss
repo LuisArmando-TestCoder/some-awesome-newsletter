@@ -5,7 +5,9 @@
   font-style: italic;
 }
 .scenario {
+  display: block;
   height: 100vh;
+  margin-top: 30vh;
 }
 .highlight {
   color: var(--color-foreground);

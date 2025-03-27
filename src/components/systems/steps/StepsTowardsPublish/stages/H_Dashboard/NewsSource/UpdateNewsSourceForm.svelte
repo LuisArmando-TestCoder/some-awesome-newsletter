@@ -1,21 +1,19 @@
 <script lang="ts">
-  // 1) Remove createEventDispatcher import and use a writable store
-  // import { createEventDispatcher } from "svelte";
-  import { writable } from "svelte/store";
+  import { writable, get } from "svelte/store";
   import type { NewsSource } from "../../../../../../types.ts";
-
   import PlainText from "../../../../../inputs/PlainText/PlainText.svelte";
   import Country from "../../../../../inputs/Country/Country.svelte";
   import ScheduleTime from "../../../../../inputs/ScheduleTime/ScheduleTime.svelte";
   import SubmitButton from "../../../../../buttons/SubmitButton/SubmitButton.svelte";
   import ToggleCard from "../../../../../buttons/ToggleCard/ToggleCard.svelte";
-
   import updateNewsSource from "../../../../../requests/updateNewsSource.ts";
   import { processNewsSourceAction } from "./newsSourceActions.ts";
   import Link from "../../../../../inputs/Link/Link.svelte";
   import regenerateSelectors from "../../../../../requests/regenerateSelectors.ts";
   import store, { latestMessage } from "../../../../../../store.ts";
   import IconButton from "../../../../../buttons/IconButton/IconButton.svelte";
+  import { generatePersonality } from "../../../../../requests/generatePersonality.ts";
+  import Personality from "../../../../../inputs/Personality/Personality.svelte";
 
   // The news source to update
   export let newsSource: NewsSource;
@@ -37,13 +35,32 @@
   // For toggling advanced fields
   export let canReveal: boolean = true;
 
-  // 2) Create a local store for "updated news source"
-  //    So consumers can subscribe to this rather than listening for a Svelte event.
+  // Local store for the updated news source
   export const updatedNewsSource = writable<NewsSource | null>(null);
 
-  // We previously had: const dispatch = createEventDispatcher();
+  // Variables para el campo Personality:
+  // rawContent contiene el texto a partir del cual se generará la personalidad.
+  let rawContent: string = "";
+  // showRawContentArea controla si se muestra el textarea para ingresar rawContent.
+  let showRawContentArea: boolean = false;
 
-  // Update the news source
+  // Función para cambiar la visibilidad del área de rawContent
+  function toggleRawContentArea() {
+    showRawContentArea = !showRawContentArea;
+  }
+
+  // Función que llama a la API para generar la personalidad a partir de rawContent.
+  async function handleGeneratePersonality() {
+    try {
+      const result = await generatePersonality(rawContent, updateFields.id);
+      // Actualiza el campo personality con la descripción generada
+      updateFields.personality = result.personality;
+    } catch (error: any) {
+      errorMessage = error.message;
+    }
+  }
+
+  // Función original para actualizar la fuente
   async function handleUpdate() {
     const payload = {
       community: updateFields.community,
@@ -58,13 +75,11 @@
 
     await processNewsSourceAction(
       payload,
-      // Transform is trivial here, so just return the payload
       (f) => f,
       updateNewsSource,
       (msg) => (errorMessage = msg),
       "Failed to update news source. Please try again.",
       (updated) => {
-        // 3) Instead of dispatching an event, set the store value
         updatedNewsSource.set(updated);
       }
     );
@@ -78,7 +93,6 @@
 </script>
 
 <form class="news-source-update-form" on:submit|preventDefault={handleUpdate}>
-  <!-- Non-selector fields -->
   <ToggleCard {canReveal} cardTitle="Basic Settings" isOpen={false}>
     <div class="selectors-group">
       <PlainText
@@ -89,6 +103,7 @@
       />
 
       <Country
+        label="Newsletter target country"
         defaultCountryCode={updateFields.country}
         onSelect={(code) => (updateFields.country = code)}
       />
@@ -106,12 +121,16 @@
         value={updateFields.url}
         onChange={(val) => (updateFields.url = val)}
       />
+    </div>
+  </ToggleCard>
 
-      <PlainText
-        label="Personality"
-        placeholder="Tone (e.g. 'Warm and professional')"
-        value={updateFields.personality}
+  <ToggleCard {canReveal} cardTitle="Generation Settings" isOpen={false}>
+    <div class="selectors-group">
+      <Personality
+        personality={updateFields.personality}
+        newsSourceId={updateFields.id}
         onChange={(val) => (updateFields.personality = val)}
+        onError={(msg) => (errorMessage = msg)}
       />
 
       <ScheduleTime
@@ -139,10 +158,8 @@
             updateFields.id,
             updateFields.url
           );
-
           errorRegeneratingSelectors.set(!response);
           isRegenerating.set(false);
-
           if (response) {
             updateFields.linkSelector = response.linkSelector;
           }
@@ -178,13 +195,65 @@
     flex-direction: column;
     gap: 1rem;
   }
-
   .selectors-group {
     margin: 1rem 0;
     display: grid;
     gap: 25px;
   }
-
+  .personality-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .input-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  /* El input ocupa la mayor parte del ancho */
+  .input-row :global(.plain-text-input) {
+    flex: 1;
+  }
+  .generate-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border: none;
+    background-color: var(--color-x-gradient-inversion);
+    color: var(--color-background);
+    border-radius: 5px;
+    transition: background 0.3s ease;
+  }
+  .generate-btn:hover {
+    background-color: var(--color-x-gradient);
+  }
+  /* Área glassmorphic para rawContent */
+  .raw-content-area {
+    position: relative;
+    margin-top: 0.5rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+  }
+  .raw-content-area textarea {
+    width: 100%;
+    height: 100px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    background: transparent;
+    border: none;
+    color: var(--color-foreground);
+    resize: vertical;
+    outline: none;
+  }
+  /* IconButton posicionado en la esquina superior derecha */
+  .raw-content-area :global(.icon-button) {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+  }
   .error-message {
     color: red;
     font-size: 0.9rem;

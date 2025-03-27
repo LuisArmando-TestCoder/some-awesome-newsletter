@@ -6,7 +6,7 @@
   export let disabled: boolean = false;
   export let loading: boolean = false;
   export let active: boolean = true;
-  export let label: string = "Icon";
+  export let label: string = "";
   export let src: string;
   export let callback: MouseEventHandler<HTMLButtonElement> = () => {};
 </script>
@@ -53,6 +53,7 @@
       :global(svg) {
         width: 1.5rem;
         height: 1.5rem;
+        transition: .35s;
       }
     }
 
@@ -60,8 +61,11 @@
       opacity: 1;
       // background: var(--color-x-gradient-inversion);
       --color-foreground: var(--color-background);
-      transform: rotate(5deg);
-      margin-right: 1.25rem;
+      // margin-right: 1.25rem;
+
+      :global(svg) {
+        transform: rotate(360deg);
+      }	
     }
 
     &.inactive {

@@ -61,7 +61,7 @@
   }
 </script>
 
-<CardComponent collapsed={false} {canReveal} svg="idea" label="News Sources">
+<CardComponent collapsed={true} {canReveal} svg="idea" label="News Sources">
   <!-- Toggle card for adding a new news source -->
   <ToggleCard
     {canReveal}

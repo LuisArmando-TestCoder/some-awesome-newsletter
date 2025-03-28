@@ -15,7 +15,7 @@
   <CardComponent
     collapsed={true}
     {canReveal}
-    svg="user-gear-solid"
+    svg="group"
     label="**Users** Configuration"
   >
     <AutoCollapseToggle {canReveal}

@@ -3,6 +3,7 @@
   import logout from "../../../../requests/logout.ts";
   import Config from "./Config/Config.svelte";
   import NewsSource from "./NewsSource/NewsSource.svelte";
+  import Users from "./Users/Users.svelte";
 
   export let canReveal = true;
 
@@ -20,6 +21,7 @@
     > -->
       <Config {canReveal} />
       <NewsSource {canReveal} />
+      <Users {canReveal} />
     <!-- </a> -->
   </div>
   <div class="pad center">

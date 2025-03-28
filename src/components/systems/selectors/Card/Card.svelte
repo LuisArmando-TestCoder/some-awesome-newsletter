@@ -73,7 +73,9 @@
     cursor: pointer;
     text-align: left;
     box-shadow: 0 0 10px -6.5px var(--color-background);
-    overflow: hidden;
+    max-height: 100%;
+    position: sticky;
+    top: 0;
     /* Horizontal expansion: expanded state happens immediately, collapsed state waits 0.5s */
     &.expanded {
       overflow: auto;
@@ -138,6 +140,7 @@
       width 0s ease 0.4s;
     opacity: 0;
     width: 0;
+    height: 125px;
 
     :global(svg) {
       transition:

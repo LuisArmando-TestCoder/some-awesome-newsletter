@@ -5,10 +5,6 @@
   font-style: italic;
 }
 .scenario {
-  height: 100vh;
-  margin-top: 30vh;
-  padding-bottom: 10vh;
-
   @media (max-width: 720px) {
     margin-top: 0;
   }
@@ -27,10 +23,11 @@
   display: flex;
   gap: 25px;
   justify-content: center;
-  @media (max-width: 720px) {
-    flex-direction: column;
-    place-items: center;
-  }
+  display: grid;
+  gap: 25px;
+  justify-content: center;
+  place-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(inherit, 1fr));
 }
 .pad {
   padding: 100px 0 50px;

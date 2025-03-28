@@ -96,7 +96,7 @@
   <ToggleCard {canReveal} cardTitle="Basic Settings" isOpen={false}>
     <div class="selectors-group">
       <PlainText
-        label="Community"
+        label="Buyer Persona"
         placeholder="e.g. 'Expats from US'"
         value={updateFields.community}
         onChange={(val) => (updateFields.community = val)}
@@ -124,7 +124,7 @@
     </div>
   </ToggleCard>
 
-  <ToggleCard {canReveal} cardTitle="Generation Settings" isOpen={false}>
+  <ToggleCard {canReveal} cardTitle="Advanced Generation Settings" isOpen={false}>
     <div class="selectors-group">
       <Personality
         personality={updateFields.personality}
@@ -139,12 +139,7 @@
         value={updateFields.scheduleTime}
         onChange={(_, cron) => (updateFields.scheduleTime = cron)}
       />
-    </div>
-  </ToggleCard>
 
-  <!-- Advanced Scrape Selectors -->
-  <ToggleCard {canReveal} cardTitle="Advanced Scrape Selectors" isOpen={false}>
-    <div class="selectors-group">
       <IconButton
         src="./icons/refresh.svg"
         disabled={$isRegenerating}

@@ -75,7 +75,7 @@
     box-shadow: 0 0 10px -6.5px var(--color-background);
     max-height: 100%;
     position: sticky;
-    top: 0;
+    top: calc((-150px + 25px) * 2);
     /* Horizontal expansion: expanded state happens immediately, collapsed state waits 0.5s */
     &.expanded {
       overflow: auto;

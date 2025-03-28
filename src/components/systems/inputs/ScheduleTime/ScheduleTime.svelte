@@ -211,11 +211,9 @@
 <style lang="scss">
   // --- Base Variables ---
   :root {
-    --color-foreground: #f0f0f0;
     --color-foreground-opaque: #e0e0e09a;
     --color-background-input: #ffffff1a;
     --color-background-input-border: #ffffff33;
-    --color-focus: #64aeff;
     --color-error: #ff6b6b;
     --color-code-bg: #0000004d;
     --color-natural-desc: #b0c4de; // LightSteelBlue for description
@@ -266,9 +264,9 @@
       opacity: 0.8;
     }
     &:focus {
-      border-color: var(--color-focus);
+      border-color: var(--color-foreground);
       box-shadow:
-        0 0 0 1px var(--color-focus),
+        0 0 0 1px var(--color-foreground),
         0 2px 8px -2px #00000033;
     }
     &.error {

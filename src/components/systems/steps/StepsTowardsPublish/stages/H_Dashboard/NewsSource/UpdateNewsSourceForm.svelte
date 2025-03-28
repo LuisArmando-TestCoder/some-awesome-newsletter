@@ -121,17 +121,18 @@
         value={updateFields.url}
         onChange={(val) => (updateFields.url = val)}
       />
-    </div>
-  </ToggleCard>
 
-  <ToggleCard {canReveal} cardTitle="Advanced Generation Settings" isOpen={false}>
-    <div class="selectors-group">
       <Personality
         personality={updateFields.personality}
         newsSourceId={updateFields.id}
         onChange={(val) => (updateFields.personality = val)}
         onError={(msg) => (errorMessage = msg)}
       />
+    </div>
+  </ToggleCard>
+
+  <ToggleCard {canReveal} cardTitle="Advanced Generation Settings" isOpen={false}>
+    <div class="selectors-group">
 
       <ScheduleTime
         label="Schedule Time"

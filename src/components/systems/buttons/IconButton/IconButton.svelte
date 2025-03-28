@@ -2,7 +2,6 @@
   import type { MouseEventHandler } from "svelte/elements";
   import Svg from "../../../SVG/SVG.svelte";
 
-  // Props for the glassmorphic icon button
   export let disabled: boolean = false;
   export let loading: boolean = false;
   export let active: boolean = true;
@@ -25,7 +24,6 @@
 
 <style lang="scss">
   .icon-button {
-    backdrop-filter: blur(6px);
     border: none;
     transition: 0.15s;
     cursor: pointer;

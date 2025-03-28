@@ -22,10 +22,7 @@ export default async function createNewsSource(newsSource: {
 
   const body = JSON.stringify({
     type: "website",
-    country: "US",
-    community: "Expats from US",
     scheduleTime: "0 6 * * *",
-    personality: "Warm and professional",
     ...Object.fromEntries(
       Object.entries(newsSource).filter(([_, value]) => value)
     ),

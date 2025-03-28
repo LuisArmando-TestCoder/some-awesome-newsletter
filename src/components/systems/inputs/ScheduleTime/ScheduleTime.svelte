@@ -362,9 +362,7 @@
 <style lang="scss">
   // Define some base variables, assuming they might come from a global scope
   :root {
-    --color-foreground: #e0e0e0;
     --color-foreground-opaque: #e0e0e09a;
-    --color-background: #333333dd; // Base background for contrast
     --color-background-input: #ffffff1a; // More transparent for glass effect
     --color-background-input-border: #ffffff33;
     --color-focus: #64aeff;

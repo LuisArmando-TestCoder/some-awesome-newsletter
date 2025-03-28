@@ -273,7 +273,7 @@
   class="dropdown"
   bind:this={dropdownRef}
   on:keydown={handleKeydown}
-  tabindex="0" {# Remove if focus should always start on the button #}
+  tabindex="0"
 >
   {#if label}
     <span class="label">{label}</span>
@@ -287,7 +287,6 @@
     aria-haspopup="listbox"
     aria-expanded={open}
     aria-controls={open ? 'country-listbox' : undefined}
-    {# Add aria-activedescendant dynamically if needed, but focusing item directly is often simpler #}
   >
     {#if selectedCountry}
       {#if selectedCountry.flag}<span class="country-flag" aria-hidden="true">{selectedCountry.flag}</span>{/if}
@@ -314,7 +313,7 @@
       bind:this={listRef}
       role="listbox"
       id="country-listbox"
-      tabindex="-1" {# Make list focusable programmatically if needed, but items get focus #}
+      tabindex="-1"
     >
       {#each countries as country, index (country.code)}
         <li
@@ -324,10 +323,10 @@
           class:highlighted={highlightedIndex === index}
           role="option"
           aria-selected={selectedCountry?.code === country.code}
-          tabindex="-1" {# Items are not directly tabbable, controlled by main keydown #}
+          tabindex="-1"
           on:click={() => selectCountry(country)}
-          on:mouseenter={() => { highlightedIndex = index; }} {# Optional: Highlight on mouse hover #}
-        >
+          on:mouseenter={() => { highlightedIndex = index; }}
+          >
           {#if country.flag}<span class="country-flag" aria-hidden="true">{country.flag}</span>{/if}
           <span class="country-name">{country.name}</span>
           <span class="country-code">({country.code})</span>

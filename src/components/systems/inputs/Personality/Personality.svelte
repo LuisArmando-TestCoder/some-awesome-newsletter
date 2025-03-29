@@ -95,6 +95,7 @@
     align-items: center;
     gap: 1rem;
     place-items: end;
+    flex-wrap: wrap;
   }
   /* Asumiendo que tu PlainText aplica la clase global ".plain-text-input" */
   .input-row :global(.plain-text-input) {

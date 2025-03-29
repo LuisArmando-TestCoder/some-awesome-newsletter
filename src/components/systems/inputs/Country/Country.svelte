@@ -378,7 +378,7 @@
     gap: 0.5rem; // Space between elements
     // justify-content: space-between; // Removed to let content flow naturally
     width: 100%; // Make button take full width of container
-    min-width: 250px; // Ensure minimum size
+    max-width: 250px; // Ensure minimum size
     transition:
       border-color 0.2s ease,
       box-shadow 0.2s ease;

@@ -76,6 +76,7 @@
     max-height: 100%;
     position: sticky;
     top: calc((-150px + 25px) * 2);
+    padding-bottom: 150px;
     /* Horizontal expansion: expanded state happens immediately, collapsed state waits 0.5s */
     &.expanded {
       overflow: auto;

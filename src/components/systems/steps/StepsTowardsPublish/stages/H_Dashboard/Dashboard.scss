@@ -33,12 +33,6 @@
   display: flex;
   justify-content: center;
 }
-.horizontal {
-  display: flex;
-  place-content: center;
-  justify-content: end;
-  user-select: none;
-}
 /* Estilos para el formulario de News Sources */
 .news-source-form {
   display: flex;

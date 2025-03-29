@@ -2,7 +2,8 @@
 @font-face {
   font-family: "Spartan Black";
   font-weight: bold;
-  src: url("./fonts/League_Spartan/static/LeagueSpartan-Black.ttf") format("truetype");
+  src: url("./fonts/League_Spartan/static/LeagueSpartan-Black.ttf")
+    format("truetype");
 }
 
 /* Jost */
@@ -29,7 +30,7 @@
   --font-paragraph: "Jost", sans-serif;
 
   --transition-short-duration: 1s;
-  --transition-shortest-duration: .3s;
+  --transition-shortest-duration: 0.3s;
 
   --ham-size: calc(clamp(100px, 30vw, 200px) / 4);
 
@@ -81,6 +82,13 @@
 
 :global(.none) {
   display: none;
+}
+
+:global(.horizontal) {
+  display: flex;
+  place-content: center;
+  justify-content: end;
+  user-select: none;
 }
 
 @keyframes loading {

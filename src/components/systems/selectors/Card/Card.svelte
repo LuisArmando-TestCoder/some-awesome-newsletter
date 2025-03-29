@@ -171,8 +171,9 @@
     transition:
       max-height 0.4s ease 0.5s,
       opacity 0.4s ease 0.5s;
-    max-height: auto; /* Adjust based on expected content height */
+    max-height: 100vh; /* Adjust based on expected content height */
     opacity: 1;
+    overflow: auto;
   }
 
   .card.collapsed .card-body {

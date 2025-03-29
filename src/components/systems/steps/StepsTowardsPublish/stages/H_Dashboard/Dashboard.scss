@@ -20,13 +20,7 @@
   overflow: auto;
 }
 .grid {
-  display: flex;
-  justify-content: center;
-  display: grid;
-  grid-gap: 25px;
-  justify-content: center;
   place-items: center;
-  grid-template-columns: repeat(auto-fit, minmax(inherit, 1fr));
 }
 .pad {
   padding: 100px 0 50px;

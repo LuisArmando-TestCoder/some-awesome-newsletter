@@ -77,6 +77,7 @@
     position: sticky;
     top: 0;
     padding-bottom: 150px;
+    margin-bottom: 25px;
     /* Horizontal expansion: expanded state happens immediately, collapsed state waits 0.5s */
     &.expanded {
       overflow: auto;

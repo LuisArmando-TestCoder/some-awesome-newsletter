@@ -1,18 +1,13 @@
 <script lang="ts">
   import CardComponent from "../../../../../selectors/Card/Card.svelte";
+  import Page from "../../../../../wrappers/Page/Page.svelte";
 
   export let canReveal = true;
 
   $: canReveal;
 </script>
 
-<CardComponent
-  collapsed={true}
-  {canReveal}
-  svg="group"
-  label="**Users** Configuration"
->
-</CardComponent>
+<Page></Page>
 
 <style lang="scss">
   @use "../Dashboard.scss";

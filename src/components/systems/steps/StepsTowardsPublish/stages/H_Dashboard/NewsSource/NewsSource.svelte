@@ -9,6 +9,7 @@
 
   import AddNewsSourceForm from "./AddNewsSourceForm.svelte";
   import UpdateNewsSourceForm from "./UpdateNewsSourceForm.svelte";
+  import Page from "../../../../../wrappers/Page/Page.svelte";
 
   export let canReveal = true;
 
@@ -80,7 +81,7 @@
   const ADD_NEWS_SOURCE_CARD_ID = "add-news-source";
 </script>
 
-<CardComponent collapsed={true} {canReveal} svg="idea" label="News Sources">
+<Page>
   <!-- Use the SlotAutoCollapseToggle wrapper -->
   <SlotAutoCollapseToggle {canReveal} autoCollapse={true} let:getToggleProps>
     <!-- ^-- autoCollapse=true makes it an accordion -->
@@ -139,7 +140,7 @@
     {/if}
   </SlotAutoCollapseToggle>
   <!-- End wrapper -->
-</CardComponent>
+</Page>
 
 <style lang="scss">
   /* Remove or adjust original margin if SlotAutoCollapseToggle provides enough spacing */

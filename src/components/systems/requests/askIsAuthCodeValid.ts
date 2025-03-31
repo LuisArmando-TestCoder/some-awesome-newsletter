@@ -32,7 +32,7 @@ export default async (onSuccessCallback?: Function) => {
     onSuccessCallback?.();
     getConfiguratorSession();
     saveToStore({
-      directionsThatShouldDisappear: [-1],
+      directionsThatShouldDisappear: [-1, 1],
       hasNewEmailCodeBeenSent: false,
     });
   }

@@ -1,6 +1,7 @@
 <script lang="ts">
   export let trigger: (isChecked: boolean) => void;
   export let isChecked: boolean = false;
+  let inputElement: Element;
 </script>
 
 <input

@@ -6,18 +6,15 @@
   import NewsletterTitleToggle from "./toggles/NewsletterTitleToggle.svelte";
   import SenderNameToggle from "./toggles/SenderNameToggle.svelte";
   import EmailSignatureToggle from "./toggles/EmailSignatureToggle.svelte";
+  import Page from "../../../../../wrappers/Page/Page.svelte";
 
   export let canReveal = true;
 
   $: canReveal;
 </script>
 
-<CardComponent
-  collapsed={true}
-  {canReveal}
-  svg="user-gear-solid"
-  label="**Brand Configuration**"
->
+
+<Page>
   <AutoCollapseToggle {canReveal}
     toggles={{
       brandColor: [ColorPickerToggle],
@@ -27,7 +24,7 @@
       emailSignature: [EmailSignatureToggle],
     }}
   />
-</CardComponent>
+</Page>
 
 <style lang="scss">
   @use "../Dashboard.scss";

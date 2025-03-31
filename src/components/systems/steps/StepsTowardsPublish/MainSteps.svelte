@@ -14,6 +14,9 @@
   import askIsAuthCodeValid from "../../requests/askIsAuthCodeValid.ts";
   import { onMount } from "svelte";
   import { get } from "svelte/store";
+  import Config from "./stages/H_Dashboard/Config/Config.svelte";
+  import NewsSource from "./stages/H_Dashboard/NewsSource/NewsSource.svelte";
+  import Users from "./stages/H_Dashboard/Users/Users.svelte";
 
   const t = () => true;
 
@@ -40,7 +43,9 @@
       },
       G_AuthCode,
     ],
-    [(store: Store) => store.isAuthCodeValid, H_Dashboard],
+    [(store: Store) => store.isAuthCodeValid, Config],
+    [(store: Store) => store.isAuthCodeValid, NewsSource],
+    [(store: Store) => store.isAuthCodeValid, Users],
   ];
 
   onMount(() => {

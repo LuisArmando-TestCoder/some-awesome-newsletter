@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount } from "svelte";
   import { writable } from "svelte/store";
 
   // Props for the email input.
@@ -17,9 +18,9 @@
   let valid = false;
 
   // Validate email format on input, update the store, and call onChange.
-  function handleInput(event: Event) {
-    const target = event.target as HTMLInputElement;
-    value = target.value;
+  function handleInput(event: Event | null, newValue?: string) {
+    const target = event?.target as HTMLInputElement;
+    value = target?.value?.trim?.() || (newValue as string);
     valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
     emailStore.set(value);
 
@@ -33,10 +34,18 @@
       onEnter(valid);
     }
   }
+
+  onMount(() => {
+    // Initialize the store with the initial value.
+    emailStore.set(value);
+    handleInput(null, value);
+  });
 </script>
 
 <div class="email-input-wrapper">
-  <label class="input-label" for="email-input">{value ? label || placeholder : label}</label>
+  <label class="input-label" for="email-input"
+    >{value ? label || placeholder : label}</label
+  >
   <input
     id="email-input"
     type="email"
@@ -57,6 +66,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    gap: .5rem;
   }
 
   input {

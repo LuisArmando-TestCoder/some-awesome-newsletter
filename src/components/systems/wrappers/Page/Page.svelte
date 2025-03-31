@@ -21,5 +21,9 @@
     padding: 160px 25px 0;
     overflow: auto;
     max-height: 100vh;
+
+    @media (max-width: 640px) {
+      padding: 160px 15px 0;
+    }
   }
 </style>

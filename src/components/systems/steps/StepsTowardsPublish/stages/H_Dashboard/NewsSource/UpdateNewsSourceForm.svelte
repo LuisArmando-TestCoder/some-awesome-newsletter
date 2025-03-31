@@ -121,13 +121,6 @@
         value={updateFields.url}
         onChange={(val) => (updateFields.url = val)}
       />
-
-      <Personality
-        personality={updateFields.personality}
-        newsSourceId={updateFields.id}
-        onChange={(val) => (updateFields.personality = val)}
-        onError={(msg) => (errorMessage = msg)}
-      />
     </div>
   </ToggleCard>
 
@@ -174,6 +167,13 @@
         placeholder="CSS selector for article link"
         value={updateFields.linkSelector}
         onChange={(val) => (updateFields.linkSelector = val)}
+      />
+
+      <Personality
+        personality={updateFields.personality}
+        newsSourceId={updateFields.id}
+        onChange={(val) => (updateFields.personality = val)}
+        onError={(msg) => (errorMessage = msg)}
       />
     </div>
   </ToggleCard>

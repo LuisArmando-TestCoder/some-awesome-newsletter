@@ -18,7 +18,8 @@
 
 <style lang="scss">
   .page {
-    margin-top: 160px;
-    padding: 0 25px;
+    padding: 160px 25px 0;
+    overflow: auto;
+    max-height: 100vh;
   }
 </style>

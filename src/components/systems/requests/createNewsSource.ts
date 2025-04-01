@@ -22,6 +22,9 @@ export default async function createNewsSource(newsSource: {
 
   const body = JSON.stringify({
     type: "website",
+    personality: get(store).personality,
+    community: "World Wide Expats",
+    country: "US",
     scheduleTime: "0 6 * * *",
     ...Object.fromEntries(
       Object.entries(newsSource).filter(([_, value]) => value)

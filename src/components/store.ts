@@ -48,9 +48,20 @@ const store = writable<Store>({
   authCode: "",
   directionsThatShouldDisappear: [],
   isAuthCodeValid: "",
-  apiURL: "http://localhost:8000",
-  // 'https://ai-newsletter-translated.onrender.com',
+  // apiURL: "http://localhost:8000",
+  apiURL: "https://ai-newsletter-translated.onrender.com",
   config: {},
+  personality:
+    "The writer embodies a dynamic and intellectually stimulating personality, " +
+    "marked by a blend of creativity and analytical rigor. " +
+    "This voice is articulate and insightful, favoring originality over cliché, " +
+    "and strives for genuine communication that resonates on an emotional level. " +
+    "An adept navigator of style, the writer emphasizes the importance of varied " +
+    "sentence structures and evocative language to maintain engagement and avoid monotony. " +
+    "There is a distinct appreciation for depth in communication, " +
+    "prioritizing authenticity and respectful interaction while steering clear of superficial " +
+    "conclusions and inflated urgency. This voice is both thoughtful and precise, " +
+    "aimed at fostering meaningful exchanges that acknowledge complexity and uniqueness.",
 });
 
 export const emptyStoreSnapshot = JSON.parse(JSON.stringify(get(store)));

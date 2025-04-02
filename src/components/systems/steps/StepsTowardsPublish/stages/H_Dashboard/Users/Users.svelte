@@ -2,13 +2,6 @@
 <script lang="ts">
   import { onMount, onDestroy, tick } from "svelte";
   import { writable, get } from "svelte/store";
-  import type {
-    Chart,
-    ChartConfiguration,
-    ChartData,
-    ChartOptions,
-  } from "chart.js/auto"; // Import Chart.js types
-  import { Chart as ChartJS } from "chart.js/auto"; // Import Chart.js itself
 
   import store from "../../../../../../store.ts";
   import type {
@@ -25,26 +18,26 @@
   import Language from "../../../../../selectors/Language/Language.svelte";
   import SubmitButton from "../../../../../buttons/SubmitButton/SubmitButton.svelte";
   import IconButton from "../../../../../buttons/IconButton/IconButton.svelte";
+  import ToggleCard from "../../../../../buttons/ToggleCard/ToggleCard.svelte";
+  import Stat from "../../../../../stats/Stat.svelte";
 
-  // --- API Request Imports ---
   import getLeadsForConfigurator from "../../../../../requests/getLeadsForConfigurator.ts";
-  import { addNewsletterUser } from "../../../../../requests/addNewsletterUserEndpoint.ts"; // Use the specific function
+  import { addNewsletterUser } from "../../../../../requests/addNewsletterUserEndpoint.ts";
   import subscribeNewsletterUser from "../../../../../requests/subscribeNewsletterUser.ts";
   import getUsersFromRawFileOrText from "../../../../../requests/getUsersFromRawFileOrText.ts";
+  import getAllSubscribersFromConfigEndpoint from "../../../../../requests/getAllSubscribersFromConfigEndpoint.ts";
+  import unsubscribeUserToConfigNewsSource from "../../../../../requests/unsubscribeUserToConfigNewsSource.ts";
 
   export let canReveal = true;
 
-  // --- State ---
   let subscribersByNewsSource = writable<Record<string, NewsletterUser[]>>({});
   let allLeadData = writable<
     Record<string, Record<string, Record<string, string>>>
-  >({}); // { configId: { newsSourceId: { userId: { timestamp: leadUrl } } } } -> Fetched structure seems different, adjust if needed
-  let chartInstances: Record<string, Chart> = {}; // Store chart instances for updates/destruction
+  >({});
   let loadingSubscribers = writable(true);
   let loadingLeads = writable(true);
   let loadingError = writable<string | null>(null);
 
-  // State for forms within each news source toggle
   let manualAddForms: Record<
     string,
     {
@@ -67,32 +60,32 @@
     }
   > = {};
 
-  // --- Helper Functions ---
-  function initializeFormStates(newsSources: NewsSource[]) {
+  function initializeFormStates(newsSources: NewsSource[] | undefined) {
     const initialManualForms: typeof manualAddForms = {};
     const initialBulkStates: typeof bulkAddStates = {};
     (newsSources || []).forEach((ns) => {
-      initialManualForms[ns.id] = {
-        name: "",
-        email: "",
-        bio: "",
-        language: "en",
-        countryOfResidence: "US",
-        isAdding: false,
-        error: null,
-      };
-      initialBulkStates[ns.id] = {
-        file: null,
-        isAdding: false,
-        error: null,
-        successMessage: null,
-      };
+      if (ns && ns.id) {
+        initialManualForms[ns.id] = {
+          name: "",
+          email: "",
+          bio: "",
+          language: "en",
+          countryOfResidence: "US",
+          isAdding: false,
+          error: null,
+        };
+        initialBulkStates[ns.id] = {
+          file: null,
+          isAdding: false,
+          error: null,
+          successMessage: null,
+        };
+      }
     });
     manualAddForms = initialManualForms;
     bulkAddStates = initialBulkStates;
   }
 
-  // --- Data Fetching ---
   onMount(async () => {
     const configId = get(store).configuratorEmail;
     if (!configId) {
@@ -107,40 +100,25 @@
     loadingError.set(null);
 
     try {
-      // 1. Fetch Subscribers grouped by News Source
-      // Assuming the backend endpoint /config-subscribers/:configId exists and returns { newsSourceId1: [user1, user2], newsSourceId2: [user3] }
-      const subsResponse = await getAllSubscribersFromConfigEndpoint(configId); // You'll need to implement this frontend request function
+      const subsResponse = await getAllSubscribersFromConfigEndpoint(configId);
       subscribersByNewsSource.set(subsResponse || {});
 
-      // 2. Fetch Lead Data
-      const leadsResponse = await getLeadsForConfigurator(); // Assuming this returns { configId: { nsId: { userId: { timestamp: url } } } }
-      // The backend returns { cfgId: { nsId: { userId: {...} } } } but we only care about our cfgId
+      const leadsResponse = await getLeadsForConfigurator();
       allLeadData.set(leadsResponse?.[configId] || {});
 
-      // 3. Initialize form states based on fetched news sources
-      initializeFormStates(get(store).config?.newsSources || []);
+      initializeFormStates(get(store).config?.newsSources);
     } catch (err: any) {
       console.error("Error fetching user/lead data:", err);
       loadingError.set(err.message || "Failed to load data.");
     } finally {
       loadingSubscribers.set(false);
       loadingLeads.set(false);
-      // Trigger chart rendering after data is loaded and state is updated
-      await tick();
-      renderAllCharts();
     }
   });
 
-  // Cleanup chart instances on component destroy
-  onDestroy(() => {
-    Object.values(chartInstances).forEach((chart) => chart.destroy());
-  });
-
-  // --- Event Handlers ---
-
-  // Manual User Add
   async function handleManualAddUser(newsSourceId: string) {
     const formState = manualAddForms[newsSourceId];
+    if (!formState) return;
     formState.isAdding = true;
     formState.error = null;
     const configId = get(store).configuratorEmail;
@@ -152,10 +130,9 @@
         bio: formState.bio,
         language: formState.language,
         countryOfResidence: formState.countryOfResidence,
-        newsSourcesConfigTuples: [], // Backend handles initial subscription based on country if configId is passed
+        newsSourcesConfigTuples: [],
       };
 
-      // Validate basic fields
       if (
         !newUser.email ||
         !newUser.name ||
@@ -165,52 +142,44 @@
         throw new Error("Name, Email, Language, and Country are required.");
       }
 
-      // 1. Add the user globally (backend checks existence)
-      await addNewsletterUser(newUser as NewsletterUser, configId); // Pass configId to handle potential auto-subscription based on country by backend
-
-      // 2. Explicitly subscribe this user to THIS specific news source
+      await addNewsletterUser(newUser as NewsletterUser, configId);
       await subscribeNewsletterUser(configId, newsSourceId, newUser.email);
 
-      // 3. Optimistic UI Update or Refetch
-      subscribersByNewsSource.update((current) => {
-        const updatedList = [...(current[newsSourceId] || [])];
-        // Avoid duplicates if backend already added due to country match
-        if (!updatedList.some((u) => u.email === newUser.email)) {
-          updatedList.push(newUser as NewsletterUser); // Add the user with potentially partial data
-        }
-        return { ...current, [newsSourceId]: updatedList };
-      });
+      const subsResponse = await getAllSubscribersFromConfigEndpoint(configId);
+      subscribersByNewsSource.set(subsResponse || {});
 
-      // Clear form
-      formState.name = "";
-      formState.email = "";
-      formState.bio = "";
-      // Reset lang/country? Optional.
-      // formState.language = 'en';
-      // formState.countryOfResidence = 'US';
+      manualAddForms[newsSourceId] = {
+        ...manualAddForms[newsSourceId],
+        name: "",
+        email: "",
+        bio: "",
+      };
+      manualAddForms = { ...manualAddForms };
     } catch (err: any) {
       console.error("Error adding user:", err);
       formState.error = err.message || "Failed to add user.";
     } finally {
       formState.isAdding = false;
-      manualAddForms = { ...manualAddForms }; // Trigger reactivity
+      manualAddForms = { ...manualAddForms };
     }
   }
 
-  // Bulk User Add - File Selection
   function handleFileSelect(event: Event, newsSourceId: string) {
     const input = event.target as HTMLInputElement;
+    const state = bulkAddStates[newsSourceId];
+    if (!state) return;
     if (input.files && input.files.length > 0) {
-      bulkAddStates[newsSourceId].file = input.files[0];
-      bulkAddStates[newsSourceId].error = null;
-      bulkAddStates[newsSourceId].successMessage = null;
-      bulkAddStates = { ...bulkAddStates }; // Trigger reactivity
+      state.file = input.files[0];
+      state.error = null;
+      state.successMessage = null;
+      bulkAddStates = { ...bulkAddStates };
     }
+    input.value = "";
   }
 
-  // Bulk User Add - Upload & Process
   async function handleBulkAddUsers(newsSourceId: string) {
     const state = bulkAddStates[newsSourceId];
+    if (!state) return;
     if (!state.file) {
       state.error = "Please select a file first.";
       bulkAddStates = { ...bulkAddStates };
@@ -226,7 +195,6 @@
     const errors: string[] = [];
 
     try {
-      // 1. Call backend to parse file/text
       const usersFromFile = await getUsersFromRawFileOrText({
         file: state.file,
       });
@@ -237,214 +205,195 @@
         );
       }
 
-      // 2. Process each user from the file
-      for (const user of usersFromFile) {
-        if (!user.email) {
-          errors.push(
-            `Skipped user with missing email: ${user.name || "Unknown Name"}`
-          );
-          continue;
-        }
-        try {
-          // 2a. Add user globally (backend handles duplicates)
-          await addNewsletterUser(user, configId); // Pass configId for potential country matching
-          addedCount++; // Increment even if user already existed, as they are processed
+      await Promise.all(
+        usersFromFile.map(async (user) => {
+          if (!user.email) {
+            errors.push(
+              `Skipped user with missing email: ${user.name || "Unknown Name"}`
+            );
+            return;
+          }
+          try {
+            const userToAdd: NewsletterUser = {
+              name: user.name || "Unknown Name",
+              email: user.email,
+              bio: user.bio || "",
+              language: user.language || "en",
+              countryOfResidence: user.countryOfResidence || "US",
+              newsSourcesConfigTuples: user.newsSourcesConfigTuples || [],
+              ...user,
+            };
 
-          // 2b. Subscribe user specifically to this news source
-          await subscribeNewsletterUser(configId, newsSourceId, user.email);
-          subscribedCount++;
-        } catch (userError: any) {
-          errors.push(`Error processing ${user.email}: ${userError.message}`);
-        }
-      }
+            await addNewsletterUser(userToAdd, configId);
+            addedCount++;
+            await subscribeNewsletterUser(configId, newsSourceId, user.email);
+            subscribedCount++;
+          } catch (userError: any) {
+            if (userError?.message?.includes("already exists")) {
+              try {
+                await subscribeNewsletterUser(
+                  configId,
+                  newsSourceId,
+                  user.email
+                );
+                subscribedCount++;
+              } catch (subscribeError: any) {
+                errors.push(
+                  `Error subscribing existing user ${user.email}: ${subscribeError.message}`
+                );
+              }
+            } else {
+              errors.push(
+                `Error processing ${user.email}: ${userError.message}`
+              );
+            }
+          }
+        })
+      );
 
-      // 3. Update UI - Refetch might be simplest for bulk
       const subsResponse = await getAllSubscribersFromConfigEndpoint(configId);
       subscribersByNewsSource.set(subsResponse || {});
 
       state.successMessage = `Processed ${usersFromFile.length} users. Added/Updated: ${addedCount}. Subscribed to this source: ${subscribedCount}.`;
       if (errors.length) {
-        state.error = `Encountered ${errors.length} errors: ${errors.slice(0, 3).join(", ")}...`; // Show first few errors
+        state.error = `Encountered ${errors.length} errors: ${errors.slice(0, 5).join("; ")}${errors.length > 5 ? "..." : ""}`;
       }
-      state.file = null; // Clear file input
+      state.file = null;
     } catch (err: any) {
       console.error("Error during bulk add:", err);
       state.error = err.message || "Failed to process bulk upload.";
+      state.file = null;
     } finally {
       state.isAdding = false;
-      bulkAddStates = { ...bulkAddStates }; // Trigger reactivity
+      bulkAddStates = { ...bulkAddStates };
     }
   }
 
-  // Remove User
   async function handleRemoveUser(newsSourceId: string, userEmail: string) {
     const configId = get(store).configuratorEmail;
-    // Add a confirmation dialog here for better UX
     if (
       !confirm(
-        `Are you sure you want to unsubscribe ${userEmail} from this news source?`
+        `Are you sure you want to unsubscribe ${userEmail} from this news source (${newsSourceId})?`
       )
     ) {
       return;
     }
 
     try {
-      // Call the backend function/request helper
-      await unsubscribeUserToConfigNewsSource(
+      const success = await unsubscribeUserToConfigNewsSource(
         userEmail,
         configId,
         newsSourceId
       );
 
-      // Optimistic UI update
-      subscribersByNewsSource.update((current) => {
-        const updatedList = (current[newsSourceId] || []).filter(
-          (u) => u.email !== userEmail
+      if (success) {
+        subscribersByNewsSource.update((current) => {
+          const updatedList = (current[newsSourceId] || []).filter(
+            (u) => u.email !== userEmail
+          );
+          return { ...current, [newsSourceId]: updatedList };
+        });
+        console.log(`${userEmail} unsubscribed successfully.`);
+      } else {
+        alert(
+          `Failed to unsubscribe ${userEmail}. The user might already be unsubscribed or an error occurred.`
         );
-        return { ...current, [newsSourceId]: updatedList };
-      });
+      }
     } catch (err: any) {
       console.error(
         `Error removing user ${userEmail} from ${newsSourceId}:`,
         err
       );
-      alert(`Failed to remove user: ${err.message}`); // Simple alert for error
+      alert(
+        `An unexpected error occurred while trying to remove the user: ${err.message}`
+      );
     }
   }
 
-  // --- Chart Logic ---
-  function processLeadDataForChart(newsSourceId: string): {
-    labels: string[];
-    data: number[];
-  } {
-    const nsLeadData = $allLeadData?.[newsSourceId];
-    if (!nsLeadData) return { labels: [], data: [] };
-
-    const clicksByDay: Record<string, number> = {};
-
-    // Iterate through users for this news source
-    Object.values(nsLeadData).forEach((userLeads) => {
-      // Iterate through timestamps for this user
-      Object.keys(userLeads).forEach((timestampStr) => {
-        try {
-          const date = new Date(timestampStr);
-          const dayKey = date.toISOString().split("T")[0]; // YYYY-MM-DD
-          clicksByDay[dayKey] = (clicksByDay[dayKey] || 0) + 1;
-        } catch (e) {
-          console.warn(`Invalid timestamp format encountered: ${timestampStr}`);
-        }
-      });
-    });
-
-    // Sort keys (days) chronologically
-    const sortedDays = Object.keys(clicksByDay).sort();
-
-    // Prepare labels and data for Chart.js
-    const labels = sortedDays;
-    const data = sortedDays.map((day) => clicksByDay[day]);
-
-    return { labels, data };
-  }
-
-  function renderChart(canvasId: string, newsSourceId: string) {
-    const canvas = document.getElementById(canvasId) as HTMLCanvasElement;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    const { labels, data } = processLeadDataForChart(newsSourceId);
-
-    // Destroy previous chart instance if it exists
-    if (chartInstances[canvasId]) {
-      chartInstances[canvasId].destroy();
-    }
-
-    const chartConfig: ChartConfiguration = {
-      type: "line", // Or 'bar'
-      data: {
-        labels: labels,
-        datasets: [
-          {
-            label: `Lead Clicks for ${newsSourceId}`,
-            data: data,
-            borderColor: get(store).config?.brandColor || "#03a9f4",
-            backgroundColor:
-              (get(store).config?.brandColor || "#03a9f4") + "33", // Semi-transparent fill
-            tension: 0.1,
-            fill: true,
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          y: {
-            beginAtZero: true,
-            ticks: {
-              color: get(store).isDarkTheme ? "#eee" : "#333", // Adjust tick color based on theme
-              stepSize: 1, // Ensure integer ticks for counts
-            },
-            grid: {
-              color: get(store).isDarkTheme ? "#555" : "#ddd", // Adjust grid line color
-            },
-          },
-          x: {
-            ticks: {
-              color: get(store).isDarkTheme ? "#eee" : "#333", // Adjust tick color based on theme
-            },
-            grid: {
-              color: get(store).isDarkTheme ? "#555" : "#ddd", // Adjust grid line color
-            },
-          },
-        },
-        plugins: {
-          legend: {
-            display: false, // Hide legend if only one dataset
-          },
-        },
-      },
-    };
-
-    chartInstances[canvasId] = new ChartJS(ctx, chartConfig);
-  }
-
-  // Function to render charts for all news sources
-  function renderAllCharts() {
+  function getLeadClickCounts() {
+    const leadData = get(allLeadData) || {};
     const newsSources = get(store).config?.newsSources || [];
-    newsSources.forEach((ns) => {
-      const canvasId = `chart-${ns.id}`;
-      // Check if canvas element exists before rendering
-      if (document.getElementById(canvasId)) {
-        renderChart(canvasId, ns.id);
-      } else {
-        console.warn(`Canvas element ${canvasId} not found yet.`);
-      }
-    });
+
+    return newsSources
+      .map((ns) => {
+        if (!ns || !ns.id)
+          return { id: "unknown", name: "Unknown Source", total: 0 };
+
+        const nsLeadData = leadData[ns.id];
+        let clickCount = 0;
+
+        if (nsLeadData && typeof nsLeadData === "object") {
+          clickCount = Object.values(nsLeadData).reduce((sum, userLeads) => {
+            return (
+              sum +
+              (userLeads && typeof userLeads === "object"
+                ? Object.keys(userLeads).length
+                : 0)
+            );
+          }, 0);
+        }
+
+        return {
+          id: ns.id,
+          name: ns.url?.split("//")[1]?.split("/")[0] ?? ns.id,
+          total: clickCount,
+        };
+      })
+      .filter(
+        (item): item is { id: string; name: string; total: number } =>
+          item.id !== "unknown"
+      );
   }
 
-  // Re-render charts when lead data changes
-  $: if (!$loadingLeads) {
-    renderAllCharts();
+  function getSubscriberCounts() {
+    const subsData = get(subscribersByNewsSource);
+    const newsSources = get(store).config?.newsSources || [];
+
+    return newsSources
+      .map((ns) => {
+        if (!ns || !ns.id)
+          return { id: "unknown", name: "Unknown Source", total: 0 };
+        return {
+          id: ns.id,
+          name: ns.url?.split("//")[1]?.split("/")[0] ?? ns.id,
+          total: subsData[ns.id]?.length || 0,
+        };
+      })
+      .filter(
+        (item): item is { id: string; name: string; total: number } =>
+          item.id !== "unknown"
+      );
   }
 
-  $: canReveal; // Make sure reactivity is triggered if canReveal changes
+  let previousNewsSourceIds: string[] = [];
+  $: {
+    const currentNewsSources = get(store).config?.newsSources || [];
+    const currentIds = Array.isArray(currentNewsSources)
+      ? currentNewsSources
+          .map((ns) => ns?.id)
+          .filter((id): id is string => !!id)
+          .sort()
+      : [];
 
-
-  function getAllSubscribersFromConfigEndpoint(configId: any) {
-    throw new Error("Function not implemented.");
+    if (JSON.stringify(currentIds) !== JSON.stringify(previousNewsSourceIds)) {
+      console.log("News sources list changed, re-initializing forms.");
+      previousNewsSourceIds = currentIds;
+      tick().then(() => {
+        initializeFormStates(currentNewsSources);
+      });
+    }
   }
+
+  $: canReveal;
 </script>
 
 <Page>
   <div class="users-page-layout">
-    <!-- User Management Column -->
     <div class="column user-management-column">
       <TextTypes type="title">Manage Users by News Source</TextTypes>
 
       {#if $loadingSubscribers}
-        <p>Loading subscribers...</p>
+        <p><TextTypes type="sub-italic">Loading subscribers...</TextTypes></p>
       {:else if $loadingError}
         <p class="error-message">Error loading data: {$loadingError}</p>
       {:else}
@@ -455,109 +404,125 @@
         >
           {#each $store.config?.newsSources || [] as newsSource (newsSource.id)}
             {@const nsId = newsSource.id}
-            {@const currentSubscribers = $subscribersByNewsSource[nsId] || []}
             {@const manualForm = manualAddForms[nsId]}
             {@const bulkState = bulkAddStates[nsId]}
+            {#if manualForm && bulkState}
+              <ToggleCard
+                {canReveal}
+                cardTitle={`Subscribers for: ${newsSource.url?.split("//")[1]?.split("/")[0] ?? nsId}`}
+                {...getToggleProps(nsId)}
+              >
+                <div class="subscriber-list">
+                  <TextTypes type="subtitle"
+                    >Current Subscribers ({(
+                      $subscribersByNewsSource[nsId] || []
+                    ).length})</TextTypes
+                  >
+                  {#if ($subscribersByNewsSource[nsId] || []).length > 0}
+                    <ul>
+                      {#each $subscribersByNewsSource[nsId] as user (user.email)}
+                        <li>
+                          <span
+                            title={`Name: ${user.name}\nEmail: ${user.email}\nLang: ${user.language}\nCountry: ${user.countryOfResidence}\nBio: ${user.bio || "N/A"}`}
+                            >{user.name} ({user.email}) - {user.language}/{user.countryOfResidence}</span
+                          >
+                          <IconButton
+                            src="./icons/trash.svg"
+                            label="Unsubscribe"
+                            callback={() => handleRemoveUser(nsId, user.email)}
+                            tooltip="Unsubscribe user from this source"
+                          />
+                        </li>
+                      {/each}
+                    </ul>
+                  {:else}
+                    <p>
+                      <TextTypes type="sub-italic"
+                        >No subscribers for this source yet.</TextTypes
+                      >
+                    </p>
+                  {/if}
+                </div>
 
-            <ToggleCard
-              {canReveal}
-              cardTitle={`Subscribers for: ${newsSource.url?.split("//")[1]?.split("/")[0] ?? nsId}`}
-              {...getToggleProps(nsId)}
-            >
-              <!-- Subscriber List -->
-              <div class="subscriber-list">
-                <TextTypes type="subtitle"
-                  >Current Subscribers ({currentSubscribers.length})</TextTypes
-                >
-                {#if currentSubscribers.length > 0}
-                  <ul>
-                    {#each currentSubscribers as user (user.email)}
-                      <li>
-                        <span
-                          >{user.name} ({user.email}) - {user.language}/{user.countryOfResidence}</span
-                        >
-                        <IconButton
-                          src="./icons/trash.svg"
-                          label="Remove"
-                          callback={() => handleRemoveUser(nsId, user.email)}
-                        />
-                      </li>
-                    {/each}
-                  </ul>
-                {:else}
-                  <p>
-                    <TextTypes type="sub-italic"
-                      >No subscribers for this source yet.</TextTypes
-                    >
-                  </p>
-                {/if}
-              </div>
+                <hr class="section-separator" />
 
-              <hr />
-
-              <!-- Manual Add Form -->
-              <div class="manual-add-form">
-                <TextTypes type="subtitle">Add User Manually</TextTypes>
-                {#if manualForm}
+                <div class="manual-add-form">
+                  <TextTypes type="subtitle">Add User Manually</TextTypes>
                   <form
+                    class="form"
                     on:submit|preventDefault={() => handleManualAddUser(nsId)}
                   >
                     <PlainText
-                      label="Name"
+                      label="Name *"
                       placeholder="User's full name"
                       bind:value={manualForm.name}
+                      required={true}
                     />
                     <Email
-                      label="Email"
+                      label="Email *"
                       placeholder="User's email address"
                       bind:value={manualForm.email}
+                      required={true}
                     />
                     <PlainText
                       label="Bio (Optional)"
-                      placeholder="Short description"
+                      placeholder="Short description (optional)"
                       bind:value={manualForm.bio}
                     />
                     <Language
+                      label="Language *"
+                      selectedCode={manualForm.language}
                       onSelect={(lang) => (manualForm.language = lang.code)}
                     />
                     <Country
+                      label="Country *"
                       defaultCountryCode={manualForm.countryOfResidence}
-                      onSelect={(code) =>
-                        (manualForm.countryOfResidence = code)}
+                      onSelect={(code) => {
+                        if (code) manualForm.countryOfResidence = code;
+                      }}
                     />
                     <SubmitButton
-                      label={manualForm.isAdding ? "Adding..." : "Add User"}
-                      disabled={manualForm.isAdding}
+                      label={manualForm.isAdding
+                        ? "Adding..."
+                        : "Add & Subscribe User"}
+                      disabled={manualForm.isAdding ||
+                        !manualForm.name ||
+                        !manualForm.email}
                       loading={manualForm.isAdding}
                       callback={() => handleManualAddUser(nsId)}
+                      style="margin-top: 0.5rem;"
                     />
                     {#if manualForm.error}
                       <p class="error-message">{manualForm.error}</p>
                     {/if}
                   </form>
-                {:else}
-                  <p>Loading form...</p>
-                {/if}
-              </div>
+                </div>
 
-              <hr />
+                <hr class="section-separator" />
 
-              <!-- Bulk Add Section -->
-              <div class="bulk-add-section">
-                <TextTypes type="subtitle">Add Users from File</TextTypes>
-                {#if bulkState}
-                  <input
-                    type="file"
-                    accept=".csv, .txt, .xlsx, .xls"
-                    on:change={(e) => handleFileSelect(e, nsId)}
-                  />
+                <div class="bulk-add-section">
+                  <TextTypes type="subtitle"
+                    >Add Users from File (.csv, .txt, .xlsx)</TextTypes
+                  >
+                  <label class="file-input-label" for={`file-upload-${nsId}`}>
+                    Choose File
+                    <input
+                      id={`file-upload-${nsId}`}
+                      class="file-input-hidden"
+                      type="file"
+                      accept=".csv, .txt, .xlsx, .xls"
+                      on:change={(e) => handleFileSelect(e, nsId)}
+                    />
+                  </label>
                   {#if bulkState.file}
-                    <p>Selected: {bulkState.file.name}</p>
+                    <p class="selected-file-info">
+                      Selected: {bulkState.file.name}
+                    </p>
                   {/if}
                   <SubmitButton
                     label={bulkState.isAdding
                       ? "Uploading..."
-                      : "Upload & Add Users"}
+                      : "Upload & Add/Subscribe"}
                     disabled={bulkState.isAdding || !bulkState.file}
                     loading={bulkState.isAdding}
                     callback={() => handleBulkAddUsers(nsId)}
@@ -568,17 +533,29 @@
                   {#if bulkState.error}
                     <p class="error-message">{bulkState.error}</p>
                   {/if}
-                {:else}
-                  <p>Loading form state...</p>
-                {/if}
-              </div>
-            </ToggleCard>
+                </div>
+              </ToggleCard>
+            {:else}
+              <ToggleCard
+                {canReveal}
+                cardTitle={`Subscribers for: ${newsSource.url?.split("//")[1]?.split("/")[0] ?? nsId}`}
+                {...getToggleProps(nsId)}
+                disabled={true}
+              >
+                <p>
+                  <TextTypes type="sub-italic"
+                    >Initializing forms for this source...</TextTypes
+                  >
+                </p>
+              </ToggleCard>
+            {/if}
           {/each}
+
           {#if !$store.config?.newsSources?.length}
             <p>
               <TextTypes type="sub-italic"
-                >No news sources configured yet. Add one in the "News Sources"
-                section.</TextTypes
+                >No news sources configured yet. Add news sources in the
+                previous steps to manage users.</TextTypes
               >
             </p>
           {/if}
@@ -586,30 +563,43 @@
       {/if}
     </div>
 
-    <!-- Charts Column -->
     <div class="column charts-column">
-      <TextTypes type="title">Lead Click Analytics</TextTypes>
-      {#if $loadingLeads}
-        <p>Loading lead data...</p>
+      <TextTypes type="title">Analytics</TextTypes>
+      {#if $loadingLeads || $loadingSubscribers}
+        <p>
+          <TextTypes type="sub-italic">Loading analytics data...</TextTypes>
+        </p>
       {:else if $loadingError}
-        <p class="error-message">Error loading lead data: {$loadingError}</p>
+        <p class="error-message">
+          Error loading analytics data: {$loadingError}
+        </p>
       {:else}
-        <div class="charts-container">
-          {#each $store.config?.newsSources || [] as newsSource (newsSource.id)}
-            <div class="chart-wrapper">
-              <TextTypes type="subtitle"
-                >{newsSource.url?.split("//")[1]?.split("/")[0] ??
-                  newsSource.id}</TextTypes
-              >
-              <div class="chart-canvas-container">
-                <canvas id={`chart-${newsSource.id}`}></canvas>
-              </div>
+        <div class="stats-container">
+          {#if $store.config?.newsSources?.length}
+            <div class="stat-wrapper">
+              <TextTypes type="subtitle">Subscribers per Source</TextTypes>
+              <Stat
+                dataCallback={getSubscriberCounts}
+                HEXColor={$store.config?.brandColor || "#2196f3"}
+                xText="News Source"
+                yText="Subscribers"
+              />
             </div>
-          {/each}
-          {#if !$store.config?.newsSources?.length}
+
+            <div class="stat-wrapper">
+              <TextTypes type="subtitle">Lead Clicks per Source</TextTypes>
+              <Stat
+                dataCallback={getLeadClickCounts}
+                HEXColor={$store.complementaryColor || "#ff9800"}
+                xText="News Source"
+                yText="Clicks"
+              />
+            </div>
+          {:else}
             <p>
               <TextTypes type="sub-italic"
-                >No news sources available for charts.</TextTypes
+                >No news sources configured. Analytics require configured news
+                sources.</TextTypes
               >
             </p>
           {/if}
@@ -620,59 +610,65 @@
 </Page>
 
 <style lang="scss">
-  @use "../Dashboard.scss"; // Import shared dashboard styles
+  @use "../Dashboard.scss"; // Ensure this path is correct and the file has no errors
+
+  .form {
+    display: grid;
+    gap: 1rem;
+  }
 
   .users-page-layout {
     display: grid;
-    grid-template-columns: repeat(
-      auto-fit,
-      minmax(min(450px, 100%), 1fr)
-    ); // Responsive columns
-    gap: 2rem; // Space between columns
-    align-items: start; // Align items to the top
+    grid-template-columns: repeat(auto-fit, minmax(min(450px, 100%), 1fr));
+    gap: 2rem;
+    align-items: start;
   }
 
   .column {
-    // Styles common to both columns, if any
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
 
   .user-management-column {
-    // Styles specific to the user management side
+    // Specific styles if needed
   }
 
   .charts-column {
-    // Styles specific to the charts side
-    position: sticky; // Make charts sticky on scroll
-    top: 120px; // Adjust based on header height
-    max-height: calc(100vh - 140px); // Limit height
-    overflow-y: auto; // Allow scrolling within the charts column
+    position: sticky;
+    top: 120px;
+    max-height: calc(100vh - 140px);
+    overflow-y: auto;
+    padding-bottom: 2rem;
   }
 
-  .charts-container {
+  .stats-container {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
   }
 
-  .chart-wrapper {
-    background: var(--color-background-very-opaque);
+  .stat-wrapper {
+    background-color: var(--color-background-opaque);
     padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    border: 1px solid var(--color-background-input-border);
+    border-radius: var(--radius-base);
+    box-shadow: var(--shadow-soft);
   }
 
-  .chart-canvas-container {
-    position: relative; // Needed for Chart.js responsiveness
-    height: 250px; // Fixed height for each chart canvas
-    width: 100%;
+  :global(.toggle-card-content) {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
   }
 
   .subscriber-list {
-    margin-bottom: 1.5rem;
-    max-height: 300px; // Limit height and make scrollable
+    margin-bottom: 0;
+    max-height: 300px;
     overflow-y: auto;
-    padding-right: 10px; // Space for scrollbar
+    padding-right: 10px;
+    border: 1px solid var(--color-background-input-border);
+    border-radius: var(--radius-small);
+    padding: 0.5rem;
 
     ul {
       list-style: none;
@@ -686,6 +682,7 @@
       align-items: center;
       padding: 0.4rem 0;
       border-bottom: 1px solid var(--color-background-input-border);
+      gap: 0.5rem;
 
       &:last-child {
         border-bottom: none;
@@ -693,61 +690,119 @@
 
       span {
         flex-grow: 1;
-        margin-right: 1rem; // Space before the button
+        margin-right: 0.5rem;
         font-size: 0.9rem;
-        word-break: break-all; // Prevent long emails overflowing
+        word-break: break-word;
+        color: var(--color-foreground);
+        cursor: default;
       }
 
-      // Target the IconButton specifically if needed
-      :global(.icon-button) {
-        flex-shrink: 0; // Prevent button from shrinking
-        // Adjust button size/padding if needed
-        font-size: 0.8rem; // Smaller label
-        padding: 0.2rem 0.5rem; // Smaller padding
-        min-width: 70px; // Ensure minimum width
-
+      /* --- CORRECTED :global SELECTOR --- */
+      /* Target the IconButton component globally */
+      :global(.icon-button[label="Unsubscribe"]) {
+        flex-shrink: 0;
+        font-size: 0.8rem;
+        padding: 0.1rem 0.3rem;
+        min-width: auto;
+        border-radius: 4px;
+        /* Base styles for icon path */
+        :global(.icon svg path) {
+          fill: var(--color-error, #ff6b6b);
+          transition: fill 0.2s ease;
+        }
+        /* Base styles for icon container (if needed) */
         :global(.icon) {
-          width: 1rem;
-          height: 1rem;
-          margin-right: 0.3rem; // Less space next to icon
-          padding: 0.3rem;
+          width: 0.9rem;
+          height: 0.9rem;
+          margin-right: 0.2rem;
+          padding: 0.2rem;
+          vertical-align: middle;
+        }
+
+        /* Hover state for the button itself */
+        &:not(:disabled):hover {
+          background-color: var(
+            --color-error-opaque,
+            rgba(255, 107, 107, 0.1)
+          ) !important;
+          border-color: var(--color-error, #ff6b6b) !important;
+          color: var(
+            --color-error,
+            #ff6b6b
+          ) !important; // Style button text/label on hover
+
+          /* Style icon path inside the button on hover */
+          :global(.icon svg path) {
+            fill: var(
+              --color-error,
+              #ff6b6b
+            ) !important; // Or maybe white? Adjust as needed
+          }
         }
       }
+      /* --- END CORRECTION --- */
     }
   }
 
-  hr {
+  hr.section-separator {
     border: none;
     border-top: 1px solid var(--color-background-input-border);
-    margin: 1.5rem 0;
+    margin: 0;
   }
 
   .manual-add-form,
   .bulk-add-section {
-    margin-top: 1rem;
+    margin-top: 0;
     display: flex;
     flex-direction: column;
-    gap: 1rem; // Space between form elements
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .file-input-hidden {
+    display: none;
+  }
+  .file-input-label {
+    display: inline-block;
+    padding: 0.6rem 1rem;
+    background-color: var(--color-background-button, #f0f0f0);
+    color: var(--color-foreground-button, #333);
+    border: 1px solid var(--color-background-input-border);
+    border-radius: var(--radius-base);
+    cursor: pointer;
+    text-align: center;
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease;
+    font-size: 0.9rem;
+
+    &:hover {
+      background-color: var(--color-background-button-hover, #e0e0e0);
+      border-color: var(--color-foreground);
+    }
+  }
+  .selected-file-info {
+    font-size: 0.85rem;
+    color: var(--color-foreground-muted);
+    margin-top: -0.25rem;
+    margin-bottom: 0.25rem;
   }
 
   .error-message {
     color: var(--color-error, #ff6b6b);
     font-size: 0.9em;
-    margin-top: 0.5rem;
   }
   .success-message {
-    color: #4caf50; // Example success color
+    color: var(--color-success, #4caf50);
     font-size: 0.9em;
-    margin-top: 0.5rem;
   }
 
-  /* Responsive adjustments */
   @media (max-width: 900px) {
     .users-page-layout {
-      grid-template-columns: 1fr; // Stack columns on smaller screens
+      grid-template-columns: 1fr;
     }
     .charts-column {
-      position: relative; // Unstick charts column when stacked
+      position: relative;
       top: auto;
       max-height: none;
       overflow-y: visible;

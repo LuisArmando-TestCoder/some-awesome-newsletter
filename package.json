@@ -66,7 +66,7 @@
     "aos": "^2.3.4",
     "autoprefixer": "^10.4.20",
     "canvas-preset": "^3.3.8",
-    "chart.js": "^4.4.7",
+    "chart.js": "^4.4.8",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "express-validator": "^7.2.1",

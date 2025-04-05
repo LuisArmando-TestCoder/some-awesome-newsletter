@@ -1,6 +1,7 @@
 import { get } from "svelte/store";
 import store from "../../store.ts";
 import type { NewsletterUser } from "../../types.ts";
+import getConfiguratorSession from "./getConfiguratorSession.ts";
 
 export interface AddNewsletterUserResponse {
   message: string;
@@ -14,10 +15,11 @@ export interface AddNewsletterUserResponse {
  */
 export async function addNewsletterUser(
   user: NewsletterUser,
-  configId?: string
+  configId: string,
+  newsSourceId: string
 ): Promise<AddNewsletterUserResponse> {
   // Build the endpoint URL based on the presence of configId
-  const url = `${get(store).apiURL}/users/${configId}`;
+  const url = `${get(store).apiURL}/users/${configId}/${newsSourceId}`;
 
   try {
     const response = await fetch(url, {
@@ -32,6 +34,8 @@ export async function addNewsletterUser(
       const errorMessage = errorResponse.message || response.statusText;
       throw new Error(`Error adding newsletter user: ${errorMessage}`);
     }
+
+    await getConfiguratorSession(); // Refresh the configurator session after adding a user
 
     return await response.json();
   } catch (error) {

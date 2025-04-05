@@ -130,10 +130,10 @@ export async function addUserAndSubscribe(
 
   try {
     // 1. Add the user (backend should handle if user already exists)
-    await addNewsletterUser(newUserForApi, configId);
+    await addNewsletterUser(newUserForApi, configId, newsSourceId);
 
     // 2. Subscribe the user to the specific news source
-    await subscribeNewsletterUser(configId, newsSourceId, userData.email);
+    // await subscribeNewsletterUser(configId, newsSourceId, userData.email);
 
     // 3. Refresh the subscriber list to ensure UI consistency
     // This is the simplest way to guarantee the store reflects the backend state.
@@ -219,7 +219,7 @@ export async function processBulkUpload(
 
         // Attempt to add/update the user
         try {
-          await addNewsletterUser(userToAdd, configId);
+          await addNewsletterUser(userToAdd, configId, newsSourceId);
           userAdded = true; // Count success
         } catch (addError: any) {
           // If error is "already exists", we still proceed to subscribe attempt.

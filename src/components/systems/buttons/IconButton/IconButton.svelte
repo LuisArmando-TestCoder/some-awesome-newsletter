@@ -62,7 +62,7 @@
       // margin-right: 1.25rem;
 
       :global(svg) {
-        transform: rotate(360deg);
+        transform: rotate(3.60deg);
       }	
     }
 

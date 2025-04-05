@@ -1,3 +1,5 @@
+import { get } from "svelte/store";
+import store from "../../store.ts";
 import type { NewsletterUser } from "../../types.ts";
 
 export interface AddNewsletterUserResponse {
@@ -15,7 +17,7 @@ export async function addNewsletterUser(
   configId?: string
 ): Promise<AddNewsletterUserResponse> {
   // Build the endpoint URL based on the presence of configId
-  const url = configId ? `/users/${configId}` : "/users";
+  const url = `${get(store).apiURL}/users/${configId}`;
 
   try {
     const response = await fetch(url, {

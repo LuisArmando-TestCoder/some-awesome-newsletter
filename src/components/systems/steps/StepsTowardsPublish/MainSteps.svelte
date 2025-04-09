@@ -17,8 +17,29 @@
   import Config from "./stages/H_Dashboard/Config/Config.svelte";
   import NewsSource from "./stages/H_Dashboard/NewsSource/NewsSource.svelte";
   import Users from "./stages/H_Dashboard/Users/Users.svelte";
+    import store from "../../../store.ts";
 
-  const t = () => true;
+  const t = () => {
+    if (
+      $store.authCode &&
+      $store.stepsIndex > 6 &&
+      $store.directionsThatShouldDisappear.length === 0
+    ) {
+        saveToStore({
+          directionsThatShouldDisappear: [-1, 1],
+        });
+      } else if (
+        $store.authCode &&
+        $store.stepsIndex <= 6 &&
+        $store.directionsThatShouldDisappear.length === 2
+      ) {
+        saveToStore({
+          directionsThatShouldDisappear: [],
+        });
+      }
+
+    return true;
+  };
 
   const components = [
     [t, A_Welcome1],
@@ -32,7 +53,6 @@
         if (
           store.configuratorEmail &&
           store.isComingFromValidStep &&
-          !store.hasNewEmailCodeBeenSent &&
           !store.isAuthCodeValid
         ) {
           console.log("hey");
@@ -43,9 +63,15 @@
       },
       G_AuthCode,
     ],
-    [(store: Store) => store.isAuthCodeValid, Config],
-    [(store: Store) => store.isAuthCodeValid, NewsSource],
-    [(store: Store) => store.isAuthCodeValid, Users],
+    [(store: Store) => {
+      return store.isAuthCodeValid;
+    }, Config],
+    [(store: Store) => {
+      return store.isAuthCodeValid;
+    }, NewsSource],
+    [(store: Store) => {
+      return store.isAuthCodeValid;
+    }, Users],
   ];
 
   onMount(() => {

@@ -7,6 +7,8 @@ import {
 import { getComplementaryColor } from "../inputs/ColorPicker/getColorSuggestions.ts";
 import createInitialConfiguratorConfig from "./createInitialConfiguratorConfig.ts";
 import createNewsSource from "./createNewsSource.ts";
+import { addNewsletterUser } from "./addNewsletterUserEndpoint.ts";
+import subscribeNewsletterUser from "./subscribeNewsletterUser.ts";
 
 async function getConfigFetchResponse(authHeaders: {
   [index: string]: string;
@@ -46,7 +48,7 @@ export default async () => {
   });
 
   if (!json.newsSources || json.newsSources.length === 0) {
-    createNewsSource({
+    const newsSource = await createNewsSource({
       type: "website",
       url: get(store).newsSource,
       country: "US",
@@ -55,6 +57,12 @@ export default async () => {
       scheduleTime: "0 6 * * *",
       personality: "Warm and professional journalist voice.",
     });
+
+    await addNewsletterUser(
+      get(store).configuratorEmail, 
+      get(store).configuratorEmail, 
+      newsSource.id
+    );
   }
 
   foregroundColor.set(json.brandColor);

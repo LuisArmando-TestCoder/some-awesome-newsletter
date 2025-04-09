@@ -32,7 +32,7 @@ export default async (onSuccessCallback?: Function) => {
     onSuccessCallback?.();
     getConfiguratorSession();
     saveToStore({
-      directionsThatShouldDisappear: [-1, 1],
+      directionsThatShouldDisappear: get(store).stepsIndex > 6 ? [-1, 1] : [],
       hasNewEmailCodeBeenSent: false,
     });
   }

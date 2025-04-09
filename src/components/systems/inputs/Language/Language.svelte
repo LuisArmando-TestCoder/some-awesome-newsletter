@@ -359,7 +359,7 @@
     display: block;
     margin-bottom: 0.5rem;
     font-weight: 500;
-    color: var(--color-foreground, #333);
+    color: var(--color-background);
   }
 
   .dropdown {
@@ -376,7 +376,7 @@
 
   .dropdown-toggle {
     background: var(--color-background, #fff);
-    color: var(--color-foreground, #333);
+    color: var(--color-background-inversion);
     border: 1px solid var(--color-border, #ccc);
     padding: 0.6rem 1rem;
     border-radius: 8px;
@@ -474,7 +474,7 @@
     transition:
       background-color 0.15s ease,
       color 0.15s ease;
-    color: var(--color-foreground, #333);
+    color: var(--color-background-inversion);
     white-space: nowrap;
     outline: none;
 

@@ -99,7 +99,7 @@
 
   .user-card-name {
     font-weight: 600;
-    color: var(--color-text-primary, #333);
+    color: var(--color-foreground);
     font-size: 1rem;
   }
 

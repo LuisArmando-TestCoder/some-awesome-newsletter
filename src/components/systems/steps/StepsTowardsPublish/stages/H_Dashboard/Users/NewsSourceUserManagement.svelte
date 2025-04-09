@@ -1,9 +1,11 @@
 <!-- src/components/systems/steps/StepsTowardsPublish/stages/H_Dashboard/Users/NewsSourceUserManagement.svelte -->
 <script lang="ts">
   // REMOVED: createEventDispatcher (was unused here)
+  // REMOVED: createEventDispatcher (was unused here)
   import { tick } from "svelte";
   import type { NewsSource, NewsletterUser } from "../../../../../../types.ts"; // Adjust path
   import * as UserDataService from "./UserDataService.ts"; // Adjust path
+  import { userRemovalRequestStore } from "./userActions.ts"; // Import the shared store
 
   // Import Child Components (Assumed to be updated to accept function props)
   import ManualAddUserForm from "./ManualAddUserForm.svelte";
@@ -14,6 +16,7 @@
   import ToggleCard from "../../../../../buttons/ToggleCard/ToggleCard.svelte"; // Adjusted path - verify this is correct
   import TextTypes from "../../../../../texts/TextTypes/TextTypes.svelte"; // Adjust path
   import Svg from "../../../../../../SVG/SVG.svelte"; // Adjust path
+    import IconButton from "../../../../../buttons/IconButton/IconButton.svelte";
 
   // --- Props ---
   /** The specific news source object this component manages */
@@ -42,6 +45,18 @@
   $: reversedSubscribers = subscribers ? [...subscribers].reverse() : [];
   $: sourceName =
     newsSource.url?.split("//")[1]?.split("/")[0] ?? newsSource.id; // User-friendly name
+
+  // --- Reactive Store Subscription ---
+  // Handle removal requests triggered by child UserCard components via the shared store
+  $: if ($userRemovalRequestStore && $userRemovalRequestStore.newsSourceId === newsSource.id) {
+    // Check if the request is for *this* news source instance
+    const { email } = $userRemovalRequestStore;
+    // Clear the store immediately to prevent re-triggering and allow subsequent requests
+    userRemovalRequestStore.set(null);
+    // Call the handler function which contains the confirmation and API call
+    handleRemoveUser(email);
+  }
+
 
   // --- Functions ---
   function toggleAddFormVisibility() {
@@ -179,20 +194,14 @@
   <!-- Section for adding users (trigger + forms) -->
   <div class="add-user-section">
     <!-- Trigger to show/hide the add forms -->
-    <button
-      class="add-user-trigger"
-      on:click={toggleAddFormVisibility}
-      aria-expanded={isAddingFormVisible}
-      aria-controls={`add-forms-${newsSource.id}`}
-      disabled={isPerformingAction}
-    >
-      <Svg src="./icons/plus.svg" />
-      <span
-        >{isAddingFormVisible
+    <IconButton
+      src="/icons/plus.svg"
+      label={isAddingFormVisible
           ? "Cancel Adding User"
-          : "Add New Subscriber"}</span
-      >
-    </button>
+          : "Add New Subscriber"}
+      callback={toggleAddFormVisibility}
+      disabled={isPerformingAction}
+    />
 
     <!-- Display Action Feedback -->
     {#if actionFeedback}
@@ -210,9 +219,8 @@
     {#if isAddingFormVisible}
       <div class="add-forms-container" id={`add-forms-${newsSource.id}`}>
         <!-- Manual Add Form Component -->
-        <!-- UPDATED: Pass handler as 'onSubmit' prop instead of listening for 'addUser' event -->
+        <!-- UPDATED: Pass handler as 'onSubmit' prop. Removed newsSourceId prop as it's not expected by the component. -->
         <ManualAddUserForm
-          newsSourceId={newsSource.id}
           onSubmit={handleManualAdd}
           disabled={isPerformingAction}
         />
@@ -243,11 +251,10 @@
       <div class="subscriber-cards-container">
         <!-- Loop through reversed list (newest first) -->
         {#each reversedSubscribers as user (user.email)}
-          <!-- UPDATED: Pass handler as 'onRemove' prop instead of listening for 'removeUser' event -->
+          <!-- UPDATED: Removed 'onRemove' prop. Removal is now handled via the userRemovalRequestStore subscription. -->
           <UserCard
             {user}
             newsSourceId={newsSource.id}
-            onRemove={handleRemoveUser}
             disabled={removingUserEmail === user.email}
           />
         {/each}

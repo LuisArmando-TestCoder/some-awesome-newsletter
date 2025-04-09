@@ -1,5 +1,7 @@
 import { get } from "svelte/store";
 import store, { saveToConfig } from "../../store.ts";
+import { addNewsletterUser } from "./addNewsletterUserEndpoint.ts";
+import subscribeNewsletterUser from "./subscribeNewsletterUser.ts";
 
 /**
  * Crea una nueva fuente de noticias asociada a una configuración.
@@ -67,6 +69,11 @@ export default async function createNewsSource(newsSource: {
     saveToConfig({ newsSources: [newsSourceFromResponse] });
   }
 
+  await subscribeNewsletterUser(
+    get(store).configuratorEmail,
+    json?.newsSource.id,
+    get(store).configuratorEmail
+  );
 
   console.log("[CREATE-NEWSOURCE] Updated store with new news source.");
 

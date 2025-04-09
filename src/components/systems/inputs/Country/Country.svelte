@@ -1,8 +1,8 @@
 <script lang="ts">
   import { onMount, onDestroy, tick } from "svelte";
   import { writable } from "svelte/store";
-  import type { Country } from "../../../types"; // Adjust path if needed
-  import countries from "./countries"; // Adjust path if needed
+  import type { Country } from "../../../types.js"; // Adjust path if needed
+  import countries from "./countries.js"; // Adjust path if needed
   import fuzzysort from "fuzzysort"; // Import fuzzysort
 
   export let defaultCountryCode: string | null = null;
@@ -38,11 +38,11 @@
     if (initialCountry) {
       // Don't trigger onSelect on initial mount, just set the state
       selectedCountry = initialCountry;
-      selectedCountryStore.set(initialCountry);
-      // Set initial highlight when opened later
-      lastValidHighlightedIndex = countries.findIndex(c => c.code === initialCountry.code);
-    } else {
-       selectedCountryStore.set(null);
+       selectedCountryStore.set(initialCountry);
+       // Set initial highlight when opened later
+       lastValidHighlightedIndex = countries.findIndex((c: Country) => c.code === initialCountry.code);
+     } else {
+        selectedCountryStore.set(null);
        lastValidHighlightedIndex = 0; // Start at top if no default
     }
 
@@ -58,14 +58,14 @@
     clearTimeout(searchDebounceTimeout);
   });
 
-  // --- Utility ---
-  function findCountryByCode(code: string): Country | null {
-    return countries.find((country) => country.code === code) || null;
-  }
+   // --- Utility ---
+   function findCountryByCode(code: string): Country | null {
+     return countries.find((country: Country) => country.code === code) || null;
+   }
 
-  function findIndexByCode(code: string): number {
-      return countries.findIndex((country) => country.code === code);
-  }
+   function findIndexByCode(code: string): number {
+       return countries.findIndex((country: Country) => country.code === code);
+   }
 
 
   // --- Event Handlers ---
@@ -244,12 +244,12 @@
 
       // console.log("Search results:", searchResults); // For debugging
 
-      if (searchResults.length > 0) {
-        // Find the index of the *best* match in the original countries array
-        const bestMatch = searchResults[0].obj;
-        const bestMatchIndex = countries.findIndex(c => c.code === bestMatch.code);
+       if (searchResults.length > 0) {
+         // Find the index of the *best* match in the original countries array
+         const bestMatch = searchResults[0].obj as Country; // Cast to Country
+         const bestMatchIndex = countries.findIndex((c: Country) => c.code === bestMatch.code);
 
-        if (bestMatchIndex !== -1) {
+         if (bestMatchIndex !== -1) {
           highlightedIndex = bestMatchIndex;
           lastValidHighlightedIndex = highlightedIndex; // Update last valid on successful search
           focusAndScrollToHighlightedItem();
@@ -345,7 +345,7 @@
     display: block;
     margin-bottom: 0.5rem;
     font-weight: 500; // Example style
-    color: var(--color-foreground, #333); // Use CSS vars or defaults
+    color: var(--color-background); // Use CSS vars or defaults
   }
 
   .dropdown {
@@ -368,7 +368,7 @@
 
   .dropdown-toggle {
     background: var(--color-background, #fff);
-    color: var(--color-foreground, #333);
+    color: var(--color-background-inversion);
     border: 1px solid var(--color-border, #ccc);
     padding: 0.6rem 1rem; // Slightly more padding
     border-radius: 8px;
@@ -452,7 +452,7 @@
       background-color 0.15s ease,
       color 0.15s ease;
     // background: var(--color-x-gradient-inversion); // Remove complex background
-    color: var(--color-foreground, #333);
+    color: var(--color-background-inversion);
     white-space: nowrap; // Prevent wrapping
     outline: none; // Items don't need individual outlines when focus managed
 

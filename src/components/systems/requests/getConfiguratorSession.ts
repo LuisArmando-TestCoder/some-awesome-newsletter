@@ -3,12 +3,12 @@ import store, { saveToConfig, saveToStore } from "../../store.ts";
 import {
   foregroundColor,
   complementaryColor,
-} from "../../ThemeChanger/store.ts";
+} from "../../ThemeChanger/Store.ts"; // Corrected casing
 import { getComplementaryColor } from "../inputs/ColorPicker/getColorSuggestions.ts";
 import createInitialConfiguratorConfig from "./createInitialConfiguratorConfig.ts";
 import createNewsSource from "./createNewsSource.ts";
-import { addNewsletterUser } from "./addNewsletterUserEndpoint.ts";
-import subscribeNewsletterUser from "./subscribeNewsletterUser.ts";
+// Removed unused imports: addNewsletterUser, subscribeNewsletterUser
+import { refreshSubscribers } from "../steps/StepsTowardsPublish/stages/H_Dashboard/Users/UserDataService.ts"; // Import refresh function
 
 async function getConfigFetchResponse(authHeaders: {
   [index: string]: string;
@@ -51,22 +51,30 @@ export default async () => {
     const newsSource = await createNewsSource({
       type: "website",
       url: get(store).newsSource,
-      country: "US",
-      community: "Expats from US",
+      country: "US", // Consider if these should be configurable defaults
+      community: "Expats from US", // Consider if these should be configurable defaults
       lead: get(store).lead,
-      scheduleTime: "0 6 * * *",
-      personality: "Warm and professional journalist voice.",
+      // Generate random schedule: random hour (0-23), random day of week (0-6)
+      scheduleTime: `0 ${Math.floor(Math.random() * 24)} * * ${Math.floor(Math.random() * 7)}`,
+      personality: "Warm and professional journalist voice.", // Consider if this should be configurable default
     });
 
-    await addNewsletterUser(
-      get(store).configuratorEmail, 
-      get(store).configuratorEmail, 
-      newsSource.id
-    );
+    // User addition/subscription moved to createNewsSource.ts
   }
 
   foregroundColor.set(json.brandColor);
   complementaryColor.set(getComplementaryColor(json.brandColor));
+
+  // --- Ensure subscribers are fetched immediately after login/session setup ---
+  try {
+    console.log("[GET-SESSION] Triggering initial subscriber refresh after config load...");
+    await refreshSubscribers();
+    console.log("[GET-SESSION] Initial subscriber refresh completed.");
+  } catch (error) {
+    console.error("[GET-SESSION] Error during initial subscriber refresh:", error);
+    // Decide if login should fail or proceed with potentially missing subscriber data
+  }
+  // --- End subscriber fetch ---
 
   return response.ok;
 };

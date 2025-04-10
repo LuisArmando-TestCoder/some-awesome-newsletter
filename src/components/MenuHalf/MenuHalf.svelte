@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { saveToStore } from '../store.ts';
-  import X from '../X/X.svelte';
+  import { saveToStore } from "../store.ts";
+    import logout from "../systems/requests/logout.ts";
+  import X from "../X/X.svelte";
 
   let isChecked: boolean;
 </script>
@@ -9,33 +10,61 @@
   <nav>
     <ul class="menu-half--list">
       <li class="menu-half--list-item home">
-        <a class="menu-half--sub-anchor menu-half--anchor" onclick={() => {
-          saveToStore({ stepsIndex: 0, directionsThatShouldDisappear: [] });
-        }}>Home</a>
+        <a
+          class="menu-half--sub-anchor menu-half--anchor"
+          onclick={() => {
+            isChecked = false;
+            saveToStore({ stepsIndex: 0, directionsThatShouldDisappear: [] });
+          }}>Home</a
+        >
       </li>
       <li class="menu-half--list-item home">
-        <a class="menu-half--sub-anchor menu-half--anchor"  onclick={() => {
-          saveToStore({ stepsIndex: 7 });
-        }}>Config</a>
+        <a
+          class="menu-half--sub-anchor menu-half--anchor"
+          onclick={() => {
+            isChecked = false;
+            saveToStore({ stepsIndex: 7 });
+          }}>Config</a
+        >
       </li>
       <li class="menu-half--list-item home">
-        <a class="menu-half--sub-anchor menu-half--anchor"  onclick={() => {
-          saveToStore({ stepsIndex: 8 });
-        }}>News Sources</a>
+        <a
+          class="menu-half--sub-anchor menu-half--anchor"
+          onclick={() => {
+            isChecked = false;
+
+            saveToStore({ stepsIndex: 8 });
+          }}>News Sources</a
+        >
       </li>
       <li class="menu-half--list-item home">
-        <a class="menu-half--sub-anchor menu-half--anchor"  onclick={() => {
-          saveToStore({ stepsIndex: 9 });
-        }}>Users</a>
+        <a
+          class="menu-half--sub-anchor menu-half--anchor"
+          onclick={() => {
+            isChecked = false;
+
+            saveToStore({ stepsIndex: 9 });
+          }}>Users</a
+        >
+      </li>
+      <li>
+        <a
+          class="menu-half--anchor menu-half--logout"
+          onclick={() => {
+            isChecked = false;
+
+            logout();
+          }}>Log Out</a
+        >
       </li>
     </ul>
   </nav>
 </div>
 
 <div class="menu-half-x">
-  <X trigger={(ic) => (isChecked = !ic)} />
+  <X {isChecked} trigger={(ic) => (isChecked = !ic)} />
 </div>
 
 <style lang="scss">
-  @use './MenuHalf.scss';
+  @use "./MenuHalf.scss";
 </style>

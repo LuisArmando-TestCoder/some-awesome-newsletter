@@ -35,6 +35,8 @@ const store = writable<Store>({
     "config.senderName",
     "config.newsletterTitle",
     "config.emailSignature",
+    "subscribers", // Added
+    "leads", // Added
   ],
   autoCollapse: true,
   toggles: {},
@@ -51,6 +53,8 @@ const store = writable<Store>({
   apiURL: "http://localhost:8000",
   // apiURL: "https://ai-newsletter-translated.onrender.com",
   config: {},
+  subscribers: {}, // Added initial empty object for subscribers
+  leads: {}, // Added initial empty object for leads
   personality:
     "The writer embodies a dynamic and intellectually stimulating personality, " +
     "marked by a blend of creativity and analytical rigor. " +

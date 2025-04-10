@@ -10,6 +10,9 @@ export default async function subscribeNewsletterUser(
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      // Add authentication headers
+      "x-auth-email": get(store).configuratorEmail,
+      "x-auth-code": get(store).authCode,
     },
     body: JSON.stringify({
       configId,

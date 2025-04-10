@@ -68,6 +68,18 @@
     opacity: 0;
   }
 
+  &--logout {
+    cursor: pointer;
+
+    &::after {
+      transform: translateY(-5px);
+    }
+
+    &:hover {
+      color: red;
+    }
+  }
+
   .switch + &--list-externals {
     height: clamp(100px, 20vh, 300px);
     margin: 25px 0;

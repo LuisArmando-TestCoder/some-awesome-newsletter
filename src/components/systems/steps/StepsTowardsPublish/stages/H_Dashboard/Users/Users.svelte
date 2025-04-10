@@ -27,23 +27,16 @@
   });
 
   // --- Reactive Data Access ---
-  // Subscribe to stores from the service and the central store
-  const {
-    subscribersByNewsSource,
-    allLeadData,
-    loadingSubscribers,
-    loadingLeads,
-    loadingError,
-  } = UserDataService;
-
-  // Derive props for children directly from store subscriptions
+  // Access data directly from the central store
   $: config = $store.config;
-  $: newsSources = config?.newsSources || [];
-  $: brandColor = config?.brandColor;
+  $: newsSources = $store.config?.newsSources || []; // Use $store directly
+  $: subscribersByNewsSource = $store.subscribers || {}; // Get subscribers from central store
+  $: allLeadData = $store.leads || {}; // Get leads from central store
+  $: brandColor = $store.config?.brandColor; // Use $store directly
   $: complementaryColor = $store.complementaryColor; // Assuming this is separate in the main store
 
-  // Combine loading states for analytics
-  $: isAnalyticsLoading = $loadingSubscribers || $loadingLeads;
+  // Removed loading state logic tied to UserDataService stores
+  // Consider adding global loading/error states to central store if needed
 </script>
 
 <!-- HTML TEMPLATE SECTION -->
@@ -53,53 +46,40 @@
     <div class="column user-management-column">
       <TextTypes type="title">Manage Users by News Source</TextTypes>
 
-      {#if $loadingSubscribers && !newsSources.length}
-        <!-- Show initial loading only if we haven't potentially loaded sources yet -->
-        <p class="loading-message">
-          <TextTypes type="sub-italic">Loading subscribers...</TextTypes>
-        </p>
-      {:else if $loadingError && !$subscribersByNewsSource}
-        <!-- Show error only if it prevented loading subscribers -->
-        <p class="error-message">Error loading data: {$loadingError}</p>
+      <!-- Display content based on newsSources availability -->
+      {#if newsSources && newsSources.length > 0}
+        {#each newsSources as newsSource (newsSource.id)}
+          {@const subscribersForSource = (subscribersByNewsSource && subscribersByNewsSource[newsSource.id]) ? subscribersByNewsSource[newsSource.id] : []}
+          <NewsSourceUserManagement
+            {newsSource}
+            subscribers={subscribersForSource}
+            {canReveal}
+          />
+        {/each}
       {:else}
-        <!-- Loop through news sources from the config store -->
-        {#if newsSources.length > 0}
-          {#each newsSources as newsSource (newsSource.id)}
-            {@const subscribersForSource =
-              $subscribersByNewsSource[newsSource.id] || []}
-            <NewsSourceUserManagement
-              {newsSource}
-              subscribers={subscribersForSource}
-              {canReveal}
-            />
-          {/each}
-        {:else}
-          <!-- Message if loading is done but no news sources are configured -->
-          {#if !$loadingSubscribers}
-            <p class="no-data-message">
-              <TextTypes type="sub-italic">
-                No news sources configured yet. Add news sources in the previous
-                steps to manage users.
-              </TextTypes>
-            </p>
-          {/if}
-        {/if}
+        <!-- Message if no news sources are configured -->
+        <p class="no-data-message">
+          <TextTypes type="sub-italic">
+            No news sources configured yet. Add news sources in the previous
+            steps to manage users.
+          </TextTypes>
+        </p>
       {/if}
-    </div>
+    </div> <!-- Correctly closing user-management-column -->
 
     <!-- Analytics Column -->
     <div class="column charts-column">
       <UserAnalytics
-        subscribersByNewsSource={$subscribersByNewsSource}
-        allLeadData={$allLeadData}
+        {subscribersByNewsSource}
+        {allLeadData}
         {newsSources}
         {brandColor}
         {complementaryColor}
-        isLoading={isAnalyticsLoading}
-        loadingError={$loadingError}
+        isLoading={false}
+        loadingError={null}
       />
-    </div>
-  </div>
+    </div> <!-- Correctly closing charts-column -->
+  </div> <!-- Correctly closing users-page-layout -->
 </Page>
 
 <!-- STYLES -->

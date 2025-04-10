@@ -1,32 +1,16 @@
  // src/services/UserDataService.ts
 // --- DATA SERVICE MODULE ---
-import { writable, get } from "svelte/store";
+import { get } from "svelte/store"; // Removed writable
 
 // Import Request Functions (adjust paths as necessary)
-import store from "../../../../../../store.ts";
+import store, { saveToStore } from "../../../../../../store.ts"; // Added saveToStore
 import type { NewsletterUser } from "../../../../../../types.ts";
 import { addNewsletterUser } from "../../../../../requests/addNewsletterUserEndpoint.ts";
 import subscribeNewsletterUser from "../../../../../requests/subscribeNewsletterUser.ts";
 import getAllSubscribersFromConfigEndpoint from "../../../../../requests/getAllSubscribersFromConfigEndpoint.ts";
 import unsubscribeUserToConfigNewsSource from "../../../../../requests/unsubscribeUserToConfigNewsSource.ts";
 import getLeadsForConfigurator from "../../../../../requests/getLeadsForConfigurator.ts";
-import getUsersFromRawFileOrText from "../../../../../requests/getUsersFromRawFileOrText.ts"; // Reverted to original path
-
-// --- Core State Stores ---
-// Holds subscribers keyed by news source ID
-export const subscribersByNewsSource = writable<
-  Record<string, NewsletterUser[]>
->({});
-// Holds lead data, potentially keyed by config ID -> news source ID -> user ID -> lead info
-export const allLeadData = writable<
-  Record<string, Record<string, Record<string, string>>>
->({});
-// Loading state specifically for subscribers
-export const loadingSubscribers = writable(true);
-// Loading state specifically for leads
-export const loadingLeads = writable(true);
-// General error state, primarily for loading issues
-export const loadingError = writable<string | null>(null);
+import getUsersFromRawFileOrText from "../../../../../requests/getUsersFromRawFileOrText.ts";
 
 // --- Helper Function ---
 /**
@@ -39,64 +23,143 @@ function getConfigId(): string | null {
   return configStore?.configuratorEmail ?? null;
 }
 
+// --- Centralized Refresh Function ---
+
+/**
+ * Fetches the latest subscriber list for the current config ID and updates the central store.
+ * @returns {Promise<void>}
+ * @throws {Error} If config ID is missing or fetch fails.
+ */
+export async function refreshSubscribers(): Promise<void> {
+  console.log("[UserDataService] refreshSubscribers: Starting subscriber refresh.");
+  const configId = getConfigId();
+  if (!configId) {
+    console.error("[UserDataService] refreshSubscribers: Configuration ID missing.");
+    throw new Error("Subscriber refresh failed: Configuration ID missing.");
+  }
+  console.log(`[UserDataService] refreshSubscribers: Using configId: ${configId}`);
+
+  try {
+    const subsResponse = await getAllSubscribersFromConfigEndpoint(configId);
+    console.log("[UserDataService] refreshSubscribers: Fetched raw subscribers response:", JSON.stringify(subsResponse)); // Log raw response
+
+    const subscribersToSave = subsResponse || {};
+    // Ensure we save an empty object if subsResponse is null/undefined
+    saveToStore({ subscribers: subscribersToSave });
+    console.log("[UserDataService] refreshSubscribers: Updated central store with subscribers.");
+
+    // Log the store state immediately after saving for verification
+    const currentStoreState = get(store);
+    console.log("[UserDataService] refreshSubscribers: Store state after save:", JSON.stringify(currentStoreState.subscribers));
+
+  } catch (err: any) {
+    console.error("[UserDataService] refreshSubscribers: Error fetching/processing subscribers:", err);
+    // Optionally clear subscribers on error to prevent showing stale data
+    // saveToStore({ subscribers: {} });
+    throw new Error(err.message || "Failed to refresh subscriber list.");
+  }
+}
+
+
 // --- Service Functions ---
 
 /**
  * Loads initial subscriber and lead data for the current configuration ID.
- * Updates the corresponding stores.
+ * Saves the data to the central store. Uses the centralized refresh function.
  */
 export async function loadInitialData(): Promise<void> {
   console.log("[UserDataService] loadInitialData: Starting initial data load.");
   const configId = getConfigId();
   if (!configId) {
     console.error("[UserDataService] loadInitialData: Configuration ID (Email) not found in store.");
-    loadingError.set("Configuration ID (Email) not found in store.");
-    loadingSubscribers.set(false);
-    loadingLeads.set(false);
     return;
   }
   console.log(`[UserDataService] loadInitialData: Using configId: ${configId}`);
 
-  // Reset states before fetching
-  console.log("[UserDataService] loadInitialData: Resetting loading states and stores.");
-  loadingSubscribers.set(true);
-  loadingLeads.set(true);
-  loadingError.set(null);
-  subscribersByNewsSource.set({}); // Clear potentially stale data
-  allLeadData.set({}); // Clear potentially stale data
+  // Clear potentially stale data before fetching
+  console.log("[UserDataService] loadInitialData: Clearing previous subscribers and leads in central store.");
+  saveToStore({ subscribers: {}, leads: {} });
 
   try {
-    console.log("[UserDataService] loadInitialData: Fetching subscribers and leads...");
-    // Fetch subscribers and leads concurrently
-    const [subsResponse, leadsResponse] = await Promise.all([
-      getAllSubscribersFromConfigEndpoint(configId),
-      getLeadsForConfigurator(), // Assuming this fetches leads relevant to the user/config context
+    console.log("[UserDataService] loadInitialData: Fetching leads and refreshing subscribers concurrently...");
+    // Fetch leads and refresh subscribers in parallel
+    const [_subsRefreshResult, leadsResponse] = await Promise.all([
+      refreshSubscribers(), // Use the centralized refresh function
+      getLeadsForConfigurator(),
     ]);
-    console.log("[UserDataService] loadInitialData: Fetched subscribers:", subsResponse);
     console.log("[UserDataService] loadInitialData: Fetched leads:", leadsResponse);
 
-    subscribersByNewsSource.set(subsResponse || {});
-    console.log("[UserDataService] loadInitialData: Updated subscribersByNewsSource store.");
+    // Save fetched leads data
+    const updateData: { leads?: any } = {};
+    if (leadsResponse && leadsResponse[configId]) {
+       updateData.leads = leadsResponse[configId];
+    } else {
+       updateData.leads = {}; // Ensure leads is at least an empty object
+    }
+    saveToStore(updateData); // Save only leads here, subscribers handled by refreshSubscribers
+    console.log("[UserDataService] loadInitialData: Updated central store with leads.");
 
-    // Assuming leadsResponse has a structure like { configId: { /* lead data */ } }
-    // Adjust this based on the actual structure of leadsResponse
-    allLeadData.set(leadsResponse?.[configId] || {});
-    console.log("[UserDataService] loadInitialData: Updated allLeadData store.");
+    // --- Post-load check: Ensure configurator is subscribed to empty sources ---
+    console.log("[UserDataService] loadInitialData: Checking if configurator needs subscribing to existing empty sources...");
+    const finalStoreState = get(store);
+    const currentNewsSources = finalStoreState.config?.newsSources || [];
+    const currentSubscribers = finalStoreState.subscribers || {};
+    const configuratorEmail = finalStoreState.configuratorEmail;
+    let didSubscribeConfigurator = false;
+
+    if (configuratorEmail && currentNewsSources.length > 0) {
+      for (const newsSource of currentNewsSources) {
+        const sourceId = newsSource.id;
+        // Check if this source exists in the subscriber map and has an empty list
+        if (sourceId && currentSubscribers.hasOwnProperty(sourceId) && currentSubscribers[sourceId]?.length === 0) {
+          console.log(`[UserDataService] loadInitialData: News source ${sourceId} has no subscribers. Attempting to add/subscribe configurator ${configuratorEmail}...`);
+          try {
+            // 1. Ensure user exists (backend handles duplicates)
+             await addNewsletterUser(
+               { // Basic user data
+                 email: configuratorEmail,
+                 name: configuratorEmail,
+                 bio: "Newsletter Configurator",
+                 language: "en",
+                 countryOfResidence: "US",
+                 newsSourcesConfigTuples: [],
+               },
+               configuratorEmail, // configId
+               sourceId
+             );
+             // 2. Subscribe user
+             await subscribeNewsletterUser(
+               configuratorEmail, // configId
+               sourceId,
+               configuratorEmail // userEmail
+             );
+             console.log(`[UserDataService] loadInitialData: Successfully added/subscribed configurator to empty source ${sourceId}.`);
+             didSubscribeConfigurator = true; // Mark that we made a change
+          } catch (subError) {
+             console.error(`[UserDataService] loadInitialData: Error adding/subscribing configurator to empty source ${sourceId}:`, subError);
+             // Continue to check other sources even if one fails
+          }
+        }
+      }
+    }
+
+    // If we potentially added the configurator to any source, refresh subscribers again
+    if (didSubscribeConfigurator) {
+      console.log("[UserDataService] loadInitialData: Re-refreshing subscribers after adding configurator to empty sources...");
+      await refreshSubscribers();
+    }
+    // --- End post-load check ---
+
   } catch (err: any) {
-    console.error("[UserDataService] loadInitialData: Error fetching user/lead data:", err);
-    loadingError.set(err.message || "Failed to load initial user data.");
-    // Ensure stores are reset to empty on error to avoid showing stale data
-    console.log("[UserDataService] loadInitialData: Resetting stores due to error.");
-    subscribersByNewsSource.set({});
-    allLeadData.set({});
+    console.error("[UserDataService] loadInitialData: Error during initial data load or post-check:", err);
+    // Reset stores on error
+    console.log("[UserDataService] loadInitialData: Resetting subscribers/leads in central store due to error.");
+    saveToStore({ subscribers: {}, leads: {} });
   } finally {
-    // Ensure loading states are always set to false after attempt
-    console.log("[UserDataService] loadInitialData: Setting loading states to false.");
-    loadingSubscribers.set(false);
-    loadingLeads.set(false);
-    console.log("[UserDataService] loadInitialData: Finished initial data load.");
+    console.log("[UserDataService] loadInitialData: Finished initial data load attempt.");
   }
 }
+
 
 /**
  * Adds a newsletter user globally and then subscribes them to a specific news source.
@@ -155,14 +218,11 @@ export async function addUserAndSubscribe(
     // await subscribeNewsletterUser(configId, newsSourceId, userData.email);
     // console.log(`[UserDataService] addUserAndSubscribe: subscribeNewsletterUser successful for ${userData.email}.`);
 
-    // 3. Refresh the subscriber list to ensure UI consistency
+    // 3. Refresh the subscriber list using the centralized function
     console.log("[UserDataService] addUserAndSubscribe: Refreshing subscriber list...");
-    // This is the simplest way to guarantee the store reflects the backend state.
-    const subsResponse = await getAllSubscribersFromConfigEndpoint(configId);
-    console.log("[UserDataService] addUserAndSubscribe: Fetched updated subscribers:", subsResponse);
-    subscribersByNewsSource.set(subsResponse || {});
-    console.log("[UserDataService] addUserAndSubscribe: Updated subscribersByNewsSource store.");
+    await refreshSubscribers();
     console.log(`[UserDataService] addUserAndSubscribe: Finished successfully for user ${userData.email}.`);
+
   } catch (err: any) {
     console.error(
       `[UserDataService] addUserAndSubscribe: Error adding/subscribing user ${userData.email} to ${newsSourceId}:`,
@@ -316,12 +376,9 @@ export async function processBulkUpload(
     });
     console.log(`[UserDataService] processBulkUpload: Tally complete. Added: ${addedCount}, Subscribed: ${subscribedCount}, Errors: ${errors.length}`);
 
-    // 4. Refresh the subscriber list *after* all processing is done
+    // 4. Refresh the subscriber list using the centralized function *after* all processing is done
     console.log("[UserDataService] processBulkUpload: Refreshing subscriber list...");
-    const subsResponse = await getAllSubscribersFromConfigEndpoint(configId);
-    console.log("[UserDataService] processBulkUpload: Fetched updated subscribers:", subsResponse);
-    subscribersByNewsSource.set(subsResponse || {});
-    console.log("[UserDataService] processBulkUpload: Updated subscribersByNewsSource store.");
+    await refreshSubscribers();
 
     // 5. Compile summary messages
     const successMessage = `Processed ${totalInFile} users from file. Added/Updated: ${addedCount}. Subscribed to this source: ${subscribedCount}.`;
@@ -377,38 +434,37 @@ export async function unsubscribeUserFromSource(
     console.log(`[UserDataService] unsubscribeUserFromSource: API call returned: ${success}`);
 
     if (success) {
-      // Update the store locally for immediate UI feedback
-      console.log(`[UserDataService] unsubscribeUserFromSource: Updating local store for ${userEmail}...`);
-      subscribersByNewsSource.update((current) => {
-        const list = current[newsSourceId] || [];
-        const updatedList = list.filter((u) => u.email !== userEmail);
-        // Only update if the list actually changed
-        if (updatedList.length !== list.length) {
-          console.log(`[UserDataService] unsubscribeUserFromSource: Removing ${userEmail} from local store for ${newsSourceId}.`);
-          const newState = { ...current }; // Create new object for reactivity
-          newState[newsSourceId] = updatedList;
-          return newState;
-        }
-        console.log(`[UserDataService] unsubscribeUserFromSource: User ${userEmail} not found in local store for ${newsSourceId}, no update needed.`);
-        return current; // Return same object if no change
-      });
+      // Update the central store for UI feedback
+      console.log(`[UserDataService] unsubscribeUserFromSource: Updating central store for ${userEmail}...`);
+      const currentStore = get(store);
+      const currentSubscribers = currentStore.subscribers || {};
+      const list = currentSubscribers[newsSourceId] || [];
+      const updatedList = list.filter((u: NewsletterUser) => u.email !== userEmail);
+
+      // Only update if the list actually changed
+      if (updatedList.length !== list.length) {
+        const newSubscribersState = { ...currentSubscribers };
+        newSubscribersState[newsSourceId] = updatedList;
+        saveToStore({ subscribers: newSubscribersState });
+        console.log(`[UserDataService] unsubscribeUserFromSource: Removed ${userEmail} from central store for ${newsSourceId}.`);
+      } else {
+        console.log(`[UserDataService] unsubscribeUserFromSource: User ${userEmail} not found in central store for ${newsSourceId}, no update needed.`);
+      }
       console.log(
-        `[UserDataService] unsubscribeUserFromSource: ${userEmail} unsubscribed successfully from ${newsSourceId}.`
+        `[UserDataService] unsubscribeUserFromSource: ${userEmail} unsubscribed successfully (or was already unsubscribed) from ${newsSourceId}.`
       );
       return true;
     } else {
       // API call completed but indicated failure (e.g., user not found, already unsubscribed)
-      // In this case, we can treat it as 'job done' from the user's perspective.
-      // We might want to refresh the store here to ensure consistency if the local state was wrong.
-      console.warn(
-        `[UserDataService] unsubscribeUserFromSource: API indicated no action needed for unsubscribing ${userEmail} from ${newsSourceId}. Refreshing list to ensure consistency.`
-      );
-      const subsResponse = await getAllSubscribersFromConfigEndpoint(configId);
-      console.log("[UserDataService] unsubscribeUserFromSource: Fetched updated subscribers after no-action API response:", subsResponse);
-      subscribersByNewsSource.set(subsResponse || {});
-      console.log("[UserDataService] unsubscribeUserFromSource: Updated subscribersByNewsSource store.");
-      return true; // Still return true as the desired state (unsubscribed) is achieved or already existed.
+      // OR if the API call succeeded (success was true initially).
+      // Refresh the central store to ensure consistency in both cases.
+      console.log(`[UserDataService] unsubscribeUserFromSource: Refreshing subscriber list for consistency after action for ${userEmail}...`);
+      await refreshSubscribers();
+      return true; // Return true as the desired state (unsubscribed) is achieved or already existed, or the action succeeded.
     }
+    // Note: The original 'else' block handling API failure is removed because refreshSubscribers is now called regardless.
+    // If the API call itself throws an error, it will be caught below.
+
   } catch (err: any) {
     console.error(
       `[UserDataService] unsubscribeUserFromSource: Error removing user ${userEmail} from ${newsSourceId}:`,

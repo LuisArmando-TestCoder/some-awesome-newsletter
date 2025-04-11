@@ -1,5 +1,5 @@
 {
-  "extends": "@tsconfig/svelte/tsconfig.json",
+  "extends": "./.svelte-kit/tsconfig.json", // Extend the SvelteKit generated config
   "compilerOptions": {
     "lib": ["es2020", "dom"],
     "allowJs": true,
@@ -12,8 +12,12 @@
     "strict": true,
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "allowImportingTsExtensions": true
+    "allowImportingTsExtensions": true,
+    // Add explicit path mapping as a fallback
+    "paths": {
+      "$app/*": ["./node_modules/@sveltejs/kit/src/runtime/app/*"] 
+    }
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", ".svelte-kit/ambient.d.ts"], // Ensure ambient types are included
   "exclude": ["node_modules"]
 }

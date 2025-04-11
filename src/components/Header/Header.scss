@@ -56,9 +56,17 @@
     box-shadow: 0 0 100px -35px var(--color-background);
     color: var(--color-background);
     font-family: var(--font-title);
+    transition: transform 0.3s ease-in-out; // Add transition for smooth hide/show
     display: flex;
     gap: 1.5rem;
     width: 100%;
+  }
+
+  // Style for when the header should be hidden
+  &.hidden {
+    nav {
+      transform: translateY(-100%);
+    }
   }
 
   .logo {

@@ -1,6 +1,8 @@
 <!-- src/components/systems/steps/StepsTowardsPublish/stages/H_Dashboard/Users/Users.svelte -->
 <script lang="ts">
   import { onMount } from "svelte";
+  import { writable } from "svelte/store"; // ADDED writable
+  import type { NewsSource } from "../../../../../../types.js"; // Import NewsSource type if not already implicitly available - ADDED .js
 
   // Central Store and Types
   import store from "../../../../../../store.ts"; // Adjust path
@@ -37,6 +39,11 @@
 
   // Removed loading state logic tied to UserDataService stores
   // Consider adding global loading/error states to central store if needed
+
+  // --- State for Auto-Collapse (Using Writable Store) ---
+  const openNewsSourceIdStore = writable<string | null>(null); // Store for the open card ID
+
+  // REMOVED Event Handler
 </script>
 
 <!-- HTML TEMPLATE SECTION -->
@@ -50,10 +57,12 @@
       {#if newsSources && newsSources.length > 0}
         {#each newsSources as newsSource (newsSource.id)}
           {@const subscribersForSource = (subscribersByNewsSource && subscribersByNewsSource[newsSource.id]) ? subscribersByNewsSource[newsSource.id] : []}
+          <!-- REMOVED duplicate declaration -->
           <NewsSourceUserManagement
             {newsSource}
             subscribers={subscribersForSource}
             {canReveal}
+            {openNewsSourceIdStore}
           />
         {/each}
       {:else}

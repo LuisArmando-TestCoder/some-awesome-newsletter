@@ -1,9 +1,12 @@
 <!-- src/components/systems/steps/StepsTowardsPublish/stages/H_Dashboard/Users/NewsSourceUserManagement.svelte -->
 <script lang="ts">
-  // REMOVED: createEventDispatcher (was unused here)
-  // REMOVED: createEventDispatcher (was unused here)
   import { tick } from "svelte";
-  import type { NewsSource, NewsletterUser } from "../../../../../../types.ts"; // Adjust path
+  import { get } from "svelte/store";
+  import type { Writable } from "svelte/store";
+  import type { NewsSource, NewsletterUser } from "../../../../../../types.ts"; // Using local types path
+  import store from "../../../../../../store.ts";
+  import updateConfiguration from "../../../../../requests/updateConfiguration.ts";
+  import getConfiguratorSession from "../../../../../requests/getConfiguratorSession.ts"; // Import config refresh function
   import * as UserDataService from "./UserDataService.ts"; // Adjust path
   import { userRemovalRequestStore } from "./userActions.ts"; // Import the shared store
 
@@ -13,10 +16,12 @@
   import UserCard from "./UserCard.svelte";
 
   // Import UI Components (Existing)
+  import Switch from "../../../../../selectors/Switch/Switch.svelte"; // ADDED Switch component import
   import ToggleCard from "../../../../../buttons/ToggleCard/ToggleCard.svelte"; // Adjusted path - verify this is correct
   import TextTypes from "../../../../../texts/TextTypes/TextTypes.svelte"; // Adjust path
   import Svg from "../../../../../../SVG/SVG.svelte"; // Adjust path
     import IconButton from "../../../../../buttons/IconButton/IconButton.svelte";
+    // Removed duplicate type import
 
   // --- Props ---
   /** The specific news source object this component manages */
@@ -25,6 +30,9 @@
   export let subscribers: NewsletterUser[] = [];
   /** Controls if the main card can be revealed (passed down to ToggleCard) */
   export let canReveal: boolean = true;
+  // REMOVED isOpen prop
+  /** Writable store from parent controlling which news source card is open */
+  export let openNewsSourceIdStore: Writable<string | null>; // ADDED store prop
 
   // --- State ---
   let isAddingFormVisible: boolean = false;
@@ -35,10 +43,14 @@
   let isPerformingAction: boolean = false;
   /** Specific loading state for removing a user (could target specific email if needed) */
   let removingUserEmail: string | null = null;
+  /** Loading state for toggling the active status */
+  let isUpdatingActive: boolean = false; // ADDED loading state for switch
 
-  // REMOVED: const dispatch = createEventDispatcher();
+  // REMOVED event dispatcher
 
   // --- Computed Properties ---
+  // Determine if *this* card should be open based on the store value
+  $: isOpen = $openNewsSourceIdStore === newsSource.id;
   $: cardTitle = `Subscribers for: ${newsSource.url?.split("//")[1]?.split("/")[0] ?? newsSource.id}`;
   $: subscriberCount = subscribers.length;
   // Create a reversed copy for display (newest first) without mutating the prop
@@ -59,6 +71,58 @@
 
 
   // --- Functions ---
+
+  /** Handles toggling the active state of the news source */
+  async function handleToggleActive(newState: boolean) {
+    if (!$store.config || !$store.config.newsSources) {
+      console.error("Cannot toggle active state: config or newsSources missing from store.");
+      setFeedback("error", "Configuration data is missing, cannot update.");
+      return; // Exit if essential data is missing
+    }
+
+    isUpdatingActive = true;
+    clearFeedback(); // Corrected usage of clearFeedback
+
+    // Deep copy the newsSources array to avoid direct mutation
+    const currentNewsSources = JSON.parse(JSON.stringify($store.config.newsSources));
+    const sourceIndex = currentNewsSources.findIndex((ns: NewsSource) => ns.id === newsSource.id);
+
+    if (sourceIndex === -1) {
+      console.error(`Cannot toggle active state: news source with ID ${newsSource.id} not found in store config.`);
+      setFeedback("error", "News source not found in current configuration.");
+      isUpdatingActive = false;
+      return;
+    }
+
+    // Update the active state in the copied array
+    currentNewsSources[sourceIndex].active = newState;
+
+    try {
+      console.log(`Attempting to update config with newsSources:`, currentNewsSources);
+      const success = await updateConfiguration({ newsSources: currentNewsSources });
+
+      if (success) {
+        setFeedback("success", `News source ${newState ? 'activated' : 'deactivated'}.`);
+        // Refresh the main config store to reflect the change everywhere
+        await getConfiguratorSession(); // Re-fetch the entire config
+      } else {
+        setFeedback("error", "Failed to update news source status.");
+        // No need to manually revert switch state, getConfiguratorSession() should fetch the correct state
+      }
+    } catch (error: any) {
+      console.error("Error updating news source active state:", error);
+      setFeedback("error", `Error: ${error.message || 'Failed to update status.'}`);
+      // Attempt to refresh config even on error to sync state
+      try {
+        await getConfiguratorSession();
+      } catch (refreshError) {
+        console.error("Failed to refresh config after update error:", refreshError);
+      }
+    } finally {
+      isUpdatingActive = false;
+    }
+  }
+
   function toggleAddFormVisibility() {
     const wasVisible = isAddingFormVisible;
     isAddingFormVisible = !isAddingFormVisible;
@@ -186,10 +250,31 @@
 <ToggleCard
   {canReveal}
   {cardTitle}
-  isOpen={false}
-  onChange={(isOpen) => console.log("ToggleCard state changed:", isOpen)}
+  isOpen={isOpen}
+  onChange={(newIsOpenState: boolean) => {
+    // Update the store when this card's toggle changes
+    // Update the store when this card's toggle changes
+    // Update the store when this card's toggle changes
+    // Update the store when this card's toggle changes
+    // Update the store when this card's toggle changes
+    // Update the store when this card's toggle changes
+    // Update the store when this card's toggle changes
+    openNewsSourceIdStore.set(newIsOpenState ? newsSource.id : null);
+  }}
 >
-  <!-- Slot Content for the ToggleCard -->
+  <!-- Default Slot Content for the ToggleCard body -->
+
+   <!-- Activation Switch -->
+   <div class="switch-container" class:disabled={isUpdatingActive}>
+    <span style="font-size: 0.8em; color: var(--color-text-secondary); margin-right: 0.5rem;">Active:</span>
+    <Switch
+      toggled={newsSource.active ?? false}
+      onChange={handleToggleActive}
+      />
+      <!-- No disabled prop, handled by CSS -->
+  </div>
+  <hr style="margin: 0.5rem 0 1rem 0; border-color: var(--color-border-light, #eee);"> <!-- Separator -->
+
 
   <!-- Section for adding users (trigger + forms) -->
   <div class="add-user-section">
@@ -279,6 +364,19 @@
   @use "../Dashboard.scss";
 
   // Add component-specific styles here or reuse from Users.scss
+  // Added styles for switch container and disabled state
+  .switch-container {
+    display: flex;
+    align-items: center;
+    margin-left: 1rem; // Add some space from the title
+    transition: opacity 0.3s ease;
+
+    &.disabled {
+      opacity: 0.5;
+      pointer-events: none; // Prevent interaction when disabled
+    }
+  }
+
   .add-user-section {
     margin-bottom: 1rem; // Space between add section and list
   }

@@ -9,7 +9,9 @@
   import type { CandidateScore } from "./getColorSuggestions.ts";
   import store from "../../../store.ts";
   // Import the color picker library
-  import ColorPicker, { A11yVariant } from "svelte-awesome-color-picker";
+  import ColorPicker from "svelte-awesome-color-picker"; // Removed A11yVariant as it's not used
+  import nearestColor from "nearest-color"; // Import the library
+  // Standard colors are accessed via nearestColor.STANDARD_COLORS
   import {
     complementaryColor,
     foregroundColor,
@@ -21,6 +23,9 @@
   export let onChange: (newColor: string) => void = () => {};
   export let canReveal = false;
   export const selectedColorStore = writable(selectedColor);
+
+  // Initialize nearestColor using the standard colors map
+  const getColorNameFunc = nearestColor.from(nearestColor.STANDARD_COLORS);
 
   let open = false;
   let pickerRef: HTMLElement;
@@ -36,6 +41,9 @@
     palette,
     selectedColor || "#000000"
   ) as CandidateScore[];
+
+  // Reactive color name
+  $: colorName = getColorNameFunc(selectedColor)?.name || "Unknown";
 
   // Toggle the palette dropdown open/close
   function togglePicker() {
@@ -157,9 +165,10 @@
   <!-- Replacing the text input with svelte-awesome-color-picker.
        We attach on:mousedown and on:click to keep the drag functionality.
        The on:input event updates the selectedColor state and triggers onChange. -->
-  <ColorPicker
-    bind:hex={selectedColor}
-    position="responsive"
+  <div class="picker-wrapper" on:mousedown={handleMouseDown} on:click={handleClick}>
+    <ColorPicker
+      bind:hex={selectedColor}
+      position="responsive"
     on:input={(e) => {
       selectedColor = e.detail.hex || $foregroundColor;
       selectedColorStore.set(selectedColor);
@@ -168,45 +177,9 @@
         setStoreColor();
       }
     }}
-    on:mousedown={handleMouseDown}
-    on:click={handleClick}
-  />
-
-  {#if open}
-    <!-- Palette Dropdown with Drag-and-Drop Reordering -->
-    <ul class="color-dropdown" role="listbox" tabindex="-1">
-      {#each palette as color, index (color)}
-        <li
-          class="swatch-item"
-          role="option"
-          aria-selected={color === selectedColor}
-        >
-          <button
-            class="color-swatch"
-            style="background: {color};"
-            draggable="true"
-            on:dragstart={(e) => handleDragStart(e, index)}
-            on:dragover={handleDragOver}
-            on:drop={(e) => handleDrop(e, index)}
-            on:click={() => selectColor(color)}
-            on:keydown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                selectColor(color);
-                setStoreColor();
-              }
-            }}
-          >
-            {#if color === selectedColor}
-              <svg class="checkmark" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M20 6L9 17l-5-5z" />
-              </svg>
-            {/if}
-          </button>
-        </li>
-      {/each}
-    </ul>
-  {/if}
+    />
+    <span class="color-name" aria-live="polite">({colorName})</span>
+  </div>
 
   <MarkdownText {canReveal}>
     ==Related colors== for different types of color ==palettes==.
@@ -255,6 +228,18 @@
     justify-content: space-between;
     flex-wrap: wrap;
     z-index: 1;
+  }
+
+  .picker-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* Adjust gap as needed */
+  }
+
+  .color-name {
+    font-size: 0.9em;
+    color: var(--color-foreground-muted); /* Use a muted color */
+    margin-left: 5px; /* Space between picker and name */
   }
 
   /* Optionally, you may remove or adjust styles for the removed .color-preview */

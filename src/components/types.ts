@@ -69,6 +69,7 @@ export interface NewsSource {
   personality: string;
   email?: EmailConfig;
   openAiApiKey?: string;
+  active?: boolean;
 }
 
 export interface EmailAuth {

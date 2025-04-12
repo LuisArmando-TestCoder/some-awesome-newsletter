@@ -56,6 +56,7 @@ const store = writable<Store>({
   config: {},
   subscribers: {}, // Added initial empty object for subscribers
   leads: {}, // Added initial empty object for leads
+  isRefreshingSubscribers: false, // Flag for background refresh
   personality:
     "The writer embodies a dynamic and intellectually stimulating personality, " +
     "marked by a blend of creativity and analytical rigor. " +
@@ -161,4 +162,26 @@ function createObjectGetter<T extends object>(
 
     return getNested(obj, keys);
   };
+}
+
+export function setStorageFromKeysToSave() {
+  for (const key of get(store).keysToSave) {
+    try {
+      const value = JSON.parse(localStorage.getItem(key) || "");
+
+      if (!value) continue;
+
+      populateToStore(key, value);
+    } catch {
+      continue;
+    }
+  }
+}
+
+export function saveAllKeysToSaveInLocalStorage() {
+  store.subscribe((currentStore: Store) => {
+    for (const key of currentStore.keysToSave) {
+      localStorage.setItem(key, JSON.stringify(getFromStore(key)));
+    }
+  });
 }

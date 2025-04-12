@@ -3,7 +3,9 @@
   import store, {
     getFromStore,
     populateToStore,
+    saveAllKeysToSaveInLocalStorage,
     saveToStore,
+    setStorageFromKeysToSave,
   } from "../../../store.ts";
   import Steps from "../Steps.svelte";
   import type { Store } from "../../../types.ts";
@@ -22,20 +24,6 @@
     }
   };
 
-  function setStorageFromKeysToSave() {
-    for (const key of $store.keysToSave) {
-      try {
-        const value = JSON.parse(localStorage.getItem(key) || "");
-
-        if (!value) continue;
-
-        populateToStore(key, value);
-      } catch {
-        continue;
-      }
-    }
-  }
-
   function setInitialNonInteractiveSlidesAutomaticSlideTime() {
     const timings = [6.5e3, 8e3, 9e3];
     let timing = 0;
@@ -49,14 +37,6 @@
       console.log("index", index, $store.stepsIndex, timing, waitDuration);
 
       setTimeout(goNext(index + 1), wait);
-    });
-  }
-
-  function saveAllKeysToSaveInLocalStorage() {
-    store.subscribe((currentStore: Store) => {
-      for (const key of currentStore.keysToSave) {
-        localStorage.setItem(key, JSON.stringify(getFromStore(key)));
-      }
     });
   }
 

@@ -28,14 +28,11 @@ export let canReveal = true; // Keep props passed from parent
   // Access data directly from the central store
   $: config = $store.config;
   $: newsSources = $store.config?.newsSources || []; // Use $store directly
-  $: subscribersByNewsSource = (() => {
-    const subs = $store.subscribers || {};
-    console.log('[Users.svelte] Reactive subscribers update detected:', JSON.stringify(subs)); // DIAGNOSTIC LOG
-    return subs;
-  })();
+  $: subscribersByNewsSource = $store.subscribers || {}; // Get subscribers from central store (loaded from localStorage initially)
   $: allLeadData = $store.leads || {}; // Get leads from central store
   $: brandColor = $store.config?.brandColor; // Use $store directly
   $: complementaryColor = $store.complementaryColor; // Assuming this is separate in the main store
+  $: isRefreshing = $store.isRefreshingSubscribers; // Subscribe to the refresh flag
 
   // Removed loading state logic tied to UserDataService stores
   // Consider adding global loading/error states to central store if needed
@@ -51,14 +48,17 @@ export let canReveal = true; // Keep props passed from parent
   <div class="users-page-layout">
     <!-- User Management Column -->
     <div class="column user-management-column">
-      <TextTypes type="title">Manage Users by News Source</TextTypes>
+      <div class="title-container">
+        <TextTypes type="title">Manage Users by News Source</TextTypes>
+        {#if isRefreshing}
+          <span class="refresh-indicator">(Updating list...)</span>
+        {/if}
+      </div>
 
       <!-- Display content based on newsSources availability -->
       {#if newsSources && newsSources.length > 0}
-        <!-- Check if subscriber data is ready -->
+        <!-- Check if subscriber data is ready (will be from localStorage initially) -->
         {@const subsReady = subscribersByNewsSource && Object.keys(subscribersByNewsSource).length > 0}
-        <!-- DIAGNOSTIC LOG -->
-        {console.log('[Users.svelte Template - User List] Evaluating subsReady:', subsReady, 'Subscribers:', JSON.stringify(subscribersByNewsSource))}
         {#if subsReady}
           {#each newsSources as newsSource (newsSource.id)}
             {@const subscribersForSource = subscribersByNewsSource[newsSource.id] ?? []}
@@ -89,9 +89,7 @@ export let canReveal = true; // Keep props passed from parent
       <!-- Similar check for analytics -->
       {#if newsSources && newsSources.length > 0}
         {@const subsReadyForAnalytics = subscribersByNewsSource && Object.keys(subscribersByNewsSource).length > 0}
-        <!-- DIAGNOSTIC LOG -->
-        {console.log('[Users.svelte Template - Analytics] Evaluating subsReadyForAnalytics:', subsReadyForAnalytics, 'Subscribers:', JSON.stringify(subscribersByNewsSource))}
-        {#if subsReadyForAnalytics}
+         {#if subsReadyForAnalytics}
           <UserAnalytics
             {subscribersByNewsSource}
             {allLeadData}
@@ -120,6 +118,19 @@ export let canReveal = true; // Keep props passed from parent
   @use "./Users.scss"; // Styles specific to the Users page layout (e.g., .users-page-layout, .column)
 
   // Add any styles *only* relevant to the main Users.svelte shell here
+  .title-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; // Space between title and indicator
+    margin-bottom: 1rem; // Existing margin likely handled by TextTypes or parent styles
+  }
+
+  .refresh-indicator {
+    font-size: var(--font-size-s); // Smaller text
+    color: var(--color-text-secondary); // Muted color
+    font-style: italic;
+  }
+
   .loading-message,
   .error-message,
   .no-data-message {
@@ -129,7 +140,6 @@ export let canReveal = true; // Keep props passed from parent
   }
   .loading-message,
   .no-data-message {
-    background-color: var(--color-background);
     color: var(--color-text-secondary, #666);
   }
   .error-message {

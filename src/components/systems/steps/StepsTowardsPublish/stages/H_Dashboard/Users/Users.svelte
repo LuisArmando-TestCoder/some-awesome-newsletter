@@ -19,20 +19,20 @@
   import TextTypes from "../../../../../texts/TextTypes/TextTypes.svelte"; // Adjust path
 
   // Props (if any remain - canReveal was one)
-  export let canReveal = true; // Keep props passed from parent
+export let canReveal = true; // Keep props passed from parent
 
-  // --- Initialization ---
-  onMount(() => {
-    // Trigger initial data load via the service
-    // Components will reactively update based on the service's store changes
-    UserDataService.loadInitialData();
-  });
+// --- Initialization ---
+// REMOVED onMount call - Data is loaded centrally via getConfiguratorSession -> refreshSubscribers
 
-  // --- Reactive Data Access ---
+// --- Reactive Data Access ---
   // Access data directly from the central store
   $: config = $store.config;
   $: newsSources = $store.config?.newsSources || []; // Use $store directly
-  $: subscribersByNewsSource = $store.subscribers || {}; // Get subscribers from central store
+  $: subscribersByNewsSource = (() => {
+    const subs = $store.subscribers || {};
+    console.log('[Users.svelte] Reactive subscribers update detected:', JSON.stringify(subs)); // DIAGNOSTIC LOG
+    return subs;
+  })();
   $: allLeadData = $store.leads || {}; // Get leads from central store
   $: brandColor = $store.config?.brandColor; // Use $store directly
   $: complementaryColor = $store.complementaryColor; // Assuming this is separate in the main store
@@ -55,16 +55,24 @@
 
       <!-- Display content based on newsSources availability -->
       {#if newsSources && newsSources.length > 0}
-        {#each newsSources as newsSource (newsSource.id)}
-          {@const subscribersForSource = (subscribersByNewsSource && subscribersByNewsSource[newsSource.id]) ? subscribersByNewsSource[newsSource.id] : []}
-          <!-- REMOVED duplicate declaration -->
-          <NewsSourceUserManagement
-            {newsSource}
-            subscribers={subscribersForSource}
-            {canReveal}
-            {openNewsSourceIdStore}
-          />
-        {/each}
+        <!-- Check if subscriber data is ready -->
+        {@const subsReady = subscribersByNewsSource && Object.keys(subscribersByNewsSource).length > 0}
+        <!-- DIAGNOSTIC LOG -->
+        {console.log('[Users.svelte Template - User List] Evaluating subsReady:', subsReady, 'Subscribers:', JSON.stringify(subscribersByNewsSource))}
+        {#if subsReady}
+          {#each newsSources as newsSource (newsSource.id)}
+            {@const subscribersForSource = subscribersByNewsSource[newsSource.id] ?? []}
+            <NewsSourceUserManagement
+              {newsSource}
+              subscribers={subscribersForSource}
+              {canReveal}
+              {openNewsSourceIdStore}
+            />
+          {/each}
+        {:else}
+          <!-- Show loading specifically for subscribers if news sources exist but subscriber data isn't ready -->
+          <p class="loading-message">Loading subscribers...</p>
+        {/if}
       {:else}
         <!-- Message if no news sources are configured -->
         <p class="no-data-message">
@@ -78,15 +86,27 @@
 
     <!-- Analytics Column -->
     <div class="column charts-column">
-      <UserAnalytics
-        {subscribersByNewsSource}
-        {allLeadData}
-        {newsSources}
-        {brandColor}
-        {complementaryColor}
-        isLoading={false}
-        loadingError={null}
-      />
+      <!-- Similar check for analytics -->
+      {#if newsSources && newsSources.length > 0}
+        {@const subsReadyForAnalytics = subscribersByNewsSource && Object.keys(subscribersByNewsSource).length > 0}
+        <!-- DIAGNOSTIC LOG -->
+        {console.log('[Users.svelte Template - Analytics] Evaluating subsReadyForAnalytics:', subsReadyForAnalytics, 'Subscribers:', JSON.stringify(subscribersByNewsSource))}
+        {#if subsReadyForAnalytics}
+          <UserAnalytics
+            {subscribersByNewsSource}
+            {allLeadData}
+            {newsSources}
+            {brandColor}
+            {complementaryColor}
+          />
+        {:else}
+          <!-- Show loading only if news sources exist but subscribers don't yet -->
+          <p class="loading-message">Loading analytics data...</p>
+        {/if}
+      {:else}
+        <!-- Optional: Message if no news sources, hence no analytics -->
+        <p class="no-data-message">Analytics require configured news sources.</p>
+      {/if}
     </div> <!-- Correctly closing charts-column -->
   </div> <!-- Correctly closing users-page-layout -->
 </Page>

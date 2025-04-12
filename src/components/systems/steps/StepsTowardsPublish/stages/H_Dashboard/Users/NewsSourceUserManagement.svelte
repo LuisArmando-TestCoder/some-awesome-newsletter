@@ -273,7 +273,7 @@
       />
       <!-- No disabled prop, handled by CSS -->
   </div>
-  <hr style="margin: 0.5rem 0 1rem 0; border-color: var(--color-border-light, #eee);"> <!-- Separator -->
+  <hr style="margin: 0.5rem 0 1rem 0; border-color: var(--color-background-opaque);"> <!-- Separator -->
 
 
   <!-- Section for adding users (trigger + forms) -->

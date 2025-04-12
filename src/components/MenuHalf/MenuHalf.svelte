@@ -3,7 +3,7 @@
     import logout from "../systems/requests/logout.ts";
   import X from "../X/X.svelte";
 
-  let isChecked: boolean;
+  export let isChecked = false; // Export isChecked as a prop, default to false
 </script>
 
 <div class="menu-half {isChecked ? 'open' : 'closed'}">

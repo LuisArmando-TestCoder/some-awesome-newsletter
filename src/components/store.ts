@@ -6,6 +6,7 @@ import updateConfiguration from "./systems/requests/updateConfiguration.ts";
 export const latestMessage = writable<string>("");
 
 export const socket = writable<Socket | null>(null);
+export const isScrollingDown = writable<boolean>(false); // Add state for scroll direction
 
 const colorPalette = [
   "#e91e63",

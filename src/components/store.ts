@@ -38,6 +38,8 @@ const store = writable<Store>({
     "config.emailSignature",
     "subscribers", // Added
     "leads", // Added
+    "subscriberName", // Added for subscription flow
+    "subscriberCountry", // Added for subscription flow
   ],
   autoCollapse: true,
   toggles: {},
@@ -51,13 +53,15 @@ const store = writable<Store>({
   authCode: "",
   directionsThatShouldDisappear: [],
   isAuthCodeValid: "",
-  // apiURL: "http://localhost:8000",
-  apiURL: "https://ai-newsletter-translated.onrender.com",
+  apiURL: "http://localhost:8000",
+  // apiURL: "https://ai-newsletter-translated.onrender.com",
   config: {},
   subscribers: {}, // Added initial empty object for subscribers
   leads: {}, // Added initial empty object for leads
   isRefreshingSubscribers: false, // Flag for background refresh
   subscriberEmail: "",
+  subscriberName: "", // Added for subscription flow
+  subscriberCountry: "", // Added for subscription flow
   subscriberLanguage: "",
   subscriberConfiguratorId: "",
   subscriberNewsSourceId: "",

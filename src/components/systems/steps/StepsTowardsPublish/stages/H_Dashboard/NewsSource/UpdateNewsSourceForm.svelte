@@ -14,6 +14,7 @@
   import IconButton from "../../../../../buttons/IconButton/IconButton.svelte";
   import { generatePersonality } from "../../../../../requests/generatePersonality.ts";
   import Personality from "../../../../../inputs/Personality/Personality.svelte";
+  import CopyUrlWithQR from "../../../../../../common/CopyUrlWithQR.svelte"; // Corrected path
 
   // The news source to update
   export let newsSource: NewsSource;
@@ -93,8 +94,14 @@
 </script>
 
 <form class="news-source-update-form" on:submit|preventDefault={handleUpdate}>
+  <CopyUrlWithQR
+    configuratorEmail={$store.configuratorEmail}
+    newsSourceId={newsSource.id}
+    lead={newsSource.lead}
+  />
   <ToggleCard {canReveal} cardTitle="Basic Settings" isOpen={false}>
     <div class="selectors-group">
+
       <PlainText
         label="Buyer Persona"
         placeholder="e.g. 'Expats from US'"

@@ -1,5 +1,5 @@
 import store, { emptyStoreSnapshot, saveToConfig, saveToStore } from "../../store.ts";
-import { complementaryColor, complementaryColorSnapshot, foregroundColor, foregroundColorSnapshot } from "../../ThemeChanger/store.ts";
+import { complementaryColor, complementaryColorSnapshot, foregroundColor, foregroundColorSnapshot } from "../../ThemeChanger/theme-store.ts";
 import type { Store } from "../../types.ts";
 
 export default function logout() {

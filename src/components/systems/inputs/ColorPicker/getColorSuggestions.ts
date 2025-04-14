@@ -1,7 +1,7 @@
 // colorSuggestions.ts
 
 import { get } from "svelte/store";
-import { complementaryColor } from "../../../ThemeChanger/store.ts";
+import { complementaryColor } from "../../../ThemeChanger/theme-store.ts";
 import store from "../../../store.ts";
 
 // -----------------------------

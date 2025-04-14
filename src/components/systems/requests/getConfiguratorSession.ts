@@ -3,7 +3,7 @@ import store, { saveToConfig, saveToStore } from "../../store.ts";
 import {
   foregroundColor,
   complementaryColor,
-} from "../../ThemeChanger/Store.ts"; // Corrected casing
+} from "../../ThemeChanger/store.ts"; // Corrected casing
 import { getComplementaryColor } from "../inputs/ColorPicker/getColorSuggestions.ts";
 import createInitialConfiguratorConfig from "./createInitialConfiguratorConfig.ts";
 import createNewsSource from "./createNewsSource.ts";

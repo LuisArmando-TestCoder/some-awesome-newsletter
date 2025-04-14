@@ -15,7 +15,7 @@
   import {
     complementaryColor,
     foregroundColor,
-  } from "../../../ThemeChanger/store.ts";
+  } from "../../../ThemeChanger/store.js";
   import MarkdownText from "../../texts/MarkdownText/MarkdownText.svelte";
 
   // Props & Stores

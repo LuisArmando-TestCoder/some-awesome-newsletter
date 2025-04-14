@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { TextType } from "../types.ts";
+  import type { TextType } from "../../../types.ts";
 
   export let type: TextType;
 </script>

@@ -51,12 +51,17 @@ const store = writable<Store>({
   authCode: "",
   directionsThatShouldDisappear: [],
   isAuthCodeValid: "",
-  apiURL: "http://localhost:8000",
-  // apiURL: "https://ai-newsletter-translated.onrender.com",
+  // apiURL: "http://localhost:8000",
+  apiURL: "https://ai-newsletter-translated.onrender.com",
   config: {},
   subscribers: {}, // Added initial empty object for subscribers
   leads: {}, // Added initial empty object for leads
   isRefreshingSubscribers: false, // Flag for background refresh
+  subscriberEmail: "",
+  subscriberLanguage: "",
+  subscriberConfiguratorId: "",
+  subscriberNewsSourceId: "",
+  subscriberLead: "",
   personality:
     "The writer embodies a dynamic and intellectually stimulating personality, " +
     "marked by a blend of creativity and analytical rigor. " +

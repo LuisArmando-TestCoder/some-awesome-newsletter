@@ -7,7 +7,6 @@
   import { browser } from "$app/environment";
   import { isScrollingDown } from "../components/store.ts"; // Import the store variable
   import MainSteps from "../components/systems/steps/StepsTowardsPublish/MainSteps.svelte";
-  import ThemeChanger from "../components/ThemeChanger/ThemeChanger.svelte";
 
   let lastScrollY = 0;
 

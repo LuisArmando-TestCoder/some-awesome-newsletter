@@ -82,7 +82,7 @@
   });
 </script>
 
-{#key visible}
+{#if visible}
   <div class="theme-changer">
     <button
       aria-label="Change theme from dark to light"
@@ -92,7 +92,7 @@
       <div class="icon"></div>
     </button>
   </div>
-{/key}
+{/if}
 
 <style lang="scss">
   @use "./ThemeChanger.scss";

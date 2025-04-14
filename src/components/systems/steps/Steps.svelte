@@ -12,10 +12,11 @@
   onMount(() => {
     steps.set(
       components.map(([_, component], index) => {
+        console.log("can u reveal", index, $store.stepsIndex === index);
+
         return [
           (store: Store) => {
             const canReveal = store.stepsIndex === index;
-
             const getAreAllPreviousValid = () => components
               .slice(0, index + 1)
               .every(([callback]) => callback(store));

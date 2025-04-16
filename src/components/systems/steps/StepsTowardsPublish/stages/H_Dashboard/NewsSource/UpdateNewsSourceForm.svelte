@@ -40,7 +40,7 @@
     linkSelector: string;
     url: string;
     id: string;
-    active: boolean;
+    // active: boolean; // Removed
     openAiApiKey: string;
     emailMaskSender: string;
     appPassword: string;
@@ -56,7 +56,7 @@
     linkSelector: "", // Use empty string
     url: "", // Use empty string
     id: "",
-    active: true, // Default active state
+    // active: true, // Removed default active state
     openAiApiKey: "",
     emailMaskSender: "",
     appPassword: "",
@@ -76,7 +76,7 @@
       linkSelector: newsSource.linkSelector || "",
       url: newsSource.url || "", // Ensure url is string
       id: newsSource.id,
-      active: newsSource.active === undefined ? true : newsSource.active, // Initialize active state, default to true
+      // active: newsSource.active === undefined ? true : newsSource.active, // Removed active state initialization
       openAiApiKey: newsSource.openAiApiKey || "",
       emailMaskSender: newsSource.emailMaskSender || "",
       appPassword: newsSource.appPassword || "",
@@ -149,7 +149,7 @@
       linkSelector: updateFields.linkSelector,
       url: updateFields.url,
       id: updateFields.id,
-      active: updateFields.active, // Include active state in payload
+      // active: updateFields.active, // Removed active state from payload
       // Include new fields only if they have values, otherwise send null
       openAiApiKey: updateFields.openAiApiKey || null,
       emailMaskSender: updateFields.emailMaskSender || null,
@@ -183,12 +183,7 @@
 <form class="news-source-update-form" on:submit|preventDefault={handleUpdate}>
   <!-- Remove #if updateFields block as it's initialized directly now -->
 
-    <div class="switch-container">
-      <Switch
-        bind:toggled={updateFields.active}
-        />
-      <label>This Newsletter will be set as { updateFields.active ? "" : "in" }active after update</label>
-    </div>
+    <!-- Removed Active Switch Container -->
     <CopyUrlWithQR
       configuratorEmail={$store.configuratorEmail}
       newsSourceId={newsSource.id}

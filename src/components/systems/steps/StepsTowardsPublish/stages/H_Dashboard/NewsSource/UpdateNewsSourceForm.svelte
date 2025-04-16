@@ -206,7 +206,7 @@
         <Country
           label="Newsletter target country"
           defaultCountryCode={updateFields.country}
-          onSelect={(code) => (updateFields.country = code)}
+          onSelect={(code) => (updateFields.country = code || "")}
         />
 
         <Link
@@ -270,7 +270,7 @@
         />
 
         <Personality
-          personality={updateFields.personality}
+          personality={updateFields.personality ?? ''}
           newsSourceId={updateFields.id}
           onError={(msg) => (errorMessage = msg)}
           onChange={(newValue) => { updateFields.personality = newValue; }}

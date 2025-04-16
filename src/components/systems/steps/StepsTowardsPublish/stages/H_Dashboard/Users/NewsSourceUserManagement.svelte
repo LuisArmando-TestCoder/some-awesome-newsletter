@@ -20,8 +20,12 @@
   import ToggleCard from "../../../../../buttons/ToggleCard/ToggleCard.svelte"; // Adjusted path - verify this is correct
   import TextTypes from "../../../../../texts/TextTypes/TextTypes.svelte"; // Adjust path
   import Svg from "../../../../../../SVG/SVG.svelte"; // Adjust path
-    import IconButton from "../../../../../buttons/IconButton/IconButton.svelte";
-    // Removed duplicate type import
+  import IconButton from "../../../../../buttons/IconButton/IconButton.svelte";
+  import SubmitButton from "../../../../../buttons/SubmitButton/SubmitButton.svelte"; // Import SubmitButton
+  // Removed duplicate type import
+
+  // Import Request Function
+  import triggerNewsSourceSend from "../../../../../requests/triggerNewsSourceSend.js"; // Import the trigger function
 
   // --- Props ---
   /** The specific news source object this component manages */
@@ -45,6 +49,8 @@
   let removingUserEmail: string | null = null;
   /** Loading state for toggling the active status */
   let isUpdatingActive: boolean = false; // ADDED loading state for switch
+  /** Loading state for triggering manual send */
+  let isTriggeringSend: boolean = false; // ADDED loading state for trigger button
 
   // REMOVED event dispatcher
 
@@ -71,6 +77,33 @@
 
 
   // --- Functions ---
+
+  /** Handles manually triggering the newsletter send for this source */
+  async function handleTriggerSend() {
+    if (!newsSource || !newsSource.id) {
+      setFeedback("error", "Cannot trigger send: News source ID is missing.");
+      return;
+    }
+    if (isTriggeringSend) return; // Prevent double clicks
+
+    isTriggeringSend = true;
+    clearFeedback();
+
+    try {
+      const success = await triggerNewsSourceSend(newsSource.id);
+      if (success) {
+        setFeedback("success", `Newsletter send initiated for ${sourceName}.`);
+      } else {
+        // Error message is likely logged within triggerNewsSourceSend
+        setFeedback("error", `Failed to initiate send for ${sourceName}. Check console for details.`);
+      }
+    } catch (error: any) {
+      console.error(`Error in handleTriggerSend for ${newsSource.id}:`, error);
+      setFeedback("error", error.message || `Failed to trigger send for ${sourceName}.`);
+    } finally {
+      isTriggeringSend = false;
+    }
+  }
 
   /** Handles toggling the active state of the news source */
   async function handleToggleActive(newState: boolean) {
@@ -253,12 +286,6 @@
   isOpen={isOpen}
   onChange={(newIsOpenState: boolean) => {
     // Update the store when this card's toggle changes
-    // Update the store when this card's toggle changes
-    // Update the store when this card's toggle changes
-    // Update the store when this card's toggle changes
-    // Update the store when this card's toggle changes
-    // Update the store when this card's toggle changes
-    // Update the store when this card's toggle changes
     openNewsSourceIdStore.set(newIsOpenState ? newsSource.id : null);
   }}
 >
@@ -273,7 +300,18 @@
       />
       <!-- No disabled prop, handled by CSS -->
   </div>
-  <hr style="margin: 0.5rem 0 1rem 0; border-color: var(--color-background-opaque);"> <!-- Separator -->
+
+  <!-- Manual Trigger Button -->
+  <div class="trigger-send-container">
+      <SubmitButton
+          label="Send Newsletter Now"
+           callback={() => handleTriggerSend()}
+           loading={isTriggeringSend}
+           disabled={isUpdatingActive || isPerformingAction}
+       />
+   </div>
+
+  <hr style="margin: 1rem 0; border-color: var(--color-background-opaque);"> <!-- Separator -->
 
 
   <!-- Section for adding users (trigger + forms) -->
@@ -363,7 +401,11 @@
   @use "./Users.scss";
   @use "../Dashboard.scss";
 
-  // Add component-specific styles here or reuse from Users.scss
+  .trigger-send-container {
+    display: flex;
+    justify-content: end;
+  }
+
   // Added styles for switch container and disabled state
   .switch-container {
     display: flex;

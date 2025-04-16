@@ -24,7 +24,8 @@
     valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
     emailStore.set(value);
 
-    onChange(value);
+    // Call onChange with empty string if invalid or empty, otherwise with the value
+    onChange(valid ? value : "");
   }
 
   function handleKeyDown(event: KeyboardEvent) {

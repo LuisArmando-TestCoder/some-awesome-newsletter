@@ -14,13 +14,22 @@
   import IconButton from "../../../../../buttons/IconButton/IconButton.svelte";
   import { generatePersonality } from "../../../../../requests/generatePersonality.ts";
   import Personality from "../../../../../inputs/Personality/Personality.svelte";
-  import CopyUrlWithQR from "../../../../../../common/CopyUrlWithQR.svelte"; // Corrected path
+  import CopyUrlWithQR from "../../../../../../common/CopyUrlWithQR.svelte";
+  import EmailInput from "../../../../../inputs/Email/Email.svelte"; // Added
+  import MarkdownText from "../../../../../texts/MarkdownText/MarkdownText.svelte"; // Added
+  import { onMount } from "svelte"; // Ensure onMount is imported
 
   // The news source to update
   export let newsSource: NewsSource;
 
-  // The local update fields we track
-  export let updateFields: {
+  // For error messages
+  export let errorMessage: string;
+
+  // For toggling advanced fields
+  export let canReveal: boolean = true;
+
+  // Declare updateFields without initializing here
+  let updateFields: {
     community: string;
     country: string;
     lead: string;
@@ -29,32 +38,62 @@
     linkSelector: string;
     url: string;
     id: string;
+    openAiApiKey: string;
+    emailMaskSender: string;
+    appPassword: string;
   };
 
-  // For error messages
-  export let errorMessage: string;
-  // For toggling advanced fields
-  export let canReveal: boolean = true;
+  onMount(() => {
+    // Initialize updateFields inside onMount
+    updateFields = {
+      community: newsSource.community || "",
+      country: newsSource.country || "",
+      lead: newsSource.lead || "",
+      personality: newsSource.personality || "",
+      scheduleTime: newsSource.scheduleTime || "",
+      linkSelector: newsSource.linkSelector || "",
+      url: newsSource.url || "",
+      id: newsSource.id,
+      openAiApiKey: newsSource.openAiApiKey || "",
+      emailMaskSender: newsSource.emailMaskSender || "",
+      appPassword: newsSource.appPassword || "",
+    };
+  });
+
+  // Validation for email credentials
+  let emailValidationError = "";
+  $: {
+    // Guard the validation logic: only run if updateFields has been initialized
+    if (updateFields) {
+      const sender = updateFields.emailMaskSender;
+      const password = updateFields.appPassword;
+      if ((sender && !password) || (!sender && password)) {
+        emailValidationError =
+          "Both Email Sender and App Password are required if one is provided.";
+      } else {
+        emailValidationError = ""; // Clear error if both filled or both empty
+      }
+    } else {
+       emailValidationError = ""; // Default before init
+    }
+  }
 
   // Local store for the updated news source
   export const updatedNewsSource = writable<NewsSource | null>(null);
 
   // Variables para el campo Personality:
-  // rawContent contiene el texto a partir del cual se generará la personalidad.
   let rawContent: string = "";
-  // showRawContentArea controla si se muestra el textarea para ingresar rawContent.
   let showRawContentArea: boolean = false;
 
-  // Función para cambiar la visibilidad del área de rawContent
   function toggleRawContentArea() {
     showRawContentArea = !showRawContentArea;
   }
 
-  // Función que llama a la API para generar la personalidad a partir de rawContent.
   async function handleGeneratePersonality() {
     try {
+      // Ensure updateFields is initialized before accessing id
+      if (!updateFields?.id) return;
       const result = await generatePersonality(rawContent, updateFields.id);
-      // Actualiza el campo personality con la descripción generada
       updateFields.personality = result.personality;
     } catch (error: any) {
       errorMessage = error.message;
@@ -63,6 +102,11 @@
 
   // Función original para actualizar la fuente
   async function handleUpdate() {
+     // Ensure updateFields is initialized before creating payload
+    if (!updateFields?.id) {
+        errorMessage = "Form data not initialized correctly.";
+        return;
+    }
     const payload = {
       community: updateFields.community,
       country: updateFields.country,
@@ -72,7 +116,17 @@
       linkSelector: updateFields.linkSelector,
       url: updateFields.url,
       id: updateFields.id,
+      // Include new fields only if they have values, otherwise send null
+      openAiApiKey: updateFields.openAiApiKey || null,
+      emailMaskSender: updateFields.emailMaskSender || null,
+      appPassword: updateFields.appPassword || null,
     };
+
+    // Prevent submission if email validation fails
+    if (emailValidationError) {
+      errorMessage = emailValidationError;
+      return;
+    }
 
     await processNewsSourceAction(
       payload,
@@ -88,107 +142,134 @@
 
   const isRegenerating = writable(false);
   const errorRegeneratingSelectors = writable(false);
-
-  $: updateFields;
-  $: $store;
+  $: $store; // Keep store subscription if needed elsewhere
 </script>
 
 <form class="news-source-update-form" on:submit|preventDefault={handleUpdate}>
-  <CopyUrlWithQR
-    configuratorEmail={$store.configuratorEmail}
-    newsSourceId={newsSource.id}
-    lead={newsSource.lead}
-  />
-  <ToggleCard {canReveal} cardTitle="Basic Settings" isOpen={false}>
-    <div class="selectors-group">
+  {#if updateFields} <!-- Use updateFields existence as indicator that onMount has run -->
+    <CopyUrlWithQR
+      configuratorEmail={$store.configuratorEmail}
+      newsSourceId={newsSource.id}
+      lead={newsSource.lead}
+    />
+    <ToggleCard {canReveal} cardTitle="Basic Settings" isOpen={false}>
+      <div class="selectors-group">
 
-      <PlainText
-        label="Buyer Persona"
-        placeholder="e.g. 'Expats from US'"
-        value={updateFields.community}
-        onChange={(val) => (updateFields.community = val)}
-      />
+        <PlainText
+          label="Buyer Persona"
+          placeholder="e.g. 'Expats from US'"
+          bind:value={updateFields.community}
+        />
 
-      <Country
-        label="Newsletter target country"
-        defaultCountryCode={updateFields.country}
-        onSelect={(code) => (updateFields.country = code)}
-      />
+        <Country
+          label="Newsletter target country"
+          defaultCountryCode={updateFields.country}
+          onSelect={(code) => (updateFields.country = code)}
+        />
 
-      <Link
-        label="Lead"
-        placeholder="Destination URL or text"
-        value={updateFields.lead}
-        onChange={(val) => (updateFields.lead = val)}
-      />
+        <Link
+          label="Lead"
+          placeholder="Destination URL or text"
+          bind:value={updateFields.lead}
+        />
 
-      <Link
-        label="News Source URL"
-        placeholder="Your news source URL"
-        value={updateFields.url}
-        onChange={(val) => (updateFields.url = val)}
-      />
-    </div>
-  </ToggleCard>
-
-  <ToggleCard {canReveal} cardTitle="Advanced Generation Settings" isOpen={false}>
-    <div class="selectors-group">
-
-      <ScheduleTime
-        label="Schedule Time"
-        placeholder="e.g., 'every Monday at 9 AM'"
-        value={updateFields.scheduleTime}
-        onChange={(_, cron) => (updateFields.scheduleTime = cron)}
-      />
-
-      <IconButton
-        src="./icons/refresh.svg"
-        disabled={$isRegenerating}
-        loading={$isRegenerating}
-        label="Regenerate Selectors"
-        callback={async () => {
-          isRegenerating.set(true);
-          errorRegeneratingSelectors.set(false);
-          const response = await regenerateSelectors(
-            $store.configuratorEmail,
-            updateFields.id,
-            updateFields.url
-          );
-          errorRegeneratingSelectors.set(!response);
-          isRegenerating.set(false);
-          if (response) {
-            updateFields.linkSelector = response.linkSelector;
-          }
-        }}
-      />
-      <div class={$isRegenerating ? "loading" : "none"}>
-        {$isRegenerating ? $latestMessage : ""}
+        <Link
+          label="News Source URL"
+          placeholder="Your news source URL"
+          bind:value={updateFields.url}
+        />
       </div>
-      <div class={$errorRegeneratingSelectors ? "error" : "none"}>
-        {$errorRegeneratingSelectors
-          ? `Error regenerating selectors at: ${$latestMessage}`
-          : ""}
+    </ToggleCard>
+
+    <ToggleCard {canReveal} cardTitle="Advanced Generation Settings" isOpen={false}>
+      <div class="selectors-group">
+
+        <ScheduleTime
+          label="Schedule Time"
+          placeholder="e.g., 'every Monday at 9 AM'"
+          bind:value={updateFields.scheduleTime}
+        />
+
+        <IconButton
+          src="./icons/refresh.svg"
+          disabled={$isRegenerating}
+          loading={$isRegenerating}
+          label="Regenerate Selectors"
+          callback={async () => {
+            isRegenerating.set(true);
+            errorRegeneratingSelectors.set(false);
+            const response = await regenerateSelectors(
+              $store.configuratorEmail,
+              updateFields.id,
+              updateFields.url
+            );
+            errorRegeneratingSelectors.set(!response);
+            isRegenerating.set(false);
+            if (response) {
+              updateFields.linkSelector = response.linkSelector;
+            }
+          }}
+        />
+        <div class={$isRegenerating ? "loading" : "none"}>
+          {$isRegenerating ? $latestMessage : ""}
+        </div>
+        <div class={$errorRegeneratingSelectors ? "error" : "none"}>
+          {$errorRegeneratingSelectors
+            ? `Error regenerating selectors at: ${$latestMessage}`
+            : ""}
+        </div>
+        <PlainText
+          label="Link Selector"
+          placeholder="CSS selector for article link"
+          bind:value={updateFields.linkSelector}
+        />
+
+        <Personality
+          bind:personality={updateFields.personality}
+          newsSourceId={updateFields.id}
+          onError={(msg) => (errorMessage = msg)}
+        />
+
+        <!-- OpenAI API Key Input -->
+        <PlainText
+          label="OpenAI API Key (Optional)"
+          placeholder="Leave blank to use global key"
+          bind:value={updateFields.openAiApiKey}
+        />
+        <MarkdownText {canReveal}>
+          --Overrides the global OpenAI key for this specific news source.--
+        </MarkdownText>
+
+        <!-- Email Credentials Inputs -->
+        <EmailInput
+          label="Sender Email Address (Optional)"
+          placeholder="Leave blank to use global credentials"
+          bind:value={updateFields.emailMaskSender}
+        />
+        <PlainText
+          label="Email App Password (Optional)"
+          type="password"
+          placeholder="Required if Sender Email is provided"
+          bind:value={updateFields.appPassword}
+        />
+        {#if emailValidationError}
+          <p class="error-message">{emailValidationError}</p>
+        {/if}
+        <MarkdownText {canReveal}>
+          --Overrides the global email credentials for this specific news source. Both fields are required if one is provided.--
+        </MarkdownText>
+
       </div>
-      <PlainText
-        label="Link Selector"
-        placeholder="CSS selector for article link"
-        value={updateFields.linkSelector}
-        onChange={(val) => (updateFields.linkSelector = val)}
-      />
+    </ToggleCard>
 
-      <Personality
-        personality={updateFields.personality}
-        newsSourceId={updateFields.id}
-        onChange={(val) => (updateFields.personality = val)}
-        onError={(msg) => (errorMessage = msg)}
-      />
-    </div>
-  </ToggleCard>
+    <SubmitButton label="Update News Source" callback={handleUpdate} />
 
-  <SubmitButton label="Update News Source" callback={handleUpdate} />
-
-  {#if errorMessage}
-    <div class="error-message">{errorMessage}</div>
+    {#if errorMessage}
+      <div class="error-message">{errorMessage}</div>
+    {/if}
+  {:else}
+    <!-- Optional: Show a loading state or nothing while updateFields initializes -->
+    <p>Loading form...</p>
   {/if}
 </form>
 
@@ -261,5 +342,10 @@
     color: red;
     font-size: 0.9rem;
     text-align: center;
+  }
+  .error-message { /* Ensure error message style is present */
+    color: red;
+    font-size: 0.875rem;
+    margin-top: -0.5rem; /* Adjust spacing if needed */
   }
 </style>

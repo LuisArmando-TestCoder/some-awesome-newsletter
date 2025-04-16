@@ -36,6 +36,9 @@ const store = writable<Store>({
     "config.senderName",
     "config.newsletterTitle",
     "config.emailSignature",
+    "config.openAPIKey", // New
+    "config.emailMaskSender", // New
+    "config.appPassword", // New
     "subscribers", // Added
     "leads", // Added
     "subscriberName", // Added for subscription flow
@@ -55,7 +58,11 @@ const store = writable<Store>({
   isAuthCodeValid: "",
   // apiURL: "http://localhost:8000",
   apiURL: "https://ai-newsletter-translated.onrender.com",
-  config: {},
+  config: {
+    openAPIKey: "", // New
+    emailMaskSender: "", // New
+    appPassword: "", // New
+  },
   subscribers: {}, // Added initial empty object for subscribers
   leads: {}, // Added initial empty object for leads
   isRefreshingSubscribers: false, // Flag for background refresh

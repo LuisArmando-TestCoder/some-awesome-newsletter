@@ -5,6 +5,7 @@
   export let value: string = "";
   export let placeholder: string = "";
   export let label: string = "";
+  export let type: "text" | "password" | "email" | "number" | "tel" | "url" = "text"; // Add type prop
 
   // Callback to be invoked when the input changes.
   export let onChange: (newValue: string) => void = () => {};
@@ -25,7 +26,7 @@
   <label class="input-label" for="text-input">{value ? label || placeholder : label}</label>
   <input
     id="text-input"
-    type="text"
+    {type}
     bind:value
     {placeholder}
     on:input={handleInput}

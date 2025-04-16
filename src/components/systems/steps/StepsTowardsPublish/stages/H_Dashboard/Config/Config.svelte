@@ -6,6 +6,8 @@
   import NewsletterTitleToggle from "./toggles/NewsletterTitleToggle.svelte";
   import SenderNameToggle from "./toggles/SenderNameToggle.svelte";
   import EmailSignatureToggle from "./toggles/EmailSignatureToggle.svelte";
+  import OpenAPIKeyToggle from "./toggles/OpenAPIKeyToggle.svelte";
+  import EmailCredentialsToggle from "./toggles/EmailCredentialsToggle.svelte"; // New combined toggle
   import Page from "../../../../../wrappers/Page/Page.svelte";
 
   export let canReveal = true;
@@ -22,6 +24,8 @@
       newsletterTitle: [NewsletterTitleToggle],
       senderName: [SenderNameToggle],
       emailSignature: [EmailSignatureToggle],
+      openAPIKey: [OpenAPIKeyToggle],
+      emailCredentials: [EmailCredentialsToggle], // New combined toggle
     }}
   />
 </Page>

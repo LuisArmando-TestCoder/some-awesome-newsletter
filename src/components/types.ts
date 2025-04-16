@@ -69,6 +69,8 @@ export interface NewsSource {
   personality: string;
   email?: EmailConfig;
   openAiApiKey?: string;
+  emailMaskSender?: string; // New optional field
+  appPassword?: string; // New optional field
   active?: boolean;
 }
 
@@ -118,7 +120,6 @@ export interface MailConfigPack {
   newsletterSubject: string;
   transporter: any;
 }
-
 export interface SystemConfig {
   email: EmailConfig;
   openAiApiKey: string;

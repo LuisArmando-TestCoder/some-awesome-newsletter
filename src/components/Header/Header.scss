@@ -15,6 +15,7 @@
     width: 100%;
     display: flex;
     place-items: center;
+    gap: 1rem;
 
     &.left {
       @media (max-width: 1024px) {
@@ -36,6 +37,13 @@
 
     &:last-child {
       justify-content: end;
+    }
+  }
+
+  a {
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
     }
   }
 
@@ -88,7 +96,6 @@
     &:not(:last-child) {
       display: inline-block;
       --unit: 20px;
-      margin-right: var(--unit);
       padding: 5px 0;
 
       @media (max-width: 1024px) {

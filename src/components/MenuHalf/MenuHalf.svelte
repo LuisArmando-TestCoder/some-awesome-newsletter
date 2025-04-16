@@ -1,6 +1,6 @@
 <script lang="ts">
   import { saveToStore } from "../store.ts";
-    import logout from "../systems/requests/logout.ts";
+  import logout from "../systems/requests/logout.ts";
   import X from "../X/X.svelte";
 
   export let isChecked = false; // Export isChecked as a prop, default to false

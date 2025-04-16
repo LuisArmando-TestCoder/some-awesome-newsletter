@@ -4,6 +4,7 @@
   import store, { saveToStore, isScrollingDown } from "../store.ts"; // Import isScrollingDown
   import SVG from "../SVG/SVG.svelte";
   import ThemeChanger from "../ThemeChanger/ThemeChanger.svelte";
+    import logout from "../systems/requests/logout.ts";
 
   let menuOpen = false;
   let headerVisible = writable(true); // Regular boolean variable
@@ -52,6 +53,15 @@
         <div class="menu-x hide-on-desktop interactive">
           <MenuHalf bind:isChecked={menuOpen} />
         </div>
+        <section class="menu-x hide-on-mobile interactive">
+          <a
+            class="menu-half--anchor menu-half--logout"
+            onclick={() => {  
+              logout();
+            }}>Log Out</a
+          >
+        </section>
+
         <section class="menu-x hide-on-mobile interactive">
           <ThemeChanger visible={true} />
         </section>

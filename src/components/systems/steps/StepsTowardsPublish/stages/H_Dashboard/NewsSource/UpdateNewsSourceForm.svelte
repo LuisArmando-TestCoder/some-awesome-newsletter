@@ -317,15 +317,6 @@
     flex-direction: column;
     gap: 1rem;
   }
-  .switch-container { /* Style for label and switch */
-    display: flex;
-    align-items: center;
-    gap: 0.1rem; /* Adjust spacing as needed */
-  }
-  .switch-container label {
-    /* Optional: Add styles for the label */
-    font-weight: 500; /* Example */
-  }
   .selectors-group {
     margin: 1rem 0;
     display: grid;

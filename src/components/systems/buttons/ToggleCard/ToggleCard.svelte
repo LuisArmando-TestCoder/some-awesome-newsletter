@@ -95,6 +95,8 @@
 
   .content {
     padding: 0.5rem 1rem;
+    display: grid;
+    grid-gap: 1rem;
 
     &.expanded {
       padding: 0.5rem 1rem 10rem;

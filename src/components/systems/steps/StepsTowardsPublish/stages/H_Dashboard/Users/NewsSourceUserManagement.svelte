@@ -66,7 +66,10 @@
 
   // --- Reactive Store Subscription ---
   // Handle removal requests triggered by child UserCard components via the shared store
-  $: if ($userRemovalRequestStore && $userRemovalRequestStore.newsSourceId === newsSource.id) {
+  $: if (
+    $userRemovalRequestStore &&
+    $userRemovalRequestStore.newsSourceId === newsSource.id
+  ) {
     // Check if the request is for *this* news source instance
     const { email } = $userRemovalRequestStore;
     // Clear the store immediately to prevent re-triggering and allow subsequent requests
@@ -74,7 +77,6 @@
     // Call the handler function which contains the confirmation and API call
     handleRemoveUser(email);
   }
-
 
   // --- Functions ---
 
@@ -95,11 +97,17 @@
         setFeedback("success", `Newsletter send initiated for ${sourceName}.`);
       } else {
         // Error message is likely logged within triggerNewsSourceSend
-        setFeedback("error", `Failed to initiate send for ${sourceName}. Check console for details.`);
+        setFeedback(
+          "error",
+          `Failed to initiate send for ${sourceName}. Check console for details.`,
+        );
       }
     } catch (error: any) {
       console.error(`Error in handleTriggerSend for ${newsSource.id}:`, error);
-      setFeedback("error", error.message || `Failed to trigger send for ${sourceName}.`);
+      setFeedback(
+        "error",
+        error.message || `Failed to trigger send for ${sourceName}.`,
+      );
     } finally {
       isTriggeringSend = false;
     }
@@ -108,7 +116,9 @@
   /** Handles toggling the active state of the news source */
   async function handleToggleActive(newState: boolean) {
     if (!$store.config || !$store.config.newsSources) {
-      console.error("Cannot toggle active state: config or newsSources missing from store.");
+      console.error(
+        "Cannot toggle active state: config or newsSources missing from store.",
+      );
       setFeedback("error", "Configuration data is missing, cannot update.");
       return; // Exit if essential data is missing
     }
@@ -117,11 +127,17 @@
     clearFeedback(); // Corrected usage of clearFeedback
 
     // Deep copy the newsSources array to avoid direct mutation
-    const currentNewsSources = JSON.parse(JSON.stringify($store.config.newsSources));
-    const sourceIndex = currentNewsSources.findIndex((ns: NewsSource) => ns.id === newsSource.id);
+    const currentNewsSources = JSON.parse(
+      JSON.stringify($store.config.newsSources),
+    );
+    const sourceIndex = currentNewsSources.findIndex(
+      (ns: NewsSource) => ns.id === newsSource.id,
+    );
 
     if (sourceIndex === -1) {
-      console.error(`Cannot toggle active state: news source with ID ${newsSource.id} not found in store config.`);
+      console.error(
+        `Cannot toggle active state: news source with ID ${newsSource.id} not found in store config.`,
+      );
       setFeedback("error", "News source not found in current configuration.");
       isUpdatingActive = false;
       return;
@@ -131,11 +147,19 @@
     currentNewsSources[sourceIndex].active = newState;
 
     try {
-      console.log(`Attempting to update config with newsSources:`, currentNewsSources);
-      const success = await updateConfiguration({ newsSources: currentNewsSources });
+      console.log(
+        `Attempting to update config with newsSources:`,
+        currentNewsSources,
+      );
+      const success = await updateConfiguration({
+        newsSources: currentNewsSources,
+      });
 
       if (success) {
-        setFeedback("success", `News source ${newState ? 'activated' : 'deactivated'}.`);
+        setFeedback(
+          "success",
+          `News source ${newState ? "activated" : "deactivated"}.`,
+        );
         // Refresh the main config store to reflect the change everywhere
         await getConfiguratorSession(); // Re-fetch the entire config
       } else {
@@ -144,12 +168,18 @@
       }
     } catch (error: any) {
       console.error("Error updating news source active state:", error);
-      setFeedback("error", `Error: ${error.message || 'Failed to update status.'}`);
+      setFeedback(
+        "error",
+        `Error: ${error.message || "Failed to update status."}`,
+      );
       // Attempt to refresh config even on error to sync state
       try {
         await getConfiguratorSession();
       } catch (refreshError) {
-        console.error("Failed to refresh config after update error:", refreshError);
+        console.error(
+          "Failed to refresh config after update error:",
+          refreshError,
+        );
       }
     } finally {
       isUpdatingActive = false;
@@ -176,7 +206,7 @@
   function setFeedback(
     type: "success" | "error",
     message: string,
-    duration: number = 5000
+    duration: number = 5000,
   ) {
     actionFeedback = { type, message };
     // Use tick to ensure the feedback element is rendered before starting timeout
@@ -193,7 +223,7 @@
     formData: Pick<
       NewsletterUser,
       "name" | "email" | "bio" | "language" | "countryOfResidence"
-    >
+    >,
   ) {
     // const { formData } = event.detail; // No longer needed
     clearFeedback();
@@ -203,7 +233,7 @@
       await UserDataService.addUserAndSubscribe(formData, newsSource.id);
       setFeedback(
         "success",
-        `Successfully added and subscribed ${formData.email}.`
+        `Successfully added and subscribed ${formData.email}.`,
       );
       isAddingFormVisible = false; // Hide form on success
     } catch (error: any) {
@@ -226,7 +256,7 @@
     try {
       const result = await UserDataService.processBulkUpload(
         file,
-        newsSource.id
+        newsSource.id,
       );
       let feedbackType: "success" | "error" = "success";
       let message = result.successMessage;
@@ -252,7 +282,7 @@
 
     if (
       !confirm(
-        `Are you sure you want to unsubscribe ${email} from ${sourceName}?`
+        `Are you sure you want to unsubscribe ${email} from ${sourceName}?`,
       )
     ) {
       return;
@@ -266,12 +296,12 @@
       // Store update is handled by the service, prop update triggers reactivity
       setFeedback(
         "success",
-        `${email} unsubscribed successfully from ${sourceName}.`
+        `${email} unsubscribed successfully from ${sourceName}.`,
       );
     } catch (error: any) {
       console.error(
         `Error in handleRemoveUser for ${email} from ${newsSource.id}:`,
-        error
+        error,
       );
       setFeedback("error", error.message || `Failed to unsubscribe ${email}.`);
     } finally {
@@ -283,7 +313,7 @@
 <ToggleCard
   {canReveal}
   {cardTitle}
-  isOpen={isOpen}
+  {isOpen}
   onChange={(newIsOpenState: boolean) => {
     // Update the store when this card's toggle changes
     openNewsSourceIdStore.set(newIsOpenState ? newsSource.id : null);
@@ -291,37 +321,25 @@
 >
   <!-- Default Slot Content for the ToggleCard body -->
 
-   <!-- Activation Switch -->
-   <div class="switch-container" class:disabled={isUpdatingActive}>
-    <span style="font-size: 0.8em; color: var(--color-text-secondary); margin-right: 0.5rem;">Active:</span>
+  <!-- Activation Switch -->
+  <div class="switch-container" class:disabled={isUpdatingActive}>
+    <span
+      style="font-size: 0.8em; color: var(--color-text-secondary); margin-right: 0.5rem;"
+      >Active:</span
+    >
     <Switch
       toggled={newsSource.active ?? false}
       onChange={handleToggleActive}
-      />
-      <!-- No disabled prop, handled by CSS -->
+    />
+    <!-- No disabled prop, handled by CSS -->
   </div>
-
-  <!-- Manual Trigger Button -->
-  <div class="trigger-send-container">
-      <SubmitButton
-          label="Send Newsletter Now"
-           callback={() => handleTriggerSend()}
-           loading={isTriggeringSend}
-           disabled={isUpdatingActive || isPerformingAction}
-       />
-   </div>
-
-  <hr style="margin: 1rem 0; border-color: var(--color-background-opaque);"> <!-- Separator -->
-
 
   <!-- Section for adding users (trigger + forms) -->
   <div class="add-user-section">
     <!-- Trigger to show/hide the add forms -->
     <IconButton
       src="/icons/plus.svg"
-      label={isAddingFormVisible
-          ? "Cancel Adding User"
-          : "Add New Subscriber"}
+      label={isAddingFormVisible ? "Cancel Adding User" : "Add New Subscriber"}
       callback={toggleAddFormVisibility}
       disabled={isPerformingAction}
     />
@@ -392,6 +410,16 @@
     {/if}
   </div>
   <!-- End subscriber-list-section -->
+
+  <!-- Manual Trigger Button -->
+  <div class="trigger-send-container">
+    <SubmitButton
+      label="Send Newsletter Now"
+      callback={() => handleTriggerSend()}
+      loading={isTriggeringSend}
+      disabled={isUpdatingActive || isPerformingAction}
+    />
+  </div>
 </ToggleCard>
 
 <!-- End ToggleCard for this news source -->
@@ -409,6 +437,7 @@
   // Added styles for switch container and disabled state
   .switch-container {
     display: flex;
+    justify-content: end;
     align-items: center;
     margin-left: 1rem; // Add some space from the title
     transition: opacity 0.3s ease;

@@ -4,7 +4,7 @@ import type { NewsSource } from "../../types.ts";
 
 export default async function regenerateSelectors(configId: string, newsSourceId: string, newUrl?: string) {
   const response = await fetch(
-    `${get(store).apiURL}/news-source/regenerate-selectors/${configId}/${newsSourceId}`,
+    `${get(store).apiURL()}/news-source/regenerate-selectors/${configId}/${newsSourceId}`,
     {
       method: "PUT",
       headers: {

@@ -37,7 +37,7 @@ export default async function getAllSubscribersFromConfigEndpoint(
   }
 
   // Construct the full API URL
-  const url = `${apiURL}/config-subscribers/${encodeURIComponent(configId)}`;
+  const url = `${apiURL()}/config-subscribers/${encodeURIComponent(configId)}`;
 
   // Prepare authentication headers using the *logged-in user's* credentials
   const authHeaders = {

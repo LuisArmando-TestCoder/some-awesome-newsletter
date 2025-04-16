@@ -6,7 +6,7 @@ export default async function triggerNewsSourceSend(newsSourceId: string): Promi
   // Cast the store value to the imported type
   const storeValue = get(store) as Store; // Use the imported Store type
   const configId = storeValue.configuratorEmail;
-  const apiUrl = storeValue.apiURL;
+  const apiURL = storeValue.apiURL();
   const authCode = storeValue.authCode;
 
   if (!newsSourceId) {
@@ -21,7 +21,7 @@ export default async function triggerNewsSourceSend(newsSourceId: string): Promi
     return false;
   }
 
-  const url = `${apiUrl}/news-source/${configId}/${newsSourceId}/trigger`;
+  const url = `${apiURL}/news-source/${configId}/${newsSourceId}/trigger`;
 
   try {
     const response = await fetch(url, {

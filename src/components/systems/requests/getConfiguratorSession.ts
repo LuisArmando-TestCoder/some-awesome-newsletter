@@ -13,9 +13,9 @@ import { refreshSubscribers } from "../steps/StepsTowardsPublish/stages/H_Dashbo
 async function getConfigFetchResponse(authHeaders: {
   [index: string]: string;
 }) {
-  console.log(get(store).apiURL, get(store).configuratorEmail);
+  console.log(get(store).apiURL(), get(store).configuratorEmail);
   let response = await fetch(
-    `${get(store).apiURL}/private-config?documentId=${
+    `${get(store).apiURL()}/private-config?documentId=${
       get(store).configuratorEmail
     }`,
     {

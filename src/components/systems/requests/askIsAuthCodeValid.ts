@@ -4,7 +4,7 @@ import getConfiguratorSession from "./getConfiguratorSession.ts";
 
 export default async (onSuccessCallback?: Function) => {
   const response = await fetch(
-    `${get(store).apiURL}/auth/${get(store).configuratorEmail}?code=${
+    `${get(store).apiURL()}/auth/${get(store).configuratorEmail}?code=${
       get(store).authCode
     }`
   );

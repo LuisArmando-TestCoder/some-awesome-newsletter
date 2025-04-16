@@ -31,7 +31,7 @@ export default async function submitPublicSubscription(
   }
 
   try {
-    const response = await fetch(`${get(store).apiURL}/public-subscribe`, {
+    const response = await fetch(`${get(store).apiURL()}/public-subscribe`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

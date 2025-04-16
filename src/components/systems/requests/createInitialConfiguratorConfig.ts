@@ -18,7 +18,7 @@ export default async function createInitialConfiguratorConfig(authHeaders: {
   };
 
   const response = await fetch(
-    `${get(store).apiURL}/config?documentId=${configId}`,
+    `${get(store).apiURL()}/config?documentId=${configId}`,
     {
       method: "POST",
       headers: authHeaders,

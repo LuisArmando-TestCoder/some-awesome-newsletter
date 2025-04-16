@@ -19,7 +19,7 @@ export async function addNewsletterUser(
   newsSourceId: string
 ): Promise<AddNewsletterUserResponse> {
   // Build the endpoint URL based on the presence of configId
-  const url = `${get(store).apiURL}/users/${configId}/${newsSourceId}`;
+  const url = `${get(store).apiURL()}/users/${configId}/${newsSourceId}`;
 
   try {
     const response = await fetch(url, {
@@ -35,7 +35,7 @@ export async function addNewsletterUser(
       throw new Error(`Error adding newsletter user: ${errorMessage}`);
     }
 
-    // await getConfiguratorSession(); // Refresh the configurator session after adding a user
+    await getConfiguratorSession(); // Refresh the configurator session after adding a user
 
     return await response.json();
   } catch (error) {

@@ -10,7 +10,7 @@ export default async function postSubscriber(subscriber: {
 }) {
   const configId = get(store).configuratorEmail;
 
-  const response = await fetch(`${get(store).apiURL}/users/${configId}`, {
+  const response = await fetch(`${get(store).apiURL()}/users/${configId}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

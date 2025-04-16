@@ -44,10 +44,10 @@ export default async function createNewsSource(newsSource: {
   });
   console.log("[CREATE-NEWSOURCE] Request body:", body);
 
-  const apiUrl = `${get(store).apiURL}/news-source/${configId}`;
-  console.log("[CREATE-NEWSOURCE] Sending POST request to:", apiUrl);
+  const apiURL = `${get(store).apiURL()}/news-source/${configId}`;
+  console.log("[CREATE-NEWSOURCE] Sending POST request to:", apiURL);
 
-  const response = await fetch(apiUrl, {
+  const response = await fetch(apiURL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

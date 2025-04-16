@@ -6,7 +6,7 @@ export async function generatePersonality(
   rawContent: string,
   newsSourceId: string
 ): Promise<{ message: string; newsSource: any; personality: string }> {
-  const url = `${get(store).apiURL}/news-source/personality/${
+  const url = `${get(store).apiURL()}/news-source/personality/${
     get(store).configuratorEmail
   }/${newsSourceId}`;
 

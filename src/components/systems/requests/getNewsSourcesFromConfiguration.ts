@@ -5,7 +5,7 @@ export default async function getNewsSourcesFromConfiguration(
   configId?: string
 ) {
   const response = await fetch(
-    `${get(store).apiURL}/configuration-news-sources?configId=${
+    `${get(store).apiURL()}/configuration-news-sources?configId=${
       configId || get(store).configuratorEmail
     }`,
     {

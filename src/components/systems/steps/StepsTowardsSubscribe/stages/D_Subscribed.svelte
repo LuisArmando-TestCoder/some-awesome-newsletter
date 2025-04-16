@@ -23,7 +23,7 @@
     <div class="right">
       <SubmitButton
         callback={() =>
-          (window.location.href = `${$store.apiURL}/lead-counter?leadUrl=${
+          (window.location.href = `${$store.apiURL()}/lead-counter?leadUrl=${
             $store.subscriberLead
           }&configuratorId=${$store.subscriberConfiguratorId}&newsSourceId=${
             $store.subscriberNewsSourceId

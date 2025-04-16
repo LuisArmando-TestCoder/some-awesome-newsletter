@@ -25,7 +25,7 @@ export default async (config: { [index: string]: string }) => {
 
   // --- Fetch latest config before merging ---
   let latestConfigFromBackend = {};
-  const getConfigUrl = `${apiURL}/private-config?documentId=${configuratorEmail}`; // Assuming GET uses private-config
+  const getConfigUrl = `${apiURL()}/private-config?documentId=${configuratorEmail}`; // Assuming GET uses private-config
   console.log("[UPDATE-CONFIG-FRONT] Fetching latest config from:", getConfigUrl);
   try {
     const fetchResponse = await fetch(getConfigUrl, {
@@ -61,7 +61,7 @@ export default async (config: { [index: string]: string }) => {
   const requestBody = JSON.stringify(mergedConfig);
   console.log("[UPDATE-CONFIG-FRONT] Request body (merged with latest fetched):", requestBody);
 
-  const updateURL = `${apiURL}/config?documentId=${configuratorEmail}`; // PUT endpoint remains /config
+  const updateURL = `${apiURL()}/config?documentId=${configuratorEmail}`; // PUT endpoint remains /config
   console.log("[UPDATE-CONFIG-FRONT] Sending PUT request to:", updateURL);
 
   let putResponse;

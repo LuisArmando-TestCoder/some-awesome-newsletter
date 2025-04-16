@@ -40,7 +40,7 @@ export default async function unsubscribeUserToConfigNewsSource(
   });
 
   // Construct the full API URL including the email in the path and query parameters
-  const url = `${apiURL}/unsubscribe/${encodeURIComponent(
+  const url = `${apiURL()}/unsubscribe/${encodeURIComponent(
     email
   )}?${queryParams.toString()}`;
 

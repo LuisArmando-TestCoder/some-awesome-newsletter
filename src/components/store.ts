@@ -56,8 +56,7 @@ const store = writable<Store>({
   authCode: "",
   directionsThatShouldDisappear: [],
   isAuthCodeValid: "",
-  // apiURL: "http://localhost:8000",
-  apiURL: "https://ai-newslettxer-translated.onrender.com",
+  apiURL: () => window.location.origin.startsWith('http://localhost') ? "http://localhost:8000" : "https://ai-newslettxer-translated.onrender.com",
   config: {
     openAPIKey: "", // New
     emailMaskSender: "", // New

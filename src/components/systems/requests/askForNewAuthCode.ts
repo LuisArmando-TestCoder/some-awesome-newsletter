@@ -7,7 +7,7 @@ export default async function ask() {
   });
 
   const response = await fetch(
-    `${get(store).apiURL}/auth/${get(store).configuratorEmail}`,
+    `${get(store).apiURL()}/auth/${get(store).configuratorEmail}`,
     {
       method: "POST",
     }

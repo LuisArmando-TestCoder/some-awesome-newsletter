@@ -14,7 +14,7 @@ export default async function updateNewsSource(
     return null; // Or throw new Error("newsSourceId is required");
   }
   const response = await fetch(
-    `${get(store).apiURL}/news-source/${configId}/${newsSourceId}`,
+    `${get(store).apiURL()}/news-source/${configId}/${newsSourceId}`,
     {
       method: "PUT",
       headers: {

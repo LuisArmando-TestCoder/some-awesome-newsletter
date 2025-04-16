@@ -31,7 +31,7 @@
     console.log("Connecting socket...");
     // Dynamically import socket.io-client so it only loads in the browser.
     const { io } = await import("socket.io-client");
-    const s = io(apiURL, { path: "/socket-io" });
+    const s = io(apiURL(), { path: "/socket-io" });
     socket.set(s);
 
     // Set up event listeners.

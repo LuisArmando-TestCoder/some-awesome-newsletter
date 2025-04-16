@@ -6,7 +6,7 @@ export default async function subscribeNewsletterUser(
   newsSourceId: string,
   email: string
 ) {
-  const response = await fetch(`${get(store).apiURL}/subscribe`, {
+  const response = await fetch(`${get(store).apiURL()}/subscribe`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

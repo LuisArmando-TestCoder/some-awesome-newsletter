@@ -1,12 +1,18 @@
 import { get } from "svelte/store";
-import store, { saveToConfig } from "../../store.ts";
-import type NewsSource from "../steps/StepsTowardsPublish/stages/H_Dashboard/NewsSource/NewsSource.svelte";
+import store, { saveToConfig } from "../../store.js"; // Add .js extension
+import type { NewsSource } from "../../types.js"; // Add .js extension
 
+// Adjust signature: make newsSourceId optional, broaden updateData type
 export default async function updateNewsSource(
-  updateData: { [index: string]: string },
-  newsSourceId: string
+  updateData: { [index: string]: string | boolean | null }, // Allow boolean/null for 'active' and optional fields
+  newsSourceId?: string // Make id optional to match expected callback
 ) {
   const configId = get(store).configuratorEmail;
+  // Ensure newsSourceId is provided, otherwise throw error or handle appropriately
+  if (!newsSourceId) {
+    console.error("Error: newsSourceId is required for updating.");
+    return null; // Or throw new Error("newsSourceId is required");
+  }
   const response = await fetch(
     `${get(store).apiURL}/news-source/${configId}/${newsSourceId}`,
     {

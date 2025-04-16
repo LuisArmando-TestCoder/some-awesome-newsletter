@@ -6,6 +6,7 @@
   import ScheduleTime from "../../../../../inputs/ScheduleTime/ScheduleTime.svelte";
   import SubmitButton from "../../../../../buttons/SubmitButton/SubmitButton.svelte";
   import ToggleCard from "../../../../../buttons/ToggleCard/ToggleCard.svelte";
+  import Switch from "../../../../../selectors/Switch/Switch.svelte"; // Import Switch component
   import updateNewsSource from "../../../../../requests/updateNewsSource.ts";
   import { processNewsSourceAction } from "./newsSourceActions.ts";
   import Link from "../../../../../inputs/Link/Link.svelte";
@@ -18,6 +19,7 @@
   import EmailInput from "../../../../../inputs/Email/Email.svelte"; // Added
   import MarkdownText from "../../../../../texts/MarkdownText/MarkdownText.svelte"; // Added
   import { onMount } from "svelte"; // Ensure onMount is imported
+  import { parseNaturalLanguageToCron } from "../../../../../inputs/ScheduleTime/naturalCronParser.ts"; // Import the parser - Added .js extension
 
   // The news source to update
   export let newsSource: NewsSource;
@@ -28,36 +30,67 @@
   // For toggling advanced fields
   export let canReveal: boolean = true;
 
-  // Declare updateFields without initializing here
-  let updateFields: {
+  // Define the type for updateFields
+  type UpdateFieldsType = {
     community: string;
     country: string;
     lead: string;
-    personality: string;
+    personality: string; // Revert back to string
     scheduleTime: string;
     linkSelector: string;
     url: string;
     id: string;
+    active: boolean;
     openAiApiKey: string;
     emailMaskSender: string;
     appPassword: string;
   };
 
+  // Initialize updateFields with the defined type and default values
+  let updateFields: UpdateFieldsType = {
+    community: "",
+    country: "",
+    lead: "", // Use empty string instead of type annotation
+    personality: "", // Ensure personality is initialized as string
+    scheduleTime: "", // Use empty string
+    linkSelector: "", // Use empty string
+    url: "", // Use empty string
+    id: "",
+    active: true, // Default active state
+    openAiApiKey: "",
+    emailMaskSender: "",
+    appPassword: "",
+  };
+
+  // State to hold the actual parsed cron string
+  let actualCronSchedule: string = "";
+
   onMount(() => {
-    // Initialize updateFields inside onMount
+    // Update updateFields with actual newsSource data once mounted
     updateFields = {
       community: newsSource.community || "",
       country: newsSource.country || "",
-      lead: newsSource.lead || "",
-      personality: newsSource.personality || "",
+      lead: newsSource.lead || "", // Ensure lead is string
+      personality: newsSource.personality || "", // Initialize with string or empty string
       scheduleTime: newsSource.scheduleTime || "",
       linkSelector: newsSource.linkSelector || "",
-      url: newsSource.url || "",
+      url: newsSource.url || "", // Ensure url is string
       id: newsSource.id,
+      active: newsSource.active === undefined ? true : newsSource.active, // Initialize active state, default to true
       openAiApiKey: newsSource.openAiApiKey || "",
       emailMaskSender: newsSource.emailMaskSender || "",
       appPassword: newsSource.appPassword || "",
     };
+
+    // Initialize actualCronSchedule by parsing the initial value
+    const initialParseResult = parseNaturalLanguageToCron(updateFields.scheduleTime);
+    if (initialParseResult.success) {
+      actualCronSchedule = initialParseResult.cron ?? "";
+    } else {
+      // Handle potential initial parse error if needed, maybe default or log
+      console.warn("Initial schedule time could not be parsed:", updateFields.scheduleTime, initialParseResult.error);
+      actualCronSchedule = ""; // Default to empty if initial value is invalid NL
+    }
   });
 
   // Validation for email credentials
@@ -111,11 +144,12 @@
       community: updateFields.community,
       country: updateFields.country,
       lead: updateFields.lead,
-      personality: updateFields.personality,
-      scheduleTime: updateFields.scheduleTime,
+      personality: updateFields.personality || "", // Ensure it's always a string in payload
+      scheduleTime: actualCronSchedule, // Use the parsed cron string
       linkSelector: updateFields.linkSelector,
       url: updateFields.url,
       id: updateFields.id,
+      active: updateFields.active, // Include active state in payload
       // Include new fields only if they have values, otherwise send null
       openAiApiKey: updateFields.openAiApiKey || null,
       emailMaskSender: updateFields.emailMaskSender || null,
@@ -130,7 +164,8 @@
 
     await processNewsSourceAction(
       payload,
-      (f) => f,
+      (f) => f, // This seems like an identity function, might need review depending on processNewsSourceAction's purpose
+      // Pass a simplified reference to updateNewsSource. processNewsSourceAction needs to handle passing the correct arguments.
       updateNewsSource,
       (msg) => (errorMessage = msg),
       "Failed to update news source. Please try again.",
@@ -146,13 +181,20 @@
 </script>
 
 <form class="news-source-update-form" on:submit|preventDefault={handleUpdate}>
-  {#if updateFields} <!-- Use updateFields existence as indicator that onMount has run -->
+  <!-- Remove #if updateFields block as it's initialized directly now -->
+
+    <div class="switch-container">
+      <Switch
+        bind:toggled={updateFields.active}
+        />
+      <label>This Newsletter will be set as { updateFields.active ? "" : "in" }active after update</label>
+    </div>
     <CopyUrlWithQR
       configuratorEmail={$store.configuratorEmail}
       newsSourceId={newsSource.id}
       lead={newsSource.lead}
     />
-    <ToggleCard {canReveal} cardTitle="Basic Settings" isOpen={false}>
+    <ToggleCard {canReveal} cardTitle="Basic Settings" isOpen={false} onChange={() => {}}>
       <div class="selectors-group">
 
         <PlainText
@@ -181,13 +223,16 @@
       </div>
     </ToggleCard>
 
-    <ToggleCard {canReveal} cardTitle="Advanced Generation Settings" isOpen={false}>
+    <ToggleCard {canReveal} cardTitle="Advanced Generation Settings" isOpen={false} onChange={() => {}}>
       <div class="selectors-group">
 
         <ScheduleTime
           label="Schedule Time"
           placeholder="e.g., 'every Monday at 9 AM'"
           bind:value={updateFields.scheduleTime}
+          onChange={(input, cron) => { // Add handler to capture parsed cron
+            actualCronSchedule = cron; // Update the state variable holding the real cron string
+          }}
         />
 
         <IconButton
@@ -225,9 +270,10 @@
         />
 
         <Personality
-          bind:personality={updateFields.personality}
+          personality={updateFields.personality}
           newsSourceId={updateFields.id}
           onError={(msg) => (errorMessage = msg)}
+          onChange={(newValue) => { updateFields.personality = newValue; }}
         />
 
         <!-- OpenAI API Key Input -->
@@ -267,10 +313,7 @@
     {#if errorMessage}
       <div class="error-message">{errorMessage}</div>
     {/if}
-  {:else}
-    <!-- Optional: Show a loading state or nothing while updateFields initializes -->
-    <p>Loading form...</p>
-  {/if}
+  <!-- End of removed #if block -->
 </form>
 
 <style lang="scss">
@@ -278,6 +321,15 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
+  }
+  .switch-container { /* Style for label and switch */
+    display: flex;
+    align-items: center;
+    gap: 0.1rem; /* Adjust spacing as needed */
+  }
+  .switch-container label {
+    /* Optional: Add styles for the label */
+    font-weight: 500; /* Example */
   }
   .selectors-group {
     margin: 1rem 0;

@@ -195,6 +195,7 @@ export function parseNaturalLanguageToCron(inputStr: string): CronParseResult {
       foundDow = true;
     } else if (lowerInput.includes("every day")) {
       // No specific DOW needed if "every day" and no days like "Monday" found
+      foundDow = true; // Signal that a day specifier was found
     }
 
     // --- Day of Month (DOM) Parsing ---
@@ -256,7 +257,8 @@ export function parseNaturalLanguageToCron(inputStr: string): CronParseResult {
     if (!foundTime && !foundDow && !foundDom && !foundMonth) {
       if (lowerInput === "every minute")
         return { success: true, cron: "* * * * *" }; // Handle edge case
-      throw new Error("Could not understand the schedule format.");
+      // Return failure object instead of throwing
+      return { success: false, error: "Could not understand the schedule format." };
     }
 
     // If time wasn't specified, but day/month was, default to midnight? Common expectation.

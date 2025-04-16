@@ -19,12 +19,14 @@
   export let onChange: (input: string, cron: string) => void = () => {}; // Sends current INPUT text and DERIVED cron
 
   // --- Internal Component State ---
-  const internalInputValue = writable(""); // Bound to the input field
+  // Remove internalInputValue store
   let derivedCron: string = ""; // Cron derived from input OR the initial value if it was cron
   let derivedNatural: string = ""; // Natural sentence derived from derivedCron
   let displayError: string = ""; // Parsing error message
   let isInitialValueCron = false; // Was the *prop* value initially cron?
   let hasMounted = false; // Prevent reactive updates before mount
+  let debounceTimeout: ReturnType<typeof setTimeout> | null = null; // For debouncing input
+  const DEBOUNCE_DELAY = 500; // milliseconds
 
   // Store for the last valid PAIR (input that resulted in valid cron)
   export const scheduleStore = writable<{ schedule: string; cron: string }>({
@@ -36,7 +38,7 @@
   onMount(async () => {
     console.log("MOUNT: Initial prop value:", value);
     isInitialValueCron = isCronString(value);
-    internalInputValue.set(value); // Set input field value
+    // No need to set internalInputValue
 
     if (isInitialValueCron) {
       // Initial value IS a cron string
@@ -45,18 +47,23 @@
       displayError = "";
       // Store: Natural description as 'schedule' for consistency? Or keep it blank? Let's store description.
       scheduleStore.set({ schedule: derivedNatural, cron: derivedCron });
-      onChange(value, derivedCron); // Report initial cron input and itself as cron output
+      // Report initial state via onChange if needed, or rely on parent's initial value
+      // onChange(value, derivedCron); // Maybe not needed if parent already has the value
     } else {
       // Initial value is Natural Language (or empty)
       const result = parseNaturalLanguageToCron(value);
       handleParseResult(value, result, true); // isInitialCheck = true
+      // If initial NL parsed successfully, report the derived cron
+      if (result.success && result.cron) {
+        onChange(value, result.cron);
+      }
     }
 
     await tick(); // Wait for DOM update
     hasMounted = true;
     console.log(
       "MOUNT: Complete. Initial Input:",
-      $internalInputValue,
+      value, // Use value prop directly
       " Derived Cron:",
       derivedCron,
       "Derived Natural:",
@@ -117,47 +124,54 @@
     );
   }
 
-  // --- Reactive Updates: Triggered by user typing ---
+  // --- Reactive Updates: Triggered by prop changes (with Debounce) ---
   $: {
+    // React to changes in the 'value' prop after mounting
     if (hasMounted) {
-      const currentInput = $internalInputValue;
-      console.log(`REACTIVE: Input changed to: '${currentInput}'`);
+      const currentInput = value; // Use the prop directly
+      console.log(`REACTIVE: 'value' prop changed to: '${currentInput}'`);
 
-      // If the user types something that IS a cron string, treat it directly
-      if (isCronString(currentInput)) {
-        console.log("REACTIVE: Input is a cron string.");
-        if (currentInput !== derivedCron) {
-          // Avoid update if it's the same cron
-          derivedCron = currentInput;
+      // Clear previous timeout
+      if (debounceTimeout) {
+        clearTimeout(debounceTimeout);
+      }
+
+      // Set a new timeout to process the input after a delay
+      debounceTimeout = setTimeout(() => {
+        console.log(`DEBOUNCED: Processing input from prop: '${currentInput}'`);
+        let newCron = "";
+        let parseError = "";
+
+        if (isCronString(currentInput)) {
+          console.log("DEBOUNCED: Input is a cron string.");
+          newCron = currentInput;
+          parseError = "";
+        } else {
+          console.log("DEBOUNCED: Input is not cron, attempting NL parse.");
+          const result = parseNaturalLanguageToCron(currentInput);
+          if (result.success) {
+            newCron = result.cron ?? "";
+            parseError = "";
+          } else {
+            newCron = "";
+            parseError = result.error ?? "Unknown parsing error.";
+          }
+        }
+
+        // Update derived state only if cron actually changed
+        if (newCron !== derivedCron || parseError !== displayError) {
+          derivedCron = newCron;
           derivedNatural = generateNaturalSentence(derivedCron);
-          displayError = "";
-          scheduleStore.set({ schedule: derivedNatural, cron: derivedCron }); // Store description + cron
+          displayError = parseError;
+          scheduleStore.set({ schedule: currentInput, cron: derivedCron }); // Store current input + derived cron
+          // Call onChange to notify parent of the *derived* cron string based on the input
           onChange(currentInput, derivedCron);
+          console.log(`DEBOUNCED: Updated derivedCron='${derivedCron}', Error='${displayError}', called onChange.`);
+        } else {
+           console.log(`DEBOUNCED: No change in derivedCron or error, skipping state update and onChange.`);
         }
-      }
-      // Only parse as NL if it's NOT the initial cron value AND not identical to current derivedCron
-      // And also not identical to the last successful natural language input stored
-      else if (!(isInitialValueCron && currentInput === value)) {
-        console.log(
-          "REACTIVE: Input is NOT initial cron, attempting NL parse."
-        );
-        // Prevent re-parsing if input hasn't changed meaningfully? Tricky. Let's parse.
-        const result = parseNaturalLanguageToCron(currentInput);
-        handleParseResult(currentInput, result); // isInitialCheck = false
-      } else {
-        console.log(
-          "REACTIVE: Input matches initial cron value, skipping NL parse."
-        );
-        // Ensure state is correct if user typed back the initial cron
-        if (derivedCron !== value) {
-          // If state somehow diverged
-          derivedCron = value;
-          derivedNatural = generateNaturalSentence(value);
-          displayError = "";
-          scheduleStore.set({ schedule: derivedNatural, cron: derivedCron });
-          onChange(value, value);
-        }
-      }
+
+      }, DEBOUNCE_DELAY);
     }
   }
 </script>
@@ -169,22 +183,22 @@
       <input
         id="schedule-input"
         type="text"
-        bind:value={$internalInputValue}
+        bind:value={value}
         {placeholder}
-        class:error={displayError && $internalInputValue}
+        class:error={displayError && value}
         aria-label={label}
-        aria-invalid={!!displayError && !!$internalInputValue}
+        aria-invalid={!!displayError && !!value}
         aria-describedby="feedback-area"
       />
     </div>
 
     <!-- Feedback Area: Show Error OR Cron + Natural Description -->
     <div id="feedback-area" class="feedback-area">
-      {#if displayError && $internalInputValue}
+       {#if displayError && value} <!-- Check error based on prop value -->
         <div class="output-feedback error">
           <span class="error-message">{displayError}</span>
         </div>
-      {:else if derivedCron}
+       {:else if derivedCron}
         <div class="output-feedback">
           <span class="cron-label">Cron:</span>
           <code class="cron-code">{derivedCron}</code>
@@ -194,7 +208,7 @@
             {derivedNatural}
           </div>
         {/if}
-      {:else if !$internalInputValue}
+       {:else if !value} <!-- Check based on prop value -->
         <!-- Optionally show placeholder text or nothing when input is empty -->
         <div class="output-feedback placeholder-feedback"></div>
         <!-- Reserve space -->

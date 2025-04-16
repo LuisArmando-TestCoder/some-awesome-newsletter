@@ -1,8 +1,8 @@
 <!-- src/components/systems/inputs/PersonalityField.svelte -->
 <script lang="ts">
   import { slide } from "svelte/transition";
-  import { generatePersonality } from "../../requests/generatePersonality";
-  import { latestMessage } from "../../../store";
+  import { generatePersonality } from "../../requests/generatePersonality.ts"; // Change back to .ts
+  import { latestMessage } from "../../../store.ts"; // Change back to .ts
   import { writable } from "svelte/store";
   import SubmitButton from "../../buttons/SubmitButton/SubmitButton.svelte";
 
@@ -15,11 +15,12 @@
   // --- State ---
   let isGenerating = writable(false);
   let generationError = writable<string | null>(null);
-  let currentContent: string = personality;
+  let currentContent: string = ""; // Initialize as empty string
   const placeholderText = "Input or generate a personality description...";
 
   // --- Reactivity ---
-  $: currentContent = personality;
+  // Ensure currentContent reflects the prop, defaulting null/undefined to empty string
+  $: currentContent = personality ?? "";
 
   // --- Functions ---
   function handleInput(event: Event) {

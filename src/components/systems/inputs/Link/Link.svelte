@@ -117,9 +117,8 @@
 </script>
 
 <div class="url-input-wrapper">
-  <label class="input-label" for="url-input">{value ? label || placeholder : label}</label>
+  <label class="input-label">{value ? label || placeholder : label}</label>
   <input
-    id="url-input"
     type="url"
     bind:value
     {placeholder}

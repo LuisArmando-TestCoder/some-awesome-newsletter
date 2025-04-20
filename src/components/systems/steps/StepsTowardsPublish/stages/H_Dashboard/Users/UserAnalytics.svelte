@@ -170,7 +170,7 @@
   }
   .stat-wrapper {
     padding: 1rem;
-    background-color: var(--color-background-inversion);
+    background-color: var(--color-background-opaque-inversion);
     border-radius: var(--radius-l);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   }

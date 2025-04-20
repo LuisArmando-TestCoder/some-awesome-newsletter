@@ -67,7 +67,7 @@
 
   <!-- Label (only visible when textarea has content) -->
   {#if currentContent}
-    <label for="personality-textarea" class="textarea-label">
+    <label class="textarea-label">
       {placeholderText}
     </label>
   {/if}
@@ -75,7 +75,6 @@
   <!-- Textarea Container (Optional - could be removed if no border needed) -->
   <div class="textarea-wrapper">
     <textarea
-      id="personality-textarea"
       class="personality-textarea"
       bind:value={currentContent}
       on:input={handleInput}

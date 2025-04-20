@@ -44,11 +44,10 @@
 </script>
 
 <div class="email-input-wrapper">
-  <label class="input-label" for="email-input"
+  <label class="input-label"
     >{value ? label || placeholder : label}</label
   >
   <input
-    id="email-input"
     type="email"
     bind:value
     {placeholder}

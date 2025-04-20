@@ -71,7 +71,7 @@
     justify-content: space-between;
     align-items: flex-start; // Align items to the top
     padding: 0.8rem 1rem;
-    background-color: var(--color-background-inversion);
+    background-color: var(--color-background-opaque-inversion);
     border: 1px solid var(--color-border-light, #e0e0e0);
     border-radius: var(--radius-m);
     transition: box-shadow 0.2s ease-in-out;

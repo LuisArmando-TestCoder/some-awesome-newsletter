@@ -178,10 +178,9 @@
 
 <template>
   <div class="schedule-input-wrapper">
-    <label for="schedule-input" class="input-label">{label}</label>
+    <label class="input-label">{label}</label>
     <div class="input-container">
       <input
-        id="schedule-input"
         type="text"
         bind:value={value}
         {placeholder}

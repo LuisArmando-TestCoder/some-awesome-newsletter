@@ -23,14 +23,14 @@
 </script>
 
 <div class="text-input-wrapper">
-  <label class="input-label" for="text-input">{value ? label || placeholder : label}</label>
+  <label class="input-label">{value ? label || placeholder : label}</label>
   <input
-    id="text-input"
     {type}
     bind:value
     {placeholder}
     on:input={handleInput}
     aria-label={label}
+    autocomplete={type === 'password' ? 'current-password' : undefined}
   />
 </div>
 

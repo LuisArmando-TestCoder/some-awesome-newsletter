@@ -38,11 +38,12 @@ export default async function triggerNewsSourceSend(newsSourceId: string): Promi
     if (!response.ok) {
       // Log detailed error if possible
       const errorBody = await response.text();
-      console.error(
-        `Error triggering news source send (${response.status}): ${errorBody}`
-      );
-      // Optionally, show a user-friendly error message
-      return false;
+      // Log the error body for debugging, but don't prevent throwing
+      console.error(`Error triggering news source send (${response.status}): ${errorBody}`);
+      // Throw an error object that includes the response details
+      const error: any = new Error(`HTTP error! status: ${response.status}`);
+      error.response = response; // Attach the full response
+      throw JSON.parse(errorBody).message; // Throw the error so the calling component can catch it
     }
 
     // Backend returns 202 Accepted on success
@@ -51,9 +52,16 @@ export default async function triggerNewsSourceSend(newsSourceId: string): Promi
     );
     // Optionally, show a success message to the user
     return true; // Indicate success
-  } catch (error) {
-    console.error("Network or other error triggering news source send:", error);
-    // Optionally, show a user-friendly error message
-    return false;
+  } catch (error: any) { // Added type annotation
+    // Check if it's the specific error we threw with the response attached
+    if (error && error.response) {
+      console.error("Re-throwing HTTP error from triggerNewsSourceSend:", error);
+      throw error; // Re-throw the error with response details
+    } else {
+      // Handle genuine network errors or other unexpected issues
+      console.error("Network or other error triggering news source send:", error);
+      // Optionally, show a user-friendly error message for network issues
+      return error; // Return false only for non-HTTP errors caught here
+    }
   }
 }

@@ -25,7 +25,7 @@
   // Removed duplicate type import
 
   // Import Request Function
-  import triggerNewsSourceSend from "../../../../../requests/triggerNewsSourceSend.js"; // Import the trigger function
+  import triggerNewsSourceSend from "../../../../../requests/triggerNewsSourceSend.js"; // CORRECTED Import (added .js extension as required by NodeNext resolution)
 
   // --- Props ---
   /** The specific news source object this component manages */
@@ -92,24 +92,49 @@
     clearFeedback();
 
     try {
-      const success = await triggerNewsSourceSend(newsSource.id);
-      if (success) {
+      const response = await triggerNewsSourceSend(newsSource.id);
+      if (typeof response === "boolean" && response) {
         setFeedback("success", `Newsletter send initiated for ${sourceName}.`);
       } else {
         // Error message is likely logged within triggerNewsSourceSend
         setFeedback(
           "error",
-          `Failed to initiate send for ${sourceName}. Check console for details.`,
+          String(response),
         );
-      }
-    } catch (error: any) {
-      console.error(`Error in handleTriggerSend for ${newsSource.id}:`, error);
-      setFeedback(
-        "error",
-        error.message || `Failed to trigger send for ${sourceName}.`,
-      );
-    } finally {
-      isTriggeringSend = false;
+       }
+     } catch (error: any) {
+       console.error(`[SVELTE CATCH] Error caught in handleTriggerSend for ${newsSource.id}:`, error); // Enhanced log
+       // Check for specific rate limit error (429)
+       let errorMessage = `Failed to trigger send for ${sourceName}.`; // Default message
+       if (error && error.response && typeof error.response.json === 'function' && error.response.status === 429) { // Added more checks
+         // Attempt to get the specific message from the response body
+          try {
+            console.log("[SVELTE CATCH] Attempting to parse 429 response body..."); // Log step
+            // Assuming the body is JSON and has a 'message' field
+            const errorData = await error.response.json();
+            console.log("[SVELTE CATCH] Parsed 429 error data:", errorData); // Log parsed data
+            if (errorData && errorData.message) {
+               errorMessage = errorData.message;
+               console.log("[SVELTE CATCH] Extracted message:", errorMessage); // Log extracted message
+            } else {
+               errorMessage = `Rate limit hit (no specific message). Status 429`;
+               console.log("[SVELTE CATCH] No message field found in 429 data."); // Log finding
+            }
+          } catch (parseError) {
+            console.error("[SVELTE CATCH] Could not parse 429 error response body:", parseError);
+            errorMessage = `Rate limit hit (parsing failed). Status 429`;
+          }
+       } else if (error && error.message) { // Added check for error existence
+         // Use the error's message if available and not a 429
+         errorMessage = error.message;
+         console.log("[SVELTE CATCH] Using generic error.message:", errorMessage); // Log finding
+       } else {
+         console.log("[SVELTE CATCH] Using default error message."); // Log finding
+       }
+       console.log("[SVELTE CATCH] Final error message before setFeedback:", errorMessage); // Log final message
+       setFeedback("error", error);
+     } finally {
+       isTriggeringSend = false;
     }
   }
 

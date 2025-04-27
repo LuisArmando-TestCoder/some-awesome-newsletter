@@ -43,6 +43,7 @@
     // active: boolean; // Removed
     emailMaskSender: string;
     appPassword: string;
+    includeImages: boolean; // Added for image toggle
   };
 
   // Initialize updateFields with the defined type and default values
@@ -58,6 +59,7 @@
     // active: true, // Removed default active state
     emailMaskSender: "",
     appPassword: "",
+    includeImages: true, // Default to true
   };
 
   // State to hold the actual parsed cron string
@@ -77,6 +79,8 @@
       // active: newsSource.active === undefined ? true : newsSource.active, // Removed active state initialization
       emailMaskSender: newsSource.emailMaskSender || "",
       appPassword: newsSource.appPassword || "",
+      // Default to true if undefined in the source data
+      includeImages: newsSource.includeImages === undefined ? true : newsSource.includeImages,
     };
 
     // Initialize actualCronSchedule by parsing the initial value
@@ -150,6 +154,7 @@
       // Include new fields only if they have values, otherwise send null
       emailMaskSender: updateFields.emailMaskSender || null,
       appPassword: updateFields.appPassword || null,
+      includeImages: updateFields.includeImages, // Add the flag to the payload
     };
 
     // Prevent submission if email validation fails
@@ -267,6 +272,17 @@
           onChange={(newValue) => { updateFields.personality = newValue; }}
         />
 
+        <!-- Include Images Toggle -->
+        <div class="switch-container">
+          <label for="include-images-switch">Include Images in Newsletter</label>
+          <Switch
+            bind:toggled={updateFields.includeImages}
+          />
+        </div>
+        <MarkdownText {canReveal}>
+          --Whether to include automatically sourced stock images in the generated newsletter content.--
+        </MarkdownText>
+
         <!-- Email Credentials Inputs -->
         <EmailInput
           label="Sender Email Address (Optional)"
@@ -307,6 +323,15 @@
     margin: 1rem 0;
     display: grid;
     gap: 25px;
+  }
+  .switch-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* Adds space between label and switch */
+  }
+  .switch-container label {
+    /* Optional: style the label */
+    font-weight: bold;
   }
   .personality-section {
     display: flex;

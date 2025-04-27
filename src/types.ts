@@ -20,6 +20,7 @@ export interface NewsSource {
   personality: string;
   email?: EmailConfig;
   openAiApiKey?: string;
+  includeImages?: boolean; // Optional flag to include images in the newsletter
 }
 
 export interface NewsletterUser {

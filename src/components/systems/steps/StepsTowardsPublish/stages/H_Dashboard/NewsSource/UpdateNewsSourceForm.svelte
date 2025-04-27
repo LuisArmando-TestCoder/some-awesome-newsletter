@@ -41,7 +41,6 @@
     url: string;
     id: string;
     // active: boolean; // Removed
-    openAiApiKey: string;
     emailMaskSender: string;
     appPassword: string;
   };
@@ -57,7 +56,6 @@
     url: "", // Use empty string
     id: "",
     // active: true, // Removed default active state
-    openAiApiKey: "",
     emailMaskSender: "",
     appPassword: "",
   };
@@ -77,7 +75,6 @@
       url: newsSource.url || "", // Ensure url is string
       id: newsSource.id,
       // active: newsSource.active === undefined ? true : newsSource.active, // Removed active state initialization
-      openAiApiKey: newsSource.openAiApiKey || "",
       emailMaskSender: newsSource.emailMaskSender || "",
       appPassword: newsSource.appPassword || "",
     };
@@ -151,7 +148,6 @@
       id: updateFields.id,
       // active: updateFields.active, // Removed active state from payload
       // Include new fields only if they have values, otherwise send null
-      openAiApiKey: updateFields.openAiApiKey || null,
       emailMaskSender: updateFields.emailMaskSender || null,
       appPassword: updateFields.appPassword || null,
     };
@@ -270,16 +266,6 @@
           onError={(msg) => (errorMessage = msg)}
           onChange={(newValue) => { updateFields.personality = newValue; }}
         />
-
-        <!-- OpenAI API Key Input -->
-        <PlainText
-          label="OpenAI API Key (Optional)"
-          placeholder="Leave blank to use global key"
-          bind:value={updateFields.openAiApiKey}
-        />
-        <MarkdownText {canReveal}>
-          --Overrides the global OpenAI key for this specific news source.--
-        </MarkdownText>
 
         <!-- Email Credentials Inputs -->
         <EmailInput

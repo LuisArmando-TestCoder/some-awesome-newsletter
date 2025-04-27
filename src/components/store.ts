@@ -44,6 +44,7 @@ const store = writable<Store>({
     "subscriberName", // Added for subscription flow
     "subscriberCountry", // Added for subscription flow
   ],
+  appLanguage: "en", // Added for global language setting
   autoCollapse: true,
   toggles: {},
   colorPalette,
@@ -68,7 +69,7 @@ const store = writable<Store>({
   subscriberEmail: "",
   subscriberName: "", // Added for subscription flow
   subscriberCountry: "", // Added for subscription flow
-  subscriberLanguage: "",
+  subscriberLanguage: "", // Specific to subscriber context
   subscriberConfiguratorId: "",
   subscriberNewsSourceId: "",
   subscriberLead: "",

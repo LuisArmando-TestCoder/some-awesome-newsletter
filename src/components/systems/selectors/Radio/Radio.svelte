@@ -48,7 +48,7 @@
 <style lang="scss">
   .glass-radio {
     display: inline-flex;
-    align-items: center;
+    
     cursor: pointer;
     user-select: none;
     border: none;
@@ -66,7 +66,7 @@
     border-radius: 50%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    
     margin-right: 8px;
     transition:
       border-color 0.3s ease,

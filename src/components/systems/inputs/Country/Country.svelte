@@ -374,7 +374,7 @@
     border-radius: 8px;
     cursor: pointer;
     display: flex;
-    align-items: center;
+    
     gap: 0.5rem; // Space between elements
     // justify-content: space-between; // Removed to let content flow naturally
     width: 100%; // Make button take full width of container
@@ -445,7 +445,7 @@
   .dropdown-item {
     padding: 0.6rem 1rem;
     display: flex;
-    align-items: center;
+    
     gap: 0.5rem;
     cursor: pointer;
     transition:

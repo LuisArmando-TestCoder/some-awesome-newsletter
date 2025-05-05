@@ -31,7 +31,7 @@
     user-select: none;
     color: var(--color-background);
     display: flex;
-    align-items: center;
+    place-items: center;
     font-size: 18px;
     border-radius: 30px;
     background: transparent;

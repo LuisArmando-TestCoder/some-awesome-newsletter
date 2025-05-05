@@ -4,8 +4,8 @@
   --unit-2: 18px;
   --unit-3: 20px;
   --unit-4: 22px;
-  --unit-5: 24px;
-  --unit-6: 30px;
+  --unit-5: 30px;
+  --unit-6: 19px;
 
   &--paragraph {
     font-family: var(--font-paragraph);
@@ -35,14 +35,22 @@
 
   &--title {
     font-family: var(--font-title);
-    font-size: var(--unit-6);
+    font-size: var(--unit-5);
     color: var(--color-foreground);
+
+    @media (max-width: 1024px) {
+      font-size: var(--unit-6);
+    }
   }
 
   &--title-highlight {
     font-family: var(--font-title);
-    font-size: var(--unit-6);
+    font-size: var(--unit-5);
     color: var(--color-background);
+
+    @media (max-width: 1024px) {
+      font-size: var(--unit-6);
+    }
   }
 
   &--title-sub-italic {

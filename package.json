@@ -1,5 +1,5 @@
 {
-  "name": "some-awesome-newsletter-platform",
+  "name": "funnel-irp",
   "version": "0.0.1",
   "scripts": {
     "dev": "vite dev",
@@ -42,6 +42,7 @@
     "@tsconfig/svelte": "^5.0.4",
     "@types/nearest-color": "^0.4.1",
     "@types/qrcode": "^1.5.5",
+    "hls.js": "^1.6.2",
     "publint": "^0.3.2",
     "sass": "^1.85.1",
     "sass-embedded": "^1.85.1",
@@ -76,7 +77,6 @@
     "fuzzysort": "^3.1.0",
     "gapi-script": "^1.2.0",
     "gsap": "^3.12.7",
-    "hls.js": "^1.5.20",
     "jsonwebtoken": "^9.0.2",
     "leaflet": "^1.9.4",
     "nearest-color": "^0.4.4",

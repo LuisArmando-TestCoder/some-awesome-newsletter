@@ -137,7 +137,7 @@
 
     .qr-section {
         display: flex;
-        align-items: center; /* Vertically align QR and download button */
+         /* Vertically align QR and download button */
         gap: 10px; /* Space between QR image and download button */
     }
 

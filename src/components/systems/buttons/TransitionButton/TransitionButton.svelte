@@ -94,7 +94,7 @@
     .arrow {
       display: flex;
       justify-content: center;
-      align-items: center;
+      
 
       svg {
         width: 24px;

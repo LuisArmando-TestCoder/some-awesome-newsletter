@@ -1,91 +1,36 @@
 import { get, writable } from "svelte/store";
 import type { Populator, Store } from "./types.ts";
 import type { Socket } from "socket.io-client";
-import updateConfiguration from "./systems/requests/updateConfiguration.ts";
 
 export const latestMessage = writable<string>("");
 
 export const socket = writable<Socket | null>(null);
 export const isScrollingDown = writable<boolean>(false); // Add state for scroll direction
 
-const colorPalette = [
-  "#e91e63",
-  "#2196f3",
-  "#03a9f4",
-  "#00bcd4",
-  "#4caf50",
-  "#8bc34a",
-  "#cddc39",
-  "#ffc107",
-  "#ff5722",
-];
-
 const store = writable<Store>({
-  keysToSave: [
-    "stepsIndex",
-    "configuratorEmail",
-    "newsSource",
-    "lead",
-    "authCode",
-    "isAuthCodeValid",
-    "autoCollapse",
-    "toggles",
-    "config.brandColor",
-    "config.newsletterSubject",
-    "config.scheduleTime",
-    "config.senderName",
-    "config.newsletterTitle",
-    "config.emailSignature",
-    "config.emailMaskSender", // New
-    "subscribers", // Added
-    "leads", // Added
-    "subscriberName", // Added for subscription flow
-    "subscriberCountry", // Added for subscription flow
-  ],
+  keysToSave: ["name", "email", "budget", "countryFrom", "countryTo", "stepsIndex", "age", "sex", "reasonsForMoving"], // Added new keys
+  stepsIndex: 0, // Renamed from stepsIndex
+  name: "",
+  email: "",
+  budget: null, // Use null or 0 for initial budget? null might be better to indicate not set.
+  age: null, // Added age
+  sex: "", // Added sex (string, e.g., 'Male', 'Female')
+  countryFrom: null, // Use null for initial country codes
+  countryTo: null,
+  reasonsForMoving: [""], // Added reasons (array of strings)
   appLanguage: "en", // Added for global language setting
-  autoCollapse: true,
-  toggles: {},
-  colorPalette,
-  stepsIndex: 0,
-  hasInteracted: false, // don't save
-  configuratorEmail: "",
-  newsSource: "",
-  lead: "",
-  hasNewEmailCodeBeenSent: false,
-  authCode: "",
-  directionsThatShouldDisappear: [],
-  isAuthCodeValid: "",
-  apiURL: () => window.location.origin.startsWith('http://localhost') ? "http://localhost:8000" : "https://ai-newsletter-translated.onrender.com",
-  config: {
-    emailMaskSender: "", // New
-    appPassword: "", // New
-  },
-  subscribers: {}, // Added initial empty object for subscribers
-  leads: {}, // Added initial empty object for leads
-  isRefreshingSubscribers: false, // Flag for background refresh
-  subscriberEmail: "",
-  subscriberName: "", // Added for subscription flow
-  subscriberCountry: "", // Added for subscription flow
-  subscriberLanguage: "", // Specific to subscriber context
-  subscriberConfiguratorId: "",
-  subscriberNewsSourceId: "",
-  subscriberLead: "",
-  personality:
-    "The writer embodies a dynamic and intellectually stimulating personality, " +
-    "marked by a blend of creativity and analytical rigor. " +
-    "This voice is articulate and insightful, favoring originality over cliché, " +
-    "and strives for genuine communication that resonates on an emotional level. " +
-    "An adept navigator of style, the writer emphasizes the importance of varied " +
-    "sentence structures and evocative language to maintain engagement and avoid monotony. " +
-    "There is a distinct appreciation for depth in communication, " +
-    "prioritizing authenticity and respectful interaction while steering clear of superficial " +
-    "conclusions and inflated urgency. This voice is both thoughtful and precise, " +
-    "aimed at fostering meaningful exchanges that acknowledge complexity and uniqueness.",
+  apiURL: () => window.location.origin.startsWith('http://localhost') ? "http://localhost:8000" : "https://irp-funnel.onrender.com",
 });
 
 export const emptyStoreSnapshot = JSON.parse(JSON.stringify(get(store)));
 
 export default store;
+
+// Function to increment the step index
+export function incrementStepsIndex() {
+  console.log("increment", get(store))
+  store.update(s => ({ ...s, stepsIndex: s.stepsIndex + 1 }));
+}
 
 export function saveToStore(objectValue: { [index: string]: any }) {
   store.set({
@@ -102,19 +47,6 @@ export function populateToStore(propertyPath: string, value: any) {
 
 export function getFromStore(propertyPath: string) {
   return createObjectGetter(get(store))(propertyPath);
-}
-
-export function saveToConfig(config: { [index: string]: any }) {
-  if (get(store).isAuthCodeValid) {
-    saveToStore({
-      config: {
-        ...get(store).config,
-        ...config,
-      },
-    });
-
-    updateConfiguration(get(store).config);
-  }
 }
 
 function createObjectPopulator<T extends object>(obj: T): Populator<T> {

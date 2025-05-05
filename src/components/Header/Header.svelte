@@ -4,7 +4,6 @@
   import store, { saveToStore, isScrollingDown } from "../store.ts"; // Import isScrollingDown
   import SVG from "../SVG/SVG.svelte";
   import ThemeChanger from "../ThemeChanger/ThemeChanger.svelte";
-    import logout from "../systems/requests/logout.ts";
 
   let menuOpen = false;
   let headerVisible = writable(true); // Regular boolean variable
@@ -57,7 +56,6 @@
           <a
             class="menu-half--anchor menu-half--logout"
             onclick={() => {  
-              logout();
             }}>Log Out</a
           >
         </section>

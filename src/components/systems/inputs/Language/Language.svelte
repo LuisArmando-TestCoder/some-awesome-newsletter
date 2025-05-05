@@ -382,7 +382,7 @@
     border-radius: 8px;
     cursor: pointer;
     display: flex;
-    align-items: center;
+    
     gap: 0.5rem;
     width: 100%;
     max-width: 280px; // Adjust as needed for language names
@@ -403,7 +403,7 @@
   // Wrapper for selected value to help with labelling
   .selected-value-wrapper {
     display: flex;
-    align-items: center;
+    
     gap: 0.5rem;
     flex-grow: 1; // Allow wrapper to take space
     overflow: hidden; // Prevent overflow issues
@@ -468,7 +468,7 @@
   .dropdown-item {
     padding: 0.6rem 1rem;
     display: flex;
-    align-items: center;
+    
     gap: 0.5rem;
     cursor: pointer;
     transition:

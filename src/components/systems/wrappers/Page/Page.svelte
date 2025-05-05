@@ -1,10 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import askIsAuthCodeValid from "../../requests/askIsAuthCodeValid.ts";
-  import setStorageFromKeysToSave from "../../helpers/setStorageFromKeysToSave.ts";
 
   onMount(async () => {
-    setStorageFromKeysToSave();
 
     // if (!(await askIsAuthCodeValid())) {
     //   window.location.href = "/";
@@ -18,12 +15,12 @@
 
 <style lang="scss">
   .page {
-    padding: 160px 25px 0;
+    padding: 160px 25px;
     overflow: auto;
     max-height: 100vh;
 
-    @media (max-width: 640px) {
-      padding: 160px 15px 0;
+    @media (max-width: 1024px) {
+      padding: 160px 25px;
     }
   }
 </style>

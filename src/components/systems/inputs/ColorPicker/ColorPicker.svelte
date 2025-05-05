@@ -232,7 +232,7 @@
 
   .picker-wrapper {
     display: flex;
-    align-items: center;
+    
     gap: 0.5rem; /* Adjust gap as needed */
   }
 
@@ -334,7 +334,7 @@
 
   .suggestion-item button {
     display: flex;
-    align-items: center;
+    
     border: none;
     background: transparent;
     cursor: pointer;

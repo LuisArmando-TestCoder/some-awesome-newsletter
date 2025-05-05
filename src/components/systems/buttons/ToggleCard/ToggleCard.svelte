@@ -61,7 +61,7 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    
     border: none;
     padding: 0.5rem 1rem;
     background: transparent;

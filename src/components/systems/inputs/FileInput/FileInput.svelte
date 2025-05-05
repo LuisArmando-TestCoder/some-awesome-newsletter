@@ -182,7 +182,7 @@ aria-disabled={disabled || isSubmitting}
 .file-drop-zone {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    
     justify-content: center;
     padding: 1.5rem 1rem;
     border: 2px dashed var(--color-border, #ccc);

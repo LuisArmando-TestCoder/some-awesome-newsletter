@@ -52,7 +52,7 @@
 <style lang="scss">
   .glass-checkbox {
     display: inline-flex;
-    align-items: center;
+    
     cursor: pointer;
     user-select: none;
     outline: none; /* Remove default focus outline; consider adding a custom focus style */
@@ -70,7 +70,7 @@
       border-radius: 4px;
       display: flex;
       justify-content: center;
-      align-items: center;
+      
       transition:
         background 0.3s ease,
         border-color 0.3s ease;

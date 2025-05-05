@@ -29,7 +29,7 @@
     user-select: none;
     color: var(--color-background-inversion);
     display: flex;
-    align-items: center;
+    
     font-size: 18px;
     border-radius: 30px;
     background: var(--color-x-gradient-inversion);

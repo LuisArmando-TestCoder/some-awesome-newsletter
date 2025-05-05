@@ -6,7 +6,6 @@
   import { onMount, onDestroy } from "svelte";
   import { browser } from "$app/environment";
   import { isScrollingDown } from "../components/store.ts"; // Import the store variable
-  import MainSteps from "../components/systems/steps/StepsTowardsPublish/MainSteps.svelte";
 
   let lastScrollY = 0;
 
@@ -40,11 +39,7 @@
   });
 </script>
 
-<GlobalData />
-<SocketClient />
 <ChosenShader />
-<Header />
-<MainSteps />
 
 <style lang="scss">
   @use "./styles/everything.scss";

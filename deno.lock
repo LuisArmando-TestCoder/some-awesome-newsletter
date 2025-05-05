@@ -48,7 +48,7 @@
         "npm:fuzzysort@^3.1.0",
         "npm:gapi-script@^1.2.0",
         "npm:gsap@^3.12.7",
-        "npm:hls.js@^1.5.20",
+        "npm:hls.js@^1.6.2",
         "npm:jsonwebtoken@^9.0.2",
         "npm:leaflet@^1.9.4",
         "npm:nearest-color@~0.4.4",

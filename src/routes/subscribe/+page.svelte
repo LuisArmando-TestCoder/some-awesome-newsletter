@@ -12,7 +12,7 @@
     export let data: PageData; // Receive data from load function
 
     let lastScrollY = 0;
- 
+
     function handleScroll() {
         const currentScrollY = window.scrollY;
         let scrollingDownValue = false;

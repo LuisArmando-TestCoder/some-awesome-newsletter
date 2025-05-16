@@ -312,6 +312,7 @@
   .suggestion-panel {
     animation: fadeSlide 0.5s ease-out;
     max-height: 200px;
+    max-width: 500px;
     overflow: auto;
   }
 

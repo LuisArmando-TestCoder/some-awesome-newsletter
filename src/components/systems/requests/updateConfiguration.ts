@@ -1,90 +1,65 @@
 import { get } from "svelte/store";
 import store from "../../store.ts";
 
-export default async (config: { [index: string]: string }) => {
-  const configuratorEmail = get(store).configuratorEmail;
-  const authCode = get(store).authCode;
-  const apiURL = get(store).apiURL;
-  // We will fetch the latest config instead of relying solely on the store state
-  // const currentConfig = get(store).config;
+/* helper for mutating the store in-place */
+const patchStoreConfig = (cfg: Record<string, unknown>) =>
+  store.update(s => ({ ...s, config: { ...s.config, ...cfg } }));
 
-  console.log("[UPDATE-CONFIG-FRONT] Starting updateConfiguration with parameters:", {
-    providedConfig: config,
-    // currentConfig, // Removed from initial log
-    configuratorEmail,
-    authCode,
-    apiURL,
-  });
+export default async function updateConfiguration(
+  partialConfig: Record<string, unknown>
+): Promise<boolean> {
+  const { configuratorEmail, authCode, apiURL } = get(store);
 
-  const authHeaders = {
+  /* ─────────── auth / urls ─────────── */
+  const headers = {
     "x-auth-email": configuratorEmail,
     "x-auth-code": authCode,
     "Content-Type": "application/json",
+    Accept: "application/json"
   };
-  console.log("[UPDATE-CONFIG-FRONT] Using auth headers:", authHeaders);
+  const getURL = `${apiURL()}/private-config?documentId=${configuratorEmail}`;
+  const putURL = `${apiURL()}/config?documentId=${configuratorEmail}`;
 
-  // --- Fetch latest config before merging ---
-  let latestConfigFromBackend = {};
-  const getConfigUrl = `${apiURL()}/private-config?documentId=${configuratorEmail}`; // Assuming GET uses private-config
-  console.log("[UPDATE-CONFIG-FRONT] Fetching latest config from:", getConfigUrl);
+  /* ─────────── fetch latest config first ─────────── */
+  let latest: any = {};
   try {
-    const fetchResponse = await fetch(getConfigUrl, {
-      method: "GET",
-      headers: { // Ensure GET request also has auth headers if needed by backend
-        "x-auth-email": configuratorEmail,
-        "x-auth-code": authCode,
-        "Accept": "application/json",
-      },
-    });
-    if (!fetchResponse.ok) {
-      console.error(`[UPDATE-CONFIG-FRONT] Failed to fetch latest config. Status: ${fetchResponse.status}`);
-      // Decide how to handle: proceed with potentially stale store data, or fail?
-      // Let's fail for safety to avoid potential overwrites with bad data.
-      return false;
-      // Or fallback: latestConfigFromBackend = get(store).config; // Use store state as fallback
-    }
-    latestConfigFromBackend = await fetchResponse.json();
-    console.log("[UPDATE-CONFIG-FRONT] Successfully fetched latest config:", latestConfigFromBackend);
-  } catch (fetchError) {
-    console.error("[UPDATE-CONFIG-FRONT] Error fetching latest config:", fetchError);
-    return false; // Fail if fetch fails
+    const r = await fetch(getURL, { headers });
+    if (!r.ok) throw new Error(String(r.status));
+    latest = await r.json();
+  } catch (err) {
+    console.error("[UPDATE-CFG] Could not retrieve latest config:", err);
+    return false;
   }
-  // --- End fetch latest config ---
 
-
-  // Merge the *latest fetched* config with the provided changes
-  const mergedConfig = {
-    ...latestConfigFromBackend, // Start with the freshly fetched config
-    ...config,                 // Spread the specific changes, overwriting existing keys
-  };
-
-  const requestBody = JSON.stringify(mergedConfig);
-  console.log("[UPDATE-CONFIG-FRONT] Request body (merged with latest fetched):", requestBody);
-
-  const updateURL = `${apiURL()}/config?documentId=${configuratorEmail}`; // PUT endpoint remains /config
-  console.log("[UPDATE-CONFIG-FRONT] Sending PUT request to:", updateURL);
-
-  let putResponse;
+  /* ─────────── merge & PUT ─────────── */
+  const merged = { ...latest, ...partialConfig };
+  let response;
   try {
-    putResponse = await fetch(updateURL, { // Use different variable name
+    response = await fetch(putURL, {
       method: "PUT",
-      headers: authHeaders, // PUT needs Content-Type, already included
-      body: requestBody,
+      headers,
+      body: JSON.stringify(merged)
     });
-    console.log("[UPDATE-CONFIG-FRONT] Received PUT response:", putResponse);
-  } catch (error) {
-    console.error("[UPDATE-CONFIG-FRONT] Error during PUT fetch:", error);
+  } catch (err) {
+    console.error("[UPDATE-CFG] PUT failed:", err);
+    return false;
+  }
+  if (!response.ok) {
+    console.error("[UPDATE-CFG] PUT status:", response.status);
     return false;
   }
 
-  // Check PUT response status
-  if (!putResponse.ok) {
-    console.error("[UPDATE-CONFIG-FRONT] Update configuration failed. Status:", putResponse.status);
-    return false;
-  }
+  /* ─────────── update local store with the config returned by backend ─────────── */
+  try {
+    const json = await response.json();          // backend now returns { message, config }
+    if (json?.config) {
+      patchStoreConfig(json.config);             // 🔄 keep store (and LS) in sync
+    } else {
+      // fallback: refetch
+      const r = await fetch(getURL, { headers });
+      if (r.ok) patchStoreConfig(await r.json());
+    }
+  } catch {/* silent */ }
 
-  // Removed duplicate/incorrect check using old 'response' variable
-
-  console.log("[UPDATE-CONFIG-FRONT] Update configuration succeeded.");
   return true;
-};
+}

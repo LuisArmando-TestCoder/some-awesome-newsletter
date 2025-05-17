@@ -36,6 +36,7 @@ const store = writable<Store>({
     "config.senderName",
     "config.newsletterTitle",
     "config.emailSignature",
+    "config.logo",
     "config.emailMaskSender", // New
     "subscribers", // Added
     "leads", // Added

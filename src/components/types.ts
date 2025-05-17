@@ -89,6 +89,7 @@ export interface EmailConfig {
 }
 
 export interface Config {
+  logo?: string;
   newsSources?: NewsSource[];
   openAiApiKey?: string;
   email: EmailConfig;

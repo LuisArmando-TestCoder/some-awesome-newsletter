@@ -2,6 +2,7 @@
     import AutoCollapseToggle from "../../AutoCollapseToggle.svelte";
     import ColorPickerToggle from "./ColorPickerToggle.svelte";
     import EmailSignatureToggle from "./EmailSignatureToggle.svelte";
+    import ImageToggle from "./ImageToggle.svelte";
   
     export let canReveal = true;
   
@@ -10,6 +11,7 @@
 
 <AutoCollapseToggle {canReveal}
     toggles={{
+        logoImage: [ImageToggle],
         brandColor: [ColorPickerToggle],
         emailSignature: [EmailSignatureToggle],
     }}

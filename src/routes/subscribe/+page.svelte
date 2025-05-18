@@ -74,11 +74,11 @@
 </script>
 
 {#if logoUrl}
-<div style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 1000; background-color: rgba(255, 255, 255, 0.8); padding: 10px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+<div style="position: fixed; padding: 0;">
     <img 
         src={logoUrl} 
         alt="{newsletterTitle || 'Newsletter'} Logo" 
-        style="display: block; width: 400px; height: auto; max-height: 100px; object-fit: contain;" 
+        style="display: block; width: 200px; height: auto; object-fit: contain;" 
     />
 </div>
 {/if}

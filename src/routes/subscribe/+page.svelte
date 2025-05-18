@@ -8,9 +8,12 @@
     import MainSteps from "../../components/systems/steps/StepsTowardsSubscribe/MainSteps.svelte";
     import GlobalData from "../../components/GlobalData/GlobalData.svelte";
     import type { PageData } from './$types.js'; // Import PageData type
+    import getPublicConfig from "../../components/systems/requests/getPublicConfig.ts"; // Import request function
 
     export let data: PageData; // Receive data from load function
 
+    let logoUrl: string | null | undefined = null;
+    let newsletterTitle: string | null | undefined = null; // Added for consistency, though not explicitly requested for fixed display
     let lastScrollY = 0;
  
     function handleScroll() {
@@ -30,7 +33,7 @@
         lastScrollY = currentScrollY;
     }
 
-    onMount(() => {
+    onMount(async () => {
         // Save data from load function to the store
         if (data.newsSourceId && data.configuratorId && data.lead) {
             saveToStore({
@@ -39,6 +42,15 @@
                 subscriberLead: data.lead,
                 stepsIndex: 0 // Reset steps index here as well
             });
+
+            // Fetch public config to get the logo and title
+            if (data.configuratorId) {
+                const publicConfig = await getPublicConfig(data.configuratorId);
+                if (publicConfig) {
+                    logoUrl = publicConfig.logo;
+                    newsletterTitle = publicConfig.newsletterTitle; // Store title for alt text
+                }
+            }
         } else {
              // Handle missing params if necessary, maybe redirect or show error
             console.warn("Subscribe page loaded without required URL parameters (newsSourceId, configuratorId, lead).");
@@ -60,6 +72,16 @@
         }
     });
 </script>
+
+{#if logoUrl}
+<div style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 1000; background-color: rgba(255, 255, 255, 0.8); padding: 10px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+    <img 
+        src={logoUrl} 
+        alt="{newsletterTitle || 'Newsletter'} Logo" 
+        style="display: block; width: 400px; height: auto; max-height: 100px; object-fit: contain;" 
+    />
+</div>
+{/if}
 
 <ThemeChanger visible={false} />
 <GlobalData />

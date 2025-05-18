@@ -96,6 +96,9 @@ export interface Config {
   configuratorId?: string;
   brandColor?: string;
   emailSignature?: string;
+  senderName?: string; // Added
+  newsletterTitle?: string; // Added
+  newsletterSubject?: string; // Added
 }
 
 export interface NewsletterUser {

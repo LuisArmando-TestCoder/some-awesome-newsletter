@@ -16,7 +16,7 @@
 
   const components = [
     [t, A_Welcome], // Step A: Always enabled
-    [(store: Store) => true, B_Name], // Step B: Always enabled after A
+    [t, B_Name], // Step B: Always enabled after A
     [(store: Store) => store.subscriberName?.trim(), C_Email], // Step C: Enabled if name is entered
     [(store: Store) => store.subscriberEmail, D_Country], // Step D: Enabled if email is valid (Email component handles validation)
     [(store: Store) => store.subscriberCountry, E_Language], // Step E: Enabled if country is selected

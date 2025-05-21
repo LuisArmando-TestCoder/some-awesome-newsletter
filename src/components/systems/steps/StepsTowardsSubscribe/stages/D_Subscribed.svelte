@@ -4,7 +4,6 @@
   import MarkdownText from "../../../texts/MarkdownText/MarkdownText.svelte";
   import Centered from "../../../wrappers/Centered/Centered.svelte";
   import { page } from "$app/state"; // Use $app/state instead
-  import { onMount } from "svelte";
   import SubmitButton from "../../../buttons/SubmitButton/SubmitButton.svelte";
 
   export let canReveal = false;

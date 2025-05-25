@@ -4,7 +4,7 @@
   import { get } from "svelte/store";
   import type { Writable } from "svelte/store";
   import type { NewsSource, NewsletterUser } from "../../../../../../types.ts"; // Using local types path
-  import store from "../../../../../../store.ts";
+  import store, { latestMessage } from "../../../../../../store.ts"; // Imported latestMessage
   import updateConfiguration from "../../../../../requests/updateConfiguration.ts";
   import getConfiguratorSession from "../../../../../requests/getConfiguratorSession.ts"; // Import config refresh function
   import * as UserDataService from "./UserDataService.ts"; // Adjust path
@@ -19,6 +19,7 @@
   import Switch from "../../../../../selectors/Switch/Switch.svelte"; // ADDED Switch component import
   import ToggleCard from "../../../../../buttons/ToggleCard/ToggleCard.svelte"; // Adjusted path - verify this is correct
   import TextTypes from "../../../../../texts/TextTypes/TextTypes.svelte"; // Adjust path
+  import TextArea from "../../../../../inputs/TextArea/TextArea.svelte"; // Import new TextArea
   import Svg from "../../../../../../SVG/SVG.svelte"; // Adjust path
   import IconButton from "../../../../../buttons/IconButton/IconButton.svelte";
   import SubmitButton from "../../../../../buttons/SubmitButton/SubmitButton.svelte"; // Import SubmitButton
@@ -26,6 +27,7 @@
 
   // Import Request Function
   import triggerNewsSourceSend from "../../../../../requests/triggerNewsSourceSend.js"; // CORRECTED Import (added .js extension as required by NodeNext resolution)
+  import sendCustomContent from "../../../../../requests/sendCustomContent.ts"; // Import new request function
 
   // --- Props ---
   /** The specific news source object this component manages */
@@ -51,6 +53,10 @@
   let isUpdatingActive: boolean = false; // ADDED loading state for switch
   /** Loading state for triggering manual send */
   let isTriggeringSend: boolean = false; // ADDED loading state for trigger button
+  /** Content for custom email send */
+  let customEmailContent: string = "";
+  /** Loading state for sending custom content */
+  let isSendingCustomContent: boolean = false;
 
   // REMOVED event dispatcher
 
@@ -79,6 +85,38 @@
   }
 
   // --- Functions ---
+
+  async function handleSendCustomContent() {
+    if (!customEmailContent.trim()) {
+      setFeedback("error", "Custom content cannot be empty.");
+      return;
+    }
+    if (isSendingCustomContent) return;
+
+    isSendingCustomContent = true;
+    clearFeedback();
+    latestMessage.set("Initiating custom content send...");
+
+    try {
+      const success = await sendCustomContent(
+        get(store).configuratorEmail, 
+        newsSource.id, 
+        customEmailContent
+      );
+      if (success) {
+        setFeedback("success", `Custom content successfully initiated for ${sourceName}.`);
+        customEmailContent = ""; // Clear textarea on success
+      } else {
+        // Error feedback is handled by sendCustomContent or if it returns false without specific message
+        setFeedback("error", `Failed to send custom content for ${sourceName}. Check console for details.`);
+      }
+    } catch (error: any) {
+      setFeedback("error", error.message || `An unexpected error occurred while sending custom content for ${sourceName}.`);
+    } finally {
+      isSendingCustomContent = false;
+      latestMessage.set("");
+    }
+  }
 
   /** Handles manually triggering the newsletter send for this source */
   async function handleTriggerSend() {
@@ -442,8 +480,30 @@
       label="Send Newsletter Now"
       callback={() => handleTriggerSend()}
       loading={isTriggeringSend}
-      disabled={isUpdatingActive || isPerformingAction}
+      disabled={isUpdatingActive || isPerformingAction || isSendingCustomContent}
     />
+  </div>
+
+  <!-- Custom Content Send Section -->
+  <div class="custom-content-send-section">
+    <TextTypes type="subtitle"
+      >Send Custom Message to Subscribers of {sourceName}</TextTypes
+    >
+    <TextArea
+      bind:value={customEmailContent}
+      label="Custom Message Content:"
+      placeholder="Type your direct message to subscribers here..."
+      rows={8}
+      disabled={isSendingCustomContent || isTriggeringSend}
+    />
+    <div class="custom-send-button-container">
+      <SubmitButton
+        label="Send Custom Message"
+        callback={handleSendCustomContent}
+        loading={isSendingCustomContent}
+        disabled={!customEmailContent.trim() || isTriggeringSend || isUpdatingActive || isPerformingAction}
+      />
+    </div>
   </div>
 </ToggleCard>
 
@@ -456,7 +516,24 @@
 
   .trigger-send-container {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end; // Keep existing button to the right
+    margin-top: 1rem; // Add some margin if it's not the last element anymore
+  }
+
+  .custom-content-send-section {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border-light, #eee);
+
+    h4 { // Styling for the new subtitle using TextTypes props
+        margin-bottom: 0.75rem;
+    }
+  }
+  
+  .custom-send-button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0.75rem;
   }
 
   // Added styles for switch container and disabled state

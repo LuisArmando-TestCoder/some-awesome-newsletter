@@ -44,6 +44,7 @@
     emailMaskSender: string;
     appPassword: string;
     includeImages: boolean; // Added for image toggle
+    isPublic: boolean; // Added for public/private toggle
   };
 
   // Initialize updateFields with the defined type and default values
@@ -60,6 +61,7 @@
     emailMaskSender: "",
     appPassword: "",
     includeImages: true, // Default to true
+    isPublic: true, // Default to true
   };
 
   // State to hold the actual parsed cron string
@@ -81,6 +83,7 @@
       appPassword: newsSource.appPassword || "",
       // Default to true if undefined in the source data
       includeImages: newsSource.includeImages === undefined ? true : newsSource.includeImages,
+      isPublic: newsSource.isPublic === undefined ? true : newsSource.isPublic, // Initialize isPublic
     };
 
     // Initialize actualCronSchedule by parsing the initial value
@@ -155,6 +158,7 @@
       emailMaskSender: updateFields.emailMaskSender || null,
       appPassword: updateFields.appPassword || null,
       includeImages: updateFields.includeImages, // Add the flag to the payload
+      isPublic: updateFields.isPublic, // Add the isPublic flag to the payload
     };
 
     // Prevent submission if email validation fails
@@ -281,6 +285,17 @@
         </div>
         <MarkdownText {canReveal}>
           --Whether to include automatically sourced stock images in the generated newsletter content.--
+        </MarkdownText>
+
+        <!-- Public/Private Toggle -->
+        <div class="switch-container">
+          <label for="is-public-switch">Publicly Visible in Widget</label>
+          <Switch
+            bind:toggled={updateFields.isPublic}
+          />
+        </div>
+        <MarkdownText {canReveal}>
+          --If enabled, this news source can be listed for users to subscribe to in the widget. Private sources are only for direct links.--
         </MarkdownText>
 
         <!-- Email Credentials Inputs -->

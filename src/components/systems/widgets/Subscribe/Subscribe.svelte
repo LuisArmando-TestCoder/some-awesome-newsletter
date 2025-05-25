@@ -1,41 +1,235 @@
+<script lang="ts">
+  import { onMount, setContext } from "svelte";
+  import { page } from "$app/stores";
+  import store, { saveToStore, getFromStore } from "../../../store.ts";
+  import type { Store } from "../../../types.ts"; // Corrected Store import
+  import type { SvelteComponent } from "svelte";
+  import { writable, get, type Writable } from 'svelte/store'; // Imported get
+
+  import A_InitialParams from "./stages/A_InitialParams.svelte";
+  import B_UserDetails from "./stages/B_UserDetails.svelte";
+  import C_ConfirmAndSubscribe from "./stages/C_ConfirmAndSubscribe.svelte";
+
+  // Props for endpoint, if provided directly
+  export let endpoint: string = "/public-subscribe"; // Default endpoint
+  const endpointStore = writable(endpoint);
+  setContext('getParentEndpoint', () => endpointStore); // Provide endpoint to child contexts
+
+  // Store prefilled optional data from URL to be accessed by C_ConfirmAndSubscribe
+  onMount(() => {
+    const urlParams = $page.url.searchParams;
+    const prefilledLanguage = urlParams.get("language") || undefined;
+    const prefilledCountry = urlParams.get("countryOfResidence") || undefined;
+    const prefilledBio = urlParams.get("bio") || undefined;
+
+    // Save these to the store using distinct keys for the widget
+    if (prefilledLanguage) saveToStore({ widgetPrefilledLanguage: prefilledLanguage });
+    if (prefilledCountry) saveToStore({ widgetPrefilledCountry: prefilledCountry });
+    if (prefilledBio) saveToStore({ widgetPrefilledBio: prefilledBio });
+
+    // Save prefilled email and name for B_UserDetails
+    const pfEmail = urlParams.get("email") || "";
+    const pfName = urlParams.get("name") || "";
+    if (pfEmail) saveToStore({ widgetPrefilledEmail: pfEmail });
+    if (pfName) saveToStore({ widgetPrefilledName: pfName });
+
+    // Update endpointStore if prop changes after mount
+    endpointStore.set(endpoint);
+  });
+
+  // Update endpointStore when the prop changes
+  $: endpointStore.set(endpoint);
+
+  // Step management
+  let currentStepIndex = writable(0);
+  // let componentInstances: any[] = []; // Not directly needed if binding to stepStates
+
+  // Define steps and their conditions
+  const steps: {
+    component: any; // Using any for broader compatibility with svelte:component
+    condition: (s: Store) => boolean;
+    props?: Record<string, any>;
+  }[] = [
+    {
+      component: A_InitialParams,
+      condition: () => true, // Always show first step
+    },
+    {
+      component: B_UserDetails,
+      condition: (s: Store) => !!(s.widgetConfiguratorId && s.widgetSelectedNewsSourceId),
+    },
+    {
+      component: C_ConfirmAndSubscribe,
+      condition: (s: Store) =>
+        !!(
+          s.widgetConfiguratorId &&
+          s.widgetSelectedNewsSourceId &&
+          s.widgetEmail && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s.widgetEmail) && // Basic email format check
+          s.widgetName && s.widgetName.trim() !== ""
+        ),
+      props: { endpoint: endpoint } // Pass endpoint to the final step directly as well
+    },
+  ];
+
+  let activeStepComponent: typeof SvelteComponent = steps[0].component;
+  let activeStepProps = steps[0].props || {};
+  let stepStates = steps.map(() => writable(false)); // isStepComplete for each step
+
+  // Subscribe to store changes to re-evaluate step conditions and current step
+  store.subscribe(s => {
+    let newStepIndex = 0;
+    for (let i = 0; i < steps.length; i++) {
+      if (steps[i].condition(s)) {
+        if (i === $currentStepIndex) { // If current step is still valid
+             // Check if this step instance has reported completion
+            if (get(stepStates[i])) {
+                 if (i + 1 < steps.length && steps[i+1].condition(s)) {
+                    newStepIndex = i + 1; // Try to move to next if current is complete and next is valid
+                 } else {
+                    newStepIndex = i; // Stay if current is complete but next is not yet valid
+                 }
+            } else {
+                newStepIndex = i; // Stay if current step is not yet complete
+            }
+            break; 
+        } else if (i > $currentStepIndex && get(stepStates[i-1])) { 
+            // If we are looking past current step, and previous was complete
+            newStepIndex = i;
+            break;
+        } else if (i < $currentStepIndex) {
+            // Allow moving back if a previous step becomes valid again (e.g. data cleared)
+            newStepIndex = i; // This logic might need refinement for complex backward navigation
+        }
+      } else {
+        // If a condition for a step before current one fails, move back to it.
+        if (i <= $currentStepIndex) {
+            newStepIndex = i;
+        }
+        break; // Stop at the first step whose condition is not met
+      }
+    }
+    
+    // More robust way to find the furthest valid step
+    let furthestValidStep = 0;
+    for (let i = 0; i < steps.length; i++) {
+        if (steps[i].condition(s)) {
+            if (i === 0 || get(stepStates[i-1])) { // Check if previous step was completed
+                 furthestValidStep = i;
+            } else {
+                break; // Previous step not complete, so can't advance
+            }
+        } else {
+            break; // Condition for this step not met
+        }
+    }
+    newStepIndex = furthestValidStep;
 
 
-Haz una página en some-awesome-newsletter/src/components/systems/widgets/Subscribe/Subscribe.svelte que tome info en los query paramos, pero que también tome un end point param al que le envíe toda la info, para que los dueños de negocio puedan usarla
+    if ($currentStepIndex !== newStepIndex) {
+      currentStepIndex.set(newStepIndex);
+    }
+    activeStepComponent = steps[$currentStepIndex].component;
+    activeStepProps = { ...(steps[$currentStepIndex].props || {}), canReveal: true };
+  });
+  
+  function handleStepComplete(index: number, complete: boolean) {
+    stepStates[index].set(complete);
+    // Trigger re-evaluation of current step by briefly updating the main store
+    // This is a bit of a hack; a more direct event system or derived store might be cleaner.
+    store.update(s => ({...s})); 
+  }
 
-Record the requests that it is sending
+</script>
 
-Tienen que haber New Sources privados y públicos y los privados son los que pueden ser listados a la hora de escogerlos en el widget y de parte del usuario porque de parte de un un gestor de New Sources ellos pueden poner un widget para una específica pero si no ponen en New Source entonces los usuarios podrían escoger los Shorts pero no queremos que aparezcan los ciertos sucesos privados entonces Privados serían como los que está usando esta chica Bella
+<div class="subscribe-widget-stepped">
+  <h2>Subscribe to our Newsletter</h2>
+  
+  <div class="steps-container">
+    {#each steps as step, i}&nbsp;
+        <div 
+            class="step-indicator" 
+            class:active={$currentStepIndex === i}
+            class:completed={get(stepStates[i]) && $currentStepIndex > i}
+            class:accessible={step.condition($store) && (i === 0 || get(stepStates[i-1]))}
+            on:click={() => {
+                if (step.condition($store) && (i === 0 || get(stepStates[i-1]) || i < $currentStepIndex)) {
+                    currentStepIndex.set(i);
+                }
+            }}
+        >
+            Step {i + 1}
+        </div>
+    {/each}
+  </div>
 
-only the email?
+  <div class="step-content">
+    {#key $currentStepIndex}
+        <svelte:component 
+            this={steps[$currentStepIndex].component} 
+            canReveal={true}
+            {...(steps[$currentStepIndex].props || {})}
+            bind:isStepComplete={stepStates[$currentStepIndex]}
+            on:stepStatusChange={(e: { detail: { isComplete: boolean } }) => handleStepComplete($currentStepIndex, e.detail.isComplete)} 
+            endpoint={steps[$currentStepIndex].component === C_ConfirmAndSubscribe ? endpoint : undefined}
+        />
+    {/key}
+  </div>
+</div>
 
-to which newsSource?
-
-Autofill remaining data with the query params
-
-Este es el endpoint del back
-ai-newsletter-translated/API/newsletter/subscribeEndpoint.ts
-
-Estos son los tipos del backend
-ai-newsletter-translated/types.ts
-
-Estos son los tipos del front
-some-awesome-newsletter/src/components/types.ts
-
-Este es el store del front
-some-awesome-newsletter/src/components/store.ts
-
-In here there is submitPublicSubscription
-some-awesome-newsletter/src/components/systems/steps/StepsTowardsSubscribe/stages/C_Language.svelte
-
-U have to use this request
-some-awesome-newsletter/src/components/systems/requests/submitPublicSubscription.ts
-
-Look at all the steps this has and look at each component these components use some-awesome-newsletter/src/components/systems/steps/StepsTowardsSubscribe/MainSteps.svelte
-
-the query params this uses have to be taken (nosotros podemos o no tener el query param de newssource)
-some-awesome-newsletter/src/components/systems/steps/StepsTowardsSubscribe/stages/A_Welcome.svelte
-
-Para la configuración de los news sources privados y publicos (sólo los publicos son visibles en el widget) esta configuracion debe estar en avanzado aquí, por defecto públicos
-some-awesome-newsletter/src/components/systems/steps/StepsTowardsPublish/stages/H_Dashboard/NewsSource/UpdateNewsSourceForm.svelte 
-
-esta página se va a usar como widget y como página de suscripción, por lo que tiene que tener un botón de subscribe y subir todos los datos al endpoint
+<style>
+  .subscribe-widget-stepped {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-family: sans-serif;
+    background-color: #f9f9f9;
+  }
+  .subscribe-widget-stepped h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 1.5rem;
+  }
+  .steps-container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+  }
+  .step-indicator {
+    padding: 0.5rem 1rem;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: default;
+    color: #aaa;
+    font-weight: bold;
+    transition: all 0.3s ease;
+  }
+  .step-indicator.accessible {
+      cursor: pointer;
+      color: #555;
+  }
+  .step-indicator.accessible:hover {
+      background-color: #f0f0f0;
+      border-color: #ddd;
+  }
+  .step-indicator.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+    cursor: default;
+  }
+  .step-indicator.completed {
+    background-color: #28a745;
+    color: white;
+    border-color: #28a745;
+  }
+  .step-content {
+    padding: 1rem;
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  }
+</style>

@@ -72,6 +72,8 @@ export interface NewsSource {
   emailMaskSender?: string; // New optional field
   appPassword?: string; // New optional field
   active?: boolean;
+  isPublic?: boolean; // Added for public/private visibility in widgets
+  includeImages?: boolean; // Optional flag to include images in the newsletter
 }
 
 export interface EmailAuth {

@@ -181,9 +181,9 @@
     <span class="color-name" aria-live="polite">({colorName})</span>
   </div>
 
-  <MarkdownText {canReveal}>
+  <!-- <MarkdownText {canReveal}>
     ==Related colors== for different types of color ==palettes==.
-  </MarkdownText>
+  </MarkdownText> -->
 
   <!-- AI-Powered Smart Suggestions Panel -->
   <!-- <section class="suggestion-panel" aria-label="Smart Color Suggestions">

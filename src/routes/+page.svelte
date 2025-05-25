@@ -42,7 +42,7 @@
 
 <GlobalData />
 <SocketClient />
-<ChosenShader />
+<!-- <ChosenShader /> -->
 <Header />
 <MainSteps />
 

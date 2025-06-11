@@ -388,7 +388,7 @@
   <div class="switch-container" class:disabled={isUpdatingActive}>
     <span
       style="font-size: 0.8em; color: var(--color-text-secondary); margin-right: 0.5rem;"
-      >Active:</span
+      >{newsSource.active ?? false ? "Active" : "Inactive"}:</span
     >
     <Switch
       toggled={newsSource.active ?? false}

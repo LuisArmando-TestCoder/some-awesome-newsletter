@@ -74,15 +74,15 @@ export default async () => {
        console.log("[GET-SESSION] Successfully refetched config. Updating store."); // Use console.log
        saveToStore({ config: updatedJson }); // Save the UPDATED config
        // Update theme based on potentially updated config
-       foregroundColor.set(updatedJson.brandColor);
-       complementaryColor.set(getComplementaryColor(updatedJson.brandColor));
+       // foregroundColor.set(updatedJson.brandColor);
+       // complementaryColor.set(getComplementaryColor(updatedJson.brandColor));
     }
     // --- End refetch ---
 
   } else {
     // If news sources already existed, just update theme from initial fetch
-    foregroundColor.set(json.brandColor);
-    complementaryColor.set(getComplementaryColor(json.brandColor));
+    // foregroundColor.set(json.brandColor);
+    // complementaryColor.set(getComplementaryColor(json.brandColor));
   }
 
 

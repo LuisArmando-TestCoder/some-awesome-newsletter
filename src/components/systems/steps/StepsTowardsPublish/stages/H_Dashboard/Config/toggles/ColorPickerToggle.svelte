@@ -14,9 +14,4 @@
 </MarkdownText>
 <ColorPicker
   {canReveal}
-  position="responsive"
-  selectedColor={$store.config.brandColor}
-  onChange={(value) => {
-    saveToConfig({ brandColor: value });
-  }}
 />

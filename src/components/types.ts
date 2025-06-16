@@ -96,7 +96,7 @@ export interface Config {
   openAiApiKey?: string;
   email: EmailConfig;
   configuratorId?: string;
-  brandColor?: string;
+  // brandColor?: string;
   emailSignature?: string;
   senderName?: string; // Added
   newsletterTitle?: string; // Added

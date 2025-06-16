@@ -20,7 +20,7 @@
     export let newsSources: NewsSource[] = [];
   
     /** Primary color for charts */
-    export let brandColor: string | undefined = '#2196f3'; // Default fallback
+    // export let brandColor: string | undefined = '#2196f3'; // Default fallback
   
     /** Secondary color for charts */
     export let complementaryColor: string | undefined = '#ff9800'; // Default fallback
@@ -123,7 +123,6 @@
           <TextTypes type="subtitle">Subscribers per Source</TextTypes>
           <Stat
             dataCallback={getSubscriberCounts}
-            HEXColor={brandColor}
             xText="News Source"
             yText="Subscribers"
           />

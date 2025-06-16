@@ -30,7 +30,7 @@ export let canReveal = true; // Keep props passed from parent
   $: newsSources = $store.config?.newsSources || []; // Use $store directly
   $: subscribersByNewsSource = $store.subscribers || {}; // Get subscribers from central store (loaded from localStorage initially)
   $: allLeadData = $store.leads || {}; // Get leads from central store
-  $: brandColor = $store.config?.brandColor; // Use $store directly
+  // $: brandColor = $store.config?.brandColor; // Use $store directly
   $: complementaryColor = $store.complementaryColor; // Assuming this is separate in the main store
   $: isRefreshing = $store.isRefreshingSubscribers; // Subscribe to the refresh flag
 
@@ -94,7 +94,6 @@ export let canReveal = true; // Keep props passed from parent
             {subscribersByNewsSource}
             {allLeadData}
             {newsSources}
-            {brandColor}
             {complementaryColor}
           />
         {:else}

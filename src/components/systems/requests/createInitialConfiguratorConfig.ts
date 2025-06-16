@@ -10,10 +10,10 @@ export default async function createInitialConfiguratorConfig(authHeaders: {
     newsletterSubject: "Daily News",
     newsletterTitle: "Morning Bulletin",
     senderName: configId.split("@")[0],
-    brandColor:
-      get(store).colorPalette[
-        Math.floor(Math.random() * get(store).colorPalette.length)
-      ],
+    // brandColor:
+    //   get(store).colorPalette[
+    //     Math.floor(Math.random() * get(store).colorPalette.length)
+    //   ],
     emailSignature: "Translated this news article for you",
   };
 

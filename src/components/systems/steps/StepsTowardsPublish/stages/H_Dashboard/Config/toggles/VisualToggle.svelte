@@ -12,7 +12,7 @@
 <AutoCollapseToggle {canReveal}
     toggles={{
         logoImage: [ImageToggle],
-        brandColor: [ColorPickerToggle],
+        // brandColor: [ColorPickerToggle],
         emailSignature: [EmailSignatureToggle],
     }}
 />

@@ -99,7 +99,7 @@
     grid-gap: 1rem;
 
     &.expanded {
-      padding: 0.5rem 1rem 10rem;
+      padding: 0.5rem 1rem;
     }
   }
 </style>

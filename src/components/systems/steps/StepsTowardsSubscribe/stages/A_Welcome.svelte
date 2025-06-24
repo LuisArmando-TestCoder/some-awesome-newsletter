@@ -32,10 +32,10 @@
 
 <Centered>
   <MarkdownText {canReveal}>
-    ## **AI-Powered Newsletter** every now and then.
+    ## Automatic Newsletter.
   </MarkdownText>
 
   <MarkdownText {canReveal}>
-    ### Get **Curated Content** in your own language.
+    ### Set it once - use it forever.
   </MarkdownText>
 </Centered>

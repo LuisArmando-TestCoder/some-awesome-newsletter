@@ -6,8 +6,9 @@
 </script>
 
 <Centered>
+
   <MarkdownText {canReveal}>
-    It **automatically detects** each user's ==country of residence.==The AI then delivers **the most interesting article** from ==your feed==, **fully translated** into ==their language.==
+    ### ...use it forever.
   </MarkdownText>
 
   <style lang="scss">

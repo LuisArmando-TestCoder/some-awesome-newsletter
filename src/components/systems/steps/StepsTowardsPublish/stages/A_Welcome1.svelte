@@ -7,10 +7,6 @@
 
 <Centered>
   <MarkdownText {canReveal}>
-      ## Newsletter **where** **there** isn't one
-  </MarkdownText>
-  
-  <MarkdownText {canReveal}>
-      ### **AI-powered** newsletter for **marketing agencies**
+    ## Automatic Newsletter
   </MarkdownText>
 </Centered>

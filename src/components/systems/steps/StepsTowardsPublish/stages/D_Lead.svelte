@@ -8,13 +8,13 @@
 </script>
 
 <Centered>
-  <MarkdownText {canReveal}>--Let's start with your lead--</MarkdownText>
+  <MarkdownText {canReveal}>--In order to take clients from the newsletter to your website--</MarkdownText>
 
   <MarkdownText {canReveal}>
-    ### Where do you want to **lead** your clients?
+    ### What is your personal or organizational website?
   </MarkdownText>
   <Link
-    placeholder="Your website's URL"
+    placeholder="The link to your website"
     value={$store.lead}
     onChange={(lead) =>
       saveToStore({

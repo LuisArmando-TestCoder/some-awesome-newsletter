@@ -8,13 +8,13 @@
 </script>
 
 <Centered>
-  <MarkdownText {canReveal}>--The email your clients will see...--</MarkdownText>
+  <MarkdownText {canReveal}>--You will use this email to sign in into our automatic newsletter configuration dashboard--</MarkdownText>
   
   <MarkdownText {canReveal}
-    >### On behalf of **whom** do we **send** the **newsletter**?</MarkdownText
+    >### Your account's email</MarkdownText
   >
   <Email
-    placeholder="Your email or your organization's"
+    placeholder="The email you will be using to log-in here from now on"
     value={$store.configuratorEmail}
     onChange={(value) => {
       saveToStore({

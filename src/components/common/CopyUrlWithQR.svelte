@@ -1,12 +1,13 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import QRCode from "qrcode";
+    import MarkdownText from "../systems/texts/MarkdownText/MarkdownText.svelte";
 
-    export let configuratorEmail: string;
-    export let newsSourceId: string;
+    export let configuratorEmail: string = "";
+    export let newsSourceId: string = "";
     export let lead: string | undefined | null = ""; // Handle potential undefined/null
-
-    let fullUrl = "";
+    export let fullUrl: string = "";
+    export let label: string = "";
     let qrCodeDataUrl = "";
     let copyButtonText = "Copy URL";
     let downloadButtonText = "Download QR";
@@ -14,7 +15,7 @@
     // Reactive statement to update URL and QR code when props change
     $: {
         const leadParam = lead ? `&lead=${encodeURIComponent(lead)}` : "";
-        fullUrl = `https://aibanewsletter.club/subscribe?configuratorId=${encodeURIComponent(configuratorEmail)}&newsSourceId=${encodeURIComponent(newsSourceId)}${leadParam}`;
+        fullUrl = fullUrl || `https://aibanewsletter.club/subscribe?configuratorId=${encodeURIComponent(configuratorEmail)}&newsSourceId=${encodeURIComponent(newsSourceId)}${leadParam}`;
         generateQrCode(fullUrl);
     }
 
@@ -100,6 +101,9 @@
                         >{downloadButtonText}</button
                     >
                 </div>
+                <a on:click={copyUrl} href={fullUrl} target="_blank">
+                    {label}
+                </a>
             </div>
         {:else}
             <p>Generating QR code...</p>
@@ -107,7 +111,15 @@
     </div>
 </div>
 
-<style>
+<style lang="scss">
+    a {
+        cursor: pointer;
+        color: var(--color-foreground);
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
     .copy-url-container {
         font-family: sans-serif;
         border-radius: 8px;

@@ -8,14 +8,13 @@
 </script>
 
 <Centered>
-  <MarkdownText {canReveal}>--Now... for your newsletter feed--</MarkdownText>
+  <MarkdownText {canReveal}>--In order to use your blog or news feed we need you to type its link--</MarkdownText>
 
   <MarkdownText {canReveal}>
-    ### From which **blog** or **news site** do you want to **generate** your
-    **content?**
+    ### We will generate content from your feed, so you don't have to create a newsletter from scratch
   </MarkdownText>
   <Link
-    placeholder="The news site or blog"
+    placeholder="Your news' site or blog's link"
     value={$store.newsSource}
     onChange={(newsSource) =>
       saveToStore({

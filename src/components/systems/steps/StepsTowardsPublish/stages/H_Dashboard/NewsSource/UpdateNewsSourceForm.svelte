@@ -187,13 +187,6 @@
 
 <form class="news-source-update-form" on:submit|preventDefault={handleUpdate}>
   <!-- Remove #if updateFields block as it's initialized directly now -->
-
-    <!-- Removed Active Switch Container -->
-    <CopyUrlWithQR
-      configuratorEmail={$store.configuratorEmail}
-      newsSourceId={newsSource.id}
-      lead={newsSource.lead}
-    />
     <ToggleCard {canReveal} cardTitle="Basic Settings" isOpen={false} onChange={() => {}}>
       <div class="selectors-group">
 
@@ -225,6 +218,18 @@
 
     <ToggleCard {canReveal} cardTitle="Advanced Generation Settings" isOpen={false} onChange={() => {}}>
       <div class="selectors-group">
+
+        <!-- Removed Active Switch Container -->
+        <CopyUrlWithQR
+          configuratorEmail={$store.configuratorEmail}
+          newsSourceId={newsSource.id}
+          lead={newsSource.lead}
+          label="Link for manual subscription"
+        />
+        <CopyUrlWithQR
+          fullUrl={`https://aibanewsletter.club/users/${encodeURIComponent($store.configuratorEmail)}/${encodeURIComponent(newsSource.id)}`}
+          label="Post Request URL for API subscription / Body: {"{ bio, countryOfResidence, email, language, name }"}"
+        />
 
         <ScheduleTime
           label="Schedule Time"

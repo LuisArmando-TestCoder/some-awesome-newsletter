@@ -25,7 +25,7 @@
   };
 
   function setInitialNonInteractiveSlidesAutomaticSlideTime() {
-    const timings = [3e3, 2.5e3, 2.5e3];
+    const timings = [2.5e3, 2e3, 2e3];
     let timing = 0;
 
     timings.forEach((waitDuration, index) => {

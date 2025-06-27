@@ -11,7 +11,7 @@
   <MarkdownText {canReveal}>--In order for clients to go from the newsletter to your website--</MarkdownText>
 
   <MarkdownText {canReveal}>
-    ### What is your personal or organizational website?
+    ### Put your personal or organizational website
   </MarkdownText>
   <Link
     placeholder="The link to your website"

@@ -8,7 +8,7 @@
 </script>
 
 <Centered>
-  <MarkdownText {canReveal}>--In order to take clients from the newsletter to your website--</MarkdownText>
+  <MarkdownText {canReveal}>--In order for clients to go from the newsletter to your website--</MarkdownText>
 
   <MarkdownText {canReveal}>
     ### What is your personal or organizational website?

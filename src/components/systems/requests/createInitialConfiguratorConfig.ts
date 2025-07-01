@@ -14,7 +14,7 @@ export default async function createInitialConfiguratorConfig(authHeaders: {
     //   get(store).colorPalette[
     //     Math.floor(Math.random() * get(store).colorPalette.length)
     //   ],
-    emailSignature: "Translated this news article for you",
+    emailSignature: "",
   };
 
   const response = await fetch(

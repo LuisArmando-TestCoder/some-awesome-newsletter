@@ -1,6 +1,7 @@
 <script lang="ts">
     import { fade } from 'svelte/transition';
     import type { SvelteComponent } from 'svelte';
+    // Animation for CSS transitions is not possible due to external re-rendering for state transitions, so use gsap or keyframes
 
     /**
      * Describes one step in the checklist.
@@ -8,7 +9,7 @@
      */
     interface CheckCondition<T = SvelteComponent> {
         componentValue: new (...args: any) => T;
-        condition: boolean;   // purely primitive boolean for strict typing
+        condition: () => boolean;   // purely primitive boolean for strict typing
         checkName: string;
         tooltip: string;
     }
@@ -22,11 +23,12 @@
      * Derive which <li> in the component list should be visible.
      * Logic: visible when (current && !next) OR (!current && prev)
      */
+
     $: showStates = checkConditions.map((cc, idx) => {
-        const prev = checkConditions[idx - 1]?.condition ?? true;
-        const next = checkConditions[idx + 1]?.condition ?? false;
-        const current = cc.condition;
-        return (current && !next) || (!current && prev);
+        const prev = checkConditions[idx - 1]?.condition() ?? true;
+        const next = checkConditions[idx + 1]?.condition() ?? false;
+        const current = cc.condition();
+        return prev && !next && !current;
     });
 </script>
 
@@ -35,8 +37,8 @@
     {#each checkConditions as { checkName, tooltip, condition }, idx}
         <li
             class="check"
-            class:checked={condition}
-            aria-checked={condition}
+            class:checked={condition()}
+            aria-checked={condition()}
             tabindex="0"
         >
             {checkName}
@@ -49,9 +51,7 @@
 <ul class="component" aria-live="polite">
     {#each checkConditions as { componentValue }, idx}
         <li class:show={showStates[idx]} transition:fade|local>
-            {#if showStates[idx]}
-                <svelte:component this={componentValue} />
-            {/if}
+            <svelte:component this={componentValue} />
         </li>
     {/each}
 </ul>
@@ -63,20 +63,42 @@
         padding: 0;
         display: flex;
         gap: 0.5rem;
-        justify-content: center;
         margin-bottom: 1rem;
+        flex-direction: column;
 
         .check {
             position: relative;
             padding: 0.5rem 1rem;
-            border: 2px solid #ccc;
-            border-radius: 6px;
             cursor: default;
             transition: background-color 0.3s, border-color 0.3s;
 
+            &::before {
+                content: "";
+                display: inline-block;
+                width: 5px;
+                height: 5px;
+                position: relative;
+                border: 1px solid #4caf50;
+                border-radius: 50%;
+                margin-right: 10px;
+                transition: 0.5s;
+                background: transparent;
+            }
+
             &.checked {
-                border-color: #4caf50;
-                background-color: rgba(76, 175, 80, 0.1);
+                &::before {
+                    animation: appear .35s forwards;
+                    background: transparent;
+                }
+
+                @keyframes appear {
+                    0% {
+                        background: transparent;
+                    }
+                    to {
+                        background: #4caf50;
+                    }
+                }
             }
 
             .tooltip {
@@ -117,11 +139,24 @@
             width: 100%;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.4s ease;
+            transition: .5s;
+            transform: translateX(100px);
 
             &.show {
                 opacity: 1;
                 pointer-events: all;
+                animation: show .65s forwards;
+            }
+
+            @keyframes show {
+                0% {
+                    opacity: 0;
+                    transform: translateX(100px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0px);
+                }
             }
         }
     }

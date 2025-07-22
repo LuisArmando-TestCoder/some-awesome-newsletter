@@ -1,7 +1,7 @@
 <!-- src/components/systems/steps/StepsTowardsPublish/stages/H_Dashboard/Users/NewsSourceUserManagement.svelte -->
 <script lang="ts">
   import { tick } from "svelte";
-  import { get } from "svelte/store";
+  import { get, writable } from "svelte/store";
   import type { Writable } from "svelte/store";
   import type { NewsSource, NewsletterUser } from "../../../../../../types.ts"; // Using local types path
   import store, { latestMessage } from "../../../../../../store.ts"; // Imported latestMessage
@@ -19,6 +19,7 @@
   import Switch from "../../../../../selectors/Switch/Switch.svelte"; // ADDED Switch component import
   import ToggleCard from "../../../../../buttons/ToggleCard/ToggleCard.svelte"; // Adjusted path - verify this is correct
   import TextTypes from "../../../../../texts/TextTypes/TextTypes.svelte"; // Adjust path
+  import PlainText from "../../../../../inputs/PlainText/PlainText.svelte";
   import TextArea from "../../../../../inputs/TextArea/TextArea.svelte"; // Import new TextArea
   import Svg from "../../../../../../SVG/SVG.svelte"; // Adjust path
   import IconButton from "../../../../../buttons/IconButton/IconButton.svelte";
@@ -57,6 +58,7 @@
   let customEmailContent: string = "";
   /** Loading state for sending custom content */
   let isSendingCustomContent: boolean = false;
+  const search = writable("");
 
   // REMOVED event dispatcher
 
@@ -66,7 +68,13 @@
   $: cardTitle = `Subscribers for: ${newsSource.url?.split("//")[1]?.split("/")[0] ?? newsSource.id}`;
   $: subscriberCount = subscribers.length;
   // Create a reversed copy for display (newest first) without mutating the prop
-  $: reversedSubscribers = subscribers ? [...subscribers].reverse() : [];
+  $: reversedSubscribers = subscribers
+    ? [...subscribers]
+        .reverse()
+        .filter((s) =>
+          `${s.name} ${s.email}`.toLowerCase().includes($search.toLowerCase()),
+        )
+    : [];
   $: sourceName =
     newsSource.url?.split("//")[1]?.split("/")[0] ?? newsSource.id; // User-friendly name
 
@@ -450,6 +458,12 @@
     <TextTypes type="subtitle">
       Current Subscribers ({subscriberCount})
     </TextTypes>
+
+    <PlainText
+      label="Search by name or email"
+      bind:value={$search}
+      placeholder="Search..."
+    />
 
     {#if subscriberCount > 0}
       <div class="subscriber-cards-container">

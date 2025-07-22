@@ -29,7 +29,6 @@ export let canReveal = true; // Keep props passed from parent
   $: config = $store.config;
   $: newsSources = $store.config?.newsSources || []; // Use $store directly
   $: subscribersByNewsSource = $store.subscribers || {}; // Get subscribers from central store (loaded from localStorage initially)
-  $: allLeadData = $store.leads || {}; // Get leads from central store
   // $: brandColor = $store.config?.brandColor; // Use $store directly
   $: complementaryColor = $store.complementaryColor; // Assuming this is separate in the main store
   $: isRefreshing = $store.isRefreshingSubscribers; // Subscribe to the refresh flag
@@ -40,7 +39,6 @@ export let canReveal = true; // Keep props passed from parent
   // --- State for Auto-Collapse (Using Writable Store) ---
   const openNewsSourceIdStore = writable<string | null>(null); // Store for the open card ID
 
-  // REMOVED Event Handler
 </script>
 
 <!-- HTML TEMPLATE SECTION -->
@@ -92,7 +90,7 @@ export let canReveal = true; // Keep props passed from parent
          {#if subsReadyForAnalytics}
           <UserAnalytics
             {subscribersByNewsSource}
-            {allLeadData}
+            allLeadData={$store.leads}
             {newsSources}
             {complementaryColor}
           />

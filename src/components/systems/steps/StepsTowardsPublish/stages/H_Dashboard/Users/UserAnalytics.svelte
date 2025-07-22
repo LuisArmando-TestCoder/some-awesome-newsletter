@@ -30,8 +30,7 @@
   
     /** Contains loading error message, if any */
     export let loadingError: string | null = null;
-  
-  
+
     // --- Data Transformation Functions (kept within component for encapsulation) ---
   
     /**
@@ -62,6 +61,8 @@
     function getLeadClickCounts() {
        // Ensure newsSources is an array before mapping
       if (!Array.isArray(newsSources)) return [];
+
+      console.log(newsSources, "newsSources")
   
       // We directly use the allLeadData prop here.
       // The structure was assumed to be { configId: { nsId: { userId: {...} } } }
@@ -69,6 +70,8 @@
       // the structure passed down should already be filtered for the specific configId,
       // i.e., { nsId: { userId: { ... } } }
       const leadDataForCurrentConfig = allLeadData || {};
+
+      console.log(allLeadData, "allLeadData")
   
       return newsSources
         .map((ns) => {
@@ -76,6 +79,8 @@
   
           const nsLeadData = leadDataForCurrentConfig[ns.id];
           let clickCount = 0;
+
+          console.log(nsLeadData, "nsLeadData")
   
           // Calculate clicks: Sum of keys (users) for this news source
           if (nsLeadData && typeof nsLeadData === 'object') {
@@ -100,6 +105,7 @@
     // Reactive computed values if needed, though passing callbacks to Stat is fine
     // $: subscriberChartData = getSubscriberCounts();
     // $: leadChartData = getLeadClickCounts();
+    $: allLeadData;
 
 </script>
 

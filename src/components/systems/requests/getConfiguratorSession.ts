@@ -8,7 +8,7 @@ import { getComplementaryColor } from "../inputs/ColorPicker/getColorSuggestions
 import createInitialConfiguratorConfig from "./createInitialConfiguratorConfig.ts";
 import createNewsSource from "./createNewsSource.ts";
 // Removed unused imports: addNewsletterUser, subscribeNewsletterUser
-import { refreshSubscribers } from "../steps/StepsTowardsPublish/stages/H_Dashboard/Users/UserDataService.ts"; // Import refresh function
+import { loadInitialData, refreshSubscribers } from "../steps/StepsTowardsPublish/stages/H_Dashboard/Users/UserDataService.ts"; // Import refresh function
 
 async function getConfigFetchResponse(authHeaders: {
   [index: string]: string;
@@ -96,6 +96,7 @@ export default async () => {
     console.error("[GET-SESSION] Error during initial subscriber refresh:", error);
     // Decide if login should fail or proceed with potentially missing subscriber data
   } finally {
+    // await loadInitialData();
     saveToStore({ isRefreshingSubscribers: false }); // Clear flag after fetch (success or error)
   }
   // --- End subscriber fetch ---

@@ -12,7 +12,16 @@ export default async function getLeadsForConfigurator() {
     }
   );
 
-  if (!response.ok) return null;
+  
+  if (!response.ok) {
+    console.log("response", response)
 
-  return await response.json();
+    return null;
+  }
+  
+  const object =  await response.json();
+
+  console.log(object, "object N")
+
+  return object;
 }

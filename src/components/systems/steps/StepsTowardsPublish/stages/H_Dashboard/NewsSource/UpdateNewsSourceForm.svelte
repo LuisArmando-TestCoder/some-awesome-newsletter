@@ -19,7 +19,6 @@
   import EmailInput from "../../../../../inputs/Email/Email.svelte"; // Added
   import MarkdownText from "../../../../../texts/MarkdownText/MarkdownText.svelte"; // Added
   import { onMount } from "svelte"; // Ensure onMount is imported
-  import { parseNaturalLanguageToCron } from "../../../../../inputs/ScheduleTime/naturalCronParser.ts"; // Import the parser - Added .js extension
 
   // The news source to update
   export let newsSource: NewsSource;
@@ -64,9 +63,6 @@
     isPublic: true, // Default to true
   };
 
-  // State to hold the actual parsed cron string
-  let actualCronSchedule: string = "";
-
   onMount(() => {
     // Update updateFields with actual newsSource data once mounted
     updateFields = {
@@ -85,16 +81,6 @@
       includeImages: newsSource.includeImages === undefined ? true : newsSource.includeImages,
       isPublic: newsSource.isPublic === undefined ? true : newsSource.isPublic, // Initialize isPublic
     };
-
-    // Initialize actualCronSchedule by parsing the initial value
-    const initialParseResult = parseNaturalLanguageToCron(updateFields.scheduleTime);
-    if (initialParseResult.success) {
-      actualCronSchedule = initialParseResult.cron ?? "";
-    } else {
-      // Handle potential initial parse error if needed, maybe default or log
-      console.warn("Initial schedule time could not be parsed:", updateFields.scheduleTime, initialParseResult.error);
-      actualCronSchedule = ""; // Default to empty if initial value is invalid NL
-    }
   });
 
   // Validation for email credentials
@@ -121,6 +107,7 @@
   // Variables para el campo Personality:
   let rawContent: string = "";
   let showRawContentArea: boolean = false;
+  let debounceTimeout: ReturnType<typeof setTimeout>;
 
   function toggleRawContentArea() {
     showRawContentArea = !showRawContentArea;
@@ -149,7 +136,7 @@
       country: updateFields.country,
       lead: updateFields.lead,
       personality: updateFields.personality || "", // Ensure it's always a string in payload
-      scheduleTime: actualCronSchedule, // Use the parsed cron string
+      scheduleTime: updateFields.scheduleTime, // Pass the frequency string
       linkSelector: updateFields.linkSelector,
       url: updateFields.url,
       id: updateFields.id,
@@ -160,6 +147,8 @@
       includeImages: updateFields.includeImages, // Add the flag to the payload
       isPublic: updateFields.isPublic, // Add the isPublic flag to the payload
     };
+
+    console.log("[UpdateNewsSourceForm.svelte] Payload to be sent:", payload);
 
     // Prevent submission if email validation fails
     if (emailValidationError) {
@@ -233,10 +222,15 @@
 
         <ScheduleTime
           label="Schedule Time"
-          placeholder="e.g., 'every Monday at 9 AM'"
-          bind:value={updateFields.scheduleTime}
-          onChange={(input, cron) => { // Add handler to capture parsed cron
-            actualCronSchedule = cron; // Update the state variable holding the real cron string
+          value={updateFields.scheduleTime}
+          onChange={(schedule) => {
+            console.log("[UpdateNewsSourceForm.svelte] onChange received:", schedule);
+            updateFields.scheduleTime = schedule;
+            // Debounce the update
+            clearTimeout(debounceTimeout);
+            debounceTimeout = setTimeout(() => {
+              handleUpdate();
+            }, 1000);
           }}
         />
 

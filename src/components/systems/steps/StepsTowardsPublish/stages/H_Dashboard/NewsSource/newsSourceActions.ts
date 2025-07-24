@@ -20,6 +20,7 @@ export async function processNewsSourceAction<T>(
   onSuccess: (result: any) => void
 ): Promise<void> {
   const payload = transform(fields);
+  console.log("[newsSourceActions.ts] Payload:", payload);
 
   const validationError = validateFields({
     url: payload.url,

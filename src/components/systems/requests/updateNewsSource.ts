@@ -7,6 +7,7 @@ export default async function updateNewsSource(
   updateData: { [index: string]: string | boolean | null }, // Allow boolean/null for 'active' and optional fields
   newsSourceId?: string // Make id optional to match expected callback
 ) {
+  console.log("[updateNewsSource.ts] updateData:", updateData);
   const configId = get(store).configuratorEmail;
   // Ensure newsSourceId is provided, otherwise throw error or handle appropriately
   if (!newsSourceId) {
@@ -32,7 +33,7 @@ export default async function updateNewsSource(
   }
 
   const json = await response.json();
-  console.log("json?.newsSource", json?.newsSource, response);
+  console.log("[updateNewsSource.ts] Response from server:", json);
 
   // Replace the existing news source with the updated one
   const currentSources = get(store).config.newsSources || [];

@@ -164,6 +164,11 @@
       (msg) => (errorMessage = msg),
       "Failed to update news source. Please try again.",
       (updated) => {
+        console.log("[UpdateNewsSourceForm.svelte] onSuccess received:", JSON.stringify(updated, null, 2));
+        if (updated.linkSelector) {
+          console.log("[UpdateNewsSourceForm.svelte] Updating linkSelector to:", updated.linkSelector);
+          updateFields = { ...updateFields, linkSelector: updated.linkSelector };
+        }
         updatedNewsSource.set(updated);
       }
     );
@@ -172,6 +177,19 @@
   const isRegenerating = writable(false);
   const errorRegeneratingSelectors = writable(false);
   $: $store; // Keep store subscription if needed elsewhere
+
+  latestMessage.subscribe((message) => {
+    if (message.includes("Regenerating selectors")) {
+      isRegenerating.set(true);
+      errorRegeneratingSelectors.set(false);
+    } else if (message.includes("Selectors regenerated successfully")) {
+      isRegenerating.set(false);
+      errorRegeneratingSelectors.set(false);
+    } else if (message.includes("Error regenerating selectors")) {
+      isRegenerating.set(false);
+      errorRegeneratingSelectors.set(true);
+    }
+  });
 </script>
 
 <form class="news-source-update-form" on:submit|preventDefault={handleUpdate}>
@@ -226,11 +244,6 @@
           onChange={(schedule) => {
             console.log("[UpdateNewsSourceForm.svelte] onChange received:", schedule);
             updateFields.scheduleTime = schedule;
-            // Debounce the update
-            clearTimeout(debounceTimeout);
-            debounceTimeout = setTimeout(() => {
-              handleUpdate();
-            }, 1000);
           }}
         />
 

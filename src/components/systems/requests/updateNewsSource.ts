@@ -33,7 +33,7 @@ export default async function updateNewsSource(
   }
 
   const json = await response.json();
-  console.log("[updateNewsSource.ts] Response from server:", json);
+  console.log("[updateNewsSource.ts] Response from server:", JSON.stringify(json, null, 2));
 
   // Replace the existing news source with the updated one
   const currentSources = get(store).config.newsSources || [];

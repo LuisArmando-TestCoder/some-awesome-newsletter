@@ -11,6 +11,7 @@
     const id = $page.url.searchParams.get("q");
     if (id) {
       try {
+        console.log("$store.apiURL()", $store.apiURL())
         const response = await fetch(`${$store.apiURL()}/article/${id}`);
         if (response.ok) {
           article = await response.json();

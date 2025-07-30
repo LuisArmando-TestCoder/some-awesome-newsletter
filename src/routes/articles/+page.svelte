@@ -4,6 +4,7 @@
   import languages from "../../components/systems/inputs/Language/languages.ts";
     import ThemeChanger from "../../components/ThemeChanger/ThemeChanger.svelte";
     import PlainText from "../../components/systems/inputs/PlainText/PlainText.svelte";
+    import store from "../../components/store.ts";
 
   let articleHolder: any = null;
   let articles: any[] = [];
@@ -14,7 +15,7 @@
     const holder = $page.url.searchParams.get("holder");
     if (holder) {
       try {
-        const response = await fetch(`http://localhost:8000/articles/${holder}`);
+        const response = await fetch(`${$store.apiURL}/articles/${holder}`);
         if (response.ok) {
           articleHolder = await response.json();
           fetchArticles();

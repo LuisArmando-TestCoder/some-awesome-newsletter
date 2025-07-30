@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
   import { page } from "$app/stores";
     import ThemeChanger from "../../components/ThemeChanger/ThemeChanger.svelte";
+    import store from "../../components/store.ts";
 
   let article: any = null;
   let error: string | null = null;
@@ -10,7 +11,7 @@
     const id = $page.url.searchParams.get("q");
     if (id) {
       try {
-        const response = await fetch(`http://localhost:8000/article/${id}`);
+        const response = await fetch(`${$store.apiURL}/article/${id}`);
         if (response.ok) {
           article = await response.json();
         } else {

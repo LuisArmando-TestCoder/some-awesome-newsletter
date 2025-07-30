@@ -3,6 +3,7 @@
   import { page } from "$app/stores";
   import languages from "../../components/systems/inputs/Language/languages.ts";
     import ThemeChanger from "../../components/ThemeChanger/ThemeChanger.svelte";
+    import PlainText from "../../components/systems/inputs/PlainText/PlainText.svelte";
 
   let articleHolder: any = null;
   let articles: any[] = [];
@@ -67,7 +68,7 @@
 
 <div class="articles-page">
   <h1>Articles</h1>
-  <input type="text" bind:value={search} placeholder="Search articles..." />
+  <PlainText bind:value={search} placeholder="Search articles..." />
   {#if error}
     <p class="error">{error}</p>
   {:else if articles.length > 0}

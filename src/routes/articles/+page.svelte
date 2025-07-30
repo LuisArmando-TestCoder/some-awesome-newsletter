@@ -34,7 +34,7 @@
   async function fetchArticles() {
     const allArticleIds = Object.values(articleHolder).flat();
     const articlePromises = allArticleIds.map(async (id) => {
-      const response = await fetch(`http://localhost:8000/article/${id}`);
+      const response = await fetch(`${$store.apiURL()}/article/${id}`);
       const article = await response.json();
       return { ...article, id };
     });

@@ -68,6 +68,7 @@
 
   .article-page {
     padding: 2rem;
+    line-height: 2;
   }
 
   .error {

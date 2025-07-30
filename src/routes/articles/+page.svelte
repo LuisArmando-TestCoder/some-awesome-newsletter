@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
   import { page } from "$app/stores";
   import languages from "../../components/systems/inputs/Language/languages.ts";
+    import ThemeChanger from "../../components/ThemeChanger/ThemeChanger.svelte";
 
   let articleHolder: any = null;
   let articles: any[] = [];
@@ -62,6 +63,8 @@
   }
 </script>
 
+<ThemeChanger visible={false} />
+
 <div class="articles-page">
   <h1>Articles</h1>
   <input type="text" bind:value={search} placeholder="Search articles..." />
@@ -85,6 +88,8 @@
 </div>
 
 <style lang="scss">
+  @use "../styles/everything.scss";
+
   .articles-page {
     padding: 2rem;
   }
@@ -100,7 +105,7 @@
     padding: 1rem;
     border-radius: 8px;
     text-decoration: none;
-    color: inherit;
+    color: var(--color-background);
     transition: all 0.2s ease-in-out;
 
     &:hover {

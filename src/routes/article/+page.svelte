@@ -11,7 +11,7 @@
     const id = $page.url.searchParams.get("q");
     if (id) {
       try {
-        const response = await fetch(`${$store.apiURL}/article/${id}`);
+        const response = await fetch(`${$store.apiURL()}/article/${id}`);
         if (response.ok) {
           article = await response.json();
         } else {

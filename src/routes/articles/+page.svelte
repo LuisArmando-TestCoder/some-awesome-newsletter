@@ -15,7 +15,7 @@
     const holder = $page.url.searchParams.get("holder");
     if (holder) {
       try {
-        const response = await fetch(`${$store.apiURL}/articles/${holder}`);
+        const response = await fetch(`${$store.apiURL()}/articles/${holder}`);
         if (response.ok) {
           articleHolder = await response.json();
           fetchArticles();

@@ -199,7 +199,7 @@
 
         <PlainText
           label="Buyer Persona"
-          placeholder="e.g. 'Expats from US'"
+          placeholder="e.g. 'My Dear Newsletter Users'"
           bind:value={updateFields.community}
         />
 

@@ -47,7 +47,7 @@
         type: "website",
         url: f.url,
         country: "US",
-        community: "Expats from US",
+        community: "Newsletter Users",
         lead: f.lead,
         scheduleTime: f.schedule,
         personality: f.personality,

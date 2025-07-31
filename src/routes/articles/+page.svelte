@@ -41,9 +41,20 @@
     articles = await Promise.all(articlePromises);
   }
 
+  function getImage(content: string) {
+    const div = document.createElement("div");
+  
+    div.innerHTML = content;
+
+    const img = div.querySelector("img");
+
+    return img;
+  }
+
   function getPreview(content: string) {
     const div = document.createElement("div");
     div.innerHTML = content;
+
     return div.innerText.trim().replace(/\n/g, " ").replace(/\s+/g, " ").split(" ").slice(0, 20).join(" ");
   }
 
@@ -79,6 +90,7 @@
       <div class="articles-grid">
         {#each articlesInLang as article}
           <a href={`/article?q=${article.id}`} class="article-card">
+            <img class="img" src={getImage(article.content)?.src} alt={getImage(article.content)?.alt}>
             <h3>{getPreview(article.content)}...</h3>
             <p>{article.creation}</p>
           </a>
@@ -93,6 +105,13 @@
 <style lang="scss">
   @use "../styles/everything.scss";
 
+  .img {
+    width: 100%;
+    height: 200px;
+    transition: 0.35s;
+    object-fit: cover;
+  }
+
   .articles-page {
     padding: 2rem;
   }
@@ -104,16 +123,16 @@
   }
 
   .article-card {
-    border: 1px solid #ccc;
-    padding: 1rem;
     border-radius: 8px;
     text-decoration: none;
     color: var(--color-background);
     transition: all 0.2s ease-in-out;
 
     &:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      .img {
+        transform: translate(5px, 5px);
+        box-shadow: -5px -5px var(--color-background);
+      }
     }
   }
 

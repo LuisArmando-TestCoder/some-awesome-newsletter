@@ -83,6 +83,7 @@
   }
 
   .custom-textarea {
+    field-sizing: content;
     flex-grow: 1;
     width: 100%;
     padding: 0.75rem;

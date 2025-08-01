@@ -28,7 +28,10 @@
       try {
         const response = await fetch(`${$store.apiURL()}/articles/${holder}`);
         if (response.ok) {
-          articleHolder = await response.json();
+          articleHolder = Object.fromEntries(Object.entries(await response.json()).map(([key, value]) => {
+            return [key, value.reverse()]
+          }));
+          console.log("article holder", articleHolder)
           fetchArticles();
           const articleId = $page.url.searchParams.get("article");
           if (articleId) {

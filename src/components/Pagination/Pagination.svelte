@@ -110,7 +110,7 @@
             disabled={currentPage === totalPages}
             aria-label="Next Page"
         >
-            Next ▶
+            Next ►
         </button>
     </nav>
 {/if}

@@ -10,6 +10,8 @@
   import Pagination from "../../components/Pagination/Pagination.svelte";
   import Modal from "../../components/Modal/Modal.svelte";
   import store from "../../components/store.ts";
+    import SmoothScrollWrapper from "../../components/SmoothScrollWrapper/SmoothScrollWrapper.svelte";
+    import SoftTitle from "../../components/SoftTitle/SoftTitle.svelte";
 
   /* ────────────────── types ─────────────────── */
   interface Article {
@@ -30,6 +32,7 @@
   let articles: Article[] = [];
   let error: string | null = null;
   let search = "";
+  let currentId = writable();
   const ITEMS_PER_PAGE = 10;
 
   /* ───────────── utilities ───────────── */
@@ -111,6 +114,7 @@
       // avoid duplicates
       if (!articles.some((art) => art.id === id)) {
         articles = [...articles, article];
+        currentId.set(id)
       }
       return article;
     } catch (err) {
@@ -170,61 +174,70 @@
 
 <ThemeChanger visible={false} />
 
-<div class="articles-page">
-  <h1>Articles</h1>
-  <PlainText bind:value={search} placeholder="Search articles..." />
+<SmoothScrollWrapper>
+  <SoftTitle text={$currentId ?? "Newsletter"}/>
 
-  {#if error}
-    <p class="error">{error}</p>
-  {:else if articles.length === 0}
-    <p>Loading...</p>
-  {:else}
-    {#each Object.entries(groupedArticles) as [language, group]}
-    
-    <!-- WITH IMAGES -->
-    {#if group.withImages.length}
-    <Pagination {ITEMS_PER_PAGE} items={group.withImages} let:pageItems>
-      <h2 class="articles-flag">{getFlag(language)} {language}</h2>
-      <div class="articles-grid">
-            {#each pageItems as article (article.id)}
-              <button class="article-card" on:click={() => openArticle(article)}>
-                <img
-                  class="img"
-                  src={getImage(article.content)?.src || "placeholder.jpg"}
-                  alt={getImage(article.content)?.alt || ""}
-                />
-                <h3>{getTitle(article.content)}</h3>
-                <div>
-                  <o>{getPreview(noH1(article.content))}...</o>
-                </div>
-                <p>
-                  <sup>{article.creation}</sup>
-                </p>
-              </button>
-            {/each}
-          </div>
-        </Pagination>
-      {/if}
-
-      <!-- WITHOUT IMAGES -->
-      {#if group.withoutImages.length}
-        <Pagination {ITEMS_PER_PAGE} items={group.withoutImages} let:pageItems>
-          <ul class="articles-list">
-            {#each pageItems as article (article.id)}
-              <li>
-                <button class="article-card no-img" on:click={() => openArticle(article)}>
+  <div class="articles-page">
+    <h1>Articles</h1>
+    <PlainText bind:value={search} placeholder="Search articles..." />
+  
+  
+    {#if error}
+      <p class="error">{error}</p>
+    {:else if articles.length === 0}
+      <p>Loading...</p>
+    {:else}
+      {#each Object.entries(groupedArticles) as [language, group]}
+      
+      <!-- WITH IMAGES -->
+      {#if group.withImages.length}
+      <Pagination {ITEMS_PER_PAGE} items={group.withImages} let:pageItems>
+        <h2 class="articles-flag">{getFlag(language)} {language}</h2>
+        <div class="articles-grid">
+              {#each pageItems as article (article.id)}
+                <button class="article-card" on:click={() => openArticle(article)}>
+                  <img
+                    class="img"
+                    src={getImage(article.content)?.src || "placeholder.jpg"}
+                    alt={getImage(article.content)?.alt || ""}
+                  />
                   <h3>{getTitle(article.content)}</h3>
-                  <p>{getPreview(article.content)}</p>
-                  <small>{article.creation}</small>
+                  <div>
+                    <o>{getPreview(noH1(article.content))}...</o>
+                  </div>
+                  <p>
+                    <sup>{article.creation}</sup>
+                  </p>
                 </button>
-              </li>
-            {/each}
-          </ul>
-        </Pagination>
-      {/if}
-    {/each}
-  {/if}
-</div>
+              {/each}
+            </div>
+          </Pagination>
+        {/if}
+  
+        <!-- WITHOUT IMAGES -->
+        {#if group.withoutImages.length}
+          <Pagination {ITEMS_PER_PAGE} items={group.withoutImages} let:pageItems>
+            <ul class="articles-list">
+              {#each pageItems as article (article.id)}
+                <li>
+                  <button class="article-card no-img" on:click={() => openArticle(article)}>
+                    <h3>{getTitle(article.content)}</h3>
+                    <p>{getPreview(article.content)}</p>
+                    <small>{article.creation}</small>
+                  </button>
+                </li>
+              {/each}
+            </ul>
+          </Pagination>
+        {/if}
+      {/each}
+    {/if}
+  </div>
+  
+  <p class="loading-articles">
+    {$currentId}
+  </p>
+</SmoothScrollWrapper>
 
 <!-- ───────────── modal ───────────── -->
 <Modal {showModal} onChange={(v) => { if (!v) closeModal(); }}>
@@ -239,6 +252,12 @@
 
 <style lang="scss">
   @use "../styles/everything.scss";
+
+  .loading-articles {
+    text-align: right;
+    text-wrap: wrap;
+    padding: 1rem;
+  }
 
   .articles-flag {
     padding-top: 3rem;

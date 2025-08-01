@@ -10,8 +10,9 @@
   import Pagination from "../../components/Pagination/Pagination.svelte";
   import Modal from "../../components/Modal/Modal.svelte";
   import store from "../../components/store.ts";
-    import SmoothScrollWrapper from "../../components/SmoothScrollWrapper/SmoothScrollWrapper.svelte";
-    import SoftTitle from "../../components/SoftTitle/SoftTitle.svelte";
+  import SmoothScrollWrapper from "../../components/SmoothScrollWrapper/SmoothScrollWrapper.svelte";
+  import SoftTitle from "../../components/SoftTitle/SoftTitle.svelte";
+    import { isDarkTheme, themeIndex } from "../../components/ThemeChanger/theme-store.ts";
 
   /* ────────────────── types ─────────────────── */
   interface Article {
@@ -53,15 +54,9 @@
 
   function noH1(content: string) {
     const div = document.createElement("div");
-
     div.innerHTML = content;
-
-    const h1 = div.querySelector("h1");
-    const h2 = div.querySelector("h2");
-
-    h1?.remove()
-    h2?.remove()
-
+    div.querySelector("h1")?.remove();
+    div.querySelector("h2")?.remove();
     return div.innerHTML;
   }
 
@@ -77,8 +72,7 @@
   /* ────────── navigation helpers ────────── */
   function updateURLParam(id: string | null) {
     const url = new URL($page.url);
-    if (id) url.searchParams.set("article", id);
-    else url.searchParams.delete("article");
+    id ? url.searchParams.set("article", id) : url.searchParams.delete("article");
     goto(`/articles?${url.searchParams.toString()}`, { replaceState: true });
   }
 
@@ -95,11 +89,10 @@
   }
 
   async function openArticleById(id: string) {
-    // look in already-fetched list
     let article = articles.find((a) => a.id === id);
     if (!article) {
       article = await fetchSingleArticle(id);
-      if (!article) return; // not found / fetch failed
+      if (!article) return;
     }
     openArticle(article);
   }
@@ -111,10 +104,9 @@
       if (!r.ok) return null;
       const a = await r.json();
       const article = { ...a, id } as Article;
-      // avoid duplicates
       if (!articles.some((art) => art.id === id)) {
         articles = [...articles, article];
-        currentId.set(id)
+        currentId.set(id);
       }
       return article;
     } catch (err) {
@@ -125,13 +117,14 @@
 
   /* ───────────── initial load ───────────── */
   onMount(async () => {
+    isDarkTheme.set(true)
+
     const holder = $page.url.searchParams.get("holder");
     if (!holder) {
       error = "No article holder specified.";
       return;
     }
 
-    // Deep-link support
     const deepLinkedId = $page.url.searchParams.get("article");
 
     try {
@@ -143,16 +136,14 @@
 
       const ids: string[] = Object.values(articleHolder).flat();
 
-      // Fetch deep-linked article first (await so modal opens after it arrives)
       if (deepLinkedId && ids.includes(deepLinkedId)) {
         await openArticleById(deepLinkedId);
       }
 
-      // Fire-and-forget the rest
       ids
         .filter((id) => id !== deepLinkedId)
         .forEach((id) => fetchSingleArticle(id));
-    } catch (e) {
+    } catch {
       error = "Error fetching article list.";
     }
   });
@@ -165,9 +156,7 @@
   $: groupedArticles = filteredArticles.reduce((acc, a) => {
     const lang = a.language || "unknown";
     if (!acc[lang]) acc[lang] = { withImages: [], withoutImages: [] } as Group;
-    hasImage(a.content)
-      ? acc[lang].withImages.push(a)
-      : acc[lang].withoutImages.push(a);
+    hasImage(a.content) ? acc[lang].withImages.push(a) : acc[lang].withoutImages.push(a);
     return acc;
   }, {} as Record<string, Group>);
 </script>
@@ -175,45 +164,44 @@
 <ThemeChanger visible={false} />
 
 <SmoothScrollWrapper>
-  <SoftTitle text={$currentId ?? "Newsletter"}/>
+  <SoftTitle text={$currentId ?? "Newsletter"} />
 
   <div class="articles-page">
     <h1>Articles</h1>
     <PlainText bind:value={search} placeholder="Search articles..." />
-  
-  
+
     {#if error}
       <p class="error">{error}</p>
     {:else if articles.length === 0}
       <p>Loading...</p>
     {:else}
       {#each Object.entries(groupedArticles) as [language, group]}
-      
-      <!-- WITH IMAGES -->
-      {#if group.withImages.length}
-      <Pagination {ITEMS_PER_PAGE} items={group.withImages} let:pageItems>
-        <h2 class="articles-flag">{getFlag(language)} {language}</h2>
-        <div class="articles-grid">
+        <!-- WITH IMAGES -->
+        {#if group.withImages.length}
+          <Pagination {ITEMS_PER_PAGE} items={group.withImages} let:pageItems>
+            <h2 class="articles-flag">{getFlag(language)} {language}</h2>
+            <div class="articles-grid">
               {#each pageItems as article (article.id)}
                 <button class="article-card" on:click={() => openArticle(article)}>
-                  <img
-                    class="img"
-                    src={getImage(article.content)?.src || "placeholder.jpg"}
-                    alt={getImage(article.content)?.alt || ""}
-                  />
+                  <!-- replaced <img> with background div -->
+                  <div
+                    class="img bg-img"
+                    role="img"
+                    aria-label={getImage(article.content)?.alt || ""}
+                    style={`background-image:url('${getImage(article.content)?.src || "placeholder.jpg"}');`}
+                  ></div>
+
                   <h3>{getTitle(article.content)}</h3>
                   <div>
                     <o>{getPreview(noH1(article.content))}...</o>
                   </div>
-                  <p>
-                    <sup>{article.creation}</sup>
-                  </p>
+                  <p><sup>{article.creation}</sup></p>
                 </button>
               {/each}
             </div>
           </Pagination>
         {/if}
-  
+
         <!-- WITHOUT IMAGES -->
         {#if group.withoutImages.length}
           <Pagination {ITEMS_PER_PAGE} items={group.withoutImages} let:pageItems>
@@ -233,14 +221,12 @@
       {/each}
     {/if}
   </div>
-  
-  <p class="loading-articles">
-    {$currentId}
-  </p>
+
+  <p class="loading-articles">{$currentId}</p>
 </SmoothScrollWrapper>
 
 <!-- ───────────── modal ───────────── -->
-<Modal {showModal} onChange={(v) => { if (!v) closeModal(); }}>
+<Modal {showModal} onChange={(v) => !v && closeModal()}>
   {#if selectedArticle}
     <div class="modal-content-inner">
       <h2>{getTitle(selectedArticle.content)}</h2>
@@ -263,10 +249,16 @@
     padding-top: 3rem;
   }
 
-  .img {
+  .img,
+  .bg-img {
     width: 100%;
     height: 200px;
+    /* object-fit only affects real <img>; harmless for <div> */
     object-fit: cover;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* keep background fixed on scroll */
     transition: 0.35s;
     border: 0.1px solid;
   }
@@ -304,7 +296,9 @@
     &:hover {
       text-decoration: underline;
 
-      .img {
+      /* shared hover effect for img / bg-img */
+      .img,
+      .bg-img {
         transform: translate(5px, 5px);
         box-shadow: -5px -5px var(--color-background);
       }
@@ -315,7 +309,7 @@
     padding: 0 0 1rem;
 
     &:hover {
-      border: .1px solid;
+      border: 0.1px solid;
       transform: translate(-5px, -5px);
       box-shadow: 5px 5px var(--color-background);
       padding: 0 1rem 1rem;

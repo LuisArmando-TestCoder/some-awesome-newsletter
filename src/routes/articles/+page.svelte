@@ -315,6 +315,7 @@
     padding: 0 0 1rem;
 
     &:hover {
+      border: .1px solid;
       transform: translate(-5px, -5px);
       box-shadow: 5px 5px var(--color-background);
       padding: 0 1rem 1rem;

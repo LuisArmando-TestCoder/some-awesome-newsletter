@@ -1,133 +1,171 @@
 <script lang="ts">
+  /* ─────────────────── imports ─────────────────── */
   import { onMount } from "svelte";
+  import { writable } from "svelte/store";
   import { page } from "$app/stores";
   import { goto } from "$app/navigation";
   import languages from "../../components/systems/inputs/Language/languages.ts";
   import ThemeChanger from "../../components/ThemeChanger/ThemeChanger.svelte";
   import PlainText from "../../components/systems/inputs/PlainText/PlainText.svelte";
+  import Pagination from "../../components/Pagination/Pagination.svelte";
   import Modal from "../../components/Modal/Modal.svelte";
   import store from "../../components/store.ts";
 
+  /* ────────────────── types ─────────────────── */
   interface Article {
     id: string;
     content: string;
     creation: string;
     language: string;
   }
+  interface Group {
+    withImages: Article[];
+    withoutImages: Article[];
+  }
 
+  /* ─────────────── state ─────────────── */
   let articleHolder: any = null;
-  let showModal = false;
+  let showModal = writable(false);
   let selectedArticle: Article | null = null;
   let articles: Article[] = [];
   let error: string | null = null;
   let search = "";
+  const ITEMS_PER_PAGE = 10;
 
-  onMount(async () => {
-    const holder = $page.url.searchParams.get("holder");
-    if (holder) {
-      try {
-        const response = await fetch(`${$store.apiURL()}/articles/${holder}`);
-        if (response.ok) {
-          articleHolder = Object.fromEntries(Object.entries(await response.json()).map(([key, value]) => {
-            return [key, value.reverse()]
-          }));
-          console.log("article holder", articleHolder)
-          fetchArticles();
-          const articleId = $page.url.searchParams.get("article");
-          if (articleId) {
-            const article = articles.find(a => a.id === articleId);
-            if (article) {
-              selectedArticle = article;
-              showModal = true;
-            }
-          }
-        } else {
-          error = "Article holder not found.";
-        }
-      } catch (e) {
-        error = "Error fetching article holder.";
-      }
-    } else {
-      error = "No article holder specified.";
-    }
-  });
+  /* ───────────── utilities ───────────── */
+  function getImage(html: string) {
+    const div = document.createElement("div");
+    div.innerHTML = html;
+    return div.querySelector("img") as HTMLImageElement | null;
+  }
+  const hasImage = (c: string) => !!getImage(c);
 
-  async function fetchArticles() {
-    const allArticleIds = Object.values(articleHolder).flat();
-    for (const id of allArticleIds) {
-      fetch(`${$store.apiURL()}/article/${id}`)
-        .then((response) => response.json())
-        .then((article) => {
-          articles = [...articles, { ...article, id }];
-        });
-    }
+  function getTitle(html: string) {
+    const div = document.createElement("div");
+    div.innerHTML = html;
+    const h1 = div.querySelector("h1")?.innerText;
+    const h2 = div.querySelector("h2")?.innerText;
+    return h1 ? (h1.length >= (h2?.length || 0) ? h1 : h2) : h2 || "Article";
   }
 
-  function getImage(content: string) {
+  function noH1(content: string) {
     const div = document.createElement("div");
 
     div.innerHTML = content;
 
-    const img = div.querySelector("img");
+    const h1 = div.querySelector("h1");
+    const h2 = div.querySelector("h2");
 
-    return img;
+    h1?.remove()
+    h2?.remove()
+
+    return div.innerHTML;
   }
 
-  function getTitle(content: string) {
+  function getPreview(html: string) {
     const div = document.createElement("div");
-
-    div.innerHTML = content;
-
-    const h1 = div.querySelector("h1")?.innerText
-    const h2 = div.querySelector("h2")?.innerText
-
-    const title = h1 ? (
-      (h1.length > (h2?.length || 0)) ? h1 : h2
-    ) : h2;
-
-    return title;
+    div.innerHTML = html;
+    return div.innerText.trim().replace(/\s+/g, " ").split(" ").slice(0, 10).join(" ");
   }
 
-  function getPreview(content: string) {
-    const div = document.createElement("div");
-    div.innerHTML = content;
+  const getFlag = (code: string) =>
+    languages.find((l) => l.code === code)?.flag || "";
 
-    return div.innerText.trim().replace(/\n/g, " ").replace(/\s+/g, " ").split(" ").slice(0, 20).join(" ");
-  }
-
-  $: filteredArticles = articles.filter((article) =>
-    article.content.toLowerCase().includes(search.toLowerCase())
-  );
-
-  $: groupedArticles = filteredArticles.reduce((acc, article) => {
-    const { language } = article;
-    if (!acc[language]) {
-      acc[language] = [];
-    }
-    acc[language].push(article);
-    return acc;
-  }, {} as { [key: string]: Article[] });
-
-  function getFlag(langCode: string) {
-    const lang = languages.find((l) => l.code === langCode);
-    return lang ? lang.flag : "";
+  /* ────────── navigation helpers ────────── */
+  function updateURLParam(id: string | null) {
+    const url = new URL($page.url);
+    if (id) url.searchParams.set("article", id);
+    else url.searchParams.delete("article");
+    goto(`/articles?${url.searchParams.toString()}`, { replaceState: true });
   }
 
   function openArticle(article: Article) {
     selectedArticle = article;
-    showModal = true;
-    const url = new URL($page.url);
-    url.searchParams.set("article", article.id);
-    goto(url.toString(), { replaceState: true });
+    showModal.set(true);
+    updateURLParam(article.id);
   }
 
   function closeModal() {
-    showModal = false;
+    showModal.set(false);
     selectedArticle = null;
-    const url = new URL($page.url);
-    url.searchParams.delete("article");
-    goto(url.toString(), { replaceState: true });
+    updateURLParam(null);
   }
+
+  async function openArticleById(id: string) {
+    // look in already-fetched list
+    let article = articles.find((a) => a.id === id);
+    if (!article) {
+      article = await fetchSingleArticle(id);
+      if (!article) return; // not found / fetch failed
+    }
+    openArticle(article);
+  }
+
+  /* ───────────── data fetching ───────────── */
+  async function fetchSingleArticle(id: string): Promise<Article | null> {
+    try {
+      const r = await fetch(`${$store.apiURL()}/article/${id}`);
+      if (!r.ok) return null;
+      const a = await r.json();
+      const article = { ...a, id } as Article;
+      // avoid duplicates
+      if (!articles.some((art) => art.id === id)) {
+        articles = [...articles, article];
+      }
+      return article;
+    } catch (err) {
+      console.error(`Failed to fetch article ${id}: ${err}`);
+      return null;
+    }
+  }
+
+  /* ───────────── initial load ───────────── */
+  onMount(async () => {
+    const holder = $page.url.searchParams.get("holder");
+    if (!holder) {
+      error = "No article holder specified.";
+      return;
+    }
+
+    // Deep-link support
+    const deepLinkedId = $page.url.searchParams.get("article");
+
+    try {
+      const resp = await fetch(`${$store.apiURL()}/articles/${holder}`);
+      if (!resp.ok) throw new Error("holder fetch failed");
+      articleHolder = Object.fromEntries(
+        Object.entries(await resp.json()).map(([k, v]) => [k, v.reverse()])
+      );
+
+      const ids: string[] = Object.values(articleHolder).flat();
+
+      // Fetch deep-linked article first (await so modal opens after it arrives)
+      if (deepLinkedId && ids.includes(deepLinkedId)) {
+        await openArticleById(deepLinkedId);
+      }
+
+      // Fire-and-forget the rest
+      ids
+        .filter((id) => id !== deepLinkedId)
+        .forEach((id) => fetchSingleArticle(id));
+    } catch (e) {
+      error = "Error fetching article list.";
+    }
+  });
+
+  /* ───────────── derived stores ───────────── */
+  $: filteredArticles = articles.filter((a) =>
+    a.content.toLowerCase().includes(search.toLowerCase())
+  );
+
+  $: groupedArticles = filteredArticles.reduce((acc, a) => {
+    const lang = a.language || "unknown";
+    if (!acc[lang]) acc[lang] = { withImages: [], withoutImages: [] } as Group;
+    hasImage(a.content)
+      ? acc[lang].withImages.push(a)
+      : acc[lang].withoutImages.push(a);
+    return acc;
+  }, {} as Record<string, Group>);
 </script>
 
 <ThemeChanger visible={false} />
@@ -135,30 +173,66 @@
 <div class="articles-page">
   <h1>Articles</h1>
   <PlainText bind:value={search} placeholder="Search articles..." />
+
   {#if error}
     <p class="error">{error}</p>
-  {:else if articles.length > 0}
-    {#each Object.entries(groupedArticles) as [language, articlesInLang]}
-      <h2>{getFlag(language)} {language}</h2>
-      <div class="articles-grid">
-        {#each articlesInLang as article (article.id)}
-          <button on:click={() => openArticle(article)} class="article-card">
-            <img class="img" src={getImage(article.content)?.src} alt={getImage(article.content)?.alt}>
-            <h3>{getTitle(article.content)}...</h3>
-            <p>{article.creation}</p>
-          </button>
-        {/each}
-      </div>
-    {/each}
-  {:else}
+  {:else if articles.length === 0}
     <p>Loading...</p>
+  {:else}
+    {#each Object.entries(groupedArticles) as [language, group]}
+    
+    <!-- WITH IMAGES -->
+    {#if group.withImages.length}
+    <Pagination {ITEMS_PER_PAGE} items={group.withImages} let:pageItems>
+      <h2 class="articles-flag">{getFlag(language)} {language}</h2>
+      <div class="articles-grid">
+            {#each pageItems as article (article.id)}
+              <button class="article-card" on:click={() => openArticle(article)}>
+                <img
+                  class="img"
+                  src={getImage(article.content)?.src || "placeholder.jpg"}
+                  alt={getImage(article.content)?.alt || ""}
+                />
+                <h3>{getTitle(article.content)}</h3>
+                <div>
+                  <o>{getPreview(noH1(article.content))}...</o>
+                </div>
+                <p>
+                  <sup>{article.creation}</sup>
+                </p>
+              </button>
+            {/each}
+          </div>
+        </Pagination>
+      {/if}
+
+      <!-- WITHOUT IMAGES -->
+      {#if group.withoutImages.length}
+        <Pagination {ITEMS_PER_PAGE} items={group.withoutImages} let:pageItems>
+          <ul class="articles-list">
+            {#each pageItems as article (article.id)}
+              <li>
+                <button class="article-card no-img" on:click={() => openArticle(article)}>
+                  <h3>{getTitle(article.content)}</h3>
+                  <p>{getPreview(article.content)}</p>
+                  <small>{article.creation}</small>
+                </button>
+              </li>
+            {/each}
+          </ul>
+        </Pagination>
+      {/if}
+    {/each}
   {/if}
 </div>
 
-<Modal showModal={showModal} on:close={closeModal}>
+<!-- ───────────── modal ───────────── -->
+<Modal {showModal} onChange={(v) => { if (!v) closeModal(); }}>
   {#if selectedArticle}
     <div class="modal-content-inner">
-      {@html selectedArticle.content}
+      <h2>{getTitle(selectedArticle.content)}</h2>
+      <p><small>Created: {selectedArticle.creation} | Language: {selectedArticle.language}</small></p>
+      {@html noH1(selectedArticle.content)}
     </div>
   {/if}
 </Modal>
@@ -166,12 +240,16 @@
 <style lang="scss">
   @use "../styles/everything.scss";
 
+  .articles-flag {
+    padding-top: 3rem;
+  }
+
   .img {
     width: 100%;
     height: 200px;
-    transition: 0.35s;
     object-fit: cover;
-    border: .1px solid;
+    transition: 0.35s;
+    border: 0.1px solid;
   }
 
   .articles-page {
@@ -182,21 +260,31 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 1rem;
-    place-items: self-start;
+    margin-bottom: 2rem;
+    place-items: start;
+  }
+
+  .articles-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+    padding: 0;
   }
 
   .article-card {
-    border-radius: 8px;
-    text-decoration: none;
-    color: var(--color-background);
-    transition: all 0.2s ease-in-out;
     background: none;
     border: none;
     padding: 0;
     cursor: pointer;
     text-align: left;
+    color: var(--color-background);
+    transition: all 0.2s ease-in-out;
 
     &:hover {
+      text-decoration: underline;
+
       .img {
         transform: translate(5px, 5px);
         box-shadow: -5px -5px var(--color-background);
@@ -204,17 +292,31 @@
     }
   }
 
+  .no-img {
+    padding: 0 0 1rem;
+
+    &:hover {
+      transform: translate(-5px, -5px);
+      box-shadow: 5px 5px var(--color-background);
+      padding: 0 1rem 1rem;
+    }
+  }
+
   .error {
     color: red;
   }
 
-  input {
-    width: 100%;
-    padding: 0.5rem;
-    margin-bottom: 1rem;
-  }
-  
   .modal-content-inner {
-      color: black;
+    background: white;
+    color: black;
+    padding: 20px;
+    max-height: 80vh;
+    overflow-y: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  h2 {
+    margin-top: 0;
   }
 </style>

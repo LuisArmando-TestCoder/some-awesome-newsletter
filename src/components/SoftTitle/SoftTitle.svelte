@@ -47,6 +47,8 @@
 
 <style lang="scss">
     .soft {
+        --height: 60vh;
+
         filter: invert(1);
         text-transform: uppercase;
         font-weight: bolder;
@@ -55,7 +57,7 @@
         position: relative;
         top: 0;
         width: 100vw;
-        height: 60vh;
+        height: var(--height);
         overflow: hidden;
 
         o {
@@ -68,7 +70,7 @@
             position: absolute;
             top: 0;
             left: 0;
-            font-size: 60vh;
+            font-size: var(--height);
             display: block;
             mix-blend-mode: screen;
             height: 100vh;

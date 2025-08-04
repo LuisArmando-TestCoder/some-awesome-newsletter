@@ -86,7 +86,6 @@
 <ThemeChanger visible={false} />
 <GlobalData />
 <SocketClient />
-<ChosenShader />
 <MainSteps />
 
 <style lang="scss">

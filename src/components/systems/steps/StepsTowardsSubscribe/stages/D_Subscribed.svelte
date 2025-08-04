@@ -27,7 +27,7 @@
           }&configuratorId=${$store.subscriberConfiguratorId}&newsSourceId=${
             $store.subscriberNewsSourceId
           }&newsletterUserId=${$store.subscriberEmail}`)}
-        label="Continue to Offer"
+        label="Continue to {new URL($store.subscriberLead).host.replace("www.", "")}"
       />
     </div>
   {:else}

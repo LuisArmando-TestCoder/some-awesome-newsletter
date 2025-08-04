@@ -383,7 +383,7 @@
 
 <ToggleCard
   {canReveal}
-  {cardTitle}
+  cardTitle="{cardTitle} {!isOpen ? `(${subscriberCount})` : ''}"
   {isOpen}
   onChange={(newIsOpenState: boolean) => {
     // Update the store when this card's toggle changes

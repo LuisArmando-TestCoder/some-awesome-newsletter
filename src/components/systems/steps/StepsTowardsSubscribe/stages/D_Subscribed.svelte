@@ -13,7 +13,7 @@
   <MarkdownText {canReveal}>## You're **In!** Welcome Aboard.</MarkdownText>
 
   <MarkdownText {canReveal}>
-    ### Get Ready for **Exclusive AI Insights** Landing in Your Inbox Soon.
+    ### Get Ready for **Exclusive Insights** Landing in Your Inbox Soon.
   </MarkdownText>
 
   <!-- Read lead directly from URL using page state -->

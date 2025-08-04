@@ -19,13 +19,13 @@
     // const lead = urlParams.get("lead"); // Lead will be read directly in D_Subscribed
 
     // Store them if they exist
-    if (newsSourceId && configuratorId) { // Only check for these two now
+    if (newsSourceId && $configuratorId) { // Only check for these two now
       saveToStore({
         subscriberNewsSourceId: newsSourceId,
-        subscriberConfiguratorId: configuratorId,
+        subscriberConfiguratorId: $configuratorId,
         // subscriberLead: lead // Don't save lead here
       });
-      console.log('A_Welcome: Saved params to store', { newsSourceId, configuratorId });
+      console.log('A_Welcome: Saved params to store', { newsSourceId, configuratorId: $configuratorId });
     } else {
       console.warn(
         "A_Welcome.svelte: Missing newsSourceId or configuratorId in URL query parameters." // Updated warning

@@ -117,7 +117,7 @@
 
   /* ───────────── initial load ───────────── */
   onMount(async () => {
-    isDarkTheme.set(true)
+    isDarkTheme.set(false)
 
     const holder = $page.url.searchParams.get("holder");
     if (!holder) {

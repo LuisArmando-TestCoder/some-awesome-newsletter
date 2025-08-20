@@ -7,7 +7,6 @@
   import TextTypes from "../../../../../texts/TextTypes/TextTypes.svelte";
   import PlainText from "../../../../../inputs/PlainText/PlainText.svelte";
   import Email from "../../../../../inputs/Email/Email.svelte";
-  import Country from "../../../../../inputs/Country/Country.svelte";
   import Language from "../../../../../inputs/Language/Language.svelte";
   import SubmitButton from "../../../../../buttons/SubmitButton/SubmitButton.svelte";
   import type { NewsletterUser } from "../../../../../../types.ts"; // Adjust path
@@ -16,7 +15,7 @@
   // Type for the expected form data payload
   type FormDataPayload = Pick<
     NewsletterUser,
-    "name" | "email" | "bio" | "language" | "countryOfResidence"
+    "name" | "email" | "bio" | "language"
   >;
 
   // --- Props ---
@@ -33,7 +32,6 @@
   let email: string = "";
   let bio: string = "";
   let language: string = "en"; // Default language
-  let countryOfResidence: string = "US"; // Default country
   let isSubmitting: boolean = false; // Loading state specifically for this form's submission attempt
   let validationError: string | null = null;
 
@@ -47,7 +45,6 @@
     email = "";
     bio = "";
     language = "en";
-    countryOfResidence = "US";
     validationError = null;
     isSubmitting = false; // Ensure submitting state is also reset
   }
@@ -78,10 +75,6 @@
       validationError = "Language selection is required.";
       return;
     }
-    if (!countryOfResidence) {
-      validationError = "Country selection is required.";
-      return;
-    }
     // --- End Validation ---
 
     // Set loading state for the submit button
@@ -93,7 +86,6 @@
       email: email.trim(),
       bio: bio.trim(),
       language,
-      countryOfResidence,
     };
 
     // Call the parent's handler function passed via the onSubmit prop
@@ -123,7 +115,7 @@
   }
 
   // Reactive statement to clear validation error when user starts typing again
-  $: if (name || email || language || countryOfResidence) {
+  $: if (name || email || language) {
     if (validationError) validationError = null;
   }
 
@@ -161,14 +153,6 @@
         label="Language *"
         defaultLanguageCode={language}
         onSelect={(lang) => (language = lang as string)}
-        disabled={disabled || isSubmitting}
-      />
-      <Country
-        label="Country *"
-        defaultCountryCode={countryOfResidence}
-        onSelect={(code) => {
-          if (code) countryOfResidence = code;
-        }}
         disabled={disabled || isSubmitting}
       />
       <PlainText

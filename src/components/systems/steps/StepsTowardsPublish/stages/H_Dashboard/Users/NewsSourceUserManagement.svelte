@@ -293,7 +293,7 @@
   async function handleManualAdd(
     formData: Pick<
       NewsletterUser,
-      "name" | "email" | "bio" | "language" | "countryOfResidence"
+      "name" | "email" | "bio" | "language"
     >,
   ) {
     // const { formData } = event.detail; // No longer needed

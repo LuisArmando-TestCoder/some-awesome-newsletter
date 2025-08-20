@@ -46,7 +46,6 @@
       (f) => ({
         type: "website",
         url: f.url,
-        country: "US",
         community: "Newsletter Users",
         lead: f.lead,
         scheduleTime: f.schedule,

@@ -41,12 +41,7 @@
     {/if}
     <div class="user-card-meta">
       {#if user.language}<span>Lang: {user.language.toUpperCase()}</span>{/if}
-      {#if user.language && user.countryOfResidence}<span> / </span>{/if}
-      {#if user.countryOfResidence}<span
-          >Country: {user.countryOfResidence.toUpperCase()}</span
-        >{/if}
-      {#if !user.language && !user.countryOfResidence}<span>No metadata</span
-        >{/if}
+      {#if !user.language}<span>No metadata</span>{/if}
     </div>
     {#if user.bio}
       <div class="user-card-bio">{user.bio}</div>

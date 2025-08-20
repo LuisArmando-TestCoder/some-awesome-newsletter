@@ -87,18 +87,15 @@ export default async function createNewsSource(newsSource: {
     try {
       console.log(`[CREATE-NEWSOURCE] Ensuring configurator user exists: ${configuratorEmail}`);
       // Add user (backend should handle if already exists)
-      await addNewsletterUser(
-        { // Basic user data
-          email: configuratorEmail,
-          name: configuratorEmail, // Use email as name default
-          bio: "Newsletter Configurator",
-          language: "en", // Default
-          countryOfResidence: "US", // Default
-          newsSourcesConfigTuples: [], // Backend manages this
-        },
-        configuratorEmail, // configId
-        newSourceId
-      );
+await addNewsletterUser(
+  { // Basic user data
+    email: configuratorEmail,
+    name: configuratorEmail, // Use email as name default
+    bio: "Newsletter Configurator",
+    language: "en", // Default
+    countryOfResidence: "US", // Default
+  }
+);
       console.log(`[CREATE-NEWSOURCE] addNewsletterUser call completed for ${configuratorEmail}.`);
 
       console.log(`[CREATE-NEWSOURCE] Subscribing configurator ${configuratorEmail} to new source ${newSourceId}`);

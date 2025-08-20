@@ -10,7 +10,6 @@ export interface NewsSource {
   type: string;
   url: string;
   linkSelector: string;
-  country: string;
   community: string;
   lead: string;
   id: string;
@@ -28,7 +27,6 @@ export interface NewsletterUser {
   name: string;
   bio: string;
   language: string; // ISO 639-1 language code
-  countryOfResidence: string; // Alpha-2 country code
   newsSourcesConfigTuples: {
     newsSourceId: string;
     configId: string;

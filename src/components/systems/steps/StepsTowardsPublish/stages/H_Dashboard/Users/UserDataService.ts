@@ -115,18 +115,15 @@ export async function loadInitialData(): Promise<void> {
           console.log(`[UserDataService] loadInitialData: News source ${sourceId} has no subscribers. Attempting to add/subscribe configurator ${configuratorEmail}...`);
           try {
             // 1. Ensure user exists (backend handles duplicates)
-             await addNewsletterUser(
-               { // Basic user data
-                 email: configuratorEmail,
-                 name: configuratorEmail,
-                 bio: "Newsletter Configurator",
-                 language: "en",
-                 countryOfResidence: "US",
-                 newsSourcesConfigTuples: [],
-               },
-               configuratorEmail, // configId
-               sourceId
-             );
+await addNewsletterUser(
+  { // Basic user data
+    email: configuratorEmail,
+    name: configuratorEmail,
+    bio: "Newsletter Configurator",
+    language: "en",
+    countryOfResidence: "US",
+  }
+);
              // 2. Subscribe user
              await subscribeNewsletterUser(
                configuratorEmail, // configId
@@ -172,7 +169,7 @@ export async function loadInitialData(): Promise<void> {
 export async function addUserAndSubscribe(
   userData: Pick<
     NewsletterUser,
-    "name" | "email" | "bio" | "language" | "countryOfResidence"
+    "name" | "email" | "bio" | "language"
   >,
   newsSourceId: string
 ): Promise<void> {
@@ -190,11 +187,10 @@ export async function addUserAndSubscribe(
   if (
     !userData.email ||
     !userData.name ||
-    !userData.language ||
-    !userData.countryOfResidence
+    !userData.language
   ) {
     console.error("[UserDataService] addUserAndSubscribe: Validation failed - missing required fields.");
-    throw new Error("Name, Email, Language, and Country are required.");
+    throw new Error("Name, Email, and Language are required.");
   }
   // Potentially add email format validation here if needed
   console.log("[UserDataService] addUserAndSubscribe: Input validation passed.");
@@ -202,7 +198,7 @@ export async function addUserAndSubscribe(
   // Construct the full user object expected by addNewsletterUser
   // The NewsletterUser type doesn't include id, created_at, updated_at. Backend handles these.
   const newUserForApi: NewsletterUser = {
-    ...userData, // Contains name, email, bio, language, countryOfResidence
+    ...userData, // Contains name, email, bio, language
     newsSourcesConfigTuples: [], // Start with empty; backend likely manages this relationship
   };
   console.log("[UserDataService] addUserAndSubscribe: Prepared user object for API:", newUserForApi);
@@ -210,7 +206,7 @@ export async function addUserAndSubscribe(
   try {
     // 1. Add the user (backend should handle if user already exists)
     console.log(`[UserDataService] addUserAndSubscribe: Calling addNewsletterUser for ${userData.email}...`);
-    await addNewsletterUser(newUserForApi, configId, newsSourceId);
+    await addNewsletterUser(newUserForApi);
     console.log(`[UserDataService] addUserAndSubscribe: addNewsletterUser successful for ${userData.email}.`);
 
     // 2. Subscribe the user to the specific news source
@@ -315,7 +311,7 @@ export async function processBulkUpload(
         // Attempt to add/update the user
         console.log(`[UserDataService] processBulkUpload: Attempting addNewsletterUser for ${userFromFile.email}...`);
         try {
-          await addNewsletterUser(userToAdd, configId, newsSourceId);
+          await addNewsletterUser(userToAdd);
           console.log(`[UserDataService] processBulkUpload: addNewsletterUser successful (or user existed) for ${userFromFile.email}.`);
           userAdded = true; // Count success
         } catch (addError: any) {

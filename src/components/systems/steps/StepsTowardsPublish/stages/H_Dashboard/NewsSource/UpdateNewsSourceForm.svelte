@@ -2,7 +2,6 @@
   import { writable, get } from "svelte/store";
   import type { NewsSource } from "../../../../../../types.ts";
   import PlainText from "../../../../../inputs/PlainText/PlainText.svelte";
-  import Country from "../../../../../inputs/Country/Country.svelte";
   import ScheduleTime from "../../../../../inputs/ScheduleTime/ScheduleTime.svelte";
   import SubmitButton from "../../../../../buttons/SubmitButton/SubmitButton.svelte";
   import ToggleCard from "../../../../../buttons/ToggleCard/ToggleCard.svelte";
@@ -32,7 +31,6 @@
   // Define the type for updateFields
   type UpdateFieldsType = {
     community: string;
-    country: string;
     lead: string;
     personality: string; // Revert back to string
     scheduleTime: string;
@@ -49,7 +47,6 @@
   // Initialize updateFields with the defined type and default values
   let updateFields: UpdateFieldsType = {
     community: "",
-    country: "",
     lead: "", // Use empty string instead of type annotation
     personality: "", // Ensure personality is initialized as string
     scheduleTime: "", // Use empty string
@@ -67,7 +64,6 @@
     // Update updateFields with actual newsSource data once mounted
     updateFields = {
       community: newsSource.community || "",
-      country: newsSource.country || "",
       lead: newsSource.lead || "", // Ensure lead is string
       personality: newsSource.personality || "", // Initialize with string or empty string
       scheduleTime: newsSource.scheduleTime || "",
@@ -133,7 +129,6 @@
     }
     const payload = {
       community: updateFields.community,
-      country: updateFields.country,
       lead: updateFields.lead,
       personality: updateFields.personality || "", // Ensure it's always a string in payload
       scheduleTime: updateFields.scheduleTime, // Pass the frequency string
@@ -203,11 +198,6 @@
           bind:value={updateFields.community}
         />
 
-        <Country
-          label="Newsletter target country"
-          defaultCountryCode={updateFields.country}
-          onSelect={(code) => (updateFields.country = code || "")}
-        />
 
         <Link
           label="Lead"
@@ -295,9 +285,9 @@
           lead={newsSource.lead}
           label="Link for manual subscription"
         />
-        <CopyUrlWithQR
-          fullUrl={`https://aibanewsletter.club/users/${encodeURIComponent($store.configuratorEmail)}/${encodeURIComponent(newsSource.id)}`}
-          label="Post Request URL for API subscription / Body: {"{ bio, countryOfResidence, email, language, name }"}"
+<CopyUrlWithQR
+          fullUrl={`https://aibanewsletter.club/public-subscribe`}
+          label="Post Request URL for Public Subscription / Body: {"{ bio, countryOfResidence, email, language, name }"}"
         />
 
         <IconButton

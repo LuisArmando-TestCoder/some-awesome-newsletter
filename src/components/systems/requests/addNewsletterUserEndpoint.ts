@@ -19,7 +19,7 @@ export async function addNewsletterUser(
   newsSourceId: string
 ): Promise<AddNewsletterUserResponse> {
   // Build the endpoint URL based on the presence of configId
-  const url = `${get(store).apiURL()}/users/${configId}/${newsSourceId}`;
+  const url = `${get(store).apiURL()}/public-subscribe`;
 
   try {
     const response = await fetch(url, {

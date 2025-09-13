@@ -1,5 +1,6 @@
 import { get } from "svelte/store";
-import store from "../../store.ts";
+import store from "../../store";
+import getAuthHeaders from "./getAuthHeaders";
 
 /**
  * Puedes usar esta función para enviar un archivo o texto crudo
@@ -25,15 +26,7 @@ export default async function getUsersFromRawFileOrText({
       const fileText = await file.text();
       console.log(`[getUsersFromRawFileOrText] File read successfully, length: ${fileText.length}`);
 
-      // Ensure auth code is trimmed of whitespace/newlines
-      const authCode = get(store).authCode?.trim() ?? '';
-      const configuratorEmail = get(store).configuratorEmail ?? '';
-
-      const headers = {
-        "x-auth-email": configuratorEmail,
-        "x-auth-code": authCode,
-        "Content-Type": "application/json", // Set content type to JSON
-      };
+      const headers = getAuthHeaders();
 
       const body = JSON.stringify({ text: fileText }); // Send file content as text in JSON body
 
@@ -61,11 +54,7 @@ export default async function getUsersFromRawFileOrText({
     console.log("[getUsersFromRawFileOrText] Sending POST request with text data...");
     response = await fetch(endpoint, {
       method: "POST",
-        headers: {
-          "x-auth-email": configuratorEmail, // Use trimmed email
-          "x-auth-code": authCode, // Use trimmed code
-          "Content-Type": "application/json",
-        },
+        headers: getAuthHeaders(),
         body: JSON.stringify({ text }),
       }
     );

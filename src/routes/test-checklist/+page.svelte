@@ -5,7 +5,7 @@
     import GlobalData from "../../components/GlobalData/GlobalData.svelte";
     import SocketClient from "../../components/SocketClient.svelte";
     import Header from "../../components/Header/Header.svelte";
-    import { andthisthing, andthisthingaswell } from "../../components/systems/wrappers/InteractiveSlides/store.ts";
+    import { andthisthing, andthisthingaswell } from "../../components/systems/wrappers/InteractiveSlides/store";
     import How from "../../components/systems/wrappers/InteractiveSlides/How.svelte";
 
     const a = writable([
@@ -25,7 +25,6 @@
 </script>
 
 <!-- <ChosenShader /> -->
-<Header />
 {#key [$andthisthing, $andthisthingaswell]}
     <InteractiveSlides
         checkConditions={$a}

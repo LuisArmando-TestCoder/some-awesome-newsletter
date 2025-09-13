@@ -2,7 +2,7 @@
     import { onMount, onDestroy } from "svelte";
     import { browser } from "$app/environment";
     import { writable } from "svelte/store";
-    import { smoothScrollTarget } from "../SmoothScrollWrapper/store.ts";
+    import { smoothScrollTarget } from "../SmoothScrollWrapper/store";
 
     export let scaleSpeed = 1;
     export let videoURL = "https://videos.pexels.com/video-files/31196472/13325298_2560_1440_25fps.mp4"

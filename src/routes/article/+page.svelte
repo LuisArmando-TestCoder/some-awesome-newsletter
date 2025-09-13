@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
   import { page } from "$app/stores";
     import ThemeChanger from "../../components/ThemeChanger/ThemeChanger.svelte";
-    import store from "../../components/store.ts";
+    import store from "../../components/store";
 
   let article: any = null;
   let error: string | null = null;

@@ -4,8 +4,8 @@
   import TextTypes from "../../../../../texts/TextTypes/TextTypes.svelte";
   import SlotAutoCollapseToggle from "../SlotAutoCollapseToggle.svelte"; // <--- Import the wrapper
 
-  import type { NewsSource } from "../../../../../../types.ts";
-  import store, { latestMessage } from "../../../../../../store.ts";
+  import type { NewsSource } from "../../../../../../types";
+  import store, { latestMessage } from "../../../../../../store";
 
   import AddNewsSourceForm from "./AddNewsSourceForm.svelte";
   import UpdateNewsSourceForm from "./UpdateNewsSourceForm.svelte";

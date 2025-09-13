@@ -1,6 +1,6 @@
 <script lang="ts">
   import SubmitButton from "../../../../buttons/SubmitButton/SubmitButton.svelte";
-  import logout from "../../../../requests/logout.ts";
+  import logout from "../../../../requests/logout";
   import Config from "./Config/Config.svelte";
   import NewsSource from "./NewsSource/NewsSource.svelte";
   import Users from "./Users/Users.svelte";

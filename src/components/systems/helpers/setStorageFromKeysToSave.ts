@@ -1,5 +1,5 @@
 import { get } from "svelte/store";
-import store, { populateToStore } from "../../store.ts";
+import store, { populateToStore } from "../../store";
 
 export default function setStorageFromKeysToSave() {
   for (const key of get(store).keysToSave) {

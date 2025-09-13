@@ -1,8 +1,8 @@
 <script lang="ts">
   import Image from "../../../../../../inputs/Image/Image.svelte";
-  import store, { saveToConfig } from "../../../../../../../store.ts";
+  import store, { saveToConfig } from "../../../../../../../store";
   import MarkdownText from "../../../../../../texts/MarkdownText/MarkdownText.svelte";
-    import updateConfiguration from "../../../../../../requests/updateConfiguration.ts";
+    import updateConfiguration from "../../../../../../requests/updateConfiguration";
 
   export let canReveal = true;
 
@@ -12,13 +12,9 @@
   async function handleImageChange(imageData: string | null) {
     // Update the news source with the new logo
     console.log("IMAGE DATA", imageData);
-    const updatedSource = await updateConfiguration(
+    saveToConfig(
       { logo: imageData as string }
     );
-    
-    if (!updatedSource) {
-      console.error("Failed to update news source with logo");
-    }
   }
 </script>
 

@@ -1,0 +1,139 @@
+/* --- LEGAL DOCUMENT STYLES --- */
+
+/* --- TOKENS & RHYTHM --- */
+.legal-page {
+  --line-height: 1.7;
+  --max-width: 75ch;
+  line-height: var(--line-height);
+}
+
+/* --- TYPOGRAPHY --- */
+.legal-page h1,
+.legal-page h2,
+.legal-page h3,
+.legal-page h4 {
+  font-family: var(--font-heading);
+  line-height: 1.3;
+}
+
+.legal-page p,
+.legal-page li,
+.legal-page dd {
+  font-family: var(--font-body);
+}
+
+/* --- HEADINGS --- */
+.legal-page {
+  counter-reset: h2-counter;
+}
+
+.legal-page h2 {
+  counter-reset: h3-counter;
+  counter-increment: h2-counter;
+  content: counter(h2-counter) ". ";
+}
+
+.legal-page h3 {
+  counter-reset: h4-counter;
+  counter-increment: h3-counter;
+  content: counter(h2-counter) "." counter(h3-counter) ". ";
+}
+
+/* --- LINKS --- */
+.legal-page a {
+  color: var(--c-primary);
+  text-decoration: underline;
+}
+
+.legal-page a:visited {
+  color: var(--c-primary-dark);
+}
+
+/* --- LISTS & DEFS --- */
+.legal-page ul,
+.legal-page ol {
+  margin-left: var(--space-lg);
+  margin-bottom: var(--space-md);
+}
+
+.legal-page dt {
+  font-weight: bold;
+}
+
+.legal-page dd {
+  margin-left: var(--space-lg);
+  margin-bottom: var(--space-md);
+}
+
+/* --- TABLES --- */
+.legal-page table {
+  width: 100%;
+  margin-bottom: var(--space-md);
+  border-collapse: collapse;
+}
+
+.legal-page th,
+.legal-page td {
+  padding: var(--space-sm);
+  border: 1px solid var(--c-border);
+}
+
+.legal-page th {
+  background-color: var(--c-bg-alt);
+}
+
+/* --- CALLOUTS --- */
+.legal-page .callout {
+  padding: var(--space-md);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-md);
+}
+
+.legal-page .callout--warning {
+  border-color: red;
+}
+
+/* --- CITATIONS --- */
+.legal-page .legal-cite {
+  font-size: 0.9rem;
+  color: var(--c-text-light);
+}
+
+/* --- ACCORDIONS --- */
+.legal-page details {
+  margin-bottom: var(--space-md);
+}
+
+.legal-page summary {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* --- DARK MODE --- */
+@media (prefers-color-scheme: dark) {
+  .legal-page {
+    color: var(--c-white);
+    background-color: var(--c-text);
+  }
+}
+
+/* --- RTL SUPPORT --- */
+:dir(rtl) .legal-page ul,
+:dir(rtl) .legal-page ol,
+:dir(rtl) .legal-page dd {
+  margin-left: 0;
+  margin-right: var(--space-lg);
+}
+
+/* --- PRINT STYLES --- */
+@media print {
+  .legal-page {
+    font-size: 12pt;
+    line-height: 1.4;
+  }
+
+  .legal-page a:after {
+    content: " (" attr(href) ")";
+  }
+}

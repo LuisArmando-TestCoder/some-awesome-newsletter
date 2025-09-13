@@ -2,7 +2,7 @@
   import TextTypes from "../../../../texts/TextTypes/TextTypes.svelte";
   import Switch from "../../../../selectors/Switch/Switch.svelte";
   import ToggleCard from "../../../../buttons/ToggleCard/ToggleCard.svelte";
-  import camelCaseToCapitalized from "../../../../helpers/camelCaseToCapitalized.ts";
+  import camelCaseToCapitalized from "../../../../helpers/camelCaseToCapitalized";
 
   export let autoCollapse = true;
   export let toggles: { [index: string]: [any, boolean?] };

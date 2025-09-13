@@ -5,14 +5,14 @@
   import type { NewsSource } from "../../../../../../types.js"; // Import NewsSource type if not already implicitly available - ADDED .js
 
   // Central Store and Types
-  import store from "../../../../../../store.ts"; // Adjust path
+  import store from "../../../../../../store"; // Adjust path
 
   // Data Service (Handles state and API calls)
-  import * as UserDataService from "./UserDataService.ts"; // Adjust path
+  import * as UserDataService from "./UserDataService"; // Adjust path
 
   // Child Components
   import NewsSourceUserManagement from "./NewsSourceUserManagement.svelte";
-  import UserAnalytics from "./UserAnalytics.svelte";
+  import UserAnalytics from "../Reports/UserAnalytics.svelte";
 
   // UI Wrappers/Components
   import Page from "../../../../../wrappers/Page/Page.svelte"; // Adjust path
@@ -43,7 +43,6 @@ export let canReveal = true; // Keep props passed from parent
 
 <!-- HTML TEMPLATE SECTION -->
 <Page>
-  <div class="users-page-layout">
     <!-- User Management Column -->
     <div class="column user-management-column">
       <div class="title-container">
@@ -81,29 +80,6 @@ export let canReveal = true; // Keep props passed from parent
         </p>
       {/if}
     </div> <!-- Correctly closing user-management-column -->
-
-    <!-- Analytics Column -->
-    <div class="column charts-column">
-      <!-- Similar check for analytics -->
-      {#if newsSources && newsSources.length > 0}
-        {@const subsReadyForAnalytics = subscribersByNewsSource && Object.keys(subscribersByNewsSource).length > 0}
-         {#if subsReadyForAnalytics}
-          <UserAnalytics
-            {subscribersByNewsSource}
-            allLeadData={$store.leads}
-            {newsSources}
-            {complementaryColor}
-          />
-        {:else}
-          <!-- Show loading only if news sources exist but subscribers don't yet -->
-          <p class="loading-message">Loading analytics data...</p>
-        {/if}
-      {:else}
-        <!-- Optional: Message if no news sources, hence no analytics -->
-        <p class="no-data-message">Analytics require configured news sources.</p>
-      {/if}
-    </div> <!-- Correctly closing charts-column -->
-  </div> <!-- Correctly closing users-page-layout -->
 </Page>
 
 <!-- STYLES -->

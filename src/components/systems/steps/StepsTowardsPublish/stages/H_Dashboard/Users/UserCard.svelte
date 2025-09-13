@@ -1,8 +1,8 @@
 <!-- src/components/systems/steps/StepsTowardsPublish/stages/H_Dashboard/Users/UserCard.svelte -->
 <script lang="ts">
   // REMOVED: import { createEventDispatcher } from "svelte";
-  import { userRemovalRequestStore } from "./userActions.ts"; // Adjust path: Up 5 levels
-  import type { NewsletterUser } from "../../../../../../types.ts"; // Adjust path
+  import { userRemovalRequestStore } from "./userActions"; // Adjust path: Up 5 levels
+  import type { NewsletterUser } from "../../../../../../types"; // Adjust path
 
   // Import UI Components (Adjust paths as needed)
   import IconButton from "../../../../../buttons/IconButton/IconButton.svelte";

@@ -1,4 +1,4 @@
-import store from "../../store.ts";
+import store from "../../store";
 import { get } from "svelte/store";
 
 /**

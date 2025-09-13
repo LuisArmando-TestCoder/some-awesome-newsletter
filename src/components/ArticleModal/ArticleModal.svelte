@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Modal from "../Modal/Modal.svelte"; // adjust path if needed
+    import Modal from "../data/Modal/Modal.svelte"; // adjust path if needed
 
     /** Controls the modal’s visibility (two-way bound from parent). */
     export let show = false;

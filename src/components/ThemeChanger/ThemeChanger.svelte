@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { complementaryColor, foregroundColor, isDarkTheme, themeIndex } from "./theme-store.ts";
+  import { complementaryColor, foregroundColor, isDarkTheme, themeIndex } from "./theme-store";
 
   // Check localStorage for theme preference
   onMount(() => {

@@ -3,12 +3,12 @@
     import SocketClient from "../../components/SocketClient.svelte";
     import { onMount, onDestroy } from "svelte";
     import { browser } from "$app/environment";
-    import store, { isScrollingDown, saveToStore } from "../../components/store.ts"; // Import the store variable
+    import store, { isScrollingDown, saveToStore } from "../../components/store"; // Import the store variable
     import ThemeChanger from "../../components/ThemeChanger/ThemeChanger.svelte";
     import MainSteps from "../../components/systems/steps/StepsTowardsSubscribe/MainSteps.svelte";
     import GlobalData from "../../components/GlobalData/GlobalData.svelte";
     import type { PageData } from './$types.js'; // Import PageData type
-    import getPublicConfig from "../../components/systems/requests/getPublicConfig.ts"; // Import request function
+    import getPublicConfig from "../../components/systems/requests/getPublicConfig"; // Import request function
 
     export let data: PageData; // Receive data from load function
 

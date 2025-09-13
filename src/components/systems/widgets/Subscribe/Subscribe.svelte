@@ -1,8 +1,8 @@
 <script lang="ts">
   import { onMount, setContext } from "svelte";
   import { page } from "$app/stores";
-  import store, { saveToStore, getFromStore } from "../../../store.ts";
-  import type { Store } from "../../../types.ts"; // Corrected Store import
+  import store, { saveToStore, getFromStore } from "../../../store";
+  import type { Store } from "../../../types"; // Corrected Store import
   import type { SvelteComponent } from "svelte";
   import { writable, get, type Writable } from 'svelte/store'; // Imported get
 

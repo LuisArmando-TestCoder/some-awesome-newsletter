@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount, getContext } from "svelte";
-  import store, { getFromStore } from "../../../../store.ts";
-  import type { Store } from "../../../../types.ts"; // Import Store from types.ts
+  import store, { getFromStore } from "../../../../store";
+  import type { Store } from "../../../../types"; // Import Store from types.ts
   import type { Writable } from 'svelte/store';
 
   // Props for endpoint, if provided directly by the main Subscribe widget

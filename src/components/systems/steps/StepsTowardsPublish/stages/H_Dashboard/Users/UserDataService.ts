@@ -3,14 +3,14 @@
 import { get } from "svelte/store"; // Removed writable
 
 // Import Request Functions (adjust paths as necessary)
-import store, { saveToStore } from "../../../../../../store.ts"; // Added saveToStore
-import type { NewsletterUser } from "../../../../../../types.ts";
-import { addNewsletterUser } from "../../../../../requests/addNewsletterUserEndpoint.ts";
-import subscribeNewsletterUser from "../../../../../requests/subscribeNewsletterUser.ts";
-import getAllSubscribersFromConfigEndpoint from "../../../../../requests/getAllSubscribersFromConfigEndpoint.ts";
-import unsubscribeUserToConfigNewsSource from "../../../../../requests/unsubscribeUserToConfigNewsSource.ts";
-import getLeadsForConfigurator from "../../../../../requests/getLeadsForConfigurator.ts";
-import getUsersFromRawFileOrText from "../../../../../requests/getUsersFromRawFileOrText.ts";
+import store, { saveToStore } from "../../../../../../store"; // Added saveToStore
+import type { NewsletterUser } from "../../../../../../types";
+import { addNewsletterUser } from "../../../../../requests/addNewsletterUserEndpoint";
+import subscribeNewsletterUser from "../../../../../requests/subscribeNewsletterUser";
+import getAllSubscribersFromConfigEndpoint from "../../../../../requests/getAllSubscribersFromConfigEndpoint";
+import unsubscribeUserToConfigNewsSource from "../../../../../requests/unsubscribeUserToConfigNewsSource";
+import getLeadsForConfigurator from "../../../../../requests/getLeadsForConfigurator";
+import getUsersFromRawFileOrText from "../../../../../requests/getUsersFromRawFileOrText";
 
 // --- Helper Function ---
 /**
@@ -31,16 +31,8 @@ function getConfigId(): string | null {
  * @throws {Error} If config ID is missing or fetch fails.
  */
 export async function refreshSubscribers(): Promise<void> {
-  console.log("[UserDataService] refreshSubscribers: Starting subscriber refresh.");
-  const configId = getConfigId();
-  if (!configId) {
-    console.error("[UserDataService] refreshSubscribers: Configuration ID missing.");
-    throw new Error("Subscriber refresh failed: Configuration ID missing.");
-  }
-  console.log(`[UserDataService] refreshSubscribers: Using configId: ${configId}`);
-
   try {
-    const subsResponse = await getAllSubscribersFromConfigEndpoint(configId);
+    const subsResponse = await getAllSubscribersFromConfigEndpoint();
     console.log("[UserDataService] refreshSubscribers: Fetched raw subscribers response:", JSON.stringify(subsResponse)); // Log raw response
 
     const subscribersToSave = subsResponse || {};
@@ -115,15 +107,18 @@ export async function loadInitialData(): Promise<void> {
           console.log(`[UserDataService] loadInitialData: News source ${sourceId} has no subscribers. Attempting to add/subscribe configurator ${configuratorEmail}...`);
           try {
             // 1. Ensure user exists (backend handles duplicates)
-await addNewsletterUser(
-  { // Basic user data
-    email: configuratorEmail,
-    name: configuratorEmail,
-    bio: "Newsletter Configurator",
-    language: "en",
-    countryOfResidence: "US",
-  }
-);
+             await addNewsletterUser(
+               { // Basic user data
+                 email: configuratorEmail,
+                 name: configuratorEmail,
+                 bio: "Newsletter Configurator",
+                 language: "en",
+                 countryOfResidence: "US",
+                 newsSourcesConfigTuples: [],
+               },
+               configuratorEmail, // configId
+               sourceId
+             );
              // 2. Subscribe user
              await subscribeNewsletterUser(
                configuratorEmail, // configId
@@ -206,7 +201,7 @@ export async function addUserAndSubscribe(
   try {
     // 1. Add the user (backend should handle if user already exists)
     console.log(`[UserDataService] addUserAndSubscribe: Calling addNewsletterUser for ${userData.email}...`);
-    await addNewsletterUser(newUserForApi);
+    await addNewsletterUser(newUserForApi, configId, newsSourceId);
     console.log(`[UserDataService] addUserAndSubscribe: addNewsletterUser successful for ${userData.email}.`);
 
     // 2. Subscribe the user to the specific news source
@@ -311,7 +306,7 @@ export async function processBulkUpload(
         // Attempt to add/update the user
         console.log(`[UserDataService] processBulkUpload: Attempting addNewsletterUser for ${userFromFile.email}...`);
         try {
-          await addNewsletterUser(userToAdd);
+          await addNewsletterUser(userToAdd, configId, newsSourceId);
           console.log(`[UserDataService] processBulkUpload: addNewsletterUser successful (or user existed) for ${userFromFile.email}.`);
           userAdded = true; // Count success
         } catch (addError: any) {

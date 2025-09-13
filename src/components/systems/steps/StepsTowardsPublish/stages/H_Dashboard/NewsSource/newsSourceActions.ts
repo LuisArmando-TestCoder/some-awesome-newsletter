@@ -1,6 +1,6 @@
 // src/lib/newsSourceActions.ts
 
-import { validateFields } from "./validation.ts";
+import { validateFields } from "./validation";
 
 /**
  * Generic helper function for create/update news source actions.

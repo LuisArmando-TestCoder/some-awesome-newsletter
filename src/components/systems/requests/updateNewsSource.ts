@@ -1,6 +1,7 @@
 import { get } from "svelte/store";
 import store, { saveToConfig } from "../../store.js"; // Add .js extension
 import type { NewsSource } from "../../types.js"; // Add .js extension
+import getAuthHeaders from "./getAuthHeaders.js";
 
 // Adjust signature: make newsSourceId optional, broaden updateData type
 export default async function updateNewsSource(
@@ -18,11 +19,7 @@ export default async function updateNewsSource(
     `${get(store).apiURL()}/news-source/${configId}/${newsSourceId}`,
     {
       method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        "x-auth-email": configId,
-        "x-auth-code": get(store).authCode,
-      },
+      headers: getAuthHeaders(),
       body: JSON.stringify(updateData),
     }
   );

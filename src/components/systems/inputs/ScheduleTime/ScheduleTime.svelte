@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import cronToSentence from "./cronToNatural.ts";
+  import cronToSentence from "./cronToNatural";
 
   // --- Props ---
   export let value: string = "daily"; // Initial value can be 'daily', 'weekly', 'monthly' or a cron string

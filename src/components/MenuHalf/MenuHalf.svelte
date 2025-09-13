@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { saveToStore } from "../store.ts";
-  import logout from "../systems/requests/logout.ts";
+  import { saveToStore } from "../store";
+  import logout from "../systems/requests/logout";
   import X from "../X/X.svelte";
 
   export let isChecked = false; // Export isChecked as a prop, default to false
@@ -23,7 +23,7 @@
           class="menu-half--sub-anchor menu-half--anchor"
           onclick={() => {
             isChecked = false;
-            saveToStore({ stepsIndex: 7 });
+            saveToStore({ stepsIndex: 5 });
           }}>Config</a
         >
       </li>
@@ -33,7 +33,7 @@
           onclick={() => {
             isChecked = false;
 
-            saveToStore({ stepsIndex: 8 });
+            saveToStore({ stepsIndex: 6 });
           }}>News Sources</a
         >
       </li>
@@ -43,7 +43,7 @@
           onclick={() => {
             isChecked = false;
 
-            saveToStore({ stepsIndex: 9 });
+            saveToStore({ stepsIndex: 7 });
           }}>Users</a
         >
       </li>

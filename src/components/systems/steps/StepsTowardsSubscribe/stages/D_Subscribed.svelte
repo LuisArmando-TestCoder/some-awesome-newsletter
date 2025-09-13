@@ -1,6 +1,6 @@
 <script lang="ts">
   // Removed onMount and related imports
-  import store from "../../../../store.ts";
+  import store from "../../../../store";
   import MarkdownText from "../../../texts/MarkdownText/MarkdownText.svelte";
   import Centered from "../../../wrappers/Centered/Centered.svelte";
   import { page } from "$app/state"; // Use $app/state instead

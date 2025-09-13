@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
   import { get } from "svelte/store";
   import { browser } from "$app/environment";
-  import store, { latestMessage, socket } from "./store.ts";
+  import store, { latestMessage, socket } from "./store";
 
   let socketInitialized = false;
   let lastId = "";
@@ -67,8 +67,8 @@
     const unsubscribe = store.subscribe(() => {
       const { isAuthCodeValid, configuratorEmail, authCode } = get(store);
       if (isAuthCodeValid && configuratorEmail && authCode) {
-        console.log(isAuthCodeValid, configuratorEmail, authCode, "SocketClient");
-        console.log("Starting socket connection for", configuratorEmail);
+        // console.log(isAuthCodeValid, configuratorEmail, authCode, "SocketClient");
+        // console.log("Starting socket connection for", configuratorEmail);
         startSocket();
       }
     });

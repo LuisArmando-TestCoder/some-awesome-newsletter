@@ -1,7 +1,7 @@
 <script lang="ts">
   import { writable } from "svelte/store";
-  import { getContrastColor } from "../../inputs/ColorPicker/getColorSuggestions.ts";
-  import { complementaryColor, foregroundColor, themeIndex } from "../../../ThemeChanger/theme-store.ts";
+  import { getContrastColor } from "../../inputs/ColorPicker/getColorSuggestions";
+  import { complementaryColor, foregroundColor, themeIndex } from "../../../ThemeChanger/theme-store";
 
   // Prop: initial state of the switch (default: false)
   export let toggled: boolean = false;

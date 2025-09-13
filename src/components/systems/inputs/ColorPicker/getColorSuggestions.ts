@@ -1,8 +1,8 @@
 // colorSuggestions.ts
 
 import { get } from "svelte/store";
-import { complementaryColor } from "../../../ThemeChanger/theme-store.ts";
-import store from "../../../store.ts";
+import { complementaryColor } from "../../../ThemeChanger/theme-store";
+import store from "../../../store";
 
 // -----------------------------
 // Helper Functions: HEX ↔ HSL

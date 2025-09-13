@@ -1,9 +1,9 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { page } from "$app/stores";
-  import store, { saveToStore } from "../../../../store.ts";
-  import type { NewsSource, Config, Store } from "../../../../types.ts"; // Import Store from types.ts
-  import getPublicConfig from "../../../requests/getPublicConfig.ts";
+  import store, { saveToStore } from "../../../../store";
+  import type { NewsSource, Config, Store } from "../../../../types"; // Import Store from types.ts
+  import getPublicConfig from "../../../requests/getPublicConfig";
 
   export let canReveal = false; // For step progression, managed by parent
 

@@ -1,6 +1,6 @@
 <script lang="ts">
   import ColorPicker from "../../../../../../inputs/ColorPicker/ColorPicker.svelte";
-  import store, { saveToConfig } from "../../../../../../../store.ts";
+  import store, { saveToConfig } from "../../../../../../../store";
   import MarkdownText from "../../../../../../texts/MarkdownText/MarkdownText.svelte";
 
   export let canReveal = true;

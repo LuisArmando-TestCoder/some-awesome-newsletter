@@ -1,6 +1,6 @@
 <script lang="ts">
   import PlainText from "../../../../../../inputs/PlainText/PlainText.svelte";
-  import store, { saveToConfig } from "../../../../../../../store.ts";
+  import store, { saveToConfig } from "../../../../../../../store";
   import MarkdownText from "../../../../../../texts/MarkdownText/MarkdownText.svelte";
 
   export let canReveal = true;

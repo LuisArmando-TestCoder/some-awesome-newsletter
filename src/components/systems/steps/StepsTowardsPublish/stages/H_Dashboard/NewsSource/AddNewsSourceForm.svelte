@@ -5,14 +5,14 @@
   import store, {
     latestMessage,
     saveToStore,
-  } from "../../../../../../store.ts";
+  } from "../../../../../../store";
 
   import SubmitButton from "../../../../../buttons/SubmitButton/SubmitButton.svelte";
   import Link from "../../../../../inputs/Link/Link.svelte";
   import TextTypes from "../../../../../texts/TextTypes/TextTypes.svelte";
 
-  import createNewsSource from "../../../../../requests/createNewsSource.ts";
-  import { processNewsSourceAction } from "./newsSourceActions.ts";
+  import createNewsSource from "../../../../../requests/createNewsSource";
+  import { processNewsSourceAction } from "./newsSourceActions";
 
   // 2) Create a writable store for tracking the newly added news source
   export const addedNewsSource = writable<any>(null);

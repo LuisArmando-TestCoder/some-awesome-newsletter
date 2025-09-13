@@ -1,7 +1,7 @@
 import { get } from "svelte/store";
-import store from "../../store.ts";
-import type { NewsletterUser } from "../../types.ts";
-import getConfiguratorSession from "./getConfiguratorSession.ts";
+import store from "../../store";
+import type { NewsletterUser } from "../../types";
+import getConfiguratorSession from "./getConfiguratorSession";
 
 export interface AddNewsletterUserResponse {
   message: string;
@@ -19,7 +19,7 @@ export async function addNewsletterUser(
   newsSourceId: string
 ): Promise<AddNewsletterUserResponse> {
   // Build the endpoint URL based on the presence of configId
-  const url = `${get(store).apiURL()}/public-subscribe`;
+  const url = `${get(store).apiURL()}/users/${configId}/${newsSourceId}`;
 
   try {
     const response = await fetch(url, {

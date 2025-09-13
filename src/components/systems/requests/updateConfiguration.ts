@@ -1,5 +1,6 @@
 import { get } from "svelte/store";
-import store from "../../store.ts";
+import store from "../../store";
+import getAuthHeaders from "./getAuthHeaders";
 
 /* helper for mutating the store in-place */
 const patchStoreConfig = (cfg: Record<string, unknown>) =>
@@ -11,14 +12,9 @@ export default async function updateConfiguration(
   const { configuratorEmail, authCode, apiURL } = get(store);
 
   /* ─────────── auth / urls ─────────── */
-  const headers = {
-    "x-auth-email": configuratorEmail,
-    "x-auth-code": authCode,
-    "Content-Type": "application/json",
-    Accept: "application/json"
-  };
-  const getURL = `${apiURL()}/private-config?documentId=${configuratorEmail}`;
-  const putURL = `${apiURL()}/config?documentId=${configuratorEmail}`;
+  const headers = getAuthHeaders();
+  const getURL = `${apiURL()}/private-config?documentId=${getAuthHeaders()["x-auth-email"]}`;
+  const putURL = `${apiURL()}/config?documentId=${getAuthHeaders()["x-auth-email"]}`;
 
   /* ─────────── fetch latest config first ─────────── */
   let latest: any = {};

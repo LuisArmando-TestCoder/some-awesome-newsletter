@@ -1,6 +1,6 @@
 <script lang="ts">
   import Date from "../../buttons/Date/Date.svelte";
-  import camelCaseToCapitalized from "../../helpers/camelCaseToCapitalized.ts";
+  import camelCaseToCapitalized from "../../helpers/camelCaseToCapitalized";
   import Number from "../../inputs/Number/Number.svelte";
   import PlainText from "../../inputs/PlainText/PlainText.svelte";
   import MarkdownText from "../../texts/MarkdownText/MarkdownText.svelte";

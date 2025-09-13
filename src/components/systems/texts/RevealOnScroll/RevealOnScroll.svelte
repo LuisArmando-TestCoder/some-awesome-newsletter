@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import store from "../../../store.ts";
+  import store from "../../../store";
 
   // Define the wrapper element with proper typing
   let wrapper: HTMLDivElement | undefined;

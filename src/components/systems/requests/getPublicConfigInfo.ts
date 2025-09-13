@@ -1,5 +1,5 @@
 import { get } from "svelte/store";
-import store from "../../store.ts"; // Adjust path if needed
+import store from "../../store"; // Adjust path if needed
 
 /**
  * Fetches public configuration info (like newsletter title) for a specific

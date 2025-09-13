@@ -1,17 +1,14 @@
 import { get } from "svelte/store";
-import store, { saveToConfig } from "../../store.ts";
-import type { NewsSource } from "../../types.ts";
+import store, { saveToConfig } from "../../store";
+import type { NewsSource } from "../../types";
+import getAuthHeaders from "./getAuthHeaders";
 
 export default async function regenerateSelectors(configId: string, newsSourceId: string, newUrl?: string) {
   const response = await fetch(
     `${get(store).apiURL()}/news-source/regenerate-selectors/${configId}/${newsSourceId}`,
     {
       method: "PUT",
-      headers: {
-        "x-auth-email": get(store).configuratorEmail,
-        "x-auth-code": get(store).authCode,
-        "Content-Type": "application/json",
-      },
+      headers: getAuthHeaders(),
       body: JSON.stringify(
         newUrl
           ? { newsSourceUrl: newUrl }

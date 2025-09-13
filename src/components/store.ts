@@ -1,7 +1,7 @@
 import { get, writable } from "svelte/store";
-import type { Populator, Store } from "./types.ts";
+import type { Populator, Store } from "./types";
 import type { Socket } from "socket.io-client";
-import updateConfiguration from "./systems/requests/updateConfiguration.ts";
+import updateConfiguration from "./systems/requests/updateConfiguration";
 
 export const latestMessage = writable<string>("");
 
@@ -22,7 +22,6 @@ const colorPalette = [
 
 const store = writable<Store>({
   keysToSave: [
-    "stepsIndex",
     "configuratorEmail",
     "newsSource",
     "lead",
@@ -31,6 +30,7 @@ const store = writable<Store>({
     "autoCollapse",
     "toggles",
     "config.brandColor",
+    "config.newsSources",
     "config.newsletterSubject",
     "config.scheduleTime",
     "config.senderName",
@@ -42,6 +42,7 @@ const store = writable<Store>({
     "leads", // Added
     "subscriberName", // Added for subscription flow
     "subscriberCountry", // Added for subscription flow
+    "user"
   ],
   appLanguage: "en", // Added for global language setting
   autoCollapse: true,
@@ -55,8 +56,8 @@ const store = writable<Store>({
   hasNewEmailCodeBeenSent: false,
   authCode: "",
   directionsThatShouldDisappear: [],
-  isAuthCodeValid: "",
-  apiURL: () => window.location.origin.startsWith('http://localhost') ? "http://localhost:8000" : "https://ai-newsletter-translated.onrender.com",
+  isAuthCodeValid: false,
+  apiURL: () => typeof window !== 'undefined' && window.location.origin.startsWith('http://localhost') ? "http://localhost:8000" : "https://ai-newsletter-translated.onrender.com",
   config: {
     emailMaskSender: "", // New
     appPassword: "", // New
@@ -89,10 +90,13 @@ export const emptyStoreSnapshot = JSON.parse(JSON.stringify(get(store)));
 export default store;
 
 export function saveToStore(objectValue: { [index: string]: any }) {
+  console.log("objectValue", objectValue)
+  // setAllKeysToSaveInLocalStorage();
   store.set({
     ...get(store),
     ...objectValue,
   });
+  setAllKeysToSaveInLocalStorage();
 }
 
 export function populateToStore(propertyPath: string, value: any) {
@@ -192,10 +196,63 @@ export function setStorageFromKeysToSave() {
   }
 }
 
+function setCookie(name: string, value: string, days = 365) {
+  try {
+    if (typeof document === "undefined") return;
+    let expires = "";
+    if (days) {
+      const date = new Date();
+      date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+      expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + encodeURIComponent(
+      JSON.stringify(value)
+    ) + expires + "; path=/";
+  } catch {}
+}
+
+export function getCookie(name: string) {
+  try {
+    if (typeof document === "undefined") return null;
+    const nameEQ = name + "=";
+    const ca = document.cookie.split(';');
+    for(let i=0;i < ca.length;i++) {
+        let c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return decodeURIComponent(c.substring(nameEQ.length,c.length));
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+function setAllKeysToSaveInLocalStorage() {
+  const isLocalStorageAvailable = typeof window !== "undefined" && typeof window.localStorage !== "undefined";
+  for (const key of get(store).keysToSave) {
+    const value = getFromStore(key);
+    // Save to cookies always
+    setCookie(key, value);
+    // Save to localStorage if available
+    if (isLocalStorageAvailable) {
+      try {
+        console.log("Here", key, value)
+        localStorage.setItem(key, JSON.stringify(value || JSON.parse(localStorage.getItem(key) || "")));
+      } catch {}
+    }
+  }
+}
+
 export function saveAllKeysToSaveInLocalStorage() {
   store.subscribe((currentStore: Store) => {
-    for (const key of currentStore.keysToSave) {
-      localStorage.setItem(key, JSON.stringify(getFromStore(key)));
-    }
+    setAllKeysToSaveInLocalStorage();
   });
 }
+
+export const stepsMapping = Object.freeze({
+  "News Sources": 6,
+  "Users": 7,
+  "Reports": 9,
+  "Profile": 5,
+  "Billing": 8,
+});

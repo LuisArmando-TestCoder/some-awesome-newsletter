@@ -1,10 +1,10 @@
 <script lang="ts">
     import { writable } from "svelte/store";
   import MenuHalf from "../MenuHalf/MenuHalf.svelte";
-  import store, { saveToStore, isScrollingDown } from "../store.ts"; // Import isScrollingDown
+  import store, { saveToStore, isScrollingDown } from "../store"; // Import isScrollingDown
   import SVG from "../SVG/SVG.svelte";
   import ThemeChanger from "../ThemeChanger/ThemeChanger.svelte";
-    import logout from "../systems/requests/logout.ts";
+    import logout from "../systems/requests/logout";
 
   let menuOpen = false;
   let headerVisible = writable(true); // Regular boolean variable
@@ -21,19 +21,19 @@
         <a
           class="menu-item hide-on-mobile"
           onclick={() => {
-            saveToStore({ stepsIndex: 7 });
+            saveToStore({ stepsIndex: 5 });
           }}>Config</a
         >
         <a
           class="menu-item hide-on-mobile"
           onclick={() => {
-            saveToStore({ stepsIndex: 8 });
+            saveToStore({ stepsIndex: 6 });
           }}>News Sources</a
         >
         <a
           class="menu-item hide-on-mobile"
           onclick={() => {
-            saveToStore({ stepsIndex: 9 });
+            saveToStore({ stepsIndex: 7 });
           }}>Users</a
         >
         <section class="menu-x hide-on-desktop interactive">

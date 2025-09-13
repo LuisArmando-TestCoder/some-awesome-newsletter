@@ -1,6 +1,7 @@
 import { get } from "svelte/store";
-import store, { saveToConfig } from "../../store.ts";
-import type { NewsSource } from "../../types.ts";
+import store, { saveToConfig } from "../../store";
+import type { NewsSource } from "../../types";
+import getAuthHeaders from "./getAuthHeaders";
 
 export async function generatePersonality(
   rawContent: string,
@@ -12,11 +13,7 @@ export async function generatePersonality(
 
   const response = await fetch(url, {
     method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      "x-auth-email": get(store).configuratorEmail,
-      "x-auth-code": get(store).authCode,
-    },
+    headers: getAuthHeaders(),
     body: JSON.stringify({ rawContent }),
   });
 

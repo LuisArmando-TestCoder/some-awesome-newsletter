@@ -1,10 +1,10 @@
 <script lang="ts">
   import MarkdownText from "../../../texts/MarkdownText/MarkdownText.svelte";
   import { get } from "svelte/store"; // Import get
-  import store, { saveToStore } from "../../../../store.ts";
+  import store, { saveToStore } from "../../../../store";
   import Centered from "../../../wrappers/Centered/Centered.svelte";
   import LanguageInput from "../../../inputs/Language/Language.svelte"; // Renamed import
-  import submitPublicSubscription from "../../../requests/submitPublicSubscription.ts"; // Corrected import path (was ../../)
+  import submitPublicSubscription from "../../../requests/submitPublicSubscription"; // Corrected import path (was ../../)
   // import LoadingSpinner from "../../../loaders/LoadingSpinner/LoadingSpinner.svelte"; // Removed - Component not found
 
   export let canReveal = false;

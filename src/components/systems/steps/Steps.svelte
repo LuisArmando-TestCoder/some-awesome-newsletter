@@ -2,8 +2,8 @@
   import { onMount, type SvelteComponent } from "svelte";
   import MultiSlotComponent from "../wrappers/MultiSlotComponent/MultiSlotComponent.svelte";
   import TransitionSteps from "./TransitionSteps/TransitionSteps.svelte";
-  import store from "../../store.ts";
-  import type { ComponentSteps, Store } from "../../types.ts";
+  import store from "../../store";
+  import type { ComponentSteps, Store } from "../../types";
   import { writable } from "svelte/store";
 
   export let components: ComponentSteps;
@@ -12,7 +12,7 @@
   onMount(() => {
     steps.set(
       components.map(([_, component], index) => {
-        console.log("can u reveal", index, $store.stepsIndex === index);
+        // console.log("can u reveal", index, $store.stepsIndex === index);
 
         return [
           (store: Store) => {

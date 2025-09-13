@@ -135,3 +135,12 @@ export type Populator<T extends object> = (
   propertyPath: string,
   value: any
 ) => T;
+
+export type StepsKey = "News Sources" | "Users" | "Reports" | "Profile" | "Billing";
+
+export type SideLinkType = {
+  url?: string;
+  callback?: Function;
+  name: string;
+  children?: SideLinkType[]
+}

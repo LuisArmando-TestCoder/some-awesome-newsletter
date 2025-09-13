@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { TextType } from "../../../types.ts";
+  import type { TextType } from "../../../types";
   import RevealText from "../RevealText/RevealText.svelte";
   import TextTypes from "../TextTypes/TextTypes.svelte";
 

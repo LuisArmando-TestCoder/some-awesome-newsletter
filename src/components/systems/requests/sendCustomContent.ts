@@ -1,6 +1,7 @@
 import { get } from "svelte/store";
-import store from "../../store.ts";
-import type { Store as AppStoreType } from "../../types.ts";
+import store from "../../store";
+import type { Store as AppStoreType } from "../../types";
+import getAuthHeaders from "./getAuthHeaders";
 
 export default async function sendCustomContent(
   configId: string,
@@ -27,17 +28,12 @@ export default async function sendCustomContent(
 
   // The backend endpoint will be POST /newsletter/send-custom-content
   // The body will contain configId, newsSourceId, and content.
-  // Auth headers are x-auth-email (which is configId) and x-auth-code.
   const endpointUrl = `${apiURLFunction()}/newsletter/send-custom-content`;
 
   try {
     const response = await fetch(endpointUrl, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-auth-email": configId, // configuratorEmail is used as configId here
-        "x-auth-code": authCode,
-      },
+      headers: getAuthHeaders(),
       body: JSON.stringify({
         configId: configId, // Sending configId in body as well for clarity/consistency
         newsSourceId: newsSourceId,

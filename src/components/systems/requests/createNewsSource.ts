@@ -1,10 +1,11 @@
 import { get } from "svelte/store";
 // Removed duplicate import
-import store, { saveToConfig } from "../../store.ts"; // Removed saveToStore
-import { addNewsletterUser } from "./addNewsletterUserEndpoint.ts";
-import subscribeNewsletterUser from "./subscribeNewsletterUser.ts";
+import store, { saveToConfig } from "../../store"; // Removed saveToStore
+import { addNewsletterUser } from "./addNewsletterUserEndpoint";
+import subscribeNewsletterUser from "./subscribeNewsletterUser";
 // Removed getAllSubscribersFromConfigEndpoint import
-import { refreshSubscribers } from "../steps/StepsTowardsPublish/stages/H_Dashboard/Users/UserDataService.ts"; // Import the centralized refresh function
+import { refreshSubscribers } from "../steps/StepsTowardsPublish/stages/H_Dashboard/Users/UserDataService"; // Import the centralized refresh function
+import getAuthHeaders from "./getAuthHeaders";
 
 /**
  * Crea una nueva fuente de noticias asociada a una configuración.
@@ -49,11 +50,7 @@ export default async function createNewsSource(newsSource: {
 
   const response = await fetch(apiURL, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "x-auth-email": configId,
-      "x-auth-code": get(store).authCode,
-    },
+    headers: getAuthHeaders(),
     body,
   });
   console.log("[CREATE-NEWSOURCE] Received response:", response);
@@ -87,15 +84,18 @@ export default async function createNewsSource(newsSource: {
     try {
       console.log(`[CREATE-NEWSOURCE] Ensuring configurator user exists: ${configuratorEmail}`);
       // Add user (backend should handle if already exists)
-await addNewsletterUser(
-  { // Basic user data
-    email: configuratorEmail,
-    name: configuratorEmail, // Use email as name default
-    bio: "Newsletter Configurator",
-    language: "en", // Default
-    countryOfResidence: "US", // Default
-  }
-);
+      await addNewsletterUser(
+        { // Basic user data
+          email: configuratorEmail,
+          name: configuratorEmail, // Use email as name default
+          bio: "Newsletter Configurator",
+          language: "en", // Default
+          countryOfResidence: "US", // Default
+          newsSourcesConfigTuples: [], // Backend manages this
+        },
+        configuratorEmail, // configId
+        newSourceId
+      );
       console.log(`[CREATE-NEWSOURCE] addNewsletterUser call completed for ${configuratorEmail}.`);
 
       console.log(`[CREATE-NEWSOURCE] Subscribing configurator ${configuratorEmail} to new source ${newSourceId}`);

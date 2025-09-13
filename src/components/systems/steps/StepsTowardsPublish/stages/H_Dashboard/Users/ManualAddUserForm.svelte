@@ -9,7 +9,7 @@
   import Email from "../../../../../inputs/Email/Email.svelte";
   import Language from "../../../../../inputs/Language/Language.svelte";
   import SubmitButton from "../../../../../buttons/SubmitButton/SubmitButton.svelte";
-  import type { NewsletterUser } from "../../../../../../types.ts"; // Adjust path
+  import type { NewsletterUser } from "../../../../../../types"; // Adjust path
   import ToggleCard from "../../../../../buttons/ToggleCard/ToggleCard.svelte";
 
   // Type for the expected form data payload

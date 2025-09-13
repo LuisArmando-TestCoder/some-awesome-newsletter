@@ -1,8 +1,8 @@
 <script lang="ts">
-  import store, { saveToStore } from "../../../../store.ts";
+  import store, { saveToStore } from "../../../../store";
   import Code from "../../../inputs/Code/Code.svelte";
-  import askIsAuthCodeValid from "../../../requests/askIsAuthCodeValid.ts";
-  import askForNewAuthCode from "../../../requests/askForNewAuthCode.ts";
+  import askIsAuthCodeValid from "../../../requests/askIsAuthCodeValid";
+  import askForNewAuthCode from "../../../requests/askForNewAuthCode";
   import MarkdownText from "../../../texts/MarkdownText/MarkdownText.svelte";
   import Centered from "../../../wrappers/Centered/Centered.svelte";
   import type { Writable } from "svelte/store";

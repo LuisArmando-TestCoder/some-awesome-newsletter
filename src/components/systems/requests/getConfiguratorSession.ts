@@ -1,26 +1,25 @@
 import { get } from "svelte/store";
-import store, { saveToConfig, saveToStore } from "../../store.ts";
+import store, { getCookie, saveToConfig, saveToStore } from "../../store";
 import {
   foregroundColor,
   complementaryColor,
-} from "../../ThemeChanger/theme-store.ts"; // Corrected casing
-import { getComplementaryColor } from "../inputs/ColorPicker/getColorSuggestions.ts";
-import createInitialConfiguratorConfig from "./createInitialConfiguratorConfig.ts";
-import createNewsSource from "./createNewsSource.ts";
+} from "../../ThemeChanger/theme-store"; // Corrected casing
+import { getComplementaryColor } from "../inputs/ColorPicker/getColorSuggestions";
+import createInitialConfiguratorConfig from "./createInitialConfiguratorConfig";
+import createNewsSource from "./createNewsSource";
 // Removed unused imports: addNewsletterUser, subscribeNewsletterUser
-import { loadInitialData, refreshSubscribers } from "../steps/StepsTowardsPublish/stages/H_Dashboard/Users/UserDataService.ts"; // Import refresh function
+import { loadInitialData, refreshSubscribers } from "../steps/StepsTowardsPublish/stages/H_Dashboard/Users/UserDataService"; // Import refresh function
+import getAuthHeaders from "./getAuthHeaders";
 
-async function getConfigFetchResponse(authHeaders: {
-  [index: string]: string;
-}) {
+export async function getConfigFetchResponse() {
   console.log(get(store).apiURL(), get(store).configuratorEmail);
   let response = await fetch(
     `${get(store).apiURL()}/private-config?documentId=${
-      get(store).configuratorEmail
+      getAuthHeaders()["x-auth-email"]
     }`,
     {
       method: "GET",
-      headers: authHeaders,
+      headers: getAuthHeaders(),
     }
   );
 
@@ -28,17 +27,13 @@ async function getConfigFetchResponse(authHeaders: {
 }
 
 export default async () => {
-  const authHeaders = {
-    "x-auth-email": get(store).configuratorEmail,
-    "x-auth-code": get(store).authCode,
-    "Content-Type": "application/json",
-  };
+  console.log("get(store).authCode", get(store).authCode)
 
-  let response = await getConfigFetchResponse(authHeaders);
+  let response = await getConfigFetchResponse();
 
   if (!response.ok) {
     await createInitialConfiguratorConfig(authHeaders);
-    response = await getConfigFetchResponse(authHeaders);
+    response = await getConfigFetchResponse();
   }
 
   const json = await response.json();
@@ -64,7 +59,7 @@ export default async () => {
     // --- Refetch config AFTER potentially creating the first news source ---
     // This ensures the store reflects the newly added source
     console.log("[GET-SESSION] Refetching config after potential news source creation..."); // Use console.log
-    const updatedResponse = await getConfigFetchResponse(authHeaders);
+    const updatedResponse = await getConfigFetchResponse();
     if (!updatedResponse.ok) {
        // Handle error if refetch fails - maybe throw or log and proceed with potentially stale config?
        console.error("[GET-SESSION] Failed to refetch configuration after news source creation.");
@@ -99,6 +94,7 @@ export default async () => {
     // await loadInitialData();
     saveToStore({ isRefreshingSubscribers: false }); // Clear flag after fetch (success or error)
   }
+  // loadInitialData();
   // --- End subscriber fetch ---
 
   return response.ok;

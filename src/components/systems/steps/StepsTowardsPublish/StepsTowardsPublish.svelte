@@ -5,10 +5,14 @@
     populateToStore,
     saveAllKeysToSaveInLocalStorage,
     saveToStore,
+    stepsMapping,
     setStorageFromKeysToSave,
-  } from "../../../store.ts";
+  } from "../../../store";
   import Steps from "../Steps.svelte";
-  import type { Store } from "../../../types.ts";
+  import type { Store } from "../../../types";
+  import { user as userStore } from "$lib/stores/user.js";
+  export let data;
+  import askIsAuthCodeValid from "../../requests/askIsAuthCodeValid.js";
 
   export let components;
 
@@ -40,10 +44,31 @@
     });
   }
 
+  // Set the global user store when the prop changes
   onMount(() => {
-    setStorageFromKeysToSave();
-    setInitialNonInteractiveSlidesAutomaticSlideTime();
-    saveAllKeysToSaveInLocalStorage();
+    console.log("$userStore", $store)
+    askIsAuthCodeValid(() => {
+      console.log("askIsAuthCodeValid", $store.newsSource, $store.lead)
+      if (!$store.newsSource || $store.lead) {
+        const fisrtNS = $store.config.newsSources?.[0];
+        console.log("$store.config", $store.config)
+
+        if (fisrtNS) {
+          const { url, lead } = fisrtNS;
+  
+          saveToStore({
+            newsSource: url,
+            lead,
+            stepsIndex: stepsMapping["News Sources"]
+          });
+
+          return;
+        }
+
+        // HERE make el burumbum
+        setInitialNonInteractiveSlidesAutomaticSlideTime();
+      }
+    }); 
   });
 </script>
 

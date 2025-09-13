@@ -1,7 +1,7 @@
 <script lang="ts">
   import MarkdownText from "../../../texts/MarkdownText/MarkdownText.svelte";
   import Link from "../../../inputs/Link/Link.svelte";
-  import store, { saveToStore } from "../../../../store.ts";
+  import store, { saveToStore } from "../../../../store";
   import Centered from "../../../wrappers/Centered/Centered.svelte";
 
   export let canReveal = false;

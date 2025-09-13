@@ -5,9 +5,9 @@
     getComplementaryColor,
     getContrastColor,
     hslToHex,
-  } from "./getColorSuggestions.ts";
-  import type { CandidateScore } from "./getColorSuggestions.ts";
-  import store from "../../../store.ts";
+  } from "./getColorSuggestions";
+  import type { CandidateScore } from "./getColorSuggestions";
+  import store from "../../../store";
   // Import the color picker library
   import ColorPicker from "svelte-awesome-color-picker"; // Removed A11yVariant as it's not used
   import nearestColor from "nearest-color"; // Import the library
@@ -15,7 +15,7 @@
   import {
     complementaryColor,
     foregroundColor,
-  } from "../../../ThemeChanger/theme-store.ts";
+  } from "../../../ThemeChanger/theme-store";
   import MarkdownText from "../../texts/MarkdownText/MarkdownText.svelte";
 
   // Props & Stores

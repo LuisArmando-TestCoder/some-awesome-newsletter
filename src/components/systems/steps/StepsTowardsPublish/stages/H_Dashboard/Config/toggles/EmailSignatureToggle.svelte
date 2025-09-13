@@ -1,5 +1,5 @@
 <script lang="ts">
-  import store, { saveToConfig } from "../../../../../../../store.ts";
+  import store, { saveToConfig } from "../../../../../../../store";
   import MarkdownText from "../../../../../../texts/MarkdownText/MarkdownText.svelte";
   import TextArea from "../../../../../../inputs/TextArea/TextArea.svelte";
 

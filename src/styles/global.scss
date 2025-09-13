@@ -1,0 +1,138 @@
+@use './reset.scss';
+
+:global {
+  @font-face {
+    font-family: 'League Spartan';
+    src: url('/fonts/League_Spartan/LeagueSpartan-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Jost';
+    src: url('/fonts/JOST/Jost-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Jost';
+    src: url('/fonts/JOST/Jost-Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Poppins';
+    src: url('/fonts/Poppins/Poppins-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-display: swap;
+  }
+}
+
+:root {
+  --c-primary: #060D0D;
+  --c-primary-dark: #060D0D;
+  --c-secondary: #6c757d;
+  --c-text: #212529;
+  --c-text-light: #495057;
+  --c-bg: #f8f8f8;
+  --c-bg-alt: #f1f2f3;
+  --c-border: #f6f9ff;
+  --c-white: #fff;
+  --c-focus-ring: rgba(105, 110, 255, 0.5);
+
+  --font-heading: 'League Spartan', sans-serif;
+  --font-highlight: 'Jost', sans-serif;
+  --font-body: 'Poppins', sans-serif;
+
+  --space-xs: 0.25rem; // 4px
+  --space-sm: 0.5rem; // 8px
+  --space-md: 1rem; // 16px
+  --space-lg: 2rem; // 32px
+  --space-xl: 4rem; // 64px
+  --space-xxl: 8rem; // 128px
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.07), 0 4px 6px rgba(0, 0, 0, 0.06);
+
+  --transition-fast: 200ms ease-in-out;
+  --transition-normal: 300ms ease-in-out;
+
+  --color-foreground: #181818;
+  --color-outline: #03a9f4;
+  --color-background: #181818; // #f1e9e4
+
+  --transition-short-duration: 1s;
+  --transition-shortest-duration: 0.3s;
+
+  --ham-size: calc(clamp(100px, 30vw, 200px) / 4);
+}
+
+:global(h1) {
+  font-family: var(--font-heading);
+}
+
+:global(h2, h3, h4, h5, h6) {
+  font-family: var(--font-highlight);
+}
+
+:global(body) {
+  font-family: var(--font-body);
+}
+
+:global(button),
+:global(input) {
+  font-family: var(--font-body);
+}
+
+
+
+/* --- GLOBAL STYLES & RESETS --- */
+:global(body) {
+  margin: 0;
+  color: var(--c-text);
+  background-color: var(--c-bg);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:global(h1, h2, h3, h4) {
+  font-weight: 700;
+  line-height: 1.2;
+  margin-top: 0;
+  margin-bottom: var(--space-md);
+}
+
+:global(h1) {
+  font-size: clamp(2.5rem, 4vw, 1.5rem);
+}
+
+:global(h2) {
+  font-size: clamp(2rem, 4vw, 2.75rem);
+}
+
+:global(h3) {
+  font-size: 1.5rem;
+}
+
+:global(h4) {
+  font-size: 1.2rem;
+}
+
+:global(p) {
+  margin-top: 0;
+  margin-bottom: var(--space-md);
+}
+
+:global(a) {
+  color: var(--c-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}

@@ -1,5 +1,5 @@
 import { get } from "svelte/store";
-import store, { saveToStore } from "../../store.ts";
+import store, { saveToStore } from "../../store";
 
 export default async function ask() {
   saveToStore({

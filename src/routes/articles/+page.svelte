@@ -4,15 +4,15 @@
   import { writable } from "svelte/store";
   import { page } from "$app/stores";
   import { goto } from "$app/navigation";
-  import languages from "../../components/systems/inputs/Language/languages.ts";
+  import languages from "../../components/systems/inputs/Language/languages";
   import ThemeChanger from "../../components/ThemeChanger/ThemeChanger.svelte";
   import PlainText from "../../components/systems/inputs/PlainText/PlainText.svelte";
   import Pagination from "../../components/Pagination/Pagination.svelte";
   import Modal from "../../components/Modal/Modal.svelte";
-  import store from "../../components/store.ts";
+  import store from "../../components/store";
   import SmoothScrollWrapper from "../../components/SmoothScrollWrapper/SmoothScrollWrapper.svelte";
   import SoftTitle from "../../components/SoftTitle/SoftTitle.svelte";
-    import { isDarkTheme, themeIndex } from "../../components/ThemeChanger/theme-store.ts";
+    import { isDarkTheme, themeIndex } from "../../components/ThemeChanger/theme-store";
 
   /* ────────────────── types ─────────────────── */
   interface Article {

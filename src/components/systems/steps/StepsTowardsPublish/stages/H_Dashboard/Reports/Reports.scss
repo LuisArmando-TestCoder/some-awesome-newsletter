@@ -1,0 +1,316 @@
+// --- Base Styles ---
+.form {
+  display: grid;
+  gap: 0.75rem; // Slightly smaller gap within forms
+}
+
+.users-page-layout {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(480px, 100%), 1fr)
+  ); // Slightly wider min width
+  gap: 2rem;
+  align-items: start;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-management-column {
+  // Styles specific to the left column
+}
+
+// --- Analytics Column ---
+.charts-column {
+  position: sticky;
+  top: 120px; // Adjust based on your header height
+  max-height: calc(100vh - 140px); // Adjust based on header/padding
+  overflow-y: auto;
+  padding-bottom: 2rem;
+}
+
+.stats-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.stat-wrapper {
+  background-color: var(--color-background-opaque-inversion);
+  padding: 1rem 1.5rem;
+  border-radius: var(--radius-base);
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--color-background-input-border); // Subtle border
+}
+
+// --- Toggle Card Content ---
+// Style the direct content area provided by ToggleCard
+:global(.toggle-card-content) {
+  // Use :global if the component doesn't automatically scope slots
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; // Space between "Add User Section" and "Subscriber List Section"
+  padding-top: 1rem; // Add some padding inside the card content area
+}
+
+// --- Add User Section (Trigger + Forms) ---
+.add-user-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.add-user-trigger {
+  display: inline-flex; // Use inline-flex to align icon and text
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0;
+  border: 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-foreground); // Use theme primary color
+  background-color: transparent;
+  border-radius: var(--radius-base);
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease,
+    border-color 0.2s ease;
+  align-self: flex-start; // Don't stretch full width
+
+  // Style the icon within the button if using the Icon component
+  :global(.icon) {
+    // Target the icon globally if needed
+    fill: currentColor; // Inherit button color
+  }
+
+  :global(svg) {
+    width: 1rem;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: var(
+      --color-primary-faded,
+      rgba(0, 123, 255, 0.08)
+    ); // Faded background on hover
+    border-color: var(--color-foreground);
+    outline: none;
+  }
+
+  &[aria-expanded="true"] {
+    // Optional: Style when forms are visible (e.g., change background/border)
+    background-color: var(--color-primary-faded, rgba(0, 123, 255, 0.08));
+    border-color: var(--color-foreground);
+  }
+}
+
+.add-forms-container {
+  // Styles for the container that wraps the forms when visible
+  border-radius: var(--radius-small);
+  padding: 1.5rem; // Padding around the forms
+  margin-top: 0.5rem; // Space below the trigger button
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; // Gap between manual form, hr, bulk form
+}
+
+// --- Add Forms Styling (Manual & Bulk) ---
+.manual-add-form,
+.bulk-add-section {
+  margin-top: 0; // Remove previous margin, handled by container gap
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem; // Gap between title and elements within the section
+}
+
+// File Input (keep existing styles)
+.file-input-hidden {
+  display: none;
+}
+.file-input-label {
+  display: inline-block;
+  padding: 0.6rem 1rem;
+  background-color: var(--color-background-button, #f0f0f0);
+  color: var(--color-foreground-button, #333);
+  border: 1px solid var(--color-background-input-border);
+  border-radius: var(--radius-base);
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  font-size: 0.9rem;
+  &:hover {
+    background-color: var(--color-background-button-hover, #e0e0e0);
+    border-color: var(--color-foreground);
+  }
+}
+.selected-file-info {
+  font-size: 0.85rem;
+  color: var(--color-foreground-muted);
+  margin-top: -0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+// --- Subscriber List Section ---
+.subscriber-list-section {
+  margin-top: 1rem; // Add space above the list title if forms were hidden
+}
+
+.subscriber-cards-container {
+  display: grid;
+  grid-template-columns: 1fr; // Each card takes full width by default
+  gap: 1rem; // Space between user cards
+  max-height: 400px; // Limit height and enable scrolling
+  overflow-y: auto;
+  padding: 0.5rem; // Padding around the cards area
+  border: 1px solid var(--color-background-input-border); // Border around the list
+  border-radius: var(--radius-small);
+}
+
+.user-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; // Align items to the top
+  padding: 1rem;
+  background-color: var(
+    --color-background-card,
+    var(--color-background-opaque)
+  ); // Card background
+  border: 1px solid var(--color-background-input-border);
+  border-radius: var(--radius-small);
+  box-shadow: var(--shadow-extra-soft); // Subtle shadow for cards
+  gap: 1rem; // Gap between details and actions
+}
+
+.user-card-details {
+  flex-grow: 1; // Allow details to take available space
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem; // Small gap between detail lines
+  word-break: break-word; // Prevent long emails/names from overflowing badly
+}
+
+.user-card-name {
+  font-weight: 600;
+  color: var(--color-foreground);
+  font-size: 1rem;
+}
+
+.user-card-email {
+  font-size: 0.9rem;
+  color: var(--color-foreground-muted);
+}
+
+.user-card-meta {
+  font-size: 0.8rem;
+  color: var(--color-foreground-muted);
+  margin-top: 0.2rem;
+  span {
+    // Style individual meta items if needed
+    display: inline-block; // Ensures slashes have space
+  }
+}
+
+.user-card-bio {
+  font-size: 0.85rem;
+  color: var(--color-foreground);
+  margin-top: 0.5rem;
+  font-style: italic;
+  background-color: var(
+    --color-background-very-opaque
+  ); // Slight background for bio
+  padding: 0.3rem 0.5rem;
+  border-radius: var(--radius-tiny);
+  border-left: 2px solid var(--color-primary-soft, #a0cfff); // Accent border
+}
+
+.user-card-actions {
+  flex-shrink: 0; // Prevent actions area from shrinking
+  padding-top: 0.2rem; // Align button slightly better with top text
+
+  // Style the icon button within the card
+  :global(.icon-button[label="Unsubscribe"]) {
+    font-size: 0.8rem;
+    padding: 0.1rem 0.3rem;
+    min-width: auto;
+    border-radius: 4px;
+
+    :global(.icon svg path) {
+      fill: var(--color-error, #ff6b6b);
+      transition: fill 0.2s ease;
+    }
+    :global(.icon) {
+      width: 0.9rem;
+      height: 0.9rem;
+      margin-right: 0.2rem;
+      padding: 0.2rem;
+      vertical-align: middle;
+    }
+
+    &:not(:disabled):hover {
+      background-color: var(
+        --color-error-opaque,
+        rgba(255, 107, 107, 0.1)
+      ) !important;
+      border-color: var(--color-error, #ff6b6b) !important;
+      color: var(--color-error, #ff6b6b) !important;
+
+      :global(.icon svg path) {
+        fill: var(--color-error, #ff6b6b) !important;
+      }
+    }
+  }
+}
+
+// --- Utilities ---
+hr.section-separator {
+  border: none;
+  border-top: 1px solid var(--color-background-input-border);
+  margin: 0.5rem 0; // Add some vertical margin around separators
+}
+
+.error-message {
+  color: var(--color-error, #ff6b6b);
+  font-size: 0.9em;
+  margin-top: 0.2rem; // Reduce top margin slightly
+}
+.success-message {
+  color: var(--color-success, #4caf50);
+  font-size: 0.9em;
+  margin-top: 0.2rem;
+}
+
+// --- Responsive Adjustments ---
+@media (max-width: 900px) {
+  .users-page-layout {
+    grid-template-columns: 1fr; // Stack columns
+  }
+  .charts-column {
+    position: relative; // Unstick
+    top: auto;
+    max-height: none;
+    overflow-y: visible;
+  }
+}
+
+// Optional: If cards become too narrow on small screens
+@media (max-width: 550px) {
+  .users-page-layout {
+    gap: 1.5rem; // Reduce gap on small screens
+  }
+  .user-card {
+    flex-direction: column; // Stack details and actions
+    align-items: stretch; // Stretch items
+  }
+  .user-card-actions {
+    padding-top: 0.5rem;
+    align-self: flex-end; // Align button to the right
+  }
+  .stat-wrapper {
+    padding: 1rem; // Reduce padding slightly
+  }
+  .add-forms-container {
+    padding: 1rem; // Reduce padding slightly
+  }
+}

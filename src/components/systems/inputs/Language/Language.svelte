@@ -5,7 +5,7 @@
   import { fade, slide } from "svelte/transition";
 
   // Assuming languages.ts is in the same directory
-  import languagesData from "./languages.ts";
+  import languagesData from "./languages";
 
   interface Language {
     code: string;

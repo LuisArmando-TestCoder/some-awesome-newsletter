@@ -1,15 +1,14 @@
 import { get } from "svelte/store";
-import store from "../../store.ts";
+import store from "../../store";
+import getAuthHeaders from "./getAuthHeaders";
 
-export default async function createInitialConfiguratorConfig(authHeaders: {
-  [index: string]: string;
-}) {
-  const configId = get(store).configuratorEmail;
+export default async function createInitialConfiguratorConfig() {
+  const configId = getAuthHeaders()["x-auth-email"];
 
   const body = {
     newsletterSubject: "Daily News",
     newsletterTitle: "Morning Bulletin",
-    senderName: configId.split("@")[0],
+    senderName: configId?.split("@")[0],
     // brandColor:
     //   get(store).colorPalette[
     //     Math.floor(Math.random() * get(store).colorPalette.length)
@@ -18,10 +17,10 @@ export default async function createInitialConfiguratorConfig(authHeaders: {
   };
 
   const response = await fetch(
-    `${get(store).apiURL()}/config?documentId=${configId}`,
+    `${get(store).apiURL()}/config?documentId=${getAuthHeaders()["x-auth-email"]}`,
     {
       method: "POST",
-      headers: authHeaders,
+      headers: getAuthHeaders(),
       body: JSON.stringify(body),
     }
   );

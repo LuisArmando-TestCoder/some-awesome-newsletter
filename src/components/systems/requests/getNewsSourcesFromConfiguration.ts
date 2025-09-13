@@ -1,5 +1,6 @@
 import { get } from "svelte/store";
-import store from "../../store.ts";
+import store from "../../store";
+import getAuthHeaders from "./getAuthHeaders";
 
 export default async function getNewsSourcesFromConfiguration(
   configId?: string
@@ -9,10 +10,7 @@ export default async function getNewsSourcesFromConfiguration(
       configId || get(store).configuratorEmail
     }`,
     {
-      headers: {
-        "x-auth-email": get(store).configuratorEmail,
-        "x-auth-code": get(store).authCode,
-      },
+      headers: getAuthHeaders(),
     }
   );
 

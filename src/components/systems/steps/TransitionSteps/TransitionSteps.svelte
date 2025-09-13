@@ -1,5 +1,5 @@
 <script lang="ts">
-  import store, { saveToStore } from "../../../store.ts";
+  import store, { saveToStore } from "../../../store";
   import TransitionButton from "../../buttons/TransitionButton/TransitionButton.svelte";
 
   export let components: any[];

@@ -1,7 +1,7 @@
 <!-- src/components/systems/steps/StepsTowardsPublish/stages/H_Dashboard/Users/UserAnalytics.svelte -->
 <script lang="ts">
     import { get } from 'svelte/store'; // Only needed if accessing stores directly, prefer props
-    import type { NewsletterUser, NewsSource } from '../../../../../../types.ts'; // Adjust path
+    import type { NewsletterUser, NewsSource } from '../../../../../../types.js'; // Adjust path
     import type { Writable } from 'svelte/store'; // If passing stores as props
   
     // Import UI Components (Adjust paths as needed)

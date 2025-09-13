@@ -1,0 +1,67 @@
+{
+  "currency": "USD",
+  "billingIntervals": ["monthly", "yearly"],
+  "currentPlan": "trial",
+  "plans": [
+    {
+      "id": "trial",
+      "name": "Trial",
+      "monthly": 0,
+      "yearly": 0,
+      "tagline": "Get started free",
+      "featuresBase": [
+        "100 API calls/day",
+        "1 project",
+        "Basic support"
+      ],
+      "featuresDelta": [],
+      "limits": {
+        "api_calls_per_day": 100,
+        "projects": 1
+      },
+      "ctaLabel": "Start Free"
+    },
+    {
+      "id": "starter",
+      "name": "Starter",
+      "monthly": 20,
+      "yearly": 240,
+      "tagline": "For growing teams",
+      "featuresBase": [],
+      "featuresDelta": [
+        "5,000 API calls/day",
+        "Up to 10 projects",
+        "Priority email support"
+      ],
+      "limits": {
+        "api_calls_per_day": 5000,
+        "projects": 10
+      },
+      "ctaLabel": "Upgrade to Starter"
+    },
+    {
+      "id": "pro",
+      "name": "Pro",
+      "monthly": 200,
+      "yearly": 2400,
+      "tagline": "Scale without limits",
+      "featuresBase": [],
+      "featuresDelta": [
+        "Unlimited API calls",
+        "Unlimited projects",
+        "Dedicated success manager"
+      ],
+      "limits": {
+        "api_calls_per_day": -1,
+        "projects": -1
+      },
+      "ctaLabel": "Upgrade to Pro"
+    }
+  ],
+  "contact": {
+    "text": "Need more capabilities for your business?",
+    "cta": "Contact Us",
+    "href": "/help",
+    "note": "Opens the door to Pay-as-you-go when monthly spend > 10× Starter."
+  }
+}

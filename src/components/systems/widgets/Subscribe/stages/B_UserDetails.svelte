@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import store, { saveToStore, getFromStore } from "../../../../store.ts";
+  import store, { saveToStore, getFromStore } from "../../../../store";
   import EmailInput from "../../../inputs/Email/Email.svelte";
   import PlainText from "../../../inputs/PlainText/PlainText.svelte";
 

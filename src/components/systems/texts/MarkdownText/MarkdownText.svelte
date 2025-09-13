@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import Text from "../Text/Text.svelte";
-  import type { Block, TextNode } from "../../../types.ts";
+  import type { Block, TextNode } from "../../../types";
 
   let blocks: Block[] = [];
   let slotContainer: HTMLDivElement;

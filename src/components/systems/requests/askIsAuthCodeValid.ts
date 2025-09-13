@@ -1,27 +1,39 @@
 import { get } from "svelte/store";
-import store, { saveToStore } from "../../store.ts";
-import getConfiguratorSession from "./getConfiguratorSession.ts";
+import store, { saveToStore } from "../../store";
+import getConfiguratorSession from "./getConfiguratorSession";
+import { user } from "$lib/stores/user";
+import getAuthHeaders from "./getAuthHeaders";
 
 export default async (onSuccessCallback?: Function) => {
-  const response = await fetch(
-    `${get(store).apiURL()}/auth/${get(store).configuratorEmail}?code=${
-      get(store).authCode
-    }`
-  );
+  const authCode = getAuthHeaders()["x-auth-code"];
+  const configuratorEmail = getAuthHeaders()["x-auth-email"];
+  const idToken = get(user)?.idToken || get(store).idToken;
+  const clientId = get(user)?.clientId || get(store).clientId;
 
-  let isValid = false;
+  console.log('[askIsAuthCodeValid.ts] authCode', authCode);
+  console.log('[askIsAuthCodeValid.ts] configuratorEmail', configuratorEmail);
+  console.log('[askIsAuthCodeValid.ts] idToken', idToken);
+  console.log('[askIsAuthCodeValid.ts] clientId', clientId);
+
+  const url = `${get(store).apiURL()}/auth/${configuratorEmail}?code=${
+    authCode
+  }&token_id=${idToken}&client_id=${clientId}`;
+
+  console.log('[askIsAuthCodeValid.ts] url', url);
+
+  const response = await fetch(url);
+
+  let isAuthCodeValid = response.ok;
+
+  saveToStore({ isAuthCodeValid }); // Persist valid state
+
   let errorMessage = "Authentication failed. Please try again."; // Default error
 
   if (response.ok) {
     // Successful validation (200 OK)
-    isValid = true;
-    saveToStore({ isAuthCodeValid: true }); // Persist valid state
     console.log("Authentication successful via askIsAuthCodeValid."); // Use console.log
-
   } else {
     // Handle specific errors (e.g., 403 Forbidden for invalid code)
-    isValid = false;
-    saveToStore({ isAuthCodeValid: false }); // Persist invalid state
     try {
       const errorJson = await response.json();
       errorMessage = errorJson.error || `Authentication failed (${response.status})`;
@@ -33,15 +45,14 @@ export default async (onSuccessCallback?: Function) => {
     }
     // Reset step index only on failure
     saveToStore({
-      stepsIndex: 6, // todo: review: this is hard coded => if you change the position of the auth, you will be taken aback
+      stepsIndex: 3, // todo: review: this is hard coded => if you change the position of the auth, you will be taken aback
     });
   }
 
-
-  console.log("is ok", isValid, get(store).hasNewEmailCodeBeenSent); // Log the derived validity
+  console.log("is ok", isAuthCodeValid, get(store).hasNewEmailCodeBeenSent); // Log the derived validity
 
   // Handle step progression only if validation was successful
-  if (isValid && get(store).hasNewEmailCodeBeenSent) {
+  if (isAuthCodeValid && get(store).hasNewEmailCodeBeenSent) {
     saveToStore({
       hasNewEmailCodeBeenSent: false,
       stepsIndex: get(store).stepsIndex + 1,
@@ -49,9 +60,9 @@ export default async (onSuccessCallback?: Function) => {
   }
 
   // Handle session loading and callbacks only if validation was successful
-  if (isValid) {
+  if (isAuthCodeValid) {
+    await getConfiguratorSession(); // Load session data
     onSuccessCallback?.(); // Call success callback if provided
-    getConfiguratorSession(); // Load session data
     saveToStore({
       directionsThatShouldDisappear: get(store).stepsIndex > 6 ? [-1, 1] : [],
       hasNewEmailCodeBeenSent: false, // Reset flag after successful use
@@ -62,5 +73,5 @@ export default async (onSuccessCallback?: Function) => {
      // For now, it's logged to console.
   }
 
-  return isValid; // Return the boolean validity status
+  return isAuthCodeValid; // Return the boolean validity status
 };

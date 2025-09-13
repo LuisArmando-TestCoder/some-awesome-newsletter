@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { page } from "$app/state"; // Use $app/state instead
-  import store, { saveToStore } from "../../../../store.ts"; // Import saveToStore function
+  import store, { saveToStore } from "../../../../store"; // Import saveToStore function
   import MarkdownText from "../../../texts/MarkdownText/MarkdownText.svelte";
   import Centered from "../../../wrappers/Centered/Centered.svelte";
     import { writable } from "svelte/store";

@@ -1,7 +1,7 @@
 // src/components/systems/requests/unsubscribeUserToConfigNewsSource.ts
 
 import { get } from "svelte/store";
-import store from "../../store.ts"; // Adjust path if needed
+import store from "../../store"; // Adjust path if needed
 
 /**
  * Unsubscribes a user from a specific news source within a specific configuration

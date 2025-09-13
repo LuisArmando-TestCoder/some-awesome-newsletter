@@ -1,8 +1,8 @@
 <!-- src/components/systems/inputs/PersonalityField.svelte -->
 <script lang="ts">
   import { slide } from "svelte/transition";
-  import { generatePersonality } from "../../requests/generatePersonality.ts"; // Change back to .ts
-  import { latestMessage } from "../../../store.ts"; // Change back to .ts
+  import { generatePersonality } from "../../requests/generatePersonality"; // Change back to .ts
+  import { latestMessage } from "../../../store"; // Change back to .ts
   import { writable } from "svelte/store";
   import SubmitButton from "../../buttons/SubmitButton/SubmitButton.svelte";
 

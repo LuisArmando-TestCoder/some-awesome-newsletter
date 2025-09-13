@@ -1,6 +1,6 @@
 import { get } from "svelte/store";
-import store from "../../store.ts"; 
-import type { Config, Store as AppStoreType } from "../../types.ts"; // Added .ts and AppStoreType
+import store from "../../store"; 
+import type { Config, Store as AppStoreType } from "../../types"; // Added .ts and AppStoreType
 
 /**
  * Fetches the public configuration for a given configurator ID.

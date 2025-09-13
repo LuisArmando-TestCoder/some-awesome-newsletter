@@ -1,6 +1,6 @@
 <script lang="ts">
   import MarkdownText from "../../../texts/MarkdownText/MarkdownText.svelte";
-  import store, { saveToStore } from "../../../../store.ts";
+  import store, { saveToStore } from "../../../../store";
   import Centered from "../../../wrappers/Centered/Centered.svelte";
   import { onMount } from "svelte";
 

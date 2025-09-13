@@ -1,6 +1,7 @@
 import { get } from "svelte/store";
 import store from "../../store.js"; // Add .js extension
 import type { Store } from "../../types.js"; // Import Store type from types.ts
+import getAuthHeaders from "./getAuthHeaders.js";
 
 export default async function triggerNewsSourceSend(newsSourceId: string): Promise<boolean> {
   // Cast the store value to the imported type
@@ -26,12 +27,7 @@ export default async function triggerNewsSourceSend(newsSourceId: string): Promi
   try {
     const response = await fetch(url, {
       method: "POST",
-      headers: {
-        // No Content-Type needed for POST without body, but doesn't hurt
-        "Content-Type": "application/json",
-        "x-auth-email": configId,
-        "x-auth-code": authCode,
-      },
+      headers: getAuthHeaders(),
       // No body is needed for this trigger endpoint
     });
 

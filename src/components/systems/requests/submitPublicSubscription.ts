@@ -1,6 +1,6 @@
 import { get } from "svelte/store";
-import store from "../../store.ts";
-import type { NewsletterUser } from "../../../types.ts"; // Assuming types are defined here
+import store from "../../store";
+import type { NewsletterUser } from "../../../types"; // Assuming types are defined here
 
 // Define the expected payload structure for clarity
 interface PublicSubscriptionPayload {

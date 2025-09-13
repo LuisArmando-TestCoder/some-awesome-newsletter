@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
-  import type { Store } from "../../../types.ts";
+  import type { Store } from "../../../types";
   import A_Welcome from "./stages/A_Welcome.svelte";
   import B_Name from "./stages/B_Name.svelte"; // Import new Name step
   import C_Email from "./stages/B_Email.svelte"; // Keep old name, but it's step C now

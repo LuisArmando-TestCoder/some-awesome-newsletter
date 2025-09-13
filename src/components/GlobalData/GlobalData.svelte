@@ -1,8 +1,8 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { startTicks } from "./ticks.js";
-  import { populateToStore, getFromStore } from "../store.ts"; // Import store helpers
-  import getGeoIpLanguage from "../systems/requests/getGeoIpLanguage.ts"; // Corrected import path
+  import { populateToStore, getFromStore } from "../store"; // Import store helpers
+  import getGeoIpLanguage from "../systems/requests/getGeoIpLanguage"; // Corrected import path
 
   onMount(async () => {
     startTicks();

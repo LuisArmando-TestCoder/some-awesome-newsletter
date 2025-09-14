@@ -11,7 +11,6 @@
   import Steps from "../Steps.svelte";
   import type { Store } from "../../../types";
   import { user as userStore } from "$lib/stores/user.js";
-  export let data;
   import askIsAuthCodeValid from "../../requests/askIsAuthCodeValid.js";
 
   export let components;

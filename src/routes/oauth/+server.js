@@ -14,7 +14,6 @@ async function getUserData(access_token) {
   return data;
 }
 
-
 export const GET = async ({ url, cookies }) => {
     console.log('[oauth/+server.js] OAuth endpoint hit');
     const redirectURL = `${url.origin}/oauth`;

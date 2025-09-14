@@ -18,7 +18,5 @@
 </svelte:head>
 
 <div class="mx-auto flex min-h-[80svh] w-full max-w-7xl items-center justify-center px-4 py-10">
-  {#if copy}
-    <AuthForm mode="login" {copy} legal={{ termsUrl: runtime.legal.termsUrl, privacyUrl: runtime.legal.privacyUrl }} />
-  {/if}
+  <AuthForm mode="login" {copy} legal={{ termsUrl: runtime.legal.termsUrl, privacyUrl: runtime.legal.privacyUrl }} />
 </div>

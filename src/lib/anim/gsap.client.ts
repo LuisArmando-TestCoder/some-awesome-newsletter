@@ -1,57 +1,77 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ScrollSmoother } from 'gsap/ScrollSmoother';
-import { SplitText } from 'gsap/SplitText';
 
-// --- 1. REGISTER PLUGINS ---
-// This should only happen once per page load.
-gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText);
+// --- Base registration (seguro en SSR) ---
+gsap.registerPlugin(ScrollTrigger);
 
-console.log('anim.init: GSAP plugins registered', {
-    version: gsap.version,
-    isClient: typeof window !== 'undefined'
+console.log('anim.init: GSAP base registered', {
+  version: gsap.version,
+  isClient: typeof window !== 'undefined'
 });
 
-// --- 2. SMOOTHER INSTANCE MANAGEMENT ---
-let smoother: ScrollSmoother | null = null;
+// --- Manejamos las referencias a plugins dinámicos ---
+let smoother: any = null;
+let ScrollSmoother: any = null;
+let SplitText: any = null;
 
 /**
- * Creates a new ScrollSmoother instance. Kills the old one if it exists.
- * @param wrapper - The wrapper element for the smooth scroll container.
- * @param content - The content element for the smooth scroll container.
- * @returns The new ScrollSmoother instance.
+ * Carga dinámica de plugins que solo existen en el cliente.
  */
-export function createSmoother(wrapper: HTMLElement, content: HTMLElement): ScrollSmoother {
-    if (smoother) {
-        console.log('anim.smoother: Killing existing ScrollSmoother instance.');
-        smoother.kill();
-    }
-    console.log('anim.smoother: Creating new ScrollSmoother instance.');
-    smoother = ScrollSmoother.create({
-        wrapper,
-        content,
-        smooth: 1,
-        effects: true,
-        smoothTouch: 0.1,
-        normalizeScroll: true
+async function loadClientPlugins() {
+  if (typeof window === 'undefined') return;
+
+  if (!ScrollSmoother || !SplitText) {
+    const smootherModule = await import('gsap/ScrollSmoother');
+    const splitTextModule = await import('gsap/SplitText');
+
+    ScrollSmoother = smootherModule.ScrollSmoother;
+    SplitText = splitTextModule.SplitText;
+
+    gsap.registerPlugin(ScrollSmoother, SplitText);
+
+    console.log('anim.init: Client GSAP plugins registered', {
+      hasSmoother: !!ScrollSmoother,
+      hasSplitText: !!SplitText
     });
-    return smoother;
+  }
 }
 
 /**
- * Returns the current ScrollSmoother instance.
- * @returns The ScrollSmoother instance or null if it doesn't exist.
+ * Crea una nueva instancia de ScrollSmoother.
  */
-export function getSmoother(): ScrollSmoother | null {
-    return smoother;
+export async function createSmoother(wrapper: HTMLElement, content: HTMLElement) {
+  await loadClientPlugins();
+
+  if (!ScrollSmoother) {
+    console.warn('ScrollSmoother not available (probably SSR).');
+    return null;
+  }
+
+  if (smoother) {
+    console.log('anim.smoother: Killing existing instance.');
+    smoother.kill();
+  }
+
+  console.log('anim.smoother: Creating new instance.');
+  smoother = ScrollSmoother.create({
+    wrapper,
+    content,
+    smooth: 1,
+    effects: true,
+    smoothTouch: 0.1,
+    normalizeScroll: true
+  });
+
+  return smoother;
 }
 
-/**
- * Refreshes all ScrollTrigger instances.
- */
+export function getSmoother() {
+  return smoother;
+}
+
 export function refreshAll(): void {
-    console.log('anim.refresh: Refreshing all ScrollTriggers.');
-    ScrollTrigger.refresh();
+  console.log('anim.refresh: Refreshing all ScrollTriggers.');
+  ScrollTrigger.refresh();
 }
 
 export { gsap };

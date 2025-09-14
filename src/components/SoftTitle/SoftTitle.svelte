@@ -2,11 +2,11 @@
     import { onMount, onDestroy } from "svelte";
     import { browser } from "$app/environment";
     import { writable } from "svelte/store";
-    import { smoothScrollTarget } from "../SmoothScrollWrapper/store";
 
     export let scaleSpeed = 1;
-    export let videoURL = "https://videos.pexels.com/video-files/31196472/13325298_2560_1440_25fps.mp4"
-    export let direction = 1
+    export let videoURL =
+        "https://videos.pexels.com/video-files/31196472/13325298_2560_1440_25fps.mp4";
+    export let direction = 1;
     export let offset = 0;
     export let pushToRead = false;
     export let z = false;
@@ -17,8 +17,8 @@
     onMount(() => {
         w.set(window);
         d.set(document);
-        random.set(String(Math.random()))
-    })
+        random.set(String(Math.random()));
+    });
 
     /* ------------------------------------------------------------------
      * ✨ Public props
@@ -27,23 +27,22 @@
     export let text: string = "Σxecutions";
 </script>
 
-<div class="soft" style="top: {pushToRead ? -$smoothScrollTarget : 0}px; {pushToRead && !z ? 'z-index: -1;' : 'z-index: 1;'}">
-    <video playsinline muted={true} autoplay loop class="video" src={videoURL}/>
+<div class="soft">
+    <video
+        playsinline
+        muted={true}
+        autoplay
+        loop
+        class="video"
+        src={videoURL}
+    />
     <h1 class="title">
-        <o id={random} style="left: {offset + $smoothScrollTarget * scaleSpeed}px">
+        <o id={random}>
             {text}
         </o>
     </h1>
 </div>
-<div style="z-index: 1; height: {
-    pushToRead ? 
-        (
-            (offset / $w.innerHeight) + 
-            ($d?.getElementById?.(random)?.offsetWidth / $w.innerWidth) 
-            / scaleSpeed
-        )
-    : 0
-}vh;"/>
+<div />
 
 <style lang="scss">
     .soft {
@@ -64,7 +63,7 @@
             position: relative;
             display: inline-block;
         }
-        
+
         .title {
             margin: 0;
             position: absolute;

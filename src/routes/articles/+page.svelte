@@ -10,7 +10,6 @@
   import Pagination from "../../components/Pagination/Pagination.svelte";
   import Modal from "../../components/Modal/Modal.svelte";
   import store from "../../components/store";
-  import SmoothScrollWrapper from "../../components/SmoothScrollWrapper/SmoothScrollWrapper.svelte";
   import SoftTitle from "../../components/SoftTitle/SoftTitle.svelte";
     import { isDarkTheme, themeIndex } from "../../components/ThemeChanger/theme-store";
 
@@ -163,7 +162,6 @@
 
 <ThemeChanger visible={false} />
 
-<SmoothScrollWrapper>
   <SoftTitle text={$currentId ?? "Newsletter"} />
 
   <div class="articles-page">
@@ -223,7 +221,6 @@
   </div>
 
   <p class="loading-articles">{$currentId}</p>
-</SmoothScrollWrapper>
 
 <!-- ───────────── modal ───────────── -->
 <Modal {showModal} onChange={(v) => !v && closeModal()}>

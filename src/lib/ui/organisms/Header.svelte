@@ -65,11 +65,6 @@
     // Polling interval to ensure underline stays in sync
     const underlineInterval = setInterval(updateUnderline, 100);
 
-    if ($user) {
-      console.log("user", $user)
-      links.set([...$links, { name: 'Dashboard', url: '/dashboard' }]);
-      updateUnderline();
-    }
     return () => {
       window.removeEventListener('resize', updateUnderline);
       clearInterval(underlineInterval);
@@ -77,7 +72,7 @@
   });
 
   $: $page.url.pathname, updateUnderline();
-  afterUpdate(updateUnderline);
+  $: updateUnderline();
 </script>
 
 <div class="header-wrapper">

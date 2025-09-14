@@ -99,7 +99,7 @@
     <ul class="sidebar__nav-list">
       {#each links as link}
         <!-- SideLink handles icon/initials & class toggles -->
-        <SideLink class="sidebar__nav-item" isCollapsed={$collapsed} {link} />
+        <SideLink isCollapsed={$collapsed} {link} />
       {/each}
     </ul>
   </nav>
@@ -134,7 +134,7 @@
   }
 
   /* shape-a vs shape-b are “opposite” between mobile/desktop + collapsed/expanded */
-  .sidebar.shape-a .outlined { border-radius: 9999px; /* circle/pill */ }
+  .sidebar.shape-a .outlined { border-radius: 10px; /* circle/pill */ }
   .sidebar.shape-b .outlined { border-radius: 10px;   /* rounded-rect */ }
 
   /* ===== Sidebar frame ===== */

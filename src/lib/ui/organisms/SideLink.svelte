@@ -77,6 +77,13 @@
     }
   }
 
+  .is-collapsed {
+    .sidebar__nav-link {
+      gap: 0;
+      transition-delay: .5s;
+    }
+  }
+
   .sidebar__nav-link {
     color: var(--c-text);
     text-decoration: none;
@@ -87,6 +94,7 @@
     gap: var(--space-md);
     white-space: nowrap;
     overflow: hidden;
+    transition-delay: .5s;
 
     &.underline {
       font-weight: 900;
@@ -110,17 +118,11 @@
       border-style: dashed;
     }
 
-    :global(.sidebar:not(.collapsed)) & {
-      background: var(--c-primary);
-      color: var(--c-white);
-      border-color: transparent;
-    }
   }
 
   .sidebar__nav-link.underline .link-initials {
     background: var(--c-primary);
     color: var(--c-white);
-    border-color: transparent;
   }
 
   .link-name,

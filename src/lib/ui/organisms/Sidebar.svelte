@@ -224,6 +224,7 @@
 
   .sidebar__profile-avatar {
     width: 40px; height: 40px; object-fit: cover; flex-shrink: 0; display: block;
+    object-position: center;
     /* Hide avatar if collapsed OR if the image failed (inline on:error sets display:none) */
     .sidebar.collapsed & { display: none !important; }
   }

@@ -29,11 +29,6 @@
     const given_name =
       params.get("given_name") ?? getAuthHeaders()["given_name"];
 
-    console.log(
-      "{            configuratorEmail,            authCode,            tokenId,           clientId          }",
-      { configuratorEmail, authCode, tokenId, clientId },
-    );
-
     if (params.size > 0) {
       // 👉 Erase query params from the URL without reloading
       const cleanUrl = $page.url.origin + $page.url.pathname;

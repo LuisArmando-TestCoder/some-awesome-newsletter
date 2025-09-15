@@ -1,6 +1,5 @@
 <script lang="ts">
-    import { onMount, onDestroy } from "svelte";
-    import { browser } from "$app/environment";
+    import { onMount } from "svelte";
     import { writable } from "svelte/store";
 
     export let scaleSpeed = 1;

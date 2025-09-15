@@ -7,6 +7,15 @@ import subscribeNewsletterUser from "./subscribeNewsletterUser";
 import { refreshSubscribers } from "../steps/StepsTowardsPublish/stages/H_Dashboard/Users/UserDataService"; // Import the centralized refresh function
 import getAuthHeaders from "./getAuthHeaders";
 
+export function getRandomScheduleTime() {
+  // Generate random schedule: random hour (0-23), random day of week (0-6)
+  const randomHour = Math.floor(Math.random() * 24);
+  const randomDayOfWeek = Math.floor(Math.random() * 7);
+  const randomScheduleTime = `0 ${randomHour} * * ${randomDayOfWeek}`;
+
+  return randomScheduleTime;
+}
+
 /**
  * Crea una nueva fuente de noticias asociada a una configuración.
  * Este endpoint autocompleta los selectores faltantes usando GPT y guarda la fuente en Firestore.
@@ -26,10 +35,8 @@ export default async function createNewsSource(newsSource: {
     configId
   );
 
-  // Generate random schedule: random hour (0-23), random day of week (0-6)
-  const randomHour = Math.floor(Math.random() * 24);
-  const randomDayOfWeek = Math.floor(Math.random() * 7);
-  const randomScheduleTime = `0 ${randomHour} * * ${randomDayOfWeek}`;
+  const randomScheduleTime = getRandomScheduleTime();
+
   console.log("[CREATE-NEWSOURCE] Generated random scheduleTime:", randomScheduleTime);
 
   const body = JSON.stringify({

@@ -20,15 +20,13 @@
   let addNewsSourceUrl = "";
   let addNewsSourceLead = "";
   let addNewsSourcePersonality = "";
-  let addNewsSourceSchedule = "";
   let isAdding = false;
   let addErrorMessage = "";
 
   function clearAddForm() {
     addNewsSourceUrl = "";
     addNewsSourceLead = "";
-    addNewsSourcePersonality = "";
-    addNewsSourceSchedule = "";
+    addNewsSourcePersonality = $store.personality;
   }
 
   // Called when the user submits the add form
@@ -38,7 +36,6 @@
       url: addNewsSourceUrl,
       lead: addNewsSourceLead,
       personality: addNewsSourcePersonality,
-      schedule: addNewsSourceSchedule,
     };
 
     await processNewsSourceAction(
@@ -48,7 +45,6 @@
         url: f.url,
         community: "Newsletter Users",
         lead: f.lead,
-        scheduleTime: f.schedule,
         personality: f.personality,
       }),
       createNewsSource,

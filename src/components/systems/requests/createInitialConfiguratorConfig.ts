@@ -1,26 +1,38 @@
 import { get } from "svelte/store";
 import store from "../../store";
-import getAuthHeaders from "./getAuthHeaders";
 
-export default async function createInitialConfiguratorConfig() {
-  const configId = getAuthHeaders()["x-auth-email"];
+function normalizeWord(input: string): string {
+  return input
+    // Remove digits
+    .replace(/[0-9]+/g, "")
+    // Replace separators (., -, _) with spaces
+    .replace(/[._-]+/g, " ")
+    // Split into parts, filter out empties (in case of multiple separators)
+    .split(" ")
+    .filter(Boolean)
+    // Capitalize first letter of each part
+    .map(
+      word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+    )
+    // Join back with space
+    .join(" ");
+}
+
+export default async function createInitialConfiguratorConfig(authHeaders: Record<string, string>) {
+  const configId = authHeaders["x-auth-email"];
 
   const body = {
     newsletterSubject: "Daily News",
     newsletterTitle: "Morning Bulletin",
-    senderName: configId?.split("@")[0],
-    // brandColor:
-    //   get(store).colorPalette[
-    //     Math.floor(Math.random() * get(store).colorPalette.length)
-    //   ],
+    senderName: normalizeWord(configId?.split("@")[0]),
     emailSignature: "",
   };
 
   const response = await fetch(
-    `${get(store).apiURL()}/config?documentId=${getAuthHeaders()["x-auth-email"]}`,
+    `${get(store).apiURL()}/config`,
     {
       method: "POST",
-      headers: getAuthHeaders(),
+      headers: authHeaders,
       body: JSON.stringify(body),
     }
   );

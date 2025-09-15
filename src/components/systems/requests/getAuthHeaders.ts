@@ -16,18 +16,10 @@ function safeGet(storage: Storage | undefined, key: string): any {
 function getMixedStore(key: string, keyedValue?: string) {
     const k = keyedValue || key;
 
-    const userLS = safeGet(typeof localStorage !== "undefined" ? localStorage : undefined, "user");
-    const userSS = safeGet(typeof sessionStorage !== "undefined" ? sessionStorage : undefined, "user");
     const directLS = safeGet(typeof localStorage !== "undefined" ? localStorage : undefined, k);
-    const directSS = safeGet(typeof sessionStorage !== "undefined" ? sessionStorage : undefined, k);
 
     return {
-        [key]:
-            (userLS?.[k]) ??
-            (userSS?.[k]) ??
-            directLS ??
-            directSS ??
-            safeParse(getCookie("user") ?? decodeURIComponent(getCookie("user") || "{}"), {})?.[k]
+        [key]: directLS
     };
 }
 
@@ -37,6 +29,8 @@ export default function getAuthHeaders(): { [index: string]: string } {
         "Content-Type": "application/json",
         ...getMixedStore("x-auth-email", "configuratorEmail"),
         ...getMixedStore("x-auth-code", "authCode"),
+        ...getMixedStore("x-auth-token-id", "tokenId"),
+        ...getMixedStore("x-auth-client-id", "clientId"),
         ...getMixedStore("picture"),
         ...getMixedStore("given_name"),
     }

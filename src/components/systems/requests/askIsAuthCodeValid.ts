@@ -1,14 +1,11 @@
 import { get } from "svelte/store";
 import store, { saveToStore } from "../../store";
-import getConfiguratorSession from "./getConfiguratorSession";
-import { user } from "$lib/stores/user";
 import getAuthHeaders from "./getAuthHeaders";
 
-export default async (onSuccessCallback?: Function) => {
+export default async (onSuccessCallback?: Function, onFailureCallback?: Function) => {
   const authCode = getAuthHeaders()["x-auth-code"];
   const configuratorEmail = getAuthHeaders()["x-auth-email"];
-  const idToken = get(user)?.idToken || get(store).idToken;
-  const clientId = get(user)?.clientId || get(store).clientId;
+  const {idToken, clientId} = getAuthHeaders();
 
   console.log('[askIsAuthCodeValid.ts] authCode', authCode);
   console.log('[askIsAuthCodeValid.ts] configuratorEmail', configuratorEmail);
@@ -17,15 +14,13 @@ export default async (onSuccessCallback?: Function) => {
 
   const url = `${get(store).apiURL()}/auth/${configuratorEmail}?code=${
     authCode
-  }&token_id=${idToken}&client_id=${clientId}`;
+  }`+ (idToken ? `&token_id=${idToken}&client_id=${clientId}` : '');
 
   console.log('[askIsAuthCodeValid.ts] url', url);
 
   const response = await fetch(url);
 
   let isAuthCodeValid = response.ok;
-
-  saveToStore({ isAuthCodeValid }); // Persist valid state
 
   let errorMessage = "Authentication failed. Please try again."; // Default error
 
@@ -49,29 +44,12 @@ export default async (onSuccessCallback?: Function) => {
     });
   }
 
-  console.log("is ok", isAuthCodeValid, get(store).hasNewEmailCodeBeenSent); // Log the derived validity
+  saveToStore({ isAuthCodeValid }); // Persist valid state
 
   // Handle step progression only if validation was successful
-  if (isAuthCodeValid && get(store).hasNewEmailCodeBeenSent) {
-    saveToStore({
-      hasNewEmailCodeBeenSent: false,
-      stepsIndex: get(store).stepsIndex + 1,
-    });
-  }
-
-  // Handle session loading and callbacks only if validation was successful
   if (isAuthCodeValid) {
-    await getConfiguratorSession(); // Load session data
-    onSuccessCallback?.(); // Call success callback if provided
-    saveToStore({
-      directionsThatShouldDisappear: get(store).stepsIndex > 6 ? [-1, 1] : [],
-      hasNewEmailCodeBeenSent: false, // Reset flag after successful use
-    });
-  } else {
-     // Optionally display the errorMessage to the user via a store or event
-     // e.g., saveToStore({ authError: errorMessage });
-     // For now, it's logged to console.
+    return onSuccessCallback?.();
   }
-
-  return isAuthCodeValid; // Return the boolean validity status
+  
+  return onFailureCallback?.();
 };

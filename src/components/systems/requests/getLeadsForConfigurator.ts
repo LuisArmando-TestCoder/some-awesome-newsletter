@@ -10,9 +10,8 @@ export default async function getLeadsForConfigurator() {
     }
   );
 
-  
   if (!response.ok) {
-    console.log("response", response)
+    console.log("leads response", response)
 
     return null;
   }

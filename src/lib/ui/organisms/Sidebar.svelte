@@ -2,7 +2,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { collapsed } from "$lib/stores/sidebar.store";
-  import { user } from "$lib/stores/user";
   import store, { saveToStore, stepsMapping } from "../../../components/store";
   import logout from "../../../components/systems/requests/logout";
   import SideLink from "./SideLink.svelte";
@@ -107,16 +106,16 @@
   {#if $store.isAuthCodeValid}
     <div class="sidebar__profile">
       <img
-        src={$user?.picture || ""}
+        src={$store?.picture || ""}
         alt="User avatar"
         class="sidebar__profile-avatar outlined"
         on:error={(e) => (e.currentTarget.style.display = 'none')}
       />
       <div class="sidebar__profile-initials outlined">
-        {getInitials($store?.config.senderName)}
+        {getInitials($store?.config.senderName || $store?.given_name)}
       </div>
       <div class="sidebar__profile-info">
-        <p class="sidebar__profile-name">{$store?.config.senderName}</p>
+        <p class="sidebar__profile-name">{$store?.config.senderName || $store?.given_name}</p>
         <a on:click={() => logout()} class="sidebar__profile-logout">Log Out</a>
       </div>
     </div>

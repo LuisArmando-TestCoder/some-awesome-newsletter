@@ -57,7 +57,11 @@ const store = writable<Store>({
   authCode: "",
   directionsThatShouldDisappear: [],
   isAuthCodeValid: false,
-  apiURL: () => typeof window !== 'undefined' && window.location.origin.startsWith('http://localhost') ? "http://localhost:8000" : "https://ai-newsletter-translated.onrender.com",
+  apiURL: (origin?: string) => typeof window !== 'undefined' ? (
+    window.location.origin.startsWith('http://localhost') ? "http://localhost:8000" : "https://ai-newsletter-translated.onrender.com"
+  ) : (
+    origin?.startsWith('http://localhost') ? "http://localhost:8000" : "https://ai-newsletter-translated.onrender.com"
+  ),
   config: {
     emailMaskSender: "", // New
     appPassword: "", // New
@@ -90,7 +94,7 @@ export const emptyStoreSnapshot = JSON.parse(JSON.stringify(get(store)));
 export default store;
 
 export function saveToStore(objectValue: { [index: string]: any }) {
-  console.log("objectValue", objectValue)
+  // console.log("objectValue", objectValue)
   // setAllKeysToSaveInLocalStorage();
   store.set({
     ...get(store),
@@ -236,7 +240,7 @@ function setAllKeysToSaveInLocalStorage() {
     // Save to localStorage if available
     if (isLocalStorageAvailable) {
       try {
-        console.log("Here", key, value)
+        // console.log("Here", key, value)
         localStorage.setItem(key, JSON.stringify(value || JSON.parse(localStorage.getItem(key) || "")));
       } catch {}
     }

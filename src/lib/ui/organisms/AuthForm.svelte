@@ -1,18 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-
-  // Helper to set cookie in browser
-  function setCookie(name: string, value: string, options: { path?: string; sameSite?: string; secure?: boolean; maxAge?: number }) {
-    let cookieStr = `${encodeURIComponent(name)}=${encodeURIComponent(value)}`;
-    if (options.maxAge) cookieStr += `; max-age=${options.maxAge}`;
-    if (options.path) cookieStr += `; path=${options.path}`;
-    if (options.sameSite) cookieStr += `; samesite=${options.sameSite}`;
-    if (options.secure) cookieStr += `; secure`;
-    document.cookie = cookieStr;
-  }
   import { z } from 'zod';
   import { runtime } from '$lib/config/runtime';
-  import { loginWithGoogle, loginWithEmail, signupWithGoogle, signupWithEmail } from '$lib/api/auth';
   import EmailInput from '$lib/ui/components/EmailInput.svelte';
     import Code from '../../../components/systems/inputs/Code/Code.svelte';
     import MarkdownText from '../../../components/systems/texts/MarkdownText/MarkdownText.svelte';
@@ -20,6 +9,7 @@
     import type { Writable } from 'svelte/store';
     import store, { saveToStore } from '../../../components/store';
     import askIsAuthCodeValid from '../../../components/systems/requests/askIsAuthCodeValid';
+    import logout from '../../../components/systems/requests/logout';
 
   export let mode: 'login' | 'signup' = 'login';
   export let copy: any; // from auth.json (login or signup branch)
@@ -120,26 +110,8 @@
               hasNewEmailCodeBeenSent: true,
               isAuthCodeValid: true,
             });
-            askIsAuthCodeValid(() => {
-              externalAuthCode.set("");
-              
-              if ($store.isAuthCodeValid) {
-                const name = email.split("@")[0];
-                
-                setCookie(
-                  'user',
-                  JSON.stringify({ name, given_name: name, family_name: name, email }),
-                  {
-                    path: '/',
-                    secure: true,
-                    maxAge: 60 * 60 * 24 * 7 // 1 week
-                  }
-                );
-
-                setTimeout(() => {
-                  window.location.href = "/dashboard";
-                });
-              }
+            askIsAuthCodeValid(() => {              
+              window.location.href = `/dashboard?x-auth-email=${email}&x-auth-code=${authCode}`;
             });
           }
         }}

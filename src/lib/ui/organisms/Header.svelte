@@ -3,7 +3,6 @@
   import { derived, writable } from 'svelte/store';
   import { onMount, afterUpdate } from 'svelte';
   import { gsap } from '../../anim/gsap.client';
-    import { user } from '$lib/stores/user';
     import store from '../../../components/store';
     import logout from '../../../components/systems/requests/logout';
 

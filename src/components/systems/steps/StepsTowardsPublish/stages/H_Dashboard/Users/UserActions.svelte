@@ -1,7 +1,7 @@
 <!-- Example: Parent Component (e.g., Users.svelte) -->
 <script lang="ts">
   import UserCard from "./UserCard.svelte";
-  import { userRemovalRequestStore, type UserRemovalPayload } from './userActions.ts'; // Adjust path
+  import { userRemovalRequestStore, type UserRemovalPayload } from './userActions'; // Adjust path
   import type { NewsletterUser } from "../../../../../../types";
   import { onDestroy } from 'svelte'; // Or use $: reactive statement
 

@@ -11,15 +11,15 @@ import createNewsSource from "./createNewsSource";
 import { loadInitialData, refreshSubscribers } from "../steps/StepsTowardsPublish/stages/H_Dashboard/Users/UserDataService"; // Import refresh function
 import getAuthHeaders from "./getAuthHeaders";
 
-export async function getConfigFetchResponse() {
-  console.log(get(store).apiURL(), get(store).configuratorEmail);
+export async function getConfigFetchResponse(authHeaders: Record<string, string>, origin?: string) {
+  console.log(get(store).apiURL(origin), get(store).configuratorEmail);
   let response = await fetch(
     `${get(store).apiURL()}/private-config?documentId=${
-      getAuthHeaders()["x-auth-email"]
+      (authHeaders || getAuthHeaders())["x-auth-email"]
     }`,
     {
       method: "GET",
-      headers: getAuthHeaders(),
+      headers: (authHeaders || getAuthHeaders()),
     }
   );
 
@@ -29,11 +29,11 @@ export async function getConfigFetchResponse() {
 export default async () => {
   console.log("get(store).authCode", get(store).authCode)
 
-  let response = await getConfigFetchResponse();
+  let response = await getConfigFetchResponse(getAuthHeaders());
 
   if (!response.ok) {
-    await createInitialConfiguratorConfig(authHeaders);
-    response = await getConfigFetchResponse();
+    await createInitialConfiguratorConfig(getAuthHeaders());
+    response = await getConfigFetchResponse(getAuthHeaders());
   }
 
   const json = await response.json();
@@ -42,8 +42,8 @@ export default async () => {
     config: json,
   });
 
-  if (!json.newsSources || json.newsSources.length === 0) {
-    const newsSource = await createNewsSource({
+  if (get(store).newsSource && (!json.newsSources || json.newsSources.length === 0)) {
+    await createNewsSource({
       type: "website",
       url: get(store).newsSource,
       country: "US", // Consider if these should be configurable defaults
@@ -59,7 +59,7 @@ export default async () => {
     // --- Refetch config AFTER potentially creating the first news source ---
     // This ensures the store reflects the newly added source
     console.log("[GET-SESSION] Refetching config after potential news source creation..."); // Use console.log
-    const updatedResponse = await getConfigFetchResponse();
+    const updatedResponse = await getConfigFetchResponse(getAuthHeaders());
     if (!updatedResponse.ok) {
        // Handle error if refetch fails - maybe throw or log and proceed with potentially stale config?
        console.error("[GET-SESSION] Failed to refetch configuration after news source creation.");

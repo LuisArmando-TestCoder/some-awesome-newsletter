@@ -10,8 +10,6 @@ export default async function getGeoIpLanguage(): Promise<string | null> {
     const apiUrl = get(store).apiURL(); // Get API URL from store
     const response = await fetch(`${apiUrl}/geo`);
 
-
-
     if (response.ok) {
       const data = await response.json();
       return data.language || null; // Return language or null if not present

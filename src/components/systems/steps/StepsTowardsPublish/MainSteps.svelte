@@ -13,6 +13,7 @@
   import Reports from "./stages/H_Dashboard/Reports/Reports.svelte"; // Corrected import (already was correct, maybe TS server lag?)
   import Billing from "./stages/H_Dashboard/Billing/Billing.svelte"; // Corrected import (already was correct, maybe TS server lag?)
   import store from "../../../store";
+    import { isValidURL } from "../../inputs/Link/isValidLink";
 
   const t = () => {
     if (
@@ -41,21 +42,21 @@
     [t, B_Welcome2],
     [t, C_Welcome3],
     [t, D_Lead],
-    [(store: Store) => store.lead, E_NewsSource],
+    [(store: Store) => isValidURL(store.lead), E_NewsSource],
     [(store: Store) => {
-      return store.newsSource;
+      return isValidURL(store.newsSource);
     }, Config],
     [(store: Store) => {
-      return store.newsSource;
+      return isValidURL(store.newsSource);
     }, NewsSource],
     [(store: Store) => {
-      return store.newsSource;
+      return isValidURL(store.newsSource);
     }, Users],
     [(store: Store) => {
-      return store.newsSource;
+      return isValidURL(store.newsSource);
     }, Billing],
     [(store: Store) => {
-      return store.newsSource;
+      return isValidURL(store.newsSource);
     }, Reports],
   ];
 </script>

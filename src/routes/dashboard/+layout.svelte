@@ -72,7 +72,7 @@
           getLeadsForConfigurator(),
         ]);
 
-        saveToStore({ leads: leadsResponse[configuratorEmail] });
+        if (leadsResponse) saveToStore({ leads: leadsResponse[configuratorEmail] });
 
         const fisrtNS = $store.config.newsSources?.[0];
         console.log("$store.config", $store.config);

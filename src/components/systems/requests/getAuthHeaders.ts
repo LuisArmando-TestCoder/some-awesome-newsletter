@@ -24,6 +24,8 @@ function getMixedStore(key: string, keyedValue?: string) {
 }
 
 export default function getAuthHeaders(): { [index: string]: string } {
+    const picture = getMixedStore("picture").picture || getMixedStore("config")?.config?.logo;
+
     return {
         "Accept": "application/json",
         "Content-Type": "application/json",
@@ -31,7 +33,7 @@ export default function getAuthHeaders(): { [index: string]: string } {
         ...getMixedStore("x-auth-code", "authCode"),
         ...getMixedStore("x-auth-token-id", "tokenId"),
         ...getMixedStore("x-auth-client-id", "clientId"),
-        ...getMixedStore("picture"),
         ...getMixedStore("given_name"),
+        picture,
     }
 }

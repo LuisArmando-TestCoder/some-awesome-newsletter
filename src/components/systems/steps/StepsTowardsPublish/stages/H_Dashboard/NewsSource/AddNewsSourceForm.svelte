@@ -51,15 +51,9 @@
       (msg) => (addErrorMessage = msg),
       "Failed to add news source. Please try again.",
       (created) => {
-        // If successful, push into local store config
-        const currentConfig = $store.config;
-        if (currentConfig?.newsSources) {
-          currentConfig.newsSources.push(created);
-          saveToStore({ config: currentConfig });
-        }
+        // The createNewsSource request already updates the store, so we don't need to do it here.
+        // We just clear the form and update the local 'addedNewsSource' store.
         clearAddForm();
-
-        // 3) Instead of dispatching an event, update the store
         addedNewsSource.set(created);
       }
     );

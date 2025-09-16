@@ -34,6 +34,12 @@
   let search = "";
   let currentId = writable();
   const ITEMS_PER_PAGE = 10;
+  let currentPages: Record<string, number> = {};
+
+  function handlePageChange(groupKey: string, event: CustomEvent<{ page: number }>) {
+    currentPages[groupKey] = event.detail.page;
+    currentPages = currentPages; // for reactivity
+  }
 
   /* ───────────── utilities ───────────── */
   function getImage(html: string) {
@@ -176,45 +182,67 @@
       {#each Object.entries(groupedArticles) as [language, group]}
         <!-- WITH IMAGES -->
         {#if group.withImages.length}
-          <Pagination {ITEMS_PER_PAGE} items={group.withImages} let:pageItems>
-            <h2 class="articles-flag">{getFlag(language)} {language}</h2>
-            <div class="articles-grid">
-              {#each pageItems as article (article.id)}
-                <button class="article-card" on:click={() => openArticle(article)}>
-                  <!-- replaced <img> with background div -->
-                  <div
-                    class="img bg-img"
-                    role="img"
-                    aria-label={getImage(article.content)?.alt || ""}
-                    style={`background-image:url('${getImage(article.content)?.src || "placeholder.jpg"}');`}
-                  ></div>
+          {@const groupKey = `${language}-with`}
+          {@const currentPage = currentPages[groupKey] || 0}
+          {@const pageItems = group.withImages.slice(
+            currentPage * ITEMS_PER_PAGE,
+            (currentPage + 1) * ITEMS_PER_PAGE
+          )}
+          <h2 class="articles-flag">{getFlag(language)} {language}</h2>
+          <div class="articles-grid">
+            {#each pageItems as article (article.id)}
+              <button class="article-card" on:click={() => openArticle(article)}>
+                <!-- replaced <img> with background div -->
+                <div
+                  class="img bg-img"
+                  role="img"
+                  aria-label={getImage(article.content)?.alt || ""}
+                  style={`background-image:url('${
+                    getImage(article.content)?.src || "placeholder.jpg"
+                  }');`}
+                ></div>
 
-                  <h3>{getTitle(article.content)}</h3>
-                  <div>
-                    <o>{getPreview(noH1(article.content))}...</o>
-                  </div>
-                  <p><sup>{article.creation}</sup></p>
-                </button>
-              {/each}
-            </div>
-          </Pagination>
+                <h3>{getTitle(article.content)}</h3>
+                <div>
+                  <o>{getPreview(noH1(article.content))}...</o>
+                </div>
+                <p><sup>{article.creation}</sup></p>
+              </button>
+            {/each}
+          </div>
+          <Pagination
+            currentPage={currentPage}
+            totalItems={group.withImages.length}
+            pageSize={ITEMS_PER_PAGE}
+            on:pageChange={(e) => handlePageChange(groupKey, e)}
+          />
         {/if}
 
         <!-- WITHOUT IMAGES -->
         {#if group.withoutImages.length}
-          <Pagination {ITEMS_PER_PAGE} items={group.withoutImages} let:pageItems>
-            <ul class="articles-list">
-              {#each pageItems as article (article.id)}
-                <li>
-                  <button class="article-card no-img" on:click={() => openArticle(article)}>
-                    <h3>{getTitle(article.content)}</h3>
-                    <p>{getPreview(article.content)}</p>
-                    <small>{article.creation}</small>
-                  </button>
-                </li>
-              {/each}
-            </ul>
-          </Pagination>
+          {@const groupKey = `${language}-without`}
+          {@const currentPage = currentPages[groupKey] || 0}
+          {@const pageItems = group.withoutImages.slice(
+            currentPage * ITEMS_PER_PAGE,
+            (currentPage + 1) * ITEMS_PER_PAGE
+          )}
+          <ul class="articles-list">
+            {#each pageItems as article (article.id)}
+              <li>
+                <button class="article-card no-img" on:click={() => openArticle(article)}>
+                  <h3>{getTitle(article.content)}</h3>
+                  <p>{getPreview(article.content)}</p>
+                  <small>{article.creation}</small>
+                </button>
+              </li>
+            {/each}
+          </ul>
+          <Pagination
+            currentPage={currentPage}
+            totalItems={group.withoutImages.length}
+            pageSize={ITEMS_PER_PAGE}
+            on:pageChange={(e) => handlePageChange(groupKey, e)}
+          />
         {/if}
       {/each}
     {/if}

@@ -19,7 +19,8 @@
   import Switch from "../../../../../selectors/Switch/Switch.svelte"; // ADDED Switch component import
   import ToggleCard from "../../../../../buttons/ToggleCard/ToggleCard.svelte"; // Adjusted path - verify this is correct
   import TextTypes from "../../../../../texts/TextTypes/TextTypes.svelte"; // Adjust path
-  import PlainText from "../../../../../inputs/PlainText/PlainText.svelte";
+  import Pagination from "../../../../../../Pagination/Pagination.svelte";
+  import SearchBar from "../../../../../../SearchBar/SearchBar.svelte";
   import TextArea from "../../../../../inputs/TextArea/TextArea.svelte"; // Import new TextArea
   import Svg from "../../../../../../SVG/SVG.svelte"; // Adjust path
   import IconButton from "../../../../../buttons/IconButton/IconButton.svelte";
@@ -58,7 +59,9 @@
   let customEmailContent: string = "";
   /** Loading state for sending custom content */
   let isSendingCustomContent: boolean = false;
-  const search = writable("");
+  let searchTerm = "";
+  let currentPage = 0;
+  const pageSize = 5;
 
   // REMOVED event dispatcher
 
@@ -72,9 +75,24 @@
     ? [...subscribers]
         .reverse()
         .filter((s) =>
-          `${s.name} ${s.email}`.toLowerCase().includes($search.toLowerCase()),
+          `${s.name} ${s.email}`.toLowerCase().includes(searchTerm.toLowerCase()),
         )
     : [];
+
+  $: paginatedSubscribers = reversedSubscribers.slice(
+    currentPage * pageSize,
+    (currentPage + 1) * pageSize
+  );
+
+  function handlePageChange(event: CustomEvent<{ page: number }>) {
+    currentPage = event.detail.page;
+  }
+
+  function handleSearch(event: CustomEvent<{ value: string }>) {
+    searchTerm = event.detail.value;
+    currentPage = 0; // Reset page on new search
+  }
+
   $: sourceName =
     newsSource.url?.split("//")[1]?.split("/")[0] ?? newsSource.id; // User-friendly name
 
@@ -459,16 +477,15 @@
       Current Subscribers ({subscriberCount})
     </TextTypes>
 
-    <PlainText
-      label="Search by name or email"
-      bind:value={$search}
-      placeholder="Search..."
+    <SearchBar
+      placeholder="Search by name or email..."
+      on:search={handleSearch}
     />
 
     {#if subscriberCount > 0}
       <div class="subscriber-cards-container">
         <!-- Loop through reversed list (newest first) -->
-        {#each reversedSubscribers as user (user.email)}
+        {#each paginatedSubscribers as user (user.email)}
           <!-- UPDATED: Removed 'onRemove' prop. Removal is now handled via the userRemovalRequestStore subscription. -->
           <UserCard
             {user}
@@ -477,6 +494,12 @@
           />
         {/each}
       </div>
+      <Pagination
+        {currentPage}
+        totalItems={reversedSubscribers.length}
+        {pageSize}
+        on:pageChange={handlePageChange}
+      />
     {:else}
       <!-- Message when no subscribers -->
       <p style="margin-top: 0.5rem;">

@@ -17,9 +17,15 @@
   // UI Wrappers/Components
   import Page from "../../../../../wrappers/Page/Page.svelte"; // Adjust path
   import TextTypes from "../../../../../texts/TextTypes/TextTypes.svelte"; // Adjust path
+  import SearchBar from "../../../../../../SearchBar/SearchBar.svelte";
+  import Pagination from "../../../../../../Pagination/Pagination.svelte";
 
   // Props (if any remain - canReveal was one)
 export let canReveal = true; // Keep props passed from parent
+
+let searchTerm = "";
+let currentPage = 0;
+const pageSize = 5;
 
 // --- Initialization ---
 // REMOVED onMount call - Data is loaded centrally via getConfiguratorSession -> refreshSubscribers
@@ -29,6 +35,35 @@ export let canReveal = true; // Keep props passed from parent
   $: config = $store.config;
   $: newsSources = $store.config?.newsSources || []; // Use $store directly
   $: subscribersByNewsSource = $store.subscribers || {}; // Get subscribers from central store (loaded from localStorage initially)
+
+  $: filteredNewsSources = newsSources.filter(ns => {
+    const searchTermLower = searchTerm.toLowerCase();
+    const inNewsSource = ns.url?.toLowerCase().includes(searchTermLower) ||
+                         ns.lead?.toLowerCase().includes(searchTermLower) ||
+                         ns.id?.toLowerCase().includes(searchTermLower);
+
+    if (inNewsSource) return true;
+
+    const subscribers = subscribersByNewsSource[ns.id] || [];
+    return subscribers.some(sub => 
+      sub.email.toLowerCase().includes(searchTermLower) ||
+      (sub.name && sub.name.toLowerCase().includes(searchTermLower))
+    );
+  });
+
+  $: paginatedNewsSources = filteredNewsSources.slice(
+    currentPage * pageSize,
+    (currentPage + 1) * pageSize
+  );
+
+  function handleSearch(event: CustomEvent<{ value: string }>) {
+    searchTerm = event.detail.value;
+    currentPage = 0;
+  }
+
+  function handlePageChange(event: CustomEvent<{ page: number }>) {
+    currentPage = event.detail.page;
+  }
   // $: brandColor = $store.config?.brandColor; // Use $store directly
   $: complementaryColor = $store.complementaryColor; // Assuming this is separate in the main store
   $: isRefreshing = $store.isRefreshingSubscribers; // Subscribe to the refresh flag
@@ -43,6 +78,7 @@ export let canReveal = true; // Keep props passed from parent
 
 <!-- HTML TEMPLATE SECTION -->
 <Page>
+    <SearchBar placeholder="Search by URL, lead, or ID..." on:search={handleSearch} />
     <!-- User Management Column -->
     <div class="column user-management-column">
       <div class="title-container">
@@ -57,7 +93,7 @@ export let canReveal = true; // Keep props passed from parent
         <!-- Check if subscriber data is ready (will be from localStorage initially) -->
         {@const subsReady = subscribersByNewsSource && Object.keys(subscribersByNewsSource).length > 0}
         {#if subsReady}
-          {#each newsSources as newsSource (newsSource.id)}
+          {#each paginatedNewsSources as newsSource (newsSource.id)}
             {@const subscribersForSource = subscribersByNewsSource[newsSource.id] ?? []}
             <NewsSourceUserManagement
               {newsSource}
@@ -66,6 +102,12 @@ export let canReveal = true; // Keep props passed from parent
               {openNewsSourceIdStore}
             />
           {/each}
+          <Pagination 
+            {currentPage}
+            totalItems={filteredNewsSources.length}
+            {pageSize}
+            on:pageChange={handlePageChange}
+          />
         {:else}
           <!-- Show loading specifically for subscribers if news sources exist but subscriber data isn't ready -->
           <p class="loading-message">Loading subscribers...</p>

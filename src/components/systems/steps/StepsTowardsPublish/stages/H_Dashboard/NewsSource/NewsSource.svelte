@@ -10,8 +10,14 @@
   import AddNewsSourceForm from "./AddNewsSourceForm.svelte";
   import UpdateNewsSourceForm from "./UpdateNewsSourceForm.svelte";
   import Page from "../../../../../wrappers/Page/Page.svelte";
+  import Pagination from "../../../../../../Pagination/Pagination.svelte";
+  import SearchBar from "../../../../../../SearchBar/SearchBar.svelte";
 
   export let canReveal = true;
+
+  let currentPage = 0;
+  const pageSize = 3;
+  let searchTerm = "";
 
   // Local error messages for each update form
   let updateErrorMessages: Record<string, string> = {};
@@ -66,6 +72,27 @@
     ? [...$store.config.newsSources].reverse()
     : [];
 
+  $: filteredNewsSources = newsSourcesReversed.filter(
+    (ns) =>
+      ns.url?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      ns.lead?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      ns.id?.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  $: paginatedNewsSources = filteredNewsSources.slice(
+    currentPage * pageSize,
+    (currentPage + 1) * pageSize
+  );
+
+  function handlePageChange(event: CustomEvent<{ page: number }>) {
+    currentPage = event.detail.page;
+  }
+
+  function handleSearch(event: CustomEvent<{ value: string }>) {
+    searchTerm = event.detail.value;
+    currentPage = 0; // Reset to first page on new search
+  }
+
   // No longer need local isAddCardOpen state
   // let isAddCardOpen = false; <--- REMOVED
 
@@ -82,6 +109,10 @@
 </script>
 
 <Page>
+  <SearchBar
+    placeholder="Search news sources..."
+    on:search={handleSearch}
+  />
   <!-- Use the SlotAutoCollapseToggle wrapper -->
   <SlotAutoCollapseToggle {canReveal} autoCollapse={true} let:getToggleProps>
     <!-- ^-- autoCollapse=true makes it an accordion -->
@@ -101,7 +132,7 @@
     <!-- No need for the extra div.news-sources-list unless needed for specific styling -->
     <!-- The SlotAutoCollapseToggle already provides a .toggle-group div -->
     {#if newsSourcesReversed && newsSourcesReversed.length}
-      {#each newsSourcesReversed as ns (ns.id)}
+      {#each paginatedNewsSources as ns (ns.id)}
         <ToggleCard
           {canReveal}
           cardTitle={`${ns.url?.split("//")[1] ?? "N/A"} ⟫ ${ns.lead?.split("//")[1] ?? "N/A"}`}
@@ -109,7 +140,6 @@
         >
           <UpdateNewsSourceForm
             newsSource={ns}
-            bind:updateFields={updateFields[ns.id]}
             errorMessage={updateErrorMessages[ns.id]}
             {canReveal}
             on:updated={() => {
@@ -119,6 +149,13 @@
           />
         </ToggleCard>
       {/each}
+
+      <Pagination
+        {currentPage}
+        totalItems={filteredNewsSources.length}
+        {pageSize}
+        on:pageChange={handlePageChange}
+      />
     {:else}
       <!-- Loading/Empty State -->
       <div class="loading-state">

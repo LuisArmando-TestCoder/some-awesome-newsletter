@@ -22,12 +22,12 @@
     <div class="right">
       <SubmitButton
         callback={() =>
-          (window.location.href = `${$store.apiURL()}/lead-counter?leadUrl=${
-            $store.subscriberLead
-          }&configuratorId=${$store.subscriberConfiguratorId}&newsSourceId=${
+          (window.location.href = `${$store.apiURL()}/lead-counter?leadUrl=${leadUrl}&configuratorId=${
+            $store.subscriberConfiguratorId
+          }&newsSourceId=${
             $store.subscriberNewsSourceId
           }&newsletterUserId=${$store.subscriberEmail}`)}
-        label="Continue to {new URL($store.subscriberLead).host.replace("www.", "")}"
+        label="Continue to {new URL(leadUrl).host.replace("www.", "")}"
       />
     </div>
   {:else}

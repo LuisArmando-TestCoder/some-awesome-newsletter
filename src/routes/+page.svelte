@@ -700,7 +700,9 @@
 
 	/* 3. Hero */
 	.hero {
-		background: var(--c-primary);
+		background: url(https://images.pexels.com/photos/574283/pexels-photo-574283.jpeg);
+		background-size: cover;
+		background-attachment: fixed;
 		text-align: center;
 		padding-top: var(--space-xxl);
 		.container {
@@ -708,11 +710,11 @@
 		}
 		.hero-hook {
 			margin-bottom: var(--space-md);
-			color: var(--c-white);
+			color: var(--color-background);
 		}
 		.hero-sub-hook {
 			font-size: 1.25rem;
-			color: var(--c-white);
+			color: var(--color-background);
 			margin: var(--space-xl);
 		}
 		.hero-ctas {
@@ -729,7 +731,7 @@
 			justify-content: center;
 			gap: var(--space-lg);
 			font-size: 0.9rem;
-			color: var(--c-white);
+			color: var(--color-background);
 			li {
 				position: relative;
 				&:not(:last-child)::after {
@@ -774,7 +776,9 @@
 
 	/* 5. Value Props */
 	.value-props {
-		background-color: var(--c-bg-alt);
+		background: url(http://images.pexels.com/photos/2008145/pexels-photo-2008145.jpeg);
+		background-size: cover;
+		background-attachment: fixed;
 		.card {
 			text-align: center;
 			h3 {
@@ -807,7 +811,9 @@
 
 	/* 7. How It Works */
 	.how-it-works {
-		background-color: var(--c-bg-alt);
+		background: url(https://images.pexels.com/photos/190295/pexels-photo-190295.jpeg);
+		background-size: cover;
+		background-attachment: fixed;
 		.steps-grid {
 			display: grid;
 			gap: var(--space-lg);
@@ -888,7 +894,9 @@
 
 	/* 11. Testimonials */
 	.testimonials {
-		background-color: var(--c-bg-alt);
+		background: url(https://images.pexels.com/photos/1764436/pexels-photo-1764436.jpeg);
+		background-size: cover;
+		background-attachment: fixed;
 		blockquote {
 			margin: 0;
 			p {

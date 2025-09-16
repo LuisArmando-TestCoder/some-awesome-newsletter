@@ -1,14 +1,13 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { content } from '$lib/content';
-	import { useSmoothPage } from '$lib/anim/useSmoothPage';
-	import { useScrollSection } from '$lib/anim/useScrollSection';
-	import { browser } from '$app/environment';
-	import { afterNavigate } from '$app/navigation';
-	import { getSmoother, refreshAll } from '$lib/anim/gsap.client';
-	import Faq from '$lib/ui/organisms/Faq.svelte';
-    import logout from '../components/systems/requests/logout';
-
+	import { onMount } from "svelte";
+	import { content } from "$lib/content";
+	import { useSmoothPage } from "$lib/anim/useSmoothPage";
+	import { useScrollSection } from "$lib/anim/useScrollSection";
+	import { browser } from "$app/environment";
+	import { afterNavigate } from "$app/navigation";
+	import { getSmoother, refreshAll } from "$lib/anim/gsap.client";
+	import Faq from "$lib/ui/organisms/Faq.svelte";
+	import logout from "../components/systems/requests/logout";
 	// --- State ---
 	let showAnnouncement = true;
 	let prefersReducedMotion = false;
@@ -17,20 +16,25 @@
 	onMount(() => {
 		if (!browser) return;
 		// Check for reduced motion preference
-		const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+		const mediaQuery = window.matchMedia(
+			"(prefers-reduced-motion: reduce)",
+		);
 		prefersReducedMotion = mediaQuery.matches;
-		mediaQuery.addEventListener('change', (e) => (prefersReducedMotion = e.matches));
+		mediaQuery.addEventListener(
+			"change",
+			(e) => (prefersReducedMotion = e.matches),
+		);
 
 		// Handle announcement bar persistence
-		if (localStorage.getItem('announcementDismissed') === 'true') {
+		if (localStorage.getItem("announcementDismissed") === "true") {
 			showAnnouncement = false;
 		}
 
 		// Refresh ScrollTrigger on window resize
-		window.addEventListener('resize', refreshAll);
+		window.addEventListener("resize", refreshAll);
 
 		return () => {
-			window.removeEventListener('resize', refreshAll);
+			window.removeEventListener("resize", refreshAll);
 		};
 	});
 
@@ -38,7 +42,7 @@
 		if (browser) {
 			const smoother = getSmoother();
 			if (smoother && to?.url.hash) {
-				smoother.scrollTo(to.url.hash, true, 'top top');
+				smoother.scrollTo(to.url.hash, true, "top top");
 			} else if (smoother) {
 				smoother.scrollTo(0, true);
 			}
@@ -48,7 +52,7 @@
 
 	function handleDismissAnnouncement() {
 		showAnnouncement = false;
-		localStorage.setItem('announcementDismissed', 'true');
+		localStorage.setItem("announcementDismissed", "true");
 	}
 </script>
 
@@ -65,23 +69,23 @@
 	<!-- JSON-LD -->
 	<script type="application/ld+json">
 		{
-		  "@context": "https://schema.org",
-		  "@type": "Organization",
-		  "name": "${$content.organization.name}",
-		  "url": "${$content.organization.url}",
-		  "logo": "${$content.organization.logo}"
+			"@context": "https://schema.org",
+			"@type": "Organization",
+			"name": "${$content.organization.name}",
+			"url": "${$content.organization.url}",
+			"logo": "${$content.organization.logo}"
 		}
 	</script>
 	<script type="application/ld+json">
 		{
-		  "@context": "https://schema.org",
-		  "@type": "Product",
-		  "name": "${$content.product.name}",
-		  "description": "${$content.product.description}",
-		  "brand": {
-			"@type": "Organization",
-			"name": "${$content.organization.name}"
-		  }
+			"@context": "https://schema.org",
+			"@type": "Product",
+			"name": "${$content.product.name}",
+			"description": "${$content.product.description}",
+			"brand": {
+				"@type": "Organization",
+				"name": "${$content.organization.name}"
+			}
 		}
 	</script>
 </svelte:head>
@@ -90,7 +94,6 @@
 	<div id="smooth-content">
 		<!-- Accessibility: Skip to main content -->
 		<a href="#main-content" class="skip-link">Skip to main content</a>
-
 		<!-- Page Wrapper -->
 		<div class="landing-page">
 			<!-- 1. Announcement Bar -->
@@ -103,24 +106,37 @@
 					<button
 						aria-label="Dismiss announcement"
 						on:click={handleDismissAnnouncement}
-						on:keydown={(e) => e.key === 'Escape' && handleDismissAnnouncement()}
+						on:keydown={(e) =>
+							e.key === "Escape" && handleDismissAnnouncement()}
 					>
 						&times;
-			</button>
-		</div>
-	{/if}
+					</button>
+				</div>
+			{/if}
 
-	<main id="main-content">
-		<!-- 3. Hero Section -->
-		<section class="hero" use:useScrollSection>
+
+			<main id="main-content">
+				<!-- 3. Hero Section -->
+				<section class="hero" use:useScrollSection>
 					<div class="container">
-						<h1 class="hero-hook" data-speed="0.9">{$content.hero.hook}</h1>
-						<p class="hero-sub-hook" data-speed="0.8">{$content.hero.subHook}</p>
+						<h1 class="hero-hook" data-speed="0.9">
+							{$content.hero.hook}
+						</h1>
+						<p class="hero-sub-hook" data-speed="0.8">
+							{$content.hero.subHook}
+						</p>
 						<div class="hero-ctas" data-speed="0.9">
-							<a on:click={() => {
-								logout(false);
-							}} href="/signup" class="cta-secondary-inverted">{$content.hero.primaryCta}</a>
-							<a href="/demo" class="cta-primary-scaled">{$content.hero.secondaryCta}</a>
+							<a
+								on:click={() => {
+									logout(false);
+								}}
+								href="/signup"
+								class="cta-secondary-inverted"
+								>{$content.hero.primaryCta}</a
+							>
+							<a href="/demo" class="cta-primary-scaled"
+								>{$content.hero.secondaryCta}</a
+							>
 						</div>
 						<ul class="hero-trust-cues" data-speed="0.7">
 							{#each $content.hero.trustCues as cue}
@@ -167,18 +183,30 @@
 				</section>
 
 				<!-- 6. Feature Grid -->
-				<section id="features" class="feature-grid" use:useScrollSection>
+				<section
+					id="features"
+					class="feature-grid"
+					use:useScrollSection
+				>
 					<div class="container">
 						<div class="section-header">
 							<h2>Powerful Features, Effortless Control</h2>
-							<p>Everything you need to automate and scale your business.</p>
+							<p>
+								Everything you need to automate and scale your
+								business.
+							</p>
 						</div>
 						{#each $content.features as feature, i}
-							<div class="feature-item" class:reverse={i % 2 !== 0}>
+							<div
+								class="feature-item"
+								class:reverse={i % 2 !== 0}
+							>
 								<div class="feature-text">
 									<h3>{feature.title}</h3>
 									<p>{feature.description}</p>
-									<a href="#" class="cta-link">Learn more &rarr;</a>
+									<a href="#" class="cta-link"
+										>Learn more &rarr;</a
+									>
 								</div>
 								<div class="feature-visual" data-speed="auto">
 									<img
@@ -217,14 +245,23 @@
 					<div class="container">
 						<div class="section-header">
 							<h2>Built for Every Team</h2>
-							<p>Whatever your role, Silo Automation has a solution.</p>
+							<p>
+								Whatever your role, Silo Automation has a
+								solution.
+							</p>
 						</div>
 						<div class="grid">
 							{#each $content.personas as persona, i}
 								<div class="card" data-speed="1.05">
 									<h4>{persona.persona}</h4>
-									<p><strong>Problem:</strong> {persona.problem}</p>
-									<p><strong>Outcome:</strong> {persona.outcome}</p>
+									<p>
+										<strong>Problem:</strong>
+										{persona.problem}
+									</p>
+									<p>
+										<strong>Outcome:</strong>
+										{persona.outcome}
+									</p>
 								</div>
 							{/each}
 						</div>
@@ -240,8 +277,12 @@
 						<div class="metrics-grid">
 							{#each $content.metrics as metric, i}
 								<div class="metric-item" data-speed="0.9">
-									<div class="metric-value">{metric.value}</div>
-									<div class="metric-label">{metric.label}</div>
+									<div class="metric-value">
+										{metric.value}
+									</div>
+									<div class="metric-label">
+										{metric.label}
+									</div>
 									<p class="metric-proof">{metric.proof}</p>
 								</div>
 							{/each}
@@ -266,7 +307,9 @@
 								/>
 							{/each}
 						</div>
-						<a href="/integrations" class="cta-link">See all integrations &rarr;</a>
+						<a href="/integrations" class="cta-link"
+							>See all integrations &rarr;</a
+						>
 					</div>
 				</section>
 
@@ -292,15 +335,23 @@
 				</section>
 
 				<!-- 12. Pricing Preview -->
-				<section id="pricing" class="pricing-preview" use:useScrollSection>
+				<section
+					id="pricing"
+					class="pricing-preview"
+					use:useScrollSection
+				>
 					<div class="container">
 						<div class="section-header">
 							<h2>{$content.pricing.teaser}</h2>
 						</div>
 						<div class="pricing-box">
 							<p>Our plans are designed to grow with you.</p>
-							<div class="plan-price">{$content.pricing.plan}</div>
-							<a href="/pricing" class="cta-primary">{$content.pricing.cta}</a>
+							<div class="plan-price">
+								{$content.pricing.plan}
+							</div>
+							<a href="/pricing" class="cta-primary"
+								>{$content.pricing.cta}</a
+							>
 						</div>
 					</div>
 				</section>
@@ -312,9 +363,14 @@
 				<section id="demo" class="final-cta" use:useScrollSection>
 					<div class="container">
 						<h2>{$content.finalCta.hook}</h2>
-						<a on:click={() => {
-							logout(false);
-						}} href="/signup" class="cta-primary-inverted">{$content.finalCta.cta}</a>
+						<a
+							on:click={() => {
+								logout(false);
+							}}
+							href="/signup"
+							class="cta-primary-inverted"
+							>{$content.finalCta.cta}</a
+						>
 					</div>
 				</section>
 			</main>
@@ -325,11 +381,22 @@
 					<div class="footer-main">
 						<div class="footer-about">
 							<a href="/" class="logo" aria-label="Homepage">
-								<img src="/icons/logow.png" width="50" alt="logo">
+								<img
+									src="/icons/logow.png"
+									width="50"
+									alt="logo"
+								/>
 								<span>{$content.organization.name}</span>
 							</a>
-							<p>&copy; {new Date().getFullYear()} {$content.footer.copyright}</p>
-							<p><a href="mailto:{$content.footer.contact}">{$content.footer.contact}</a></p>
+							<p>
+								&copy; {new Date().getFullYear()}
+								{$content.footer.copyright}
+							</p>
+							<p>
+								<a href="mailto:{$content.footer.contact}"
+									>{$content.footer.contact}</a
+								>
+							</p>
 						</div>
 						<div class="footer-links">
 							<h4>Company</h4>
@@ -355,7 +422,7 @@
 </div>
 
 <style lang="scss">
-  @use '../styles/global.scss';
+	@use "../styles/global.scss";
 	* {
 		box-sizing: border-box;
 	}
@@ -411,11 +478,13 @@
 		transition: all var(--transition-fast);
 		border: 2px solid transparent;
 		cursor: pointer;
-		
+
 		&:focus-visible {
 			outline: 2px solid transparent;
 			outline-offset: 2px;
-			box-shadow: 0 0 0 3px var(--c-white), 0 0 0 5px var(--c-focus-ring);
+			box-shadow:
+				0 0 0 3px var(--c-white),
+				0 0 0 5px var(--c-focus-ring);
 		}
 	}
 
@@ -423,7 +492,10 @@
 		background-color: var(--c-white);
 		color: var(--c-white);
 		box-shadow: inset 0 0 0 100px var(--c-primary);
-		transition: box-shadow 1s, color .2s, background-color .4s;
+		transition:
+			box-shadow 1s,
+			color 0.2s,
+			background-color 0.4s;
 
 		&:hover {
 			background-color: transparent;
@@ -436,7 +508,10 @@
 		background-color: var(--c-primary);
 		color: var(--c-primary);
 		box-shadow: inset 0 0 0 100px var(--c-white);
-		transition: box-shadow 1s, color .2s, background-color .4s;
+		transition:
+			box-shadow 1s,
+			color 0.2s,
+			background-color 0.4s;
 
 		&:hover {
 			background-color: transparent;
@@ -449,7 +524,11 @@
 		background-color: var(--c-primary);
 		color: var(--c-primary);
 		box-shadow: inset 0 0 0 100px var(--c-white);
-		transition: box-shadow 1s, color .2s, background-color .4s, transform .75;
+		transition:
+			box-shadow 1s,
+			color 0.2s,
+			background-color 0.4s,
+			transform 0.75;
 		transition-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
 		transform: scale(1);
 
@@ -471,7 +550,10 @@
 		background-color: var(--c-white);
 		color: var(--c-white);
 		box-shadow: inset 0 0 0 100px var(--c-primary);
-		transition: box-shadow 1s, color .2s, background-color .4s;
+		transition:
+			box-shadow 1s,
+			color 0.2s,
+			background-color 0.4s;
 
 		&:hover {
 			background-color: transparent;
@@ -492,7 +574,9 @@
 		border-radius: var(--radius-lg);
 		padding: var(--space-lg);
 		box-shadow: var(--shadow-md);
-		transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+		transition:
+			transform var(--transition-normal),
+			box-shadow var(--transition-normal);
 		height: 100%;
 	}
 
@@ -586,7 +670,9 @@
 			font-weight: 700;
 			font-size: 1.25rem;
 			color: var(--c-text);
-			svg { color: var(--c-primary); }
+			svg {
+				color: var(--c-primary);
+			}
 		}
 		nav {
 			display: none;
@@ -647,7 +733,7 @@
 			li {
 				position: relative;
 				&:not(:last-child)::after {
-					content: '•';
+					content: "•";
 					position: absolute;
 					right: calc(-1 * var(--space-lg) / 2);
 					color: var(--c-border);
@@ -691,7 +777,9 @@
 		background-color: var(--c-bg-alt);
 		.card {
 			text-align: center;
-			h3 { color: var(--c-primary); }
+			h3 {
+				color: var(--c-primary);
+			}
 		}
 	}
 
@@ -705,7 +793,9 @@
 			grid-template-columns: 1fr 1fr;
 		}
 		&.reverse {
-			.feature-text { order: 2; }
+			.feature-text {
+				order: 2;
+			}
 		}
 		.feature-visual img {
 			width: 100%;
@@ -747,7 +837,8 @@
 	.metrics {
 		background-color: var(--c-primary);
 		color: var(--c-white);
-		.section-header h2, .section-header p {
+		.section-header h2,
+		.section-header p {
 			color: var(--c-white);
 		}
 		.metrics-grid {
@@ -777,7 +868,9 @@
 
 	/* 10. Integrations */
 	.integrations {
-		.container { text-align: center; }
+		.container {
+			text-align: center;
+		}
 		.logo-strip {
 			display: flex;
 			flex-wrap: wrap;
@@ -828,7 +921,6 @@
 		}
 	}
 
-
 	/* 14. Final CTA */
 	.final-cta {
 		background-color: var(--c-primary);
@@ -870,7 +962,9 @@
 			gap: var(--space-md);
 			color: var(--c-white);
 			margin-bottom: var(--space-md);
-			svg { color: var(--c-primary); }
+			svg {
+				color: var(--c-primary);
+			}
 		}
 		.footer-links {
 			h4 {

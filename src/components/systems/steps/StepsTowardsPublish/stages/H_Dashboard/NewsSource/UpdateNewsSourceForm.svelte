@@ -18,6 +18,7 @@
   import EmailInput from "../../../../../inputs/Email/Email.svelte"; // Added
   import MarkdownText from "../../../../../texts/MarkdownText/MarkdownText.svelte"; // Added
   import { onMount } from "svelte"; // Ensure onMount is imported
+  import PostExplanation from "./PostExplanation.svelte";
 
   // The news source to update
   export let newsSource: NewsSource;
@@ -285,10 +286,7 @@
           lead={newsSource.lead}
           label="Link for manual subscription"
         />
-        <CopyUrlWithQR
-          fullUrl={`https://aibanewsletter.club/users/${encodeURIComponent($store.configuratorEmail)}/${encodeURIComponent(newsSource.id)}`}
-          label="Post Request URL for API subscription / Body: {"{ bio, countryOfResidence, email, language, name }"}"
-        />
+        <PostExplanation {newsSource} />
 
         <IconButton
           src="./icons/refresh.svg"

@@ -1,0 +1,162 @@
+<script lang="ts">
+    import { writable, derived } from 'svelte/store';
+    import CodeFormatter from "../../../../../../common/CodeFormatter.svelte";
+    import store from "../../../../../../store";
+    import type { NewsSource, NewsletterUser } from "../../../../../../types";
+    import Email from "../../../../../inputs/Email/Email.svelte";
+    import SubmitButton from "../../../../../buttons/SubmitButton/SubmitButton.svelte";
+    import { addNewsletterUser } from "../../../../../requests/addNewsletterUserEndpoint";
+    import Language from "../../../../../inputs/Language/Language.svelte";
+    import PlainText from "../../../../../inputs/PlainText/PlainText.svelte";
+
+    export let newsSource: NewsSource;
+
+    const userEmail = writable("");
+    const userName = writable("Robert Downey Jr.");
+    const userBio = writable("Subscribed from the playground.");
+    const userLanguage = writable("en");
+    let message = "";
+    let isLoading = false;
+
+    async function handleSubscription() {
+        const emailValue = $userEmail;
+        if (!emailValue) {
+            message = "Please enter a valid email address.";
+            return;
+        }
+
+        isLoading = true;
+        message = "";
+
+        const user: NewsletterUser = {
+            email: emailValue,
+            name: $userName,
+            bio: $userBio,
+            language: $userLanguage,
+            newsSourcesConfigTuples: [],
+        };
+
+        try {
+            const configId = $store.configuratorEmail;
+            const newsSourceId = newsSource.id;
+            const result = await addNewsletterUser(user, configId, newsSourceId);
+            message = result.message || "Subscribed successfully!";
+        } catch (error) {
+            console.error("Subscription error:", error);
+            const errorMessage = error instanceof Error ? error.message : "An unknown error occurred.";
+            message = `Failed to subscribe: ${errorMessage}`;
+        } finally {
+            isLoading = false;
+        }
+    }
+
+    const codeSnippetForExecution = derived(userEmail, $userEmail => `
+// Clicking the \`\`Run Code\`\` button will invoke this subscription logic as an example,
+// which uses this very addNewsletterUser function internally.
+const userEmail = "${$userEmail || 'your.email@example.com'}";
+
+addUserToNewsletter(userEmail);
+`);
+
+  const codeSnippetForCreation = derived(
+    [userEmail, userName, userBio, userLanguage],
+    ([$userEmail, $userName, $userBio, $userLanguage]) => `
+// You can tweak all this hardcoded parameters
+async function addUserToNewsletter(email) {
+  const user = {
+    email,
+    name: "${$userName}",
+    bio: "${$userBio}",
+    language: "${$userLanguage}", // ISO-639-1 language code
+  };
+
+  // This is the ID associated to this current account, use for internal processes
+  const configId = "${$store.configuratorEmail}";
+
+  // This is the ID associated with ${newsSource.url}
+  const newsSourceId = "${newsSource.id}";
+
+  // API endpoint to add a new subscriber.
+  const response = await fetch(\`/users/\${configId}/\${newsSourceId}\`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(user),
+  });
+
+  const result = await response.json();
+
+  if (response.ok) {
+    console.log('User added successfully:', result.message);
+  } else {
+    console.error('Failed to add user:', result.message);
+  }
+}
+`);
+</script>
+
+<div class="playground-controls">
+  <Email
+    onChange={(newValue) => userEmail.set(newValue)}
+    placeholder="Enter subscriber's email"
+  />
+
+  <p>
+    Enter an email to see how the API call is constructed, then click "Run Code"
+    to subscribe the user to the "{newsSource.url}" news source.
+  </p>
+
+  <SubmitButton
+    label="Run Code"
+    callback={handleSubscription}
+    loading={isLoading}
+    disabled={!$userEmail || isLoading}
+  />
+</div>
+
+<CodeFormatter
+  lang="javascript"
+  code={$codeSnippetForExecution}
+/>
+
+{#if message}
+  <p class="feedback-message">{message}</p>
+{/if}
+
+<h4>Interactive API Playground</h4>
+
+<div class="input-grid">
+    <PlainText label="Name" bind:value={$userName} />
+    <PlainText label="Bio" bind:value={$userBio} />
+    <Language onSelect={(code) => userLanguage.set(code || 'en')} />
+</div>
+
+<CodeFormatter
+  lang="javascript"
+  code={$codeSnippetForCreation}
+/>
+
+<style>
+  .playground-controls {
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .feedback-message {
+    margin-top: 8px;
+    font-size: 0.9rem;
+    padding: 8px;
+    border-radius: 4px;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+  }
+  .input-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+</style>

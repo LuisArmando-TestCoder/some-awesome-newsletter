@@ -57,6 +57,7 @@ export interface Article {
 }
 
 export interface NewsSource {
+  // name: string;
   type: string;
   url: string;
   linkSelector: string;
@@ -107,8 +108,9 @@ export interface NewsletterUser {
   email: string;
   name: string;
   bio: string;
+  welcomeEmailSent?: boolean;
   language: string; // ISO 639-1 language code
-  countryOfResidence: string; // Alpha-2 country code
+  countryOfResidence?: string; // Alpha-2 country code
   newsSourcesConfigTuples: {
     newsSourceId: string;
     configId: string;

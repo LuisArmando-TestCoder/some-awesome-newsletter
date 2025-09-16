@@ -215,6 +215,7 @@
       transition: transform var(--transition-normal), box-shadow var(--transition-normal);
       max-width: 440px;
       margin: 0 auto;
+      display: grid;
 
       &:hover {
         transform: translateY(-4px);

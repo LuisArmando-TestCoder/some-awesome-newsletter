@@ -35,8 +35,6 @@ export async function addNewsletterUser(
       throw new Error(`Error adding newsletter user: ${errorMessage}`);
     }
 
-    await getConfiguratorSession(); // Refresh the configurator session after adding a user
-
     return await response.json();
   } catch (error) {
     console.error("Failed to add newsletter user:", error);

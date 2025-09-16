@@ -7,6 +7,7 @@
   export let placeholder: string = "Enter your email...";
   export let label: string = "";
   export let onEnter: (isValid: boolean) => void = () => {};
+  export let disabled: boolean = false;
 
   // Callback to be invoked when the input changes.
   export let onChange: (newValue: string) => void = () => {};
@@ -55,6 +56,7 @@
     on:keydown={handleKeyDown}
     aria-label={label}
     class:invalid={!valid && value !== ""}
+    {disabled}
   />
   {#if !valid && value !== ""}
     <span class="error-message">Please enter a valid email.</span>

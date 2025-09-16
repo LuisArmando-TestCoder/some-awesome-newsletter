@@ -6,6 +6,9 @@
   export let placeholder: string = "";
   export let label: string = "";
   export let type: "text" | "password" | "email" | "number" | "tel" | "url" = "text"; // Add type prop
+  export let isTextarea: boolean = false;
+  export let rows: number = 3;
+  export let disabled: boolean = false;
 
   // Callback to be invoked when the input changes.
   export let onChange: (newValue: string) => void = () => {};
@@ -24,14 +27,26 @@
 
 <div class="text-input-wrapper">
   <label class="input-label">{value ? label || placeholder : label}</label>
-  <input
-    {type}
-    bind:value
-    {placeholder}
-    on:input={handleInput}
-    aria-label={label}
-    autocomplete={type === 'password' ? 'current-password' : undefined}
-  />
+  {#if isTextarea}
+    <textarea
+      bind:value
+      {placeholder}
+      on:input={handleInput}
+      aria-label={label}
+      {rows}
+      {disabled}
+    />
+  {:else}
+    <input
+      {type}
+      bind:value
+      {placeholder}
+      on:input={handleInput}
+      aria-label={label}
+      autocomplete={type === 'password' ? 'current-password' : undefined}
+      {disabled}
+    />
+  {/if}
 </div>
 
 <style lang="scss">

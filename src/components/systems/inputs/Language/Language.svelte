@@ -19,6 +19,7 @@
   export let defaultLanguageCode: string | null = null;
   export let label = "Language";
   export let onSelect: (selectedCode: string | null) => void = () => {};
+  export let disabled: boolean = false;
 
   // State
   let selectedLanguage: Language | null = null;
@@ -255,6 +256,7 @@
       aria-labelledby="language-select-label"
       in:fade={{ duration: 200 }}
       out:fade={{ duration: 200 }}
+      {disabled}
     />
   {:else}
     <button
@@ -266,6 +268,7 @@
       aria-labelledby="language-select-label {selectedLanguage ? 'selected-language-label' : ''}"
       in:fade={{ duration: 200 }}
       out:fade={{ duration: 200 }}
+      {disabled}
     >
       {#if selectedLanguage}
         <span class="flex items-center gap-2 truncate">

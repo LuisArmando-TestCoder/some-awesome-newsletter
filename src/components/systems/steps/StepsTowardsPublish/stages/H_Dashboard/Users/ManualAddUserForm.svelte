@@ -50,7 +50,7 @@
   }
 
   /** Handles the form submission */
-  function handleSubmit() {
+  async function handleSubmit() {
     if (disabled || isSubmitting) {
       return; // Prevent submission if disabled or already submitting
     }
@@ -91,7 +91,7 @@
     // Call the parent's handler function passed via the onSubmit prop
     try {
       // Call the provided onSubmit function. It might be async.
-      const result = onSubmit(formData);
+      await onSubmit(formData);
       // If the onSubmit function is async, we might want to wait for it,
       // but usually the parent handles its own loading state.
       // For this pattern, we typically just trigger the parent and let it manage flow.
@@ -101,7 +101,7 @@
       // unless this component needs to react specifically to an error during the *call* itself.
       console.error("Error calling onSubmit:", error);
       // Optionally set a generic error here, though parent feedback is preferred.
-      // validationError = "An unexpected error occurred during submission.";
+      validationError = "An unexpected error occurred during submission.";
     } finally {
       // Resetting isSubmitting state. The parent's 'disabled' prop should handle
       // the broader loading state during the async operation. Resetting here allows
@@ -139,14 +139,12 @@
         label="Name *"
         placeholder="User's full name"
         bind:value={name}
-        required={true}
         disabled={disabled || isSubmitting}
       />
       <Email
         label="Email *"
         placeholder="User's email address"
         bind:value={email}
-        required={true}
         disabled={disabled || isSubmitting}
       />
       <Language
@@ -159,9 +157,9 @@
         label="Bio (Optional)"
         placeholder="Short description (optional)"
         bind:value={bio}
-        disabled={disabled || isSubmitting}
         isTextarea={true}
         rows={3}
+        disabled={disabled || isSubmitting}
       />
 
       <!-- Display Validation Error -->
@@ -172,14 +170,13 @@
       <!-- SubmitButton should trigger the form submission -->
       <!-- Removing the callback prop as the form's on:submit handles it -->
       <SubmitButton
-        label={isSubmitting ? "Submitting..." : "Add & Subscribe User"}
+        label={isSubmitting ? "submitting" : "Add & Subscribe User"}
         disabled={disabled || isSubmitting || !!validationError}
         loading={isSubmitting}
-        type="submit"
       />
       <!-- If SubmitButton doesn't inherently trigger form submit, keep the callback:
        <SubmitButton
-           label={isSubmitting ? "Submitting..." : "Add & Subscribe User"}
+           label={isSubmitting ? "submitting" : "Add & Subscribe User"}
            disabled={disabled || isSubmitting || !!validationError}
            loading={isSubmitting}
            callback={handleSubmit}  // Re-add if button doesn't bubble submit
@@ -237,5 +234,9 @@
   /* Ensure Textarea within PlainText works well */
   :global(.plain-text-input-wrapper textarea) {
     resize: vertical; /* Allow vertical resize */
+  }
+
+  :global(.submit-button-wrapper button:disabled) {
+    opacity: 0.5;
   }
 </style>

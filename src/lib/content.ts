@@ -41,7 +41,7 @@ export const content = writable({
         subTitle: 'Engage your audience like never before with AI-driven content that speaks directly to them.',
         props: [
             { title: 'Hyper-Personalization', description: 'Our AI analyzes your website to understand your audience and automatically tailors articles to their interests and language.' },
-            { title: 'Automated Content Creation', description: 'Set your schedule—daily, weekly, or monthly—and let our AI select, write, and translate articles for you.' },
+            { title: 'Automated Content Creation', description: 'Set your schedule, daily, weekly, or monthly, and let our AI select, write, and translate articles for you.' },
             { title: 'Your Brand, Your Voice', description: 'The AI learns your brand\'s personality from your website or custom input, ensuring every newsletter sounds like it was written by you.' }
         ]
     },

@@ -2,7 +2,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { writable } from "svelte/store"; // ADDED writable
-  import type { NewsSource } from "../../../../../../types.js"; // Import NewsSource type if not already implicitly available - ADDED .js
+  import type { NewsSource, NewsletterUser } from "../../../../../../types.js"; // Import NewsSource type if not already implicitly available - ADDED .js
 
   // Central Store and Types
   import store from "../../../../../../store"; // Adjust path
@@ -34,9 +34,12 @@ const pageSize = 5;
   // Access data directly from the central store
   $: config = $store.config;
   $: newsSources = $store.config?.newsSources || []; // Use $store directly
+  $: newsSourcesReversed = $store.config?.newsSources
+    ? [...$store.config.newsSources].reverse()
+    : [];
   $: subscribersByNewsSource = $store.subscribers || {}; // Get subscribers from central store (loaded from localStorage initially)
 
-  $: filteredNewsSources = newsSources.filter(ns => {
+  $: filteredNewsSources = newsSourcesReversed.filter(ns => {
     const searchTermLower = searchTerm.toLowerCase();
     const inNewsSource = ns.url?.toLowerCase().includes(searchTermLower) ||
                          ns.lead?.toLowerCase().includes(searchTermLower) ||
@@ -45,7 +48,7 @@ const pageSize = 5;
     if (inNewsSource) return true;
 
     const subscribers = subscribersByNewsSource[ns.id] || [];
-    return subscribers.some(sub => 
+    return subscribers.some((sub: NewsletterUser) => 
       sub.email.toLowerCase().includes(searchTermLower) ||
       (sub.name && sub.name.toLowerCase().includes(searchTermLower))
     );
@@ -89,7 +92,7 @@ const pageSize = 5;
       </div>
 
       <!-- Display content based on newsSources availability -->
-      {#if newsSources && newsSources.length > 0}
+      {#if newsSourcesReversed && newsSourcesReversed.length > 0}
         <!-- Check if subscriber data is ready (will be from localStorage initially) -->
         {@const subsReady = subscribersByNewsSource && Object.keys(subscribersByNewsSource).length > 0}
         {#if subsReady}

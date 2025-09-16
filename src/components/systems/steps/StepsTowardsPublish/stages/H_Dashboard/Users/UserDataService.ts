@@ -209,9 +209,36 @@ export async function addUserAndSubscribe(
     // await subscribeNewsletterUser(configId, newsSourceId, userData.email);
     // console.log(`[UserDataService] addUserAndSubscribe: subscribeNewsletterUser successful for ${userData.email}.`);
 
-    // 3. Refresh the subscriber list using the centralized function
-    console.log("[UserDataService] addUserAndSubscribe: Refreshing subscriber list...");
-    await refreshSubscribers();
+    // 3. Update the store locally instead of refreshing
+    console.log("[UserDataService] addUserAndSubscribe: Updating local store...");
+    const currentStore = get(store);
+    // Deep copy to avoid mutation issues
+    const currentSubscribers = JSON.parse(JSON.stringify(currentStore.subscribers || {}));
+
+    if (!currentSubscribers[newsSourceId]) {
+      currentSubscribers[newsSourceId] = [];
+    }
+
+    // Check if user already exists in local store for this source
+    const userExists = currentSubscribers[newsSourceId].some(
+      (sub: NewsletterUser) => sub.email === userData.email
+    );
+
+    if (!userExists) {
+      // Construct a user object for the store. It doesn't have to be complete.
+      const userForStore: NewsletterUser = {
+        email: userData.email,
+        name: userData.name,
+        bio: userData.bio || '',
+        language: userData.language,
+        newsSourcesConfigTuples: [], // default value
+      };
+      currentSubscribers[newsSourceId].push(userForStore);
+      saveToStore({ subscribers: currentSubscribers });
+      console.log(`[UserDataService] addUserAndSubscribe: Added ${userData.email} to local store for ${newsSourceId}.`);
+    } else {
+      console.log(`[UserDataService] addUserAndSubscribe: User ${userData.email} already in local store for ${newsSourceId}.`);
+    }
     console.log(`[UserDataService] addUserAndSubscribe: Finished successfully for user ${userData.email}.`);
 
   } catch (err: any) {
@@ -367,9 +394,33 @@ export async function processBulkUpload(
     });
     console.log(`[UserDataService] processBulkUpload: Tally complete. Added: ${addedCount}, Subscribed: ${subscribedCount}, Errors: ${errors.length}`);
 
-    // 4. Refresh the subscriber list using the centralized function *after* all processing is done
-    console.log("[UserDataService] processBulkUpload: Refreshing subscriber list...");
-    await refreshSubscribers();
+    // 4. Update the store locally instead of refreshing
+    console.log("[UserDataService] processBulkUpload: Updating local store...");
+    const currentStore = get(store);
+    const currentSubscribers = JSON.parse(JSON.stringify(currentStore.subscribers || {}));
+
+    if (!currentSubscribers[newsSourceId]) {
+      currentSubscribers[newsSourceId] = [];
+    }
+
+    const existingEmails = new Set(currentSubscribers[newsSourceId].map((u: NewsletterUser) => u.email));
+
+    usersFromFile.forEach((userFromFile: any) => {
+      if (userFromFile.email && !existingEmails.has(userFromFile.email)) {
+        const userForStore: NewsletterUser = {
+          email: userFromFile.email,
+          name: userFromFile.name || "Unknown Name",
+          bio: userFromFile.bio || "",
+          language: userFromFile.language || "en",
+          countryOfResidence: userFromFile.countryOfResidence || "US",
+          newsSourcesConfigTuples: [],
+        };
+        currentSubscribers[newsSourceId].push(userForStore);
+      }
+    });
+
+    saveToStore({ subscribers: currentSubscribers });
+    console.log("[UserDataService] processBulkUpload: Updated local store with new users.");
 
     // 5. Compile summary messages
     const successMessage = `Processed ${totalInFile} users from file. Added/Updated: ${addedCount}. Subscribed to this source: ${subscribedCount}.`;
@@ -424,38 +475,22 @@ export async function unsubscribeUserFromSource(
     );
     console.log(`[UserDataService] unsubscribeUserFromSource: API call returned: ${success}`);
 
-    if (success) {
-      // Update the central store for UI feedback
-      console.log(`[UserDataService] unsubscribeUserFromSource: Updating central store for ${userEmail}...`);
-      const currentStore = get(store);
-      const currentSubscribers = currentStore.subscribers || {};
-      const list = currentSubscribers[newsSourceId] || [];
-      const updatedList = list.filter((u: NewsletterUser) => u.email !== userEmail);
+    // Update the central store for UI feedback regardless of what the API returns, as long as it doesn't throw.
+    // This handles cases where the user might already be unsubscribed.
+    const currentStore = get(store);
+    const currentSubscribers = currentStore.subscribers || {};
+    const list = currentSubscribers[newsSourceId] || [];
+    const updatedList = list.filter((u: NewsletterUser) => u.email !== userEmail);
 
-      // Only update if the list actually changed
-      if (updatedList.length !== list.length) {
-        const newSubscribersState = { ...currentSubscribers };
-        newSubscribersState[newsSourceId] = updatedList;
-        saveToStore({ subscribers: newSubscribersState });
-        console.log(`[UserDataService] unsubscribeUserFromSource: Removed ${userEmail} from central store for ${newsSourceId}.`);
-      } else {
-        console.log(`[UserDataService] unsubscribeUserFromSource: User ${userEmail} not found in central store for ${newsSourceId}, no update needed.`);
-      }
-      console.log(
-        `[UserDataService] unsubscribeUserFromSource: ${userEmail} unsubscribed successfully (or was already unsubscribed) from ${newsSourceId}.`
-      );
-      return true;
+    if (updatedList.length !== list.length) {
+      const newSubscribersState = { ...currentSubscribers };
+      newSubscribersState[newsSourceId] = updatedList;
+      saveToStore({ subscribers: newSubscribersState });
+      console.log(`[UserDataService] unsubscribeUserFromSource: Removed ${userEmail} from central store for ${newsSourceId}.`);
     } else {
-      // API call completed but indicated failure (e.g., user not found, already unsubscribed)
-      // OR if the API call succeeded (success was true initially).
-      // Refresh the central store to ensure consistency in both cases.
-      console.log(`[UserDataService] unsubscribeUserFromSource: Refreshing subscriber list for consistency after action for ${userEmail}...`);
-      await refreshSubscribers();
-      return true; // Return true as the desired state (unsubscribed) is achieved or already existed, or the action succeeded.
+      console.log(`[UserDataService] unsubscribeUserFromSource: User ${userEmail} not found in central store for ${newsSourceId}, no update needed.`);
     }
-    // Note: The original 'else' block handling API failure is removed because refreshSubscribers is now called regardless.
-    // If the API call itself throws an error, it will be caught below.
-
+    return true;
   } catch (err: any) {
     console.error(
       `[UserDataService] unsubscribeUserFromSource: Error removing user ${userEmail} from ${newsSourceId}:`,

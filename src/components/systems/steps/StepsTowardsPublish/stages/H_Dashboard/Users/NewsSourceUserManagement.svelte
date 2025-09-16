@@ -445,6 +445,12 @@
       </div>
     {/if}
 
+    {#if isPerformingAction}
+      <div class="loading-indicator">
+        <p>Adding user, please wait</p>
+      </div>
+    {/if}
+
     <!-- Conditionally rendered container for add forms -->
     {#if isAddingFormVisible}
       <div class="add-forms-container" id={`add-forms-${newsSource.id}`}>
@@ -676,6 +682,38 @@
       &:hover {
         opacity: 1;
       }
+    }
+  }
+
+  .loading-indicator {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: var(--color-background-secondary);
+    border-radius: var(--radius-m);
+    text-align: center;
+    color: var(--color-text-secondary);
+  }
+
+  .loading-indicator p::after {
+    content: '.';
+    animation: ellipsis 1.5s infinite;
+    display: inline-block;
+    width: 1em;
+    text-align: left;
+  }
+
+  @keyframes ellipsis {
+    0% {
+      content: '.';
+    }
+    33% {
+      content: '..';
+    }
+    66% {
+      content: '...';
+    }
+    100% {
+      content: '.';
     }
   }
 </style>

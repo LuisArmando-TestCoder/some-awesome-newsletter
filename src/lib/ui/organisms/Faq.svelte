@@ -62,6 +62,7 @@
 
 <style lang="scss">
 	.faq {
+		padding: 0 25px;
 		max-width: 800px;
 		margin: var(--space-xxl) auto;
 		.faq-list {

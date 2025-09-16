@@ -4,7 +4,7 @@ export const content = writable({
     title: 'AI Newsletter Generator: Personalized Content, Delivered.',
     metaDescription:
         'Generate personalized newsletters with AI. Transform any news source into custom articles for your subscribers, in their language, and in your brand\'s voice.',
-    ogImageUrl: 'https://images.pexels.com/photos/3760067/pexels-photo-3760067.jpeg',
+    ogImageUrl: 'https://images.pexels.com/photos/261599/pexels-photo-261599.jpeg',
     canonicalUrl: 'https://example.com/ai-newsletter-generator',
     organization: {
         name: 'AI Newsletter, Inc.',

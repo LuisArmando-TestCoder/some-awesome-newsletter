@@ -1,0 +1,20 @@
+.exports-page {
+  padding: 1rem;
+}
+
+.json-display {
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 1rem;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  max-height: 500px;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+}
+
+.download-button {
+  display: flex;
+  justify-content: flex-end;
+}

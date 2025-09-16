@@ -259,4 +259,5 @@ export const stepsMapping = Object.freeze({
   "Reports": 9,
   "Profile": 5,
   "Billing": 8,
+  "Exports": 10,
 });

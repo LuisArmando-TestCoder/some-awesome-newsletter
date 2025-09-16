@@ -26,8 +26,8 @@
   }
 
   export let links: SideLinkType[] = [
-    { name: "Dashboard", children: [getLink("News Sources"), getLink("Users")] },
-    getLink("Reports"),
+    { name: "Dashboard", children: [getLink("News Sources"), getLink("Users"), getLink("Reports")] },
+    getLink("Exports"),
     { name: "Settings", children: [getLink("Profile"), getLink("Billing")] },
   ];
 

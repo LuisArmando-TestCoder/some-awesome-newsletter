@@ -14,6 +14,7 @@
   import Billing from "./stages/H_Dashboard/Billing/Billing.svelte"; // Corrected import (already was correct, maybe TS server lag?)
   import store from "../../../store";
     import { isValidURL } from "../../inputs/Link/isValidLink";
+    import Exports from "./stages/H_Dashboard/Exports/Exports.svelte";
 
   const t = () => {
     if (
@@ -58,6 +59,9 @@
     [(store: Store) => {
       return isValidURL(store.newsSource);
     }, Reports],
+    [(store: Store) => {
+      return isValidURL(store.newsSource);
+    }, Exports],
   ];
 </script>
 

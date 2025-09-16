@@ -132,7 +132,7 @@
 
 <style lang="scss">
   .dashboard-layout {
-    background: url(https://images.pexels.com/photos/925743/pexels-photo-925743.jpeg);
+    background: url(https://images.pexels.com/photos/753695/pexels-photo-753695.jpeg);
     background-attachment: fixed;
     background-size: cover;
     /* Single source of truth for widths; Sidebar also reads these */

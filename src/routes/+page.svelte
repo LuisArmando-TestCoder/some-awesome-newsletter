@@ -97,7 +97,7 @@
 		<!-- Page Wrapper -->
 		<div class="landing-page">
 			<!-- 1. Announcement Bar -->
-			{#if showAnnouncement}
+			{#if showAnnouncement && $content.announcement}
 				<div class="announcement-bar">
 					<p>
 						{$content.announcement.text}
@@ -117,6 +117,7 @@
 
 			<main id="main-content">
 				<!-- 3. Hero Section -->
+				{#if $content.hero}
 				<section class="hero" use:useScrollSection>
 					<div class="container">
 						<h1 class="hero-hook" data-speed="0.9">
@@ -145,8 +146,10 @@
 						</ul>
 					</div>
 				</section>
+				{/if}
 
 				<!-- 4. Social Proof -->
+				{#if $content.socialProof}
 				<section class="social-proof" use:useScrollSection>
 					<div class="container">
 						<p>{$content.socialProof.counts}</p>
@@ -163,8 +166,10 @@
 						</div>
 					</div>
 				</section>
+				{/if}
 
 				<!-- 5. Value Propositions -->
+				{#if $content.valueProps}
 				<section class="value-props" use:useScrollSection>
 					<div class="container">
 						<div class="section-header">
@@ -181,8 +186,10 @@
 						</div>
 					</div>
 				</section>
+				{/if}
 
 				<!-- 6. Feature Grid -->
+				{#if $content.features}
 				<section
 					id="features"
 					class="feature-grid"
@@ -220,8 +227,10 @@
 						{/each}
 					</div>
 				</section>
+				{/if}
 
 				<!-- 7. How It Works -->
+				{#if $content.howItWorks}
 				<section class="how-it-works" use:useScrollSection>
 					<div class="container">
 						<div class="section-header">
@@ -238,8 +247,10 @@
 						</div>
 					</div>
 				</section>
+				{/if}
 
 				<!-- 8. Use Cases / Personas -->
+				{#if $content.personas}
 				<section class="personas" use:useScrollSection>
 					<div class="container">
 						<div class="section-header">
@@ -265,8 +276,10 @@
 						</div>
 					</div>
 				</section>
+				{/if}
 
 				<!-- 9. Metrics / Outcomes -->
+				{#if $content.metrics}
 				<section class="metrics" use:useScrollSection>
 					<div class="container">
 						<div class="section-header">
@@ -287,8 +300,10 @@
 						</div>
 					</div>
 				</section>
+				{/if}
 
 				<!-- 10. Integrations -->
+				{#if $content.integrations}
 				<section class="integrations" use:useScrollSection>
 					<div class="container">
 						<div class="section-header">
@@ -310,8 +325,10 @@
 						>
 					</div>
 				</section>
+				{/if}
 
 				<!-- 11. Testimonials -->
+				{#if $content.testimonials}
 				<section class="testimonials" use:useScrollSection>
 					<div class="container">
 						<div class="section-header">
@@ -331,8 +348,10 @@
 						</div>
 					</div>
 				</section>
+				{/if}
 
 				<!-- 12. Pricing Preview -->
+				{#if $content.pricing}
 				<section
 					id="pricing"
 					class="pricing-preview"
@@ -353,11 +372,13 @@
 						</div>
 					</div>
 				</section>
+				{/if}
 
 				<!-- 13. FAQ -->
 				<Faq />
 
 				<!-- 14. Final CTA -->
+				{#if $content.finalCta}
 				<section id="demo" class="final-cta" use:useScrollSection>
 					<div class="container">
 						<h2>{$content.finalCta.hook}</h2>
@@ -371,9 +392,11 @@
 						>
 					</div>
 				</section>
+				{/if}
 			</main>
 
 			<!-- 15. Footer -->
+			{#if $content.footer}
 			<footer class="page-footer">
 				<div class="container">
 					<div class="footer-main">
@@ -415,6 +438,7 @@
 					</div>
 				</div>
 			</footer>
+			{/if}
 		</div>
 	</div>
 </div>

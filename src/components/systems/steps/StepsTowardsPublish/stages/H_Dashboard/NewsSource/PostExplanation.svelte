@@ -70,6 +70,8 @@ async function addUserToNewsletter(email) {
     language: "${$userLanguage}", // ISO-639-1 language code
   };
 
+  const APIURI = "https://ai-newsletter-translated.onrender.com";
+
   // This is the ID associated to this current account, use for internal processes
   const configId = "${$store.configuratorEmail}";
 
@@ -77,7 +79,7 @@ async function addUserToNewsletter(email) {
   const newsSourceId = "${newsSource.id}";
 
   // API endpoint to add a new subscriber.
-  const response = await fetch(\`/users/\${configId}/\${newsSourceId}\`, {
+  const response = await fetch(\`\${APIURI}/users/\${configId}/\${newsSourceId}\`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

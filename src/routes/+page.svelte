@@ -168,11 +168,11 @@
 				<section class="value-props" use:useScrollSection>
 					<div class="container">
 						<div class="section-header">
-							<h2>Why Choose Us?</h2>
-							<p>Unlock unparalleled efficiency and control.</p>
+							<h2>{$content.valueProps.title}</h2>
+							<p>{$content.valueProps.subTitle}</p>
 						</div>
 						<div class="grid">
-							{#each $content.valueProps as prop, i}
+							{#each $content.valueProps.props as prop, i}
 								<div class="card" data-speed="1.05">
 									<h3>{prop.title}</h3>
 									<p>{prop.description}</p>
@@ -190,13 +190,12 @@
 				>
 					<div class="container">
 						<div class="section-header">
-							<h2>Powerful Features, Effortless Control</h2>
+							<h2>{$content.features.title}</h2>
 							<p>
-								Everything you need to automate and scale your
-								business.
+								{$content.features.subTitle}
 							</p>
 						</div>
-						{#each $content.features as feature, i}
+						{#each $content.features.featureList as feature, i}
 							<div
 								class="feature-item"
 								class:reverse={i % 2 !== 0}
@@ -205,7 +204,7 @@
 									<h3>{feature.title}</h3>
 									<p>{feature.description}</p>
 									<a href="#" class="cta-link"
-										>Learn more &rarr;</a
+										>{feature.cta} &rarr;</a
 									>
 								</div>
 								<div class="feature-visual" data-speed="auto">
@@ -226,10 +225,10 @@
 				<section class="how-it-works" use:useScrollSection>
 					<div class="container">
 						<div class="section-header">
-							<h2>Get Started in 3 Simple Steps</h2>
+							<h2>{$content.howItWorks.title}</h2>
 						</div>
 						<div class="steps-grid">
-							{#each $content.howItWorks as item, i}
+							{#each $content.howItWorks.steps as item, i}
 								<div class="step-card" data-lag="0.1">
 									<div class="step-number">{item.step}</div>
 									<h4>{item.title}</h4>
@@ -244,14 +243,13 @@
 				<section class="personas" use:useScrollSection>
 					<div class="container">
 						<div class="section-header">
-							<h2>Built for Every Team</h2>
+							<h2>{$content.personas.title}</h2>
 							<p>
-								Whatever your role, Silo Automation has a
-								solution.
+								{$content.personas.subTitle}
 							</p>
 						</div>
 						<div class="grid">
-							{#each $content.personas as persona, i}
+							{#each $content.personas.personaList as persona, i}
 								<div class="card" data-speed="1.05">
 									<h4>{persona.persona}</h4>
 									<p>
@@ -272,10 +270,10 @@
 				<section class="metrics" use:useScrollSection>
 					<div class="container">
 						<div class="section-header">
-							<h2>Real Results, Backed by Data</h2>
+							<h2>{$content.metrics.title}</h2>
 						</div>
 						<div class="metrics-grid">
-							{#each $content.metrics as metric, i}
+							{#each $content.metrics.metricList as metric, i}
 								<div class="metric-item" data-speed="0.9">
 									<div class="metric-value">
 										{metric.value}
@@ -317,10 +315,10 @@
 				<section class="testimonials" use:useScrollSection>
 					<div class="container">
 						<div class="section-header">
-							<h2>What Our Customers Say</h2>
+							<h2>{$content.testimonials.title}</h2>
 						</div>
 						<div class="grid">
-							{#each $content.testimonials as testimonial, i}
+							{#each $content.testimonials.testimonialList as testimonial, i}
 								<blockquote class="card" data-lag="0.05">
 									<p>"{testimonial.quote}"</p>
 									<footer>
@@ -345,7 +343,7 @@
 							<h2>{$content.pricing.teaser}</h2>
 						</div>
 						<div class="pricing-box">
-							<p>Our plans are designed to grow with you.</p>
+							<p>{$content.pricing.subTitle}</p>
 							<div class="plan-price">
 								{$content.pricing.plan}
 							</div>
@@ -399,17 +397,17 @@
 							</p>
 						</div>
 						<div class="footer-links">
-							<h4>Company</h4>
+							<h4>{$content.footer.companyLinks.title}</h4>
 							<ul>
-								<li><a href="/about">About Us</a></li>
-								<li><a href="/careers">Careers</a></li>
-								<li><a href="/blog">Blog</a></li>
+								{#each $content.footer.companyLinks.links as link}
+									<li><a href={link.href}>{link.text}</a></li>
+								{/each}
 							</ul>
 						</div>
 						<div class="footer-links">
-							<h4>Legal</h4>
+							<h4>{$content.footer.legalLinks.title}</h4>
 							<ul>
-								{#each $content.footer.links as link}
+								{#each $content.footer.legalLinks.links as link}
 									<li><a href={link.href}>{link.text}</a></li>
 								{/each}
 							</ul>

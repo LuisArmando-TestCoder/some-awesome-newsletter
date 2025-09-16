@@ -1,27 +1,27 @@
 import { writable } from 'svelte/store';
 
 export const content = writable({
-    title: 'Silo Automation: Reclaim Your Time',
+    title: 'AI Newsletter Generator: Personalized Content, Delivered.',
     metaDescription:
-        'Automate repetitive tasks, integrate your tools, and unlock peak efficiency. Start for free and see results in minutes.',
-    ogImageUrl: 'https://example.com/og-image.png',
-    canonicalUrl: 'https://example.com/',
+        'Generate personalized newsletters with AI. Transform any news source into custom articles for your subscribers, in their language, and in your brand\'s voice.',
+    ogImageUrl: 'https://images.pexels.com/photos/3760067/pexels-photo-3760067.jpeg',
+    canonicalUrl: 'https://example.com/ai-newsletter-generator',
     organization: {
-        name: 'Silo Automation, Inc.',
+        name: 'AI Newsletter, Inc.',
         logo: 'https://example.com/logo.png',
         url: 'https://example.com/'
     },
     product: {
-        name: 'Silo Automator',
-        description: 'The ultimate platform for streamlining your digital workflows.'
+        name: 'AI Newsletter Generator',
+        description: 'The ultimate platform for creating personalized, AI-driven newsletters.'
     },
     announcement: {
-        text: 'New Integration: Connect with XYZ Platform in one click!',
-        cta: 'Learn More'
+        text: 'Beta Launch: Sign up now and get 50% off for the first 3 months!',
+        cta: 'Get Started'
     },
     hero: {
-        hook: 'Stop Wasting Time on Repetitive Tasks.',
-        subHook: 'Our platform automates your newsletters so you can focus on what truly matters.',
+        hook: 'AI-Powered Newsletters, Effortlessly.',
+        subHook: 'Transform any news source into personalized articles for your subscribers, in their language, and in your brand\'s voice.',
         primaryCta: 'Get Started for Free',
         secondaryCta: 'Watch a Demo',
         trustCues: ['No credit card required', '14-day free trial', 'Cancel anytime']
@@ -36,67 +36,88 @@ export const content = writable({
         ],
         counts: 'Trusted by 10,000+ teams worldwide'
     },
-    valueProps: [
-        { title: 'Integrate Everything', description: 'Connect all your tools in a single, unified hub.' },
-        { title: 'Automate Workflows', description: 'Build powerful automations with a simple drag-and-drop interface.' },
-        { title: 'Scale with Confidence', description: 'Our enterprise-grade platform grows with your business needs.' }
-    ],
-    features: [
-        {
-            title: 'Visual Workflow Builder',
-            description: 'Design complex automations without writing a single line of code.',
-            image: '/screenshots/feature-builder.png'
-        },
-        {
-            title: 'One-Click Integrations',
-            description: 'Connect to hundreds of popular apps from our extensive library.',
-            image: '/screenshots/feature-integrations.png'
-        },
-        {
-            title: 'Advanced Analytics',
-            description: 'Get deep insights into your operational efficiency and identify bottlenecks.',
-            image: '/screenshots/feature-analytics.png'
-        }
-    ],
-    howItWorks: [
-        {
-            step: 1,
-            title: 'Connect Your Apps',
-            description: 'Authorize your favorite tools with our secure, one-click process.'
-        },
-        {
-            step: 2,
-            title: 'Build Your Silo',
-            description: 'Visually map out your process using our intuitive drag-and-drop editor.'
-        },
-        {
-            step: 3,
-            title: 'Activate & Monitor',
-            description: 'Go live and watch your automated workflows deliver results in real-time.'
-        }
-    ],
-    personas: [
-        {
-            persona: 'For Marketing Teams',
-            problem: 'Struggling to sync lead data between your CRM and email platform?',
-            outcome: 'Automate lead nurturing and track campaign ROI from a single dashboard.'
-        },
-        {
-            persona: 'For Operations',
-            problem: 'Manual data entry and report generation slowing you down?',
-            outcome: 'Eliminate errors and get real-time reports delivered to your inbox automatically.'
-        },
-        {
-            persona: 'For Developers',
-            problem: 'Spending too much time on internal tool scripts and API glue code?',
-            outcome: 'Offload maintenance to us and trigger workflows via our robust developer API.'
-        }
-    ],
-    metrics: [
-        { value: '50%', label: 'Reduction in manual data entry', proof: 'According to a case study with Acme Corp.' },
-        { value: '8h', label: 'Average time saved per employee per week', proof: 'Based on internal customer surveys.' },
-        { value: '3x', label: 'Faster project delivery cycles', proof: 'Observed in teams after 30 days of use.' }
-    ],
+    valueProps: {
+        title: 'The Future of Newsletters is Here',
+        subTitle: 'Engage your audience like never before with AI-driven content that speaks directly to them.',
+        props: [
+            { title: 'Hyper-Personalization', description: 'Our AI analyzes your website to understand your audience and automatically tailors articles to their interests and language.' },
+            { title: 'Automated Content Creation', description: 'Set your schedule—daily, weekly, or monthly—and let our AI select, write, and translate articles for you.' },
+            { title: 'Your Brand, Your Voice', description: 'The AI learns your brand\'s personality from your website or custom input, ensuring every newsletter sounds like it was written by you.' }
+        ]
+    },
+    features: {
+        title: 'Advanced Features for Maximum Impact',
+        subTitle: 'Go beyond simple newsletters and create a powerful marketing channel.',
+        featureList: [
+            {
+                title: 'Intelligent Article Selection',
+                description: 'Our AI scans news sources and selects the most relevant articles based on an analysis of your target audience, ensuring high engagement.',
+                image: 'https://images.pexels.com/photos/3760067/pexels-photo-3760067.jpeg',
+                cta: 'Learn more'
+            },
+            {
+                title: 'Seamless Language Translation',
+                description: 'Reach a global audience by automatically translating articles into your subscribers\' native languages, breaking down communication barriers.',
+                image: 'https://images.pexels.com/photos/207756/pexels-photo-207756.jpeg',
+                cta: 'Learn more'
+            },
+            {
+                title: 'Lead Tracking & Analytics',
+                description: 'Embed a lead tracker in your company link to monitor engagement and measure the success of your campaigns with our built-in counter.',
+                image: 'https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg',
+                cta: 'Learn more'
+            }
+        ]
+    },
+    howItWorks: {
+        title: 'Get Started in 3 Simple Steps',
+        steps: [
+            {
+                step: 1,
+                title: 'Connect Your News Source',
+                description: 'Link any news source, and our AI will start analyzing it for relevant content.'
+            },
+            {
+                step: 2,
+                title: 'Define Your Voice',
+                description: 'Let our AI learn your brand\'s personality from your website or provide a custom description.'
+            },
+            {
+                step: 3,
+                title: 'Launch Your Newsletter',
+                description: 'Set your schedule and watch as personalized, multilingual newsletters are automatically sent to your subscribers.'
+            }
+        ]
+    },
+    personas: {
+        title: 'Perfect for Your Business',
+        subTitle: 'From startups to enterprises, our tool is designed to help you grow.',
+        personaList: [
+            {
+                persona: 'Content Creators',
+                problem: 'Spending hours curating and writing content for your audience.',
+                outcome: 'Automate your content creation process and focus on growing your community.'
+            },
+            {
+                persona: 'Marketing Teams',
+                problem: 'Struggling to create personalized content that resonates with a global audience.',
+                outcome: 'Increase engagement and conversions with hyper-personalized, multilingual newsletters.'
+            },
+            {
+                persona: 'Businesses',
+                problem: 'Lacking the resources to create a consistent and engaging newsletter.',
+                outcome: 'Build a powerful marketing channel that drives traffic and sales with minimal effort.'
+            }
+        ]
+    },
+    metrics: {
+        title: 'Real Results, Backed by Data',
+        metricList: [
+            { value: '90%', label: 'Reduction in content creation time', proof: 'Based on beta user feedback.' },
+            { value: '2x', label: 'Increase in subscriber engagement', proof: 'Observed in A/B tests with beta users.' },
+            { value: '5x', label: 'Faster content delivery', proof: 'Compared to manual newsletter creation.' }
+        ]
+    },
     integrations: {
         text: 'Works with the tools you already love.',
         logos: [
@@ -108,39 +129,54 @@ export const content = writable({
             { name: 'Tool F', src: '/logos/tool-f.svg' }
         ]
     },
-    testimonials: [
-        {
-            quote: "This platform transformed our operations. We're saving hundreds of hours a month.",
-            name: 'Jane Doe',
-            title: 'COO, InnovateCorp'
-        },
-        {
-            quote: 'The flexibility of the workflow builder is unmatched. If you can think it, you can automate it.',
-            name: 'John Smith',
-            title: 'Head of Marketing, QuantumLeap'
-        },
-        {
-            quote: 'A game-changer for our dev team. We retired a mountain of legacy scripts in the first week.',
-            name: 'Emily White',
-            title: 'Lead Engineer, Synergy Inc.'
-        }
-    ],
+    testimonials: {
+        title: 'What Our Customers Say',
+        testimonialList: [
+            {
+                quote: "The AI Newsletter Generator has been a game-changer for our content strategy. We're now able to reach our global audience with personalized content that resonates.",
+                name: 'Alex Chen',
+                title: 'Head of Growth, Global Tech Inc.'
+            },
+            {
+                quote: 'I was skeptical at first, but the AI-generated content is incredibly well-written and on-brand. Our subscribers love it!',
+                name: 'Samantha Jones',
+                title: 'Founder, The Content Corner'
+            },
+            {
+                quote: 'The amount of time we\'ve saved is incredible. We can now focus on other areas of our business while the AI handles our newsletter.',
+                name: 'David Rodriguez',
+                title: 'CEO, Startup Solutions'
+            }
+        ]
+    },
     pricing: {
-        teaser: 'Simple, transparent pricing',
-        plan: 'Starts from $20/mo',
-        cta: 'View All Plans'
+        teaser: 'Affordable Plans for Every Business',
+        subTitle: 'Our plans are designed to grow with you.',
+        plan: 'Starts from $29/mo',
+        cta: 'See Pricing'
     },
     finalCta: {
-        hook: 'Ready to build your automated future?',
-        cta: 'Start Automating Now'
+        hook: 'Ready to Revolutionize Your Newsletter?',
+        cta: 'Start Your Free Trial Today'
     },
     footer: {
-        copyright: `© ${new Date().getFullYear()} Silo Automation, Inc. All rights reserved.`,
-        links: [
-            { text: 'Privacy Policy', href: '/legal/privacy' },
-            { text: 'Terms of Service', href: '/legal/terms' },
-            { text: 'Cookie Policy', href: '/legal/cookies' }
-        ],
-        contact: 'support@silo-automation.com'
+        copyright: `© ${new Date().getFullYear()} AI Newsletter, Inc. All rights reserved.`,
+        companyLinks: {
+            title: 'Company',
+            links: [
+                { text: 'About Us', href: '/about' },
+                { text: 'Careers', href: '/careers' },
+                { text: 'Blog', href: '/blog' }
+            ]
+        },
+        legalLinks: {
+            title: 'Legal',
+            links: [
+                { text: 'Privacy Policy', href: '/legal/privacy' },
+                { text: 'Terms of Service', href: '/legal/terms' },
+                { text: 'Cookie Policy', href: '/legal/cookies' }
+            ]
+        },
+        contact: 'support@ainewsletter.com'
     }
 });

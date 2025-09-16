@@ -18,13 +18,6 @@
 
 <style lang="scss">
   .page {
-    padding: 160px 25px 0;
-    overflow: auto;
     box-sizing: border-box;
-    max-height: calc(100vh - 83px);
-
-    @media (max-width: 640px) {
-      padding: 160px 15px 0;
-    }
   }
 </style>

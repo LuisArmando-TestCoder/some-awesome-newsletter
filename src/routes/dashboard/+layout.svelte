@@ -132,6 +132,9 @@
 
 <style lang="scss">
   .dashboard-layout {
+    background: url(https://images.pexels.com/photos/925743/pexels-photo-925743.jpeg);
+    background-attachment: fixed;
+    background-size: cover;
     /* Single source of truth for widths; Sidebar also reads these */
     --sidebar-expanded-w: 280px;
     --sidebar-collapsed-w: 80px;
@@ -157,9 +160,8 @@
 
   .dashboard-layout__content {
     flex-grow: 1;
-    padding: var(--space-md) var(--space-lg);
-    max-height: inherit;
-    overflow-y: auto;
+    max-height: calc(100vh - 83px);
+    overflow: hidden;
   }
 
   /* Optional: block clicks/scroll behind the mobile overlay */

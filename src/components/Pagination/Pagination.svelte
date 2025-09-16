@@ -125,7 +125,6 @@
 
     .page-btn {
         background: none;
-        border: 1px solid var(--color-background);
         padding: 0.4rem 0.8rem;
         cursor: pointer;
         transition: background 0.2s ease-in-out;

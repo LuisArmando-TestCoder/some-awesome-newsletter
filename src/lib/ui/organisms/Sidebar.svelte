@@ -142,9 +142,10 @@
     --sidebar-expanded-w: var(--sidebar-expanded-w, 280px);
     --sidebar-collapsed-w: var(--sidebar-collapsed-w, 80px);
 
-    background: var(--c-bg-alt);
+    background: #fff6;
+    backdrop-filter: blur(6px);
     padding: var(--space-md);
-    border-right: 1px solid var(--c-border);
+    box-shadow: 0 0 5px -2px #fff;
     transition: width 0.3s ease, left 0.3s ease, box-shadow 0.2s ease;
     width: var(--sidebar-expanded-w); /* desktop default expanded */
     display: flex;
@@ -157,14 +158,19 @@
 
     /* ⬇️ NEW mobile behavior: anchored at left:0, width-only transitions */
     &.mobile {
+      --h: 83px;
       position: fixed;
-      top: 116.59px;
+      top: var(--h);
       left: 0;              /* always 0; never negative */
-      height: calc(100dvh - 116.59px);       /* better on mobile; browser falls back to 100vh */
+      height: calc(100dvh - var(--h));       /* better on mobile; browser falls back to 100vh */
       z-index: 1000;
       /* baseline: when class .mobile is present, we default to collapsed rail */
       width: var(--sidebar-collapsed-w);
       transition: width 0.3s ease, box-shadow 0.2s ease;
+
+      @media (max-width: 480px) {
+        --h: 116.59px;
+      }
     }
 
     /* collapsed rail: visible, tappable */

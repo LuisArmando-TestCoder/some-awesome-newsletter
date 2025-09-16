@@ -252,7 +252,7 @@
       justify-content: center;
       gap: var(--space-sm);
       width: 100%;
-      padding: 0.75rem 1rem;
+      padding: 0.5rem 1rem;
       border-radius: var(--radius-md);
       font-weight: 600;
       margin-bottom: var(--space-md);

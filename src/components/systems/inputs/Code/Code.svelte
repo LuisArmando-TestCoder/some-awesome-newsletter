@@ -130,8 +130,7 @@
   .auth-code-input input {
     width: 3rem;
     height: 3rem;
-    background: var(--color-background-very-opaque);
-    backdrop-filter: blur(6px);
+    background: var(--color-background-inversion);
     border: 1px solid var(--color-background);
     border-radius: 8px;
     text-align: center;

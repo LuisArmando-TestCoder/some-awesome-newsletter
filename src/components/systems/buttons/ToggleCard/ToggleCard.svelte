@@ -41,6 +41,8 @@
 
 <style lang="scss">
   .card {
+    background: #fffa;
+    backdrop-filter: blur(5px);
     border-radius: 4px;
     border: 0;
     margin: 1rem 0;

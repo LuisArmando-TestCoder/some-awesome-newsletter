@@ -13,12 +13,14 @@
     &.inactive {
       z-index: -1;
       opacity: 0;
+      padding: 25px;
       pointer-events: none;
       transform: translate(0, -50px);
     }
 
     &.active {
       opacity: 1;
+      padding: 25px;
       transform: translate(0, 0px);
     }
 

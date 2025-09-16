@@ -77,11 +77,10 @@
   }
 
   input {
-    background: var(--color-background-very-opaque);
-    backdrop-filter: blur(6px);
+    background: var(--color-background-inversion);
     border: 1px solid var(--color-background);
     border-radius: 8px;
-    padding: 0.75rem 1rem;
+    padding: 0.5rem 1rem;
     font-size: 1rem;
     color: var(--color-foreground);
     transition:

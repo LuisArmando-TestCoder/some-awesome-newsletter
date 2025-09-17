@@ -75,7 +75,7 @@
     ? [...subscribers]
         .reverse()
         .filter((s) =>
-          `${s.name} ${s.email}`.toLowerCase().includes(searchTerm.toLowerCase()),
+          `${s.name} ${s.email} ${s.bio}`.toLowerCase().includes(searchTerm.toLowerCase()),
         )
     : [];
 
@@ -484,7 +484,7 @@
     </TextTypes>
 
     <SearchBar
-      placeholder="Search by name or email..."
+      placeholder="Search by name, bio or email..."
       on:search={handleSearch}
     />
 

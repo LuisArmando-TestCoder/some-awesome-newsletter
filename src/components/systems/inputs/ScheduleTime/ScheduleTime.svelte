@@ -5,7 +5,7 @@
   import { onMount } from "svelte";
 
   export let store: Writable<string> | undefined = undefined;
-  export let value: string = "0 0 * * *";
+  export let value: string | undefined = undefined;
   export let onChange: ((value: string) => void) | undefined = undefined;
   export let exclude: Array<"minute" | "hour" | "dayOfMonth" | "month" | "dayOfWeek"> = [];
   export let label: string | undefined = undefined;
@@ -17,8 +17,9 @@
   const dayOfWeekStore = writable("*");
 
   let isParsing = false;
+  let isMounted = false;
 
-  function parseCron(cron: string) {
+  function parseCron(cron: string | undefined) {
     if (!cron || typeof cron !== 'string') return;
     isParsing = true;
     const parts = cron.split(" ");
@@ -40,9 +41,10 @@
           parseCron(v);
         }
       });
-    } else {
+    } else if (value) {
       parseCron(value);
     }
+    isMounted = true;
   });
 
   dayOfMonthStore.subscribe(v => {
@@ -66,7 +68,7 @@
   );
 
   cronStore.subscribe((v) => {
-    if (!isParsing) {
+    if (!isParsing && isMounted) {
       if (store) {
         store.set(v);
       }

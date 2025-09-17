@@ -22,51 +22,6 @@
   // Local error messages for each update form
   let updateErrorMessages: Record<string, string> = {};
 
-  // We'll store only the fields we want to display (no id/url/type).
-  let updateFields: Record<
-    string,
-    {
-      community: string;
-      country: string;
-      lead: string;
-      personality: string;
-      scheduleTime: string;
-      linkSelector: string;
-      url: string;
-      id: string;
-    }
-  > = {};
-
-  // Listen to changes in store to populate updateFields
-  $: if ($store.config?.newsSources) {
-    $store.config.newsSources.forEach((ns: NewsSource) => {
-      if (!ns || !ns.id) return;
-      // Avoid resetting fields if already populated (e.g., during editing)
-      if (!updateFields[ns.id]) {
-        updateFields[ns.id] = {
-          community: ns.community || "",
-          country: ns.country || "",
-          lead: ns.lead || "",
-          personality: ns.personality || "",
-          scheduleTime: ns.scheduleTime || "",
-          linkSelector: ns.linkSelector || "",
-          url: ns.url || "",
-          id: ns.id,
-        };
-      }
-    });
-    // Optional: Clean up updateFields for sources that no longer exist
-    const currentIds = new Set(
-      $store.config.newsSources.map((ns: { id: any }) => ns.id)
-    );
-    Object.keys(updateFields).forEach((id) => {
-      if (!currentIds.has(id)) {
-        delete updateFields[id];
-      }
-    });
-    updateFields = updateFields; // Trigger reactivity if keys were deleted
-  }
-
   // For display, reverse the array so newest appears first
   $: newsSourcesReversed = $store.config?.newsSources
     ? [...$store.config.newsSources].reverse()
@@ -132,19 +87,25 @@
     <!-- No need for the extra div.news-sources-list unless needed for specific styling -->
     <!-- The SlotAutoCollapseToggle already provides a .toggle-group div -->
     {#if newsSourcesReversed && newsSourcesReversed.length}
-      {#each paginatedNewsSources as ns (ns.id)}
+      {#each paginatedNewsSources as ns, i (ns.id)}
         <ToggleCard
           {canReveal}
           cardTitle={`${ns.url?.split("//")[1] ?? "N/A"} ⟫ ${ns.lead?.split("//")[1] ?? "N/A"}`}
           {...getToggleProps(ns.id)}
         >
           <UpdateNewsSourceForm
-            newsSource={ns}
+            bind:newsSource={paginatedNewsSources[i]}
             errorMessage={updateErrorMessages[ns.id]}
             {canReveal}
             on:updated={() => {
               console.log(`Update form for ${ns.id} reported update`);
-              /* handle post-update logic, e.g. show success message */
+              // Find the index of the news source in the original array and update it
+              const index = $store.config.newsSources.findIndex(
+                (source: NewsSource) => source.id === ns.id
+              );
+              if (index !== -1) {
+                $store.config.newsSources[index] = paginatedNewsSources[i];
+              }
             }}
           />
         </ToggleCard>

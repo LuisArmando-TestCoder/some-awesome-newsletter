@@ -47,21 +47,21 @@
 
   // Initialize updateFields with the defined type and default values
   let updateFields: UpdateFieldsType;
-  $: updateFields = {
-    community: newsSource.community || "",
-    lead: newsSource.lead || "", // Ensure lead is string
-    personality: newsSource.personality || "", // Initialize with string or empty string
-    scheduleTime: newsSource.scheduleTime || "0 0 * * *",
-    linkSelector: newsSource.linkSelector || "",
-    url: newsSource.url || "", // Ensure url is string
-    id: newsSource.id,
-    // active: newsSource.active === undefined ? true : newsSource.active, // Removed active state initialization
-    emailMaskSender: newsSource.emailMaskSender || "",
-    appPassword: newsSource.appPassword || "",
-    // Default to true if undefined in the source data
-    includeImages: newsSource.includeImages === undefined ? true : newsSource.includeImages,
-    isPublic: newsSource.isPublic === undefined ? true : newsSource.isPublic, // Initialize isPublic
-  };
+  $: if (newsSource) {
+    updateFields = {
+      community: newsSource.community || "",
+      lead: newsSource.lead || "",
+      personality: newsSource.personality || "",
+      scheduleTime: newsSource.scheduleTime,
+      linkSelector: newsSource.linkSelector || "",
+      url: newsSource.url || "",
+      id: newsSource.id,
+      emailMaskSender: newsSource.emailMaskSender || "",
+      appPassword: newsSource.appPassword || "",
+      includeImages: newsSource.includeImages === undefined ? true : newsSource.includeImages,
+      isPublic: newsSource.isPublic === undefined ? true : newsSource.isPublic,
+    };
+  }
 
   // Validation for email credentials
   let emailValidationError = "";
@@ -112,7 +112,7 @@
   // Función original para actualizar la fuente
   async function handleUpdate() {
      // Ensure updateFields is initialized before creating payload
-    if (!updateFields?.id) {
+    if (!updateFields?.id || !updateFields.scheduleTime) {
         errorMessage = "Form data not initialized correctly.";
         return;
     }
@@ -177,7 +177,7 @@
 </script>
 
 <form class="news-source-update-form" on:submit|preventDefault={handleUpdate}>
-  <!-- Remove #if updateFields block as it's initialized directly now -->
+  {#if updateFields}
     <ToggleCard {canReveal} cardTitle="Basic Settings" isOpen={false} onChange={() => {}}>
       <div class="selectors-group">
 
@@ -336,7 +336,7 @@
     {#if errorMessage}
       <div class="error-message">{errorMessage}</div>
     {/if}
-  <!-- End of removed #if block -->
+  {/if}
 </form>
 
 <style lang="scss">

@@ -239,31 +239,26 @@
     </span>
   {/if}
 
-  {#if showInput}
+  <div class="custom-select-control">
     <input
       type="text"
       bind:this={inputRef}
       value={typeahead}
       on:input={handleInput}
-      placeholder="Type to search language..."
-      class="custom-select-input"
+      placeholder="Type to search..."
+      class="custom-select-input {open ? 'open' : ''}"
       aria-autocomplete="list"
       aria-controls={open ? "language-listbox" : undefined}
       aria-labelledby="language-select-label"
-      in:fade={{ duration: 200 }}
-      out:fade={{ duration: 200 }}
       {disabled}
     />
-  {:else}
     <button
       type="button"
       bind:this={buttonRef}
       on:click={toggleOpen}
-      class="custom-select-button"
+      class="custom-select-button {!open ? 'visible' : ''}"
       aria-controls={open ? "language-listbox" : undefined}
       aria-labelledby="language-select-label {selectedLanguage ? 'selected-language-label' : ''}"
-      in:fade={{ duration: 200 }}
-      out:fade={{ duration: 200 }}
       {disabled}
     >
       {#if selectedLanguage}
@@ -278,7 +273,7 @@
         <span class="text-gray-500">Select a language</span>
       {/if}
       <svg
-        class="w-4 h-4 transform transition-transform duration-200 {open ? 'rotate-180' : ''}"
+        class="custom-select-arrow w-4 h-4 transform transition-transform duration-200 {open ? 'rotate-180' : ''}"
         fill="currentColor"
         viewBox="0 0 24 24"
         aria-hidden="true"
@@ -286,21 +281,7 @@
         <path d="M7 10l5 5 5-5z" />
       </svg>
     </button>
-  {/if}
-
-  {#if selectedLanguage && !showInput}
-    <div
-      class="mt-2 text-sm text-gray-700 flex items-center gap-2"
-      in:fade={{ duration: 200 }}
-      out:fade={{ duration: 200 }}
-    >
-      Selected:
-      {#if selectedLanguage.flag}
-        <span class="text-lg" aria-hidden="true">{selectedLanguage.flag}</span>
-      {/if}
-      <span>{selectedLanguage.name} ({selectedLanguage.code})</span>
-    </div>
-  {/if}
+  </div>
 
   {#if open}
     <ul

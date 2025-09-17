@@ -45,7 +45,7 @@
 .pagination-btn {
   background: none;
   border: none;
-  color: #222;
+  color: var(--color-highlight);
   font-size: 1rem;
   padding: 0.5em 1.2em;
   border-radius: 999px;

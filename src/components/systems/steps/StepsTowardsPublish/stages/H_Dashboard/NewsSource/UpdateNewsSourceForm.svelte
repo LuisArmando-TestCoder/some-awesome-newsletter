@@ -46,39 +46,22 @@
   };
 
   // Initialize updateFields with the defined type and default values
-  let updateFields: UpdateFieldsType = {
-    community: "",
-    lead: "", // Use empty string instead of type annotation
-    personality: "", // Ensure personality is initialized as string
-    scheduleTime: "", // Use empty string
-    linkSelector: "", // Use empty string
-    url: "", // Use empty string
-    id: "",
-    // active: true, // Removed default active state
-    emailMaskSender: "",
-    appPassword: "",
-    includeImages: true, // Default to true
-    isPublic: true, // Default to true
+  let updateFields: UpdateFieldsType;
+  $: updateFields = {
+    community: newsSource.community || "",
+    lead: newsSource.lead || "", // Ensure lead is string
+    personality: newsSource.personality || "", // Initialize with string or empty string
+    scheduleTime: newsSource.scheduleTime || "0 0 * * *",
+    linkSelector: newsSource.linkSelector || "",
+    url: newsSource.url || "", // Ensure url is string
+    id: newsSource.id,
+    // active: newsSource.active === undefined ? true : newsSource.active, // Removed active state initialization
+    emailMaskSender: newsSource.emailMaskSender || "",
+    appPassword: newsSource.appPassword || "",
+    // Default to true if undefined in the source data
+    includeImages: newsSource.includeImages === undefined ? true : newsSource.includeImages,
+    isPublic: newsSource.isPublic === undefined ? true : newsSource.isPublic, // Initialize isPublic
   };
-
-  onMount(() => {
-    // Update updateFields with actual newsSource data once mounted
-    updateFields = {
-      community: newsSource.community || "",
-      lead: newsSource.lead || "", // Ensure lead is string
-      personality: newsSource.personality || "", // Initialize with string or empty string
-      scheduleTime: newsSource.scheduleTime || "",
-      linkSelector: newsSource.linkSelector || "",
-      url: newsSource.url || "", // Ensure url is string
-      id: newsSource.id,
-      // active: newsSource.active === undefined ? true : newsSource.active, // Removed active state initialization
-      emailMaskSender: newsSource.emailMaskSender || "",
-      appPassword: newsSource.appPassword || "",
-      // Default to true if undefined in the source data
-      includeImages: newsSource.includeImages === undefined ? true : newsSource.includeImages,
-      isPublic: newsSource.isPublic === undefined ? true : newsSource.isPublic, // Initialize isPublic
-    };
-  });
 
   // Validation for email credentials
   let emailValidationError = "";
@@ -100,6 +83,11 @@
 
   // Local store for the updated news source
   export const updatedNewsSource = writable<NewsSource | null>(null);
+
+  let isMounted = false;
+  onMount(() => {
+    isMounted = true;
+  });
 
   // Variables para el campo Personality:
   let rawContent: string = "";
@@ -217,11 +205,14 @@
     <ToggleCard {canReveal} cardTitle="Advanced Generation Settings" isOpen={false} onChange={() => {}}>
       <div class="selectors-group">
         <ScheduleTime
-          label="Schedule Time"
+          label="How often you want the newsletter to publish"
           value={updateFields.scheduleTime}
-          onChange={(schedule) => {
-            console.log("[UpdateNewsSourceForm.svelte] onChange received:", schedule);
-            updateFields.scheduleTime = schedule;
+          exclude={["minute", "hour", "dayOfMonth"]}
+          onChange={(newValue) => {
+            updateFields.scheduleTime = newValue;
+            if (isMounted) {
+              handleUpdate();
+            }
           }}
         />
 
@@ -229,7 +220,12 @@
           personality={updateFields.personality ?? ''}
           newsSourceId={updateFields.id}
           onError={(msg) => (errorMessage = msg)}
-          onChange={(newValue) => { updateFields.personality = newValue; }}
+          onChange={(newValue) => { 
+            updateFields.personality = newValue; 
+            if (isMounted) {
+              handleUpdate();
+            }
+          }}
         />
 
         <!-- Include Images Toggle -->
@@ -237,6 +233,11 @@
           <label for="include-images-switch">Include Images in Newsletter</label>
           <Switch
             bind:toggled={updateFields.includeImages}
+            on:change={() => {
+              if (isMounted) {
+                handleUpdate();
+              }
+            }}
           />
         </div>
         <MarkdownText {canReveal}>
@@ -248,6 +249,11 @@
           <label for="is-public-switch">Publicly Visible in Widget</label>
           <Switch
             bind:toggled={updateFields.isPublic}
+            on:change={() => {
+              if (isMounted) {
+                handleUpdate();
+              }
+            }}
           />
         </div>
         <MarkdownText {canReveal}>

@@ -119,59 +119,28 @@ function parseSegment(
   // Range (e.g., 1-5, MON-FRI)
   if (segment.includes("-")) {
     const [startStr, endStr] = segment.split("-");
-    let start =
-      names && map
-        ? map.get(startStr.toUpperCase()) ?? parseInt(startStr, 10)
-        : parseInt(startStr, 10);
-    let end =
-      names && map
-        ? map.get(endStr.toUpperCase()) ?? parseInt(endStr, 10)
-        : parseInt(endStr, 10);
 
-    // Handle names case where map returns 0-based index but min/max are 1-based etc.
-    if (names && map) {
-      const startLookup = map.get(startStr.toUpperCase());
-      const endLookup = map.get(endStr.toUpperCase());
-      // Adjust if names used (map returns 0-based typically)
-      if (startLookup !== undefined) start = startLookup;
-      if (endLookup !== undefined) end = endLookup;
+    const startNum = parseInt(startStr, 10);
+    const endNum = parseInt(endStr, 10);
+
+    if (!isNaN(startNum) && (startNum < min || startNum > max)) {
+      throw new Error(
+        `Range start value ${startNum} out of bounds [${min}-${max}] in segment: ${segment}`
+      );
+    }
+    if (!isNaN(endNum) && (endNum < min || endNum > max)) {
+      throw new Error(
+        `Range end value ${endNum} out of bounds [${min}-${max}] in segment: ${segment}`
+      );
     }
 
-    if (isNaN(start) || isNaN(end) || start < min || end > max || start > end) {
-      // Allow SUN-FRI (0-5) type ranges if dayMap handles 7->0
-      if (!(names === DAY_NAMES && start === 0 && end < max)) {
-        // Simple validation - more complex name ranges need careful checking
-        if (isNaN(start) || isNaN(end) || start > end) {
-          // Try harder for names
-          const startIdx =
-            names && map ? map.get(startStr.toUpperCase()) : undefined;
-          const endIdx =
-            names && map ? map.get(endStr.toUpperCase()) : undefined;
-          if (
-            startIdx === undefined ||
-            endIdx === undefined ||
-            startIdx > endIdx
-          ) {
-            throw new Error(`Invalid range segment: ${segment}`);
-          }
-          start = startIdx;
-          end = endIdx;
-        } else if (start < min || end > max) {
-          // Allow day names like 7 (Sunday) to map correctly if using numbers
-          if (!(names === DAY_NAMES && (start === 7 || end === 7))) {
-            throw new Error(
-              `Range values out of bounds [${min}-${max}] in segment: ${segment}`
-            );
-          }
-          // Adjust 7 to 0 for Sunday if needed for internal logic consistency
-          if (start === 7) start = 0;
-          if (end === 7) end = 0; // This case (range ending in 7) is complex. Assume 7 means Sunday (0).
-          if (start > end) {
-            // e.g. FRI-TUE (5-2) - wrap around? Standard cron doesn't wrap range.
-            throw new Error(`Invalid range sequence (start > end): ${segment}`);
-          }
-        }
-      }
+    let start =
+      (names && map ? map.get(startStr.toUpperCase()) : undefined) ?? startNum;
+    let end =
+      (names && map ? map.get(endStr.toUpperCase()) : undefined) ?? endNum;
+
+    if (isNaN(start) || isNaN(end) || start > end) {
+      throw new Error(`Invalid range segment: ${segment}`);
     }
 
     const values = [];
@@ -188,22 +157,34 @@ function parseSegment(
   }
 
   // Single value (e.g., 5, TUE)
+  const originalValue = parseInt(segment, 10);
+  if (!isNaN(originalValue)) {
+    if (originalValue < min || originalValue > max) {
+      if (!(names === DAY_NAMES && originalValue === 7)) {
+        throw new Error(
+          `Value '${segment}' is out of range [${min}-${max}]`
+        );
+      }
+    }
+  }
+
   let value =
     names && map
-      ? map.get(segment.toUpperCase()) ?? parseInt(segment, 10)
-      : parseInt(segment, 10);
-  // Adjust if names used
+      ? map.get(segment.toUpperCase()) ?? originalValue
+      : originalValue;
+
   if (names && map) {
     const lookup = map.get(segment.toUpperCase());
     if (lookup !== undefined) value = lookup;
   }
 
-  if (isNaN(value) || value < min || value > max) {
-    // Allow day names like 7 (Sunday)
-    if (!(names === DAY_NAMES && value === 7)) {
-      throw new Error(`Invalid single value segment: ${segment}`);
-    }
-    value = 0; // Treat 7 as Sunday (0)
+  if (isNaN(value)) {
+    throw new Error(`Invalid single value segment: ${segment}`);
+  }
+
+  // Adjust for Sunday=7
+  if (names === DAY_NAMES && value === 7) {
+    value = 0;
   }
 
   const name = names ? names[value] : value.toString();

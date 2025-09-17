@@ -50,37 +50,11 @@
 </div>
 
 <style lang="scss">
+  @import "../../../../lib/styles/centralized-styles.scss";
+
   .text-input-wrapper {
     display: flex;
     flex-direction: column;
     width: 100%;
-  }
-
-  .input-label {
-    margin-bottom: 0.5rem;
-    color: var(--color-foreground);
-    font-size: 1rem;
-  }
-
-  input {
-    background: var(--color-background-inversion);
-    border: 1px solid var(--color-background);
-    border-radius: 8px;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    color: var(--color-background);
-    transition:
-      border 0.3s ease,
-      box-shadow 0.3s ease;
-    outline: none;
-  }
-
-  input::placeholder {
-    color: var(--color-foreground-opaque);
-  }
-
-  input:focus {
-    border-color: var(--color-foreground);
-    box-shadow: 0 0 10px -2px var(--color-foreground);
   }
 </style>

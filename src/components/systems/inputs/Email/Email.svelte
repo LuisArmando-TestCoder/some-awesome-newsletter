@@ -48,60 +48,59 @@
   <label class="input-label"
     >{value ? label || placeholder : label}</label
   >
-  <input
-    type="email"
-    bind:value
-    {placeholder}
-    on:input={handleInput}
-    on:keydown={handleKeyDown}
-    aria-label={label}
-    class:invalid={!valid && value !== ""}
-    {disabled}
-  />
+  <div class="input-container">
+    <input
+      type="email"
+      bind:value
+      {placeholder}
+      on:input={handleInput}
+      on:keydown={handleKeyDown}
+      aria-label={label}
+      class:invalid={!valid && value !== ""}
+      {disabled}
+    />
+    <button class="at-button" on:click={() => (value += "@")}>@</button>
+  </div>
   {#if !valid && value !== ""}
     <span class="error-message">Please enter a valid email.</span>
   {/if}
 </div>
 
 <style lang="scss">
+  @import "../../../../lib/styles/centralized-styles.scss";
+
   .email-input-wrapper {
     display: flex;
     flex-direction: column;
     width: 100%;
-    gap: .5rem;
+    gap: 0.5rem;
+  }
+
+  .input-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    position: relative;
   }
 
   input {
-    background: var(--color-background-inversion);
-    border: 1px solid var(--color-background);
-    border-radius: 8px;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    color: var(--color-background);
-    transition:
-      border 0.3s ease,
-      box-shadow 0.3s ease;
-    outline: none;
     text-align: center;
+    width: 100%;
+  }
+
+  .at-button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: var(--color-primary);
   }
 
   input::placeholder {
     color: var(--color-background);
-  }
-
-  input:focus {
-    border-color: var(--color-foreground);
-    box-shadow: 0 0 10px -2px var(--color-foreground);
-  }
-
-  input.invalid {
-    border-color: red;
-    box-shadow: 0 0 10px -2px red;
-  }
-
-  .error-message {
-    margin-top: 0.25rem;
-    font-size: 0.875rem;
-    color: red;
   }
 </style>

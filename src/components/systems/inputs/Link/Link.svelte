@@ -75,52 +75,17 @@
 </div>
 
 <style lang="scss">
+  @import "../../../../lib/styles/centralized-styles.scss";
+
   .url-input-wrapper {
     display: flex;
     flex-direction: column;
     width: 100%;
   }
 
-  .input-label {
-    margin-bottom: 0.5rem;
-    color: var(--color-foreground);
-    font-size: 1rem;
-  }
-
   input {
-    background: var(--color-background-inversion);
-    border: 1px solid var(--color-background);
-    border-radius: 8px;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    color: var(--color-foreground);
-    transition:
-      border 0.3s ease,
-      box-shadow 0.3s ease;
-    outline: none;
-
     &.center {
       text-align: center;
     }
-  }
-
-  input::placeholder {
-    color: var(--color-foreground-opaque);
-  }
-
-  input:focus {
-    border-color: var(--color-foreground);
-    box-shadow: 0 0 10px -2px var(--color-foreground);
-  }
-
-  input.invalid {
-    border-color: red;
-    box-shadow: 0 0 10px -2px red;
-  }
-
-  .error-message {
-    margin-top: 0.25rem;
-    font-size: 0.875rem;
-    color: red;
   }
 </style>

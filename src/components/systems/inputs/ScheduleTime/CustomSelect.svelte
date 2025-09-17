@@ -1,29 +1,23 @@
 <script lang="ts">
   import { onMount, onDestroy, tick } from "svelte";
-  import { writable } from "svelte/store";
+  import { browser } from "$app/environment";
+  import type { Writable } from "svelte/store";
   import fuzzysort from "fuzzysort";
   import { fade, slide } from "svelte/transition";
 
-  // Assuming languages.ts is in the same directory
-  import languagesData from "./languages";
-
-  interface Language {
-    code: string;
-    name: string;
-    flag: string | null;
+  interface Option {
+    value: string;
+    label: string;
   }
 
-  const languages: Language[] = languagesData;
-
   // Props
-  export let defaultLanguageCode: string | null = null;
-  export let label = "Language";
-  export let onSelect: (selectedCode: string | null) => void = () => {};
+  export let options: Option[] = [];
+  export let store: Writable<string | null>;
+  export let label = "Select an option";
   export let disabled: boolean = false;
 
   // State
-  let selectedLanguage: Language | null = null;
-  export const selectedLanguageStore = writable<Language | null>(null);
+  let selectedOption: Option | null = null;
   let open = false;
   let showInput = false;
   let dropdownRef: HTMLElement;
@@ -41,34 +35,36 @@
 
   // Lifecycle
   onMount(() => {
-    const initialLanguage = defaultLanguageCode
-      ? findLanguageByCode(defaultLanguageCode)
+    const initialOption = $store
+      ? findOptionByValue($store)
       : null;
-    if (initialLanguage) {
-      selectedLanguage = initialLanguage;
-      selectedLanguageStore.set(initialLanguage);
-      lastValidHighlightedIndex = findIndexByCode(initialLanguage.code);
+    if (initialOption) {
+      selectedOption = initialOption;
+      lastValidHighlightedIndex = findIndexByValue(initialOption.value);
     } else {
-      selectedLanguageStore.set(null);
       lastValidHighlightedIndex = 0;
     }
 
-    document.addEventListener("click", handleClickOutside);
-    listItems = new Array(languages.length).fill(null);
+    if (browser) {
+      document.addEventListener("click", handleClickOutside);
+    }
+    listItems = new Array(options.length).fill(null);
   });
 
   onDestroy(() => {
-    document.removeEventListener("click", handleClickOutside);
+    if (browser) {
+      document.removeEventListener("click", handleClickOutside);
+    }
     clearTimeout(searchDebounceTimeout);
   });
 
   // Utility
-  function findLanguageByCode(code: string): Language | null {
-    return languages.find((language) => language.code === code) || null;
+  function findOptionByValue(val: string): Option | null {
+    return options.find((option) => option.value === val) || null;
   }
 
-  function findIndexByCode(code: string): number {
-    return languages.findIndex((language) => language.code === code);
+  function findIndexByValue(val: string): number {
+    return options.findIndex((option) => option.value === val);
   }
 
   // Event Handlers
@@ -77,8 +73,8 @@
     showInput = open; // Input visibility tied to dropdown state
     if (open) {
       typeahead = "";
-      highlightedIndex = selectedLanguage
-        ? findIndexByCode(selectedLanguage.code)
+      highlightedIndex = selectedOption
+        ? findIndexByValue(selectedOption.value)
         : lastValidHighlightedIndex !== -1
           ? lastValidHighlightedIndex
           : 0;
@@ -91,15 +87,14 @@
     }
   }
 
-  function selectLanguage(language: Language) {
-    selectedLanguage = language;
-    selectedLanguageStore.set(language);
-    lastValidHighlightedIndex = findIndexByCode(language.code);
+  function selectOption(option: Option) {
+    selectedOption = option;
+    store.set(option.value);
+    lastValidHighlightedIndex = findIndexByValue(option.value);
     open = false;
     showInput = false;
     typeahead = "";
     highlightedIndex = -1;
-    onSelect(language.code);
     buttonRef?.focus();
   }
 
@@ -126,7 +121,7 @@
       switch (event.key) {
         case "ArrowDown":
           event.preventDefault();
-          highlightedIndex = (highlightedIndex + 1) % languages.length;
+          highlightedIndex = (highlightedIndex + 1) % options.length;
           lastValidHighlightedIndex = highlightedIndex;
           focusAndScrollToHighlightedItem();
           return;
@@ -134,7 +129,7 @@
         case "ArrowUp":
           event.preventDefault();
           highlightedIndex =
-            (highlightedIndex - 1 + languages.length) % languages.length;
+            (highlightedIndex - 1 + options.length) % options.length;
           lastValidHighlightedIndex = highlightedIndex;
           focusAndScrollToHighlightedItem();
           return;
@@ -148,15 +143,15 @@
 
         case "End":
           event.preventDefault();
-          highlightedIndex = languages.length - 1;
+          highlightedIndex = options.length - 1;
           lastValidHighlightedIndex = highlightedIndex;
           focusAndScrollToHighlightedItem();
           return;
 
         case "Enter":
-          if (highlightedIndex !== -1 && highlightedIndex < languages.length) {
+          if (highlightedIndex !== -1 && highlightedIndex < options.length) {
             event.preventDefault();
-            selectLanguage(languages[highlightedIndex]);
+            selectOption(options[highlightedIndex]);
           }
           return;
 
@@ -192,23 +187,23 @@
         highlightedIndex =
           lastValidHighlightedIndex !== -1
             ? lastValidHighlightedIndex
-            : selectedLanguage
-              ? findIndexByCode(selectedLanguage.code)
+            : selectedOption
+              ? findIndexByValue(selectedOption.value)
               : 0;
         focusAndScrollToHighlightedItem();
         return;
       }
 
-      const searchResults = fuzzysort.go(typeahead, languages, {
-        keys: ["name", "code"],
+      const searchResults = fuzzysort.go(typeahead, options, {
+        keys: ["label"],
         threshold: -10000,
         limit: 50,
       });
 
       if (searchResults.length > 0) {
         const bestMatch = searchResults[0].obj;
-        const bestMatchIndex = languages.findIndex(
-          (l) => l.code === bestMatch.code
+        const bestMatchIndex = options.findIndex(
+          (o) => o.value === bestMatch.value
         );
 
         if (bestMatchIndex !== -1) {
@@ -222,6 +217,12 @@
       }
     }, SEARCH_DEBOUNCE_DELAY);
   }
+
+  $: {
+    if ($store) {
+      selectedOption = findOptionByValue($store);
+    }
+  }
 </script>
 
 <div
@@ -231,54 +232,43 @@
   role="combobox"
   aria-haspopup="listbox"
   aria-expanded={open}
-  aria-owns={open ? "language-listbox" : undefined}
+  aria-owns={open ? "option-listbox" : undefined}
 >
   {#if label}
-    <span class="custom-select-label" id="language-select-label">
+    <span class="custom-select-label" id="option-select-label">
       {label}
     </span>
   {/if}
 
-  {#if showInput}
+  <div class="custom-select-control">
     <input
       type="text"
       bind:this={inputRef}
       value={typeahead}
       on:input={handleInput}
-      placeholder="Type to search language..."
-      class="custom-select-input"
+      placeholder="Type to search..."
+      class="custom-select-input {open ? 'open' : ''}"
       aria-autocomplete="list"
-      aria-controls={open ? "language-listbox" : undefined}
-      aria-labelledby="language-select-label"
-      in:fade={{ duration: 200 }}
-      out:fade={{ duration: 200 }}
+      aria-controls={open ? "option-listbox" : undefined}
+      aria-labelledby="option-select-label"
       {disabled}
     />
-  {:else}
     <button
       type="button"
       bind:this={buttonRef}
       on:click={toggleOpen}
-      class="custom-select-button"
-      aria-controls={open ? "language-listbox" : undefined}
-      aria-labelledby="language-select-label {selectedLanguage ? 'selected-language-label' : ''}"
-      in:fade={{ duration: 200 }}
-      out:fade={{ duration: 200 }}
+      class="custom-select-button {!open ? 'visible' : ''}"
+      aria-controls={open ? "option-listbox" : undefined}
+      aria-labelledby="option-select-label {selectedOption ? 'selected-option-label' : ''}"
       {disabled}
     >
-      {#if selectedLanguage}
-        <span class="flex items-center gap-2 truncate">
-          {#if selectedLanguage.flag}
-            <span class="text-lg" aria-hidden="true">{selectedLanguage.flag}</span>
-          {/if}
-          <span class="truncate">{selectedLanguage.name}</span>
-          <span class="text-gray-500 text-xs">({selectedLanguage.code})</span>
-        </span>
+      {#if selectedOption}
+        <span class="truncate">{selectedOption.label}</span>
       {:else}
-        <span class="text-gray-500">Select a language</span>
+        <span class="text-gray-500">Select an option</span>
       {/if}
       <svg
-        class="w-4 h-4 transform transition-transform duration-200 {open ? 'rotate-180' : ''}"
+        class="custom-select-arrow w-4 h-4 transform transition-transform duration-200 {open ? 'rotate-180' : ''}"
         fill="currentColor"
         viewBox="0 0 24 24"
         aria-hidden="true"
@@ -286,59 +276,39 @@
         <path d="M7 10l5 5 5-5z" />
       </svg>
     </button>
-  {/if}
-
-  {#if selectedLanguage && !showInput}
-    <div
-      class="mt-2 text-sm text-gray-700 flex items-center gap-2"
-      in:fade={{ duration: 200 }}
-      out:fade={{ duration: 200 }}
-    >
-      Selected:
-      {#if selectedLanguage.flag}
-        <span class="text-lg" aria-hidden="true">{selectedLanguage.flag}</span>
-      {/if}
-      <span>{selectedLanguage.name} ({selectedLanguage.code})</span>
-    </div>
-  {/if}
+  </div>
 
   {#if open}
     <ul
       bind:this={listRef}
       role="listbox"
-      id="language-listbox"
+      id="option-listbox"
       class="custom-select-list"
       tabindex="-1"
-      aria-labelledby="language-select-label"
+      aria-labelledby="option-select-label"
       in:slide={{ duration: 200 }}
       out:slide={{ duration: 200 }}
     >
-      {#each languages as language, index (language.code)}
+      {#each options as option, index (option.value)}
         <li
           bind:this={listItems[index]}
-          id={`language-option-${language.code}`}
+          id={`option-${option.value}`}
           class="custom-select-list-item"
           class:highlighted={highlightedIndex === index}
-          class:selected={selectedLanguage?.code === language.code}
+          class:selected={selectedOption?.value === option.value}
           role="option"
-          aria-selected={selectedLanguage?.code === language.code}
+          aria-selected={selectedOption?.value === option.value}
           tabindex="-1"
-          on:click={() => selectLanguage(language)}
+          on:click={() => selectOption(option)}
           on:mouseenter={() => {
             highlightedIndex = index;
           }}
         >
-          {#if language.flag}
-            <span class="text-lg" aria-hidden="true">{language.flag}</span>
-          {/if}
-          <span class="truncate">{language.name}</span>
-          <span class="{highlightedIndex === index ? 'text-white' : 'text-gray-500'} text-xs">
-            ({language.code})
-          </span>
+          <span class="truncate">{option.label}</span>
         </li>
       {:else}
         <li class="px-4 py-2 text-sm text-gray-500" role="option" aria-disabled="true">
-          No languages available.
+          No options available.
         </li>
       {/each}
     </ul>

@@ -31,7 +31,7 @@
   let name: string = "";
   let email: string = "";
   let bio: string = "";
-  let language: string = "en"; // Default language
+  let language: string | null = "en"; // Default language
   let isSubmitting: boolean = false; // Loading state specifically for this form's submission attempt
   let validationError: string | null = null;
 
@@ -47,6 +47,12 @@
     language = "en";
     validationError = null;
     isSubmitting = false; // Ensure submitting state is also reset
+  }
+
+  function handleLanguageSelect(selectedLanguageCode: string | null) {
+    if (selectedLanguageCode) {
+      language = selectedLanguageCode;
+    }
   }
 
   /** Handles the form submission */
@@ -150,7 +156,7 @@
       <Language
         label="Language *"
         defaultLanguageCode={language}
-        onSelect={(lang) => (language = lang as string)}
+        onSelect={handleLanguageSelect}
         disabled={disabled || isSubmitting}
       />
       <PlainText

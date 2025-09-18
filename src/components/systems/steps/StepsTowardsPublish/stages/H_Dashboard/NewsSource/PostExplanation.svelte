@@ -18,6 +18,12 @@
     let message = "";
     let isLoading = false;
 
+    function handleLanguageSelect(selectedLanguageCode: string | null) {
+        if (selectedLanguageCode) {
+            userLanguage.set(selectedLanguageCode);
+        }
+    }
+
     async function handleSubscription() {
         const emailValue = $userEmail;
         if (!emailValue) {
@@ -131,7 +137,7 @@ async function addUserToNewsletter(email) {
 <div class="input-grid">
     <PlainText label="Name" bind:value={$userName} />
     <PlainText label="Bio" bind:value={$userBio} />
-    <Language onSelect={(code) => userLanguage.set(code || 'en')} />
+    <Language onSelect={handleLanguageSelect} defaultLanguageCode={$userLanguage} />
 </div>
 
 <CodeFormatter

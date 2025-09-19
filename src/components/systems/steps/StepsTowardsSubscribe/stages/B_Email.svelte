@@ -16,7 +16,7 @@
 
 <Centered>
   <MarkdownText {canReveal}>
-    ### Where should we **send** your **AI insights**?
+    ### Where should we send your insights?
   </MarkdownText>
   <Email
     placeholder="Your email"

@@ -75,8 +75,7 @@
   $: $store.header;
 </script>
 
-{#if $store.header}
-<div class="header-wrapper">
+<div class="header-wrapper" class:show={$store.header}>
   <header class="header">
     <div class="header__container">
       <a href="/" class="header__logo" aria-label="Homepage">
@@ -122,13 +121,18 @@
     </div>
   </header>
 </div>
-{/if}
 
 <style lang="scss">
   @use '../../../styles/global.scss';
 
   .header-wrapper {
     container-type: inline-size;
+    transition: 1s;
+    clip-path: inset(0 0 100% 0);
+
+    &.show {
+      clip-path: inset(0 0 0 0);
+    }
   }
 
   .header {

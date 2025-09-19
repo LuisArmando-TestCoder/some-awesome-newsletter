@@ -4,7 +4,8 @@
   import store, { saveToStore } from "../../../../store"; // Import saveToStore function
   import MarkdownText from "../../../texts/MarkdownText/MarkdownText.svelte";
   import Centered from "../../../wrappers/Centered/Centered.svelte";
-    import { writable } from "svelte/store";
+  import { writable } from "svelte/store";
+  import SubmitButton from "../../../buttons/SubmitButton/SubmitButton.svelte";
 
   export let canReveal = false;
   const configuratorId = writable("");
@@ -44,4 +45,18 @@
       ### You have been invited by {$configuratorId}.
     </MarkdownText>
   {/key}
+
+  <div class="right-align">
+    <SubmitButton
+      callback={() => saveToStore({ stepsIndex: $store.stepsIndex + 1 })}
+    />
+  </div>
 </Centered>
+
+<style>
+  .right-align {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+  }
+</style>

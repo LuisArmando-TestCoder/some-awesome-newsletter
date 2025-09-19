@@ -37,32 +37,3 @@
     </p>
   {/if}
 </Centered>
-
-<style>
-  .right {
-    display: block;
-    width: 100%;
-    display: flex;
-    justify-content: end;
-    margin-top: 2rem;
-  }
-
-  .cta-button {
-    display: inline-block;
-    padding: 10px 20px;
-    margin-top: 20px;
-    background-color: var(--color-foreground); /* Use theme color or fallback */
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    text-align: center;
-    transition: background-color 0.3s ease;
-  }
-
-  .cta-button:hover {
-    background-color: var(
-      --color-background-inversion
-    ); /* Darker shade on hover */
-  }
-</style>

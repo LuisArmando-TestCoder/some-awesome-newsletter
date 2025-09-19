@@ -2,104 +2,42 @@
   import MarkdownText from "../../../texts/MarkdownText/MarkdownText.svelte";
   import store, { saveToStore } from "../../../../store";
   import Centered from "../../../wrappers/Centered/Centered.svelte";
-  import { onMount } from "svelte";
+  import PlainText from "../../../inputs/PlainText/PlainText.svelte";
+  import SubmitButton from "../../../buttons/SubmitButton/SubmitButton.svelte";
 
   export let canReveal = false;
 
-  let nameValue = $store.subscriberName; // Initialize with store value
-  let isValid = nameValue.trim().length > 0; // Basic validation: not empty
-
-  function handleInput(event: Event) {
-    const target = event.target as HTMLInputElement;
-    nameValue = target.value; // No need to trim here, maybe later
-    isValid = nameValue.trim().length > 0;
-    saveToStore({
-      subscriberName: nameValue, // Save potentially untrimmed value, trim on submit/use
-    });
+  function isValidName(name: string): boolean {
+    return name?.trim().length > 0;
   }
-
-  function handleKeyDown(event: KeyboardEvent) {
-    if (event.key === "Enter") {
-      if (isValid) {
-        // Optionally trim before advancing:
-        // saveToStore({ subscriberName: nameValue.trim() });
-        saveToStore({
-          stepsIndex: $store.stepsIndex + 1,
-        });
-      }
-    }
-  }
-
-  // Sync with store on mount in case it was pre-populated
-  onMount(() => {
-    nameValue = $store.subscriberName;
-    isValid = nameValue.trim().length > 0;
-  });
 </script>
 
 <Centered>
   <MarkdownText {canReveal}>
     ### What's your **name**?
   </MarkdownText>
-  <div class="name-input-wrapper">
-    <input
-      id="name-input"
-      type="text"
-      bind:value={nameValue}
-      placeholder="Your name"
-      on:input={handleInput}
-      on:keydown={handleKeyDown}
-      aria-label="Your name"
-      class:invalid={!isValid && nameValue !== ""}
-    />
-    {#if !isValid && nameValue !== ""}
-      <span class="error-message">Please enter your name.</span>
+  <PlainText
+    placeholder="Your name"
+    value={$store.subscriberName}
+    onChange={(value) => {
+      saveToStore({
+        subscriberName: value,
+      });
+    }}
+  />
+  <div class="right-align">
+    {#if isValidName($store.subscriberName)}
+      <SubmitButton
+        callback={() => saveToStore({ stepsIndex: $store.stepsIndex + 1 })}
+      />
     {/if}
   </div>
 </Centered>
 
-<style lang="scss">
-  // Reusing similar styles from Email input for consistency
-  .name-input-wrapper {
+<style>
+  .right-align {
     display: flex;
-    flex-direction: column;
+    justify-content: flex-end;
     width: 100%;
-    gap: 0.5rem;
-    margin-top: 1rem; // Add some space after the title
-  }
-
-  input {
-    background: var(--color-background-inversion);
-    border: 1px solid var(--color-background);
-    border-radius: 8px;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    color: var(--color-foreground);
-    transition:
-      border 0.3s ease,
-      box-shadow 0.3s ease;
-    outline: none;
-    text-align: center;
-  }
-
-  input::placeholder {
-    color: var(--color-foreground-opaque);
-  }
-
-  input:focus {
-    border-color: var(--color-foreground);
-    box-shadow: 0 0 10px -2px var(--color-foreground);
-  }
-
-  input.invalid {
-    border-color: red;
-    box-shadow: 0 0 10px -2px red;
-  }
-
-  .error-message {
-    margin-top: 0.25rem;
-    font-size: 0.875rem;
-    color: red;
-    text-align: center;
   }
 </style>

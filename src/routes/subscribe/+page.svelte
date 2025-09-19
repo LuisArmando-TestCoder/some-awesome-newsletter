@@ -63,6 +63,10 @@
             lastScrollY = window.scrollY; // Initialize lastScrollY
             window.addEventListener("scroll", handleScroll, { passive: true });
         }
+        
+        saveToStore({
+            header: false
+        });
     });
 
     onDestroy(() => {

@@ -4,6 +4,7 @@
   import store, { saveToStore } from "../../../../store";
   import Centered from "../../../wrappers/Centered/Centered.svelte";
   import SubmitButton from "../../../buttons/SubmitButton/SubmitButton.svelte";
+    import Email from "../../../inputs/Email/Email.svelte";
 
   export let canReveal = false;
 
@@ -17,7 +18,7 @@
   <MarkdownText {canReveal}>
     ### Where should we **send** your **AI insights**?
   </MarkdownText>
-  <PlainText
+  <Email
     placeholder="Your email"
     value={$store.subscriberEmail}
     onChange={(value) => {

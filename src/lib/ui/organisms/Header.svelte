@@ -72,8 +72,10 @@
 
   $: $page.url.pathname, updateUnderline();
   $: updateUnderline();
+  $: $store.header;
 </script>
 
+{#if $store.header}
 <div class="header-wrapper">
   <header class="header">
     <div class="header__container">
@@ -120,6 +122,7 @@
     </div>
   </header>
 </div>
+{/if}
 
 <style lang="scss">
   @use '../../../styles/global.scss';

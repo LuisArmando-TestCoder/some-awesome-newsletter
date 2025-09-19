@@ -45,6 +45,7 @@ const store = writable<Store>({
     "user"
   ],
   appLanguage: "en", // Added for global language setting
+  header: true,
   autoCollapse: true,
   toggles: {},
   colorPalette,

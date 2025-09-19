@@ -5,8 +5,16 @@
     import GlobalData from "../../components/GlobalData/GlobalData.svelte";
     import type { PageData } from './$types.js'; // Import PageData type
     import Subscribe from "../../components/systems/widgets/Subscribe/Subscribe.svelte";
+    import { onMount } from "svelte";
+    import { saveToStore } from "../../components/store";
 
     export let data: PageData; // Receive data from load function
+
+    onMount(() => {
+        saveToStore({
+            header: false
+        });
+    });
 </script>
 
 <ThemeChanger visible={false} />

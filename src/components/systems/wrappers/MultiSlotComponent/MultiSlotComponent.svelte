@@ -1,6 +1,8 @@
 <script lang="ts">
+    import { collapsed } from "$lib/stores/sidebar.store";
   import { onDestroy } from "svelte";
   import { writable, type Writable } from "svelte/store";
+    import store from "../../../store";
 
   type Callback = (state: any) => boolean;
 
@@ -21,6 +23,7 @@
 <div class="multi-slot-component">
   {#each steps as [callback, Component]}
     <div
+      class:collapsed={$store.header}
       class="multi-slot-component--component-slot"
       class:active={!!callback($storeValue)}
       class:inactive={!callback($storeValue)}

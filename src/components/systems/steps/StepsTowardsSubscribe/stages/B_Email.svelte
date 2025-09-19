@@ -20,7 +20,6 @@
   </MarkdownText>
   <Email
     placeholder="Your email"
-    value={$store.subscriberEmail}
     onChange={(value) => {
       saveToStore({
         subscriberEmail: value,

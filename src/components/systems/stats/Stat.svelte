@@ -2,7 +2,11 @@
 <script lang="ts">
   import { onMount, onDestroy, tick } from "svelte";
   import { Chart, registerables } from "chart.js/auto";
-  import type { ChartConfiguration, ChartData } from "chart.js/auto";
+  import type {
+    ChartConfiguration,
+    ChartData,
+    CartesianScaleOptions,
+  } from "chart.js/auto";
 
   // Define a type for the expected data item structure
   type StatDataItem = {
@@ -41,7 +45,7 @@
     }
 
     const labels = rawData.map(
-      (item) => item.name || item.id || `Item ${index + 1}` || "Unknown"
+      (item, index) => item.name || item.id || `Item ${index + 1}` || "Unknown"
     ); // Improved fallback label
     const dataValues = rawData.map((item) => item.total || 0); // Default to 0 if total is missing/falsy
 
@@ -172,13 +176,19 @@
       chartInstance.data.datasets[0].label = yText; // Update dataset label
     }
     // Update scales
-    if (chartInstance.options?.scales?.x?.title) {
-      chartInstance.options.scales.x.title.text = xText;
-      chartInstance.options.scales.x.title.display = !!xText;
+    if (chartInstance.options?.scales?.x) {
+      const xScale = chartInstance.options.scales.x as CartesianScaleOptions;
+      if (xScale.title) {
+        xScale.title.text = xText;
+        xScale.title.display = !!xText;
+      }
     }
-    if (chartInstance.options?.scales?.y?.title) {
-      chartInstance.options.scales.y.title.text = yText;
-      chartInstance.options.scales.y.title.display = !!yText;
+    if (chartInstance.options?.scales?.y) {
+      const yScale = chartInstance.options.scales.y as CartesianScaleOptions;
+      if (yScale.title) {
+        yScale.title.text = yText;
+        yScale.title.display = !!yText;
+      }
     }
     // Trigger chart update to reflect option changes
     chartInstance.update();

@@ -4,9 +4,20 @@
     import type { NewsletterUser, NewsSource } from '../../../../../../types.js'; // Adjust path
     import type { Writable } from 'svelte/store'; // If passing stores as props
   
+    // Define a type for the expected data item structure, matching Stat.svelte
+    type StatDataItem = {
+      name?: string;
+      id?: string;
+      total: number;
+      [key: string]: any;
+    };
+
     // Import UI Components (Adjust paths as needed)
     import TextTypes from '../../../../../texts/TextTypes/TextTypes.svelte';
     import Stat from '../../../../../stats/Stat.svelte'; // Ensure this path is correct
+    import LeadStat from '../../../../../stats/LeadStat.svelte';
+    import store from '../../../../../../store.js';
+    import SubmitButton from '../../../../../buttons/SubmitButton/SubmitButton.svelte';
   
     // --- Props ---
   
@@ -37,12 +48,12 @@
      * Calculates subscriber counts per news source based on props.
      * Passed as a callback to the Stat component.
      */
-    function getSubscriberCounts() {
+    function getSubscriberCounts(): StatDataItem[] {
       // Ensure newsSources is an array before mapping
       if (!Array.isArray(newsSources)) return [];
   
       return newsSources
-        .map((ns) => {
+        .map((ns): StatDataItem | null => {
           if (!ns || !ns.id) return null; // Skip invalid sources
           return {
             id: ns.id,
@@ -50,7 +61,7 @@
             total: subscribersByNewsSource[ns.id]?.length || 0, // Get count from the prop data
           };
         })
-        .filter((item): item is { id: string; name: string; total: number } => !!item); // Filter out nulls and type guard
+        .filter(Boolean) as StatDataItem[];
     }
   
   
@@ -58,59 +69,59 @@
      * Calculates lead click counts per news source based on props.
      * Passed as a callback to the Stat component.
      */
-    function getLeadClickCounts() {
-       // Ensure newsSources is an array before mapping
-      if (!Array.isArray(newsSources)) return [];
+    function getLeadClickCounts(): StatDataItem[] {
+      if (!allLeadData || typeof allLeadData !== 'object' || Object.keys(allLeadData).length === 0 || !Array.isArray(newsSources)) {
+          return [];
+      }
 
-      console.log(newsSources, "newsSources")
-  
-      // We directly use the allLeadData prop here.
-      // The structure was assumed to be { configId: { nsId: { userId: {...} } } }
-      // But in the original component it was used as `leadData[ns.id]` which implies
-      // the structure passed down should already be filtered for the specific configId,
-      // i.e., { nsId: { userId: { ... } } }
-      const leadDataForCurrentConfig = allLeadData || {};
+      return Object.entries(allLeadData).map(([newsSourceId, leadData]) => {
+        const newsSource = newsSources.find(ns => ns.id === newsSourceId);
+        const name = newsSource ? new URL(newsSource.url).hostname : newsSourceId;
 
-      console.log(allLeadData, "allLeadData")
-  
-      return newsSources
-        .map((ns) => {
-          if (!ns || !ns.id) return null; // Skip invalid sources
-  
-          const nsLeadData = leadDataForCurrentConfig[ns.id];
-          let clickCount = 0;
+        let totalClicks = 0;
+        for (const user in leadData) {
+          totalClicks += Object.keys(leadData[user]).length;
+        }
 
-          console.log(nsLeadData, "nsLeadData")
-  
-          // Calculate clicks: Sum of keys (users) for this news source
-          if (nsLeadData && typeof nsLeadData === 'object') {
-              // The original logic counted the length of the *innermost* object's keys per user.
-              // Let's stick to that original logic.
-              clickCount = Object.values(nsLeadData).reduce((sum, userLeads) => {
-                  return sum + (userLeads && typeof userLeads === 'object' ? Object.keys(userLeads).length : 0);
-              }, 0);
-              // Alternative: If you just want the count of users who clicked *anything* for this source:
-              // clickCount = Object.keys(nsLeadData).length;
-          }
-  
-          return {
-            id: ns.id,
-            name: ns.url?.split("//")[1]?.split("/")[0] ?? ns.id, // Use domain or ID as name
-            total: clickCount,
-          };
-        })
-        .filter((item): item is { id: string; name: string; total: number } => !!item); // Filter out nulls and type guard
+        console.log("Hay newsSources", newsSources.find(({id}) => id === newsSourceId)?.url)
+        console.log("Hay newsSourceId", newsSourceId)
+        console.log("Hay newsSources", newsSources.map(({id}) => id))
+        // the problem here is tyhat I may have created and deleted ns and now their leads dont exist
+
+        return {
+          id: newsSourceId,
+          name: name,
+          total: totalClicks,
+        };
+      }).filter(item => item.total > 0);
     }
   
     // Reactive computed values if needed, though passing callbacks to Stat is fine
     // $: subscriberChartData = getSubscriberCounts();
     // $: leadChartData = getLeadClickCounts();
-    $: allLeadData;
+
+    function downloadAnalytics() {
+      const data = {
+        subscribersByNewsSource,
+        allLeadData,
+      };
+      const json = JSON.stringify(data, null, 2);
+      const blob = new Blob([json], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'user-analytics.json';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
 
 </script>
 
 <div class="analytics-section">
-  <TextTypes type="title">Analytics</TextTypes>
+  <div class="title-wrapper">
+    <TextTypes type="title">Analytics</TextTypes>
+    <SubmitButton label="Download JSON" callback={downloadAnalytics} />
+  </div>
 
   {#if isLoading}
     <p class="loading-message">
@@ -138,13 +149,15 @@
 
         <!-- Lead Click Stats -->
         <div class="stat-wrapper">
-          <TextTypes type="subtitle">Lead Clicks per Source</TextTypes>
-          <Stat
-            dataCallback={getLeadClickCounts}
-            HEXColor={complementaryColor}
-            xText="News Source"
-            yText="Clicks"
-          />
+          {#key newsSources}
+            <TextTypes type="subtitle">Lead Clicks per News Source</TextTypes>
+            <Stat
+              dataCallback={getLeadClickCounts}
+              HEXColor={complementaryColor}
+              xText="News Source"
+              yText="Clicks"
+            />
+          {/key}
           <!-- Or pass pre-computed data: -->
           <!-- <Stat data={leadChartData} HEXColor={complementaryColor} ... /> -->
         </div>
@@ -163,6 +176,12 @@
 
 <!-- Use scoped styles or rely on global styles/parent styles -->
 <style lang="scss">
+  .title-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
   .charts-column {
     // Assuming this class is defined globally or in parent
     /* Styles for the analytics column layout */

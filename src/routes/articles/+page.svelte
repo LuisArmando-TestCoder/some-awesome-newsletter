@@ -105,10 +105,10 @@
     return div.innerHTML;
   }
 
-  function getPreview(html: string, length = 20) {
+  function getPreview(html: string) {
     const div = document.createElement("div");
     div.innerHTML = html;
-    return div.innerText.trim().replace(/\s+/g, " ").split(" ").slice(0, length).join(" ") + "...";
+    return div.innerText.trim().replace(/\s+/g, " ");
   }
 
   const getFlag = (code: string | undefined) =>
@@ -220,7 +220,7 @@
               <div class="image-container"><img src={getImage(mainArticle.content)?.src} alt={getTitle(mainArticle.content)} /></div>
               <div class="text-content">
                 <h2>{getTitle(mainArticle.content)}</h2>
-                <p>{getPreview(noH1(mainArticle.content), 30)}</p>
+                <p class="preview-text">{getPreview(noH1(mainArticle.content))}</p>
               </div>
             </div>
           {/if}
@@ -228,7 +228,10 @@
             {#each articlesWithImages.slice(1, 3) as article (article.id)}
               <div class="secondary-article" on:click={() => openArticle(article)}>
                 <div class="image-container"><img src={getImage(article.content)?.src} alt={getTitle(article.content)} /></div>
-                <div class="text-content"><h3>{getTitle(article.content)}</h3></div>
+                <div class="text-content">
+                  <h3>{getTitle(article.content)}</h3>
+                  <p class="preview-text">{getPreview(noH1(article.content))}</p>
+                </div>
               </div>
             {/each}
           </div>
@@ -243,7 +246,7 @@
               {#each textSlice1 as article (article.id)}
                 <div class="text-card" on:click={() => openArticle(article)}>
                   <h3>{getTitle(article.content)}</h3>
-                  <p>{getPreview(noH1(article.content), 30)}</p>
+                  <p class="preview-text">{getPreview(noH1(article.content))}</p>
                 </div>
               {/each}
             </div>
@@ -286,20 +289,26 @@
                     <div class="image-container"><img src={getImage(main.content)?.src} alt={getTitle(main.content)} /></div>
                     <div class="text-content">
                       <h2>{getTitle(main.content)}</h2>
-                      <p>{getPreview(noH1(main.content), 30)}</p>
+                      <p class="preview-text">{getPreview(noH1(main.content))}</p>
                     </div>
                   </div>
                   <div class="secondary-articles">
                     {#if s1}
                       <div class="secondary-article" on:click={() => openArticle(s1)}>
                         <div class="image-container"><img src={getImage(s1.content)?.src} alt={getTitle(s1.content)} /></div>
-                        <div class="text-content"><h3>{getTitle(s1.content)}</h3></div>
+                        <div class="text-content">
+                          <h3>{getTitle(s1.content)}</h3>
+                          <p class="preview-text">{getPreview(noH1(s1.content))}</p>
+                        </div>
                       </div>
                     {/if}
                     {#if s2}
                       <div class="secondary-article" on:click={() => openArticle(s2)}>
                         <div class="image-container"><img src={getImage(s2.content)?.src} alt={getTitle(s2.content)} /></div>
-                        <div class="text-content"><h3>{getTitle(s2.content)}</h3></div>
+                        <div class="text-content">
+                          <h3>{getTitle(s2.content)}</h3>
+                          <p class="preview-text">{getPreview(noH1(s2.content))}</p>
+                        </div>
                       </div>
                     {/if}
                   </div>
@@ -339,7 +348,7 @@
     width: 100%;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0;
   }
 
   .hero-section {
@@ -371,9 +380,17 @@
     }
 
     .main-article {
+      min-height: 200px;
+      .preview-text {
+        -webkit-line-clamp: 4;
+      }
       &:hover img { transform: scale(1.05); }
     }
     .secondary-article {
+      min-height: 200px;
+      .preview-text {
+        -webkit-line-clamp: 2;
+      }
       &:hover img { transform: scale(1.05); }
     }
   }
@@ -410,6 +427,9 @@
       grid-column: 1 / -1;
       text-align: center;
       h3 { font-size: 2rem; }
+      .preview-text {
+        -webkit-line-clamp: 4;
+      }
     }
   }
 
@@ -441,5 +461,30 @@
   .modal-content-inner {
     height: 80vh;
     overflow-y: auto;
+  }
+
+  .preview-text {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  @media (min-width: 768px) {
+    .featured-grid .main-article {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      align-items: start;
+
+      .preview-text {
+        -webkit-line-clamp: 10;
+      }
+    }
+
+    .featured-grid.rearranged .main-article .preview-text {
+      -webkit-line-clamp: 15;
+    }
   }
 </style>

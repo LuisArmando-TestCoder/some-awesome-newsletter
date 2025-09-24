@@ -11,6 +11,8 @@
   import store from "../../components/store";
   import Tabs from "../../lib/ui/molecules/Tabs.svelte";
   import ArticleCardSkeleton from "../../components/ArticleCardSkeleton/ArticleCardSkeleton.svelte";
+  import FeaturedArticlesGrid from "../../components/articles/FeaturedArticlesGrid.svelte";
+  import TextArticlesGrid from "../../components/articles/TextArticlesGrid.svelte";
 
   /* ────────────────── types ─────────────────── */
   interface Article {
@@ -83,12 +85,6 @@
   }
 
   /* ───────────── utilities ───────────── */
-  function getImage(html: string) {
-    const div = document.createElement("div");
-    div.innerHTML = html;
-    return div.querySelector("img") as HTMLImageElement | null;
-  }
-
   function getTitle(html: string) {
     const div = document.createElement("div");
     div.innerHTML = html;
@@ -103,12 +99,6 @@
     div.querySelector("h1")?.remove();
     div.querySelector("h2")?.remove();
     return div.innerHTML;
-  }
-
-  function getPreview(html: string) {
-    const div = document.createElement("div");
-    div.innerHTML = html;
-    return div.innerText.trim().replace(/\s+/g, " ");
   }
 
   const getFlag = (code: string | undefined) =>
@@ -173,13 +163,6 @@
     fetchArticles(holder);
   }
 
-  // Reactive slicing for text-only articles
-  $: quarter = Math.ceil(articlesWithoutImages.length / 4);
-  $: textSlice1 = articlesWithoutImages.slice(0, quarter);
-  $: textSlice2 = articlesWithoutImages.slice(quarter, quarter * 2);
-  $: textSlice3 = articlesWithoutImages.slice(quarter * 2, quarter * 3);
-  $: textSlice4 = articlesWithoutImages.slice(quarter * 3);
-
 </script>
 
 <div class="articles-page-container">
@@ -213,66 +196,12 @@
     {:else}
       <!-- Section 1: Featured Articles -->
       {#if articlesWithImages.length > 0}
-        <section class="featured-grid">
-          {#if articlesWithImages[0]}
-            {@const mainArticle = articlesWithImages[0]}
-            <div class="main-article" on:click={() => openArticle(mainArticle)}>
-              <div class="image-container"><img src={getImage(mainArticle.content)?.src} alt={getTitle(mainArticle.content)} /></div>
-              <div class="text-content">
-                <h2>{getTitle(mainArticle.content)}</h2>
-                <p class="preview-text">{getPreview(noH1(mainArticle.content))}</p>
-              </div>
-            </div>
-          {/if}
-          <div class="secondary-articles">
-            {#each articlesWithImages.slice(1, 3) as article (article.id)}
-              <div class="secondary-article" on:click={() => openArticle(article)}>
-                <div class="image-container"><img src={getImage(article.content)?.src} alt={getTitle(article.content)} /></div>
-                <div class="text-content">
-                  <h3>{getTitle(article.content)}</h3>
-                  <p class="preview-text">{getPreview(noH1(article.content))}</p>
-                </div>
-              </div>
-            {/each}
-          </div>
-        </section>
+        <FeaturedArticlesGrid articles={articlesWithImages.slice(0, 3)} on:open={(e) => openArticle(e.detail)} />
       {/if}
 
       <!-- Section 2: Dynamic Text-Focused Grids -->
       {#if articlesWithoutImages.length > 0}
-        <section class="text-articles-section">
-          {#if textSlice1.length > 0}
-            <div class="text-grid-wrapper grid-a">
-              {#each textSlice1 as article (article.id)}
-                <div class="text-card" on:click={() => openArticle(article)}>
-                  <h3>{getTitle(article.content)}</h3>
-                  <p class="preview-text">{getPreview(noH1(article.content))}</p>
-                </div>
-              {/each}
-            </div>
-          {/if}
-          {#if textSlice2.length > 0}
-            <div class="text-grid-wrapper grid-b">
-              {#each textSlice2 as article (article.id)}
-                <div class="text-card" on:click={() => openArticle(article)}><h4>{getTitle(article.content)}</h4></div>
-              {/each}
-            </div>
-          {/if}
-          {#if textSlice3.length > 0}
-            <div class="text-grid-wrapper grid-c">
-              {#each textSlice3 as article (article.id)}
-                <div class="text-card" on:click={() => openArticle(article)}><h4>{getTitle(article.content)}</h4></div>
-              {/each}
-            </div>
-          {/if}
-          {#if textSlice4.length > 0}
-            <div class="text-grid-wrapper grid-d">
-              {#each textSlice4 as article (article.id)}
-                <div class="text-card" on:click={() => openArticle(article)}><h4>{getTitle(article.content)}</h4></div>
-              {/each}
-            </div>
-          {/if}
-        </section>
+        <TextArticlesGrid articles={articlesWithoutImages} on:open={(e) => openArticle(e.detail)} />
       {/if}
 
       <!-- Section 3: Rearranged Featured Grids -->
@@ -280,40 +209,12 @@
         <section class="standard-grid-repeater">
           {#each articlesWithImages.slice(3) as article, i}
             {#if i % 3 === 0}
-              {@const main = articlesWithImages[i + 3]}
-              {@const s1 = articlesWithImages[i + 4]}
-              {@const s2 = articlesWithImages[i + 5]}
-              {#if main}
-                <div class="featured-grid rearranged" style="--order: {i / 3 % 2}">
-                  <div class="main-article" on:click={() => openArticle(main)}>
-                    <div class="image-container"><img src={getImage(main.content)?.src} alt={getTitle(main.content)} /></div>
-                    <div class="text-content">
-                      <h2>{getTitle(main.content)}</h2>
-                      <p class="preview-text">{getPreview(noH1(main.content))}</p>
-                    </div>
-                  </div>
-                  <div class="secondary-articles">
-                    {#if s1}
-                      <div class="secondary-article" on:click={() => openArticle(s1)}>
-                        <div class="image-container"><img src={getImage(s1.content)?.src} alt={getTitle(s1.content)} /></div>
-                        <div class="text-content">
-                          <h3>{getTitle(s1.content)}</h3>
-                          <p class="preview-text">{getPreview(noH1(s1.content))}</p>
-                        </div>
-                      </div>
-                    {/if}
-                    {#if s2}
-                      <div class="secondary-article" on:click={() => openArticle(s2)}>
-                        <div class="image-container"><img src={getImage(s2.content)?.src} alt={getTitle(s2.content)} /></div>
-                        <div class="text-content">
-                          <h3>{getTitle(s2.content)}</h3>
-                          <p class="preview-text">{getPreview(noH1(s2.content))}</p>
-                        </div>
-                      </div>
-                    {/if}
-                  </div>
-                </div>
-              {/if}
+              <FeaturedArticlesGrid
+                articles={articlesWithImages.slice(i + 3, i + 6)}
+                rearranged={true}
+                order={i / 3 % 2}
+                on:open={(e) => openArticle(e.detail)}
+              />
             {/if}
           {/each}
         </section>
@@ -355,118 +256,6 @@
     text-align: center;
     padding: 5rem 1rem;
     margin-bottom: 3rem;
-  }
-
-  .image-container {
-    overflow: hidden;
-    border-radius: var(--border-radius);
-    flex: 1;
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform var(--transition-speed) ease;
-    }
-  }
-
-  .featured-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 2rem;
-    margin-bottom: 4rem;
-    align-items: stretch;
-    
-    &.rearranged {
-      .main-article { order: calc(1 - var(--order, 0)); }
-      .secondary-articles { order: calc(0 + var(--order, 0)); }
-    }
-
-    .main-article, .secondary-article {
-      display: flex;
-      flex-direction: column;
-      min-height: 200px;
-    }
-
-    .main-article {
-      .preview-text {
-        -webkit-line-clamp: 4;
-      }
-      &:hover {
-        img {
-          transform: scale(1.05);
-        }
-      }
-    }
-
-    .secondary-articles {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-    }
-
-    .secondary-article {
-      flex: 1;
-      .preview-text {
-        -webkit-line-clamp: 2;
-      }
-      &:hover {
-        img {
-          transform: scale(1.05);
-        }
-      }
-    }
-  }
-
-  .text-articles-section {
-    background-color: #f9f9f9;
-    padding: 3rem 2rem;
-    border-radius: var(--border-radius);
-    margin-bottom: 4rem;
-  }
-
-  .text-grid-wrapper {
-    display: grid;
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-    
-    .text-card {
-      background: #fff;
-      padding: 1.5rem;
-      border: 1px solid #eee;
-      border-radius: var(--border-radius);
-      cursor: pointer;
-      transition: all var(--transition-speed) ease;
-      &:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-      }
-    }
-  }
-
-  .grid-a {
-    grid-template-columns: 1fr 1fr;
-    .text-card:first-child {
-      grid-column: 1 / -1;
-      text-align: center;
-      h3 { font-size: 2rem; }
-      .preview-text {
-        -webkit-line-clamp: 4;
-      }
-    }
-  }
-
-  .grid-b {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .grid-c {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  }
-
-  .grid-d {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
   }
 
   .standard-grid-repeater .featured-grid {

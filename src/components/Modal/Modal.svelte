@@ -16,7 +16,7 @@
         unsubscribe = showModal.subscribe((value) => {
             visible = value;
             if (first) {
-                first = false;
+                first = false
                 return;
             }
             onChange(value);

@@ -89,6 +89,7 @@
         padding: 40px 20px 20px 20px;
         border-radius: 8px;
         max-width: 80vw;
+        height: 80vh;
         overflow-y: auto;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         animation: open-modal 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;

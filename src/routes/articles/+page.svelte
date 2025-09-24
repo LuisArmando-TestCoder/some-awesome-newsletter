@@ -11,7 +11,9 @@
   import Modal from "../../components/Modal/Modal.svelte";
   import store from "../../components/store";
   import SoftTitle from "../../components/SoftTitle/SoftTitle.svelte";
-    import { isDarkTheme, themeIndex } from "../../components/ThemeChanger/theme-store";
+  import NewsCard from "../../components/NewsCard/NewsCard.svelte";
+  import { isDarkTheme } from "../../components/ThemeChanger/theme-store";
+  import Tabs from "../../lib/ui/molecules/Tabs.svelte";
 
   /* ────────────────── types ─────────────────── */
   interface Article {
@@ -20,25 +22,51 @@
     creation: string;
     language: string;
   }
-  interface Group {
-    withImages: Article[];
-    withoutImages: Article[];
-  }
 
   /* ─────────────── state ─────────────── */
-  let articleHolder: any = null;
+  let groupedArticles: Record<string, any> = {};
   let showModal = writable(false);
   let selectedArticle: Article | null = null;
-  let articles: Article[] = [];
   let error: string | null = null;
   let search = "";
   let currentId = writable();
   const ITEMS_PER_PAGE = 10;
-  let currentPages: Record<string, number> = {};
+  let languagePages = new Map<string, number>();
+  let holder = "";
+  let activeTab = "";
+  let loading = false;
 
-  function handlePageChange(groupKey: string, event: CustomEvent<{ page: number }>) {
-    currentPages[groupKey] = event.detail.page;
-    currentPages = currentPages; // for reactivity
+  async function fetchArticles(holder: string) {
+    const pageParams = new URLSearchParams();
+    languagePages.forEach((page, lang) => {
+      if (page) {
+        pageParams.set(`page_${lang}`, page.toString());
+      }
+    });
+
+    loading = true;
+    try {
+      const resp = await fetch(
+        `${$store.apiURL()}/articles/${holder}?${pageParams.toString()}&size=${ITEMS_PER_PAGE}`
+      );
+      if (!resp.ok) throw new Error("holder fetch failed");
+      const data = await resp.json();
+      groupedArticles = data.articles || {};
+      if (!activeTab && Object.keys(groupedArticles).length) {
+        activeTab = Object.keys(groupedArticles)[0];
+      }
+    } catch (err) {
+      error = "Error fetching article list.";
+    } finally {
+      loading = false;
+    }
+  }
+
+  function handlePageChange(language: string, event: CustomEvent<{ page: number }>) {
+    languagePages.set(language, event.detail.page);
+    if (holder) {
+      fetchArticles(holder);
+    }
   }
 
   /* ───────────── utilities ───────────── */
@@ -47,7 +75,6 @@
     div.innerHTML = html;
     return div.querySelector("img") as HTMLImageElement | null;
   }
-  const hasImage = (c: string) => !!getImage(c);
 
   function getTitle(html: string) {
     const div = document.createElement("div");
@@ -71,8 +98,8 @@
     return div.innerText.trim().replace(/\s+/g, " ").split(" ").slice(0, 10).join(" ");
   }
 
-  const getFlag = (code: string) =>
-    languages.find((l) => l.code === code)?.flag || "";
+  const getFlag = (code: string | undefined) =>
+    languages.find((l) => l.code === code)?.flag ?? "";
 
   /* ────────── navigation helpers ────────── */
   function updateURLParam(id: string | null) {
@@ -94,12 +121,10 @@
   }
 
   async function openArticleById(id: string) {
-    let article = articles.find((a) => a.id === id);
-    if (!article) {
-      article = await fetchSingleArticle(id);
-      if (!article) return;
+    const fetchedArticle = await fetchSingleArticle(id);
+    if (fetchedArticle) {
+      openArticle(fetchedArticle);
     }
-    openArticle(article);
   }
 
   /* ───────────── data fetching ───────────── */
@@ -107,148 +132,107 @@
     try {
       const r = await fetch(`${$store.apiURL()}/article/${id}`);
       if (!r.ok) return null;
-      const a = await r.json();
-      const article = { ...a, id } as Article;
-      if (!articles.some((art) => art.id === id)) {
-        articles = [...articles, article];
-        currentId.set(id);
-      }
-      return article;
+      return { ...(await r.json()), id };
     } catch (err) {
-      console.error(`Failed to fetch article ${id}: ${err}`);
       return null;
     }
   }
 
   /* ───────────── initial load ───────────── */
   onMount(async () => {
-    isDarkTheme.set(false)
+    isDarkTheme.set(false);
 
-    const holder = $page.url.searchParams.get("holder");
-    if (!holder) {
+    const holderParam = $page.url.searchParams.get("holder");
+    if (!holderParam) {
       error = "No article holder specified.";
       return;
     }
+    holder = holderParam;
 
     const deepLinkedId = $page.url.searchParams.get("article");
 
-    try {
-      const resp = await fetch(`${$store.apiURL()}/articles/${holder}`);
-      if (!resp.ok) throw new Error("holder fetch failed");
-      articleHolder = Object.fromEntries(
-        Object.entries(await resp.json()).map(([k, v]) => [k, v.reverse()])
-      );
-
-      const ids: string[] = Object.values(articleHolder).flat();
-
-      if (deepLinkedId && ids.includes(deepLinkedId)) {
-        await openArticleById(deepLinkedId);
-      }
-
-      ids
-        .filter((id) => id !== deepLinkedId)
-        .forEach((id) => fetchSingleArticle(id));
-    } catch {
-      error = "Error fetching article list.";
+    if (deepLinkedId) {
+      await openArticleById(deepLinkedId);
+    } else {
+      await fetchArticles(holder);
     }
   });
-
-  /* ───────────── derived stores ───────────── */
-  $: filteredArticles = articles.filter((a) =>
-    a.content.toLowerCase().includes(search.toLowerCase())
-  );
-
-  $: groupedArticles = filteredArticles.reduce((acc, a) => {
-    const lang = a.language || "unknown";
-    if (!acc[lang]) acc[lang] = { withImages: [], withoutImages: [] } as Group;
-    hasImage(a.content) ? acc[lang].withImages.push(a) : acc[lang].withoutImages.push(a);
-    return acc;
-  }, {} as Record<string, Group>);
 </script>
 
 <ThemeChanger visible={false} />
 
-  <SoftTitle text={$currentId ?? "Newsletter"} />
+<SoftTitle text={$currentId?.toString() ?? "Newsletter"} />
 
-  <div class="articles-page">
-    <h1>Articles</h1>
-    <PlainText bind:value={search} placeholder="Search articles..." />
+<div class="articles-page">
+  <h1>Articles</h1>
+  <Tabs items={Object.keys(groupedArticles)} bind:activeItem={activeTab}>
+    <div slot="item" let:item>
+      {getFlag(item)} {item}
+    </div>
+  </Tabs>
+  <PlainText bind:value={search} placeholder="Search articles..." />
 
-    {#if error}
-      <p class="error">{error}</p>
-    {:else if articles.length === 0}
-      <p>Loading...</p>
-    {:else}
-      {#each Object.entries(groupedArticles) as [language, group]}
+
+  {#if error}
+    <p class="error">{error}</p>
+  {:else if !Object.keys(groupedArticles).length}
+    <p>Loading...</p>
+  {:else}
+    {#each Object.entries(groupedArticles) as [language, group]}
+      {#if activeTab === language}
         <!-- WITH IMAGES -->
         {#if group.withImages.length}
-          {@const groupKey = `${language}-with`}
-          {@const currentPage = currentPages[groupKey] || 0}
-          {@const pageItems = group.withImages.slice(
-            currentPage * ITEMS_PER_PAGE,
-            (currentPage + 1) * ITEMS_PER_PAGE
-          )}
-          <h2 class="articles-flag">{getFlag(language)} {language}</h2>
           <div class="articles-grid">
-            {#each pageItems as article (article.id)}
-              <button class="article-card" on:click={() => openArticle(article)}>
-                <!-- replaced <img> with background div -->
-                <div
-                  class="img bg-img"
-                  role="img"
-                  aria-label={getImage(article.content)?.alt || ""}
-                  style={`background-image:url('${
-                    getImage(article.content)?.src || "placeholder.jpg"
-                  }');`}
-                ></div>
-
-                <h3>{getTitle(article.content)}</h3>
-                <div>
-                  <o>{getPreview(noH1(article.content))}...</o>
-                </div>
-                <p><sup>{article.creation}</sup></p>
-              </button>
+            {#each group.withImages as article (article.id)}
+              <NewsCard
+                imageSrc={getImage(article.content)?.src ?? "placeholder.jpg"}
+                imageAlt={getImage(article.content)?.alt ?? ""}
+                title={getTitle(article.content) ?? "Article"}
+                excerpt={getPreview(noH1(article.content))}
+                link={`/articles?holder=${holder}&article=${article.id}`}
+                on:click={() => openArticle(article)}
+                loading={loading}
+              />
             {/each}
           </div>
           <Pagination
-            currentPage={currentPage}
-            totalItems={group.withImages.length}
+            currentPage={languagePages.get(language) || 0}
+            totalItems={group.totalWithImages}
             pageSize={ITEMS_PER_PAGE}
-            on:pageChange={(e) => handlePageChange(groupKey, e)}
+            on:pageChange={(e) => handlePageChange(language, e)}
           />
         {/if}
 
         <!-- WITHOUT IMAGES -->
         {#if group.withoutImages.length}
-          {@const groupKey = `${language}-without`}
-          {@const currentPage = currentPages[groupKey] || 0}
-          {@const pageItems = group.withoutImages.slice(
-            currentPage * ITEMS_PER_PAGE,
-            (currentPage + 1) * ITEMS_PER_PAGE
-          )}
           <ul class="articles-list">
-            {#each pageItems as article (article.id)}
+            {#each group.withoutImages as article (article.id)}
               <li>
-                <button class="article-card no-img" on:click={() => openArticle(article)}>
-                  <h3>{getTitle(article.content)}</h3>
-                  <p>{getPreview(article.content)}</p>
-                  <small>{article.creation}</small>
-                </button>
+                <NewsCard
+                  imageSrc={"placeholder.jpg"}
+                  imageAlt={""}
+                  title={getTitle(article.content) ?? "Article"}
+                  excerpt={getPreview(noH1(article.content))}
+                  link={`/articles?holder=${holder}&article=${article.id}`}
+                  on:click={() => openArticle(article)}
+                  loading={loading}
+                />
               </li>
             {/each}
           </ul>
           <Pagination
-            currentPage={currentPage}
-            totalItems={group.withoutImages.length}
+            currentPage={languagePages.get(language) || 0}
+            totalItems={group.totalWithoutImages}
             pageSize={ITEMS_PER_PAGE}
-            on:pageChange={(e) => handlePageChange(groupKey, e)}
+            on:pageChange={(e) => handlePageChange(language, e)}
           />
         {/if}
-      {/each}
-    {/if}
-  </div>
+      {/if}
+    {/each}
+  {/if}
+</div>
 
-  <p class="loading-articles">{$currentId}</p>
+<p class="loading-articles">{$currentId}</p>
 
 <!-- ───────────── modal ───────────── -->
 <Modal {showModal} onChange={(v) => !v && closeModal()}>
@@ -278,12 +262,11 @@
   .bg-img {
     width: 100%;
     height: 200px;
-    /* object-fit only affects real <img>; harmless for <div> */
     object-fit: cover;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed; /* keep background fixed on scroll */
+    background-attachment: fixed;
     transition: 0.35s;
     border: 0.1px solid;
   }
@@ -297,7 +280,7 @@
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 1rem;
     margin-bottom: 2rem;
-    place-items: start;
+    grid-auto-rows: 380px; /* Adjust this value as needed */
   }
 
   .articles-list {
@@ -321,7 +304,6 @@
     &:hover {
       text-decoration: underline;
 
-      /* shared hover effect for img / bg-img */
       .img,
       .bg-img {
         transform: translate(5px, 5px);

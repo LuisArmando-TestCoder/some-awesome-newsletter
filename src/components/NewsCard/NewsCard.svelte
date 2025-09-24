@@ -5,7 +5,7 @@
   export let imageAlt: string;
   export let title: string;
   export let excerpt: string;
-  export let link: string;
+  export let link: string | undefined = undefined;
   export let readMoreText: string = "READ MORE";
   export let loading: boolean = false;
 
@@ -17,8 +17,7 @@
     <LoadingWheel />
   </div>
 {:else}
-  <a href={link}>
-      <article class="news-item" class:no-image={!hasImage}>
+  <article class="news-item" class:no-image={!hasImage} on:click>
         <div class="news-item-image-wrapper">
           <img class="news-item-image" src={imageSrc} alt={imageAlt} />
         </div>
@@ -32,7 +31,6 @@
           </span>
         </div>
       </article>
-  </a>
 {/if}
 
 <style lang="scss">

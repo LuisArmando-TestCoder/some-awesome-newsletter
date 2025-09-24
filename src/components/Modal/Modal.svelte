@@ -8,6 +8,7 @@
     export let onChange: (value: boolean) => void = () => {};
 
     let visible: boolean;
+    let closing = false;
     let unsubscribe: () => void | undefined;
 
     if (browser) {
@@ -28,13 +29,17 @@
     }
 
     function close() {
-        showModal.set(false);
+        closing = true;
+        setTimeout(() => {
+            showModal.set(false);
+            closing = false;
+        }, 500);
     }
 </script>
 
 {#if visible}
     <div class="modal-backdrop" on:click={close}>
-        <div class="modal-content" on:click|stopPropagation>
+        <div class="modal-content" class:closing on:click|stopPropagation>
             <button class="close-button" on:click={close}>×</button>
             <slot></slot>
         </div>
@@ -48,11 +53,34 @@
         left: 0;
         width: 100vw;
         height: 100vh;
-        background: rgba(0, 0, 0, 0.5);
+        background: rgba(0, 0, 0, 0.75);
         display: flex;
         justify-content: center;
         align-items: center;
         z-index: 1000;
+        backdrop-filter: blur(5px);
+    }
+
+    @keyframes open-modal {
+        from {
+            opacity: 0;
+            clip-path: inset(50% 50% 50% 50%);
+        }
+        to {
+            opacity: 1;
+            clip-path: inset(0% 0% 0% 0%);
+        }
+    }
+
+    @keyframes close-modal {
+        from {
+            opacity: 1;
+            clip-path: inset(0% 0% 0% 0%);
+        }
+        to {
+            opacity: 0;
+            clip-path: inset(50% 50% 50% 50%);
+        }
     }
 
     .modal-content {
@@ -63,6 +91,13 @@
         max-width: 80vw;
         overflow-y: auto;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        animation: open-modal 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    }
+
+    .modal-content.closing {
+        animation: close-modal 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        user-select: none;
+        pointer-events: none;
     }
 
     .close-button {

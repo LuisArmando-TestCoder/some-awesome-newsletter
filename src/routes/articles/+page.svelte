@@ -6,7 +6,7 @@
   import { goto } from "$app/navigation";
   import languages from "../../components/systems/inputs/Language/languages";
   import ThemeChanger from "../../components/ThemeChanger/ThemeChanger.svelte";
-  import PlainText from "../../components/systems/inputs/PlainText/PlainText.svelte";
+  import SearchBar from "../../components/SearchBar/SearchBar.svelte";
   import Pagination from "../../components/Pagination/Pagination.svelte";
   import Modal from "../../components/Modal/Modal.svelte";
   import store from "../../components/store";
@@ -36,13 +36,17 @@
   let activeTab = "";
   let loading = false;
 
-  async function fetchArticles(holder: string) {
+  async function fetchArticles(holder: string, newsSourceId?: string) {
     const pageParams = new URLSearchParams();
     languagePages.forEach((page, lang) => {
       if (page) {
         pageParams.set(`page_${lang}`, page.toString());
       }
     });
+
+    if (newsSourceId) {
+      pageParams.set("newsSourceId", newsSourceId);
+    }
 
     loading = true;
     try {
@@ -105,7 +109,7 @@
   function updateURLParam(id: string | null) {
     const url = new URL($page.url);
     id ? url.searchParams.set("article", id) : url.searchParams.delete("article");
-    goto(`/articles?${url.searchParams.toString()}`, { replaceState: true });
+    goto(`/articles?${url.searchParams.toString()}`, { replaceState: true, noScroll: true });
   }
 
   function openArticle(article: Article) {
@@ -149,12 +153,14 @@
     }
     holder = holderParam;
 
+    const newsSourceId = $page.url.searchParams.get("newsSourceId");
+
     const deepLinkedId = $page.url.searchParams.get("article");
 
     if (deepLinkedId) {
       await openArticleById(deepLinkedId);
     } else {
-      await fetchArticles(holder);
+      await fetchArticles(holder, newsSourceId ?? undefined);
     }
   });
 </script>
@@ -165,12 +171,12 @@
 
 <div class="articles-page">
   <h1>Articles</h1>
+  <SearchBar bind:value={search} placeholder="Search articles..." />
   <Tabs items={Object.keys(groupedArticles)} bind:activeItem={activeTab}>
     <div slot="item" let:item>
       {getFlag(item)} {item}
     </div>
   </Tabs>
-  <PlainText bind:value={search} placeholder="Search articles..." />
 
 
   {#if error}
@@ -189,7 +195,6 @@
                 imageAlt={getImage(article.content)?.alt ?? ""}
                 title={getTitle(article.content) ?? "Article"}
                 excerpt={getPreview(noH1(article.content))}
-                link={`/articles?holder=${holder}&article=${article.id}`}
                 on:click={() => openArticle(article)}
                 loading={loading}
               />
@@ -213,7 +218,6 @@
                   imageAlt={""}
                   title={getTitle(article.content) ?? "Article"}
                   excerpt={getPreview(noH1(article.content))}
-                  link={`/articles?holder=${holder}&article=${article.id}`}
                   on:click={() => openArticle(article)}
                   loading={loading}
                 />
@@ -327,6 +331,19 @@
     color: red;
   }
 
+  @keyframes open-modal {
+    from {
+      opacity: 0;
+      clip-path: inset(50% 50% 50% 50%);
+      filter: blur(10px);
+    }
+    to {
+      opacity: 1;
+      clip-path: inset(0% 0% 0% 0%);
+      filter: blur(0);
+    }
+  }
+
   .modal-content-inner {
     background: white;
     color: black;
@@ -335,6 +352,7 @@
     overflow-y: auto;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: open-modal 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
   }
 
   h2 {

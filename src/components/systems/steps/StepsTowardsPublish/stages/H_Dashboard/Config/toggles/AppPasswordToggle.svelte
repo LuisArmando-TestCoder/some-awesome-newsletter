@@ -1,19 +1,29 @@
 <script lang="ts">
   import PlainText from "../../../../../../inputs/PlainText/PlainText.svelte";
-  import store, { saveToConfig } from "../../../../../../../store.js";
+  import { saveToConfig } from "../../../../../../../store";
   import MarkdownText from "../../../../../../texts/MarkdownText/MarkdownText.svelte";
+  import { writable } from "svelte/store";
+  import type { Store } from "../../../../../../../types";
+  import { useConfigurator } from "../../../../../../useConfigurator";
 
   export let canReveal = true;
 
-  $: canReveal;
+  const localValue = writable("");
+
+  useConfigurator((value: Store) => {
+    if (value.config.appPassword) {
+      localValue.set(value.config.appPassword);
+    }
+  });
 </script>
 
 <div>
   <PlainText
     type="password"
     placeholder="Enter your email app password"
-    value={$store.config.appPassword}
+    value={$localValue}
     onChange={(value) => {
+      localValue.set(value);
       saveToConfig({ appPassword: value });
     }}
   />

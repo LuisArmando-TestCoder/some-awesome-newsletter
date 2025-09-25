@@ -1,19 +1,30 @@
 <script lang="ts">
-  import { get } from "svelte/store";
   import EmailInput from "../../../../../../inputs/Email/Email.svelte";
   import PlainText from "../../../../../../inputs/PlainText/PlainText.svelte";
-  import store, { saveToConfig } from "../../../../../../../store.js";
+  import { saveToConfig } from "../../../../../../../store";
   import MarkdownText from "../../../../../../texts/MarkdownText/MarkdownText.svelte";
+  import { writable } from "svelte/store";
+  import type { Store } from "../../../../../../../types";
+  import { useConfigurator } from "../../../../../../useConfigurator";
 
   export let canReveal = true;
 
-  let emailMaskSender = get(store).config.emailMaskSender || "";
-  let appPassword = get(store).config.appPassword || "";
+  const emailMaskSender = writable("");
+  const appPassword = writable("");
   let validationError = "";
+
+  useConfigurator((value: Store) => {
+    if (value.config.emailMaskSender) {
+      emailMaskSender.set(value.config.emailMaskSender);
+    }
+    if (value.config.appPassword) {
+      appPassword.set(value.config.appPassword);
+    }
+  });
 
   // Reactive validation
   $: {
-    if ((emailMaskSender && !appPassword) || (!emailMaskSender && appPassword)) {
+    if (($emailMaskSender && !$appPassword) || (!$emailMaskSender && $appPassword)) {
       validationError = "Both Email Sender and App Password are required if one is provided.";
     } else {
       validationError = ""; // Clear error if both filled or both empty
@@ -21,20 +32,20 @@
   }
 
   function handleEmailChange(value: string) {
-    emailMaskSender = value;
-    saveToConfig({ emailMaskSender, appPassword });
+    emailMaskSender.set(value);
+    saveToConfig({ emailMaskSender: value, appPassword: $appPassword });
   }
 
   function handlePasswordChange(value: string) {
-    appPassword = value;
-    saveToConfig({ emailMaskSender, appPassword });
+    appPassword.set(value);
+    saveToConfig({ emailMaskSender: $emailMaskSender, appPassword: value });
   }
 </script>
 
 <div class="credentials-wrapper">
   <EmailInput
     placeholder="Enter the email address to send from"
-    value={emailMaskSender}
+    value={$emailMaskSender}
     onChange={handleEmailChange}
     label="Sender Email Address"
   />
@@ -42,7 +53,7 @@
   <PlainText
     type="password"
     placeholder="Enter your email app password"
-    value={appPassword}
+    value={$appPassword}
     onChange={handlePasswordChange}
     label="Email App Password"
   />
@@ -52,7 +63,8 @@
   {/if}
 
   <MarkdownText {canReveal}>
-    --*(Optional)* Provide email credentials if you want the newsletter sent directly from your email account (e.g., Gmail). Requires both Sender Email and an App Password.--
+    --*(Optional)* Provide email credentials if you want the newsletter sent directly from your email
+    account (e.g., Gmail). Requires both Sender Email and an App Password.--
   </MarkdownText>
 </div>
 

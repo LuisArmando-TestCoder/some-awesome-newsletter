@@ -1,28 +1,28 @@
 <script lang="ts">
   import Image from "../../../../../../inputs/Image/Image.svelte";
-  import store, { saveToConfig } from "../../../../../../../store";
+  import { saveToConfig } from "../../../../../../../store";
   import MarkdownText from "../../../../../../texts/MarkdownText/MarkdownText.svelte";
-    import updateConfiguration from "../../../../../../requests/updateConfiguration";
+  import { writable } from "svelte/store";
+  import type { Store } from "../../../../../../../types";
+  import { useConfigurator } from "../../../../../../useConfigurator";
 
   export let canReveal = true;
 
-  $: canReveal;
-  $: logoImage = $store?.config?.logo || null;
+  const localValue = writable<string | null>(null);
+
+  useConfigurator((value: Store) => {
+    if (value.config.logo) {
+      localValue.set(value.config.logo);
+    }
+  });
 
   async function handleImageChange(imageData: string | null) {
-    // Update the news source with the new logo
-    console.log("IMAGE DATA", imageData);
-    saveToConfig(
-      { logo: imageData as string }
-    );
+    localValue.set(imageData);
+    saveToConfig({ logo: imageData as string });
   }
 </script>
 
 <MarkdownText {canReveal}>
   Upload a **logo** for your newsletter
 </MarkdownText>
-<Image
-  {canReveal}
-  selectedImage={logoImage}
-  onChange={handleImageChange}
-/>
+<Image {canReveal} selectedImage={$localValue} onChange={handleImageChange} />

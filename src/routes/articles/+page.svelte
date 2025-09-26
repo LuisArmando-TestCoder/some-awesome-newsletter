@@ -31,68 +31,90 @@
   let selectedArticle: Article | null = null;
   let error: string | null = null;
   let search = "";
-  const ITEMS_PER_PAGE = 20; // Increased to accommodate more complex layouts
+  const ITEMS_PER_PAGE = 20;
   let languagePages = new Map<string, number>();
   let holder = "";
+  let newsSourceId: string | null = "";
   let activeTab = "";
-  let loading = false;
+  let loading = true;
   let totalItems = 0;
 
-  async function fetchArticles(holder: string, newsSourceId?: string) {
-    console.time("Fetch articles");
+  const articlesCache = new Map<string, any>();
+
+  function getCacheKey(lang: string, page: number) {
+    return `${holder}-${newsSourceId || ""}-${search}-${lang}-${page}`;
+  }
+
+  async function fetchAndCachePage(lang: string, pageToFetch: number) {
+    const cacheKey = getCacheKey(lang, pageToFetch);
+    if (articlesCache.has(cacheKey)) {
+      return articlesCache.get(cacheKey);
+    }
+
     const pageParams = new URLSearchParams();
-    languagePages.forEach((page, lang) => {
-      if (page) {
-        pageParams.set(`page_${lang}`, page.toString());
-      }
-    });
+    pageParams.set(`page_${lang}`, pageToFetch.toString());
+    if (newsSourceId) pageParams.set("newsSourceId", newsSourceId);
+    if (search) pageParams.set("search", search);
 
-    if (newsSourceId) {
-      pageParams.set("newsSourceId", newsSourceId);
-    }
-    if (search) {
-      pageParams.set("search", search);
+    const resp = await fetch(
+      `${$store.apiURL()}/articles/${holder}?${pageParams.toString()}&size=${ITEMS_PER_PAGE}`
+    );
+
+    if (!resp.ok) {
+      throw new Error(`Fetch failed for ${lang} page ${pageToFetch}`);
     }
 
+    const data = await resp.json();
+    const articlesData = data.articles[lang] || {
+      withImages: [],
+      withoutImages: [],
+      totalWithImages: 0,
+      totalWithoutImages: 0,
+    };
+    
+    articlesCache.set(cacheKey, articlesData);
+    return articlesData;
+  }
+
+  function displayPageContent(articlesData: any) {
+    articlesWithImages = articlesData.withImages;
+    articlesWithoutImages = articlesData.withoutImages;
+    totalItems = articlesData.totalWithImages + articlesData.totalWithoutImages;
+  }
+
+  async function loadAndDisplayPage(lang: string, page: number) {
     loading = true;
+    error = null;
     try {
-      console.time("API call");
-      const resp = await fetch(
-        `${$store.apiURL()}/articles/${holder}?${pageParams.toString()}&size=${ITEMS_PER_PAGE}`
-      );
-      console.timeEnd("API call");
-      if (!resp.ok) throw new Error("holder fetch failed");
-      console.time("Parse JSON");
-      const data = await resp.json();
-      console.timeEnd("Parse JSON");
+      const articlesData = await fetchAndCachePage(lang, page);
+      displayPageContent(articlesData);
 
-      if (availableLanguages.length === 0 && data.articles) {
-        availableLanguages = Object.keys(data.articles);
+      // Prefetch sibling pages in the background
+      const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+      if (page > 0) {
+        fetchAndCachePage(lang, page - 1).catch((e) => console.error("Prefetch previous failed:", e));
       }
-      
-      if (!activeTab && availableLanguages.length > 0) {
-        activeTab = availableLanguages[0];
+      if (page < totalPages - 1) {
+        fetchAndCachePage(lang, page + 1).catch((e) => console.error("Prefetch next failed:", e));
       }
-      
-      console.time("Process articles");
-      const articlesData = data.articles[activeTab] || { withImages: [], withoutImages: [], totalWithImages: 0, totalWithoutImages: 0 };
-      articlesWithImages = articlesData.withImages;
-      articlesWithoutImages = articlesData.withoutImages;
-      totalItems = articlesData.totalWithImages + articlesData.totalWithoutImages;
-      console.timeEnd("Process articles");
-
     } catch (err) {
       error = "Error fetching article list.";
     } finally {
       loading = false;
-      console.timeEnd("Fetch articles");
     }
   }
 
   function handlePageChange(language: string, event: CustomEvent<{ page: number }>) {
-    languagePages.set(language, event.detail.page);
-    if (holder) {
-      fetchArticles(holder);
+    const newPage = event.detail.page;
+    languagePages.set(language, newPage);
+    loadAndDisplayPage(language, newPage);
+  }
+  
+  function handleLanguageChange(code: string | null) {
+    if (code && code !== activeTab) {
+      activeTab = code;
+      const currentPage = languagePages.get(activeTab) || 0;
+      loadAndDisplayPage(activeTab, currentPage);
     }
   }
 
@@ -142,23 +164,54 @@
     const holderParam = $page.url.searchParams.get("holder");
     if (!holderParam) {
       error = "No article holder specified.";
+      loading = false;
       return;
     }
     holder = holderParam;
+    newsSourceId = $page.url.searchParams.get("newsSourceId");
 
-    const newsSourceId = $page.url.searchParams.get("newsSourceId");
-    await fetchArticles(holder, newsSourceId ?? undefined);
+    // Initial fetch to discover languages and load page 0
+    try {
+      const pageParams = new URLSearchParams();
+      if (newsSourceId) pageParams.set("newsSourceId", newsSourceId);
+      
+      const resp = await fetch(
+        `${$store.apiURL()}/articles/${holder}?${pageParams.toString()}&size=${ITEMS_PER_PAGE}`
+      );
+      if (!resp.ok) throw new Error("Initial fetch failed");
+      const data = await resp.json();
+
+      if (data.articles) {
+        availableLanguages = Object.keys(data.articles);
+        if (availableLanguages.length > 0) {
+          activeTab = availableLanguages[0];
+          
+          // Prime the cache with page 0 data for all languages
+          Object.entries(data.articles).forEach(([lang, langData]) => {
+            articlesCache.set(getCacheKey(lang, 0), langData);
+          });
+
+          // Display page 0 for the active tab
+          displayPageContent(data.articles[activeTab]);
+
+          // Prefetch page 1 for the active tab
+          const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+          if (totalPages > 1) {
+            fetchAndCachePage(activeTab, 1).catch((e) => console.error("Initial prefetch failed:", e));
+          }
+        }
+      }
+    } catch (err) {
+      error = "Error loading initial articles.";
+    } finally {
+      loading = false;
+    }
 
     const deepLinkedId = $page.url.searchParams.get("article");
     if (deepLinkedId) {
       await openArticleById(deepLinkedId);
     }
   });
-
-  $: if (activeTab) {
-    fetchArticles(holder);
-  }
-
 </script>
 
 <div class="articles-page-container">
@@ -172,11 +225,7 @@
       <div class="controls__languages">
         <Language
           whitelist={availableLanguages}
-          onSelect={(code) => {
-            if (code) {
-              activeTab = code;
-            }
-          }}
+          onSelect={(code) => handleLanguageChange(code)}
           label={"We've produced news in all these languages"}
           defaultLanguageCode={activeTab}
         />

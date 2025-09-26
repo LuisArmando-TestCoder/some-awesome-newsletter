@@ -20,6 +20,7 @@
     content: string;
     creation: string;
     language: string;
+    title: string;
   }
 
   /* ─────────────── state ─────────────── */
@@ -38,6 +39,7 @@
   let totalItems = 0;
 
   async function fetchArticles(holder: string, newsSourceId?: string) {
+    console.time("Fetch articles");
     const pageParams = new URLSearchParams();
     languagePages.forEach((page, lang) => {
       if (page) {
@@ -48,14 +50,21 @@
     if (newsSourceId) {
       pageParams.set("newsSourceId", newsSourceId);
     }
+    if (search) {
+      pageParams.set("search", search);
+    }
 
     loading = true;
     try {
+      console.time("API call");
       const resp = await fetch(
         `${$store.apiURL()}/articles/${holder}?${pageParams.toString()}&size=${ITEMS_PER_PAGE}`
       );
+      console.timeEnd("API call");
       if (!resp.ok) throw new Error("holder fetch failed");
+      console.time("Parse JSON");
       const data = await resp.json();
+      console.timeEnd("Parse JSON");
 
       if (availableLanguages.length === 0 && data.articles) {
         availableLanguages = Object.keys(data.articles);
@@ -65,15 +74,18 @@
         activeTab = availableLanguages[0];
       }
       
+      console.time("Process articles");
       const articlesData = data.articles[activeTab] || { withImages: [], withoutImages: [], totalWithImages: 0, totalWithoutImages: 0 };
       articlesWithImages = articlesData.withImages;
       articlesWithoutImages = articlesData.withoutImages;
       totalItems = articlesData.totalWithImages + articlesData.totalWithoutImages;
+      console.timeEnd("Process articles");
 
     } catch (err) {
       error = "Error fetching article list.";
     } finally {
       loading = false;
+      console.timeEnd("Fetch articles");
     }
   }
 
@@ -85,22 +97,6 @@
   }
 
   /* ───────────── utilities ───────────── */
-  function getTitle(html: string) {
-    const div = document.createElement("div");
-    div.innerHTML = html;
-    const h1 = div.querySelector("h1")?.innerText;
-    const h2 = div.querySelector("h2")?.innerText;
-    return h1 || h2 || "Article";
-  }
-
-  function noH1(content: string) {
-    const div = document.createElement("div");
-    div.innerHTML = content;
-    div.querySelector("h1")?.remove();
-    div.querySelector("h2")?.remove();
-    return div.innerHTML;
-  }
-
   const getFlag = (code: string | undefined) =>
     languages.find((l) => l.code === code)?.flag ?? "";
 
@@ -239,9 +235,9 @@
 <Modal {showModal} onChange={(v) => !v && closeModal()}>
   {#if selectedArticle}
     <div class="modal-content-inner">
-      <h2>{getTitle(selectedArticle.content)}</h2>
+      <h2>{selectedArticle.title}</h2>
       <p><small>Created: {selectedArticle.creation} | Language: {selectedArticle.language}</small></p>
-      {@html noH1(selectedArticle.content)}
+      {@html selectedArticle.content}
     </div>
   {/if}
 </Modal>

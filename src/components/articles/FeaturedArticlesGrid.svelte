@@ -109,6 +109,7 @@
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 2rem;
+    padding: 2rem;
     margin-bottom: 4rem;
     align-items: stretch;
     
@@ -161,6 +162,12 @@
     -webkit-line-clamp: 2;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+
+  @media (max-width: 767px) {
+    .featured-grid {
+      grid-template-columns: 1fr;
+    }
   }
 
   @media (min-width: 768px) {

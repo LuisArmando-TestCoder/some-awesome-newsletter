@@ -93,7 +93,7 @@
   }
 
   function removeImage() {
-    if (image?.preview) {
+    if (image?.preview && !image.preview.startsWith('https')) {
       URL.revokeObjectURL(image.preview);
     }
     image = null;
@@ -106,21 +106,18 @@
     }
   }
 
-  // Initialize from prop if provided
-  onMount(() => {
+  $: {
     if (selectedImage) {
-      // If we have a URL or base64 string from the store, display it
       image = {
-        file: new File([], "stored-image"), // Placeholder file object
+        file: new File([], "stored-image"),
         preview: selectedImage
       };
-      imageData.set(selectedImage);
     }
-  });
+  }
 
   // Cleanup
   onDestroy(() => {
-    if (image?.preview && !image.preview.startsWith('data:')) {
+    if (image?.preview && !image.preview.startsWith('data:') && !image.preview.startsWith('http')) {
       URL.revokeObjectURL(image.preview);
     }
     unsubscribe();

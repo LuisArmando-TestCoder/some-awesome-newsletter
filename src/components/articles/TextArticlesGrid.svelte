@@ -107,6 +107,9 @@
       border-radius: var(--border-radius);
       cursor: pointer;
       transition: all var(--transition-speed) ease;
+      box-sizing: border-box;
+      min-width: 0;
+      overflow-wrap: break-word;
       &:hover {
         transform: translateY(-5px);
         box-shadow: 0 10px 20px rgba(0,0,0,0.05);
@@ -146,5 +149,18 @@
     -webkit-line-clamp: 2;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+
+  @media (max-width: 767px) {
+    .text-articles-section {
+      padding: 2rem 1rem;
+    }
+    .grid-a,
+    .grid-b {
+      grid-template-columns: 1fr;
+    }
+    .grid-a .text-card:first-child h3 {
+      font-size: 1.5rem;
+    }
   }
 </style>

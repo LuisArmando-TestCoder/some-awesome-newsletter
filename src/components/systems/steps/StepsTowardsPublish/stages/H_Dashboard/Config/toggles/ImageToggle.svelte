@@ -11,6 +11,7 @@
   const localValue = writable<string | null>(null);
 
   useConfigurator((value: Store) => {
+    console.log("this is the value logo", value.config.logo)
     if (value.config.logo) {
       localValue.set(value.config.logo);
     }

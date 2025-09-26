@@ -5,11 +5,11 @@
   import { page } from "$app/stores";
   import { goto } from "$app/navigation";
   import languages from "../../components/systems/inputs/Language/languages";
+  import Language from "../../components/systems/inputs/Language/Language.svelte";
   import SearchBar from "../../components/SearchBar/SearchBar.svelte";
   import Pagination from "../../components/Pagination/Pagination.svelte";
   import Modal from "../../components/Modal/Modal.svelte";
   import store from "../../components/store";
-  import Tabs from "../../lib/ui/molecules/Tabs.svelte";
   import ArticleCardSkeleton from "../../components/ArticleCardSkeleton/ArticleCardSkeleton.svelte";
   import FeaturedArticlesGrid from "../../components/articles/FeaturedArticlesGrid.svelte";
   import TextArticlesGrid from "../../components/articles/TextArticlesGrid.svelte";
@@ -173,12 +173,19 @@
 
   <main class="articles-content">
     <div class="controls">
+      <div class="controls__languages">
+        <Language
+          whitelist={availableLanguages}
+          onSelect={(code) => {
+            if (code) {
+              activeTab = code;
+            }
+          }}
+          label={"We've produced news in all these languages"}
+          defaultLanguageCode={activeTab}
+        />
+      </div>
       <SearchBar bind:value={search} placeholder="Search articles..." />
-      <Tabs items={availableLanguages} bind:activeItem={activeTab}>
-        <div slot="item" let:item>
-          {getFlag(item)} {item}
-        </div>
-      </Tabs>
     </div>
 
     {#if error}
@@ -243,6 +250,10 @@
   :root {
     --border-radius: 12px;
     --transition-speed: 0.3s;
+  }
+
+  .controls__languages {
+    padding: 1.5rem;
   }
 
   .articles-page-container {

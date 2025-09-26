@@ -13,13 +13,12 @@
     flag: string | null;
   }
 
-  const languages: Language[] = languagesData;
-
   // Props
   export let defaultLanguageCode: string | null = null;
   export let label = "Language";
   export let onSelect: (selectedCode: string | null) => void = () => {};
   export let disabled: boolean = false;
+  export let whitelist: string[] = [];
 
   // State
   let selectedLanguage: Language | null = null;
@@ -40,6 +39,12 @@
   let lastValidHighlightedIndex: number = -1;
 
   // Lifecycle
+  let languages: Language[] = [];
+  $: languages =
+    whitelist.length > 0
+      ? languagesData.filter((lang) => whitelist.includes(lang.code))
+      : languagesData;
+
   onMount(() => {
     const initialLanguage = defaultLanguageCode
       ? findLanguageByCode(defaultLanguageCode)
@@ -53,12 +58,16 @@
       lastValidHighlightedIndex = 0;
     }
 
-    document.addEventListener("click", handleClickOutside);
+    if (typeof document !== "undefined") {
+      document.addEventListener("click", handleClickOutside);
+    }
     listItems = new Array(languages.length).fill(null);
   });
 
   onDestroy(() => {
-    document.removeEventListener("click", handleClickOutside);
+    if (typeof document !== 'undefined') {
+      document.removeEventListener('click', handleClickOutside);
+    }
     clearTimeout(searchDebounceTimeout);
   });
 

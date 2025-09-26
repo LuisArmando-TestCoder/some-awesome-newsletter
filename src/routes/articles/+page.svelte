@@ -115,6 +115,7 @@
       activeTab = code;
       const currentPage = languagePages.get(activeTab) || 0;
       loadAndDisplayPage(activeTab, currentPage);
+      updateURL({ lang: code });
     }
   }
 
@@ -123,22 +124,28 @@
     languages.find((l) => l.code === code)?.flag ?? "";
 
   /* ────────── navigation helpers ────────── */
-  function updateURLParam(id: string | null) {
+  function updateURL(params: { [key: string]: string | null }) {
     const url = new URL($page.url);
-    id ? url.searchParams.set("article", id) : url.searchParams.delete("article");
-    goto(`/articles?${url.searchParams.toString()}`, { replaceState: true, noScroll: true });
+    Object.entries(params).forEach(([key, value]) => {
+      if (value) {
+        url.searchParams.set(key, value);
+      } else {
+        url.searchParams.delete(key);
+      }
+    });
+    goto(`?${url.searchParams.toString()}`, { replaceState: true, noScroll: true });
   }
 
   function openArticle(article: Article) {
     selectedArticle = article;
     showModal.set(true);
-    updateURLParam(article.id);
+    updateURL({ article: article.id });
   }
 
   function closeModal() {
     showModal.set(false);
     selectedArticle = null;
-    updateURLParam(null);
+    updateURL({ article: null });
   }
 
   async function openArticleById(id: string) {
@@ -169,6 +176,7 @@
     }
     holder = holderParam;
     newsSourceId = $page.url.searchParams.get("newsSourceId");
+    const langParam = $page.url.searchParams.get("lang");
 
     // Initial fetch to discover languages and load page 0
     try {
@@ -184,7 +192,7 @@
       if (data.articles) {
         availableLanguages = Object.keys(data.articles);
         if (availableLanguages.length > 0) {
-          activeTab = availableLanguages[0];
+          activeTab = langParam && availableLanguages.includes(langParam) ? langParam : availableLanguages[0];
           
           // Prime the cache with page 0 data for all languages
           Object.entries(data.articles).forEach(([lang, langData]) => {
@@ -223,12 +231,14 @@
   <main class="articles-content">
     <div class="controls">
       <div class="controls__languages">
-        <Language
-          whitelist={availableLanguages}
-          onSelect={(code) => handleLanguageChange(code)}
-          label={"We've produced news in all these languages"}
-          defaultLanguageCode={activeTab}
-        />
+        {#if activeTab}
+          <Language
+            whitelist={availableLanguages}
+            onSelect={(code) => handleLanguageChange(code)}
+            label={"We've produced news in all these languages"}
+            defaultLanguageCode={activeTab}
+          />
+        {/if}
       </div>
       <SearchBar bind:value={search} placeholder="Search articles..." />
     </div>

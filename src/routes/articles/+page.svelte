@@ -51,12 +51,12 @@
 
   async function fetchAndCachePage(lang: string, pageToFetch: number) {
     const cacheKey = getCacheKey(lang, pageToFetch);
-    if (articlesCache.has(cacheKey)) {
+    if (articlesCache.has(cacheKey) && pageToFetch !== 0) { // Always refetch page 0 on initial load
       return articlesCache.get(cacheKey);
     }
 
     const pageParams = new URLSearchParams();
-    pageParams.set("page", pageToFetch.toString());
+    pageParams.set("page", (pageToFetch + 1).toString()); // API is 1-based
     pageParams.set("lang", lang);
     if (newsSourceId) pageParams.set("newsSourceId", newsSourceId);
     const url = `${$store.apiURL()}/articles/${holder}?${pageParams.toString()}&size=${ITEMS_PER_PAGE}`;
@@ -277,12 +277,6 @@
 
           // Display page 0 for the active tab
           displayPageContent(data.articles[activeTab]);
-
-          // Prefetch page 1 for the active tab
-          const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
-          if (totalPages > 1) {
-            fetchAndCachePage(activeTab, 1).catch((e) => console.error("Initial prefetch failed:", e));
-          }
         }
       }
     } catch (err) {

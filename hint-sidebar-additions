@@ -1,0 +1,5 @@
+Let's say you wanted to add some-awesome-newsletter/src/components/systems/steps/StepsTowardsPublish/stages/H_Dashboard/Newspaper/Newspaper.svelte in the side bar
+components some-awesome-newsletter/src/lib/ui/organisms/Sidebar.svelte
+StepsKey at some-awesome-newsletter/src/components/types.ts
+stepsMapping at some-awesome-newsletter/src/components/store.ts
+some-awesome-newsletter/src/components/systems/steps/StepsTowardsPublish/MainSteps.svelte

@@ -15,6 +15,7 @@
   import store from "../../../store";
     import { isValidURL } from "../../inputs/Link/isValidLink";
     import Exports from "./stages/H_Dashboard/Exports/Exports.svelte";
+    import Newspaper from "./stages/H_Dashboard/Newspaper/Newspaper.svelte";
 
   const t = () => {
     if (
@@ -62,6 +63,9 @@
     [(store: Store) => {
       return isValidURL(store.newsSource);
     }, Exports],
+    [(store: Store) => {
+      return isValidURL(store.newsSource);
+    }, Newspaper],
   ];
 </script>
 

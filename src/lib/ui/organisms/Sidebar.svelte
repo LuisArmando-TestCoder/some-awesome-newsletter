@@ -29,6 +29,7 @@
     { name: "Dashboard", children: [getLink("News Sources"), getLink("Users"), getLink("Reports")] },
     getLink("Exports"),
     { name: "Settings", children: [getLink("Profile"), getLink("Billing")] },
+    getLink("Newspaper")
   ];
 
   function getInitials(name: string): string {

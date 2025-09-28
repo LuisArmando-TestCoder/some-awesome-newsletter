@@ -138,7 +138,7 @@ export type Populator<T extends object> = (
   value: any
 ) => T;
 
-export type StepsKey = "News Sources" | "Users" | "Reports" | "Profile" | "Billing" | "Exports";
+export type StepsKey = "News Sources" | "Users" | "Reports" | "Profile" | "Billing" | "Exports" | "Newspaper";
 
 export type SideLinkType = {
   url?: string;

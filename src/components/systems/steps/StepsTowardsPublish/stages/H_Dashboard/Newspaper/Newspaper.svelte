@@ -262,6 +262,9 @@
         <option value={source.id}>{source.url}</option>
       {/each}
     </select>
+    {#if newsSourceId}
+    <a href="/articles?holder={$store.configuratorEmail}&lang={activeTab}" target="_blank" class="article-link">View Articles</a>
+    {/if}
   </div>
 
   {#if newsSourceId}
@@ -376,6 +379,20 @@
     select {
       padding: 0.5rem;
       border-radius: 8px;
+    }
+  }
+
+  .article-link {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #0056b3;
     }
   }
 

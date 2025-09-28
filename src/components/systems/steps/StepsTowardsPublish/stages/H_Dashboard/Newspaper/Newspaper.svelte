@@ -199,13 +199,17 @@
   }
 
   async function loadInitialArticles() {
+    // Reset state before fetching new data
+    articlesWithImages = [];
+    articlesWithoutImages = [];
+    totalItems = 0;
+    allUserLanguages = [];
+    activeTab = "";
+    noResults = false;
+    articlesCache.clear();
+    languagePages.clear();
+
     if (!newsSourceId || !$store.configuratorEmail) {
-      articlesWithImages = [];
-      articlesWithoutImages = [];
-      totalItems = 0;
-      allUserLanguages = [];
-      activeTab = "";
-      noResults = false;
       return;
     }
 

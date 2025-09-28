@@ -59,7 +59,8 @@
     pageParams.set("page", (pageToFetch + 1).toString()); // API is 1-based
     pageParams.set("lang", lang);
     if (newsSourceId) pageParams.set("newsSourceId", newsSourceId);
-    const url = `${$store.apiURL()}/articles/${holder}?${pageParams.toString()}&size=${ITEMS_PER_PAGE}`;
+    const domain = 'https://ai-newsletter-translated.onrender.com';
+    const url = `${domain}/articles/${holder}?${pageParams.toString()}&size=${ITEMS_PER_PAGE}`;
 
     const resp = await fetch(url);
 

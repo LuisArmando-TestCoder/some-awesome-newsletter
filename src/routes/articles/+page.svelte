@@ -13,6 +13,7 @@
   import ArticleCardSkeleton from "../../components/ArticleCardSkeleton/ArticleCardSkeleton.svelte";
   import FeaturedArticlesGrid from "../../components/articles/FeaturedArticlesGrid.svelte";
   import TextArticlesGrid from "../../components/articles/TextArticlesGrid.svelte";
+  import PlainText from "../../components/systems/inputs/PlainText/PlainText.svelte";
 
   /* ────────────────── types ─────────────────── */
   interface Article {
@@ -33,10 +34,13 @@
   let search = "";
   const ITEMS_PER_PAGE = 20;
   let languagePages = new Map<string, number>();
+  let searchTimeout: number;
   let holder = "";
   let newsSourceId: string | null = "";
   let activeTab = "";
   let loading = true;
+  let isStreaming = false;
+  let noResults = false;
   let totalItems = 0;
 
   const articlesCache = new Map<string, any>();
@@ -54,11 +58,9 @@
     const pageParams = new URLSearchParams();
     pageParams.set(`page_${lang}`, pageToFetch.toString());
     if (newsSourceId) pageParams.set("newsSourceId", newsSourceId);
-    if (search) pageParams.set("search", search);
+    const url = `${$store.apiURL()}/articles/${holder}?${pageParams.toString()}&size=${ITEMS_PER_PAGE}`;
 
-    const resp = await fetch(
-      `${$store.apiURL()}/articles/${holder}?${pageParams.toString()}&size=${ITEMS_PER_PAGE}`
-    );
+    const resp = await fetch(url);
 
     if (!resp.ok) {
       throw new Error(`Fetch failed for ${lang} page ${pageToFetch}`);
@@ -119,6 +121,73 @@
     }
   }
 
+  async function handleSearch(event: CustomEvent<{ value: string }>) {
+    search = event.detail.value;
+    clearTimeout(searchTimeout);
+
+    searchTimeout = setTimeout(async () => {
+      articlesWithImages = [];
+      articlesWithoutImages = [];
+      totalItems = 0;
+      noResults = false;
+      
+      if (!search) {
+        updateURL({ search: null });
+        loadAndDisplayPage(activeTab, 0);
+        return;
+      }
+
+      isStreaming = true;
+      error = null;
+      try {
+        let searchUrl = `${$store.apiURL()}/articles/${holder}?search=${search}`;
+        if (newsSourceId) {
+          searchUrl += `&newsSourceId=${newsSourceId}`;
+        }
+        const resp = await fetch(searchUrl);
+        if (!resp.ok) throw new Error("Search fetch failed");
+
+        const reader = resp.body?.getReader();
+        if (!reader) throw new Error("Failed to get response reader");
+
+        const decoder = new TextDecoder();
+        let buffer = "";
+
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+
+          buffer += decoder.decode(value, { stream: true });
+          const lines = buffer.split("\n");
+          buffer = lines.pop() || "";
+
+          for (const line of lines) {
+            if (line.trim() === "") continue;
+            const article = JSON.parse(line);
+            const processedArticle = {
+              ...article,
+              title: article.content ? (article.content.match(/<h1[^>]*>([\s\S]*?)<\/h1>/) || [])[1] || "Article" : "Article",
+            };
+            if (processedArticle.content && /<img[^>]+>/.test(processedArticle.content)) {
+              articlesWithImages = [...articlesWithImages, processedArticle];
+            } else {
+              articlesWithoutImages = [...articlesWithoutImages, processedArticle];
+            }
+            totalItems++;
+          }
+        }
+        if (totalItems === 0) {
+          noResults = true;
+        }
+      } catch (err) {
+        error = "Error fetching search results.";
+      } finally {
+        isStreaming = false;
+      }
+      updateURL({ search: search });
+    }, 1500);
+  }
+
   /* ───────────── utilities ───────────── */
   const getFlag = (code: string | undefined) =>
     languages.find((l) => l.code === code)?.flag ?? "";
@@ -177,6 +246,13 @@
     holder = holderParam;
     newsSourceId = $page.url.searchParams.get("newsSourceId");
     const langParam = $page.url.searchParams.get("lang");
+    const searchParam = $page.url.searchParams.get("search");
+
+    if (searchParam) {
+      search = searchParam;
+      handleSearch(new CustomEvent("search", { detail: { value: search } }));
+      return;
+    }
 
     // Initial fetch to discover languages and load page 0
     try {
@@ -240,12 +316,24 @@
           />
         {/if}
       </div>
-      <SearchBar bind:value={search} placeholder="Search articles..." />
+      <SearchBar bind:value={search} placeholder="Search articles..." on:search={handleSearch} />
     </div>
+
+    {#if isStreaming}
+      <div class="skeleton-wrapper">
+        <section class="featured-grid">
+          <div class="main-article"><ArticleCardSkeleton /></div>
+          <div class="secondary-articles">
+            <ArticleCardSkeleton />
+            <ArticleCardSkeleton />
+          </div>
+        </section>
+      </div>
+    {/if}
 
     {#if error}
       <p class="error">{error}</p>
-    {:else if loading}
+    {:else if loading && !isStreaming}
       <div class="skeleton-wrapper">
         <section class="featured-grid">
           <div class="main-article"><ArticleCardSkeleton /></div>
@@ -257,7 +345,9 @@
       </div>
     {:else}
       <!-- Section 1: Featured Articles -->
-      {#if articlesWithImages.length > 0}
+      {#if noResults}
+        <p>No articles found.</p>
+      {:else if articlesWithImages.length > 0}
         <FeaturedArticlesGrid articles={articlesWithImages.slice(0, 3)} on:open={(e) => openArticle(e.detail)} />
       {/if}
 
@@ -282,7 +372,9 @@
         </section>
       {/if}
 
+      {#if !search}
       <Pagination currentPage={languagePages.get(activeTab) || 0} {totalItems} pageSize={ITEMS_PER_PAGE} on:pageChange={(e) => handlePageChange(activeTab, e)} />
+      {/if}
     {/if}
   </main>
 

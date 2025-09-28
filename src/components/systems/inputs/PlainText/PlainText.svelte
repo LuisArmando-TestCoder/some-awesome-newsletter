@@ -5,7 +5,7 @@
   export let value: string = "";
   export let placeholder: string = "";
   export let label: string = "";
-  export let type: "text" | "password" | "email" | "number" | "tel" | "url" = "text"; // Add type prop
+  export let type: "text" | "password" | "email" | "number" | "tel" | "url" | "date" = "text"; // Add type prop
   export let isTextarea: boolean = false;
   export let rows: number = 3;
   export let disabled: boolean = false;

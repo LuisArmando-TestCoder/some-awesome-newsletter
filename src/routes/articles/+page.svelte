@@ -56,7 +56,7 @@
     }
 
     const pageParams = new URLSearchParams();
-    pageParams.set(`page_${lang}`, pageToFetch.toString());
+    pageParams.set("page", pageToFetch.toString());
     if (newsSourceId) pageParams.set("newsSourceId", newsSourceId);
     const url = `${$store.apiURL()}/articles/${holder}?${pageParams.toString()}&size=${ITEMS_PER_PAGE}`;
 
@@ -81,7 +81,7 @@
   function displayPageContent(articlesData: any) {
     articlesWithImages = articlesData.withImages;
     articlesWithoutImages = articlesData.withoutImages;
-    totalItems = articlesData.totalWithImages + articlesData.totalWithoutImages;
+    totalItems = articlesData.total;
   }
 
   async function loadAndDisplayPage(lang: string, page: number) {

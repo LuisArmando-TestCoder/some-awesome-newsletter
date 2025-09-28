@@ -57,6 +57,7 @@
 
     const pageParams = new URLSearchParams();
     pageParams.set("page", pageToFetch.toString());
+    pageParams.set("lang", lang);
     if (newsSourceId) pageParams.set("newsSourceId", newsSourceId);
     const url = `${$store.apiURL()}/articles/${holder}?${pageParams.toString()}&size=${ITEMS_PER_PAGE}`;
 
@@ -70,8 +71,7 @@
     const articlesData = data.articles[lang] || {
       withImages: [],
       withoutImages: [],
-      totalWithImages: 0,
-      totalWithoutImages: 0,
+      total: 0,
     };
     
     articlesCache.set(cacheKey, articlesData);

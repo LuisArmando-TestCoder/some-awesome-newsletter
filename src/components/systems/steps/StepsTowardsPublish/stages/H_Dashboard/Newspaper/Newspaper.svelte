@@ -263,7 +263,7 @@
       {/each}
     </select>
     {#if newsSourceId}
-    <a href="/articles?holder={$store.configuratorEmail}&lang={activeTab}" target="_blank" class="article-link">View Articles</a>
+    <a href="/articles?holder={$store.configuratorEmail}&lang={activeTab}" target="_blank" class="article-link">Share Newspaper</a>
     {/if}
   </div>
 

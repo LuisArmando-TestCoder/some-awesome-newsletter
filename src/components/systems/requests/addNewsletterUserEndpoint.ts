@@ -1,7 +1,7 @@
 import { get } from "svelte/store";
 import store from "../../store";
 import type { NewsletterUser } from "../../types";
-import getConfiguratorSession from "./getConfiguratorSession";
+import getAuthHeaders from "./getAuthHeaders";
 
 export interface AddNewsletterUserResponse {
   message: string;
@@ -16,15 +16,26 @@ export interface AddNewsletterUserResponse {
 export async function addNewsletterUser(
   user: NewsletterUser,
   configId: string,
-  newsSourceId: string
+  newsSourceId: string,
+  apiKey?: string
 ): Promise<AddNewsletterUserResponse> {
-  // Build the endpoint URL based on the presence of configId
   const url = `${get(store).apiURL()}/users/${configId}/${newsSourceId}`;
+  const authHeaders = await getAuthHeaders();
+
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+  };
+
+  if (apiKey) {
+    headers["Authorization"] = `Bearer ${apiKey}`;
+  } else {
+    Object.assign(headers, authHeaders);
+  }
 
   try {
     const response = await fetch(url, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers,
       body: JSON.stringify(user),
     });
 

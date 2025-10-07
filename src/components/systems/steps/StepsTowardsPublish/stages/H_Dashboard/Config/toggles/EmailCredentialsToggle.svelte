@@ -63,8 +63,8 @@
   {/if}
 
   <MarkdownText {canReveal}>
-    --*(Optional)* Provide email credentials if you want the newsletter sent directly from your email
-    account (e.g., Gmail). Requires both Sender Email and an App Password.--
+    *(Optional) Provide email credentials if you want the newsletter sent directly from your email*
+    *account (e.g., Gmail). Requires both Sender Email and an App Password.*
   </MarkdownText>
 </div>
 

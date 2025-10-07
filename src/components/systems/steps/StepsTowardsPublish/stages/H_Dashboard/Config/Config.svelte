@@ -9,7 +9,6 @@
   import Page from "../../../../../wrappers/Page/Page.svelte";
     import InformationToggle from "./toggles/InformationToggle.svelte";
     import VisualToggle from "./toggles/VisualToggle.svelte";
-    import SecretsToggle from "./toggles/SecretsToggle.svelte";
 
   export let canReveal = true;
 
@@ -23,7 +22,6 @@
       informationSetup: [InformationToggle],
       visualFeatures: [VisualToggle],
       emailCredentials: [EmailCredentialsToggle], // New combined toggle
-      security: [SecretsToggle],
     }}
   />
 </Page>

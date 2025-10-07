@@ -282,55 +282,6 @@
       </div>
     </ToggleCard>
     
-    <ToggleCard {canReveal} cardTitle="Developer Settings" isOpen={false} onChange={() => {}}>
-      <div class="selectors-group">
-
-        <!-- Removed Active Switch Container -->
-        <CopyUrlWithQR
-          configuratorEmail={$store.configuratorEmail}
-          newsSourceId={newsSource.id}
-          lead={newsSource.lead}
-          label="Link for manual subscription"
-        />
-        <PostExplanation {newsSource} />
-
-        <IconButton
-          src="./icons/refresh.svg"
-          disabled={$isRegenerating}
-          loading={$isRegenerating}
-          label="Regenerate Selectors"
-          callback={async () => {
-            isRegenerating.set(true);
-            errorRegeneratingSelectors.set(false);
-            const response = await regenerateSelectors(
-              $store.configuratorEmail,
-              updateFields.id,
-              updateFields.url
-            );
-            errorRegeneratingSelectors.set(!response);
-            isRegenerating.set(false);
-            if (response) {
-              updateFields.linkSelector = response.linkSelector;
-            }
-          }}
-        />
-        <div class={$isRegenerating ? "loading" : "none"}>
-          {$isRegenerating ? $latestMessage : ""}
-        </div>
-        <div class={$errorRegeneratingSelectors ? "error" : "none"}>
-          {$errorRegeneratingSelectors
-            ? `Error regenerating selectors at: ${$latestMessage}`
-            : ""}
-        </div>
-        <PlainText
-          label="Link Selector"
-          placeholder="CSS selector for article link"
-          bind:value={updateFields.linkSelector}
-        />
-      </div>
-      
-    </ToggleCard>
-
     <SubmitButton label="Update News Source" callback={handleUpdate} />
 
     {#if errorMessage}

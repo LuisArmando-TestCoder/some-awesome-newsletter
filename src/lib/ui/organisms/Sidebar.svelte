@@ -26,10 +26,9 @@
   }
 
   export let links: SideLinkType[] = [
-    { name: "Dashboard", children: [getLink("News Sources"), getLink("Users"), getLink("Reports")] },
-    getLink("Exports"),
-    { name: "Settings", children: [getLink("Profile"), getLink("Billing")] },
-    getLink("Newspaper")
+    { name: "Dashboard", children: [getLink("Profile"), getLink("News Sources"), getLink("Users"), getLink("Reports")] },
+    getLink("Secrets/Developer"), getLink("Newspaper"), getLink("Billing"),
+    
   ];
 
   function getInitials(name: string): string {

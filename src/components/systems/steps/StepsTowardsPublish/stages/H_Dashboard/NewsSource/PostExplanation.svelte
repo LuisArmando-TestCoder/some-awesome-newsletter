@@ -61,7 +61,7 @@
 // which uses this very addNewsletterUser function internally.
 const userEmail = "${$userEmail || 'your.email@example.com'}";
 
-addUserToNewsletter({ email: ${userEmail}, name: ${userName}, bio: ${userBio}, language: ${userLanguage} });
+addUserToNewsletter({ email: ${$userEmail}, name: ${$userName}, bio: ${$userBio}, language: ${$userLanguage} });
 `);
 
   const codeSnippetForCreation = derived(

@@ -14,9 +14,7 @@ import getAuthHeaders from "./getAuthHeaders";
 export async function getConfigFetchResponse(authHeaders: Record<string, string>, origin?: string) {
   console.log(get(store).apiURL(origin), get(store).configuratorEmail);
   let response = await fetch(
-    `${get(store).apiURL()}/private-config?documentId=${
-      (authHeaders || getAuthHeaders())["x-auth-email"]
-    }`,
+    `${get(store).apiURL()}/config`,
     {
       method: "GET",
       headers: (authHeaders || getAuthHeaders()),

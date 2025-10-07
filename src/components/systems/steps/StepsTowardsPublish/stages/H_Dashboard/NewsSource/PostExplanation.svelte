@@ -84,11 +84,15 @@ async function addUserToNewsletter(email) {
   // This is the ID associated with ${newsSource.url}
   const newsSourceId = "${newsSource.id}";
 
+  const url = \`\${APIURI}/users/\${configId}/\${newsSourceId}\`;
+
   // API endpoint to add a new subscriber.
-  const response = await fetch(\`\${APIURI}/users/\${configId}/\${newsSourceId}\`, {
+  const response = await fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      // The API_KEY is private, and you can find it in your account settings.
+      'Authorization': 'Bearer YOUR_API_KEY',
     },
     body: JSON.stringify(user),
   });

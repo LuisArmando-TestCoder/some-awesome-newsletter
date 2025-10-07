@@ -62,10 +62,10 @@
 const userEmail = "${$userEmail || 'your.email@example.com'}";
 
 addUserToNewsletter({ 
-  email: ${$userEmail}, 
-  name: ${$userName}, 
-  bio: ${$userBio}, 
-  language: ${$userLanguage} 
+  email: "${$userEmail || 'your.email@example.com'}", 
+  name: "${$userName}", 
+  bio: "${$userBio}", 
+  language: "${$userLanguage}" 
   });
 `);
 

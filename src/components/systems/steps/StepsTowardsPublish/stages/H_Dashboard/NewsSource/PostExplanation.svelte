@@ -59,8 +59,6 @@
     const codeSnippetForExecution = derived(userEmail, $userEmail => `
 // Clicking the \`\`Run Code\`\` button will invoke this subscription logic as an example,
 // which uses this very addNewsletterUser function internally.
-const userEmail = "${$userEmail || 'your.email@example.com'}";
-
 addUserToNewsletter({ 
   email: "${$userEmail || 'your.email@example.com'}", 
   name: "${$userName}", 

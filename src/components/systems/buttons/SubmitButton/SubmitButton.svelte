@@ -34,9 +34,9 @@
     border-radius: 30px;
     background: var(--color-x-gradient-inversion);
     box-shadow: 0 0 10px -7px var(--color-background);
-    margin-top: 1rem;
+    margin: 1rem 0;
     margin-left: auto;
-    
+      
     &:not(&:disabled):hover { 
       opacity: 1;
       box-shadow: 0px 0px 10px -7.5px var(--color-background);

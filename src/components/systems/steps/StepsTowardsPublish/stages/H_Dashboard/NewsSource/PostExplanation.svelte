@@ -61,19 +61,19 @@
 // which uses this very addNewsletterUser function internally.
 const userEmail = "${$userEmail || 'your.email@example.com'}";
 
-addUserToNewsletter(userEmail);
+addUserToNewsletter({ email: ${userEmail}, name: ${userName}, bio: ${userBio}, language: ${userLanguage} });
 `);
 
   const codeSnippetForCreation = derived(
     [userEmail, userName, userBio, userLanguage],
     ([$userEmail, $userName, $userBio, $userLanguage]) => `
 // You can tweak all this hardcoded parameters
-async function addUserToNewsletter(email) {
+async function addUserToNewsletter({ email, name, bio, language }) {
   const user = {
     email,
-    name: "${$userName}",
-    bio: "${$userBio}",
-    language: "${$userLanguage}", // ISO-639-1 language code
+    name,
+    bio,
+    language // ISO-639-1 language code
   };
 
   const APIURI = "https://ai-newsletter-translated.onrender.com";
@@ -92,7 +92,7 @@ async function addUserToNewsletter(email) {
     headers: {
       'Content-Type': 'application/json',
       // The API_KEY is private, and you can find it in your account settings.
-      'Authorization': 'Bearer YOUR_API_KEY',
+      'Authorization': \`Bearer \${YOUR_API_KEY}\`,
     },
     body: JSON.stringify(user),
   });

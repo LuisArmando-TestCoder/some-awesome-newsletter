@@ -1,5 +1,4 @@
 <script lang="ts">
-  import type { Store } from "../../../types";
   import { saveToStore } from "../../../store";
   import A_Welcome1 from "./stages/A_Welcome1.svelte";
   import B_Welcome2 from "./stages/B_Welcome2.svelte";
@@ -41,13 +40,33 @@
   };
 
   const components = [
+    A_Welcome1,
+    B_Welcome2,
+    C_Welcome3,
+    D_Lead,
+    E_NewsSource,
+    Config,
+    NewsSource,
+    Users,
+    Billing,
+    Reports,
+    Exports,
+    Newspaper,
+    Developer
+  ].map(v => [t, v]);
+</script>
+
+<StepsTowardsPublish {components} />
+
+<!-- USED TO BE:
+  const components = [
     [t, A_Welcome1],
     [t, B_Welcome2],
     [t, C_Welcome3],
     [t, D_Lead],
     [t, E_NewsSource],
     [(store: Store) => {
-      return isValidURL(store.newsSource);
+      return isValidURL(store.newsSource); // NON FETCH VALIDATIONS
     }, Config],
     [(store: Store) => {
       return isValidURL(store.newsSource);
@@ -71,6 +90,4 @@
       return isValidURL(store.newsSource);
     }, Developer],
   ];
-</script>
-
-<StepsTowardsPublish {components} />
+-->

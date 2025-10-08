@@ -3,6 +3,7 @@
   import { onMount } from "svelte";
   import { writable } from "svelte/store";
   import Language from "../../../../../../systems/inputs/Language/Language.svelte";
+  import SearchSelector from "../../../../../../systems/selectors/SearchSelector/SearchSelector.svelte";
   import SearchBar from "../../../../../../SearchBar/SearchBar.svelte";
   import Pagination from "../../../../../../Pagination/Pagination.svelte";
   import Container from "../../../../../../Container/Container.svelte";
@@ -115,6 +116,11 @@
       const currentPage = languagePages.get(activeTab) || 0;
       loadAndDisplayPage(activeTab, currentPage);
     }
+  }
+
+  function handleNewsSourceSelect(selectedId: string | null) {
+    newsSourceId = selectedId;
+    loadInitialArticles();
   }
 
   async function handleSearch(event: CustomEvent<{ value: string }>) {
@@ -253,13 +259,14 @@
   </header>
 
   <div class="news-source-selector">
-    <label for="news-source-select">Choose a news source:</label>
-    <select id="news-source-select" bind:value={newsSourceId} on:change={loadInitialArticles}>
-        <option value={null}>--Please choose an option--</option>
-      {#each $store.config.newsSources as source}
-        <option value={source.id}>{source.url}</option>
-      {/each}
-    </select>
+    <SearchSelector
+      items={$store.config.newsSources}
+      valueFieldName="id"
+      displayFieldName="url"
+      onSelect={handleNewsSourceSelect}
+      label="Choose a news source:"
+      defaultSelectedValue={newsSourceId}
+    />
     {#if newsSourceId}
     <a href="/articles?holder={$store.configuratorEmail}&lang={activeTab}" target="_blank" class="article-link">Share Newspaper</a>
     {/if}
@@ -369,7 +376,7 @@
   .news-source-selector {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
     margin-bottom: 2rem;
     gap: 1rem;
 

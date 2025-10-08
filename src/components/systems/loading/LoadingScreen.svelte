@@ -43,7 +43,8 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(2.5px);
     display: flex;
     flex-direction: column;
     justify-content: center;

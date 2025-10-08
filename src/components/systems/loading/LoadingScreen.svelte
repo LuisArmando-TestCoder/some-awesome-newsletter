@@ -43,7 +43,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: linear-gradient(90deg, rgba(0, 20, 18, 0.5) 0%, rgba(3, 9, 27, 0.5) 50%, rgba(22, 16, 69, 0.5) 100%);
     backdrop-filter: blur(2.5px);
     display: flex;
     flex-direction: column;

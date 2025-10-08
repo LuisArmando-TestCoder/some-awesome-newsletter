@@ -53,7 +53,7 @@
         left: 0;
         width: 100vw;
         height: 100vh;
-        background: rgba(0, 0, 0, 0.75);
+        background: linear-gradient(90deg, rgba(0, 20, 18, 0.5) 0%, rgba(3, 9, 27, 0.5) 50%, rgba(22, 16, 69, 0.5) 100%);
         display: flex;
         justify-content: center;
         align-items: center;

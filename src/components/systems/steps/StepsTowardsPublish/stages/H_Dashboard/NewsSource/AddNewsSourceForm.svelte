@@ -13,6 +13,7 @@
 
   import createNewsSource from "../../../../../requests/createNewsSource";
   import { processNewsSourceAction } from "./newsSourceActions";
+  import { validateFields } from "./validation";
 
   // 2) Create a writable store for tracking the newly added news source
   export const addedNewsSource = writable<any>(null);
@@ -31,12 +32,19 @@
 
   // Called when the user submits the add form
   async function handleAddNewsSource() {
-    isAdding = true;
+    console.log("[AddNewsSourceForm.svelte] handleAddNewsSource called");
     const fields = {
       url: addNewsSourceUrl,
       lead: addNewsSourceLead,
       personality: addNewsSourcePersonality,
     };
+    const error = validateFields(fields);
+    if (error) {
+      addErrorMessage = error;
+      return;
+    }
+    isAdding = true;
+    console.log("[AddNewsSourceForm.svelte] fields", fields);
 
     await processNewsSourceAction(
       fields,
@@ -64,15 +72,18 @@
 
 <form class="news-source-form" on:submit|preventDefault={handleAddNewsSource}>
   <Link
-    placeholder="Lead (destination URL or identifier)"
-    value={addNewsSourceLead}
-    onChange={(val) => (addNewsSourceLead = val)}
-  />
-  <Link
     placeholder="News Source URL"
     value={addNewsSourceUrl}
     onChange={(val) => (addNewsSourceUrl = val)}
   />
+  <Link
+    placeholder="Lead (destination URL or identifier)"
+    value={addNewsSourceLead}
+    onChange={(val) => (addNewsSourceLead = val)}
+  />
+  <p class="info-message">
+    Note: The lead URL is optional, but it's highly recommended. It helps our AI to better understand the context of your news source and generate more relevant content.
+  </p>
   <!-- Personality & schedule are optional in the example -->
   <!-- Add additional inputs for Personality and Schedule if desired -->
 

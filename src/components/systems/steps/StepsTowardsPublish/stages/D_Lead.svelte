@@ -3,6 +3,7 @@
   import Link from "../../../inputs/Link/Link.svelte";
   import store, { saveToStore } from "../../../../store";
   import Centered from "../../../wrappers/Centered/Centered.svelte";
+  import SubmitButton from "../../../buttons/SubmitButton/SubmitButton.svelte";
 
   export let canReveal = false;
 </script>
@@ -20,11 +21,19 @@
       saveToStore({
         lead,
       })}
-    onEnter={(isValid) => {
-      if (isValid)
-        saveToStore({
-          stepsIndex: $store.stepsIndex + 1,
-        });
-    }}
+    onEnter={() => saveToStore({ stepsIndex: $store.stepsIndex + 1 })}
   />
+  <br>
+  <MarkdownText {canReveal}>
+    > **Note:** The lead URL is optional, but it's highly recommended. It helps our AI to better understand the context of your news source and generate more relevant content.
+  </MarkdownText>
+  <div class="submit">
+    <SubmitButton callback={() => saveToStore({ stepsIndex: $store.stepsIndex + 1 })}/>
+  </div>
 </Centered>
+<style>
+  .submit {
+    display: flex;
+    justify-content: end;
+  }
+</style>

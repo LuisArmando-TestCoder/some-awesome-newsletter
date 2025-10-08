@@ -7,10 +7,13 @@
     import createNewsSource from "../../../requests/createNewsSource";
     import SubmitButton from "../../../buttons/SubmitButton/SubmitButton.svelte";
     import { isValidURL } from "../../../inputs/Link/isValidLink";
+  import LoadingScreen from "../../../loading/LoadingScreen.svelte";
 
   export let canReveal = false;
+  let isLoading = false;
 
   async function handleAddNewsSource() {
+    isLoading = true;
     const fields = {
       url: $store.newsSource,
       lead: $store.lead,
@@ -30,33 +33,31 @@
       createNewsSource,
       console.error,
       "Failed to add news source. Please try again.",
-      (created) => {
-        // If successful, push into local store config
-        const currentConfig = $store.config;
-        if (currentConfig?.newsSources) {
-          currentConfig.newsSources.push(created);
-          saveToStore({ config: currentConfig, stepsIndex: stepsMapping["News Sources"] });
-        }
+      () => {
+        saveToStore({ stepsIndex: stepsMapping["News Sources"] });
       }
     );
   }
 
   async function trigger(isValid: boolean) {
-      if (isValid)
+      if (isValid) {
+        await handleAddNewsSource();
         saveToStore({
           stepsIndex: $store.stepsIndex + 1,
         });
-
-        if (!$store.config.newsSources.length) {
-          await handleAddNewsSource();
-        }
+      }
     }
 </script>
 
-<Centered>
-  <MarkdownText {canReveal}>--In order to use your blog or news feed we need you to type its link--</MarkdownText>
+{#if isLoading}
+  <LoadingScreen messages={["Generating selectors...", "Analyzing content...", "Finalizing setup..."]} />
+{/if}
 
-  <MarkdownText {canReveal}>
+<Centered>
+  <div style={isLoading ? 'opacity: 0.5; pointer-events: none;' : ''}>
+    <MarkdownText {canReveal}>--In order to use your blog or news feed we need you to type its link--</MarkdownText>
+
+    <MarkdownText {canReveal}>
     ### We will generate content from your feed, so you don't have to create a newsletter from scratch
   </MarkdownText>
   <Link
@@ -66,11 +67,12 @@
       saveToStore({
         newsSource,
       })}
-    onEnter={trigger}
+    onEnter={() => trigger(isValidURL($store.newsSource))}
   />
   <br>
-  <div class="submit">
-    <SubmitButton callback={() => trigger(isValidURL($store.newsSource))}/>
+    <div class="submit">
+      <SubmitButton callback={() => trigger(isValidURL($store.newsSource))}/>
+    </div>
   </div>
 </Centered>
 

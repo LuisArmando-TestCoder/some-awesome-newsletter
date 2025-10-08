@@ -6,6 +6,7 @@ import subscribeNewsletterUser from "./subscribeNewsletterUser";
 // Removed getAllSubscribersFromConfigEndpoint import
 import { refreshSubscribers } from "../steps/StepsTowardsPublish/stages/H_Dashboard/Users/UserDataService"; // Import the centralized refresh function
 import getAuthHeaders from "./getAuthHeaders";
+import { getConfigFetchResponse } from "./getConfiguratorSession";
 
 export function getRandomScheduleTime() {
   // Generate random schedule: random hour (0-23), random day of week (0-6)
@@ -29,6 +30,7 @@ export default async function createNewsSource(newsSource: {
   scheduleTime?: string;
   personality?: string;
 }) {
+  console.log("[createNewsSource.ts] createNewsSource called with", newsSource);
   const configId = get(store).configuratorEmail;
   console.log(
     "[CREATE-NEWSOURCE] Using configuratorEmail (configId):",
@@ -138,6 +140,9 @@ export default async function createNewsSource(newsSource: {
   ); */ // Correctly closed comment
 
   console.log("[CREATE-NEWSOURCE] Updated store with new news source."); // This should not be commented
+
+  // Refetch the configuration to update the store
+  await getConfigFetchResponse(getAuthHeaders());
 
   return json?.newsSource;
 }

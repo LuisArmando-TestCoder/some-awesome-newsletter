@@ -189,16 +189,18 @@
 
 
         <Link
-          label="Lead"
-          placeholder="Destination URL or text"
-          bind:value={updateFields.lead}
-        />
-
-        <Link
           label="News Source URL"
           placeholder="Your news source URL"
           bind:value={updateFields.url}
         />
+        <Link
+          label="Lead"
+          placeholder="Destination URL or text"
+          bind:value={updateFields.lead}
+        />
+        <p class="info-message">
+          **Note:** The lead URL is optional, but it's highly recommended. It helps our AI to better understand the context of your news source and generate more relevant content.
+        </p>
       </div>
     </ToggleCard>
 

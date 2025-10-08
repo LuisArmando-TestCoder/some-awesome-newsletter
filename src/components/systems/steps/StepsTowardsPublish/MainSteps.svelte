@@ -45,7 +45,7 @@
     [t, B_Welcome2],
     [t, C_Welcome3],
     [t, D_Lead],
-    [(store: Store) => isValidURL(store.lead), E_NewsSource],
+    [t, E_NewsSource],
     [(store: Store) => {
       return isValidURL(store.newsSource);
     }, Config],

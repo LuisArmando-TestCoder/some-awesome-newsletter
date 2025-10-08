@@ -80,6 +80,7 @@
   class:shape-a={shapeA}
   class:shape-b={shapeB}
   aria-label="Primary Navigation"
+  style={$store.stepsIndex > 4 ? '' : 'display: none;'}
 >
   <button
     class="sidebar__toggle"
@@ -109,7 +110,7 @@
         src={$store?.picture || ""}
         alt="User avatar"
         class="sidebar__profile-avatar outlined"
-        on:error={(e) => (e.currentTarget.style.display = 'none')}
+        on:error={(e) => ((e.currentTarget as HTMLElement).style.display = 'none')}
       />
       <div class="sidebar__profile-initials outlined">
         {getInitials($store?.config.senderName || $store?.given_name)}

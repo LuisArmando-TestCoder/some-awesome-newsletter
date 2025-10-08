@@ -52,8 +52,8 @@
     <div class="main-article" class:selected={mainArticle.id === $selectedArticle?.id} on:click={() => openArticle(mainArticle)}>
       <div class="image-container"><img src={getImage(mainArticle.content)?.src} alt={mainArticle.title} /></div>
       <div class="text-content">
-        <h2>{mainArticle.title}</h2>
-        <p class="preview-text">{getPreview(noH1(mainArticle.content))}</p>
+        <h2>{@html mainArticle.title}</h2>
+        <p class="preview-text">{@html getPreview(noH1(mainArticle.content))}</p>
       </div>
     </div>
   {/if}
@@ -62,8 +62,8 @@
       <div class="secondary-article" class:selected={secondaryArticle1.id === $selectedArticle?.id} on:click={() => openArticle(secondaryArticle1)}>
         <div class="image-container"><img src={getImage(secondaryArticle1.content)?.src} alt={secondaryArticle1.title} /></div>
         <div class="text-content">
-          <h3>{secondaryArticle1.title}</h3>
-          <p class="preview-text">{getPreview(noH1(secondaryArticle1.content))}</p>
+          <h3>{@html secondaryArticle1.title}</h3>
+          <p class="preview-text">{@html getPreview(noH1(secondaryArticle1.content))}</p>
         </div>
       </div>
     {/if}
@@ -71,8 +71,8 @@
       <div class="secondary-article" class:selected={secondaryArticle2.id === $selectedArticle?.id} on:click={() => openArticle(secondaryArticle2)}>
         <div class="image-container"><img src={getImage(secondaryArticle2.content)?.src} alt={secondaryArticle2.title} /></div>
         <div class="text-content">
-          <h3>{secondaryArticle2.title}</h3>
-          <p class="preview-text">{getPreview(noH1(secondaryArticle2.content))}</p>
+          <h3>{@html secondaryArticle2.title}</h3>
+          <p class="preview-text">{@html getPreview(noH1(secondaryArticle2.content))}</p>
         </div>
       </div>
     {/if}

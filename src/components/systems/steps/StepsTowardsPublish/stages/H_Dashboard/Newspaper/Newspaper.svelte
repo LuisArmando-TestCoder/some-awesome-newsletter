@@ -348,7 +348,7 @@
       {#if $isArticleOpen && $selectedArticle}
         <Container show={isArticleOpen}>
           <div class="modal-content-inner">
-            <h2>{$selectedArticle.title}</h2>
+            <h2>{@html $selectedArticle.title}</h2>
             <p><small>Created: {$selectedArticle.creation} | Language: {$selectedArticle.language}</small></p>
             {@html $selectedArticle.content}
           </div>

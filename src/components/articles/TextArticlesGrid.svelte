@@ -45,8 +45,8 @@
     <div class="text-grid-wrapper grid-a">
       {#each textSlice1 as article (article.id)}
         <div class="text-card" class:selected={article.id === $selectedArticle?.id} on:click={() => openArticle(article)}>
-          <h3>{article.title}</h3>
-          <p class="preview-text">{getPreview(noH1(article.content))}</p>
+          <h3>{@html article.title}</h3>
+          <p class="preview-text">{@html getPreview(noH1(article.content))}</p>
         </div>
       {/each}
     </div>
@@ -54,21 +54,21 @@
   {#if textSlice2.length > 0}
     <div class="text-grid-wrapper grid-b">
       {#each textSlice2 as article (article.id)}
-        <div class="text-card" class:selected={article.id === $selectedArticle?.id} on:click={() => openArticle(article)}><h4>{article.title}</h4></div>
+        <div class="text-card" class:selected={article.id === $selectedArticle?.id} on:click={() => openArticle(article)}><h4>{@html article.title}</h4></div>
       {/each}
     </div>
   {/if}
   {#if textSlice3.length > 0}
     <div class="text-grid-wrapper grid-c">
       {#each textSlice3 as article (article.id)}
-        <div class="text-card" class:selected={article.id === $selectedArticle?.id} on:click={() => openArticle(article)}><h4>{article.title}</h4></div>
+        <div class="text-card" class:selected={article.id === $selectedArticle?.id} on:click={() => openArticle(article)}><h4>{@html article.title}</h4></div>
       {/each}
     </div>
   {/if}
   {#if textSlice4.length > 0}
     <div class="text-grid-wrapper grid-d">
       {#each textSlice4 as article (article.id)}
-        <div class="text-card" class:selected={article.id === $selectedArticle?.id} on:click={() => openArticle(article)}><h4>{article.title}</h4></div>
+        <div class="text-card" class:selected={article.id === $selectedArticle?.id} on:click={() => openArticle(article)}><h4>{@html article.title}</h4></div>
       {/each}
     </div>
   {/if}

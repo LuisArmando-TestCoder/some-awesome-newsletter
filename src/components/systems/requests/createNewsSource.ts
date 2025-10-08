@@ -46,7 +46,7 @@ export default async function createNewsSource(newsSource: {
     personality: get(store).personality, // Consider if this should also be from input or have a default
     community: "World Wide Expats", // Consider if this should be from input or have a default
     country: "US", // Consider if this should be from input or have a default
-    scheduleTime: newsSource.scheduleTime ?? randomScheduleTime, // Use the generated random schedule as default
+    scheduleTime: newsSource.scheduleTime || randomScheduleTime, // Use the generated random schedule as default
     ...Object.fromEntries(
       // Filter out falsy values from the input, allowing input to override defaults
       Object.entries(newsSource).filter(([_, value]) => value)

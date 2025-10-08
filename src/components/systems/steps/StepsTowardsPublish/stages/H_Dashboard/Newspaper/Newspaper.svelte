@@ -5,7 +5,7 @@
   import Language from "../../../../../../systems/inputs/Language/Language.svelte";
   import SearchBar from "../../../../../../SearchBar/SearchBar.svelte";
   import Pagination from "../../../../../../Pagination/Pagination.svelte";
-  import Modal from "../../../../../../Modal/Modal.svelte";
+  import Container from "../../../../../../Container/Container.svelte";
   import store from "../../../../../../store";
   import ArticleCardSkeleton from "../../../../../../ArticleCardSkeleton/ArticleCardSkeleton.svelte";
   import FeaturedArticlesGrid from "../../../../../../articles/FeaturedArticlesGrid.svelte";
@@ -24,8 +24,8 @@
   let articlesWithImages: Article[] = [];
   let articlesWithoutImages: Article[] = [];
   let allUserLanguages: string[] = [];
-  let showModal = writable(false);
   let selectedArticle: Article | null = null;
+  let isArticleOpen = false;
   let error: string | null = null;
   let search = "";
   const ITEMS_PER_PAGE = 20;
@@ -190,12 +190,11 @@
 
   function openArticle(article: Article) {
     selectedArticle = article;
-    showModal.set(true);
+    isArticleOpen = true;
   }
 
-  function closeModal() {
-    showModal.set(false);
-    selectedArticle = null;
+  function closeArticle() {
+    isArticleOpen = false;
   }
 
   async function loadInitialArticles() {
@@ -268,9 +267,10 @@
   </div>
 
   {#if newsSourceId}
-  <main class="articles-content">
-    <div class="controls">
-      <div class="controls__languages">
+  <main class="articles-content" class:article-open={isArticleOpen}>
+    <div class="articles-wrapper">
+      <div class="controls">
+        <div class="controls__languages">
         {#if activeTab}
           <Language
             whitelist={allUserLanguages}
@@ -337,19 +337,21 @@
       <Pagination currentPage={languagePages.get(activeTab) || 0} {totalItems} pageSize={ITEMS_PER_PAGE} on:pageChange={(e) => handlePageChange(activeTab, e)} />
       {/if}
     {/if}
+    </div>
+    <div class="article-viewer">
+      {#if selectedArticle}
+        <Container on:close={closeArticle}>
+          <div class="modal-content-inner">
+            <h2>{selectedArticle.title}</h2>
+            <p><small>Created: {selectedArticle.creation} | Language: {selectedArticle.language}</small></p>
+            {@html selectedArticle.content}
+          </div>
+        </Container>
+      {/if}
+    </div>
   </main>
   {/if}
 </div>
-
-<Modal {showModal} onChange={(v) => !v && closeModal()}>
-  {#if selectedArticle}
-    <div class="modal-content-inner">
-      <h2>{selectedArticle.title}</h2>
-      <p><small>Created: {selectedArticle.creation} | Language: {selectedArticle.language}</small></p>
-      {@html selectedArticle.content}
-    </div>
-  {/if}
-</Modal>
 
 <style lang="scss">
   .newspaper-container {
@@ -407,5 +409,73 @@
   .modal-content-inner {
     height: 80vh;
     overflow-y: auto;
+  }
+
+  .articles-content {
+    display: flex;
+    position: relative;
+    width: 100%;
+    gap: 2rem;
+  }
+
+  .articles-wrapper {
+    flex: 1 1 100%;
+    transition: flex-basis 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .article-viewer {
+    flex: 0 0 0%;
+    max-width: 0;
+    transition: flex-basis 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), max-width 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    overflow: hidden;
+    position: sticky;
+    top: 2rem;
+    height: 100vh;
+  }
+
+  .articles-content.article-open .articles-wrapper {
+    flex-basis: 65%;
+  }
+
+  .articles-content.article-open .article-viewer {
+    flex-basis: 35%;
+    max-width: 35%;
+  }
+
+  @media (max-width: 1024px) {
+    .articles-content {
+      display: block;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .articles-wrapper {
+      width: 100%;
+      position: relative;
+      left: 0;
+      transition: left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .article-viewer {
+      position: absolute;
+      top: 0;
+      left: 100%;
+      width: 100%;
+      height: 100%;
+      max-width: 100%;
+      flex-basis: auto;
+      transition: left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      z-index: 10;
+    }
+
+    .articles-content.article-open .articles-wrapper {
+      left: -100%;
+    }
+
+    .articles-content.article-open .article-viewer {
+      left: 0;
+      max-width: 100%;
+      flex-basis: auto;
+    }
   }
 </style>

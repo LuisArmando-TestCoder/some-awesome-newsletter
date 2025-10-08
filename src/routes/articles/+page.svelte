@@ -4,6 +4,7 @@
   import { writable } from "svelte/store";
   import { page } from "$app/stores";
   import { goto } from "$app/navigation";
+  import { browser } from "$app/environment";
   import languages from "../../components/systems/inputs/Language/languages";
   import Language from "../../components/systems/inputs/Language/Language.svelte";
   import SearchBar from "../../components/SearchBar/SearchBar.svelte";
@@ -29,7 +30,7 @@
   let articlesWithoutImages: Article[] = [];
   let availableLanguages: string[] = [];
   let showModal = writable(false);
-  let selectedArticle: Article | null = null;
+  let selectedArticle = writable<Article | null>(null);
   let error: string | null = null;
   let search = "";
   const ITEMS_PER_PAGE = 20;
@@ -164,11 +165,16 @@
           for (const line of lines) {
             if (line.trim() === "") continue;
             const article = JSON.parse(line);
+            const titleMatch = article.content ? article.content.match(/<h1[^>]*>([\s\S]*?)<\/h1>/) || article.content.match(/<h2[^>]*>([\s\S]*?)<\/h2>/) : null;
+            const title = titleMatch ? titleMatch[1] : "Article";
+            const content = article.content ? article.content.replace(/<h1[^>]*>[\s\S]*?<\/h1>/, "").replace(/<h2[^>]*>[\s\S]*?<\/h2>/, "") : "";
+
             const processedArticle = {
               ...article,
-              title: article.content ? (article.content.match(/<h1[^>]*>([\s\S]*?)<\/h1>/) || [])[1] || "Article" : "Article",
+              title,
+              content,
             };
-            if (processedArticle.content && /<img[^>]+>/.test(processedArticle.content)) {
+            if (article.content && /<img[^>]+>/.test(article.content)) {
               articlesWithImages = [...articlesWithImages, processedArticle];
             } else {
               articlesWithoutImages = [...articlesWithoutImages, processedArticle];
@@ -194,6 +200,7 @@
 
   /* ────────── navigation helpers ────────── */
   function updateURL(params: { [key: string]: string | null }) {
+    if (!browser) return;
     const url = new URL($page.url);
     Object.entries(params).forEach(([key, value]) => {
       if (value) {
@@ -205,22 +212,20 @@
     goto(`?${url.searchParams.toString()}`, { replaceState: true, noScroll: true });
   }
 
-  function openArticle(article: Article) {
-    selectedArticle = article;
-    showModal.set(true);
-    updateURL({ article: article.id });
-  }
-
-  function closeModal() {
-    showModal.set(false);
-    selectedArticle = null;
-    updateURL({ article: null });
-  }
+  selectedArticle.subscribe(value => {
+    if (value) {
+      showModal.set(true);
+      updateURL({ article: value.id });
+    } else {
+      showModal.set(false);
+      updateURL({ article: null });
+    }
+  });
 
   async function openArticleById(id: string) {
     const fetchedArticle = await fetchSingleArticle(id);
     if (fetchedArticle) {
-      openArticle(fetchedArticle);
+      selectedArticle.set(fetchedArticle);
     }
   }
 
@@ -342,12 +347,12 @@
       {#if noResults}
         <p>No articles found.</p>
       {:else if articlesWithImages.length > 0}
-        <FeaturedArticlesGrid articles={articlesWithImages.slice(0, 3)} on:open={(e) => openArticle(e.detail)} />
+        <FeaturedArticlesGrid articles={articlesWithImages.slice(0, 3)} bind:selectedArticle />
       {/if}
 
       <!-- Section 2: Dynamic Text-Focused Grids -->
       {#if articlesWithoutImages.length > 0}
-        <TextArticlesGrid articles={articlesWithoutImages} on:open={(e) => openArticle(e.detail)} />
+        <TextArticlesGrid articles={articlesWithoutImages} bind:selectedArticle />
       {/if}
 
       <!-- Section 3: Rearranged Featured Grids -->
@@ -359,7 +364,7 @@
                 articles={articlesWithImages.slice(i + 3, i + 6)}
                 rearranged={true}
                 order={i / 3 % 2}
-                on:open={(e) => openArticle(e.detail)}
+                bind:selectedArticle
               />
             {/if}
           {/each}
@@ -375,14 +380,18 @@
   <footer class="page-footer">
     <p>&copy; {new Date().getFullYear()} Some Awesome Newsletter. All Rights Reserved.</p>
   </footer>
+
+  <footer class="page-footer">
+    <p>&copy; {new Date().getFullYear()} Some Awesome Newsletter. All Rights Reserved.</p>
+  </footer>
 </div>
 
-<Modal {showModal} onChange={(v) => !v && closeModal()}>
-  {#if selectedArticle}
+<Modal {showModal} onChange={(v) => !v && selectedArticle.set(null)}>
+  {#if $selectedArticle}
     <div class="modal-content-inner">
-      <h2>{selectedArticle.title}</h2>
-      <p><small>Created: {selectedArticle.creation} | Language: {selectedArticle.language}</small></p>
-      {@html selectedArticle.content}
+      <h2>{$selectedArticle.title}</h2>
+      <p><small>Created: {$selectedArticle.creation} | Language: {$selectedArticle.language}</small></p>
+      {@html $selectedArticle.content}
     </div>
   {/if}
 </Modal>

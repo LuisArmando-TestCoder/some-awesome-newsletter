@@ -1,11 +1,11 @@
 <script lang="ts">
-    import { createEventDispatcher } from 'svelte';
+    import type { Writable } from 'svelte/store';
 
-    const dispatch = createEventDispatcher();
+    export let show: Writable<boolean>;
 </script>
 
 <div class="container-content">
-    <button class="close-button" on:click={() => dispatch('close')}>→</button>
+    <button class="close-button" on:click={() => show.set(false)}>→</button>
     <slot></slot>
 </div>
 
@@ -24,7 +24,7 @@
     .close-button {
         position: absolute;
         bottom: 10px;
-        left: 20px;
+        left: 10px;
         border: none;
         background: transparent;
         font-size: 2rem;

@@ -1,17 +1,17 @@
 <script lang="ts">
-  import { createEventDispatcher } from "svelte";
+  import type { Writable } from "svelte/store";
 
   export let articles: Article[] = [];
   export let rearranged = false;
   export let order = 0;
-
-  const dispatch = createEventDispatcher();
+  export let selectedArticle: Writable<Article | null>;
 
   interface Article {
     id: string;
     content: string;
     creation: string;
     language: string;
+    title: string;
   }
 
   function getImage(html: string) {
@@ -21,14 +21,6 @@
     return div.querySelector("img") as HTMLImageElement | null;
   }
 
-  function getTitle(html: string) {
-    if (typeof document === "undefined") return "Article";
-    const div = document.createElement("div");
-    div.innerHTML = html;
-    const h1 = div.querySelector("h1")?.innerText;
-    const h2 = div.querySelector("h2")?.innerText;
-    return h1 || h2 || "Article";
-  }
 
   function noH1(content: string) {
     if (typeof document === "undefined") return content;
@@ -47,7 +39,7 @@
   }
 
   function openArticle(article: Article) {
-    dispatch("open", article);
+    selectedArticle.set(article);
   }
 
   $: mainArticle = articles[0];
@@ -57,29 +49,29 @@
 
 <section class="featured-grid" class:rearranged style="--order: {order}">
   {#if mainArticle}
-    <div class="main-article" on:click={() => openArticle(mainArticle)}>
-      <div class="image-container"><img src={getImage(mainArticle.content)?.src} alt={getTitle(mainArticle.content)} /></div>
+    <div class="main-article" class:selected={mainArticle.id === $selectedArticle?.id} on:click={() => openArticle(mainArticle)}>
+      <div class="image-container"><img src={getImage(mainArticle.content)?.src} alt={mainArticle.title} /></div>
       <div class="text-content">
-        <h2>{getTitle(mainArticle.content)}</h2>
+        <h2>{mainArticle.title}</h2>
         <p class="preview-text">{getPreview(noH1(mainArticle.content))}</p>
       </div>
     </div>
   {/if}
   <div class="secondary-articles">
     {#if secondaryArticle1}
-      <div class="secondary-article" on:click={() => openArticle(secondaryArticle1)}>
-        <div class="image-container"><img src={getImage(secondaryArticle1.content)?.src} alt={getTitle(secondaryArticle1.content)} /></div>
+      <div class="secondary-article" class:selected={secondaryArticle1.id === $selectedArticle?.id} on:click={() => openArticle(secondaryArticle1)}>
+        <div class="image-container"><img src={getImage(secondaryArticle1.content)?.src} alt={secondaryArticle1.title} /></div>
         <div class="text-content">
-          <h3>{getTitle(secondaryArticle1.content)}</h3>
+          <h3>{secondaryArticle1.title}</h3>
           <p class="preview-text">{getPreview(noH1(secondaryArticle1.content))}</p>
         </div>
       </div>
     {/if}
     {#if secondaryArticle2}
-      <div class="secondary-article" on:click={() => openArticle(secondaryArticle2)}>
-        <div class="image-container"><img src={getImage(secondaryArticle2.content)?.src} alt={getTitle(secondaryArticle2.content)} /></div>
+      <div class="secondary-article" class:selected={secondaryArticle2.id === $selectedArticle?.id} on:click={() => openArticle(secondaryArticle2)}>
+        <div class="image-container"><img src={getImage(secondaryArticle2.content)?.src} alt={secondaryArticle2.title} /></div>
         <div class="text-content">
-          <h3>{getTitle(secondaryArticle2.content)}</h3>
+          <h3>{secondaryArticle2.title}</h3>
           <p class="preview-text">{getPreview(noH1(secondaryArticle2.content))}</p>
         </div>
       </div>
@@ -123,6 +115,12 @@
       flex-direction: column;
       min-height: 200px;
       cursor: pointer;
+      border: 2px solid transparent;
+      transition: border-color 0.3s ease;
+    }
+
+    .selected {
+      border-color: #007bff;
     }
 
     .main-article {

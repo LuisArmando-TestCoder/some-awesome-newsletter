@@ -1,25 +1,17 @@
 <script lang="ts">
-  import { createEventDispatcher } from "svelte";
+  import type { Writable } from "svelte/store";
 
   export let articles: Article[] = [];
-
-  const dispatch = createEventDispatcher();
+  export let selectedArticle: Writable<Article | null>;
 
   interface Article {
     id: string;
     content: string;
     creation: string;
     language: string;
+    title: string;
   }
 
-  function getTitle(html: string) {
-    if (typeof document === "undefined") return "Article";
-    const div = document.createElement("div");
-    div.innerHTML = html;
-    const h1 = div.querySelector("h1")?.innerText;
-    const h2 = div.querySelector("h2")?.innerText;
-    return h1 || h2 || "Article";
-  }
 
   function noH1(content: string) {
     if (typeof document === "undefined") return content;
@@ -38,7 +30,7 @@
   }
 
   function openArticle(article: Article) {
-    dispatch("open", article);
+    selectedArticle.set(article);
   }
 
   $: quarter = Math.ceil(articles.length / 4);
@@ -52,8 +44,8 @@
   {#if textSlice1.length > 0}
     <div class="text-grid-wrapper grid-a">
       {#each textSlice1 as article (article.id)}
-        <div class="text-card" on:click={() => openArticle(article)}>
-          <h3>{getTitle(article.content)}</h3>
+        <div class="text-card" class:selected={article.id === $selectedArticle?.id} on:click={() => openArticle(article)}>
+          <h3>{article.title}</h3>
           <p class="preview-text">{getPreview(noH1(article.content))}</p>
         </div>
       {/each}
@@ -62,21 +54,21 @@
   {#if textSlice2.length > 0}
     <div class="text-grid-wrapper grid-b">
       {#each textSlice2 as article (article.id)}
-        <div class="text-card" on:click={() => openArticle(article)}><h4>{getTitle(article.content)}</h4></div>
+        <div class="text-card" class:selected={article.id === $selectedArticle?.id} on:click={() => openArticle(article)}><h4>{article.title}</h4></div>
       {/each}
     </div>
   {/if}
   {#if textSlice3.length > 0}
     <div class="text-grid-wrapper grid-c">
       {#each textSlice3 as article (article.id)}
-        <div class="text-card" on:click={() => openArticle(article)}><h4>{getTitle(article.content)}</h4></div>
+        <div class="text-card" class:selected={article.id === $selectedArticle?.id} on:click={() => openArticle(article)}><h4>{article.title}</h4></div>
       {/each}
     </div>
   {/if}
   {#if textSlice4.length > 0}
     <div class="text-grid-wrapper grid-d">
       {#each textSlice4 as article (article.id)}
-        <div class="text-card" on:click={() => openArticle(article)}><h4>{getTitle(article.content)}</h4></div>
+        <div class="text-card" class:selected={article.id === $selectedArticle?.id} on:click={() => openArticle(article)}><h4>{article.title}</h4></div>
       {/each}
     </div>
   {/if}
@@ -110,10 +102,15 @@
       box-sizing: border-box;
       min-width: 0;
       overflow-wrap: break-word;
+      border: 2px solid transparent;
+      transition: all var(--transition-speed) ease;
       &:hover {
         transform: translateY(-5px);
         box-shadow: 0 10px 20px rgba(0,0,0,0.05);
       }
+    }
+    .selected {
+      border-color: #007bff;
     }
   }
 

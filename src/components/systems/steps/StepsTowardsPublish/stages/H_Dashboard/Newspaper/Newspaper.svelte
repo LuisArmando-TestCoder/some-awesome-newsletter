@@ -24,8 +24,8 @@
   let articlesWithImages: Article[] = [];
   let articlesWithoutImages: Article[] = [];
   let allUserLanguages: string[] = [];
-  let selectedArticle: Article | null = null;
-  let isArticleOpen = false;
+  let selectedArticle = writable<Article | null>(null);
+  let isArticleOpen = writable(false);
   let error: string | null = null;
   let search = "";
   const ITEMS_PER_PAGE = 20;
@@ -188,14 +188,13 @@
     }, 1500);
   }
 
-  function openArticle(article: Article) {
-    selectedArticle = article;
-    isArticleOpen = true;
-  }
-
-  function closeArticle() {
-    isArticleOpen = false;
-  }
+  selectedArticle.subscribe(value => {
+    if (value) {
+      isArticleOpen.set(true);
+    } else {
+      isArticleOpen.set(false);
+    }
+  });
 
   async function loadInitialArticles() {
     // Reset state before fetching new data
@@ -267,7 +266,7 @@
   </div>
 
   {#if newsSourceId}
-  <main class="articles-content" class:article-open={isArticleOpen}>
+  <main class="articles-content" class:article-open={$isArticleOpen}>
     <div class="articles-wrapper">
       <div class="controls">
         <div class="controls__languages">
@@ -311,11 +310,11 @@
       {#if noResults}
         <p>No articles found for this news source.</p>
       {:else if articlesWithImages.length > 0}
-        <FeaturedArticlesGrid articles={articlesWithImages.slice(0, 3)} on:open={(e) => openArticle(e.detail)} />
+        <FeaturedArticlesGrid articles={articlesWithImages.slice(0, 3)} bind:selectedArticle />
       {/if}
 
       {#if articlesWithoutImages.length > 0}
-        <TextArticlesGrid articles={articlesWithoutImages} on:open={(e) => openArticle(e.detail)} />
+        <TextArticlesGrid articles={articlesWithoutImages} bind:selectedArticle={selectedArticle} />
       {/if}
 
       {#if articlesWithImages.length > 3}
@@ -326,7 +325,7 @@
                 articles={articlesWithImages.slice(i + 3, i + 6)}
                 rearranged={true}
                 order={i / 3 % 2}
-                on:open={(e) => openArticle(e.detail)}
+                bind:selectedArticle
               />
             {/if}
           {/each}
@@ -339,12 +338,12 @@
     {/if}
     </div>
     <div class="article-viewer">
-      {#if selectedArticle}
-        <Container on:close={closeArticle}>
+      {#if $isArticleOpen && $selectedArticle}
+        <Container show={isArticleOpen}>
           <div class="modal-content-inner">
-            <h2>{selectedArticle.title}</h2>
-            <p><small>Created: {selectedArticle.creation} | Language: {selectedArticle.language}</small></p>
-            {@html selectedArticle.content}
+            <h2>{$selectedArticle.title}</h2>
+            <p><small>Created: {$selectedArticle.creation} | Language: {$selectedArticle.language}</small></p>
+            {@html $selectedArticle.content}
           </div>
         </Container>
       {/if}
@@ -391,7 +390,7 @@
     color: white;
     text-decoration: none;
     border-radius: 8px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s cubic-bezier(0.6, -0.28, 0.735, 1);
 
     &:hover {
       background-color: #0056b3;
@@ -420,13 +419,13 @@
 
   .articles-wrapper {
     flex: 1 1 100%;
-    transition: flex-basis 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: flex-basis 0.95s cubic-bezier(0.25, 0, 0.25, 1);
   }
 
   .article-viewer {
     flex: 0 0 0%;
     max-width: 0;
-    transition: flex-basis 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), max-width 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: flex-basis 0.75s cubic-bezier(0.25, 0, 0.25, 1), max-width 0.5s cubic-bezier(0.25, 0, 0.25, 1);
     overflow: hidden;
     position: sticky;
     top: 2rem;
@@ -453,7 +452,7 @@
       width: 100%;
       position: relative;
       left: 0;
-      transition: left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transition: left 0.5s cubic-bezier(0.25, 0, 0.25, 1);
     }
 
     .article-viewer {
@@ -464,7 +463,7 @@
       height: 100%;
       max-width: 100%;
       flex-basis: auto;
-      transition: left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transition: left 0.5s cubic-bezier(0.25, 0, 0.25, 1);
       z-index: 10;
     }
 

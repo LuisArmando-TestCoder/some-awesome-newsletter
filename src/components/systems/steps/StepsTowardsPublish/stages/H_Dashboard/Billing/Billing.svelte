@@ -17,12 +17,6 @@
 		await loadPlansContent();
 	});
 
-  async function handlePortal() {
-    const response = await fetch(`/api/portal?customerEmail=${$store.config.configuratorId}`);
-    const { url } = await response.json();
-    window.location.href = url;
-  }
-
 	$: {
 		if ($store.config && state?.content) {
 			const plan = state.content.plans.find((p) => p.id === $store.config.pricingPlan);
@@ -48,7 +42,7 @@
           <h3 class="current-plan-name">{$currentPlan.name}</h3>
           <p class="current-plan-price">${$currentPlan.monthly} per month</p>
         </div>
-        <a href={`/api/portal?customerEmail=${$store.config.configuratorId}`} class="manage-plan-button">Manage Subscription</a>
+        <a href={`/api/portal?customerEmail=${$store.configuratorEmail}`} class="manage-plan-button">Manage Subscription</a>
       {:else}
         <p>Loading your plan details...</p>
       {/if}

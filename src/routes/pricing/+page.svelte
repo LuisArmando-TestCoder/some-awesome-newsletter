@@ -1,8 +1,8 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import plansStore, { loadPlansContent, computeFeatures, type PlanId, setInterval } from '$lib/config/plans.config';
+  import plansStore, { loadPlansContent, computeFeatures, type PlanId, setInterval, type PlansState } from '$lib/config/plans.config';
   import Switch from '$lib/ui/components/Switch.svelte';
-  let state;
+  let state: PlansState;
   const unsub = plansStore.subscribe(v => (state = v));
 
   onMount(async () => {
@@ -35,8 +35,8 @@
 
     <div class="pricing__grid">
       {#if state?.content?.plans}
-        {#each state.content.plans as plan}
-          <section class="pricing__plan pricing__plan--{plan.id}" aria-labelledby="plan-name-{plan.id}">
+        {#each state.content.plans.filter(p => !p.internalOnly) as plan}
+          <section class="pricing__plan pricing__plan--{plan.id}" class:current={plan.id === state.currentPlan} aria-labelledby="plan-name-{plan.id}">
             <div class="pricing__plan-head">
               <h2 id="plan-name-{plan.id}" class="pricing__plan-name">{plan.name}</h2>
               <p class="pricing__plan-desc">{plan.tagline}</p>
@@ -44,9 +44,12 @@
             <div class="pricing__price">
               <span class="pricing__price-amount">${state.interval === 'monthly' ? plan.monthly : plan.yearly}</span>
               <span class="pricing__per">/{state.interval === 'monthly' ? 'mo' : 'yr'}</span>
+              {#if plan.id === 'yearly' && state.interval === 'monthly'}
+                <span class="pricing__equivalent"><i><sup>(equivalent to ${plan.yearly} yearly)</sup></i></span>
+              {/if}
             </div>
             <ul class="pricing__feature-list">
-              {#if plan.id !== 'trial'}
+              {#if plan.id !== 'free'}
                 <h3 class="pricing__feature-heading">Everything in previous plan, plus:</h3>
               {/if}
               {#each computeFeatures(state.content, plan.id) as feature}
@@ -56,7 +59,13 @@
                 </li>
               {/each}
             </ul>
-            <button class="pricing__cta">{plan.ctaLabel}</button>
+            {#if plan.id === state.currentPlan}
+              <button class="pricing__cta current-plan-button" disabled>This is your current plan</button>
+            {:else if state.content && state.content.plans.find(p => p.id === state.currentPlan) && plan.tier < state.content.plans.find(p => p.id === state.currentPlan)!.tier}
+              <a href={`/api/checkout?products=${plan.productId}`} class="pricing__cta">Downgrade to {plan.name}</a>
+            {:else}
+              <a href={`/api/checkout?products=${plan.productId}`} class="pricing__cta">Upgrade to {plan.name}</a>
+            {/if}
           </section>
         {/each}
       {/if}
@@ -128,6 +137,18 @@
     outline: 2px solid var(--c-primary);
     transform: translateY(-2px);
   }
+
+  .pricing__plan.current {
+    background-color: #000;
+    color: #fff;
+    border: 2px dashed var(--c-primary);
+  }
+
+  .current-plan-button {
+    background-color: transparent;
+    color: #fff;
+    border: 2px dashed #fff;
+  }
   .pricing__ribbon {
     position: absolute; top: 0.75rem; right: -2.5rem; transform: rotate(35deg);
     padding: 0.25rem 2.75rem; font-size: 0.75rem; font-weight: 600;
@@ -146,6 +167,14 @@
   .pricing__price-amount { font-size: 2.25rem; font-weight: 800; letter-spacing: -0.02em; }
   .pricing__per { font-size: 0.9375rem; opacity: 0.85; }
 
+  .pricing__equivalent {
+    font-size: 0.8rem;
+    opacity: 0.8;
+    margin-left: var(--space-xs);
+    align-self: flex-end;
+    padding-bottom: 0.25rem;
+  }
+
   /* Feature list */
   .pricing__feature-list { display: grid; gap: var(--space-sm); margin: 0 0 var(--space-lg); padding: 0; list-style: none; }
   .pricing__feature {
@@ -162,7 +191,7 @@
     display: inline-flex; justify-content: center; align-items: center;
     gap: var(--space-sm); padding: var(--space-md) var(--space-lg); border-radius: var(--radius-md);
     font-weight: 700; text-align: center; text-decoration: none; cursor: pointer;
-    border: 1px solid var(--c-primary);
+    border: 1px solid white 1px dashed;
   }
   .pricing__cta:focus-visible { outline: 2px solid var(--c-primary); outline-offset: 2px; }
   .pricing__plan--popular .pricing__cta { transform: translateZ(0); }

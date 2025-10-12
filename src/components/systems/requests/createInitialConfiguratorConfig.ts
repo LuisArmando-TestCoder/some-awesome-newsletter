@@ -23,6 +23,8 @@ export default async function createInitialConfiguratorConfig(
     newsletterTitle: "Morning Bulletin",
     senderName: normalizeWord(configId?.split("@")[0]),
     emailSignature: "",
+    pricingPlan: "free",
+    vip: false,
   };
 
   const response = await fetch(`${get(store).apiURL()}/config`, {

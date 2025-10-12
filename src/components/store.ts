@@ -38,6 +38,8 @@ const store = writable<Store>({
     "config.emailSignature",
     "config.logo",
     "config.emailMaskSender", // New
+    "config.vip",
+    "config.pricingPlan",
     "subscribers", // Added
     "leads", // Added
     "subscriberName", // Added for subscription flow
@@ -66,6 +68,8 @@ const store = writable<Store>({
   config: {
     emailMaskSender: "", // New
     appPassword: "", // New
+    vip: false,
+    pricingPlan: "free",
   },
   subscribers: {}, // Added initial empty object for subscribers
   leads: {}, // Added initial empty object for leads

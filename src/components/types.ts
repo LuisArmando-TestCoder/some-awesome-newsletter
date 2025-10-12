@@ -102,6 +102,8 @@ export interface Config {
   senderName?: string; // Added
   newsletterTitle?: string; // Added
   newsletterSubject?: string; // Added
+  vip?: boolean;
+  pricingPlan?: "free" | "monthly" | "yearly" | "vipfree";
 }
 
 export interface NewsletterUser {

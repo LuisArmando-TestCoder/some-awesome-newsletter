@@ -152,7 +152,7 @@ export const content = writable({
     pricing: {
         teaser: 'Affordable Plans for Every Business',
         subTitle: 'Our plans are designed to grow with you.',
-        plan: 'Starts from $29/mo',
+        plan: 'Starts from $9/mo',
         cta: 'See Pricing'
     },
     finalCta: {

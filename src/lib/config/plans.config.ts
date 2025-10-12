@@ -2,7 +2,7 @@
 import { writable, type Writable } from 'svelte/store';
 
 export type Interval = 'monthly' | 'yearly';
-export type PlanId = 'trial' | 'starter' | 'pro';
+export type PlanId = 'free' | 'monthly' | 'yearly' | 'vipfree';
 
 export interface Plan {
   id: PlanId;
@@ -14,6 +14,9 @@ export interface Plan {
   featuresDelta: string[];
   limits: Record<string, number>; // -1 = unlimited
   ctaLabel: string;
+  internalOnly?: boolean;
+  productId?: string;
+  tier: number;
 }
 
 export interface PlansContent {
@@ -33,7 +36,7 @@ export interface PlansState {
 
 /** Compute progressive features for a given plan using reverse-limiter */
 export function computeFeatures(content: PlansContent, target: PlanId): string[] {
-  const order: PlanId[] = ['trial', 'starter', 'pro'];
+  const order: PlanId[] = ['free', 'monthly', 'yearly', 'vipfree'];
   const idx = order.indexOf(target);
   const byId = new Map(content.plans.map(p => [p.id, p]));
   const collected: string[] = [];
@@ -54,7 +57,7 @@ function detectMock(): boolean {
 const initial: PlansState = {
   mockMode: detectMock(),
   interval: 'monthly',
-  currentPlan: 'trial',
+  currentPlan: 'free',
   content: null
 };
 

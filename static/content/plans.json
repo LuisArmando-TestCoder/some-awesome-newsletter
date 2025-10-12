@@ -1,67 +1,79 @@
 {
   "currency": "USD",
   "billingIntervals": ["monthly", "yearly"],
-  "currentPlan": "trial",
+  "currentPlan": "free",
   "plans": [
     {
-      "id": "trial",
-      "name": "Trial",
+      "id": "free",
+      "name": "Free",
       "monthly": 0,
       "yearly": 0,
-      "tagline": "Get started free",
+      "tagline": "Get started for free",
       "featuresBase": [
-        "100 API calls/day",
-        "1 project",
-        "Basic support"
+        "1 news source"
       ],
       "featuresDelta": [],
       "limits": {
-        "api_calls_per_day": 100,
-        "projects": 1
+        "newsSources": 1
       },
-      "ctaLabel": "Start Free"
+      "ctaLabel": "Current Plan",
+      "tier": 0
     },
     {
-      "id": "starter",
-      "name": "Starter",
-      "monthly": 20,
-      "yearly": 240,
-      "tagline": "For growing teams",
+      "id": "monthly",
+      "name": "Monthly",
+      "monthly": 17,
+      "yearly": 108,
+      "tagline": "For growing newsletters",
       "featuresBase": [],
       "featuresDelta": [
-        "5,000 API calls/day",
-        "Up to 10 projects",
-        "Priority email support"
+        "Up to 17 news sources"
       ],
       "limits": {
-        "api_calls_per_day": 5000,
-        "projects": 10
+        "newsSources": 17
       },
-      "ctaLabel": "Upgrade to Starter"
+      "ctaLabel": "Upgrade to Monthly",
+      "productId": "f48b54e0-910a-46ca-b0a4-5678876512fe",
+      "tier": 1
     },
     {
-      "id": "pro",
-      "name": "Pro",
-      "monthly": 200,
-      "yearly": 2400,
-      "tagline": "Scale without limits",
+      "id": "yearly",
+      "name": "Yearly",
+      "monthly": 9,
+      "yearly": 108,
+      "tagline": "Save with a yearly plan",
       "featuresBase": [],
       "featuresDelta": [
-        "Unlimited API calls",
-        "Unlimited projects",
-        "Dedicated success manager"
+        "Up to 17 news sources"
       ],
       "limits": {
-        "api_calls_per_day": -1,
-        "projects": -1
+        "newsSources": 17
       },
-      "ctaLabel": "Upgrade to Pro"
+      "ctaLabel": "Upgrade to Yearly",
+      "productId": "e4ad16dc-dc39-4656-92f3-70b3140eddea",
+      "tier": 2
+    },
+    {
+      "id": "vipfree",
+      "name": "VIP Free",
+      "monthly": 0,
+      "yearly": 0,
+      "tagline": "For partners",
+      "featuresBase": [],
+      "featuresDelta": [
+        "Unlimited news sources"
+      ],
+      "limits": {
+        "newsSources": -1
+      },
+      "ctaLabel": "Current Plan",
+      "internalOnly": true,
+      "tier": 3
     }
   ],
   "contact": {
     "text": "Need more capabilities for your business?",
     "cta": "Contact Us",
-    "href": "/help",
-    "note": "Opens the door to Pay-as-you-go when monthly spend > 10× Starter."
+    "href": "/help"
   }
 }

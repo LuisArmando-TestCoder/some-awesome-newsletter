@@ -1,6 +1,7 @@
 <script lang="ts">
   import MarkdownText from "../../../texts/MarkdownText/MarkdownText.svelte";
   import Link from "../../../inputs/Link/Link.svelte";
+  import Country from "../../../inputs/Country/Country.svelte";
   import store, { saveToStore, stepsMapping } from "../../../../store";
   import Centered from "../../../wrappers/Centered/Centered.svelte";
     import { processNewsSourceAction } from "./H_Dashboard/NewsSource/newsSourceActions";
@@ -60,15 +61,22 @@
     <MarkdownText {canReveal}>
     ### We will generate content from your feed, so you don't have to create a newsletter from scratch
   </MarkdownText>
-  <Link
-    placeholder="Your news' site or blog's link"
-    value={$store.newsSource}
-    onChange={(newsSource) =>
-      saveToStore({
-        newsSource,
-      })}
-    onEnter={() => trigger(isValidURL($store.newsSource))}
-  />
+  <div class="news-source-input">
+    <Link
+      placeholder="Your news' site or blog's link"
+      value={$store.newsSource}
+      onChange={(newsSource) =>
+        saveToStore({
+          newsSource,
+        })}
+      onEnter={() => trigger(isValidURL($store.newsSource))}
+    />
+    <Country onSelect={(selection) => {
+      if (selection) {
+        saveToStore({ newsSource: selection.ns });
+      }
+    }} />
+  </div>
   <br>
     <div class="submit">
       <SubmitButton callback={() => trigger(isValidURL($store.newsSource))}/>
@@ -77,6 +85,11 @@
 </Centered>
 
 <style>
+  .news-source-input {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
   .submit {
     display: flex;
     justify-content: end;

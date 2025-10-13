@@ -366,6 +366,9 @@
 							<div class="plan-price">
 								{$content.pricing.plan}
 							</div>
+							<div class="disclaimer">
+								Applies to the yearly plan at $108/year. You save $96 compared to the monthly plan at $17/month.
+							</div>
 							<a href="/pricing" class="cta-primary"
 								>{$content.pricing.cta}</a
 							>
@@ -948,6 +951,11 @@
 			font-weight: 700;
 			margin: var(--space-md) 0;
 			color: var(--c-primary);
+		}
+		.disclaimer {
+			font-size: 0.9rem;
+			color: var(--c-text-light);
+			margin: var(--space-md) 0;
 		}
 	}
 

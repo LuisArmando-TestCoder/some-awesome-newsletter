@@ -188,10 +188,18 @@
 
   /* CTA */
   .pricing__cta {
+    background: black;
+    color: white;
     display: inline-flex; justify-content: center; align-items: center;
     gap: var(--space-sm); padding: var(--space-md) var(--space-lg); border-radius: var(--radius-md);
     font-weight: 700; text-align: center; text-decoration: none; cursor: pointer;
     border: 1px solid white 1px dashed;
+    transition: background .35s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+    &:hover {
+      background: white;
+      color: black;
+    }
   }
   .pricing__cta:focus-visible { outline: 2px solid var(--c-primary); outline-offset: 2px; }
   .pricing__plan--popular .pricing__cta { transform: translateZ(0); }

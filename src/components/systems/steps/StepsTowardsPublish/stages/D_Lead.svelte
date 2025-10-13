@@ -12,6 +12,9 @@
   <MarkdownText {canReveal}>--In order for clients to go from the newsletter to your website--</MarkdownText>
 
   <MarkdownText {canReveal}>
+    The lead URL is optional, but it's highly recommended. It helps our AI to better understand the context of your news source and generate more relevant content.
+  </MarkdownText>
+  <MarkdownText {canReveal}>
     ### Put your personal or organizational website
   </MarkdownText>
   <Link
@@ -24,9 +27,6 @@
     onEnter={() => saveToStore({ stepsIndex: $store.stepsIndex + 1 })}
   />
   <br>
-  <MarkdownText {canReveal}>
-    > **Note:** The lead URL is optional, but it's highly recommended. It helps our AI to better understand the context of your news source and generate more relevant content.
-  </MarkdownText>
   <div class="submit">
     <SubmitButton callback={() => saveToStore({ stepsIndex: $store.stepsIndex + 1 })}/>
   </div>

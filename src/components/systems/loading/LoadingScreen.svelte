@@ -333,6 +333,7 @@
     height: 2em;
     display: grid;
     place-items: center;
+    color: black;
   }
 
   .loading-text span {

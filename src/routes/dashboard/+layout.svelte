@@ -11,6 +11,8 @@
   import getAuthHeaders from "../../components/systems/requests/getAuthHeaders";
   import { refreshSubscribers } from "../../components/systems/steps/StepsTowardsPublish/stages/H_Dashboard/Users/UserDataService";
   import getLeadsForConfigurator from "../../components/systems/requests/getLeadsForConfigurator";
+  import Notification from '../../components/Notification/Notification.svelte';
+  import { ping } from '../../components/Notification/notificationStore';
 
   onMount(() => {
     console.log("hi")
@@ -130,9 +132,11 @@
   </main>
 </div>
 
+<Notification />
+
 <style lang="scss">
   .dashboard-layout {
-    background: url(https://images.pexels.com/photos/925743/pexels-photo-925743.jpeg);
+    background: url(https://images.pexels.com/photos/4464918/pexels-photo-4464918.jpeg);
     background-attachment: fixed;
     background-size: cover;
     background-position: center;

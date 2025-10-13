@@ -194,11 +194,13 @@
     gap: var(--space-sm); padding: var(--space-md) var(--space-lg); border-radius: var(--radius-md);
     font-weight: 700; text-align: center; text-decoration: none; cursor: pointer;
     border: 1px solid white 1px dashed;
-    transition: background .35s cubic-bezier(0.075, 0.82, 0.165, 1);
+    box-shadow: 0 0 0 0 black;
+    transition: background .35s cubic-bezier(0.075, 0.82, 0.165, 1), box-shadow .5s;
 
     &:hover {
       background: white;
       color: black;
+      box-shadow: 0 0 0 2px black;
     }
   }
   .pricing__cta:focus-visible { outline: 2px solid var(--c-primary); outline-offset: 2px; }

@@ -12,10 +12,10 @@
   <MarkdownText {canReveal}>--In order for clients to go from the newsletter to your website--</MarkdownText>
 
   <MarkdownText {canReveal}>
-    The lead URL is optional, but it's highly recommended. It helps our AI to better understand the context of your news source and generate more relevant content.
+    This is highly recommended. It helps our AI to better understand the context of your newsletter and generate more relevant articles.
   </MarkdownText>
   <MarkdownText {canReveal}>
-    ### Put your personal or organizational website
+    ### Do you have a website? (optional)
   </MarkdownText>
   <Link
     placeholder="The link to your website"

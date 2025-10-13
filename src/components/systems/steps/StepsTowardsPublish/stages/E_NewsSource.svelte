@@ -9,6 +9,7 @@
     import SubmitButton from "../../../buttons/SubmitButton/SubmitButton.svelte";
     import { isValidURL } from "../../../inputs/Link/isValidLink";
   import LoadingScreen from "../../../loading/LoadingScreen.svelte";
+  import { ping } from "../../../../Notification/notificationStore";
 
   export let canReveal = false;
   let isLoading = false;
@@ -43,6 +44,7 @@
   async function trigger(isValid: boolean) {
       if (isValid) {
         await handleAddNewsSource();
+        ping("News Source Added", "we are about to send an article to you news letter, review your email in a few minutes");
         saveToStore({
           stepsIndex: $store.stepsIndex + 1,
         });
@@ -87,7 +89,7 @@
 <style>
   .news-source-input {
     display: flex;
-    align-items: center;
+    align-items: end;
     gap: 1rem;
   }
   .submit {

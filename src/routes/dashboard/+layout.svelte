@@ -6,13 +6,15 @@
   import logout from "../../components/systems/requests/logout";
   import store, { saveToStore, stepsMapping } from "../../components/store";
   import askIsAuthCodeValid from "../../components/systems/requests/askIsAuthCodeValid";
+  import MenuHalf from "../../components/MenuHalf/MenuHalf.svelte";
+  import MenuHalfTrigger from "../../components/MenuHalf/MenuHalfTrigger.svelte";
   import { getConfigFetchResponse } from "../../components/systems/requests/getConfiguratorSession";
   import createInitialConfiguratorConfig from "../../components/systems/requests/createInitialConfiguratorConfig";
   import getAuthHeaders from "../../components/systems/requests/getAuthHeaders";
-  import { refreshSubscribers } from "../../components/systems/steps/StepsTowardsPublish/stages/H_Dashboard/Users/UserDataService";
   import getLeadsForConfigurator from "../../components/systems/requests/getLeadsForConfigurator";
   import Notification from '../../components/Notification/Notification.svelte';
   import { ping } from '../../components/Notification/notificationStore';
+  import { refreshSubscribers } from "../../components/systems/steps/StepsTowardsPublish/stages/H_Dashboard/Users/UserDataService";
 
   onMount(() => {
     console.log("hi")
@@ -125,7 +127,11 @@
   }
 </script>
 
-<div class="dashboard-layout" class:collapsed={$collapsed}>
+<div
+  class="dashboard-layout"
+  class:collapsed={$collapsed}
+  class:no-header={!($store.isAuthCodeValid && $store.config.newsSources?.length > 0)}
+>
   <Sidebar />
   <main class="dashboard-layout__content" tabindex="-1">
     <slot />
@@ -133,6 +139,8 @@
 </div>
 
 <Notification />
+<MenuHalf />
+<MenuHalfTrigger />
 
 <style lang="scss">
   .dashboard-layout {
@@ -148,24 +156,27 @@
     display: flex;
 
     /* Height: fallback first, then modern */
-    max-height: calc(100vh - var(--header-h));
     max-height: calc(100dvh - var(--header-h));
 
-    /* Desktop-only layout width rules */
-    @media (min-width: 1025px) {
-      :global(.sidebar) {
-        flex-shrink: 0;
-        width: var(--sidebar-expanded-w);
-      }
-      &.collapsed :global(.sidebar) {
-        width: var(--sidebar-collapsed-w);
-      }
+    &.no-header {
+      --header-h: 0px;
+    }
+  }
+  
+  /* Desktop-only layout width rules */
+  @media (min-width: 1025px) {
+    .dashboard-layout :global(.sidebar) {
+      flex-shrink: 0;
+      width: var(--sidebar-expanded-w);
+    }
+    .dashboard-layout.collapsed :global(.sidebar) {
+      width: var(--sidebar-collapsed-w);
     }
   }
 
   .dashboard-layout__content {
     flex-grow: 1;
-    max-height: calc(100vh - 83px);
+    max-height: calc(100dvh - var(--header-h));
     overflow: hidden;
   }
 
@@ -176,7 +187,7 @@
 
   @media (max-width: 1024px) {
     .dashboard-layout.collapsed .dashboard-layout__content {
-      padding-left: var(--sidebar-collapsed-w, 80px);
+      padding-left: 0;
     }
     /* When expanded, we lock and dim the backdrop anyway */
     :global(body.sidebar-open) .dashboard-layout__content {

@@ -6,6 +6,7 @@
   margin: auto;
   background: transparent;
   border: 0;
+  --ham-size: 2.5rem;
   width: calc(var(--ham-size) * 1.35);
   height: calc(var(--ham-size) * 1.1);
   outline: none;

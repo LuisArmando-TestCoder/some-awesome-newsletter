@@ -254,5 +254,8 @@
 
   @media (max-width: 1024px) {
     :global(body.mobile-layout .dashboard-layout) { display: block; }
+    .sidebar {
+      display: none;
+    }
   }
 </style>

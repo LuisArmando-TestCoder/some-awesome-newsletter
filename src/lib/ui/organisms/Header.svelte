@@ -6,10 +6,7 @@
     import store from '../../../components/store';
     import logout from '../../../components/systems/requests/logout';
 
-  export let links = writable([
-    { name: 'Pricing', url: '/pricing' },
-    { name: 'Help', url: '/help' },
-  ]);
+  export let links = writable<{ name: string; url: string }[]>([]);
 
   // Get the current path as a derived store for easier use in markup
   const currentPath = derived(page, ($page) => $page.url.pathname);
@@ -75,6 +72,7 @@
   $: $store.header;
 </script>
 
+{#if $store.isAuthCodeValid && $store.config.newsSources?.length > 0}
 <div class="header-wrapper" class:show={$store.header}>
   <header class="header">
     <div class="header__container">
@@ -105,22 +103,27 @@
         </nav>
       </div>
       <div class="header__actions">
-        {#if $store.isAuthCodeValid && !$page.url.pathname.includes("dashboard")}
-          <a href="/dashboard" class="header__action header__action--primary">Go to Workspace</a>
-        {:else if $store.isAuthCodeValid && $page.url.pathname.includes("dashboard")}
-          {$store?.config.senderName}
-        {:else}
-          <a on:click={() => {
-            logout(false);
-          }} href="/login" class="header__action header__action--secondary">Log In</a>
-          <a on:click={() => {
-            logout(false);
-          }} href="/signup" class="header__action header__action--primary">Get Started</a>
-        {/if}
+        <div class="desktop-only">
+          {#if $store.isAuthCodeValid && !$page.url.pathname.includes("dashboard")}
+            <a href="/dashboard" class="header__action header__action--primary">Go to Workspace</a>
+          {:else if $store.isAuthCodeValid && $page.url.pathname.includes("dashboard")}
+            {$store?.config.senderName}
+          {:else}
+            <a on:click={() => {
+              logout(false);
+            }} href="/login" class="header__action header__action--secondary">Log In</a>
+            <a on:click={() => {
+              logout(false);
+            }} href="/signup" class="header__action header__action--primary">Get Started</a>
+          {/if}
+        </div>
+        <div class="mobile-only">
+        </div>
       </div>
     </div>
   </header>
 </div>
+{/if}
 
 <style lang="scss">
   @use '../../../styles/global.scss';
@@ -151,6 +154,19 @@
     margin: 0 auto;
     padding: 0 var(--space-md);
     gap: var(--space-md);
+  }
+
+  .mobile-only {
+    display: none;
+  }
+
+  @media (max-width: 1023px) {
+    .desktop-only {
+      display: none;
+    }
+    .mobile-only {
+      display: block;
+    }
   }
 
   .header__logo {
@@ -280,10 +296,11 @@
     .header__logo-text {
       font-size: 1rem;
     }
+  }
+
+  @container (width < 520px) {
     .header__action--secondary {
-      @media (width < 520px) {
-        display: none;
-      }
+      display: none;
     }
   }
 

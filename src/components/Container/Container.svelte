@@ -1,11 +1,8 @@
 <script lang="ts">
-    import type { Writable } from 'svelte/store';
-
-    export let show: Writable<boolean>;
+    import { isMobileMenuOpen } from '$lib/stores/mobile-menu.store';
 </script>
 
-<div class="container-content">
-    <button class="close-button" on:click={() => show.set(false)}>→</button>
+<div class="container-content" class:collapsed={$isMobileMenuOpen}>
     <slot></slot>
 </div>
 
@@ -19,24 +16,10 @@
         height: 80vh;
         overflow-y: auto;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
     }
 
-    .close-button {
-        position: absolute;
-        bottom: 10px;
-        left: 10px;
-        border: none;
-        background: transparent;
-        font-size: 2rem;
-        cursor: pointer;
-        color: #333;
-        z-index: 1001;
-        transform: scaleX(1.5);
-        line-height: 1;
-        width: fit-content;
-    }
-
-    .close-button:hover {
-        color: #000;
+    .collapsed {
+        transform: translateX(100%);
     }
 </style>

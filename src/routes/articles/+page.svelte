@@ -380,10 +380,6 @@
   <footer class="page-footer">
     <p>&copy; {new Date().getFullYear()} Some Awesome Newsletter. All Rights Reserved.</p>
   </footer>
-
-  <footer class="page-footer">
-    <p>&copy; {new Date().getFullYear()} Some Awesome Newsletter. All Rights Reserved.</p>
-  </footer>
 </div>
 
 <Modal {showModal} onChange={(v) => !v && selectedArticle.set(null)}>

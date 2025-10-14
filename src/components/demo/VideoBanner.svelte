@@ -10,7 +10,7 @@
   let isOpen = false;
 
   function setVideoHeight() {
-    const iframe = imgWrap.querySelector('iframe');
+    const iframe = imgWrap?.querySelector('iframe');
     if (iframe) {
       iframe.style.height = `${img.clientHeight}px`;
       iframe.style.width = '100%';

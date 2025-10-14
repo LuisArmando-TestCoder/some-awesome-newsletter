@@ -95,7 +95,7 @@
     <div class="auth-form__container {step === 'code' ? 'show' : 'hide'}">
       <div class="center">
         <MarkdownText canReveal={$store.hasNewEmailCodeBeenSent}>
-          **We** sent **an** auth code **to your** email
+          **We sent an auth code to your email**
         </MarkdownText>
       </div>
       <Code

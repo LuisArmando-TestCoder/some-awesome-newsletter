@@ -140,6 +140,11 @@
       border-color 0.3s ease,
       box-shadow 0.3s ease;
     outline: none;
+
+    @media (max-width: 720px) {
+      width: 2rem;
+      height: 2rem;
+    }
   }
 
   .auth-code-input input::placeholder {

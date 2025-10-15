@@ -5,8 +5,9 @@ import getAuthHeaders from "./getAuthHeaders";
 export default async (onSuccessCallback?: Function, onFailureCallback?: Function) => {
   const authCode = getAuthHeaders()["x-auth-code"];
   const configuratorEmail = getAuthHeaders()["x-auth-email"];
-  const {idToken, clientId} = getAuthHeaders();
-
+  const idToken = getAuthHeaders()["x-auth-token-id"];
+  const clientId = getAuthHeaders()["x-auth-client-id"];
+  
   console.log('[askIsAuthCodeValid.ts] authCode', authCode);
   console.log('[askIsAuthCodeValid.ts] configuratorEmail', configuratorEmail);
   console.log('[askIsAuthCodeValid.ts] idToken', idToken);
@@ -17,6 +18,7 @@ export default async (onSuccessCallback?: Function, onFailureCallback?: Function
   }`+ (idToken ? `&token_id=${idToken}&client_id=${clientId}` : '');
 
   console.log('[askIsAuthCodeValid.ts] url', url);
+  console.log('[askIsAuthCodeValid.ts] configuratorEmail', url);
 
   const response = await fetch(url);
 

@@ -44,7 +44,9 @@ const store = writable<Store>({
     "leads", // Added
     "subscriberName", // Added for subscription flow
     "subscriberCountry", // Added for subscription flow
-    "user"
+    "user",
+    "tokenId",
+    "clientId"
   ],
   appLanguage: "en", // Added for global language setting
   header: true,

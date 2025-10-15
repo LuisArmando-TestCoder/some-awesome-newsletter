@@ -406,7 +406,7 @@
 						<div class="footer-about">
 							<a href="/" class="logo" aria-label="Homepage">
 								<img
-									src="/icons/logow.png"
+									src="/logo/logo_large.png"
 									width="50"
 									alt="logo"
 								/>
@@ -938,6 +938,7 @@
 	/* 12. Pricing Preview */
 	.pricing-preview {
 		.pricing-box {
+			background: var(--color-background-inversion);
 			max-width: 500px;
 			margin: 0 auto;
 			text-align: center;

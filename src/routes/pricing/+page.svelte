@@ -35,7 +35,7 @@
 
     <div class="pricing__grid">
       {#if state?.content?.plans}
-        {#each state.content.plans.filter(p => !p.internalOnly) as plan}
+        {#each state.content.plans.filter(p => !p.internalOnly && (p.id === 'free' || p.id === state.interval)) as plan}
           <section class="pricing__plan pricing__plan--{plan.id}" class:current={plan.id === state.currentPlan} aria-labelledby="plan-name-{plan.id}">
             <div class="pricing__plan-head">
               <h2 id="plan-name-{plan.id}" class="pricing__plan-name">{plan.name}</h2>
@@ -44,9 +44,6 @@
             <div class="pricing__price">
               <span class="pricing__price-amount">${state.interval === 'monthly' ? plan.monthly : plan.yearly}</span>
               <span class="pricing__per">/{state.interval === 'monthly' ? 'mo' : 'yr'}</span>
-              {#if plan.id === 'yearly' && state.interval === 'monthly'}
-                <span class="pricing__equivalent"><i><sup>(equivalent to ${plan.yearly} yearly)</sup></i></span>
-              {/if}
             </div>
             <ul class="pricing__feature-list">
               {#if plan.id !== 'free'}

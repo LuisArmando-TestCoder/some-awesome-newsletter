@@ -134,7 +134,7 @@
 									logout(false);
 								}}
 								href="/signup"
-								class="cta-secondary-inverted"
+								class="cta-primary"
 								>{$content.hero.primaryCta}</a
 							>
 							<a href="/demo" class="cta-primary-scaled"

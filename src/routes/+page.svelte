@@ -46,7 +46,9 @@
 			} else if (smoother) {
 				smoother.scrollTo(0, true);
 			}
-			refreshAll();
+			if (smoother) {
+				refreshAll();
+			}
 		}
 	});
 
@@ -302,30 +304,6 @@
 				</section>
 				{/if}
 
-				<!-- 10. Integrations -->
-				{#if $content.integrations}
-				<section class="integrations" use:useScrollSection>
-					<div class="container">
-						<div class="section-header">
-							<h2>{$content.integrations.text}</h2>
-						</div>
-						<div class="logo-strip" data-speed="1.1">
-							{#each $content.integrations.logos as logo}
-								<img
-									src={logo.src}
-									alt="{logo.name} logo"
-									loading="lazy"
-									width="64"
-									height="64"
-								/>
-							{/each}
-						</div>
-						<a href="/integrations" class="cta-link"
-							>See all integrations &rarr;</a
-						>
-					</div>
-				</section>
-				{/if}
 
 				<!-- 11. Testimonials -->
 				{#if $content.testimonials}

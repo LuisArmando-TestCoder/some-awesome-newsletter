@@ -25,7 +25,7 @@ export function useSmoothPage(node: HTMLElement, options: SmoothPageOptions = {}
         disableOnReduceMotion = true
     } = options;
 
-    let smoother: ReturnType<typeof createSmoother> | null = null;
+    let smoother: Awaited<ReturnType<typeof createSmoother>> | null = null;
 
     onMount(() => {
         const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -38,13 +38,15 @@ export function useSmoothPage(node: HTMLElement, options: SmoothPageOptions = {}
         const content = document.getElementById('smooth-content');
 
         if (wrapper && content) {
-            smoother = createSmoother(wrapper, content);
-            if (onUpdate) smoother.effects().forEach((effect: any) => effect.onUpdate(onUpdate));
-            if (onStop) smoother.effects().forEach((effect: any) => effect.onStop(onStop));
+            createSmoother(wrapper, content).then((s) => {
+                smoother = s;
+                if (onUpdate) smoother.effects().forEach((effect: any) => effect.onUpdate(onUpdate));
+                if (onStop) smoother.effects().forEach((effect: any) => effect.onStop(onStop));
+            });
         }
 
         return () => {
-            if (smoother) {
+            if (smoother && typeof smoother.kill === 'function') {
                 console.log('anim.smoother: Destroying ScrollSmoother instance.');
                 smoother.kill();
                 smoother = null;
@@ -54,7 +56,7 @@ export function useSmoothPage(node: HTMLElement, options: SmoothPageOptions = {}
 
     return {
         destroy() {
-            if (smoother) {
+            if (smoother && typeof smoother.kill === 'function') {
                 console.log('anim.smoother: Destroying ScrollSmoother instance from action.');
                 smoother.kill();
                 smoother = null;

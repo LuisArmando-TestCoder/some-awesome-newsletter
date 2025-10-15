@@ -118,17 +118,6 @@ export const content = writable({
             { value: '5x', label: 'Faster content delivery', proof: 'Compared to manual newsletter creation.' }
         ]
     },
-    // integrations: {
-    //     text: 'Works with the tools you already love.',
-    //     logos: [
-    //         { name: 'Tool A', src: '/logos/tool-a.svg' },
-    //         { name: 'Tool B', src: '/logos/tool-b.svg' },
-    //         { name: 'Tool C', src: '/logos/tool-c.svg' },
-    //         { name: 'Tool D', src: '/logos/tool-d.svg' },
-    //         { name: 'Tool E', src: '/logos/tool-e.svg' },
-    //         { name: 'Tool F', src: '/logos/tool-f.svg' }
-    //     ]
-    // },
     testimonials: {
         title: 'What Our Customers Say',
         testimonialList: [

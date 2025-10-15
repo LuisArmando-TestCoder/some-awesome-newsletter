@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import plansStore, { loadPlansContent, computeFeatures, type PlanId, setInterval, type PlansState } from '$lib/config/plans.config';
   import Switch from '$lib/ui/components/Switch.svelte';
+  import { useSmoothPage } from "$lib/anim/useSmoothPage";
   let state: PlansState;
   const unsub = plansStore.subscribe(v => (state = v));
 
@@ -15,6 +16,8 @@
   <title>Pricing • A I N L</title>
 </svelte:head>
 
+<div id="smooth-wrapper" use:useSmoothPage>
+	<div id="smooth-content">
 <div class="pricing">
   <div class="pricing__container">
     <div class="pricing__header">
@@ -253,3 +256,5 @@
     .pricing * { transition: none !important; animation: none !important; }
   }
 </style>
+	</div>
+</div>

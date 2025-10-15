@@ -77,7 +77,7 @@
   <header class="header">
     <div class="header__container">
       <a href="/" class="header__logo" aria-label="Homepage">
-        <img src="/icons/logo.png" width="50" alt="logo">
+        <img src="/logo/logo-inverted.png" width="50" alt="logo">
         <span class="header__logo-text">A I N L</span>
       </a>
       <div class="header__nav-scroller">
@@ -139,7 +139,7 @@
   }
 
   .header {
-    background: var(--c-bg);
+    background: var(--color-background-very-opaque);
     padding: var(--space-md) 0;
     border-bottom: 1px solid var(--c-border);
     position: relative;

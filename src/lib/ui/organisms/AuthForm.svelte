@@ -56,7 +56,7 @@
 <div class="auth-form">
   <div class="auth-form__card">
     <div class="auth-form__header">
-      <img src="/icons/logo.png" width="175" alt="logo" class="auth-form__logo" />
+      <img src="/logo/logo-inverted.png" width="175" alt="logo" class="auth-form__logo" />
       <h1 class="auth-form__title">{copy?.title}</h1>
     </div>
     {#if copy?.subtitle}
@@ -261,8 +261,9 @@
 
       &--google {
         border: 1.5px solid var(--c-border);
-        background: var(--c-bg);
+        background: #f8f8f8;
         color: var(--c-text);
+        cursor: pointer;
 
         &:hover {
           background: var(--c-bg-alt);
@@ -276,6 +277,7 @@
         color: var(--c-white);
         font-weight: 700;
         transition: .1s;
+        cursor: pointer;
 
         &:hover {
           background: var(--c-primary-dark);

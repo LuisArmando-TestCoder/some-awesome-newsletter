@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store';
 
 export const authContent = writable({
-  logo: "/icons/logo.png",
+  logo: "/logo/logo-inverted.png",
   login: {
     title: "Log in to our Newsletter Orchestrator",
     subtitle: "Connect to continue where you left off.",

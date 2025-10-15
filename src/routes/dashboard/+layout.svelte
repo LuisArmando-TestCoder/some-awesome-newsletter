@@ -13,7 +13,6 @@
   import getAuthHeaders from "../../components/systems/requests/getAuthHeaders";
   import getLeadsForConfigurator from "../../components/systems/requests/getLeadsForConfigurator";
   import Notification from '../../components/Notification/Notification.svelte';
-  import { ping } from '../../components/Notification/notificationStore';
   import { refreshSubscribers } from "../../components/systems/steps/StepsTowardsPublish/stages/H_Dashboard/Users/UserDataService";
 
   onMount(() => {

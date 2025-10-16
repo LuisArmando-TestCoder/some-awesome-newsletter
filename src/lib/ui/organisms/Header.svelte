@@ -127,13 +127,13 @@ import { ping } from '../../../components/Notification/notificationStore';
                     saveToStore({ stepsIndex: stepsMapping["Billing"] });
                     ping("Billing", "You are in Billing");
               }} class="tier tier-vipfree">VIP</button>
-            {:else}
+            {:else if $store?.config.pricingPlan}
               <a href={
                 $store?.config.pricingPlan === 'free' ? `/api/checkout?products=${state?.content?.plans.find(p => p.id === 'monthly')?.productId}` :
                 $store?.config.pricingPlan === 'monthly' ? `/api/checkout?products=${state?.content?.plans.find(p => p.id === 'yearly')?.productId}` :
                 `/api/portal?customerEmail=${$store.configuratorEmail}`
-              } class="tier tier-{$store?.config.pricingPlan || "free"}">
-                {$store?.config.pricingPlan || "free"} plan
+              } class="tier tier-{$store?.config.pricingPlan}">
+                {$store?.config.pricingPlan} plan
               </a>
             {/if}
           {:else}

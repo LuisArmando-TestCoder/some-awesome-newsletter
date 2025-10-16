@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { quintOut } from 'svelte/easing';
-  import { fade, fly } from 'svelte/transition';
   import { notification } from './notificationStore';
+  import type { Notification } from './notificationStore';
 
   let timeoutId: number;
+  let displayNotification: Notification | null = null;
 
   function handleMouseEnter() {
     clearTimeout(timeoutId);
@@ -18,40 +18,63 @@
     }
   }
 
-  notification.subscribe(value => {
+  notification.subscribe((value) => {
     if (value) {
+      displayNotification = value;
       const duration = (value.title.length + value.message.length) * 50;
       timeoutId = setTimeout(() => {
         notification.set(null);
       }, duration);
     }
   });
+
+  function handleTransitionEnd() {
+    if (!$notification) {
+      displayNotification = null;
+    }
+  }
 </script>
 
-{#if $notification}
-  <div
-    class="notification-container"
-    in:fly={{ y: -20, duration: 500, easing: quintOut }}
-    out:fade={{ duration: 1000 }}
-    on:mouseenter={handleMouseEnter}
-    on:mouseleave={handleMouseLeave}
-  >
-    <div class="notification-content">
-      <h3>{$notification.title}</h3>
-      <p>{$notification.message}</p>
-    </div>
+<div
+  class="notification-wrapper"
+  class:visible={$notification}
+  on:mouseenter={handleMouseEnter}
+  on:mouseleave={handleMouseLeave}
+  on:transitionend={handleTransitionEnd}
+>
+  <div class="notification-container">
+    {#if displayNotification}
+      <div class="notification-content">
+        <h3>{displayNotification.title}</h3>
+        <p>{displayNotification.message}</p>
+      </div>
+    {/if}
   </div>
-{/if}
+</div>
 
 <style>
-  .notification-container {
+  .notification-wrapper {
     position: fixed;
     top: 20px;
     right: 20px;
     z-index: 9999;
+    transition:
+      opacity 0.5s ease-in-out,
+      transform 0.5s ease-in-out;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-20px);
+  }
+
+  .notification-wrapper.visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .notification-container {
     border-radius: 12px;
     overflow: hidden;
-    transition: opacity 0.5s ease-in-out;
   }
 
   .notification-content {

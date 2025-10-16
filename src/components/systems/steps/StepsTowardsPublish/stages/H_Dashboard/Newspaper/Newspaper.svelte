@@ -369,7 +369,6 @@
 
   .hero-section {
     text-align: center;
-    padding: 5rem 1rem;
     margin-bottom: 3rem;
   }
 

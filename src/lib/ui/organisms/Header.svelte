@@ -3,8 +3,22 @@
   import { derived, writable } from 'svelte/store';
   import { onMount, afterUpdate } from 'svelte';
   import { gsap } from '../../anim/gsap.client';
-    import store from '../../../components/store';
+    import store, { saveToStore, stepsMapping } from '../../../components/store';
     import logout from '../../../components/systems/requests/logout';
+import { ping } from '../../../components/Notification/notificationStore';
+  import plansStore, {
+    loadPlansContent,
+    type Plan,
+    type PlansState
+  } from '$lib/config/plans.config';
+    import { notification } from '../../../components/Notification/notificationStore';
+
+  let state: PlansState;
+  const unsub = plansStore.subscribe((v) => (state = v));
+
+  onMount(async () => {
+    await loadPlansContent();
+  });
 
   export let links = writable<{ name: string; url: string }[]>([]);
 
@@ -107,7 +121,21 @@
           {#if $store.isAuthCodeValid && !$page.url.pathname.includes("dashboard")}
             <a href="/dashboard" class="header__action header__action--primary">Go to Workspace</a>
           {:else if $store.isAuthCodeValid && $page.url.pathname.includes("dashboard")}
-            {$store?.config.senderName}
+          {$store?.config.senderName}:
+            {#if $store?.config.pricingPlan === 'vipfree'}
+              <button on:click={() => {
+                    saveToStore({ stepsIndex: stepsMapping["Billing"] });
+                    ping("Billing", "You are in Billing");
+              }} class="tier tier-vipfree">VIP</button>
+            {:else}
+              <a href={
+                $store?.config.pricingPlan === 'free' ? `/api/checkout?products=${state?.content?.plans.find(p => p.id === 'monthly')?.productId}` :
+                $store?.config.pricingPlan === 'monthly' ? `/api/checkout?products=${state?.content?.plans.find(p => p.id === 'yearly')?.productId}` :
+                `/api/portal?customerEmail=${$store.configuratorEmail}`
+              } class="tier tier-{$store?.config.pricingPlan || "free"}">
+                {$store?.config.pricingPlan || "free"} plan
+              </a>
+            {/if}
           {:else}
             <a on:click={() => {
               logout(false);
@@ -127,6 +155,57 @@
 
 <style lang="scss">
   @use '../../../styles/global.scss';
+
+  .tier {
+
+    background: #000;
+    color: white;
+    padding: .25rem .5rem;
+    border-radius: 3px;
+    box-shadow: 0 0 10px -5px #000;
+    cursor: pointer;
+    transition: .5s;
+    transform: scale(1);
+    display: inline-block;
+    margin-left: 0rem;
+    border: 0;
+
+    &:hover {
+      transition: .15s transform, .5s padding, .3s margin-left, .75s box-shadow;
+      transform: scale(1.1);
+      text-decoration: underline;
+      padding: .25rem 1rem;
+      margin-left: 1rem;
+      box-shadow: 0 0 5px -2.5px #000;
+      cursor: pointer;
+    }
+
+    &-free {
+
+    }
+
+    &-vipfree {
+      padding: .25rem 1rem;
+      background: linear-gradient(to right, #2c3e50, #bdc3c7);
+      color: #fff;
+      cursor: default;
+      font-weight: 600;
+
+      &:hover {
+        padding: .25rem 1.5rem;
+        text-decoration: none;
+      }
+    }
+    
+    &--monthly {
+
+    }
+
+    &--yearly {
+
+    }
+
+  }
 
   .header-wrapper {
     container-type: inline-size;

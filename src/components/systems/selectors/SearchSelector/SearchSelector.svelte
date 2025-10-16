@@ -2,7 +2,7 @@
   import { onMount, onDestroy, tick } from "svelte";
   import { writable } from "svelte/store";
   import fuzzysort from "fuzzysort";
-  import { fade, slide } from "svelte/transition";
+  import { slide } from "svelte/transition";
 
   // Props
   export let items: any[] = [];

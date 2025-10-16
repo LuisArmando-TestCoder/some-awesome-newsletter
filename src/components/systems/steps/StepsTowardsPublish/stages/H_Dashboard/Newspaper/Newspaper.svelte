@@ -379,6 +379,7 @@
     align-items: flex-end;
     margin-bottom: 2rem;
     gap: 1rem;
+    flex-wrap: wrap;
 
     label {
       font-weight: bold;

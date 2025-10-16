@@ -55,8 +55,7 @@
       <h2 class="section-title">A Message for our VIPs</h2>
       <div class="card">
         <p>
-          As a VIP member, you have unrestricted access to all features. We're thrilled to have you
-          with us and appreciate your support. If you have any questions or feedback, please don't
+          As a VIP member, you have unrestricted access to all features. If you have any questions or feedback, please don't
           hesitate to reach out to our CEO <a href="mailto:oriens@aiexecutions.com">oriens@aiexecutions.com</a>.
         </p>
       </div>

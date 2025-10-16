@@ -186,7 +186,7 @@ import { ping } from '../../../components/Notification/notificationStore';
 
     &-vipfree {
       padding: .25rem 1rem;
-      background: linear-gradient(to right, #2c3e50, #bdc3c7);
+      background: linear-gradient(to right, #2c3e50, #49687d);
       color: #fff;
       cursor: default;
       font-weight: 600;

@@ -56,7 +56,7 @@
       <div class="card">
         <p>
           As a VIP member, you have unrestricted access to all features. If you have any questions or feedback, please don't
-          hesitate to reach out to our CEO <a href="mailto:oriens@aiexecutions.com">oriens@aiexecutions.com</a>.
+          hesitate to reach out <a href="mailto:oriens@aiexecutions.com">oriens@aiexecutions.com</a>.
         </p>
       </div>
     </div>

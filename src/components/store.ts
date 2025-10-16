@@ -1,5 +1,5 @@
 import { get, writable } from "svelte/store";
-import type { Populator, Store } from "./types";
+import type { Config, Populator, Store } from "./types";
 import type { Socket } from "socket.io-client";
 import updateConfiguration from "./systems/requests/updateConfiguration";
 
@@ -120,7 +120,7 @@ export function getFromStore(propertyPath: string) {
   return createObjectGetter(get(store))(propertyPath);
 }
 
-export function saveToConfig(config: { [index: string]: any }) {
+export async function saveToConfig(config: { [index: string]: any }, shouldUpdateConfiguration: boolean = true): Promise<Config | null> {
   if (get(store).isAuthCodeValid) {
     saveToStore({
       config: {
@@ -129,8 +129,12 @@ export function saveToConfig(config: { [index: string]: any }) {
       },
     });
 
-    updateConfiguration(get(store).config);
+    if (shouldUpdateConfiguration) {
+      return await updateConfiguration(get(store).config);
+    }
   }
+
+  return null;
 }
 
 function createObjectPopulator<T extends object>(obj: T): Populator<T> {

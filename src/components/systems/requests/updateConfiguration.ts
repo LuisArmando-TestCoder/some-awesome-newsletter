@@ -1,6 +1,7 @@
 import { get } from "svelte/store";
 import store from "../../store";
 import getAuthHeaders from "./getAuthHeaders";
+import type { Config } from "../../types";
 
 /* helper for mutating the store in-place */
 const patchStoreConfig = (cfg: Record<string, unknown>) =>
@@ -8,7 +9,7 @@ const patchStoreConfig = (cfg: Record<string, unknown>) =>
 
 export default async function updateConfiguration(
   partialConfig: Record<string, unknown>
-): Promise<boolean> {
+): Promise<Config | null> {
   const { configuratorEmail, authCode, apiURL } = get(store);
 
   /* ─────────── auth / urls ─────────── */
@@ -24,7 +25,7 @@ export default async function updateConfiguration(
     latest = await r.json();
   } catch (err) {
     console.error("[UPDATE-CFG] Could not retrieve latest config:", err);
-    return false;
+    return null;
   }
 
   /* ─────────── merge & PUT ─────────── */
@@ -38,24 +39,29 @@ export default async function updateConfiguration(
     });
   } catch (err) {
     console.error("[UPDATE-CFG] PUT failed:", err);
-    return false;
+    return null;
   }
   if (!response.ok) {
     console.error("[UPDATE-CFG] PUT status:", response.status);
-    return false;
+    return null;
   }
 
   /* ─────────── update local store with the config returned by backend ─────────── */
   try {
-    const json = await response.json();          // backend now returns { message, config }
+    let json = await response.json();          // backend now returns { message, config }
     if (json?.config) {
-      patchStoreConfig(json.config);             // 🔄 keep store (and LS) in sync
+      patchStoreConfig(json.config);   
     } else {
       // fallback: refetch
       const r = await fetch(getURL, { headers });
-      if (r.ok) patchStoreConfig(await r.json());
+      json = await r.json()
+      if (r.ok) patchStoreConfig(json);
     }
-  } catch {/* silent */ }
+    return json;
+  } catch (error) {
+    console.error(error);
+    return null
+  }
 
-  return true;
+  return null;
 }

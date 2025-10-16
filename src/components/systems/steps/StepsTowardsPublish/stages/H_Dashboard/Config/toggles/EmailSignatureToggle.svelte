@@ -12,8 +12,8 @@
     console.log("$store.config", JSON.stringify($store.config.logo))
     const logoHtml = logo
       ? `
-    <td valign="bottom" style="height: 80px;">
-      <img src="${logo}" alt="Logo" height="80" style="border-radius: 50%;">
+    <td valign="bottom">
+      <img src="${logo}" alt="Logo" height="80" style="display: block;">
     </td>
     <td width="20"></td>
     `
@@ -32,17 +32,17 @@
       : "";
 
     const signature = `
-<table cellpadding="0" cellspacing="0" border="0" style="font-family: Arial, sans-serif; font-size: 12px; color: #333; height: 80px;">
+<table cellpadding="0" cellspacing="0" border="0" style="font-family: Arial, sans-serif; font-size: 12px; color: #333;">
   <tr>
     ${logo ? logoHtml : ''}
-    <td valign="bottom" style="font-family: Arial, sans-serif; font-size: 12px; color: #555; height: 80px;">
+    <td valign="bottom" style="font-family: Arial, sans-serif; font-size: 12px; color: #555;">
       ${senderNameHtml}
       ${newsletterTitleHtml}
       ${emailHtml}
     </td>
   </tr>
 </table>
-    `;
+`;
     if ($store.config.emailSignature !== signature)
     saveToConfig({ emailSignature: signature });
   }
@@ -71,7 +71,8 @@
 <style>
   .signature-container {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     gap: 1rem;
     margin-top: 1rem;
   }

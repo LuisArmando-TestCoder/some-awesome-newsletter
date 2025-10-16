@@ -1,6 +1,6 @@
 <script lang="ts">
   import Image from "../../../../../../inputs/Image/Image.svelte";
-  import { saveToConfig } from "../../../../../../../store";
+  import { saveToConfig, saveToStore } from "../../../../../../../store";
   import MarkdownText from "../../../../../../texts/MarkdownText/MarkdownText.svelte";
   import { writable } from "svelte/store";
   import type { Store } from "../../../../../../../types";
@@ -19,7 +19,8 @@
 
   async function handleImageChange(imageData: string | null) {
     localValue.set(imageData);
-    saveToConfig({ logo: imageData as string });
+    const config = await saveToConfig({ logo: imageData as string });
+    if (config) saveToStore({ logo: config.logo })
   }
 </script>
 

@@ -14,6 +14,7 @@
   import createNewsSource from "../../../../../requests/createNewsSource";
   import { processNewsSourceAction } from "./newsSourceActions";
   import { validateFields } from "./validation";
+    import getConfiguratorSession from "../../../../../requests/getConfiguratorSession";
 
   // 2) Create a writable store for tracking the newly added news source
   export const addedNewsSource = writable<any>(null);
@@ -58,11 +59,12 @@
       createNewsSource,
       (msg) => (addErrorMessage = msg),
       "Failed to add news source. Please try again.",
-      (created) => {
+      async (created) => {
         // The createNewsSource request already updates the store, so we don't need to do it here.
         // We just clear the form and update the local 'addedNewsSource' store.
         clearAddForm();
         addedNewsSource.set(created);
+        await getConfiguratorSession();
       }
     );
 

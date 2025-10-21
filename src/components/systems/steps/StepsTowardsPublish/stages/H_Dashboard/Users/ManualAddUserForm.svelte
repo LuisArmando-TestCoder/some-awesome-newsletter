@@ -11,6 +11,8 @@
   import SubmitButton from "../../../../../buttons/SubmitButton/SubmitButton.svelte";
   import type { NewsletterUser } from "../../../../../../types"; // Adjust path
   import ToggleCard from "../../../../../buttons/ToggleCard/ToggleCard.svelte";
+  import store from "../../../../../../store";
+  import { ping } from "../../../../../../Notification/notificationStore";
 
   // Type for the expected form data payload
   type FormDataPayload = Pick<
@@ -57,6 +59,11 @@
 
   /** Handles the form submission */
   async function handleSubmit() {
+    if ($store.config.pricingPlan === "free") {
+      ping("You have reached the maximum number of subscribers for the free plan.", "error");
+      return;
+    }
+
     if (disabled || isSubmitting) {
       return; // Prevent submission if disabled or already submitting
     }

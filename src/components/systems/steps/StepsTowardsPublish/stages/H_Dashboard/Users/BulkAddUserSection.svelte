@@ -8,6 +8,8 @@
   import SubmitButton from "../../../../../buttons/SubmitButton/SubmitButton.svelte";
   import ToggleCard from "../../../../../buttons/ToggleCard/ToggleCard.svelte";
   import FileInput from "../../../../../inputs/FileInput/FileInput.svelte";
+  import store from "../../../../../../store";
+  import { ping } from "../../../../../../Notification/notificationStore";
 
   // --- Props ---
   export let disabled: boolean = false;
@@ -27,6 +29,11 @@
 
   /** Handles the submission trigger */
   function handleBulkSubmit() {
+    if ($store.config.pricingPlan === "free") {
+      ping("Bulk adding users is not available on the free plan.", "error");
+      return;
+    }
+
     const currentFiles = $selectedFilesStore; // Get files from store
     const fileToUpload = currentFiles && currentFiles.length > 0 ? currentFiles[0] : null;
 

@@ -1,6 +1,5 @@
 <script lang="ts">
   import AutoCollapseToggle from "../AutoCollapseToggle.svelte";
-  import ColorPickerToggle from "./toggles/ColorPickerToggle.svelte";
   import NewsletterSubjectToggle from "./toggles/NewsletterSubjectToggle.svelte";
   import NewsletterTitleToggle from "./toggles/NewsletterTitleToggle.svelte";
   import SenderNameToggle from "./toggles/SenderNameToggle.svelte";

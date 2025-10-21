@@ -1,6 +1,5 @@
 <script lang="ts">
     import AutoCollapseToggle from "../../AutoCollapseToggle.svelte";
-    import ColorPickerToggle from "./ColorPickerToggle.svelte";
     import EmailSignatureToggle from "./EmailSignatureToggle.svelte";
     import ImageToggle from "./ImageToggle.svelte";
   

@@ -4,25 +4,18 @@
   import MarkdownText from "../../../../../../texts/MarkdownText/MarkdownText.svelte";
   import { writable } from "svelte/store";
   import type { Store } from "../../../../../../../types";
-    import { useConfigurator } from "../../../../../../useConfigurator";
+  import { useConfigurator } from "../../../../../../useConfigurator";
 
   export let canReveal = true;
 
-  const localValue = writable("");
-
-  useConfigurator((value: Store) => {
-    if (value.config.newsletterSubject) {
-      localValue.set(value.config.newsletterSubject);
-    }
-  });
+  $: $store;
 </script>
 
 <div>
   <PlainText
     placeholder="Change your newsletter subject"
-    value={$localValue}
+    value={$store.newsletterSubject}
     onChange={(value) => {
-      localValue.set(value);
       saveToConfig({ newsletterSubject: value });
     }}
   />

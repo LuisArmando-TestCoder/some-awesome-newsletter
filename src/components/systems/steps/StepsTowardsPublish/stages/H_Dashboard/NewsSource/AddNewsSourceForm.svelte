@@ -10,11 +10,13 @@
   import SubmitButton from "../../../../../buttons/SubmitButton/SubmitButton.svelte";
   import Link from "../../../../../inputs/Link/Link.svelte";
   import TextTypes from "../../../../../texts/TextTypes/TextTypes.svelte";
+  import Country from "../../../../../inputs/Country/Country.svelte";
 
   import createNewsSource from "../../../../../requests/createNewsSource";
   import { processNewsSourceAction } from "./newsSourceActions";
   import { validateFields } from "./validation";
-    import getConfiguratorSession from "../../../../../requests/getConfiguratorSession";
+  import getConfiguratorSession from "../../../../../requests/getConfiguratorSession";
+  import { ping } from "../../../../../../Notification/notificationStore";
 
   // 2) Create a writable store for tracking the newly added news source
   export const addedNewsSource = writable<any>(null);
@@ -49,13 +51,26 @@
 
     await processNewsSourceAction(
       fields,
-      (f) => ({
-        type: "website",
-        url: f.url,
-        community: "Newsletter Users",
-        lead: f.lead,
-        personality: f.personality,
-      }),
+      (f) => {
+        const data: {
+          type: string;
+          url: string;
+          community: string;
+          lead?: string;
+          personality: string;
+        } = {
+          type: "website",
+          url: f.url,
+          community: "Newsletter Users",
+          personality: f.personality,
+        };
+
+        if (f.lead) {
+          data.lead = f.lead;
+        }
+
+        return data;
+      },
       createNewsSource,
       (msg) => (addErrorMessage = msg),
       "Failed to add news source. Please try again.",
@@ -65,6 +80,7 @@
         clearAddForm();
         addedNewsSource.set(created);
         await getConfiguratorSession();
+        ping("News Source Added", "we are about to send an article to your newsletter, review your email in a few minutes");
       }
     );
 
@@ -73,19 +89,23 @@
 </script>
 
 <form class="news-source-form" on:submit|preventDefault={handleAddNewsSource}>
-  <Link
-    placeholder="News Source URL"
-    value={addNewsSourceUrl}
-    onChange={(val) => (addNewsSourceUrl = val)}
-  />
+  <div class="news-source-input">
+    <Link
+      placeholder="News Source URL"
+      value={addNewsSourceUrl}
+      onChange={(val) => (addNewsSourceUrl = val)}
+    />
+    <Country onSelect={(selection) => {
+      if (selection) {
+        addNewsSourceUrl = selection.ns;
+      }
+    }} />
+  </div>
   <Link
     placeholder="Lead (destination URL or identifier)"
     value={addNewsSourceLead}
     onChange={(val) => (addNewsSourceLead = val)}
   />
-  <p class="info-message">
-    Note: The lead URL is optional, but it's highly recommended. It helps our AI to better understand the context of your news source and generate more relevant content.
-  </p>
   <!-- Personality & schedule are optional in the example -->
   <!-- Add additional inputs for Personality and Schedule if desired -->
 
@@ -109,6 +129,12 @@
   .news-source-form {
     display: flex;
     flex-direction: column;
+    gap: 1rem;
+  }
+
+  .news-source-input {
+    display: flex;
+    align-items: end;
     gap: 1rem;
   }
 

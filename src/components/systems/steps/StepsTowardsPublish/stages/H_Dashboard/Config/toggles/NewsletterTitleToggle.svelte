@@ -1,6 +1,6 @@
 <script lang="ts">
   import PlainText from "../../../../../../inputs/PlainText/PlainText.svelte";
-  import { saveToConfig } from "../../../../../../../store";
+  import store, { saveToConfig } from "../../../../../../../store";
   import MarkdownText from "../../../../../../texts/MarkdownText/MarkdownText.svelte";
   import { writable } from "svelte/store";
   import type { Store } from "../../../../../../../types";
@@ -8,21 +8,14 @@
 
   export let canReveal = true;
 
-  const localValue = writable("");
-
-  useConfigurator((value: Store) => {
-    if (value.config.newsletterTitle) {
-      localValue.set(value.config.newsletterTitle);
-    }
-  });
+  $: $store;
 </script>
 
 <div>
   <PlainText
     placeholder="Change your newsletter title"
-    value={$localValue}
+    value={$store.newsletterTitle}
     onChange={(value) => {
-      localValue.set(value);
       saveToConfig({ newsletterTitle: value });
     }}
   />

@@ -10,6 +10,7 @@
     import { isValidURL } from "../../../inputs/Link/isValidLink";
   import LoadingScreen from "../../../loading/LoadingScreen.svelte";
   import { ping } from "../../../../Notification/notificationStore";
+    import getConfiguratorSession from "../../../requests/getConfiguratorSession";
 
   export let canReveal = false;
   let isLoading = false;
@@ -44,10 +45,11 @@
   async function trigger(isValid: boolean) {
       if (isValid) {
         await handleAddNewsSource();
-        ping("News Source Added", "we are about to send an article to you news letter, review your email in a few minutes");
+        ping("News Source Added", "we are about to send an article to your newsletter, review your email in a few minutes");
         saveToStore({
           stepsIndex: $store.stepsIndex + 1,
         });
+        await getConfiguratorSession();
       }
     }
 </script>

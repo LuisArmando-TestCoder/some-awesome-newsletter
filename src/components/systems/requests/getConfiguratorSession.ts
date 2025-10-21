@@ -65,7 +65,7 @@ export default async () => {
     } else {
        const updatedJson = await updatedResponse.json();
        console.log("[GET-SESSION] Successfully refetched config. Updating store."); // Use console.log
-       saveToStore({ config: updatedJson }); // Save the UPDATED config
+       saveToStore({ config: updatedJson, ...updatedJson }); // Save the UPDATED config
        // Update theme based on potentially updated config
        // foregroundColor.set(updatedJson.brandColor);
        // complementaryColor.set(getComplementaryColor(updatedJson.brandColor));

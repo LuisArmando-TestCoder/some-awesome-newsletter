@@ -80,7 +80,7 @@
   .url-input-wrapper {
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 100%;
   }
 
   input {

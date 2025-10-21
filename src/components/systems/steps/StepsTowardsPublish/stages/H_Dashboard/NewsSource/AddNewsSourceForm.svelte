@@ -89,7 +89,7 @@
 </script>
 
 <form class="news-source-form" on:submit|preventDefault={handleAddNewsSource}>
-  <div class="news-source-input">
+  <div class="news-source-input news-source-wrapper">
     <Link
       placeholder="News Source URL"
       value={addNewsSourceUrl}
@@ -101,11 +101,13 @@
       }
     }} />
   </div>
-  <Link
-    placeholder="Lead (destination URL or identifier)"
-    value={addNewsSourceLead}
-    onChange={(val) => (addNewsSourceLead = val)}
-  />
+  <div class="news-source-wrapper">
+    <Link
+      placeholder="Lead (destination URL or identifier)"
+      value={addNewsSourceLead}
+      onChange={(val) => (addNewsSourceLead = val)}
+    />
+  </div>
   <!-- Personality & schedule are optional in the example -->
   <!-- Add additional inputs for Personality and Schedule if desired -->
 
@@ -132,10 +134,15 @@
     gap: 1rem;
   }
 
+  .news-source-wrapper {
+    max-width: 512px;
+  }
+  
   .news-source-input {
-    display: flex;
     align-items: end;
-    gap: 1rem;
+    grid-gap: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(1fr, 100px));
   }
 
   .error-message {

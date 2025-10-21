@@ -3,25 +3,52 @@
   import { writable } from "svelte/store";
   import store, { saveToConfig } from "../../../../../../../store";
   import MarkdownText from "../../../../../../texts/MarkdownText/MarkdownText.svelte";
-  import TextArea from "../../../../../../inputs/TextArea/TextArea.svelte";
   import IconButton from "../../../../../../buttons/IconButton/IconButton.svelte";
   import Link from "../../../../../../inputs/Link/Link.svelte";
   import ColorPicker from "../../../../../../inputs/ColorPicker/ColorPicker.svelte";
 
   export let canReveal = true;
 
-  const brandColor = writable("#000000");
+  const brandColor = writable("#ff0000");
   const facebookLink = writable("");
   const instagramLink = writable("");
 
-  onMount(() => {
+  let editor: HTMLDivElement;
+  let quill: any;
+
+  onMount(async () => {
     brandColor.set(localStorage.getItem("brandColor") || "#000000");
     facebookLink.set(localStorage.getItem("facebookLink") || "");
     instagramLink.set(localStorage.getItem("instagramLink") || "");
 
-    brandColor.subscribe(value => localStorage.setItem("brandColor", value));
-    facebookLink.subscribe(value => localStorage.setItem("facebookLink", value));
-    instagramLink.subscribe(value => localStorage.setItem("instagramLink", value));
+    brandColor.subscribe(value => {
+      if (typeof window !== 'undefined') localStorage.setItem("brandColor", value)
+    });
+    facebookLink.subscribe(value => {
+      if (typeof window !== 'undefined') localStorage.setItem("facebookLink", value)
+    });
+    instagramLink.subscribe(value => {
+      if (typeof window !== 'undefined') localStorage.setItem("instagramLink", value)
+    });
+
+    const { default: Quill } = await import("quill");
+
+    quill = new Quill(editor, {
+      theme: "snow",
+      modules: {
+        toolbar: [
+          [{ header: [1, 2, 3, false] }],
+          ["bold", "italic", "underline", "strike"],
+          ["link", "image", "video"],
+          [{ list: "ordered" }, { list: "bullet" }],
+          ["clean"],
+        ],
+      },
+    });
+
+    quill.on("text-change", () => {
+      $store.config.emailSignature = quill.root.innerHTML;
+    });
   });
 
   function generateSignature() {
@@ -97,11 +124,11 @@
   }
 </script>
 
+<div class="editor-wrapper">
+  <div bind:this={editor} />
+</div>
+
 <div>
-  <TextArea
-    placeholder="Change your email signature HTML here"
-    bind:value={$store.config.emailSignature}
-  />
   <MarkdownText {canReveal}>--Email signatures instil brand trust--</MarkdownText>
   <div class="signature-container">
     <Link
@@ -129,6 +156,13 @@
 </div>
 
 <style>
+  @import 'https://cdn.quilljs.com/1.3.6/quill.snow.css';
+
+  .editor-wrapper {
+    height: 300px;
+    margin-bottom: 1rem;
+  }
+
   .signature-container {
     display: flex;
     flex-direction: column;

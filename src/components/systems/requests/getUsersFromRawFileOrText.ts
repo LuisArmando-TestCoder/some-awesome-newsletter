@@ -15,7 +15,7 @@ export default async function getUsersFromRawFileOrText({
 }) {
   let response: Response;
   const apiURL = get(store).apiURL();
-  const endpoint = `${apiURL}/news-source/any-user-data-base-file-to-standard-format`;
+  const endpoint = `${apiURL}/news-source/any-user-data-base-file-to-standard-format/${get(store).configuratorEmail}`;
   console.log(`[getUsersFromRawFileOrText] Starting. Input:`, { file: file?.name, text: text ? 'Provided' : undefined });
   console.log(`[getUsersFromRawFileOrText] Using endpoint: ${endpoint}`);
 

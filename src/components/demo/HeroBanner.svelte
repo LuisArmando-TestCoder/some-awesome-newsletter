@@ -43,10 +43,12 @@
 .hero-banner {
   background: var(--color-background-inversion);
   padding: 3rem 0;
+  margin-bottom: 4rem;
 }
 
 .banner-content {
   max-width: 700px;
+  width: 100%;
   margin: 0 auto;
   border-radius: 1.5rem;
   box-shadow: 0 6px 32px 0 rgba(60, 80, 120, 0.10);

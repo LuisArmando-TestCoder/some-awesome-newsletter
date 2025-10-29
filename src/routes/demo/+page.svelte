@@ -3,6 +3,7 @@
   import { content } from '../../lib/content';
   import Faq from "$lib/ui/organisms/Faq.svelte";
   import { useScrollSection } from "$lib/anim/useScrollSection";
+  import CTAButton from "../../components/demo/CTAButton.svelte";
 </script>
 
 <svelte:head>
@@ -15,6 +16,12 @@
   <HeroBanner />
 
   <Faq />
+
+  <div class="cta-section">
+    <a href="/login">
+      <CTAButton label={$content.hero.primaryCta} href="/login" variant="primary" />
+    </a>
+  </div>
 
   {#if $content.footer}
   <footer class="page-footer">
@@ -66,6 +73,11 @@
 
   .demo-page {
     animation: fadeIn 0.8s ease-in-out forwards;
+  }
+
+  .cta-section {
+    text-align: center;
+    padding: 4rem 0;
   }
 
   @keyframes fadeIn {

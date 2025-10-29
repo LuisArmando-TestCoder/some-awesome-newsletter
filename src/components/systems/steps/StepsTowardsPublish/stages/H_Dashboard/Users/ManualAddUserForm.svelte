@@ -59,7 +59,7 @@
 
   /** Handles the form submission */
   async function handleSubmit() {
-    if ($store.config.pricingPlan === "free") {
+    if ($store.config.pricingPlan === "free" && $store.config.newsSources[0].subscribersIDs > 0) {
       ping("You have reached the maximum number of subscribers for the free plan.", "error");
       return;
     }

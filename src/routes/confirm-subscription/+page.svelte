@@ -25,11 +25,12 @@
     if (configId && newsSourceId && userEmail) {
       const apiURL = $store.apiURL();
       const response = await fetch(`${apiURL}/confirm-subscription?configId=${configId}&newsSourceId=${newsSourceId}&userEmail=${userEmail}`);
+      const data = await response.json();
 
       if (response.ok) {
-        message = 'Thank you for confirming your subscription!';
+        message = data.message;
       } else {
-        message = 'There was an error confirming your subscription. Please try again later.';
+        message = data.error;
       }
     } else {
       message = 'Invalid confirmation link.';
@@ -47,7 +48,10 @@
       <p>Please accept the terms and conditions to complete your subscription.</p>
       <div class="terms">
         <input type="checkbox" id="terms" bind:checked={termsAccepted} />
-        <label for="terms">I accept the terms and conditions.</label>
+        <label for="terms">
+          I accept the <a href="/legal/terms">Terms and Conditions</a> and
+          <a href="/legal/privacy">Privacy Policy</a>.
+        </label>
       </div>
       <button on:click={confirmSubscription}>Confirm Subscription</button>
     {/if}
@@ -72,6 +76,13 @@
   }
   .terms {
     margin: var(--space-lg) 0;
+  }
+  .terms a {
+    color: blue;
+    text-decoration: none;
+  }
+  .terms a:hover {
+    text-decoration: underline;
   }
   button, .button {
     display: inline-block;

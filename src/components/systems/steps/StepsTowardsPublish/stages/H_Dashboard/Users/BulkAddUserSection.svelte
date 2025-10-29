@@ -29,7 +29,7 @@
 
   /** Handles the submission trigger */
   function handleBulkSubmit() {
-    if ($store.config.pricingPlan === "free") {
+    if ($store.config.pricingPlan === "free" && $store.config.newsSources[0].subscribersIDs > 0) {
       ping("Bulk adding users is not available on the free plan.", "error");
       return;
     }

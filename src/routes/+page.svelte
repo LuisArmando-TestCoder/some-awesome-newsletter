@@ -92,8 +92,8 @@
 	</script>
 </svelte:head>
 
-<div id="smooth-wrapper" use:useSmoothPage>
-	<div id="smooth-content">
+<div>
+	<div>
 		<!-- Accessibility: Skip to main content -->
 		<a href="#main-content" class="skip-link">Skip to main content</a>
 		<!-- Page Wrapper -->
@@ -120,15 +120,15 @@
 			<main id="main-content">
 				<!-- 3. Hero Section -->
 				{#if $content.hero}
-				<section class="hero" use:useScrollSection>
+				<section class="hero">
 					<div class="container">
-						<h1 class="hero-hook" data-speed="0.9">
+						<h1 class="hero-hook">
 							{$content.hero.hook}
 						</h1>
-						<p class="hero-sub-hook" data-speed="0.8">
+						<p class="hero-sub-hook">
 							{$content.hero.subHook}
 						</p>
-						<div class="hero-ctas" data-speed="0.9">
+						<div class="hero-ctas">
 							<a
 								on:click={() => {
 									logout(false);
@@ -141,7 +141,7 @@
 								>{$content.hero.secondaryCta}</a
 							>
 						</div>
-						<ul class="hero-trust-cues" data-speed="0.7">
+						<ul class="hero-trust-cues">
 							{#each $content.hero.trustCues as cue}
 								<li>{cue}</li>
 							{/each}
@@ -152,10 +152,10 @@
 
 				<!-- 4. Social Proof -->
 				{#if $content.socialProof}
-				<section class="social-proof" use:useScrollSection>
+				<section class="social-proof">
 					<div class="container">
 						<p>{$content.socialProof.counts}</p>
-						<div class="logo-strip" data-speed="1.1">
+						<div class="logo-strip">
 							{#each $content.socialProof.logos as logo}
 								<img
 									src={logo.src}
@@ -172,7 +172,7 @@
 
 				<!-- 5. Value Propositions -->
 				{#if $content.valueProps}
-				<section class="value-props" use:useScrollSection>
+				<section class="value-props">
 					<div class="container">
 						<div class="section-header">
 							<h2>{$content.valueProps.title}</h2>
@@ -180,7 +180,7 @@
 						</div>
 						<div class="grid">
 							{#each $content.valueProps.props as prop, i}
-								<div class="card" data-speed="1.05">
+								<div class="card">
 									<h3>{prop.title}</h3>
 									<p>{prop.description}</p>
 								</div>
@@ -194,9 +194,7 @@
 				{#if $content.features}
 				<section
 					id="features"
-					class="feature-grid"
-					use:useScrollSection
-				>
+					class="feature-grid">
 					<div class="container">
 						<div class="section-header">
 							<h2>{$content.features.title}</h2>
@@ -216,7 +214,7 @@
 										>{feature.cta} &rarr;</a
 									>
 								</div>
-								<div class="feature-visual" data-speed="auto">
+								<div class="feature-visual">
 									<img
 										src={feature.image}
 										alt="{feature.title} screenshot"
@@ -233,7 +231,7 @@
 
 				<!-- 7. How It Works -->
 				{#if $content.howItWorks}
-				<section class="how-it-works" use:useScrollSection>
+				<section class="how-it-works">
 					<div class="container">
 						<div class="section-header">
 							<h2>{$content.howItWorks.title}</h2>
@@ -253,7 +251,7 @@
 
 				<!-- 8. Use Cases / Personas -->
 				{#if $content.personas}
-				<section class="personas" use:useScrollSection>
+				<section class="personas">
 					<div class="container">
 						<div class="section-header">
 							<h2>{$content.personas.title}</h2>
@@ -263,7 +261,7 @@
 						</div>
 						<div class="grid">
 							{#each $content.personas.personaList as persona, i}
-								<div class="card" data-speed="1.05">
+								<div class="card">
 									<h4>{persona.persona}</h4>
 									<p>
 										<strong>Problem:</strong>
@@ -282,14 +280,14 @@
 
 				<!-- 9. Metrics / Outcomes -->
 				{#if $content.metrics}
-				<section class="metrics" use:useScrollSection>
+				<section class="metrics">
 					<div class="container">
 						<div class="section-header">
 							<h2>{$content.metrics.title}</h2>
 						</div>
 						<div class="metrics-grid">
 							{#each $content.metrics.metricList as metric, i}
-								<div class="metric-item" data-speed="0.9">
+								<div class="metric-item">
 									<div class="metric-value">
 										{metric.value}
 									</div>
@@ -307,7 +305,7 @@
 
 				<!-- 11. Testimonials -->
 				{#if $content.testimonials}
-				<section class="testimonials" use:useScrollSection>
+				<section class="testimonials">
 					<div class="container">
 						<div class="section-header">
 							<h2>{$content.testimonials.title}</h2>
@@ -333,7 +331,7 @@
 				<section
 					id="pricing"
 					class="pricing-preview"
-					use:useScrollSection
+					
 				>
 					<div class="container">
 						<div class="section-header">
@@ -360,7 +358,7 @@
 
 				<!-- 14. Final CTA -->
 				{#if $content.finalCta}
-				<section id="demo" class="final-cta" use:useScrollSection>
+				<section id="demo" class="final-cta">
 					<div class="container">
 						<h2>{$content.finalCta.hook}</h2>
 						<a
@@ -796,10 +794,14 @@
 		align-items: center;
 		gap: var(--space-xl);
 		margin-bottom: var(--space-xxl);
+
 		@media (min-width: 768px) {
 			grid-template-columns: 1fr 1fr;
 		}
+		
 		&.reverse {
+			grid-auto-flow: row-reverse;
+
 			.feature-text {
 				order: 2;
 			}

@@ -257,6 +257,10 @@
 
     &__subtitle {
       margin-bottom: var(--space-lg);
+
+      @media (max-width: 480px) {
+        text-align: center;
+      }
     }
 
     &__button {

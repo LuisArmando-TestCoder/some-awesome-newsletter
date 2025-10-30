@@ -229,10 +229,18 @@
       place-items: center start;
       grid-gap: var(--space-sm);
       margin-bottom: var(--space-md);
+
+      @media (max-width: 480px) {
+        margin: 0 auto var(--space-md);
+      }
+
     }
 
     &__logo {
       display: block;
+      @media (max-width: 480px) {
+        margin: 0 auto;
+      }
     }
 
     &__title {
@@ -241,6 +249,10 @@
       letter-spacing: -0.01em;
       color: var(--c-text);
       text-align: right;
+
+      @media (max-width: 480px) {
+        display: none;        
+      }
     }
 
     &__subtitle {

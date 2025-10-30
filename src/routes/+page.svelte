@@ -103,7 +103,7 @@
 				<div class="announcement-bar">
 					<p>
 						{$content.announcement.text}
-						<a href="#">{$content.announcement.cta} &rarr;</a>
+						<a href="/signup">{$content.announcement.cta} &rarr;</a>
 					</p>
 					<button
 						aria-label="Dismiss announcement"

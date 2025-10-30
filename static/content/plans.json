@@ -27,7 +27,11 @@
       "tagline": "For growing newsletters",
       "featuresBase": [],
       "featuresDelta": [
-        "Up to 17 news sources"
+        "Up to 17 news sources",
+        "Unlimited users",
+        "Custom messages in their languages",
+        "Custom app password",
+        "Automatic newspaper"
       ],
       "limits": {
         "newsSources": 17
@@ -44,7 +48,11 @@
       "tagline": "Save with a yearly plan",
       "featuresBase": [],
       "featuresDelta": [
-        "Up to 17 news sources"
+        "Up to 17 news sources",
+        "Unlimited users",
+        "Custom messages in their languages",
+        "Custom app password",
+        "Automatic newspaper"
       ],
       "limits": {
         "newsSources": 17

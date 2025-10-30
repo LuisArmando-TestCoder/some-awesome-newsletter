@@ -800,10 +800,10 @@
 		}
 		
 		&.reverse {
-			grid-auto-flow: row-reverse;
-
-			.feature-text {
-				order: 2;
+			@media (min-width: 768px) {
+				.feature-text {
+					order: 2;
+				}
 			}
 		}
 		.feature-visual img {

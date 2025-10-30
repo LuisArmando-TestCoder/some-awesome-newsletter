@@ -15,13 +15,13 @@
 <div class="demo-page">
   <HeroBanner />
 
-  <Faq />
-
   <div class="cta-section">
     <a href="/login">
       <CTAButton label={$content.hero.primaryCta} href="/login" variant="primary" />
     </a>
   </div>
+
+  <Faq />
 
   {#if $content.footer}
   <footer class="page-footer">
@@ -77,7 +77,7 @@
 
   .cta-section {
     text-align: center;
-    padding: 0 0 8rem;
+    padding: 5rem 0 0;
   }
 
   @keyframes fadeIn {

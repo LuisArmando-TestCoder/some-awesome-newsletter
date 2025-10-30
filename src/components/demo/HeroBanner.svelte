@@ -49,9 +49,8 @@
 .banner-content {
   max-width: 700px;
   width: 100%;
-  margin: 0 auto;
+  margin: 5rem auto;
   border-radius: 1.5rem;
-  box-shadow: 0 6px 32px 0 rgba(60, 80, 120, 0.10);
   display: flex;
   flex-direction: column;
   align-items: flex-start;

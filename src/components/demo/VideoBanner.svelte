@@ -32,15 +32,15 @@
 </script>
 
 <div class="re-wrap">
+  <div class:show={true} class="slot-wrap">
+    <slot />
+  </div>
   <div class="video" class:show={true}>
     <slot name="video" />
   </div>
   <div class="wrapper">
     <div class="img-wrap" class:show={true} on:click={onclick} bind:this={imgWrap}>
       <img class="img" bind:this={img} src={videoPoster} alt={videoAlt}>
-    </div>
-    <div class:show={true} class="slot-wrap">
-      <slot />
     </div>
   </div>
 </div>
@@ -51,13 +51,11 @@
     transition: opacity 1s ease-in-out, transform 0.5s ease-in-out;
     opacity: 1;
     transform: translateX(0px);
+    padding: 25px;
   }
 
   .re-wrap {
     position: relative;
-    @media (max-width: 1024px) {
-      padding: 0 1rem;
-    }
   }
 
   .video {
@@ -69,7 +67,10 @@
     transition: opacity 0.5s ease-in-out .5s;
     pointer-events: none;
     border-radius: 15px;
-    padding: 25px;
+    
+    @media (min-width: 1024px) {
+      padding: 5rem;
+    }
     
     &.show {
       opacity: 1;

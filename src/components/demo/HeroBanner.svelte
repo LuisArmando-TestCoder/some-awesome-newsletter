@@ -15,7 +15,7 @@
   >
     <div slot="video">
       <iframe
-        height="415"
+        height="600px"
         width="100%"
         src={videoUrl}
         title="YouTube video player"

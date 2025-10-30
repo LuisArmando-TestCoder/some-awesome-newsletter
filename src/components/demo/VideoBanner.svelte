@@ -32,14 +32,14 @@
 </script>
 
 <div class="re-wrap">
-  <div class="video" class:show={isOpen}>
+  <div class="video" class:show={true}>
     <slot name="video" />
   </div>
   <div class="wrapper">
-    <div class="img-wrap" class:show={isOpen} on:click={onclick} bind:this={imgWrap}>
+    <div class="img-wrap" class:show={true} on:click={onclick} bind:this={imgWrap}>
       <img class="img" bind:this={img} src={videoPoster} alt={videoAlt}>
     </div>
-    <div class:show={isOpen} class="slot-wrap">
+    <div class:show={true} class="slot-wrap">
       <slot />
     </div>
   </div>
@@ -51,13 +51,6 @@
     transition: opacity 1s ease-in-out, transform 0.5s ease-in-out;
     opacity: 1;
     transform: translateX(0px);
-
-    &.show {
-      @media (min-width: 1024px) {
-        opacity: 0;
-        transform: translateX(50vw);
-      }
-    }
   }
 
   .re-wrap {
@@ -75,6 +68,8 @@
     z-index: 1;
     transition: opacity 0.5s ease-in-out .5s;
     pointer-events: none;
+    border-radius: 15px;
+    padding: 25px;
     
     &.show {
       opacity: 1;
@@ -139,10 +134,7 @@
     padding: 25px;
     grid-gap: 25px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    grid-template-columns: 1fr;
     place-items: center;
-    @media (max-width: 1024px) {
-      grid-template-columns: 1fr;
-    }
   }
 </style>

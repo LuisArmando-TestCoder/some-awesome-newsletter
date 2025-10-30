@@ -86,7 +86,6 @@ import { ping } from '../../../components/Notification/notificationStore';
   $: $store.header;
 </script>
 
-{#if $store.isAuthCodeValid && $store.config.newsSources?.length > 0}
 <div class="header-wrapper" class:show={$store.header}>
   <header class="header">
     <div class="header__container">
@@ -151,13 +150,11 @@ import { ping } from '../../../components/Notification/notificationStore';
     </div>
   </header>
 </div>
-{/if}
 
 <style lang="scss">
   @use '../../../styles/global.scss';
 
   .tier {
-
     background: #000;
     color: white;
     padding: .25rem .5rem;
@@ -218,9 +215,9 @@ import { ping } from '../../../components/Notification/notificationStore';
   }
 
   .header {
-    background: var(--color-background-very-opaque);
+    background: var(--color-background-inversion);
     padding: var(--space-md) 0;
-    border-bottom: 1px solid var(--c-border);
+    border-bottom: 1px solid #0000000f;
     position: relative;
     z-index: 1000;
   }

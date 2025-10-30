@@ -77,7 +77,7 @@
 
   .cta-section {
     text-align: center;
-    padding: 5rem 0 0;
+    padding: 50vh 0 0;
   }
 
   @keyframes fadeIn {

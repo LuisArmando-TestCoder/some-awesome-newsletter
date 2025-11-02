@@ -22,7 +22,20 @@
   <div class="right-align">
     {#if $store.subscriberLanguage}
       <SubmitButton
-        callback={() => saveToStore({ stepsIndex: $store.stepsIndex + 1 })}
+        callback={async () => {
+          await fetch("/subscribe-widget/subscribe", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: $store.subscriberEmail,
+              configuratorId: $store.subscriberConfiguratorId,
+              newsSourceId: $store.subscriberNewsSourceId,
+            }),
+          });
+          saveToStore({ stepsIndex: $store.stepsIndex + 1 });
+        }}
       />
     {/if}
   </div>

@@ -1,12 +1,44 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { get } from "svelte/store";
-  import store from "../../../store";
+  import store, { saveToConfig } from "../../../store";
   import getAuthHeaders from "../../requests/getAuthHeaders";
+  import Link from "../Link/Link.svelte";
+  import SubmitButton from "../../buttons/SubmitButton/SubmitButton.svelte";
 
   let apiKeys: { hash: string; createdAt: string }[] = [];
   let newApiKey: string | null = null;
   let confirmingDeleteHash: string | null = null;
+  let webhookUrl: string = "";
+  let newSharedSecret: string | null = null;
+
+  async function fetchConfigData() {
+    const authHeaders = await getAuthHeaders();
+    const configId = authHeaders["x-auth-email"];
+    const response = await fetch(`${get(store).apiURL()}/configurations/${configId}`, {
+      headers: authHeaders,
+    });
+    const data = await response.json();
+    apiKeys = data.apiKeys || [];
+    webhookUrl = data.webhookUrl || "";
+  }
+
+  async function saveWebhookUrl() {
+    await saveToConfig({ webhookUrl });
+    // Optionally, add some user feedback like a notification
+  }
+
+  async function createSharedSecret() {
+    newSharedSecret = null;
+    const authHeaders = await getAuthHeaders();
+    const configId = authHeaders["x-auth-email"];
+    const response = await fetch(`${get(store).apiURL()}/configurations/${configId}/secret`, {
+      method: "POST",
+      headers: authHeaders,
+    });
+    const data = await response.json();
+    newSharedSecret = data.sharedSecret;
+  }
 
   async function fetchApiKeys() {
     const authHeaders = await getAuthHeaders();
@@ -47,7 +79,7 @@
     navigator.clipboard.writeText(text);
   }
 
-  onMount(fetchApiKeys);
+  onMount(fetchConfigData);
 </script>
 
 <style lang="scss">
@@ -55,6 +87,28 @@
 </style>
 
 <div class="secrets-container">
+
+  <div class="webhook-container">
+    <h3 class="secrets-title">Webhook Configuration</h3>
+    <p>Configure the secure URL where your server can be reached to retrieve your API key.</p>
+    <div class="webhook-url-container">
+      <Link bind:value={webhookUrl} label="Key Retrieval URL:" placeholder="https://your-server.com/api/get-key" />
+      <SubmitButton label="Save URL" callback={saveWebhookUrl} />
+    </div>
+
+    <h3 class="secrets-title">Generate Shared Secret</h3>
+    {#if newSharedSecret}
+      <div class="new-api-key-container">
+        <p class="new-api-key-label">New Shared Secret:</p>
+        <div class="new-api-key-wrapper">
+          <code class="new-api-key-code">{newSharedSecret}</code>
+          <button class="copy-new-api-key-button" on:click={() => newSharedSecret && copyToClipboard(newSharedSecret)}>Copy</button>
+        </div>
+        <p class="new-api-key-warning">Please save this secret. You will not be able to see it again.</p>
+      </div>
+    {/if}
+    <button class="create-api-key-button" on:click={createSharedSecret}>Generate New Shared Secret</button>
+  </div>
   <h3 class="secrets-title">Create New API Key</h3>
   {#if newApiKey}
     <div class="new-api-key-container">
@@ -67,6 +121,8 @@
     </div>
   {/if}
   <button class="create-api-key-button" on:click={createApiKey}>Create New API Key</button>
+
+  <h3 class="secrets-title">API Keys</h3>
   <table class="api-key-table">
     <thead>
       <tr>

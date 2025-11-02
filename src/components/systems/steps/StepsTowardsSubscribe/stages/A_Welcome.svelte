@@ -40,11 +40,13 @@
     ## Welcome to the Newsletter.
   </MarkdownText>
 
-  {#key $configuratorId}
-    <MarkdownText {canReveal}>
-      ### You have been invited by {$configuratorId}.
-    </MarkdownText>
-  {/key}
+  <div class="wrap-text">
+    {#key $configuratorId}
+      <MarkdownText {canReveal}>
+        ### You have been invited by {$configuratorId}.
+      </MarkdownText>
+    {/key}
+  </div>
 
   <div class="right-align">
     <SubmitButton
@@ -54,6 +56,13 @@
 </Centered>
 
 <style>
+  .wrap-text .wrapper-letter {
+    transition-delay: 0.89588s;
+    width: 200px;
+    display: block;
+    overflow: hidden;
+  }
+
   .right-align {
     display: flex;
     justify-content: flex-end;

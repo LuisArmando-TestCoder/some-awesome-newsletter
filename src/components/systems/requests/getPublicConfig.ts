@@ -35,6 +35,8 @@ export default async function getPublicConfig(
       method: "GET",
       headers: {
         Accept: "application/json",
+        "x-auth-email": appStore.configuratorEmail,
+        "x-auth-code": appStore.authCode,
       },
     });
 

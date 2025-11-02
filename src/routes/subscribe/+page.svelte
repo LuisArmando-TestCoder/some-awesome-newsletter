@@ -77,16 +77,6 @@
     });
 </script>
 
-{#if logoUrl}
-<div style="position: fixed; padding: 0;">
-    <img 
-        src={logoUrl} 
-        alt="{newsletterTitle || 'Newsletter'} Logo" 
-        style="display: block; width: 200px; height: auto; object-fit: contain;" 
-    />
-</div>
-{/if}
-
 <ThemeChanger visible={false} />
 <GlobalData />
 <SocketClient />

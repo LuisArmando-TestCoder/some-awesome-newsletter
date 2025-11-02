@@ -3,27 +3,31 @@
   import store, { saveToStore, getFromStore } from "../../../../store";
   import EmailInput from "../../../inputs/Email/Email.svelte";
   import PlainText from "../../../inputs/PlainText/PlainText.svelte";
+  import Language from "../../../inputs/Language/Language.svelte";
 
   export let canReveal = false; // For step progression
   export let isStepComplete: boolean = false;
 
   let localEmail: string = "";
   let localName: string = "";
+  let localLanguage: string = "";
 
   // For prefilling from URL params if they exist
   let prefilledEmail: string = "";
   let prefilledName: string = "";
 
   onMount(() => {
-    // Attempt to get prefilled values from store (saved from URL params by parent or an earlier stage)
-    // These keys should match what Subscribe.svelte (parent) might save from query params.
+    // Attempt to get prefilled values from store
     prefilledEmail = getFromStore("widgetPrefilledEmail") || "";
     prefilledName = getFromStore("widgetPrefilledName") || "";
+    const prefilledLanguage = getFromStore("widgetPrefilledLanguage") || "en";
 
     localEmail = prefilledEmail;
     localName = prefilledName;
+    localLanguage = prefilledLanguage;
     
-    // Initial check for completion based on prefilled values
+    // Initial save to store and check for completion
+    saveToStore({ widgetLanguage: localLanguage });
     checkCompletion();
   });
 
@@ -37,6 +41,14 @@
     localName = value;
     saveToStore({ widgetName: localName });
     checkCompletion();
+  }
+
+  function handleLanguageChange(selectedCode: string | null) {
+    if (selectedCode) {
+      localLanguage = selectedCode;
+      saveToStore({ widgetLanguage: localLanguage });
+      checkCompletion();
+    }
   }
   
   function checkCompletion() {
@@ -76,6 +88,9 @@
       type="text" 
       onChange={handleNameChange} 
     />
+  </div>
+  <div class="form-group">
+    <Language defaultLanguageCode={localLanguage} onSelect={handleLanguageChange} />
   </div>
 </div>
 

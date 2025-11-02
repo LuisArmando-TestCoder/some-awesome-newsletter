@@ -10,13 +10,20 @@
   import B_UserDetails from "./stages/B_UserDetails.svelte";
   import C_ConfirmAndSubscribe from "./stages/C_ConfirmAndSubscribe.svelte";
 
-  // Props for endpoint, if provided directly
-  export let endpoint: string = "/public-subscribe"; // Default endpoint
+  // Props for endpoint and configuration IDs
+  export let configuratorId: string;
+  export let newsSourceId: string;
+  export let endpoint: string = "/subscribe-widget/subscribe"; // Point to the new secure proxy
   const endpointStore = writable(endpoint);
-  setContext('getParentEndpoint', () => endpointStore); // Provide endpoint to child contexts
+  setContext('getParentEndpoint', () => endpointStore);
 
-  // Store prefilled optional data from URL to be accessed by C_ConfirmAndSubscribe
+  // Store data from props and URL params
   onMount(() => {
+    // Save props to the store for child components to use
+    saveToStore({ 
+      widgetConfiguratorId: configuratorId, 
+      widgetSelectedNewsSourceId: newsSourceId 
+    });
     const urlParams = $page.url.searchParams;
     const prefilledLanguage = urlParams.get("language") || undefined;
     const prefilledCountry = urlParams.get("countryOfResidence") || undefined;
@@ -46,14 +53,10 @@
 
   // Define steps and their conditions
   const steps: {
-    component: any; // Using any for broader compatibility with svelte:component
+    component: any;
     condition: (s: Store) => boolean;
     props?: Record<string, any>;
   }[] = [
-    {
-      component: A_InitialParams,
-      condition: () => true, // Always show first step
-    },
     {
       component: B_UserDetails,
       condition: (s: Store) => !!(s.widgetConfiguratorId && s.widgetSelectedNewsSourceId),

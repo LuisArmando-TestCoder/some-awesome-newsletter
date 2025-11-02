@@ -93,7 +93,7 @@
       () => {
         // console.log("JSON store", JSON.stringify($store, null, 2))
         window.location.href =
-          "/login?message-from-developer=Im+watching+you+bro";
+          "/login?message-from-developer=now+you+need+to+login+again+to+access+the+dashboard";
       },
     );
   });

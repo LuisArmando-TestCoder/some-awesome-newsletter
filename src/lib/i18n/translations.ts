@@ -35,6 +35,7 @@ import ar from './locales/ar';
 import bn from './locales/bn';
 import pt from './locales/pt';
 import id from './locales/id';
+import { writable } from 'svelte/store';
 
 export default {
   en,
@@ -75,3 +76,5 @@ export default {
   pt,
   id
 };
+
+export const t = writable(en)

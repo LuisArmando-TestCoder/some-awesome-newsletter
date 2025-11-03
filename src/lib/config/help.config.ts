@@ -1,12 +1,7 @@
 import { writable, type Writable, get } from 'svelte/store';
-import translations from '../i18n/translations';
+import { t } from '../i18n/translations';
 import { globalLanguage } from '../../components/store';
 import type en from '../i18n/locales/en';
-
-type Translation = typeof en;
-type LanguageKey = keyof typeof translations;
-
-const typedTranslations = translations as Record<LanguageKey, Translation>;
 
 export interface HelpContent {
   title: string;
@@ -37,21 +32,16 @@ export interface HelpState {
   content: HelpContent;
 }
 
-const getContent = (lang: string) => {
-  const translation = typedTranslations[lang as LanguageKey];
-  return translation.help || typedTranslations.en.help;
-};
-
 const initial: HelpState = {
-  content: getContent(get(globalLanguage))
+  content: get(t).help
 };
 
 const store: Writable<HelpState> = writable(initial);
 
-globalLanguage.subscribe((lang) => {
+globalLanguage.subscribe(() => {
   store.update((state) => ({
     ...state,
-    content: getContent(lang)
+    content: get(t).help
   }));
 });
 

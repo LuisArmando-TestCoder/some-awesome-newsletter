@@ -10,13 +10,7 @@
     import store, { saveToStore, globalLanguage } from '../../../components/store';
     import askIsAuthCodeValid from '../../../components/systems/requests/askIsAuthCodeValid';
     import logout from '../../../components/systems/requests/logout';
-  import translations from '$lib/i18n/translations';
-  import type en from '$lib/i18n/locales/en';
-
-  type Translation = typeof en;
-  type LanguageKey = keyof typeof translations;
-
-  const typedTranslations = translations as Record<LanguageKey, Translation>;
+  import { t } from '$lib/i18n/translations';
 
   export let mode: 'login' | 'signup' = 'login';
   export let copy: any; // from auth.json (login or signup branch)
@@ -29,12 +23,8 @@
   let email = '';
   let errorMsg = '';
   let loading = false;
-  let t: Translation;
 
-  $: {
-    const lang = $globalLanguage as LanguageKey;
-    t = typedTranslations[lang] || typedTranslations.en;
-  }
+  $: $t;
 
   // Step state: 'initial' = show Google + Email, 'code' = show code input
   let step: 'initial' | 'code' = 'initial';
@@ -46,7 +36,7 @@
   async function onEmail() {
     // Validate email
     if (!emailSchema.safeParse(email).success) {
-      errorMsg = t.authForm.emailValidation;
+      errorMsg = $t.authForm.emailValidation;
       return;
     }
     errorMsg = '';
@@ -55,7 +45,7 @@
       await askForNewAuthCode();
       step = 'code';
     } catch (e) {
-      errorMsg = t.authForm.failedToSendCode;
+      errorMsg = $t.authForm.failedToSendCode;
     }
     loading = false;
   }
@@ -98,7 +88,7 @@
           });
         }} />
       <button onclick={onEmail} class="auth-form__button auth-form__button--primary" disabled={loading}>
-        {loading ? t.authForm.sending : copy?.continueWithEmail}
+        {loading ? $t.authForm.sending : copy?.continueWithEmail}
       </button>
       {#if errorMsg}
         <p class="auth-form__error">{errorMsg}</p>
@@ -108,7 +98,7 @@
     <div class="auth-form__container {step === 'code' ? 'show' : 'hide'}">
       <div class="center">
         <MarkdownText canReveal={$store.hasNewEmailCodeBeenSent}>
-          **{t.authForm.codeSent}**
+          **{$t.authForm.codeSent}**
         </MarkdownText>
       </div>
       <Code
@@ -130,7 +120,7 @@
         }}
       />
       {#if !$store.isAuthCodeValid && $store.authCode && $store.hasNewEmailCodeBeenSent}
-        <div class="error center">{t.authForm.invalidCode}</div>
+        <div class="error center">{$t.authForm.invalidCode}</div>
       {/if}
 
       <button
@@ -140,10 +130,10 @@
           askForNewAuthCode();
         }}
       >
-        {t.authForm.regenerateCode}
+        {$t.authForm.regenerateCode}
       </button>
       <button onclick={goBack} class="auth-form__button auth-form__button--google" style="margin-top: 1rem;">
-        {t.authForm.back}
+        {$t.authForm.back}
       </button>
     </div>
 
@@ -155,9 +145,9 @@
 
     <!-- Legal -->
     <p class="auth-form__legal">
-      {t.authForm.byProceeding.replace('{appName}', runtime.appName)}
-      <a href={legal.termsUrl} class="auth-form__legal-link">{t.authForm.termsOfService}</a> {t.authForm.and}
-      <a href={legal.privacyUrl} class="auth-form__legal-link">{t.authForm.privacyPolicy}</a>.
+      {$t.authForm.byProceeding.replace('{appName}', runtime.appName)}
+      <a href={legal.termsUrl} class="auth-form__legal-link">{$t.authForm.termsOfService}</a> {$t.authForm.and}
+      <a href={legal.privacyUrl} class="auth-form__legal-link">{$t.authForm.privacyPolicy}</a>.
     </p>
   </div>
 </div>

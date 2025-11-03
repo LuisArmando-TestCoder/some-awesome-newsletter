@@ -3,22 +3,12 @@
   import { page } from "$app/stores";
     import ThemeChanger from "../../components/ThemeChanger/ThemeChanger.svelte";
     import store, { globalLanguage } from "../../components/store";
-  import translations from "../../lib/i18n/translations";
-  import type en from '../../lib/i18n/locales/en';
-
-  type Translation = typeof en;
-  type LanguageKey = keyof typeof translations;
-
-  const typedTranslations = translations as Record<LanguageKey, Translation>;
+  import { t } from "../../lib/i18n/translations";
 
   let article: any = null;
   let error: string | null = null;
-  let t: Translation;
 
-  $: {
-    const lang = $globalLanguage as LanguageKey;
-    t = typedTranslations[lang] || typedTranslations.en;
-  }
+  $: $t;
 
   onMount(async () => {
     const id = $page.url.searchParams.get("q");
@@ -29,13 +19,13 @@
         if (response.ok) {
           article = await response.json();
         } else {
-          error = t.article.notFound;
+          error = $t.article.notFound;
         }
       } catch (e) {
-        error = t.article.errorFetching;
+        error = $t.article.errorFetching;
       }
     } else {
-      error = t.article.noArticleSpecified;
+      error = $t.article.noArticleSpecified;
     }
   });
 </script>
@@ -49,11 +39,11 @@
   <article>
     <a onclick={() => {
         window.history.go(-1);
-    }} class="back">{t.article.goBack}</a>
+    }} class="back">{$t.article.goBack}</a>
     {@html article.content}
   </article>
   {:else}
-    <p>{t.article.loading}</p>
+    <p>{$t.article.loading}</p>
   {/if}
 </div>
 

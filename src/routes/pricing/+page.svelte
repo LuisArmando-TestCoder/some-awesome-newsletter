@@ -10,23 +10,13 @@
   import Switch from "$lib/ui/components/Switch.svelte";
   import { useSmoothPage } from "$lib/anim/useSmoothPage";
     import { text } from "@sveltejs/kit";
-  import translations from "../../lib/i18n/translations";
+  import { t } from "../../lib/i18n/translations";
   import { globalLanguage } from "../../components/store";
-  import type en from '../../lib/i18n/locales/en';
-
-  type Translation = typeof en;
-  type LanguageKey = keyof typeof translations;
-
-  const typedTranslations = translations as Record<LanguageKey, Translation>;
 
   let state: PlansState;
   const unsub = plansStore.subscribe((v) => (state = v));
-  let t: Translation;
 
-  $: {
-    const lang = $globalLanguage as LanguageKey;
-    t = typedTranslations[lang] || typedTranslations.en;
-  }
+  $: $t;
 
   onMount(async () => {
     await loadPlansContent(); // logs handled elsewhere
@@ -47,23 +37,23 @@
     <div class="pricing">
       <div class="pricing__container">
         <div class="pricing__header">
-          <p class="pricing__eyebrow">{t.pricing.eyebrow}</p>
-          <h1 class="pricing__title">{t.pricing.title}</h1>
+          <p class="pricing__eyebrow">{$t.pricing.eyebrow}</p>
+          <h1 class="pricing__title">{$t.pricing.title}</h1>
           {#if state?.currentPlan}
-            <span class="pricing__badge">{t.pricing.currentPlan} {state.currentPlan}</span
+            <span class="pricing__badge">{$t.pricing.currentPlan} {state.currentPlan}</span
             >
           {/if}
         </div>
 
         {#if state?.content?.billingIntervals}
           <div class="pricing__toggle">
-            <span class="pricing__toggle-label">{t.pricing.monthly}</span>
+            <span class="pricing__toggle-label">{$t.pricing.monthly}</span>
             <Switch
               toggled={state.interval === "yearly"}
               onChange={(toggled) =>
                 setInterval(toggled ? "yearly" : "monthly")}
             />
-            <span class="pricing__toggle-label">{t.pricing.yearly}</span>
+            <span class="pricing__toggle-label">{$t.pricing.yearly}</span>
           </div>
         {/if}
 
@@ -94,7 +84,7 @@
                 <ul class="pricing__feature-list">
                   {#if plan.id !== "free"}
                     <h3 class="pricing__feature-heading">
-                      {t.pricing.everythingIn}
+                      {$t.pricing.everythingIn}
                     </h3>
                   {/if}
                   {#each computeFeatures(state.content, plan.id) as feature}
@@ -116,17 +106,17 @@
                 </ul>
                 {#if plan.id === state.currentPlan}
                   <button class="pricing__cta current-plan-button" disabled
-                    >{t.pricing.isCurrentPlan}</button
+                    >{$t.pricing.isCurrentPlan}</button
                   >
                 {:else if state.content && state.content.plans.find((p) => p.id === state.currentPlan) && plan.tier < state.content.plans.find((p) => p.id === state.currentPlan)!.tier}
                   <a
                     href={`/api/checkout?products=${plan.productId}`}
-                    class="pricing__cta">{t.pricing.downgradeTo.replace('{planName}', plan.name)}</a
+                    class="pricing__cta">{$t.pricing.downgradeTo.replace('{planName}', plan.name)}</a
                   >
                 {:else}
                   <a
                     href={`/api/checkout?products=${plan.productId}`}
-                    class="pricing__cta">{t.pricing.upgradeTo.replace('{planName}', plan.name)}</a
+                    class="pricing__cta">{$t.pricing.upgradeTo.replace('{planName}', plan.name)}</a
                   >
                 {/if}
               </section>
@@ -142,7 +132,7 @@
         </div>
 
         {#if state?.mockMode}
-          <div class="pricing__banner--mock">{t.pricing.mockMode}</div>
+          <div class="pricing__banner--mock">{$t.pricing.mockMode}</div>
         {/if}
       </div>
     </div>

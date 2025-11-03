@@ -12,23 +12,13 @@ import { ping } from '../../../components/Notification/notificationStore';
     type PlansState
   } from '$lib/config/plans.config';
     import { notification } from '../../../components/Notification/notificationStore';
-  import translations from '$lib/i18n/translations';
+  import { t } from '$lib/i18n/translations';
   import { globalLanguage } from '../../../components/store';
-  import type en from '$lib/i18n/locales/en';
-
-  type Translation = typeof en;
-  type LanguageKey = keyof typeof translations;
-
-  const typedTranslations = translations as Record<LanguageKey, Translation>;
 
   let state: PlansState;
   const unsub = plansStore.subscribe((v) => (state = v));
-  let t: Translation;
 
-  $: {
-    const lang = $globalLanguage as LanguageKey;
-    t = typedTranslations[lang] || typedTranslations.en;
-  }
+  $: $t;
 
   onMount(async () => {
     await loadPlansContent();
@@ -131,32 +121,32 @@ import { ping } from '../../../components/Notification/notificationStore';
       </div>
       <div class="header__actions">
         <div class="desktop-only">
-          {#if t}
+          {#if $t}
             {#if $store.isAuthCodeValid && !$page.url.pathname.includes("dashboard")}
-              <a href="/dashboard" class="header__action header__action--primary">{t.header.goToWorkspace}</a>
+              <a href="/dashboard" class="header__action header__action--primary">{$t.header.goToWorkspace}</a>
             {:else if $store.isAuthCodeValid && $page.url.pathname.includes("dashboard")}
             {$store?.config.senderName}:
               {#if $store?.config.pricingPlan === 'vipfree'}
                 <button on:click={() => {
                       saveToStore({ stepsIndex: stepsMapping["Billing"] });
-                      ping("Billing", t.header.inBilling);
-                }} class="tier tier-vipfree">{t.header.vip}</button>
+                      ping("Billing", $t.header.inBilling);
+                }} class="tier tier-vipfree">{$t.header.vip}</button>
               {:else if $store?.config.pricingPlan}
                 <a href={
                   $store?.config.pricingPlan === 'free' ? `/api/checkout?products=${state?.content?.plans.find(p => p.id === 'monthly')?.productId}` :
                   $store?.config.pricingPlan === 'monthly' ? `/api/checkout?products=${state?.content?.plans.find(p => p.id === 'yearly')?.productId}` :
                   `/api/portal?customerEmail=${$store.configuratorEmail}`
                 } class="tier tier-{$store?.config.pricingPlan}">
-                  {t.header.plan.replace('{planName}', $store?.config.pricingPlan)}
+                  {$t.header.plan.replace('{planName}', $store?.config.pricingPlan)}
                 </a>
               {/if}
             {:else}
               <a on:click={() => {
                 logout(false);
-              }} href="/login" class="header__action header__action--secondary">{t.header.logIn}</a>
+              }} href="/login" class="header__action header__action--secondary">{$t.header.logIn}</a>
               <a on:click={() => {
                 logout(false);
-              }} href="/signup" class="header__action header__action--primary">{t.header.getStarted}</a>
+              }} href="/signup" class="header__action header__action--primary">{$t.header.getStarted}</a>
             {/if}
           {/if}
         </div>

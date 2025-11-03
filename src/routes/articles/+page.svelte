@@ -15,6 +15,14 @@
   import FeaturedArticlesGrid from "../../components/articles/FeaturedArticlesGrid.svelte";
   import TextArticlesGrid from "../../components/articles/TextArticlesGrid.svelte";
   import PlainText from "../../components/systems/inputs/PlainText/PlainText.svelte";
+  import translations from "../../lib/i18n/translations";
+  import { globalLanguage } from "../../components/store";
+  import type en from '../../lib/i18n/locales/en';
+
+  type Translation = typeof en;
+  type LanguageKey = keyof typeof translations;
+
+  const typedTranslations = translations as Record<LanguageKey, Translation>;
 
   /* ────────────────── types ─────────────────── */
   interface Article {
@@ -43,6 +51,12 @@
   let isStreaming = false;
   let noResults = false;
   let totalItems = 0;
+  let t: Translation;
+
+  $: {
+    const lang = $globalLanguage as LanguageKey;
+    t = typedTranslations[lang] || typedTranslations.en;
+  }
 
   const articlesCache = new Map<string, any>();
 
@@ -101,7 +115,7 @@
         fetchAndCachePage(lang, page + 1).catch((e) => console.error("Prefetch next failed:", e));
       }
     } catch (err) {
-      error = "Error fetching article list.";
+      error = t.articles.errorFetching;
     } finally {
       loading = false;
     }
@@ -186,7 +200,7 @@
           noResults = true;
         }
       } catch (err) {
-        error = "Error fetching search results.";
+        error = t.articles.errorFetching;
       } finally {
         isStreaming = false;
       }
@@ -244,7 +258,7 @@
   onMount(async () => {
     const holderParam = $page.url.searchParams.get("holder");
     if (!holderParam) {
-      error = "No article holder specified.";
+      error = t.articles.noArticleSpecified;
       loading = false;
       return;
     }
@@ -285,7 +299,7 @@
         }
       }
     } catch (err) {
-      error = "Error loading initial articles.";
+      error = t.articles.errorFetching;
     } finally {
       loading = false;
     }
@@ -299,8 +313,8 @@
 
 <div class="articles-page-container">
   <header class="hero-section">
-    <h1>The Latest Insights</h1>
-    <p>Explore our curated collection of articles, news, and expert opinions.</p>
+    <h1>{t.articles.title}</h1>
+    <p>{t.articles.subtitle}</p>
   </header>
 
   <main class="articles-content">
@@ -310,12 +324,12 @@
           <Language
             whitelist={availableLanguages}
             onSelect={(code) => handleLanguageChange(code)}
-            label={"We've produced news in all these languages"}
+            label={t.articles.producedIn}
             defaultLanguageCode={activeTab}
           />
         {/if}
       </div>
-      <SearchBar bind:value={search} placeholder="Search articles..." on:search={handleSearch} />
+      <SearchBar bind:value={search} placeholder={t.articles.searchPlaceholder} on:search={handleSearch} />
     </div>
 
     {#if isStreaming}
@@ -345,7 +359,7 @@
     {:else}
       <!-- Section 1: Featured Articles -->
       {#if noResults}
-        <p>No articles found.</p>
+        <p>{t.articles.noArticlesFound}</p>
       {:else if articlesWithImages.length > 0}
         <FeaturedArticlesGrid articles={articlesWithImages.slice(0, 3)} bind:selectedArticle />
       {/if}
@@ -378,7 +392,7 @@
   </main>
 
   <footer class="page-footer">
-    <p>&copy; {new Date().getFullYear()} Some Awesome Newsletter. All Rights Reserved.</p>
+    <p>&copy; {new Date().getFullYear()} Some Awesome Newsletter. {t.articles.rightsReserved}</p>
   </footer>
 </div>
 
@@ -386,7 +400,7 @@
   {#if $selectedArticle}
     <div class="modal-content-inner">
       <h2>{@html $selectedArticle.title}</h2>
-      <p><small>Created: {$selectedArticle.creation} | Language: {$selectedArticle.language}</small></p>
+      <p><small>{t.articles.created} {$selectedArticle.creation} | {t.articles.language} {$selectedArticle.language}</small></p>
       {@html $selectedArticle.content}
     </div>
   {/if}

@@ -1,5 +1,13 @@
 // src/lib/config/plans.config.ts
-import { writable, type Writable } from 'svelte/store';
+import { writable, type Writable, get } from 'svelte/store';
+import translations from '../i18n/translations';
+import { globalLanguage } from '../../components/store';
+import type en from '../i18n/locales/en';
+
+type Translation = typeof en;
+type LanguageKey = keyof typeof translations;
+
+const typedTranslations = translations as Record<LanguageKey, Translation>;
 
 export type Interval = 'monthly' | 'yearly';
 export type PlanId = 'free' | 'monthly' | 'yearly' | 'vipfree';
@@ -54,19 +62,23 @@ function detectMock(): boolean {
   return !import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY; // adapt to your runtime
 }
 
+const getContent = (lang: string) => {
+  const translation = typedTranslations[lang as LanguageKey];
+  return (translation.plans || typedTranslations.en.plans) as PlansContent;
+};
+
 const initial: PlansState = {
   mockMode: detectMock(),
   interval: 'monthly',
   currentPlan: 'free',
-  content: null
+  content: getContent(get(globalLanguage))
 };
 
 const store: Writable<PlansState> = writable(initial);
 
 /** Load JSON once and sync state (call in onMount or layout load) */
 export async function loadPlansContent(path = '/content/plans.json') {
-  const res = await fetch(path, { headers: { 'cache-control': 'no-cache' } });
-  const json = (await res.json()) as PlansContent;
+  const json = getContent(get(globalLanguage));
   store.update(s => ({
     ...s,
     content: json,

@@ -2,10 +2,23 @@
   import { onMount } from "svelte";
   import { page } from "$app/stores";
     import ThemeChanger from "../../components/ThemeChanger/ThemeChanger.svelte";
-    import store from "../../components/store";
+    import store, { globalLanguage } from "../../components/store";
+  import translations from "../../lib/i18n/translations";
+  import type en from '../../lib/i18n/locales/en';
+
+  type Translation = typeof en;
+  type LanguageKey = keyof typeof translations;
+
+  const typedTranslations = translations as Record<LanguageKey, Translation>;
 
   let article: any = null;
   let error: string | null = null;
+  let t: Translation;
+
+  $: {
+    const lang = $globalLanguage as LanguageKey;
+    t = typedTranslations[lang] || typedTranslations.en;
+  }
 
   onMount(async () => {
     const id = $page.url.searchParams.get("q");
@@ -16,13 +29,13 @@
         if (response.ok) {
           article = await response.json();
         } else {
-          error = "Article not found.";
+          error = t.article.notFound;
         }
       } catch (e) {
-        error = "Error fetching article.";
+        error = t.article.errorFetching;
       }
     } else {
-      error = "No article specified.";
+      error = t.article.noArticleSpecified;
     }
   });
 </script>
@@ -36,11 +49,11 @@
   <article>
     <a onclick={() => {
         window.history.go(-1);
-    }} class="back">Go Back</a>
+    }} class="back">{t.article.goBack}</a>
     {@html article.content}
   </article>
   {:else}
-    <p>Loading...</p>
+    <p>{t.article.loading}</p>
   {/if}
 </div>
 

@@ -46,9 +46,11 @@ const store = writable<Store>({
     "subscriberCountry", // Added for subscription flow
     "user",
     "tokenId",
-    "clientId"
+    "clientId",
+    "globalLanguage"
   ],
   appLanguage: "en", // Added for global language setting
+  globalLanguage: "en",
   header: true,
   autoCollapse: true,
   toggles: {},
@@ -96,6 +98,7 @@ const store = writable<Store>({
     "aimed at fostering meaningful exchanges that acknowledge complexity and uniqueness.",
 });
 
+export const globalLanguage = writable("en");
 export const emptyStoreSnapshot = JSON.parse(JSON.stringify(get(store)));
 
 export default store;

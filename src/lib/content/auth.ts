@@ -1,27 +1,20 @@
-import { writable } from 'svelte/store';
+import { writable, get } from 'svelte/store';
+import translations from '../i18n/translations';
+import { globalLanguage } from '../../components/store';
+import type en from '../i18n/locales/en';
 
-export const authContent = writable({
-  logo: "/logo/logo-inverted.png",
-  login: {
-    title: "Log in to our Newsletter Orchestrator",
-    subtitle: "Connect to continue where you left off.",
-    google: "Continue with Google",
-    or: "or",
-    emailPlaceholder: "you@example.com",
-    continueWithEmail: "Continue with Email",
-    switchText: "Don't have an account?",
-    switchLink: "Sign Up",
-    switchHref: "/signup"
-  },
-  signup: {
-    title: "Create your account",
-    subtitle: "No credit card required.",
-    google: "Continue with Google",
-    or: "or",
-    emailPlaceholder: "you@example.com",
-    continueWithEmail: "Continue with Email",
-    switchText: "Already have an account?",
-    switchLink: "Log In",
-    switchHref: "/login"
-  }
+type Translation = typeof en;
+type LanguageKey = keyof typeof translations;
+
+const typedTranslations = translations as Record<LanguageKey, Translation>;
+
+const getContent = (lang: string) => {
+  const translation = typedTranslations[lang as LanguageKey];
+  return translation.auth || typedTranslations.en.auth;
+};
+
+export const authContent = writable(getContent(get(globalLanguage)));
+
+globalLanguage.subscribe((lang) => {
+  authContent.set(getContent(lang));
 });

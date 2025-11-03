@@ -1,13 +1,26 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { page } from '$app/stores';
-  import store from '../../components/store';
+  import store, { globalLanguage } from '../../components/store';
+  import translations from '../../lib/i18n/translations';
+  import type en from '../../lib/i18n/locales/en';
+
+  type Translation = typeof en;
+  type LanguageKey = keyof typeof translations;
+
+  const typedTranslations = translations as Record<LanguageKey, Translation>;
 
   let configId: string | null = null;
   let newsSourceId: string | null = null;
   let userEmail: string | null = null;
   let termsAccepted = false;
   let message = '';
+  let t: Translation;
+
+  $: {
+    const lang = $globalLanguage as LanguageKey;
+    t = typedTranslations[lang] || typedTranslations.en;
+  }
 
   onMount(() => {
     const params = $page.url.searchParams;
@@ -18,7 +31,7 @@
 
   async function confirmSubscription() {
     if (!termsAccepted) {
-      message = 'You must accept the terms and conditions to subscribe.';
+      message = t.confirmSubscription.mustAccept;
       return;
     }
 
@@ -33,27 +46,27 @@
         message = data.error;
       }
     } else {
-      message = 'Invalid confirmation link.';
+      message = t.confirmSubscription.invalidLink;
     }
   }
 </script>
 
 <div class="container">
   <div class="card">
-    <h1>Confirm Your Subscription</h1>
+    <h1>{t.confirmSubscription.title}</h1>
     {#if message}
       <p>{message}</p>
-      <a href="/" class="button">Go Back</a>
+      <a href="/" class="button">{t.confirmSubscription.goBack}</a>
     {:else}
-      <p>Please accept the terms and conditions to complete your subscription.</p>
+      <p>{t.confirmSubscription.pleaseAccept}</p>
       <div class="terms">
         <input type="checkbox" id="terms" bind:checked={termsAccepted} />
         <label for="terms">
-          I accept the <a href="/legal/terms">Terms and Conditions</a> and
-          <a href="/legal/privacy">Privacy Policy</a>.
+          {t.confirmSubscription.iAccept} <a href="/legal/terms">{t.confirmSubscription.termsAndConditions}</a> {t.confirmSubscription.and}
+          <a href="/legal/privacy">{t.confirmSubscription.privacyPolicy}</a>.
         </label>
       </div>
-      <button on:click={confirmSubscription}>Confirm Subscription</button>
+      <button on:click={confirmSubscription}>{t.confirmSubscription.confirm}</button>
     {/if}
   </div>
 </div>

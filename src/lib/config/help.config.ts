@@ -1,4 +1,12 @@
-import { writable, type Writable } from 'svelte/store';
+import { writable, type Writable, get } from 'svelte/store';
+import translations from '../i18n/translations';
+import { globalLanguage } from '../../components/store';
+import type en from '../i18n/locales/en';
+
+type Translation = typeof en;
+type LanguageKey = keyof typeof translations;
+
+const typedTranslations = translations as Record<LanguageKey, Translation>;
 
 export interface HelpContent {
   title: string;
@@ -29,47 +37,22 @@ export interface HelpState {
   content: HelpContent;
 }
 
-const content: HelpContent = {
-  title: "Request higher limits",
-  subtitle: "Move to pay-as-you-go or increase quotas to match your growth.",
-  contact: {
-    cta: "Submit request",
-    successTitle: "Request received",
-    successBody: "Our team will reach out shortly.",
-    learnMore: "/plans"
-  },
-  questions: {
-    desiredLimitsHelp: "Tell us the limits you need (e.g., 100k API calls/day).",
-    useCaseHelp: "Describe your workload and traffic pattern.",
-    expectedSpendHelp: "An estimate helps us tailor pricing (optional)."
-  },
-  faqs: [
-    {
-      id: "limits-how",
-      q: "How do higher limits work?",
-      a: "We unlock larger quotas immediately after approval. Billing can be flat-rate or pay-as-you-go."
-    },
-    {
-      id: "pricing-payg",
-      q: "What is pay-as-you-go pricing?",
-      a: "You pay only for usage beyond your included plan quotas with volume discounts at scale."
-    },
-    {
-      id: "timeline",
-      q: "How long does approval take?",
-      a: "Most requests are reviewed within 1–2 business days. Urgent cases can be escalated."
-    }
-  ],
-  links: {
-    docs: "/plans",
-    community: "/help"
-  }
+const getContent = (lang: string) => {
+  const translation = typedTranslations[lang as LanguageKey];
+  return translation.help || typedTranslations.en.help;
 };
 
 const initial: HelpState = {
-  content
+  content: getContent(get(globalLanguage))
 };
 
 const store: Writable<HelpState> = writable(initial);
+
+globalLanguage.subscribe((lang) => {
+  store.update((state) => ({
+    ...state,
+    content: getContent(lang)
+  }));
+});
 
 export default store;

@@ -7,9 +7,16 @@
     import MarkdownText from '../../../components/systems/texts/MarkdownText/MarkdownText.svelte';
     import askForNewAuthCode from '../../../components/systems/requests/askForNewAuthCode';
     import type { Writable } from 'svelte/store';
-    import store, { saveToStore } from '../../../components/store';
+    import store, { saveToStore, globalLanguage } from '../../../components/store';
     import askIsAuthCodeValid from '../../../components/systems/requests/askIsAuthCodeValid';
     import logout from '../../../components/systems/requests/logout';
+  import translations from '$lib/i18n/translations';
+  import type en from '$lib/i18n/locales/en';
+
+  type Translation = typeof en;
+  type LanguageKey = keyof typeof translations;
+
+  const typedTranslations = translations as Record<LanguageKey, Translation>;
 
   export let mode: 'login' | 'signup' = 'login';
   export let copy: any; // from auth.json (login or signup branch)
@@ -22,6 +29,12 @@
   let email = '';
   let errorMsg = '';
   let loading = false;
+  let t: Translation;
+
+  $: {
+    const lang = $globalLanguage as LanguageKey;
+    t = typedTranslations[lang] || typedTranslations.en;
+  }
 
   // Step state: 'initial' = show Google + Email, 'code' = show code input
   let step: 'initial' | 'code' = 'initial';
@@ -33,7 +46,7 @@
   async function onEmail() {
     // Validate email
     if (!emailSchema.safeParse(email).success) {
-      errorMsg = 'Please enter a valid email address.';
+      errorMsg = t.authForm.emailValidation;
       return;
     }
     errorMsg = '';
@@ -42,7 +55,7 @@
       await askForNewAuthCode();
       step = 'code';
     } catch (e) {
-      errorMsg = 'Failed to send auth code. Please try again.';
+      errorMsg = t.authForm.failedToSendCode;
     }
     loading = false;
   }
@@ -85,7 +98,7 @@
           });
         }} />
       <button onclick={onEmail} class="auth-form__button auth-form__button--primary" disabled={loading}>
-        {loading ? 'Sending...' : copy?.continueWithEmail}
+        {loading ? t.authForm.sending : copy?.continueWithEmail}
       </button>
       {#if errorMsg}
         <p class="auth-form__error">{errorMsg}</p>
@@ -95,7 +108,7 @@
     <div class="auth-form__container {step === 'code' ? 'show' : 'hide'}">
       <div class="center">
         <MarkdownText canReveal={$store.hasNewEmailCodeBeenSent}>
-          **We sent an auth code to your email**
+          **{t.authForm.codeSent}**
         </MarkdownText>
       </div>
       <Code
@@ -117,7 +130,7 @@
         }}
       />
       {#if !$store.isAuthCodeValid && $store.authCode && $store.hasNewEmailCodeBeenSent}
-        <div class="error center">Invalid auth code provided</div>
+        <div class="error center">{t.authForm.invalidCode}</div>
       {/if}
 
       <button
@@ -127,10 +140,10 @@
           askForNewAuthCode();
         }}
       >
-        If you didn't receive the email, you can regenerate the code here
+        {t.authForm.regenerateCode}
       </button>
       <button onclick={goBack} class="auth-form__button auth-form__button--google" style="margin-top: 1rem;">
-        ← Back
+        {t.authForm.back}
       </button>
     </div>
 
@@ -142,9 +155,9 @@
 
     <!-- Legal -->
     <p class="auth-form__legal">
-      By proceeding, you are agreeing to {runtime.appName}'s
-      <a href={legal.termsUrl} class="auth-form__legal-link">Terms of Service</a> and
-      <a href={legal.privacyUrl} class="auth-form__legal-link">Privacy Policy</a>.
+      {t.authForm.byProceeding.replace('{appName}', runtime.appName)}
+      <a href={legal.termsUrl} class="auth-form__legal-link">{t.authForm.termsOfService}</a> {t.authForm.and}
+      <a href={legal.privacyUrl} class="auth-form__legal-link">{t.authForm.privacyPolicy}</a>.
     </p>
   </div>
 </div>

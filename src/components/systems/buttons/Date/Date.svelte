@@ -1,5 +1,6 @@
 <script lang="ts">
   import { writable } from "svelte/store";
+  import { t } from "$lib/i18n/dashboard-translations";
 
   // Props for the date input.
   export let value: string = "";
@@ -59,7 +60,7 @@
     class:invalid={!valid && value !== ""}
   />
   {#if !valid && value !== ""}
-    <span class="error-message">Please enter a valid date.</span>
+    <span class="error-message">{$t['date.validDate']}</span>
   {/if}
 </div>
 

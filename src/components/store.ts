@@ -47,10 +47,12 @@ const store = writable<Store>({
     "user",
     "tokenId",
     "clientId",
-    "globalLanguage"
+    "globalLanguage",
+    "dashboardLanguage"
   ],
   appLanguage: "en", // Added for global language setting
   globalLanguage: "en",
+  dashboardLanguage: "en",
   header: true,
   autoCollapse: true,
   toggles: {},

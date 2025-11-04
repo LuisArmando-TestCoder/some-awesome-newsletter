@@ -466,6 +466,28 @@ export default {
       "privacyPolicy": "Política de Privacidad",
       "appName": "AI Newsletter"
     },
+    "welcome": {
+      "title": "Generador automático de boletines",
+      "setItOnce": "Configúralo una vez...",
+      "useItForever": "...úsalo para siempre."
+    },
+    "lead": {
+      "title": "Para que los clientes vayan del boletín a tu sitio web",
+      "recommendation": "Esto es muy recomendable. Ayuda a nuestra IA a comprender mejor el contexto de tu boletín y a generar artículos más relevantes.",
+      "question": "¿Tienes un sitio web? (opcional)",
+      "placeholder": "El enlace a tu sitio web"
+    },
+    "newsSource": {
+      "title": "Para poder utilizar tu blog o fuente de noticias necesitamos que escribas su enlace",
+      "subtitle": "Generaremos contenido de tu feed, para que no tengas que crear un boletín desde cero",
+      "placeholder": "El enlace de tu sitio de noticias o blog"
+    },
+    "subscribe": {
+      "welcome": {
+        "title": "Bienvenido al Boletín.",
+        "invitedBy": "Has sido invitado por {configuratorId}."
+      }
+    },
     "header": {
       "goToWorkspace": "Ir al Espacio de Trabajo",
       "inBilling": "Estás en Facturación",

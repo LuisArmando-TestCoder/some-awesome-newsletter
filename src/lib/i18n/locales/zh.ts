@@ -466,6 +466,28 @@ export default {
       "privacyPolicy": "隐私政策",
       "appName": "AI新闻通讯"
     },
+    "welcome": {
+      "title": "自动新闻通讯生成器",
+      "setItOnce": "设置一次...",
+      "useItForever": "...永远使用。"
+    },
+    "lead": {
+      "title": "为了让客户从新闻通讯转到您的网站",
+      "recommendation": "强烈推荐这样做。这有助于我们的AI更好地理解您新闻通讯的上下文，并生成更相关的文章。",
+      "question": "您有网站吗？（可选）",
+      "placeholder": "您的网站链接"
+    },
+    "newsSource": {
+      "title": "为了使用您的博客或新闻源，我们需要您输入其链接",
+      "subtitle": "我们将从您的源生成内容，因此您不必从头开始创建新闻通讯",
+      "placeholder": "您的新闻网站或博客的链接"
+    },
+    "subscribe": {
+      "welcome": {
+        "title": "欢迎订阅新闻通讯。",
+        "invitedBy": "您已被{configuratorId}邀请。"
+      }
+    },
     "header": {
       "goToWorkspace": "转到工作区",
       "inBilling": "您在账单页面",

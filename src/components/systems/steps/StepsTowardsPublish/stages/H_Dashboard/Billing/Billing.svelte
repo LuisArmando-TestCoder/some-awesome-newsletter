@@ -7,6 +7,7 @@
 		type PlansState
 	} from '$lib/config/plans.config';
 	import store from '../../../../../../store';
+  import { t } from '$lib/i18n/dashboard-translations';
 
 	let state: PlansState;
 	const unsub = plansStore.subscribe((v) => (state = v));
@@ -26,25 +27,25 @@
 </script>
 
 <div class="billing-dashboard">
-  <h1 class="billing-header">Billing & Subscriptions</h1>
+  <h1 class="billing-header">{$t['billing.title']}</h1>
 
   <!-- Current Plan Section -->
   <div class="billing-section current-plan">
-    <h2 class="section-title">Current Plan</h2>
+    <h2 class="section-title">{$t['billing.currentPlanTitle']}</h2>
     <div class="card">
       {#if $store.config.pricingPlan === 'vipfree'}
         <div class="plan-details">
-          <h3 class="current-plan-name">VIP</h3>
-          <p class="current-plan-price">Exclusive access for our most valued members.</p>
+          <h3 class="current-plan-name">{$t['billing.vipPlanName']}</h3>
+          <p class="current-plan-price">{$t['billing.vipPlanDescription']}</p>
         </div>
       {:else if $currentPlan}
         <div class="plan-details">
           <h3 class="current-plan-name">{$currentPlan.name}</h3>
-          <p class="current-plan-price">${$currentPlan.monthly} per month</p>
+          <p class="current-plan-price">${$currentPlan.monthly} {$t['billing.perMonth']}</p>
         </div>
-        <a href={`/api/portal?customerEmail=${$store.configuratorEmail}`} class="manage-plan-button">Manage Subscription</a>
+        <a href={`/api/portal?customerEmail=${$store.configuratorEmail}`} class="manage-plan-button">{$t['billing.manageSubscription']}</a>
       {:else}
-        <p>Loading your plan details...</p>
+        <p>{$t['billing.loadingPlan']}</p>
       {/if}
     </div>
   </div>
@@ -52,25 +53,25 @@
   <!-- Upgrade Plan Section -->
   {#if $store.config.pricingPlan === 'vipfree'}
     <div class="billing-section vip-message">
-      <h2 class="section-title">A Message for our VIPs</h2>
+      <h2 class="section-title">{$t['billing.vipMessageTitle']}</h2>
       <div class="card">
         <p>
-          As a VIP member, you have unrestricted access to all features. If you have any questions or feedback, please don't
-          hesitate to reach out <a href="mailto:oriens@aiexecutions.com">oriens@aiexecutions.com</a>.
+          {$t['billing.vipMessageText']}
+          <a href="mailto:oriens@aiexecutions.com">oriens@aiexecutions.com</a>.
         </p>
       </div>
     </div>
   {:else}
     <div class="billing-section upgrade-plan">
-      <h2 class="section-title">Upgrade Your Plan</h2>
+      <h2 class="section-title">{$t['billing.upgradePlanTitle']}</h2>
       <div class="plan-options">
         {#if state?.content?.plans}
           {#each state.content.plans.filter((p) => !p.internalOnly) as plan}
             <div class="plan-option-card" class:selected={$currentPlan?.id === plan.id}>
               <h3 class="plan-option-title">{plan.name}</h3>
-              <p class="plan-option-price">${plan.monthly}/month</p>
+              <p class="plan-option-price">${plan.monthly}/{$t['billing.monthAbbreviation']}</p>
               {#if plan.id === 'yearly'}
-                <span class="plan-option-equivalent"><i><sup>(equivalent to ${plan.yearly} yearly)</sup></i></span>
+                <span class="plan-option-equivalent"><i><sup>({$t['billing.equivalentTo']} ${plan.yearly} {$t['billing.yearly']})</sup></i></span>
               {/if}
               <ul class="plan-option-features">
                 {#each plan.featuresBase as feature}
@@ -81,11 +82,11 @@
                 {/each}
               </ul>
               {#if $currentPlan?.id === plan.id}
-                <button class="upgrade-button current-plan-button" disabled>This is your current plan</button>
+                <button class="upgrade-button current-plan-button" disabled>{$t['billing.currentPlanButton']}</button>
               {:else if $currentPlan && plan.tier < $currentPlan.tier}
-                <a href={`/api/checkout?products=${plan.productId}`} class="upgrade-button">Downgrade to {plan.name}</a>
+                <a href={`/api/checkout?products=${plan.productId}`} class="upgrade-button">{$t['billing.downgradeTo']} {plan.name}</a>
               {:else}
-                <a href={`/api/checkout?products=${plan.productId}`} class="upgrade-button">Upgrade to {plan.name}</a>
+                <a href={`/api/checkout?products=${plan.productId}`} class="upgrade-button">{$t['billing.upgradeTo']} {plan.name}</a>
               {/if}
             </div>
           {/each}

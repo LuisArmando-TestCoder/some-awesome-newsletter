@@ -4,21 +4,22 @@
   import store, { saveToStore } from "../../../../store";
   import Centered from "../../../wrappers/Centered/Centered.svelte";
   import SubmitButton from "../../../buttons/SubmitButton/SubmitButton.svelte";
+  import { t } from '$lib/i18n/translations';
 
   export let canReveal = false;
 </script>
 
 <Centered>
-  <MarkdownText {canReveal}>--In order for clients to go from the newsletter to your website--</MarkdownText>
+  <MarkdownText {canReveal}>--{$t.lead.title}--</MarkdownText>
 
   <MarkdownText {canReveal}>
-    This is highly recommended. It helps our AI to better understand the context of your newsletter and generate more relevant articles.
+    {$t.lead.recommendation}
   </MarkdownText>
   <MarkdownText {canReveal}>
-    ### Do you have a website? (optional)
+    ### {$t.lead.question}
   </MarkdownText>
   <Link
-    placeholder="The link to your website"
+    placeholder={$t.lead.placeholder}
     value={$store.lead}
     onChange={(lead) =>
       saveToStore({

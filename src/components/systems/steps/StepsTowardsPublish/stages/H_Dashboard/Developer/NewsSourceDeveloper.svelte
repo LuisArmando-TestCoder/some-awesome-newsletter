@@ -7,6 +7,7 @@
   import TextTypes from "../../../../../texts/TextTypes/TextTypes.svelte";
   import DeveloperNewsSourceItem from "./DeveloperNewsSourceItem.svelte";
   import ToggleCard from "../../../../../buttons/ToggleCard/ToggleCard.svelte";
+  import { t } from "$lib/i18n/dashboard-translations";
 
   export let canReveal = true;
 
@@ -41,7 +42,7 @@
 </script>
 
 <SearchBar
-  placeholder="Search news sources..."
+  placeholder={$t['newsSourceDeveloper.searchPlaceholder']}
   on:search={handleSearch}
 />
 <SlotAutoCollapseToggle {canReveal} autoCollapse={true} let:getToggleProps>
@@ -67,9 +68,9 @@
       <p>
         <TextTypes type="sub-italic">
           {#if $store.config?.newsSources === undefined}
-            Loading news sources...
+            {$t['newsSourceDeveloper.loading']}
           {:else}
-            No news sources configured yet.
+            {$t['newsSourceDeveloper.noSources']}
           {/if}
         </TextTypes>
       </p>

@@ -5,6 +5,7 @@
   import { latestMessage } from "../../../store"; // Change back to .ts
   import { writable } from "svelte/store";
   import SubmitButton from "../../buttons/SubmitButton/SubmitButton.svelte";
+  import { t } from "$lib/i18n/dashboard-translations";
 
   // --- Props ---
   export let personality: string = "";
@@ -16,7 +17,7 @@
   let isGenerating = writable(false);
   let generationError = writable<string | null>(null);
   let currentContent: string = ""; // Initialize as empty string
-  const placeholderText = "Input or generate a personality description...";
+  const placeholderText = $t['personality.placeholder'];
 
   // --- Reactivity ---
   // Ensure currentContent reflects the prop, defaulting null/undefined to empty string
@@ -32,15 +33,15 @@
   async function handleGeneratePersonality() {
     isGenerating.set(true);
     generationError.set(null);
-    latestMessage.set("Generating personality...");
+    latestMessage.set($t['personality.generating']);
 
     try {
       const result = await generatePersonality(currentContent, newsSourceId);
       onChange(result.personality); // Update parent, which updates prop, which updates textarea
-      latestMessage.set("Personality generated successfully!");
+      latestMessage.set($t['personality.success']);
     } catch (error: any) {
       const message =
-        error?.message || "An unknown error occurred during generation.";
+        error?.message || $t['personality.error'];
       generationError.set(message);
       onError(message);
       latestMessage.set("");
@@ -54,14 +55,14 @@
   <!-- Loading Indicator -->
   {#if $isGenerating}
     <div class="status-message loading" transition:slide|local>
-      {$latestMessage || "Generating..."}
+      {$latestMessage || $t['personality.generatingShort']}
     </div>
   {/if}
 
   <!-- Error Indicator -->
   {#if $generationError}
     <div class="status-message error" transition:slide|local>
-      Error: {$generationError}
+      {$t['personality.errorPrefix']} {$generationError}
     </div>
   {/if}
 
@@ -88,7 +89,7 @@
   <!-- Generate Button -->
   <div class="generate-button-container">
     <SubmitButton
-      label="Generate Personality"
+      label={$t['personality.generatePersonality']}
       callback={handleGeneratePersonality}
       disabled={$isGenerating}
     />

@@ -1,10 +1,11 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { writable } from "svelte/store";
+  import { t } from "$lib/i18n/dashboard-translations";
 
   // Props for the email input.
   export let value: string = "";
-  export let placeholder: string = "Enter your email...";
+  export let placeholder: string = $t['email.enterYourEmail'];
   export let label: string = "";
   export let onEnter: (isValid: boolean) => void = () => {};
   export let disabled: boolean = false;
@@ -62,7 +63,7 @@
     <button class="at-button" on:click={() => (value += "@")}>@</button>
   </div>
   {#if !valid && value !== ""}
-    <span class="error-message">Please enter a valid email.</span>
+    <span class="error-message">{$t['email.pleaseEnterAValidEmail']}</span>
   {/if}
 </div>
 

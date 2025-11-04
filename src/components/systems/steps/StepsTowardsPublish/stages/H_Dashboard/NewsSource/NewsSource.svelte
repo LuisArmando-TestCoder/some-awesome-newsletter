@@ -12,6 +12,7 @@
   import Page from "../../../../../wrappers/Page/Page.svelte";
   import Pagination from "../../../../../../Pagination/Pagination.svelte";
   import SearchBar from "../../../../../../SearchBar/SearchBar.svelte";
+  import { t } from "$lib/i18n/dashboard-translations";
 
   export let canReveal = true;
 
@@ -65,7 +66,7 @@
 
 <Page>
   <SearchBar
-    placeholder="Search news sources..."
+    placeholder={$t['newsSource.searchPlaceholder']}
     on:search={handleSearch}
   />
   <!-- Use the SlotAutoCollapseToggle wrapper -->
@@ -76,7 +77,7 @@
     <!-- Toggle card for adding a new news source -->
     <ToggleCard
       {canReveal}
-      cardTitle="Add News Source"
+      cardTitle={$t['newsSource.addTitle']}
       {...getToggleProps(ADD_NEWS_SOURCE_CARD_ID)}
     >
       <!-- Pass canReveal down if AddNewsSourceForm needs it -->
@@ -123,9 +124,9 @@
         <p>
           <TextTypes type="sub-italic">
             {#if $store.config?.newsSources === undefined}
-              Loading news sources...
+              {$t['newsSource.loading']}
             {:else}
-              No news sources configured yet.
+              {$t['newsSource.noSources']}
             {/if}
           </TextTypes>
         </p>

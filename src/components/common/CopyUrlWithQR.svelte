@@ -2,6 +2,7 @@
     import { onMount } from "svelte";
     import QRCode from "qrcode";
     import MarkdownText from "../systems/texts/MarkdownText/MarkdownText.svelte";
+    import { t } from "$lib/i18n/dashboard-translations";
 
     export let configuratorEmail: string = "";
     export let newsSourceId: string = "";
@@ -9,8 +10,8 @@
     export let fullUrl: string = "";
     export let label: string = "";
     let qrCodeDataUrl = "";
-    let copyButtonText = "Copy URL";
-    let downloadButtonText = "Download QR";
+    let copyButtonText = $t['copyUrlWithQR.copyUrl'];
+    let downloadButtonText = $t['copyUrlWithQR.downloadQr'];
 
     // Reactive statement to update URL and QR code when props change
     $: {
@@ -41,15 +42,15 @@
         }
         try {
             await navigator.clipboard.writeText(fullUrl);
-            copyButtonText = "Copied!";
+            copyButtonText = $t['copyUrlWithQR.copied'];
             setTimeout(() => {
-                copyButtonText = "Copy URL";
+                copyButtonText = $t['copyUrlWithQR.copyUrl'];
             }, 1500); // Reset text after 1.5 seconds
         } catch (err) {
             console.error("Failed to copy URL:", err);
-            copyButtonText = "Failed";
+            copyButtonText = $t['copyUrlWithQR.failed'];
             setTimeout(() => {
-                copyButtonText = "Copy URL";
+                copyButtonText = $t['copyUrlWithQR.copyUrl'];
             }, 1500);
         }
     }
@@ -63,15 +64,15 @@
             document.body.appendChild(link); // Required for Firefox
             link.click();
             document.body.removeChild(link);
-            downloadButtonText = "Downloaded!";
+            downloadButtonText = $t['copyUrlWithQR.downloaded'];
             setTimeout(() => {
-                downloadButtonText = "Download QR";
+                downloadButtonText = $t['copyUrlWithQR.downloadQr'];
             }, 1500);
         } catch (err) {
             console.error("Failed to download QR code:", err);
-            downloadButtonText = "Failed";
+            downloadButtonText = $t['copyUrlWithQR.failed'];
             setTimeout(() => {
-                downloadButtonText = "Download QR";
+                downloadButtonText = $t['copyUrlWithQR.downloadQr'];
             }, 1500);
         }
     }
@@ -106,7 +107,7 @@
                 </a>
             </div>
         {:else}
-            <p>Generating QR code...</p>
+            <p>{$t['copyUrlWithQR.generating']}</p>
         {/if}
     </div>
 </div>

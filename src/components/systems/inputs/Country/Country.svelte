@@ -3,6 +3,7 @@
   import { writable } from "svelte/store";
   import fuzzysort from "fuzzysort";
   import { fade, slide } from "svelte/transition";
+  import { t } from "$lib/i18n/dashboard-translations";
 
   import countriesData from "./countries";
   import newsSourcesData from "./newssources";
@@ -260,7 +261,7 @@
       bind:this={inputRef}
       value={typeahead}
       on:input={handleInput}
-      placeholder="Type to search..."
+      placeholder={$t['country.typeToSearch']}
       class="custom-select-input {open ? 'open' : ''}"
       aria-autocomplete="list"
       aria-controls={open ? "country-listbox" : undefined}
@@ -285,7 +286,7 @@
           <span class="text-gray-500 text-xs">({selectedCountry.code})</span>
         </span>
       {:else}
-        <span class="text-gray-500">Select a country</span>
+        <span class="text-gray-500">{$t['country.selectACountry']}</span>
       {/if}
       <svg
         class="custom-select-arrow w-4 h-4 transform transition-transform duration-200 {open ? 'rotate-180' : ''}"
@@ -334,7 +335,7 @@
         </li>
       {:else}
         <li class="px-4 py-2 text-sm text-gray-500" role="option" aria-disabled="true">
-          No countries available.
+          {$t['country.noCountriesAvailable']}
         </li>
       {/each}
     </ul>

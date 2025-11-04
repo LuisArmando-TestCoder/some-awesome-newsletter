@@ -14,8 +14,23 @@
   import getLeadsForConfigurator from "../../components/systems/requests/getLeadsForConfigurator";
   import Notification from '../../components/Notification/Notification.svelte';
   import { refreshSubscribers } from "../../components/systems/steps/StepsTowardsPublish/stages/H_Dashboard/Users/UserDataService";
+  import { t } from '$lib/i18n/dashboard-translations';
+  import translations from '$lib/i18n/locales-dashboard/translations';
+  import { language } from '$lib/stores/language.store';
 
-  onMount(() => {
+  language.subscribe(lang => {
+    t.set(translations[lang as keyof typeof translations] || translations.en);
+  });
+
+  onMount(async () => {
+    if (typeof navigator !== "undefined") {
+      const lang = Object.keys(translations).find((O) =>
+        navigator.language.includes(O)
+      ) || 'en';
+      if (lang) {
+        language.set(lang);
+      }
+    }
     console.log("hi")
     const params = new URLSearchParams($page.url.search);
 

@@ -216,5 +216,27 @@ export default {
       },
       "contact": "support@ainewsletter.com"
     }
+  },
+  "welcome": {
+    "title": "Otomatik bülten oluşturucu",
+    "setItOnce": "Bir kez ayarla...",
+    "useItForever": "...sonsuza kadar kullan."
+  },
+  "lead": {
+    "title": "Müşterilerin bültenden web sitenize gitmesi için",
+    "recommendation": "Bu şiddetle tavsiye edilir. AI'mızın bülteninizin bağlamını daha iyi anlamasına ve daha alakalı makaleler oluşturmasına yardımcı olur.",
+    "question": "Bir web siteniz var mı? (isteğe bağlı)",
+    "placeholder": "Web sitenizin bağlantısı"
+  },
+  "newsSource": {
+    "title": "Blogunuzu veya haber akışınızı kullanmak için bağlantısını yazmanız gerekir",
+    "subtitle": "Akışınızdan içerik oluşturacağız, böylece sıfırdan bir bülten oluşturmanıza gerek kalmaz",
+    "placeholder": "Haber sitenizin veya blogunuzun bağlantısı"
+  },
+  "subscribe": {
+    "welcome": {
+      "title": "Bültene hoş geldiniz.",
+      "invitedBy": "{configuratorId} tarafından davet edildiniz."
+    }
   }
 }

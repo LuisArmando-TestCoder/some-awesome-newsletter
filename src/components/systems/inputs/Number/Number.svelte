@@ -1,5 +1,6 @@
 <script lang="ts">
   import { writable } from "svelte/store";
+  import { t } from "$lib/i18n/dashboard-translations";
 
   // Props for the number input.
   export let value: string = "";
@@ -71,7 +72,7 @@
     class:invalid={!valid && value !== ""}
   />
   {#if !valid && value !== ""}
-    <span class="error-message">Please enter a valid number.</span>
+    <span class="error-message">{$t['number.pleaseEnterAValidNumber']}</span>
   {/if}
 </div>
 

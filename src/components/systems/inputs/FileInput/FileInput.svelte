@@ -1,6 +1,7 @@
 <script lang="ts">
 import { onMount, onDestroy } from 'svelte';
 import type { Writable } from 'svelte/store'; // Import Writable type
+import { t } from '$lib/i18n/dashboard-translations';
 
 // --- Props ---
 /** A writable store provided by the parent to hold the selected FileList */
@@ -15,9 +16,9 @@ export let accept: string = ""; // Default to accept any file
 /** Unique ID for the input element */
 export let id: string = `file-upload-${Math.random().toString(36).substring(2, 9)}`;
 /** Label for the trigger button */
-export let label: string = 'Choose File';
+export let label: string = $t['fileInput.chooseFile'];
 /** Label text shown within the drop zone area */
-export let dropZoneLabel: string = 'or Drop File Here';
+export let dropZoneLabel: string = $t['fileInput.orDropFileHere'];
 
 // --- Internal State & Refs ---
 let fileInputRef: HTMLInputElement | null = null;
@@ -160,7 +161,7 @@ aria-disabled={disabled || isSubmitting}
 
 {#if isDraggingOver && !disabled && !isSubmitting}
     <div id={`${id}-drop-instructions`} class="visually-hidden">
-    Release mouse to drop files
+    {$t['fileInput.releaseMouseToDropFiles']}
     </div>
 {/if}
 

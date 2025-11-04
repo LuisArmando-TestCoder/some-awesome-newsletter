@@ -2,12 +2,13 @@
   import MarkdownText from "../../../texts/MarkdownText/MarkdownText.svelte";
   import Centered from "../../../wrappers/Centered/Centered.svelte";
   import store from "../../../../store";
+  import { t } from '$lib/i18n/translations';
 
   export let canReveal = false;
 </script>
 
 <Centered>
   <MarkdownText {canReveal}>
-    ## Automatic newsletter generator
+    ## {$t.welcome.title}
   </MarkdownText>
 </Centered>

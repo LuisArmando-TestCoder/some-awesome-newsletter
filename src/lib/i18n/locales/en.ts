@@ -465,6 +465,28 @@ export default {
       "and": "and",
       "privacyPolicy": "Privacy Policy"
     },
+    "welcome": {
+      "title": "Automatic newsletter generator",
+      "setItOnce": "Set it once...",
+      "useItForever": "...use it forever."
+    },
+    "lead": {
+      "title": "In order for clients to go from the newsletter to your website",
+      "recommendation": "This is highly recommended. It helps our AI to better understand the context of your newsletter and generate more relevant articles.",
+      "question": "Do you have a website? (optional)",
+      "placeholder": "The link to your website"
+    },
+    "newsSource": {
+      "title": "In order to use your blog or news feed we need you to type its link",
+      "subtitle": "We will generate content from your feed, so you don't have to create a newsletter from scratch",
+      "placeholder": "Your news' site or blog's link"
+    },
+    "subscribe": {
+      "welcome": {
+        "title": "Welcome to the Newsletter.",
+        "invitedBy": "You have been invited by {configuratorId}."
+      }
+    },
     "header": {
       "goToWorkspace": "Go to Workspace",
       "inBilling": "You are in Billing",

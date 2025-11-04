@@ -1,5 +1,6 @@
 <script lang="ts">
   import { writable } from "svelte/store";
+  import { t } from "$lib/i18n/dashboard-translations";
 
   // Number of digits in the auth code (default: 6)
   export let length: number = 6;
@@ -114,7 +115,7 @@
       on:input={(e) => handleInput(index, e)}
       on:keydown={(e) => handleKeyDown(index, e)}
       autocomplete="one-time-code"
-      aria-label="Authentication code digit {index + 1}"
+      aria-label="{$t['code.authCodeDigit']} {index + 1}"
     />
   {/each}
 </div>

@@ -466,6 +466,28 @@ export default {
       "privacyPolicy": "プライバシーポリシー",
       "appName": "AIニュースレター"
     },
+    "welcome": {
+      "title": "自動ニュースレタージェネレーター",
+      "setItOnce": "一度設定すれば...",
+      "useItForever": "...永久に使用できます。"
+    },
+    "lead": {
+      "title": "クライアントがニュースレターからあなたのウェブサイトに移動するために",
+      "recommendation": "これは強くお勧めします。これにより、当社のAIがニュースレターのコンテキストをよりよく理解し、より関連性の高い記事を生成するのに役立ちます。",
+      "question": "ウェブサイトをお持ちですか？（オプション）",
+      "placeholder": "あなたのウェブサイトへのリンク"
+    },
+    "newsSource": {
+      "title": "ブログやニュースフィードを使用するには、そのリンクを入力する必要があります",
+      "subtitle": "フィードからコンテンツを生成するため、ニュースレターをゼロから作成する必要はありません",
+      "placeholder": "ニュースサイトまたはブログのリンク"
+    },
+    "subscribe": {
+      "welcome": {
+        "title": "ニュースレターへようこそ。",
+        "invitedBy": "{configuratorId}によって招待されました。"
+      }
+    },
     "header": {
       "goToWorkspace": "ワークスペースに移動",
       "inBilling": "請求中です",

@@ -216,5 +216,27 @@ export default {
       },
       "contact": "support@ainewsletter.com"
     }
+  },
+  "welcome": {
+    "title": "Generator nawala otomatis",
+    "setItOnce": "Setel sapisan...",
+    "useItForever": "...gunakake salawase."
+  },
+  "lead": {
+    "title": "Kanggo klien pindhah saka nawala menyang situs web sampeyan",
+    "recommendation": "Iki disaranake banget. Iku mbantu AI kita luwih ngerti konteks nawala sampeyan lan ngasilake artikel sing luwih relevan.",
+    "question": "Sampeyan duwe situs web? (opsional)",
+    "placeholder": "Link menyang situs web sampeyan"
+  },
+  "newsSource": {
+    "title": "Kanggo nggunakake blog utawa feed warta, kita kudu sampeyan ngetik link kasebut",
+    "subtitle": "Kita bakal ngasilake konten saka feed sampeyan, dadi sampeyan ora perlu nggawe nawala saka awal",
+    "placeholder": "Link situs warta utawa blog sampeyan"
+  },
+  "subscribe": {
+    "welcome": {
+      "title": "Sugeng rawuh ing Nawala.",
+      "invitedBy": "Sampeyan diundang dening {configuratorId}."
+    }
   }
 }

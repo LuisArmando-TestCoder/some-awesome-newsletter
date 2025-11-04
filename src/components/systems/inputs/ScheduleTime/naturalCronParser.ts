@@ -1,48 +1,49 @@
-// src/lib/naturalCronParser.ts (or your preferred location)
+import { get } from 'svelte/store';
+import { t } from '$lib/i18n/dashboard-translations';
 
 // --- Helper Maps (Internal) ---
-const DAY_MAP_REV: { [key: string]: number } = {
-  sun: 0,
-  sunday: 0,
-  mon: 1,
-  monday: 1,
-  tue: 2,
-  tuesday: 2,
-  wed: 3,
-  wednesday: 3,
-  thu: 4,
-  thursday: 4,
-  fri: 5,
-  friday: 5,
-  sat: 6,
-  saturday: 6,
-};
+const DAY_MAP_REV = () => ({
+  [get(t)['cron.sun']]: 0,
+  [get(t)['cron.sunday']]: 0,
+  [get(t)['cron.mon']]: 1,
+  [get(t)['cron.monday']]: 1,
+  [get(t)['cron.tue']]: 2,
+  [get(t)['cron.tuesday']]: 2,
+  [get(t)['cron.wed']]: 3,
+  [get(t)['cron.wednesday']]: 3,
+  [get(t)['cron.thu']]: 4,
+  [get(t)['cron.thursday']]: 4,
+  [get(t)['cron.fri']]: 5,
+  [get(t)['cron.friday']]: 5,
+  [get(t)['cron.sat']]: 6,
+  [get(t)['cron.saturday']]: 6,
+});
 
-const MONTH_MAP_REV: { [key: string]: number } = {
-  jan: 1,
-  january: 1,
-  feb: 2,
-  february: 2,
-  mar: 3,
-  march: 3,
-  apr: 4,
-  april: 4,
-  may: 5,
-  jun: 6,
-  june: 6,
-  jul: 7,
-  july: 7,
-  aug: 8,
-  august: 8,
-  sep: 9,
-  september: 9,
-  oct: 10,
-  october: 10,
-  nov: 11,
-  november: 11,
-  dec: 12,
-  december: 12,
-};
+const MONTH_MAP_REV = () => ({
+    [get(t)['cron.jan']]: 1,
+    [get(t)['cron.january']]: 1,
+    [get(t)['cron.feb']]: 2,
+    [get(t)['cron.february']]: 2,
+    [get(t)['cron.mar']]: 3,
+    [get(t)['cron.march']]: 3,
+    [get(t)['cron.apr']]: 4,
+    [get(t)['cron.april']]: 4,
+    [get(t)['cron.may']]: 5,
+    [get(t)['cron.jun']]: 6,
+    [get(t)['cron.june']]: 6,
+    [get(t)['cron.jul']]: 7,
+    [get(t)['cron.july']]: 7,
+    [get(t)['cron.aug']]: 8,
+    [get(t)['cron.august']]: 8,
+    [get(t)['cron.sep']]: 9,
+    [get(t)['cron.september']]: 9,
+    [get(t)['cron.oct']]: 10,
+    [get(t)['cron.october']]: 10,
+    [get(t)['cron.nov']]: 11,
+    [get(t)['cron.november']]: 11,
+    [get(t)['cron.dec']]: 12,
+    [get(t)['cron.december']]: 12,
+});
 
 // --- Types for Result ---
 export interface CronParseResult {
@@ -73,26 +74,26 @@ export function parseNaturalLanguageToCron(inputStr: string): CronParseResult {
 
   const lowerInput = inputStr.toLowerCase().trim();
   let parts = ["*", "*", "*", "*", "*"]; // min, hour, dom, month, dow
-  let foundTime = false;
-  let foundDow = false;
-  let foundDom = false;
-  let foundMonth = false;
+    let foundTime = false;
+    let foundDow = false;
+    let foundDom = false;
+    let foundMonth = false;
 
-  try {
-    // --- Time Parsing (Minute/Hour) ---
-    let match = lowerInput.match(/midnight/);
-    if (match) {
-      parts[0] = "0";
-      parts[1] = "0";
-      foundTime = true;
-    }
+    try {
+        // --- Time Parsing (Minute/Hour) ---
+        let match = lowerInput.match(new RegExp(get(t)['cron.midnight']));
+        if (match) {
+            parts[0] = "0";
+            parts[1] = "0";
+            foundTime = true;
+        }
 
-    match = lowerInput.match(/noon/);
-    if (match) {
-      parts[0] = "0";
-      parts[1] = "12";
-      foundTime = true;
-    }
+        match = lowerInput.match(new RegExp(get(t)['cron.noon']));
+        if (match) {
+            parts[0] = "0";
+            parts[1] = "12";
+            foundTime = true;
+        }
 
     match = lowerInput.match(/(\d{1,2}):(\d{2})\s*(am|pm)?/);
     if (match && !foundTime) {
@@ -183,10 +184,10 @@ export function parseNaturalLanguageToCron(inputStr: string): CronParseResult {
     }
 
     const daysFound: number[] = [];
-    for (const dayName in DAY_MAP_REV) {
+    for (const dayName in DAY_MAP_REV()) {
       const regex = new RegExp(`\\b${dayName}\\b`);
       if (regex.test(lowerInput)) {
-        const dayNum = DAY_MAP_REV[dayName];
+        const dayNum = DAY_MAP_REV()[dayName];
         if (!daysFound.includes(dayNum)) daysFound.push(dayNum);
       }
     }
@@ -221,10 +222,10 @@ export function parseNaturalLanguageToCron(inputStr: string): CronParseResult {
 
     // --- Month Parsing ---
     const monthsFound: number[] = [];
-    for (const monthName in MONTH_MAP_REV) {
+    for (const monthName in MONTH_MAP_REV()) {
       const regex = new RegExp(`\\b${monthName}\\b`);
       if (regex.test(lowerInput)) {
-        const monthNum = MONTH_MAP_REV[monthName];
+        const monthNum = MONTH_MAP_REV()[monthName];
         if (!monthsFound.includes(monthNum)) monthsFound.push(monthNum);
       }
     }

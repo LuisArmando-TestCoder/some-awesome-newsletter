@@ -216,5 +216,27 @@ export default {
       },
       "contact": "support@ainewsletter.com"
     }
+  },
+  "welcome": {
+    "title": "자동 뉴스레터 생성기",
+    "setItOnce": "한 번 설정하면...",
+    "useItForever": "...영원히 사용하세요."
+  },
+  "lead": {
+    "title": "고객이 뉴스레터에서 귀하의 웹사이트로 이동하도록 하려면",
+    "recommendation": "이것은 매우 권장됩니다. AI가 뉴스레터의 맥락을 더 잘 이해하고 더 관련성 높은 기사를 생성하는 데 도움이 됩니다.",
+    "question": "웹사이트가 있으신가요? (선택 사항)",
+    "placeholder": "귀하의 웹사이트 링크"
+  },
+  "newsSource": {
+    "title": "블로그나 뉴스 피드를 사용하려면 링크를 입력해야 합니다",
+    "subtitle": "피드에서 콘텐츠를 생성하므로 처음부터 뉴스레터를 만들 필요가 없습니다",
+    "placeholder": "뉴스 사이트 또는 블로그 링크"
+  },
+  "subscribe": {
+    "welcome": {
+      "title": "뉴스레터에 오신 것을 환영합니다.",
+      "invitedBy": "{configuratorId}님이 초대했습니다."
+    }
   }
 }

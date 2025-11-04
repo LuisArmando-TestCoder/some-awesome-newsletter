@@ -2,10 +2,11 @@
   import { onMount } from "svelte";
   import { writable } from "svelte/store";
     import { isValidURL } from "./isValidLink";
+  import { t } from "$lib/i18n/dashboard-translations";
 
   // Props for the URL input.
   export let value: string = "";
-  export let placeholder: string = "Enter your URL...";
+  export let placeholder: string = $t['link.enterYourUrl'];
   export let label: string = "";
   export let center: boolean = false;
 
@@ -70,7 +71,7 @@
     class:center
   />
   {#if !valid && value !== ""}
-    <span class="error-message">Please enter a valid URL.</span>
+    <span class="error-message">{$t['link.pleaseEnterAValidUrl']}</span>
   {/if}
 </div>
 

@@ -216,5 +216,27 @@ export default {
       },
       "contact": "support@ainewsletter.com"
     }
+  },
+  "welcome": {
+    "title": "Automatic newsletter generator",
+    "setItOnce": "Set am once...",
+    "useItForever": "...use am forever."
+  },
+  "lead": {
+    "title": "For clients to go from di newsletter to your website",
+    "recommendation": "Dis one dey highly recommended. E dey help our AI to better understand di context of your newsletter and generate more relevant articles.",
+    "question": "You get website? (optional)",
+    "placeholder": "Di link to your website"
+  },
+  "newsSource": {
+    "title": "For us to use your blog or news feed we need you to type di link",
+    "subtitle": "We go generate content from your feed, so you no need to create newsletter from scratch",
+    "placeholder": "Your news site or blog link"
+  },
+  "subscribe": {
+    "welcome": {
+      "title": "Welcome to di Newsletter.",
+      "invitedBy": "You have been invited by {configuratorId}."
+    }
   }
 }

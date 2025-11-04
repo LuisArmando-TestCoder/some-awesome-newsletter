@@ -4,6 +4,7 @@
   import type { Writable } from "svelte/store";
   import fuzzysort from "fuzzysort";
   import { fade, slide } from "svelte/transition";
+  import { t } from "$lib/i18n/dashboard-translations";
 
   interface Option {
     value: string;
@@ -246,7 +247,7 @@
       bind:this={inputRef}
       value={typeahead}
       on:input={handleInput}
-      placeholder="Type to search..."
+      placeholder={$t['customSelect.typeToSearch']}
       class="custom-select-input {open ? 'open' : ''}"
       aria-autocomplete="list"
       aria-controls={open ? "option-listbox" : undefined}
@@ -265,7 +266,7 @@
       {#if selectedOption}
         <span class="truncate">{selectedOption.label}</span>
       {:else}
-        <span class="text-gray-500">Select an option</span>
+        <span class="text-gray-500">{$t['customSelect.selectAnOption']}</span>
       {/if}
       <svg
         class="custom-select-arrow w-4 h-4 transform transition-transform duration-200 {open ? 'rotate-180' : ''}"
@@ -308,7 +309,7 @@
         </li>
       {:else}
         <li class="px-4 py-2 text-sm text-gray-500" role="option" aria-disabled="true">
-          No options available.
+          {$t['customSelect.noOptionsAvailable']}
         </li>
       {/each}
     </ul>

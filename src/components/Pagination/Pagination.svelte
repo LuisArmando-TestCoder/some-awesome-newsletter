@@ -1,5 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
+  import { t } from '$lib/i18n/dashboard-translations';
 
   export let currentPage: number; // 0-indexed
   export let totalItems: number;
@@ -21,15 +22,15 @@
       on:click={() => goToPage(currentPage - 1)}
       disabled={currentPage === 0}
     >
-      « Newer Entries
+      « {$t['pagination.newerEntries']}
     </button>
-    <span>Page {currentPage + 1} of {totalPages}</span>
+    <span>{$t['pagination.page']} {currentPage + 1} {$t['pagination.of']} {totalPages}</span>
     <button
       class="pagination-btn older"
       on:click={() => goToPage(currentPage + 1)}
       disabled={(currentPage + 1) >= totalPages}
     >
-      Older Entries »
+      {$t['pagination.olderEntries']} »
     </button>
   </div>
 {/if}

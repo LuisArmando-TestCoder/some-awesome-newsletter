@@ -216,5 +216,27 @@ export default {
       },
       "contact": "support@ainewsletter.com"
     }
+  },
+  "welcome": {
+    "title": "Automatischer Newsletter-Generator",
+    "setItOnce": "Einmal einstellen...",
+    "useItForever": "...für immer nutzen."
+  },
+  "lead": {
+    "title": "Damit Kunden vom Newsletter auf Ihre Website gelangen",
+    "recommendation": "Dies wird dringend empfohlen. Es hilft unserer KI, den Kontext Ihres Newsletters besser zu verstehen und relevantere Artikel zu generieren.",
+    "question": "Haben Sie eine Website? (optional)",
+    "placeholder": "Der Link zu Ihrer Website"
+  },
+  "newsSource": {
+    "title": "Um Ihren Blog oder Newsfeed zu nutzen, müssen Sie dessen Link eingeben",
+    "subtitle": "Wir generieren Inhalte aus Ihrem Feed, sodass Sie keinen Newsletter von Grund auf neu erstellen müssen",
+    "placeholder": "Der Link zu Ihrer Nachrichtenseite oder Ihrem Blog"
+  },
+  "subscribe": {
+    "welcome": {
+      "title": "Willkommen beim Newsletter.",
+      "invitedBy": "Sie wurden von {configuratorId} eingeladen."
+    }
   }
 }

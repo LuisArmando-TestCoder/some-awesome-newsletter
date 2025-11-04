@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte';
   import { writable } from 'svelte/store';
+  import { t } from '$lib/i18n/dashboard-translations';
 
   // Define the ImageFile interface
   interface ImageFile {
@@ -84,7 +85,7 @@
       };
       reader.readAsDataURL(file);
     } else {
-      alert(`Unsupported file type: ${file.type}. Please select a PNG, JPEG, JPG, GIF, or WebP image.`);
+      alert(`${$t['image.unsupportedFileType']}: ${file.type}. Please select a PNG, JPEG, JPG, GIF, or WebP image.`);
       // Optionally reset the file input to allow re-selection
       if (fileInput) {
         fileInput.value = '';
@@ -151,15 +152,15 @@
           {/if}
         </div>
         <p class="title">
-          {isDragging ? 'Drop image here' : 'Drag & drop image here'}
+          {isDragging ? $t['image.dropImageHere'] : $t['image.dragAndDropImageHere']}
         </p>
-        <p class="subtitle">or click to browse</p>
+        <p class="subtitle">{$t['image.orClickToBrowse']}</p>
         <button
           type="button"
           class="select-button"
           on:click|stopPropagation={handleButtonClick}
         >
-          Select Image
+          {$t['image.selectImage']}
         </button>
       </div>
     </div>
@@ -171,7 +172,7 @@
           type="button"
           class="remove-button"
           on:click={removeImage}
-          aria-label="Remove image"
+          aria-label={$t['image.removeImage']}
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>

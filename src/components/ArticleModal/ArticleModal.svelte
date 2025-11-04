@@ -1,8 +1,12 @@
 <script lang="ts">
-    import Modal from "../data/Modal/Modal.svelte"; // adjust path if needed
+    import Modal from "../Modal/Modal.svelte"; // adjust path if needed
+    import { t } from "$lib/i18n/dashboard-translations";
+    import { writable } from "svelte/store";
 
     /** Controls the modal’s visibility (two-way bound from parent). */
     export let show = false;
+    const showModal = writable(show);
+    $: showModal.set(show);
 
     /** The article to render inside the modal. */
     export let article: {
@@ -22,7 +26,7 @@
         div.innerHTML = content;
         const h1 = div.querySelector("h1")?.innerText;
         const h2 = div.querySelector("h2")?.innerText;
-        return h1 ? (h1.length >= (h2?.length || 0) ? h1 : h2) : h2 || "Article";
+        return h1 ? (h1.length >= (h2?.length || 0) ? h1 : h2) : h2 || $t['articleModal.article'];
     }
 
     $: if (show) {
@@ -34,14 +38,14 @@
     $: console.log(`ArticleModal: article prop updated, id: ${article?.id || 'none'}`);
 </script>
 
-<Modal {show}>
+<Modal {showModal}>
     {#if article && show}
         <div class="modal-overlay" on:click={handleClose}>
             <div class="modal-content" on:click|stopPropagation>
                 <button class="close-button" on:click={handleClose}>×</button>
                 <div class="modal-content-inner">
                     <h2>{getTitle(article.content)}</h2>
-                    <p><small>Created: {article.creation} | Language: {article.language}</small></p>
+                    <p><small>{$t['articleModal.created']}: {article.creation} | {$t['articleModal.language']}: {article.language}</small></p>
                     {@html article.content}
                 </div>
             </div>

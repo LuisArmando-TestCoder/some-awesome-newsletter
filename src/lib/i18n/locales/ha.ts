@@ -216,5 +216,27 @@ export default {
       },
       "contact": "support@ainewsletter.com"
     }
+  },
+  "welcome": {
+    "title": "Janareta na wasiƙar labarai ta atomatik",
+    "setItOnce": "Saita shi sau ɗaya...",
+    "useItForever": "...yi amfani da shi har abada."
+  },
+  "lead": {
+    "title": "Don abokan ciniki su tafi daga wasiƙar labarai zuwa gidan yanar gizon ku",
+    "recommendation": "Ana ba da shawarar wannan sosai. Yana taimaka wa AI ɗinmu don fahimtar mahallin wasiƙar ku da kyau da kuma samar da labarai masu dacewa.",
+    "question": "Kuna da gidan yanar gizo? (na zaɓi)",
+    "placeholder": "Hanyar haɗi zuwa gidan yanar gizon ku"
+  },
+  "newsSource": {
+    "title": "Don amfani da bulogin ku ko ciyarwar labarai muna buƙatar ku buga hanyar haɗin sa",
+    "subtitle": "Za mu samar da abun ciki daga ciyarwar ku, don haka ba kwa buƙatar ƙirƙirar wasiƙar labarai daga karce",
+    "placeholder": "Hanyar haɗin yanar gizon ku ko bulogin ku"
+  },
+  "subscribe": {
+    "welcome": {
+      "title": "Barka da zuwa Wasiƙar Labarai.",
+      "invitedBy": "An gayyace ku ta {configuratorId}."
+    }
   }
 }

@@ -5,6 +5,7 @@
   import logout from "../systems/requests/logout";
   import SideLink from "../../lib/ui/organisms/SideLink.svelte";
   import type { SideLinkType, StepsKey } from "../types";
+  import { t } from "$lib/i18n/dashboard-translations";
 
   function step(stepName: StepsKey) {
     return () => {
@@ -13,13 +14,13 @@
     };
   }
 
-  function getLink(name: StepsKey): SideLinkType {
-    return { name, callback: step(name) };
+  function getLink(name: StepsKey, label?: string): SideLinkType {
+    return { name: label ?? name, callback: step(name) };
   }
 
   export let links: SideLinkType[] = [
-    { name: "Dashboard", children: [getLink("Profile"), getLink("News Sources"), getLink("Users"), getLink("Reports")] },
-    getLink("Secrets/Developer"), getLink("Newspaper"), getLink("Billing"),
+    { name: $t['menuHalf.dashboard'], children: [getLink("Profile", $t['menuHalf.profile']), getLink("News Sources", $t['menuHalf.newsSources']), getLink("Users", $t['menuHalf.users']), getLink("Reports", $t['menuHalf.reports'])] },
+    getLink("Secrets/Developer", $t['menuHalf.secretsDeveloper']), getLink("Newspaper", $t['menuHalf.newspaper']), getLink("Billing", $t['menuHalf.billing']),
   ];
 
   function getInitials(name: string): string {
@@ -68,7 +69,7 @@
       </div>
       <div class="sidebar__profile-info">
         <p class="sidebar__profile-name">{$store?.config.senderName || $store?.given_name}</p>
-        <a on:click={() => logout()} class="sidebar__profile-logout">Log Out</a>
+        <a on:click={() => logout()} class="sidebar__profile-logout">{$t['menuHalf.logOut']}</a>
       </div>
     </div>
   {/if}

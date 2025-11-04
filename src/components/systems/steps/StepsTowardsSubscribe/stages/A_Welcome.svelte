@@ -6,6 +6,7 @@
   import Centered from "../../../wrappers/Centered/Centered.svelte";
   import { writable } from "svelte/store";
   import SubmitButton from "../../../buttons/SubmitButton/SubmitButton.svelte";
+  import { t } from '$lib/i18n/translations';
 
   export let canReveal = false;
   const configuratorId = writable("");
@@ -37,13 +38,13 @@
 
 <Centered>
   <MarkdownText {canReveal}>
-    ## Welcome to the Newsletter.
+    ## {$t['subscribe.welcome.title']}
   </MarkdownText>
 
   <div class="wrap-text">
     {#key $configuratorId}
       <MarkdownText {canReveal}>
-        ### You have been invited by {$configuratorId}.
+        ### {$t['subscribe.welcome.invitedBy', { configuratorId: $configuratorId }]}
       </MarkdownText>
     {/key}
   </div>

@@ -216,5 +216,27 @@ export default {
       },
       "contact": "support@ainewsletter.com"
     }
+  },
+  "welcome": {
+    "title": "Generator buletin otomatis",
+    "setItOnce": "Atur sekali...",
+    "useItForever": "...gunakan selamanya."
+  },
+  "lead": {
+    "title": "Agar klien beralih dari buletin ke situs web Anda",
+    "recommendation": "Ini sangat disarankan. Ini membantu AI kami untuk lebih memahami konteks buletin Anda dan menghasilkan artikel yang lebih relevan.",
+    "question": "Apakah Anda memiliki situs web? (opsional)",
+    "placeholder": "Tautan ke situs web Anda"
+  },
+  "newsSource": {
+    "title": "Untuk menggunakan blog atau umpan berita Anda, kami perlu Anda mengetikkan tautannya",
+    "subtitle": "Kami akan menghasilkan konten dari umpan Anda, jadi Anda tidak perlu membuat buletin dari awal",
+    "placeholder": "Tautan situs berita atau blog Anda"
+  },
+  "subscribe": {
+    "welcome": {
+      "title": "Selamat datang di Buletin.",
+      "invitedBy": "Anda telah diundang oleh {configuratorId}."
+    }
   }
 }

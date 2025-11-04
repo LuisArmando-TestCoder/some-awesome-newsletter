@@ -466,6 +466,28 @@ export default {
       "privacyPolicy": "Politique de Confidentialité",
       "appName": "AI Newsletter"
     },
+    "welcome": {
+      "title": "Générateur de newsletter automatique",
+      "setItOnce": "Configurez-le une fois...",
+      "useItForever": "...utilisez-le pour toujours."
+    },
+    "lead": {
+      "title": "Pour que les clients passent de la newsletter à votre site web",
+      "recommendation": "Ceci est fortement recommandé. Cela aide notre IA à mieux comprendre le contexte de votre newsletter et à générer des articles plus pertinents.",
+      "question": "Avez-vous un site web ? (facultatif)",
+      "placeholder": "Le lien vers votre site web"
+    },
+    "newsSource": {
+      "title": "Pour utiliser votre blog ou fil d'actualités, nous avons besoin que vous saisissiez son lien",
+      "subtitle": "Nous générerons du contenu à partir de votre fil, vous n'aurez donc pas à créer une newsletter à partir de zéro",
+      "placeholder": "Le lien de votre site d'actualités ou de votre blog"
+    },
+    "subscribe": {
+      "welcome": {
+        "title": "Bienvenue à la Newsletter.",
+        "invitedBy": "Vous avez été invité par {configuratorId}."
+      }
+    },
     "header": {
       "goToWorkspace": "Aller à l'Espace de Travail",
       "inBilling": "Vous êtes dans la Facturation",

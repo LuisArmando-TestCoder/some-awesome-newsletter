@@ -12,6 +12,7 @@
     import { text } from "@sveltejs/kit";
   import { t } from "../../lib/i18n/translations";
   import { globalLanguage } from "../../components/store";
+    import Header from "$lib/ui/organisms/Header.svelte";
 
   let state: PlansState;
   const unsub = plansStore.subscribe((v) => (state = v));

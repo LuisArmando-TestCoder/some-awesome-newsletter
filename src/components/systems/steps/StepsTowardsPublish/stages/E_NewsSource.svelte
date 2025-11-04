@@ -11,6 +11,7 @@
   import LoadingScreen from "../../../loading/LoadingScreen.svelte";
   import { ping } from "../../../../Notification/notificationStore";
     import getConfiguratorSession from "../../../requests/getConfiguratorSession";
+  import { t } from '$lib/i18n/translations';
 
   export let canReveal = false;
   let isLoading = false;
@@ -60,14 +61,14 @@
 
 <Centered>
   <div style={isLoading ? 'opacity: 0.5; pointer-events: none;' : ''}>
-    <MarkdownText {canReveal}>--In order to use your blog or news feed we need you to type its link--</MarkdownText>
+    <MarkdownText {canReveal}>--{$t['newsSource.title']}--</MarkdownText>
 
     <MarkdownText {canReveal}>
-    ### We will generate content from your feed, so you don't have to create a newsletter from scratch
+    ### {$t['newsSource.subtitle']}
   </MarkdownText>
   <div class="news-source-input">
     <Link
-      placeholder="Your news' site or blog's link"
+      placeholder={$t['newsSource.placeholder']}
       value={$store.newsSource}
       onChange={(newsSource) =>
         saveToStore({

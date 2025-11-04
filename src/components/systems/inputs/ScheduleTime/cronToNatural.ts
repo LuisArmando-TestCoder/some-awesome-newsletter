@@ -1,16 +1,19 @@
-const MONTH_NAMES = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
+import { get } from 'svelte/store';
+import { t } from '$lib/i18n/dashboard-translations';
+
+const MONTH_NAMES = () => [
+  get(t)['cron.january'],
+  get(t)['cron.february'],
+  get(t)['cron.march'],
+  get(t)['cron.april'],
+  get(t)['cron.may'],
+  get(t)['cron.june'],
+  get(t)['cron.july'],
+  get(t)['cron.august'],
+  get(t)['cron.september'],
+  get(t)['cron.october'],
+  get(t)['cron.november'],
+  get(t)['cron.december'],
 ];
 const MONTH_NAMES_SHORT = [
   "JAN",
@@ -26,33 +29,38 @@ const MONTH_NAMES_SHORT = [
   "NOV",
   "DEC",
 ];
-const DAY_NAMES = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
+const DAY_NAMES = () => [
+  get(t)['cron.sunday'],
+  get(t)['cron.monday'],
+  get(t)['cron.tuesday'],
+  get(t)['cron.wednesday'],
+  get(t)['cron.thursday'],
+  get(t)['cron.friday'],
+  get(t)['cron.saturday'],
 ];
 const DAY_NAMES_SHORT = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
 // Maps for easy lookup
-const monthMap = new Map<string | number, number>(); // name/num -> 0-11
-MONTH_NAMES.forEach((name, i) => monthMap.set(name.toUpperCase(), i));
-MONTH_NAMES_SHORT.forEach((name, i) => monthMap.set(name, i));
-for (let i = 1; i <= 12; i++) {
-  monthMap.set(i, i - 1);
-  monthMap.set(i.toString(), i - 1);
+const getMonthMap = () => {
+  const monthMap = new Map<string | number, number>();
+  MONTH_NAMES().forEach((name, i) => monthMap.set(name.toUpperCase(), i));
+  MONTH_NAMES_SHORT.forEach((name, i) => monthMap.set(name, i));
+  for (let i = 1; i <= 12; i++) {
+    monthMap.set(i, i - 1);
+    monthMap.set(i.toString(), i - 1);
+  }
+  return monthMap;
 }
 
-const dayMap = new Map<string | number, number>(); // name/num -> 0-6
-DAY_NAMES.forEach((name, i) => dayMap.set(name.toUpperCase(), i));
-DAY_NAMES_SHORT.forEach((name, i) => dayMap.set(name, i));
-for (let i = 0; i <= 7; i++) {
-  // Handle 0-7 for Sunday/Saturday
-  dayMap.set(i, i % 7);
-  dayMap.set(i.toString(), i % 7);
+const getDayMap = () => {
+  const dayMap = new Map<string | number, number>();
+  DAY_NAMES().forEach((name, i) => dayMap.set(name.toUpperCase(), i));
+  DAY_NAMES_SHORT.forEach((name, i) => dayMap.set(name, i));
+  for (let i = 0; i <= 7; i++) {
+    dayMap.set(i, i % 7);
+    dayMap.set(i.toString(), i % 7);
+  }
+  return dayMap;
 }
 
 // --- Helper Functions ---
@@ -158,7 +166,7 @@ function parseSegment(
 
   // Single value (e.g., 5, TUE)
   const originalValue = parseInt(segment, 10);
-  if (!isNaN(originalValue)) {
+    if (!isNaN(originalValue)) {
     if (originalValue < min || originalValue > max) {
       if (!(names === DAY_NAMES && originalValue === 7)) {
         throw new Error(
@@ -283,8 +291,8 @@ export default function cronToSentence(cronString: string): string {
     const minuteData = parseField(minute, 0, 59);
     const hourData = parseField(hour, 0, 23);
     const dayOfMonthData = parseField(dayOfMonth, 1, 31);
-    const monthData = parseField(month, 1, 12, MONTH_NAMES, monthMap);
-    const dayOfWeekData = parseField(dayOfWeek, 0, 6, DAY_NAMES, dayMap); // Internal logic uses 0-6
+    const monthData = parseField(month, 1, 12, MONTH_NAMES(), getMonthMap());
+    const dayOfWeekData = parseField(dayOfWeek, 0, 6, DAY_NAMES(), getDayMap()); // Internal logic uses 0-6
     const yearData = parseField(year, 1970, 2099); // Adjust range if needed
 
     // --- Build the sentence ---
@@ -410,7 +418,7 @@ export default function cronToSentence(cronString: string): string {
         // Calculate specific days for step
         const days = [];
         for (let i = 0; i <= 6; i += dayOfWeekData.step) {
-          days.push(DAY_NAMES[i]);
+          days.push(DAY_NAMES()[i]);
         }
         dayOfWeekClause = `on ${listToSentence(days)}`;
       } else {

@@ -8,17 +8,17 @@ export default async (onSuccessCallback?: Function, onFailureCallback?: Function
   const idToken = getAuthHeaders()["x-auth-token-id"];
   const clientId = getAuthHeaders()["x-auth-client-id"];
   
-  console.log('[askIsAuthCodeValid.ts] authCode', authCode);
-  console.log('[askIsAuthCodeValid.ts] configuratorEmail', configuratorEmail);
-  console.log('[askIsAuthCodeValid.ts] idToken', idToken);
-  console.log('[askIsAuthCodeValid.ts] clientId', clientId);
+  // console.log('[askIsAuthCodeValid.ts] authCode', authCode);
+  // console.log('[askIsAuthCodeValid.ts] configuratorEmail', configuratorEmail);
+  // console.log('[askIsAuthCodeValid.ts] idToken', idToken);
+  // console.log('[askIsAuthCodeValid.ts] clientId', clientId); 
 
   const url = `${get(store).apiURL()}/auth/${configuratorEmail}?code=${
     authCode
   }`+ (idToken ? `&token_id=${idToken}&client_id=${clientId}` : '');
 
-  console.log('[askIsAuthCodeValid.ts] url', url);
-  console.log('[askIsAuthCodeValid.ts] configuratorEmail', url);
+  // console.log('[askIsAuthCodeValid.ts] url', url);
+  // console.log('[askIsAuthCodeValid.ts] configuratorEmail', url);
 
   const response = await fetch(url);
 

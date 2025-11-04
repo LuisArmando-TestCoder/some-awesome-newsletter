@@ -222,5 +222,14 @@ export default {
   "placeholders.searchUsers": "URL、リード、またはIDで検索...",
   "labels.manageUsers": "ニュースソース別にユーザーを管理",
   "labels.updatingList": "リストを更新中...",
-  "loading.subscribers": "購読者を読み込み中..."
+  "loading.subscribers": "購読者を読み込み中...",
+  "newspaper.title": "新聞",
+  "newspaper.subtitle": "ニュースソースから記事を閲覧、検索、閲覧します。",
+  "labels.chooseNewsSource": "ニュースソースを選択",
+  "labels.shareNewspaper": "新聞を共有",
+  "labels.producedInLanguages": "これらの言語で制作",
+  "placeholders.searchArticles": "記事を検索...",
+  "labels.noArticlesFound": "このニュースソースの記事は見つかりませんでした。",
+  "labels.created": "作成日",
+  "labels.language": "言語"
 };

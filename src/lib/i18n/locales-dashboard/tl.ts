@@ -222,5 +222,14 @@ export default {
   "placeholders.searchUsers": "Maghanap ayon sa URL, lead, o ID...",
   "labels.manageUsers": "Pamahalaan ang mga User ayon sa Pinagmulan ng Balita",
   "labels.updatingList": "Ina-update ang listahan...",
-  "loading.subscribers": "Nilo-load ang mga subscriber..."
+  "loading.subscribers": "Nilo-load ang mga subscriber...",
+  "newspaper.title": "Pahayagan",
+  "newspaper.subtitle": "Mag-browse, maghanap, at magbasa ng mga artikulo mula sa iyong mga mapagkukunan ng balita.",
+  "labels.chooseNewsSource": "Pumili ng mapagkukunan ng balita",
+  "labels.shareNewspaper": "Ibahagi ang Pahayagan",
+  "labels.producedInLanguages": "Ginawa sa mga wikang ito",
+  "placeholders.searchArticles": "Maghanap ng mga artikulo...",
+  "labels.noArticlesFound": "Walang nakitang mga artikulo para sa mapagkukunang ito ng balita.",
+  "labels.created": "Nilikha",
+  "labels.language": "Wika"
 };

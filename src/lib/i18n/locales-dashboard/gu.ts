@@ -222,5 +222,14 @@ export default {
   "placeholders.searchUsers": "URL, લીડ અથવા ID દ્વારા શોધો...",
   "labels.manageUsers": "સમાચાર સ્ત્રોત દ્વારા વપરાશકર્તાઓને મેનેજ કરો",
   "labels.updatingList": "સૂચિ અપડેટ કરી રહ્યું છે...",
-  "loading.subscribers": "સબ્સ્ક્રાઇબર્સ લોડ કરી રહ્યું છે..."
+  "loading.subscribers": "સબ્સ્ક્રાઇબર્સ લોડ કરી રહ્યું છે...",
+  "newspaper.title": "અખબાર",
+  "newspaper.subtitle": "તમારા સમાચાર સ્ત્રોતોમાંથી લેખો બ્રાઉઝ કરો, શોધો અને વાંચો.",
+  "labels.chooseNewsSource": "એક સમાચાર સ્ત્રોત પસંદ કરો",
+  "labels.shareNewspaper": "અખબાર શેર કરો",
+  "labels.producedInLanguages": "આ ભાષાઓમાં ઉત્પાદિત",
+  "placeholders.searchArticles": "લેખો શોધો...",
+  "labels.noArticlesFound": "આ સમાચાર સ્ત્રોત માટે કોઈ લેખો મળ્યા નથી.",
+  "labels.created": "બનાવ્યું",
+  "labels.language": "ભાષા"
 };

@@ -230,5 +230,13 @@ export default {
   "placeholders.searchUsers": "Buscar por URL, lead o ID...",
   "labels.manageUsers": "Gestionar usuarios por fuente de noticias",
   "labels.updatingList": "Actualizando lista...",
-  "loading.subscribers": "Cargando suscriptores..."
+  "loading.subscribers": "Cargando suscriptores...",
+  "newspaper.title": "Periódico",
+  "newspaper.subtitle": "Navega, busca y lee artículos de tus fuentes de noticias.",
+  "labels.chooseNewsSource": "Elige una fuente de noticias",
+  "labels.shareNewspaper": "Compartir Periódico",
+  "labels.producedInLanguages": "Producido en estos idiomas",
+  "placeholders.searchArticles": "Buscar artículos...",
+  "labels.noArticlesFound": "No se encontraron artículos para esta fuente de noticias.",
+  "labels.created": "Creado"
 };

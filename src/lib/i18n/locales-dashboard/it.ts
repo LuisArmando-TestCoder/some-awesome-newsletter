@@ -222,5 +222,14 @@ export default {
   "placeholders.searchUsers": "Cerca per URL, lead o ID...",
   "labels.manageUsers": "Gestisci utenti per fonte di notizie",
   "labels.updatingList": "Aggiornamento elenco...",
-  "loading.subscribers": "Caricamento iscritti..."
+  "loading.subscribers": "Caricamento iscritti...",
+  "newspaper.title": "Giornale",
+  "newspaper.subtitle": "Sfoglia, cerca e leggi articoli dalle tue fonti di notizie.",
+  "labels.chooseNewsSource": "Scegli una fonte di notizie",
+  "labels.shareNewspaper": "Condividi il giornale",
+  "labels.producedInLanguages": "Prodotto in queste lingue",
+  "placeholders.searchArticles": "Cerca articoli...",
+  "labels.noArticlesFound": "Nessun articolo trovato per questa fonte di notizie.",
+  "labels.created": "Creato",
+  "labels.language": "Lingua"
 };

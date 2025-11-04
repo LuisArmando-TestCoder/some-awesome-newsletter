@@ -169,5 +169,14 @@ export default {
   "billing.yearly": "వార్షిక",
   "billing.currentPlanButton": "ఇది మీ ప్రస్తుత ప్రణాళిక",
   "billing.downgradeTo": "కి డౌన్‌గ్రేడ్ చేయండి",
-  "billing.upgradeTo": "కి అప్‌గ్రేడ్ చేయండి"
+  "billing.upgradeTo": "కి అప్‌గ్రేడ్ చేయండి",
+  "newspaper.title": "వార్తాపత్రిక",
+  "newspaper.subtitle": "మీ వార్తా మూలాల నుండి కథనాలను బ్రౌజ్ చేయండి, శోధించండి మరియు చదవండి.",
+  "labels.chooseNewsSource": "ఒక వార్తా మూలాన్ని ఎంచుకోండి",
+  "labels.shareNewspaper": "వార్తాపత్రికను పంచుకోండి",
+  "labels.producedInLanguages": "ఈ భాషలలో ఉత్పత్తి చేయబడింది",
+  "placeholders.searchArticles": "కథనాల కోసం శోధించండి...",
+  "labels.noArticlesFound": "ఈ వార్తా మూలం కోసం కథనాలు ఏవీ కనుగొనబడలేదు.",
+  "labels.created": "సృష్టించబడింది",
+  "labels.language": "భాష"
 };

@@ -222,5 +222,14 @@ export default {
   "placeholders.searchUsers": "በዩአርኤል፣ በመሪ ወይም በመለያ ይፈልጉ...",
   "labels.manageUsers": "ተጠቃሚዎችን በዜና ምንጭ ያስተዳድሩ",
   "labels.updatingList": "ዝርዝር በማዘመን ላይ...",
-  "loading.subscribers": "ተመዝጋቢዎችን በመጫን ላይ..."
+  "loading.subscribers": "ተመዝጋቢዎችን በመጫን ላይ...",
+  "newspaper.title": "ጋዜጣ",
+  "newspaper.subtitle": "ከዜና ምንጮችዎ ጽሑፎችን ያስሱ፣ ይፈልጉ እና ያንብቡ።",
+  "labels.chooseNewsSource": "የዜና ምንጭ ይምረጡ",
+  "labels.shareNewspaper": "ጋዜጣ አጋራ",
+  "labels.producedInLanguages": "በእነዚህ ቋንቋዎች የተዘጋጀ",
+  "placeholders.searchArticles": "ጽሑፎችን ይፈልጉ...",
+  "labels.noArticlesFound": "ለዚህ የዜና ምንጭ ምንም ጽሑፎች አልተገኙም።",
+  "labels.created": "የተፈጠረ",
+  "labels.language": "ቋንቋ"
 };

@@ -169,5 +169,14 @@ export default {
   "billing.yearly": "سالانہ",
   "billing.currentPlanButton": "یہ آپ کا موجودہ پلان ہے",
   "billing.downgradeTo": "پر ڈاؤن گریڈ کریں",
-  "billing.upgradeTo": "پر اپ گریڈ کریں"
+  "billing.upgradeTo": "پر اپ گریڈ کریں",
+  "newspaper.title": "اخبار",
+  "newspaper.subtitle": "اپنے خبروں کے ذرائع سے مضامین کو براؤز کریں، تلاش کریں اور پڑھیں۔",
+  "labels.chooseNewsSource": "ایک خبر کا ذریعہ منتخب کریں",
+  "labels.shareNewspaper": "اخبار شیئر کریں",
+  "labels.producedInLanguages": "ان زبانوں میں تیار کیا گیا",
+  "placeholders.searchArticles": "مضامین تلاش کریں...",
+  "labels.noArticlesFound": "اس خبر کے ذریعہ کے لئے کوئی مضامین نہیں ملے۔",
+  "labels.created": "بنایا گیا",
+  "labels.language": "زبان"
 };

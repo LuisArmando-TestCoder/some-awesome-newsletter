@@ -222,5 +222,14 @@ export default {
   "placeholders.searchUsers": "Suche nach URL, Lead oder ID...",
   "labels.manageUsers": "Benutzer nach Nachrichtenquelle verwalten",
   "labels.updatingList": "Liste wird aktualisiert...",
-  "loading.subscribers": "Abonnenten werden geladen..."
+  "loading.subscribers": "Abonnenten werden geladen...",
+  "newspaper.title": "Zeitung",
+  "newspaper.subtitle": "Durchsuchen, suchen und lesen Sie Artikel aus Ihren Nachrichtenquellen.",
+  "labels.chooseNewsSource": "Wählen Sie eine Nachrichtenquelle",
+  "labels.shareNewspaper": "Zeitung teilen",
+  "labels.producedInLanguages": "In diesen Sprachen produziert",
+  "placeholders.searchArticles": "Artikel suchen...",
+  "labels.noArticlesFound": "Für diese Nachrichtenquelle wurden keine Artikel gefunden.",
+  "labels.created": "Erstellt",
+  "labels.language": "Sprache"
 };

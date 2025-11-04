@@ -169,5 +169,14 @@ export default {
   "billing.yearly": "รายปี",
   "billing.currentPlanButton": "นี่คือแผนปัจจุบันของคุณ",
   "billing.downgradeTo": "ดาวน์เกรดเป็น",
-  "billing.upgradeTo": "อัปเกรดเป็น"
+  "billing.upgradeTo": "อัปเกรดเป็น",
+  "newspaper.title": "หนังสือพิมพ์",
+  "newspaper.subtitle": "เรียกดู ค้นหา และอ่านบทความจากแหล่งข่าวของคุณ",
+  "labels.chooseNewsSource": "เลือกแหล่งข่าว",
+  "labels.shareNewspaper": "แชร์หนังสือพิมพ์",
+  "labels.producedInLanguages": "ผลิตในภาษาเหล่านี้",
+  "placeholders.searchArticles": "ค้นหาบทความ...",
+  "labels.noArticlesFound": "ไม่พบบทความสำหรับแหล่งข่าวนี้",
+  "labels.created": "สร้างเมื่อ",
+  "labels.language": "ภาษา"
 };

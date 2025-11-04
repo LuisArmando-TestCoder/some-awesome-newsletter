@@ -222,5 +222,14 @@ export default {
   "placeholders.searchUsers": "URL, ಸೀಸ, ಅಥವಾ ID ಮೂಲಕ ಹುಡುಕಿ...",
   "labels.manageUsers": "ಸುದ್ದಿ ಮೂಲದ ಮೂಲಕ ಬಳಕೆದಾರರನ್ನು ನಿರ್ವಹಿಸಿ",
   "labels.updatingList": "ಪಟ್ಟಿಯನ್ನು ನವೀಕರಿಸಲಾಗುತ್ತಿದೆ...",
-  "loading.subscribers": "ಚಂದಾದಾರರನ್ನು ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ..."
+  "loading.subscribers": "ಚಂದಾದಾರರನ್ನು ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ...",
+  "newspaper.title": "ವೃತ್ತಪತ್ರಿಕೆ",
+  "newspaper.subtitle": "ನಿಮ್ಮ ಸುದ್ದಿ ಮೂಲಗಳಿಂದ ಲೇಖನಗಳನ್ನು ಬ್ರೌಸ್ ಮಾಡಿ, ಹುಡುಕಿ ಮತ್ತು ಓದಿ.",
+  "labels.chooseNewsSource": "ಸುದ್ದಿ ಮೂಲವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+  "labels.shareNewspaper": "ವೃತ್ತಪತ್ರಿಕೆ ಹಂಚಿಕೊಳ್ಳಿ",
+  "labels.producedInLanguages": "ಈ ಭಾಷೆಗಳಲ್ಲಿ ತಯಾರಿಸಲಾಗಿದೆ",
+  "placeholders.searchArticles": "ಲೇಖನಗಳನ್ನು ಹುಡುಕಿ...",
+  "labels.noArticlesFound": "ಈ ಸುದ್ದಿ ಮೂಲಕ್ಕಾಗಿ ಯಾವುದೇ ಲೇಖನಗಳು ಕಂಡುಬಂದಿಲ್ಲ.",
+  "labels.created": "ರಚಿಸಲಾಗಿದೆ",
+  "labels.language": "ಭಾಷೆ"
 };

@@ -222,5 +222,14 @@ export default {
   "placeholders.searchUsers": "Tafuta kwa URL, kiongozi, au Kitambulisho...",
   "labels.manageUsers": "Dhibiti Watumiaji kwa Chanzo cha Habari",
   "labels.updatingList": "Inasasisha orodha...",
-  "loading.subscribers": "Inapakia wasajili..."
+  "loading.subscribers": "Inapakia wasajili...",
+  "newspaper.title": "Gazeti",
+  "newspaper.subtitle": "Vinjari, tafuta, na soma makala kutoka vyanzo vyako vya habari.",
+  "labels.chooseNewsSource": "Chagua chanzo cha habari",
+  "labels.shareNewspaper": "Shiriki Gazeti",
+  "labels.producedInLanguages": "Imetolewa kwa lugha hizi",
+  "placeholders.searchArticles": "Tafuta makala...",
+  "labels.noArticlesFound": "Hakuna makala zilizopatikana kwa chanzo hiki cha habari.",
+  "labels.created": "Imeundwa",
+  "labels.language": "Lugha"
 };

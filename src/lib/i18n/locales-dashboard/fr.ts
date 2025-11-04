@@ -222,5 +222,14 @@ export default {
   "placeholders.searchUsers": "Rechercher par URL, prospect ou ID...",
   "labels.manageUsers": "Gérer les utilisateurs par source d'actualités",
   "labels.updatingList": "Mise à jour de la liste...",
-  "loading.subscribers": "Chargement des abonnés..."
+  "loading.subscribers": "Chargement des abonnés...",
+  "newspaper.title": "Journal",
+  "newspaper.subtitle": "Parcourez, recherchez et lisez des articles de vos sources d'actualités.",
+  "labels.chooseNewsSource": "Choisissez une source d'actualités",
+  "labels.shareNewspaper": "Partager le journal",
+  "labels.producedInLanguages": "Produit dans ces langues",
+  "placeholders.searchArticles": "Rechercher des articles...",
+  "labels.noArticlesFound": "Aucun article trouvé pour cette source d'actualités.",
+  "labels.created": "Créé",
+  "labels.language": "Langue"
 };

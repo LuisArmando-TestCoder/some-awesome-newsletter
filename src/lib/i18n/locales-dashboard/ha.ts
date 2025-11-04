@@ -169,5 +169,14 @@ export default {
   "billing.yearly": "kowace shekara",
   "billing.currentPlanButton": "Wannan shine shirinku na yanzu",
   "billing.downgradeTo": "Rage daraja zuwa",
-  "billing.upgradeTo": "Haɓaka zuwa"
+  "billing.upgradeTo": "Haɓaka zuwa",
+  "newspaper.title": "Jarida",
+  "newspaper.subtitle": "Bincika, nemo, da karanta labarai daga majiyoyin labarai naka.",
+  "labels.chooseNewsSource": "Zaɓi majiyar labarai",
+  "labels.shareNewspaper": "Raba Jarida",
+  "labels.producedInLanguages": "An samar da shi a cikin waɗannan harsuna",
+  "placeholders.searchArticles": "Nemo labarai...",
+  "labels.noArticlesFound": "Ba a sami labarai ba don wannan majiyar labarai.",
+  "labels.created": "An ƙirƙira",
+  "labels.language": "Harshe"
 };

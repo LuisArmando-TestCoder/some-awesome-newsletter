@@ -169,5 +169,14 @@ export default {
   "billing.yearly": "연간",
   "billing.currentPlanButton": "현재 요금제입니다",
   "billing.downgradeTo": "로 다운그레이드",
-  "billing.upgradeTo": "로 업그레이드"
+  "billing.upgradeTo": "로 업그레이드",
+  "newspaper.title": "신문",
+  "newspaper.subtitle": "뉴스 소스에서 기사를 찾아보고, 검색하고, 읽어보세요.",
+  "labels.chooseNewsSource": "뉴스 소스 선택",
+  "labels.shareNewspaper": "신문 공유",
+  "labels.producedInLanguages": "이 언어로 제작됨",
+  "placeholders.searchArticles": "기사 검색...",
+  "labels.noArticlesFound": "이 뉴스 소스에 대한 기사를 찾을 수 없습니다.",
+  "labels.created": "생성됨",
+  "labels.language": "언어"
 };

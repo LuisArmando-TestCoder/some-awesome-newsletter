@@ -222,5 +222,14 @@ export default {
   "placeholders.searchUsers": "按URL、潜在客户或ID搜索...",
   "labels.manageUsers": "按新闻来源管理用户",
   "labels.updatingList": "正在更新列表...",
-  "loading.subscribers": "正在加载订阅者..."
+  "loading.subscribers": "正在加载订阅者...",
+  "newspaper.title": "报纸",
+  "newspaper.subtitle": "浏览、搜索和阅读来自您的新闻来源的文章。",
+  "labels.chooseNewsSource": "选择一个新闻来源",
+  "labels.shareNewspaper": "分享报纸",
+  "labels.producedInLanguages": "以这些语言制作",
+  "placeholders.searchArticles": "搜索文章...",
+  "labels.noArticlesFound": "未找到此新闻来源的文章。",
+  "labels.created": "已创建",
+  "labels.language": "语言"
 };

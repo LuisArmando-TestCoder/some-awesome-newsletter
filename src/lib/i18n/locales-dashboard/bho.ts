@@ -222,5 +222,14 @@ export default {
   "placeholders.searchUsers": "यूआरएल, लीड, भा आईडी से खोजीं...",
   "labels.manageUsers": "समाचार स्रोत के हिसाब से उपयोगकर्ता के प्रबंधित करीं",
   "labels.updatingList": "सूची अपडेट हो रहल बा...",
-  "loading.subscribers": "ग्राहक लोड हो रहल बा..."
+  "loading.subscribers": "ग्राहक लोड हो रहल बा...",
+  "newspaper.title": "अखबार",
+  "newspaper.subtitle": "आपन समाचार स्रोत से लेख ब्राउज़ करीं, खोजीं आ पढ़ीं।",
+  "labels.chooseNewsSource": "एक समाचार स्रोत चुनीं",
+  "labels.shareNewspaper": "अखबार साझा करीं",
+  "labels.producedInLanguages": "एह भाषा में बनल बा",
+  "placeholders.searchArticles": "लेख खोजीं...",
+  "labels.noArticlesFound": "एह समाचार स्रोत खातिर कवनो लेख ना मिलल।",
+  "labels.created": "बनावल गइल",
+  "labels.language": "भाषा"
 };

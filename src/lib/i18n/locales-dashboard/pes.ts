@@ -169,5 +169,14 @@ export default {
   "billing.yearly": "سالیانه",
   "billing.currentPlanButton": "این طرح فعلی شماست",
   "billing.downgradeTo": "تنزل به",
-  "billing.upgradeTo": "ارتقا به"
+  "billing.upgradeTo": "ارتقا به",
+  "newspaper.title": "روزنامه",
+  "newspaper.subtitle": "مرور، جستجو و خواندن مقالات از منابع خبری خود.",
+  "labels.chooseNewsSource": "یک منبع خبری را انتخاب کنید",
+  "labels.shareNewspaper": "اشتراک‌گذاری روزنامه",
+  "labels.producedInLanguages": "تولید شده در این زبان‌ها",
+  "placeholders.searchArticles": "جستجوی مقالات...",
+  "labels.noArticlesFound": "هیچ مقاله‌ای برای این منبع خبری یافت نشد.",
+  "labels.created": "ایجاد شد",
+  "labels.language": "زبان"
 };

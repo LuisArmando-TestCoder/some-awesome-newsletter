@@ -222,5 +222,14 @@ export default {
   "placeholders.searchUsers": "யூஆர்எல், முன்னணி அல்லது ஐடி மூலம் தேடு...",
   "labels.manageUsers": "செய்தி மூலம் பயனர்களை நிர்வகி",
   "labels.updatingList": "பட்டியலைப் புதுப்பிக்கிறது...",
-  "loading.subscribers": "சந்தாதாரர்களை ஏற்றுகிறது..."
+  "loading.subscribers": "சந்தாதாரர்களை ஏற்றுகிறது...",
+  "newspaper.title": "செய்தித்தாள்",
+  "newspaper.subtitle": "உங்கள் செய்தி மூலங்களிலிருந்து கட்டுரைகளை உலாவவும், தேடவும் மற்றும் படிக்கவும்.",
+  "labels.chooseNewsSource": "ஒரு செய்தி மூலத்தைத் தேர்ந்தெடுக்கவும்",
+  "labels.shareNewspaper": "செய்தித்தாளைப் பகிரவும்",
+  "labels.producedInLanguages": "இந்த மொழிகளில் தயாரிக்கப்பட்டது",
+  "placeholders.searchArticles": "கட்டுரைகளைத் தேடு...",
+  "labels.noArticlesFound": "இந்த செய்தி மூலத்திற்கு கட்டுரைகள் எதுவும் கிடைக்கவில்லை.",
+  "labels.created": "உருவாக்கப்பட்டது",
+  "labels.language": "மொழி"
 };

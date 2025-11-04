@@ -222,5 +222,14 @@ export default {
   "placeholders.searchUsers": "البحث عن طريق عنوان URL أو العميل المحتمل أو المعرف...",
   "labels.manageUsers": "إدارة المستخدمين حسب مصدر الأخبار",
   "labels.updatingList": "جاري تحديث القائمة...",
-  "loading.subscribers": "جاري تحميل المشتركين..."
+  "loading.subscribers": "جاري تحميل المشتركين...",
+  "newspaper.title": "الجريدة",
+  "newspaper.subtitle": "تصفح وابحث واقرأ المقالات من مصادر الأخبار الخاصة بك.",
+  "labels.chooseNewsSource": "اختر مصدر أخبار",
+  "labels.shareNewspaper": "مشاركة الجريدة",
+  "labels.producedInLanguages": "أنتجت بهذه اللغات",
+  "placeholders.searchArticles": "البحث عن مقالات...",
+  "labels.noArticlesFound": "لم يتم العثور على مقالات لهذا المصدر الإخباري.",
+  "labels.created": "تم الإنشاء",
+  "labels.language": "اللغة"
 };

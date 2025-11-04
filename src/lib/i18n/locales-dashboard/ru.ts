@@ -222,5 +222,14 @@ export default {
   "placeholders.searchUsers": "Поиск по URL, лиду или ID...",
   "labels.manageUsers": "Управление пользователями по источникам новостей",
   "labels.updatingList": "Обновление списка...",
-  "loading.subscribers": "Загрузка подписчиков..."
+  "loading.subscribers": "Загрузка подписчиков...",
+  "newspaper.title": "Газета",
+  "newspaper.subtitle": "Просматривайте, ищите и читайте статьи из ваших источников новостей.",
+  "labels.chooseNewsSource": "Выберите источник новостей",
+  "labels.shareNewspaper": "Поделиться газетой",
+  "labels.producedInLanguages": "Создано на этих языках",
+  "placeholders.searchArticles": "Искать статьи...",
+  "labels.noArticlesFound": "Статьи для этого источника новостей не найдены.",
+  "labels.created": "Создано",
+  "labels.language": "Язык"
 };

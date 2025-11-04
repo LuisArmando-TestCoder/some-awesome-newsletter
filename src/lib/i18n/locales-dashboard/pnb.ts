@@ -222,5 +222,14 @@ export default {
   "placeholders.searchUsers": "یو آر ایل، لیڈ، یا آئی ڈی دے ذریعے تلاش کرو...",
   "labels.manageUsers": "خبراں دے ذریعے دے مطابق صارفین دا انتظام کرو",
   "labels.updatingList": "لسٹ اپ ڈیٹ ہو رہی اے...",
-  "loading.subscribers": "سبسکرائبرز لوڈ ہو رہے نیں..."
+  "loading.subscribers": "سبسکرائبرز لوڈ ہو رہے نیں...",
+  "newspaper.title": "اخبار",
+  "newspaper.subtitle": "اپنے خبراں دے ذرائع توں مضمون براؤز کرو، تلاش کرو، تے پڑھو۔",
+  "labels.chooseNewsSource": "اک خبراں دا ذریعہ منتخب کرو",
+  "labels.shareNewspaper": "اخبار شیئر کرو",
+  "labels.producedInLanguages": "ایہناں زباناں وچ تیار کیتا گیا",
+  "placeholders.searchArticles": "مضمون تلاش کرو...",
+  "labels.noArticlesFound": "اس خبراں دے ذریعے لئی کوئی مضمون نہیں ملیا۔",
+  "labels.created": "بنایا گیا",
+  "labels.language": "زبان"
 };

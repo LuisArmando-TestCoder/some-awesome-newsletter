@@ -169,5 +169,14 @@ export default {
   "billing.yearly": "taunan",
   "billing.currentPlanButton": "Iki rencana sampeyan saiki",
   "billing.downgradeTo": "Downgrade menyang",
-  "billing.upgradeTo": "Nganyarke menyang"
+  "billing.upgradeTo": "Nganyarke menyang",
+  "newspaper.title": "Koran",
+  "newspaper.subtitle": "Jelajahi, golek, lan waca artikel saka sumber warta sampeyan.",
+  "labels.chooseNewsSource": "Pilih sumber warta",
+  "labels.shareNewspaper": "Nuduhake Koran",
+  "labels.producedInLanguages": "Diprodhuksi ing basa-basa iki",
+  "placeholders.searchArticles": "Goleki artikel...",
+  "labels.noArticlesFound": "Ora ana artikel sing ditemokake kanggo sumber warta iki.",
+  "labels.created": "Digawe",
+  "labels.language": "Basa"
 };

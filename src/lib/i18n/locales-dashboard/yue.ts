@@ -222,5 +222,14 @@ export default {
   "placeholders.searchUsers": "透過 URL、潛在客戶或 ID 搜尋...",
   "labels.manageUsers": "按新聞來源管理使用者",
   "labels.updatingList": "正在更新清單...",
-  "loading.subscribers": "正在載入訂閱者..."
+  "loading.subscribers": "正在載入訂閱者...",
+  "newspaper.title": "報紙",
+  "newspaper.subtitle": "瀏覽、搜尋同埋閱讀你新聞來源嘅文章。",
+  "labels.chooseNewsSource": "選擇一個新聞來源",
+  "labels.shareNewspaper": "分享報紙",
+  "labels.producedInLanguages": "用呢啲語言製作",
+  "placeholders.searchArticles": "搜尋文章...",
+  "labels.noArticlesFound": "搵唔到呢個新聞來源嘅文章。",
+  "labels.created": "已建立",
+  "labels.language": "語言"
 };

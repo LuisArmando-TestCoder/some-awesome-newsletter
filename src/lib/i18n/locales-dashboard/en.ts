@@ -222,5 +222,14 @@ export default {
   "placeholders.searchUsers": "Search by URL, lead, or ID...",
   "labels.manageUsers": "Manage Users by News Source",
   "labels.updatingList": "Updating list...",
-  "loading.subscribers": "Loading subscribers..."
+  "loading.subscribers": "Loading subscribers...",
+  "newspaper.title": "Newspaper",
+  "newspaper.subtitle": "Browse, search, and read articles from your news sources.",
+  "labels.chooseNewsSource": "Choose a news source",
+  "labels.shareNewspaper": "Share Newspaper",
+  "labels.producedInLanguages": "Produced in these languages",
+  "placeholders.searchArticles": "Search for articles...",
+  "labels.noArticlesFound": "No articles found for this news source.",
+  "labels.created": "Created",
+  "labels.language": "Language"
 };

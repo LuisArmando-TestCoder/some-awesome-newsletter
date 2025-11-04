@@ -169,5 +169,14 @@ export default {
   "billing.yearly": "سنويًا",
   "billing.currentPlanButton": "هذه هي خطتك الحالية",
   "billing.downgradeTo": "الرجوع إلى",
-  "billing.upgradeTo": "الترقية إلى"
+  "billing.upgradeTo": "الترقية إلى",
+  "newspaper.title": "الجريدة",
+  "newspaper.subtitle": "تصفح وابحث واقرأ المقالات من مصادر الأخبار الخاصة بك.",
+  "labels.chooseNewsSource": "اختر مصدر أخبار",
+  "labels.shareNewspaper": "مشاركة الجريدة",
+  "labels.producedInLanguages": "أنتجت بهذه اللغات",
+  "placeholders.searchArticles": "البحث عن مقالات...",
+  "labels.noArticlesFound": "لم يتم العثور على مقالات لهذا المصدر الإخباري.",
+  "labels.created": "تم الإنشاء",
+  "labels.language": "اللغة"
 };

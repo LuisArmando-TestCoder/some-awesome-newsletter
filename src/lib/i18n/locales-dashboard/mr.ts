@@ -169,5 +169,14 @@ export default {
   "billing.yearly": "वार्षिक",
   "billing.currentPlanButton": "ही तुमची सध्याची योजना आहे",
   "billing.downgradeTo": "वर डाउनग्रेड करा",
-  "billing.upgradeTo": "वर श्रेणीसुधारित करा"
+  "billing.upgradeTo": "वर श्रेणीसुधारित करा",
+  "newspaper.title": "वृत्तपत्र",
+  "newspaper.subtitle": "तुमच्या बातम्यांच्या स्रोतांमधून लेख ब्राउझ करा, शोधा आणि वाचा.",
+  "labels.chooseNewsSource": "एक बातम्यांचा स्रोत निवडा",
+  "labels.shareNewspaper": "वृत्तपत्र सामायिक करा",
+  "labels.producedInLanguages": "या भाषांमध्ये तयार केले",
+  "placeholders.searchArticles": "लेख शोधा...",
+  "labels.noArticlesFound": "या बातम्यांच्या स्रोतासाठी कोणतेही लेख आढळले नाहीत.",
+  "labels.created": "तयार केले",
+  "labels.language": "भाषा"
 };

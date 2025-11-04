@@ -8,6 +8,7 @@
     import { addNewsletterUser } from "../../../../../requests/addNewsletterUserEndpoint";
     import Language from "../../../../../inputs/Language/Language.svelte";
     import PlainText from "../../../../../inputs/PlainText/PlainText.svelte";
+  import { t } from "$lib/i18n/dashboard-translations";
 
     export let newsSource: NewsSource;
 
@@ -27,7 +28,7 @@
     async function handleSubscription() {
         const emailValue = $userEmail;
         if (!emailValue) {
-            message = "Please enter a valid email address.";
+            message = $t['errors.invalidEmail'];
             return;
         }
 
@@ -46,11 +47,11 @@
             const configId = $store.configuratorEmail;
             const newsSourceId = newsSource.id;
             const result = await addNewsletterUser(user, configId, newsSourceId);
-            message = result.message || "Subscribed successfully!";
+            message = result.message || $t['success.subscribed'];
         } catch (error) {
             console.error("Subscription error:", error);
-            const errorMessage = error instanceof Error ? error.message : "An unknown error occurred.";
-            message = `Failed to subscribe: ${errorMessage}`;
+            const errorMessage = error instanceof Error ? error.message : $t['errors.unknown'];
+            message = `${$t['errors.failedToSubscribe']}: ${errorMessage}`;
         } finally {
             isLoading = false;
         }
@@ -114,16 +115,15 @@ async function addUserToNewsletter({ email, name, bio, language }) {
 <div class="playground-controls">
   <Email
     onChange={(newValue) => userEmail.set(newValue)}
-    placeholder="Enter subscriber's email"
+    placeholder={$t['placeholders.subscriberEmail']}
   />
 
   <p>
-    Enter an email to see how the API call is constructed, then click "Run Code"
-    to subscribe the user to the "{newsSource.url}" news source.
+    {$t['markdown.apiPlayground']}
   </p>
 
   <SubmitButton
-    label="Run Code"
+    label={$t['labels.runCode']}
     callback={handleSubscription}
     loading={isLoading}
     disabled={!$userEmail || isLoading}
@@ -139,11 +139,11 @@ async function addUserToNewsletter({ email, name, bio, language }) {
   <p class="feedback-message">{message}</p>
 {/if}
 
-<h4>Interactive API Playground</h4>
+<h4>{$t['labels.interactiveApiPlayground']}</h4>
 
 <div class="input-grid">
-    <PlainText label="Name" bind:value={$userName} />
-    <PlainText label="Bio" bind:value={$userBio} />
+    <PlainText label={$t['labels.name']} bind:value={$userName} />
+    <PlainText label={$t['labels.bio']} bind:value={$userBio} />
     <Language onSelect={handleLanguageSelect} defaultLanguageCode={$userLanguage} />
 </div>
 

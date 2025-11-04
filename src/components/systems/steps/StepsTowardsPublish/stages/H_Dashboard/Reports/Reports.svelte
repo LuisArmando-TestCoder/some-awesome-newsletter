@@ -4,6 +4,7 @@
   
     // Central Store and Types
     import store from "../../../../../../store"; // Adjust path
+  import { t } from "$lib/i18n/dashboard-translations";
   
     // Data Service (Handles state and API calls)
   
@@ -50,11 +51,11 @@
             />
           {:else}
             <!-- Show loading only if news sources exist but subscribers don't yet -->
-            <p class="loading-message">Loading analytics data...</p>
+            <p class="loading-message">{$t['loading.analytics']}</p>
           {/if}
         {:else}
           <!-- Optional: Message if no news sources, hence no analytics -->
-          <p class="no-data-message">Analytics require configured news sources.</p>
+          <p class="no-data-message">{$t['errors.noNewsSources']}</p>
         {/if}
       </div> <!-- Correctly closing charts-column -->
   </Page>
@@ -98,4 +99,3 @@
       color: var(--color-error-dark, #c62828);
     }
   </style>
-  

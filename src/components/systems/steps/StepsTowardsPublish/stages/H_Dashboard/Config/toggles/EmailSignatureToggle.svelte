@@ -4,6 +4,7 @@
   import store, { saveToConfig } from "../../../../../../../store";
   import MarkdownText from "../../../../../../texts/MarkdownText/MarkdownText.svelte";
   import IconButton from "../../../../../../buttons/IconButton/IconButton.svelte";
+  import { t } from "$lib/i18n/dashboard-translations";
   import Link from "../../../../../../inputs/Link/Link.svelte";
   import ColorPicker from "../../../../../../inputs/ColorPicker/ColorPicker.svelte";
 
@@ -129,14 +130,14 @@
 </div>
 
 <div>
-  <MarkdownText {canReveal}>--Email signatures instil brand trust--</MarkdownText>
+  <MarkdownText {canReveal}>{$t['markdown.emailSignature']}</MarkdownText>
   <div class="signature-container">
     <Link
-      placeholder="Facebook Profile"
+      placeholder={$t['placeholders.facebookProfile']}
       bind:value={$facebookLink}
     />
     <Link
-      placeholder="Instagram Profile"
+      placeholder={$t['placeholders.instagramProfile']}
       bind:value={$instagramLink}
     />
     <ColorPicker
@@ -146,11 +147,11 @@
       src="./icons/refresh.svg"
       disabled={false}
       loading={false}
-      label="Generate Signature"
+      label={$t['labels.generateSignature']}
       callback={generateSignature}
     />
     <div class="signature-preview">
-      {@html $store.config.emailSignature ? $store.config.emailSignature : "No email signature set"}
+      {@html $store.config.emailSignature ? $store.config.emailSignature : $t['labels.noEmailSignatureSet']}
     </div>
   </div>
 </div>

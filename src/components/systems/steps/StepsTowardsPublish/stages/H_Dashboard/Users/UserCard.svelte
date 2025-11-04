@@ -3,6 +3,7 @@
   // REMOVED: import { createEventDispatcher } from "svelte";
   import { userRemovalRequestStore } from "./userActions"; // Adjust path: Up 5 levels
   import type { NewsletterUser } from "../../../../../../types"; // Adjust path
+  import { t } from "$lib/i18n/dashboard-translations";
 
   // Import UI Components (Adjust paths as needed)
   import IconButton from "../../../../../buttons/IconButton/IconButton.svelte";
@@ -40,8 +41,8 @@
       <div class="user-card-email">{user.email}</div>
     {/if}
     <div class="user-card-meta">
-      {#if user.language}<span>Lang: {user.language.toUpperCase()}</span>{/if}
-      {#if !user.language}<span>No metadata</span>{/if}
+      {#if user.language}<span>{$t['labels.language']}: {user.language.toUpperCase()}</span>{/if}
+      {#if !user.language}<span>{$t['labels.noMetadata']}</span>{/if}
     </div>
     {#if user.bio}
       <div class="user-card-bio">{user.bio}</div>
@@ -51,7 +52,7 @@
   <div class="user-card-actions">
     <IconButton
       src="./icons/trash.svg"
-      label="Unsubscribe"
+      label={$t['labels.unsubscribe']}
       callback={handleRemoveClick}
       {disabled}
     />

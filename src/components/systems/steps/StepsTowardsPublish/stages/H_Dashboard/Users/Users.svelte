@@ -19,6 +19,7 @@
   import TextTypes from "../../../../../texts/TextTypes/TextTypes.svelte"; // Adjust path
   import SearchBar from "../../../../../../SearchBar/SearchBar.svelte";
   import Pagination from "../../../../../../Pagination/Pagination.svelte";
+  import { t } from "$lib/i18n/dashboard-translations";
 
   // Props (if any remain - canReveal was one)
 export let canReveal = true; // Keep props passed from parent
@@ -81,13 +82,13 @@ const pageSize = 5;
 
 <!-- HTML TEMPLATE SECTION -->
 <Page>
-    <SearchBar placeholder="Search by URL, lead, or ID..." on:search={handleSearch} />
+    <SearchBar placeholder={$t['placeholders.searchUsers']} on:search={handleSearch} />
     <!-- User Management Column -->
     <div class="column user-management-column">
       <div class="title-container">
-        <TextTypes type="title">Manage Users by News Source</TextTypes>
+        <TextTypes type="title">{$t['labels.manageUsers']}</TextTypes>
         {#if isRefreshing}
-          <span class="refresh-indicator">(Updating list...)</span>
+          <span class="refresh-indicator">({$t['labels.updatingList']})</span>
         {/if}
       </div>
 
@@ -113,14 +114,13 @@ const pageSize = 5;
           />
         {:else}
           <!-- Show loading specifically for subscribers if news sources exist but subscriber data isn't ready -->
-          <p class="loading-message">Loading subscribers...</p>
+          <p class="loading-message">{$t['loading.subscribers']}</p>
         {/if}
       {:else}
         <!-- Message if no news sources are configured -->
         <p class="no-data-message">
           <TextTypes type="sub-italic">
-            No news sources configured yet. Add news sources in the previous
-            steps to manage users.
+            {$t['errors.noNewsSourcesConfigured']}
           </TextTypes>
         </p>
       {/if}

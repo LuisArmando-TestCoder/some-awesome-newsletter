@@ -19,6 +19,7 @@
   let currentPage = 0;
   const pageSize = 3;
   let searchTerm = "";
+  let cardTitle: string;
 
   // Local error messages for each update form
   let updateErrorMessages: Record<string, string> = {};
@@ -91,7 +92,7 @@
       {#each paginatedNewsSources as ns, i (ns.id)}
         <ToggleCard
           {canReveal}
-          cardTitle={`${ns.url?.split("//")[1] ?? "N/A"} ⟫ ${ns.lead?.split("//")[1] ?? "N/A"}`}
+          cardTitle={`${ns.url?.split("//")[1] ?? $t['labels.notApplicable']} ⟫ ${ns.lead?.split("//")[1] ?? $t['labels.notApplicable']}`}
           {...getToggleProps(ns.id)}
         >
           <UpdateNewsSourceForm

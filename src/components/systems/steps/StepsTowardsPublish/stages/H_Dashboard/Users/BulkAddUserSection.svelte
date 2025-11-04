@@ -10,6 +10,7 @@
   import FileInput from "../../../../../inputs/FileInput/FileInput.svelte";
   import store from "../../../../../../store";
   import { ping } from "../../../../../../Notification/notificationStore";
+  import { t } from "$lib/i18n/dashboard-translations";
 
   // --- Props ---
   export let disabled: boolean = false;
@@ -30,7 +31,7 @@
   /** Handles the submission trigger */
   function handleBulkSubmit() {
     if ($store.config.pricingPlan === "free" && $store.config.newsSources[0].subscribersIDs > 0) {
-      ping("Bulk adding users is not available on the free plan.", "error");
+      ping($t['errors.bulkAddNotAvailable'], "error");
       return;
     }
 
@@ -40,7 +41,7 @@
     // Basic check if a file exists in the store
     if (disabled || isSubmitting || !fileToUpload) {
       if (!fileToUpload && !disabled && !fileError) { // Check store value
-        fileError = "Please select a file first.";
+        fileError = $t['errors.selectFileFirst'];
       }
       return;
     }
@@ -90,7 +91,7 @@
 <div class="bulk-add-section">
   <!-- Note: Consider updating cardTitle and label if accepting *any* file -->
   <ToggleCard
-    cardTitle="Add Users from File"
+    cardTitle={$t['labels.addUsersFromFile']}
     isOpen={false}
     canReveal={true}
     onChange={console.log}
@@ -98,7 +99,7 @@
     <!-- FileInput component -->
     <FileInput
       id={`file-upload-${newsSourceId}`}
-      label="Choose File"
+      label={$t['labels.chooseFile']}
       selectedFilesStore={selectedFilesStore}
       {disabled}
     />
@@ -106,12 +107,12 @@
     {#if $selectedFilesStore && $selectedFilesStore.length > 0 && !fileError}
       {@const firstFile = $selectedFilesStore[0]}
       <p class="selected-file-info">
-        Selected: <span class="file-name">{firstFile.name}</span>
+        {$t['labels.selected']}: <span class="file-name">{firstFile.name}</span>
         <button
           class="clear-selection"
           on:click={() => reset()}
           disabled={disabled || isSubmitting}
-          aria-label="Clear selected file">✕</button
+          aria-label={$t['aria.clearFile']}>✕</button
         >
       </p>
     {/if}
@@ -124,7 +125,7 @@
     <div class="send-end">
       <!-- Submit Button (check store for file presence) -->
       <SubmitButton
-        label={isSubmitting ? "Processing..." : "Upload & Add/Subscribe"}
+        label={isSubmitting ? $t['labels.processing'] : $t['labels.uploadAndAdd']}
         disabled={disabled || isSubmitting || !$selectedFilesStore || $selectedFilesStore.length === 0 || !!fileError}
         loading={isSubmitting}
         callback={handleBulkSubmit}

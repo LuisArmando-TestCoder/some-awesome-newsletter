@@ -3,6 +3,7 @@
   import store, { saveToConfig } from "../../../../../../../store";
   import MarkdownText from "../../../../../../texts/MarkdownText/MarkdownText.svelte";
   import { writable } from "svelte/store";
+  import { t } from "$lib/i18n/dashboard-translations";
   import type { Store } from "../../../../../../../types";
   import { useConfigurator } from "../../../../../../useConfigurator";
 
@@ -13,13 +14,13 @@
 
 <div>
   <PlainText
-    placeholder="Change your newsletter title"
+    placeholder={$t['placeholders.newsletterTitle']}
     value={$store.newsletterTitle}
     onChange={(value) => {
       saveToConfig({ newsletterTitle: value });
     }}
   />
   <MarkdownText {canReveal}>
-    --Make it feel personal, like a message from a friend--
+    {$t['markdown.newsletterTitle']}
   </MarkdownText>
 </div>

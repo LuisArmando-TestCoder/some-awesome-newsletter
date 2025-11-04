@@ -254,8 +254,8 @@
 
 <div class="newspaper-container">
   <header class="hero-section">
-    <h1>Newspaper</h1>
-    <p>Select a news source to see the articles.</p>
+    <h1>{$t['newspaper.title']}</h1>
+    <p>{$t['newspaper.subtitle']}</p>
   </header>
 
   <div class="news-source-selector">
@@ -264,11 +264,11 @@
       valueFieldName="id"
       displayFieldName="url"
       onSelect={handleNewsSourceSelect}
-      label="Choose a news source:"
+      label={$t['labels.chooseNewsSource']}
       defaultSelectedValue={newsSourceId}
     />
     {#if newsSourceId}
-    <a href="/articles?holder={$store.configuratorEmail}&lang={activeTab}" target="_blank" class="article-link">Share Newspaper</a>
+    <a href="/articles?holder={$store.configuratorEmail}&lang={activeTab}" target="_blank" class="article-link">{$t['labels.shareNewspaper']}</a>
     {/if}
   </div>
 
@@ -281,12 +281,12 @@
           <Language
             whitelist={allUserLanguages}
             onSelect={(code) => handleLanguageChange(code)}
-            label={"We've produced news in all these languages"}
+            label={$t['labels.producedInLanguages']}
             defaultLanguageCode={activeTab}
           />
         {/if}
       </div>
-      <SearchBar bind:value={search} placeholder="Search articles..." on:search={handleSearch} />
+      <SearchBar bind:value={search} placeholder={$t['placeholders.searchArticles']} on:search={handleSearch} />
     </div>
 
     {#if isStreaming}
@@ -315,7 +315,7 @@
       </div>
     {:else}
       {#if noResults}
-        <p>No articles found for this news source.</p>
+        <p>{$t['labels.noArticlesFound']}</p>
       {:else if articlesWithImages.length > 0}
         <FeaturedArticlesGrid articles={articlesWithImages.slice(0, 3)} bind:selectedArticle />
       {/if}
@@ -349,7 +349,7 @@
         <Container show={isArticleOpen}>
           <div class="modal-content-inner">
             <h2>{@html $selectedArticle.title}</h2>
-            <p><small>Created: {$selectedArticle.creation} | Language: {$selectedArticle.language}</small></p>
+            <p><small>{$t['labels.created']}: {$selectedArticle.creation} | {$t['labels.language']}: {$selectedArticle.language}</small></p>
             {@html $selectedArticle.content}
           </div>
         </Container>

@@ -3,6 +3,7 @@
   import store, { saveToConfig } from "../../../../../../../store";
   import MarkdownText from "../../../../../../texts/MarkdownText/MarkdownText.svelte";
   import { writable } from "svelte/store";
+  import { t } from "$lib/i18n/dashboard-translations";
   import type { Store } from "../../../../../../../types";
   import { useConfigurator } from "../../../../../../useConfigurator";
 
@@ -13,13 +14,13 @@
 
 <div>
   <PlainText
-    placeholder="Change your email sender name"
+    placeholder={$t['placeholders.senderName']}
     value={$store.senderName}
     onChange={(value) => {
       saveToConfig({ senderName: value });
     }}
   />
   <MarkdownText {canReveal}>
-    --Indicating who the email is from helps establish trust--
+    {$t['markdown.senderName']}
   </MarkdownText>
 </div>

@@ -3,6 +3,7 @@
   import { saveToConfig, saveToStore } from "../../../../../../../store";
   import MarkdownText from "../../../../../../texts/MarkdownText/MarkdownText.svelte";
   import { writable } from "svelte/store";
+  import { t } from "$lib/i18n/dashboard-translations";
   import type { Store } from "../../../../../../../types";
   import { useConfigurator } from "../../../../../../useConfigurator";
 
@@ -25,6 +26,6 @@
 </script>
 
 <MarkdownText {canReveal}>
-  Upload a **logo** for your newsletter
+  {$t['markdown.imageToggle']}
 </MarkdownText>
 <Image {canReveal} selectedImage={$localValue} onChange={handleImageChange} />

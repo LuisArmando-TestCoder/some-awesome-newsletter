@@ -7,6 +7,7 @@
   import store, { latestMessage } from "../../../../../../store";
   import IconButton from "../../../../../buttons/IconButton/IconButton.svelte";
   import CopyUrlWithQR from "../../../../../../common/CopyUrlWithQR.svelte";
+  import { t } from "$lib/i18n/dashboard-translations";
   import PostExplanation from "../NewsSource/PostExplanation.svelte";
 
   export let newsSource: NewsSource;
@@ -35,9 +36,9 @@
   configuratorEmail={$store.configuratorEmail}
   newsSourceId={newsSource.id}
   lead={newsSource.lead}
-  label="Link for manual subscription"
+  label={$t['labels.manualSubscriptionLink']}
   />
-    <ToggleCard {canReveal} cardTitle="API Playground" isOpen={false} onChange={() => {}}>
+    <ToggleCard {canReveal} cardTitle={$t['labels.apiPlayground']} isOpen={false} onChange={() => {}}>
       <PostExplanation {newsSource} />
     </ToggleCard>
 
@@ -45,7 +46,7 @@
       src="./icons/refresh.svg"
       disabled={$isRegenerating}
       loading={$isRegenerating}
-      label="Regenerate Selectors"
+      label={$t['labels.regenerateSelectors']}
       callback={async () => {
         isRegenerating.set(true);
         errorRegeneratingSelectors.set(false);
@@ -66,12 +67,12 @@
     </div>
     <div class={$errorRegeneratingSelectors ? "error" : "none"}>
       {$errorRegeneratingSelectors
-        ? `Error regenerating selectors at: ${$latestMessage}`
+        ? `${$t['errors.regeneratingSelectors']}: ${$latestMessage}`
         : ""}
     </div>
     <PlainText
-      label="Link Selector"
-      placeholder="CSS selector for article link"
+      label={$t['labels.linkSelector']}
+      placeholder={$t['placeholders.linkSelector']}
       bind:value={linkSelector}
     />
   </div>

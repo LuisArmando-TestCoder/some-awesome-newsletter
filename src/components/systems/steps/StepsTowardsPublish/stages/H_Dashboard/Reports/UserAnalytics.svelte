@@ -18,6 +18,7 @@
     import LeadStat from '../../../../../stats/LeadStat.svelte';
     import store from '../../../../../../store.js';
     import SubmitButton from '../../../../../buttons/SubmitButton/SubmitButton.svelte';
+    import { t } from '$lib/i18n/dashboard-translations';
   
     // --- Props ---
   
@@ -119,17 +120,17 @@
 
 <div class="analytics-section">
   <div class="title-wrapper">
-    <TextTypes type="title">Analytics</TextTypes>
-    <SubmitButton label="Download JSON" callback={downloadAnalytics} />
+    <TextTypes type="title">{$t['analytics.title']}</TextTypes>
+    <SubmitButton label={$t['labels.downloadJson']} callback={downloadAnalytics} />
   </div>
 
   {#if isLoading}
     <p class="loading-message">
-      <TextTypes type="sub-italic">Loading analytics data...</TextTypes>
+      <TextTypes type="sub-italic">{$t['loading.analytics']}</TextTypes>
     </p>
   {:else if loadingError}
     <p class="error-message">
-      Error loading analytics data: {loadingError}
+      {$t['errors.loadingAnalytics']}: {loadingError}
     </p>
   {:else}
     <!-- Only show charts container if not loading and no error -->
@@ -137,11 +138,11 @@
       {#if newsSources && newsSources.length > 0}
         <!-- Subscriber Stats -->
         <div class="stat-wrapper">
-          <TextTypes type="subtitle">Subscribers per Source</TextTypes>
+          <TextTypes type="subtitle">{$t['analytics.subscribersPerSource']}</TextTypes>
           <Stat
             dataCallback={getSubscriberCounts}
-            xText="News Source"
-            yText="Subscribers"
+            xText={$t['analytics.newsSource']}
+            yText={$t['analytics.subscribers']}
           />
           <!-- Or pass pre-computed data: -->
           <!-- <Stat data={subscriberChartData} HEXColor={brandColor} ... /> -->
@@ -150,12 +151,12 @@
         <!-- Lead Click Stats -->
         <div class="stat-wrapper">
           {#key newsSources}
-            <TextTypes type="subtitle">Lead Clicks per News Source</TextTypes>
+            <TextTypes type="subtitle">{$t['analytics.leadClicksPerNewsSource']}</TextTypes>
             <Stat
               dataCallback={getLeadClickCounts}
               HEXColor={complementaryColor}
-              xText="News Source"
-              yText="Clicks"
+              xText={$t['analytics.newsSource']}
+              yText={$t['analytics.clicks']}
             />
           {/key}
           <!-- Or pass pre-computed data: -->
@@ -165,8 +166,7 @@
         <!-- Message when no news sources are configured -->
         <p class="no-data-message">
           <TextTypes type="sub-italic">
-            No news sources configured. Analytics require configured news
-            sources.
+            {$t['errors.noNewsSourcesConfigured']}
           </TextTypes>
         </p>
       {/if}

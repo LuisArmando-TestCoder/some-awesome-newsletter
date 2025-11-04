@@ -5,6 +5,7 @@
   import MarkdownText from "../../../../../../texts/MarkdownText/MarkdownText.svelte";
   import { writable } from "svelte/store";
   import type { Store } from "../../../../../../../types";
+  import { t } from "$lib/i18n/dashboard-translations";
   import { useConfigurator } from "../../../../../../useConfigurator";
 
   export let canReveal = true;
@@ -44,18 +45,18 @@
 
 <div class="credentials-wrapper">
   <EmailInput
-    placeholder="Enter the email address to send from"
+    placeholder={$t['placeholders.email']}
     value={$emailMaskSender}
     onChange={handleEmailChange}
-    label="Sender Email Address"
+    label={$t['labels.senderEmail']}
   />
 
   <PlainText
     type="password"
-    placeholder="Enter your email app password"
+    placeholder={$t['placeholders.appPassword']}
     value={$appPassword}
     onChange={handlePasswordChange}
-    label="Email App Password"
+    label={$t['labels.appPassword']}
   />
 
   {#if validationError}
@@ -63,8 +64,7 @@
   {/if}
 
   <MarkdownText {canReveal}>
-    *(Optional) Provide email credentials if you want the newsletter sent directly from your email*
-    *account (e.g., Gmail). Requires both Sender Email and an App Password.*
+    {$t['markdown.emailCredentials']}
   </MarkdownText>
 </div>
 

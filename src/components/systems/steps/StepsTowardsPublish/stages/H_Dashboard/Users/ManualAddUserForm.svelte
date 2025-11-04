@@ -13,6 +13,7 @@
   import ToggleCard from "../../../../../buttons/ToggleCard/ToggleCard.svelte";
   import store from "../../../../../../store";
   import { ping } from "../../../../../../Notification/notificationStore";
+  import { t } from "$lib/i18n/dashboard-translations";
 
   // Type for the expected form data payload
   type FormDataPayload = Pick<
@@ -60,7 +61,7 @@
   /** Handles the form submission */
   async function handleSubmit() {
     if ($store.config.pricingPlan === "free" && $store.config.newsSources[0].subscribersIDs > 0) {
-      ping("You have reached the maximum number of subscribers for the free plan.", "error");
+      ping($t['errors.maxSubscribers'], "error");
       return;
     }
 
@@ -72,20 +73,20 @@
 
     // --- Basic Client-Side Validation ---
     if (!name.trim()) {
-      validationError = "Name is required.";
+      validationError = $t['errors.nameRequired'];
       return;
     }
     if (!email.trim()) {
-      validationError = "Email is required.";
+      validationError = $t['errors.emailRequired'];
       return;
     }
     // Basic email format check (consider a more robust regex if needed)
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      validationError = "Please enter a valid email address.";
+      validationError = $t['errors.invalidEmail'];
       return;
     }
     if (!language) {
-      validationError = "Language selection is required.";
+      validationError = $t['errors.languageRequired'];
       return;
     }
     // --- End Validation ---
@@ -114,7 +115,7 @@
       // unless this component needs to react specifically to an error during the *call* itself.
       console.error("Error calling onSubmit:", error);
       // Optionally set a generic error here, though parent feedback is preferred.
-      validationError = "An unexpected error occurred during submission.";
+      validationError = $t['errors.unexpectedError'];
     } finally {
       // Resetting isSubmitting state. The parent's 'disabled' prop should handle
       // the broader loading state during the async operation. Resetting here allows
@@ -140,7 +141,7 @@
 
 <div class="manual-add-form">
   <ToggleCard
-    cardTitle="Add User Manually"
+    cardTitle={$t['labels.addUserManually']}
     isOpen={false}
     onChange={(isOpen) => {
       console.log("ToggleCard state changed:", isOpen);
@@ -149,26 +150,26 @@
     <!-- Using form element's submit event is still good practice -->
     <form class="form" on:submit|preventDefault={handleSubmit}>
       <PlainText
-        label="Name *"
-        placeholder="User's full name"
+        label={`${$t['labels.name']} *`}
+        placeholder={$t['placeholders.userName']}
         bind:value={name}
         disabled={disabled || isSubmitting}
       />
       <Email
-        label="Email *"
-        placeholder="User's email address"
+        label={`${$t['labels.email']} *`}
+        placeholder={$t['placeholders.userEmail']}
         bind:value={email}
         disabled={disabled || isSubmitting}
       />
       <Language
-        label="Language *"
+        label={`${$t['labels.language']} *`}
         defaultLanguageCode={language}
         onSelect={handleLanguageSelect}
         disabled={disabled || isSubmitting}
       />
       <PlainText
-        label="Bio (Optional)"
-        placeholder="Short description (optional)"
+        label={`${$t['labels.bio']} (${$t['labels.optional']})`}
+        placeholder={$t['placeholders.shortDescription']}
         bind:value={bio}
         isTextarea={true}
         rows={3}
@@ -183,7 +184,7 @@
       <!-- SubmitButton should trigger the form submission -->
       <!-- Removing the callback prop as the form's on:submit handles it -->
       <SubmitButton
-        label={isSubmitting ? "submitting" : "Add & Subscribe User"}
+        label={isSubmitting ? $t['labels.submitting'] : $t['labels.addAndSubscribe']}
         disabled={disabled || isSubmitting || !!validationError}
         loading={isSubmitting}
       />

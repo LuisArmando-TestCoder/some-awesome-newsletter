@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { writable, type Writable } from 'svelte/store';
+	import TagNode from './TagNode.svelte';
 
-	export let tags: string[] = [];
+	export let tags: { name: string; children?: any[] }[] = [];
 	export let selectedTags: Writable<string[]> = writable([]);
 
 	function toggleTag(tag: string) {
@@ -18,15 +19,8 @@
 </script>
 
 <div class="tags-container">
-	{#each tags as tag}
-		<button
-			class="tag-button"
-			class:selected={$selectedTags.includes(tag)}
-			on:click={() => toggleTag(tag)}
-			aria-pressed={$selectedTags.includes(tag)}
-		>
-			{tag}
-		</button>
+	{#each tags as node}
+		<TagNode {node} {selectedTags} {toggleTag} />
 	{/each}
 </div>
 

@@ -11,7 +11,7 @@
   import ArticleCardSkeleton from "../../../../../../ArticleCardSkeleton/ArticleCardSkeleton.svelte";
   import FeaturedArticlesGrid from "../../../../../../articles/FeaturedArticlesGrid.svelte";
   import TextArticlesGrid from "../../../../../../articles/TextArticlesGrid.svelte";
-    import { t } from "$lib/i18n/dashboard-translations";
+  import { t } from "$lib/i18n/dashboard-translations";
 
   /* ────────────────── types ─────────────────── */
   interface Article {
@@ -201,6 +201,10 @@
     } else {
       isArticleOpen.set(false);
     }
+  });
+
+  onMount(() => {
+    loadInitialArticles();
   });
 
   async function loadInitialArticles() {

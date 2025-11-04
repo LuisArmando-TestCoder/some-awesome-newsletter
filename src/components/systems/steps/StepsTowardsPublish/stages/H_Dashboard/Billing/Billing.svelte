@@ -75,10 +75,10 @@
               {/if}
               <ul class="plan-option-features">
                 {#each plan.featuresBase as feature}
-                  <li>{feature}</li>
+                  <li>{($t as Record<string, string>)[feature] || feature}</li>
                 {/each}
                 {#each plan.featuresDelta as feature}
-                  <li>{feature}</li>
+                  <li>{($t as Record<string, string>)[feature] || feature}</li>
                 {/each}
               </ul>
               {#if $currentPlan?.id === plan.id}

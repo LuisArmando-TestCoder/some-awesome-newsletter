@@ -22,7 +22,7 @@
   function parseCron(cron: string | undefined) {
     if (!cron || typeof cron !== 'string') return;
     isParsing = true;
-    const parts = cron.split(" ");
+    const parts = cron?.split(" ");
     if (parts.length === 5) {
       minuteStore.set(parts[0]);
       hourStore.set(parts[1]);

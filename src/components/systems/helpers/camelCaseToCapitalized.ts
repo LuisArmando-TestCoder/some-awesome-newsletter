@@ -3,7 +3,7 @@ export default function camelCaseToCapitalized(text: string): string {
   const spaced = text.replace(/([a-z])([A-Z])/g, "$1 $2");
 
   // Split the text by spaces, then capitalize the first letter of each word.
-  const words = spaced.split(" ");
+  const words = spaced?.split(" ");
   const capitalizedWords = words.map(
     (word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
   );

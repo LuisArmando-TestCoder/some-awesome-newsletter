@@ -19,7 +19,7 @@
                 const lastLevelChildren: Element[] = Array.from(allElements).filter(el => el.children.length === 0);
 
                 ;[...lastLevelChildren].forEach((child, i) => {
-                    const childrenWrappedOuterHTMLs = (child as HTMLElement).innerText.split(" ").map((letter, j) => {
+                    const childrenWrappedOuterHTMLs = (child as HTMLElement).innerText?.split(" ").map((letter, j) => {
                         const letterWrapper = document.createElement("span");
 
                         letterWrapper.className = "wrapper-letter";

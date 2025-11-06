@@ -24,10 +24,10 @@
   >
     <span>
       <TextTypes type="paragraph">
-        {cardTitle.split(" ")[0]}
+        {cardTitle?.split(" ")[0]}
       </TextTypes>
       <TextTypes type="highlight">
-        {cardTitle.split(" ").slice(1).join(" ")}
+        {cardTitle?.split(" ").slice(1).join(" ")}
       </TextTypes>
     </span>
     <span class="arrow" class:open={isOpen}></span>

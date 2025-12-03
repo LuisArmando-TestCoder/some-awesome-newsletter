@@ -15,6 +15,13 @@ export const POST: RequestHandler = async ({ request, url }) => {
   try {
     const { email, configuratorId, newsSourceId } = await request.json();
     const API_URL = getApiUrl(url.origin);
+    const body = {
+      email,
+      name: email.split('@')[0],
+      pass: THE_PASS,
+    };
+    
+    console.log('[subscribe] Using THE_PASS to subscribe. ' + JSON.stringify(body));
 
     console.log(`[subscribe] Received request for ${email} to subscribe to ${newsSourceId} from ${configuratorId}`);
 
@@ -25,11 +32,6 @@ export const POST: RequestHandler = async ({ request, url }) => {
 
     if (url.origin.includes("aibanewsletter.club") || url.origin.includes("localhost")) {
       console.log('[subscribe] Internal request detected. Using THE_PASS to subscribe.');
-      const body = {
-        email,
-        name: email.split('@')[0],
-        pass: THE_PASS,
-      };
       const response = await fetch(`${API_URL}/users/${configuratorId}/${newsSourceId}`, {
         method: 'POST',
         headers: {
@@ -44,7 +46,14 @@ export const POST: RequestHandler = async ({ request, url }) => {
 
     // 1. Fetch the configuration from the Deno API to get webhookUrl and sharedSecret
     console.log(`[subscribe] Fetching configuration for ${configuratorId}`);
-    const configResponse = await fetch(`${API_URL}/configurations/${configuratorId}`);
+    const configResponse = await fetch(`${API_URL}/config`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-auth-email': configuratorId,
+      },
+      body: JSON.stringify(body),
+    });
 
 
     if (!configResponse.ok) {

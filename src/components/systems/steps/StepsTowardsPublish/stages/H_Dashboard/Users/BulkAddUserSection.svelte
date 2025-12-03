@@ -30,7 +30,7 @@
 
   /** Handles the submission trigger */
   function handleBulkSubmit() {
-    if ($store.config.pricingPlan === "free" && $store.config.newsSources[0].subscribersIDs > 0) {
+    if ($store.config.pricingPlan === "free" && $store.subscribers && $store.subscribers[$store.config.newsSources[0].id]?.length > 0) {
       ping($t['errors.bulkAddNotAvailable'], "error");
       return;
     }

@@ -65,7 +65,6 @@ export interface NewsSource {
   community: string;
   lead: string;
   id: string;
-  subscribersIDs?: string[];
   scheduleTime: string;
   personality: string;
   email?: EmailConfig;

@@ -1,4 +1,4 @@
- // src/services/UserDataService.ts
+// src/services/UserDataService.ts
 // --- DATA SERVICE MODULE ---
 import { get } from "svelte/store"; // Removed writable
 
@@ -7,7 +7,8 @@ import store, { saveToStore } from "../../../../../../store"; // Added saveToSto
 import type { NewsletterUser } from "../../../../../../types";
 import { addNewsletterUser } from "../../../../../requests/addNewsletterUserEndpoint";
 import subscribeNewsletterUser from "../../../../../requests/subscribeNewsletterUser";
-import getAllSubscribersFromConfigEndpoint from "../../../../../requests/getAllSubscribersFromConfigEndpoint";
+// import getAllSubscribersFromConfigEndpoint from "../../../../../requests/getAllSubscribersFromConfigEndpoint"; // Deprecated
+import getNewsletterUsersByNewsSource from "../../../../../requests/getNewsletterUsersByNewsSource"; // New request function
 import unsubscribeUserToConfigNewsSource from "../../../../../requests/unsubscribeUserToConfigNewsSource";
 import getLeadsForConfigurator from "../../../../../requests/getLeadsForConfigurator";
 import getUsersFromRawFileOrText from "../../../../../requests/getUsersFromRawFileOrText";
@@ -27,22 +28,38 @@ function getConfigId(): string | null {
 
 /**
  * Fetches the latest subscriber list for the current config ID and updates the central store.
+ * Now iterates through all news sources to fetch subscribers for each.
  * @returns {Promise<void>}
  * @throws {Error} If config ID is missing or fetch fails.
  */
 export async function refreshSubscribers(): Promise<void> {
   try {
-    const subsResponse = await getAllSubscribersFromConfigEndpoint();
-    console.log("[UserDataService] refreshSubscribers: Fetched raw subscribers response:", JSON.stringify(subsResponse)); // Log raw response
+    const configId = getConfigId();
+    if (!configId) throw new Error("Config ID missing");
 
-    const subscribersToSave = subsResponse || {};
+    const currentStore = get(store);
+    const newsSources = currentStore.config?.newsSources || [];
+    const subscribersToSave: { [key: string]: NewsletterUser[] } = {};
+
+    console.log(`[UserDataService] refreshSubscribers: Fetching subscribers for ${newsSources.length} sources.`);
+
+    // Fetch subscribers for each news source in parallel
+    await Promise.all(newsSources.map(async (source: any) => {
+        if (source.id) {
+            const users = await getNewsletterUsersByNewsSource(configId, source.id);
+            subscribersToSave[source.id] = users;
+        }
+    }));
+
+    console.log("[UserDataService] refreshSubscribers: Fetched all subscribers. Updating store.");
+
     // Ensure we save an empty object if subsResponse is null/undefined
     saveToStore({ subscribers: subscribersToSave });
     console.log("[UserDataService] refreshSubscribers: Updated central store with subscribers.");
 
     // Log the store state immediately after saving for verification
     const currentStoreState = get(store);
-    console.log("[UserDataService] refreshSubscribers: Store state after save:", JSON.stringify(currentStoreState.subscribers));
+    // console.log("[UserDataService] refreshSubscribers: Store state after save:", JSON.stringify(currentStoreState.subscribers));
 
   } catch (err: any) {
     console.error("[UserDataService] refreshSubscribers: Error fetching/processing subscribers:", err);
@@ -103,6 +120,8 @@ export async function loadInitialData(): Promise<void> {
       for (const newsSource of currentNewsSources) {
         const sourceId = newsSource.id;
         // Check if this source exists in the subscriber map and has an empty list
+        // Note: With the new logic, currentSubscribers[sourceId] might be undefined if fetch failed, but we initialized it.
+        // If the source ID key exists and length is 0, it means we fetched successfully but found no users.
         if (sourceId && currentSubscribers.hasOwnProperty(sourceId) && currentSubscribers[sourceId]?.length === 0) {
           console.log(`[UserDataService] loadInitialData: News source ${sourceId} has no subscribers. Attempting to add/subscribe configurator ${configuratorEmail}...`);
           try {

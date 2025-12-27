@@ -463,7 +463,8 @@ export default {
       "byProceeding": "By proceeding, you are agreeing to {appName}'s",
       "termsOfService": "Terms of Service",
       "and": "and",
-      "privacyPolicy": "Privacy Policy"
+      "privacyPolicy": "Privacy Policy",
+      "appName": "AI Newsletter"
     },
     "welcome": {
       "title": "Automatic newsletter generator",

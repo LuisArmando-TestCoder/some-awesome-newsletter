@@ -30,10 +30,10 @@
 
   /** Handles the submission trigger */
   function handleBulkSubmit() {
-    if ($store.config.pricingPlan === "free" && $store.subscribers && $store.subscribers[$store.config.newsSources[0].id]?.length > 0) {
-      ping($t['errors.bulkAddNotAvailable'], "error");
-      return;
-    }
+    // if ($store.config.pricingPlan === "free" && $store.subscribers && $store.subscribers[$store.config.newsSources[0].id]?.length > 0) {
+    //   ping($t['errors.bulkAddNotAvailable'], "error");
+    //   return;
+    // }
 
     const currentFiles = $selectedFilesStore; // Get files from store
     const fileToUpload = currentFiles && currentFiles.length > 0 ? currentFiles[0] : null;

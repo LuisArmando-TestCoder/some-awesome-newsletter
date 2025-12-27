@@ -35,10 +35,10 @@
 
   // Called when the user submits the add form
   async function handleAddNewsSource() {
-    if ($store.config.pricingPlan === "free") {
-      ping("You have reached the maximum number of news sources for the free plan.", "error");
-      return;
-    }
+    // if ($store.config.pricingPlan === "free") {
+    //   ping("You have reached the maximum number of news sources for the free plan.", "error");
+    //   return;
+    // }
 
     console.log("[AddNewsSourceForm.svelte] handleAddNewsSource called");
     const fields = {

@@ -60,10 +60,10 @@
 
   /** Handles the form submission */
   async function handleSubmit() {
-    if ($store.config.pricingPlan === "free" && $store.subscribers && $store.subscribers[$store.config.newsSources[0].id]?.length > 0) {
-      ping($t['errors.maxSubscribers'], "error");
-      return;
-    }
+    // if ($store.config.pricingPlan === "free" && $store.subscribers && $store.subscribers[$store.config.newsSources[0].id]?.length > 0) {
+    //   ping($t['errors.maxSubscribers'], "error");
+    //   return;
+    // }
 
     if (disabled || isSubmitting) {
       return; // Prevent submission if disabled or already submitting

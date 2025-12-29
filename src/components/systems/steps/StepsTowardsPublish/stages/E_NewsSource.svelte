@@ -61,14 +61,14 @@
 
 <Centered>
   <div style={isLoading ? 'opacity: 0.5; pointer-events: none;' : ''}>
-    <MarkdownText {canReveal}>--{$t['newsSource.title']}--</MarkdownText>
+    <MarkdownText {canReveal}>--{$t.newsSource.title}--</MarkdownText>
 
     <MarkdownText {canReveal}>
-    ### {$t['newsSource.subtitle']}
+    ### {$t.newsSource.subtitle}
   </MarkdownText>
   <div class="news-source-input">
     <Link
-      placeholder={$t['newsSource.placeholder']}
+      placeholder={$t.newsSource.placeholder}
       value={$store.newsSource}
       onChange={(newsSource) =>
         saveToStore({

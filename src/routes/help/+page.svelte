@@ -11,7 +11,7 @@
 </script>
 
 <svelte:head>
-  <title>Help • A I N L</title>
+  <title>Help • A I B A N</title>
 </svelte:head>
 
 <div class="help">

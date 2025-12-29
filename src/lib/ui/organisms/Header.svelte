@@ -95,7 +95,7 @@ import { ping } from '../../../components/Notification/notificationStore';
     <div class="header__container">
       <a href="/" class="header__logo" aria-label="Homepage">
         <img src="/logo/logo-inverted.png" width="50" alt="logo">
-        <span class="header__logo-text">A I N L</span>
+        <span class="header__logo-text">A I B A N</span>
       </a>
       <div class="header__nav-scroller">
         <nav class="header__nav" aria-label="Primary">

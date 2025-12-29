@@ -11,7 +11,7 @@
 </script>
 
 <svelte:head>
-  <title>Terms of Service • A I N L</title>
+  <title>Terms of Service • A I B A N</title>
 </svelte:head>
 
 <div class="legal-page">
@@ -20,7 +20,7 @@
     <p>Last updated: August 10, 2025</p>
 
     <h2>1. Introduction</h2>
-    <p>Welcome to A I N L! These Terms of Service ("Terms") govern your use of our website and services. By accessing or using our services, you agree to be bound by these Terms.</p>
+    <p>Welcome to A I B A N! These Terms of Service ("Terms") govern your use of our website and services. By accessing or using our services, you agree to be bound by these Terms.</p>
 
     <h2>2. Use of Our Services</h2>
     <p>You may use our services only in compliance with these Terms and all applicable laws. You agree not to misuse our services. For example, you may not interfere with our services or try to access them using a method other than the interface and the instructions that we provide.</p>
@@ -38,7 +38,7 @@
     <p>We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material we will provide at least 30 days' notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.</p>
 
     <h2>7. Contact Us</h2>
-    <p>If you have any questions about these Terms, please contact us at support@A I N L.com.</p>
+    <p>If you have any questions about these Terms, please contact us at support@A I B A N.com.</p>
   </div>
 </div>
 

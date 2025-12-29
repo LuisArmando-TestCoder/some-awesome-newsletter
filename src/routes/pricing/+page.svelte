@@ -30,7 +30,7 @@
 </script>
 
 <svelte:head>
-  <title>Pricing • A I N L</title>
+  <title>Pricing • A I B A N</title>
 </svelte:head>
 
 <div id="smooth-wrapper" use:useSmoothPage>

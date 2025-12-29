@@ -595,12 +595,14 @@
 		max-width: 700px;
 		margin-left: auto;
 		margin-right: auto;
+		h2, p {
+			color: var(--color-background-inversion);
+		}
 		h2 {
 			margin-bottom: var(--space-sm);
 		}
 		p {
 			font-size: 1.125rem;
-			color: var(--c-text-light);
 		}
 	}
 
@@ -777,7 +779,7 @@
 
 	/* 5. Value Props */
 	.value-props {
-		background: url(http://images.pexels.com/photos/2008145/pexels-photo-2008145.jpeg);
+		background: url(https://images.pexels.com/photos/261579/pexels-photo-261579.jpeg?w=1250);
 		background-size: cover;
 		background-attachment: fixed;
 		.card {

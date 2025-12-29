@@ -19,6 +19,7 @@
   import MarkdownText from "../../../../../texts/MarkdownText/MarkdownText.svelte"; // Added
   import { onMount } from "svelte"; // Ensure onMount is imported
   import PostExplanation from "./PostExplanation.svelte";
+    import { ping } from "../../../../../../Notification/notificationStore";
 
   // The news source to update
   export let newsSource: NewsSource;
@@ -154,6 +155,7 @@
           updateFields = { ...updateFields, linkSelector: updated.linkSelector };
         }
         updatedNewsSource.set(updated);
+        ping("News Source has been update", "Changed");
       }
     );
   }

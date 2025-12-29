@@ -43,11 +43,8 @@ export function computeFeatures(content: PlansContent, target: PlanId): string[]
   const idx = order.indexOf(target);
   const byId = new Map(content.plans.map(p => [p.id, p]));
   const collected: string[] = [];
-  for (let i = 0; i <= idx; i++) {
-    const p = byId.get(order[i])!;
-    if (i === 0) collected.push(...p.featuresBase);
-    else collected.push(...p.featuresDelta);
-  }
+  const p = byId.get(order[idx])!;
+  collected.push(...p.featuresDelta);
   return collected;
 }
 

@@ -57,7 +57,6 @@ export interface Article {
 }
 
 export interface NewsSource {
-  // name: string;
   type: string;
   url: string;
   linkSelector: string;
@@ -69,11 +68,11 @@ export interface NewsSource {
   personality: string;
   email?: EmailConfig;
   openAiApiKey?: string;
-  emailMaskSender?: string; // New optional field
-  appPassword?: string; // New optional field
+  emailMaskSender?: string; 
+  appPassword?: string; 
   active?: boolean;
-  isPublic?: boolean; // Added for public/private visibility in widgets
-  includeImages?: boolean; // Optional flag to include images in the newsletter
+  isPublic?: boolean; 
+  includeImages?: boolean; 
 }
 
 export interface EmailAuth {
@@ -90,19 +89,34 @@ export interface EmailConfig {
   newsletterTitle: string;
 }
 
+/**
+ * Enhanced Pricing Plans based on 2026 Strategy:
+ * - free: Strict 100 users limit
+ * - starter: $17/mo - 5 sources, 100k users
+ * - growth: $35/mo - 17 sources, 250k users
+ * - pro: $80/mo - 25 sources, 500k users
+ * - master: $150/mo - 50 sources, unlimited users
+ */
+export type PricingPlanId = "free" | "starter" | "growth" | "pro" | "master" | "vipfree";
+export type BillingInterval = "monthly" | "yearly";
+
 export interface Config {
   logo?: string;
   newsSources?: NewsSource[];
   openAiApiKey?: string;
   email: EmailConfig;
   configuratorId?: string;
-  // brandColor?: string;
   emailSignature?: string;
-  senderName?: string; // Added
-  newsletterTitle?: string; // Added
-  newsletterSubject?: string; // Added
+  senderName?: string; 
+  newsletterTitle?: string; 
+  newsletterSubject?: string; 
   vip?: boolean;
-  pricingPlan?: "free" | "monthly" | "yearly" | "vipfree";
+  
+  /** * Updated pricingPlan to use specific tiers
+   * billingInterval handles the 35% discount logic
+   */
+  pricingPlan?: PricingPlanId;
+  billingInterval?: BillingInterval;
 }
 
 export interface NewsletterUser {
@@ -129,6 +143,7 @@ export interface MailConfigPack {
   newsletterSubject: string;
   transporter: any;
 }
+
 export interface SystemConfig {
   email: EmailConfig;
   openAiApiKey: string;

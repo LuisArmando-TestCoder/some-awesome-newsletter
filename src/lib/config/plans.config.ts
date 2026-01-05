@@ -1,24 +1,28 @@
 // src/lib/config/plans.config.ts
 import { writable, type Writable, get } from 'svelte/store';
 import { t } from '../i18n/translations';
-import { globalLanguage } from '../../components/store';
-import type en from '../i18n/locales/en';
 
 export type Interval = 'monthly' | 'yearly';
-export type PlanId = 'free' | 'monthly' | 'yearly' | 'vipfree';
+/** * Refactored Plan IDs based on Luis Armando's review.
+ * Tiers: Starter ($17), Growth ($35), Pro ($80), Master ($150)
+ */
+export type PlanId = 'free' | 'starter' | 'growth' | 'pro' | 'master' | 'vipfree';
 
 export interface Plan {
   id: PlanId;
   name: string;
   monthly: number;
-  yearly: number;
+  yearly: number; // This will store the total annual cost (Monthly * 12 * 0.65)
   tagline: string;
   featuresBase: string[];
   featuresDelta: string[];
-  limits: Record<string, number>; // -1 = unlimited
+  limits: {
+    sources: number;
+    users: number; // -1 = unlimited
+  };
   ctaLabel: string;
   internalOnly?: boolean;
-  productId?: string;
+  productId?: string; // Stripe Price ID
   tier: number;
 }
 
@@ -37,40 +41,91 @@ export interface PlansState {
   content: PlansContent | null;
 }
 
-/** Compute progressive features for a given plan using reverse-limiter */
+const ANNUAL_DISCOUNT = 0.35;
+
+/** * Helper to calculate the 35% discount for annual plans.
+ * result = (Monthly * 12) * 0.65
+ */
+const calcAnnual = (monthly: number) => Math.floor((monthly * 12) * (1 - ANNUAL_DISCOUNT));
+
+/** * Hardcoded Plan definitions ensuring the new limits are enforced.
+ * These will be merged with the i18n content.
+ */
+const PLAN_DEFINITIONS: Record<PlanId, Partial<Plan>> = {
+  free: { 
+    monthly: 0, yearly: 0, tier: 0, 
+    limits: { sources: 1, users: 100 } 
+  },
+  starter: { 
+    monthly: 17, yearly: calcAnnual(17), tier: 1, 
+    limits: { sources: 5, users: 100000 },
+    productId: 'price_starter_id' 
+  },
+  growth: { 
+    monthly: 35, yearly: calcAnnual(35), tier: 2, 
+    limits: { sources: 17, users: 250000 },
+    productId: 'price_growth_id' 
+  },
+  pro: { 
+    monthly: 80, yearly: calcAnnual(80), tier: 3, 
+    limits: { sources: 25, users: 500000 },
+    productId: 'price_pro_id' 
+  },
+  master: { 
+    monthly: 150, yearly: calcAnnual(150), tier: 4, 
+    limits: { sources: 50, users: -1 },
+    productId: 'price_master_id' 
+  },
+  vipfree: { 
+    monthly: 0, yearly: 0, tier: 99, 
+    limits: { sources: 100, users: -1 }, 
+    internalOnly: true 
+  }
+};
+
+/** Compute progressive features for a given plan */
 export function computeFeatures(content: PlansContent, target: PlanId): string[] {
-  const order: PlanId[] = ['free', 'monthly', 'yearly', 'vipfree'];
-  const idx = order.indexOf(target);
-  const byId = new Map(content.plans.map(p => [p.id, p]));
-  const collected: string[] = [];
-  const p = byId.get(order[idx])!;
-  collected.push(...p.featuresDelta);
-  return collected;
+  const plan = content.plans.find(p => p.id === target);
+  if (!plan) return [];
+  
+  // Combine base and delta features
+  return [...plan.featuresBase, ...plan.featuresDelta];
 }
 
-/** Detect mock mode from env-safe condition your app already uses */
 function detectMock(): boolean {
-  // Example: if Stripe keys are missing, we consider pricing mockable.
-  return !import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY; // adapt to your runtime
+  return !import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
 }
 
+// Initialize with i18n structure and apply the new pricing logic
 const initial: PlansState = {
   mockMode: detectMock(),
   interval: 'monthly',
   currentPlan: 'free',
-  content: get(t).plans as PlansContent
+  content: null
 };
 
 const store: Writable<PlansState> = writable(initial);
 
-/** Load JSON once and sync state (call in onMount or layout load) */
-export async function loadPlansContent(path = '/content/plans.json') {
-  const json = get(t).plans as PlansContent;
+/** * Load content and merge with hardcoded business logic (prices/limits)
+ */
+export async function loadPlansContent() {
+  const translations = get(t);
+  const json = translations.plans as PlansContent;
+  
+  // Enrich the plans from translations with our hardcoded logic
+  const enrichedPlans = json.plans.map(p => ({
+    ...p,
+    ...PLAN_DEFINITIONS[p.id as PlanId]
+  })) as Plan[];
+
   store.update(s => ({
     ...s,
-    content: json,
-    currentPlan: json.currentPlan,
-    interval: (json.billingIntervals?.[0] ?? 'monthly') as Interval
+    content: {
+      ...json,
+      plans: enrichedPlans
+    },
+    currentPlan: json.currentPlan || 'free',
+    interval: 'monthly'
   }));
 }
 
@@ -82,4 +137,4 @@ export function setCurrentPlan(plan: PlanId) {
   store.update(s => ({ ...s, currentPlan: plan }));
 }
 
-export default store; // <— DEFAULT EXPORT: writable store
+export default store;

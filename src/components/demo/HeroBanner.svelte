@@ -2,7 +2,7 @@
   import VideoBanner from "./VideoBanner.svelte";
   import CTAButton from "./CTAButton.svelte";
   import LetterByLetter from "./LetterByLetter.svelte";
-  import { content } from '../../lib/content';
+    import { t } from "$lib/i18n/translations";
 
   export let videoUrl: string = "https://www.youtube.com/embed/zPOFU2QY_HA";
   export let imageUrl: string = "https://i.ytimg.com/vi/zPOFU2QY_HA/maxresdefault.jpg";
@@ -11,7 +11,7 @@
   <VideoBanner
     videoUrl={videoUrl}
     videoPoster={imageUrl}
-    videoAlt={$content.hero.secondaryCta}
+    videoAlt={$t.mainContent.hero.secondaryCta}
   >
     <div slot="video">
       <iframe
@@ -26,14 +26,14 @@
     </div>
     <div class="banner-content">
       <h6 class="banner-subtitle">
-        <LetterByLetter text={$content.hero.hook} initialOffset={0} />
+        <LetterByLetter text={$t.mainContent.hero.hook} initialOffset={0} />
       </h6>
       <h1 class="banner-title">
-        <LetterByLetter text={$content.hero.subHook} initialOffset={47.9 / 100} />
+        <LetterByLetter text={$t.mainContent.hero.subHook} initialOffset={47.9 / 100} />
       </h1>
       <div class="button-row">
         <a href="/login">
-          <CTAButton label={$content.hero.primaryCta} href="/login" variant="primary" />
+          <CTAButton label={$t.mainContent.hero.primaryCta} href="/login" variant="primary" />
         </a>
       </div>
     </div>

@@ -238,5 +238,66 @@ export default {
   "labels.producedInLanguages": "Producido en estos idiomas",
   "placeholders.searchArticles": "Buscar artículos...",
   "labels.noArticlesFound": "No se encontraron artículos para esta fuente de noticias.",
-  "labels.created": "Creado"
+  "labels.created": "Creado","billing.unlimited": "Ilimitado",
+  "billing.users": "usuarios",
+  "billing.newsSources": "fuentes de noticias",
+  "billing.youSave": "Ahorras",
+  "billing.mostPopular": "Más Popular",
+  "billing.perYear": "por año",
+  "billing.planCustom": "Plan Personalizado",
+  "billing.monthly": "mensual",
+  "billing.currentPlan": "Este es tu plan actual",
+  
+  // News Source Management
+  "newsSource.url": "URL de la fuente",
+  "newsSource.status": "Estado",
+  "newsSource.active": "Activo",
+  "newsSource.error": "Error de sincronización",
+  "newsSource.lastSync": "Última sincronización",
+  "newsSource.actions": "Acciones",
+  "newsSource.delete": "Eliminar fuente",
+  "newsSource.confirmDelete": "¿Estás seguro de que deseas eliminar esta fuente de noticias?",
+  
+  // Reports
+  "reports.title": "Reportes y Analíticas",
+  "reports.subscribers": "Total de suscriptores",
+  "reports.openRate": "Tasa de apertura",
+  "reports.clickRate": "Tasa de clics",
+  "reports.deliveryStatus": "Estado de entrega",
+  
+  // Secrets / Developer
+  "secrets.title": "Configuración de Desarrollador",
+  "secrets.apiKey": "Clave API",
+  "secrets.showKey": "Mostrar clave",
+  "secrets.hideKey": "Ocultar clave",
+  "secrets.copyKey": "Copiar clave",
+  "secrets.regenerate": "Regenerar clave",
+  "secrets.webhookUrl": "URL del Webhook",
+  
+  // Profile
+  "profile.title": "Perfil de Usuario",
+  "profile.name": "Nombre",
+  "profile.email": "Correo electrónico",
+  "profile.saveChanges": "Guardar cambios",
+  "profile.avatar": "Imagen de perfil",
+  "profile.successUpdate": "Perfil actualizado con éxito",
+  
+  // General UI
+  "labels.back": "Volver",
+  "labels.cancel": "Cancelar",
+  "labels.confirm": "Confirmar",
+  "labels.edit": "Editar",
+  "labels.save": "Guardar",
+  "labels.loading": "Cargando...",
+  "labels.noData": "No hay datos disponibles",
+  "labels.search": "Buscar",
+  "labels.filter": "Filtrar",
+  "labels.all": "Todos",
+  "labels.enabled": "Habilitado",
+  "labels.disabled": "Deshabilitado",
+  
+  // Toasts / Notifications
+  "notification.success": "Operación exitosa",
+  "notification.error": "Ha ocurrido un error",
+  "notification.copiedToClipboard": "Copiado al portapapeles"
 };

@@ -3,15 +3,15 @@
   import { derived, writable } from 'svelte/store';
   import { onMount, afterUpdate } from 'svelte';
   import { gsap } from '../../anim/gsap.client';
-    import store, { saveToStore, stepsMapping } from '../../../components/store';
-    import logout from '../../../components/systems/requests/logout';
-import { ping } from '../../../components/Notification/notificationStore';
+  import store, { saveToStore, stepsMapping } from '../../../components/store';
+  import logout from '../../../components/systems/requests/logout';
+  import { ping } from '../../../components/Notification/notificationStore';
   import plansStore, {
     loadPlansContent,
     type Plan,
     type PlansState
   } from '$lib/config/plans.config';
-    import { notification } from '../../../components/Notification/notificationStore';
+  import { notification } from '../../../components/Notification/notificationStore';
   import { t } from '$lib/i18n/translations';
   import { globalLanguage } from '../../../components/store';
 
@@ -26,37 +26,29 @@ import { ping } from '../../../components/Notification/notificationStore';
 
   export let links = writable<{ name: string; url: string }[]>([]);
 
-  // Get the current path as a derived store for easier use in markup
   const currentPath = derived(page, ($page) => $page.url.pathname);
 
-  // For underline animation
+  // Underline animation logic
   let navListEl: HTMLUListElement | null = null;
   let linkEls: (HTMLAnchorElement | null)[] = [];
   let underlineLeft: number = 0;
   let underlineWidth: number = 0;
   let underlineEl: HTMLDivElement | null = null;
 
-  // Animate underline with GSAP
   function animateUnderline(left: number, width: number) {
     if (underlineEl) {
       gsap.to(underlineEl, {
         left,
         width,
         duration: 0.32,
-        ease: 'cubic-bezier(0.7,0,0.3,1)'
+        ease: 'power2.out'
       });
     }
   }
 
   function updateUnderline() {
     const activeIdx = $links.findIndex(l => $page.url.pathname === l.url);
-    if (
-      activeIdx !== -1 &&
-      linkEls[activeIdx] &&
-      typeof linkEls[activeIdx]?.getBoundingClientRect === 'function' &&
-      navListEl &&
-      typeof navListEl.getBoundingClientRect === 'function'
-    ) {
+    if (activeIdx !== -1 && linkEls[activeIdx] && navListEl) {
       const linkRect = linkEls[activeIdx]!.getBoundingClientRect();
       const navRect = navListEl.getBoundingClientRect();
       const left = linkRect.left - navRect.left;
@@ -66,19 +58,13 @@ import { ping } from '../../../components/Notification/notificationStore';
       underlineWidth = width;
     } else {
       animateUnderline(0, 0);
-      underlineLeft = 0;
-      underlineWidth = 0;
     }
   }
 
-  // Update underline on mount and after every update
   onMount(() => {
     updateUnderline();
     window.addEventListener('resize', updateUnderline);
-
-    // Polling interval to ensure underline stays in sync
     const underlineInterval = setInterval(updateUnderline, 100);
-
     return () => {
       window.removeEventListener('resize', updateUnderline);
       clearInterval(underlineInterval);
@@ -87,7 +73,25 @@ import { ping } from '../../../components/Notification/notificationStore';
 
   $: $page.url.pathname, updateUnderline();
   $: updateUnderline();
-  $: $store.header;
+
+  /**
+   * Logic to determine the next upgrade tier for the quick-action button
+   */
+  function getNextTierLink(currentTier: string) {
+    const cycle = state.interval || 'monthly';
+    const tiers = ['free', 'starter', 'growth', 'pro', 'master'];
+    const currentIndex = tiers.indexOf(currentTier);
+    
+    // If on master or unknown, go to customer portal
+    if (currentIndex === -1 || currentIndex === tiers.length - 1) {
+      return `/api/portal?customerEmail=${$store.configuratorEmail}`;
+    }
+
+    const nextTier = tiers[currentIndex + 1];
+    const nextProduct = state?.content?.plans.find(p => p.id === nextTier);
+    
+    return `/api/checkout?products=${nextProduct?.productId}&interval=${cycle}`;
+  }
 </script>
 
 <div class="header-wrapper" class:show={$store.header}>
@@ -97,6 +101,7 @@ import { ping } from '../../../components/Notification/notificationStore';
         <img src="/logo/logo-inverted.png" width="50" alt="logo">
         <span class="header__logo-text">A I B A N</span>
       </a>
+      
       <div class="header__nav-scroller">
         <nav class="header__nav" aria-label="Primary">
           <ul class="header__nav-list" bind:this={navListEl}>
@@ -113,44 +118,39 @@ import { ping } from '../../../components/Notification/notificationStore';
             <div
               class="header__nav-underline"
               bind:this={underlineEl}
-              style="left: {underlineLeft}px; width: {underlineWidth}px;"
               aria-hidden="true"
             ></div>
           </ul>
         </nav>
       </div>
+
       <div class="header__actions">
         <div class="desktop-only">
           {#if $t}
             {#if $store.isAuthCodeValid && !$page.url.pathname.includes("dashboard")}
               <a href="/dashboard" class="header__action header__action--primary">{$t.header.goToWorkspace}</a>
             {:else if $store.isAuthCodeValid && $page.url.pathname.includes("dashboard")}
-            {$store?.config.senderName}:
+              <span class="header__sender-name">{$store?.config.senderName}:</span>
+              
               {#if $store?.config.pricingPlan === 'vipfree'}
                 <button on:click={() => {
                       saveToStore({ stepsIndex: stepsMapping["Billing"] });
                       ping("Billing", $t.header.inBilling);
                 }} class="tier tier-vipfree">{$t.header.vip}</button>
               {:else if $store?.config.pricingPlan}
-                <a href={
-                  $store?.config.pricingPlan === 'free' ? `/api/checkout?products=${state?.content?.plans.find(p => p.id === 'monthly')?.productId}` :
-                  $store?.config.pricingPlan === 'monthly' ? `/api/checkout?products=${state?.content?.plans.find(p => p.id === 'yearly')?.productId}` :
-                  `/api/portal?customerEmail=${$store.configuratorEmail}`
-                } class="tier tier-{$store?.config.pricingPlan}">
-                  {$t.header.plan.replace('{planName}', $store?.config.pricingPlan)}
+                <a 
+                  href={getNextTierLink($store?.config.pricingPlan)} 
+                  class="tier tier-{$store?.config.pricingPlan}"
+                  title="Click to Upgrade"
+                >
+                  {$t.header.plan.replace('{planName}', $store?.config.pricingPlan.toUpperCase())}
                 </a>
               {/if}
             {:else}
-              <a on:click={() => {
-                logout(false);
-              }} href="/login" class="header__action header__action--secondary">{$t.header.logIn}</a>
-              <a on:click={() => {
-                logout(false);
-              }} href="/signup" class="header__action header__action--primary">{$t.header.getStarted}</a>
+              <a on:click={() => logout(false)} href="/login" class="header__action header__action--secondary">{$t.header.logIn}</a>
+              <a on:click={() => logout(false)} href="/signup" class="header__action header__action--primary">{$t.header.getStarted}</a>
             {/if}
           {/if}
-        </div>
-        <div class="mobile-only">
         </div>
       </div>
     </div>
@@ -160,70 +160,60 @@ import { ping } from '../../../components/Notification/notificationStore';
 <style lang="scss">
   @use '../../../styles/global.scss';
 
+  .header__sender-name {
+    font-size: 0.85rem;
+    opacity: 0.8;
+    margin-right: 0.25rem;
+  }
+
   .tier {
     background: #000;
     color: white;
-    padding: .25rem .5rem;
-    border-radius: 3px;
-    box-shadow: 0 0 10px -5px #000;
+    padding: .25rem .75rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
     cursor: pointer;
-    transition: .5s;
-    transform: scale(1);
+    transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     display: inline-block;
-    margin-left: 0rem;
-    border: 0;
+    border: 1px solid rgba(255,255,255,0.1);
 
     &:hover {
-      transition: .15s transform, .5s padding, .3s margin-left, .75s box-shadow;
-      transform: scale(1.1);
-      text-decoration: underline;
-      padding: .25rem 1rem;
-      margin-left: 1rem;
-      box-shadow: 0 0 5px -2.5px #000;
-      cursor: pointer;
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      background: var(--c-primary);
+      color: white;
     }
 
-    &-free {
-
-    }
+    /* Specific Tier Styling */
+    &-free { background: #64748b; }
+    &-starter { background: #3b82f6; }
+    &-growth { background: #8b5cf6; }
+    &-pro { background: #ec4899; }
+    &-master { background: #f59e0b; }
 
     &-vipfree {
-      padding: .25rem 1rem;
-      background: linear-gradient(to right, #2c3e50, #49687d);
-      color: #fff;
-      cursor: default;
-      font-weight: 600;
-
+      background: linear-gradient(135deg, #2c3e50, #49687d);
+      border: 1px solid #ffffff33;
       &:hover {
-        padding: .25rem 1.5rem;
-        text-decoration: none;
+        background: linear-gradient(135deg, #1a252f, #2c3e50);
       }
     }
-    
-    &--monthly {
-
-    }
-
-    &--yearly {
-
-    }
-
   }
 
   .header-wrapper {
     container-type: inline-size;
     transition: 1s;
     clip-path: inset(0 0 100% 0);
-
-    &.show {
-      clip-path: inset(0 0 0 0);
-    }
+    &.show { clip-path: inset(0 0 0 0); }
   }
 
   .header {
     background: var(--color-background-inversion);
     padding: var(--space-md) 0;
-    border-bottom: 1px solid #0000000f;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
     position: relative;
     z-index: 1000;
   }
@@ -238,46 +228,15 @@ import { ping } from '../../../components/Notification/notificationStore';
     gap: var(--space-md);
   }
 
-  .mobile-only {
-    display: none;
-  }
-
-  @media (max-width: 1023px) {
-    .desktop-only {
-      display: none;
-    }
-    .mobile-only {
-      display: block;
-    }
-  }
-
   .header__logo {
     display: flex;
     align-items: center;
     gap: var(--space-sm);
-    font-weight: 700;
+    font-weight: 800;
     font-size: 1.25rem;
     color: var(--c-text);
     text-decoration: none;
-    transition: all var(--transition-fast);
-
-    &:hover {
-      text-decoration: none;
-    }
-
-    svg {
-      color: var(--c-primary);
-      flex-shrink: 0;
-    }
-  }
-
-  .header__nav-scroller {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none; /* Firefox */
-    &::-webkit-scrollbar {
-      display: none; /* Safari and Chrome */
-    }
+    img { filter: invert(0); }
   }
 
   .header__nav-list {
@@ -286,6 +245,7 @@ import { ping } from '../../../components/Notification/notificationStore';
     padding: 0;
     display: flex;
     gap: var(--space-lg);
+    position: relative;
   }
 
   .header__nav-link {
@@ -295,38 +255,19 @@ import { ping } from '../../../components/Notification/notificationStore';
     white-space: nowrap;
     position: relative;
     z-index: 1;
-
-    &:hover {
-      color: var(--c-primary);
-    }
-
-    &--active,
-    &[aria-current="page"] {
-      color: var(--c-primary);
-      font-weight: 700;
-    }
+    font-size: 0.95rem;
+    &:hover { color: var(--c-primary); }
+    &--active { color: var(--c-primary); font-weight: 700; }
   }
 
   .header__nav-underline {
     position: absolute;
-    bottom: 0;
-    height: 2.5px;
+    bottom: -4px;
+    height: 3px;
     background: var(--c-primary);
     border-radius: 2px;
-    /* No CSS transition, GSAP handles animation */
     z-index: 0;
     pointer-events: none;
-    transition: 1s;
-    transition-timing-function: cubic-bezier(0.59,-0.18, 0, 1);
-  }
-
-  .header__nav-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    gap: var(--space-lg);
-    position: relative;
   }
 
   .header__actions {
@@ -336,81 +277,27 @@ import { ping } from '../../../components/Notification/notificationStore';
   }
 
   .header__action {
-    padding: var(--space-sm) var(--space-md);
-    border-radius: var(--radius-md);
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
     text-decoration: none;
-    font-weight: 600;
-    transition: all var(--transition-fast);
-    white-space: nowrap;
-
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: 0.2s;
     &--primary {
       background-color: var(--c-primary);
-      color: var(--c-white);
-      border: 1px solid var(--c-primary);
-      &:hover {
-        background-color: var(--c-white);
-        color: var(--c-primary);
-      }
+      color: white;
+      &:hover { filter: brightness(1.1); }
     }
-
     &--secondary {
-      background-color: var(--c-bg);
-      color: var(--c-primary);
+      color: var(--c-text);
       border: 1px solid var(--c-border);
-      &:hover {
-        border-color: var(--c-primary);
-      }
+      &:hover { background: #f9fafb; }
     }
   }
 
-  /* Shape C: Expanded (Default) */
-  @container (width >= 961px) {
-    .header__nav-scroller {
-      overflow-x: visible;
-    }
-  }
-
-  /* Shape B: Condensed */
-  @container (481px < width < 961px) {
-    .header__container {
-      gap: var(--space-sm);
-    }
-    .header__logo-text {
-      font-size: 1rem;
-    }
-  }
-
-  @container (width < 520px) {
-    .header__action--secondary {
-      display: none;
-    }
-  }
-
-  /* Shape A: Compact */
-  @container (width <= 480px) {
-    .header__container {
-      flex-wrap: wrap;
-      gap: var(--space-sm);
-    }
-    .header__logo-text {
-      display: none;
-    }
-    .header__nav-scroller {
-      order: 3;
-      width: 100%;
-    }
-    .header__actions {
-      margin-left: auto;
-    }
-    .header__action--secondary {
-      display: none;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .header__logo,
-    .header__action {
-      transition: none;
-    }
+  /* Responsive Constraints */
+  @container (width < 600px) {
+    .header__logo-text { display: none; }
+    .header__nav-scroller { order: 3; width: 100%; }
   }
 </style>

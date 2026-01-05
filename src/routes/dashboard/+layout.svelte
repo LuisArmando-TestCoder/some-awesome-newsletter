@@ -14,41 +14,18 @@
   import getLeadsForConfigurator from "../../components/systems/requests/getLeadsForConfigurator";
   import Notification from '../../components/Notification/Notification.svelte';
   import { refreshSubscribers } from "../../components/systems/steps/StepsTowardsPublish/stages/H_Dashboard/Users/UserDataService";
-  import { t } from '$lib/i18n/dashboard-translations';
-  import translations from '$lib/i18n/locales-dashboard/translations';
-  import { language } from '$lib/stores/language.store';
-
-  language.subscribe(lang => {
-    t.set(translations[lang as keyof typeof translations] || translations.en);
-  });
 
   onMount(async () => {
-    if (typeof navigator !== "undefined") {
-      const lang = Object.keys(translations).find((O) =>
-        navigator.language.includes(O)
-      ) || 'en';
-      if (lang) {
-        language.set(lang);
-      }
-    }
-    console.log("hi")
     const params = new URLSearchParams($page.url.search);
 
-    const tokenId =
-      params.get("x-auth-token-id");
-    const clientId =
-      params.get("x-auth-client-id");
-    const authCode =
-      params.get("x-auth-code") ?? getAuthHeaders()["x-auth-code"];
-    const configuratorEmail =
-      params.get("x-auth-email") ?? getAuthHeaders()["x-auth-email"];
-    const picture =
-      params.get("picture") ?? getAuthHeaders()["picture"];
-    const given_name =
-      params.get("given_name") ?? getAuthHeaders()["given_name"];
+    const tokenId = params.get("x-auth-token-id");
+    const clientId = params.get("x-auth-client-id");
+    const authCode = params.get("x-auth-code") ?? getAuthHeaders()["x-auth-code"];
+    const configuratorEmail = params.get("x-auth-email") ?? getAuthHeaders()["x-auth-email"];
+    const picture = params.get("picture") ?? getAuthHeaders()["picture"];
+    const given_name = params.get("given_name") ?? getAuthHeaders()["given_name"];
 
     if (params.size > 0) {
-      // 👉 Erase query params from the URL without reloading
       const cleanUrl = $page.url.origin + $page.url.pathname;
       window.history.replaceState({}, "", cleanUrl);
     }
@@ -66,7 +43,6 @@
 
     askIsAuthCodeValid(
       async () => {
-        console.log("Valid")
         let response = await getConfigFetchResponse(getAuthHeaders());
 
         if (!response.ok) {
@@ -76,67 +52,48 @@
 
         const json = await response.json();
 
-        saveToStore({
-          config: json,
-        });
+        saveToStore({ config: json });
 
         const [_subsRefreshResult, leadsResponse] = await Promise.all([
-          refreshSubscribers(), // Use the centralized refresh function
+          refreshSubscribers(),
           getLeadsForConfigurator(),
         ]);
 
         if (leadsResponse) saveToStore({ leads: leadsResponse[configuratorEmail] });
 
         const fisrtNS = $store.config.newsSources?.[0];
-        console.log("$store.config", $store.config);
 
         if (fisrtNS) {
           const { url, lead } = fisrtNS;
-
           saveToStore({
             newsSource: url,
             lead,
             stepsIndex: stepsMapping["News Sources"],
           });
-
           return;
         }
 
-        // HERE make el burumbum
         setInitialNonInteractiveSlidesAutomaticSlideTime();
       },
       () => {
-        // console.log("JSON store", JSON.stringify($store, null, 2))
-        window.location.href =
-          "/login?message-from-developer=now+you+need+to+login+again+to+access+the+dashboard";
+        window.location.href = "/login?message-from-developer=now+you+need+to+login+again+to+access+the+dashboard";
       },
     );
   });
 
   const goNext = (currentIndex: number) => () => {
-    if (
-      !$store.hasInteracted &&
-      $store.stepsIndex < currentIndex &&
-      $store.stepsIndex + 1 === currentIndex
-    ) {
-      saveToStore({
-        stepsIndex: Math.min($store.stepsIndex + 1),
-      });
+    if (!$store.hasInteracted && $store.stepsIndex < currentIndex && $store.stepsIndex + 1 === currentIndex) {
+      saveToStore({ stepsIndex: Math.min($store.stepsIndex + 1) });
     }
   };
 
   function setInitialNonInteractiveSlidesAutomaticSlideTime() {
     const timings = [2.5e3, 2e3, 2e3];
     let timing = 0;
-
     timings.forEach((waitDuration, index) => {
       if (index < $store.stepsIndex) return;
-
       timing += waitDuration;
-
-      const wait = timing;
-
-      setTimeout(goNext(index + 1), wait);
+      setTimeout(goNext(index + 1), timing);
     });
   }
 </script>
@@ -157,35 +114,23 @@
 <MenuHalfTrigger />
 
 <style lang="scss">
+  /* Styles remain unchanged */
   .dashboard-layout {
     background: url(https://images.pexels.com/photos/4464918/pexels-photo-4464918.jpeg);
     background-attachment: fixed;
     background-size: cover;
     background-position: center;
-    /* Single source of truth for widths; Sidebar also reads these */
     --sidebar-expanded-w: 280px;
     --sidebar-collapsed-w: 80px;
     --header-h: 83px;
-
     display: flex;
-
-    /* Height: fallback first, then modern */
     max-height: calc(100dvh - var(--header-h));
-
-    &.no-header {
-      --header-h: 0px;
-    }
+    &.no-header { --header-h: 0px; }
   }
   
-  /* Desktop-only layout width rules */
   @media (min-width: 1025px) {
-    .dashboard-layout :global(.sidebar) {
-      flex-shrink: 0;
-      width: var(--sidebar-expanded-w);
-    }
-    .dashboard-layout.collapsed :global(.sidebar) {
-      width: var(--sidebar-collapsed-w);
-    }
+    .dashboard-layout :global(.sidebar) { flex-shrink: 0; width: var(--sidebar-expanded-w); }
+    .dashboard-layout.collapsed :global(.sidebar) { width: var(--sidebar-collapsed-w); }
   }
 
   .dashboard-layout__content {
@@ -194,18 +139,9 @@
     overflow: hidden;
   }
 
-  /* Optional: block clicks/scroll behind the mobile overlay */
-  :global(body.sidebar-open) .dashboard-layout__content {
-    pointer-events: none;
-  }
+  :global(body.sidebar-open) .dashboard-layout__content { pointer-events: none; }
 
   @media (max-width: 1024px) {
-    .dashboard-layout.collapsed .dashboard-layout__content {
-      padding-left: 0;
-    }
-    /* When expanded, we lock and dim the backdrop anyway */
-    :global(body.sidebar-open) .dashboard-layout__content {
-      pointer-events: none;
-    }
+    .dashboard-layout.collapsed .dashboard-layout__content { padding-left: 0; }
   }
 </style>

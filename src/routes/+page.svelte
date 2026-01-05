@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { onMount } from "svelte";
-	import { content } from "$lib/content";
 	import { useSmoothPage } from "$lib/anim/useSmoothPage";
 	import { useScrollSection } from "$lib/anim/useScrollSection";
 	import { browser } from "$app/environment";
@@ -8,6 +7,7 @@
 	import { getSmoother, refreshAll } from "$lib/anim/gsap.client";
 	import Faq from "$lib/ui/organisms/Faq.svelte";
 	import logout from "../components/systems/requests/logout";
+    import { t } from "$lib/i18n/translations";
 	// --- State ---
 	let showAnnouncement = true;
 	let prefersReducedMotion = false;
@@ -56,37 +56,38 @@
 		showAnnouncement = false;
 		localStorage.setItem("announcementDismissed", "true");
 	}
+
 </script>
 
 <svelte:head>
-	<title>{$content.title}</title>
-	<meta name="description" content={$content.metaDescription} />
-	<link rel="canonical" href={$content.canonicalUrl} />
+	<title>{$t.mainContent.title}</title>
+	<meta name="description" content={$t.mainContent.metaDescription} />
+	<link rel="canonical" href={$t.mainContent.canonicalUrl} />
 	<!-- Open Graph -->
-	<meta property="og:title" content={$content.title} />
-	<meta property="og:description" content={$content.metaDescription} />
-	<meta property="og:image" content={$content.ogImageUrl} />
-	<meta property="og:url" content={$content.canonicalUrl} />
+	<meta property="og:title" content={$t.mainContent.title} />
+	<meta property="og:description" content={$t.mainContent.metaDescription} />
+	<meta property="og:image" content={$t.mainContent.ogImageUrl} />
+	<meta property="og:url" content={$t.mainContent.canonicalUrl} />
 	<meta property="og:type" content="website" />
 	<!-- JSON-LD -->
 	<script type="application/ld+json">
 		{
 			"@context": "https://schema.org",
 			"@type": "Organization",
-			"name": "${$content.organization.name}",
-			"url": "${$content.organization.url}",
-			"logo": "${$content.organization.logo}"
+			"name": "${$t.mainContent.organization.name}",
+			"url": "${$t.mainContent.organization.url}",
+			"logo": "${$t.mainContent.organization.logo}"
 		}
 	</script>
 	<script type="application/ld+json">
 		{
 			"@context": "https://schema.org",
 			"@type": "Product",
-			"name": "${$content.product.name}",
-			"description": "${$content.product.description}",
+			"name": "${$t.mainContent.product.name}",
+			"description": "${$t.mainContent.product.description}",
 			"brand": {
 				"@type": "Organization",
-				"name": "${$content.organization.name}"
+				"name": "${$t.mainContent.organization.name}"
 			}
 		}
 	</script>
@@ -99,11 +100,11 @@
 		<!-- Page Wrapper -->
 		<div class="landing-page">
 			<!-- 1. Announcement Bar -->
-			{#if showAnnouncement && $content.announcement}
+			{#if showAnnouncement && $t.mainContent.announcement}
 				<div class="announcement-bar">
 					<p>
-						{$content.announcement.text}
-						<a href="/signup">{$content.announcement.cta} &rarr;</a>
+						{$t.mainContent.announcement.text}
+						<a href="/signup">{$t.mainContent.announcement.cta} &rarr;</a>
 					</p>
 					<button
 						aria-label="Dismiss announcement"
@@ -119,14 +120,14 @@
 
 			<main id="main-content">
 				<!-- 3. Hero Section -->
-				{#if $content.hero}
+				{#if $t.mainContent.hero}
 				<section class="hero">
 					<div class="container">
 						<h1 class="hero-hook">
-							{$content.hero.hook}
+							{$t.mainContent.hero.hook}
 						</h1>
 						<p class="hero-sub-hook">
-							{$content.hero.subHook}
+							{$t.mainContent.hero.subHook}
 						</p>
 						<div class="hero-ctas">
 							<a
@@ -135,14 +136,14 @@
 								}}
 								href="/signup"
 								class="cta-primary"
-								>{$content.hero.primaryCta}</a
+								>{$t.mainContent.hero.primaryCta}</a
 							>
 							<a href="/demo" class="cta-primary-scaled"
-								>{$content.hero.secondaryCta}</a
+								>{$t.mainContent.hero.secondaryCta}</a
 							>
 						</div>
 						<ul class="hero-trust-cues">
-							{#each $content.hero.trustCues as cue}
+							{#each $t.mainContent.hero.trustCues as cue}
 								<li>{cue}</li>
 							{/each}
 						</ul>
@@ -151,12 +152,12 @@
 				{/if}
 
 				<!-- 4. Social Proof -->
-				{#if $content.socialProof}
+				{#if $t.mainContent.socialProof}
 				<section class="social-proof">
 					<div class="container">
-						<p>{$content.socialProof.counts}</p>
+						<p>{$t.mainContent.socialProof.counts}</p>
 						<div class="logo-strip">
-							{#each $content.socialProof.logos as logo}
+							{#each $t.mainContent.socialProof.logos as logo}
 								<img
 									src={logo.src}
 									alt="{logo.name} logo"
@@ -171,15 +172,15 @@
 				{/if}
 
 				<!-- 5. Value Propositions -->
-				{#if $content.valueProps}
+				{#if $t.mainContent.valueProps}
 				<section class="value-props">
 					<div class="container">
 						<div class="section-header">
-							<h2>{$content.valueProps.title}</h2>
-							<p>{$content.valueProps.subTitle}</p>
+							<h2>{$t.mainContent.valueProps.title}</h2>
+							<p>{$t.mainContent.valueProps.subTitle}</p>
 						</div>
 						<div class="grid">
-							{#each $content.valueProps.props as prop, i}
+							{#each $t.mainContent.valueProps.props as prop, i}
 								<div class="card">
 									<h3>{prop.title}</h3>
 									<p>{prop.description}</p>
@@ -191,18 +192,18 @@
 				{/if}
 
 				<!-- 6. Feature Grid -->
-				{#if $content.features}
+				{#if $t.mainContent.features}
 				<section
 					id="features"
 					class="feature-grid">
 					<div class="container">
 						<div class="section-header">
-							<h2>{$content.features.title}</h2>
+							<h2>{$t.mainContent.features.title}</h2>
 							<p>
-								{$content.features.subTitle}
+								{$t.mainContent.features.subTitle}
 							</p>
 						</div>
-						{#each $content.features.featureList as feature, i}
+						{#each $t.mainContent.features.featureList as feature, i}
 							<div
 								class="feature-item"
 								class:reverse={i % 2 !== 0}
@@ -230,14 +231,14 @@
 				{/if}
 
 				<!-- 7. How It Works -->
-				{#if $content.howItWorks}
+				{#if $t.mainContent.howItWorks}
 				<section class="how-it-works">
 					<div class="container">
 						<div class="section-header">
-							<h2>{$content.howItWorks.title}</h2>
+							<h2>{$t.mainContent.howItWorks.title}</h2>
 						</div>
 						<div class="steps-grid">
-							{#each $content.howItWorks.steps as item, i}
+							{#each $t.mainContent.howItWorks.steps as item, i}
 								<div class="step-card" data-lag="0.1">
 									<div class="step-number">{item.step}</div>
 									<h4>{item.title}</h4>
@@ -250,17 +251,17 @@
 				{/if}
 
 				<!-- 8. Use Cases / Personas -->
-				{#if $content.personas}
+				{#if $t.mainContent.personas}
 				<section class="personas">
 					<div class="container">
 						<div class="section-header">
-							<h2>{$content.personas.title}</h2>
+							<h2>{$t.mainContent.personas.title}</h2>
 							<p>
-								{$content.personas.subTitle}
+								{$t.mainContent.personas.subTitle}
 							</p>
 						</div>
 						<div class="grid">
-							{#each $content.personas.personaList as persona, i}
+							{#each $t.mainContent.personas.personaList as persona, i}
 								<div class="card">
 									<h4>{persona.persona}</h4>
 									<p>
@@ -279,14 +280,14 @@
 				{/if}
 
 				<!-- 9. Metrics / Outcomes -->
-				{#if $content.metrics}
+				{#if $t.mainContent.metrics}
 				<section class="metrics">
 					<div class="container">
 						<div class="section-header">
-							<h2>{$content.metrics.title}</h2>
+							<h2>{$t.mainContent.metrics.title}</h2>
 						</div>
 						<div class="metrics-grid">
-							{#each $content.metrics.metricList as metric, i}
+							{#each $t.mainContent.metrics.metricList as metric, i}
 								<div class="metric-item">
 									<div class="metric-value">
 										{metric.value}
@@ -304,14 +305,14 @@
 
 
 				<!-- 11. Testimonials -->
-				{#if $content.testimonials}
+				{#if $t.mainContent.testimonials}
 				<section class="testimonials">
 					<div class="container">
 						<div class="section-header">
-							<h2>{$content.testimonials.title}</h2>
+							<h2>{$t.mainContent.testimonials.title}</h2>
 						</div>
 						<div class="grid">
-							{#each $content.testimonials.testimonialList as testimonial, i}
+							{#each $t.mainContent.testimonials.testimonialList as testimonial, i}
 								<blockquote class="card" data-lag="0.05">
 									<p>"{testimonial.quote}"</p>
 									<footer>
@@ -327,7 +328,7 @@
 				{/if}
 
 				<!-- 12. Pricing Preview -->
-				{#if $content.pricing}
+				{#if $t.mainContent.pricing}
 				<section
 					id="pricing"
 					class="pricing-preview"
@@ -335,18 +336,18 @@
 				>
 					<div class="container">
 						<div class="section-header">
-							<h2>{$content.pricing.teaser}</h2>
+							<h2>{$t.mainContent.pricing.teaser}</h2>
 						</div>
 						<div class="pricing-box">
-							<p>{$content.pricing.subTitle}</p>
+							<p>{$t.mainContent.pricing.subTitle}</p>
 							<div class="plan-price">
-								{$content.pricing.plan}
+								{$t.mainContent.pricing.plan}
 							</div>
 							<div class="disclaimer">
 								Applies to the yearly plan at $108/year. You save $96 compared to the monthly plan at $17/month.
 							</div>
 							<a href="/pricing" class="cta-primary"
-								>{$content.pricing.cta}</a
+								>{$t.mainContent.pricing.cta}</a
 							>
 						</div>
 					</div>
@@ -357,17 +358,17 @@
 				<Faq />
 
 				<!-- 14. Final CTA -->
-				{#if $content.finalCta}
+				{#if $t.mainContent.finalCta}
 				<section id="demo" class="final-cta">
 					<div class="container">
-						<h2>{$content.finalCta.hook}</h2>
+						<h2>{$t.mainContent.finalCta.hook}</h2>
 						<a
 							on:click={() => {
 								logout(false);
 							}}
 							href="/signup"
 							class="cta-primary-inverted"
-							>{$content.finalCta.cta}</a
+							>{$t.mainContent.finalCta.cta}</a
 						>
 					</div>
 				</section>
@@ -375,7 +376,7 @@
 			</main>
 
 			<!-- 15. Footer -->
-			{#if $content.footer}
+			{#if $t.mainContent.footer}
 			<footer class="page-footer">
 				<div class="container">
 					<div class="footer-main">
@@ -386,30 +387,30 @@
 									width="50"
 									alt="logo"
 								/>
-								<span>{$content.organization.name}</span>
+								<span>{$t.mainContent.organization.name}</span>
 							</a>
 							<p>
 								&copy; {new Date().getFullYear()}
-								{$content.footer.copyright}
+								{$t.mainContent.footer.copyright}
 							</p>
 							<p>
-								<a href="mailto:{$content.footer.contact}"
-									>{$content.footer.contact}</a
+								<a href="mailto:{$t.mainContent.footer.contact}"
+									>{$t.mainContent.footer.contact}</a
 								>
 							</p>
 						</div>
 						<div class="footer-links">
-							<h4>{$content.footer.companyLinks.title}</h4>
+							<h4>{$t.mainContent.footer.companyLinks.title}</h4>
 							<ul>
-								{#each $content.footer.companyLinks.links as link}
+								{#each $t.mainContent.footer.companyLinks.links as link}
 									<li><a href={link.href}>{link.text}</a></li>
 								{/each}
 							</ul>
 						</div>
 						<div class="footer-links">
-							<h4>{$content.footer.legalLinks.title}</h4>
+							<h4>{$t.mainContent.footer.legalLinks.title}</h4>
 							<ul>
-								{#each $content.footer.legalLinks.links as link}
+								{#each $t.mainContent.footer.legalLinks.links as link}
 									<li><a href={link.href}>{link.text}</a></li>
 								{/each}
 							</ul>
@@ -703,7 +704,7 @@
 
 	/* 3. Hero */
 	.hero {
-		background: url(https://images.pexels.com/photos/574283/pexels-photo-574283.jpeg);
+		background: url(https://images.pexels.com/photos/8086364/pexels-photo-8086364.jpeg); // Photo by Ron Lach
 		background-size: cover;
 		background-attachment: fixed;
 		text-align: center;
@@ -713,11 +714,11 @@
 		}
 		.hero-hook {
 			margin-bottom: var(--space-md);
-			color: var(--color-background);
+			color: var(--color-background-inversion);
 		}
 		.hero-sub-hook {
 			font-size: 1.25rem;
-			color: var(--color-background);
+			color: var(--color-background-inversion);
 			margin: var(--space-xl);
 		}
 		.hero-ctas {
@@ -734,7 +735,7 @@
 			justify-content: center;
 			gap: var(--space-lg);
 			font-size: 0.9rem;
-			color: var(--color-background);
+			color: var(--color-background-inversion);
 			li {
 				position: relative;
 				&:not(:last-child)::after {

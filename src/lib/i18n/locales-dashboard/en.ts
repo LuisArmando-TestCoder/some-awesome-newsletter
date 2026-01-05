@@ -231,5 +231,83 @@ export default {
   "placeholders.searchArticles": "Search for articles...",
   "labels.noArticlesFound": "No articles found for this news source.",
   "labels.created": "Created",
-  "labels.language": "Language"
+  "labels.language": "Language",
+  // Billing Limits & Marketing (Added for visual completeness)
+  "billing.unlimited": "Unlimited",
+  "billing.users": "users",
+  "billing.newsSources": "news sources",
+  "billing.youSave": "You save",
+  "billing.mostPopular": "Most Popular",
+  "billing.perYear": "per year",
+  "billing.planCustom": "Custom Plan",
+  "billing.monthly": "monthly",
+  "billing.currentPlan": "This is your current plan",
+
+  // News Source Actions
+  "newsSource.url": "Source URL",
+  "newsSource.status": "Status",
+  "newsSource.active": "Active",
+  "newsSource.error": "Sync Error",
+  "newsSource.lastSync": "Last Synced",
+  "newsSource.actions": "Actions",
+  "newsSource.delete": "Delete Source",
+  "newsSource.confirmDelete": "Are you sure you want to delete this news source?",
+
+  // Profile Management
+  "profile.title": "User Profile",
+  "profile.name": "Name",
+  "profile.email": "Email Address",
+  "profile.saveChanges": "Save Changes",
+  "profile.avatar": "Profile Picture",
+  "profile.successUpdate": "Profile updated successfully",
+
+  // Developer/Secrets Additional
+  "secrets.title": "Developer Settings",
+  "secrets.apiKey": "API Key",
+  "secrets.showKey": "Show Key",
+  "secrets.hideKey": "Hide Key",
+  "secrets.copyKey": "Copy Key",
+  "secrets.regenerate": "Regenerate Key",
+  "secrets.webhookUrl": "Webhook URL",
+
+  // General UI Labels
+  "labels.back": "Back",
+  "labels.cancel": "Cancel",
+  "labels.confirm": "Confirm",
+  "labels.edit": "Edit",
+  "labels.save": "Save",
+  "labels.loading": "Loading...",
+  "labels.noData": "No data available",
+  "labels.search": "Search",
+  "labels.filter": "Filter",
+  "labels.all": "All",
+  "labels.enabled": "Enabled",
+  "labels.disabled": "Disabled",
+
+  // Subscriber Management
+  "errors.maxSubscribers": "You have reached the maximum number of subscribers for the Free plan.",
+  "errors.nameRequired": "Name is required.",
+  "errors.emailRequired": "Email is required.",
+  "errors.languageRequired": "Language selection is required.",
+  "errors.unexpectedError": "An unexpected error occurred during submission.",
+  "labels.addUserManually": "Add User Manually",
+  "placeholders.userName": "User's full name",
+  "placeholders.userEmail": "User's email address",
+  "labels.optional": "Optional",
+  "placeholders.shortDescription": "Short description (optional)",
+  "labels.submitting": "Submitting...",
+  "labels.addAndSubscribe": "Add and Subscribe User",
+  "labels.selected": "Selected",
+  "aria.clearFile": "Clear selected file",
+  "labels.processing": "Processing...",
+  "labels.uploadAndAdd": "Upload and Add/Subscribe",
+  "labels.addUsersFromFile": "Add Users from File",
+  "errors.selectFileFirst": "Please select a file first.",
+  "labels.noMetadata": "No metadata",
+  "labels.unsubscribe": "Unsubscribe",
+
+  // Toasts
+  "notification.success": "Operation successful",
+  "notification.error": "An error has occurred",
+  "notification.copiedToClipboard": "Copied to clipboard"
 };

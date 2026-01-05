@@ -1,14 +1,14 @@
 <script lang="ts">
   import HeroBanner from "../../components/demo/HeroBanner.svelte";
-  import { content } from '../../lib/content';
   import Faq from "$lib/ui/organisms/Faq.svelte";
   import { useScrollSection } from "$lib/anim/useScrollSection";
   import CTAButton from "../../components/demo/CTAButton.svelte";
+  import { t } from "$lib/i18n/translations";
 </script>
 
 <svelte:head>
-  <title>Demo - {$content.title}</title>
-  <meta name="description" content={`Watch a demo of ${$content.product.name} in action.`} />
+  <title>Demo - {$t.mainContent.title}</title>
+  <meta name="description" content={`Watch a demo of ${$t.mainContent.product.name} in action.`} />
   <link rel="stylesheet" href="/styles/everything.css" />
 </svelte:head>
 
@@ -17,13 +17,13 @@
 
   <div class="cta-section">
     <a href="/login">
-      <CTAButton label={$content.hero.primaryCta} href="/login" variant="primary" />
+      <CTAButton label={$t.mainContent.hero.primaryCta} href="/login" variant="primary" />
     </a>
   </div>
 
   <Faq />
 
-  {#if $content.footer}
+  {#if $t.mainContent.footer}
   <footer class="page-footer">
       <div class="container">
           <div class="footer-main">
@@ -34,30 +34,30 @@
                           width="50"
                           alt="logo"
                       />
-                      <span>{$content.organization.name}</span>
+                      <span>{$t.mainContent.organization.name}</span>
                   </a>
                   <p>
                       &copy; {new Date().getFullYear()}
-                      {$content.footer.copyright}
+                      {$t.mainContent.footer.copyright}
                   </p>
                   <p>
-                      <a href="mailto:{$content.footer.contact}"
-                          >{$content.footer.contact}</a
+                      <a href="mailto:{$t.mainContent.footer.contact}"
+                          >{$t.mainContent.footer.contact}</a
                       >
                   </p>
               </div>
               <div class="footer-links">
-                  <h4>{$content.footer.companyLinks.title}</h4>
+                  <h4>{$t.mainContent.footer.companyLinks.title}</h4>
                   <ul>
-                      {#each $content.footer.companyLinks.links as link}
+                      {#each $t.mainContent.footer.companyLinks.links as link}
                           <li><a href={link.href}>{link.text}</a></li>
                       {/each}
                   </ul>
               </div>
               <div class="footer-links">
-                  <h4>{$content.footer.legalLinks.title}</h4>
+                  <h4>{$t.mainContent.footer.legalLinks.title}</h4>
                   <ul>
-                      {#each $content.footer.legalLinks.links as link}
+                      {#each $t.mainContent.footer.legalLinks.links as link}
                           <li><a href={link.href}>{link.text}</a></li>
                       {/each}
                   </ul>

@@ -72,7 +72,7 @@
       <div class="card">
         <p>
           {$t['billing.vipMessageText']}
-          <a href="mailto:oriens@aiexecutions.com">oriens@aiexecutions.com</a>.
+          <a href="mailto:oriens@aiban.news">oriens@aiban.news</a>.
         </p>
       </div>
     </div>

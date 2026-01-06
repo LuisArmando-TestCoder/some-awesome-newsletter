@@ -902,7 +902,7 @@
 
 	/* 11. Testimonials */
 	.testimonials {
-		background: url(https://images.pexels.com/photos/1764436/pexels-photo-1764436.jpeg);
+		background: url(https://images.pexels.com/photos/8293641/pexels-photo-8293641.jpeg);
 		background-size: cover;
 		background-attachment: fixed;
 		blockquote {

@@ -7,24 +7,23 @@
         type PlansState,
     } from "$lib/config/plans.config";
     import Switch from "$lib/ui/components/Switch.svelte";
-    import { useSmoothPage } from "$lib/anim/useSmoothPage";
     import { t } from "$lib/i18n/translations";
 
     let state: PlansState;
     const unsub = plansStore.subscribe((v) => (state = v));
 
+    // Refined config to ensure clean naming and data flow
     const PLANS_CONFIG = [
-        { id: "starter", mo: 17, sources: 5, users: "100k" },
-        { id: "growth", mo: 35, sources: 17, users: "250k" },
-        { id: "pro", mo: 80, sources: 25, users: "500k" },
-        { id: "master", mo: 150, sources: 50, users: "Unlimited" },
+        { id: "starter", mo: 17 },
+        { id: "growth", mo: 35 },
+        { id: "pro", mo: 80 },
+        { id: "master", mo: 150 },
     ];
 
     const ANNUAL_DISCOUNT = 0.35;
 
     function calculatePrice(monthlyPrice: number, interval: string) {
         if (interval === "monthly") return monthlyPrice;
-        // (Monthly Price * 12) - 35% discount
         return Math.floor(monthlyPrice * 12 * (1 - ANNUAL_DISCOUNT));
     }
 
@@ -47,25 +46,16 @@
 
         <div class="pricing__toggle-wrapper">
             <div class="pricing__toggle-container">
-                <span
-                    class="pricing__toggle-text"
-                    class:pricing__toggle-text--active={state.interval ===
-                        "monthly"}
-                >
+                <span class="pricing__toggle-text" class:pricing__toggle-text--active={state.interval === "monthly"}>
                     {$t.pricing.monthly}
                 </span>
                 <div class="pricing__switch">
                     <Switch
                         toggled={state.interval === "yearly"}
-                        onChange={(toggled) =>
-                            setInterval(toggled ? "yearly" : "monthly")}
+                        onChange={(toggled) => setInterval(toggled ? "yearly" : "monthly")}
                     />
                 </div>
-                <span
-                    class="pricing__toggle-text"
-                    class:pricing__toggle-text--active={state.interval ===
-                        "yearly"}
-                >
+                <span class="pricing__toggle-text" class:pricing__toggle-text--active={state.interval === "yearly"}>
                     {$t.pricing.yearly}
                     <span class="pricing__discount-badge">-35%</span>
                 </span>
@@ -79,8 +69,7 @@
                         <div class="pricing__card-header">
                             <h2 class="pricing__card-name">{plan.name}</h2>
                             <p class="pricing__card-tagline">
-                                {$t.plans.plans.find((p) => p.id === "free")
-                                    ?.tagline}
+                                {$t.plans.plans.find((p) => p.id === "free")?.tagline}
                             </p>
                         </div>
 
@@ -91,99 +80,65 @@
                         </div>
 
                         <ul class="pricing__features">
-                            <li
-                                class="pricing__feature-item pricing__feature-item--primary"
-                            >
-                                <strong>100</strong>
-                                {$t.billing.users}
-                            </li>
-                            <li
-                                class="pricing__feature-item pricing__feature-item--primary"
-                            >
-                                <strong>1</strong>
-                                {$t.billing.newsSources}
-                            </li>
                             {#each computeFeatures(state.content, plan.id) as feature}
                                 <li class="pricing__feature-item">{feature}</li>
                             {/each}
                         </ul>
 
-                        <a
-                            href="/signup"
-                            class="pricing__button pricing__button--outline"
-                        >
+                        <a href="/signup" class="pricing__button pricing__button--outline">
                             {$t.header.getStarted}
                         </a>
                     </article>
                 {/each}
 
                 {#each PLANS_CONFIG as tier}
-                    {@const planData =
-                        state.content.plans.find((p) => p.id === tier.id) ||
-                        state.content.plans[0]}
-                    <article
-                        class="pricing__card"
-                        class:pricing__card--featured={tier.id === "growth"}
-                    >
-                        {#if tier.id === "growth"}
-                            <div class="pricing__card-badge">
-                                {$t.pricing.mostPopular}
-                            </div>
-                        {/if}
-
-                        <div class="pricing__card-header">
-                            <h2 class="pricing__card-name">
-                                {tier.id.toUpperCase()}
-                            </h2>
-                            <p class="pricing__card-tagline">
-                                {$t.plans.plans.find((p) => p.id === tier.id)
-                                    ?.tagline}
-                            </p>
-                        </div>
-
-                        <div class="pricing__price-block">
-                            <span class="pricing__currency">$</span>
-                            <span class="pricing__amount"
-                                >{calculatePrice(tier.mo, state.interval)}</span
-                            >
-                            <span class="pricing__period"
-                                >/{state.interval === "monthly"
-                                    ? "mo"
-                                    : "yr"}</span
-                            >
-                        </div>
-
-                        <ul class="pricing__features">
-                            <li
-                                class="pricing__feature-item pricing__feature-item--primary"
-                            >
-                                <strong>{tier.users}</strong>
-                                {$t.billing.users}
-                            </li>
-                            <li
-                                class="pricing__feature-item pricing__feature-item--primary"
-                            >
-                                <strong>{tier.sources}</strong>
-                                {$t.billing.newsSources}
-                            </li>
-                            {#each computeFeatures(state.content, tier.id) as feature}
-                                <li class="pricing__feature-item">{feature}</li>
-                            {/each}
-                        </ul>
-
-                        <a
-                            href={`/api/checkout?products=${planData.productId}&interval=${state.interval}`}
-                            class="pricing__button"
-                            class:pricing__button--primary={tier.id ===
-                                "growth"}
-                            class:pricing__button--dark={tier.id !== "growth"}
+                    {@const planData = state.content.plans.find((p) => p.id === tier.id)}
+                    {#if planData}
+                        <article
+                            class="pricing__card"
+                            class:pricing__card--featured={tier.id === "growth"}
                         >
-                            {$t.pricing.upgradeTo.replace(
-                                "{planName}",
-                                tier.id,
-                            )}
-                        </a>
-                    </article>
+                            {#if tier.id === "growth"}
+                                <div class="pricing__card-badge">
+                                    {$t.pricing.mostPopular}
+                                </div>
+                            {/if}
+
+                            <div class="pricing__card-header">
+                                <h2 class="pricing__card-name">
+                                    {planData.name}
+                                </h2>
+                                <p class="pricing__card-tagline">
+                                    {$t.plans.plans.find((p) => p.id === tier.id)?.tagline}
+                                </p>
+                            </div>
+
+                            <div class="pricing__price-block">
+                                <span class="pricing__currency">$</span>
+                                <span class="pricing__amount">
+                                    {calculatePrice(tier.mo, state.interval)}
+                                </span>
+                                <span class="pricing__period">
+                                    /{state.interval === "monthly" ? "mo" : "yr"}
+                                </span>
+                            </div>
+
+                            <ul class="pricing__features">
+                                {#each computeFeatures(state.content, tier.id) as feature}
+                                    <li class="pricing__feature-item">{feature}</li>
+                                {/each}
+                            </ul>
+
+                            <a
+                                href={`/api/checkout?products=${planData.productId}&interval=${state.interval}`}
+                                class="pricing__button"
+                                class:pricing__button--primary={tier.id === "growth"}
+                                class:pricing__button--dark={tier.id !== "growth"}
+                            >
+                                {$t.pricing.upgradeTo.replace("{planName}", planData.name)}
+                            </a>
+                        </article>
+                    {/if}
                 {/each}
             {/if}
         </div>

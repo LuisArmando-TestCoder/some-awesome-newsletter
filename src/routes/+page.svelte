@@ -192,8 +192,6 @@
 				</section>
 				{/if}
 
-				<Pricing />
-
 				<!-- Feature Grid -->
 				{#if $t.mainContent.features}
 				<section
@@ -326,6 +324,8 @@
 					</div>
 				</section>
 				{/if}
+
+				<Pricing />
 
 				<!-- Pricing Preview -->
 				<!-- {#if $t.mainContent.pricing}

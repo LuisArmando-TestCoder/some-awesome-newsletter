@@ -112,7 +112,7 @@
       <footer class="policy__footer">
         <p class="policy__text">
           If you have any questions about our use of cookies or other technologies, please email us at 
-          <a href="mailto:privacy@aiban.com" class="policy__link">privacy@aiban.com</a>.
+          <a href="mailto:legal@aiban.com" class="policy__link">legal@aiban.com</a>.
         </p>
       </footer>
   

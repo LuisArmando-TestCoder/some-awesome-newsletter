@@ -1,6 +1,6 @@
 import { get } from "svelte/store";
 // Removed duplicate import
-import store, { saveToConfig } from "../../store"; // Removed saveToStore
+import store, { globalLanguage, saveToConfig } from "../../store"; // Removed saveToStore
 import { addNewsletterUser } from "./addNewsletterUserEndpoint";
 import subscribeNewsletterUser from "./subscribeNewsletterUser";
 // Removed getAllSubscribersFromConfigEndpoint import
@@ -98,7 +98,7 @@ export default async function createNewsSource(newsSource: {
           email: configuratorEmail,
           name: configuratorEmail, // Use email as name default
           bio: "Newsletter Configurator",
-          language: "en", // Default
+          language: get(globalLanguage) || "en", // Default
           countryOfResidence: "US", // Default
           newsSourcesConfigTuples: [], // Backend manages this
         },

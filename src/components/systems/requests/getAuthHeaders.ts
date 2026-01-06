@@ -1,3 +1,4 @@
+import { get } from "svelte/store";
 import { getCookie } from "../../store"
 
 function safeParse(json: string | null, fallback: any = null) {
@@ -33,6 +34,7 @@ export default function getAuthHeaders(): { [index: string]: string } {
         ...getMixedStore("x-auth-code", "authCode"),
         ...getMixedStore("x-auth-token-id", "tokenId"),
         ...getMixedStore("x-auth-client-id", "clientId"),
+        ...getMixedStore("x-user-language", "lang"),
         ...getMixedStore("given_name"),
         picture,
     }

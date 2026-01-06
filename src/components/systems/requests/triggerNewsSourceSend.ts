@@ -1,5 +1,5 @@
 import { get } from "svelte/store";
-import store from "../../store.js"; // Add .js extension
+import store, { globalLanguage } from "../../store.js"; // Add .js extension
 import type { Store } from "../../types.js"; // Import Store type from types.ts
 import getAuthHeaders from "./getAuthHeaders.js";
 

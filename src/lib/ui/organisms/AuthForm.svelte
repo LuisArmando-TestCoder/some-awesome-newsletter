@@ -68,12 +68,12 @@
 
     <div class="auth-form__container {step === 'initial' ? 'show' : 'hide'}">
       <!-- Google (form redirect) -->
-      <form class="auth-form__google-form" method="post" action="?/OAuth2" style="margin-bottom: var(--space-md);">
+      <!-- <form class="auth-form__google-form" method="post" action="?/OAuth2" style="margin-bottom: var(--space-md);">
         <button class="auth-form__button auth-form__button--google" type="submit">
           <svg aria-hidden="true" viewBox="0 0 24 24" class="auth-form__icon"><path fill="currentColor" d="M21.35 11.1h-9.18v2.96h5.27c-.23 1.46-1.59 4.29-5.27 4.29-3.17 0-5.76-2.62-5.76-5.85s2.59-5.85 5.76-5.85c1.81 0 3.02.77 3.72 1.43l2.53-2.44C16.6 3.83 14.49 3 12.17 3 6.97 3 2.75 7.22 2.75 12.5S6.97 22 12.17 22c7.08 0 8.78-6.1 8.78-9.27 0-.63-.07-1.03-.17-1.63Z"/></svg>
           <span>{copy?.google}</span>
         </button>
-      </form>
+      </form> -->
       <!-- Divider -->
       <div class="auth-form__divider">
         <span class="auth-form__divider-line"></span>

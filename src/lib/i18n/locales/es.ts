@@ -43,7 +43,7 @@ export default {
       "cta": "Comenzar"
     },
     "hero": {
-      "hook": "Newsletters escritos por IA.",
+      "hook": "Newsletters escritos por IA, con voz humana.",
       "subHook": "Transforma cualquier fuente de noticias en artículos personalizados para tus suscriptores, en su idioma y con la voz de tu marca.",
       "primaryCta": "Comenzar Gratis",
       "secondaryCta": "Ver una Demostración",

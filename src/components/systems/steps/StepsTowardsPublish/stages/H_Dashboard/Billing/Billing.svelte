@@ -134,40 +134,23 @@
 
               <ul class="plan-option-features">
                 <li class="limit-highlighter">
-                  <strong
-                    >{plan.id === "free"
-                      ? "100"
-                      : plan.id === "starter"
-                        ? "100,000"
-                        : plan.id === "growth"
-                          ? "250,000"
-                          : plan.id === "pro"
-                            ? "500,000"
-                            : "Unlimited"}</strong
-                  >
-                  {$t["billing.users"]}
+                  <strong>{plan.id === 'free' ? '100' : 
+                           plan.id === 'starter' ? '100,000' :
+                           plan.id === 'growth' ? '250,000' :
+                           plan.id === 'pro' ? '500,000' : 'Unlimited'}</strong> 
+                  {$t['billing.users']}
                 </li>
-
                 <li class="limit-highlighter">
-                  <strong
-                    >{plan.id === "free"
-                      ? "1"
-                      : plan.id === "starter"
-                        ? "5"
-                        : plan.id === "growth"
-                          ? "17"
-                          : plan.id === "pro"
-                            ? "25"
-                            : "50"}</strong
-                  >
-                  {$t["billing.newsSources"]}
+                  <strong>{plan.id === 'free' ? '1' : 
+                           plan.id === 'starter' ? '5' :
+                           plan.id === 'growth' ? '17' :
+                           plan.id === 'pro' ? '25' : '50'}</strong> 
+                  {$t['billing.newsSources']}
                 </li>
-
+                
                 {#each plan.featuresBase as feature}
-                  {#if !["users", "newsSources"].includes(feature.toLowerCase())}
-                    <li>
-                      {($t as Record<string, string>)[feature] || feature}
-                    </li>
+                  {#if feature.toLowerCase() !== 'users' && feature.toLowerCase() !== 'news sources'}
+                    <li>{($t as Record<string, string>)[feature] || feature}</li>
                   {/if}
                 {/each}
               </ul>

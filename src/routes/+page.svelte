@@ -120,7 +120,7 @@
 
 
 			<main id="main-content">
-			. Hero Section -->
+				<!-- Hero Section -->
 				{#if $t.mainContent.hero}
 				<section class="hero">
 					<div class="container">
@@ -214,9 +214,6 @@
 								<div class="feature-text">
 									<h3>{feature.title}</h3>
 									<p>{feature.description}</p>
-									<!-- <a href="#" class="cta-link"
-										>{feature.cta} &rarr;</a
-									> -->
 								</div>
 								<div class="feature-visual">
 									<img

@@ -120,7 +120,7 @@
 
 
 			<main id="main-content">
-				<!-- 3. Hero Section -->
+			. Hero Section -->
 				{#if $t.mainContent.hero}
 				<section class="hero">
 					<div class="container">
@@ -152,7 +152,7 @@
 				</section>
 				{/if}
 
-				<!-- 4. Social Proof -->
+				<!-- Social Proof -->
 				{#if $t.mainContent.socialProof}
 				<section class="social-proof">
 					<div class="container">
@@ -172,7 +172,7 @@
 				</section>
 				{/if}
 
-				<!-- 5. Value Propositions -->
+				<!-- Value Propositions -->
 				{#if $t.mainContent.valueProps}
 				<section class="value-props">
 					<div class="container">
@@ -192,7 +192,9 @@
 				</section>
 				{/if}
 
-				<!-- 6. Feature Grid -->
+				<Pricing />
+
+				<!-- Feature Grid -->
 				{#if $t.mainContent.features}
 				<section
 					id="features"
@@ -212,9 +214,9 @@
 								<div class="feature-text">
 									<h3>{feature.title}</h3>
 									<p>{feature.description}</p>
-									<a href="#" class="cta-link"
+									<!-- <a href="#" class="cta-link"
 										>{feature.cta} &rarr;</a
-									>
+									> -->
 								</div>
 								<div class="feature-visual">
 									<img
@@ -231,7 +233,7 @@
 				</section>
 				{/if}
 
-				<!-- 7. How It Works -->
+				<!-- How It Works -->
 				{#if $t.mainContent.howItWorks}
 				<section class="how-it-works">
 					<div class="container">
@@ -251,7 +253,7 @@
 				</section>
 				{/if}
 
-				<!-- 8. Use Cases / Personas -->
+				<!-- Use Cases / Personas -->
 				{#if $t.mainContent.personas}
 				<section class="personas">
 					<div class="container">
@@ -280,7 +282,7 @@
 				</section>
 				{/if}
 
-				<!-- 9. Metrics / Outcomes -->
+				<!-- Metrics / Outcomes -->
 				{#if $t.mainContent.metrics}
 				<section class="metrics">
 					<div class="container">
@@ -305,7 +307,7 @@
 				{/if}
 
 
-				<!-- 11. Testimonials -->
+				<!-- Testimonials -->
 				{#if $t.mainContent.testimonials}
 				<section class="testimonials">
 					<div class="container">
@@ -328,7 +330,7 @@
 				</section>
 				{/if}
 
-				<!-- 12. Pricing Preview -->
+				<!-- Pricing Preview -->
 				<!-- {#if $t.mainContent.pricing}
 				<section
 					id="pricing"
@@ -354,7 +356,6 @@
 					</div>
 				</section>
 				{/if} -->
-				<Pricing />
 
 				<!-- 13. FAQ -->
 				<Faq />

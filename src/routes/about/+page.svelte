@@ -1,36 +1,37 @@
 <script lang="ts">
-    import { fade, fly } from "svelte/transition";
+    import { fade } from "svelte/transition";
 
+    // Integrating your actual portfolio projects as the "Ecosystem"
     const projects = [
         {
             name: "Engagement AI",
             url: "https://aibanewsletter.club",
-            desc: "Our flagship IRP system for automated audience growth.",
+            desc: "The flagship IRP system for automated audience growth and news delivery.",
         },
         {
-            name: "AI Philosopher",
-            url: "https://github.com",
-            desc: "Exploring recursive logic and human-AI interaction.",
+            name: "Scene Preset",
+            url: "https://github.com/LuisArmando-TestCoder/scene-preset",
+            desc: "A library focused on avoiding boilerplates when using Three.js and 3D Web APIs.",
         },
         {
-            name: "Recursive Maths",
-            url: "https://github.com",
-            desc: "Mathematical frameworks for scalable systems.",
+            name: "Atomic Framework",
+            url: "https://github.com/LuisArmando-TestCoder/atomic-gatsby-typescript-recoiljs",
+            desc: "A high-performance template built from an atomic design standpoint for scalability.",
         },
         {
-            name: "3D Web Preset",
-            url: "https://github.com",
-            desc: "High-performance components for the modern web.",
+            name: "Canvas Preset",
+            url: "https://github.com/LuisArmando-TestCoder/canvas-preset",
+            desc: "Abstracting common Web API use cases to streamline developer experience.",
         },
         {
-            name: "Truth Tables",
-            url: "https://github.com",
-            desc: "Logic verification tools for complex automations.",
+            name: "VFX Trigger",
+            url: "https://github.com/LuisArmando-TestCoder",
+            desc: "One-click 3D, 2D, and shader effects for immersive web experiences.",
         },
         {
-            name: "People Do Network",
-            url: "https://github.com",
-            desc: "Human-centric networking in an automated world.",
+            name: "3D-Rooms",
+            url: "https://github.com/LuisArmando-TestCoder/3D-Rooms",
+            desc: "Experimental First Person Camera controllers for Three.js environments.",
         },
     ];
 </script>
@@ -42,16 +43,13 @@
 <main class="about">
     <section class="about__hero" in:fade={{ duration: 800 }}>
         <div class="about__container">
-            <span class="about__badge">Our Philosophy</span>
+            <span class="about__badge">The Creator's Philosophy</span>
             <h1 class="about__title">
-                We turn job-trapped founders into <span class="highlight"
-                    >owners</span
-                >.
+                We turn job-trapped founders into <span class="highlight">owners</span>.
             </h1>
             <p class="about__lead">
-                Most people with great ideas get stuck. Not because they lack
-                talent, but because they don’t know where to start, or which
-                path to choose.
+                Most people with great ideas get stuck in the execution. We build the 
+                <strong>leverage</strong> so you can focus on the exploration.
             </p>
         </div>
     </section>
@@ -61,15 +59,13 @@
             <div class="about__content">
                 <h2 class="about__subtitle">Why we exist</h2>
                 <p class="about__text">
-                    If a business falls apart without the owner, it’s not a
-                    business, it’s a job. We help business owners grow their
-                    companies in a way that sets them free from running the
-                    company day‑to‑day.
+                    Founded by <strong>Luis Murillo Baltodano</strong> (Senior Creative Engineer), AIBAN is the result of a passion for computer graphics, automation, and optimization. 
+                </p>
+                <p class="about__text">
+                    If a business falls apart without the owner, it’s not a business—it’s a job. We build systems that ensure quality in all axes, allowing humans to do what they do best.
                 </p>
                 <blockquote class="about__quote">
-                    "We want humans to do what humans do best: <strong
-                        >explore</strong
-                    >."
+                    "We want humans to do what humans do best: <strong>explore</strong>."
                 </blockquote>
             </div>
             <div class="about__visual">
@@ -89,26 +85,38 @@
                     <span class="step__num">01</span>
                     <h3>Build Systems Fast</h3>
                     <p>
-                        We take your ideas and turn them into real, functional
-                        systems in days, not months.
+                        Using custom frameworks like Atomic Design, we turn ideas into functional web systems in days.
                     </p>
                 </div>
                 <div class="step">
                     <span class="step__num">02</span>
                     <h3>Automate Execution</h3>
                     <p>
-                        We organize your business so it works while you sleep.
-                        Systems scale leverage.
+                        We leverage Go and Python for server-side automation so your business works while you sleep.
                     </p>
                 </div>
                 <div class="step">
                     <span class="step__num">03</span>
                     <h3>Multiply Reach</h3>
                     <p>
-                        We grow your business by multiplying your impact without
-                        multiplying your work.
+                        We use generative principles to grow your impact without multiplying your hours.
                     </p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about__projects">
+        <div class="about__container">
+            <h2 class="about__subtitle centered">The Engineering Ecosystem</h2>
+            <div class="project-grid">
+                {#each projects as project}
+                    <a href={project.url} target="_blank" class="project-card">
+                        <h4 class="project-card__title">{project.name}</h4>
+                        <p class="project-card__desc">{project.desc}</p>
+                        <span class="project-card__link">Explore Source →</span>
+                    </a>
+                {/each}
             </div>
         </div>
     </section>
@@ -118,34 +126,19 @@
             <div class="identity-card">
                 <h2 class="about__subtitle">What are we?</h2>
                 <p class="about__text">
-                    We are systems, automation, and
-                    execution. Capital scales effort, but systems scale
-                    leverage.
+                    We are systems, automation, and execution. 
+                    Built on a foundation of creative engineering and 3D web expertise.
                 </p>
+                <div class="identity-actions">
+                    <a href="https://github.com/LuisArmando-TestCoder" class="about__btn">GitHub</a>
+                    <a href="mailto:oriens@aiban.news" class="about__btn about__btn--outline">Contact Lab</a>
+                </div>
                 <p class="about__disclaimer">
-                    Delivered through platform
-                    subscriptions. Leveraging our web
-                    services and the automation provided for your business
-                    processes.
+                    Delivered through high-performance platform subscriptions.
                 </p>
             </div>
         </div>
     </section>
-
-    <!-- <section class="about__projects">
-        <div class="about__container">
-            <h2 class="about__subtitle centered">The Ecosystem</h2>
-            <div class="project-grid">
-                {#each projects as project}
-                    <a href={project.url} target="_blank" class="project-card">
-                        <h4 class="project-card__title">{project.name}</h4>
-                        <p class="project-card__desc">{project.desc}</p>
-                        <span class="project-card__link">View Source →</span>
-                    </a>
-                {/each}
-            </div>
-        </div>
-    </section> -->
 </main>
 
 <style lang="scss">
@@ -176,11 +169,7 @@
         &__hero {
             padding: 100px 0;
             text-align: center;
-            background: radial-gradient(
-                circle at top right,
-                #eff6ff 0%,
-                transparent 40%
-            );
+            background: radial-gradient(circle at top right, #eff6ff 0%, transparent 40%);
         }
 
         &__badge {
@@ -199,10 +188,7 @@
             font-weight: 800;
             letter-spacing: -0.02em;
             margin-bottom: 24px;
-
-            .highlight {
-                color: var(--primary);
-            }
+            .highlight { color: var(--primary); }
         }
 
         &__lead {
@@ -222,15 +208,8 @@
             }
         }
 
-        &__mission {
-            padding: 80px 0;
-        }
-
-        &__text {
-            font-size: 1.125rem;
-            color: var(--text-muted);
-            margin-bottom: 24px;
-        }
+        &__mission { padding: 80px 0; }
+        &__text { font-size: 1.125rem; color: var(--text-muted); margin-bottom: 24px; }
 
         &__quote {
             border-left: 4px solid var(--primary);
@@ -241,39 +220,17 @@
             margin: 40px 0;
         }
 
-        &__how {
-            background: var(--bg-light);
-            padding: 100px 0;
-        }
-
-        &__steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 32px;
-        }
+        &__how { background: var(--bg-light); padding: 100px 0; }
+        &__steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; }
 
         .step {
             background: white;
             padding: 40px;
             border-radius: 16px;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-
-            &__num {
-                font-size: 3rem;
-                font-weight: 800;
-                color: #e5e7eb;
-                display: block;
-                margin-bottom: 16px;
-            }
-
-            h3 {
-                font-size: 1.25rem;
-                font-weight: 700;
-                margin-bottom: 12px;
-            }
-            p {
-                color: var(--text-muted);
-            }
+            &__num { font-size: 3rem; font-weight: 800; color: #e5e7eb; display: block; margin-bottom: 16px; }
+            h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 12px; }
+            p { color: var(--text-muted); }
         }
 
         &__identity {
@@ -284,31 +241,35 @@
                 padding: 60px;
                 border-radius: 24px;
                 text-align: center;
-
-                .about__subtitle {
-                    color: white;
-                }
-                .about__text {
-                    color: #9ca3af;
-                }
+                .about__subtitle { color: white; }
+                .about__text { color: #9ca3af; margin-bottom: 32px; }
             }
-            .about__disclaimer {
-                font-size: 0.875rem;
-                color: #6b7280;
-                margin-top: 32px;
-                font-style: italic;
+            .identity-actions {
+                display: flex;
+                gap: 16px;
+                justify-content: center;
+            }
+            .about__disclaimer { font-size: 0.875rem; color: #6b7280; margin-top: 32px; font-style: italic; }
+        }
+
+        &__btn {
+            padding: 12px 32px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 700;
+            transition: transform 0.2s;
+            &:hover { transform: translateY(-2px); }
+            &--outline {
+                background: transparent;
+                border: 1px solid #374151;
+                &:hover { background: #1f2937; }
             }
         }
 
-        &__projects {
-            padding: 100px 0;
-        }
-
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-        }
+        &__projects { padding: 100px 0; }
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
 
         .project-card {
             text-decoration: none;
@@ -317,38 +278,21 @@
             border: 1px solid #e5e7eb;
             border-radius: 12px;
             transition: all 0.3s ease;
-
             &:hover {
                 border-color: var(--primary);
                 transform: translateY(-4px);
                 box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
             }
-
-            &__title {
-                font-weight: 700;
-                margin-bottom: 8px;
-                color: var(--primary);
-            }
-            &__desc {
-                font-size: 0.9rem;
-                color: var(--text-muted);
-                margin-bottom: 16px;
-            }
-            &__link {
-                font-size: 0.8rem;
-                font-weight: 600;
-                text-transform: uppercase;
-                color: var(--text-main);
-            }
+            &__title { font-weight: 700; margin-bottom: 8px; color: var(--primary); }
+            &__desc { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 16px; }
+            &__link { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; color: var(--text-main); }
         }
 
-        // Visual Lever Animation
         .abstract-lever {
             position: relative;
             height: 200px;
             width: 200px;
             margin: 0 auto;
-
             .lever-arm {
                 position: absolute;
                 top: 50%;
@@ -374,11 +318,8 @@
     }
 
     @media (max-width: 850px) {
-        .about__container.grid {
-            grid-template-columns: 1fr;
-        }
-        .about__hero {
-            padding: 60px 0;
-        }
+        .about__container.grid { grid-template-columns: 1fr; }
+        .about__hero { padding: 60px 0; }
+        .identity-actions { flex-direction: column; }
     }
 </style>

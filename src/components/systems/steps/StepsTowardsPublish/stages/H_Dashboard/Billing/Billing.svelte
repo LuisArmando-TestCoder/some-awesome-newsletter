@@ -1,22 +1,22 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-  import { writable } from 'svelte/store';
+  import { onMount } from "svelte";
+  import { writable } from "svelte/store";
   import plansStore, {
     loadPlansContent,
     type Plan,
-    type PlansState
-  } from '$lib/config/plans.config';
-  import store from '../../../../../../store';
-  import { t } from '$lib/i18n/dashboard-translations';
-  import Switch from '$lib/ui/components/Switch.svelte';
+    type PlansState,
+  } from "$lib/config/plans.config";
+  import store from "../../../../../../store";
+  import { t } from "$lib/i18n/dashboard-translations";
+  import Switch from "$lib/ui/components/Switch.svelte";
 
   let state: PlansState;
   const unsub = plansStore.subscribe((v) => (state = v));
 
   const currentPlan = writable<Plan | undefined>(undefined);
-  
+
   // Track billing cycle for the 35% discount UI toggle
-  let billingCycle: 'monthly' | 'yearly' = 'monthly';
+  let billingCycle: "monthly" | "yearly" = "monthly";
   const ANNUAL_DISCOUNT = 0.35;
 
   onMount(async () => {
@@ -25,53 +25,63 @@
 
   $: {
     if ($store.config && state?.content) {
-      const plan = state.content.plans.find((p) => p.id === $store.config.pricingPlan);
+      const plan = state.content.plans.find(
+        (p) => p.id === $store.config.pricingPlan,
+      );
       currentPlan.set(plan);
       // Auto-set toggle if user is already on a yearly plan
-      if ($store.config.billingInterval === 'yearly') billingCycle = 'yearly';
+      if ($store.config.billingInterval === "yearly") billingCycle = "yearly";
     }
   }
 
-  function getPrice(plan: Plan, cycle: 'monthly' | 'yearly') {
-    if (plan.id === 'free') return 0;
-    if (cycle === 'monthly') return plan.monthly;
+  function getPrice(plan: Plan, cycle: "monthly" | "yearly") {
+    if (plan.id === "free") return 0;
+    if (cycle === "monthly") return plan.monthly;
     // Apply 35% discount: (Monthly * 12) * 0.65
-    return Math.floor((plan.monthly * 12) * (1 - ANNUAL_DISCOUNT));
+    return Math.floor(plan.monthly * 12 * (1 - ANNUAL_DISCOUNT));
   }
 </script>
 
 <div class="billing-dashboard">
-  <h1 class="billing-header">{$t['billing.title']}</h1>
+  <h1 class="billing-header">{$t["billing.title"]}</h1>
 
   <div class="billing-section current-plan">
-    <h2 class="section-title">{$t['billing.currentPlanTitle']}</h2>
+    <h2 class="section-title">{$t["billing.currentPlanTitle"]}</h2>
     <div class="card">
-      {#if $store.config.pricingPlan === 'vipfree'}
+      {#if $store.config.pricingPlan === "vipfree"}
         <div class="plan-details">
-          <h3 class="current-plan-name">{$t['billing.vipPlanName']}</h3>
-          <p class="current-plan-price">{$t['billing.vipPlanDescription']}</p>
+          <h3 class="current-plan-name">{$t["billing.vipPlanName"]}</h3>
+          <p class="current-plan-price">{$t["billing.vipPlanDescription"]}</p>
         </div>
       {:else if $currentPlan}
         <div class="plan-details">
           <h3 class="current-plan-name">{$currentPlan.name}</h3>
           <p class="current-plan-price">
-            ${billingCycle === 'monthly' ? $currentPlan.monthly : getPrice($currentPlan, 'yearly')} 
-            {$t['billing.per']} {billingCycle === 'monthly' ? $t['billing.month'] : $t['billing.year']}
+            ${billingCycle === "monthly"
+              ? $currentPlan.monthly
+              : getPrice($currentPlan, "yearly")}
+            {$t["billing.per"]}
+            {billingCycle === "monthly"
+              ? $t["billing.month"]
+              : $t["billing.year"]}
           </p>
         </div>
-        <a href={`/api/portal?customerEmail=${$store.configuratorEmail}`} class="manage-plan-button">{$t['billing.manageSubscription']}</a>
+        <a
+          href={`/api/portal?customerEmail=${$store.configuratorEmail}`}
+          class="manage-plan-button">{$t["billing.manageSubscription"]}</a
+        >
       {:else}
-        <p>{$t['billing.loadingPlan']}</p>
+        <p>{$t["billing.loadingPlan"]}</p>
       {/if}
     </div>
   </div>
 
-  {#if $store.config.pricingPlan === 'vipfree'}
+  {#if $store.config.pricingPlan === "vipfree"}
     <div class="billing-section vip-message">
-      <h2 class="section-title">{$t['billing.vipMessageTitle']}</h2>
+      <h2 class="section-title">{$t["billing.vipMessageTitle"]}</h2>
       <div class="card">
         <p>
-          {$t['billing.vipMessageText']}
+          {$t["billing.vipMessageText"]}
           <a href="mailto:oriens@aiban.news">oriens@aiban.news</a>.
         </p>
       </div>
@@ -79,16 +89,18 @@
   {:else}
     <div class="billing-section upgrade-plan">
       <div class="section-header-flex">
-        <h2 class="section-title">{$t['billing.upgradePlanTitle']}</h2>
-        
+        <h2 class="section-title">{$t["billing.upgradePlanTitle"]}</h2>
+
         <div class="cycle-toggle">
-          <span class:active={billingCycle === 'monthly'}>{$t['billing.monthly']}</span>
-          <Switch 
-            toggled={billingCycle === 'yearly'} 
-            onChange={(v) => billingCycle = v ? 'yearly' : 'monthly'} 
+          <span class:active={billingCycle === "monthly"}
+            >{$t["billing.monthly"]}</span
+          >
+          <Switch
+            toggled={billingCycle === "yearly"}
+            onChange={(v) => (billingCycle = v ? "yearly" : "monthly")}
           />
-          <span class:active={billingCycle === 'yearly'}>
-            {$t['billing.yearly']} 
+          <span class:active={billingCycle === "yearly"}>
+            {$t["billing.yearly"]}
             <span class="discount-badge">-35%</span>
           </span>
         </div>
@@ -97,50 +109,82 @@
       <div class="plan-options">
         {#if state?.content?.plans}
           {#each state.content.plans.filter((p) => !p.internalOnly) as plan}
-            <div class="plan-option-card" class:selected={$currentPlan?.id === plan.id} class:featured={plan.id === 'growth'}>
-              {#if plan.id === 'growth'}
-                <div class="popular-tag">{$t['billing.mostPopular']}</div>
+            <div
+              class="plan-option-card"
+              class:selected={$currentPlan?.id === plan.id}
+              class:featured={plan.id === "growth"}
+            >
+              {#if plan.id === "growth"}
+                <div class="popular-tag">{$t["billing.mostPopular"]}</div>
               {/if}
-              
+
               <h3 class="plan-option-title">{plan.name}</h3>
               <div class="price-container">
-                <span class="plan-option-price">${getPrice(plan, billingCycle)}</span>
-                <span class="plan-option-interval">/{billingCycle === 'monthly' ? 'mo' : 'yr'}</span>
+                <span class="plan-option-price"
+                  >${getPrice(plan, billingCycle)}</span
+                >
+                <span class="plan-option-interval"
+                  >/{billingCycle === "monthly" ? "mo" : "yr"}</span
+                >
               </div>
 
-              {#if billingCycle === 'yearly' && plan.id !== 'free'}
-                <span class="savings-note">{$t['billing.youSave']} 35%</span>
+              {#if billingCycle === "yearly" && plan.id !== "free"}
+                <span class="savings-note">{$t["billing.youSave"]} 35%</span>
               {/if}
 
               <ul class="plan-option-features">
                 <li class="limit-highlighter">
-                  <strong>{plan.id === 'free' ? '100' : 
-                           plan.id === 'starter' ? '100,000' :
-                           plan.id === 'growth' ? '250,000' :
-                           plan.id === 'pro' ? '500,000' : 'Unlimited'}</strong> 
-                  {$t['billing.users']}
+                  <strong
+                    >{plan.id === "free"
+                      ? "100"
+                      : plan.id === "starter"
+                        ? "100,000"
+                        : plan.id === "growth"
+                          ? "250,000"
+                          : plan.id === "pro"
+                            ? "500,000"
+                            : "Unlimited"}</strong
+                  >
+                  {$t["billing.users"]}
                 </li>
+
                 <li class="limit-highlighter">
-                  <strong>{plan.id === 'free' ? '1' : 
-                           plan.id === 'starter' ? '5' :
-                           plan.id === 'growth' ? '17' :
-                           plan.id === 'pro' ? '25' : '50'}</strong> 
-                  {$t['billing.newsSources']}
+                  <strong
+                    >{plan.id === "free"
+                      ? "1"
+                      : plan.id === "starter"
+                        ? "5"
+                        : plan.id === "growth"
+                          ? "17"
+                          : plan.id === "pro"
+                            ? "25"
+                            : "50"}</strong
+                  >
+                  {$t["billing.newsSources"]}
                 </li>
-                
+
                 {#each plan.featuresBase as feature}
-                  <li>{($t as Record<string, string>)[feature] || feature}</li>
+                  {#if !["users", "newsSources"].includes(feature.toLowerCase())}
+                    <li>
+                      {($t as Record<string, string>)[feature] || feature}
+                    </li>
+                  {/if}
                 {/each}
               </ul>
 
               {#if $currentPlan?.id === plan.id}
-                <button class="upgrade-button current-plan-button" disabled>{$t['billing.currentPlanButton']}</button>
+                <button class="upgrade-button current-plan-button" disabled
+                  >{$t["billing.currentPlanButton"]}</button
+                >
               {:else}
-                <a 
-                  href={`/api/checkout?products=${plan.productId}&interval=${billingCycle}`} 
+                <a
+                  href={`/api/checkout?products=${plan.productId}&interval=${billingCycle}`}
                   class="upgrade-button"
                 >
-                  {($currentPlan && plan.tier < $currentPlan.tier) ? $t['billing.downgradeTo'] : $t['billing.upgradeTo']} {plan.name}
+                  {$currentPlan && plan.tier < $currentPlan.tier
+                    ? $t["billing.downgradeTo"]
+                    : $t["billing.upgradeTo"]}
+                  {plan.name}
                 </a>
               {/if}
             </div>
@@ -153,7 +197,8 @@
 
 <style>
   .billing-dashboard {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     padding: 20px;
     background-color: #f0f2f5;
     color: #333;
@@ -177,7 +222,7 @@
     background: white;
     padding: 8px 15px;
     border-radius: 50px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   }
 
   .cycle-toggle .active {
@@ -308,7 +353,7 @@
   }
 
   .plan-option-features li::before {
-    content: '✔';
+    content: "✔";
     color: #28a745;
     position: absolute;
     left: 0;

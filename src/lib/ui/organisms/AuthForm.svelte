@@ -75,11 +75,11 @@
         </button>
       </form> -->
       <!-- Divider -->
-      <div class="auth-form__divider">
+      <!-- <div class="auth-form__divider">
         <span class="auth-form__divider-line"></span>
         <span>{copy?.or}</span>
         <span class="auth-form__divider-line"></span>
-      </div>
+      </div> -->
       <!-- Email input -->
       <EmailInput bind:value={email} placeholder={copy?.emailPlaceholder} label="Email" onEnter={() => onEmail()} 
         onChange={(value) => {

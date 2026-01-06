@@ -168,7 +168,7 @@
     &__nav-list { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
     &__nav-link { 
       color: #666; text-decoration: none; font-size: 0.8rem; font-weight: 700; text-transform: uppercase;
-      &.active { color: #000; box-shadow: 0 4px 0 -1px #000; }
+      &.active { color: #000; box-shadow: 0 0 4px -1px #000; }
       &--pill { background: #000; color: #fff !important; padding: 0.6rem 1.5rem; border-radius: 4px; }
     }
     &__actions { display: flex; gap: 1rem; align-items: center; }

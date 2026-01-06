@@ -8,7 +8,7 @@
   } from "$lib/config/plans.config";
   import Switch from "$lib/ui/components/Switch.svelte";
   import { useSmoothPage } from "$lib/anim/useSmoothPage";
-  import { t } from "../../lib/i18n/translations";
+  import { t } from "$lib/i18n/translations";
 
   let state: PlansState;
   const unsub = plansStore.subscribe((v) => (state = v));

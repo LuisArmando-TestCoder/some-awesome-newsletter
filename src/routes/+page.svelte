@@ -8,6 +8,7 @@
 	import Faq from "$lib/ui/organisms/Faq.svelte";
 	import logout from "../components/systems/requests/logout";
     import { t } from "$lib/i18n/translations";
+    import Pricing from "$lib/ui/organisms/Pricing.svelte";
 	// --- State ---
 	let showAnnouncement = true;
 	let prefersReducedMotion = false;
@@ -328,7 +329,7 @@
 				{/if}
 
 				<!-- 12. Pricing Preview -->
-				{#if $t.mainContent.pricing}
+				<!-- {#if $t.mainContent.pricing}
 				<section
 					id="pricing"
 					class="pricing-preview"
@@ -352,7 +353,8 @@
 						</div>
 					</div>
 				</section>
-				{/if}
+				{/if} -->
+				<Pricing />
 
 				<!-- 13. FAQ -->
 				<Faq />

@@ -203,7 +203,7 @@ export default {
         "links": [
           { "text": "Game da Mu", "href": "/about" },
           { "text": "Ayyuka", "href": "/careers" },
-          { "text": "Blog", "href": "/blog" }
+          { "text": "Blog", "href": "https://github.com/LuisArmando-TestCoder/scientia/tree/master/proposiciones" }
         ]
       },
       "legalLinks": {

@@ -203,7 +203,7 @@ export default {
         "links": [
           { "text": "Tentang Kami", "href": "/about" },
           { "text": "Karier", "href": "/careers" },
-          { "text": "Blog", "href": "/blog" }
+          { "text": "Blog", "href": "https://github.com/LuisArmando-TestCoder/scientia/tree/master/proposiciones" }
         ]
       },
       "legalLinks": {

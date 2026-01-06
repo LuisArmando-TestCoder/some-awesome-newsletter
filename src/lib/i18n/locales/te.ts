@@ -203,7 +203,7 @@ export default {
         "links": [
           { "text": "మా గురించి", "href": "/about" },
           { "text": "కెరీర్లు", "href": "/careers" },
-          { "text": "బ్లాగ్", "href": "/blog" }
+          { "text": "బ్లాగ్", "href": "https://github.com/LuisArmando-TestCoder/scientia/tree/master/proposiciones" }
         ]
       },
       "legalLinks": {

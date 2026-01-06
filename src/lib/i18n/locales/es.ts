@@ -198,7 +198,7 @@ export default {
         "links": [
           { "text": "Sobre Nosotros", "href": "/about" },
           { "text": "Carreras", "href": "/careers" },
-          { "text": "Blog", "href": "/blog" }
+          { "text": "Blog", "href": "https://github.com/LuisArmando-TestCoder/scientia/tree/master/proposiciones" }
         ]
       },
       "legalLinks": {

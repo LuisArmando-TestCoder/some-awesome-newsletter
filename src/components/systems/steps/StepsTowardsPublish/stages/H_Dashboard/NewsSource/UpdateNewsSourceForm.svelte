@@ -184,7 +184,7 @@
       <div class="selectors-group">
 
         <PlainText
-          label="Buyer Persona"
+          label="Type of client"
           placeholder="e.g. 'My Dear Newsletter Users'"
           bind:value={updateFields.community}
         />

@@ -151,7 +151,6 @@
         background: white;
         color: var(--text-main);
         line-height: 1.6;
-        padding-top: 80px;
 
         &__container {
             max-width: 1100px;

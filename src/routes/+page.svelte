@@ -597,7 +597,7 @@
 		margin-left: auto;
 		margin-right: auto;
 		h2, p {
-			color: var(--color-background-inversion);
+			color: var(--color-background);
 		}
 		h2 {
 			margin-bottom: var(--space-sm);

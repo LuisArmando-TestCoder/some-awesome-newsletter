@@ -156,7 +156,6 @@
   
       background: white;
       color: var(--text-main);
-      padding-top: 80px;
   
       &__container {
         max-width: 1000px;
@@ -209,6 +208,12 @@
       &__values {
         padding: 100px 0;
         background-color: var(--bg-alt);
+      }
+
+      &__visual {
+        background: url(https://images.pexels.com/photos/4839763/pexels-photo-4839763.jpeg);
+        background-size: contain;
+        height: 100%;
       }
   
       .values-grid {

@@ -597,7 +597,8 @@
 		margin-left: auto;
 		margin-right: auto;
 		h2, p {
-			color: var(--color-background);
+			color: var(--color-background-inversion);
+    		mix-blend-mode: difference;
 		}
 		h2 {
 			margin-bottom: var(--space-sm);
@@ -780,7 +781,7 @@
 
 	/* 5. Value Props */
 	.value-props {
-		background: url(https://images.pexels.com/photos/261579/pexels-photo-261579.jpeg?w=1250);
+		background: url(https://images.pexels.com/photos/434337/pexels-photo-434337.jpeg);
 		background-size: cover;
 		background-attachment: fixed;
 		.card {

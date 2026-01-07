@@ -19,8 +19,18 @@
   }
 
   export let links: SideLinkType[] = [
-    { name: $t['menuHalf.dashboard'], children: [getLink("Profile", $t['menuHalf.profile']), getLink("News Sources", $t['menuHalf.newsSources']), getLink("Users", $t['menuHalf.users']), getLink("Reports", $t['menuHalf.reports'])] },
-    getLink("Secrets/Developer", $t['menuHalf.secretsDeveloper']), getLink("Newspaper", $t['menuHalf.newspaper']), getLink("Billing", $t['menuHalf.billing']),
+    {
+      name: $t["menuHalf.dashboard"],
+      children: [
+        getLink("Profile", $t["menuHalf.profile"]),
+        getLink("News Sources", $t["menuHalf.newsSources"]),
+        getLink("Users", $t["menuHalf.users"]),
+        getLink("Reports", $t["menuHalf.reports"]),
+      ],
+    },
+    getLink("Secrets/Developer", $t["menuHalf.secretsDeveloper"]),
+    // getLink("Newspaper", $t["menuHalf.newspaper"]),
+    getLink("Billing", $t["menuHalf.billing"]),
   ];
 
   function getInitials(name: string): string {
@@ -46,7 +56,7 @@
   class="sidebar"
   class:collapsed={!$isMobileMenuOpen}
   aria-label="Primary Navigation"
-  style={$store.stepsIndex > 4 ? '' : 'display: none;'}
+  style={$store.stepsIndex > 4 ? "" : "display: none;"}
 >
   <nav id="sidebar-nav" class="sidebar__nav" aria-label="Sections">
     <ul class="sidebar__nav-list">
@@ -62,14 +72,19 @@
         src={$store?.picture || ""}
         alt="User avatar"
         class="sidebar__profile-avatar outlined"
-        on:error={(e) => ((e.currentTarget as HTMLElement).style.display = 'none')}
+        on:error={(e) =>
+          ((e.currentTarget as HTMLElement).style.display = "none")}
       />
       <div class="sidebar__profile-initials outlined">
         {getInitials($store?.config.senderName || $store?.given_name)}
       </div>
       <div class="sidebar__profile-info">
-        <p class="sidebar__profile-name">{$store?.config.senderName || $store?.given_name}</p>
-        <a on:click={() => logout()} class="sidebar__profile-logout">{$t['menuHalf.logOut']}</a>
+        <p class="sidebar__profile-name">
+          {$store?.config.senderName || $store?.given_name}
+        </p>
+        <a on:click={() => logout()} class="sidebar__profile-logout"
+          >{$t["menuHalf.logOut"]}</a
+        >
       </div>
     </div>
   {/if}
@@ -86,7 +101,10 @@
     backdrop-filter: blur(6px);
     padding: var(--space-md);
     box-shadow: 0 0 5px -2px #fff;
-    transition: width 0.3s ease, left 0.3s ease, box-shadow 0.2s ease;
+    transition:
+      width 0.3s ease,
+      left 0.3s ease,
+      box-shadow 0.2s ease;
     width: var(--sidebar-expanded-w);
     display: flex;
     flex-direction: column;
@@ -103,8 +121,16 @@
     }
   }
 
-  .sidebar__nav { flex-grow: 1; overflow-y: auto; overflow-x: hidden; }
-  .sidebar__nav-list { list-style: none; padding: 0; margin: 0; }
+  .sidebar__nav {
+    flex-grow: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  .sidebar__nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
 
   .sidebar__profile {
     margin-top: auto;
@@ -116,7 +142,11 @@
   }
 
   .sidebar__profile-avatar {
-    width: 40px; height: 40px; object-fit: cover; flex-shrink: 0; display: block;
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    flex-shrink: 0;
+    display: block;
     object-position: center;
   }
 
@@ -124,10 +154,27 @@
     display: none;
   }
 
-  .sidebar__profile-info { overflow: hidden; }
-  .sidebar__profile-name, .sidebar__profile-logout { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .sidebar__profile-name { font-weight: 600; margin: 0; }
-  .sidebar__profile-logout { font-size: 0.9rem; color: var(--c-text-light); cursor: pointer; &:hover { text-decoration: underline; } }
+  .sidebar__profile-info {
+    overflow: hidden;
+  }
+  .sidebar__profile-name,
+  .sidebar__profile-logout {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .sidebar__profile-name {
+    font-weight: 600;
+    margin: 0;
+  }
+  .sidebar__profile-logout {
+    font-size: 0.9rem;
+    color: var(--c-text-light);
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 
   @media (min-width: 1024px) {
     .sidebar {

@@ -170,10 +170,10 @@ export default {
   "billing.currentPlanButton": "This is your current plan",
   "billing.downgradeTo": "Downgrade to",
   "billing.upgradeTo": "Upgrade to",
-  "placeholders.email": "Enter the email address to send from",
-  "labels.senderEmail": "Sender Email Address",
-  "placeholders.appPassword": "Enter your email app password",
-  "labels.appPassword": "Email App Password",
+  "placeholders.email": "your-email@gmail.com",
+  "labels.senderEmail": "Email Address (Sender)",
+  "placeholders.appPassword": "abcd efgh ijkl mnop",
+  "labels.appPassword": "App Password (16 letters)",
   "markdown.emailCredentials": "*(Optional) Provide email credentials if you want the newsletter sent directly from your email account (e.g., Gmail). Requires both Sender Email and an App Password.*",
   "markdown.emailMaskSender": "--The email address that will appear as the sender in your newsletters.--",
   "markdown.emailSignature": "--Email signatures instil brand trust--",
@@ -232,7 +232,6 @@ export default {
   "labels.noArticlesFound": "No articles found for this news source.",
   "labels.created": "Created",
   "labels.language": "Language",
-  // Billing Limits & Marketing (Added for visual completeness)
   "billing.unlimited": "Unlimited",
   "billing.users": "users",
   "billing.newsSources": "news sources",
@@ -242,8 +241,6 @@ export default {
   "billing.planCustom": "Custom Plan",
   "billing.monthly": "monthly",
   "billing.currentPlan": "This is your current plan",
-
-  // News Source Actions
   "newsSource.url": "Source URL",
   "newsSource.status": "Status",
   "newsSource.active": "Active",
@@ -252,16 +249,12 @@ export default {
   "newsSource.actions": "Actions",
   "newsSource.delete": "Delete Source",
   "newsSource.confirmDelete": "Are you sure you want to delete this news source?",
-
-  // Profile Management
   "profile.title": "User Profile",
   "profile.name": "Name",
   "profile.email": "Email Address",
   "profile.saveChanges": "Save Changes",
   "profile.avatar": "Profile Picture",
   "profile.successUpdate": "Profile updated successfully",
-
-  // Developer/Secrets Additional
   "secrets.title": "Developer Settings",
   "secrets.apiKey": "API Key",
   "secrets.showKey": "Show Key",
@@ -269,8 +262,6 @@ export default {
   "secrets.copyKey": "Copy Key",
   "secrets.regenerate": "Regenerate Key",
   "secrets.webhookUrl": "Webhook URL",
-
-  // General UI Labels
   "labels.back": "Back",
   "labels.cancel": "Cancel",
   "labels.confirm": "Confirm",
@@ -283,8 +274,6 @@ export default {
   "labels.all": "All",
   "labels.enabled": "Enabled",
   "labels.disabled": "Disabled",
-
-  // Subscriber Management
   "errors.maxSubscribers": "You have reached the maximum number of subscribers for the Free plan.",
   "errors.nameRequired": "Name is required.",
   "errors.emailRequired": "Email is required.",
@@ -305,9 +294,21 @@ export default {
   "errors.selectFileFirst": "Please select a file first.",
   "labels.noMetadata": "No metadata",
   "labels.unsubscribe": "Unsubscribe",
-
-  // Toasts
   "notification.success": "Operation successful",
   "notification.error": "An error has occurred",
-  "notification.copiedToClipboard": "Copied to clipboard"
+  "notification.copiedToClipboard": "Copied to clipboard",
+
+  /* New Credentials Section Keys */
+  "credentials.title": "Connect your own email",
+  "credentials.optional": "Optional",
+  "credentials.intro": "This configuration is <strong>completely optional</strong>. It is only necessary if you want system emails to be sent from your personal address. If you prefer not to do this, we will use our default address for you.",
+  "credentials.googleRequirement": "To enable this, Google requires a 16-letter <strong>\"App Password\"</strong> to protect your main account.",
+  "credentials.howToGet": "How to get this code?",
+  "credentials.hideGuide": "Hide guide",
+  "credentials.quickConfig": "Quick configuration",
+  "credentials.goGoogle": "Go to Google Security ↗",
+  "credentials.step1": "Go to <b>Security</b>.",
+  "credentials.step2": "Look for <b>\"App passwords\"</b>.",
+  "credentials.step3": "Create a key named <b>\"AIBAN\"</b> and paste the code below.",
+  "credentials.errorBothRequired": "Both fields are required to activate custom sending."
 };

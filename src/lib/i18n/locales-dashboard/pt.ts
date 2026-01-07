@@ -153,5 +153,23 @@ export default {
   "newsSource.searchPlaceholder": "Pesquisar fontes de notícias...",
   "newsSource.addTitle": "Adicionar Fonte de Notícias",
   "newsSource.loading": "Carregando fontes de notícias...",
-  "newsSource.noSources": "Nenhuma fonte de notícias configurada ainda."
+  "newsSource.noSources": "Nenhuma fonte de notícias configurada ainda.",
+
+  /* Novos campos de credenciais */
+  "credentials.title": "Conecte seu próprio e-mail",
+  "credentials.optional": "Opcional",
+  "credentials.intro": "Esta configuração é <strong>totalmente opcional</strong>. Ela só é necessária se você deseja que os e-mails do sistema sejam enviados do seu endereço pessoal. Se não desejar, usaremos nosso endereço padrão para você.",
+  "credentials.googleRequirement": "Para ativar isso, o Google exige uma <strong>\"Senha de App\"</strong> de 16 caracteres para manter sua conta principal segura.",
+  "credentials.howToGet": "Como obter este código?",
+  "credentials.hideGuide": "Ocultar guia",
+  "credentials.quickConfig": "Configuração rápida",
+  "credentials.goGoogle": "Ir para configurações de segurança do Google ↗",
+  "credentials.step1": "Vá para a opção <b>Segurança</b>.",
+  "credentials.step2": "Encontre <b>\"Senhas de app\"</b>.",
+  "credentials.step3": "Crie uma chave chamada <b>\"AIBAN\"</b> e cole o código abaixo.",
+  "credentials.errorBothRequired": "Ambas as informações são necessárias para ativar o envio de e-mail personalizado.",
+  "labels.senderEmail": "Endereço de e-mail (Remetente)",
+  "labels.appPassword": "Senha de app (16 caracteres)",
+  "placeholders.email": "seu-email@gmail.com",
+  "placeholders.appPassword": "abcd efgh ijkl mnop"
 };

@@ -178,5 +178,31 @@ export default {
   "placeholders.searchArticles": "جستجوی مقالات...",
   "labels.noArticlesFound": "هیچ مقاله‌ای برای این منبع خبری یافت نشد.",
   "labels.created": "ایجاد شد",
-  "labels.language": "زبان"
+  "labels.language": "زبان",
+
+  /* Credentials Section */
+  "credentials.title": "ایمیل شخصی خود را متصل کنید",
+  "credentials.optional": "اختیاری",
+  "credentials.intro": "این تنظیمات <strong>کاملاً اختیاری</strong> است. این بخش فقط در صورتی لازم است که بخواهید ایمیل‌های سیستم از آدرس شخصی شما ارسال شوند. در غیر این صورت، ما از آدرس پیش‌فرض خود استفاده خواهیم کرد.",
+  "credentials.googleRequirement": "برای فعال‌سازی، گوگل به یک <strong>\"رمز عبور برنامه\" (App password)</strong> ۱۶ رقمی نیاز دارد تا امنیت حساب اصلی شما حفظ شود.",
+  "credentials.howToGet": "چگونه این کد را دریافت کنم؟",
+  "credentials.hideGuide": "پنهان کردن راهنما",
+  "credentials.quickConfig": "پیکربندی سریع",
+  "credentials.goGoogle": "رفتن به تنظیمات امنیت گوگل ↗",
+  "credentials.step1": "به برگه <b>Security (امنیت)</b> بروید.",
+  "credentials.step2": "عبارت <b>\"App passwords\"</b> را جستجو کنید.",
+  "credentials.step3": "یک کلید با نام <b>\"AIBAN\"</b> ایجاد کنید و کد را اینجا جای‌گذاری کنید.",
+  "credentials.errorBothRequired": "برای فعال‌سازی ارسال شخصی، هر دو ورودی الزامی است.",
+
+  /* Analytics & Playground Labels */
+  "placeholders.email": "your-email@gmail.com",
+  "labels.senderEmail": "آدرس ایمیل فرستنده",
+  "placeholders.appPassword": "abcd efgh ijkl mnop",
+  "labels.appPassword": "رمز عبور برنامه (۱۶ کاراکتر)",
+  "analytics.title": "تحلیل‌ها",
+  "analytics.newsSource": "منبع خبری",
+  "analytics.subscribers": "مشترکین",
+  "analytics.clicks": "کلیک‌ها",
+  "labels.apiPlayground": "محیط آزمایشی API",
+  "labels.downloadJson": "دانلود JSON"
 };

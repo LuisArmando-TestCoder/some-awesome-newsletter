@@ -178,5 +178,34 @@ export default {
   "placeholders.searchArticles": "लेख शोधा...",
   "labels.noArticlesFound": "या बातम्यांच्या स्रोतासाठी कोणतेही लेख आढळले नाहीत.",
   "labels.created": "तयार केले",
-  "labels.language": "भाषा"
+  "labels.language": "भाषा",
+
+  /* New Credentials Section */
+  "credentials.title": "तुमचा स्वतःचा ईमेल कनेक्ट करा",
+  "credentials.optional": "पर्यायी",
+  "credentials.intro": "हा सेटअप <strong>पूर्णपणे पर्यायी</strong> आहे. जर तुम्हाला तुमच्या वैयक्तिक पत्त्यावरून सिस्टम ईमेल पाठवायचे असतील तरच याची गरज आहे. अन्यथा, आम्ही आमचा डीफॉल्ट पत्ता वापरू.",
+  "credentials.googleRequirement": "सक्रियकरणासाठी, तुमचे मुख्य खाते सुरक्षित ठेवण्यासाठी Google ला १६-अक्षरी <strong>\"अॅप पासवर्ड\"</strong> आवश्यक आहे.",
+  "credentials.howToGet": "हा कोड कसा मिळवायचा?",
+  "credentials.hideGuide": "मार्गदर्शक लपवा",
+  "credentials.quickConfig": "द्रुत कॉन्फिगरेशन",
+  "credentials.goGoogle": "Google सुरक्षा सेटिंग्जवर जा ↗",
+  "credentials.step1": "<b>Security (सुरक्षा)</b> टॅबवर जा.",
+  "credentials.step2": "<b>\"App passwords\" (अॅप पासवर्ड)</b> शोधा.",
+  "credentials.step3": "<b>\"AIBAN\"</b> नावाच्या की तयार करा आणि खाली कोड पेस्ट करा.",
+  "credentials.errorBothRequired": "वैयक्तिक ईमेल पाठवणे सक्षम करण्यासाठी दोन्ही इनपुट आवश्यक आहेत.",
+
+  /* Additional Labels */
+  "labels.senderEmail": "पाठवणाऱ्याचा ईमेल पत्ता",
+  "labels.appPassword": "अॅप पासवर्ड (१६ अक्षरे)",
+  "placeholders.email": "तुमचा-ईमेल@gmail.com",
+  "placeholders.appPassword": "abcd efgh ijkl mnop",
+  "labels.generateSignature": "स्वाक्षरी तयार करा",
+  "labels.noEmailSignatureSet": "कोणतीही ईमेल स्वाक्षरी सेट केलेली नाही",
+  "markdown.imageToggle": "तुमच्या वृत्तपत्रासाठी **लोगो** अपलोड करा",
+  "analytics.title": "विश्लेषण",
+  "analytics.newsSource": "बातम्यांचा स्रोत",
+  "analytics.subscribers": "सदस्य",
+  "analytics.clicks": "क्लिक",
+  "labels.apiPlayground": "API प्लेग्राउंड",
+  "labels.downloadJson": "JSON डाउनलोड करा"
 };

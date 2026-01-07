@@ -231,5 +231,18 @@ export default {
   "placeholders.searchArticles": "مضمون تلاش کرو...",
   "labels.noArticlesFound": "اس خبراں دے ذریعے لئی کوئی مضمون نہیں ملیا۔",
   "labels.created": "بنایا گیا",
-  "labels.language": "زبان"
+  "labels.language": "زبان",
+
+  /* Credentials Section Update */
+  "credentials.title": "اپنا ای میل اکاؤنٹ جوڑو",
+  "credentials.optional": "اختیاری",
+  "credentials.intro": "ایہ سیٹ اپ <strong>لازمی نہیں اے</strong>۔ ایہ صرف اس صورت وچ ضروری اے جے تسیں چاہندے او کہ سسٹم ای میلز تواڈے ذاتی پتے توں بھیجیاں جان۔ بصورت دیگر، اسیں اپنا ڈیفالٹ پتہ استعمال کراں گے۔",
+  "credentials.googleRequirement": "ایکٹیویشن لئی، گوگل نوں 16-ہندسیاں دا <strong>\"ایپ پاس ورڈ\"</strong> چاہیدا اے تاکہ تواڈا اصل اکاؤنٹ محفوظ رہے۔",
+  "credentials.howToGet": "ایہ کوڈ کویں ملے گا؟",
+  "credentials.hideGuide": "گائیڈ چھپاؤ",
+  "credentials.quickConfig": "فوری کنفیگریشن",
+  "credentials.goGoogle": "گوگل سکیورٹی سیٹنگز تے جاؤ ↗",
+  "credentials.step1": "<b>Security (سکیورٹی)</b> ٹیب تے جاؤ۔",
+  "credentials.step2": "<b>\"App passwords\"</b> تلاش کرو۔",
+  "credentials.step3": "<b>\"AIBAN\"</b> دے ناں نال چابی بناؤ تے کوڈ ایتھے پیسٹ کرو۔"
 };

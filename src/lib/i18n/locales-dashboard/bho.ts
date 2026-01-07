@@ -170,6 +170,8 @@ export default {
   "billing.currentPlanButton": "ई आपके वर्तमान योजना ह",
   "billing.downgradeTo": "पर डाउनग्रेड करीं",
   "billing.upgradeTo": "पर अपग्रेड करीं",
+
+  /* यहाँ से अपडेट कइल गइल लेबल बा */
   "placeholders.email": "ईमेल पता डालीं जेकरा से भेजल जाव",
   "labels.senderEmail": "भेजने वाला के ईमेल पता",
   "placeholders.appPassword": "आपन ईमेल ऐप पासवर्ड डालीं",
@@ -186,7 +188,7 @@ export default {
   "markdown.newsletterSubject": "--एके संक्षिप्त, साफ, आ जिज्ञासा पैदा करे वाला राखीं--",
   "placeholders.newsletterTitle": "आपन न्यूज़लेटर के शीर्षक बदलीं",
   "markdown.newsletterTitle": "--एके व्यक्तिगत महसूस कराईं, जइसे कि दोस्त के संदेश होखे--",
-  "placeholders.senderName": "आपन ईमेल भेजे वाला के नाम बदलीं",
+  "placeholders.senderName": "आपन ईमेल भेजने वाला के नाम बदलीं",
   "markdown.senderName": "--ईमेल केकरा ओर से आइल बा ई बतावे से भरोसा बनावे में मदद मिलेला--",
   "labels.manualSubscriptionLink": "मैनुअल सदस्यता खातिर लिंक",
   "labels.apiPlayground": "एपीआई प्लेग्राउंड",

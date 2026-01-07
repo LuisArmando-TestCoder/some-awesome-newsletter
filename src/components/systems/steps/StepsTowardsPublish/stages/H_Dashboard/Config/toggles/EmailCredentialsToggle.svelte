@@ -26,7 +26,7 @@
 
   $: {
     if (($emailMaskSender && !$appPassword) || (!$emailMaskSender && $appPassword)) {
-      validationError = "Se necesitan ambos datos para activar el envío personalizado.";
+      validationError = $t["credentials.errorBothRequired"];
     } else {
       validationError = "";
     }
@@ -53,17 +53,17 @@
     <div class="icon-bg">🔑</div>
     <div class="text-content">
       <div class="title-row">
-        <h4>Conecta tu propio correo</h4>
-        <span class="optional-badge">Opcional</span>
+        <h4>{$t["credentials.title"]}</h4>
+        <span class="optional-badge">{$t["credentials.optional"]}</span>
       </div>
       <p class="intro-text">
-        Esta configuración es <strong>totalmente opcional</strong>. Solo es necesaria si deseas que los correos del sistema salgan desde tu dirección personal. Si prefieres no hacerlo, utilizaremos nuestra dirección predeterminada por ti.
+        {@html $t["credentials.intro"]}
       </p>
       <p class="google-requirement">
-        Para activarlo, Google requiere una <strong>"Contraseña de Aplicación"</strong> de 16 letras para proteger tu cuenta principal.
+        {@html $t["credentials.googleRequirement"]}
       </p>
       <button class="toggle-btn" class:active={showSteps} on:click={toggleSteps}>
-        <span>{showSteps ? 'Ocultar guía' : '¿Cómo conseguir este código?'}</span>
+        <span>{showSteps ? $t["credentials.hideGuide"] : $t["credentials.howToGet"]}</span>
         <span class="chevron">{showSteps ? '▲' : '▼'}</span>
       </button>
     </div>
@@ -72,24 +72,24 @@
   {#if showSteps}
     <div class="tutorial-box" transition:slide>
       <div class="tutorial-header">
-        <h5>Configuración rápida</h5>
+        <h5>{$t["credentials.quickConfig"]}</h5>
         <a href="https://myaccount.google.com/security" target="_blank" rel="noopener noreferrer" class="external-link">
-          Ir a Seguridad de Google ↗
+          {$t["credentials.goGoogle"]}
         </a>
       </div>
       
       <div class="steps-grid">
         <div class="step-item">
           <span class="step-badge">1</span>
-          <p>Entra en <b>Seguridad</b>.</p>
+          <p>{@html $t["credentials.step1"]}</p>
         </div>
         <div class="step-item">
           <span class="step-badge">2</span>
-          <p>Busca <b>"Contraseñas de aplicaciones"</b>.</p>
+          <p>{@html $t["credentials.step2"]}</p>
         </div>
         <div class="step-item">
           <span class="step-badge">3</span>
-          <p>Crea la llave <b>"AIBAN"</b> y pega el código abajo.</p>
+          <p>{@html $t["credentials.step3"]}</p>
         </div>
       </div>
     </div>
@@ -97,19 +97,19 @@
 
   <div class="form-container">
     <EmailInput
-      placeholder="tu-correo@gmail.com"
+      placeholder={$t["placeholders.email"]}
       value={$emailMaskSender}
       onChange={handleEmailChange}
-      label="Dirección de correo (Remitente)"
+      label={$t["labels.senderEmail"]}
     />
 
     <div class="password-wrapper">
       <PlainText
         type="password"
-        placeholder="abcd efgh ijkl mnop"
+        placeholder={$t["placeholders.appPassword"]}
         value={$appPassword}
         onChange={handlePasswordChange}
-        label="Contraseña de Aplicación (16 letras)"
+        label={$t["labels.appPassword"]}
       />
       {#if $appPassword.length > 0 && $appPassword.length !== 16}
         <span class="char-count">{$appPassword.length}/16</span>

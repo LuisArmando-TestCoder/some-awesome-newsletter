@@ -295,6 +295,20 @@ export default {
   "labels.all": "Todos",
   "labels.enabled": "Habilitado",
   "labels.disabled": "Deshabilitado",
+
+  // ... existing keys ...
+  "credentials.title": "Conecta tu propio correo",
+  "credentials.optional": "Opcional",
+  "credentials.intro": "Esta configuración es totalmente opcional. Solo es necesaria si deseas que los correos del sistema salgan desde tu dirección personal. Si prefieres no hacerlo, utilizaremos nuestra dirección predeterminada por ti.",
+  "credentials.googleRequirement": "Para activarlo, Google requiere una \"Contraseña de Aplicación\" de 16 letras para proteger tu cuenta principal.",
+  "credentials.howToGet": "¿Cómo conseguir este código?",
+  "credentials.hideGuide": "Ocultar guía",
+  "credentials.quickConfig": "Configuración rápida",
+  "credentials.goGoogle": "Ir a Seguridad de Google ↗",
+  "credentials.step1": "Entra en <b>Seguridad</b>.",
+  "credentials.step2": "Busca <b>\"Contraseñas de aplicaciones\"</b>.",
+  "credentials.step3": "Crea la llave <b>\"AIBAN\"</b> y pega el código abajo.",
+  "credentials.errorBothRequired": "Se necesitan ambos datos para activar el envío personalizado.",
   
   // Toasts / Notifications
   "notification.success": "Operación exitosa",

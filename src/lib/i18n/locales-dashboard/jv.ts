@@ -79,7 +79,7 @@ export default {
   "naturalCronParser.unit": "unit",
   "naturalCronParser.days": "dina",
   "naturalCronParser.everyXUnits": "saben {step} {pluralUnit}",
-  "naturalCronParser.invalidCronString": "String cron sing diwenehake ora bener.",
+  "naturalCronParser.invalidCronString": "String cron yang diwenehake ora bener.",
   "naturalCronParser.invalidCronStringFormat": "Format string cron ora bener. Dikarepake 5 utawa 6 bagean, entuk {length}.",
   "naturalCronParser.everyMinute": "Saben menit",
   "naturalCronParser.everyMinutePastEveryOrdinalHour": "Saben menit liwat saben jam {ordinal}",
@@ -178,5 +178,34 @@ export default {
   "placeholders.searchArticles": "Goleki artikel...",
   "labels.noArticlesFound": "Ora ana artikel sing ditemokake kanggo sumber warta iki.",
   "labels.created": "Digawe",
-  "labels.language": "Basa"
+  "labels.language": "Basa",
+
+  /* New Credentials Section */
+  "credentials.title": "Sambungake Email Sampeyan Dhewe",
+  "credentials.optional": "Opsional",
+  "credentials.intro": "Persiyapan iki <strong>opsional banget</strong>. Iki mung dibutuhake yen sampeyan pengin email sistem dikirim saka alamat pribadi sampeyan. Yen ora, kita bakal nggunakake alamat gawan kita.",
+  "credentials.googleRequirement": "Kanggo aktivasi, Google mbutuhake 16-karakter <strong>\"App password\"</strong> kanggo njaga keamanan akun utama sampeyan.",
+  "credentials.howToGet": "Pripun carane entuk kode iki?",
+  "credentials.hideGuide": "Singidaken pandhuan",
+  "credentials.quickConfig": "Konfigurasi cepet",
+  "credentials.goGoogle": "Bukak setelan keamanan Google ↗",
+  "credentials.step1": "Bukak tab <b>Keamanan (Security)</b>.",
+  "credentials.step2": "Goleki <b>\"App passwords\"</b>.",
+  "credentials.step3": "Gawe kunci jenenge <b>\"AIBAN\"</b> banjur tempel kodenya ing ngisor iki.",
+  "credentials.errorBothRequired": "Loro input kasebut dibutuhake kanggo ngaktifake pengiriman pribadi.",
+
+  /* System Labels */
+  "labels.senderEmail": "Alamat Email Pangirim",
+  "labels.appPassword": "App Password (16 karakter)",
+  "placeholders.email": "email-sampeyan@gmail.com",
+  "placeholders.appPassword": "abcd efgh ijkl mnop",
+  "labels.generateSignature": "Gawe Tapak Asmo",
+  "labels.noEmailSignatureSet": "Ora ana tapak asmo email sing diatur",
+  "markdown.imageToggle": "Unggah **Logo** kanggo koran sampeyan",
+  "analytics.title": "Analitik",
+  "analytics.newsSource": "Sumber Warta",
+  "analytics.subscribers": "Pelanggan",
+  "analytics.clicks": "Klik",
+  "labels.apiPlayground": "API Playground",
+  "labels.downloadJson": "Unduh JSON"
 };

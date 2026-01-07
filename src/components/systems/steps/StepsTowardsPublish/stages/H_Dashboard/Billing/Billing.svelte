@@ -1,382 +1,251 @@
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onMount, onDestroy } from "svelte";
   import { writable } from "svelte/store";
   import plansStore, {
-    loadPlansContent,
-    type Plan,
-    type PlansState,
+      loadPlansContent,
+      computeFeatures,
+      setInterval,
+      type Plan,
+      type PlansState,
   } from "$lib/config/plans.config";
   import store from "../../../../../../store";
-  import { t } from "$lib/i18n/dashboard-translations";
   import Switch from "$lib/ui/components/Switch.svelte";
+  import { t } from "$lib/i18n/translations";
 
   let state: PlansState;
   const unsub = plansStore.subscribe((v) => (state = v));
 
   const currentPlan = writable<Plan | undefined>(undefined);
+  let isProcessing = false;
 
-  // Track billing cycle for the 35% discount UI toggle
-  let billingCycle: "monthly" | "yearly" = "monthly";
+  // Matches your provided structured config
+  const PLANS_CONFIG = [
+      { id: "starter", mo: 17 },
+      { id: "growth", mo: 35 },
+      { id: "pro", mo: 80 },
+      { id: "master", mo: 150 },
+  ];
+
   const ANNUAL_DISCOUNT = 0.35;
 
-  onMount(async () => {
-    await loadPlansContent();
-  });
-
-  $: {
-    if ($store.config && state?.content) {
-      const plan = state.content.plans.find(
-        (p) => p.id === $store.config.pricingPlan,
-      );
-      currentPlan.set(plan);
-      // Auto-set toggle if user is already on a yearly plan
-      if ($store.config.billingInterval === "yearly") billingCycle = "yearly";
-    }
+  function calculatePrice(monthlyPrice: number, interval: string) {
+      if (interval === "monthly") return monthlyPrice;
+      return Math.floor(monthlyPrice * 12 * (1 - ANNUAL_DISCOUNT));
   }
 
-  function getPrice(plan: Plan, cycle: "monthly" | "yearly") {
-    if (plan.id === "free") return 0;
-    if (cycle === "monthly") return plan.monthly;
-    // Apply 35% discount: (Monthly * 12) * 0.65
-    return Math.floor(plan.monthly * 12 * (1 - ANNUAL_DISCOUNT));
+  onMount(async () => {
+      await loadPlansContent();
+  });
+
+  onDestroy(() => unsub());
+
+  $: if ($store.config && state?.content) {
+      const plan = state.content.plans.find((p) => p.id === $store.config.pricingPlan);
+      currentPlan.set(plan);
+      // Sync global interval if user is already on a yearly plan
+      if ($store.config.billingInterval === "yearly" && state.interval !== "yearly") {
+          setInterval("yearly");
+      }
+  }
+
+  async function handleTilopayCheckout(plan: Plan, amount: number) {
+      if (plan.id === "free" || $store.config?.pricingPlan === plan.id) return;
+
+      isProcessing = true;
+      try {
+          const response = await fetch(
+              `/api/checkout?products=${plan.id}&amount=${amount}&customerEmail=${$store.configuratorEmail}`
+          );
+          const { url, fields } = await response.json();
+
+          const form = document.createElement("form");
+          form.method = "POST";
+          form.action = url;
+
+          for (const [key, value] of Object.entries(fields)) {
+              const input = document.createElement("input");
+              input.type = "hidden";
+              input.name = key;
+              input.value = value as string;
+              form.appendChild(input);
+          }
+
+          document.body.appendChild(form);
+          form.submit();
+      } catch (error) {
+          console.error("Tilopay Error:", error);
+          isProcessing = false;
+      }
   }
 </script>
 
-<div class="billing-dashboard">
-  <h1 class="billing-header">{$t["billing.title"]}</h1>
-
-  <div class="billing-section current-plan">
-    <h2 class="section-title">{$t["billing.currentPlanTitle"]}</h2>
-    <div class="card">
-      {#if $store.config.pricingPlan === "vipfree"}
-        <div class="plan-details">
-          <h3 class="current-plan-name">{$t["billing.vipPlanName"]}</h3>
-          <p class="current-plan-price">{$t["billing.vipPlanDescription"]}</p>
-        </div>
-      {:else if $currentPlan}
-        <div class="plan-details">
-          <h3 class="current-plan-name">{$currentPlan.name}</h3>
-          <p class="current-plan-price">
-            ${billingCycle === "monthly"
-              ? $currentPlan.monthly
-              : getPrice($currentPlan, "yearly")}
-            {$t["billing.per"]}
-            {billingCycle === "monthly"
-              ? $t["billing.month"]
-              : $t["billing.year"]}
+<section class="pricing">
+  <div class="pricing__container">
+      <header class="pricing__header">
+          <span class="pricing__eyebrow">{$t.billing.title}</span>
+          <h1 class="pricing__title">{$t.billing.currentPlanTitle}</h1>
+          <p class="pricing__subtitle">
+              {$store.config.pricingPlan === 'vipfree' ? $t.billing.vipPlanDescription : 'Manage your subscription and scaling preferences.'}
           </p>
-        </div>
-        <a
-          href={`/api/portal?customerEmail=${$store.configuratorEmail}`}
-          class="manage-plan-button">{$t["billing.manageSubscription"]}</a
-        >
-      {:else}
-        <p>{$t["billing.loadingPlan"]}</p>
-      {/if}
-    </div>
-  </div>
+      </header>
 
-  {#if $store.config.pricingPlan === "vipfree"}
-    <div class="billing-section vip-message">
-      <h2 class="section-title">{$t["billing.vipMessageTitle"]}</h2>
-      <div class="card">
-        <p>
-          {$t["billing.vipMessageText"]}
-          <a href="mailto:oriens@aiban.news">oriens@aiban.news</a>.
-        </p>
-      </div>
-    </div>
-  {:else}
-    <div class="billing-section upgrade-plan">
-      <div class="section-header-flex">
-        <h2 class="section-title">{$t["billing.upgradePlanTitle"]}</h2>
-
-        <div class="cycle-toggle">
-          <span class:active={billingCycle === "monthly"}
-            >{$t["billing.monthly"]}</span
-          >
-          <Switch
-            toggled={billingCycle === "yearly"}
-            onChange={(v) => (billingCycle = v ? "yearly" : "monthly")}
-          />
-          <span class:active={billingCycle === "yearly"}>
-            {$t["billing.yearly"]}
-            <span class="discount-badge">-35%</span>
-          </span>
-        </div>
-      </div>
-
-      <div class="plan-options">
-        {#if state?.content?.plans}
-          {#each state.content.plans.filter((p) => !p.internalOnly) as plan}
-            <div
-              class="plan-option-card"
-              class:selected={$currentPlan?.id === plan.id}
-              class:featured={plan.id === "growth"}
-            >
-              {#if plan.id === "growth"}
-                <div class="popular-tag">{$t["billing.mostPopular"]}</div>
-              {/if}
-
-              <h3 class="plan-option-title">{plan.name}</h3>
-              <div class="price-container">
-                <span class="plan-option-price"
-                  >${getPrice(plan, billingCycle)}</span
-                >
-                <span class="plan-option-interval"
-                  >/{billingCycle === "monthly" ? "mo" : "yr"}</span
-                >
+      <div class="pricing__toggle-wrapper">
+          <div class="pricing__toggle-container">
+              <span class="pricing__toggle-text" class:pricing__toggle-text--active={state.interval === "monthly"}>
+                  {$t.pricing.monthly}
+              </span>
+              <div class="pricing__switch">
+                  <Switch
+                      toggled={state.interval === "yearly"}
+                      onChange={(toggled) => setInterval(toggled ? "yearly" : "monthly")}
+                  />
               </div>
-
-              {#if billingCycle === "yearly" && plan.id !== "free"}
-                <span class="savings-note">{$t["billing.youSave"]} 35%</span>
-              {/if}
-
-              <ul class="plan-option-features">
-                <li class="limit-highlighter">
-                  <strong>{plan.id === 'free' ? '100' : 
-                           plan.id === 'starter' ? '100,000' :
-                           plan.id === 'growth' ? '250,000' :
-                           plan.id === 'pro' ? '500,000' : 'Unlimited'}</strong> 
-                  {$t['billing.users']}
-                </li>
-                <li class="limit-highlighter">
-                  <strong>{plan.id === 'free' ? '1' : 
-                           plan.id === 'starter' ? '5' :
-                           plan.id === 'growth' ? '17' :
-                           plan.id === 'pro' ? '25' : '50'}</strong> 
-                  {$t['billing.newsSources']}
-                </li>
-                
-                {#each plan.featuresBase as feature}
-                  {#if feature.toLowerCase() !== 'users' && feature.toLowerCase() !== 'news sources'}
-                    <li>{($t as Record<string, string>)[feature] || feature}</li>
-                  {/if}
-                {/each}
-              </ul>
-
-              {#if $currentPlan?.id === plan.id}
-                <button class="upgrade-button current-plan-button" disabled
-                  >{$t["billing.currentPlanButton"]}</button
-                >
-              {:else}
-                <a
-                  href={`/api/checkout?products=${plan.productId}&interval=${billingCycle}`}
-                  class="upgrade-button"
-                >
-                  {$currentPlan && plan.tier < $currentPlan.tier
-                    ? $t["billing.downgradeTo"]
-                    : $t["billing.upgradeTo"]}
-                  {plan.name}
-                </a>
-              {/if}
-            </div>
-          {/each}
-        {/if}
+              <span class="pricing__toggle-text" class:pricing__toggle-text--active={state.interval === "yearly"}>
+                  {$t.pricing.yearly}
+                  <span class="pricing__discount-badge">-35%</span>
+              </span>
+          </div>
       </div>
-    </div>
-  {/if}
-</div>
 
-<style>
-  .billing-dashboard {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-    padding: 20px;
-    background-color: #f0f2f5;
-    color: #333;
-  }
+      <div class="pricing__grid" class:pricing__grid--loading={isProcessing}>
+          {#if state?.content?.plans}
+              {#each state.content.plans.filter((p) => p.id === "free") as plan}
+                  <article class="pricing__card pricing__card--free" class:pricing__card--active={$store.config.pricingPlan === plan.id}>
+                      <div class="pricing__card-header">
+                          <h2 class="pricing__card-name">{plan.name}</h2>
+                          <p class="pricing__card-tagline">{$t.plans.plans.find((p) => p.id === "free")?.tagline}</p>
+                      </div>
 
-  .section-header-flex {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-    gap: 15px;
-  }
+                      <div class="pricing__price-block">
+                          <span class="pricing__currency">$</span>
+                          <span class="pricing__amount">0</span>
+                          <span class="pricing__period">/mo</span>
+                      </div>
 
-  .cycle-toggle {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: 600;
-    font-size: 0.9rem;
-    background: white;
-    padding: 8px 15px;
-    border-radius: 50px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  }
+                      <ul class="pricing__features">
+                          {#each computeFeatures(state.content, plan.id) as feature}
+                              <li class="pricing__feature-item">{feature}</li>
+                          {/each}
+                      </ul>
 
-  .cycle-toggle .active {
-    color: #007bff;
-  }
+                      <button 
+                          class="pricing__button pricing__button--outline" 
+                          disabled={$store.config.pricingPlan === plan.id}
+                      >
+                          {$store.config.pricingPlan === plan.id ? $t.billing.currentPlanButton : "Get Started"}
+                      </button>
+                  </article>
+              {/each}
 
-  .discount-badge {
-    background: #28a745;
-    color: white;
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-size: 0.7rem;
-  }
+              {#each PLANS_CONFIG as tier}
+                  {@const planData = state.content.plans.find((p) => p.id === tier.id)}
+                  {@const price = calculatePrice(tier.mo, state.interval)}
+                  
+                  {#if planData}
+                      <article
+                          class="pricing__card"
+                          class:pricing__card--featured={tier.id === "growth"}
+                          class:pricing__card--active={$store.config.pricingPlan === tier.id}
+                      >
+                          {#if tier.id === "growth"}
+                              <div class="pricing__card-badge">{$t.pricing.mostPopular}</div>
+                          {/if}
 
-  .billing-header {
-    font-size: 1.8rem;
-    font-weight: 600;
-    margin-bottom: 30px;
-    color: #1a202c;
-  }
+                          <div class="pricing__card-header">
+                              <h2 class="pricing__card-name">{planData.name}</h2>
+                              <p class="pricing__card-tagline">
+                                  {$t.plans.plans.find((p) => p.id === tier.id)?.tagline}
+                              </p>
+                          </div>
 
-  .billing-section {
-    margin-bottom: 40px;
-  }
+                          <div class="pricing__price-block">
+                              <span class="pricing__currency">$</span>
+                              <span class="pricing__amount">{price}</span>
+                              <span class="pricing__period">/{state.interval === "monthly" ? "mo" : "yr"}</span>
+                          </div>
 
-  .section-title {
-    font-size: 1.3rem;
-    font-weight: 500;
-    margin: 0;
-    color: #4a5568;
-  }
+                          <ul class="pricing__features">
+                              {#each computeFeatures(state.content, tier.id) as feature}
+                                  <li class="pricing__feature-item">{feature}</li>
+                              {/each}
+                          </ul>
 
-  .card {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    padding: 25px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-  }
+                          <button
+                              on:click={() => handleTilopayCheckout(planData, price)}
+                              class="pricing__button"
+                              class:pricing__button--primary={tier.id === "growth"}
+                              class:pricing__button--dark={tier.id !== "growth"}
+                              disabled={$store.config.pricingPlan === tier.id || $store.config.pricingPlan === 'vipfree'}
+                          >
+                              {#if $store.config.pricingPlan === tier.id}
+                                  {$t.billing.currentPlanButton}
+                              {:else}
+                                  {$t.pricing.upgradeTo.replace("{planName}", planData.name)}
+                              {/if}
+                          </button>
+                      </article>
+                  {/if}
+              {/each}
+          {/if}
+      </div>
+  </div>
+</section>
 
-  .plan-options {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 20px;
-  }
+<style lang="scss">
+  /* Using your provided BEM styles exactly */
+  .pricing {
+      padding: 40px 20px;
+      background-color: #ffffff;
+      min-height: 100vh;
+      font-family: "Inter", sans-serif;
 
-  .plan-option-card {
-    background-color: #fff;
-    border-radius: 12px;
-    padding: 25px;
-    position: relative;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    border: 1px solid #e2e8f0;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.2s;
-  }
+      &__container { max-width: 1200px; margin: 0 auto; }
+      &__header { text-align: center; margin-bottom: 48px; }
+      &__eyebrow { color: #3b82f6; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+      &__title { font-size: 2.5rem; font-weight: 800; color: #111827; margin: 12px 0; }
+      &__subtitle { color: #6b7280; font-size: 1.125rem; }
 
-  .plan-option-card.featured {
-    border: 2px solid #007bff;
-    transform: scale(1.03);
-  }
+      &__toggle-wrapper { display: flex; justify-content: center; margin-bottom: 60px; }
+      &__toggle-container { display: flex; align-items: center; gap: 16px; padding: 8px 16px; background: #f3f4f6; border-radius: 99px; }
+      &__toggle-text { font-size: 0.875rem; font-weight: 500; color: #6b7280; transition: color 0.2s;
+          &--active { color: #111827; font-weight: 700; }
+      }
+      &__discount-badge { background: #dcfce7; color: #166534; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; margin-left: 4px; }
 
-  .popular-tag {
-    position: absolute;
-    top: -12px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #007bff;
-    color: white;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 700;
-  }
+      &__grid { 
+          display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; align-items: stretch;
+          &--loading { opacity: 0.6; pointer-events: none; }
+      }
 
-  .plan-option-card.selected {
-    background-color: #1a202c;
-    color: #fff;
-  }
+      &__card {
+          position: relative; padding: 40px 32px; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 24px; display: flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease;
+          &:hover { transform: translateY(-8px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
+          &--featured { border: 2px solid #3b82f6; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.2); }
+          &--free { background: #fafafa; }
+          &--active { border-style: dashed; background: #f9fafb; }
+      }
 
-  .plan-option-card.selected * {
-    color: #fff !important;
-  }
+      &__card-badge { position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); background: #3b82f6; color: white; padding: 6px 16px; border-radius: 99px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; }
+      &__card-name { font-size: 1.25rem; font-weight: 700; color: #111827; margin-bottom: 4px; }
+      &__card-tagline { font-size: 0.875rem; color: #6b7280; margin-bottom: 24px; }
+      &__price-block { display: flex; align-items: baseline; margin-bottom: 32px; }
+      &__currency { font-size: 1.5rem; font-weight: 600; color: #111827; }
+      &__amount { font-size: 3.5rem; font-weight: 800; color: #111827; letter-spacing: -0.02em; }
+      &__period { font-size: 1rem; color: #6b7280; margin-left: 4px; }
+      &__features { list-style: none; padding: 0; margin: 0 0 40px 0; flex-grow: 1; }
 
-  .price-container {
-    margin: 10px 0;
-  }
+      &__feature-item {
+          font-size: 0.95rem; color: #4b5563; padding: 10px 0; display: flex; align-items: center; border-bottom: 1px solid #f3f4f6;
+          &:last-child { border-bottom: none; }
+          &::before { content: "✓"; color: #22c55e; margin-right: 12px; font-weight: 900; }
+      }
 
-  .plan-option-price {
-    font-size: 2rem;
-    font-weight: 800;
-    color: #1a202c;
-  }
-
-  .plan-option-interval {
-    font-size: 1rem;
-    color: #718096;
-  }
-
-  .savings-note {
-    color: #28a745;
-    font-size: 0.85rem;
-    font-weight: 600;
-    margin-bottom: 15px;
-  }
-
-  .limit-highlighter {
-    color: #007bff;
-    font-weight: 500;
-  }
-
-  .plan-option-features {
-    list-style: none;
-    padding: 0;
-    margin: 20px 0;
-    font-size: 0.9rem;
-    flex-grow: 1;
-  }
-
-  .plan-option-features li {
-    margin-bottom: 10px;
-    padding-left: 25px;
-    position: relative;
-  }
-
-  .plan-option-features li::before {
-    content: "✔";
-    color: #28a745;
-    position: absolute;
-    left: 0;
-  }
-
-  .upgrade-button {
-    width: 100%;
-    background-color: #007bff;
-    color: #fff;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 6px;
-    padding: 12px;
-    font-weight: 600;
-    transition: background 0.2s;
-  }
-
-  .upgrade-button:hover {
-    background-color: #0056b3;
-  }
-
-  .current-plan-button {
-    background-color: transparent;
-    border: 2px dashed #4a5568;
-    color: #4a5568;
-  }
-
-  .manage-plan-button {
-    background-color: #28a745;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 600;
-  }
-
-  @media (max-width: 600px) {
-    .section-header-flex {
-      flex-direction: column;
-      align-items: flex-start;
-    }
+      &__button {
+          width: 100%; display: block; text-align: center; padding: 16px; border-radius: 12px; font-weight: 700; text-decoration: none; border: none; cursor: pointer; transition: all 0.2s;
+          &--primary { background: #3b82f6; color: white; &:hover { background: #2563eb; } }
+          &--dark { background: #111827; color: white; &:hover { background: #000000; } }
+          &--outline { border: 2px solid #e5e7eb; color: #374151; background: white; &:hover { background: #f9fafb; } }
+          &:disabled { background: #f3f4f6; color: #9ca3af; cursor: not-allowed; border: none; }
+      }
   }
 </style>

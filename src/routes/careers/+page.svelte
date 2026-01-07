@@ -45,7 +45,7 @@
     ];
   
     function generateMailto(title: string, body: string) {
-      const email = "oriens@aiban.news";
+      const email = "oriens@aiexecutions.com";
       const subject = encodeURIComponent(`Application: ${title} at AIBAN`);
       const encodedBody = encodeURIComponent(body);
       return `mailto:${email}?subject=${subject}&body=${encodedBody}`;
@@ -125,7 +125,7 @@
   
         <div class="careers__speculative">
           <p>Don't see a role that fits? We always have room for exceptional builders.</p>
-          <a href="mailto:oriens@aiban.news" class="link">Send a speculative application to oriens@aiban.news →</a>
+          <a href="mailto:oriens@aiexecutions.com" class="link">Send a speculative application to oriens@aiexecutions.com →</a>
         </div>
       </div>
     </section>
@@ -147,7 +147,7 @@
         transform: translateY(-2px);
       }
     }
-    
+
     .careers {
       --primary: #3b82f6;
       --text-main: #111827;

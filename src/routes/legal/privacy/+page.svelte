@@ -1,7 +1,7 @@
 <script lang="ts">
   import { t } from '$lib/i18n/translations';
   const lastUpdated = "October 24, 2023";
-  const contactEmail = "legal@aiban.news";
+  const contactEmail = "oriens@aiexecutions.com";
 </script>
 
 <svelte:head>

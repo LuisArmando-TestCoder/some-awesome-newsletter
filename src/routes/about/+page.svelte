@@ -131,7 +131,7 @@
                 </p>
                 <div class="identity-actions">
                     <a href="https://github.com/LuisArmando-TestCoder" class="about__btn">GitHub</a>
-                    <a href="mailto:oriens@aiban.news" class="about__btn about__btn--outline">Contact Lab</a>
+                    <a href="mailto:oriens@aiexecutions.com" class="about__btn about__btn--outline">Contact Lab</a>
                 </div>
                 <p class="about__disclaimer">
                     Delivered through high-performance platform subscriptions.

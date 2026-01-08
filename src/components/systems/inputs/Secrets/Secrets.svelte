@@ -236,9 +236,7 @@
   }
 
   .webhook-url-container {
-    display: flex;
-    align-items: flex-end;
-    gap: 16px;
+    display: grid;
     background: #fafafa;
     padding: 20px;
     border-radius: 12px;

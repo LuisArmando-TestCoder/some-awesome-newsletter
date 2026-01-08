@@ -1,10 +1,7 @@
 <script lang="ts">
-  // 1) Remove createEventDispatcher import
-  // import { createEventDispatcher } from "svelte";
   import { writable } from "svelte/store";
   import store, {
     latestMessage,
-    saveToStore,
   } from "../../../../../../store";
 
   import SubmitButton from "../../../../../buttons/SubmitButton/SubmitButton.svelte";
@@ -17,8 +14,10 @@
   import { validateFields } from "./validation";
   import getConfiguratorSession from "../../../../../requests/getConfiguratorSession";
   import { ping } from "../../../../../../Notification/notificationStore";
+  
+  // Import translation store
+  import { t } from "$lib/i18n/dashboard-translations";
 
-  // 2) Create a writable store for tracking the newly added news source
   export const addedNewsSource = writable<any>(null);
 
   let addNewsSourceUrl = "";
@@ -33,26 +32,20 @@
     addNewsSourcePersonality = $store.personality;
   }
 
-  // Called when the user submits the add form
   async function handleAddNewsSource() {
-    // if ($store.config.pricingPlan === "free") {
-    //   ping("You have reached the maximum number of news sources for the free plan.", "error");
-    //   return;
-    // }
-
-    console.log("[AddNewsSourceForm.svelte] handleAddNewsSource called");
     const fields = {
       url: addNewsSourceUrl,
       lead: addNewsSourceLead,
       personality: addNewsSourcePersonality,
     };
+    
     const error = validateFields(fields);
     if (error) {
       addErrorMessage = error;
       return;
     }
+    
     isAdding = true;
-    console.log("[AddNewsSourceForm.svelte] fields", fields);
 
     await processNewsSourceAction(
       fields,
@@ -78,14 +71,13 @@
       },
       createNewsSource,
       (msg) => (addErrorMessage = msg),
-      "Failed to add news source. Please try again.",
+      $t['newsSource.errorDefault'], // Translated default error
       async (created) => {
-        // The createNewsSource request already updates the store, so we don't need to do it here.
-        // We just clear the form and update the local 'addedNewsSource' store.
         clearAddForm();
         addedNewsSource.set(created);
         await getConfiguratorSession();
-        ping("News Source Added", "we are about to send an article to your newsletter, review your email in a few minutes");
+        // Translated Ping Notification
+        ping($t['newsSource.successTitle'], $t['newsSource.successDescription']);
       }
     );
 
@@ -96,7 +88,7 @@
 <form class="news-source-form" on:submit|preventDefault={handleAddNewsSource}>
   <div class="news-source-input news-source-wrapper">
     <Link
-      placeholder="News Source URL"
+      placeholder={$t['newsSource.urlPlaceholder']}
       value={addNewsSourceUrl}
       onChange={(val) => (addNewsSourceUrl = val)}
     />
@@ -108,13 +100,11 @@
   </div>
   <div class="news-source-wrapper">
     <Link
-      placeholder="Lead (destination URL or identifier)"
+      placeholder={$t['newsSource.leadPlaceholder']}
       value={addNewsSourceLead}
       onChange={(val) => (addNewsSourceLead = val)}
     />
   </div>
-  <!-- Personality & schedule are optional in the example -->
-  <!-- Add additional inputs for Personality and Schedule if desired -->
 
   {#if isAdding}
     <TextTypes type="sub-highlight-italic">{$latestMessage}</TextTypes>
@@ -123,7 +113,7 @@
   <SubmitButton
     disabled={isAdding}
     loading={isAdding}
-    label={isAdding ? "Adding" : "Upload News Source"}
+    label={isAdding ? $t['newsSource.adding'] : $t['newsSource.uploadButton']}
     callback={handleAddNewsSource}
   />
 

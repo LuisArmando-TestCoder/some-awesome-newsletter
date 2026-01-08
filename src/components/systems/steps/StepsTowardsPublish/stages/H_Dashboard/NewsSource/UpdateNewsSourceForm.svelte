@@ -5,48 +5,39 @@
   import ScheduleTime from "../../../../../inputs/ScheduleTime/ScheduleTime.svelte";
   import SubmitButton from "../../../../../buttons/SubmitButton/SubmitButton.svelte";
   import ToggleCard from "../../../../../buttons/ToggleCard/ToggleCard.svelte";
-  import Switch from "../../../../../selectors/Switch/Switch.svelte"; // Import Switch component
+  import Switch from "../../../../../selectors/Switch/Switch.svelte";
   import updateNewsSource from "../../../../../requests/updateNewsSource";
   import { processNewsSourceAction } from "./newsSourceActions";
   import Link from "../../../../../inputs/Link/Link.svelte";
-  import regenerateSelectors from "../../../../../requests/regenerateSelectors";
   import store, { latestMessage } from "../../../../../../store";
-  import IconButton from "../../../../../buttons/IconButton/IconButton.svelte";
   import { generatePersonality } from "../../../../../requests/generatePersonality";
   import Personality from "../../../../../inputs/Personality/Personality.svelte";
-  import CopyUrlWithQR from "../../../../../../common/CopyUrlWithQR.svelte";
-  import EmailInput from "../../../../../inputs/Email/Email.svelte"; // Added
-  import MarkdownText from "../../../../../texts/MarkdownText/MarkdownText.svelte"; // Added
-  import { onMount } from "svelte"; // Ensure onMount is imported
-  import PostExplanation from "./PostExplanation.svelte";
-    import { ping } from "../../../../../../Notification/notificationStore";
+  import EmailInput from "../../../../../inputs/Email/Email.svelte";
+  import MarkdownText from "../../../../../texts/MarkdownText/MarkdownText.svelte";
+  import { onMount } from "svelte";
+  import { ping } from "../../../../../../Notification/notificationStore";
+  
+  // Translation store import
+  import { t } from "$lib/i18n/dashboard-translations";
 
-  // The news source to update
   export let newsSource: NewsSource;
-
-  // For error messages
   export let errorMessage: string;
-
-  // For toggling advanced fields
   export let canReveal: boolean = true;
 
-  // Define the type for updateFields
   type UpdateFieldsType = {
     community: string;
     lead: string;
-    personality: string; // Revert back to string
+    personality: string;
     scheduleTime: string;
     linkSelector: string;
     url: string;
     id: string;
-    // active: boolean; // Removed
     emailMaskSender: string;
     appPassword: string;
-    includeImages: boolean; // Added for image toggle
-    isPublic: boolean; // Added for public/private toggle
+    includeImages: boolean;
+    isPublic: boolean;
   };
 
-  // Initialize updateFields with the defined type and default values
   let updateFields: UpdateFieldsType;
   $: if (newsSource) {
     updateFields = {
@@ -64,25 +55,21 @@
     };
   }
 
-  // Validation for email credentials
   let emailValidationError = "";
   $: {
-    // Guard the validation logic: only run if updateFields has been initialized
     if (updateFields) {
       const sender = updateFields.emailMaskSender;
       const password = updateFields.appPassword;
       if ((sender && !password) || (!sender && password)) {
-        emailValidationError =
-          "Both Email Sender and App Password are required if one is provided.";
+        emailValidationError = $t['newsSource.errorEmailBoth'];
       } else {
-        emailValidationError = ""; // Clear error if both filled or both empty
+        emailValidationError = "";
       }
     } else {
-       emailValidationError = ""; // Default before init
+       emailValidationError = "";
     }
   }
 
-  // Local store for the updated news source
   export const updatedNewsSource = writable<NewsSource | null>(null);
 
   let isMounted = false;
@@ -90,52 +77,27 @@
     isMounted = true;
   });
 
-  // Variables para el campo Personality:
   let rawContent: string = "";
-  let showRawContentArea: boolean = false;
-  let debounceTimeout: ReturnType<typeof setTimeout>;
 
-  function toggleRawContentArea() {
-    showRawContentArea = !showRawContentArea;
-  }
-
-  async function handleGeneratePersonality() {
-    try {
-      // Ensure updateFields is initialized before accessing id
-      if (!updateFields?.id) return;
-      const result = await generatePersonality(rawContent, updateFields.id);
-      updateFields.personality = result.personality;
-    } catch (error: any) {
-      errorMessage = error.message;
-    }
-  }
-
-  // Función original para actualizar la fuente
   async function handleUpdate() {
-     // Ensure updateFields is initialized before creating payload
     if (!updateFields?.id || !updateFields.scheduleTime) {
-        errorMessage = "Form data not initialized correctly.";
+        errorMessage = $t['newsSource.errorInit'];
         return;
     }
     const payload = {
       community: updateFields.community,
       lead: updateFields.lead,
-      personality: updateFields.personality || "", // Ensure it's always a string in payload
-      scheduleTime: updateFields.scheduleTime, // Pass the frequency string
+      personality: updateFields.personality || "",
+      scheduleTime: updateFields.scheduleTime,
       linkSelector: updateFields.linkSelector,
       url: updateFields.url,
       id: updateFields.id,
-      // active: updateFields.active, // Removed active state from payload
-      // Include new fields only if they have values, otherwise send null
       emailMaskSender: updateFields.emailMaskSender || null,
       appPassword: updateFields.appPassword || null,
-      includeImages: updateFields.includeImages, // Add the flag to the payload
-      isPublic: updateFields.isPublic, // Add the isPublic flag to the payload
+      includeImages: updateFields.includeImages,
+      isPublic: updateFields.isPublic,
     };
 
-    console.log("[UpdateNewsSourceForm.svelte] Payload to be sent:", payload);
-
-    // Prevent submission if email validation fails
     if (emailValidationError) {
       errorMessage = emailValidationError;
       return;
@@ -143,80 +105,56 @@
 
     await processNewsSourceAction(
       payload,
-      (f) => f, // This seems like an identity function, might need review depending on processNewsSourceAction's purpose
-      // Pass a simplified reference to updateNewsSource. processNewsSourceAction needs to handle passing the correct arguments.
+      (f) => f,
       updateNewsSource,
       (msg) => (errorMessage = msg),
-      "Failed to update news source. Please try again.",
+      $t['newsSource.errorUpdateFail'],
       (updated) => {
-        console.log("[UpdateNewsSourceForm.svelte] onSuccess received:", JSON.stringify(updated, null, 2));
         if (updated.linkSelector) {
-          console.log("[UpdateNewsSourceForm.svelte] Updating linkSelector to:", updated.linkSelector);
           updateFields = { ...updateFields, linkSelector: updated.linkSelector };
         }
         updatedNewsSource.set(updated);
-        ping("News Source has been update", "Changed");
+        ping($t['newsSource.updateSuccessTitle'], $t['newsSource.updateSuccessMsg']);
       }
     );
   }
-
-  const isRegenerating = writable(false);
-  const errorRegeneratingSelectors = writable(false);
-  $: $store; // Keep store subscription if needed elsewhere
-
-  latestMessage.subscribe((message) => {
-    if (message.includes("Regenerating selectors")) {
-      isRegenerating.set(true);
-      errorRegeneratingSelectors.set(false);
-    } else if (message.includes("Selectors regenerated successfully")) {
-      isRegenerating.set(false);
-      errorRegeneratingSelectors.set(false);
-    } else if (message.includes("Error regenerating selectors")) {
-      isRegenerating.set(false);
-      errorRegeneratingSelectors.set(true);
-    }
-  });
 </script>
 
 <form class="news-source-update-form" on:submit|preventDefault={handleUpdate}>
   {#if updateFields}
-    <ToggleCard {canReveal} cardTitle="Basic Settings" isOpen={false} onChange={() => {}}>
+    <ToggleCard {canReveal} cardTitle={$t['newsSource.basicSettings']} isOpen={false} onChange={() => {}}>
       <div class="selectors-group">
-
         <PlainText
-          label="Type of client"
-          placeholder="e.g. 'My Dear Newsletter Users'"
+          label={$t['newsSource.typeOfClient']}
+          placeholder={$t['newsSource.clientPlaceholder']}
           bind:value={updateFields.community}
         />
 
-
         <Link
-          label="News Source URL"
-          placeholder="Your news source URL"
+          label={$t['newsSource.urlLabel']}
+          placeholder={$t['newsSource.urlPlaceholder']}
           bind:value={updateFields.url}
         />
         <Link
-          label="Lead"
-          placeholder="Destination URL or text"
+          label={$t['newsSource.leadLabel']}
+          placeholder={$t['newsSource.leadPlaceholder']}
           bind:value={updateFields.lead}
         />
         <p class="info-message">
-          **Note:** The lead URL is optional, but it's highly recommended. It helps our AI to better understand the context of your news source and generate more relevant content.
+          {$t['newsSource.leadNote']}
         </p>
       </div>
     </ToggleCard>
 
-    <ToggleCard {canReveal} cardTitle="Advanced Generation Settings" isOpen={false} onChange={() => {}}>
+    <ToggleCard {canReveal} cardTitle={$t['newsSource.advancedSettings']} isOpen={false} onChange={() => {}}>
       <div class="selectors-group">
         <ScheduleTime
-          label="How often you want the newsletter to publish"
+          label={$t['newsSource.scheduleLabel']}
           value={updateFields.scheduleTime}
           exclude={["minute", "hour", "dayOfMonth"]}
           onChange={(newValue) => {
             updateFields.scheduleTime = newValue;
-            if (isMounted) {
-              handleUpdate();
-            }
+            if (isMounted) handleUpdate();
           }}
         />
 
@@ -226,67 +164,53 @@
           onError={(msg) => (errorMessage = msg)}
           onChange={(newValue) => { 
             updateFields.personality = newValue; 
-            if (isMounted) {
-              handleUpdate();
-            }
+            if (isMounted) handleUpdate();
           }}
         />
 
-        <!-- Include Images Toggle -->
         <div class="switch-container">
-          <label for="include-images-switch">Include Images in Newsletter</label>
+          <label for="include-images-switch">{$t['newsSource.includeImages']}</label>
           <Switch
             bind:toggled={updateFields.includeImages}
-            on:change={() => {
-              if (isMounted) {
-                handleUpdate();
-              }
-            }}
+            on:change={() => { if (isMounted) handleUpdate(); }}
           />
         </div>
         <MarkdownText {canReveal}>
-          --Whether to include automatically sourced stock images in the generated newsletter content.--
+          {$t['newsSource.includeImagesDesc']}
         </MarkdownText>
 
-        <!-- Public/Private Toggle -->
         <div class="switch-container">
-          <label for="is-public-switch">Publicly Visible in Widget</label>
+          <label for="is-public-switch">{$t['newsSource.publicVisible']}</label>
           <Switch
             bind:toggled={updateFields.isPublic}
-            on:change={() => {
-              if (isMounted) {
-                handleUpdate();
-              }
-            }}
+            on:change={() => { if (isMounted) handleUpdate(); }}
           />
         </div>
         <MarkdownText {canReveal}>
-          --If enabled, this news source can be listed for users to subscribe to in the widget. Private sources are only for direct links.--
+          {$t['newsSource.publicVisibleDesc']}
         </MarkdownText>
 
-        <!-- Email Credentials Inputs -->
         <EmailInput
-          label="Sender Email Address (Optional)"
-          placeholder="Leave blank to use global credentials"
+          label={$t['newsSource.senderEmailLabel']}
+          placeholder={$t['newsSource.senderEmailPlaceholder']}
           bind:value={updateFields.emailMaskSender}
         />
         <PlainText
-          label="Email App Password (Optional)"
+          label={$t['newsSource.appPasswordLabel']}
           type="password"
-          placeholder="Required if Sender Email is provided"
+          placeholder={$t['newsSource.appPasswordPlaceholder']}
           bind:value={updateFields.appPassword}
         />
         {#if emailValidationError}
           <p class="error-message">{emailValidationError}</p>
         {/if}
         <MarkdownText {canReveal}>
-          --Overrides the global email credentials for this specific news source. Both fields are required if one is provided.--
+          {$t['newsSource.emailCredentialsDesc']}
         </MarkdownText>
-
       </div>
     </ToggleCard>
     
-    <SubmitButton label="Update News Source" callback={handleUpdate} />
+    <SubmitButton label={$t['newsSource.updateButton']} callback={handleUpdate} />
 
     {#if errorMessage}
       <div class="error-message">{errorMessage}</div>

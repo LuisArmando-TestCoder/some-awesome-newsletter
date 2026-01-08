@@ -1,187 +1,199 @@
 const languages = [
-  { code: "ab", name: "Abkhazian", flag: null }, // No single country association is accurate
-  { code: "aa", name: "Afar", flag: "🇪🇹" }, // Ethiopia, Eritrea, Djibouti
-  { code: "af", name: "Afrikaans", flag: "🇿🇦" }, // South Africa
-  { code: "ak", name: "Akan", flag: "🇬🇭" }, // Ghana
-  { code: "sq", name: "Albanian", flag: "🇦🇱" }, // Albania
-  { code: "am", name: "Amharic", flag: "🇪🇹" }, // Ethiopia
-  { code: "ar", name: "Arabic", flag: "🇸🇦" }, // Widespread, Saudi flag is symbolic
-  { code: "an", name: "Aragonese", flag: "🇪🇸" }, // Spain (region)
-  { code: "hy", name: "Armenian", flag: "🇦🇲" }, // Armenia
-  { code: "as", name: "Assamese", flag: "🇮🇳" }, // India (Assam)
-  { code: "av", name: "Avaric", flag: "🇷🇺" }, // Russia (Dagestan)
-  { code: "ae", name: "Avestan", flag: null }, // Ancient Iranian language
-  { code: "ay", name: "Aymara", flag: "🇧🇴" }, // Bolivia, Peru
-  { code: "az", name: "Azerbaijani", flag: "🇦🇿" }, // Azerbaijan
-  { code: "bm", name: "Bambara", flag: "🇲🇱" }, // Mali
-  { code: "ba", name: "Bashkir", flag: "🇷🇺" }, // Russia (Bashkortostan)
-  { code: "eu", name: "Basque", flag: "🇪🇸" }, // Spain/France (Basque Country)
-  { code: "be", name: "Belarusian", flag: "🇧🇾" }, // Belarus
-  { code: "bn", name: "Bengali", flag: "🇧🇩" }, // Bangladesh, India (West Bengal)
-  { code: "bi", name: "Bislama", flag: "🇻🇺" }, // Vanuatu
-  { code: "bs", name: "Bosnian", flag: "🇧🇦" }, // Bosnia and Herzegovina
-  { code: "br", name: "Breton", flag: "🇫🇷" }, // France (Brittany)
-  { code: "bg", name: "Bulgarian", flag: "🇧🇬" }, // Bulgaria
-  { code: "my", name: "Burmese", flag: "🇲🇲" }, // Myanmar
-  { code: "ca", name: "Catalan", flag: "🇦🇩" }, // Andorra, Spain (Catalonia)
-  { code: "ch", name: "Chamorro", flag: "🇬🇺" }, // Guam
-  { code: "ce", name: "Chechen", flag: "🇷🇺" }, // Russia (Chechnya)
-  { code: "ny", name: "Chichewa", flag: "🇲🇼" }, // Malawi
-  { code: "zh", name: "Chinese", flag: "🇨🇳" }, // China, Taiwan, Singapore etc. (Mandarin is most common)
-  { code: "cu", name: "Church Slavic", flag: null }, // Liturgical language
-  { code: "cv", name: "Chuvash", flag: "🇷🇺" }, // Russia (Chuvashia)
-  { code: "kw", name: "Cornish", flag: "🇬🇧" }, // UK (Cornwall)
-  { code: "co", name: "Corsican", flag: "🇫🇷" }, // France (Corsica)
-  { code: "cr", name: "Cree", flag: "🇨🇦" }, // Canada
-  { code: "hr", name: "Croatian", flag: "🇭🇷" }, // Croatia
-  { code: "cs", name: "Czech", flag: "🇨🇿" }, // Czechia
-  { code: "da", name: "Danish", flag: "🇩🇰" }, // Denmark
-  { code: "dv", name: "Divehi", flag: "🇲🇻" }, // Maldives
-  { code: "nl", name: "Dutch", flag: "🇳🇱" }, // Netherlands, Belgium
-  { code: "dz", name: "Dzongkha", flag: "🇧🇹" }, // Bhutan
-  { code: "en", name: "English", flag: "🇬🇧" }, // Widespread, UK flag often used
-  { code: "eo", name: "Esperanto", flag: "🏳️" }, // Constructed language, unofficial flag often used
-  { code: "et", name: "Estonian", flag: "🇪🇪" }, // Estonia
-  { code: "ee", name: "Ewe", flag: "🇬🇭" }, // Ghana, Togo
-  { code: "fo", name: "Faroese", flag: "🇫🇴" }, // Faroe Islands
-  { code: "fj", name: "Fijian", flag: "🇫🇯" }, // Fiji
-  { code: "fi", name: "Finnish", flag: "🇫🇮" }, // Finland
-  { code: "fr", name: "French", flag: "🇫🇷" }, // Widespread, France flag often used
-  { code: "fy", name: "Western Frisian", flag: "🇳🇱" }, // Netherlands (Friesland)
-  { code: "ff", name: "Fulah", flag: "🇬🇳" }, // Widespread in West Africa, Guinea flag symbolic
-  { code: "gd", name: "Scottish Gaelic", flag: "🇬🇧" }, // UK (Scotland)
-  { code: "gl", name: "Galician", flag: "🇪🇸" }, // Spain (Galicia)
-  { code: "lg", name: "Ganda", flag: "🇺🇬" }, // Uganda
-  { code: "ka", name: "Georgian", flag: "🇬🇪" }, // Georgia
-  { code: "de", name: "German", flag: "🇩🇪" }, // Germany, Austria, Switzerland etc.
-  { code: "el", name: "Greek", flag: "🇬🇷" }, // Greece, Cyprus
-  { code: "kl", name: "Kalaallisut (Greenlandic)", flag: "🇬🇱" }, // Greenland
-  { code: "gn", name: "Guarani", flag: "🇵🇾" }, // Paraguay
-  { code: "gu", name: "Gujarati", flag: "🇮🇳" }, // India (Gujarat)
-  { code: "ht", name: "Haitian Creole", flag: "🇭🇹" }, // Haiti
-  { code: "ha", name: "Hausa", flag: "🇳🇬" }, // Nigeria, Niger etc.
-  { code: "he", name: "Hebrew", flag: "🇮🇱" }, // Israel
-  { code: "hz", name: "Herero", flag: "🇳🇦" }, // Namibia, Botswana
-  { code: "hi", name: "Hindi", flag: "🇮🇳" }, // India
-  { code: "ho", name: "Hiri Motu", flag: "🇵🇬" }, // Papua New Guinea
-  { code: "hu", name: "Hungarian", flag: "🇭🇺" }, // Hungary
-  { code: "is", name: "Icelandic", flag: "🇮🇸" }, // Iceland
-  { code: "io", name: "Ido", flag: null }, // Constructed language
-  { code: "ig", name: "Igbo", flag: "🇳🇬" }, // Nigeria
-  { code: "id", name: "Indonesian", flag: "🇮🇩" }, // Indonesia
-  { code: "ia", name: "Interlingua", flag: null }, // Constructed language
-  { code: "ie", name: "Interlingue", flag: null }, // Constructed language
-  { code: "iu", name: "Inuktitut", flag: "🇨🇦" }, // Canada
-  { code: "ik", name: "Inupiaq", flag: "🇺🇸" }, // USA (Alaska)
-  { code: "ga", name: "Irish", flag: "🇮🇪" }, // Ireland
-  { code: "it", name: "Italian", flag: "🇮🇹" }, // Italy
-  { code: "ja", name: "Japanese", flag: "🇯🇵" }, // Japan
-  { code: "jv", name: "Javanese", flag: "🇮🇩" }, // Indonesia (Java)
-  { code: "kn", name: "Kannada", flag: "🇮🇳" }, // India (Karnataka)
-  { code: "kr", name: "Kanuri", flag: "🇳🇬" }, // Nigeria, Niger, Chad
-  { code: "ks", name: "Kashmiri", flag: "🇮🇳" }, // India/Pakistan (Kashmir)
-  { code: "kk", name: "Kazakh", flag: "🇰🇿" }, // Kazakhstan
-  { code: "km", name: "Khmer", flag: "🇰🇭" }, // Cambodia
-  { code: "ki", name: "Kikuyu", flag: "🇰🇪" }, // Kenya
-  { code: "rw", name: "Kinyarwanda", flag: "🇷🇼" }, // Rwanda
-  { code: "ky", name: "Kyrgyz", flag: "🇰🇬" }, // Kyrgyzstan
-  { code: "kv", name: "Komi", flag: "🇷🇺" }, // Russia (Komi Republic)
-  { code: "kg", name: "Kongo", flag: "🇨🇩" }, // DRC, ROC, Angola
-  { code: "ko", name: "Korean", flag: "🇰🇷" }, // South Korea, North Korea
-  { code: "kj", name: "Kuanyama", flag: "🇦🇴" }, // Angola, Namibia
-  { code: "ku", name: "Kurdish", flag: "🇮🇶" }, // Iraq, Turkey, Syria, Iran (flag choice is complex/political)
-  { code: "lo", name: "Lao", flag: "🇱🇦" }, // Laos
-  { code: "la", name: "Latin", flag: "🇻🇦" }, // Vatican City (official), historical/liturgical
-  { code: "lv", name: "Latvian", flag: "🇱🇻" }, // Latvia
-  { code: "li", name: "Limburgish", flag: "🇳🇱" }, // Netherlands, Belgium, Germany
-  { code: "ln", name: "Lingala", flag: "🇨🇩" }, // DRC, ROC
-  { code: "lt", name: "Lithuanian", flag: "🇱🇹" }, // Lithuania
-  { code: "lu", name: "Luba-Katanga", flag: "🇨🇩" }, // DRC
-  { code: "lb", name: "Luxembourgish", flag: "🇱🇺" }, // Luxembourg
-  { code: "mk", name: "Macedonian", flag: "🇲🇰" }, // North Macedonia
-  { code: "mg", name: "Malagasy", flag: "🇲🇬" }, // Madagascar
-  { code: "ms", name: "Malay", flag: "🇲🇾" }, // Malaysia, Indonesia, Brunei, Singapore
-  { code: "ml", name: "Malayalam", flag: "🇮🇳" }, // India (Kerala)
-  { code: "mt", name: "Maltese", flag: "🇲🇹" }, // Malta
-  { code: "gv", name: "Manx", flag: "🇮🇲" }, // Isle of Man
-  { code: "mi", name: "Maori", flag: "🇳🇿" }, // New Zealand
-  { code: "mr", name: "Marathi", flag: "🇮🇳" }, // India (Maharashtra)
-  { code: "mh", name: "Marshallese", flag: "🇲🇭" }, // Marshall Islands
-  { code: "mn", name: "Mongolian", flag: "🇲🇳" }, // Mongolia
-  { code: "na", name: "Nauru", flag: "🇳🇷" }, // Nauru
-  { code: "nv", name: "Navajo", flag: "🇺🇸" }, // USA (Navajo Nation)
-  { code: "nd", name: "North Ndebele", flag: "🇿🇼" }, // Zimbabwe
-  { code: "nr", name: "South Ndebele", flag: "🇿🇦" }, // South Africa
-  { code: "ng", name: "Ndonga", flag: "🇳🇦" }, // Namibia
-  { code: "ne", name: "Nepali", flag: "🇳🇵" }, // Nepal
-  { code: "no", name: "Norwegian", flag: "🇳🇴" }, // Norway
-  { code: "nb", name: "Norwegian Bokmål", flag: "🇳🇴" }, // Norway
-  { code: "nn", name: "Norwegian Nynorsk", flag: "🇳🇴" }, // Norway
-  { code: "oc", name: "Occitan", flag: "🇫🇷" }, // France, Spain, Italy
-  { code: "oj", name: "Ojibwa", flag: "🇨🇦" }, // Canada, USA
-  { code: "or", name: "Oriya", flag: "🇮🇳" }, // India (Odisha)
-  { code: "om", name: "Oromo", flag: "🇪🇹" }, // Ethiopia, Kenya
-  { code: "os", name: "Ossetian", flag: "🇬🇪" }, // Georgia (South Ossetia), Russia (North Ossetia)
-  { code: "pi", name: "Pali", flag: null }, // Liturgical language (Theravada Buddhism)
-  { code: "ps", name: "Pashto", flag: "🇦🇫" }, // Afghanistan, Pakistan
-  { code: "fa", name: "Persian (Farsi)", flag: "🇮🇷" }, // Iran, Afghanistan (Dari), Tajikistan (Tajik)
-  { code: "pl", name: "Polish", flag: "🇵🇱" }, // Poland
-  { code: "pt", name: "Portuguese", flag: "🇵🇹" }, // Portugal, Brazil, Angola etc.
-  { code: "pa", name: "Punjabi", flag: "🇮🇳" }, // India (Punjab), Pakistan (Punjab)
-  { code: "qu", name: "Quechua", flag: "🇵🇪" }, // Peru, Bolivia, Ecuador etc.
-  { code: "ro", name: "Romanian", flag: "🇷🇴" }, // Romania, Moldova
-  { code: "rm", name: "Romansh", flag: "🇨🇭" }, // Switzerland
-  { code: "rn", name: "Rundi", flag: "🇧🇮" }, // Burundi
-  { code: "ru", name: "Russian", flag: "🇷🇺" }, // Russia and many former Soviet states
-  { code: "se", name: "Northern Sami", flag: "🇳🇴" }, // Norway, Sweden, Finland
-  { code: "sm", name: "Samoan", flag: "🇼🇸" }, // Samoa
-  { code: "sg", name: "Sango", flag: "🇨🇫" }, // Central African Republic
-  { code: "sa", name: "Sanskrit", flag: "🇮🇳" }, // Ancient/liturgical language of India
-  { code: "sc", name: "Sardinian", flag: "🇮🇹" }, // Italy (Sardinia)
-  { code: "sr", name: "Serbian", flag: "🇷🇸" }, // Serbia
-  { code: "sn", name: "Shona", flag: "🇿🇼" }, // Zimbabwe
-  { code: "ii", name: "Sichuan Yi", flag: "🇨🇳" }, // China
-  { code: "sd", name: "Sindhi", flag: "🇵🇰" }, // Pakistan (Sindh), India
-  { code: "si", name: "Sinhala", flag: "🇱🇰" }, // Sri Lanka
-  { code: "sk", name: "Slovak", flag: "🇸🇰" }, // Slovakia
-  { code: "sl", name: "Slovenian", flag: "🇸🇮" }, // Slovenia
-  { code: "so", name: "Somali", flag: "🇸🇴" }, // Somalia
-  { code: "st", name: "Southern Sotho", flag: "🇱🇸" }, // Lesotho, South Africa
-  { code: "es", name: "Spanish", flag: "🇪🇸" }, // Widespread, Spain flag often used
-  { code: "su", name: "Sundanese", flag: "🇮🇩" }, // Indonesia (Java)
-  { code: "sw", name: "Swahili", flag: "🇹🇿" }, // Tanzania, Kenya, Uganda etc. (TZ flag symbolic)
-  { code: "ss", name: "Swati", flag: "🇸🇿" }, // Eswatini, South Africa
-  { code: "sv", name: "Swedish", flag: "🇸🇪" }, // Sweden, Finland
-  { code: "tl", name: "Tagalog (Filipino)", flag: "🇵🇭" }, // Philippines
-  { code: "ty", name: "Tahitian", flag: "🇵🇫" }, // French Polynesia
-  { code: "tg", name: "Tajik", flag: "🇹🇯" }, // Tajikistan
-  { code: "ta", name: "Tamil", flag: "🇮🇳" }, // India (Tamil Nadu), Sri Lanka, Singapore
-  { code: "tt", name: "Tatar", flag: "🇷🇺" }, // Russia (Tatarstan)
-  { code: "te", name: "Telugu", flag: "🇮🇳" }, // India (Andhra Pradesh, Telangana)
-  { code: "th", name: "Thai", flag: "🇹🇭" }, // Thailand
-  { code: "bo", name: "Tibetan", flag: "🇨🇳" }, // China (Tibet)
-  { code: "ti", name: "Tigrinya", flag: "🇪🇷" }, // Eritrea, Ethiopia
-  { code: "to", name: "Tonga", flag: "🇹🇴" }, // Tonga
-  { code: "ts", name: "Tsonga", flag: "🇿🇦" }, // South Africa, Mozambique
-  { code: "tn", name: "Tswana", flag: "🇧🇼" }, // Botswana, South Africa
-  { code: "tr", name: "Turkish", flag: "🇹🇷" }, // Turkey
-  { code: "tk", name: "Turkmen", flag: "🇹🇲" }, // Turkmenistan
-  { code: "tw", name: "Twi", flag: "🇬🇭" }, // Ghana
-  { code: "ug", name: "Uighur", flag: "🇨🇳" }, // China (Xinjiang)
-  { code: "uk", name: "Ukrainian", flag: "🇺🇦" }, // Ukraine
-  { code: "ur", name: "Urdu", flag: "🇵🇰" }, // Pakistan, India
-  { code: "uz", name: "Uzbek", flag: "🇺🇿" }, // Uzbekistan
-  { code: "ve", name: "Venda", flag: "🇿🇦" }, // South Africa
-  { code: "vi", name: "Vietnamese", flag: "🇻🇳" }, // Vietnam
-  { code: "vo", name: "Volapük", flag: null }, // Constructed language
-  { code: "wa", name: "Walloon", flag: "🇧🇪" }, // Belgium (Wallonia)
-  { code: "cy", name: "Welsh", flag: "🇬🇧" }, // UK (Wales)
-  { code: "wo", name: "Wolof", flag: "🇸🇳" }, // Senegal, Gambia, Mauritania
-  { code: "xh", name: "Xhosa", flag: "🇿🇦" }, // South Africa
-  { code: "yi", name: "Yiddish", flag: null }, // Historically widespread Ashkenazi Jewish language
-  { code: "yo", name: "Yoruba", flag: "🇳🇬" }, // Nigeria, Benin, Togo
-  { code: "za", name: "Zhuang", flag: "🇨🇳" }, // China (Guangxi)
-  { code: "zu", name: "Zulu", flag: "🇿🇦" }, // South Africa
+  { code: "en", name: "English", flag: "🇬🇧" },
+  { code: "es", name: "Spanish", flag: "🇪🇸" },
+  { code: "ru", name: "Russian", flag: "🇷🇺" },
+  { code: "zh", name: "Chinese", flag: "🇨🇳" },
+  { code: "ja", name: "Japanese", flag: "🇯🇵" }, // Corrected to ISO 639-1 'ja'
+  { code: "fr", name: "French", flag: "🇫🇷" },
+  { code: "it", name: "Italian", flag: "🇮🇹" },
+  { code: "de", name: "German", flag: "🇩🇪" },
+  { code: "gu", name: "Gujarati", flag: "🇮🇳" },
+  { code: "am", name: "Amharic", flag: "🇪🇹" },
+  { code: "kn", name: "Kannada", flag: "🇮🇳" },
+  { code: "sw", name: "Swahili", flag: "🇹🇿" },
+  { code: "tl", name: "Tagalog", flag: "🇵🇭" },
+  { code: "ta", name: "Tamil", flag: "🇮🇳" },
+  { code: "ko", name: "Korean", flag: "🇰🇷" },
+  { code: "th", name: "Thai", flag: "🇹🇭" },
+  { code: "jv", name: "Javanese", flag: "🇮🇩" },
+  { code: "ur", name: "Urdu", flag: "🇵🇰" },
+  { code: "mr", name: "Marathi", flag: "🇮🇳" },
+  { code: "vi", name: "Vietnamese", flag: "🇻🇳" },
+  { code: "te", name: "Telugu", flag: "🇮🇳" },
+  { code: "ha", name: "Hausa", flag: "🇳🇬" },
+  { code: "tr", name: "Turkish", flag: "🇹🇷" },
+  { code: "hi", name: "Hindi", flag: "🇮🇳" },
+  { code: "ar", name: "Arabic", flag: "🇸🇦" },
+  { code: "bn", name: "Bengali", flag: "🇧🇩" },
+  { code: "pt", name: "Portuguese", flag: "🇵🇹" },
+  { code: "id", name: "Indonesian", flag: "🇮🇩" },
+
+  // Regional & Dialect Codes (ISO 639-3) as found in your imports
+  { code: "apc", name: "Levantine Arabic", flag: "🇱🇧" },
+  { code: "arz", name: "Egyptian Arabic", flag: "🇪🇬" },
+  { code: "apd", name: "Sudanese Arabic", flag: "🇸🇩" },
+  { code: "pnb", name: "Western Punjabi", flag: "🇵🇰" },
+  { code: "bho", name: "Bhojpuri", flag: "🇮🇳" },
+  { code: "yue", name: "Cantonese", flag: "🇭🇰" },
+  { code: "wuu", name: "Wu Chinese", flag: "🇨🇳" },
+  { code: "pes", name: "Western Persian", flag: "🇮🇷" },
+  { code: "pcm", name: "Nigerian Pidgin", flag: "🇳🇬" },
+
+  // Other languages from your original request
+  { code: "ab", name: "Abkhazian", flag: null },
+  { code: "aa", name: "Afar", flag: "🇪🇹" },
+  { code: "af", name: "Afrikaans", flag: "🇿🇦" },
+  { code: "ak", name: "Akan", flag: "🇬🇭" },
+  { code: "sq", name: "Albanian", flag: "🇦🇱" },
+  { code: "an", name: "Aragonese", flag: "🇪🇸" },
+  { code: "hy", name: "Armenian", flag: "🇦🇲" },
+  { code: "as", name: "Assamese", flag: "🇮🇳" },
+  { code: "av", name: "Avaric", flag: "🇷🇺" },
+  { code: "ae", name: "Avestan", flag: null },
+  { code: "ay", name: "Aymara", flag: "🇧🇴" },
+  { code: "az", name: "Azerbaijani", flag: "🇦🇿" },
+  { code: "bm", name: "Bambara", flag: "🇲🇱" },
+  { code: "ba", name: "Bashkir", flag: "🇷🇺" },
+  { code: "eu", name: "Basque", flag: "🇪🇸" },
+  { code: "be", name: "Belarusian", flag: "🇧🇾" },
+  { code: "bi", name: "Bislama", flag: "🇻🇺" },
+  { code: "bs", name: "Bosnian", flag: "🇧🇦" },
+  { code: "br", name: "Breton", flag: "🇫🇷" },
+  { code: "bg", name: "Bulgarian", flag: "🇧🇬" },
+  { code: "my", name: "Burmese", flag: "🇲🇲" },
+  { code: "ca", name: "Catalan", flag: "🇦🇩" },
+  { code: "ch", name: "Chamorro", flag: "🇬🇺" },
+  { code: "ce", name: "Chechen", flag: "🇷🇺" },
+  { code: "ny", name: "Chichewa", flag: "🇲🇼" },
+  { code: "cu", name: "Church Slavic", flag: null },
+  { code: "cv", name: "Chuvash", flag: "🇷🇺" },
+  { code: "kw", name: "Cornish", flag: "🇬🇧" },
+  { code: "co", name: "Corsican", flag: "🇫🇷" },
+  { code: "cr", name: "Cree", flag: "🇨🇦" },
+  { code: "hr", name: "Croatian", flag: "🇭🇷" },
+  { code: "cs", name: "Czech", flag: "🇨🇿" },
+  { code: "da", name: "Danish", flag: "🇩🇰" },
+  { code: "dv", name: "Divehi", flag: "🇲🇻" },
+  { code: "nl", name: "Dutch", flag: "🇳🇱" },
+  { code: "dz", name: "Dzongkha", flag: "🇧🇹" },
+  { code: "eo", name: "Esperanto", flag: "🏳️" },
+  { code: "et", name: "Estonian", flag: "🇪🇪" },
+  { code: "ee", name: "Ewe", flag: "🇬🇭" },
+  { code: "fo", name: "Faroese", flag: "🇫🇴" },
+  { code: "fj", name: "Fijian", flag: "🇫🇯" },
+  { code: "fi", name: "Finnish", flag: "🇫🇮" },
+  { code: "fy", name: "Western Frisian", flag: "🇳🇱" },
+  { code: "ff", name: "Fulah", flag: "🇬🇳" },
+  { code: "gd", name: "Scottish Gaelic", flag: "🇬🇧" },
+  { code: "gl", name: "Galician", flag: "🇪🇸" },
+  { code: "lg", name: "Ganda", flag: "🇺🇬" },
+  { code: "ka", name: "Georgian", flag: "🇬🇪" },
+  { code: "el", name: "Greek", flag: "🇬🇷" },
+  { code: "kl", name: "Kalaallisut", flag: "🇬🇱" },
+  { code: "gn", name: "Guarani", flag: "🇵🇾" },
+  { code: "ht", name: "Haitian Creole", flag: "🇭🇹" },
+  { code: "hz", name: "Herero", flag: "🇳🇦" },
+  { code: "ho", name: "Hiri Motu", flag: "🇵🇬" },
+  { code: "hu", name: "Hungarian", flag: "🇭🇺" },
+  { code: "is", name: "Icelandic", flag: "🇮🇸" },
+  { code: "io", name: "Ido", flag: null },
+  { code: "ig", name: "Igbo", flag: "🇳🇬" },
+  { code: "ia", name: "Interlingua", flag: null },
+  { code: "ie", name: "Interlingue", flag: null },
+  { code: "iu", name: "Inuktitut", flag: "🇨🇦" },
+  { code: "ik", name: "Inupiaq", flag: "🇺🇸" },
+  { code: "ga", name: "Irish", flag: "🇮🇪" },
+  { code: "kr", name: "Kanuri", flag: "🇳🇬" },
+  { code: "ks", name: "Kashmiri", flag: "🇮🇳" },
+  { code: "kk", name: "Kazakh", flag: "🇰🇿" },
+  { code: "km", name: "Khmer", flag: "🇰🇭" },
+  { code: "ki", name: "Kikuyu", flag: "🇰🇪" },
+  { code: "rw", name: "Kinyarwanda", flag: "🇷🇼" },
+  { code: "ky", name: "Kyrgyz", flag: "🇰🇬" },
+  { code: "kv", name: "Komi", flag: "🇷🇺" },
+  { code: "kg", name: "Kongo", flag: "🇨🇩" },
+  { code: "kj", name: "Kuanyama", flag: "🇦🇴" },
+  { code: "ku", name: "Kurdish", flag: "🇮🇶" },
+  { code: "lo", name: "Lao", flag: "🇱🇦" },
+  { code: "la", name: "Latin", flag: "🇻🇦" },
+  { code: "lv", name: "Latvian", flag: "🇱🇻" },
+  { code: "li", name: "Limburgish", flag: "🇳🇱" },
+  { code: "ln", name: "Lingala", flag: "🇨🇩" },
+  { code: "lt", name: "Lithuanian", flag: "🇱🇹" },
+  { code: "lu", name: "Luba-Katanga", flag: "🇨🇩" },
+  { code: "lb", name: "Luxembourgish", flag: "🇱🇺" },
+  { code: "mk", name: "Macedonian", flag: "🇲🇰" },
+  { code: "mg", name: "Malagasy", flag: "🇲🇬" },
+  { code: "ms", name: "Malay", flag: "🇲🇾" },
+  { code: "ml", name: "Malayalam", flag: "🇮🇳" },
+  { code: "mt", name: "Maltese", flag: "🇲🇹" },
+  { code: "gv", name: "Manx", flag: "🇮🇲" },
+  { code: "mi", name: "Maori", flag: "🇳🇿" },
+  { code: "mh", name: "Marshallese", flag: "🇲🇭" },
+  { code: "mn", name: "Mongolian", flag: "🇲🇳" },
+  { code: "na", name: "Nauru", flag: "🇳🇷" },
+  { code: "nv", name: "Navajo", flag: "🇺🇸" },
+  { code: "nd", name: "North Ndebele", flag: "🇿🇼" },
+  { code: "nr", name: "South Ndebele", flag: "🇿🇦" },
+  { code: "ng", name: "Ndonga", flag: "🇳🇦" },
+  { code: "ne", name: "Nepali", flag: "🇳🇵" },
+  { code: "no", name: "Norwegian", flag: "🇳🇴" },
+  { code: "nb", name: "Norwegian Bokmål", flag: "🇳🇴" },
+  { code: "nn", name: "Norwegian Nynorsk", flag: "🇳🇴" },
+  { code: "oc", name: "Occitan", flag: "🇫🇷" },
+  { code: "oj", name: "Ojibwa", flag: "🇨🇦" },
+  { code: "or", name: "Oriya", flag: "🇮🇳" },
+  { code: "om", name: "Oromo", flag: "🇪🇹" },
+  { code: "os", name: "Ossetian", flag: "🇬🇪" },
+  { code: "pi", name: "Pali", flag: null },
+  { code: "ps", name: "Pashto", flag: "🇦🇫" },
+  { code: "fa", name: "Persian", flag: "🇮🇷" },
+  { code: "pl", name: "Polish", flag: "🇵🇱" },
+  { code: "pa", name: "Punjabi", flag: "🇮🇳" },
+  { code: "qu", name: "Quechua", flag: "🇵🇪" },
+  { code: "ro", name: "Romanian", flag: "🇷🇴" },
+  { code: "rm", name: "Romansh", flag: "🇨🇭" },
+  { code: "rn", name: "Rundi", flag: "🇧🇮" },
+  { code: "se", name: "Northern Sami", flag: "🇳🇴" },
+  { code: "sm", name: "Samoan", flag: "🇼🇸" },
+  { code: "sg", name: "Sango", flag: "🇨🇫" },
+  { code: "sa", name: "Sanskrit", flag: "🇮🇳" },
+  { code: "sc", name: "Sardinian", flag: "🇮🇹" },
+  { code: "sr", name: "Serbian", flag: "🇷🇸" },
+  { code: "sn", name: "Shona", flag: "🇿🇼" },
+  { code: "ii", name: "Sichuan Yi", flag: "🇨🇳" },
+  { code: "sd", name: "Sindhi", flag: "🇵🇰" },
+  { code: "si", name: "Sinhala", flag: "🇱🇰" },
+  { code: "sk", name: "Slovak", flag: "🇸🇰" },
+  { code: "sl", name: "Slovenian", flag: "🇸🇮" },
+  { code: "so", name: "Somali", flag: "🇸🇴" },
+  { code: "st", name: "Southern Sotho", flag: "🇱🇸" },
+  { code: "su", name: "Sundanese", flag: "🇮🇩" },
+  { code: "ss", name: "Swati", flag: "🇸🇿" },
+  { code: "sv", name: "Swedish", flag: "🇸🇪" },
+  { code: "ty", name: "Tahitian", flag: "🇵🇫" },
+  { code: "tg", name: "Tajik", flag: "🇹🇯" },
+  { code: "tt", name: "Tatar", flag: "🇷🇺" },
+  { code: "bo", name: "Tibetan", flag: "🇨🇳" },
+  { code: "ti", name: "Tigrinya", flag: "🇪🇷" },
+  { code: "to", name: "Tonga", flag: "🇹🇴" },
+  { code: "ts", name: "Tsonga", flag: "🇿🇦" },
+  { code: "tn", name: "Tswana", flag: "🇧🇼" },
+  { code: "tk", name: "Turkmen", flag: "🇹🇲" },
+  { code: "tw", name: "Twi", flag: "🇬🇭" },
+  { code: "ug", name: "Uighur", flag: "🇨🇳" },
+  { code: "uk", name: "Ukrainian", flag: "🇺🇦" },
+  { code: "uz", name: "Uzbek", flag: "🇺🇿" },
+  { code: "ve", name: "Venda", flag: "🇿🇦" },
+  { code: "vo", name: "Volapük", flag: null },
+  { code: "wa", name: "Walloon", flag: "🇧🇪" },
+  { code: "cy", name: "Welsh", flag: "🇬🇧" },
+  { code: "wo", name: "Wolof", flag: "🇸🇳" },
+  { code: "xh", name: "Xhosa", flag: "🇿🇦" },
+  { code: "yi", name: "Yiddish", flag: null },
+  { code: "yo", name: "Yoruba", flag: "🇳🇬" },
+  { code: "za", name: "Zhuang", flag: "🇨🇳" },
+  { code: "zu", name: "Zulu", flag: "🇿🇦" },
 ];
 
 export default languages;

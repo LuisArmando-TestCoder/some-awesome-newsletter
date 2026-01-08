@@ -1,76 +1,57 @@
-<!-- src/components/systems/steps/StepsTowardsPublish/stages/H_Dashboard/Users/NewsSourceUserManagement.svelte -->
 <script lang="ts">
   import { tick } from "svelte";
   import { get, writable } from "svelte/store";
   import type { Writable } from "svelte/store";
-  import type { NewsSource, NewsletterUser } from "../../../../../../types"; // Using local types path
-  import store, { latestMessage } from "../../../../../../store"; // Imported latestMessage
+  import type { NewsSource, NewsletterUser } from "../../../../../../types";
+  import store, { latestMessage } from "../../../../../../store";
   import updateConfiguration from "../../../../../requests/updateConfiguration";
-  import getConfiguratorSession from "../../../../../requests/getConfiguratorSession"; // Import config refresh function
-  import * as UserDataService from "./UserDataService"; // Adjust path
-  import { userRemovalRequestStore } from "./userActions"; // Import the shared store
+  import getConfiguratorSession from "../../../../../requests/getConfiguratorSession";
+  import * as UserDataService from "./UserDataService";
+  import { userRemovalRequestStore } from "./userActions";
 
-  // Import Child Components (Assumed to be updated to accept function props)
   import ManualAddUserForm from "./ManualAddUserForm.svelte";
   import BulkAddUserSection from "./BulkAddUserSection.svelte";
   import UserCard from "./UserCard.svelte";
 
-  // Import UI Components (Existing)
-  import Switch from "../../../../../selectors/Switch/Switch.svelte"; // ADDED Switch component import
-  import ToggleCard from "../../../../../buttons/ToggleCard/ToggleCard.svelte"; // Adjusted path - verify this is correct
-  import TextTypes from "../../../../../texts/TextTypes/TextTypes.svelte"; // Adjust path
+  import Switch from "../../../../../selectors/Switch/Switch.svelte";
+  import ToggleCard from "../../../../../buttons/ToggleCard/ToggleCard.svelte";
+  import TextTypes from "../../../../../texts/TextTypes/TextTypes.svelte";
   import Pagination from "../../../../../../Pagination/Pagination.svelte";
   import SearchBar from "../../../../../../SearchBar/SearchBar.svelte";
-  import TextArea from "../../../../../inputs/TextArea/TextArea.svelte"; // Import new TextArea
-  import Svg from "../../../../../../SVG/SVG.svelte"; // Adjust path
+  import TextArea from "../../../../../inputs/TextArea/TextArea.svelte";
   import IconButton from "../../../../../buttons/IconButton/IconButton.svelte";
-  import SubmitButton from "../../../../../buttons/SubmitButton/SubmitButton.svelte"; // Import SubmitButton
-  // Removed duplicate type import
+  import SubmitButton from "../../../../../buttons/SubmitButton/SubmitButton.svelte";
+  
+  import triggerNewsSourceSend from "../../../../../requests/triggerNewsSourceSend.js";
+  import sendCustomContent from "../../../../../requests/sendCustomContent";
+  
+  // Import translation store
+  import { t } from "$lib/i18n/dashboard-translations";
 
-  // Import Request Function
-  import triggerNewsSourceSend from "../../../../../requests/triggerNewsSourceSend.js"; // CORRECTED Import (added .js extension as required by NodeNext resolution)
-  import sendCustomContent from "../../../../../requests/sendCustomContent"; // Import new request function
-
-  // --- Props ---
-  /** The specific news source object this component manages */
   export let newsSource: NewsSource;
-  /** The list of subscribers specifically for this news source */
   export let subscribers: NewsletterUser[] = [];
-  /** Controls if the main card can be revealed (passed down to ToggleCard) */
   export let canReveal: boolean = true;
-  // REMOVED isOpen prop
-  /** Writable store from parent controlling which news source card is open */
-  export let openNewsSourceIdStore: Writable<string | null>; // ADDED store prop
+  export let openNewsSourceIdStore: Writable<string | null>;
 
-  // --- State ---
   let isAddingFormVisible: boolean = false;
-  /** Feedback for actions performed within *this* specific news source card */
-  let actionFeedback: { type: "success" | "error"; message: string } | null =
-    null;
-  /** Generic loading flag for actions originating from this component (add/bulk) */
+  let actionFeedback: { type: "success" | "error"; message: string } | null = null;
   let isPerformingAction: boolean = false;
-  /** Specific loading state for removing a user (could target specific email if needed) */
   let removingUserEmail: string | null = null;
-  /** Loading state for toggling the active status */
-  let isUpdatingActive: boolean = false; // ADDED loading state for switch
-  /** Loading state for triggering manual send */
-  let isTriggeringSend: boolean = false; // ADDED loading state for trigger button
-  /** Content for custom email send */
+  let isUpdatingActive: boolean = false;
+  let isTriggeringSend: boolean = false;
   let customEmailContent: string = "";
-  /** Loading state for sending custom content */
   let isSendingCustomContent: boolean = false;
   let searchTerm = "";
   let currentPage = 0;
   const pageSize = 5;
 
-  // REMOVED event dispatcher
-
-  // --- Computed Properties ---
-  // Determine if *this* card should be open based on the store value
   $: isOpen = $openNewsSourceIdStore === newsSource.id;
-  $: cardTitle = `Subscribers for: ${newsSource.url?.split("//")[1]?.split("/")[0] ?? newsSource.id}`;
+  $: sourceName = newsSource.url?.split("//")[1]?.split("/")[0] ?? newsSource.id;
+  
+  // Translated Titles
+  $: cardTitle = `${$t['labels.subscribersFor']}: ${sourceName}`;
   $: subscriberCount = subscribers.length;
-  // Create a reversed copy for display (newest first) without mutating the prop
+
   $: reversedSubscribers = subscribers
     ? [...subscribers]
         .reverse()
@@ -90,38 +71,28 @@
 
   function handleSearch(event: CustomEvent<{ value: string }>) {
     searchTerm = event.detail.value;
-    currentPage = 0; // Reset page on new search
+    currentPage = 0;
   }
 
-  $: sourceName =
-    newsSource.url?.split("//")[1]?.split("/")[0] ?? newsSource.id; // User-friendly name
-
-  // --- Reactive Store Subscription ---
-  // Handle removal requests triggered by child UserCard components via the shared store
   $: if (
     $userRemovalRequestStore &&
     $userRemovalRequestStore.newsSourceId === newsSource.id
   ) {
-    // Check if the request is for *this* news source instance
     const { email } = $userRemovalRequestStore;
-    // Clear the store immediately to prevent re-triggering and allow subsequent requests
     userRemovalRequestStore.set(null);
-    // Call the handler function which contains the confirmation and API call
     handleRemoveUser(email);
   }
 
-  // --- Functions ---
-
   async function handleSendCustomContent() {
     if (!customEmailContent.trim()) {
-      setFeedback("error", "Custom content cannot be empty.");
+      setFeedback("error", $t['errors.contentEmpty']);
       return;
     }
     if (isSendingCustomContent) return;
 
     isSendingCustomContent = true;
     clearFeedback();
-    latestMessage.set("Initiating custom content send...");
+    latestMessage.set($t['messages.initiatingCustomSend']);
 
     try {
       const success = await sendCustomContent(
@@ -130,27 +101,25 @@
         customEmailContent
       );
       if (success) {
-        setFeedback("success", `Custom content successfully initiated for ${sourceName}.`);
-        customEmailContent = ""; // Clear textarea on success
+        setFeedback("success", $t['messages.customSendSuccess'].replace('{source}', sourceName));
+        customEmailContent = "";
       } else {
-        // Error feedback is handled by sendCustomContent or if it returns false without specific message
-        setFeedback("error", `Failed to send custom content for ${sourceName}. Check console for details.`);
+        setFeedback("error", $t['errors.customSendFailed'].replace('{source}', sourceName));
       }
     } catch (error: any) {
-      setFeedback("error", error.message || `An unexpected error occurred while sending custom content for ${sourceName}.`);
+      setFeedback("error", error.message || $t['errors.unexpectedError']);
     } finally {
       isSendingCustomContent = false;
       latestMessage.set("");
     }
   }
 
-  /** Handles manually triggering the newsletter send for this source */
   async function handleTriggerSend() {
     if (!newsSource || !newsSource.id) {
-      setFeedback("error", "Cannot trigger send: News source ID is missing.");
+      setFeedback("error", $t['errors.missingSourceId']);
       return;
     }
-    if (isTriggeringSend) return; // Prevent double clicks
+    if (isTriggeringSend) return;
 
     isTriggeringSend = true;
     clearFeedback();
@@ -158,243 +127,125 @@
     try {
       const response = await triggerNewsSourceSend(newsSource.id);
       if (typeof response === "boolean" && response) {
-        setFeedback("success", `Newsletter send initiated for ${sourceName}.`);
+        setFeedback("success", $t['messages.newsletterInitiated'].replace('{source}', sourceName));
       } else {
-        // Error message is likely logged within triggerNewsSourceSend
-        setFeedback(
-          "error",
-          String(response),
-        );
+        setFeedback("error", String(response));
        }
      } catch (error: any) {
-       console.error(`[SVELTE CATCH] Error caught in handleTriggerSend for ${newsSource.id}:`, error); // Enhanced log
-       // Check for specific rate limit error (429)
-       let errorMessage = `Failed to trigger send for ${sourceName}.`; // Default message
-       if (error && error.response && typeof error.response.json === 'function' && error.response.status === 429) { // Added more checks
-         // Attempt to get the specific message from the response body
-          try {
-            console.log("[SVELTE CATCH] Attempting to parse 429 response body..."); // Log step
-            // Assuming the body is JSON and has a 'message' field
-            const errorData = await error.response.json();
-            console.log("[SVELTE CATCH] Parsed 429 error data:", errorData); // Log parsed data
-            if (errorData && errorData.message) {
-               errorMessage = errorData.message;
-               console.log("[SVELTE CATCH] Extracted message:", errorMessage); // Log extracted message
-            } else {
-               errorMessage = `Rate limit hit (no specific message). Status 429`;
-               console.log("[SVELTE CATCH] No message field found in 429 data."); // Log finding
-            }
-          } catch (parseError) {
-            console.error("[SVELTE CATCH] Could not parse 429 error response body:", parseError);
-            errorMessage = `Rate limit hit (parsing failed). Status 429`;
-          }
-       } else if (error && error.message) { // Added check for error existence
-         // Use the error's message if available and not a 429
-         errorMessage = error.message;
-         console.log("[SVELTE CATCH] Using generic error.message:", errorMessage); // Log finding
-       } else {
-         console.log("[SVELTE CATCH] Using default error message."); // Log finding
-       }
-       console.log("[SVELTE CATCH] Final error message before setFeedback:", errorMessage); // Log final message
-       setFeedback("error", error);
+       setFeedback("error", error.message || $t['errors.triggerFailed']);
      } finally {
        isTriggeringSend = false;
     }
   }
 
-  /** Handles toggling the active state of the news source */
   async function handleToggleActive(newState: boolean) {
     if (!$store.config || !$store.config.newsSources) {
-      console.error(
-        "Cannot toggle active state: config or newsSources missing from store.",
-      );
-      setFeedback("error", "Configuration data is missing, cannot update.");
-      return; // Exit if essential data is missing
+      setFeedback("error", $t['errors.configMissing']);
+      return;
     }
 
     isUpdatingActive = true;
-    clearFeedback(); // Corrected usage of clearFeedback
+    clearFeedback();
 
-    // Deep copy the newsSources array to avoid direct mutation
-    const currentNewsSources = JSON.parse(
-      JSON.stringify($store.config.newsSources),
-    );
-    const sourceIndex = currentNewsSources.findIndex(
-      (ns: NewsSource) => ns.id === newsSource.id,
-    );
+    const currentNewsSources = JSON.parse(JSON.stringify($store.config.newsSources));
+    const sourceIndex = currentNewsSources.findIndex((ns: NewsSource) => ns.id === newsSource.id);
 
     if (sourceIndex === -1) {
-      console.error(
-        `Cannot toggle active state: news source with ID ${newsSource.id} not found in store config.`,
-      );
-      setFeedback("error", "News source not found in current configuration.");
+      setFeedback("error", $t['errors.sourceNotFound']);
       isUpdatingActive = false;
       return;
     }
 
-    // Update the active state in the copied array
     currentNewsSources[sourceIndex].active = newState;
 
     try {
-      console.log(
-        `Attempting to update config with newsSources:`,
-        currentNewsSources,
-      );
-      const success = await updateConfiguration({
-        newsSources: currentNewsSources,
-      });
-
+      const success = await updateConfiguration({ newsSources: currentNewsSources });
       if (success) {
-        setFeedback(
-          "success",
-          `News source ${newState ? "activated" : "deactivated"}.`,
-        );
-        // Refresh the main config store to reflect the change everywhere
-        await getConfiguratorSession(); // Re-fetch the entire config
+        const statusKey = newState ? $t['labels.activated'] : $t['labels.deactivated'];
+        setFeedback("success", $t['messages.sourceStatusUpdated'].replace('{status}', statusKey));
+        await getConfiguratorSession();
       } else {
-        setFeedback("error", "Failed to update news source status.");
-        // No need to manually revert switch state, getConfiguratorSession() should fetch the correct state
+        setFeedback("error", $t['errors.updateStatusFailed']);
       }
     } catch (error: any) {
-      console.error("Error updating news source active state:", error);
-      setFeedback(
-        "error",
-        `Error: ${error.message || "Failed to update status."}`,
-      );
-      // Attempt to refresh config even on error to sync state
-      try {
-        await getConfiguratorSession();
-      } catch (refreshError) {
-        console.error(
-          "Failed to refresh config after update error:",
-          refreshError,
-        );
-      }
+      setFeedback("error", error.message || $t['errors.updateStatusFailed']);
+      await getConfiguratorSession();
     } finally {
       isUpdatingActive = false;
     }
   }
 
   function toggleAddFormVisibility() {
-    const wasVisible = isAddingFormVisible;
     isAddingFormVisible = !isAddingFormVisible;
-    actionFeedback = null; // Clear feedback when toggling visibility
-
-    // If opening, ensure children forms might clear their state if they implement a reset method
-    // If closing, we might also want to trigger reset in children if needed
-    // This is simplified here; complex state reset might need direct child component refs or context API.
-    if (isAddingFormVisible && !wasVisible) {
-      // Potentially reset children if needed when opening
-    }
+    actionFeedback = null;
   }
 
   function clearFeedback() {
     actionFeedback = null;
   }
 
-  function setFeedback(
-    type: "success" | "error",
-    message: string,
-    duration: number = 5000,
-  ) {
+  function setFeedback(type: "success" | "error", message: string, duration: number = 5000) {
     actionFeedback = { type, message };
-    // Use tick to ensure the feedback element is rendered before starting timeout
     tick().then(() => {
       if (actionFeedback) {
-        // Check if feedback hasn't been cleared already
         setTimeout(clearFeedback, duration);
       }
     });
   }
 
-  // UPDATED: Now accepts formData directly instead of an event object
-  async function handleManualAdd(
-    formData: Pick<
-      NewsletterUser,
-      "name" | "email" | "bio" | "language"
-    >,
-  ) {
-    // const { formData } = event.detail; // No longer needed
+  async function handleManualAdd(formData: Pick<NewsletterUser, "name" | "email" | "bio" | "language">) {
     clearFeedback();
     isPerformingAction = true;
 
     try {
       await UserDataService.addUserAndSubscribe(formData, newsSource.id);
-      setFeedback(
-        "success",
-        `Successfully added and subscribed ${formData.email}.`,
-      );
-      isAddingFormVisible = false; // Hide form on success
+      setFeedback("success", $t['messages.userAddedSuccess'].replace('{email}', formData.email));
+      isAddingFormVisible = false;
     } catch (error: any) {
-      console.error(`Error in handleManualAdd for ${newsSource.id}:`, error);
-      setFeedback("error", error.message || "Failed to add user.");
-      // Keep form open on error
+      setFeedback("error", error.message || $t['errors.addUserFailed']);
     } finally {
       isPerformingAction = false;
     }
   }
 
-  // UPDATED: Now accepts file directly instead of an event object
   async function handleBulkAdd(file: File | null) {
-    // const { file } = event.detail; // No longer needed
     if (!file) return;
-
     clearFeedback();
     isPerformingAction = true;
 
     try {
-      const result = await UserDataService.processBulkUpload(
-        file,
-        newsSource.id,
-      );
-      let feedbackType: "success" | "error" = "success";
-      let message = result.successMessage;
-
-      if (result.errorMessage) {
-        message += ` | Errors: ${result.errorMessage}`;
-        feedbackType = "error"; // Treat as error if any errors occurred during bulk process
-      }
-      setFeedback(feedbackType, message, 7000); // Longer duration for bulk results
-      isAddingFormVisible = false; // Hide form on completion (success or partial success)
+      const result = await UserDataService.processBulkUpload(file, newsSource.id);
+      let feedbackType: "success" | "error" = result.errorMessage ? "error" : "success";
+      let message = result.successMessage + (result.errorMessage ? ` | ${$t['labels.errors']}: ${result.errorMessage}` : "");
+      
+      setFeedback(feedbackType, message, 7000);
+      isAddingFormVisible = false;
     } catch (error: any) {
-      console.error(`Error in handleBulkAdd for ${newsSource.id}:`, error);
-      setFeedback("error", error.message || "Failed to process bulk upload.");
-      // Keep form open on major processing error
+      setFeedback("error", error.message || $t['errors.bulkUploadFailed']);
     } finally {
       isPerformingAction = false;
     }
   }
 
-  // UPDATED: Now accepts email directly instead of an event object
   async function handleRemoveUser(email: string) {
-    // const { email } = event.detail; // No longer needed
+    const confirmMessage = ($t['messages.confirmUnsubscribe'] || 'Unsubscribe {email}?')
+      .replace('{email}', email)
+      .replace('{source}', sourceName);
 
-    if (
-      !confirm(
-        `Are you sure you want to unsubscribe ${email} from ${sourceName}?`,
-      )
-    ) {
+    if (!confirm(confirmMessage)) {
       return;
     }
 
     clearFeedback();
-    removingUserEmail = email; // Set loading state for this specific user
+    removingUserEmail = email;
 
     try {
       await UserDataService.unsubscribeUserFromSource(email, newsSource.id);
-      // Store update is handled by the service, prop update triggers reactivity
-      setFeedback(
-        "success",
-        `${email} unsubscribed successfully from ${sourceName}.`,
-      );
+      setFeedback("success", $t['messages.unsubscribeSuccess'].replace('{email}', email).replace('{source}', sourceName));
     } catch (error: any) {
-      console.error(
-        `Error in handleRemoveUser for ${email} from ${newsSource.id}:`,
-        error,
-      );
-      setFeedback("error", error.message || `Failed to unsubscribe ${email}.`);
+      setFeedback("error", error.message || $t['errors.unsubscribeFailed']);
     } finally {
-      removingUserEmail = null; // Clear loading state for this user
+      removingUserEmail = null;
     }
   }
 </script>
@@ -403,145 +254,95 @@
   {canReveal}
   cardTitle="{cardTitle} {!isOpen ? `(${subscriberCount})` : ''}"
   {isOpen}
-  onChange={(newIsOpenState: boolean) => {
-    // Update the store when this card's toggle changes
-    openNewsSourceIdStore.set(newIsOpenState ? newsSource.id : null);
-  }}
+  onChange={(newIsOpenState) => openNewsSourceIdStore.set(newIsOpenState ? newsSource.id : null)}
 >
-  <!-- Default Slot Content for the ToggleCard body -->
-
-  <!-- Activation Switch -->
   <div class="switch-container" class:disabled={isUpdatingActive}>
-    <span
-      style="font-size: 0.8em; color: var(--color-text-secondary); margin-right: 0.5rem;"
-      >{newsSource.active ?? false ? "Active" : "Inactive"}:</span
-    >
+    <span class="status-label">
+      {newsSource.active ?? false ? $t['labels.active'] : $t['labels.inactive']}:
+    </span>
     <Switch
       toggled={newsSource.active ?? false}
       onChange={handleToggleActive}
     />
-    <!-- No disabled prop, handled by CSS -->
   </div>
 
-  <!-- Section for adding users (trigger + forms) -->
   <div class="add-user-section">
-    <!-- Trigger to show/hide the add forms -->
     <IconButton
       src="/icons/plus.svg"
-      label={isAddingFormVisible ? "Cancel Adding User" : "Add New Subscriber"}
+      label={isAddingFormVisible ? $t['labels.cancelAdding'] : $t['labels.addNewSubscriber']}
       callback={toggleAddFormVisibility}
       disabled={isPerformingAction}
     />
 
-    <!-- Display Action Feedback -->
     {#if actionFeedback}
       <div class="feedback-message {actionFeedback.type}">
         {actionFeedback.message}
-        <button
-          class="close-feedback"
-          on:click={clearFeedback}
-          aria-label="Dismiss notification">×</button
-        >
+        <button class="close-feedback" on:click={clearFeedback} aria-label={$t['labels.dismiss']}>×</button>
       </div>
     {/if}
 
     {#if isPerformingAction}
       <div class="loading-indicator">
-        <p>Adding user, please wait</p>
+        <p>{$t['messages.addingUserWait']}</p>
       </div>
     {/if}
 
-    <!-- Conditionally rendered container for add forms -->
     {#if isAddingFormVisible}
       <div class="add-forms-container" id={`add-forms-${newsSource.id}`}>
-        <!-- Manual Add Form Component -->
-        <!-- UPDATED: Pass handler as 'onSubmit' prop. Removed newsSourceId prop as it's not expected by the component. -->
-        <ManualAddUserForm
-          onSubmit={handleManualAdd}
-          disabled={isPerformingAction}
-        />
-
+        <ManualAddUserForm onSubmit={handleManualAdd} disabled={isPerformingAction} />
         <hr class="section-separator" />
-
-        <!-- Bulk Add Section Component -->
-        <!-- UPDATED: Pass handler as 'onUpload' prop instead of listening for 'bulkAdd' event -->
-        <BulkAddUserSection
-          newsSourceId={newsSource.id}
-          onUpload={handleBulkAdd}
-          disabled={isPerformingAction}
-        />
-
-        <!-- No final separator needed if it's the last item -->
-        <!-- <hr class="section-separator" /> -->
+        <BulkAddUserSection newsSourceId={newsSource.id} onUpload={handleBulkAdd} disabled={isPerformingAction} />
       </div>
     {/if}
   </div>
 
-  <!-- Subscriber List Section -->
   <div class="subscriber-list-section">
     <TextTypes type="subtitle">
-      Current Subscribers ({subscriberCount})
+      {$t['labels.currentSubscribers']} ({subscriberCount})
     </TextTypes>
 
     <SearchBar
-      placeholder="Search by name, bio or email..."
+      placeholder={$t['placeholders.searchSubscribers']}
       on:search={handleSearch}
     />
 
     {#if subscriberCount > 0}
       <div class="subscriber-cards-container">
-        <!-- Loop through reversed list (newest first) -->
         {#each paginatedSubscribers as user (user.email)}
-          <!-- UPDATED: Removed 'onRemove' prop. Removal is now handled via the userRemovalRequestStore subscription. -->
-          <UserCard
-            {user}
-            newsSourceId={newsSource.id}
-            disabled={removingUserEmail === user.email}
-          />
+          <UserCard {user} newsSourceId={newsSource.id} disabled={removingUserEmail === user.email} />
         {/each}
       </div>
-      <Pagination
-        {currentPage}
-        totalItems={reversedSubscribers.length}
-        {pageSize}
-        on:pageChange={handlePageChange}
-      />
+      <Pagination {currentPage} totalItems={reversedSubscribers.length} {pageSize} on:pageChange={handlePageChange} />
     {:else}
-      <!-- Message when no subscribers -->
       <p style="margin-top: 0.5rem;">
-        <TextTypes type="sub-italic"
-          >No subscribers for this source yet.</TextTypes
-        >
+        <TextTypes type="sub-italic">{$t['messages.noSubscribers']}</TextTypes>
       </p>
     {/if}
   </div>
-  <!-- End subscriber-list-section -->
 
-  <!-- Manual Trigger Button -->
   <div class="trigger-send-container">
     <SubmitButton
-      label="Send Newsletter Now"
+      label={$t['labels.sendNewsletterNow']}
       callback={() => handleTriggerSend()}
       loading={isTriggeringSend}
       disabled={isUpdatingActive || isPerformingAction || isSendingCustomContent}
     />
   </div>
 
-  <!-- Custom Content Send Section -->
   <div class="custom-content-send-section">
-    <TextTypes type="subtitle"
-      >Send Custom Message to Subscribers of {sourceName}</TextTypes
-    >
+    <TextTypes type="subtitle">
+      {$t['labels.sendCustomMessageTo'].replace('{source}', sourceName)}
+    </TextTypes>
     <TextArea
       bind:value={customEmailContent}
-      label="Custom Message Content:"
-      placeholder="Type your direct message to subscribers here..."
+      label={$t['labels.customMessageContent']}
+      placeholder={$t['placeholders.typeDirectMessage']}
       rows={8}
       disabled={isSendingCustomContent || isTriggeringSend}
     />
     <div class="custom-send-button-container">
       <SubmitButton
-        label="Send Custom Message"
+        label={$t['labels.sendCustomMessage']}
         callback={handleSendCustomContent}
         loading={isSendingCustomContent}
         disabled={!customEmailContent.trim() || isTriggeringSend || isUpdatingActive || isPerformingAction}
@@ -550,27 +351,26 @@
   </div>
 </ToggleCard>
 
-<!-- End ToggleCard for this news source -->
-
-<!-- Styles remain the same -->
 <style lang="scss">
   @use "./Users.scss";
   @use "../Dashboard.scss";
 
+  .status-label {
+    font-size: 0.8em; 
+    color: var(--color-text-secondary); 
+    margin-right: 0.5rem;
+  }
+
   .trigger-send-container {
     display: flex;
-    justify-content: flex-end; // Keep existing button to the right
-    margin-top: 1rem; // Add some margin if it's not the last element anymore
+    justify-content: flex-end;
+    margin-top: 1rem;
   }
 
   .custom-content-send-section {
     margin-top: 1.5rem;
     padding-top: 1rem;
     border-top: 1px solid var(--color-border-light, #eee);
-
-    h4 { // Styling for the new subtitle using TextTypes props
-        margin-bottom: 0.75rem;
-    }
   }
   
   .custom-send-button-container {
@@ -579,46 +379,21 @@
     margin-top: 0.75rem;
   }
 
-  // Added styles for switch container and disabled state
   .switch-container {
     display: flex;
     justify-content: end;
     align-items: center;
-    margin-left: 1rem; // Add some space from the title
+    margin-left: 1rem;
     transition: opacity 0.3s ease;
 
     &.disabled {
       opacity: 0.5;
-      pointer-events: none; // Prevent interaction when disabled
+      pointer-events: none;
     }
   }
 
   .add-user-section {
-    margin-bottom: 1rem; // Space between add section and list
-  }
-
-  .add-user-trigger {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5em;
-    color: var(--color-foreground);
-    padding: 0.4rem 0.8rem;
-    border-radius: var(--radius-m);
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    font-weight: 500;
-
-    &:hover:not(:disabled) {
-      background: var(--color-primary, #00bcd4);
-      color: white;
-    }
-    &:disabled {
-      cursor: not-allowed;
-      opacity: 0.7;
-    }
-    & > span {
-      padding-top: 0.1rem;
-    }
+    margin-bottom: 1rem;
   }
 
   .add-forms-container {
@@ -642,14 +417,14 @@
   .subscriber-cards-container {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem; // Space between user cards
+    gap: 0.75rem;
     margin-top: 0.5rem;
   }
 
   .feedback-message {
-    position: relative; // For absolute positioning of close button
-    padding: 0.75rem 2rem 0.75rem 1rem; // Extra padding on right for close button
-    margin: 1rem 0 0.5rem 0; // Display above subscriber list or near trigger
+    position: relative;
+    padding: 0.75rem 2rem 0.75rem 1rem;
+    margin: 1rem 0 0.5rem 0;
     border-radius: var(--radius-s);
     font-size: 0.9rem;
     border: 1px solid transparent;
@@ -677,7 +452,7 @@
       font-size: 1.4em;
       line-height: 1;
       padding: 0.2rem;
-      color: inherit; // Inherit color from parent type (success/error)
+      color: inherit;
       opacity: 0.7;
       &:hover {
         opacity: 1;
@@ -703,17 +478,9 @@
   }
 
   @keyframes ellipsis {
-    0% {
-      content: '.';
-    }
-    33% {
-      content: '..';
-    }
-    66% {
-      content: '...';
-    }
-    100% {
-      content: '.';
-    }
+    0% { content: '.'; }
+    33% { content: '..'; }
+    66% { content: '...'; }
+    100% { content: '.'; }
   }
 </style>

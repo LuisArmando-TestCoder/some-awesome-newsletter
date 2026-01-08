@@ -310,5 +310,27 @@ export default {
   "credentials.step1": "Go to <b>Security</b>.",
   "credentials.step2": "Look for <b>\"App passwords\"</b>.",
   "credentials.step3": "Create a key named <b>\"AIBAN\"</b> and paste the code below.",
-  "credentials.errorBothRequired": "Both fields are required to activate custom sending."
+  "credentials.errorBothRequired": "Both fields are required to activate custom sending.",
+
+  /* Updated Secrets Section */
+  "secrets.webhookTitle": "Automated Content Delivery (Webhooks)",
+  "secrets.developerRequired": "Developer Required",
+  "secrets.webhookDesc": "If you want AIBAN to automatically publish news to your blog or app, enter your server's endpoint below.",
+  "secrets.destinationUrl": "Destination URL:",
+  "secrets.saveConnection": "Save Connection",
+  "secrets.signatureTitle": "Security Signature",
+  "secrets.signatureDesc": "This secret acts like a \"digital seal\" to prove content is really coming from AIBAN.",
+  "secrets.copyNow": "Copy this now.",
+  "secrets.wontShowAgain": "It will never be shown again.",
+  "secrets.copy": "Copy",
+  "secrets.generateSignature": "Generate Security Signature",
+  "secrets.apiTitle": "App Connection Keys (API)",
+  "secrets.apiDesc": "Use these keys to allow other software tools to talk to your AIBAN account securely.",
+  "secrets.keyGenerated": "Key Generated Successfully",
+  "secrets.storeSecurely": "Store this in a password manager. You cannot recover it later.",
+  "secrets.createNewKey": "Create New Access Key",
+  "secrets.activeConnections": "Active Connections",
+  "secrets.keySnapshot": "Key Snapshot",
+  "secrets.revokeAccess": "Revoke Access",
+  
 };

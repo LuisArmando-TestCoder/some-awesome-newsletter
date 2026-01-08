@@ -313,5 +313,25 @@ export default {
   // Toasts / Notifications
   "notification.success": "Operación exitosa",
   "notification.error": "Ha ocurrido un error",
-  "notification.copiedToClipboard": "Copiado al portapapeles"
+  "notification.copiedToClipboard": "Copiado al portapapeles",
+  /* Español (es) - Configuración de Desarrollador y Secretos */
+  "secrets.webhookTitle": "Entrega Automatizada de Contenido (Webhooks)",
+  "secrets.developerRequired": "Requiere Desarrollador",
+  "secrets.webhookDesc": "Si quieres que AIBAN publique noticias automáticamente en tu blog o aplicación, ingresa el endpoint de tu servidor a continuación.",
+  "secrets.destinationUrl": "URL de destino:",
+  "secrets.saveConnection": "Guardar conexión",
+  "secrets.signatureTitle": "Firma de Seguridad",
+  "secrets.signatureDesc": "Este secreto actúa como un \"sello digital\" para demostrar que el contenido proviene realmente de AIBAN.",
+  "secrets.copyNow": "Cópialo ahora.",
+  "secrets.wontShowAgain": "No se volverá a mostrar nunca más.",
+  "secrets.copy": "Copiar",
+  "secrets.generateSignature": "Generar firma de seguridad",
+  "secrets.apiTitle": "Claves de Conexión de la App (API)",
+  "secrets.apiDesc": "Usa estas claves para permitir que otras herramientas de software se comuniquen con tu cuenta de AIBAN de forma segura.",
+  "secrets.keyGenerated": "Clave generada con éxito",
+  "secrets.storeSecurely": "Guarda esto en un gestor de contraseñas. No podrás recuperarlo más tarde.",
+  "secrets.createNewKey": "Crear nueva clave de acceso",
+  "secrets.activeConnections": "Conexiones activas",
+  "secrets.keySnapshot": "Vista previa de la clave",
+  "secrets.revokeAccess": "Revocar acceso",
 };

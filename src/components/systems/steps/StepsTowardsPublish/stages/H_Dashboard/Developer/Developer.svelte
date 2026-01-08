@@ -6,7 +6,7 @@
 </script>
 
 <Page>
-  <Exports />
   <SecretsToggle />
   <NewsSourceDeveloper />
+  <Exports />
 </Page>

@@ -231,5 +231,26 @@ export default {
   "placeholders.searchArticles": "البحث عن مقالات...",
   "labels.noArticlesFound": "لم يتم العثور على مقالات لهذا المصدر الإخباري.",
   "labels.created": "تم الإنشاء",
-  "labels.language": "اللغة"
+  "labels.language": "اللغة",
+  /* الترجمة المصرية لـ Secrets / API Settings */
+  "secrets.webhookTitle": "توصيل المحتوى أوتوماتيكياً (Webhooks)",
+  "secrets.developerRequired": "محتاج مطور برمجيات",
+  "secrets.webhookDesc": "لو عايز AIBAN ينشر الأخبار أوتوماتيكياً على البلوج أو التطبيق بتاعك، دخل عنوان الـ endpoint بتاع سيرفرك هنا.",
+  "secrets.destinationUrl": "رابط الوجهة (URL):",
+  "secrets.saveConnection": "حفظ الاتصال",
+  "secrets.signatureTitle": "توقيع الحماية (Security Signature)",
+  "secrets.signatureDesc": "السر ده عامل زي \"ختم رقمي\" بيأكد إن المحتوى جاي فعلاً من AIBAN.",
+  "secrets.copyNow": "انسخه دلوقتي.",
+  "secrets.wontShowAgain": "مش هيظهر تاني أبداً.",
+  "secrets.copy": "نسخ",
+  "secrets.generateSignature": "إنشاء توقيع حماية",
+  "secrets.apiTitle": "مفاتيح ربط التطبيقات (API Keys)",
+  "secrets.apiDesc": "استخدم المفاتيح دي عشان تسمح لبرامج تانية تتواصل مع حسابك في AIBAN بأمان.",
+  "secrets.keyGenerated": "تم إنشاء المفتاح بنجاح",
+  "secrets.storeSecurely": "احفظه في برنامج إدارة كلمات السر (Password Manager). مش هتعرف ترجعه تاني بعدين.",
+  "secrets.createNewKey": "إنشاء مفتاح دخول جديد",
+  "secrets.activeConnections": "الاتصالات الشغالة",
+  "secrets.keySnapshot": "لمحة عن المفتاح",
+  "secrets.revokeAccess": "إلغاء الصلاحية",
+  
 };

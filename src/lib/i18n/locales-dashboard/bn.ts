@@ -171,5 +171,26 @@ export default {
   "labels.senderEmail": "ইমেল ঠিকানা (প্রেরক)",
   "labels.appPassword": "অ্যাপ পাসওয়ার্ড (১৬ অক্ষর)",
   "placeholders.email": "your-email@gmail.com",
-  "placeholders.appPassword": "abcd efgh ijkl mnop"
+  "placeholders.appPassword": "abcd efgh ijkl mnop",
+  /* বাংলা অনুবাদ - সিক্রেটস এবং এপিআই সেটিংস */
+  "secrets.webhookTitle": "স্বয়ংক্রিয় কন্টেন্ট ডেলিভারি (Webhooks)",
+  "secrets.developerRequired": "ডেভেলপার প্রয়োজন",
+  "secrets.webhookDesc": "আপনি যদি চান AIBAN স্বয়ংক্রিয়ভাবে আপনার ব্লগ বা অ্যাপে সংবাদ প্রকাশ করুক, তবে নিচে আপনার সার্ভারের এন্ডপয়েন্ট লিখুন।",
+  "secrets.destinationUrl": "গন্তব্য ইউআরএল (URL):",
+  "secrets.saveConnection": "সংযোগ সংরক্ষণ করুন",
+  "secrets.signatureTitle": "নিরাপত্তা স্বাক্ষর (Security Signature)",
+  "secrets.signatureDesc": "এই সিক্রেটটি একটি \"ডিজিটাল সিল\" হিসেবে কাজ করে যা প্রমাণ করে যে কন্টেন্টটি সত্যিই AIBAN থেকে আসছে।",
+  "secrets.copyNow": "এটি এখনই কপি করুন।",
+  "secrets.wontShowAgain": "এটি আর কখনো দেখানো হবে না।",
+  "secrets.copy": "কপি",
+  "secrets.generateSignature": "নিরাপত্তা স্বাক্ষর তৈরি করুন",
+  "secrets.apiTitle": "অ্যাপ সংযোগ কী (API Keys)",
+  "secrets.apiDesc": "অন্যান্য সফটওয়্যার টুলস যাতে আপনার AIBAN অ্যাকাউন্টের সাথে নিরাপদে যোগাযোগ করতে পারে সেজন্য এই কী-গুলো ব্যবহার করুন।",
+  "secrets.keyGenerated": "কী সফলভাবে তৈরি হয়েছে",
+  "secrets.storeSecurely": "এটি একটি পাসওয়ার্ড ম্যানেজারে সংরক্ষণ করুন। পরবর্তীতে এটি আর পুনরুদ্ধার করা যাবে না।",
+  "secrets.createNewKey": "নতুন এক্সেস কী তৈরি করুন",
+  "secrets.activeConnections": "সক্রিয় সংযোগসমূহ",
+  "secrets.keySnapshot": "কী স্ন্যাপশট",
+  "secrets.revokeAccess": "এক্সেস বাতিল করুন",
+  
 };

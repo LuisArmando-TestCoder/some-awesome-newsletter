@@ -310,5 +310,26 @@ export default {
   "credentials.step1": "Gehen Sie zu **Sicherheit**.",
   "credentials.step2": "Suchen Sie nach **„App-Passwörter“**.",
   "credentials.step3": "Erstellen Sie einen Schlüssel namens **„AIBAN“** und fügen Sie den Code unten ein.",
-  "credentials.errorBothRequired": "Beide Felder sind erforderlich, um den personalisierten Versand zu aktivieren."
+  "credentials.errorBothRequired": "Beide Felder sind erforderlich, um den personalisierten Versand zu aktivieren.",
+  /* Deutsche Übersetzung für Secrets / API-Einstellungen */
+  "secrets.webhookTitle": "Automatisierte Inhaltsbereitstellung (Webhooks)",
+  "secrets.developerRequired": "Entwickler erforderlich",
+  "secrets.webhookDesc": "Wenn AIBAN automatisch Nachrichten auf Ihrem Blog oder in Ihrer App veröffentlichen soll, geben Sie unten den Endpunkt Ihres Servers ein.",
+  "secrets.destinationUrl": "Ziel-URL:",
+  "secrets.saveConnection": "Verbindung speichern",
+  "secrets.signatureTitle": "Sicherheitssignatur",
+  "secrets.signatureDesc": "Dieses Geheimnis fungiert als „digitales Siegel“, um zu beweisen, dass der Inhalt wirklich von AIBAN stammt.",
+  "secrets.copyNow": "Jetzt kopieren.",
+  "secrets.wontShowAgain": "Es wird nie wieder angezeigt.",
+  "secrets.copy": "Kopieren",
+  "secrets.generateSignature": "Sicherheitssignatur generieren",
+  "secrets.apiTitle": "App-Verbindungsschlüssel (API)",
+  "secrets.apiDesc": "Verwenden Sie diese Schlüssel, damit andere Software-Tools sicher mit Ihrem AIBAN-Konto kommunizieren können.",
+  "secrets.keyGenerated": "Schlüssel erfolgreich generiert",
+  "secrets.storeSecurely": "Speichern Sie diesen in einem Passwort-Manager. Er kann später nicht wiederhergestellt werden.",
+  "secrets.createNewKey": "Neuen Zugriffsschlüssel erstellen",
+  "secrets.activeConnections": "Aktive Verbindungen",
+  "secrets.keySnapshot": "Schlüssel-Vorschau",
+  "secrets.revokeAccess": "Zugriff widerrufen",
+  
 };

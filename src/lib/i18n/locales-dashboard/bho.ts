@@ -233,5 +233,26 @@ export default {
   "placeholders.searchArticles": "लेख खोजीं...",
   "labels.noArticlesFound": "एह समाचार स्रोत खातिर कवनो लेख ना मिलल।",
   "labels.created": "बनावल गइल",
-  "labels.language": "भाषा"
+  "labels.language": "भाषा",
+  /* भोजपुरी अनुवाद - सीक्रेट्स आ API सेटिंग्स */
+  "secrets.webhookTitle": "अपने आप कंटेंट पहुँचावे वाला सुविधा (Webhooks)",
+  "secrets.developerRequired": "डेवलपर के जरूरत बा",
+  "secrets.webhookDesc": "अगर रउआ चाहत बानी कि AIBAN अपने आप रउआ ब्लॉग चाहे ऐप पर खबर पब्लिश करे, त नीचे अपना सर्वर के एंडपॉइंट डालीं।",
+  "secrets.destinationUrl": "पहुँचे के पता (URL):",
+  "secrets.saveConnection": "कनेक्शन सुरक्षित करीं",
+  "secrets.signatureTitle": "सुरक्षा सिग्नेचर",
+  "secrets.signatureDesc": "ई सीक्रेट एक गो \"डिजिटल मुहर\" नियर काम करेला जेसे ई साबित होला कि कंटेंट असल में AIBAN से आवत बा।",
+  "secrets.copyNow": "एके अभीये कॉपी करीं।",
+  "secrets.wontShowAgain": "ई फेर दोबारा कबो ना देखाई।",
+  "secrets.copy": "कॉपी",
+  "secrets.generateSignature": "सुरक्षा सिग्नेचर बनाईं",
+  "secrets.apiTitle": "ऐप कनेक्शन चाबी (API)",
+  "secrets.apiDesc": "दूसर सॉफ्टवेयर टूल्स के अपना AIBAN खाता से सुरक्षित तरीका से जोड़े खातिर ई चाबी के इस्तेमाल करीं।",
+  "secrets.keyGenerated": "चाबी सफलता से बन गईल",
+  "secrets.storeSecurely": "एके पासवर्ड मैनेजर में सुरक्षित राखीं। बाद में रउआ एके वापस ना पा सकीं।",
+  "secrets.createNewKey": "नया एक्सेस की (Key) बनाईं",
+  "secrets.activeConnections": "चालू कनेक्शन",
+  "secrets.keySnapshot": "चाबी के झलक",
+  "secrets.revokeAccess": "एक्सेस वापस लीं",
+  
 };

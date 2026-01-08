@@ -310,5 +310,26 @@ export default {
   "credentials.step1": "ادخل إلى قسم **الأمان**.",
   "credentials.step2": "ابحث عن **\"كلمات مرور التطبيقات\"**.",
   "credentials.step3": "أنشئ مفتاحاً باسم **\"AIBAN\"** ثم الصق الكود أدناه.",
-  "credentials.errorBothRequired": "كلا الحقلين مطلوبان لتفعيل الإرسال المخصص."
+  "credentials.errorBothRequired": "كلا الحقلين مطلوبان لتفعيل الإرسال المخصص.",
+  /* الترجمة العربية - إعدادات المطور والمفاتيح السرية */
+  "secrets.webhookTitle": "التوصيل التلقائي للمحتوى (Webhooks)",
+  "secrets.developerRequired": "يتطلب مطور برمجيات",
+  "secrets.webhookDesc": "إذا كنت ترغب في أن يقوم AIBAN بنشر الأخبار تلقائيًا في مدونتك أو تطبيقك، فأدخل عنوان سيرفرك أدناه.",
+  "secrets.destinationUrl": "رابط الوجهة (URL):",
+  "secrets.saveConnection": "حفظ الاتصال",
+  "secrets.signatureTitle": "توقيع الحماية",
+  "secrets.signatureDesc": "هذا السر يعمل كـ \"ختم رقمي\" لإثبات أن المحتوى قادم بالفعل من AIBAN.",
+  "secrets.copyNow": "انسخ هذا الآن.",
+  "secrets.wontShowAgain": "لن يتم عرضه مرة أخرى أبدًا.",
+  "secrets.copy": "نسخ",
+  "secrets.generateSignature": "إنشاء توقيع حماية",
+  "secrets.apiTitle": "مفاتيح ربط التطبيقات (API)",
+  "secrets.apiDesc": "استخدم هذه المفاتيح للسماح للبرمجيات الأخرى بالتواصل مع حسابك في AIBAN بشكل آمن.",
+  "secrets.keyGenerated": "تم إنشاء المفتاح بنجاح",
+  "secrets.storeSecurely": "احفظ هذا المفتاح في مدير كلمات السر، حيث لن تتمكن من استعادته لاحقًا.",
+  "secrets.createNewKey": "إنشاء مفتاح وصول جديد",
+  "secrets.activeConnections": "الاتصالات النشطة",
+  "secrets.keySnapshot": "لمحة عن المفتاح",
+  "secrets.revokeAccess": "إلغاء الوصول",
+  
 };

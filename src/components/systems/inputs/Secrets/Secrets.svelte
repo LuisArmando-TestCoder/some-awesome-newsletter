@@ -14,11 +14,71 @@
   let webhookUrl: string = "";
   let newSharedSecret: string | null = null;
 
-  // ... (fetch and logic functions remain the same) ...
+  async function fetchConfigData() {
+    const authHeaders = await getAuthHeaders();
+    const configId = authHeaders["x-auth-email"];
+    const response = await fetch(`${get(store).apiURL()}/configurations/${configId}`, {
+      headers: authHeaders,
+    });
+    const data = await response.json();
+    apiKeys = data.apiKeys || [];
+    webhookUrl = data.webhookUrl || "";
+  }
+
+  async function saveWebhookUrl() {
+    await saveToConfig({ webhookUrl });
+    // Feedback logic could be added here
+  }
+
+  async function createSharedSecret() {
+    newSharedSecret = null;
+    const authHeaders = await getAuthHeaders();
+    const configId = authHeaders["x-auth-email"];
+    const response = await fetch(`${get(store).apiURL()}/configurations/${configId}/secret`, {
+      method: "POST",
+      headers: authHeaders,
+    });
+    const data = await response.json();
+    newSharedSecret = data.sharedSecret;
+  }
+
+  async function fetchApiKeys() {
+    const authHeaders = await getAuthHeaders();
+    const configId = authHeaders["x-auth-email"];
+    const response = await fetch(`${get(store).apiURL()}/apikeys/${configId}`, {
+      headers: authHeaders,
+    });
+    const data = await response.json();
+    apiKeys = data.apiKeys;
+  }
+
+  async function createApiKey() {
+    newApiKey = null; 
+    const authHeaders = await getAuthHeaders();
+    const configId = authHeaders["x-auth-email"];
+    const response = await fetch(`${get(store).apiURL()}/apikeys/${configId}`, {
+      method: "POST",
+      headers: authHeaders,
+    });
+    const data = await response.json();
+    newApiKey = data.apiKey;
+    await fetchApiKeys();
+  }
+
+  async function deleteApiKey(apiKeyHash: string) {
+    const authHeaders = await getAuthHeaders();
+    const configId = authHeaders["x-auth-email"];
+    const encodedApiKeyHash = encodeURIComponent(apiKeyHash);
+    await fetch(`${get(store).apiURL()}/apikeys/${configId}/${encodedApiKeyHash}`, {
+      method: "DELETE",
+      headers: authHeaders,
+    });
+    await fetchApiKeys();
+    confirmingDeleteHash = null;
+  }
 
   function copyToClipboard(text: string) {
     navigator.clipboard.writeText(text);
-    // You could trigger a notification here using $t['notification.copiedToClipboard']
   }
 
   onMount(fetchConfigData);
@@ -54,7 +114,7 @@
           <p class="warning-text">⚠️ <strong>{$t['secrets.copyNow']}</strong> {$t['secrets.wontShowAgain']}</p>
           <div class="new-api-key-wrapper">
             <code class="new-api-key-code">{newSharedSecret}</code>
-            <button class="copy-btn" on:click={() => copyToClipboard(newSharedSecret)}>{$t['secrets.copy']}</button>
+            <button class="copy-btn" on:click={() => newSharedSecret && copyToClipboard(newSharedSecret)}>{$t['secrets.copy']}</button>
           </div>
         </div>
       {:else}
@@ -74,7 +134,7 @@
         <p class="warning-text">✅ <strong>{$t['secrets.keyGenerated']}</strong></p>
         <div class="new-api-key-wrapper">
           <code class="new-api-key-code">{newApiKey}</code>
-          <button class="copy-btn" on:click={() => copyToClipboard(newApiKey)}>{$t['secrets.copy']}</button>
+          <button class="copy-btn" on:click={() => newApiKey && copyToClipboard(newApiKey)}>{$t['secrets.copy']}</button>
         </div>
         <p class="small-hint">{$t['secrets.storeSecurely']}</p>
       </div>

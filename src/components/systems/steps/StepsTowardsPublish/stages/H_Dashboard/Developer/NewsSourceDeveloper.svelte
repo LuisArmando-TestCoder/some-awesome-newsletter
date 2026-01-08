@@ -39,49 +39,142 @@
     searchTerm = event.detail.value;
     currentPage = 0; // Reset to first page on new search
   }
+  
+  // Helper to make URLs readable for the UI
+  function formatUrl(url: string | undefined): string {
+    if (!url) return "N/A";
+    return url.replace(/^(?:https?:\/\/)?(?:www\.)?/i, "").split('/')[0];
+  }
+
+  function getPath(url: string | undefined): string {
+    if (!url) return "";
+    const path = url.replace(/^(?:https?:\/\/)?(?:www\.)?[^\/]+/i, "");
+    return path === "/" || path === "" ? "Root" : path;
+  }
 </script>
 
-<SearchBar
-  placeholder={$t['newsSourceDeveloper.searchPlaceholder']}
-  on:search={handleSearch}
-/>
-<SlotAutoCollapseToggle {canReveal} autoCollapse={true} let:getToggleProps>
-  {#if newsSourcesReversed && newsSourcesReversed.length}
-    {#each paginatedNewsSources as ns (ns.id)}
-      <ToggleCard
-        {canReveal}
-        cardTitle={`${ns.url?.split("//")[1] ?? "N/A"} ⟫ ${ns.lead?.split("//")[1] ?? "N/A"}`}
-        {...getToggleProps(ns.id)}
-      >
-        <DeveloperNewsSourceItem newsSource={ns} {canReveal} />
-      </ToggleCard>
-    {/each}
-
-    <Pagination
-      {currentPage}
-      totalItems={filteredNewsSources.length}
-      {pageSize}
-      on:pageChange={handlePageChange}
-    />
-  {:else}
-    <div class="loading-state">
-      <p>
-        <TextTypes type="sub-italic">
-          {#if $store.config?.newsSources === undefined}
-            {$t['newsSourceDeveloper.loading']}
-          {:else}
-            {$t['newsSourceDeveloper.noSources']}
-          {/if}
-        </TextTypes>
-      </p>
+<div class="developer-sources-container">
+  <header class="section-header">
+    <div class="header-text">
+      <h3>{$t['newsSourceDeveloper.title'] || "API News Sources"}</h3>
+      <p>{filteredNewsSources.length} sources found</p>
     </div>
-  {/if}
-</SlotAutoCollapseToggle>
+    <div class="search-wrapper">
+      <SearchBar
+        placeholder={$t['newsSourceDeveloper.searchPlaceholder']}
+        on:search={handleSearch}
+      />
+    </div>
+  </header>
+
+  <SlotAutoCollapseToggle {canReveal} autoCollapse={true} let:getToggleProps>
+    {#if newsSourcesReversed && newsSourcesReversed.length}
+      <div class="sources-list">
+        {#each paginatedNewsSources as ns (ns.id)}
+          <div class="source-card-wrapper">
+            <ToggleCard
+              {canReveal}
+              cardTitle="{formatUrl(ns.url)} → {formatUrl(ns.lead)}"
+              {...getToggleProps(ns.id)}
+            >
+              <div class="card-inner-context">
+                <span class="path-badge">{getPath(ns.url)}</span>
+                <DeveloperNewsSourceItem newsSource={ns} {canReveal} />
+              </div>
+            </ToggleCard>
+          </div>
+        {/each}
+      </div>
+
+      <footer class="pagination-footer">
+        <Pagination
+          {currentPage}
+          totalItems={filteredNewsSources.length}
+          {pageSize}
+          on:pageChange={handlePageChange}
+        />
+      </footer>
+    {:else}
+      <div class="empty-state">
+        <div class="icon-placeholder">ℹ️</div>
+        <p>
+          <TextTypes type="sub-italic">
+            {#if $store.config?.newsSources === undefined}
+              {$t['newsSourceDeveloper.loading']}
+            {:else}
+              {$t['newsSourceDeveloper.noSources']}
+            {/if}
+          </TextTypes>
+        </p>
+      </div>
+    {/if}
+  </SlotAutoCollapseToggle>
+</div>
 
 <style lang="scss">
-  .loading-state {
-    padding: 1rem;
+  .developer-sources-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+
+    h3 { margin: 0; font-size: 1.25rem; }
+    p { margin: 0; font-size: 0.85rem; color: #666; }
+
+    .search-wrapper {
+      width: 300px;
+    }
+  }
+
+  .sources-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .source-card-wrapper {
+    :global(.toggle-card-header) {
+      background: #fdfdfd;
+      &:hover { background: #f7f7f7; }
+    }
+  }
+
+  .card-inner-context {
+    position: relative;
+    padding-top: 10px;
+  }
+
+  .path-badge {
+    position: absolute;
+    top: -35px;
+    right: 10px;
+    font-size: 0.7rem;
+    background: #f0f0f0;
+    padding: 2px 8px;
+    border-radius: 4px;
+    color: #888;
+  }
+
+  .pagination-footer {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+  }
+
+  .empty-state {
+    padding: 4rem 2rem;
     text-align: center;
-    color: #777;
+    background: #fafafa;
+    border: 2px dashed #eee;
+    border-radius: 12px;
+    
+    .icon-placeholder { font-size: 2rem; margin-bottom: 10px; }
   }
 </style>

@@ -29,58 +29,163 @@
       errorRegeneratingSelectors.set(true);
     }
   });
+
+  const handleRegenerate = async () => {
+    isRegenerating.set(true);
+    errorRegeneratingSelectors.set(false);
+    const response = await regenerateSelectors(
+      $store.configuratorEmail,
+      newsSource.id,
+      newsSource.url
+    );
+    errorRegeneratingSelectors.set(!response);
+    isRegenerating.set(false);
+    if (response) {
+      linkSelector = response.linkSelector;
+    }
+  };
 </script>
 
-<div class="selectors-group">
-  <CopyUrlWithQR
-  configuratorEmail={$store.configuratorEmail}
-  newsSourceId={newsSource.id}
-  lead={newsSource.lead}
-  label={$t['labels.manualSubscriptionLink']}
-  />
-    <ToggleCard {canReveal} cardTitle={$t['labels.apiPlayground']} isOpen={false} onChange={() => {}}>
+<div class="developer-item-card">
+  <section class="config-row">
+    <div class="description">
+      <h4>{$t['labels.connectionDetails'] || "Connection"}</h4>
+      <p>{$t['descriptions.connection'] || "Use this link to sync your news source manually."}</p>
+    </div>
+    <div class="action-component">
+      <CopyUrlWithQR
+        configuratorEmail={$store.configuratorEmail}
+        newsSourceId={newsSource.id}
+        lead={newsSource.lead}
+        label={$t['labels.manualSubscriptionLink'] || "Copy Link"}
+      />
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section class="config-row">
+    <div class="description">
+      <h4>{$t['labels.linkDetection'] || "Detection Pattern"}</h4>
+      <p>{$t['descriptions.detection'] || "The CSS selector used to find links on the source page."}</p>
+    </div>
+    <div class="action-component">
+      <div class="input-with-inline-action">
+        <PlainText
+          label="" 
+          placeholder={$t['placeholders.linkSelector'] || "Enter selector..."}
+          bind:value={linkSelector}
+        />
+        <div class="inline-button">
+          <IconButton
+            src="./icons/refresh.svg"
+            disabled={$isRegenerating}
+            loading={$isRegenerating}
+            label={$t['labels.autoDetect'] || "Auto-detect"}
+            callback={handleRegenerate}
+          />
+        </div>
+      </div>
+      
+      <div class="feedback-area">
+        {#if $isRegenerating}
+          <span class="status-msg loading">{$latestMessage}</span>
+        {:else if $errorRegeneratingSelectors}
+          <span class="status-msg error">{$t['errors.regeneratingSelectors']}: {$latestMessage}</span>
+        {/if}
+      </div>
+    </div>
+  </section>
+
+  <div class="advanced-tools">
+    <ToggleCard 
+      {canReveal} 
+      cardTitle={$t['labels.apiPlayground'] || "Developer API Playground"} 
+      isOpen={false} 
+      onChange={() => {}}
+    >
       <PostExplanation {newsSource} />
     </ToggleCard>
-
-    <IconButton
-      src="./icons/refresh.svg"
-      disabled={$isRegenerating}
-      loading={$isRegenerating}
-      label={$t['labels.regenerateSelectors']}
-      callback={async () => {
-        isRegenerating.set(true);
-        errorRegeneratingSelectors.set(false);
-        const response = await regenerateSelectors(
-          $store.configuratorEmail,
-          newsSource.id,
-          newsSource.url
-        );
-        errorRegeneratingSelectors.set(!response);
-        isRegenerating.set(false);
-        if (response) {
-          linkSelector = response.linkSelector;
-        }
-      }}
-    />
-    <div class={$isRegenerating ? "loading" : "none"}>
-      {$isRegenerating ? $latestMessage : ""}
-    </div>
-    <div class={$errorRegeneratingSelectors ? "error" : "none"}>
-      {$errorRegeneratingSelectors
-        ? `${$t['errors.regeneratingSelectors']}: ${$latestMessage}`
-        : ""}
-    </div>
-    <PlainText
-      label={$t['labels.linkSelector']}
-      placeholder={$t['placeholders.linkSelector']}
-      bind:value={linkSelector}
-    />
   </div>
+</div>
 
 <style lang="scss">
-  .selectors-group {
-    margin: 1rem 0;
+  .developer-item-card {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #eaeaea;
+  }
+
+  .config-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      gap: 16px;
+    }
+  }
+
+  .description {
+    flex: 1;
+    h4 {
+      margin: 0 0 4px 0;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #111;
+    }
+    p {
+      margin: 0;
+      font-size: 0.85rem;
+      color: #666;
+      line-height: 1.4;
+    }
+  }
+
+  .action-component {
+    flex: 1.5;
+    width: 100%;
+  }
+
+  .input-with-inline-action {
     display: grid;
-    gap: 25px;
+    justify-items: right;
+    gap: 24px;
+
+    :global(.plain-text-container) {
+      margin: 0; /* Removing default margins to align with button */
+    }
+  }
+
+  .feedback-area {
+    height: 20px;
+    margin-top: 4px;
+    font-size: 0.75rem;
+
+    .status-msg {
+      &.loading { color: #4f46e5; }
+      &.error { color: #d32f2f; }
+    }
+  }
+
+  .divider {
+    border: 0;
+    border-top: 1px solid #f0f0f0;
+    margin: 0;
+  }
+
+  .advanced-tools {
+    margin-top: 8px;
+    
+    :global(.toggle-card) {
+      border: 1px solid #f0f0f0;
+      background: #fafafa;
+    }
   }
 </style>

@@ -179,3 +179,154 @@
     </div>
   </div>
 </div>
+
+<style lang="scss">
+  .secrets-container {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 20px;
+  }
+
+  .card-section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .header-with-badge {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    &.dev-only {
+      background: #eef2ff;
+      color: #4f46e5;
+      border: 1px solid #c7d2fe;
+    }
+  }
+
+  .secrets-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0;
+    color: #111;
+  }
+
+  .sub-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 20px 0 8px 0;
+  }
+
+  .section-desc {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .webhook-url-container {
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+    background: #fafafa;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #eaeaea;
+
+    .btn-wrapper { margin-bottom: 4px; }
+  }
+
+  .secret-reveal-box {
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    padding: 20px;
+    border-radius: 12px;
+    &.success { background: #f0fdf4; border-color: #bbf7d0; }
+  }
+
+  .warning-text {
+    font-size: 0.85rem;
+    color: #92400e;
+    margin-bottom: 12px;
+  }
+
+  .new-api-key-wrapper {
+    display: flex;
+    gap: 8px;
+    background: #000;
+    padding: 8px 12px;
+    border-radius: 8px;
+    align-items: center;
+
+    .new-api-key-code {
+      color: #fff;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      flex: 1;
+      overflow-x: auto;
+    }
+
+    .copy-btn {
+      background: #333;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      &:hover { background: #444; }
+    }
+  }
+
+  .primary-btn {
+    background: #000;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    width: fit-content;
+  }
+
+  .secondary-btn {
+    background: white;
+    border: 1px solid #ddd;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    width: fit-content;
+  }
+
+  .table-container { margin-top: 24px; }
+
+  .api-key-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+    font-size: 0.9rem;
+
+    th { text-align: left; padding: 12px; border-bottom: 2px solid #eee; color: #666; }
+    td { padding: 16px 12px; border-bottom: 1px solid #eee; }
+  }
+
+  .hash-preview { background: #f1f5f9; padding: 4px 8px; border-radius: 4px; }
+
+  .delete-btn { color: #dc2626; background: none; border: none; cursor: pointer; font-weight: 500; }
+
+  .divider { border: 0; border-top: 1px solid #eee; margin: 20px 0; }
+
+  .empty-state { text-align: center; color: #999; padding: 40px; }
+</style>

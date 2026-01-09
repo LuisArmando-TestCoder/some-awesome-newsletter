@@ -2,31 +2,31 @@ export default {
   "auth": {
     "logo": "/icons/logo.png",
     "login": {
-      "title": "Connectez-vous à votre Orchestrateur de Newsletters",
-      "subtitle": "Connectez-vous pour reprendre là où vous vous étiez arrêté.",
-      "google": "Continuer avec Google",
-      "or": "ou",
-      "emailPlaceholder": "vous@exemple.com",
-      "continueWithEmail": "Continuer avec l'e-mail",
-      "switchText": "Vous n'avez pas de compte ?",
-      "switchLink": "S'inscrire",
+      "title": "ወደ ኒውስሌተር ማቀናጃዎ ይግቡ",
+      "subtitle": "ካቆሙበት ለመቀጠል እባክዎ ይግቡ።",
+      "google": "በጎግል ይቀጥሉ",
+      "or": "ወይም",
+      "emailPlaceholder": "you@example.com",
+      "continueWithEmail": "በኢሜይል ይቀጥሉ",
+      "switchText": "መለያ የለዎትም?",
+      "switchLink": "ይመዝገቡ",
       "switchHref": "/signup"
     },
     "signup": {
-      "title": "Créez votre compte",
-      "subtitle": "Aucune carte de crédit requise.",
-      "google": "Continuer avec Google",
-      "or": "ou",
-      "emailPlaceholder": "vous@exemple.com",
-      "continueWithEmail": "Continuer avec l'e-mail",
-      "switchText": "Vous avez déjà un compte ?",
-      "switchLink": "Se connecter",
+      "title": "መለያዎን ይፍጠሩ",
+      "subtitle": "ምንም የክሬዲት ካርድ አያስፈልግም።",
+      "google": "በጎግል ይቀጥሉ",
+      "or": "ወይም",
+      "emailPlaceholder": "you@example.com",
+      "continueWithEmail": "በኢሜይል ይቀጥሉ",
+      "switchText": "ቀደም ብሎ መለያ አለዎት?",
+      "switchLink": "ይግቡ",
       "switchHref": "/login"
     }
   },
   "mainContent": {
-    "title": "Générateur de Newsletters IA : Contenu personnalisé, livré.",
-    "metaDescription": "Générez des newsletters personnalisées avec l'IA. Transformez n'importe quelle source d'actualités en articles personnalisés pour vos abonnés, dans leur langue et avec la voix de votre marque.",
+    "title": "የ AI ኒውስሌተር አፍላቂ፡ ለግል የተበጀ ይዘት፣ ቀርቧል።",
+    "metaDescription": "በ AI አማካኝነት ለግል የተበጁ ኒውስሌተሮችን ያፍልቁ። ማንኛውንም የዜና ምንጭ ለደንበኞችዎ በሚፈልጉት ቋንቋ እና በድርጅትዎ ድምጽ ወደተዘጋጁ ጽሁፎች ይለውጡ።",
     "ogImageUrl": "https://images.pexels.com/photos/261599/pexels-photo-261599.jpeg",
     "canonicalUrl": "https://example.com/ai-newsletter-generator",
     "organization": {
@@ -35,22 +35,22 @@ export default {
       "url": "https://example.com/"
     },
     "product": {
-      "name": "Générateur de Newsletters IA",
-      "description": "La plateforme ultime pour créer des newsletters personnalisées pilotées par l'IA."
+      "name": "የ AI ኒውስሌተር አፍላቂ",
+      "description": "በ AI የሚመሩ ለግል የተበጁ ኒውስሌተሮችን ለመፍጠር የመጨረሻው መድረክ።"
     },
     "announcement": {
-      "text": "Lancement Beta : Inscrivez-vous maintenant et profitez de 35% de réduction sur les plans annuels !",
-      "cta": "Commencer"
+      "text": "የቤታ (Beta) ጅማሮ፡ አሁኑኑ ይመዝገቡ እና በዓመታዊ ክፍያ የ35% ቅናሽ ያግኙ!",
+      "cta": "ይጀምሩ"
     },
     "hero": {
-      "hook": "Newsletters propulsées par l'IA, sans effort.",
-      "subHook": "Transformez n'importe quelle source d'actualités en articles personnalisés pour vos abonnés, dans leur langue et avec l'identité sonore de votre marque.",
-      "primaryCta": "Commencer gratuitement",
-      "secondaryCta": "Voir la démo",
+      "hook": "በ AI የሚሰሩ ኒውስሌተሮች፣ ያለ ምንም ድካም።",
+      "subHook": "ማንኛውንም የዜና ምንጭ ለደንበኞችዎ በሚፈልጉት ቋንቋ እና በምርትዎ ማንነት ወደተዘጋጁ ጽሁፎች ይለውጡ።",
+      "primaryCta": "በነጻ ይጀምሩ",
+      "secondaryCta": "ማሳያውን ይመልከቱ",
       "trustCues": [
-        "Aucune carte de crédit requise",
-        "Gratuit jusqu'à 100 utilisateurs",
-        "Annulation à tout moment"
+        "ምንም የክሬዲት ካርድ አያስፈልግም",
+        "እስከ 100 ተጠቃሚዎች ድረስ ነጻ",
+        "በማንኛውም ጊዜ መሰረዝ ይቻላል"
       ]
     },
     "socialProof": {
@@ -61,164 +61,164 @@ export default {
         { "name": "Apex Solutions", "src": "/logos/logo_4.png" },
         { "name": "Momentum Co.", "src": "/logos/logo_5.png" }
       ],
-      "counts": "Approuvé par plus de 10 000 équipes dans le monde"
+      "counts": "በዓለም ዙሪያ ከ10,000 በላይ በሆኑ ቡድኖች የታመነ"
     },
     "valueProps": {
-      "title": "Le futur des newsletters est ici",
-      "subTitle": "Engagez votre audience comme jamais auparavant avec un contenu généré par IA qui s'adresse directement à elle.",
+      "title": "የኒውስሌተር የወደፊት ዕጣ እዚህ ነው",
+      "subTitle": "በቀጥታ እነሱን በሚያናግር በ AI በተፈጠረ ይዘት ደንበኞችዎን ከምንጊዜውም በላይ ያሳትፉ።",
       "props": [
         {
-          "title": "Hyper-personnalisation",
-          "description": "Notre IA analyse votre site web pour comprendre votre audience et adapte automatiquement les articles à leurs intérêts et à leur langue."
+          "title": "ከፍተኛ ግላዊነት",
+          "description": "የእኛ AI ደንበኞችዎን ለመረዳት ድረ-ገጽዎን ይተነትናል፣ እና ጽሁፎቹን እንደ ፍላጎታቸውና እንደ ቋንቋቸው ያዘጋጃል።"
         },
         {
-          "title": "Création de contenu automatisée",
-          "description": "Définissez votre calendrier (quotidien, hebdomadaire ou mensuel) et laissez notre IA sélectionner, rédiger et traduire les articles pour vous."
+          "title": "አውቶማቲክ የይዘት ፈጠራ",
+          "description": "መርሃ ግብርዎን (ዕለታዊ፣ ሳምንታዊ ወይም ወርሃዊ) ይወስኑ እና የእኛ AI ጽሁፎችን እንዲመርጥ፣ እንዲጽፍ እና እንዲተረጉም ይፍቀዱለት።"
         },
         {
-          "title": "Votre marque, votre voix",
-          "description": "L'IA apprend la personnalité de votre marque à partir de votre site web ou d'entrées personnalisées, garantissant que chaque newsletter semble avoir été écrite par vous."
+          "title": "የእርስዎ ምርት፣ የእርስዎ ድምጽ",
+          "description": "AI የምርትዎን ስብዕና ከድረ-ገጽዎ ወይም ከሚሰጡት መረጃ ይማራል፣ ይህም እያንዳንዱ ኒውስሌተር በእርስዎ እንደተጻፈ እንዲሰማ ያደርጋል።"
         }
       ]
     },
     "features": {
-      "title": "Fonctions avancées pour un impact maximum",
-      "subTitle": "Allez au-delà des simples newsletters et créez un canal marketing puissant.",
+      "title": "ለከፍተኛ ተጽዕኖ የላቁ ባህሪያት",
+      "subTitle": "ከቀላል ኒውስሌተር ባለፈ ጠንካራ የግብይት መስመር ይፍጠሩ።",
       "featureList": [
         {
-          "title": "Sélection intelligente d'articles",
-          "description": "Notre IA scanne les sources d'actualités et sélectionne les articles les plus pertinents basés sur une analyse de votre public cible.",
+          "title": "ብልጥ የጽሁፍ ምርጫ",
+          "description": "የእኛ AI የዜና ምንጮችን በመቃኘት ለታለመው ማህበረሰብዎ ተስማሚ የሆኑ ጽሁፎችን ይመርጣል።",
           "image": "https://images.pexels.com/photos/3760067/pexels-photo-3760067.jpeg",
-          "cta": "En savoir plus"
+          "cta": "ተጨማሪ ይወቁ"
         },
         {
-          "title": "Traduction fluide",
-          "description": "Atteignez une audience mondiale en traduisant automatiquement les articles dans la langue maternelle de vos abonnés.",
+          "title": "ቀልጣፋ ትርጉም",
+          "description": "ጽሁፎችን በደንበኞችዎ የአፍ መፍቻ ቋንቋ በራስ-ሰር በመተርጎም ዓለም አቀፍ ተደራሽነትዎን ያስፉ።",
           "image": "https://images.pexels.com/photos/207756/pexels-photo-207756.jpeg",
-          "cta": "En savoir plus"
+          "cta": "ተጨማሪ ይወቁ"
         },
         {
-          "title": "Suivi de leads et analyses",
-          "description": "Intégrez un traceur de prospects dans vos liens pour surveiller l'engagement et mesurer le succès de vos campagnes.",
+          "title": "የደንበኞች ክትትል እና ትንታኔ",
+          "description": "የደንበኞችን ተሳትፎ ለመከታተል እና የዘመቻዎን ስኬት ለመለካት የክትትል ዘዴዎችን በሊንኮችዎ ውስጥ ያካትቱ።",
           "image": "https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg",
-          "cta": "En savoir plus"
+          "cta": "ተጨማሪ ይወቁ"
         }
       ]
     },
     "howItWorks": {
-      "title": "Commencez en 3 étapes simples",
+      "title": "በ3 ቀላል ደረጃዎች ይጀምሩ",
       "steps": [
         {
           "step": 1,
-          "title": "Connectez votre source",
-          "description": "Liez n'importe quelle source d'actualités, et notre IA commencera à analyser le contenu pertinent."
+          "title": "ምንጭዎን ያገናኙ",
+          "description": "ማንኛውንም የዜና ምንጭ ያገናኙ፣ AI ይዘቱን መተንተን ይጀምራል።"
         },
         {
           "step": 2,
-          "title": "Définissez votre voix",
-          "description": "Laissez notre IA apprendre la personnalité de votre marque via votre site web ou fournissez une description personnalisée."
+          "title": "ድምጽዎን ይወስኑ",
+          "description": "AI የምርትዎን ማንነት ከድረ-ገጽዎ እንዲማር ያድርጉ ወይም መግለጫ ይስጡት።"
         },
         {
           "step": 3,
-          "title": "Lancez votre newsletter",
-          "description": "Configurez votre calendrier et regardez vos newsletters personnalisées et multilingues être envoyées à vos abonnés."
+          "title": "ኒውስሌተርዎን ይልቀቁ",
+          "description": "መርሃ ግብርዎን ያስተካክሉ እና ለደንበኞችዎ የሚላኩ ለግል የተበጁ እና ዘርፈ-ብዙ ቋንቋ ያላቸው ኒውስሌተሮችን ይመልከቱ።"
         }
       ]
     },
     "personas": {
-      "title": "Parfait pour votre entreprise",
-      "subTitle": "Des startups aux grandes entreprises, notre outil est conçu pour vous aider à croître.",
+      "title": "ለድርጅትዎ ተስማሚ",
+      "subTitle": "ከአዳዲስ ጀማሪዎች እስከ ትላልቅ ኩባንያዎች፣ መሣሪያችን እንዲያድጉ ታስቦ የተሰራ ነው።",
       "personaList": [
         {
-          "persona": "Créateurs de contenu",
-          "problem": "Passer des heures à curer et rédiger du contenu pour votre audience.",
-          "outcome": "Automatisez votre processus de création de contenu et concentrez-vous sur la croissance de votre communauté."
+          "persona": "የይዘት ፈጣሪዎች",
+          "problem": "ለደንበኞችዎ ይዘት ለመምረጥ እና ለመጻፍ ረጅም ሰዓታት ማጥፋት።",
+          "outcome": "የይዘት ፈጠራ ሂደትዎን በራስ-ሰር ያድርጉ እና ማህበረሰብዎን በማሳደግ ላይ ያተኩሩ።"
         },
         {
-          "persona": "Équipes marketing",
-          "problem": "Difficulté à créer du contenu personnalisé pour une audience mondiale.",
-          "outcome": "Augmentez l'engagement et les conversions avec des newsletters hyper-personnalisées."
+          "persona": "የግብይት ቡድኖች",
+          "problem": "ለዓለም አቀፍ ደንበኞች ለግል የተበጀ ይዘት ለመፍጠር መቸገር።",
+          "outcome": "በከፍተኛ ሁኔታ ለግል በተበጁ ኒውስሌተሮች ተሳትፎን እና ሽያጭን ይጨምሩ።"
         },
         {
-          "persona": "Entreprises",
-          "problem": "Manque de ressources pour créer une newsletter cohérente et engageante.",
-          "outcome": "Construisez un canal marketing puissant qui génère du trafic avec un effort minimal."
+          "persona": "ድርጅቶች",
+          "problem": "ወጥ የሆነ እና ሳቢ ኒውስሌተር ለመፍጠር የሰው ኃይል ማጣት።",
+          "outcome": "በትንሽ ጥረት ከፍተኛ ትራፊክ የሚያመጣ ጠንካራ የግብይት መስመር ይገንቡ።"
         }
       ]
     },
     "metrics": {
-      "title": "Résultats réels, basés sur des données",
+      "title": "በመረጃ የተረጋገጡ እውነተኛ ውጤቶች",
       "metricList": [
-        { "value": "90%", "label": "Réduction du temps de création", "proof": "Basé sur les retours des utilisateurs beta." },
-        { "value": "2x", "label": "Augmentation de l'engagement", "proof": "Observé lors de tests A/B." },
-        { "value": "5x", "label": "Livraison de contenu plus rapide", "proof": "Comparé à la création manuelle." }
+        { "value": "90%", "label": "የፈጠራ ጊዜ ቅናሽ", "proof": "በቤታ ተጠቃሚዎች አስተያየት ላይ የተመሰረተ።" },
+        { "value": "2x", "label": "የተሳትፎ ጭማሪ", "proof": "በ A/B ሙከራዎች የታየ።" },
+        { "value": "5x", "label": "ፈጣን የይዘት አቅርቦት", "proof": "በእጅ ከመስራት ጋር ሲነጻጸር።" }
       ]
     },
     "testimonials": {
-      "title": "Ce que disent nos clients",
+      "title": "ደንበኞቻችን የሚሉትን ይስሙ",
       "testimonialList": [
         {
-          "quote": "Le générateur de newsletters IA a changé la donne. Nous pouvons désormais atteindre notre audience mondiale avec un contenu qui résonne.",
-          "name": "Alex Chen",
-          "title": "Directeur de la Croissance, Global Tech Inc."
+          "quote": "የ AI ኒውስሌተር አፍላቂው የጨዋታ ለውጥ ነው። አሁን ዓለም አቀፍ ደንበኞቻችንን በሚገባቸው ይዘት መድረስ እንችላለን።",
+          "name": "አሌክስ ቼን",
+          "title": "የእድገት ዳይሬክተር፣ Global Tech Inc."
         },
         {
-          "quote": "J'étais sceptique au début, mais le contenu généré par l'IA est incroyablement bien écrit. Nos abonnés adorent !",
-          "name": "Samantha Jones",
-          "title": "Fondatrice, The Content Corner"
+          "quote": "መጀመሪያ ላይ ጥርጣሬ ነበረኝ፣ ነገር ግን በ AI የሚመነጨው ይዘት በሚገርም ሁኔታ በጥሩ ሁኔታ የተጻፈ ነው። ደንበኞቻችን ወደውታል!",
+          "name": "ሳማንታ ጆንስ",
+          "title": "መስራች፣ The Content Corner"
         }
       ]
     },
     "pricing": {
-      "teaser": "Des plans abordables pour chaque entreprise",
-      "subTitle": "Nos plans sont conçus pour évoluer avec vous.",
-      "plan": "À partir de 17 $/mois",
-      "cta": "Voir les tarifs"
+      "teaser": "ለእያንዳንዱ ድርጅት ተመጣጣኝ እቅዶች",
+      "subTitle": "እቅዶቻችን ከእርስዎ እድገት ጋር አብረው እንዲሄዱ የተነደፉ ናቸው።",
+      "plan": "በወር ከ $17 ጀምሮ",
+      "cta": "ዋጋዎችን ይመልከቱ"
     },
     "finalCta": {
-      "hook": "Prêt à révolutionner votre newsletter ?",
-      "cta": "Commencez votre essai gratuit aujourd'hui"
+      "hook": "ኒውስሌተርዎን ለመለወጥ ዝግጁ ነዎት?",
+      "cta": "የነጻ ሙከራዎን ዛሬ ይጀምሩ"
     },
     "footer": {
-      "copyright": "© 2026 AI Newsletter, Inc. Tous droits réservés.",
+      "copyright": "© 2026 AI Newsletter, Inc. መብቱ በህግ የተጠበቀ ነው።",
       "companyLinks": {
-        "title": "Entreprise",
+        "title": "ኩባንያ",
         "links": [
-          { "text": "À propos", "href": "/about" },
-          { "text": "Carrières", "href": "/careers" },
-          { "text": "Blog", "href": "https://github.com/LuisArmando-TestCoder/scientia/tree/master/proposiciones" }
+          { "text": "ስለ እኛ", "href": "/about" },
+          { "text": "ስራዎች", "href": "/careers" },
+          { "text": "ብሎግ", "href": "https://github.com/..." }
         ]
       },
       "legalLinks": {
-        "title": "Légal",
+        "title": "ህጋዊ",
         "links": [
-          { "text": "Politique de confidentialité", "href": "/legal/privacy" },
-          { "text": "Conditions de service", "href": "/legal/terms" },
-          { "text": "Politique de cookies", "href": "/legal/cookies" }
+          { "text": "የግላዊነት ፖሊሲ", "href": "/legal/privacy" },
+          { "text": "የአገልግሎት ውሎች", "href": "/legal/terms" },
+          { "text": "የኩኪ ፖሊሲ", "href": "/legal/cookies" }
         ]
       },
       "contact": "oriens@aiexecutions.com"
     }
   },
   "help": {
-    "title": "Demander des limites supérieures",
-    "subtitle": "Passez au paiement à l'usage ou augmentez vos quotas pour suivre votre croissance.",
+    "title": "ከፍተኛ ገደቦችን ይጠይቁ",
+    "subtitle": "ለእድገትዎ እንዲመጥን እንደ አጠቃቀምዎ ይክፈሉ ወይም ኮታዎን ያሳድጉ።",
     "contact": {
-      "cta": "Soumettre la demande",
-      "successTitle": "Demande reçue",
-      "successBody": "Notre équipe vous contactera sous peu.",
+      "cta": "ጥያቄውን ያቅርቡ",
+      "successTitle": "ጥያቄው ደርሷል",
+      "successBody": "የእኛ ቡድን በቅርቡ ያነጋግርዎታል።",
       "learnMore": "/plans"
     },
     "questions": {
-      "desiredLimitsHelp": "Indiquez les limites nécessaires (ex: 1M d'utilisateurs).",
-      "useCaseHelp": "Décrivez votre charge de travail et le type de trafic.",
-      "expectedSpendHelp": "Une estimation nous aide à adapter la tarification (optionnel)."
+      "desiredLimitsHelp": "የሚያስፈልገውን ገደብ ይግለጹ (ለምሳሌ፦ 1 ሚሊዮን ተጠቃሚዎች)።",
+      "useCaseHelp": "የስራ ጫናዎን እና የትራፊክ አይነትዎን ይግለጹ።",
+      "expectedSpendHelp": "ግምታዊ በጀት ዋጋውን ለማስተካከል ይረዳናል (አማራጭ)።"
     },
     "faqs": [
       {
         "id": "limits-how",
-        "q": "Comment fonctionnent les limites supérieures ?",
-        "a": "Nous débloquons des quotas plus importants immédiatement après approbation. La facturation peut être forfaitaire ou à l'usage."
+        "q": "ከፍተኛ ገደቦች እንዴት ይሰራሉ?",
+        "a": "ጥያቄዎ ተቀባይነት ካገኘ በኋላ ወዲያውኑ ከፍተኛ ኮታዎችን እንከፍታለን። ክፍያው በቋሚነት ወይም እንደ አጠቃቀም ሊሆን ይችላል።"
       }
     ],
     "links": {
@@ -228,29 +228,29 @@ export default {
   },
   "faq": [
     {
-      "q": "Y a-t-il un essai gratuit ?",
-      "a": "Oui ! Vous pouvez commencer avec notre plan Gratuit limité à 100 utilisateurs pour tester la technologie."
+      "q": "የነጻ ሙከራ አለ?",
+      "a": "አዎ! ቴክኖሎጂውን ለመሞከር እስከ 100 ተጠቃሚዎች በሚፈቅደው የነጻ እቅዳችን መጀመር ይችላሉ።"
     },
     {
-      "q": "Puis-je annuler à tout moment ?",
-      "a": "Oui, vous pouvez annuler votre abonnement à tout moment depuis votre tableau de bord."
+      "q": "በማንኛውም ጊዜ መሰረዝ እችላለሁ?",
+      "a": "አዎ፣ የደንበኝነት ምዝገባዎን በማንኛውም ጊዜ ከቁጥጥር ፓነልዎ (Dashboard) መሰረዝ ይችላሉ።"
     }
   ],
   "plans": {
     "currency": "USD",
-    "billingIntervals": ["mensuel", "annuel"],
+    "billingIntervals": ["ወርሃዊ", "ዓመታዊ"],
     "currentPlan": "free",
     "plans": [
       {
         "id": "free",
-        "name": "Gratuit",
+        "name": "ነጻ",
         "monthly": 0,
         "yearly": 0,
-        "tagline": "Testez la technologie",
-        "featuresBase": ["1 source d'actualités", "Jusqu'à 100 utilisateurs"],
+        "tagline": "ቴክኖሎጂውን ይሞክሩ",
+        "featuresBase": ["1 የዜና ምንጭ", "እስከ 100 ተጠቃሚዎች"],
         "featuresDelta": [],
         "limits": { "newsSources": 1, "users": 100 },
-        "ctaLabel": "Plan actuel",
+        "ctaLabel": "የአሁኑ እቅድ",
         "tier": 0
       },
       {
@@ -258,11 +258,11 @@ export default {
         "name": "Starter",
         "monthly": 17,
         "yearly": 132,
-        "tagline": "Pour les newsletters en croissance",
-        "featuresBase": ["5 sources d'actualités", "Jusqu'à 100k utilisateurs"],
-        "featuresDelta": ["Support e-mail", "Traduction de base"],
+        "tagline": "ለሚያድጉ ኒውስሌተሮች",
+        "featuresBase": ["5 የዜና ምንጮች", "እስከ 100ሺህ ተጠቃሚዎች"],
+        "featuresDelta": ["የኢሜይል ድጋፍ", "መሰረታዊ ትርጉም"],
         "limits": { "newsSources": 5, "users": 100000 },
-        "ctaLabel": "Choisir Starter",
+        "ctaLabel": "Starter ይምረጡ",
         "productId": "prod_starter_id",
         "tier": 1
       },
@@ -271,11 +271,11 @@ export default {
         "name": "Growth",
         "monthly": 35,
         "yearly": 273,
-        "tagline": "L'équilibre parfait",
-        "featuresBase": ["17 sources d'actualités", "Jusqu'à 250k utilisateurs"],
-        "featuresDelta": ["Branding personnalisé", "Analyses avancées"],
+        "tagline": "ተስማሚ ሚዛን",
+        "featuresBase": ["17 የዜና ምንጮች", "እስከ 250ሺህ ተጠቃሚዎች"],
+        "featuresDelta": ["የምርት ስም ማስተካከያ", "የላቁ ትንታኔዎች"],
         "limits": { "newsSources": 17, "users": 250000 },
-        "ctaLabel": "Choisir Growth",
+        "ctaLabel": "Growth ይምረጡ",
         "productId": "prod_growth_id",
         "tier": 2
       },
@@ -284,11 +284,11 @@ export default {
         "name": "Pro",
         "monthly": 80,
         "yearly": 624,
-        "tagline": "Pour les pros du marketing",
-        "featuresBase": ["25 sources d'actualités", "Jusqu'à 500k utilisateurs"],
-        "featuresDelta": ["Accès API", "Traitement prioritaire"],
+        "tagline": "ለግብይት ባለሙያዎች",
+        "featuresBase": ["25 የዜና ምንጮች", "እስከ 500ሺህ ተጠቃሚዎች"],
+        "featuresDelta": ["የ API አገልግሎት", "ቅድሚያ የሚሰጠው አሰራር"],
         "limits": { "newsSources": 25, "users": 500000 },
-        "ctaLabel": "Choisir Pro",
+        "ctaLabel": "Pro ይምረጡ",
         "productId": "prod_pro_id",
         "tier": 3
       },
@@ -297,166 +297,166 @@ export default {
         "name": "Master",
         "monthly": 150,
         "yearly": 1170,
-        "tagline": "Scalabilité illimitée",
-        "featuresBase": ["50 sources d'actualités", "Utilisateurs illimités"],
-        "featuresDelta": ["Support VIP", "Webhooks personnalisés"],
+        "tagline": "ያልተገደበ እድገት",
+        "featuresBase": ["50 የዜና ምንጮች", "ያልተገደበ ተጠቃሚዎች"],
+        "featuresDelta": ["VIP ድጋፍ", "ብጁ ዌብ ሁኮች (Webhooks)"],
         "limits": { "newsSources": 50, "users": -1 },
-        "ctaLabel": "Choisir Master",
+        "ctaLabel": "Master ይምረጡ",
         "productId": "prod_master_id",
         "tier": 4
       },
       {
         "id": "vipfree",
-        "name": "VIP Gratuit",
+        "name": "VIP ነጻ",
         "monthly": 0,
         "yearly": 0,
-        "tagline": "Accès complet pour les partenaires",
-        "featuresBase": ["Sources illimitées", "Utilisateurs illimités"],
+        "tagline": "ለአጋሮች ሙሉ አገልግሎት",
+        "featuresBase": ["ያልተገደቡ ምንጮች", "ያልተገደቡ ተጠቃሚዎች"],
         "featuresDelta": [],
         "limits": { "newsSources": -1, "users": -1 },
-        "ctaLabel": "Plan actuel",
+        "ctaLabel": "የአሁኑ እቅድ",
         "internalOnly": true,
         "tier": 5
       }
     ],
     "contact": {
-      "text": "Besoin d'une solution sur mesure ?",
-      "cta": "Contactez-nous",
+      "text": "የተለየ መፍትሄ ይፈልጋሉ?",
+      "cta": "ያግኙን",
       "href": "/help"
     }
   },
   "article": {
-    "notFound": "Article non trouvé.",
-    "errorFetching": "Erreur lors de la récupération de l'article.",
-    "noArticleSpecified": "Aucun article spécifié.",
-    "goBack": "Retour",
-    "loading": "Chargement..."
+    "notFound": "ጽሁፉ አልተገኘም።",
+    "errorFetching": "ጽሁፉን በማምጣት ላይ ስህተት ተከስቷል።",
+    "noArticleSpecified": "ምንም ጽሁፍ አልተጠቀሰም።",
+    "goBack": "ተመለስ",
+    "loading": "በመጫን ላይ..."
   },
   "pricing": {
-    "eyebrow": "Tarification",
-    "title": "Plans flexibles",
-    "currentPlan": "Plan actuel :",
-    "monthly": "Mensuel",
-    "yearly": "Annuel (Économisez 35%)",
-    "everythingIn": "Tout ce qu'il y a dans le plan précédent, plus :",
-    "isCurrentPlan": "Ceci est votre plan actuel",
-    "downgradeTo": "Passer à {planName}",
-    "upgradeTo": "Améliorer vers {planName}",
-    "mockMode": "Mode simulation activé",
-    "mostPopular": "Le plus populaire",
-    "perMonth": "par mois",
-    "perYear": "par an",
-    "youSave": "Vous économisez"
+    "eyebrow": "ክፍያ",
+    "title": "ተለዋዋጭ እቅዶች",
+    "currentPlan": "የአሁኑ እቅድ፡",
+    "monthly": "ወርሃዊ",
+    "yearly": "ዓመታዊ (35% ይቆጥቡ)",
+    "everythingIn": "ካለፈው እቅድ በተጨማሪ የሚከተሉትን ይጨምራል፡",
+    "isCurrentPlan": "ይህ የአሁኑ እቅድዎ ነው",
+    "downgradeTo": "ወደ {planName} ዝቅ ያድርጉ",
+    "upgradeTo": "ወደ {planName} ያሳድጉ",
+    "mockMode": "የሙከራ ሁነታ በርቷል",
+    "mostPopular": "በጣም ተመራጭ",
+    "perMonth": "በወር",
+    "perYear": "በዓመት",
+    "youSave": "የሚቆጥቡት"
   },
   "confirmSubscription": {
-    "title": "Confirmez votre abonnement",
-    "goBack": "Retour",
-    "pleaseAccept": "Veuillez accepter les conditions pour finaliser votre abonnement.",
-    "iAccept": "J'accepte les",
-    "termsAndConditions": "Conditions générales",
-    "and": "et la",
-    "privacyPolicy": "Politique de confidentialité",
-    "confirm": "Confirmer l'abonnement",
-    "mustAccept": "Vous devez accepter les conditions pour vous abonner.",
-    "invalidLink": "Lien de confirmation invalide."
+    "title": "ምዝገባዎን ያረጋግጡ",
+    "goBack": "ተመለስ",
+    "pleaseAccept": "ምዝገባዎን ለማጠናቀቅ እባክዎ ደንቦቹን ይቀበሉ።",
+    "iAccept": "እቀበላለሁ፡",
+    "termsAndConditions": "አጠቃላይ ደንቦች",
+    "and": "እና",
+    "privacyPolicy": "የግላዊነት ፖሊሲ",
+    "confirm": "ምዝገባውን አረጋግጥ",
+    "mustAccept": "ለመመዝገብ ደንቦቹን መቀበል አለብዎት።",
+    "invalidLink": "የማረጋገጫ ሊንኩ ልክ አይደለም።"
   },
   "articles": {
-    "title": "Dernières analyses",
-    "subtitle": "Explorez notre collection curée d'articles et d'actualités.",
-    "producedIn": "Nous avons produit des actus dans toutes ces langues",
-    "searchPlaceholder": "Rechercher des articles...",
-    "noArticlesFound": "Aucun article trouvé.",
-    "created": "Créé :",
-    "language": "Langue :",
-    "rightsReserved": "Tous droits réservés.",
-    "errorFetching": "Erreur lors de la récupération des articles."
+    "title": "የቅርብ ጊዜ ትንታኔዎች",
+    "subtitle": "የተመረጡ ጽሁፎችን እና ዜናዎችን ያስሱ።",
+    "producedIn": "በእነዚህ ሁሉ ቋንቋዎች ዜናዎችን አዘጋጅተናል",
+    "searchPlaceholder": "ጽሁፎችን ይፈልጉ...",
+    "noArticlesFound": "ምንም ጽሁፍ አልተገኘም።",
+    "created": "የተፈጠረበት፡",
+    "language": "ቋንቋ፡",
+    "rightsReserved": "መብቱ በህግ የተጠበቀ ነው።",
+    "errorFetching": "ጽሁፎችን በማምጣት ላይ ስህተት ተከስቷል።"
   },
   "mainPage": {
-    "skipToMainContent": "Aller au contenu principal",
-    "dismissAnnouncement": "Masquer l'annonce",
-    "problem": "Problème :",
-    "outcome": "Résultat :",
-    "disclaimer": "L'économie de 35% s'applique uniquement à la facturation annuelle."
+    "skipToMainContent": "ወደ ዋናው ይዘት ይለፉ",
+    "dismissAnnouncement": "ማስታወቂያውን ደብቅ",
+    "problem": "ችግር፡",
+    "outcome": "ውጤት፡",
+    "disclaimer": "የ35% ቅናሽ የሚሰራው በዓመታዊ ክፍያ ላይ ብቻ ነው።"
   },
   "authForm": {
-    "emailValidation": "Veuillez entrer un e-mail valide.",
-    "failedToSendCode": "Échec de l'envoi du code. Veuillez réessayer.",
-    "sending": "Envoi en cours...",
-    "codeSent": "Code envoyé sur votre e-mail",
-    "invalidCode": "Code fourni invalide",
-    "regenerateCode": "Renvoyer le code",
-    "back": "← Retour",
-    "byProceeding": "En continuant, vous acceptez les",
-    "termsOfService": "Conditions de service",
-    "and": "et la",
-    "privacyPolicy": "Politique de confidentialité",
+    "emailValidation": "እባክዎ ትክክለኛ ኢሜይል ያስገቡ።",
+    "failedToSendCode": "ኮዱን መላክ አልተቻለም። እባክዎ እንደገና ይሞክሩ።",
+    "sending": "በመላክ ላይ...",
+    "codeSent": "ኮዱ ወደ ኢሜይልዎ ተልኳል",
+    "invalidCode": "የገባው ኮድ ልክ አይደለም",
+    "regenerateCode": "ኮዱን እንደገና ላክ",
+    "back": "← ተመለስ",
+    "byProceeding": "በመቀጠልዎ የሚከተሉትን ይቀበላሉ፡",
+    "termsOfService": "የአገልግሎት ውሎች",
+    "and": "እና",
+    "privacyPolicy": "የግላዊነት ፖሊሲ",
     "appName": "AI Newsletter"
   },
   "welcome": {
-    "title": "Générateur automatique de newsletters",
-    "setItOnce": "Configurez une fois...",
-    "useItForever": "...utilisez pour toujours."
+    "title": "አውቶማቲክ የኒውስሌተር አፍላቂ",
+    "setItOnce": "አንዴ ያስተካክሉ...",
+    "useItForever": "...ለዘላለም ይጠቀሙ።"
   },
   "lead": {
-    "title": "Transformez vos abonnés en visiteurs",
-    "recommendation": "Aidez notre IA à comprendre votre marque en connectant votre site web.",
-    "question": "Avez-vous un site web ? (optionnel)",
-    "placeholder": "https://votre-site.com"
+    "title": "ደንበኞችዎን ወደ ጎብኝዎች ይለውጡ",
+    "recommendation": "ድረ-ገጽዎን በማገናኘት AI ምርትዎን እንዲረዳ ያግዙት።",
+    "question": "ድረ-ገጽ አለዎት? (አማራጭ)",
+    "placeholder": "https://your-site.com"
   },
   "newsSource": {
-    "title": "Connectez votre source de contenu",
-    "subtitle": "Nous récupérerons votre flux pour que vous ne partiez pas de zéro.",
-    "placeholder": "Votre blog ou lien RSS"
+    "title": "የይዘት ምንጭዎን ያገናኙ",
+    "subtitle": "ከባዶ እንዳይጀምሩ ይዘቶችን ከምንጭዎ እናመጣለን።",
+    "placeholder": "የእርስዎ ብሎግ ወይም RSS ሊንክ"
   },
   "subscribe": {
     "welcome": {
-      "title": "Bienvenue à la Newsletter.",
-      "invitedBy": "Vous avez été invité par {configuratorId}."
+      "title": "ወደ ኒውስሌተሩ እንኳን በደህና መጡ።",
+      "invitedBy": "የተጋበዙት በ {configuratorId} ነው።"
     }
   },
   "header": {
-    "goToWorkspace": "Aller au Workspace",
-    "inBilling": "Facturation",
+    "goToWorkspace": "ወደ መስሪያ ቦታ ይሂዱ",
+    "inBilling": "ክፍያ",
     "vip": "VIP",
-    "plan": "Plan {planName}",
-    "logIn": "Connexion",
-    "getStarted": "Démarrer"
+    "plan": "እቅድ {planName}",
+    "logIn": "ይግቡ",
+    "getStarted": "ይጀምሩ"
   },
   "fileInput": {
-    "chooseFile": "Choisir un fichier",
-    "dropFile": "Déposer ici",
-    "release": "Relâcher pour uploader"
+    "chooseFile": "ፋይል ይምረጡ",
+    "dropFile": "እዚህ ይልቀቁ",
+    "release": "ለመጫን ይልቀቁ"
   },
   "imageInput": {
-    "unsupportedFileType": "Format non supporté. Utilisez PNG, JPEG ou WebP.",
-    "dropImage": "Déposer l'image",
-    "dragDrop": "Glisser-déposer",
-    "browse": "ou parcourir les fichiers",
-    "selectImage": "Sélectionner",
-    "preview": "Aperçu",
-    "removeImage": "Supprimer"
+    "unsupportedFileType": "ያልተደገፈ ፎርማት። እባክዎ PNG, JPEG ወይም WebP ይጠቀሙ።",
+    "dropImage": "ምስሉን እዚህ ይልቀቁ",
+    "dragDrop": "ጎትተው ያስገቡ",
+    "browse": "ወይም ፋይሎችን ይፈልጉ",
+    "selectImage": "ይምረጡ",
+    "preview": "ቅድመ እይታ",
+    "removeImage": "አስወግድ"
   },
   "billing": {
-    "title": "Facturation & Abonnement",
-    "currentPlanTitle": "Votre plan actuel",
-    "upgradePlanTitle": "Changer votre plan",
-    "manageSubscription": "Gérer l'abonnement",
-    "vipPlanName": "Partenaire VIP",
-    "vipPlanDescription": "Accès illimité offert par AI Newsletter.",
-    "perMonth": "par mois",
-    "perYear": "par an",
-    "monthAbbreviation": "mo",
-    "equivalentTo": "équivalent à",
-    "mostPopular": "Le plus populaire",
-    "upgradeTo": "Améliorer vers",
-    "downgradeTo": "Passer à",
-    "currentPlanButton": "Votre plan",
-    "youSave": "Vous économisez",
-    "users": "utilisateurs",
-    "newsSources": "sources d'actus",
-    "monthly": "Mensuel",
-    "yearly": "Annuel",
-    "loadingPlan": "Chargement des données..."
+    "title": "ክፍያ እና ምዝገባ",
+    "currentPlanTitle": "የአሁኑ እቅድዎ",
+    "upgradePlanTitle": "እቅድዎን ይቀይሩ",
+    "manageSubscription": "ምዝገባን ያስተዳድሩ",
+    "vipPlanName": "VIP አጋር",
+    "vipPlanDescription": "በ AI Newsletter በኩል የቀረበ ያልተገደበ አገልግሎት።",
+    "perMonth": "በወር",
+    "perYear": "በዓመት",
+    "monthAbbreviation": "ወር",
+    "equivalentTo": "ከዚህ ጋር እኩል፡",
+    "mostPopular": "በጣም ተመራጭ",
+    "upgradeTo": "ወደዚህ ያሳድጉ፡",
+    "downgradeTo": "ወደዚህ ዝቅ ያድርጉ፡",
+    "currentPlanButton": "የእርስዎ እቅድ",
+    "youSave": "የሚቆጥቡት",
+    "users": "ተጠቃሚዎች",
+    "newsSources": "የዜና ምንጮች",
+    "monthly": "ወርሃዊ",
+    "yearly": "ዓመታዊ",
+    "loadingPlan": "መረጃ በመጫን ላይ..."
   },
   "languages": [
     { "code": "ab", "name": "አብካዝኛ" },

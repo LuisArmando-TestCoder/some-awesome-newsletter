@@ -2,54 +2,54 @@ export default {
   "auth": {
     "logo": "/icons/logo.png",
     "login": {
-      "title": "Faça login no nosso Orquestrador de Newsletter",
+      "title": "Acesse nosso Orquestrador de Newsletters",
       "subtitle": "Conecte-se para continuar de onde parou.",
-      "google": "Continuar com o Google",
+      "google": "Continuar com Google",
       "or": "ou",
       "emailPlaceholder": "voce@exemplo.com",
       "continueWithEmail": "Continuar com E-mail",
-      "switchText": "Não tem uma conta?",
-      "switchLink": "Inscreva-se",
+      "switchText": "Ainda não tem uma conta?",
+      "switchLink": "Cadastre-se",
       "switchHref": "/signup"
     },
     "signup": {
       "title": "Crie sua conta",
       "subtitle": "Não é necessário cartão de crédito.",
-      "google": "Continuar com o Google",
+      "google": "Continuar com Google",
       "or": "ou",
       "emailPlaceholder": "voce@exemplo.com",
       "continueWithEmail": "Continuar com E-mail",
       "switchText": "Já tem uma conta?",
-      "switchLink": "Faça login",
+      "switchLink": "Entrar",
       "switchHref": "/login"
     }
   },
   "mainContent": {
-    "title": "Gerador de Newsletter com IA: Conteúdo Personalizado, Entregue.",
-    "metaDescription": "Gere newsletters personalizadas com IA. Transforme qualquer fonte de notícias em artigos personalizados para seus assinantes, no idioma deles e na voz da sua marca.",
+    "title": "Gerador de Newsletter com IA: Conteúdo Personalizado e Entregue.",
+    "metaDescription": "Gere newsletters personalizadas com IA. Transforme qualquer fonte de notícias em artigos exclusivos para seus inscritos, no idioma deles e na voz da sua marca.",
     "ogImageUrl": "https://images.pexels.com/photos/261599/pexels-photo-261599.jpeg",
-    "canonicalUrl": "https://example.com/ai-newsletter-generator",
+    "canonicalUrl": "https://exemplo.com/gerador-newsletter-ia",
     "organization": {
       "name": "AI Newsletter, Inc.",
-      "logo": "https://example.com/logo.png",
-      "url": "https://example.com/"
+      "logo": "https://exemplo.com/logo.png",
+      "url": "https://exemplo.com/"
     },
     "product": {
       "name": "Gerador de Newsletter com IA",
-      "description": "A plataforma definitiva para criar newsletters personalizadas e orientadas por IA."
+      "description": "A plataforma definitiva para criar newsletters personalizadas e impulsionadas por IA."
     },
     "announcement": {
-      "text": "Lançamento Beta: Inscreva-se agora e ganhe 50% de desconto nos primeiros 3 meses!",
-      "cta": "Comece Agora"
+      "text": "Lançamento Beta: Cadastre-se agora e ganhe 35% de desconto nos planos anuais!",
+      "cta": "Começar Agora"
     },
     "hero": {
-      "hook": "Newsletters com Tecnologia de IA, sem Esforço.",
-      "subHook": "Transforme qualquer fonte de notícias em artigos personalizados para seus assinantes, no idioma deles e na voz da sua marca.",
-      "primaryCta": "Comece de Graça",
-      "secondaryCta": "Assista a uma Demonstração",
+      "hook": "Newsletters com IA, sem esforço.",
+      "subHook": "Transforme qualquer fonte de notícias em artigos personalizados para seus inscritos, no idioma deles e com a identidade da sua marca.",
+      "primaryCta": "Começar Gratuitamente",
+      "secondaryCta": "Ver Demonstração",
       "trustCues": [
-        "Não é necessário cartão de crédito",
-        "Teste gratuito de 14 dias",
+        "Sem necessidade de cartão de crédito",
+        "Grátis para até 100 usuários",
         "Cancele a qualquer momento"
       ]
     },
@@ -64,42 +64,42 @@ export default {
       "counts": "Confiado por mais de 10.000 equipes em todo o mundo"
     },
     "valueProps": {
-      "title": "O Futuro das Newsletters Está Aqui",
-      "subTitle": "Envolva seu público como nunca antes com conteúdo orientado por IA que fala diretamente com eles.",
+      "title": "O Futuro das Newsletters Chegou",
+      "subTitle": "Engaje seu público como nunca antes com conteúdo gerado por IA que fala diretamente com eles.",
       "props": [
         {
-          "title": "Hiper-Personalização",
-          "description": "Nossa IA analisa seu site para entender seu público e adapta automaticamente os artigos aos seus interesses e idioma."
+          "title": "Hiperpersonalização",
+          "description": "Nossa IA analisa seu site para entender seu público e adapta automaticamente os artigos aos interesses e idiomas deles."
         },
         {
           "title": "Criação de Conteúdo Automatizada",
-          "description": "Defina sua programação, diária, semanal ou mensal, e deixe nossa IA selecionar, escrever e traduzir artigos para você."
+          "description": "Defina sua frequência — diária, semanal ou mensal — e deixe nossa IA selecionar, escrever e traduzir os artigos para você."
         },
         {
           "title": "Sua Marca, Sua Voz",
-          "description": "A IA aprende a personalidade da sua marca a partir do seu site ou de informações personalizadas, garantindo que cada newsletter soe como se tivesse sido escrita por você."
+          "description": "A IA aprende a personalidade da sua marca através do seu site ou orientações personalizadas, garantindo que cada newsletter soe como se tivesse sido escrita por você."
         }
       ]
     },
     "features": {
-      "title": "Recursos Avançados para Máximo Impacto",
-      "subTitle": "Vá além de simples newsletters e crie um canal de marketing poderoso.",
+      "title": "Recursos Avançados para Impacto Máximo",
+      "subTitle": "Vá além de newsletters simples e crie um canal de marketing poderoso.",
       "featureList": [
         {
           "title": "Seleção Inteligente de Artigos",
-          "description": "Nossa IA examina fontes de notícias e seleciona os artigos mais relevantes com base em uma análise do seu público-alvo, garantindo alto engajamento.",
+          "description": "Nossa IA varre fontes de notícias e seleciona os artigos mais relevantes com base na análise do seu público-alvo.",
           "image": "https://images.pexels.com/photos/3760067/pexels-photo-3760067.jpeg",
           "cta": "Saiba mais"
         },
         {
-          "title": "Tradução de Idiomas Contínua",
-          "description": "Alcance um público global traduzindo automaticamente artigos para os idiomas nativos de seus assinantes, quebrando barreiras de comunicação.",
+          "title": "Tradução de Idiomas Fluida",
+          "description": "Alcance um público global traduzindo automaticamente os artigos para os idiomas nativos dos seus inscritos.",
           "image": "https://images.pexels.com/photos/207756/pexels-photo-207756.jpeg",
           "cta": "Saiba mais"
         },
         {
-          "title": "Rastreamento de Leads e Análises",
-          "description": "Incorpore um rastreador de leads no link da sua empresa para monitorar o engajamento e medir o sucesso de suas campanhas com nosso contador integrado.",
+          "title": "Rastreamento de Leads e Analytics",
+          "description": "Insira rastreadores de leads nos links da sua empresa para monitorar o engajamento e medir o sucesso da campanha.",
           "image": "https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg",
           "cta": "Saiba mais"
         }
@@ -110,94 +110,77 @@ export default {
       "steps": [
         {
           "step": 1,
-          "title": "Conecte Sua Fonte de Notícias",
-          "description": "Vincule qualquer fonte de notícias e nossa IA começará a analisá-la em busca de conteúdo relevante."
+          "title": "Conecte sua Fonte de Notícias",
+          "description": "Vincule qualquer fonte de notícias e nossa IA começará a analisar o conteúdo relevante."
         },
         {
           "step": 2,
-          "title": "Defina Sua Voz",
-          "description": "Deixe nossa IA aprender a personalidade da sua marca a partir do seu site ou forneça uma descrição personalizada."
+          "title": "Defina sua Voz",
+          "description": "Deixe nossa IA aprender a personalidade da sua marca através do seu site ou forneça uma descrição personalizada."
         },
         {
           "step": 3,
-          "title": "Lance Sua Newsletter",
-          "description": "Defina sua programação e observe como newsletters personalizadas e multilíngues são enviadas automaticamente para seus assinantes."
+          "title": "Lance sua Newsletter",
+          "description": "Defina seu cronograma e veja as newsletters personalizadas e multilíngues serem enviadas aos seus inscritos."
         }
       ]
     },
     "personas": {
-      "title": "Perfeito para o Seu Negócio",
-      "subTitle": "De startups a grandes empresas, nossa ferramenta foi projetada para ajudá-lo a crescer.",
+      "title": "Perfeito para o seu Negócio",
+      "subTitle": "De startups a grandes empresas, nossa ferramenta foi projetada para ajudar você a crescer.",
       "personaList": [
         {
           "persona": "Criadores de Conteúdo",
-          "problem": "Passar horas selecionando e escrevendo conteúdo para seu público.",
-          "outcome": "Automatize seu processo de criação de conteúdo e concentre-se no crescimento da sua comunidade."
+          "problem": "Gasta horas curando e escrevendo conteúdo para o seu público.",
+          "outcome": "Automatize seu processo de criação de conteúdo e foque no crescimento da sua comunidade."
         },
         {
           "persona": "Equipes de Marketing",
-          "problem": "Lutando para criar conteúdo personalizado que ressoe com um público global.",
-          "outcome": "Aumente o engajamento e as conversões com newsletters hiper-personalizadas e multilíngues."
+          "problem": "Dificuldade em criar conteúdo personalizado para um público global.",
+          "outcome": "Aumente o engajamento e as conversões com newsletters hiperpersonalizadas."
         },
         {
           "persona": "Empresas",
-          "problem": "Falta de recursos para criar uma newsletter consistente e envolvente.",
-          "outcome": "Construa um canal de marketing poderoso que gera tráfego e vendas com o mínimo de esforço."
+          "problem": "Falta de recursos para criar uma newsletter consistente e atraente.",
+          "outcome": "Construa um canal de marketing poderoso que gera tráfego com o mínimo de esforço."
         }
       ]
     },
     "metrics": {
-      "title": "Resultados Reais, Apoiados por Dados",
+      "title": "Resultados Reais, Baseados em Dados",
       "metricList": [
-        {
-          "value": "90%",
-          "label": "Redução no tempo de criação de conteúdo",
-          "proof": "Com base no feedback de usuários beta."
-        },
-        {
-          "value": "2x",
-          "label": "Aumento no engajamento de assinantes",
-          "proof": "Observado em testes A/B com usuários beta."
-        },
-        {
-          "value": "5x",
-          "label": "Entrega de conteúdo mais rápida",
-          "proof": "Em comparação com a criação manual de newsletters."
-        }
+        { "value": "90%", "label": "Redução no tempo de criação", "proof": "Baseado no feedback de usuários beta." },
+        { "value": "2x", "label": "Aumento no engajamento", "proof": "Observado em testes A/B." },
+        { "value": "5x", "label": "Entrega de conteúdo mais rápida", "proof": "Comparado à criação manual." }
       ]
     },
     "testimonials": {
-      "title": "O Que Nossos Clientes Dizem",
+      "title": "O que nossos clientes dizem",
       "testimonialList": [
         {
-          "quote": "O Gerador de Newsletter com IA mudou o jogo para nossa estratégia de conteúdo. Agora conseguimos alcançar nosso público global com conteúdo personalizado que ressoa.",
+          "quote": "O Gerador de Newsletter com IA mudou o jogo. Agora conseguimos alcançar nosso público global com conteúdo relevante.",
           "name": "Alex Chen",
-          "title": "Chefe de Crescimento, Global Tech Inc."
+          "title": "Head de Crescimento, Global Tech Inc."
         },
         {
-          "quote": "Eu estava cético no início, mas o conteúdo gerado por IA é incrivelmente bem escrito e alinhado à marca. Nossos assinantes adoram!",
+          "quote": "Eu estava cético no início, mas o conteúdo gerado pela IA é incrivelmente bem escrito. Nossos inscritos adoram!",
           "name": "Samantha Jones",
           "title": "Fundadora, The Content Corner"
-        },
-        {
-          "quote": "A quantidade de tempo que economizamos é incrível. Agora podemos nos concentrar em outras áreas do nosso negócio enquanto a IA cuida da nossa newsletter.",
-          "name": "David Rodriguez",
-          "title": "CEO, Startup Solutions"
         }
       ]
     },
     "pricing": {
-      "teaser": "Planos Acessíveis para Todos os Negócios",
-      "subTitle": "Nossos planos são projetados para crescer com você.",
-      "plan": "A partir de $9/mês",
+      "teaser": "Planos Acessíveis para Cada Negócio",
+      "subTitle": "Nossos planos foram feitos para crescer com você.",
+      "plan": "A partir de $17/mês",
       "cta": "Ver Preços"
     },
     "finalCta": {
-      "hook": "Pronto para Revolucionar Sua Newsletter?",
-      "cta": "Comece Seu Teste Gratuito Hoje"
+      "hook": "Pronto para Revolucionar sua Newsletter?",
+      "cta": "Comece seu Teste Grátis Hoje"
     },
     "footer": {
-      "copyright": "© 2025 AI Newsletter, Inc. Todos os direitos reservados.",
+      "copyright": "© 2026 AI Newsletter, Inc. Todos os direitos reservados.",
       "companyLinks": {
         "title": "Empresa",
         "links": [
@@ -207,7 +190,7 @@ export default {
         ]
       },
       "legalLinks": {
-        "title": "Legal",
+        "title": "Jurídico",
         "links": [
           { "text": "Política de Privacidade", "href": "/legal/privacy" },
           { "text": "Termos de Serviço", "href": "/legal/terms" },
@@ -217,26 +200,621 @@ export default {
       "contact": "support@ainewsletter.com"
     }
   },
+  "help": {
+    "title": "Solicitar limites maiores",
+    "subtitle": "Mude para o modelo pague-pelo-uso ou aumente as cotas para acompanhar seu crescimento.",
+    "contact": {
+      "cta": "Enviar solicitação",
+      "successTitle": "Solicitação recebida",
+      "successBody": "Nossa equipe entrará em contato em breve.",
+      "learnMore": "/plans"
+    },
+    "questions": {
+      "desiredLimitsHelp": "Diga-nos os limites necessários (ex: 1M de usuários).",
+      "useCaseHelp": "Descreva sua carga de trabalho e padrão de tráfego.",
+      "expectedSpendHelp": "Uma estimativa nos ajuda a personalizar o preço (opcional)."
+    },
+    "faqs": [
+      {
+        "id": "limits-how",
+        "q": "Como funcionam os limites maiores?",
+        "a": "Liberamos cotas maiores imediatamente após a aprovação. O faturamento pode ser fixo ou baseado no uso."
+      }
+    ],
+    "links": {
+      "docs": "/plans",
+      "community": "/help"
+    }
+  },
+  "faq": [
+    {
+      "q": "Existe um teste grátis?",
+      "a": "Sim! Você pode começar com nosso plano Gratuito, limitado a 100 usuários, para testar a tecnologia."
+    },
+    {
+      "q": "Posso cancelar a qualquer momento?",
+      "a": "Sim, você pode cancelar sua assinatura a qualquer momento através do painel da sua conta."
+    }
+  ],
+  "plans": {
+    "currency": "USD",
+    "billingIntervals": ["mensal", "anual"],
+    "currentPlan": "free",
+    "plans": [
+      {
+        "id": "free",
+        "name": "Gratuito",
+        "monthly": 0,
+        "yearly": 0,
+        "tagline": "Teste a tecnologia",
+        "featuresBase": ["1 fonte de notícias", "Até 100 usuários"],
+        "featuresDelta": [],
+        "limits": { "newsSources": 1, "users": 100 },
+        "ctaLabel": "Plano Atual",
+        "tier": 0
+      },
+      {
+        "id": "starter",
+        "name": "Starter",
+        "monthly": 17,
+        "yearly": 132,
+        "tagline": "Para newsletters em crescimento",
+        "featuresBase": ["5 fontes de notícias", "Até 100k usuários"],
+        "featuresDelta": ["Suporte por e-mail", "Tradução básica"],
+        "limits": { "newsSources": 5, "users": 100000 },
+        "ctaLabel": "Escolher Starter",
+        "productId": "prod_starter_id",
+        "tier": 1
+      },
+      {
+        "id": "growth",
+        "name": "Growth",
+        "monthly": 35,
+        "yearly": 273,
+        "tagline": "O equilíbrio perfeito",
+        "featuresBase": ["17 fontes de notícias", "Até 250k usuários"],
+        "featuresDelta": ["Branding personalizado", "Analytics avançado"],
+        "limits": { "newsSources": 17, "users": 250000 },
+        "ctaLabel": "Escolher Growth",
+        "productId": "prod_growth_id",
+        "tier": 2
+      },
+      {
+        "id": "pro",
+        "name": "Pro",
+        "monthly": 80,
+        "yearly": 624,
+        "tagline": "Para profissionais de marketing",
+        "featuresBase": ["25 fontes de notícias", "Até 500k usuários"],
+        "featuresDelta": ["Acesso à API", "Processamento prioritário"],
+        "limits": { "newsSources": 25, "users": 500000 },
+        "ctaLabel": "Escolher Pro",
+        "productId": "prod_pro_id",
+        "tier": 3
+      },
+      {
+        "id": "master",
+        "name": "Master",
+        "monthly": 150,
+        "yearly": 1170,
+        "tagline": "Escalabilidade ilimitada",
+        "featuresBase": ["50 fontes de notícias", "Usuários ilimitados"],
+        "featuresDelta": ["Suporte VIP", "Webhooks personalizados"],
+        "limits": { "newsSources": 50, "users": -1 },
+        "ctaLabel": "Escolher Master",
+        "productId": "prod_master_id",
+        "tier": 4
+      },
+      {
+        "id": "vipfree",
+        "name": "VIP Grátis",
+        "monthly": 0,
+        "yearly": 0,
+        "tagline": "Acesso total para parceiros",
+        "featuresBase": ["Fontes ilimitadas", "Usuários ilimitados"],
+        "featuresDelta": [],
+        "limits": { "newsSources": -1, "users": -1 },
+        "ctaLabel": "Plano Atual",
+        "internalOnly": true,
+        "tier": 5
+      }
+    ],
+    "contact": {
+      "text": "Precisa de uma solução personalizada?",
+      "cta": "Fale Conosco",
+      "href": "/help"
+    }
+  },
+  "article": {
+    "notFound": "Artigo não encontrado.",
+    "errorFetching": "Erro ao carregar o artigo.",
+    "noArticleSpecified": "Nenhum artigo especificado.",
+    "goBack": "Voltar",
+    "loading": "Carregando..."
+  },
+  "pricing": {
+    "eyebrow": "Preços",
+    "title": "Planos Flexíveis",
+    "currentPlan": "Plano Atual:",
+    "monthly": "Mensal",
+    "yearly": "Anual (Economize 35%)",
+    "everythingIn": "Tudo do plano anterior, mais:",
+    "isCurrentPlan": "Este é seu plano atual",
+    "downgradeTo": "Mudar para {planName}",
+    "upgradeTo": "Fazer upgrade para {planName}",
+    "mockMode": "Modo de Teste Ativado",
+    "mostPopular": "Mais Popular",
+    "perMonth": "por mês",
+    "perYear": "por ano",
+    "youSave": "Você economiza"
+  },
+  "confirmSubscription": {
+    "title": "Confirme sua Assinatura",
+    "goBack": "Voltar",
+    "pleaseAccept": "Por favor, aceite os termos para concluir sua assinatura.",
+    "iAccept": "Eu aceito os",
+    "termsAndConditions": "Termos e Condições",
+    "and": "e",
+    "privacyPolicy": "Política de Privacidade",
+    "confirm": "Confirmar Assinatura",
+    "mustAccept": "Você deve aceitar os termos para assinar.",
+    "invalidLink": "Link de confirmação inválido."
+  },
+  "articles": {
+    "title": "Últimas Insights",
+    "subtitle": "Explore nossa coleção curada de artigos e notícias.",
+    "producedIn": "Produzimos notícias em todos estes idiomas",
+    "searchPlaceholder": "Buscar artigos...",
+    "noArticlesFound": "Nenhum artigo encontrado.",
+    "created": "Criado em:",
+    "language": "Idioma:",
+    "rightsReserved": "Todos os direitos reservados.",
+    "errorFetching": "Erro ao carregar artigos."
+  },
+  "mainPage": {
+    "skipToMainContent": "Pular para o conteúdo principal",
+    "dismissAnnouncement": "Fechar anúncio",
+    "problem": "Problema:",
+    "outcome": "Resultado:",
+    "disclaimer": "A economia de 35% aplica-se apenas ao faturamento anual."
+  },
+  "authForm": {
+    "emailValidation": "Por favor, insira um e-mail válido.",
+    "failedToSendCode": "Falha ao enviar o código. Tente novamente.",
+    "sending": "Enviando...",
+    "codeSent": "Código enviado para seu e-mail",
+    "invalidCode": "Código fornecido é inválido",
+    "regenerateCode": "Reenviar código",
+    "back": "← Voltar",
+    "byProceeding": "Ao continuar, você concorda com os",
+    "termsOfService": "Termos de Serviço",
+    "and": "e",
+    "privacyPolicy": "Política de Privacidade",
+    "appName": "IA Newsletter"
+  },
   "welcome": {
-    "title": "Gerador automático de newsletter",
+    "title": "Gerador automático de newsletters",
     "setItOnce": "Configure uma vez...",
     "useItForever": "...use para sempre."
   },
   "lead": {
-    "title": "Para que os clientes passem da newsletter para o seu site",
-    "recommendation": "Isso é altamente recomendado. Ajuda nossa IA a entender melhor o contexto de sua newsletter e a gerar artigos mais relevantes.",
+    "title": "Transforme inscritos em visitantes",
+    "recommendation": "Ajude nossa IA a entender sua marca conectando seu site.",
     "question": "Você tem um site? (opcional)",
-    "placeholder": "O link para o seu site"
+    "placeholder": "https://seu-site.com.br"
   },
   "newsSource": {
-    "title": "Para usar seu blog ou feed de notícias, precisamos que você digite o link",
-    "subtitle": "Geraremos conteúdo do seu feed, para que você não precise criar uma newsletter do zero",
-    "placeholder": "O link do seu site de notícias ou blog"
+    "title": "Conecte sua fonte de conteúdo",
+    "subtitle": "Buscaremos seu feed para que você não precise começar do zero.",
+    "placeholder": "Seu blog ou link RSS"
   },
   "subscribe": {
     "welcome": {
       "title": "Bem-vindo à Newsletter.",
       "invitedBy": "Você foi convidado por {configuratorId}."
     }
-  }
+  },
+  "header": {
+    "goToWorkspace": "Ir para Workspace",
+    "inBilling": "Faturamento",
+    "vip": "VIP",
+    "plan": "Plano {planName}",
+    "logIn": "Entrar",
+    "getStarted": "Começar Agora"
+  },
+  "fileInput": {
+    "chooseFile": "Escolher Arquivo",
+    "dropFile": "Solte aqui",
+    "release": "Solte para enviar"
+  },
+  "imageInput": {
+    "unsupportedFileType": "Tipo não suportado. Use PNG, JPEG ou WebP.",
+    "dropImage": "Solte a imagem",
+    "dragDrop": "Arraste e solte",
+    "browse": "ou procure arquivos",
+    "selectImage": "Selecionar",
+    "preview": "Prévia",
+    "removeImage": "Remover"
+  },
+  "billing": {
+    "title": "Faturamento e Assinatura",
+    "currentPlanTitle": "Seu Plano Atual",
+    "upgradePlanTitle": "Mude seu Plano",
+    "manageSubscription": "Gerenciar Assinatura",
+    "vipPlanName": "Parceiro VIP",
+    "vipPlanDescription": "Acesso ilimitado cortesia de IA Newsletter.",
+    "perMonth": "por mês",
+    "perYear": "por ano",
+    "monthAbbreviation": "mês",
+    "equivalentTo": "equivalente a",
+    "mostPopular": "Mais Popular",
+    "upgradeTo": "Fazer upgrade para",
+    "downgradeTo": "Mudar para",
+    "currentPlanButton": "Seu Plano",
+    "youSave": "Você economiza",
+    "users": "usuários",
+    "newsSources": "fontes de notícias",
+    "monthly": "Mensal",
+    "yearly": "Anual",
+    "loadingPlan": "Carregando dados do plano..."
+  },
+  "languages": [
+    { "code": "ab", "name": "Abkhaziano" },
+    { "code": "aa", "name": "Afar" },
+    { "code": "af", "name": "Africâner" },
+    { "code": "ak", "name": "Akan" },
+    { "code": "sq", "name": "Albanês" },
+    { "code": "am", "name": "Amárico" },
+    { "code": "ar", "name": "Árabe" },
+    { "code": "an", "name": "Aragonês" },
+    { "code": "hy", "name": "Armênio" },
+    { "code": "as", "name": "Assamês" },
+    { "code": "av", "name": "Avaro" },
+    { "code": "ae", "name": "Avéstico" },
+    { "code": "ay", "name": "Aimará" },
+    { "code": "az", "name": "Azerbaijano" },
+    { "code": "bm", "name": "Bambara" },
+    { "code": "ba", "name": "Bashkir" },
+    { "code": "eu", "name": "Basco" },
+    { "code": "be", "name": "Bielorrusso" },
+    { "code": "bn", "name": "Bengali" },
+    { "code": "bi", "name": "Bislama" },
+    { "code": "bs", "name": "Bósnio" },
+    { "code": "br", "name": "Bretão" },
+    { "code": "bg", "name": "Búlgaro" },
+    { "code": "my", "name": "Birmanês" },
+    { "code": "ca", "name": "Catalão" },
+    { "code": "ch", "name": "Chamorro" },
+    { "code": "ce", "name": "Checheno" },
+    { "code": "ny", "name": "Nianja" },
+    { "code": "zh", "name": "Chinês" },
+    { "code": "cu", "name": "Elavo Eclesiástico" },
+    { "code": "cv", "name": "Chuvache" },
+    { "code": "kw", "name": "Córnico" },
+    { "code": "co", "name": "Corso" },
+    { "code": "cr", "name": "Cree" },
+    { "code": "hr", "name": "Croata" },
+    { "code": "cs", "name": "Tcheco" },
+    { "code": "da", "name": "Dinamarquês" },
+    { "code": "dv", "name": "Divehi" },
+    { "code": "nl", "name": "Holandês" },
+    { "code": "dz", "name": "Dzongkha" },
+    { "code": "en", "name": "Inglês" },
+    { "code": "eo", "name": "Esperanto" },
+    { "code": "et", "name": "Estoniano" },
+    { "code": "ee", "name": "Ewe" },
+    { "code": "fo", "name": "Feroês" },
+    { "code": "fj", "name": "Fijiano" },
+    { "code": "fi", "name": "Finlandês" },
+    { "code": "fr", "name": "Francês" },
+    { "code": "fy", "name": "Frísio Ocidental" },
+    { "code": "ff", "name": "Fula" },
+    { "code": "gd", "name": "Gaélico Escocês" },
+    { "code": "gl", "name": "Galego" },
+    { "code": "lg", "name": "Ganda" },
+    { "code": "ka", "name": "Georgiano" },
+    { "code": "de", "name": "Alemão" },
+    { "code": "el", "name": "Grego" },
+    { "code": "kl", "name": "Groenlandês" },
+    { "code": "gn", "name": "Guarani" },
+    { "code": "gu", "name": "Gujarati" },
+    { "code": "ht", "name": "Crioulo Haitiano" },
+    { "code": "ha", "name": "Haúça" },
+    { "code": "he", "name": "Hebraico" },
+    { "code": "hz", "name": "Herero" },
+    { "code": "hi", "name": "Híndi" },
+    { "code": "ho", "name": "Hiri Motu" },
+    { "code": "hu", "name": "Húngaro" },
+    { "code": "is", "name": "Islandês" },
+    { "code": "io", "name": "Ido" },
+    { "code": "ig", "name": "Ibo" },
+    { "code": "id", "name": "Indonésio" },
+    { "code": "ia", "name": "Interlíngua" },
+    { "code": "ie", "name": "Interlíngue" },
+    { "code": "iu", "name": "Inuktitut" },
+    { "code": "ik", "name": "Inupiaq" },
+    { "code": "ga", "name": "Irlandês" },
+    { "code": "it", "name": "Italiano" },
+    { "code": "ja", "name": "Japonês" },
+    { "code": "jv", "name": "Javanês" },
+    { "code": "kn", "name": "Canarês" },
+    { "code": "kr", "name": "Canúri" },
+    { "code": "ks", "name": "Caxemira" },
+    { "code": "kk", "name": "Cazaque" },
+    { "code": "km", "name": "Khmer" },
+    { "code": "ki", "name": "Cicuio" },
+    { "code": "rw", "name": "Quiniaruanda" },
+    { "code": "ky", "name": "Quirguiz" },
+    { "code": "kv", "name": "Komi" },
+    { "code": "kg", "name": "Congolês" },
+    { "code": "ko", "name": "Coreano" },
+    { "code": "kj", "name": "Cuanhama" },
+    { "code": "ku", "name": "Curdo" },
+    { "code": "lo", "name": "Laociano" },
+    { "code": "la", "name": "Latim" },
+    { "code": "lv", "name": "Letão" },
+    { "code": "li", "name": "Limburguês" },
+    { "code": "ln", "name": "Lingala" },
+    { "code": "lt", "name": "Lituano" },
+    { "code": "lu", "name": "Luba-Catanga" },
+    { "code": "lb", "name": "Luxemburguês" },
+    { "code": "mk", "name": "Macedônio" },
+    { "code": "mg", "name": "Malgaxe" },
+    { "code": "ms", "name": "Malaio" },
+    { "code": "ml", "name": "Malaiala" },
+    { "code": "mt", "name": "Maltês" },
+    { "code": "gv", "name": "Manx" },
+    { "code": "mi", "name": "Maori" },
+    { "code": "mr", "name": "Marata" },
+    { "code": "mh", "name": "Marshallês" },
+    { "code": "mn", "name": "Mongol" },
+    { "code": "na", "name": "瑙루ano" },
+    { "code": "nv", "name": "Navajo" },
+    { "code": "nd", "name": "Ndebele do Norte" },
+    { "code": "nr", "name": "Ndebele do Sul" },
+    { "code": "ng", "name": "Ndonga" },
+    { "code": "ne", "name": "Nepalês" },
+    { "code": "no", "name": "Norueguês" },
+    { "code": "nb", "name": "Bokmål Norueguês" },
+    { "code": "nn", "name": "Nynorsk Norueguês" },
+    { "code": "oc", "name": "Occitano" },
+    { "code": "oj", "name": "Ojíbua" },
+    { "code": "or", "name": "Oriya" },
+    { "code": "om", "name": "Oromo" },
+    { "code": "os", "name": "Osseto" },
+    { "code": "pi", "name": "Pali" },
+    { "code": "ps", "name": "Pashto" },
+    { "code": "fa", "name": "Persa" },
+    { "code": "pl", "name": "Polonês" },
+    { "code": "pt", "name": "Português" },
+    { "code": "pa", "name": "Punjabi" },
+    { "code": "qu", "name": "Quíchua" },
+    { "code": "ro", "name": "Romeno" },
+    { "code": "rm", "name": "Romanche" },
+    { "code": "rn", "name": "Rundi" },
+    { "code": "ru", "name": "Russo" },
+    { "code": "se", "name": "Sami do Norte" },
+    { "code": "sm", "name": "Samoano" },
+    { "code": "sg", "name": "Sango" },
+    { "code": "sa", "name": "Sânscrito" },
+    { "code": "sc", "name": "Sardo" },
+    { "code": "sr", "name": "Sérvio" },
+    { "code": "sn", "name": "Shona" },
+    { "code": "ii", "name": "Sichuan Yi" },
+    { "code": "sd", "name": "Sindi" },
+    { "code": "si", "name": "Cingalês" },
+    { "code": "sk", "name": "Eslovaco" },
+    { "code": "sl", "name": "Esloveno" },
+    { "code": "so", "name": "Somali" },
+    { "code": "st", "name": "Soto do Sul" },
+    { "code": "es", "name": "Espanhol" },
+    { "code": "su", "name": "Sundanês" },
+    { "code": "sw", "name": "Suaíli" },
+    { "code": "ss", "name": "Suázi" },
+    { "code": "sv", "name": "Sueco" },
+    { "code": "tl", "name": "Tagalo" },
+    { "code": "ty", "name": "Taitiano" },
+    { "code": "tg", "name": "Tajique" },
+    { "code": "ta", "name": "Tâmil" },
+    { "code": "tt", "name": "Tártaro" },
+    { "code": "te", "name": "Telugu" },
+    { "code": "th", "name": "Tailandês" },
+    { "code": "bo", "name": "Tibetano" },
+    { "code": "ti", "name": "Tigrínia" },
+    { "code": "to", "name": "Tonganês" },
+    { "code": "ts", "name": "Tsonga" },
+    { "code": "tn", "name": "Tsuana" },
+    { "code": "tr", "name": "Turco" },
+    { "code": "tk", "name": "Turcomano" },
+    { "code": "tw", "name": "Twi" },
+    { "code": "ug", "name": "Uigur" },
+    { "code": "uk", "name": "Ucraniano" },
+    { "code": "ur", "name": "Urdu" },
+    { "code": "uz", "name": "Uzbeque" },
+    { "code": "ve", "name": "Venda" },
+    { "code": "vi", "name": "Vietnamita" },
+    { "code": "vo", "name": "Volapuque" },
+    { "code": "wa", "name": "Valão" },
+    { "code": "cy", "name": "Galês" },
+    { "code": "wo", "name": "Wolof" },
+    { "code": "xh", "name": "Xhosa" },
+    { "code": "yi", "name": "Iídiche" },
+    { "code": "yo", "name": "Iorubá" },
+    { "code": "za", "name": "Zhuang" },
+    { "code": "zu", "name": "Zulu" }
+  ],
+  "countries": [
+    { "code": "AF", "name": "Afeganistão" },
+    { "code": "AL", "name": "Albânia" },
+    { "code": "DZ", "name": "Argélia" },
+    { "code": "AS", "name": "Samoa Americana" },
+    { "code": "AD", "name": "Andorra" },
+    { "code": "AO", "name": "Angola" },
+    { "code": "AI", "name": "Anguilla" },
+    { "code": "AQ", "name": "Antártida" },
+    { "code": "AG", "name": "Antígua e Barbuda" },
+    { "code": "AR", "name": "Argentina" },
+    { "code": "AM", "name": "Armênia" },
+    { "code": "AW", "name": "Aruba" },
+    { "code": "AU", "name": "Austrália" },
+    { "code": "AT", "name": "Áustria" },
+    { "code": "AZ", "name": "Azerbaijão" },
+    { "code": "BS", "name": "Bahamas" },
+    { "code": "BH", "name": "Bahrein" },
+    { "code": "BD", "name": "Bangladesh" },
+    { "code": "BB", "name": "Barbados" },
+    { "code": "BY", "name": "Bielorrússia" },
+    { "code": "BE", "name": "Bélgica" },
+    { "code": "BZ", "name": "Belize" },
+    { "code": "BJ", "name": "Benin" },
+    { "code": "BM", "name": "Bermudas" },
+    { "code": "BT", "name": "Butão" },
+    { "code": "BO", "name": "Bolívia" },
+    { "code": "BA", "name": "Bósnia e Herzegovina" },
+    { "code": "BW", "name": "Botsuana" },
+    { "code": "BR", "name": "Brasil" },
+    { "code": "IO", "name": "Território Britânico do Oceano Índico" },
+    { "code": "VG", "name": "Ilhas Virgens Britânicas" },
+    { "code": "BN", "name": "Brunei" },
+    { "code": "BG", "name": "Bulgária" },
+    { "code": "BF", "name": "Burquina Faso" },
+    { "code": "BI", "name": "Burundi" },
+    { "code": "KH", "name": "Camboja" },
+    { "code": "CM", "name": "Camarões" },
+    { "code": "CA", "name": "Canadá" },
+    { "code": "CV", "name": "Cabo Verde" },
+    { "code": "KY", "name": "Ilhas Cayman" },
+    { "code": "CF", "name": "República Centro-Africana" },
+    { "code": "TD", "name": "Chade" },
+    { "code": "CL", "name": "Chile" },
+    { "code": "CN", "name": "China" },
+    { "code": "CX", "name": "Ilha Christmas" },
+    { "code": "CC", "name": "Ilhas Cocos (Keeling)" },
+    { "code": "CO", "name": "Colômbia" },
+    { "code": "KM", "name": "Comores" },
+    { "code": "CG", "name": "Congo - Brazzaville" },
+    { "code": "CD", "name": "Congo - Kinshasa" },
+    { "code": "CK", "name": "Ilhas Cook" },
+    { "code": "CR", "name": "Costa Rica" },
+    { "code": "CI", "name": "Costa do Marfim" },
+    { "code": "HR", "name": "Croácia" },
+    { "code": "CU", "name": "Cuba" },
+    { "code": "CY", "name": "Chipre" },
+    { "code": "CZ", "name": "Tchéquia" },
+    { "code": "DK", "name": "Dinamarca" },
+    { "code": "DJ", "name": "Djibuti" },
+    { "code": "DM", "name": "Dominica" },
+    { "code": "DO", "name": "República Dominicana" },
+    { "code": "EC", "name": "Equador" },
+    { "code": "EG", "name": "Egito" },
+    { "code": "SV", "name": "El Salvador" },
+    { "code": "GQ", "name": "Guiné Equatorial" },
+    { "code": "ER", "name": "Eritreia" },
+    { "code": "EE", "name": "Estônia" },
+    { "code": "SZ", "name": "Essuatíni" },
+    { "code": "ET", "name": "Etiópia" },
+    { "code": "FJ", "name": "Fiji" },
+    { "code": "FI", "name": "Finlândia" },
+    { "code": "FR", "name": "França" },
+    { "code": "GA", "name": "Gabão" },
+    { "code": "GM", "name": "Gâmbia" },
+    { "code": "GE", "name": "Geórgia" },
+    { "code": "DE", "name": "Alemanha" },
+    { "code": "GH", "name": "Gana" },
+    { "code": "GR", "name": "Grécia" },
+    { "code": "GT", "name": "Guatemala" },
+    { "code": "GN", "name": "Guiné" },
+    { "code": "GY", "name": "Guiana" },
+    { "code": "HT", "name": "Haiti" },
+    { "code": "HN", "name": "Honduras" },
+    { "code": "HK", "name": "Hong Kong" },
+    { "code": "HU", "name": "Hungria" },
+    { "code": "IS", "name": "Islândia" },
+    { "code": "IN", "name": "Índia" },
+    { "code": "ID", "name": "Indonésia" },
+    { "code": "IR", "name": "Irã" },
+    { "code": "IQ", "name": "Iraque" },
+    { "code": "IE", "name": "Irlanda" },
+    { "code": "IL", "name": "Israel" },
+    { "code": "IT", "name": "Itália" },
+    { "code": "JM", "name": "Jamaica" },
+    { "code": "JP", "name": "Japão" },
+    { "code": "JO", "name": "Jordânia" },
+    { "code": "KZ", "name": "Cazaquistão" },
+    { "code": "KE", "name": "Quênia" },
+    { "code": "KR", "name": "Coreia do Sul" },
+    { "code": "KW", "name": "Kuwait" },
+    { "code": "KG", "name": "Quirguistão" },
+    { "code": "LA", "name": "Laos" },
+    { "code": "LV", "name": "Letônia" },
+    { "code": "LB", "name": "Líbano" },
+    { "code": "LS", "name": "Lesoto" },
+    { "code": "LR", "name": "Libéria" },
+    { "code": "LY", "name": "Líbia" },
+    { "code": "LI", "name": "Liechtenstein" },
+    { "code": "LT", "name": "Lituânia" },
+    { "code": "LU", "name": "Luxemburgo" },
+    { "code": "MG", "name": "Madagascar" },
+    { "code": "MW", "name": "Malaui" },
+    { "code": "MY", "name": "Malásia" },
+    { "code": "MV", "name": "Maldivas" },
+    { "code": "ML", "name": "Mali" },
+    { "code": "MT", "name": "Malta" },
+    { "code": "MX", "name": "México" },
+    { "code": "MD", "name": "Moldávia" },
+    { "code": "MC", "name": "Mônaco" },
+    { "code": "MN", "name": "Mongólia" },
+    { "code": "ME", "name": "Montenegro" },
+    { "code": "MA", "name": "Marrocos" },
+    { "code": "MZ", "name": "Moçambique" },
+    { "code": "MM", "name": "Mianmar" },
+    { "code": "NA", "name": "Namíbia" },
+    { "code": "NP", "name": "Nepal" },
+    { "code": "NL", "name": "Países Baixos" },
+    { "code": "NZ", "name": "Nova Zelândia" },
+    { "code": "NI", "name": "Nicarágua" },
+    { "code": "NE", "name": "Níger" },
+    { "code": "NG", "name": "Nigéria" },
+    { "code": "MK", "name": "Macedônia do Norte" },
+    { "code": "NO", "name": "Noruega" },
+    { "code": "OM", "name": "Omã" },
+    { "code": "PK", "name": "Paquistão" },
+    { "code": "PA", "name": "Panamá" },
+    { "code": "PG", "name": "Papua-Nova Guiné" },
+    { "code": "PY", "name": "Paraguai" },
+    { "code": "PE", "name": "Peru" },
+    { "code": "PH", "name": "Filipinas" },
+    { "code": "PL", "name": "Polônia" },
+    { "code": "PT", "name": "Portugal" },
+    { "code": "QA", "name": "Catar" },
+    { "code": "RO", "name": "Romênia" },
+    { "code": "RU", "name": "Rússia" },
+    { "code": "RW", "name": "Ruanda" },
+    { "code": "SA", "name": "Arábia Saudita" },
+    { "code": "SN", "name": "Senegal" },
+    { "code": "RS", "name": "Sérvia" },
+    { "code": "SG", "name": "Singapura" },
+    { "code": "SK", "name": "Eslováquia" },
+    { "code": "SI", "name": "Eslovênia" },
+    { "code": "ZA", "name": "África do Sul" },
+    { "code": "ES", "name": "Espanha" },
+    { "code": "LK", "name": "Sri Lanka" },
+    { "code": "SE", "name": "Suécia" },
+    { "code": "CH", "name": "Suíça" },
+    { "code": "TW", "name": "Taiwan" },
+    { "code": "TH", "name": "Tailândia" },
+    { "code": "TR", "name": "Turquia" },
+    { "code": "UG", "name": "Uganda" },
+    { "code": "UA", "name": "Ucrânia" },
+    { "code": "AE", "name": "Emirados Árabes Unidos" },
+    { "code": "GB", "name": "Reino Unido" },
+    { "code": "US", "name": "Estados Unidos" },
+    { "code": "UY", "name": "Uruguai" },
+    { "code": "UZ", "name": "Uzbequistão" },
+    { "code": "VE", "name": "Venezuela" },
+    { "code": "VN", "name": "Vietnã" },
+    { "code": "YE", "name": "Iêmen" },
+    { "code": "ZM", "name": "Zâmbia" },
+    { "code": "ZW", "name": "Zimbábue" }
+  ]
 }

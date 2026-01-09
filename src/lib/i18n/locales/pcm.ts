@@ -3,30 +3,30 @@ export default {
     "logo": "/icons/logo.png",
     "login": {
       "title": "Log in to our Newsletter Orchestrator",
-      "subtitle": "Connect to continue where you left off.",
+      "subtitle": "Connect to continue from where you stop.",
       "google": "Continue with Google",
       "or": "or",
       "emailPlaceholder": "you@example.com",
       "continueWithEmail": "Continue with Email",
-      "switchText": "No get account?",
-      "switchLink": "Sign Up",
+      "switchText": "You never get account?",
+      "switchLink": "Sign up",
       "switchHref": "/signup"
     },
     "signup": {
       "title": "Create your account",
-      "subtitle": "No credit card required.",
+      "subtitle": "No need for credit card.",
       "google": "Continue with Google",
       "or": "or",
       "emailPlaceholder": "you@example.com",
       "continueWithEmail": "Continue with Email",
-      "switchText": "Already get account?",
-      "switchLink": "Log In",
+      "switchText": "You already get account?",
+      "switchLink": "Log in",
       "switchHref": "/login"
     }
   },
   "mainContent": {
-    "title": "AI Newsletter Generator: Personalized Content, Delivered.",
-    "metaDescription": "Generate personalized newsletters with AI. Transform any news source into custom articles for your subscribers, in their language, and in your brand's voice.",
+    "title": "AI Newsletter Generator: Correct Content, Straight to Inbox.",
+    "metaDescription": "Make beta newsletters with AI. Change any news source to special articles for your people, for di language wey dem sabi, and your brand style.",
     "ogImageUrl": "https://images.pexels.com/photos/261599/pexels-photo-261599.jpeg",
     "canonicalUrl": "https://example.com/ai-newsletter-generator",
     "organization": {
@@ -36,21 +36,21 @@ export default {
     },
     "product": {
       "name": "AI Newsletter Generator",
-      "description": "The ultimate platform for creating personalized, AI-driven newsletters."
+      "description": "Di best platform to make special newsletters wey AI dey run."
     },
     "announcement": {
-      "text": "Beta Launch: Sign up now and get 50% off for the first 3 months!",
-      "cta": "Get Started"
+      "text": "Beta Launch: Sign up now and get 35% discount for yearly plans!",
+      "cta": "Start Now"
     },
     "hero": {
-      "hook": "AI-Powered Newsletters, Effortlessly.",
-      "subHook": "Transform any news source into personalized articles for your subscribers, in their language, and in your brand's voice.",
-      "primaryCta": "Get Started for Free",
-      "secondaryCta": "Watch a Demo",
+      "hook": "AI Newsletter, No Stress.",
+      "subHook": "Change any news source to special articles for your people, for di language wey dem sabi, and your brand style.",
+      "primaryCta": "Start for Free",
+      "secondaryCta": "See Demo",
       "trustCues": [
-        "No credit card required",
-        "14-day free trial",
-        "Cancel anytime"
+        "No credit card needed",
+        "Free for up to 100 users",
+        "Cancel any time"
       ]
     },
     "socialProof": {
@@ -61,143 +61,126 @@ export default {
         { "name": "Apex Solutions", "src": "/logos/logo_4.png" },
         { "name": "Momentum Co.", "src": "/logos/logo_5.png" }
       ],
-      "counts": "Trusted by 10,000+ teams worldwide"
+      "counts": "Over 10,000 teams for di whole world trust us"
     },
     "valueProps": {
-      "title": "The Future of Newsletters is Here",
-      "subTitle": "Engage your audience like never before with AI-driven content that speaks directly to them.",
+      "title": "Di Future of Newsletters Don Show",
+      "subTitle": "Carry your audience follow body with AI content wey dey talk to dem directly.",
       "props": [
         {
           "title": "Hyper-Personalization",
-          "description": "Our AI analyzes your website to understand your audience and automatically tailors articles to their interests and language."
+          "description": "Our AI go check your website so e go understand your audience, den e go prepare articles wey dem go like for di language wey dem sabi."
         },
         {
-          "title": "Automated Content Creation",
-          "description": "Set your schedule, daily, weekly, or monthly, and let our AI select, write, and translate articles for you."
+          "title": "Automatic Content Creation",
+          "description": "Set your time — daily, weekly, or monthly — and make our AI pick, write, and translate articles for you."
         },
         {
           "title": "Your Brand, Your Voice",
-          "description": "The AI learns your brand's personality from your website or custom input, ensuring every newsletter sounds like it was written by you."
+          "description": "AI go learn your brand style from your website or wetin you tell am, so every newsletter go be like say na you write am yourself."
         }
       ]
     },
     "features": {
-      "title": "Advanced Features for Maximum Impact",
-      "subTitle": "Go beyond simple newsletters and create a powerful marketing channel.",
+      "title": "Better Features for Better Result",
+      "subTitle": "No just send normal newsletter, build better marketing channel.",
       "featureList": [
         {
-          "title": "Intelligent Article Selection",
-          "description": "Our AI scans news sources and selects the most relevant articles based on an analysis of your target audience, ensuring high engagement.",
+          "title": "Sense-Head Article Picking",
+          "description": "Our AI go scan news sources and pick di ones wey make sense pass for your audience.",
           "image": "https://images.pexels.com/photos/3760067/pexels-photo-3760067.jpeg",
           "cta": "Learn more"
         },
         {
-          "title": "Seamless Language Translation",
-          "description": "Reach a global audience by automatically translating articles into your subscribers' native languages, breaking down communication barriers.",
+          "title": "Correct Language Translation",
+          "description": "Reach everybody for di world as di AI dey translate articles to your customers' native language automatically.",
           "image": "https://images.pexels.com/photos/207756/pexels-photo-207756.jpeg",
           "cta": "Learn more"
         },
         {
           "title": "Lead Tracking & Analytics",
-          "description": "Embed a lead tracker in your company link to monitor engagement and measure the success of your campaigns with our built-in counter.",
+          "description": "Put lead tracker for your company links to see how people dey click and check if your campaign dey work.",
           "image": "https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg",
           "cta": "Learn more"
         }
       ]
     },
     "howItWorks": {
-      "title": "Get Started in 3 Simple Steps",
+      "title": "Start for only 3 Steps",
       "steps": [
         {
           "step": 1,
           "title": "Connect Your News Source",
-          "description": "Link any news source, and our AI will start analyzing it for relevant content."
+          "description": "Link any news source, and our AI go start to find correct content inside."
         },
         {
           "step": 2,
-          "title": "Define Your Voice",
-          "description": "Let our AI learn your brand's personality from your website or provide a custom description."
+          "title": "Tell Us Your Style",
+          "description": "Make our AI learn your brand style from your website or give us di description."
         },
         {
           "step": 3,
           "title": "Launch Your Newsletter",
-          "description": "Set your schedule and watch as personalized, multilingual newsletters are automatically sent to your subscribers."
+          "description": "Set your schedule and see as special, multi-language newsletters dey go meet your customers."
         }
       ]
     },
     "personas": {
-      "title": "Perfect for Your Business",
-      "subTitle": "From startups to enterprises, our tool is designed to help you grow.",
+      "title": "E Set for Your Business",
+      "subTitle": "Whether na startup or big company, our tool go help you grow.",
       "personaList": [
         {
           "persona": "Content Creators",
-          "problem": "Spending hours curating and writing content for your audience.",
-          "outcome": "Automate your content creation process and focus on growing your community."
+          "problem": "Dey waste hours dey find and write content for audience.",
+          "outcome": "Make your content work happen by itself and focus on how to grow your community."
         },
         {
           "persona": "Marketing Teams",
-          "problem": "Struggling to create personalized content that resonates with a global audience.",
-          "outcome": "Increase engagement and conversions with hyper-personalized, multilingual newsletters."
+          "problem": "Dey struggle to make special content for people across di world.",
+          "outcome": "Boost engagement with newsletters wey dem design for each person."
         },
         {
           "persona": "Businesses",
-          "problem": "Lacking the resources to create a consistent and engaging newsletter.",
-          "outcome": "Build a powerful marketing channel that drives traffic and sales with minimal effort."
+          "problem": "No get enough people or time to make beta newsletters always.",
+          "outcome": "Build better marketing channel wey go bring traffic without too much stress."
         }
       ]
     },
     "metrics": {
-      "title": "Real Results, Backed by Data",
+      "title": "Real Results with Data",
       "metricList": [
-        {
-          "value": "90%",
-          "label": "Reduction in content creation time",
-          "proof": "Based on beta user feedback."
-        },
-        {
-          "value": "2x",
-          "label": "Increase in subscriber engagement",
-          "proof": "Observed in A/B tests with beta users."
-        },
-        {
-          "value": "5x",
-          "label": "Faster content delivery",
-          "proof": "Compared to manual newsletter creation."
-        }
+        { "value": "90%", "label": "Time wey you save", "proof": "Based on wetin beta users talk." },
+        { "value": "2x", "label": "Engagement increase", "proof": "Based on A/B testing." },
+        { "value": "5x", "label": "Faster content delivery", "proof": "Compare to when person do am by hand." }
       ]
     },
     "testimonials": {
-      "title": "What Our Customers Say",
+      "title": "Wetin Our Customers Dey Talk",
       "testimonialList": [
         {
-          "quote": "The AI Newsletter Generator has been a game-changer for our content strategy. We're now able to reach our global audience with personalized content that resonates.",
+          "quote": "AI Newsletter Generator na game-changer. Now we dey reach our world-wide audience with content wey dem like.",
           "name": "Alex Chen",
           "title": "Head of Growth, Global Tech Inc."
         },
         {
-          "quote": "I was skeptical at first, but the AI-generated content is incredibly well-written and on-brand. Our subscribers love it!",
+          "quote": "I first dey fear, but di content wey di AI write make sense well-well. Our customers love am!",
           "name": "Samantha Jones",
           "title": "Founder, The Content Corner"
-        },
-        {
-          "quote": "The amount of time we've saved is incredible. We can now focus on other areas of our business while the AI handles our newsletter.",
-          "name": "David Rodriguez",
-          "title": "CEO, Startup Solutions"
         }
       ]
     },
     "pricing": {
-      "teaser": "Affordable Plans for Every Business",
-      "subTitle": "Our plans are designed to grow with you.",
-      "plan": "Starts from $9/mo",
-      "cta": "See Pricing"
+      "teaser": "Beta Price for Every Business",
+      "subTitle": "Our plans go grow as you dey grow.",
+      "plan": "Start from $17/month",
+      "cta": "See Prices"
     },
     "finalCta": {
-      "hook": "Ready to Revolutionize Your Newsletter?",
+      "hook": "You Ready to Change Your Newsletter Game?",
       "cta": "Start Your Free Trial Today"
     },
     "footer": {
-      "copyright": "© 2025 AI Newsletter, Inc. All rights reserved.",
+      "copyright": "© 2026 AI Newsletter, Inc. All rights reserved.",
       "companyLinks": {
         "title": "Company",
         "links": [
@@ -217,26 +200,621 @@ export default {
       "contact": "support@ainewsletter.com"
     }
   },
+  "help": {
+    "title": "Ask for Higher Limits",
+    "subtitle": "Move to pay-as-you-go or increase your quota as you dey grow.",
+    "contact": {
+      "cta": "Submit Request",
+      "successTitle": "We don get your request",
+      "successBody": "Our team go reach out to you soon.",
+      "learnMore": "/plans"
+    },
+    "questions": {
+      "desiredLimitsHelp": "Tell us di limit wey you need (e.g., 1M users).",
+      "useCaseHelp": "Tell us how you wan take use am and your traffic style.",
+      "expectedSpendHelp": "Wetin you plan to spend go help us arrange price for you (optional)."
+    },
+    "faqs": [
+      {
+        "id": "limits-how",
+        "q": "How higher limits take dey work?",
+        "a": "Once we approve am, we go open bigger quota for you sharp-sharp. You fit pay flat-rate or pay-as-you-go."
+      }
+    ],
+    "links": {
+      "docs": "/plans",
+      "community": "/help"
+    }
+  },
+  "faq": [
+    {
+      "q": "Free trial dey?",
+      "a": "Yes! You fit start with our Free plan for up to 100 users to test di machine."
+    },
+    {
+      "q": "I fit cancel any time?",
+      "a": "Yes, you fit cancel your subscription any time for your account dashboard."
+    }
+  ],
+  "plans": {
+    "currency": "USD",
+    "billingIntervals": ["monthly", "yearly"],
+    "currentPlan": "free",
+    "plans": [
+      {
+        "id": "free",
+        "name": "Free",
+        "monthly": 0,
+        "yearly": 0,
+        "tagline": "Test di machine",
+        "featuresBase": ["1 news source", "Up to 100 users"],
+        "featuresDelta": [],
+        "limits": { "newsSources": 1, "users": 100 },
+        "ctaLabel": "Current Plan",
+        "tier": 0
+      },
+      {
+        "id": "starter",
+        "name": "Starter",
+        "monthly": 17,
+        "yearly": 132,
+        "tagline": "For newsletters wey dey grow",
+        "featuresBase": ["5 news sources", "Up to 100k users"],
+        "featuresDelta": ["Email support", "Basic translation"],
+        "limits": { "newsSources": 5, "users": 100000 },
+        "ctaLabel": "Pick Starter",
+        "productId": "prod_starter_id",
+        "tier": 1
+      },
+      {
+        "id": "growth",
+        "name": "Growth",
+        "monthly": 35,
+        "yearly": 273,
+        "tagline": "Di perfect balance",
+        "featuresBase": ["17 news sources", "Up to 250k users"],
+        "featuresDelta": ["Custom branding", "Advanced analytics"],
+        "limits": { "newsSources": 17, "users": 250000 },
+        "ctaLabel": "Pick Growth",
+        "productId": "prod_growth_id",
+        "tier": 2
+      },
+      {
+        "id": "pro",
+        "name": "Pro",
+        "monthly": 80,
+        "yearly": 624,
+        "tagline": "For marketing pros",
+        "featuresBase": ["25 news sources", "Up to 500k users"],
+        "featuresDelta": ["API access", "Priority processing"],
+        "limits": { "newsSources": 25, "users": 500000 },
+        "ctaLabel": "Pick Pro",
+        "productId": "prod_pro_id",
+        "tier": 3
+      },
+      {
+        "id": "master",
+        "name": "Master",
+        "monthly": 150,
+        "yearly": 1170,
+        "tagline": "No limit to growth",
+        "featuresBase": ["50 news sources", "No limit for users"],
+        "featuresDelta": ["V.I.P support", "Custom webhooks"],
+        "limits": { "newsSources": 50, "users": -1 },
+        "ctaLabel": "Pick Master",
+        "productId": "prod_master_id",
+        "tier": 4
+      },
+      {
+        "id": "vipfree",
+        "name": "VIP Free",
+        "monthly": 0,
+        "yearly": 0,
+        "tagline": "Full access for partners",
+        "featuresBase": ["No limit for sources", "No limit for users"],
+        "featuresDelta": [],
+        "limits": { "newsSources": -1, "users": -1 },
+        "ctaLabel": "Current Plan",
+        "internalOnly": true,
+        "tier": 5
+      }
+    ],
+    "contact": {
+      "text": "You need custom plan?",
+      "cta": "Contact Us",
+      "href": "/help"
+    }
+  },
+  "article": {
+    "notFound": "We no find di article.",
+    "errorFetching": "Wahala dey to carry di article.",
+    "noArticleSpecified": "You no choose any article.",
+    "goBack": "Go Back",
+    "loading": "E dey load..."
+  },
+  "pricing": {
+    "eyebrow": "Pricing",
+    "title": "Flexible Plans",
+    "currentPlan": "Current Plan:",
+    "monthly": "Monthly",
+    "yearly": "Yearly (Save 35%)",
+    "everythingIn": "Everything for di plan before am, plus:",
+    "isCurrentPlan": "Dis na your current plan",
+    "downgradeTo": "Downgrade to {planName}",
+    "upgradeTo": "Upgrade to {planName}",
+    "mockMode": "Mock Mode dey active",
+    "mostPopular": "Most Popular",
+    "perMonth": "per month",
+    "perYear": "per year",
+    "youSave": "You save"
+  },
+  "confirmSubscription": {
+    "title": "Confirm Your Subscription",
+    "goBack": "Go Back",
+    "pleaseAccept": "Abeg gree for di terms to finish your subscription.",
+    "iAccept": "I gree",
+    "termsAndConditions": "Terms and Conditions",
+    "and": "and",
+    "privacyPolicy": "Privacy Policy",
+    "confirm": "Confirm Subscription",
+    "mustAccept": "You must gree for terms before you fit subscribe.",
+    "invalidLink": "Dis confirmation link no work."
+  },
+  "articles": {
+    "title": "Latest Gist",
+    "subtitle": "Check our beta collection of articles and news.",
+    "producedIn": "We don make news for all dese languages",
+    "searchPlaceholder": "Search for article...",
+    "noArticlesFound": "No article dey.",
+    "created": "Created:",
+    "language": "Language:",
+    "rightsReserved": "All Rights Reserved.",
+    "errorFetching": "Wahala dey to carry di article."
+  },
+  "mainPage": {
+    "skipToMainContent": "Jump to main content",
+    "dismissAnnouncement": "Commot announcement",
+    "problem": "Problem:",
+    "outcome": "Outcome:",
+    "disclaimer": "Di 35% savings na only for yearly billing."
+  },
+  "authForm": {
+    "emailValidation": "Abeg put correct email.",
+    "failedToSendCode": "We no fit send code. Abeg try again.",
+    "sending": "E dey go...",
+    "codeSent": "Code don land for your email",
+    "invalidCode": "Di code wey you put no work",
+    "regenerateCode": "Resend code",
+    "back": "← Back",
+    "byProceeding": "As you dey go front, you gree for",
+    "termsOfService": "Terms of Service",
+    "and": "and",
+    "privacyPolicy": "Privacy Policy",
+    "appName": "AI Newsletter"
+  },
   "welcome": {
-    "title": "Automatic newsletter generator",
+    "title": "Automatic Newsletter Generator",
     "setItOnce": "Set am once...",
     "useItForever": "...use am forever."
   },
   "lead": {
-    "title": "For clients to go from di newsletter to your website",
-    "recommendation": "Dis one dey highly recommended. E dey help our AI to better understand di context of your newsletter and generate more relevant articles.",
-    "question": "You get website? (optional)",
-    "placeholder": "Di link to your website"
+    "title": "Turn Customers to Visitors",
+    "recommendation": "Help our AI understand your brand by linking your website.",
+    "question": "You get website? (e fit skip)",
+    "placeholder": "https://your-site.com"
   },
   "newsSource": {
-    "title": "For us to use your blog or news feed we need you to type di link",
-    "subtitle": "We go generate content from your feed, so you no need to create newsletter from scratch",
-    "placeholder": "Your news site or blog link"
+    "title": "Connect Your Content Source",
+    "subtitle": "We go carry your feed so you no go start from zero.",
+    "placeholder": "Your blog or RSS link"
   },
   "subscribe": {
     "welcome": {
       "title": "Welcome to di Newsletter.",
-      "invitedBy": "You have been invited by {configuratorId}."
+      "invitedBy": "{configuratorId} invite you come."
     }
-  }
+  },
+  "header": {
+    "goToWorkspace": "Go Workspace",
+    "inBilling": "Billing",
+    "vip": "VIP",
+    "plan": "{planName} Plan",
+    "logIn": "Log in",
+    "getStarted": "Start Now"
+  },
+  "fileInput": {
+    "chooseFile": "Pick File",
+    "dropFile": "Drop am here",
+    "release": "Release to upload"
+  },
+  "imageInput": {
+    "unsupportedFileType": "Dis type no work. Use PNG, JPEG, or WebP.",
+    "dropImage": "Drop image",
+    "dragDrop": "Drag & Drop",
+    "browse": "or find file",
+    "selectImage": "Select",
+    "preview": "Preview",
+    "removeImage": "Commot am"
+  },
+  "billing": {
+    "title": "Billing & Subscription",
+    "currentPlanTitle": "Your Current Plan",
+    "upgradePlanTitle": "Change Your Plan",
+    "manageSubscription": "Manage Subscription",
+    "vipPlanName": "VIP Partner",
+    "vipPlanDescription": "Unlimited access from AI Newsletter.",
+    "perMonth": "per month",
+    "perYear": "per year",
+    "monthAbbreviation": "mo",
+    "equivalentTo": "be like",
+    "mostPopular": "Most Popular",
+    "upgradeTo": "Upgrade to",
+    "downgradeTo": "Switch to",
+    "currentPlanButton": "Your Plan",
+    "youSave": "You save",
+    "users": "users",
+    "newsSources": "news sources",
+    "monthly": "Monthly",
+    "yearly": "Yearly",
+    "loadingPlan": "Dey load plan data..."
+  },
+  "languages": [
+    { "code": "ab", "name": "Abkhazian" },
+    { "code": "aa", "name": "Afar" },
+    { "code": "af", "name": "Afrikaans" },
+    { "code": "ak", "name": "Akan" },
+    { "code": "sq", "name": "Albanian" },
+    { "code": "am", "name": "Amharic" },
+    { "code": "ar", "name": "Arabic" },
+    { "code": "an", "name": "Aragonese" },
+    { "code": "hy", "name": "Armenian" },
+    { "code": "as", "name": "Assamese" },
+    { "code": "av", "name": "Avaric" },
+    { "code": "ae", "name": "Avestan" },
+    { "code": "ay", "name": "Aymara" },
+    { "code": "az", "name": "Azerbaijani" },
+    { "code": "bm", "name": "Bambara" },
+    { "code": "ba", "name": "Bashkir" },
+    { "code": "eu", "name": "Basque" },
+    { "code": "be", "name": "Belarusian" },
+    { "code": "bn", "name": "Bengali" },
+    { "code": "bi", "name": "Bislama" },
+    { "code": "bs", "name": "Bosnian" },
+    { "code": "br", "name": "Breton" },
+    { "code": "bg", "name": "Bulgarian" },
+    { "code": "my", "name": "Burmese" },
+    { "code": "ca", "name": "Catalan" },
+    { "code": "ch", "name": "Chamorro" },
+    { "code": "ce", "name": "Chechen" },
+    { "code": "ny", "name": "Chichewa" },
+    { "code": "zh", "name": "Chinese" },
+    { "code": "cu", "name": "Church Slavic" },
+    { "code": "cv", "name": "Chuvash" },
+    { "code": "kw", "name": "Cornish" },
+    { "code": "co", "name": "Corsican" },
+    { "code": "cr", "name": "Cree" },
+    { "code": "hr", "name": "Croatian" },
+    { "code": "cs", "name": "Czech" },
+    { "code": "da", "name": "Danish" },
+    { "code": "dv", "name": "Divehi" },
+    { "code": "nl", "name": "Dutch" },
+    { "code": "dz", "name": "Dzongkha" },
+    { "code": "en", "name": "English" },
+    { "code": "eo", "name": "Esperanto" },
+    { "code": "et", "name": "Estonian" },
+    { "code": "ee", "name": "Ewe" },
+    { "code": "fo", "name": "Faroese" },
+    { "code": "fj", "name": "Fijian" },
+    { "code": "fi", "name": "Finnish" },
+    { "code": "fr", "name": "French" },
+    { "code": "fy", "name": "West Frisian" },
+    { "code": "ff", "name": "Fulah" },
+    { "code": "gd", "name": "Scottish Gaelic" },
+    { "code": "gl", "name": "Galician" },
+    { "code": "lg", "name": "Ganda" },
+    { "code": "ka", "name": "Georgian" },
+    { "code": "de", "name": "German" },
+    { "code": "el", "name": "Greek" },
+    { "code": "kl", "name": "Kalaallisut" },
+    { "code": "gn", "name": "Guarani" },
+    { "code": "gu", "name": "Gujarati" },
+    { "code": "ht", "name": "Haitian Creole" },
+    { "code": "ha", "name": "Hausa" },
+    { "code": "he", "name": "Hebrew" },
+    { "code": "hz", "name": "Herero" },
+    { "code": "hi", "name": "Hindi" },
+    { "code": "ho", "name": "Hiri Motu" },
+    { "code": "hu", "name": "Hungarian" },
+    { "code": "is", "name": "Icelandic" },
+    { "code": "io", "name": "Ido" },
+    { "code": "ig", "name": "Igbo" },
+    { "code": "id", "name": "Indonesian" },
+    { "code": "ia", "name": "Interlingua" },
+    { "code": "ie", "name": "Interlingue" },
+    { "code": "iu", "name": "Inuktitut" },
+    { "code": "ik", "name": "Inupiaq" },
+    { "code": "ga", "name": "Irish" },
+    { "code": "it", "name": "Italian" },
+    { "code": "ja", "name": "Japanese" },
+    { "code": "jv", "name": "Javanese" },
+    { "code": "kn", "name": "Kannada" },
+    { "code": "kr", "name": "Kanuri" },
+    { "code": "ks", "name": "Kashmiri" },
+    { "code": "kk", "name": "Kazakh" },
+    { "code": "km", "name": "Khmer" },
+    { "code": "ki", "name": "Kikuyu" },
+    { "code": "rw", "name": "Kinyarwanda" },
+    { "code": "ky", "name": "Kirghiz" },
+    { "code": "kv", "name": "Komi" },
+    { "code": "kg", "name": "Kongo" },
+    { "code": "ko", "name": "Korean" },
+    { "code": "kj", "name": "Kuanyama" },
+    { "code": "ku", "name": "Kurdish" },
+    { "code": "lo", "name": "Lao" },
+    { "code": "la", "name": "Latin" },
+    { "code": "lv", "name": "Latvian" },
+    { "code": "li", "name": "Limburgish" },
+    { "code": "ln", "name": "Lingala" },
+    { "code": "lt", "name": "Lithuanian" },
+    { "code": "lu", "name": "Luba-Katanga" },
+    { "code": "lb", "name": "Luxembourgish" },
+    { "code": "mk", "name": "Macedonian" },
+    { "code": "mg", "name": "Malagasy" },
+    { "code": "ms", "name": "Malay" },
+    { "code": "ml", "name": "Malayalam" },
+    { "code": "mt", "name": "Maltese" },
+    { "code": "gv", "name": "Manx" },
+    { "code": "mi", "name": "Maori" },
+    { "code": "mr", "name": "Marathi" },
+    { "code": "mh", "name": "Marshallese" },
+    { "code": "mn", "name": "Mongolian" },
+    { "code": "na", "name": "Nauru" },
+    { "code": "nv", "name": "Navajo" },
+    { "code": "nd", "name": "North Ndebele" },
+    { "code": "nr", "name": "South Ndebele" },
+    { "code": "ng", "name": "Ndonga" },
+    { "code": "ne", "name": "Nepali" },
+    { "code": "no", "name": "Norwegian" },
+    { "code": "nb", "name": "Norwegian Bokmål" },
+    { "code": "nn", "name": "Norwegian Nynorsk" },
+    { "code": "oc", "name": "Occitan" },
+    { "code": "oj", "name": "Ojibwa" },
+    { "code": "or", "name": "Oriya" },
+    { "code": "om", "name": "Oromo" },
+    { "code": "os", "name": "Ossetic" },
+    { "code": "pi", "name": "Pali" },
+    { "code": "ps", "name": "Pashto" },
+    { "code": "fa", "name": "Persian" },
+    { "code": "pl", "name": "Polish" },
+    { "code": "pt", "name": "Portuguese" },
+    { "code": "pa", "name": "Punjabi" },
+    { "code": "qu", "name": "Quechua" },
+    { "code": "ro", "name": "Romanian" },
+    { "code": "rm", "name": "Romansh" },
+    { "code": "rn", "name": "Rundi" },
+    { "code": "ru", "name": "Russian" },
+    { "code": "se", "name": "North Sami" },
+    { "code": "sm", "name": "Samoan" },
+    { "code": "sg", "name": "Sango" },
+    { "code": "sa", "name": "Sanskrit" },
+    { "code": "sc", "name": "Sardinian" },
+    { "code": "sr", "name": "Serbian" },
+    { "code": "sn", "name": "Shona" },
+    { "code": "ii", "name": "Sichuan Yi" },
+    { "code": "sd", "name": "Sindhi" },
+    { "code": "si", "name": "Sinhala" },
+    { "code": "sk", "name": "Slovak" },
+    { "code": "sl", "name": "Slovenian" },
+    { "code": "so", "name": "Somali" },
+    { "code": "st", "name": "Southern Sotho" },
+    { "code": "es", "name": "Spanish" },
+    { "code": "su", "name": "Sundanese" },
+    { "code": "sw", "name": "Swahili" },
+    { "code": "ss", "name": "Swati" },
+    { "code": "sv", "name": "Swedish" },
+    { "code": "tl", "name": "Tagalog" },
+    { "code": "ty", "name": "Tahitian" },
+    { "code": "tg", "name": "Tajik" },
+    { "code": "ta", "name": "Tamil" },
+    { "code": "tt", "name": "Tatar" },
+    { "code": "te", "name": "Telugu" },
+    { "code": "th", "name": "Thai" },
+    { "code": "bo", "name": "Tibetan" },
+    { "code": "ti", "name": "Tigrinya" },
+    { "code": "to", "name": "Tonga" },
+    { "code": "ts", "name": "Tsonga" },
+    { "code": "tn", "name": "Tswana" },
+    { "code": "tr", "name": "Turkish" },
+    { "code": "tk", "name": "Turkmen" },
+    { "code": "tw", "name": "Twi" },
+    { "code": "ug", "name": "Uighur" },
+    { "code": "uk", "name": "Ukrainian" },
+    { "code": "ur", "name": "Urdu" },
+    { "code": "uz", "name": "Uzbek" },
+    { "code": "ve", "name": "Venda" },
+    { "code": "vi", "name": "Vietnamese" },
+    { "code": "vo", "name": "Volapük" },
+    { "code": "wa", "name": "Walloon" },
+    { "code": "cy", "name": "Welsh" },
+    { "code": "wo", "name": "Wolof" },
+    { "code": "xh", "name": "Xhosa" },
+    { "code": "yi", "name": "Yiddish" },
+    { "code": "yo", "name": "Yoruba" },
+    { "code": "za", "name": "Zhuang" },
+    { "code": "zu", "name": "Zulu" }
+  ],
+  "countries": [
+    { "code": "AF", "name": "Afghanistan" },
+    { "code": "AL", "name": "Albania" },
+    { "code": "DZ", "name": "Algeria" },
+    { "code": "AS", "name": "American Samoa" },
+    { "code": "AD", "name": "Andorra" },
+    { "code": "AO", "name": "Angola" },
+    { "code": "AI", "name": "Anguilla" },
+    { "code": "AQ", "name": "Antarctica" },
+    { "code": "AG", "name": "Antigua and Barbuda" },
+    { "code": "AR", "name": "Argentina" },
+    { "code": "AM", "name": "Armenia" },
+    { "code": "AW", "name": "Aruba" },
+    { "code": "AU", "name": "Australia" },
+    { "code": "AT", "name": "Austria" },
+    { "code": "AZ", "name": "Azerbaijan" },
+    { "code": "BS", "name": "Bahamas" },
+    { "code": "BH", "name": "Bahrain" },
+    { "code": "BD", "name": "Bangladesh" },
+    { "code": "BB", "name": "Barbados" },
+    { "code": "BY", "name": "Belarus" },
+    { "code": "BE", "name": "Belgium" },
+    { "code": "BZ", "name": "Belize" },
+    { "code": "BJ", "name": "Benin" },
+    { "code": "BM", "name": "Bermuda" },
+    { "code": "BT", "name": "Bhutan" },
+    { "code": "BO", "name": "Bolivia" },
+    { "code": "BA", "name": "Bosnia and Herzegovina" },
+    { "code": "BW", "name": "Botswana" },
+    { "code": "BR", "name": "Brazil" },
+    { "code": "IO", "name": "British Indian Ocean Territory" },
+    { "code": "VG", "name": "British Virgin Islands" },
+    { "code": "BN", "name": "Brunei" },
+    { "code": "BG", "name": "Bulgaria" },
+    { "code": "BF", "name": "Burkina Faso" },
+    { "code": "BI", "name": "Burundi" },
+    { "code": "KH", "name": "Cambodia" },
+    { "code": "CM", "name": "Cameroon" },
+    { "code": "CA", "name": "Canada" },
+    { "code": "CV", "name": "Cape Verde" },
+    { "code": "KY", "name": "Cayman Islands" },
+    { "code": "CF", "name": "Central African Republic" },
+    { "code": "TD", "name": "Chad" },
+    { "code": "CL", "name": "Chile" },
+    { "code": "CN", "name": "China" },
+    { "code": "CX", "name": "Christmas Island" },
+    { "code": "CC", "name": "Cocos (Keeling) Islands" },
+    { "code": "CO", "name": "Colombia" },
+    { "code": "KM", "name": "Comoros" },
+    { "code": "CG", "name": "Congo - Brazzaville" },
+    { "code": "CD", "name": "Congo - Kinshasa" },
+    { "code": "CK", "name": "Cook Islands" },
+    { "code": "CR", "name": "Costa Rica" },
+    { "code": "CI", "name": "Côte d’Ivoire" },
+    { "code": "HR", "name": "Croatia" },
+    { "code": "CU", "name": "Cuba" },
+    { "code": "CY", "name": "Cyprus" },
+    { "code": "CZ", "name": "Czechia" },
+    { "code": "DK", "name": "Denmark" },
+    { "code": "DJ", "name": "Djibouti" },
+    { "code": "DM", "name": "Dominica" },
+    { "code": "DO", "name": "Dominican Republic" },
+    { "code": "EC", "name": "Ecuador" },
+    { "code": "EG", "name": "Egypt" },
+    { "code": "SV", "name": "El Salvador" },
+    { "code": "GQ", "name": "Equatorial Guinea" },
+    { "code": "ER", "name": "Eritrea" },
+    { "code": "EE", "name": "Estonia" },
+    { "code": "SZ", "name": "Eswatini" },
+    { "code": "ET", "name": "Ethiopia" },
+    { "code": "FJ", "name": "Fiji" },
+    { "code": "FI", "name": "Finland" },
+    { "code": "FR", "name": "France" },
+    { "code": "GA", "name": "Gabon" },
+    { "code": "GM", "name": "Gambia" },
+    { "code": "GE", "name": "Georgia" },
+    { "code": "DE", "name": "Germany" },
+    { "code": "GH", "name": "Ghana" },
+    { "code": "GR", "name": "Greece" },
+    { "code": "GT", "name": "Guatemala" },
+    { "code": "GN", "name": "Guinea" },
+    { "code": "GY", "name": "Guyana" },
+    { "code": "HT", "name": "Haiti" },
+    { "code": "HN", "name": "Honduras" },
+    { "code": "HK", "name": "Hong Kong" },
+    { "code": "HU", "name": "Hungary" },
+    { "code": "IS", "name": "Iceland" },
+    { "code": "IN", "name": "India" },
+    { "code": "ID", "name": "Indonesia" },
+    { "code": "IR", "name": "Iran" },
+    { "code": "IQ", "name": "Iraq" },
+    { "code": "IE", "name": "Ireland" },
+    { "code": "IL", "name": "Israel" },
+    { "code": "IT", "name": "Italy" },
+    { "code": "JM", "name": "Jamaica" },
+    { "code": "JP", "name": "Japan" },
+    { "code": "JO", "name": "Jordan" },
+    { "code": "KZ", "name": "Kazakhstan" },
+    { "code": "KE", "name": "Kenya" },
+    { "code": "KR", "name": "South Korea" },
+    { "code": "KW", "name": "Kuwait" },
+    { "code": "KG", "name": "Kyrgyzstan" },
+    { "code": "LA", "name": "Laos" },
+    { "code": "LV", "name": "Latvia" },
+    { "code": "LB", "name": "Lebanon" },
+    { "code": "LS", "name": "Lesotho" },
+    { "code": "LR", "name": "Liberia" },
+    { "code": "LY", "name": "Libya" },
+    { "code": "LI", "name": "Liechtenstein" },
+    { "code": "LT", "name": "Lithuania" },
+    { "code": "LU", "name": "Luxembourg" },
+    { "code": "MG", "name": "Madagascar" },
+    { "code": "MW", "name": "Malawi" },
+    { "code": "MY", "name": "Malaysia" },
+    { "code": "MV", "name": "Maldives" },
+    { "code": "ML", "name": "Mali" },
+    { "code": "MT", "name": "Malta" },
+    { "code": "MX", "name": "Mexico" },
+    { "code": "MD", "name": "Moldova" },
+    { "code": "MC", "name": "Monaco" },
+    { "code": "MN", "name": "Mongolia" },
+    { "code": "ME", "name": "Montenegro" },
+    { "code": "MA", "name": "Morocco" },
+    { "code": "MZ", "name": "Mozambique" },
+    { "code": "MM", "name": "Myanmar" },
+    { "code": "NA", "name": "Namibia" },
+    { "code": "NP", "name": "Nepal" },
+    { "code": "NL", "name": "Netherlands" },
+    { "code": "NZ", "name": "New Zealand" },
+    { "code": "NI", "name": "Nicaragua" },
+    { "code": "NE", "name": "Niger" },
+    { "code": "NG", "name": "Nigeria" },
+    { "code": "MK", "name": "North Macedonia" },
+    { "code": "NO", "name": "Norway" },
+    { "code": "OM", "name": "Oman" },
+    { "code": "PK", "name": "Pakistan" },
+    { "code": "PA", "name": "Panama" },
+    { "code": "PG", "name": "Papua New Guinea" },
+    { "code": "PY", "name": "Paraguay" },
+    { "code": "PE", "name": "Peru" },
+    { "code": "PH", "name": "Philippines" },
+    { "code": "PL", "name": "Poland" },
+    { "code": "PT", "name": "Portugal" },
+    { "code": "QA", "name": "Qatar" },
+    { "code": "RO", "name": "Romania" },
+    { "code": "RU", "name": "Russia" },
+    { "code": "RW", "name": "Rwanda" },
+    { "code": "SA", "name": "Saudi Arabia" },
+    { "code": "SN", "name": "Senegal" },
+    { "code": "RS", "name": "Serbia" },
+    { "code": "SG", "name": "Singapore" },
+    { "code": "SK", "name": "Slovakia" },
+    { "code": "SI", "name": "Slovenia" },
+    { "code": "ZA", "name": "South Africa" },
+    { "code": "ES", "name": "Spain" },
+    { "code": "LK", "name": "Sri Lanka" },
+    { "code": "SE", "name": "Sweden" },
+    { "code": "CH", "name": "Switzerland" },
+    { "code": "TW", "name": "Taiwan" },
+    { "code": "TH", "name": "Thailand" },
+    { "code": "TR", "name": "Turkey" },
+    { "code": "UG", "name": "Uganda" },
+    { "code": "UA", "name": "Ukraine" },
+    { "code": "AE", "name": "United Arab Emirates" },
+    { "code": "GB", "name": "United Kingdom" },
+    { "code": "US", "name": "United States" },
+    { "code": "UY", "name": "Uruguay" },
+    { "code": "UZ", "name": "Uzbekistan" },
+    { "code": "VE", "name": "Venezuela" },
+    { "code": "VN", "name": "Vietnam" },
+    { "code": "YE", "name": "Yemen" },
+    { "code": "ZM", "name": "Zambia" },
+    { "code": "ZW", "name": "Zimbabwe" }
+  ]
 }

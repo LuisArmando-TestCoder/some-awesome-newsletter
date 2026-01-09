@@ -2,19 +2,19 @@ export default {
   "auth": {
     "logo": "/icons/logo.png",
     "login": {
-      "title": "뉴스레터 오케스트레이터에 로그인하세요",
-      "subtitle": "중단한 부분부터 계속하려면 연결하세요.",
+      "title": "뉴스레터 오케스트레이터 로그인",
+      "subtitle": "로그인하여 중단한 부분부터 다시 시작하세요.",
       "google": "Google 계정으로 계속하기",
       "or": "또는",
       "emailPlaceholder": "you@example.com",
       "continueWithEmail": "이메일로 계속하기",
       "switchText": "계정이 없으신가요?",
-      "switchLink": "가입하기",
+      "switchLink": "회원가입",
       "switchHref": "/signup"
     },
     "signup": {
-      "title": "계정을 만드세요",
-      "subtitle": "신용카드가 필요 없습니다.",
+      "title": "계정 만들기",
+      "subtitle": "신용카드가 필요하지 않습니다.",
       "google": "Google 계정으로 계속하기",
       "or": "또는",
       "emailPlaceholder": "you@example.com",
@@ -25,8 +25,8 @@ export default {
     }
   },
   "mainContent": {
-    "title": "AI 뉴스레터 생성기: 맞춤형 콘텐츠, 전달.",
-    "metaDescription": "AI로 맞춤형 뉴스레터를 생성하세요. 모든 뉴스 소스를 구독자를 위한 맞춤형 기사로 변환하여 그들의 언어와 브랜드의 목소리로 전달하세요.",
+    "title": "AI 뉴스레터 생성기: 맞춤형 콘텐츠 전달 시스템",
+    "metaDescription": "AI로 맞춤형 뉴스레터를 생성하세요. 모든 뉴스 소스를 구독자 맞춤형 기사로 변환하여 구독자의 언어와 브랜드 보이스로 전달합니다.",
     "ogImageUrl": "https://images.pexels.com/photos/261599/pexels-photo-261599.jpeg",
     "canonicalUrl": "https://example.com/ai-newsletter-generator",
     "organization": {
@@ -36,21 +36,21 @@ export default {
     },
     "product": {
       "name": "AI 뉴스레터 생성기",
-      "description": "맞춤형 AI 기반 뉴스레터를 만들기 위한 최고의 플랫폼입니다."
+      "description": "개인화된 AI 기반 뉴스레터 제작을 위한 최적의 플랫폼입니다."
     },
     "announcement": {
-      "text": "베타 출시: 지금 가입하고 첫 3개월 동안 50% 할인 받으세요!",
+      "text": "베타 출시: 지금 가입하고 연간 요금제 35% 할인을 받으세요!",
       "cta": "시작하기"
     },
     "hero": {
-      "hook": "AI 기반 뉴스레터, 손쉽게.",
-      "subHook": "모든 뉴스 소스를 구독자를 위한 맞춤형 기사로 변환하여 그들의 언어와 브랜드의 목소리로 전달하세요.",
+      "hook": "AI 기반 뉴스레터, 이제 손쉽게 만드세요.",
+      "subHook": "어떤 뉴스 소스든 구독자를 위한 맞춤형 기사로 변환합니다. 구독자의 언어와 당신의 브랜드 가치를 그대로 담아냅니다.",
       "primaryCta": "무료로 시작하기",
       "secondaryCta": "데모 보기",
       "trustCues": [
-        "신용카드가 필요 없습니다",
-        "14일 무료 평가판",
-        "언제든지 취소 가능"
+        "신용카드 정보 필요 없음",
+        "최대 100명까지 무료",
+        "언제든 취소 가능"
       ]
     },
     "socialProof": {
@@ -61,182 +61,760 @@ export default {
         { "name": "Apex Solutions", "src": "/logos/logo_4.png" },
         { "name": "Momentum Co.", "src": "/logos/logo_5.png" }
       ],
-      "counts": "전 세계 10,000개 이상의 팀이 신뢰합니다"
+      "counts": "전 세계 10,000개 이상의 팀이 신뢰하고 있습니다"
     },
     "valueProps": {
-      "title": "뉴스레터의 미래가 여기에 있습니다",
-      "subTitle": "AI 기반 콘텐츠로 청중과 직접 소통하여 이전과는 다른 방식으로 참여를 유도하세요.",
+      "title": "뉴스레터의 미래가 여기 있습니다",
+      "subTitle": "독자에게 직접 말을 거는 듯한 AI 기반 콘텐츠로 이전과는 다른 고객 참여를 경험하세요.",
       "props": [
         {
-          "title": "초개인화",
-          "description": "저희 AI는 귀하의 웹사이트를 분석하여 청중을 이해하고 그들의 관심사와 언어에 맞게 기사를 자동으로 맞춤화합니다."
+          "title": "초개인화 기술",
+          "description": "AI가 귀하의 웹사이트를 분석하여 잠재 고객을 이해하고, 관심사와 언어에 맞게 기사를 자동으로 구성합니다."
         },
         {
-          "title": "자동화된 콘텐츠 제작",
-          "description": "매일, 매주 또는 매월 일정을 설정하고 저희 AI가 귀하를 위해 기사를 선택, 작성 및 번역하도록 하세요."
+          "title": "자동화된 콘텐츠 생성",
+          "description": "일간, 주간, 월간 일정을 설정하면 AI가 기사를 선택, 작성 및 번역까지 모두 처리합니다."
         },
         {
-          "title": "귀하의 브랜드, 귀하의 목소리",
-          "description": "AI는 귀하의 웹사이트나 맞춤형 입력에서 브랜드의 개성을 학습하여 모든 뉴스레터가 귀하가 직접 쓴 것처럼 들리도록 합니다."
+          "title": "당신의 브랜드, 당신의 목소리",
+          "description": "AI가 웹사이트나 입력 정보를 통해 브랜드의 개성을 학습하여, 모든 뉴스레터가 마치 직접 쓴 것처럼 느껴지게 합니다."
         }
       ]
     },
     "features": {
       "title": "최대 효과를 위한 고급 기능",
-      "subTitle": "단순한 뉴스레터를 넘어 강력한 마케팅 채널을 만드세요.",
+      "subTitle": "단순한 뉴스레터를 넘어 강력한 마케팅 채널을 구축하세요.",
       "featureList": [
         {
-          "title": "지능적인 기사 선택",
-          "description": "저희 AI는 뉴스 소스를 스캔하고 타겟 청중 분석을 기반으로 가장 관련성 높은 기사를 선택하여 높은 참여를 보장합니다.",
+          "title": "지능형 기사 선택",
+          "description": "AI가 뉴스 소스를 스캔하고 타겟 독자 분석 결과에 따라 가장 관련성 높은 기사를 선정합니다.",
           "image": "https://images.pexels.com/photos/3760067/pexels-photo-3760067.jpeg",
-          "cta": "더 알아보기"
+          "cta": "자세히 알아보기"
         },
         {
-          "title": "원활한 언어 번역",
-          "description": "구독자의 모국어로 기사를 자동으로 번역하여 전 세계 청중에게 다가가고 의사소통 장벽을 허무세요.",
+          "title": "원활한 다국어 번역",
+          "description": "기사를 구독자의 모국어로 자동 번역하여 전 세계 독자에게 다가갈 수 있습니다.",
           "image": "https://images.pexels.com/photos/207756/pexels-photo-207756.jpeg",
-          "cta": "더 알아보기"
+          "cta": "자세히 알아보기"
         },
         {
           "title": "리드 추적 및 분석",
-          "description": "회사 링크에 리드 추적기를 포함하여 참여를 모니터링하고 내장된 카운터로 캠페인의 성공을 측정하세요.",
+          "description": "회사 링크에 리드 트래커를 심어 독자 참여도를 모니터링하고 캠페인 성과를 측정하세요.",
           "image": "https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg",
-          "cta": "더 알아보기"
+          "cta": "자세히 알아보기"
         }
       ]
     },
     "howItWorks": {
-      "title": "3가지 간단한 단계로 시작하기",
+      "title": "단 3단계로 시작하는 간단한 프로세스",
       "steps": [
         {
           "step": 1,
-          "title": "뉴스 소스 연결하기",
-          "description": "모든 뉴스 소스를 연결하면 저희 AI가 관련 콘텐츠를 분석하기 시작합니다."
+          "title": "뉴스 소스 연결",
+          "description": "모든 뉴스 소스를 연결하면 AI가 관련 콘텐츠 분석을 시작합니다."
         },
         {
           "step": 2,
-          "title": "목소리 정의하기",
-          "description": "저희 AI가 귀하의 웹사이트에서 브랜드의 개성을 학습하거나 맞춤형 설명을 제공하도록 하세요."
+          "title": "브랜드 보이스 정의",
+          "description": "AI가 웹사이트에서 브랜드 성격을 학습하게 하거나 직접 커스텀 설명을 제공하세요."
         },
         {
           "step": 3,
-          "title": "뉴스레터 시작하기",
-          "description": "일정을 설정하고 맞춤형 다국어 뉴스레터가 구독자에게 자동으로 전송되는 것을 지켜보세요."
+          "title": "뉴스레터 발행",
+          "description": "일정을 설정하면 개인화된 다국어 뉴스레터가 구독자들에게 자동으로 전송됩니다."
         }
       ]
     },
     "personas": {
-      "title": "귀하의 비즈니스에 완벽합니다",
-      "subTitle": "스타트업부터 대기업까지, 저희 도구는 귀하의 성장을 돕기 위해 설계되었습니다.",
+      "title": "귀하의 비즈니스에 최적화된 솔루션",
+      "subTitle": "스타트업부터 대기업까지, 성장을 돕기 위해 설계되었습니다.",
       "personaList": [
         {
-          "persona": "콘텐츠 제작자",
-          "problem": "청중을 위해 콘텐츠를 큐레이팅하고 작성하는 데 몇 시간을 소비합니다.",
-          "outcome": "콘텐츠 제작 프로세스를 자동화하고 커뮤니티 성장에 집중하세요."
+          "persona": "콘텐츠 크리에이터",
+          "problem": "독자를 위한 콘텐츠 큐레이션과 작성에 많은 시간을 소비하고 있습니다.",
+          "outcome": "콘텐츠 생성 과정을 자동화하고 커뮤니티 성장에 더 집중하세요."
         },
         {
           "persona": "마케팅 팀",
-          "problem": "전 세계 청중에게 공감을 불러일으키는 맞춤형 콘텐츠를 만드는 데 어려움을 겪고 있습니다.",
-          "outcome": "초개인화된 다국어 뉴스레터로 참여와 전환을 늘리세요."
+          "problem": "글로벌 독자를 위한 맞춤형 콘텐츠 제작에 어려움을 겪고 있습니다.",
+          "outcome": "초개인화된 뉴스레터로 참여율과 전환율을 높이세요."
         },
         {
-          "persona": "기업",
-          "problem": "일관되고 매력적인 뉴스레터를 만들 자원이 부족합니다.",
-          "outcome": "최소한의 노력으로 트래픽과 매출을 유도하는 강력한 마케팅 채널을 구축하세요."
+          "persona": "일반 기업",
+          "problem": "일관성 있고 매력적인 뉴스레터를 제작할 리소스가 부족합니다.",
+          "outcome": "최소한의 노력으로 트래픽을 유도하는 강력한 마케팅 채널을 구축하세요."
         }
       ]
     },
     "metrics": {
-      "title": "데이터로 뒷받침되는 실제 결과",
+      "title": "데이터로 입증된 실제 결과",
       "metricList": [
-        {
-          "value": "90%",
-          "label": "콘텐츠 제작 시간 단축",
-          "proof": "베타 사용자 피드백 기준."
-        },
-        {
-          "value": "2x",
-          "label": "구독자 참여 증가",
-          "proof": "베타 사용자와의 A/B 테스트에서 관찰됨."
-        },
-        {
-          "value": "5x",
-          "label": "더 빠른 콘텐츠 전달",
-          "proof": "수동 뉴스레터 제작과 비교."
-        }
+        { "value": "90%", "label": "제작 시간 단축", "proof": "베타 사용자 피드백 기준." },
+        { "value": "2x", "label": "참여도 증가", "proof": "A/B 테스트 결과 기준." },
+        { "value": "5x", "label": "콘텐츠 전달 속도 향상", "proof": "수동 제작 대비 수치." }
       ]
     },
     "testimonials": {
       "title": "고객 후기",
       "testimonialList": [
         {
-          "quote": "AI 뉴스레터 생성기는 저희 콘텐츠 전략에 획기적인 변화를 가져왔습니다. 이제 저희는 전 세계 청중에게 공감을 불러일으키는 맞춤형 콘텐츠를 제공할 수 있습니다.",
-          "name": "알렉스 첸",
-          "title": "성장 책임자, 글로벌 테크 Inc."
+          "quote": "AI 뉴스레터 생성기는 우리 사업의 게임 체인저입니다. 이제 전 세계 독자들에게 공감을 불러일으키는 콘텐츠를 제공할 수 있게 되었습니다.",
+          "name": "Alex Chen",
+          "title": "Head of Growth, Global Tech Inc."
         },
         {
-          "quote": "처음에는 회의적이었지만 AI가 생성한 콘텐츠는 놀라울 정도로 잘 작성되었고 브랜드와 일치합니다. 저희 구독자들이 좋아합니다!",
-          "name": "사만다 존스",
-          "title": "창립자, 더 콘텐츠 코너"
-        },
-        {
-          "quote": "저희가 절약한 시간은 엄청납니다. 이제 AI가 뉴스레터를 처리하는 동안 저희는 비즈니스의 다른 영역에 집중할 수 있습니다.",
-          "name": "데이비드 로드리게스",
-          "title": "CEO, 스타트업 솔루션즈"
+          "quote": "처음에는 회의적이었지만, AI가 생성한 콘텐츠의 품질이 놀라울 정도로 훌륭합니다. 구독자분들이 정말 좋아하세요!",
+          "name": "Samantha Jones",
+          "title": "Founder, The Content Corner"
         }
       ]
     },
     "pricing": {
-      "teaser": "모든 비즈니스를 위한 저렴한 요금제",
-      "subTitle": "저희 요금제는 귀하와 함께 성장하도록 설계되었습니다.",
-      "plan": "월 $9부터 시작",
-      "cta": "가격 보기"
+      "teaser": "모든 비즈니스를 위한 합리적인 요금제",
+      "subTitle": "귀하의 성장 단계에 맞춰 선택할 수 있는 요금제입니다.",
+      "plan": "월 $17부터 시작",
+      "cta": "요금제 확인하기"
     },
     "finalCta": {
-      "hook": "뉴스레터를 혁신할 준비가 되셨나요?",
-      "cta": "오늘 무료 평가판을 시작하세요"
+      "hook": "뉴스레터 운영의 혁신을 시작할 준비가 되셨나요?",
+      "cta": "오늘 무료 체험을 시작하세요"
     },
     "footer": {
-      "copyright": "© 2025 AI Newsletter, Inc. 모든 권리 보유.",
+      "copyright": "© 2026 AI Newsletter, Inc. All rights reserved.",
       "companyLinks": {
-        "title": "회사",
+        "title": "회사 정보",
         "links": [
           { "text": "회사 소개", "href": "/about" },
-          { "text": "채용", "href": "/careers" },
+          { "text": "채용 정보", "href": "/careers" },
           { "text": "블로그", "href": "https://github.com/LuisArmando-TestCoder/scientia/tree/master/proposiciones" }
         ]
       },
       "legalLinks": {
-        "title": "법률",
+        "title": "법적 고지",
         "links": [
           { "text": "개인정보 처리방침", "href": "/legal/privacy" },
-          { "text": "서비스 약관", "href": "/legal/terms" },
+          { "text": "이용 약관", "href": "/legal/terms" },
           { "text": "쿠키 정책", "href": "/legal/cookies" }
         ]
       },
       "contact": "support@ainewsletter.com"
     }
   },
+  "help": {
+    "title": "제한도 상향 요청",
+    "subtitle": "종량제 요금제로 전환하거나 성장에 맞춰 할당량을 늘리세요.",
+    "contact": {
+      "cta": "상향 요청 제출",
+      "successTitle": "요청이 접수되었습니다",
+      "successBody": "저희 팀에서 곧 연락드리겠습니다.",
+      "learnMore": "/plans"
+    },
+    "questions": {
+      "desiredLimitsHelp": "필요한 제한도(예: 100만 명 사용자)를 알려주세요.",
+      "useCaseHelp": "작업 부하와 트래픽 패턴을 설명해 주세요.",
+      "expectedSpendHelp": "예상 지출액을 알려주시면 최적의 가격을 제안해 드립니다(선택 사항)."
+    },
+    "faqs": [
+      {
+        "id": "limits-how",
+        "q": "제한도 상향은 어떻게 진행되나요?",
+        "a": "승인 즉시 더 큰 할당량을 잠금 해제해 드립니다. 결제는 고정 요금 또는 종량제 방식으로 가능합니다."
+      }
+    ],
+    "links": {
+      "docs": "/plans",
+      "community": "/help"
+    }
+  },
+  "faq": [
+    {
+      "q": "무료 체험이 있나요?",
+      "a": "네! 기술 테스트를 위해 사용자 100명까지 제한된 무료 요금제로 시작하실 수 있습니다."
+    },
+    {
+      "q": "언제든지 취소할 수 있나요?",
+      "a": "네, 계정 대시보드에서 언제든지 구독을 취소하실 수 있습니다."
+    }
+  ],
+  "plans": {
+    "currency": "USD",
+    "billingIntervals": ["월간", "연간"],
+    "currentPlan": "free",
+    "plans": [
+      {
+        "id": "free",
+        "name": "Free",
+        "monthly": 0,
+        "yearly": 0,
+        "tagline": "기술 테스트용",
+        "featuresBase": ["뉴스 소스 1개", "최대 100명 사용자"],
+        "featuresDelta": [],
+        "limits": { "newsSources": 1, "users": 100 },
+        "ctaLabel": "현재 요금제",
+        "tier": 0
+      },
+      {
+        "id": "starter",
+        "name": "Starter",
+        "monthly": 17,
+        "yearly": 132,
+        "tagline": "성장 중인 뉴스레터 대상",
+        "featuresBase": ["뉴스 소스 5개", "최대 10만 명 사용자"],
+        "featuresDelta": ["이메일 지원", "기본 번역"],
+        "limits": { "newsSources": 5, "users": 100000 },
+        "ctaLabel": "Starter 선택",
+        "productId": "prod_starter_id",
+        "tier": 1
+      },
+      {
+        "id": "growth",
+        "name": "Growth",
+        "monthly": 35,
+        "yearly": 273,
+        "tagline": "성능과 비용의 완벽한 조화",
+        "featuresBase": ["뉴스 소스 17개", "최대 25만 명 사용자"],
+        "featuresDelta": ["커스텀 브랜딩", "고급 분석"],
+        "limits": { "newsSources": 17, "users": 250000 },
+        "ctaLabel": "Growth 선택",
+        "productId": "prod_growth_id",
+        "tier": 2
+      },
+      {
+        "id": "pro",
+        "name": "Pro",
+        "monthly": 80,
+        "yearly": 624,
+        "tagline": "전문 마케터용",
+        "featuresBase": ["뉴스 소스 25개", "최대 50만 명 사용자"],
+        "featuresDelta": ["API 액세스", "우선 처리 지원"],
+        "limits": { "newsSources": 25, "users": 500000 },
+        "ctaLabel": "Pro 선택",
+        "productId": "prod_pro_id",
+        "tier": 3
+      },
+      {
+        "id": "master",
+        "name": "Master",
+        "monthly": 150,
+        "yearly": 1170,
+        "tagline": "무제한 확장성",
+        "featuresBase": ["뉴스 소스 50개", "사용자 무제한"],
+        "featuresDelta": ["밀착형 케어 서비스", "커스텀 웹훅"],
+        "limits": { "newsSources": 50, "users": -1 },
+        "ctaLabel": "Master 선택",
+        "productId": "prod_master_id",
+        "tier": 4
+      },
+      {
+        "id": "vipfree",
+        "name": "VIP Free",
+        "monthly": 0,
+        "yearly": 0,
+        "tagline": "파트너 전용 전체 액세스",
+        "featuresBase": ["뉴스 소스 무제한", "사용자 무제한"],
+        "featuresDelta": [],
+        "limits": { "newsSources": -1, "users": -1 },
+        "ctaLabel": "현재 요금제",
+        "internalOnly": true,
+        "tier": 5
+      }
+    ],
+    "contact": {
+      "text": "커스텀 솔루션이 필요하신가요?",
+      "cta": "문의하기",
+      "href": "/help"
+    }
+  },
+  "article": {
+    "notFound": "기사를 찾을 수 없습니다.",
+    "errorFetching": "기사를 불러오는 중 오류가 발생했습니다.",
+    "noArticleSpecified": "지정된 기사가 없습니다.",
+    "goBack": "뒤로 가기",
+    "loading": "로딩 중..."
+  },
+  "pricing": {
+    "eyebrow": "요금제",
+    "title": "유연한 선택",
+    "currentPlan": "현재 요금제:",
+    "monthly": "월간",
+    "yearly": "연간 (35% 절약)",
+    "everythingIn": "이전 요금제 모든 기능 포함:",
+    "isCurrentPlan": "현재 이용 중인 요금제입니다",
+    "downgradeTo": "{planName} 요금제로 변경(다운그레이드)",
+    "upgradeTo": "{planName} 요금제로 변경(업그레이드)",
+    "mockMode": "테스트 모드 활성화됨",
+    "mostPopular": "인기",
+    "perMonth": "/월",
+    "perYear": "/연",
+    "youSave": "절약 금액"
+  },
+  "confirmSubscription": {
+    "title": "구독 확인",
+    "goBack": "뒤로 가기",
+    "pleaseAccept": "구독을 완료하려면 약관에 동의해 주세요.",
+    "iAccept": "동의함:",
+    "termsAndConditions": "이용 약관",
+    "and": "및",
+    "privacyPolicy": "개인정보 처리방침",
+    "confirm": "구독 확정",
+    "mustAccept": "구독을 위해서는 약관 동의가 필요합니다.",
+    "invalidLink": "유효하지 않은 확인 링크입니다."
+  },
+  "articles": {
+    "title": "최신 인사이트",
+    "subtitle": "엄선된 기사와 뉴스 컬렉션을 살펴보세요.",
+    "producedIn": "다음과 같은 언어들로 뉴스를 제작했습니다",
+    "searchPlaceholder": "기사 검색...",
+    "noArticlesFound": "기사가 없습니다.",
+    "created": "작성일:",
+    "language": "언어:",
+    "rightsReserved": "All Rights Reserved.",
+    "errorFetching": "기사를 불러오는 중 오류가 발생했습니다."
+  },
+  "mainPage": {
+    "skipToMainContent": "본문으로 건너뛰기",
+    "dismissAnnouncement": "공지 닫기",
+    "problem": "문제점:",
+    "outcome": "해결 결과:",
+    "disclaimer": "35% 할인은 연간 결제 시에만 적용됩니다."
+  },
+  "authForm": {
+    "emailValidation": "유효한 이메일을 입력해 주세요.",
+    "failedToSendCode": "코드 전송에 실패했습니다. 다시 시도해 주세요.",
+    "sending": "전송 중...",
+    "codeSent": "이메일로 코드가 전송되었습니다",
+    "invalidCode": "잘못된 코드입니다",
+    "regenerateCode": "코드 재전송",
+    "back": "← 뒤로",
+    "byProceeding": "계속 진행하면 다음에 동의하게 됩니다:",
+    "termsOfService": "서비스 이용 약관",
+    "and": "및",
+    "privacyPolicy": "개인정보 처리방침",
+    "appName": "AI 뉴스레터"
+  },
   "welcome": {
     "title": "자동 뉴스레터 생성기",
-    "setItOnce": "한 번 설정하면...",
-    "useItForever": "...영원히 사용하세요."
+    "setItOnce": "한 번만 설정하면...",
+    "useItForever": "...영구적으로 자동화됩니다."
   },
   "lead": {
-    "title": "고객이 뉴스레터에서 귀하의 웹사이트로 이동하도록 하려면",
-    "recommendation": "이것은 매우 권장됩니다. AI가 뉴스레터의 맥락을 더 잘 이해하고 더 관련성 높은 기사를 생성하는 데 도움이 됩니다.",
-    "question": "웹사이트가 있으신가요? (선택 사항)",
-    "placeholder": "귀하의 웹사이트 링크"
+    "title": "구독자를 방문자로 전환하세요",
+    "recommendation": "웹사이트를 연결하여 AI가 귀하의 브랜드를 더 잘 이해하도록 도와주세요.",
+    "question": "연결할 웹사이트가 있으신가요? (선택 사항)",
+    "placeholder": "https://your-site.com"
   },
   "newsSource": {
-    "title": "블로그나 뉴스 피드를 사용하려면 링크를 입력해야 합니다",
-    "subtitle": "피드에서 콘텐츠를 생성하므로 처음부터 뉴스레터를 만들 필요가 없습니다",
-    "placeholder": "뉴스 사이트 또는 블로그 링크"
+    "title": "콘텐츠 소스 연결",
+    "subtitle": "피드를 가져오므로 처음부터 작성할 필요가 없습니다.",
+    "placeholder": "블로그 또는 RSS 링크"
   },
   "subscribe": {
     "welcome": {
-      "title": "뉴스레터에 오신 것을 환영합니다.",
-      "invitedBy": "{configuratorId}님이 초대했습니다."
+      "title": "뉴스레터 구독을 환영합니다.",
+      "invitedBy": "{configuratorId} 님으로부터 초대받으셨습니다."
     }
-  }
+  },
+  "header": {
+    "goToWorkspace": "워크스페이스로 이동",
+    "inBilling": "결제 정보",
+    "vip": "VIP",
+    "plan": "{planName} 요금제",
+    "logIn": "로그인",
+    "getStarted": "시작하기"
+  },
+  "fileInput": {
+    "chooseFile": "파일 선택",
+    "dropFile": "여기에 놓기",
+    "release": "업로드를 위해 놓기"
+  },
+  "imageInput": {
+    "unsupportedFileType": "지원되지 않는 파일 형식입니다. PNG, JPEG, WebP를 사용해 주세요.",
+    "dropImage": "이미지 놓기",
+    "dragDrop": "드래그 앤 드롭",
+    "browse": "또는 파일 찾아보기",
+    "selectImage": "선택",
+    "preview": "미리보기",
+    "removeImage": "삭제"
+  },
+  "billing": {
+    "title": "결제 및 구독",
+    "currentPlanTitle": "현재 요금제",
+    "upgradePlanTitle": "요금제 변경",
+    "manageSubscription": "구독 관리",
+    "vipPlanName": "VIP 파트너",
+    "vipPlanDescription": "AI 뉴스레터에서 제공하는 무제한 액세스 권한입니다.",
+    "perMonth": "월간 요금",
+    "perYear": "연간 요금",
+    "monthAbbreviation": "월",
+    "equivalentTo": "에 해당",
+    "mostPopular": "인기",
+    "upgradeTo": "업그레이드:",
+    "downgradeTo": "변경:",
+    "currentPlanButton": "현재 요금제",
+    "youSave": "절약 금액",
+    "users": "명 사용자",
+    "newsSources": "개 뉴스 소스",
+    "monthly": "월간 결제",
+    "yearly": "연간 결제",
+    "loadingPlan": "요금제 데이터를 불러오는 중..."
+  },
+  "languages": [
+    { "code": "ab", "name": "압하스어" },
+    { "code": "aa", "name": "아파르어" },
+    { "code": "af", "name": "아프리칸스어" },
+    { "code": "ak", "name": "아칸어" },
+    { "code": "sq", "name": "알바니아어" },
+    { "code": "am", "name": "암하라어" },
+    { "code": "ar", "name": "아랍어" },
+    { "code": "an", "name": "아라곤어" },
+    { "code": "hy", "name": "아르메니아어" },
+    { "code": "as", "name": "아삼어" },
+    { "code": "av", "name": "아바르어" },
+    { "code": "ae", "name": "아베스타어" },
+    { "code": "ay", "name": "아이마라어" },
+    { "code": "az", "name": "아제르바이잔어" },
+    { "code": "bm", "name": "밤바라어" },
+    { "code": "ba", "name": "바시키르어" },
+    { "code": "eu", "name": "바스크어" },
+    { "code": "be", "name": "벨라루스어" },
+    { "code": "bn", "name": "뱅골어" },
+    { "code": "bi", "name": "비스라마어" },
+    { "code": "bs", "name": "보스니아어" },
+    { "code": "br", "name": "브르타뉴어" },
+    { "code": "bg", "name": "불가리아어" },
+    { "code": "my", "name": "미얀마어" },
+    { "code": "ca", "name": "카탈루냐어" },
+    { "code": "ch", "name": "차모로어" },
+    { "code": "ce", "name": "체첸어" },
+    { "code": "ny", "name": "치체와어" },
+    { "code": "zh", "name": "중국어" },
+    { "code": "cu", "name": "교회 슬라브어" },
+    { "code": "cv", "name": "추바시어" },
+    { "code": "kw", "name": "콘월어" },
+    { "code": "co", "name": "코르시카어" },
+    { "code": "cr", "name": "크리어" },
+    { "code": "hr", "name": "크로아티아어" },
+    { "code": "cs", "name": "체코어" },
+    { "code": "da", "name": "덴마크어" },
+    { "code": "dv", "name": "디베히어" },
+    { "code": "nl", "name": "네덜란드어" },
+    { "code": "dz", "name": "종카어" },
+    { "code": "en", "name": "영어" },
+    { "code": "eo", "name": "에스페란토어" },
+    { "code": "et", "name": "에스토니아어" },
+    { "code": "ee", "name": "에웨어" },
+    { "code": "fo", "name": "페로어" },
+    { "code": "fj", "name": "피지어" },
+    { "code": "fi", "name": "핀란드어" },
+    { "code": "fr", "name": "프랑스어" },
+    { "code": "fy", "name": "서프리슬란드어" },
+    { "code": "ff", "name": "풀라어" },
+    { "code": "gd", "name": "스코트 게일어" },
+    { "code": "gl", "name": "갈리시아어" },
+    { "code": "lg", "name": "간다어" },
+    { "code": "ka", "name": "조지아어" },
+    { "code": "de", "name": "독일어" },
+    { "code": "el", "name": "그리스어" },
+    { "code": "kl", "name": "그린란드어" },
+    { "code": "gn", "name": "과라니어" },
+    { "code": "gu", "name": "구자라트어" },
+    { "code": "ht", "name": "아이티 크리올어" },
+    { "code": "ha", "name": "하우사어" },
+    { "code": "he", "name": "히브리어" },
+    { "code": "hz", "name": "헤레로어" },
+    { "code": "hi", "name": "힌디어" },
+    { "code": "ho", "name": "히리 모투어" },
+    { "code": "hu", "name": "헝가리어" },
+    { "code": "is", "name": "아이슬란드어" },
+    { "code": "io", "name": "이도어" },
+    { "code": "ig", "name": "이보어" },
+    { "code": "id", "name": "인도네시아어" },
+    { "code": "ia", "name": "인테르링구아" },
+    { "code": "ie", "name": "인테르링구에" },
+    { "code": "iu", "name": "이누이트어" },
+    { "code": "ik", "name": "이누피아크어" },
+    { "code": "ga", "name": "아일랜드어" },
+    { "code": "it", "name": "이탈리아어" },
+    { "code": "ja", "name": "일본어" },
+    { "code": "jv", "name": "자바어" },
+    { "code": "kn", "name": "칸나다어" },
+    { "code": "kr", "name": "카누리어" },
+    { "code": "ks", "name": "카슈미르어" },
+    { "code": "kk", "name": "카자흐어" },
+    { "code": "km", "name": "크메르어" },
+    { "code": "ki", "name": "키쿠유어" },
+    { "code": "rw", "name": "키냐르완다어" },
+    { "code": "ky", "name": "키르기스어" },
+    { "code": "kv", "name": "코미어" },
+    { "code": "kg", "name": "콩고어" },
+    { "code": "ko", "name": "한국어" },
+    { "code": "kj", "name": "쿠아냐마어" },
+    { "code": "ku", "name": "쿠르드어" },
+    { "code": "lo", "name": "라오어" },
+    { "code": "la", "name": "라틴어" },
+    { "code": "lv", "name": "라트비아어" },
+    { "code": "li", "name": "림뷔르흐어" },
+    { "code": "ln", "name": "링갈라어" },
+    { "code": "lt", "name": "리투아니아어" },
+    { "code": "lu", "name": "루바카탕가어" },
+    { "code": "lb", "name": "룩셈부르크어" },
+    { "code": "mk", "name": "마케도니아어" },
+    { "code": "mg", "name": "마다가스카르어" },
+    { "code": "ms", "name": "말레이어" },
+    { "code": "ml", "name": "말라얄람어" },
+    { "code": "mt", "name": "몰타어" },
+    { "code": "gv", "name": "맨섬어" },
+    { "code": "mi", "name": "마오리어" },
+    { "code": "mr", "name": "마라티어" },
+    { "code": "mh", "name": "마셜어" },
+    { "code": "mn", "name": "몽골어" },
+    { "code": "na", "name": "나우루어" },
+    { "code": "nv", "name": "나바호어" },
+    { "code": "nd", "name": "북부 은데벨레어" },
+    { "code": "nr", "name": "남부 은데벨레어" },
+    { "code": "ng", "name": "은동가어" },
+    { "code": "ne", "name": "네팔어" },
+    { "code": "no", "name": "노르웨이어" },
+    { "code": "nb", "name": "노르웨이 보크몰" },
+    { "code": "nn", "name": "노르웨이 니노르스크" },
+    { "code": "oc", "name": "옥시탄어" },
+    { "code": "oj", "name": "오지브웨이어" },
+    { "code": "or", "name": "오리야어" },
+    { "code": "om", "name": "오로모어" },
+    { "code": "os", "name": "오세트어" },
+    { "code": "pi", "name": "팔리어" },
+    { "code": "ps", "name": "파슈토어" },
+    { "code": "fa", "name": "페르시아어" },
+    { "code": "pl", "name": "폴란드어" },
+    { "code": "pt", "name": "포르투갈어" },
+    { "code": "pa", "name": "펀자브어" },
+    { "code": "qu", "name": "케추아어" },
+    { "code": "ro", "name": "루마니아어" },
+    { "code": "rm", "name": "로만슈어" },
+    { "code": "rn", "name": "룬디어" },
+    { "code": "ru", "name": "러시아어" },
+    { "code": "se", "name": "북부 사미어" },
+    { "code": "sm", "name": "사모아어" },
+    { "code": "sg", "name": "상고어" },
+    { "code": "sa", "name": "산스크리트어" },
+    { "code": "sc", "name": "사르데냐어" },
+    { "code": "sr", "name": "세르비아어" },
+    { "code": "sn", "name": "쇼나어" },
+    { "code": "ii", "name": "쓰촨 이어" },
+    { "code": "sd", "name": "신디어" },
+    { "code": "si", "name": "싱할라어" },
+    { "code": "sk", "name": "슬로바키아어" },
+    { "code": "sl", "name": "슬로베니아어" },
+    { "code": "so", "name": "소말리어" },
+    { "code": "st", "name": "남부 소토어" },
+    { "code": "es", "name": "스페인어" },
+    { "code": "su", "name": "순다어" },
+    { "code": "sw", "name": "스와힐리어" },
+    { "code": "ss", "name": "스와티어" },
+    { "code": "sv", "name": "스웨덴어" },
+    { "code": "tl", "name": "타갈로그어" },
+    { "code": "ty", "name": "타히티어" },
+    { "code": "tg", "name": "타지크어" },
+    { "code": "ta", "name": "타밀어" },
+    { "code": "tt", "name": "타타르어" },
+    { "code": "te", "name": "텔루구어" },
+    { "code": "th", "name": "태국어" },
+    { "code": "bo", "name": "티베트어" },
+    { "code": "ti", "name": "티그리냐어" },
+    { "code": "to", "name": "통가어" },
+    { "code": "ts", "name": "총가어" },
+    { "code": "tn", "name": "츠와나어" },
+    { "code": "tr", "name": "터키어" },
+    { "code": "tk", "name": "투르크멘어" },
+    { "code": "tw", "name": "트위어" },
+    { "code": "ug", "name": "위구르어" },
+    { "code": "uk", "name": "우크라이나어" },
+    { "code": "ur", "name": "우르두어" },
+    { "code": "uz", "name": "우즈베크어" },
+    { "code": "ve", "name": "벤다어" },
+    { "code": "vi", "name": "베트남어" },
+    { "code": "vo", "name": "볼라퓌크어" },
+    { "code": "wa", "name": "왈롱어" },
+    { "code": "cy", "name": "웨일스어" },
+    { "code": "wo", "name": "월로프어" },
+    { "code": "xh", "name": "코사어" },
+    { "code": "yi", "name": "이디시어" },
+    { "code": "yo", "name": "요루바어" },
+    { "code": "za", "name": "좡어" },
+    { "code": "zu", "name": "줄루어" }
+  ],
+  "countries": [
+    { "code": "AF", "name": "아프가니스탄" },
+    { "code": "AL", "name": "알바니아" },
+    { "code": "DZ", "name": "알제리" },
+    { "code": "AS", "name": "아메리칸사모아" },
+    { "code": "AD", "name": "안도라" },
+    { "code": "AO", "name": "앙골라" },
+    { "code": "AI", "name": "앵귈라" },
+    { "code": "AQ", "name": "남극대륙" },
+    { "code": "AG", "name": "안티구아 바부다" },
+    { "code": "AR", "name": "아르헨티나" },
+    { "code": "AM", "name": "아르메니아" },
+    { "code": "AW", "name": "아루바" },
+    { "code": "AU", "name": "호주" },
+    { "code": "AT", "name": "오스트리아" },
+    { "code": "AZ", "name": "아제르바이잔" },
+    { "code": "BS", "name": "바하마" },
+    { "code": "BH", "name": "바레인" },
+    { "code": "BD", "name": "방글라데시" },
+    { "code": "BB", "name": "바베이도스" },
+    { "code": "BY", "name": "벨라루스" },
+    { "code": "BE", "name": "벨기에" },
+    { "code": "BZ", "name": "벨리즈" },
+    { "code": "BJ", "name": "베냉" },
+    { "code": "BM", "name": "버뮤다" },
+    { "code": "BT", "name": "부탄" },
+    { "code": "BO", "name": "볼리비아" },
+    { "code": "BA", "name": "보스니아 헤르체고비나" },
+    { "code": "BW", "name": "보츠와나" },
+    { "code": "BR", "name": "브라질" },
+    { "code": "IO", "name": "영국령 인도양 지역" },
+    { "code": "VG", "name": "영국령 버진아일랜드" },
+    { "code": "BN", "name": "브루나이" },
+    { "code": "BG", "name": "불가리아" },
+    { "code": "BF", "name": "부르키나파소" },
+    { "code": "BI", "name": "부룬디" },
+    { "code": "KH", "name": "캄보디아" },
+    { "code": "CM", "name": "카메룬" },
+    { "code": "CA", "name": "캐나다" },
+    { "code": "CV", "name": "카보베르데" },
+    { "code": "KY", "name": "케이맨 제도" },
+    { "code": "CF", "name": "중앙아프리카 공화국" },
+    { "code": "TD", "name": "차드" },
+    { "code": "CL", "name": "칠레" },
+    { "code": "CN", "name": "중국" },
+    { "code": "CX", "name": "크리스마스섬" },
+    { "code": "CC", "name": "코코스 제도" },
+    { "code": "CO", "name": "콜롬비아" },
+    { "code": "KM", "name": "코모로" },
+    { "code": "CG", "name": "콩고 - 브라자빌" },
+    { "code": "CD", "name": "콩고 - 킨샤사" },
+    { "code": "CK", "name": "쿡 제도" },
+    { "code": "CR", "name": "코스타리카" },
+    { "code": "CI", "name": "코트디부아르" },
+    { "code": "HR", "name": "크로아티아" },
+    { "code": "CU", "name": "쿠바" },
+    { "code": "CY", "name": "사이프러스" },
+    { "code": "CZ", "name": "체코" },
+    { "code": "DK", "name": "덴마크" },
+    { "code": "DJ", "name": "지부티" },
+    { "code": "DM", "name": "도미니카" },
+    { "code": "DO", "name": "도미니카 공화국" },
+    { "code": "EC", "name": "에콰도르" },
+    { "code": "EG", "name": "이집트" },
+    { "code": "SV", "name": "엘살바도르" },
+    { "code": "GQ", "name": "적도 기니" },
+    { "code": "ER", "name": "에리트레아" },
+    { "code": "EE", "name": "에스토니아" },
+    { "code": "SZ", "name": "에스와티니" },
+    { "code": "ET", "name": "에티오피아" },
+    { "code": "FJ", "name": "피지" },
+    { "code": "FI", "name": "핀란드" },
+    { "code": "FR", "name": "프랑스" },
+    { "code": "GA", "name": "가봉" },
+    { "code": "GM", "name": "감비아" },
+    { "code": "GE", "name": "조지아" },
+    { "code": "DE", "name": "독일" },
+    { "code": "GH", "name": "가나" },
+    { "code": "GR", "name": "그리스" },
+    { "code": "GT", "name": "과테말라" },
+    { "code": "GN", "name": "기니" },
+    { "code": "GY", "name": "가이아나" },
+    { "code": "HT", "name": "아이티" },
+    { "code": "HN", "name": "온두라스" },
+    { "code": "HK", "name": "홍콩" },
+    { "code": "HU", "name": "헝가리" },
+    { "code": "IS", "name": "아이슬란드" },
+    { "code": "IN", "name": "인도" },
+    { "code": "ID", "name": "인도네시아" },
+    { "code": "IR", "name": "이란" },
+    { "code": "IQ", "name": "이라크" },
+    { "code": "IE", "name": "아일랜드" },
+    { "code": "IL", "name": "이스라엘" },
+    { "code": "IT", "name": "이탈리아" },
+    { "code": "JM", "name": "자메이카" },
+    { "code": "JP", "name": "일본" },
+    { "code": "JO", "name": "요르단" },
+    { "code": "KZ", "name": "카자흐스탄" },
+    { "code": "KE", "name": "케냐" },
+    { "code": "KR", "name": "대한민국" },
+    { "code": "KW", "name": "쿠웨이트" },
+    { "code": "KG", "name": "키르기스스탄" },
+    { "code": "LA", "name": "라오스" },
+    { "code": "LV", "name": "라트비아" },
+    { "code": "LB", "name": "레바논" },
+    { "code": "LS", "name": "레소토" },
+    { "code": "LR", "name": "라이베리아" },
+    { "code": "LY", "name": "리비아" },
+    { "code": "LI", "name": "리히텐슈타인" },
+    { "code": "LT", "name": "리투아니아" },
+    { "code": "LU", "name": "룩셈부르크" },
+    { "code": "MG", "name": "마다가스카르" },
+    { "code": "MW", "name": "말라위" },
+    { "code": "MY", "name": "말레이시아" },
+    { "code": "MV", "name": "몰디브" },
+    { "code": "ML", "name": "말리" },
+    { "code": "MT", "name": "몰타" },
+    { "code": "MX", "name": "멕시코" },
+    { "code": "MD", "name": "몰도바" },
+    { "code": "MC", "name": "모나코" },
+    { "code": "MN", "name": "몽골" },
+    { "code": "ME", "name": "몬테네그로" },
+    { "code": "MA", "name": "모로코" },
+    { "code": "MZ", "name": "모잠비크" },
+    { "code": "MM", "name": "미얀마" },
+    { "code": "NA", "name": "나미비아" },
+    { "code": "NP", "name": "네팔" },
+    { "code": "NL", "name": "네덜란드" },
+    { "code": "NZ", "name": "뉴질랜드" },
+    { "code": "NI", "name": "니카라과" },
+    { "code": "NE", "name": "니제르" },
+    { "code": "NG", "name": "나이지리아" },
+    { "code": "MK", "name": "북마케도니아" },
+    { "code": "NO", "name": "노르웨이" },
+    { "code": "OM", "name": "오만" },
+    { "code": "PK", "name": "파키스탄" },
+    { "code": "PA", "name": "파나마" },
+    { "code": "PG", "name": "파푸아뉴기니" },
+    { "code": "PY", "name": "파라과이" },
+    { "code": "PE", "name": "페루" },
+    { "code": "PH", "name": "필리핀" },
+    { "code": "PL", "name": "폴란드" },
+    { "code": "PT", "name": "포르투갈" },
+    { "code": "QA", "name": "카타르" },
+    { "code": "RO", "name": "루마니아" },
+    { "code": "RU", "name": "러시아" },
+    { "code": "RW", "name": "르완다" },
+    { "code": "SA", "name": "사우디아라비아" },
+    { "code": "SN", "name": "세네갈" },
+    { "code": "RS", "name": "세르비아" },
+    { "code": "SG", "name": "싱가포르" },
+    { "code": "SK", "name": "슬로바키아" },
+    { "code": "SI", "name": "슬로베니아" },
+    { "code": "ZA", "name": "남아프리카 공화국" },
+    { "code": "ES", "name": "스페인" },
+    { "code": "LK", "name": "스리랑카" },
+    { "code": "SE", "name": "스웨덴" },
+    { "code": "CH", "name": "스위스" },
+    { "code": "TW", "name": "대만" },
+    { "code": "TH", "name": "태국" },
+    { "code": "TR", "name": "튀르키예" },
+    { "code": "UG", "name": "우간다" },
+    { "code": "UA", "name": "우크라이나" },
+    { "code": "AE", "name": "아랍에미리트" },
+    { "code": "GB", "name": "영국" },
+    { "code": "US", "name": "미국" },
+    { "code": "UY", "name": "우루과이" },
+    { "code": "UZ", "name": "우즈베키스탄" },
+    { "code": "VE", "name": "베네수엘라" },
+    { "code": "VN", "name": "베트남" },
+    { "code": "YE", "name": "예멘" },
+    { "code": "ZM", "name": "잠비아" },
+    { "code": "ZW", "name": "짐바브웨" }
+  ]
 }

@@ -1,871 +1,820 @@
 export default {
-    "auth": {
-      "logo": "/icons/logo.png",
-      "login": {
-        "title": "Ingia kwenye Mpangilio wetu wa Jarida",
-        "subtitle": "Unganisha ili uendelee ulipoishia.",
-        "google": "Endelea na Google",
-        "or": "au",
-        "emailPlaceholder": "wewe@example.com",
-        "continueWithEmail": "Endelea na Barua pepe",
-        "switchText": "Huna akaunti?",
-        "switchLink": "Jisajili",
-        "switchHref": "/signup"
-      },
-      "signup": {
-        "title": "Fungua akaunti yako",
-        "subtitle": "Hakuna kadi ya mkopo inayohitajika.",
-        "google": "Endelea na Google",
-        "or": "au",
-        "emailPlaceholder": "wewe@example.com",
-        "continueWithEmail": "Endelea na Barua pepe",
-        "switchText": "Tayari una akaunti?",
-        "switchLink": "Ingia",
-        "switchHref": "/login"
-      }
+  "auth": {
+    "logo": "/icons/logo.png",
+    "login": {
+      "title": "Acesse nosso Orquestrador de Newsletters",
+      "subtitle": "Conecte-se para continuar de onde parou.",
+      "google": "Continuar com Google",
+      "or": "ou",
+      "emailPlaceholder": "voce@exemplo.com",
+      "continueWithEmail": "Continuar com E-mail",
+      "switchText": "Ainda não tem uma conta?",
+      "switchLink": "Cadastre-se",
+      "switchHref": "/signup"
     },
-    "mainContent": {
-      "title": "Jenereta ya Jarida la AI: Maudhui ya Kibinafsi, Yanayowasilishwa.",
-      "metaDescription": "Tengeneza majarida ya kibinafsi na AI. Badilisha chanzo chochote cha habari kuwa makala maalum kwa wasajili wako, katika lugha yao, na kwa sauti ya chapa yako.",
-      "ogImageUrl": "https://images.pexels.com/photos/261599/pexels-photo-261599.jpeg",
-      "canonicalUrl": "https://example.com/ai-newsletter-generator",
-      "organization": {
-        "name": "AI Newsletter, Inc.",
-        "logo": "https://example.com/logo.png",
-        "url": "https://example.com/"
-      },
-      "product": {
-        "name": "Jenereta ya Jarida la AI",
-        "description": "Jukwaa la mwisho la kuunda majarida ya kibinafsi, yanayoendeshwa na AI."
-      },
-      "announcement": {
-        "text": "Uzinduzi wa Beta: Jisajili sasa na upate punguzo la 50% kwa miezi 3 ya kwanza!",
-        "cta": "Anza"
-      },
-      "hero": {
-        "hook": "Majarida Yanayoendeshwa na AI, Bila Nguvu.",
-        "subHook": "Badilisha chanzo chochote cha habari kuwa makala za kibinafsi kwa wasajili wako, katika lugha yao, na kwa sauti ya chapa yako.",
-        "primaryCta": "Anza Bure",
-        "secondaryCta": "Tazama Onyesho",
-        "trustCues": [
-          "Hakuna kadi ya mkopo inayohitajika",
-          "Jaribio la bure la siku 14",
-          "Ghairi wakati wowote"
-        ]
-      },
-      "socialProof": {
-        "logos": [
-          {
-            "name": "InnovateCorp",
-            "src": "/logos/logo_1.png"
-          },
-          {
-            "name": "QuantumLeap",
-            "src": "/logos/logo_2.png"
-          },
-          {
-            "name": "Synergy Inc.",
-            "src": "/logos/logo_3.png"
-          },
-          {
-            "name": "Apex Solutions",
-            "src": "/logos/logo_4.png"
-          },
-          {
-            "name": "Momentum Co.",
-            "src": "/logos/logo_5.png"
-          }
-        ],
-        "counts": "Inaaminiwa na timu 10,000+ ulimwenguni kote"
-      },
-      "valueProps": {
-        "title": "Mustakabali wa Majarida Uko Hapa",
-        "subTitle": "Wavutie hadhira yako kama kamwe kabla na maudhui yanayoendeshwa na AI ambayo yanazungumza nao moja kwa moja.",
-        "props": [
-          {
-            "title": "Ubinasishaji wa Juu",
-            "description": "AI yetu inachambua tovuti yako ili kuelewa hadhira yako na inarekebisha makala kiotomatiki kulingana na maslahi na lugha yao."
-          },
-          {
-            "title": "Uundaji wa Maudhui Kiotomatiki",
-            "description": "Weka ratiba yako, kila siku, kila wiki, au kila mwezi, na uruhusu AI yetu ichague, iandike, na itafsiri makala kwa ajili yako."
-          },
-          {
-            "title": "Chapa Yako, Sauti Yako",
-            "description": "AI inajifunza utu wa chapa yako kutoka kwa tovuti yako au ingizo maalum, ikihakikisha kila jarida linasikika kana kwamba limeandikwa na wewe."
-          }
-        ]
-      },
-      "features": {
-        "title": "Vipengele vya Juu kwa Athari ya Juu",
-        "subTitle": "Nenda zaidi ya majarida rahisi na uunde kituo chenye nguvu cha uuzaji.",
-        "featureList": [
-          {
-            "title": "Uteuzi wa Makala Wenye Akili",
-            "description": "AI yetu inachanganua vyanzo vya habari na inachagua makala muhimu zaidi kulingana na uchambuzi wa hadhira yako lengwa, ikihakikisha ushiriki wa juu.",
-            "image": "https://images.pexels.com/photos/3760067/pexels-photo-3760067.jpeg",
-            "cta": "Jifunze zaidi"
-          },
-          {
-            "title": "Tafsiri ya Lugha Isiyo na Mfumo",
-            "description": "Fikia hadhira ya kimataifa kwa kutafsiri makala kiotomatiki katika lugha asili za wasajili wako, ukivunja vizuizi vya mawasiliano.",
-            "image": "https://images.pexels.com/photos/207756/pexels-photo-207756.jpeg",
-            "cta": "Jifunze zaidi"
-          },
-          {
-            "title": "Ufuatiliaji na Uchambuzi wa Miongozo",
-            "description": "Pachika kifuatiliaji cha miongozo katika kiungo cha kampuni yako ili kufuatilia ushiriki na kupima mafanikio ya kampeni zako na kaunta yetu iliyojengewa ndani.",
-            "image": "https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg",
-            "cta": "Jifunze zaidi"
-          }
-        ]
-      },
-      "howItWorks": {
-        "title": "Anza kwa Hatua 3 Rahisi",
-        "steps": [
-          {
-            "step": 1,
-            "title": "Unganisha Chanzo chako cha Habari",
-            "description": "Unganisha chanzo chochote cha habari, na AI yetu itaanza kukichambua kwa maudhui muhimu."
-          },
-          {
-            "step": 2,
-            "title": "Bainisha Sauti Yako",
-            "description": "Ruhusu AI yetu ijifunze utu wa chapa yako kutoka kwa tovuti yako au toa maelezo maalum."
-          },
-          {
-            "step": 3,
-            "title": "Zindua Jarida Lako",
-            "description": "Weka ratiba yako na utazame majarida ya kibinafsi, ya lugha nyingi yakitumwa kiotomatiki kwa wasajili wako."
-          }
-        ]
-      },
-      "personas": {
-        "title": "Inafaa Kabisa kwa Biashara Yako",
-        "subTitle": "Kuanzia wanaoanza hadi makampuni makubwa, zana yetu imeundwa kukusaidia kukua.",
-        "personaList": [
-          {
-            "persona": "Waumbaji wa Maudhui",
-            "problem": "Kutumia masaa mengi kuchagua na kuandika maudhui kwa hadhira yako.",
-            "outcome": "Fanya mchakato wako wa uundaji wa maudhui kuwa wa kiotomatiki na uzingatie kukuza jamii yako."
-          },
-          {
-            "persona": "Timu za Uuzaji",
-            "problem": "Kujitahidi kuunda maudhui ya kibinafsi ambayo yanavutia hadhira ya kimataifa.",
-            "outcome": "Ongeza ushiriki na ubadilishaji na majarida ya kibinafsi, ya lugha nyingi."
-          },
-          {
-            "persona": "Biashara",
-            "problem": "Kukosa rasilimali za kuunda jarida thabiti na la kuvutia.",
-            "outcome": "Jenga kituo chenye nguvu cha uuzaji ambacho kinaendesha trafiki na mauzo kwa juhudi ndogo."
-          }
-        ]
-      },
-      "metrics": {
-        "title": "Matokeo Halisi, Yanayoungwa Mkono na Data",
-        "metricList": [
-          {
-            "value": "90%",
-            "label": "Kupungua kwa muda wa uundaji wa maudhui",
-            "proof": "Kulingana na maoni ya watumiaji wa beta."
-          },
-          {
-            "value": "2x",
-            "label": "Kuongezeka kwa ushiriki wa wasajili",
-            "proof": "Imeonekana katika majaribio ya A/B na watumiaji wa beta."
-          },
-          {
-            "value": "5x",
-            "label": "Uwasilishaji wa maudhui haraka",
-            "proof": "Ikilinganishwa na uundaji wa jarida la mikono."
-          }
-        ]
-      },
-      "testimonials": {
-        "title": "Wateja Wetu Wanasema Nini",
-        "testimonialList": [
-          {
-            "quote": "Jenereta ya Jarida la AI imekuwa kibadilisha mchezo kwa mkakati wetu wa maudhui. Sasa tunaweza kufikia hadhira yetu ya kimataifa na maudhui ya kibinafsi ambayo yanavutia.",
-            "name": "Alex Chen",
-            "title": "Mkuu wa Ukuaji, Global Tech Inc."
-          },
-          {
-            "quote": "Nilikuwa na shaka mwanzoni, lakini maudhui yaliyotengenezwa na AI yameandikwa vizuri sana na yanaendana na chapa. Wasajili wetu wanayapenda!",
-            "name": "Samantha Jones",
-            "title": "Mwanzilishi, The Content Corner"
-          },
-          {
-            "quote": "Kiasi cha muda tulichookoa ni cha ajabu. Sasa tunaweza kuzingatia maeneo mengine ya biashara yetu huku AI ikishughulikia jarida letu.",
-            "name": "David Rodriguez",
-            "title": "Mkurugenzi Mtendaji, Startup Solutions"
-          }
-        ]
-      },
-      "pricing": {
-        "teaser": "Mipango ya bei nafuu kwa Kila Biashara",
-        "subTitle": "Mipango yetu imeundwa kukua nawe.",
-        "plan": "Kuanzia $9/mwezi",
-        "cta": "Tazama Bei"
-      },
-      "finalCta": {
-        "hook": "Uko Tayari Kubadilisha Jarida Lako?",
-        "cta": "Anza Jaribio Lako la Bure Leo"
-      },
-      "footer": {
-        "copyright": "© 2025 AI Newsletter, Inc. Haki zote zimehifadhiwa.",
-        "companyLinks": {
-          "title": "Kampuni",
-          "links": [
-            {
-              "text": "Kutuhusu",
-              "href": "/about"
-            },
-            {
-              "text": "Kazi",
-              "href": "/careers"
-            },
-            {
-              "text": "Blogu",
-              "href": "/blog"
-            }
-          ]
-        },
-        "legalLinks": {
-          "title": "Kisheria",
-          "links": [
-            {
-              "text": "Sera ya Faragha",
-              "href": "/legal/privacy"
-            },
-            {
-              "text": "Masharti ya Huduma",
-              "href": "/legal/terms"
-            },
-            {
-              "text": "Sera ya Vidakuzi",
-              "href": "/legal/cookies"
-            }
-          ]
-        },
-        "contact": "support@ainewsletter.com"
-      }
+    "signup": {
+      "title": "Crie sua conta",
+      "subtitle": "Não é necessário cartão de crédito.",
+      "google": "Continuar com Google",
+      "or": "ou",
+      "emailPlaceholder": "voce@exemplo.com",
+      "continueWithEmail": "Continuar com E-mail",
+      "switchText": "Já tem uma conta?",
+      "switchLink": "Entrar",
+      "switchHref": "/login"
+    }
+  },
+  "mainContent": {
+    "title": "Gerador de Newsletter com IA: Conteúdo Personalizado e Entregue.",
+    "metaDescription": "Gere newsletters personalizadas com IA. Transforme qualquer fonte de notícias em artigos exclusivos para seus inscritos, no idioma deles e na voz da sua marca.",
+    "ogImageUrl": "https://images.pexels.com/photos/261599/pexels-photo-261599.jpeg",
+    "canonicalUrl": "https://exemplo.com/gerador-newsletter-ia",
+    "organization": {
+      "name": "AI Newsletter, Inc.",
+      "logo": "https://exemplo.com/logo.png",
+      "url": "https://exemplo.com/"
     },
-    "help": {
-      "title": "Omba vikomo vya juu zaidi",
-      "subtitle": "Hamia kwenye malipo ya kadri unavyotumia au ongeza viwango ili kuendana na ukuaji wako.",
-      "contact": {
-        "cta": "Wasilisha ombi",
-        "successTitle": "Ombi limepokelewa",
-        "successBody": "Timu yetu itawasiliana nawe hivi karibuni.",
-        "learnMore": "/plans"
-      },
-      "questions": {
-        "desiredLimitsHelp": "Tuambie vikomo unavyohitaji (k.m., simu 100k za API/siku).",
-        "useCaseHelp": "Eleza mzigo wako wa kazi na muundo wa trafiki.",
-        "expectedSpendHelp": "Makadirio hutusaidia kubinafsisha bei (si lazima)."
-      },
-      "faqs": [
+    "product": {
+      "name": "Gerador de Newsletter com IA",
+      "description": "A plataforma definitiva para criar newsletters personalizadas e impulsionadas por IA."
+    },
+    "announcement": {
+      "text": "Lançamento Beta: Cadastre-se agora e ganhe 35% de desconto nos planos anuais!",
+      "cta": "Começar Agora"
+    },
+    "hero": {
+      "hook": "Newsletters com IA, sem esforço.",
+      "subHook": "Transforme qualquer fonte de notícias em artigos personalizados para seus inscritos, no idioma deles e com a identidade da sua marca.",
+      "primaryCta": "Começar Gratuitamente",
+      "secondaryCta": "Ver Demonstração",
+      "trustCues": [
+        "Sem necessidade de cartão de crédito",
+        "Grátis para até 100 usuários",
+        "Cancele a qualquer momento"
+      ]
+    },
+    "socialProof": {
+      "logos": [
+        { "name": "InnovateCorp", "src": "/logos/logo_1.png" },
+        { "name": "QuantumLeap", "src": "/logos/logo_2.png" },
+        { "name": "Synergy Inc.", "src": "/logos/logo_3.png" },
+        { "name": "Apex Solutions", "src": "/logos/logo_4.png" },
+        { "name": "Momentum Co.", "src": "/logos/logo_5.png" }
+      ],
+      "counts": "Confiado por mais de 10.000 equipes em todo o mundo"
+    },
+    "valueProps": {
+      "title": "O Futuro das Newsletters Chegou",
+      "subTitle": "Engaje seu público como nunca antes com conteúdo gerado por IA que fala diretamente com eles.",
+      "props": [
         {
-          "id": "limits-how",
-          "q": "Vikomo vya juu zaidi hufanyaje kazi?",
-          "a": "Tunafungua viwango vikubwa zaidi mara tu baada ya kuidhinishwa. Malipo yanaweza kuwa ya kiwango cha kudumu au ya kadri unavyotumia."
+          "title": "Hiperpersonalização",
+          "description": "Nossa IA analisa seu site para entender seu público e adapta automaticamente os artigos aos interesses e idiomas deles."
         },
         {
-          "id": "pricing-payg",
-          "q": "Bei ya malipo ya kadri unavyotumia ni nini?",
-          "a": "Unalipia tu matumizi yanayozidi viwango vya mpango wako vilivyojumuishwa na punguzo la ujazo kwa kiwango kikubwa."
+          "title": "Criação de Conteúdo Automatizada",
+          "description": "Defina sua frequência — diária, semanal ou mensal — e deixe nossa IA selecionar, escrever e traduzir os artigos para você."
         },
         {
-          "id": "timeline",
-          "q": "Idhini inachukua muda gani?",
-          "a": "Maombi mengi hupitiwa ndani ya siku 1-2 za kazi. Kesi za dharura zinaweza kuharakishwa."
+          "title": "Sua Marca, Sua Voz",
+          "description": "A IA aprende a personalidade da sua marca através do seu site ou orientações personalizadas, garantindo que cada newsletter soe como se tivesse sido escrita por você."
         }
-      ],
-      "links": {
-        "docs": "/plans",
-        "community": "/help"
-      }
+      ]
     },
-    "faq": [
-      {
-        "q": "Kuna jaribio la bure?",
-        "a": "Ndiyo! Watumiaji wote wapya wanapata jaribio la bure la siku 14 la mpango wetu wa Pro, hakuna kadi ya mkopo inayohitajika."
-      },
-      {
-        "q": "Nini kitatokea baada ya jaribio langu kuisha?",
-        "a": "Unaweza kuchagua kuboresha hadi mpango wa kulipia au kushushwa kiotomatiki hadi mpango wetu wa Bure, ambao una vipengele vichache."
-      },
-      {
-        "q": "Ninaweza kuunganisha na zana maalum?",
-        "a": "Bila shaka. Jukwaa letu linajumuisha API yenye nguvu na mfumo wa webhook ili kuunganisha na programu yoyote ya ndani au ya umiliki."
-      },
-      {
-        "q": "Je, data yangu iko salama?",
-        "a": "Usalama ndio kipaumbele chetu kikuu. Tumethibitishwa na SOC 2 Aina ya II na data yote imesimbwa kwa njia fiche wakati wa usafirishaji na wakati wa kupumzika."
-      },
-      {
-        "q": "Je, mnatoa usaidizi?",
-        "a": "Ndiyo, tunatoa usaidizi wa barua pepe 24/7 kwa mipango yote, na usaidizi wa simu na Slack wa kujitolea unapatikana kwenye mpango wetu wa Biashara."
-      },
-      {
-        "q": "Ninaweza kughairi wakati wowote?",
-        "a": "Ndiyo, unaweza kughairi usajili wako wakati wowote kutoka kwa dashibodi ya akaunti yako. Mpango wako utaendelea kuwa hai hadi mwisho wa mzunguko wa sasa wa malipo."
-      }
-    ],
-    "plans": {
-      "currency": "USD",
-      "billingIntervals": [
-        "monthly",
-        "yearly"
-      ],
-      "currentPlan": "free",
-      "plans": [
+    "features": {
+      "title": "Recursos Avançados para Impacto Máximo",
+      "subTitle": "Vá além de newsletters simples e crie um canal de marketing poderoso.",
+      "featureList": [
         {
-          "id": "free",
-          "name": "Bure",
-          "monthly": 0,
-          "yearly": 0,
-          "tagline": "Anza bure",
-          "featuresBase": [
-            "Chanzo 1 cha habari"
-          ],
-          "featuresDelta": [],
-          "limits": {
-            "newsSources": 1
-          },
-          "ctaLabel": "Mpango wa Sasa",
-          "tier": 0
+          "title": "Seleção Inteligente de Artigos",
+          "description": "Nossa IA varre fontes de notícias e seleciona os artigos mais relevantes com base na análise do seu público-alvo.",
+          "image": "https://images.pexels.com/photos/3760067/pexels-photo-3760067.jpeg",
+          "cta": "Saiba mais"
         },
         {
-          "id": "monthly",
-          "name": "Kila mwezi",
-          "monthly": 17,
-          "yearly": 108,
-          "tagline": "Kwa majarida yanayokua",
-          "featuresBase": [],
-          "featuresDelta": [
-            "Hadi vyanzo 17 vya habari",
-            "Watumiaji wasio na kikomo",
-            "Ujumbe maalum katika lugha zao",
-            "Nenosiri maalum la programu",
-            "Gazeti la kiotomatiki"
-          ],
-          "limits": {
-            "newsSources": 17
-          },
-          "ctaLabel": "Boresha hadi Kila mwezi",
-          "productId": "f48b54e0-910a-46ca-b0a4-5678876512fe",
-          "tier": 1
+          "title": "Tradução de Idiomas Fluida",
+          "description": "Alcance um público global traduzindo automaticamente os artigos para os idiomas nativos dos seus inscritos.",
+          "image": "https://images.pexels.com/photos/207756/pexels-photo-207756.jpeg",
+          "cta": "Saiba mais"
         },
         {
-          "id": "yearly",
-          "name": "Kila mwaka",
-          "monthly": 9,
-          "yearly": 108,
-          "tagline": "Okoa na mpango wa kila mwaka",
-          "featuresBase": [],
-          "featuresDelta": [
-            "Hadi vyanzo 17 vya habari",
-            "Watumiaji wasio na kikomo",
-            "Ujumbe maalum katika lugha zao",
-            "Nenosiri maalum la programu",
-            "Gazeti la kiotomatiki"
-          ],
-          "limits": {
-            "newsSources": 17
-          },
-          "ctaLabel": "Boresha hadi Kila mwaka",
-          "productId": "e4ad16dc-dc39-4656-92f3-70b3140eddea",
-          "tier": 2
-        },
-        {
-          "id": "vipfree",
-          "name": "VIP Bure",
-          "monthly": 0,
-          "yearly": 0,
-          "tagline": "Kwa washirika",
-          "featuresBase": [],
-          "featuresDelta": [
-            "Vyanzo vya habari visivyo na kikomo"
-          ],
-          "limits": {
-            "newsSources": -1
-          },
-          "ctaLabel": "Mpango wa Sasa",
-          "internalOnly": true,
-          "tier": 3
+          "title": "Rastreamento de Leads e Analytics",
+          "description": "Insira rastreadores de leads nos links da sua empresa para monitorar o engajamento e medir o sucesso da campanha.",
+          "image": "https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg",
+          "cta": "Saiba mais"
         }
-      ],
-      "contact": {
-        "text": "Unahitaji uwezo zaidi kwa biashara yako?",
-        "cta": "Wasiliana Nasi",
-        "href": "/help"
-      }
+      ]
     },
-    "article": {
-      "notFound": "Makala haijapatikana.",
-      "errorFetching": "Hitilafu wakati wa kuleta makala.",
-      "noArticleSpecified": "Hakuna makala iliyobainishwa.",
-      "goBack": "Rudi Nyuma",
-      "loading": "Inapakia..."
+    "howItWorks": {
+      "title": "Comece em 3 Passos Simples",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Conecte sua Fonte de Notícias",
+          "description": "Vincule qualquer fonte de notícias e nossa IA começará a analisar o conteúdo relevante."
+        },
+        {
+          "step": 2,
+          "title": "Defina sua Voz",
+          "description": "Deixe nossa IA aprender a personalidade da sua marca através do seu site ou forneça uma descrição personalizada."
+        },
+        {
+          "step": 3,
+          "title": "Lance sua Newsletter",
+          "description": "Defina seu cronograma e veja as newsletters personalizadas e multilíngues serem enviadas aos seus inscritos."
+        }
+      ]
+    },
+    "personas": {
+      "title": "Perfeito para o seu Negócio",
+      "subTitle": "De startups a grandes empresas, nossa ferramenta foi projetada para ajudar você a crescer.",
+      "personaList": [
+        {
+          "persona": "Criadores de Conteúdo",
+          "problem": "Gasta horas curando e escrevendo conteúdo para o seu público.",
+          "outcome": "Automatize seu processo de criação de conteúdo e foque no crescimento da sua comunidade."
+        },
+        {
+          "persona": "Equipes de Marketing",
+          "problem": "Dificuldade em criar conteúdo personalizado para um público global.",
+          "outcome": "Aumente o engajamento e as conversões com newsletters hiperpersonalizadas."
+        },
+        {
+          "persona": "Empresas",
+          "problem": "Falta de recursos para criar uma newsletter consistente e atraente.",
+          "outcome": "Construa um canal de marketing poderoso que gera tráfego com o mínimo de esforço."
+        }
+      ]
+    },
+    "metrics": {
+      "title": "Resultados Reais, Baseados em Dados",
+      "metricList": [
+        { "value": "90%", "label": "Redução no tempo de criação", "proof": "Baseado no feedback de usuários beta." },
+        { "value": "2x", "label": "Aumento no engajamento", "proof": "Observado em testes A/B." },
+        { "value": "5x", "label": "Entrega de conteúdo mais rápida", "proof": "Comparado à criação manual." }
+      ]
+    },
+    "testimonials": {
+      "title": "O que nossos clientes dizem",
+      "testimonialList": [
+        {
+          "quote": "O Gerador de Newsletter com IA mudou o jogo. Agora conseguimos alcançar nosso público global com conteúdo relevante.",
+          "name": "Alex Chen",
+          "title": "Head de Crescimento, Global Tech Inc."
+        },
+        {
+          "quote": "Eu estava cético no início, mas o conteúdo gerado pela IA é incrivelmente bem escrito. Nossos inscritos adoram!",
+          "name": "Samantha Jones",
+          "title": "Fundadora, The Content Corner"
+        }
+      ]
     },
     "pricing": {
-      "eyebrow": "Bei",
-      "title": "Mipango",
-      "currentPlan": "Mpango wa Sasa:",
-      "monthly": "Kila mwezi",
-      "yearly": "Kila mwaka",
-      "everythingIn": "Kila kitu katika mpango uliopita, pamoja na:",
-      "isCurrentPlan": "Huu ni mpango wako wa sasa",
-      "downgradeTo": "Shusha hadi {planName}",
-      "upgradeTo": "Boresha hadi {planName}",
-      "mockMode": "Hali ya Kuiga Imewashwa"
+      "teaser": "Planos Acessíveis para Cada Negócio",
+      "subTitle": "Nossos planos foram feitos para crescer com você.",
+      "plan": "A partir de $17/mês",
+      "cta": "Ver Preços"
     },
-    "confirmSubscription": {
-      "title": "Thibitisha Usajili Wako",
-      "goBack": "Rudi Nyuma",
-      "pleaseAccept": "Tafadhali kubali sheria na masharti ili kukamilisha usajili wako.",
-      "iAccept": "Ninakubali",
-      "termsAndConditions": "Sheria na Masharti",
-      "and": "na",
-      "privacyPolicy": "Sera ya Faragha",
-      "confirm": "Thibitisha Usajili",
-      "mustAccept": "Lazima ukubali sheria na masharti ili kujisajili.",
-      "invalidLink": "Kiungo cha uthibitishaji si sahihi."
+    "finalCta": {
+      "hook": "Pronto para Revolucionar sua Newsletter?",
+      "cta": "Comece seu Teste Grátis Hoje"
     },
-    "articles": {
-      "title": "Ufahamu wa Hivi Punde",
-      "subtitle": "Gundua mkusanyiko wetu ulioratibiwa wa makala, habari, na maoni ya wataalam.",
-      "producedIn": "Tumetoa habari katika lugha hizi zote",
-      "searchPlaceholder": "Tafuta makala...",
-      "noArticlesFound": "Hakuna makala zilizopatikana.",
-      "created": "Imeundwa:",
-      "language": "Lugha:",
-      "rightsReserved": "Haki Zote Zimehifadhiwa.",
-      "errorFetching": "Hitilafu wakati wa kuleta makala.",
-      "noArticleSpecified": "Hakuna makala iliyobainishwa."
+    "footer": {
+      "copyright": "© 2026 AI Newsletter, Inc. Todos os direitos reservados.",
+      "companyLinks": {
+        "title": "Empresa",
+        "links": [
+          { "text": "Sobre Nós", "href": "/about" },
+          { "text": "Carreiras", "href": "/careers" },
+          { "text": "Blog", "href": "https://github.com/LuisArmando-TestCoder/scientia/tree/master/proposiciones" }
+        ]
+      },
+      "legalLinks": {
+        "title": "Jurídico",
+        "links": [
+          { "text": "Política de Privacidade", "href": "/legal/privacy" },
+          { "text": "Termos de Serviço", "href": "/legal/terms" },
+          { "text": "Política de Cookies", "href": "/legal/cookies" }
+        ]
+      },
+      "contact": "support@ainewsletter.com"
+    }
+  },
+  "help": {
+    "title": "Solicitar limites maiores",
+    "subtitle": "Mude para o modelo pague-pelo-uso ou aumente as cotas para acompanhar seu crescimento.",
+    "contact": {
+      "cta": "Enviar solicitação",
+      "successTitle": "Solicitação recebida",
+      "successBody": "Nossa equipe entrará em contato em breve.",
+      "learnMore": "/plans"
     },
-    "mainPage": {
-      "skipToMainContent": "Ruka hadi maudhui kuu",
-      "dismissAnnouncement": "Ondoa tangazo",
-      "problem": "Tatizo:",
-      "outcome": "Matokeo:",
-      "disclaimer": "Inatumika kwa mpango wa kila mwaka kwa $108/mwaka. Unaokoa $96 ikilinganishwa na mpango wa kila mwezi kwa $17/mwezi."
+    "questions": {
+      "desiredLimitsHelp": "Diga-nos os limites necessários (ex: 1M de usuários).",
+      "useCaseHelp": "Descreva sua carga de trabalho e padrão de tráfego.",
+      "expectedSpendHelp": "Uma estimativa nos ajuda a personalizar o preço (opcional)."
     },
-    "authForm": {
-      "emailValidation": "Tafadhali ingiza anwani sahihi ya barua pepe.",
-      "failedToSendCode": "Imeshindwa kutuma nambari ya uthibitishaji. Tafadhali jaribu tena.",
-      "sending": "Inatuma...",
-      "codeSent": "Tumetuma nambari ya uthibitishaji kwa barua pepe yako",
-      "invalidCode": "Nambari ya uthibitishaji iliyotolewa si sahihi",
-      "regenerateCode": "Ikiwa hukupokea barua pepe, unaweza kutengeneza nambari mpya hapa",
-      "back": "← Nyuma",
-      "byProceeding": "Kwa kuendelea, unakubaliana na {appName}'s",
-      "termsOfService": "Masharti ya Huduma",
-      "and": "na",
-      "privacyPolicy": "Sera ya Faragha"
-    },
-    "welcome": {
-      "title": "Jenereta ya jarida la kiotomatiki",
-      "setItOnce": "Weka mara moja...",
-      "useItForever": "...itumie milele."
-    },
-    "lead": {
-      "title": "Ili wateja waende kutoka kwenye jarida hadi kwenye tovuti yako",
-      "recommendation": "Hii inapendekezwa sana. Inasaidia AI yetu kuelewa vizuri zaidi muktadha wa jarida lako na kutoa makala muhimu zaidi.",
-      "question": "Je, una tovuti? (si lazima)",
-      "placeholder": "Kiungo cha tovuti yako"
-    },
-    "newsSource": {
-      "title": "Ili kutumia blogu yako au mlisho wa habari tunahitaji uandike kiungo chake",
-      "subtitle": "Tutatoa maudhui kutoka kwa mlisho wako, kwa hivyo huhitaji kuunda jarida kutoka mwanzo",
-      "placeholder": "Kiungo cha tovuti yako ya habari au blogu"
-    },
-    "subscribe": {
-      "welcome": {
-        "title": "Karibu kwenye Jarida.",
-        "invitedBy": "Umealikwa na {configuratorId}."
+    "faqs": [
+      {
+        "id": "limits-how",
+        "q": "Como funcionam os limites maiores?",
+        "a": "Liberamos cotas maiores imediatamente após a aprovação. O faturamento pode ser fixo ou baseado no uso."
       }
-    },
-    "header": {
-      "goToWorkspace": "Nenda kwenye Nafasi ya Kazi",
-      "inBilling": "Uko kwenye Malipo",
-      "vip": "VIP",
-      "plan": "Mpango wa {planName}",
-      "logIn": "Ingia",
-      "getStarted": "Anza"
-    },
-    "fileInput": {
-      "chooseFile": "Chagua Faili",
-      "dropFile": "au Achia Faili Hapa",
-      "release": "Achia kipanya ili kuachia faili"
-    },
-    "imageInput": {
-      "unsupportedFileType": "Aina ya faili isiyotumika: {fileType}. Tafadhali chagua picha ya PNG, JPEG, JPG, GIF, au WebP.",
-      "dropImage": "Achia picha hapa",
-      "dragDrop": "Buruta na uachie picha hapa",
-      "browse": "au bofya ili kuvinjari",
-      "selectImage": "Chagua Picha",
-      "preview": "Onyesho la kukagua",
-      "removeImage": "Ondoa picha"
-    },
-    "languages": [
-      { "code": "ab", "name": "Kiaabkhazi" },
-      { "code": "aa", "name": "Kiafar" },
-      { "code": "af", "name": "Kiafrikana" },
-      { "code": "ak", "name": "Kiakani" },
-      { "code": "sq", "name": "Kialbania" },
-      { "code": "am", "name": "Kiamhari" },
-      { "code": "ar", "name": "Kiarabu" },
-      { "code": "an", "name": "Kiaragoni" },
-      { "code": "hy", "name": "Kiarmenia" },
-      { "code": "as", "name": "Kiassam" },
-      { "code": "av", "name": "Kiavari" },
-      { "code": "ae", "name": "Kiavesta" },
-      { "code": "ay", "name": "Kiaimara" },
-      { "code": "az", "name": "Kiazeri" },
-      { "code": "bm", "name": "Kibambara" },
-      { "code": "ba", "name": "Kibashkir" },
-      { "code": "eu", "name": "Kibasque" },
-      { "code": "be", "name": "Kibelarusi" },
-      { "code": "bn", "name": "Kibengali" },
-      { "code": "bi", "name": "Kibislama" },
-      { "code": "bs", "name": "Kibosnia" },
-      { "code": "br", "name": "Kibretoni" },
-      { "code": "bg", "name": "Kibulgaria" },
-      { "code": "my", "name": "Kiburma" },
-      { "code": "ca", "name": "Kikatalani" },
-      { "code": "ch", "name": "Kichamorro" },
-      { "code": "ce", "name": "Kichechen" },
-      { "code": "ny", "name": "Kichewa" },
-      { "code": "zh", "name": "Kichina" },
-      { "code": "cu", "name": "Kislavoni cha Kanisa" },
-      { "code": "cv", "name": "Kichuvash" },
-      { "code": "kw", "name": "Kikorni" },
-      { "code": "co", "name": "Kikosikani" },
-      { "code": "cr", "name": "Kikri" },
-      { "code": "hr", "name": "Kikroeshia" },
-      { "code": "cs", "name": "Kicheki" },
-      { "code": "da", "name": "Kidenmaki" },
-      { "code": "dv", "name": "Kidivehi" },
-      { "code": "nl", "name": "Kiholanzi" },
-      { "code": "dz", "name": "Kidzongkha" },
-      { "code": "en", "name": "Kiingereza" },
-      { "code": "eo", "name": "Kiesperanto" },
-      { "code": "et", "name": "Kiestonia" },
-      { "code": "ee", "name": "Kiewe" },
-      { "code": "fo", "name": "Kifaroe" },
-      { "code": "fj", "name": "Kifiji" },
-      { "code": "fi", "name": "Kifini" },
-      { "code": "fr", "name": "Kifaransa" },
-      { "code": "fy", "name": "Kifrisia cha Magharibi" },
-      { "code": "ff", "name": "Kifulah" },
-      { "code": "gd", "name": "Kigaeli cha Uskoti" },
-      { "code": "gl", "name": "Kigalicia" },
-      { "code": "lg", "name": "Kiganda" },
-      { "code": "ka", "name": "Kijojia" },
-      { "code": "de", "name": "Kijerumani" },
-      { "code": "el", "name": "Kigiriki" },
-      { "code": "kl", "name": "Kikalaallisut (Kigrinlandi)" },
-      { "code": "gn", "name": "Kiguarani" },
-      { "code": "gu", "name": "Kigujarati" },
-      { "code": "ht", "name": "Kikrioli cha Haiti" },
-      { "code": "ha", "name": "Kihausa" },
-      { "code": "he", "name": "Kiebrania" },
-      { "code": "hz", "name": "Kiherero" },
-      { "code": "hi", "name": "Kihindi" },
-      { "code": "ho", "name": "Kihiri Motu" },
-      { "code": "hu", "name": "Kihungari" },
-      { "code": "is", "name": "Kiaislandi" },
-      { "code": "io", "name": "Kiido" },
-      { "code": "ig", "name": "Kiigbo" },
-      { "code": "id", "name": "Kiindonesia" },
-      { "code": "ia", "name": "Kiinterlingua" },
-      { "code": "ie", "name": "Kiinterlingue" },
-      { "code": "iu", "name": "Kiinuktitut" },
-      { "code": "ik", "name": "Kiinupiaq" },
-      { "code": "ga", "name": "Kiayalandi" },
-      { "code": "it", "name": "Kiitaliano" },
-      { "code": "ja", "name": "Kijapani" },
-      { "code": "jv", "name": "Kijava" },
-      { "code": "kn", "name": "Kikannada" },
-      { "code": "kr", "name": "Kikanuri" },
-      { "code": "ks", "name": "Kikashmiri" },
-      { "code": "kk", "name": "Kikazaki" },
-      { "code": "km", "name": "Kikhmer" },
-      { "code": "ki", "name": "Kikikuyu" },
-      { "code": "rw", "name": "Kinyarwanda" },
-      { "code": "ky", "name": "Kikirigizi" },
-      { "code": "kv", "name": "Kikomi" },
-      { "code": "kg", "name": "Kikongo" },
-      { "code": "ko", "name": "Kikorea" },
-      { "code": "kj", "name": "Kikuanyama" },
-      { "code": "ku", "name": "Kikurdi" },
-      { "code": "lo", "name": "Kilaosi" },
-      { "code": "la", "name": "Kilatini" },
-      { "code": "lv", "name": "Kilatvia" },
-      { "code": "li", "name": "Kilimburgi" },
-      { "code": "ln", "name": "Kilingala" },
-      { "code": "lt", "name": "Kilithuania" },
-      { "code": "lu", "name": "Kiluba-Katanga" },
-      { "code": "lb", "name": "Kilasembagi" },
-      { "code": "mk", "name": "Kimasedonia" },
-      { "code": "mg", "name": "Kimalagasi" },
-      { "code": "ms", "name": "Kimalay" },
-      { "code": "ml", "name": "Kimalayalam" },
-      { "code": "mt", "name": "Kimalta" },
-      { "code": "gv", "name": "Kimanx" },
-      { "code": "mi", "name": "Kimaori" },
-      { "code": "mr", "name": "Kimarathi" },
-      { "code": "mh", "name": "Kimashale" },
-      { "code": "mn", "name": "Kimongolia" },
-      { "code": "na", "name": "Kinauru" },
-      { "code": "nv", "name": "Kinavajo" },
-      { "code": "nd", "name": "Kindebele cha Kaskazini" },
-      { "code": "nr", "name": "Kindebele cha Kusini" },
-      { "code": "ng", "name": "Kindonga" },
-      { "code": "ne", "name": "Kinepali" },
-      { "code": "no", "name": "Kinorwe" },
-      { "code": "nb", "name": "Kinorwe cha Bokmål" },
-      { "code": "nn", "name": "Kinorwe cha Nynorsk" },
-      { "code": "oc", "name": "Kiokitani" },
-      { "code": "oj", "name": "Kiojibwa" },
-      { "code": "or", "name": "Kioriya" },
-      { "code": "om", "name": "Kioromo" },
-      { "code": "os", "name": "Kiosetia" },
-      { "code": "pi", "name": "Kipali" },
-      { "code": "ps", "name": "Kipashto" },
-      { "code": "fa", "name": "Kiajemi (Kifarsi)" },
-      { "code": "pl", "name": "Kipolandi" },
-      { "code": "pt", "name": "Kireno" },
-      { "code": "pa", "name": "Kipunjabi" },
-      { "code": "qu", "name": "Kiquechua" },
-      { "code": "ro", "name": "Kiromania" },
-      { "code": "rm", "name": "Kiromanshi" },
-      { "code": "rn", "name": "Kirundi" },
-      { "code": "ru", "name": "Kirusi" },
-      { "code": "se", "name": "Kisami cha Kaskazini" },
-      { "code": "sm", "name": "Kisamoa" },
-      { "code": "sg", "name": "Kisango" },
-      { "code": "sa", "name": "Kisanskriti" },
-      { "code": "sc", "name": "Kisardinia" },
-      { "code": "sr", "name": "Kiserbia" },
-      { "code": "sn", "name": "Kishona" },
-      { "code": "ii", "name": "Kiyi cha Sichuan" },
-      { "code": "sd", "name": "Kisindhi" },
-      { "code": "si", "name": "Kisinhala" },
-      { "code": "sk", "name": "Kislovakia" },
-      { "code": "sl", "name": "Kislovenia" },
-      { "code": "so", "name": "Kisomali" },
-      { "code": "st", "name": "Kisotho cha Kusini" },
-      { "code": "es", "name": "Kihispania" },
-      { "code": "su", "name": "Kisunda" },
-      { "code": "sw", "name": "Kiswahili" },
-      { "code": "ss", "name": "Kiswati" },
-      { "code": "sv", "name": "Kiswidi" },
-      { "code": "tl", "name": "Kitagalogi (Kifilipino)" },
-      { "code": "ty", "name": "Kitahiti" },
-      { "code": "tg", "name": "Kitajiki" },
-      { "code": "ta", "name": "Kitamil" },
-      { "code": "tt", "name": "Kitatari" },
-      { "code": "te", "name": "Kitelugu" },
-      { "code": "th", "name": "Kithai" },
-      { "code": "bo", "name": "Kitibeti" },
-      { "code": "ti", "name": "Kitigrinya" },
-      { "code": "to", "name": "Kitonga" },
-      { "code": "ts", "name": "Kitsonga" },
-      { "code": "tn", "name": "Kitswana" },
-      { "code": "tr", "name": "Kituruki" },
-      { "code": "tk", "name": "Kiturukimeni" },
-      { "code": "tw", "name": "Kitwi" },
-      { "code": "ug", "name": "Kiuiguri" },
-      { "code": "uk", "name": "Kiukreni" },
-      { "code": "ur", "name": "Kiurdu" },
-      { "code": "uz", "name": "Kiuzbeki" },
-      { "code": "ve", "name": "Kivenda" },
-      { "code": "vi", "name": "Kivietinamu" },
-      { "code": "vo", "name": "Kivolapük" },
-      { "code": "wa", "name": "Kiwaloon" },
-      { "code": "cy", "name": "Kiwelisi" },
-      { "code": "wo", "name": "Kiwolofu" },
-      { "code": "xh", "name": "Kixhosa" },
-      { "code": "yi", "name": "Kiyidi" },
-      { "code": "yo", "name": "Kiyoruba" },
-      { "code": "za", "name": "Kizhuang" },
-      { "code": "zu", "name": "Kizulu" }
     ],
-    "countries": [
-      { "code": "AF", "name": "Afghanistan" },
-      { "code": "AL", "name": "Albania" },
-      { "code": "DZ", "name": "Aljeria" },
-      { "code": "AS", "name": "Samoa ya Marekani" },
-      { "code": "AD", "name": "Andora" },
-      { "code": "AO", "name": "Angola" },
-      { "code": "AI", "name": "Anguilla" },
-      { "code": "AQ", "name": "Antaktika" },
-      { "code": "AG", "name": "Antigua na Barbuda" },
-      { "code": "AR", "name": "Ajentina" },
-      { "code": "AM", "name": "Armenia" },
-      { "code": "AW", "name": "Aruba" },
-      { "code": "AU", "name": "Australia" },
-      { "code": "AT", "name": "Austria" },
-      { "code": "AZ", "name": "Azerbaijani" },
-      { "code": "BS", "name": "Bahama" },
-      { "code": "BH", "name": "Bahraini" },
-      { "code": "BD", "name": "Bangladeshi" },
-      { "code": "BB", "name": "Babadosi" },
-      { "code": "BY", "name": "Belarusi" },
-      { "code": "BE", "name": "Ubelgiji" },
-      { "code": "BZ", "name": "Belize" },
-      { "code": "BJ", "name": "Benin" },
-      { "code": "BM", "name": "Bermuda" },
-      { "code": "BT", "name": "Bhutani" },
-      { "code": "BO", "name": "Bolivia" },
-      { "code": "BA", "name": "Bosnia na Herzegovina" },
-      { "code": "BW", "name": "Botswana" },
-      { "code": "BR", "name": "Brazili" },
-      { "code": "IO", "name": "Eneo la Uingereza katika Bahari Hindi" },
-      { "code": "VG", "name": "Visiwa vya Virgin vya Uingereza" },
-      { "code": "BN", "name": "Brunei" },
-      { "code": "BG", "name": "Bulgaria" },
-      { "code": "BF", "name": "Bukinafaso" },
-      { "code": "BI", "name": "Burundi" },
-      { "code": "KH", "name": "Kambodia" },
-      { "code": "CM", "name": "Kameruni" },
-      { "code": "CA", "name": "Kanada" },
-      { "code": "CV", "name": "Cape Verde" },
-      { "code": "KY", "name": "Visiwa vya Cayman" },
-      { "code": "CF", "name": "Jamhuri ya Afrika ya Kati" },
-      { "code": "TD", "name": "Chadi" },
-      { "code": "CL", "name": "Chile" },
-      { "code": "CN", "name": "Uchina" },
-      { "code": "CX", "name": "Kisiwa cha Krismasi" },
-      { "code": "CC", "name": "Visiwa vya Cocos (Keeling)" },
-      { "code": "CO", "name": "Kolombia" },
-      { "code": "KM", "name": "Komoro" },
-      { "code": "CG", "name": "Kongo - Brazzaville" },
-      { "code": "CD", "name": "Kongo - Kinshasa" },
-      { "code": "CK", "name": "Visiwa vya Cook" },
-      { "code": "CR", "name": "Kostarika" },
-      { "code": "CI", "name": "Côte d’Ivoire" },
-      { "code": "HR", "name": "Kroeshia" },
-      { "code": "CU", "name": "Kuba" },
-      { "code": "CY", "name": "Saiprasi" },
-      { "code": "CZ", "name": "Ucheki" },
-      { "code": "DK", "name": "Denmaki" },
-      { "code": "DJ", "name": "Jibuti" },
-      { "code": "DM", "name": "Dominika" },
-      { "code": "DO", "name": "Jamhuri ya Dominika" },
-      { "code": "EC", "name": "Ekwado" },
-      { "code": "EG", "name": "Misri" },
-      { "code": "SV", "name": "El Salvador" },
-      { "code": "GQ", "name": "Ginekweta" },
-      { "code": "ER", "name": "Eritrea" },
-      { "code": "EE", "name": "Estonia" },
-      { "code": "SZ", "name": "Eswatini" },
-      { "code": "ET", "name": "Ethiopia" },
-      { "code": "FJ", "name": "Fiji" },
-      { "code": "FI", "name": "Ufini" },
-      { "code": "FR", "name": "Ufaransa" },
-      { "code": "GA", "name": "Gabon" },
-      { "code": "GM", "name": "Gambia" },
-      { "code": "GE", "name": "Jojia" },
-      { "code": "DE", "name": "Ujerumani" },
-      { "code": "GH", "name": "Ghana" },
-      { "code": "GR", "name": "Ugiriki" },
-      { "code": "GT", "name": "Gwatemala" },
-      { "code": "GN", "name": "Gine" },
-      { "code": "GY", "name": "Guyana" },
-      { "code": "HT", "name": "Haiti" },
-      { "code": "HN", "name": "Hondurasi" },
-      { "code": "HK", "name": "Hong Kong" },
-      { "code": "HU", "name": "Hungaria" },
-      { "code": "IS", "name": "Aisilandi" },
-      { "code": "IN", "name": "India" },
-      { "code": "ID", "name": "Indonesia" },
-      { "code": "IR", "name": "Iran" },
-      { "code": "IQ", "name": "Iraki" },
-      { "code": "IE", "name": "Ayalandi" },
-      { "code": "IL", "name": "Israeli" },
-      { "code": "IT", "name": "Italia" },
-      { "code": "JM", "name": "Jamaika" },
-      { "code": "JP", "name": "Japani" },
-      { "code": "JO", "name": "Yordani" },
-      { "code": "KZ", "name": "Kazakistani" },
-      { "code": "KE", "name": "Kenya" },
-      { "code": "KR", "name": "Korea Kusini" },
-      { "code": "KW", "name": "Kuwaiti" },
-      { "code": "KG", "name": "Kirigizistani" },
-      { "code": "LA", "name": "Laosi" },
-      { "code": "LV", "name": "Lativia" },
-      { "code": "LB", "name": "Lebanoni" },
-      { "code": "LS", "name": "Lesotho" },
-      { "code": "LR", "name": "Liberia" },
-      { "code": "LY", "name": "Libya" },
-      { "code": "LI", "name": "Liechtenstein" },
-      { "code": "LT", "name": "Lithuania" },
-      { "code": "LU", "name": "Lasembagi" },
-      { "code": "MG", "name": "Madagaska" },
-      { "code": "MW", "name": "Malawi" },
-      { "code": "MY", "name": "Malesia" },
-      { "code": "MV", "name": "Maldivi" },
-      { "code": "ML", "name": "Mali" },
-      { "code": "MT", "name": "Malta" },
-      { "code": "MX", "name": "Meksiko" },
-      { "code": "MD", "name": "Moldova" },
-      { "code": "MC", "name": "Monako" },
-      { "code": "MN", "name": "Mongolia" },
-      { "code": "ME", "name": "Montenegro" },
-      { "code": "MA", "name": "Moroko" },
-      { "code": "MZ", "name": "Msumbiji" },
-      { "code": "MM", "name": "Myama" },
-      { "code": "NA", "name": "Namibia" },
-      { "code": "NP", "name": "Nepali" },
-      { "code": "NL", "name": "Uholanzi" },
-      { "code": "NZ", "name": "Nyuzilandi" },
-      { "code": "NI", "name": "Nikaragwa" },
-      { "code": "NE", "name": "Nijeri" },
-      { "code": "NG", "name": "Nijeria" },
-      { "code": "MK", "name": "Masedonia Kaskazini" },
-      { "code": "NO", "name": "Norwe" },
-      { "code": "OM", "name": "Omani" },
-      { "code": "PK", "name": "Pakistani" },
-      { "code": "PA", "name": "Panama" },
-      { "code": "PG", "name": "Papua Guinea Mpya" },
-      { "code": "PY", "name": "Paragwai" },
-      { "code": "PE", "name": "Peru" },
-      { "code": "PH", "name": "Ufilipino" },
-      { "code": "PL", "name": "Polandi" },
-      { "code": "PT", "name": "Ureno" },
-      { "code": "QA", "name": "Katari" },
-      { "code": "RO", "name": "Romania" },
-      { "code": "RU", "name": "Urusi" },
-      { "code": "RW", "name": "Rwanda" },
-      { "code": "SA", "name": "Saudi" },
-      { "code": "SN", "name": "Senegali" },
-      { "code": "RS", "name": "Serbia" },
-      { "code": "SG", "name": "Singapoo" },
-      { "code": "SK", "name": "Slovakia" },
-      { "code": "SI", "name": "Slovenia" },
-      { "code": "ZA", "name": "Afrika Kusini" },
-      { "code": "ES", "name": "Hispania" },
-      { "code": "LK", "name": "Sri Lanka" },
-      { "code": "SE", "name": "Uswidi" },
-      { "code": "CH", "name": "Uswisi" },
-      { "code": "TW", "name": "Taiwani" },
-      { "code": "TH", "name": "Thailandi" },
-      { "code": "TR", "name": "Uturuki" },
-      { "code": "UG", "name": "Uganda" },
-      { "code": "UA", "name": "Ukreni" },
-      { "code": "AE", "name": "Falme za Kiarabu" },
-      { "code": "GB", "name": "Ufalme wa Muungano" },
-      { "code": "US", "name": "Marekani" },
-      { "code": "UY", "name": "Urugwai" },
-      { "code": "UZ", "name": "Uzibekistani" },
-      { "code": "VE", "name": "Venezuela" },
-      { "code": "VN", "name": "Vietnamu" },
-      { "code": "YE", "name": "Yemeni" },
-      { "code": "ZM", "name": "Zambia" },
-      { "code": "ZW", "name": "Zimbabwe" }
-    ]
-  }
+    "links": {
+      "docs": "/plans",
+      "community": "/help"
+    }
+  },
+  "faq": [
+    {
+      "q": "Existe um teste grátis?",
+      "a": "Sim! Você pode começar com nosso plano Gratuito, limitado a 100 usuários, para testar a tecnologia."
+    },
+    {
+      "q": "Posso cancelar a qualquer momento?",
+      "a": "Sim, você pode cancelar sua assinatura a qualquer momento através do painel da sua conta."
+    }
+  ],
+  "plans": {
+    "currency": "USD",
+    "billingIntervals": ["mensal", "anual"],
+    "currentPlan": "free",
+    "plans": [
+      {
+        "id": "free",
+        "name": "Gratuito",
+        "monthly": 0,
+        "yearly": 0,
+        "tagline": "Teste a tecnologia",
+        "featuresBase": ["1 fonte de notícias", "Até 100 usuários"],
+        "featuresDelta": [],
+        "limits": { "newsSources": 1, "users": 100 },
+        "ctaLabel": "Plano Atual",
+        "tier": 0
+      },
+      {
+        "id": "starter",
+        "name": "Starter",
+        "monthly": 17,
+        "yearly": 132,
+        "tagline": "Para newsletters em crescimento",
+        "featuresBase": ["5 fontes de notícias", "Até 100k usuários"],
+        "featuresDelta": ["Suporte por e-mail", "Tradução básica"],
+        "limits": { "newsSources": 5, "users": 100000 },
+        "ctaLabel": "Escolher Starter",
+        "productId": "prod_starter_id",
+        "tier": 1
+      },
+      {
+        "id": "growth",
+        "name": "Growth",
+        "monthly": 35,
+        "yearly": 273,
+        "tagline": "O equilíbrio perfeito",
+        "featuresBase": ["17 fontes de notícias", "Até 250k usuários"],
+        "featuresDelta": ["Branding personalizado", "Analytics avançado"],
+        "limits": { "newsSources": 17, "users": 250000 },
+        "ctaLabel": "Escolher Growth",
+        "productId": "prod_growth_id",
+        "tier": 2
+      },
+      {
+        "id": "pro",
+        "name": "Pro",
+        "monthly": 80,
+        "yearly": 624,
+        "tagline": "Para profissionais de marketing",
+        "featuresBase": ["25 fontes de notícias", "Até 500k usuários"],
+        "featuresDelta": ["Acesso à API", "Processamento prioritário"],
+        "limits": { "newsSources": 25, "users": 500000 },
+        "ctaLabel": "Escolher Pro",
+        "productId": "prod_pro_id",
+        "tier": 3
+      },
+      {
+        "id": "master",
+        "name": "Master",
+        "monthly": 150,
+        "yearly": 1170,
+        "tagline": "Escalabilidade ilimitada",
+        "featuresBase": ["50 fontes de notícias", "Usuários ilimitados"],
+        "featuresDelta": ["Suporte VIP", "Webhooks personalizados"],
+        "limits": { "newsSources": 50, "users": -1 },
+        "ctaLabel": "Escolher Master",
+        "productId": "prod_master_id",
+        "tier": 4
+      },
+      {
+        "id": "vipfree",
+        "name": "VIP Grátis",
+        "monthly": 0,
+        "yearly": 0,
+        "tagline": "Acesso total para parceiros",
+        "featuresBase": ["Fontes ilimitadas", "Usuários ilimitados"],
+        "featuresDelta": [],
+        "limits": { "newsSources": -1, "users": -1 },
+        "ctaLabel": "Plano Atual",
+        "internalOnly": true,
+        "tier": 5
+      }
+    ],
+    "contact": {
+      "text": "Precisa de uma solução personalizada?",
+      "cta": "Fale Conosco",
+      "href": "/help"
+    }
+  },
+  "article": {
+    "notFound": "Artigo não encontrado.",
+    "errorFetching": "Erro ao carregar o artigo.",
+    "noArticleSpecified": "Nenhum artigo especificado.",
+    "goBack": "Voltar",
+    "loading": "Carregando..."
+  },
+  "pricing": {
+    "eyebrow": "Preços",
+    "title": "Planos Flexíveis",
+    "currentPlan": "Plano Atual:",
+    "monthly": "Mensal",
+    "yearly": "Anual (Economize 35%)",
+    "everythingIn": "Tudo do plano anterior, mais:",
+    "isCurrentPlan": "Este é seu plano atual",
+    "downgradeTo": "Mudar para {planName}",
+    "upgradeTo": "Fazer upgrade para {planName}",
+    "mockMode": "Modo de Teste Ativado",
+    "mostPopular": "Mais Popular",
+    "perMonth": "por mês",
+    "perYear": "por ano",
+    "youSave": "Você economiza"
+  },
+  "confirmSubscription": {
+    "title": "Confirme sua Assinatura",
+    "goBack": "Voltar",
+    "pleaseAccept": "Por favor, aceite os termos para concluir sua assinatura.",
+    "iAccept": "Eu aceito os",
+    "termsAndConditions": "Termos e Condições",
+    "and": "e",
+    "privacyPolicy": "Política de Privacidade",
+    "confirm": "Confirmar Assinatura",
+    "mustAccept": "Você deve aceitar os termos para assinar.",
+    "invalidLink": "Link de confirmação inválido."
+  },
+  "articles": {
+    "title": "Últimas Insights",
+    "subtitle": "Explore nossa coleção curada de artigos e notícias.",
+    "producedIn": "Produzimos notícias em todos estes idiomas",
+    "searchPlaceholder": "Buscar artigos...",
+    "noArticlesFound": "Nenhum artigo encontrado.",
+    "created": "Criado em:",
+    "language": "Idioma:",
+    "rightsReserved": "Todos os direitos reservados.",
+    "errorFetching": "Erro ao carregar artigos."
+  },
+  "mainPage": {
+    "skipToMainContent": "Pular para o conteúdo principal",
+    "dismissAnnouncement": "Fechar anúncio",
+    "problem": "Problema:",
+    "outcome": "Resultado:",
+    "disclaimer": "A economia de 35% aplica-se apenas ao faturamento anual."
+  },
+  "authForm": {
+    "emailValidation": "Por favor, insira um e-mail válido.",
+    "failedToSendCode": "Falha ao enviar o código. Tente novamente.",
+    "sending": "Enviando...",
+    "codeSent": "Código enviado para seu e-mail",
+    "invalidCode": "Código fornecido é inválido",
+    "regenerateCode": "Reenviar código",
+    "back": "← Voltar",
+    "byProceeding": "Ao continuar, você concorda com os",
+    "termsOfService": "Termos de Serviço",
+    "and": "e",
+    "privacyPolicy": "Política de Privacidade",
+    "appName": "IA Newsletter"
+  },
+  "welcome": {
+    "title": "Gerador automático de newsletters",
+    "setItOnce": "Configure uma vez...",
+    "useItForever": "...use para sempre."
+  },
+  "lead": {
+    "title": "Transforme inscritos em visitantes",
+    "recommendation": "Ajude nossa IA a entender sua marca conectando seu site.",
+    "question": "Você tem um site? (opcional)",
+    "placeholder": "https://seu-site.com.br"
+  },
+  "newsSource": {
+    "title": "Conecte sua fonte de conteúdo",
+    "subtitle": "Buscaremos seu feed para que você não precise começar do zero.",
+    "placeholder": "Seu blog ou link RSS"
+  },
+  "subscribe": {
+    "welcome": {
+      "title": "Bem-vindo à Newsletter.",
+      "invitedBy": "Você foi convidado por {configuratorId}."
+    }
+  },
+  "header": {
+    "goToWorkspace": "Ir para Workspace",
+    "inBilling": "Faturamento",
+    "vip": "VIP",
+    "plan": "Plano {planName}",
+    "logIn": "Entrar",
+    "getStarted": "Começar Agora"
+  },
+  "fileInput": {
+    "chooseFile": "Escolher Arquivo",
+    "dropFile": "Solte aqui",
+    "release": "Solte para enviar"
+  },
+  "imageInput": {
+    "unsupportedFileType": "Tipo não suportado. Use PNG, JPEG ou WebP.",
+    "dropImage": "Solte a imagem",
+    "dragDrop": "Arraste e solte",
+    "browse": "ou procure arquivos",
+    "selectImage": "Selecionar",
+    "preview": "Prévia",
+    "removeImage": "Remover"
+  },
+  "billing": {
+    "title": "Faturamento e Assinatura",
+    "currentPlanTitle": "Seu Plano Atual",
+    "upgradePlanTitle": "Mude seu Plano",
+    "manageSubscription": "Gerenciar Assinatura",
+    "vipPlanName": "Parceiro VIP",
+    "vipPlanDescription": "Acesso ilimitado cortesia de IA Newsletter.",
+    "perMonth": "por mês",
+    "perYear": "por ano",
+    "monthAbbreviation": "mês",
+    "equivalentTo": "equivalente a",
+    "mostPopular": "Mais Popular",
+    "upgradeTo": "Fazer upgrade para",
+    "downgradeTo": "Mudar para",
+    "currentPlanButton": "Seu Plano",
+    "youSave": "Você economiza",
+    "users": "usuários",
+    "newsSources": "fontes de notícias",
+    "monthly": "Mensal",
+    "yearly": "Anual",
+    "loadingPlan": "Carregando dados do plano..."
+  },
+  "languages": [
+    { "code": "ab", "name": "Kiaabkhazi" },
+    { "code": "aa", "name": "Kiafar" },
+    { "code": "af", "name": "Kiafrikana" },
+    { "code": "ak", "name": "Kiakani" },
+    { "code": "sq", "name": "Kialbania" },
+    { "code": "am", "name": "Kiamhari" },
+    { "code": "ar", "name": "Kiarabu" },
+    { "code": "an", "name": "Kiaragoni" },
+    { "code": "hy", "name": "Kiarmenia" },
+    { "code": "as", "name": "Kiassam" },
+    { "code": "av", "name": "Kiavari" },
+    { "code": "ae", "name": "Kiavesta" },
+    { "code": "ay", "name": "Kiaimara" },
+    { "code": "az", "name": "Kiazeri" },
+    { "code": "bm", "name": "Kibambara" },
+    { "code": "ba", "name": "Kibashkir" },
+    { "code": "eu", "name": "Kibasque" },
+    { "code": "be", "name": "Kibelarusi" },
+    { "code": "bn", "name": "Kibengali" },
+    { "code": "bi", "name": "Kibislama" },
+    { "code": "bs", "name": "Kibosnia" },
+    { "code": "br", "name": "Kibretoni" },
+    { "code": "bg", "name": "Kibulgaria" },
+    { "code": "my", "name": "Kiburma" },
+    { "code": "ca", "name": "Kikatalani" },
+    { "code": "ch", "name": "Kichamorro" },
+    { "code": "ce", "name": "Kichechen" },
+    { "code": "ny", "name": "Kichewa" },
+    { "code": "zh", "name": "Kichina" },
+    { "code": "cu", "name": "Kislavoni cha Kanisa" },
+    { "code": "cv", "name": "Kichuvash" },
+    { "code": "kw", "name": "Kikorni" },
+    { "code": "co", "name": "Kikosikani" },
+    { "code": "cr", "name": "Kikri" },
+    { "code": "hr", "name": "Kikroeshia" },
+    { "code": "cs", "name": "Kicheki" },
+    { "code": "da", "name": "Kidenmaki" },
+    { "code": "dv", "name": "Kidivehi" },
+    { "code": "nl", "name": "Kiholanzi" },
+    { "code": "dz", "name": "Kidzongkha" },
+    { "code": "en", "name": "Kiingereza" },
+    { "code": "eo", "name": "Kiesperanto" },
+    { "code": "et", "name": "Kiestonia" },
+    { "code": "ee", "name": "Kiewe" },
+    { "code": "fo", "name": "Kifaroe" },
+    { "code": "fj", "name": "Kifiji" },
+    { "code": "fi", "name": "Kifini" },
+    { "code": "fr", "name": "Kifaransa" },
+    { "code": "fy", "name": "Kifrisia cha Magharibi" },
+    { "code": "ff", "name": "Kifulah" },
+    { "code": "gd", "name": "Kigaeli cha Uskoti" },
+    { "code": "gl", "name": "Kigalicia" },
+    { "code": "lg", "name": "Kiganda" },
+    { "code": "ka", "name": "Kijojia" },
+    { "code": "de", "name": "Kijerumani" },
+    { "code": "el", "name": "Kigiriki" },
+    { "code": "kl", "name": "Kikalaallisut (Kigrinlandi)" },
+    { "code": "gn", "name": "Kiguarani" },
+    { "code": "gu", "name": "Kigujarati" },
+    { "code": "ht", "name": "Kikrioli cha Haiti" },
+    { "code": "ha", "name": "Kihausa" },
+    { "code": "he", "name": "Kiebrania" },
+    { "code": "hz", "name": "Kiherero" },
+    { "code": "hi", "name": "Kihindi" },
+    { "code": "ho", "name": "Kihiri Motu" },
+    { "code": "hu", "name": "Kihungari" },
+    { "code": "is", "name": "Kiaislandi" },
+    { "code": "io", "name": "Kiido" },
+    { "code": "ig", "name": "Kiigbo" },
+    { "code": "id", "name": "Kiindonesia" },
+    { "code": "ia", "name": "Kiinterlingua" },
+    { "code": "ie", "name": "Kiinterlingue" },
+    { "code": "iu", "name": "Kiinuktitut" },
+    { "code": "ik", "name": "Kiinupiaq" },
+    { "code": "ga", "name": "Kiayalandi" },
+    { "code": "it", "name": "Kiitaliano" },
+    { "code": "ja", "name": "Kijapani" },
+    { "code": "jv", "name": "Kijava" },
+    { "code": "kn", "name": "Kikannada" },
+    { "code": "kr", "name": "Kikanuri" },
+    { "code": "ks", "name": "Kikashmiri" },
+    { "code": "kk", "name": "Kikazaki" },
+    { "code": "km", "name": "Kikhmer" },
+    { "code": "ki", "name": "Kikikuyu" },
+    { "code": "rw", "name": "Kinyarwanda" },
+    { "code": "ky", "name": "Kikirigizi" },
+    { "code": "kv", "name": "Kikomi" },
+    { "code": "kg", "name": "Kikongo" },
+    { "code": "ko", "name": "Kikorea" },
+    { "code": "kj", "name": "Kikuanyama" },
+    { "code": "ku", "name": "Kikurdi" },
+    { "code": "lo", "name": "Kilaosi" },
+    { "code": "la", "name": "Kilatini" },
+    { "code": "lv", "name": "Kilatvia" },
+    { "code": "li", "name": "Kilimburgi" },
+    { "code": "ln", "name": "Kilingala" },
+    { "code": "lt", "name": "Kilithuania" },
+    { "code": "lu", "name": "Kiluba-Katanga" },
+    { "code": "lb", "name": "Kilasembagi" },
+    { "code": "mk", "name": "Kimasedonia" },
+    { "code": "mg", "name": "Kimalagasi" },
+    { "code": "ms", "name": "Kimalay" },
+    { "code": "ml", "name": "Kimalayalam" },
+    { "code": "mt", "name": "Kimalta" },
+    { "code": "gv", "name": "Kimanx" },
+    { "code": "mi", "name": "Kimaori" },
+    { "code": "mr", "name": "Kimarathi" },
+    { "code": "mh", "name": "Kimashale" },
+    { "code": "mn", "name": "Kimongolia" },
+    { "code": "na", "name": "Kinauru" },
+    { "code": "nv", "name": "Kinavajo" },
+    { "code": "nd", "name": "Kindebele cha Kaskazini" },
+    { "code": "nr", "name": "Kindebele cha Kusini" },
+    { "code": "ng", "name": "Kindonga" },
+    { "code": "ne", "name": "Kinepali" },
+    { "code": "no", "name": "Kinorwe" },
+    { "code": "nb", "name": "Kinorwe cha Bokmål" },
+    { "code": "nn", "name": "Kinorwe cha Nynorsk" },
+    { "code": "oc", "name": "Kiokitani" },
+    { "code": "oj", "name": "Kiojibwa" },
+    { "code": "or", "name": "Kioriya" },
+    { "code": "om", "name": "Kioromo" },
+    { "code": "os", "name": "Kiosetia" },
+    { "code": "pi", "name": "Kipali" },
+    { "code": "ps", "name": "Kipashto" },
+    { "code": "fa", "name": "Kiajemi (Kifarsi)" },
+    { "code": "pl", "name": "Kipolandi" },
+    { "code": "pt", "name": "Kireno" },
+    { "code": "pa", "name": "Kipunjabi" },
+    { "code": "qu", "name": "Kiquechua" },
+    { "code": "ro", "name": "Kiromania" },
+    { "code": "rm", "name": "Kiromanshi" },
+    { "code": "rn", "name": "Kirundi" },
+    { "code": "ru", "name": "Kirusi" },
+    { "code": "se", "name": "Kisami cha Kaskazini" },
+    { "code": "sm", "name": "Kisamoa" },
+    { "code": "sg", "name": "Kisango" },
+    { "code": "sa", "name": "Kisanskriti" },
+    { "code": "sc", "name": "Kisardinia" },
+    { "code": "sr", "name": "Kiserbia" },
+    { "code": "sn", "name": "Kishona" },
+    { "code": "ii", "name": "Kiyi cha Sichuan" },
+    { "code": "sd", "name": "Kisindhi" },
+    { "code": "si", "name": "Kisinhala" },
+    { "code": "sk", "name": "Kislovakia" },
+    { "code": "sl", "name": "Kislovenia" },
+    { "code": "so", "name": "Kisomali" },
+    { "code": "st", "name": "Kisotho cha Kusini" },
+    { "code": "es", "name": "Kihispania" },
+    { "code": "su", "name": "Kisunda" },
+    { "code": "sw", "name": "Kiswahili" },
+    { "code": "ss", "name": "Kiswati" },
+    { "code": "sv", "name": "Kiswidi" },
+    { "code": "tl", "name": "Kitagalogi (Kifilipino)" },
+    { "code": "ty", "name": "Kitahiti" },
+    { "code": "tg", "name": "Kitajiki" },
+    { "code": "ta", "name": "Kitamil" },
+    { "code": "tt", "name": "Kitatari" },
+    { "code": "te", "name": "Kitelugu" },
+    { "code": "th", "name": "Kithai" },
+    { "code": "bo", "name": "Kitibeti" },
+    { "code": "ti", "name": "Kitigrinya" },
+    { "code": "to", "name": "Kitonga" },
+    { "code": "ts", "name": "Kitsonga" },
+    { "code": "tn", "name": "Kitswana" },
+    { "code": "tr", "name": "Kituruki" },
+    { "code": "tk", "name": "Kiturukimeni" },
+    { "code": "tw", "name": "Kitwi" },
+    { "code": "ug", "name": "Kiuiguri" },
+    { "code": "uk", "name": "Kiukreni" },
+    { "code": "ur", "name": "Kiurdu" },
+    { "code": "uz", "name": "Kiuzbeki" },
+    { "code": "ve", "name": "Kivenda" },
+    { "code": "vi", "name": "Kivietinamu" },
+    { "code": "vo", "name": "Kivolapük" },
+    { "code": "wa", "name": "Kiwaloon" },
+    { "code": "cy", "name": "Kiwelisi" },
+    { "code": "wo", "name": "Kiwolofu" },
+    { "code": "xh", "name": "Kixhosa" },
+    { "code": "yi", "name": "Kiyidi" },
+    { "code": "yo", "name": "Kiyoruba" },
+    { "code": "za", "name": "Kizhuang" },
+    { "code": "zu", "name": "Kizulu" }
+  ],
+  "countries": [
+    { "code": "AF", "name": "Afghanistan" },
+    { "code": "AL", "name": "Albania" },
+    { "code": "DZ", "name": "Aljeria" },
+    { "code": "AS", "name": "Samoa ya Marekani" },
+    { "code": "AD", "name": "Andora" },
+    { "code": "AO", "name": "Angola" },
+    { "code": "AI", "name": "Anguilla" },
+    { "code": "AQ", "name": "Antaktika" },
+    { "code": "AG", "name": "Antigua na Barbuda" },
+    { "code": "AR", "name": "Ajentina" },
+    { "code": "AM", "name": "Armenia" },
+    { "code": "AW", "name": "Aruba" },
+    { "code": "AU", "name": "Australia" },
+    { "code": "AT", "name": "Austria" },
+    { "code": "AZ", "name": "Azerbaijani" },
+    { "code": "BS", "name": "Bahama" },
+    { "code": "BH", "name": "Bahraini" },
+    { "code": "BD", "name": "Bangladeshi" },
+    { "code": "BB", "name": "Babadosi" },
+    { "code": "BY", "name": "Belarusi" },
+    { "code": "BE", "name": "Ubelgiji" },
+    { "code": "BZ", "name": "Belize" },
+    { "code": "BJ", "name": "Benin" },
+    { "code": "BM", "name": "Bermuda" },
+    { "code": "BT", "name": "Bhutani" },
+    { "code": "BO", "name": "Bolivia" },
+    { "code": "BA", "name": "Bosnia na Herzegovina" },
+    { "code": "BW", "name": "Botswana" },
+    { "code": "BR", "name": "Brazili" },
+    { "code": "IO", "name": "Eneo la Uingereza katika Bahari Hindi" },
+    { "code": "VG", "name": "Visiwa vya Virgin vya Uingereza" },
+    { "code": "BN", "name": "Brunei" },
+    { "code": "BG", "name": "Bulgaria" },
+    { "code": "BF", "name": "Bukinafaso" },
+    { "code": "BI", "name": "Burundi" },
+    { "code": "KH", "name": "Kambodia" },
+    { "code": "CM", "name": "Kameruni" },
+    { "code": "CA", "name": "Kanada" },
+    { "code": "CV", "name": "Cape Verde" },
+    { "code": "KY", "name": "Visiwa vya Cayman" },
+    { "code": "CF", "name": "Jamhuri ya Afrika ya Kati" },
+    { "code": "TD", "name": "Chadi" },
+    { "code": "CL", "name": "Chile" },
+    { "code": "CN", "name": "Uchina" },
+    { "code": "CX", "name": "Kisiwa cha Krismasi" },
+    { "code": "CC", "name": "Visiwa vya Cocos (Keeling)" },
+    { "code": "CO", "name": "Kolombia" },
+    { "code": "KM", "name": "Komoro" },
+    { "code": "CG", "name": "Kongo - Brazzaville" },
+    { "code": "CD", "name": "Kongo - Kinshasa" },
+    { "code": "CK", "name": "Visiwa vya Cook" },
+    { "code": "CR", "name": "Kostarika" },
+    { "code": "CI", "name": "Côte d’Ivoire" },
+    { "code": "HR", "name": "Kroeshia" },
+    { "code": "CU", "name": "Kuba" },
+    { "code": "CY", "name": "Saiprasi" },
+    { "code": "CZ", "name": "Ucheki" },
+    { "code": "DK", "name": "Denmaki" },
+    { "code": "DJ", "name": "Jibuti" },
+    { "code": "DM", "name": "Dominika" },
+    { "code": "DO", "name": "Jamhuri ya Dominika" },
+    { "code": "EC", "name": "Ekwado" },
+    { "code": "EG", "name": "Misri" },
+    { "code": "SV", "name": "El Salvador" },
+    { "code": "GQ", "name": "Ginekweta" },
+    { "code": "ER", "name": "Eritrea" },
+    { "code": "EE", "name": "Estonia" },
+    { "code": "SZ", "name": "Eswatini" },
+    { "code": "ET", "name": "Ethiopia" },
+    { "code": "FJ", "name": "Fiji" },
+    { "code": "FI", "name": "Ufini" },
+    { "code": "FR", "name": "Ufaransa" },
+    { "code": "GA", "name": "Gabon" },
+    { "code": "GM", "name": "Gambia" },
+    { "code": "GE", "name": "Jojia" },
+    { "code": "DE", "name": "Ujerumani" },
+    { "code": "GH", "name": "Ghana" },
+    { "code": "GR", "name": "Ugiriki" },
+    { "code": "GT", "name": "Gwatemala" },
+    { "code": "GN", "name": "Gine" },
+    { "code": "GY", "name": "Guyana" },
+    { "code": "HT", "name": "Haiti" },
+    { "code": "HN", "name": "Hondurasi" },
+    { "code": "HK", "name": "Hong Kong" },
+    { "code": "HU", "name": "Hungaria" },
+    { "code": "IS", "name": "Aisilandi" },
+    { "code": "IN", "name": "India" },
+    { "code": "ID", "name": "Indonesia" },
+    { "code": "IR", "name": "Iran" },
+    { "code": "IQ", "name": "Iraki" },
+    { "code": "IE", "name": "Ayalandi" },
+    { "code": "IL", "name": "Israeli" },
+    { "code": "IT", "name": "Italia" },
+    { "code": "JM", "name": "Jamaika" },
+    { "code": "JP", "name": "Japani" },
+    { "code": "JO", "name": "Yordani" },
+    { "code": "KZ", "name": "Kazakistani" },
+    { "code": "KE", "name": "Kenya" },
+    { "code": "KR", "name": "Korea Kusini" },
+    { "code": "KW", "name": "Kuwaiti" },
+    { "code": "KG", "name": "Kirigizistani" },
+    { "code": "LA", "name": "Laosi" },
+    { "code": "LV", "name": "Lativia" },
+    { "code": "LB", "name": "Lebanoni" },
+    { "code": "LS", "name": "Lesotho" },
+    { "code": "LR", "name": "Liberia" },
+    { "code": "LY", "name": "Libya" },
+    { "code": "LI", "name": "Liechtenstein" },
+    { "code": "LT", "name": "Lithuania" },
+    { "code": "LU", "name": "Lasembagi" },
+    { "code": "MG", "name": "Madagaska" },
+    { "code": "MW", "name": "Malawi" },
+    { "code": "MY", "name": "Malesia" },
+    { "code": "MV", "name": "Maldivi" },
+    { "code": "ML", "name": "Mali" },
+    { "code": "MT", "name": "Malta" },
+    { "code": "MX", "name": "Meksiko" },
+    { "code": "MD", "name": "Moldova" },
+    { "code": "MC", "name": "Monako" },
+    { "code": "MN", "name": "Mongolia" },
+    { "code": "ME", "name": "Montenegro" },
+    { "code": "MA", "name": "Moroko" },
+    { "code": "MZ", "name": "Msumbiji" },
+    { "code": "MM", "name": "Myama" },
+    { "code": "NA", "name": "Namibia" },
+    { "code": "NP", "name": "Nepali" },
+    { "code": "NL", "name": "Uholanzi" },
+    { "code": "NZ", "name": "Nyuzilandi" },
+    { "code": "NI", "name": "Nikaragwa" },
+    { "code": "NE", "name": "Nijeri" },
+    { "code": "NG", "name": "Nijeria" },
+    { "code": "MK", "name": "Masedonia Kaskazini" },
+    { "code": "NO", "name": "Norwe" },
+    { "code": "OM", "name": "Omani" },
+    { "code": "PK", "name": "Pakistani" },
+    { "code": "PA", "name": "Panama" },
+    { "code": "PG", "name": "Papua Guinea Mpya" },
+    { "code": "PY", "name": "Paragwai" },
+    { "code": "PE", "name": "Peru" },
+    { "code": "PH", "name": "Ufilipino" },
+    { "code": "PL", "name": "Polandi" },
+    { "code": "PT", "name": "Ureno" },
+    { "code": "QA", "name": "Katari" },
+    { "code": "RO", "name": "Romania" },
+    { "code": "RU", "name": "Urusi" },
+    { "code": "RW", "name": "Rwanda" },
+    { "code": "SA", "name": "Saudi" },
+    { "code": "SN", "name": "Senegali" },
+    { "code": "RS", "name": "Serbia" },
+    { "code": "SG", "name": "Singapoo" },
+    { "code": "SK", "name": "Slovakia" },
+    { "code": "SI", "name": "Slovenia" },
+    { "code": "ZA", "name": "Afrika Kusini" },
+    { "code": "ES", "name": "Hispania" },
+    { "code": "LK", "name": "Sri Lanka" },
+    { "code": "SE", "name": "Uswidi" },
+    { "code": "CH", "name": "Uswisi" },
+    { "code": "TW", "name": "Taiwani" },
+    { "code": "TH", "name": "Thailandi" },
+    { "code": "TR", "name": "Uturuki" },
+    { "code": "UG", "name": "Uganda" },
+    { "code": "UA", "name": "Ukreni" },
+    { "code": "AE", "name": "Falme za Kiarabu" },
+    { "code": "GB", "name": "Ufalme wa Muungano" },
+    { "code": "US", "name": "Marekani" },
+    { "code": "UY", "name": "Urugwai" },
+    { "code": "UZ", "name": "Uzibekistani" },
+    { "code": "VE", "name": "Venezuela" },
+    { "code": "VN", "name": "Vietnamu" },
+    { "code": "YE", "name": "Yemeni" },
+    { "code": "ZM", "name": "Zambia" },
+    { "code": "ZW", "name": "Zimbabwe" }
+  ]
+}

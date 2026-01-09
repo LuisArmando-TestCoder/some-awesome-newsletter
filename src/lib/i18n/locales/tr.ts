@@ -2,33 +2,33 @@ export default {
   "auth": {
     "logo": "/icons/logo.png",
     "login": {
-      "title": "Bülten Düzenleyicimize giriş yapın",
+      "title": "Bülten Yönetim Paneline Giriş Yapın",
       "subtitle": "Kaldığınız yerden devam etmek için bağlanın.",
-      "google": "Google ile devam et",
+      "google": "Google ile Devam Et",
       "or": "veya",
-      "emailPlaceholder": "you@example.com",
-      "continueWithEmail": "E-posta ile devam et",
+      "emailPlaceholder": "adiniz@ornek.com",
+      "continueWithEmail": "E-posta ile Devam Et",
       "switchText": "Hesabınız yok mu?",
-      "switchLink": "Kaydolun",
+      "switchLink": "Kayıt Ol",
       "switchHref": "/signup"
     },
     "signup": {
       "title": "Hesabınızı oluşturun",
       "subtitle": "Kredi kartı gerekmez.",
-      "google": "Google ile devam et",
+      "google": "Google ile Devam Et",
       "or": "veya",
-      "emailPlaceholder": "you@example.com",
-      "continueWithEmail": "E-posta ile devam et",
+      "emailPlaceholder": "adiniz@ornek.com",
+      "continueWithEmail": "E-posta ile Devam Et",
       "switchText": "Zaten bir hesabınız var mı?",
-      "switchLink": "Giriş yapın",
+      "switchLink": "Giriş Yap",
       "switchHref": "/login"
     }
   },
   "mainContent": {
-    "title": "AI Bülten Oluşturucu: Kişiselleştirilmiş İçerik, Teslim Edildi.",
-    "metaDescription": "AI ile kişiselleştirilmiş bültenler oluşturun. Herhangi bir haber kaynağını aboneleriniz için kendi dillerinde ve markanızın sesiyle özel makalelere dönüştürün.",
+    "title": "AI Bülten Oluşturucu: Kişiselleştirilmiş İçerik, Kapınıza Teslim.",
+    "metaDescription": "Yapay zeka ile kişiselleştirilmiş bültenler oluşturun. Herhangi bir haber kaynağını aboneleriniz için kendi dillerinde ve markanızın tonunda özel makalelere dönüştürün.",
     "ogImageUrl": "https://images.pexels.com/photos/261599/pexels-photo-261599.jpeg",
-    "canonicalUrl": "https://example.com/ai-newsletter-generator",
+    "canonicalUrl": "https://example.com/tr/ai-bulten-olusturucu",
     "organization": {
       "name": "AI Newsletter, Inc.",
       "logo": "https://example.com/logo.png",
@@ -36,20 +36,20 @@ export default {
     },
     "product": {
       "name": "AI Bülten Oluşturucu",
-      "description": "Kişiselleştirilmiş, AI destekli bültenler oluşturmak için nihai platform."
+      "description": "Kişiselleştirilmiş, yapay zeka destekli bültenler oluşturmak için en gelişmiş platform."
     },
     "announcement": {
-      "text": "Beta Lansmanı: Şimdi kaydolun ve ilk 3 ay için %50 indirim kazanın!",
-      "cta": "Başlayın"
+      "text": "Beta Lansmanı: Şimdi kaydolun ve yıllık planlarda %35 indirim kazanın!",
+      "cta": "Hemen Başlayın"
     },
     "hero": {
-      "hook": "AI Destekli Bültenler, Zahmetsizce.",
-      "subHook": "Herhangi bir haber kaynağını aboneleriniz için kendi dillerinde ve markanızın sesiyle kişiselleştirilmiş makalelere dönüştürün.",
+      "hook": "Yapay Zeka Destekli Bültenler, Zahmetsizce.",
+      "subHook": "Herhangi bir haber kaynağını aboneleriniz için kendi dillerinde ve markanızın ses tonunda kişiselleştirilmiş makalelere dönüştürün.",
       "primaryCta": "Ücretsiz Başlayın",
-      "secondaryCta": "Demoyu İzleyin",
+      "secondaryCta": "Demoyu İzle",
       "trustCues": [
         "Kredi kartı gerekmez",
-        "14 günlük ücretsiz deneme",
+        "100 kullanıcıya kadar ücretsiz",
         "İstediğiniz zaman iptal edin"
       ]
     },
@@ -65,43 +65,43 @@ export default {
     },
     "valueProps": {
       "title": "Bültenlerin Geleceği Burada",
-      "subTitle": "Doğrudan onlarla konuşan AI destekli içerikle hedef kitlenizi daha önce hiç olmadığı gibi etkileşime geçirin.",
+      "subTitle": "Doğrudan onlara hitap eden yapay zeka destekli içeriklerle hedef kitlenizle daha önce hiç olmadığı kadar bağ kurun.",
       "props": [
         {
-          "title": "Hiper Kişiselleştirme",
-          "description": "AI'mız, hedef kitlenizi anlamak için web sitenizi analiz eder ve makaleleri ilgi alanlarına ve dillerine göre otomatik olarak uyarlar."
+          "title": "Hiper-Kişiselleştirme",
+          "description": "Yapay zekamız, hedef kitlenizi anlamak için web sitenizi analiz eder ve makaleleri otomatik olarak onların ilgi alanlarına ve dillerine göre uyarlar."
         },
         {
           "title": "Otomatik İçerik Oluşturma",
-          "description": "Programınızı günlük, haftalık veya aylık olarak ayarlayın ve AI'mızın sizin için makaleler seçmesine, yazmasına ve çevirmesine izin verin."
+          "description": "Günlük, haftalık veya aylık programınızı belirleyin; yapay zekamızın makaleleri sizin yerinize seçmesine, yazmasına ve çevirmesine izin verin."
         },
         {
-          "title": "Markanız, Sesiniz",
-          "description": "AI, web sitenizden veya özel girdilerden markanızın kişiliğini öğrenir ve her bültenin sizin tarafınızdan yazılmış gibi duyulmasını sağlar."
+          "title": "Sizin Markanız, Sizin Sesiniz",
+          "description": "Yapay zeka, web sitenizden veya özel girdilerinizden markanızın kişiliğini öğrenir ve her bültenin sizin tarafınızdan yazılmış gibi duyulmasını sağlar."
         }
       ]
     },
     "features": {
-      "title": "Maksimum Etki için Gelişmiş Özellikler",
+      "title": "Maksimum Etki İçin Gelişmiş Özellikler",
       "subTitle": "Basit bültenlerin ötesine geçin ve güçlü bir pazarlama kanalı oluşturun.",
       "featureList": [
         {
           "title": "Akıllı Makale Seçimi",
-          "description": "AI'mız haber kaynaklarını tarar ve hedef kitlenizin analizine dayanarak en alakalı makaleleri seçer, böylece yüksek etkileşim sağlar.",
+          "description": "Yapay zekamız haber kaynaklarını tarar ve hedef kitlenizin analizine dayanarak en alakalı makaleleri seçer.",
           "image": "https://images.pexels.com/photos/3760067/pexels-photo-3760067.jpeg",
-          "cta": "Daha fazla bilgi edinin"
+          "cta": "Daha fazla bilgi"
         },
         {
-          "title": "Sorunsuz Dil Çevirisi",
-          "description": "Makaleleri abonelerinizin ana dillerine otomatik olarak çevirerek küresel bir kitleye ulaşın, iletişim engellerini ortadan kaldırın.",
+          "title": "Kusursuz Dil Çevirisi",
+          "description": "Makaleleri abonelerinizin ana dillerine otomatik olarak çevirerek küresel bir kitleye ulaşın.",
           "image": "https://images.pexels.com/photos/207756/pexels-photo-207756.jpeg",
-          "cta": "Daha fazla bilgi edinin"
+          "cta": "Daha fazla bilgi"
         },
         {
-          "title": "Potansiyel Müşteri Takibi ve Analitik",
-          "description": "Etkileşimi izlemek ve kampanyalarınızın başarısını yerleşik sayacımızla ölçmek için şirket bağlantınıza bir potansiyel müşteri izleyici yerleştirin.",
+          "title": "Aday Takibi ve Analitik",
+          "description": "Etkileşimi izlemek ve kampanya başarısını ölçmek için şirket bağlantınıza bir aday takipçisi (lead tracker) yerleştirin.",
           "image": "https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg",
-          "cta": "Daha fazla bilgi edinin"
+          "cta": "Daha fazla bilgi"
         }
       ]
     },
@@ -111,132 +111,710 @@ export default {
         {
           "step": 1,
           "title": "Haber Kaynağınızı Bağlayın",
-          "description": "Herhangi bir haber kaynağını bağlayın, AI'mız ilgili içerik için onu analiz etmeye başlayacaktır."
+          "description": "Herhangi bir haber kaynağını bağlayın, yapay zekamız ilgili içerik için analiz etmeye başlasın."
         },
         {
           "step": 2,
-          "title": "Sesinizi Tanımlayın",
-          "description": "AI'mızın web sitenizden markanızın kişiliğini öğrenmesine izin verin veya özel bir açıklama sağlayın."
+          "title": "Ses Tonunuzu Belirleyin",
+          "description": "Yapay zekamızın web sitenizden marka kişiliğinizi öğrenmesine izin verin veya özel bir açıklama sağlayın."
         },
         {
           "step": 3,
-          "title": "Bülteninizi Başlatın",
-          "description": "Programınızı ayarlayın ve kişiselleştirilmiş, çok dilli bültenlerin abonelerinize otomatik olarak gönderilmesini izleyin."
+          "title": "Bülteninizi Yayınlayın",
+          "description": "Programınızı belirleyin ve kişiselleştirilmiş, çok dilli bültenlerin abonelerinize gönderilmesini izleyin."
         }
       ]
     },
     "personas": {
-      "title": "İşletmeniz için Mükemmel",
-      "subTitle": "Startup'lardan işletmelere kadar, aracımız büyümenize yardımcı olmak için tasarlanmıştır.",
+      "title": "İşletmeniz İçin Mükemmel",
+      "subTitle": "Girişimlerden büyük ölçekli şirketlere kadar aracımız büyümenize yardımcı olmak için tasarlandı.",
       "personaList": [
         {
-          "persona": "İçerik Oluşturucuları",
-          "problem": "Hedef kitleniz için içerik düzenlemek ve yazmak için saatler harcamak.",
+          "persona": "İçerik Üreticileri",
+          "problem": "Hedef kitleniz için içerik derlemek ve yazmak için saatler harcamak.",
           "outcome": "İçerik oluşturma sürecinizi otomatikleştirin ve topluluğunuzu büyütmeye odaklanın."
         },
         {
           "persona": "Pazarlama Ekipleri",
-          "problem": "Küresel bir kitleyle rezonans kuran kişiselleştirilmiş içerik oluşturmakta zorlanmak.",
-          "outcome": "Hiper kişiselleştirilmiş, çok dilli bültenlerle etkileşimi ve dönüşümleri artırın."
+          "problem": "Küresel bir kitle için kişiselleştirilmiş içerik oluşturmakta zorlanmak.",
+          "outcome": "Hiper-kişiselleştirilmiş bültenlerle etkileşimi ve dönüşümleri artırın."
         },
         {
           "persona": "İşletmeler",
           "problem": "Tutarlı ve ilgi çekici bir bülten oluşturmak için kaynak eksikliği.",
-          "outcome": "Minimum çabayla trafik ve satışları artıran güçlü bir pazarlama kanalı oluşturun."
+          "outcome": "Minimum çabayla trafik çeken güçlü bir pazarlama kanalı oluşturun."
         }
       ]
     },
     "metrics": {
-      "title": "Gerçek Sonuçlar, Verilerle Destekleniyor",
+      "title": "Verilerle Desteklenen Gerçek Sonuçlar",
       "metricList": [
-        {
-          "value": "90%",
-          "label": "İçerik oluşturma süresinde azalma",
-          "proof": "Beta kullanıcı geri bildirimlerine dayanmaktadır."
-        },
-        {
-          "value": "2x",
-          "label": "Abone etkileşiminde artış",
-          "proof": "Beta kullanıcılarıyla yapılan A/B testlerinde gözlemlendi."
-        },
-        {
-          "value": "5x",
-          "label": "Daha hızlı içerik teslimatı",
-          "proof": "Manuel bülten oluşturmaya kıyasla."
-        }
+        { "value": "%90", "label": "Hazırlama süresinde azalma", "proof": "Beta kullanıcı geri bildirimlerine dayanmaktadır." },
+        { "value": "2 Kat", "label": "Etkileşimde artış", "proof": "A/B testlerinde gözlemlenmiştir." },
+        { "value": "5 Kat", "label": "Daha hızlı içerik teslimi", "proof": "Manuel oluşturma ile karşılaştırılmıştır." }
       ]
     },
     "testimonials": {
-      "title": "Müşterilerimiz Ne Diyor",
+      "title": "Müşterilerimiz Ne Diyor?",
       "testimonialList": [
         {
-          "quote": "AI Bülten Oluşturucu, içerik stratejimiz için bir oyun değiştirici oldu. Artık küresel kitlemize rezonans kuran kişiselleştirilmiş içerikle ulaşabiliyoruz.",
+          "quote": "AI Bülten Oluşturucu bizim için bir dönüm noktası oldu. Artık küresel kitlemize onlara hitap eden içeriklerle ulaşabiliyoruz.",
           "name": "Alex Chen",
-          "title": "Büyüme Başkanı, Global Tech Inc."
+          "title": "Büyüme Bölüm Başkanı, Global Tech Inc."
         },
         {
-          "quote": "Başlangıçta şüpheciydim, ancak AI tarafından oluşturulan içerik inanılmaz derecede iyi yazılmış ve markaya uygun. Abonelerimiz onu seviyor!",
+          "quote": "İlk başta şüpheliydim ama yapay zeka tarafından oluşturulan içerik inanılmaz derecede iyi yazılmış. Abonelerimiz buna bayılıyor!",
           "name": "Samantha Jones",
           "title": "Kurucu, The Content Corner"
-        },
-        {
-          "quote": "Tasarruf ettiğimiz zaman inanılmaz. Artık AI bültenimizi yönetirken işimizin diğer alanlarına odaklanabiliriz.",
-          "name": "David Rodriguez",
-          "title": "CEO, Startup Solutions"
         }
       ]
     },
     "pricing": {
-      "teaser": "Her İşletme için Uygun Fiyatlı Planlar",
-      "subTitle": "Planlarımız sizinle birlikte büyümek üzere tasarlanmıştır.",
-      "plan": "Aylık 9 dolardan başlıyor",
-      "cta": "Fiyatları Gör"
+      "teaser": "Her İşletme İçin Uygun Planlar",
+      "subTitle": "Planlarımız sizinle birlikte büyümek üzere tasarlandı.",
+      "plan": "17$/ay'dan başlayan fiyatlarla",
+      "cta": "Fiyatlandırmayı Gör"
     },
     "finalCta": {
-      "hook": "Bülteninizi Devrim Yaratmaya Hazır mısınız?",
+      "hook": "Bülteninizde Devrim Yapmaya Hazır mısınız?",
       "cta": "Ücretsiz Denemenizi Bugün Başlatın"
     },
     "footer": {
-      "copyright": "© 2025 AI Newsletter, Inc. Tüm hakları saklıdır.",
+      "copyright": "© 2026 AI Newsletter, Inc. Tüm hakları saklıdır.",
       "companyLinks": {
         "title": "Şirket",
         "links": [
           { "text": "Hakkımızda", "href": "/about" },
           { "text": "Kariyer", "href": "/careers" },
-          { "text": "Blog", "href": "https://github.com/LuisArmando-TestCoder/scientia/tree/master/proposiciones" }
+          { "text": "Blog", "href": "https://github.com/..." }
         ]
       },
       "legalLinks": {
         "title": "Yasal",
         "links": [
           { "text": "Gizlilik Politikası", "href": "/legal/privacy" },
-          { "text": "Hizmet Şartları", "href": "/legal/terms" },
+          { "text": "Kullanım Şartları", "href": "/legal/terms" },
           { "text": "Çerez Politikası", "href": "/legal/cookies" }
         ]
       },
       "contact": "support@ainewsletter.com"
     }
   },
+  "help": {
+    "title": "Daha yüksek limitler talep edin",
+    "subtitle": "Kullandıkça öde modeline geçin veya büyümenize uygun kotaları artırın.",
+    "contact": {
+      "cta": "Talep gönder",
+      "successTitle": "Talep alındı",
+      "successBody": "Ekibimiz kısa süre içinde sizinle iletişime geçecektir.",
+      "learnMore": "/plans"
+    },
+    "questions": {
+      "desiredLimitsHelp": "İhtiyacınız olan limitleri bize bildirin (örneğin 1 milyon kullanıcı).",
+      "useCaseHelp": "İş yükünüzü ve trafik modelinizi açıklayın.",
+      "expectedSpendHelp": "Tahmini bütçeniz fiyatlandırmayı özelleştirmemize yardımcı olur (isteğe bağlı)."
+    },
+    "faqs": [
+      {
+        "id": "limits-how",
+        "q": "Daha yüksek limitler nasıl çalışır?",
+        "a": "Onaydan hemen sonra daha büyük kotaların kilidini açıyoruz. Faturalandırma sabit ücretli veya kullandıkça öde şeklinde olabilir."
+      }
+    ],
+    "links": {
+      "docs": "/plans",
+      "community": "/help"
+    }
+  },
+  "faq": [
+    {
+      "q": "Ücretsiz deneme var mı?",
+      "a": "Evet! Teknolojiyi test etmek için 100 kullanıcı ile sınırlı Ücretsiz planımızla başlayabilirsiniz."
+    },
+    {
+      "q": "İstediğim zaman iptal edebilir miyim?",
+      "a": "Evet, aboneliğinizi hesap panelinizden istediğiniz zaman iptal edebilirsiniz."
+    }
+  ],
+  "plans": {
+    "currency": "USD",
+    "billingIntervals": ["aylık", "yıllık"],
+    "currentPlan": "free",
+    "plans": [
+      {
+        "id": "free",
+        "name": "Ücretsiz",
+        "monthly": 0,
+        "yearly": 0,
+        "tagline": "Teknolojiyi test edin",
+        "featuresBase": ["1 haber kaynağı", "100 kullanıcıya kadar"],
+        "featuresDelta": [],
+        "limits": { "newsSources": 1, "users": 100 },
+        "ctaLabel": "Mevcut Plan",
+        "tier": 0
+      },
+      {
+        "id": "starter",
+        "name": "Başlangıç",
+        "monthly": 17,
+        "yearly": 132,
+        "tagline": "Büyüyen bültenler için",
+        "featuresBase": ["5 haber kaynağı", "100 bin kullanıcıya kadar"],
+        "featuresDelta": ["E-posta desteği", "Temel çeviri"],
+        "limits": { "newsSources": 5, "users": 100000 },
+        "ctaLabel": "Başlangıç Seç",
+        "productId": "prod_starter_id",
+        "tier": 1
+      },
+      {
+        "id": "growth",
+        "name": "Gelişim",
+        "monthly": 35,
+        "yearly": 273,
+        "tagline": "Mükemmel denge",
+        "featuresBase": ["17 haber kaynağı", "250 bin kullanıcıya kadar"],
+        "featuresDelta": ["Özel markalama", "Gelişmiş analitik"],
+        "limits": { "newsSources": 17, "users": 250000 },
+        "ctaLabel": "Gelişim Seç",
+        "productId": "prod_growth_id",
+        "tier": 2
+      },
+      {
+        "id": "pro",
+        "name": "Profesyonel",
+        "monthly": 80,
+        "yearly": 624,
+        "tagline": "Pazarlama profesyonelleri için",
+        "featuresBase": ["25 haber kaynağı", "500 bin kullanıcıya kadar"],
+        "featuresDelta": ["API Erişimi", "Öncelikli işleme"],
+        "limits": { "newsSources": 25, "users": 500000 },
+        "ctaLabel": "Profesyonel Seç",
+        "productId": "prod_pro_id",
+        "tier": 3
+      },
+      {
+        "id": "master",
+        "name": "Usta",
+        "monthly": 150,
+        "yearly": 1170,
+        "tagline": "Sınırsız ölçeklenebilirlik",
+        "featuresBase": ["50 haber kaynağı", "Sınırsız kullanıcı"],
+        "featuresDelta": ["Birebir destek", "Özel webhook'lar"],
+        "limits": { "newsSources": 50, "users": -1 },
+        "ctaLabel": "Usta Seç",
+        "productId": "prod_master_id",
+        "tier": 4
+      },
+      {
+        "id": "vipfree",
+        "name": "Ücretsiz VIP",
+        "monthly": 0,
+        "yearly": 0,
+        "tagline": "Partnerler için tam erişim",
+        "featuresBase": ["Sınırsız kaynak", "Sınırsız kullanıcı"],
+        "featuresDelta": [],
+        "limits": { "newsSources": -1, "users": -1 },
+        "ctaLabel": "Mevcut Plan",
+        "internalOnly": true,
+        "tier": 5
+      }
+    ],
+    "contact": {
+      "text": "Özel bir çözüme mi ihtiyacınız var?",
+      "cta": "Bize Ulaşın",
+      "href": "/help"
+    }
+  },
+  "article": {
+    "notFound": "Makale bulunamadı.",
+    "errorFetching": "Makale getirilirken hata oluştu.",
+    "noArticleSpecified": "Makale belirtilmedi.",
+    "goBack": "Geri Dön",
+    "loading": "Yükleniyor..."
+  },
+  "pricing": {
+    "eyebrow": "Fiyatlandırma",
+    "title": "Esnek Planlar",
+    "currentPlan": "Mevcut Plan:",
+    "monthly": "Aylık",
+    "yearly": "Yıllık (%35 Tasarruf)",
+    "everythingIn": "Önceki plandaki her şey ve:",
+    "isCurrentPlan": "Bu sizin mevcut planınız",
+    "downgradeTo": "{planName} planına düşür",
+    "upgradeTo": "{planName} planına yükselt",
+    "mockMode": "Simülasyon Modu Etkin",
+    "mostPopular": "En Popüler",
+    "perMonth": "aylık",
+    "perYear": "yıllık",
+    "youSave": "Kazancınız"
+  },
+  "confirmSubscription": {
+    "title": "Aboneliğinizi Onaylayın",
+    "goBack": "Geri Dön",
+    "pleaseAccept": "Aboneliğinizi tamamlamak için lütfen şartları kabul edin.",
+    "iAccept": "Şunları kabul ediyorum:",
+    "termsAndConditions": "Şartlar ve Koşullar",
+    "and": "ve",
+    "privacyPolicy": "Gizlilik Politikası",
+    "confirm": "Aboneliği Onayla",
+    "mustAccept": "Abone olmak için şartları kabul etmelisiniz.",
+    "invalidLink": "Geçersiz onay bağlantısı."
+  },
+  "articles": {
+    "title": "En Son Analizler",
+    "subtitle": "Özenle seçilmiş makale ve haber koleksiyonumuzu keşfedin.",
+    "producedIn": "Tüm bu dillerde haber ürettik",
+    "searchPlaceholder": "Makalelerde ara...",
+    "noArticlesFound": "Makale bulunamadı.",
+    "created": "Oluşturulma:",
+    "language": "Dil:",
+    "rightsReserved": "Tüm Hakları Saklıdır.",
+    "errorFetching": "Makaleler getirilirken hata oluştu."
+  },
+  "mainPage": {
+    "skipToMainContent": "Ana içeriğe atla",
+    "dismissAnnouncement": "Duyuruyu kapat",
+    "problem": "Sorun:",
+    "outcome": "Sonuç:",
+    "disclaimer": "%35 tasarruf yalnızca yıllık faturalandırmada geçerlidir."
+  },
+  "authForm": {
+    "emailValidation": "Lütfen geçerli bir e-posta adresi girin.",
+    "failedToSendCode": "Kod gönderilemedi. Lütfen tekrar deneyin.",
+    "sending": "Gönderiliyor...",
+    "codeSent": "Kod e-postanıza gönderildi",
+    "invalidCode": "Geçersiz kod girildi",
+    "regenerateCode": "Kodu tekrar gönder",
+    "back": "← Geri",
+    "byProceeding": "Devam ederek şunları kabul etmiş olursunuz:",
+    "termsOfService": "Hizmet Şartları",
+    "and": "ve",
+    "privacyPolicy": "Gizlilik Politikası",
+    "appName": "AI Newsletter"
+  },
   "welcome": {
     "title": "Otomatik bülten oluşturucu",
-    "setItOnce": "Bir kez ayarla...",
-    "useItForever": "...sonsuza kadar kullan."
+    "setItOnce": "Bir kez kurun...",
+    "useItForever": "...sonsuza dek kullanın."
   },
   "lead": {
-    "title": "Müşterilerin bültenden web sitenize gitmesi için",
-    "recommendation": "Bu şiddetle tavsiye edilir. AI'mızın bülteninizin bağlamını daha iyi anlamasına ve daha alakalı makaleler oluşturmasına yardımcı olur.",
-    "question": "Bir web siteniz var mı? (isteğe bağlı)",
-    "placeholder": "Web sitenizin bağlantısı"
+    "title": "Aboneleri ziyaretçiye dönüştürün",
+    "recommendation": "Web sitenizi bağlayarak yapay zekamızın markanızı anlamasına yardımcı olun.",
+    "question": "Web siteniz var mı? (isteğe bağlı)",
+    "placeholder": "https://siteniz.com"
   },
   "newsSource": {
-    "title": "Blogunuzu veya haber akışınızı kullanmak için bağlantısını yazmanız gerekir",
-    "subtitle": "Akışınızdan içerik oluşturacağız, böylece sıfırdan bir bülten oluşturmanıza gerek kalmaz",
-    "placeholder": "Haber sitenizin veya blogunuzun bağlantısı"
+    "title": "İçerik kaynağınızı bağlayın",
+    "subtitle": "Sıfırdan başlamamanız için akışınızı (feed) çekeceğiz.",
+    "placeholder": "Blog veya RSS bağlantınız"
   },
   "subscribe": {
     "welcome": {
-      "title": "Bültene hoş geldiniz.",
+      "title": "Bültene Hoş Geldiniz.",
       "invitedBy": "{configuratorId} tarafından davet edildiniz."
     }
-  }
+  },
+  "header": {
+    "goToWorkspace": "Panele Git",
+    "inBilling": "Faturalandırma",
+    "vip": "VIP",
+    "plan": "{planName} planı",
+    "logIn": "Giriş Yap",
+    "getStarted": "Başlayın"
+  },
+  "fileInput": {
+    "chooseFile": "Dosya Seç",
+    "dropFile": "Buraya bırakın",
+    "release": "Yüklemek için bırakın"
+  },
+  "imageInput": {
+    "unsupportedFileType": "Desteklenmeyen tür. PNG, JPEG veya WebP kullanın.",
+    "dropImage": "Resmi bırakın",
+    "dragDrop": "Sürükle ve bırak",
+    "browse": "veya dosyalara göz atın",
+    "selectImage": "Seç",
+    "preview": "Önizleme",
+    "removeImage": "Kaldır"
+  },
+  "billing": {
+    "title": "Faturalandırma ve Abonelik",
+    "currentPlanTitle": "Mevcut Planınız",
+    "upgradePlanTitle": "Planınızı Değiştirin",
+    "manageSubscription": "Aboneliği Yönet",
+    "vipPlanName": "VIP Partner",
+    "vipPlanDescription": "AI Newsletter nezaketiyle sınırsız erişim.",
+    "perMonth": "aylık",
+    "perYear": "yıllık",
+    "monthAbbreviation": "ay",
+    "equivalentTo": "şuna eşdeğer:",
+    "mostPopular": "En Popüler",
+    "upgradeTo": "Şuna yükselt:",
+    "downgradeTo": "Şuna geç:",
+    "currentPlanButton": "Planınız",
+    "youSave": "Kazancınız",
+    "users": "kullanıcı",
+    "newsSources": "haber kaynağı",
+    "monthly": "Aylık",
+    "yearly": "Yıllık",
+    "loadingPlan": "Plan verileri yükleniyor..."
+  },
+  "languages": [
+    { "code": "ab", "name": "Abhazca" },
+    { "code": "aa", "name": "Afarca" },
+    { "code": "af", "name": "Afrikaanca" },
+    { "code": "ak", "name": "Akanca" },
+    { "code": "sq", "name": "Arnavutça" },
+    { "code": "am", "name": "Amharca" },
+    { "code": "ar", "name": "Arapça" },
+    { "code": "an", "name": "Aragonca" },
+    { "code": "hy", "name": "Ermenice" },
+    { "code": "as", "name": "Assamca" },
+    { "code": "av", "name": "Avarca" },
+    { "code": "ae", "name": "Avestçe" },
+    { "code": "ay", "name": "Aymaraca" },
+    { "code": "az", "name": "Azerice" },
+    { "code": "bm", "name": "Bambaraca" },
+    { "code": "ba", "name": "Başkurtça" },
+    { "code": "eu", "name": "Baskça" },
+    { "code": "be", "name": "Belarusça" },
+    { "code": "bn", "name": "Bengalce" },
+    { "code": "bi", "name": "Bislama" },
+    { "code": "bs", "name": "Boşnakça" },
+    { "code": "br", "name": "Bretonca" },
+    { "code": "bg", "name": "Bulgarca" },
+    { "code": "my", "name": "Birmanca" },
+    { "code": "ca", "name": "Katalanca" },
+    { "code": "ch", "name": "Çamorroca" },
+    { "code": "ce", "name": "Çeçence" },
+    { "code": "ny", "name": "Nyanja" },
+    { "code": "zh", "name": "Çince" },
+    { "code": "cu", "name": "Kilise Slavcası" },
+    { "code": "cv", "name": "Çuvaşça" },
+    { "code": "kw", "name": "Kernevekçe" },
+    { "code": "co", "name": "Korsikaca" },
+    { "code": "cr", "name": "Krice" },
+    { "code": "hr", "name": "Hırvatça" },
+    { "code": "cs", "name": "Çekçe" },
+    { "code": "da", "name": "Danca" },
+    { "code": "dv", "name": "Divehice" },
+    { "code": "nl", "name": "Felemekçe" },
+    { "code": "dz", "name": "Dzongka" },
+    { "code": "en", "name": "İngilizce" },
+    { "code": "eo", "name": "Esperanto" },
+    { "code": "et", "name": "Estonca" },
+    { "code": "ee", "name": "Evece" },
+    { "code": "fo", "name": "Faroece" },
+    { "code": "fj", "name": "Ficice" },
+    { "code": "fi", "name": "Fince" },
+    { "code": "fr", "name": "Fransızca" },
+    { "code": "fy", "name": "Batı Frizcesi" },
+    { "code": "ff", "name": "Fula dili" },
+    { "code": "gd", "name": "İskoç Galcesi" },
+    { "code": "gl", "name": "Galiçyaca" },
+    { "code": "lg", "name": "Luganda" },
+    { "code": "ka", "name": "Gürcüce" },
+    { "code": "de", "name": "Almanca" },
+    { "code": "el", "name": "Yunanca" },
+    { "code": "kl", "name": "Grönlandca" },
+    { "code": "gn", "name": "Guaranice" },
+    { "code": "gu", "name": "Guceratça" },
+    { "code": "ht", "name": "Haiti Kreyolu" },
+    { "code": "ha", "name": "Hausaca" },
+    { "code": "he", "name": "İbranice" },
+    { "code": "hz", "name": "Hereroca" },
+    { "code": "hi", "name": "Hintçe" },
+    { "code": "ho", "name": "Hiri Motu" },
+    { "code": "hu", "name": "Macarca" },
+    { "code": "is", "name": "İzlandaca" },
+    { "code": "io", "name": "İdo" },
+    { "code": "ig", "name": "İgbo dili" },
+    { "code": "id", "name": "Endonezce" },
+    { "code": "ia", "name": "İnterlingua" },
+    { "code": "ie", "name": "Interlingue" },
+    { "code": "iu", "name": "İnuitçe" },
+    { "code": "ik", "name": "İnupiaq" },
+    { "code": "ga", "name": "İrlandaca" },
+    { "code": "it", "name": "İtalyanca" },
+    { "code": "ja", "name": "Japonca" },
+    { "code": "jv", "name": "Cava dili" },
+    { "code": "kn", "name": "Kannada" },
+    { "code": "kr", "name": "Kanuri" },
+    { "code": "ks", "name": "Keşmirce" },
+    { "code": "kk", "name": "Kazakça" },
+    { "code": "km", "name": "Kmerce" },
+    { "code": "ki", "name": "Kikuyu" },
+    { "code": "rw", "name": "Kinyarwanda" },
+    { "code": "ky", "name": "Kırgızca" },
+    { "code": "kv", "name": "Komice" },
+    { "code": "kg", "name": "Kongoca" },
+    { "code": "ko", "name": "Korece" },
+    { "code": "kj", "name": "Kuanyama" },
+    { "code": "ku", "name": "Kürtçe" },
+    { "code": "lo", "name": "Laoca" },
+    { "code": "la", "name": "Latince" },
+    { "code": "lv", "name": "Letonca" },
+    { "code": "li", "name": "Limburgca" },
+    { "code": "ln", "name": "Lingala" },
+    { "code": "lt", "name": "Litvanca" },
+    { "code": "lu", "name": "Luba-Katanga" },
+    { "code": "lb", "name": "Lüksemburgca" },
+    { "code": "mk", "name": "Makedonca" },
+    { "code": "mg", "name": "Malgaşça" },
+    { "code": "ms", "name": "Malayca" },
+    { "code": "ml", "name": "Malayalam" },
+    { "code": "mt", "name": "Maltaca" },
+    { "code": "gv", "name": "Manks" },
+    { "code": "mi", "name": "Maori dili" },
+    { "code": "mr", "name": "Marathi" },
+    { "code": "mh", "name": "Marshallca" },
+    { "code": "mn", "name": "Moğolca" },
+    { "code": "na", "name": "Nauruca" },
+    { "code": "nv", "name": "Navahoca" },
+    { "code": "nd", "name": "Kuzey Ndebele" },
+    { "code": "nr", "name": "Güney Ndebele" },
+    { "code": "ng", "name": "Ndonga" },
+    { "code": "ne", "name": "Nepalce" },
+    { "code": "no", "name": "Norveççe" },
+    { "code": "nb", "name": "Bokmål Norveççe" },
+    { "code": "nn", "name": "Nynorsk Norveççe" },
+    { "code": "oc", "name": "Oksitanca" },
+    { "code": "oj", "name": "Ojibwa" },
+    { "code": "or", "name": "Oriya dili" },
+    { "code": "om", "name": "Oromca" },
+    { "code": "os", "name": "Osetçe" },
+    { "code": "pi", "name": "Palice" },
+    { "code": "ps", "name": "Peştuca" },
+    { "code": "fa", "name": "Farsça" },
+    { "code": "pl", "name": "Polonyaca" },
+    { "code": "pt", "name": "Portekizce" },
+    { "code": "pa", "name": "Pencapça" },
+    { "code": "qu", "name": "Keçuva dili" },
+    { "code": "ro", "name": "Rumence" },
+    { "code": "rm", "name": "Romanşça" },
+    { "code": "rn", "name": "Kirundi" },
+    { "code": "ru", "name": "Rusça" },
+    { "code": "se", "name": "Kuzey Laponca" },
+    { "code": "sm", "name": "Samoaca" },
+    { "code": "sg", "name": "Sango" },
+    { "code": "sa", "name": "Sanskritçe" },
+    { "code": "sc", "name": "Sardunyaca" },
+    { "code": "sr", "name": "Sırpça" },
+    { "code": "sn", "name": "Şonaca" },
+    { "code": "ii", "name": "Siçuan Yi" },
+    { "code": "sd", "name": "Sindhi" },
+    { "code": "si", "name": "Sinhali dili" },
+    { "code": "sk", "name": "Slovakça" },
+    { "code": "sl", "name": "Slovence" },
+    { "code": "so", "name": "Somalice" },
+    { "code": "st", "name": "Güney Sotho" },
+    { "code": "es", "name": "İspanyolca" },
+    { "code": "su", "name": "Sundaca" },
+    { "code": "sw", "name": "Svahili" },
+    { "code": "ss", "name": "Swati" },
+    { "code": "sv", "name": "İsveççe" },
+    { "code": "tl", "name": "Tagalogca" },
+    { "code": "ty", "name": "Tahiti dili" },
+    { "code": "tg", "name": "Tacikçe" },
+    { "code": "ta", "name": "Tamilce" },
+    { "code": "tt", "name": "Tatarca" },
+    { "code": "te", "name": "Teluguca" },
+    { "code": "th", "name": "Tayca" },
+    { "code": "bo", "name": "Tibetçe" },
+    { "code": "ti", "name": "Tigrinya dili" },
+    { "code": "to", "name": "Tongaca" },
+    { "code": "ts", "name": "Tsongaca" },
+    { "code": "tn", "name": "Tsvana dili" },
+    { "code": "tr", "name": "Türkçe" },
+    { "code": "tk", "name": "Türkmence" },
+    { "code": "tw", "name": "Twi dili" },
+    { "code": "ug", "name": "Uygurca" },
+    { "code": "uk", "name": "Ukraynaca" },
+    { "code": "ur", "name": "Urduca" },
+    { "code": "uz", "name": "Özbekçe" },
+    { "code": "ve", "name": "Vendaca" },
+    { "code": "vi", "name": "Vietnamca" },
+    { "code": "vo", "name": "Volapük" },
+    { "code": "wa", "name": "Valonca" },
+    { "code": "cy", "name": "Galce" },
+    { "code": "wo", "name": "Wolof dili" },
+    { "code": "xh", "name": "Xhosa dili" },
+    { "code": "yi", "name": "Yidiş" },
+    { "code": "yo", "name": "Yorubaca" },
+    { "code": "za", "name": "Zhuangca" },
+    { "code": "zu", "name": "Zuluca" }
+  ],
+  "countries": [
+    { "code": "AF", "name": "Afganistan" },
+    { "code": "AL", "name": "Arnavutluk" },
+    { "code": "DZ", "name": "Cezayir" },
+    { "code": "AS", "name": "Amerikan Samoası" },
+    { "code": "AD", "name": "Andorra" },
+    { "code": "AO", "name": "Angola" },
+    { "code": "AI", "name": "Anguilla" },
+    { "code": "AQ", "name": "Antarktika" },
+    { "code": "AG", "name": "Antigua ve Barbuda" },
+    { "code": "AR", "name": "Arjantin" },
+    { "code": "AM", "name": "Ermenistan" },
+    { "code": "AW", "name": "Aruba" },
+    { "code": "AU", "name": "Avustralya" },
+    { "code": "AT", "name": "Avusturya" },
+    { "code": "AZ", "name": "Azerbaycan" },
+    { "code": "BS", "name": "Bahamalar" },
+    { "code": "BH", "name": "Bahreyn" },
+    { "code": "BD", "name": "Bangladeş" },
+    { "code": "BB", "name": "Barbados" },
+    { "code": "BY", "name": "Beyaz Rusya" },
+    { "code": "BE", "name": "Belçika" },
+    { "code": "BZ", "name": "Belize" },
+    { "code": "BJ", "name": "Benin" },
+    { "code": "BM", "name": "Bermuda" },
+    { "code": "BT", "name": "Butan" },
+    { "code": "BO", "name": "Bolivya" },
+    { "code": "BA", "name": "Bosna-Hersek" },
+    { "code": "BW", "name": "Botsvana" },
+    { "code": "BR", "name": "Brezilya" },
+    { "code": "IO", "name": "Britanya Hint Okyanusu Toprakları" },
+    { "code": "VG", "name": "Britanya Virjin Adaları" },
+    { "code": "BN", "name": "Brunei" },
+    { "code": "BG", "name": "Bulgaristan" },
+    { "code": "BF", "name": "Burkina Faso" },
+    { "code": "BI", "name": "Burundi" },
+    { "code": "KH", "name": "Kamboçya" },
+    { "code": "CM", "name": "Kamerun" },
+    { "code": "CA", "name": "Kanada" },
+    { "code": "CV", "name": "Yeşil Burun Adaları" },
+    { "code": "KY", "name": "Cayman Adaları" },
+    { "code": "CF", "name": "Orta Afrika Cumhuriyeti" },
+    { "code": "TD", "name": "Çad" },
+    { "code": "CL", "name": "Şili" },
+    { "code": "CN", "name": "Çin" },
+    { "code": "CX", "name": "Christmas Adası" },
+    { "code": "CC", "name": "Cocos (Keeling) Adaları" },
+    { "code": "CO", "name": "Kolombiya" },
+    { "code": "KM", "name": "Komorlar" },
+    { "code": "CG", "name": "Kongo - Brazzaville" },
+    { "code": "CD", "name": "Kongo - Kinşasa" },
+    { "code": "CK", "name": "Cook Adaları" },
+    { "code": "CR", "name": "Kosta Rika" },
+    { "code": "CI", "name": "Fildişi Sahili" },
+    { "code": "HR", "name": "Hırvatistan" },
+    { "code": "CU", "name": "Küba" },
+    { "code": "CY", "name": "Kıbrıs" },
+    { "code": "CZ", "name": "Çekya" },
+    { "code": "DK", "name": "Danimarka" },
+    { "code": "DJ", "name": "Cibuti" },
+    { "code": "DM", "name": "Dominika" },
+    { "code": "DO", "name": "Dominik Cumhuriyeti" },
+    { "code": "EC", "name": "Ekvador" },
+    { "code": "EG", "name": "Mısır" },
+    { "code": "SV", "name": "El Salvador" },
+    { "code": "GQ", "name": "Ekvator Ginesi" },
+    { "code": "ER", "name": "Eritre" },
+    { "code": "EE", "name": "Estonya" },
+    { "code": "SZ", "name": "Esvatini" },
+    { "code": "ET", "name": "Etiyopya" },
+    { "code": "FJ", "name": "Fiji" },
+    { "code": "FI", "name": "Finlandiya" },
+    { "code": "FR", "name": "Fransa" },
+    { "code": "GA", "name": "Gabon" },
+    { "code": "GM", "name": "Gambiya" },
+    { "code": "GE", "name": "Gürcistan" },
+    { "code": "DE", "name": "Almanya" },
+    { "code": "GH", "name": "Gana" },
+    { "code": "GR", "name": "Yunanistan" },
+    { "code": "GT", "name": "Guatemala" },
+    { "code": "GN", "name": "Gine" },
+    { "code": "GY", "name": "Guyana" },
+    { "code": "HT", "name": "Haiti" },
+    { "code": "HN", "name": "Honduras" },
+    { "code": "HK", "name": "Hong Kong" },
+    { "code": "HU", "name": "Macaristan" },
+    { "code": "IS", "name": "İzlanda" },
+    { "code": "IN", "name": "Hindistan" },
+    { "code": "ID", "name": "Endonezya" },
+    { "code": "IR", "name": "İran" },
+    { "code": "IQ", "name": "Irak" },
+    { "code": "IE", "name": "İrlanda" },
+    { "code": "IL", "name": "İsrail" },
+    { "code": "IT", "name": "İtalya" },
+    { "code": "JM", "name": "Jamaika" },
+    { "code": "JP", "name": "Japonya" },
+    { "code": "JO", "name": "Ürdün" },
+    { "code": "KZ", "name": "Kazakistan" },
+    { "code": "KE", "name": "Kenya" },
+    { "code": "KR", "name": "Güney Kore" },
+    { "code": "KW", "name": "Kuveyt" },
+    { "code": "KG", "name": "Kırgızistan" },
+    { "code": "LA", "name": "Laos" },
+    { "code": "LV", "name": "Letonya" },
+    { "code": "LB", "name": "Lübnan" },
+    { "code": "LS", "name": "Lesotho" },
+    { "code": "LR", "name": "Liberya" },
+    { "code": "LY", "name": "Libya" },
+    { "code": "LI", "name": "Liechtenstein" },
+    { "code": "LT", "name": "Litvanya" },
+    { "code": "LU", "name": "Lüksemburg" },
+    { "code": "MG", "name": "Madagaskar" },
+    { "code": "MW", "name": "Malavi" },
+    { "code": "MY", "name": "Malezya" },
+    { "code": "MV", "name": "Maldivler" },
+    { "code": "ML", "name": "Mali" },
+    { "code": "MT", "name": "Malta" },
+    { "code": "MX", "name": "Meksika" },
+    { "code": "MD", "name": "Moldova" },
+    { "code": "MC", "name": "Monako" },
+    { "code": "MN", "name": "Moğolistan" },
+    { "code": "ME", "name": "Karadağ" },
+    { "code": "MA", "name": "Fas" },
+    { "code": "MZ", "name": "Mozambik" },
+    { "code": "MM", "name": "Myanmar" },
+    { "code": "NA", "name": "Namibya" },
+    { "code": "NP", "name": "Nepal" },
+    { "code": "NL", "name": "Hollanda" },
+    { "code": "NZ", "name": "Yeni Zelanda" },
+    { "code": "NI", "name": "Nikaragua" },
+    { "code": "NE", "name": "Nijer" },
+    { "code": "NG", "name": "Nijerya" },
+    { "code": "MK", "name": "Kuzey Makedonya" },
+    { "code": "NO", "name": "Norveç" },
+    { "code": "OM", "name": "Umman" },
+    { "code": "PK", "name": "Pakistan" },
+    { "code": "PA", "name": "Panama" },
+    { "code": "PG", "name": "Papua Yeni Gine" },
+    { "code": "PY", "name": "Paraguay" },
+    { "code": "PE", "name": "Peru" },
+    { "code": "PH", "name": "Filipinler" },
+    { "code": "PL", "name": "Polonya" },
+    { "code": "PT", "name": "Portekiz" },
+    { "code": "QA", "name": "Katar" },
+    { "code": "RO", "name": "Romanya" },
+    { "code": "RU", "name": "Rusya" },
+    { "code": "RW", "name": "Ruanda" },
+    { "code": "SA", "name": "Suudi Arabistan" },
+    { "code": "SN", "name": "Senegal" },
+    { "code": "RS", "name": "Sırbistan" },
+    { "code": "SG", "name": "Singapur" },
+    { "code": "SK", "name": "Slovakya" },
+    { "code": "SI", "name": "Slovenya" },
+    { "code": "ZA", "name": "Güney Afrika" },
+    { "code": "ES", "name": "İspanya" },
+    { "code": "LK", "name": "Sri Lanka" },
+    { "code": "SE", "name": "İsveç" },
+    { "code": "CH", "name": "İsviçre" },
+    { "code": "TW", "name": "Tayvan" },
+    { "code": "TH", "name": "Tayland" },
+    { "code": "TR", "name": "Türkiye" },
+    { "code": "UG", "name": "Uganda" },
+    { "code": "UA", "name": "Ukrayna" },
+    { "code": "AE", "name": "Birleşik Arap Emirlikleri" },
+    { "code": "GB", "name": "Birleşik Krallık" },
+    { "code": "US", "name": "Amerika Birleşik Devletleri" },
+    { "code": "UY", "name": "Uruguay" },
+    { "code": "UZ", "name": "Özbekistan" },
+    { "code": "VE", "name": "Venezuela" },
+    { "code": "VN", "name": "Vietnam" },
+    { "code": "YE", "name": "Yemen" },
+    { "code": "ZM", "name": "Zambiya" },
+    { "code": "ZW", "name": "Zimbabve" }
+  ]
 }

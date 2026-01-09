@@ -2,11 +2,11 @@ export default {
   "auth": {
     "logo": "/icons/logo.png",
     "login": {
-      "title": "Shiga cikin Mai Gudanar da Wasiƙunmu",
+      "title": "Shiga cikin Newsletter Orchestrator namu",
       "subtitle": "Haɗa don ci gaba daga inda ka tsaya.",
       "google": "Ci gaba da Google",
       "or": "ko",
-      "emailPlaceholder": "you@example.com",
+      "emailPlaceholder": "sunanka@misali.com",
       "continueWithEmail": "Ci gaba da Imel",
       "switchText": "Ba ka da asusu?",
       "switchLink": "Yi Rajista",
@@ -17,16 +17,16 @@ export default {
       "subtitle": "Ba a buƙatar katin kiredit.",
       "google": "Ci gaba da Google",
       "or": "ko",
-      "emailPlaceholder": "you@example.com",
+      "emailPlaceholder": "sunanka@misali.com",
       "continueWithEmail": "Ci gaba da Imel",
-      "switchText": "Tuni kana da asusu?",
-      "switchLink": "Shiga",
+      "switchText": "Kana da asusu tun asali?",
+      "switchLink": "Shiga Ciki",
       "switchHref": "/login"
     }
   },
   "mainContent": {
-    "title": "Janareta na Wasiƙar AI: Abun ciki na Musamman, An Isar.",
-    "metaDescription": "Ƙirƙiri wasiƙun labarai na musamman da AI. Canza kowane tushen labarai zuwa labarai na al'ada don masu biyan kuɗin ku, a cikin yarensu, da kuma da muryar alamar ku.",
+    "title": "AI Newsletter Generator: Keɓaɓɓen Abun Ciki, An Isar.",
+    "metaDescription": "Ƙirƙiri wasiƙun labarai na keɓaɓɓu tare da AI. Canza kowace hanyar labarai zuwa labarai na musamman ga masu biyan kuɗinka, a yarensu, kuma cikin muryar alamar kasuwancinka.",
     "ogImageUrl": "https://images.pexels.com/photos/261599/pexels-photo-261599.jpeg",
     "canonicalUrl": "https://example.com/ai-newsletter-generator",
     "organization": {
@@ -35,22 +35,22 @@ export default {
       "url": "https://example.com/"
     },
     "product": {
-      "name": "Janareta na Wasiƙar AI",
-      "description": "Dandalin ƙarshe don ƙirƙirar wasiƙun labarai na musamman, masu amfani da AI."
+      "name": "AI Newsletter Generator",
+      "description": "Babban dandalin ƙirƙirar wasiƙun labarai na keɓaɓɓu masu amfani da AI."
     },
     "announcement": {
-      "text": "Ƙaddamar da Beta: Yi rajista yanzu kuma sami rangwamen 50% na watanni 3 na farko!",
-      "cta": "Fara"
+      "text": "Kaddamar da Beta: Yi rajista yanzu kuma ka sami rangwamen kashi 35% akan tsare-tsaren shekara-shekara!",
+      "cta": "Fara Yanzu"
     },
     "hero": {
-      "hook": "Wasiƙun Labarai masu Amfani da AI, Ba tare da Wahala ba.",
-      "subHook": "Canza kowane tushen labarai zuwa labarai na musamman don masu biyan kuɗin ku, a cikin yarensu, da kuma da muryar alamar ku.",
+      "hook": "Wasiƙun Labarai Masu Amfani da AI, Cikin Sauƙi.",
+      "subHook": "Canza kowace hanyar labarai zuwa labarai na musamman ga masu biyan kuɗinka, a yarensu, kuma cikin muryar alamar kasuwancinka.",
       "primaryCta": "Fara Kyauta",
-      "secondaryCta": "Kalli Demo",
+      "secondaryCta": "Kalli Bidiyon Gwaji",
       "trustCues": [
         "Ba a buƙatar katin kiredit",
-        "Gwajin kyauta na kwanaki 14",
-        "Soke kowane lokaci"
+        "Kyauta har zuwa masu amfani 100",
+        "Soke rajista a kowane lokaci"
       ]
     },
     "socialProof": {
@@ -61,182 +61,760 @@ export default {
         { "name": "Apex Solutions", "src": "/logos/logo_4.png" },
         { "name": "Momentum Co.", "src": "/logos/logo_5.png" }
       ],
-      "counts": "Fiye da ƙungiyoyi 10,000 a duk duniya sun amince da shi"
+      "counts": "Sama da ƙungiyoyi 10,000 ne suka amince da mu a duk duniya"
     },
     "valueProps": {
       "title": "Makomar Wasiƙun Labarai Tana Nan",
-      "subTitle": "Jawo hankalin masu sauraron ku kamar ba a taɓa yi ba da abun ciki mai amfani da AI wanda ke magana da su kai tsaye.",
+      "subTitle": "Jan hankalin masu sauraronka fiye da kowane lokaci tare da abun ciki na AI wanda ke magana kai tsaye da su.",
       "props": [
         {
-          "title": "Musamman-Musamman",
-          "description": "AI ɗinmu yana nazarin gidan yanar gizon ku don fahimtar masu sauraron ku kuma yana daidaita labarai ta atomatik zuwa abubuwan da suke so da yare."
+          "title": "Keɓancewa Mai Zurfi",
+          "description": "AI namu yana bincikar rukunin yanar gizonku don fahimtar masu sauraronku kuma yana tsara labarai ta atomatik zuwa abubuwan sha'awarsu da yarensu."
         },
         {
-          "title": "Ƙirƙirar Abun ciki ta atomatik",
-          "description": "Saita jadawalin ku, na yau da kullun, na mako-mako, ko na wata-wata, kuma bari AI ɗinmu ya zaɓa, ya rubuta, kuma ya fassara muku labarai."
+          "title": "Ƙirƙirar Abun Ciki ta Atomatik",
+          "description": "Saita jadawalin ku, na kullum, mako-mako, ko kowane wata, kuma bar AI namu ya zaɓa, ya rubuta, sannan ya fassara muku labarai."
         },
         {
-          "title": "Alamar ku, Muryar ku",
-          "description": "AI yana koyon halayen alamar ku daga gidan yanar gizon ku ko shigarwa na al'ada, yana tabbatar da cewa kowane wasiƙar labarai tana jin kamar ku ne kuka rubuta ta."
+          "title": "Alamar Kasuwancinka, Muryarka",
+          "description": "AI yana koyon halayen alamar kasuwancinka daga rukunin yanar gizonku ko bayanan da kuka bayar, don tabbatar da kowace wasiƙar labarai tana fita kamar kai ne ka rubuta ta."
         }
       ]
     },
     "features": {
-      "title": "Abubuwan Ci gaba don Mafi Girman Tasiri",
-      "subTitle": "Wuce bayan wasiƙun labarai masu sauƙi kuma ƙirƙiri tashar tallace-tallace mai ƙarfi.",
+      "title": "Nagartattun Siffofi don Tasiri Mai Girma",
+      "subTitle": "Wuce wasiƙun labarai masu sauƙi kuma ka ƙirƙiri hanyar talla mai ƙarfi.",
       "featureList": [
         {
-          "title": "Zaɓin Labari mai Hankali",
-          "description": "AI ɗinmu yana bincika tushen labarai kuma yana zaɓar labarai mafi dacewa dangane da nazarin masu sauraron ku, yana tabbatar da babban haɗin gwiwa.",
+          "title": "Zaɓin Labarai na Hikima",
+          "description": "AI namu yana bincika hanyoyin labarai kuma ya zaɓi labaran da suka fi dacewa dangane da binciken masu sauraron da kuke nema.",
           "image": "https://images.pexels.com/photos/3760067/pexels-photo-3760067.jpeg",
           "cta": "Ƙara koyo"
         },
         {
-          "title": "Fassarar Harshe mara Matsala",
-          "description": "Kai ga masu sauraro na duniya ta hanyar fassara labarai ta atomatik zuwa harsunan asali na masu biyan kuɗin ku, yana karya shingen sadarwa.",
+          "title": "Fassarar Yare Marar Shinge",
+          "description": "Isa ga masu sauraro na duniya ta hanyar fassara labarai kai tsaye zuwa yaren masu biyan kuɗinka na asali.",
           "image": "https://images.pexels.com/photos/207756/pexels-photo-207756.jpeg",
           "cta": "Ƙara koyo"
         },
         {
-          "title": "Bibiyar Jagora & Nazari",
-          "description": "Sanya mai bin diddigin jagora a cikin hanyar haɗin kamfanin ku don sa ido kan haɗin gwiwa da auna nasarar kamfen ɗin ku tare da ginannen ma'aunin mu.",
+          "title": "Bin Didigin Masu Sha'awa & Kididdiga",
+          "description": "Saka mai bin didigin masu sha'awa a cikin hanyar haɗin kamfanin ku don saka idanu kan yadda ake mu'amala da auna nasarar kamfen.",
           "image": "https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg",
           "cta": "Ƙara koyo"
         }
       ]
     },
     "howItWorks": {
-      "title": "Fara a cikin Matakai 3 Masu Sauƙi",
+      "title": "Fara Cikin Matakai 3 Masu Sauƙi",
       "steps": [
         {
           "step": 1,
-          "title": "Haɗa Tushen Labarun ku",
-          "description": "Haɗa kowane tushen labarai, kuma AI ɗinmu zai fara nazarin sa don abun ciki mai dacewa."
+          "title": "Haɗa Hanyar Labaranka",
+          "description": "Haɗa kowace hanyar labarai, kuma AI namu zai fara nazarin ta don nemo abun ciki mai dacewa."
         },
         {
           "step": 2,
-          "title": "Bayyana Muryar ku",
-          "description": "Bari AI ɗinmu ya koyi halayen alamar ku daga gidan yanar gizon ku ko samar da bayanin al'ada."
+          "title": "Bayyana Muryarka",
+          "description": "Bar AI namu ya koyi halayen alamar kasuwancinka daga rukunin yanar gizonku ko ka ba da bayanin da kake so."
         },
         {
           "step": 3,
-          "title": "Kaddamar da Wasiƙar ku",
-          "description": "Saita jadawalin ku kuma kalli yadda ake aika wasiƙun labarai na musamman, na harsuna da yawa ta atomatik zuwa ga masu biyan kuɗin ku."
+          "title": "Kaddamar da Wasiƙar Labaranka",
+          "description": "Saita jadawalin ku kuma kalli yadda ake aika wasiƙun labarai na keɓaɓɓu kuma masu harsuna daban-daban ga masu biyan kuɗinka."
         }
       ]
     },
     "personas": {
-      "title": "Cikakke don Kasuwancin ku",
-      "subTitle": "Daga farawa zuwa manyan kamfanoni, an tsara kayan aikin mu don taimaka muku girma.",
+      "title": "Ya dace da Kasuwancinka",
+      "subTitle": "Daga kananan sana'o'i zuwa manyan kamfanoni, an tsara kayan aikinmu don taimaka maka girma.",
       "personaList": [
         {
-          "persona": "Masu Ƙirƙirar Abun ciki",
-          "problem": "Yin amfani da sa'o'i don tsarawa da rubuta abun ciki don masu sauraron ku.",
-          "outcome": "Sanya aikin ƙirƙirar abun cikin ku ya zama mai sarrafa kansa kuma ku mai da hankali kan haɓaka al'ummar ku."
+          "persona": "Masu Ƙirƙirar Abun Ciki",
+          "problem": "Shafe sa'o'i ana tattarawa da rubuta abun ciki ga masu sauraronka.",
+          "outcome": "Sarrafa tsarin ƙirƙirar abun ciki ta atomatik kuma ka mai da hankali kan haɓaka al'ummarka."
         },
         {
-          "persona": "Ƙungiyoyin Tallace-tallace",
-          "problem": "Yin gwagwarmaya don ƙirƙirar abun ciki na musamman wanda ke da tasiri ga masu sauraro na duniya.",
-          "outcome": "Ƙara haɗin gwiwa da juyawa tare da wasiƙun labarai na musamman, na harsuna da yawa."
+          "persona": "Ƙungiyoyin Talla",
+          "problem": "Wahalar ƙirƙirar abun ciki na keɓaɓɓu ga masu sauraro na duniya.",
+          "outcome": "Haɓaka mu'amala da samun nasara tare da wasiƙun labarai na keɓaɓɓu sosai."
         },
         {
           "persona": "Kasuwanci",
-          "problem": "Rashin albarkatu don ƙirƙirar wasiƙar labarai mai daidaito da jan hankali.",
-          "outcome": "Gina tashar tallace-tallace mai ƙarfi wacce ke haifar da zirga-zirga da tallace-tallace da ƙaramin ƙoƙari."
+          "problem": "Rashin albarkatu don ƙirƙirar wasiƙar labarai mai dorewa kuma mai jan hankali.",
+          "outcome": "Gina tashar talla mai ƙarfi wacce ke kawo cunkoso tare da ƙoƙari kaɗan."
         }
       ]
     },
     "metrics": {
-      "title": "Sakamako na Gaskiya, wanda Bayanai ke Goyon baya",
+      "title": "Sakamako na Gaske, Tare da Hujjar Bayanai",
       "metricList": [
-        {
-          "value": "90%",
-          "label": "Rage lokacin ƙirƙirar abun ciki",
-          "proof": "Dangane da ra'ayoyin masu amfani da beta."
-        },
-        {
-          "value": "2x",
-          "label": "Ƙaruwar haɗin gwiwar masu biyan kuɗi",
-          "proof": "An lura da shi a cikin gwaje-gwajen A/B tare da masu amfani da beta."
-        },
-        {
-          "value": "5x",
-          "label": "Isar da abun ciki cikin sauri",
-          "proof": "Idan aka kwatanta da ƙirƙirar wasiƙar labarai da hannu."
-        }
+        { "value": "90%", "label": "Rage lokacin ƙirƙira", "proof": "Dangane da ra'ayoyin masu amfani da Beta." },
+        { "value": "2x", "label": "Ƙaruwar mu'amala", "proof": "An gani a gwajin A/B." },
+        { "value": "5x", "label": "Saurin isar da abun ciki", "proof": "Idan aka kwatanta da ƙirƙirarwa da hannu." }
       ]
     },
     "testimonials": {
-      "title": "Abin da Abokan Cinikinmu ke Faɗi",
+      "title": "Abin da Abokan Cinikinmu Suke Faɗa",
       "testimonialList": [
         {
-          "quote": "Janareta na Wasiƙar AI ya kasance mai canza wasa don dabarun abun cikin mu. Yanzu muna iya isa ga masu sauraron mu na duniya da abun ciki na musamman wanda ke da tasiri.",
+          "quote": "AI Newsletter Generator ya kasance mai kawo canji sosai. Yanzu mun sami damar isa ga masu sauraronmu na duniya tare da abun ciki mai jan hankali.",
           "name": "Alex Chen",
-          "title": "Shugaban Ci gaba, Global Tech Inc."
+          "title": "Shugaban Haɓakawa, Global Tech Inc."
         },
         {
-          "quote": "Na yi shakku da farko, amma abun cikin da AI ya samar yana da kyau sosai kuma yana kan alama. Masu biyan kuɗin mu suna son sa!",
+          "quote": "Ina da shakku a farko, amma abun cikin da AI ya ƙirƙira an rubuta shi sosai. Masu biyan kuɗinmu suna son shi!",
           "name": "Samantha Jones",
-          "title": "Wanda ya kafa, The Content Corner"
-        },
-        {
-          "quote": "Adadin lokacin da muka adana ba abin yarda bane. Yanzu za mu iya mai da hankali kan wasu fannonin kasuwancin mu yayin da AI ke kula da wasiƙar mu.",
-          "name": "David Rodriguez",
-          "title": "Shugaba, Startup Solutions"
+          "title": "Wadda ta kafa, The Content Corner"
         }
       ]
     },
     "pricing": {
-      "teaser": "Shirye-shiryen da za a iya biya don Kowane Kasuwanci",
-      "subTitle": "An tsara shirye-shiryen mu don girma tare da ku.",
-      "plan": "Fara daga $9/wata",
+      "teaser": "Tsare-tsare Masu Sauƙi ga Kowace Sana'a",
+      "subTitle": "An tsara tsare-tsarenmu don girma tare da kai.",
+      "plan": "An fara daga $17/mo",
       "cta": "Duba Farashi"
     },
     "finalCta": {
-      "hook": "Shirye don Juyin Juya Halin Wasiƙar ku?",
-      "cta": "Fara Gwajin ku na Kyauta A Yau"
+      "hook": "Shirya don Sauya Wasiƙar Labaranka?",
+      "cta": "Fara Gwajin Kyauta Yau"
     },
     "footer": {
-      "copyright": "© 2025 AI Newsletter, Inc. An adana duk haƙƙoƙi.",
+      "copyright": "© 2026 AI Newsletter, Inc. Duk haƙƙi ya tabbata.",
       "companyLinks": {
-        "title": "Kamfanin",
+        "title": "Kamfani",
         "links": [
           { "text": "Game da Mu", "href": "/about" },
-          { "text": "Ayyuka", "href": "/careers" },
+          { "text": "Ayyukan Yi", "href": "/careers" },
           { "text": "Blog", "href": "https://github.com/LuisArmando-TestCoder/scientia/tree/master/proposiciones" }
         ]
       },
       "legalLinks": {
         "title": "Shari'a",
         "links": [
-          { "text": "Manufar Sirri", "href": "/legal/privacy" },
-          { "text": "Sharuɗɗan Sabis", "href": "/legal/terms" },
+          { "text": "Manufar Tsare Sirri", "href": "/legal/privacy" },
+          { "text": "Sharuddan Sabis", "href": "/legal/terms" },
           { "text": "Manufar Kuki", "href": "/legal/cookies" }
         ]
       },
       "contact": "support@ainewsletter.com"
     }
   },
+  "help": {
+    "title": "Nemi haɓaka iyakoki",
+    "subtitle": "Canza zuwa biya-yayin-da-kake-amfani ko haɓaka kasonka don dacewa da girmanka.",
+    "contact": {
+      "cta": "Aika buƙata",
+      "successTitle": "An karɓi buƙata",
+      "successBody": "Ƙungiyarmu za ta tuntube ka nan ba da jimawa ba.",
+      "learnMore": "/plans"
+    },
+    "questions": {
+      "desiredLimitsHelp": "Faɗa mana iyakokin da kake buƙata (misali, masu amfani miliyan 1).",
+      "useCaseHelp": "Bayyana nauyin aikinka da yanayin cunkoso.",
+      "expectedSpendHelp": "Kimantawa zai taimaka mana wajen tsara farashin (na zaɓi)."
+    },
+    "faqs": [
+      {
+        "id": "limits-how",
+        "q": "Yaya iyakoki mafi girma suke aiki?",
+        "a": "Muna buɗe kason iyakoki mafi girma nan da nan bayan amincewa. Ana iya biyan kuɗi a matsayin ƙayyadadden farashi ko biya-yayin-da-kake-amfani."
+      }
+    ],
+    "links": {
+      "docs": "/plans",
+      "community": "/help"
+    }
+  },
+  "faq": [
+    {
+      "q": "Akwai gwajin kyauta?",
+      "a": "Eh! Kuna iya farawa da Tsarinmu na Kyauta wanda aka iyakance ga masu amfani 100 don gwada fasahar."
+    },
+    {
+      "q": "Zan iya soke rajista a kowane lokaci?",
+      "a": "Eh, zaku iya soke rajistar ku a kowane lokaci daga shafin asusunku."
+    }
+  ],
+  "plans": {
+    "currency": "USD",
+    "billingIntervals": ["kowane wata", "shekara-shekara"],
+    "currentPlan": "kyauta",
+    "plans": [
+      {
+        "id": "free",
+        "name": "Kyauta",
+        "monthly": 0,
+        "yearly": 0,
+        "tagline": "Gwada fasahar",
+        "featuresBase": ["Hanyar labarai 1", "Har zuwa masu amfani 100"],
+        "featuresDelta": [],
+        "limits": { "newsSources": 1, "users": 100 },
+        "ctaLabel": "Tsarin Yanzu",
+        "tier": 0
+      },
+      {
+        "id": "starter",
+        "name": "Starter",
+        "monthly": 17,
+        "yearly": 132,
+        "tagline": "Don wasiƙun labarai masu girma",
+        "featuresBase": ["Hanyoyin labarai 5", "Har zuwa masu amfani 100k"],
+        "featuresDelta": ["Taimakon imel", "Fassarar asali"],
+        "limits": { "newsSources": 5, "users": 100000 },
+        "ctaLabel": "Zaɓi Starter",
+        "productId": "prod_starter_id",
+        "tier": 1
+      },
+      {
+        "id": "growth",
+        "name": "Growth",
+        "monthly": 35,
+        "yearly": 273,
+        "tagline": "Ma'auni mafi kyau",
+        "featuresBase": ["Hanyoyin labarai 17", "Har zuwa masu amfani 250k"],
+        "featuresDelta": ["Alamar kasuwanci ta musamman", "Kididdiga ta gaba"],
+        "limits": { "newsSources": 17, "users": 250000 },
+        "ctaLabel": "Zaɓi Growth",
+        "productId": "prod_growth_id",
+        "tier": 2
+      },
+      {
+        "id": "pro",
+        "name": "Pro",
+        "monthly": 80,
+        "yearly": 624,
+        "tagline": "Don ƙwararrun masu talla",
+        "featuresBase": ["Hanyoyin labarai 25", "Har zuwa masu amfani 500k"],
+        "featuresDelta": ["Samun damar API", "Ba da fifikon aiki"],
+        "limits": { "newsSources": 25, "users": 500000 },
+        "ctaLabel": "Zaɓi Pro",
+        "productId": "prod_pro_id",
+        "tier": 3
+      },
+      {
+        "id": "master",
+        "name": "Master",
+        "monthly": 150,
+        "yearly": 1170,
+        "tagline": "Girma marar iyaka",
+        "featuresBase": ["Hanyoyin labarai 50", "Masu amfani marasa iyaka"],
+        "featuresDelta": ["Taimako na musamman", "Custom webhooks"],
+        "limits": { "newsSources": 50, "users": -1 },
+        "ctaLabel": "Zaɓi Master",
+        "productId": "prod_master_id",
+        "tier": 4
+      },
+      {
+        "id": "vipfree",
+        "name": "VIP Kyauta",
+        "monthly": 0,
+        "yearly": 0,
+        "tagline": "Cikakken damar shiga ga abokan tarayya",
+        "featuresBase": ["Hanyoyin labarai marasa iyaka", "Masu amfani marasa iyaka"],
+        "featuresDelta": [],
+        "limits": { "newsSources": -1, "users": -1 },
+        "ctaLabel": "Tsarin Yanzu",
+        "internalOnly": true,
+        "tier": 5
+      }
+    ],
+    "contact": {
+      "text": "Kuna buƙatar tsarin musamman?",
+      "cta": "Tuntube Mu",
+      "href": "/help"
+    }
+  },
+  "article": {
+    "notFound": "Ba a sami labarin ba.",
+    "errorFetching": "An sami kuskure wajen kawo labarin.",
+    "noArticleSpecified": "Ba a tantance labarin ba.",
+    "goBack": "Koma Baya",
+    "loading": "Ana loda..."
+  },
+  "pricing": {
+    "eyebrow": "Farashi",
+    "title": "Tsare-tsare Masu Sauƙi",
+    "currentPlan": "Tsarin Yanzu:",
+    "monthly": "Na Wata",
+    "yearly": "Na Shekara (Ajiye 35%)",
+    "everythingIn": "Dukkan abubuwan da ke cikin tsarin da ya gabata, da kuma:",
+    "isCurrentPlan": "Wannan ne tsarin ku na yanzu",
+    "downgradeTo": "Koma ƙasa zuwa {planName}",
+    "upgradeTo": "Haɓaka zuwa {planName}",
+    "mockMode": "An Kunna Yanayin Mock",
+    "mostPopular": "Mafi Shahara",
+    "perMonth": "kowane wata",
+    "perYear": "kowace shekara",
+    "youSave": "Ka ajiye"
+  },
+  "confirmSubscription": {
+    "title": "Tabbatar da Biyan Kuɗinka",
+    "goBack": "Koma Baya",
+    "pleaseAccept": "Da fatan za a yarda da sharuddan don kammala biyan kuɗinka.",
+    "iAccept": "Na yarda da",
+    "termsAndConditions": "Sharudda da Yanayi",
+    "and": "kuma",
+    "privacyPolicy": "Manufar Tsare Sirri",
+    "confirm": "Tabbatar da Biyan Kuɗi",
+    "mustAccept": "Dole ne ka yarda da sharuddan don biyan kuɗi.",
+    "invalidLink": "Hanyar tabbatarwa ba ta da inganci."
+  },
+  "articles": {
+    "title": "Sabbin Bayanai",
+    "subtitle": "Bincika tarin labarai da rahotanninmu da aka zaɓa.",
+    "producedIn": "Mun samar da labarai a duk waɗannan yarukan",
+    "searchPlaceholder": "Nemi labarai...",
+    "noArticlesFound": "Ba a sami labarai ba.",
+    "created": "An ƙirƙira:",
+    "language": "Yare:",
+    "rightsReserved": "Duk Haƙƙi Ya Tabbata.",
+    "errorFetching": "Kuskure wajen kawo labarai."
+  },
+  "mainPage": {
+    "skipToMainContent": "Tsallake zuwa babban abun ciki",
+    "dismissAnnouncement": "Kore sanarwar",
+    "problem": "Matsala:",
+    "outcome": "Sakamako:",
+    "disclaimer": "Rangwamen kashi 35% yana aiki ne kawai akan lissafin shekara-shekara."
+  },
+  "authForm": {
+    "emailValidation": "Da fatan za a shigar da imel mai inganci.",
+    "failedToSendCode": "An kasa aika lamba. Da fatan za a sake gwadawa.",
+    "sending": "Ana aikawa...",
+    "codeSent": "An aika lamba zuwa imel ɗinka",
+    "invalidCode": "Lambarmu da aka bayar ba ta da inganci",
+    "regenerateCode": "Sake aika lamba",
+    "back": "← Koma baya",
+    "byProceeding": "Ta hanyar ci gaba, kun amince da",
+    "termsOfService": "Sharuddan Sabis",
+    "and": "kuma",
+    "privacyPolicy": "Manufar Tsare Sirri",
+    "appName": "AI Newsletter"
+  },
   "welcome": {
-    "title": "Janareta na wasiƙar labarai ta atomatik",
+    "title": "Injin ƙirƙirar wasiƙun labarai ta atomatik",
     "setItOnce": "Saita shi sau ɗaya...",
     "useItForever": "...yi amfani da shi har abada."
   },
   "lead": {
-    "title": "Don abokan ciniki su tafi daga wasiƙar labarai zuwa gidan yanar gizon ku",
-    "recommendation": "Ana ba da shawarar wannan sosai. Yana taimaka wa AI ɗinmu don fahimtar mahallin wasiƙar ku da kyau da kuma samar da labarai masu dacewa.",
-    "question": "Kuna da gidan yanar gizo? (na zaɓi)",
-    "placeholder": "Hanyar haɗi zuwa gidan yanar gizon ku"
+    "title": "Maida masu biyan kuɗi zuwa masu ziyara",
+    "recommendation": "Taimaka wa AI namu ya fahimci alamarku ta hanyar haɗa rukunin yanar gizonku.",
+    "question": "Kuna da rukunin yanar gizo? (na zaɓi)",
+    "placeholder": "https://shafinka.com"
   },
   "newsSource": {
-    "title": "Don amfani da bulogin ku ko ciyarwar labarai muna buƙatar ku buga hanyar haɗin sa",
-    "subtitle": "Za mu samar da abun ciki daga ciyarwar ku, don haka ba kwa buƙatar ƙirƙirar wasiƙar labarai daga karce",
-    "placeholder": "Hanyar haɗin yanar gizon ku ko bulogin ku"
+    "title": "Haɗa hanyar abun cikin ku",
+    "subtitle": "Zamu jawo bayanan ku don kar ku fara daga farko.",
+    "placeholder": "Shafin yanar gizonku ko hanyar RSS"
   },
   "subscribe": {
     "welcome": {
       "title": "Barka da zuwa Wasiƙar Labarai.",
-      "invitedBy": "An gayyace ku ta {configuratorId}."
+      "invitedBy": "{configuratorId} ne ya gayyace ku."
     }
-  }
+  },
+  "header": {
+    "goToWorkspace": "Je zuwa Wajen Aiki",
+    "inBilling": "Biya",
+    "vip": "VIP",
+    "plan": "Tsarin {planName}",
+    "logIn": "Shiga Ciki",
+    "getStarted": "Fara Yanzu"
+  },
+  "fileInput": {
+    "chooseFile": "Zaɓi Fayil",
+    "dropFile": "Ajiye a nan",
+    "release": "Saki don ɗorawa"
+  },
+  "imageInput": {
+    "unsupportedFileType": "Nau'in fayil ɗin ba a goyan bayansa. Yi amfani da PNG, JPEG, ko WebP.",
+    "dropImage": "Ajiye hoto",
+    "dragDrop": "Jawo ka ajiye",
+    "browse": "ko bincika fayiloli",
+    "selectImage": "Zaɓa",
+    "preview": "Rigimar Dubawa",
+    "removeImage": "Cire Hoto"
+  },
+  "billing": {
+    "title": "Biya & Rajista",
+    "currentPlanTitle": "Tsarin ku na Yanzu",
+    "upgradePlanTitle": "Canza Tsarin ku",
+    "manageSubscription": "Sarrafa Rajista",
+    "vipPlanName": "Abokin Tarayya na VIP",
+    "vipPlanDescription": "Daman shiga marar iyaka daga AI Newsletter.",
+    "perMonth": "kowane wata",
+    "perYear": "kowace shekara",
+    "monthAbbreviation": "wata",
+    "equivalentTo": "daidai yake da",
+    "mostPopular": "Mafi Shahara",
+    "upgradeTo": "Haɓaka zuwa",
+    "downgradeTo": "Canza zuwa",
+    "currentPlanButton": "Tsarin ku",
+    "youSave": "Ka ajiye",
+    "users": "masu amfani",
+    "newsSources": "hanyoyin labarai",
+    "monthly": "Na Wata",
+    "yearly": "Na Shekara",
+    "loadingPlan": "Ana loda bayanan tsari..."
+  },
+  "languages": [
+    { "code": "ab", "name": "Abkhaziyanci" },
+    { "code": "aa", "name": "Afanci" },
+    { "code": "af", "name": "Afirkanci" },
+    { "code": "ak", "name": "Akanci" },
+    { "code": "sq", "name": "Albaniyanci" },
+    { "code": "am", "name": "Amharanci" },
+    { "code": "ar", "name": "Larabci" },
+    { "code": "an", "name": "Aragonanci" },
+    { "code": "hy", "name": "Armeniyanci" },
+    { "code": "as", "name": "Assamanci" },
+    { "code": "av", "name": "Avaranci" },
+    { "code": "ae", "name": "Avestanci" },
+    { "code": "ay", "name": "Aymaranci" },
+    { "code": "az", "name": "Azerbaijanci" },
+    { "code": "bm", "name": "Bambaranci" },
+    { "code": "ba", "name": "Bashkiranci" },
+    { "code": "eu", "name": "Baskanci" },
+    { "code": "be", "name": "Belarusanci" },
+    { "code": "bn", "name": "Bengali" },
+    { "code": "bi", "name": "Bislama" },
+    { "code": "bs", "name": "Bosniyanci" },
+    { "code": "br", "name": "Bretonci" },
+    { "code": "bg", "name": "Bulgariyanci" },
+    { "code": "my", "name": "Burmanci" },
+    { "code": "ca", "name": "Katalanci" },
+    { "code": "ch", "name": "Chamorro" },
+    { "code": "ce", "name": "Chechenci" },
+    { "code": "ny", "name": "Chichewa" },
+    { "code": "zh", "name": "Sinanci" },
+    { "code": "cu", "name": "Silaubanci na Coci" },
+    { "code": "cv", "name": "Chuvash" },
+    { "code": "kw", "name": "Kornish" },
+    { "code": "co", "name": "Korsikanci" },
+    { "code": "cr", "name": "Cree" },
+    { "code": "hr", "name": "Krowashiyanci" },
+    { "code": "cs", "name": "Yaren Czech" },
+    { "code": "da", "name": "Danish" },
+    { "code": "dv", "name": "Divehi" },
+    { "code": "nl", "name": "Yaren mutanen Holland" },
+    { "code": "dz", "name": "Dzongkha" },
+    { "code": "en", "name": "Turanci" },
+    { "code": "eo", "name": "Esperanto" },
+    { "code": "et", "name": "Estoniyanci" },
+    { "code": "ee", "name": "Ewe" },
+    { "code": "fo", "name": "Faroese" },
+    { "code": "fj", "name": "Fijian" },
+    { "code": "fi", "name": "Finnish" },
+    { "code": "fr", "name": "Faransanci" },
+    { "code": "fy", "name": "Frisiyanci ta Yamma" },
+    { "code": "ff", "name": "Fulfulde" },
+    { "code": "gd", "name": "Gaelic na Scotland" },
+    { "code": "gl", "name": "Galiciyanci" },
+    { "code": "lg", "name": "Gandanci" },
+    { "code": "ka", "name": "Jojiyanci" },
+    { "code": "de", "name": "Jamusanci" },
+    { "code": "el", "name": "Girkanci" },
+    { "code": "kl", "name": "Greenlandic" },
+    { "code": "gn", "name": "Guaranci" },
+    { "code": "gu", "name": "Gujarati" },
+    { "code": "ht", "name": "Haitian Creole" },
+    { "code": "ha", "name": "Hausa" },
+    { "code": "he", "name": "Ibrananci" },
+    { "code": "hz", "name": "Hereranci" },
+    { "code": "hi", "name": "Hindustanci" },
+    { "code": "ho", "name": "Hiri Motu" },
+    { "code": "hu", "name": "Hungariyanci" },
+    { "code": "is", "name": "Icelandic" },
+    { "code": "io", "name": "Ido" },
+    { "code": "ig", "name": "Inyamuranci" },
+    { "code": "id", "name": "Indonusiyanci" },
+    { "code": "ia", "name": "Interlingua" },
+    { "code": "ie", "name": "Interlingue" },
+    { "code": "iu", "name": "Inuktitut" },
+    { "code": "ik", "name": "Inupiaq" },
+    { "code": "ga", "name": "Irish" },
+    { "code": "it", "name": "Italiyanci" },
+    { "code": "ja", "name": "Japananci" },
+    { "code": "jv", "name": "Jafanci" },
+    { "code": "kn", "name": "Kannadanci" },
+    { "code": "kr", "name": "Kanuranci" },
+    { "code": "ks", "name": "Kashmiranci" },
+    { "code": "kk", "name": "Kazakh" },
+    { "code": "km", "name": "Khmer" },
+    { "code": "ki", "name": "Kikuyu" },
+    { "code": "rw", "name": "Kinyarwanda" },
+    { "code": "ky", "name": "Kyrgyz" },
+    { "code": "kv", "name": "Komi" },
+    { "code": "kg", "name": "Kwangwanci" },
+    { "code": "ko", "name": "Harshen Koriya" },
+    { "code": "kj", "name": "Kuanyama" },
+    { "code": "ku", "name": "Kurdanci" },
+    { "code": "lo", "name": "Laoci" },
+    { "code": "la", "name": "Latin" },
+    { "code": "lv", "name": "Latviyanci" },
+    { "code": "li", "name": "Limburgish" },
+    { "code": "ln", "name": "Lingala" },
+    { "code": "lt", "name": "Lithuaniyanci" },
+    { "code": "lu", "name": "Luba-Katanga" },
+    { "code": "lb", "name": "Luxembourgish" },
+    { "code": "mk", "name": "Macedoniyanci" },
+    { "code": "mg", "name": "Malagasy" },
+    { "code": "ms", "name": "Malayanci" },
+    { "code": "ml", "name": "Malayalam" },
+    { "code": "mt", "name": "Maltanci" },
+    { "code": "gv", "name": "Manx" },
+    { "code": "mi", "name": "Maoranci" },
+    { "code": "mr", "name": "Marathanci" },
+    { "code": "mh", "name": "Marshallese" },
+    { "code": "mn", "name": "Mongoliyanci" },
+    { "code": "na", "name": "Nauron" },
+    { "code": "nv", "name": "Navajo" },
+    { "code": "nd", "name": "Ndebele na Arewa" },
+    { "code": "nr", "name": "Ndebele na Kudu" },
+    { "code": "ng", "name": "Ndonga" },
+    { "code": "ne", "name": "Nepalanci" },
+    { "code": "no", "name": "Norveciyanci" },
+    { "code": "nb", "name": "Norwegian Bokmål" },
+    { "code": "nn", "name": "Norwegian Nynorsk" },
+    { "code": "oc", "name": "Occitan" },
+    { "code": "oj", "name": "Ojibwa" },
+    { "code": "or", "name": "Oriya" },
+    { "code": "om", "name": "Oromo" },
+    { "code": "os", "name": "Ossetian" },
+    { "code": "pi", "name": "Pali" },
+    { "code": "ps", "name": "Pashtanci" },
+    { "code": "fa", "name": "Farshanci" },
+    { "code": "pl", "name": "Yaren mutanen Poland" },
+    { "code": "pt", "name": "Harshen Portugal" },
+    { "code": "pa", "name": "Punjabi" },
+    { "code": "qu", "name": "Quechua" },
+    { "code": "ro", "name": "Romaniyanci" },
+    { "code": "rm", "name": "Romansh" },
+    { "code": "rn", "name": "Rundi" },
+    { "code": "ru", "name": "Rashanci" },
+    { "code": "se", "name": "Sami na Arewa" },
+    { "code": "sm", "name": "Samoan" },
+    { "code": "sg", "name": "Sango" },
+    { "code": "sa", "name": "Sanskrit" },
+    { "code": "sc", "name": "Sardiniyanci" },
+    { "code": "sr", "name": "Sarbiyanci" },
+    { "code": "sn", "name": "Shonanci" },
+    { "code": "ii", "name": "Sichuan Yi" },
+    { "code": "sd", "name": "Sindhi" },
+    { "code": "si", "name": "Sinhalanci" },
+    { "code": "sk", "name": "Slovak" },
+    { "code": "sl", "name": "Sloveniyanci" },
+    { "code": "so", "name": "Somaliye" },
+    { "code": "st", "name": "Sotho na Kudu" },
+    { "code": "es", "name": "Sipaniyanci" },
+    { "code": "su", "name": "Sudananci" },
+    { "code": "sw", "name": "Swahili" },
+    { "code": "ss", "name": "Swati" },
+    { "code": "sv", "name": "Harshen Sweden" },
+    { "code": "tl", "name": "Tagalog" },
+    { "code": "ty", "name": "Tahiti" },
+    { "code": "tg", "name": "Tajikanci" },
+    { "code": "ta", "name": "Tamil" },
+    { "code": "tt", "name": "Tataranci" },
+    { "code": "te", "name": "Teluganci" },
+    { "code": "th", "name": "Thaanci" },
+    { "code": "bo", "name": "Tibetanci" },
+    { "code": "ti", "name": "Tigrinya" },
+    { "code": "to", "name": "Tongan" },
+    { "code": "ts", "name": "Tsonga" },
+    { "code": "tn", "name": "Tswana" },
+    { "code": "tr", "name": "Harshen Turkiyya" },
+    { "code": "tk", "name": "Turkmen" },
+    { "code": "tw", "name": "Twanci" },
+    { "code": "ug", "name": "Uighur" },
+    { "code": "uk", "name": "Ukrainiyanci" },
+    { "code": "ur", "name": "Urdu" },
+    { "code": "uz", "name": "Uzbek" },
+    { "code": "ve", "name": "Vendanci" },
+    { "code": "vi", "name": "Biyetnamanci" },
+    { "code": "vo", "name": "Volapük" },
+    { "code": "wa", "name": "Walloon" },
+    { "code": "cy", "name": "Welsh" },
+    { "code": "wo", "name": "Wolof" },
+    { "code": "xh", "name": "Xhosa" },
+    { "code": "yi", "name": "Yiddish" },
+    { "code": "yo", "name": "Yarbanci" },
+    { "code": "za", "name": "Zhuang" },
+    { "code": "zu", "name": "Zulunci" }
+  ],
+  "countries": [
+    { "code": "AF", "name": "Afganistan" },
+    { "code": "AL", "name": "Albaniya" },
+    { "code": "DZ", "name": "Aljeriya" },
+    { "code": "AS", "name": "Samowa na Amurka" },
+    { "code": "AD", "name": "Andora" },
+    { "code": "AO", "name": "Angola" },
+    { "code": "AI", "name": "Anguila" },
+    { "code": "AQ", "name": "Antatika" },
+    { "code": "AG", "name": "Antigwa da Barbuda" },
+    { "code": "AR", "name": "Arjantini" },
+    { "code": "AM", "name": "Armeniya" },
+    { "code": "AW", "name": "Aruba" },
+    { "code": "AU", "name": "Ostareliya" },
+    { "code": "AT", "name": "Ostiriya" },
+    { "code": "AZ", "name": "Azerbaijan" },
+    { "code": "BS", "name": "Bahamas" },
+    { "code": "BH", "name": "Bahrain" },
+    { "code": "BD", "name": "Bangiladash" },
+    { "code": "BB", "name": "Barbados" },
+    { "code": "BY", "name": "Belarut" },
+    { "code": "BE", "name": "Beljiyam" },
+    { "code": "BZ", "name": "Beliz" },
+    { "code": "BJ", "name": "Benin" },
+    { "code": "BM", "name": "Barmuda" },
+    { "code": "BT", "name": "Butan" },
+    { "code": "BO", "name": "Bolibiya" },
+    { "code": "BA", "name": "Bosniya da Harzagobina" },
+    { "code": "BW", "name": "Botswana" },
+    { "code": "BR", "name": "Burazil" },
+    { "code": "IO", "name": "Yankin Birtaniya na Tekun Indiya" },
+    { "code": "VG", "name": "Tsibirin Birjin na Birtaniya" },
+    { "code": "BN", "name": "Burune" },
+    { "code": "BG", "name": "Bulgariya" },
+    { "code": "BF", "name": "Burkina Faso" },
+    { "code": "BI", "name": "Burundi" },
+    { "code": "KH", "name": "Kambodiya" },
+    { "code": "CM", "name": "Kamaru" },
+    { "code": "CA", "name": "Kanada" },
+    { "code": "CV", "name": "Cape Verde" },
+    { "code": "KY", "name": "Tsibirin Kaiman" },
+    { "code": "CF", "name": "Jamhuriyar Afirka ta Tsakiya" },
+    { "code": "TD", "name": "Sadi" },
+    { "code": "CL", "name": "Sili" },
+    { "code": "CN", "name": "Sin" },
+    { "code": "CX", "name": "Tsibirin Kirsimeti" },
+    { "code": "CC", "name": "Tsibirai Cocos" },
+    { "code": "CO", "name": "Kolambiya" },
+    { "code": "KM", "name": "Kwamoras" },
+    { "code": "CG", "name": "Kongo - Brazzaville" },
+    { "code": "CD", "name": "Kongo - Kinshasa" },
+    { "code": "CK", "name": "Tsibirai Cook" },
+    { "code": "CR", "name": "Kosta Rika" },
+    { "code": "CI", "name": "Kwatibar" },
+    { "code": "HR", "name": "Krowashiya" },
+    { "code": "CU", "name": "Kyuba" },
+    { "code": "CY", "name": "Saipuras" },
+    { "code": "CZ", "name": "Jamhuriyar Czech" },
+    { "code": "DK", "name": "Danmark" },
+    { "code": "DJ", "name": "Jibuti" },
+    { "code": "DM", "name": "Dominika" },
+    { "code": "DO", "name": "Jamhuriyar Dominika" },
+    { "code": "EC", "name": "Ekwador" },
+    { "code": "EG", "name": "Misra" },
+    { "code": "SV", "name": "El Salbador" },
+    { "code": "GQ", "name": "Gini Ta Tsakiya" },
+    { "code": "ER", "name": "Eritreiya" },
+    { "code": "EE", "name": "Estoniya" },
+    { "code": "SZ", "name": "Eswatini" },
+    { "code": "ET", "name": "Ethiyobiya" },
+    { "code": "FJ", "name": "Fiji" },
+    { "code": "FI", "name": "Finlan" },
+    { "code": "FR", "name": "Faransa" },
+    { "code": "GA", "name": "Gabon" },
+    { "code": "GM", "name": "Gambiya" },
+    { "code": "GE", "name": "Jojiya" },
+    { "code": "DE", "name": "Jamus" },
+    { "code": "GH", "name": "Gana" },
+    { "code": "GR", "name": "Girka" },
+    { "code": "GT", "name": "Gwatimala" },
+    { "code": "GN", "name": "Gini" },
+    { "code": "GY", "name": "Gayana" },
+    { "code": "HT", "name": "Haiti" },
+    { "code": "HN", "name": "Honduras" },
+    { "code": "HK", "name": "Hong Kong" },
+    { "code": "HU", "name": "Hungariya" },
+    { "code": "IS", "name": "Aisalan" },
+    { "code": "IN", "name": "Indiya" },
+    { "code": "ID", "name": "Indunusiya" },
+    { "code": "IR", "name": "Iran" },
+    { "code": "IQ", "name": "Iraƙi" },
+    { "code": "IE", "name": "Ayalan" },
+    { "code": "IL", "name": "Isra'ila" },
+    { "code": "IT", "name": "Italiya" },
+    { "code": "JM", "name": "Jamaika" },
+    { "code": "JP", "name": "Japan" },
+    { "code": "JO", "name": "Jordan" },
+    { "code": "KZ", "name": "Kazakistan" },
+    { "code": "KE", "name": "Kenya" },
+    { "code": "KR", "name": "Koriya ta Kudu" },
+    { "code": "KW", "name": "Kuwait" },
+    { "code": "KG", "name": "Kirgizistan" },
+    { "code": "LA", "name": "Lawas" },
+    { "code": "LV", "name": "Latbiya" },
+    { "code": "LB", "name": "Labanon" },
+    { "code": "LS", "name": "Lesoto" },
+    { "code": "LR", "name": "Laberiya" },
+    { "code": "LY", "name": "Libiya" },
+    { "code": "LI", "name": "Lichtenstein" },
+    { "code": "LT", "name": "Lituweniya" },
+    { "code": "LU", "name": "Lukusambur" },
+    { "code": "MG", "name": "Madagaskar" },
+    { "code": "MW", "name": "Malawi" },
+    { "code": "MY", "name": "Malaysiya" },
+    { "code": "MV", "name": "Maldibi" },
+    { "code": "ML", "name": "Mali" },
+    { "code": "MT", "name": "Malta" },
+    { "code": "MX", "name": "Mekisiko" },
+    { "code": "MD", "name": "Moldoba" },
+    { "code": "MC", "name": "Monako" },
+    { "code": "MN", "name": "Mangoliya" },
+    { "code": "ME", "name": "Montenegro" },
+    { "code": "MA", "name": "Maroko" },
+    { "code": "MZ", "name": "Mozambik" },
+    { "code": "MM", "name": "Myanmar" },
+    { "code": "NA", "name": "Namibiya" },
+    { "code": "NP", "name": "Nepal" },
+    { "code": "NL", "name": "Yaren mutanen Holland" },
+    { "code": "NZ", "name": "Nuzilan" },
+    { "code": "NI", "name": "Nikaraguwa" },
+    { "code": "NE", "name": "Nijar" },
+    { "code": "NG", "name": "Nijeriya" },
+    { "code": "MK", "name": "Masedoniya ta Arewa" },
+    { "code": "NO", "name": "Norwe" },
+    { "code": "OM", "name": "Oman" },
+    { "code": "PK", "name": "Pakistan" },
+    { "code": "PA", "name": "Panama" },
+    { "code": "PG", "name": "Papua Sabon Gini" },
+    { "code": "PY", "name": "Paraguwai" },
+    { "code": "PE", "name": "Peru" },
+    { "code": "PH", "name": "Filipin" },
+    { "code": "PL", "name": "Polan" },
+    { "code": "PT", "name": "Portugal" },
+    { "code": "QA", "name": "Katar" },
+    { "code": "RO", "name": "Romaniya" },
+    { "code": "RU", "name": "Rasha" },
+    { "code": "RW", "name": "Ruwanda" },
+    { "code": "SA", "name": "Saudi Arabiya" },
+    { "code": "SN", "name": "Senegal" },
+    { "code": "RS", "name": "Serbiya" },
+    { "code": "SG", "name": "Singapur" },
+    { "code": "SK", "name": "Sulobakiya" },
+    { "code": "SI", "name": "Sulobeniya" },
+    { "code": "ZA", "name": "Afirka ta Kudu" },
+    { "code": "ES", "name": "Sipaniya" },
+    { "code": "LK", "name": "Siri Lanka" },
+    { "code": "SE", "name": "Sweden" },
+    { "code": "CH", "name": "Suwizalan" },
+    { "code": "TW", "name": "Taiwan" },
+    { "code": "TH", "name": "Tailan" },
+    { "code": "TR", "name": "Turkiyya" },
+    { "code": "UG", "name": "Yuganda" },
+    { "code": "UA", "name": "Ukrain" },
+    { "code": "AE", "name": "Haɗaɗɗiyar Daular Larabawa" },
+    { "code": "GB", "name": "Birtaniya" },
+    { "code": "US", "name": "Amurka" },
+    { "code": "UY", "name": "Urugwai" },
+    { "code": "UZ", "name": "Uzbekistan" },
+    { "code": "VE", "name": "Benezuwela" },
+    { "code": "VN", "name": "Biyetnam" },
+    { "code": "YE", "name": "Yemen" },
+    { "code": "ZM", "name": "Zambiya" },
+    { "code": "ZW", "name": "Zimbabuwe" }
+  ]
 }

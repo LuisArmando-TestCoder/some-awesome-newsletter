@@ -7,7 +7,7 @@ export default {
       "google": "Continuar con Google",
       "or": "o",
       "emailPlaceholder": "tu@ejemplo.com",
-      "continueWithEmail": "Continuar con Email",
+      "continueWithEmail": "Continuar con Correo",
       "switchText": "¿No tienes una cuenta?",
       "switchLink": "Regístrate",
       "switchHref": "/signup"
@@ -18,7 +18,7 @@ export default {
       "google": "Continuar con Google",
       "or": "o",
       "emailPlaceholder": "tu@ejemplo.com",
-      "continueWithEmail": "Continuar con Email",
+      "continueWithEmail": "Continuar con Correo",
       "switchText": "¿Ya tienes una cuenta?",
       "switchLink": "Iniciar Sesión",
       "switchHref": "/login"
@@ -26,7 +26,7 @@ export default {
   },
   "mainContent": {
     "title": "Generador de Newsletters con IA: Contenido Personalizado, Entregado.",
-    "metaDescription": "Genera newsletters personalizados con IA. Transforma cualquier fuente de noticias en artículos personalizados para tus suscriptores, en su idioma y con la voz de tu marca.",
+    "metaDescription": "Genera newsletters personalizados con IA. Transforma cualquier fuente de noticias en artículos a medida para tus suscriptores, en su idioma y con la voz de tu marca.",
     "ogImageUrl": "https://images.pexels.com/photos/261599/pexels-photo-261599.jpeg",
     "canonicalUrl": "https://example.com/ai-newsletter-generator",
     "organization": {
@@ -40,16 +40,16 @@ export default {
     },
     "announcement": {
       "text": "Lanzamiento Beta: ¡Regístrate ahora y obtén un 35% de descuento en planes anuales!",
-      "cta": "Comenzar"
+      "cta": "Empezar"
     },
     "hero": {
-      "hook": "Newsletters escritos por IA, con voz humana.",
+      "hook": "Newsletters impulsados por IA, sin esfuerzo.",
       "subHook": "Transforma cualquier fuente de noticias en artículos personalizados para tus suscriptores, en su idioma y con la voz de tu marca.",
-      "primaryCta": "Comenzar Gratis",
-      "secondaryCta": "Ver una Demostración",
+      "primaryCta": "Empieza Gratis",
+      "secondaryCta": "Ver Demo",
       "trustCues": [
-        "No se requiere tarjeta de crédito",
-        "Límite de 100 usuarios gratis",
+        "Sin tarjeta de crédito",
+        "Gratis hasta 100 usuarios",
         "Cancela en cualquier momento"
       ]
     },
@@ -61,52 +61,52 @@ export default {
         { "name": "Apex Solutions", "src": "/logos/logo_4.png" },
         { "name": "Momentum Co.", "src": "/logos/logo_5.png" }
       ],
-      "counts": "Confiado por más de 10,000 equipos en todo el mundo"
+      "counts": "Con la confianza de más de 10,000 equipos en todo el mundo"
     },
     "valueProps": {
-      "title": "El Futuro de los Newsletters está Aquí",
-      "subTitle": "Involucra a tu audiencia como nunca antes con contenido impulsado por IA que les habla directamente.",
+      "title": "El futuro de los newsletters está aquí",
+      "subTitle": "Conecta con tu audiencia como nunca antes con contenido generado por IA que les habla directamente.",
       "props": [
         {
-          "title": "Hiper-Personalización",
+          "title": "Hiperpersonalización",
           "description": "Nuestra IA analiza tu sitio web para entender a tu audiencia y adapta automáticamente los artículos a sus intereses e idioma."
         },
         {
           "title": "Creación de Contenido Automatizada",
-          "description": "Establece tu horario, diario, semanal o mensual, y deja que nuestra IA seleccione, escriba y traduzca los artículos por ti."
+          "description": "Establece tu horario (diario, semanal o mensual) y deja que nuestra IA seleccione, escriba y traduzca los artículos por ti."
         },
         {
           "title": "Tu Marca, Tu Voz",
-          "description": "La IA aprende la personalidad de tu marca a partir de tu sitio web o de una entrada personalizada, asegurando que cada newsletter suene como si lo hubieras escrito tú."
+          "description": "La IA aprende la personalidad de tu marca desde tu sitio web o mediante entrada personalizada, asegurando que cada newsletter suene como si lo hubieras escrito tú."
         }
       ]
     },
     "features": {
-      "title": "Funciones Avanzadas para un Máximo Impacto",
-      "subTitle": "Ve más allá de los simples newsletters y crea un potente canal de marketing.",
+      "title": "Funciones Avanzadas para el Máximo Impacto",
+      "subTitle": "Ve más allá de los newsletters simples y crea un poderoso canal de marketing.",
       "featureList": [
         {
           "title": "Selección Inteligente de Artículos",
-          "description": "Nuestra IA escanea las fuentes de noticias y selecciona los artículos más relevantes basándose en un análisis de tu público objetivo.",
+          "description": "Nuestra IA escanea fuentes de noticias y selecciona los artículos más relevantes basados en un análisis de tu público objetivo.",
           "image": "https://images.pexels.com/photos/3760067/pexels-photo-3760067.jpeg",
-          "cta": "Aprende más"
+          "cta": "Saber más"
         },
         {
-          "title": "Traducción de Idiomas sin Interrupciones",
-          "description": "Alcanza a una audiencia global traduciendo automáticamente los artículos a los idiomas nativos de tus suscriptores.",
+          "title": "Traducción de Idiomas Fluida",
+          "description": "Llega a una audiencia global traduciendo automáticamente los artículos a los idiomas nativos de tus suscriptores.",
           "image": "https://images.pexels.com/photos/207756/pexels-photo-207756.jpeg",
-          "cta": "Aprende más"
+          "cta": "Saber más"
         },
         {
-          "title": "Seguimiento de Leads y Analíticas",
-          "description": "Incrusta un rastreador de leads en el enlace de tu empresa para monitorear el compromiso y medir el éxito de tus campañas.",
+          "title": "Seguimiento de Leads y Analítica",
+          "description": "Inserta un rastreador de leads en el enlace de tu empresa para monitorear la interacción y medir el éxito de la campaña.",
           "image": "https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg",
-          "cta": "Aprende más"
+          "cta": "Saber más"
         }
       ]
     },
     "howItWorks": {
-      "title": "Comienza en 3 Sencillos Pasos",
+      "title": "Comienza en 3 Simples Pasos",
       "steps": [
         {
           "step": 1,
@@ -115,67 +115,55 @@ export default {
         },
         {
           "step": 2,
-          "title": "Define Tu Voz",
-          "description": "Deja que nuestra IA aprenda la personalidad de tu marca a partir de tu sitio web o proporciona una descripción personalizada."
+          "title": "Define tu Voz",
+          "description": "Deja que nuestra IA aprenda la personalidad de tu marca desde tu sitio web o proporciona una descripción personalizada."
         },
         {
           "step": 3,
-          "title": "Lanza Tu Newsletter",
-          "description": "Establece tu horario y observa cómo se envían automáticamente newsletters personalizados y multilingües."
+          "title": "Lanza tu Newsletter",
+          "description": "Configura tu horario y observa cómo se envían newsletters personalizados y multilingües a tus suscriptores."
         }
       ]
     },
     "personas": {
-      "title": "Perfecto para Tu Negocio",
+      "title": "Perfecto para tu Negocio",
       "subTitle": "Desde startups hasta empresas, nuestra herramienta está diseñada para ayudarte a crecer.",
       "personaList": [
         {
           "persona": "Creadores de Contenido",
           "problem": "Pasar horas curando y escribiendo contenido para tu audiencia.",
-          "outcome": "Automatiza tu proceso de creación de contenido y concéntrate en hacer crecer tu comunidad."
+          "outcome": "Automatiza tu proceso de creación de contenido y enfócate en hacer crecer tu comunidad."
         },
         {
           "persona": "Equipos de Marketing",
-          "problem": "Luchar por crear contenido personalizado que resuene con una audiencia global.",
-          "outcome": "Aumenta el compromiso y las conversiones con newsletters multilingües."
+          "problem": "Dificultad para crear contenido personalizado para una audiencia global.",
+          "outcome": "Aumenta la interacción y las conversiones con newsletters hiperpersonalizados."
         },
         {
           "persona": "Empresas",
-          "problem": "Falta de recursos para crear un newsletter consistente y atractivo.",
-          "outcome": "Construye un potente canal de marketing que genere tráfico con un esfuerzo mínimo."
+          "problem": "Falta de recursos para crear un newsletter constante y atractivo.",
+          "outcome": "Construye un canal de marketing potente que genere tráfico con el mínimo esfuerzo."
         }
       ]
     },
     "metrics": {
       "title": "Resultados Reales, Respaldados por Datos",
       "metricList": [
-        {
-          "value": "90%",
-          "label": "Reducción en el tiempo de creación",
-          "proof": "Basado en los comentarios de los usuarios beta."
-        },
-        {
-          "value": "2x",
-          "label": "Aumento en el compromiso de los suscriptores",
-          "proof": "Observado en pruebas A/B con usuarios beta."
-        },
-        {
-          "value": "5x",
-          "label": "Entrega de contenido más rápida",
-          "proof": "En comparación con la creación manual."
-        }
+        { "value": "90%", "label": "Reducción en tiempo de creación", "proof": "Basado en feedback de usuarios beta." },
+        { "value": "2x", "label": "Incremento en interacción", "proof": "Observado en pruebas A/B." },
+        { "value": "5x", "label": "Entrega de contenido más rápida", "proof": "Comparado con la creación manual." }
       ]
     },
     "testimonials": {
       "title": "Lo que Dicen Nuestros Clientes",
       "testimonialList": [
         {
-          "quote": "El Generador de Newsletters con IA ha cambiado las reglas del juego. Ahora podemos llegar a nuestra audiencia global con contenido que resuena.",
+          "quote": "El Generador de Newsletters con IA ha sido un cambio total de juego. Ahora podemos llegar a nuestra audiencia global con contenido que resuena.",
           "name": "Alex Chen",
-          "title": "Jefe de Crecimiento, Global Tech Inc."
+          "title": "Director de Crecimiento, Global Tech Inc."
         },
         {
-          "quote": "El contenido generado por IA está increíblemente bien escrito y se ajusta a la marca. ¡A nuestros suscriptores les encanta!",
+          "quote": "Al principio era escéptica, pero el contenido generado por IA está increíblemente bien escrito. ¡A nuestros suscriptores les encanta!",
           "name": "Samantha Jones",
           "title": "Fundadora, The Content Corner"
         }
@@ -188,8 +176,8 @@ export default {
       "cta": "Ver Precios"
     },
     "finalCta": {
-      "hook": "¿Listo para Revolucionar Tu Newsletter?",
-      "cta": "Comienza Tu Prueba Gratuita Hoy"
+      "hook": "¿Listo para Revolucionar tu Newsletter?",
+      "cta": "Comienza tu Prueba Gratuita Hoy"
     },
     "footer": {
       "copyright": "© 2026 AI Newsletter, Inc. Todos los derechos reservados.",
@@ -214,23 +202,23 @@ export default {
   },
   "help": {
     "title": "Solicitar límites más altos",
-    "subtitle": "Pasa a un modelo de pago por uso o aumenta las cuotas para que coincidan con tu crecimiento.",
+    "subtitle": "Cambia a pago por uso o aumenta tus cuotas según tu crecimiento.",
     "contact": {
       "cta": "Enviar solicitud",
       "successTitle": "Solicitud recibida",
-      "successBody": "Nuestro equipo se pondrá en contacto en breve.",
+      "successBody": "Nuestro equipo se pondrá en contacto pronto.",
       "learnMore": "/plans"
     },
     "questions": {
-      "desiredLimitsHelp": "Dinos los límites que necesitas (por ejemplo, 1M de usuarios).",
+      "desiredLimitsHelp": "Dinos los límites que necesitas (ej. 1M de usuarios).",
       "useCaseHelp": "Describe tu carga de trabajo y patrón de tráfico.",
-      "expectedSpendHelp": "Una estimación nos ayuda a personalizar los precios (opcional)."
+      "expectedSpendHelp": "Una estimación nos ayuda a adaptar el precio (opcional)."
     },
     "faqs": [
       {
         "id": "limits-how",
         "q": "¿Cómo funcionan los límites más altos?",
-        "a": "Desbloqueamos cuotas más grandes inmediatamente después de la aprobación."
+        "a": "Desbloqueamos cuotas mayores inmediatamente tras la aprobación. La facturación puede ser de tarifa plana o pago por uso."
       }
     ],
     "links": {
@@ -245,12 +233,12 @@ export default {
     },
     {
       "q": "¿Puedo cancelar en cualquier momento?",
-      "a": "Sí, puedes cancelar tu suscripción en cualquier momento desde el panel de tu cuenta."
+      "a": "Sí, puedes cancelar tu suscripción cuando quieras desde el panel de control de tu cuenta."
     }
   ],
   "plans": {
     "currency": "USD",
-    "billingIntervals": ["monthly", "yearly"],
+    "billingIntervals": ["mensual", "anual"],
     "currentPlan": "free",
     "plans": [
       {
@@ -258,7 +246,7 @@ export default {
         "name": "Gratis",
         "monthly": 0,
         "yearly": 0,
-        "tagline": "Para probar la tecnología",
+        "tagline": "Prueba la tecnología",
         "featuresBase": ["1 fuente de noticias", "Hasta 100 usuarios"],
         "featuresDelta": [],
         "limits": { "newsSources": 1, "users": 100 },
@@ -270,9 +258,9 @@ export default {
         "name": "Starter",
         "monthly": 17,
         "yearly": 132,
-        "tagline": "Para newsletters nacientes",
+        "tagline": "Para newsletters en crecimiento",
         "featuresBase": ["5 fuentes de noticias", "Hasta 100k usuarios"],
-        "featuresDelta": ["Soporte por email", "Traducción básica"],
+        "featuresDelta": ["Soporte por correo", "Traducción básica"],
         "limits": { "newsSources": 5, "users": 100000 },
         "ctaLabel": "Elegir Starter",
         "productId": "prod_starter_id",
@@ -285,7 +273,7 @@ export default {
         "yearly": 273,
         "tagline": "El equilibrio perfecto",
         "featuresBase": ["17 fuentes de noticias", "Hasta 250k usuarios"],
-        "featuresDelta": ["Marca personalizada", "Analíticas avanzadas"],
+        "featuresDelta": ["Branding personalizado", "Analítica avanzada"],
         "limits": { "newsSources": 17, "users": 250000 },
         "ctaLabel": "Elegir Growth",
         "productId": "prod_growth_id",
@@ -298,7 +286,7 @@ export default {
         "yearly": 624,
         "tagline": "Para profesionales del marketing",
         "featuresBase": ["25 fuentes de noticias", "Hasta 500k usuarios"],
-        "featuresDelta": ["API Access", "Prioridad de procesamiento"],
+        "featuresDelta": ["Acceso a la API", "Procesamiento prioritario"],
         "limits": { "newsSources": 25, "users": 500000 },
         "ctaLabel": "Elegir Pro",
         "productId": "prod_pro_id",
@@ -311,7 +299,7 @@ export default {
         "yearly": 1170,
         "tagline": "Escalabilidad ilimitada",
         "featuresBase": ["50 fuentes de noticias", "Usuarios ilimitados"],
-        "featuresDelta": ["Soporte White-Glove", "Webhooks personalizados"],
+        "featuresDelta": ["Soporte guante blanco", "Webhooks personalizados"],
         "limits": { "newsSources": 50, "users": -1 },
         "ctaLabel": "Elegir Master",
         "productId": "prod_master_id",
@@ -332,7 +320,7 @@ export default {
       }
     ],
     "contact": {
-      "text": "¿Necesitas una solución personalizada?",
+      "text": "¿Necesitas una solución a medida?",
       "cta": "Contáctanos",
       "href": "/help"
     }
@@ -350,18 +338,18 @@ export default {
     "currentPlan": "Plan Actual:",
     "monthly": "Mensual",
     "yearly": "Anual (Ahorra 35%)",
-    "everythingIn": "Todo en el plan anterior, más:",
+    "everythingIn": "Todo lo del plan anterior, más:",
     "isCurrentPlan": "Este es tu plan actual",
-    "downgradeTo": "Bajar a {planName}",
-    "upgradeTo": "Actualizar a {planName}",
-    "mockMode": "Modo de Simulación Activado",
+    "downgradeTo": "Cambiar a {planName}",
+    "upgradeTo": "Mejorar a {planName}",
+    "mockMode": "Modo Mock Activado",
     "mostPopular": "Más Popular",
     "perMonth": "por mes",
     "perYear": "por año",
     "youSave": "Ahorras"
   },
   "confirmSubscription": {
-    "title": "Confirma Tu Suscripción",
+    "title": "Confirma tu Suscripción",
     "goBack": "Volver",
     "pleaseAccept": "Por favor, acepta los términos para completar tu suscripción.",
     "iAccept": "Acepto los",
@@ -373,39 +361,39 @@ export default {
     "invalidLink": "Enlace de confirmación no válido."
   },
   "articles": {
-    "title": "Las Últimas Perspectivas",
+    "title": "Últimas Perspectivas",
     "subtitle": "Explora nuestra colección curada de artículos y noticias.",
     "producedIn": "Hemos producido noticias en todos estos idiomas",
     "searchPlaceholder": "Buscar artículos...",
     "noArticlesFound": "No se encontraron artículos.",
     "created": "Creado:",
     "language": "Idioma:",
-    "rightsReserved": "Todos los Derechos Reservados.",
+    "rightsReserved": "Todos los derechos reservados.",
     "errorFetching": "Error al obtener los artículos."
   },
   "mainPage": {
     "skipToMainContent": "Saltar al contenido principal",
-    "dismissAnnouncement": "Descartar anuncio",
+    "dismissAnnouncement": "Cerrar anuncio",
     "problem": "Problema:",
     "outcome": "Resultado:",
     "disclaimer": "El ahorro del 35% aplica solo a la facturación anual."
   },
   "authForm": {
     "emailValidation": "Por favor, introduce un correo válido.",
-    "failedToSendCode": "Error al enviar el código. Reintenta.",
+    "failedToSendCode": "Error al enviar el código. Inténtalo de nuevo.",
     "sending": "Enviando...",
     "codeSent": "Código enviado a tu correo",
-    "invalidCode": "Código no válido",
+    "invalidCode": "Código proporcionado no válido",
     "regenerateCode": "Reenviar código",
     "back": "← Volver",
-    "byProceeding": "Al continuar, aceptas los",
+    "byProceeding": "Al proceder, aceptas los",
     "termsOfService": "Términos de Servicio",
     "and": "y la",
     "privacyPolicy": "Política de Privacidad",
     "appName": "AI Newsletter"
   },
   "welcome": {
-    "title": "Generador automático de boletines",
+    "title": "Generador automático de newsletters",
     "setItOnce": "Configúralo una vez...",
     "useItForever": "...úsalo para siempre."
   },
@@ -417,12 +405,12 @@ export default {
   },
   "newsSource": {
     "title": "Conecta tu fuente de contenido",
-    "subtitle": "Extraeremos el feed para que no empieces de cero.",
-    "placeholder": "Enlace de tu blog o RSS"
+    "subtitle": "Extraeremos tu feed para que no empieces de cero.",
+    "placeholder": "Tu blog o enlace RSS"
   },
   "subscribe": {
     "welcome": {
-      "title": "Bienvenido al Boletín.",
+      "title": "Bienvenido al Newsletter.",
       "invitedBy": "Has sido invitado por {configuratorId}."
     }
   },
@@ -432,26 +420,26 @@ export default {
     "vip": "VIP",
     "plan": "Plan {planName}",
     "logIn": "Iniciar Sesión",
-    "getStarted": "Comenzar"
+    "getStarted": "Empezar"
   },
   "fileInput": {
     "chooseFile": "Elegir Archivo",
-    "dropFile": "Arrastra aquí",
-    "release": "Suelta para cargar"
+    "dropFile": "Suelta aquí",
+    "release": "Suelta para subir"
   },
   "imageInput": {
-    "unsupportedFileType": "Tipo no compatible. Usa PNG, JPEG o WebP.",
-    "dropImage": "Suelta la imagen",
+    "unsupportedFileType": "Tipo no soportado. Usa PNG, JPEG o WebP.",
+    "dropImage": "Soltar imagen",
     "dragDrop": "Arrastra y suelta",
-    "browse": "o busca un archivo",
+    "browse": "o busca archivos",
     "selectImage": "Seleccionar",
-    "preview": "Vista Previa",
+    "preview": "Previsualización",
     "removeImage": "Eliminar"
   },
   "billing": {
     "title": "Facturación y Suscripción",
     "currentPlanTitle": "Tu Plan Actual",
-    "upgradePlanTitle": "Cambiar de Plan",
+    "upgradePlanTitle": "Cambia tu Plan",
     "manageSubscription": "Gestionar Suscripción",
     "vipPlanName": "Socio VIP",
     "vipPlanDescription": "Acceso ilimitado cortesía de AI Newsletter.",

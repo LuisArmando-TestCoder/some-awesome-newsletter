@@ -2,31 +2,31 @@ export default {
     "auth": {
       "logo": "/icons/logo.png",
       "login": {
-        "title": "登入我哋嘅新聞通訊編排器",
-        "subtitle": "連接以繼續你上次離開嘅地方。",
-        "google": "用 Google 繼續",
-        "or": "或",
+        "title": "登入你嘅電子報編排器",
+        "subtitle": "連線之後就可以繼續上次未搞掂嘅嘢。",
+        "google": "用 Google 帳號登入",
+        "or": "或者",
         "emailPlaceholder": "you@example.com",
-        "continueWithEmail": "用電郵繼續",
-        "switchText": "冇帳戶？",
-        "switchLink": "註冊",
+        "continueWithEmail": "用 Email 繼續",
+        "switchText": "未有帳號？",
+        "switchLink": "即刻註冊",
         "switchHref": "/signup"
       },
       "signup": {
-        "title": "創建你嘅帳戶",
-        "subtitle": "唔需要信用卡。",
-        "google": "用 Google 繼續",
-        "or": "或",
+        "title": "建立你嘅帳號",
+        "subtitle": "唔使信用卡都開到名。",
+        "google": "用 Google 帳號註冊",
+        "or": "或者",
         "emailPlaceholder": "you@example.com",
-        "continueWithEmail": "用電郵繼續",
-        "switchText": "已經有帳戶？",
+        "continueWithEmail": "用 Email 繼續",
+        "switchText": "已經有帳號？",
         "switchLink": "登入",
         "switchHref": "/login"
       }
     },
     "mainContent": {
-      "title": "AI 新聞通訊生成器：個人化內容，送到你手。",
-      "metaDescription": "用 AI 生成個人化新聞通訊。將任何新聞來源轉化為為你訂閱者度身訂造嘅文章，用佢哋嘅語言，同埋你品牌嘅語氣。",
+      "title": "AI 電子報生成器：為你量身打造，內容自動送上。",
+      "metaDescription": "用 AI 製作個人化電子報。將任何新聞來源變做訂戶鍾意睇嘅文章，語言隨你揀，仲要符合返你嘅品牌腔調。",
       "ogImageUrl": "https://images.pexels.com/photos/261599/pexels-photo-261599.jpeg",
       "canonicalUrl": "https://example.com/ai-newsletter-generator",
       "organization": {
@@ -35,250 +35,190 @@ export default {
         "url": "https://example.com/"
       },
       "product": {
-        "name": "AI 新聞通訊生成器",
-        "description": "創建個人化、AI 驅動新聞通訊嘅終極平台。"
+        "name": "AI 電子報生成器",
+        "description": "打造 AI 驅動、個人化電子報嘅頂尖平台。"
       },
       "announcement": {
-        "text": "Beta 版推出：而家註冊，頭 3 個月可享 5 折優惠！",
-        "cta": "開始使用"
+        "text": "Beta 版推出：而家註冊，年費計劃即享六五折優惠！",
+        "cta": "即刻開始"
       },
       "hero": {
-        "hook": "AI 驅動嘅新聞通訊，輕鬆搞掂。",
-        "subHook": "將任何新聞來源轉化為為你訂閱者度身訂造嘅文章，用佢哋嘅語言，同埋你品牌嘅語氣。",
-        "primaryCta": "免費開始",
-        "secondaryCta": "觀看示範",
+        "hook": "AI 幫你整電子報，就係咁簡單。",
+        "subHook": "將任何新聞來源轉化做專屬訂戶嘅文章，用佢哋明嘅語言，講出你品牌嘅風格。",
+        "primaryCta": "免費開始試用",
+        "secondaryCta": "睇 Demo 示範",
         "trustCues": [
-          "唔需要信用卡",
-          "14 日免費試用",
-          "隨時取消"
+          "唔使入信用卡",
+          "首 100 名用戶免費",
+          "隨時可以取消"
         ]
       },
       "socialProof": {
         "logos": [
-          {
-            "name": "InnovateCorp",
-            "src": "/logos/logo_1.png"
-          },
-          {
-            "name": "QuantumLeap",
-            "src": "/logos/logo_2.png"
-          },
-          {
-            "name": "Synergy Inc.",
-            "src": "/logos/logo_3.png"
-          },
-          {
-            "name": "Apex Solutions",
-            "src": "/logos/logo_4.png"
-          },
-          {
-            "name": "Momentum Co.",
-            "src": "/logos/logo_5.png"
-          }
+          { "name": "InnovateCorp", "src": "/logos/logo_1.png" },
+          { "name": "QuantumLeap", "src": "/logos/logo_2.png" },
+          { "name": "Synergy Inc.", "src": "/logos/logo_3.png" },
+          { "name": "Apex Solutions", "src": "/logos/logo_4.png" },
+          { "name": "Momentum Co.", "src": "/logos/logo_5.png" }
         ],
-        "counts": "全球超過 10,000 個團隊信賴"
+        "counts": "全球超過 10,000 個團隊信賴我哋"
       },
       "valueProps": {
-        "title": "新聞通訊嘅未來已經嚟到",
-        "subTitle": "用 AI 驅動嘅內容，以前所未有嘅方式吸引你嘅觀眾，直接同佢哋對話。",
+        "title": "電子報嘅未來喺呢度",
+        "subTitle": "用 AI 內容直接同你嘅觀眾對話，增加互動，前所未有咁簡單。",
         "props": [
           {
-            "title": "超個人化",
-            "description": "我哋嘅 AI 會分析你嘅網站，了解你嘅觀眾，並自動為佢哋嘅興趣同語言度身訂造文章。"
+            "title": "深度個人化",
+            "description": "我哋嘅 AI 會分析你個網頁嚟了解你嘅觀眾，自動根據佢哋嘅興趣同語言嚟調整文章內容。"
           },
           {
-            "title": "自動化內容創作",
-            "description": "設定你嘅時間表，每日、每週或每月，等我哋嘅 AI 為你選擇、撰寫同翻譯文章。"
+            "title": "全自動內容創作",
+            "description": "排好晒時間表——每日、每星期或者每個月——等我哋個 AI 幫你揀文章、寫稿同埋翻譯。"
           },
           {
-            "title": "你嘅品牌，你嘅語氣",
-            "description": "AI 會從你嘅網站或自訂輸入中學習你品牌嘅個性，確保每份新聞通訊聽起嚟都好似係你親手寫嘅一樣。"
+            "title": "你嘅品牌，你嘅風格",
+            "description": "AI 會從你個網頁學習品牌個性，保證每份電子報睇落都好似你親手寫咁。"
           }
         ]
       },
       "features": {
-        "title": "進階功能，發揮最大影響力",
-        "subTitle": "超越簡單嘅新聞通訊，創建一個強大嘅營銷渠道。",
+        "title": "強大功能，帶嚟最強影響力",
+        "subTitle": "唔止係發封 Email 咁簡單，而係幫你建立一個強大嘅營銷途徑。",
         "featureList": [
           {
-            "title": "智能文章選擇",
-            "description": "我哋嘅 AI 會掃描新聞來源，並根據對你目標受眾嘅分析，選擇最相關嘅文章，確保高參與度。",
+            "title": "智能文章篩選",
+            "description": "AI 會幫你掃描新聞來源，根據受眾分析揀出最啱睇嘅內容。",
             "image": "https://images.pexels.com/photos/3760067/pexels-photo-3760067.jpeg",
             "cta": "了解更多"
           },
           {
-            "title": "無縫語言翻譯",
-            "description": "透過自動將文章翻譯成你訂閱者嘅母語，接觸全球觀眾，打破溝通障礙。",
+            "title": "無縫多國語言翻譯",
+            "description": "自動將文章翻譯做訂戶嘅母語，幫你將生意推向全世界。",
             "image": "https://images.pexels.com/photos/207756/pexels-photo-207756.jpeg",
             "cta": "了解更多"
           },
           {
-            "title": "潛在客戶追踪與分析",
-            "description": "喺你公司嘅連結中嵌入潛在客戶追踪器，以監測參與度，並用我哋內置嘅計數器衡量你嘅活動成效。",
+            "title": "潛在客戶追蹤同分析",
+            "description": "喺連結入面嵌入追蹤器，隨時監察互動率，評估宣傳活動成唔成功。",
             "image": "https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg",
             "cta": "了解更多"
           }
         ]
       },
       "howItWorks": {
-        "title": "3 個簡單步驟，輕鬆開始",
+        "title": "簡單三個步驟就開始到",
         "steps": [
           {
             "step": 1,
-            "title": "連接你嘅新聞來源",
-            "description": "連結任何新聞來源，我哋嘅 AI 就會開始分析其中嘅相關內容。"
+            "title": "連接內容來源",
+            "description": "擺低任何新聞連結，AI 就會即刻幫你分析入面嘅內容。"
           },
           {
             "step": 2,
-            "title": "定義你嘅語氣",
-            "description": "等我哋嘅 AI 從你嘅網站學習你品牌嘅個性，或提供自訂描述。"
+            "title": "定義你嘅風格",
+            "description": "畀 AI 喺你網頁學下品牌個性，或者你自己寫一段描述都得。"
           },
           {
             "step": 3,
-            "title": "啟動你嘅新聞通訊",
-            "description": "設定你嘅時間表，睇住個人化、多語言嘅新聞通訊自動發送俾你嘅訂閱者。"
+            "title": "發布電子報",
+            "description": "排好時間表，之後就可以安坐沙發，等個人化、多語言嘅電子報寄畀你嘅訂戶。"
           }
         ]
       },
       "personas": {
-        "title": "最適合你嘅業務",
-        "subTitle": "由初創公司到大型企業，我哋嘅工具旨在幫助你成長。",
+        "title": "啱晒你嘅生意用",
+        "subTitle": "無論你係初創公司定係大型企業，我哋個工具都幫到你成長。",
         "personaList": [
           {
             "persona": "內容創作者",
-            "problem": "花費數小時為你嘅觀眾策劃同撰寫內容。",
-            "outcome": "自動化你嘅內容創作流程，專注於發展你嘅社群。"
+            "problem": "每日花成幾個鐘去搵料同寫嘢畀觀眾睇。",
+            "outcome": "將創作過程自動化，專注返去經營你個社群。"
           },
           {
             "persona": "營銷團隊",
-            "problem": "難以創作能引起全球觀眾共鳴嘅個人化內容。",
-            "outcome": "透過超個人化、多語言嘅新聞通訊，提高參與度同轉化率。"
+            "problem": "好難針對全球唔同觀眾去整個人化內容。",
+            "outcome": "用深度個人化嘅電子報嚟提升互動同轉化率。"
           },
           {
-            "persona": "企業",
-            "problem": "缺乏資源去創建一份持續而具吸引力嘅新聞通訊。",
-            "outcome": "以最少嘅努力，建立一個強大嘅營銷渠道，推動流量同銷售。"
+            "persona": "商業機構",
+            "problem": "唔夠人手或者資源去keep住出一份好睇嘅電子報。",
+            "outcome": "用最低成本建立一個強大嘅渠道嚟引流。"
           }
         ]
       },
       "metrics": {
-        "title": "真實成果，數據支持",
+        "title": "數據講真話，效果睇得到",
         "metricList": [
-          {
-            "value": "90%",
-            "label": "減少內容創作時間",
-            "proof": "基於 beta 用戶反饋。"
-          },
-          {
-            "value": "2x",
-            "label": "訂閱者參與度增加",
-            "proof": "喺 beta 用戶嘅 A/B 測試中觀察所得。"
-          },
-          {
-            "value": "5x",
-            "label": "內容傳遞速度更快",
-            "proof": "與手動創建新聞通訊相比。"
-          }
+          { "value": "90%", "label": "節省製作時間", "proof": "根據 Beta 用戶回覆。" },
+          { "value": "2x", "label": "互動率提升", "proof": "從 A/B 測試觀察所得。" },
+          { "value": "5x", "label": "內容發布更快速", "proof": "比起人手製作快好多。" }
         ]
       },
       "testimonials": {
-        "title": "我哋客戶嘅評價",
+        "title": "用家點樣講",
         "testimonialList": [
           {
-            "quote": "AI 新聞通訊生成器徹底改變咗我哋嘅內容策略。我哋而家能夠用引起共鳴嘅個人化內容，接觸到我哋嘅全球觀眾。",
-            "name": "陳力",
-            "title": "Global Tech Inc. 增長主管"
+            "quote": "AI 電子報生成器真係幫咗大忙。我哋而家可以用最啱聽嘅內容去接觸全球嘅觀眾。",
+            "name": "Alex Chen",
+            "title": "增長主管, Global Tech Inc."
           },
           {
-            "quote": "我一開始都好懷疑，但 AI 生成嘅內容寫得非常好，而且好符合品牌風格。我哋嘅訂閱者好鍾意！",
+            "quote": "開頭我都有啲懷疑，但 AI 寫出嚟嘅內容真係好高質量。我哋啲訂戶好鍾意！",
             "name": "Samantha Jones",
-            "title": "The Content Corner 創辦人"
-          },
-          {
-            "quote": "我哋慳返嘅時間真係難以置信。而家我哋可以專注喺業務嘅其他方面，等 AI 處理我哋嘅新聞通訊。",
-            "name": "David Rodriguez",
-            "title": "Startup Solutions CEO"
+            "title": "創辦人, The Content Corner"
           }
         ]
       },
       "pricing": {
-        "teaser": "適合各種業務嘅實惠計劃",
-        "subTitle": "我哋嘅計劃旨在與你一同成長。",
-        "plan": "每月 $9 起",
-        "cta": "查看定價"
+        "teaser": "每個生意都負擔得起嘅計劃",
+        "subTitle": "我哋嘅計劃會陪住你一齊成長。",
+        "plan": "最低每月 $17 起",
+        "cta": "睇價錢"
       },
       "finalCta": {
-        "hook": "準備好徹底改變你嘅新聞通訊未？",
-        "cta": "今日就開始你嘅免費試用"
+        "hook": "準備好大改你嘅電子報未？",
+        "cta": "即刻開始免費試用"
       },
       "footer": {
-        "copyright": "© 2025 AI Newsletter, Inc. 版權所有。",
+        "copyright": "© 2026 AI Newsletter, Inc. 版權所有。",
         "companyLinks": {
           "title": "公司",
           "links": [
-            {
-              "text": "關於我哋",
-              "href": "/about"
-            },
-            {
-              "text": "職位空缺",
-              "href": "/careers"
-            },
-            {
-              "text": "網誌",
-              "href": "/blog"
-            }
+            { "text": "關於我哋", "href": "/about" },
+            { "text": "人才招聘", "href": "/careers" },
+            { "text": "網誌", "href": "https://github.com/..." }
           ]
         },
         "legalLinks": {
-          "title": "法律",
+          "title": "法律資訊",
           "links": [
-            {
-              "text": "私隱政策",
-              "href": "/legal/privacy"
-            },
-            {
-              "text": "服務條款",
-              "href": "/legal/terms"
-            },
-            {
-              "text": "Cookie 政策",
-              "href": "/legal/cookies"
-            }
+            { "text": "私隱政策", "href": "/legal/privacy" },
+            { "text": "服務條款", "href": "/legal/terms" },
+            { "text": "Cookie 政策", "href": "/legal/cookies" }
           ]
         },
         "contact": "support@ainewsletter.com"
       }
     },
     "help": {
-      "title": "要求更高限制",
-      "subtitle": "轉為按用量收費或增加配額，以配合你嘅增長。",
+      "title": "申請調高配額",
+      "subtitle": "轉用按量收費，或者增加配額嚟配合你嘅業務增長。",
       "contact": {
-        "cta": "提交請求",
-        "successTitle": "已收到請求",
+        "cta": "提交申請",
+        "successTitle": "收到申請",
         "successBody": "我哋嘅團隊會盡快聯絡你。",
         "learnMore": "/plans"
       },
       "questions": {
-        "desiredLimitsHelp": "話我哋知你需要嘅限制（例如，每日 10 萬次 API 呼叫）。",
-        "useCaseHelp": "描述你嘅工作負載同流量模式。",
-        "expectedSpendHelp": "估算有助我哋為你度身訂造定價（可選）。"
+        "desiredLimitsHelp": "話畀我哋聽你需要幾多配額（例如：100萬用戶）。",
+        "useCaseHelp": "描述下你嘅工作量同埋流量模式。",
+        "expectedSpendHelp": "話個預算畀我哋知，可以幫你定個合適價錢（可選）。"
       },
       "faqs": [
         {
           "id": "limits-how",
-          "q": "更高限制係點運作？",
-          "a": "批准後，我哋會立即解鎖更大嘅配額。計費可以係固定費率或按用量收費。"
-        },
-        {
-          "id": "pricing-payg",
-          "q": "咩係按用量收費定價？",
-          "a": "你只需為超出你計劃包含配額嘅用量付費，量大仲有折扣。"
-        },
-        {
-          "id": "timeline",
-          "q": "審批需要幾耐？",
-          "a": "大多數請求會喺 1-2 個工作日內審核。緊急情況可以加急處理。"
+          "q": "調高配額係點樣運作㗎？",
+          "a": "批准咗之後，我哋會即刻幫你開通更大配額。收費可以係固定月費或者按量收費。"
         }
       ],
       "links": {
@@ -288,36 +228,17 @@ export default {
     },
     "faq": [
       {
-        "q": "有冇免費試用？",
-        "a": "有！所有新用戶都可以免費試用我哋嘅 Pro 計劃 14 日，唔需要信用卡。"
+        "q": "有無免費試用？",
+        "a": "有！你可以由免費計劃開始，限額 100 個用戶，畀你試清楚個技術先。"
       },
       {
-        "q": "我嘅試用期結束後會點？",
-        "a": "你可以選擇升級到付費計劃，或者會自動降級到我哋功能有限嘅免費計劃。"
-      },
-      {
-        "q": "可唔可以同自訂工具整合？",
-        "a": "絕對可以。我哋嘅平台包含強大嘅 API 同 webhook 系統，可以同任何內部或專有軟件連接。"
-      },
-      {
-        "q": "我嘅數據安全嗎？",
-        "a": "安全係我哋嘅首要任務。我哋已通過 SOC 2 Type II 認證，所有數據喺傳輸同靜止時都會加密。"
-      },
-      {
-        "q": "你哋提供支援嗎？",
-        "a": "係，我哋為所有計劃提供 24/7 電郵支援，企業計劃仲有專屬電話同 Slack 支援。"
-      },
-      {
-        "q": "我可唔可以隨時取消？",
-        "a": "可以，你可以隨時喺你嘅帳戶儀表板取消訂閱。你嘅計劃會喺當前計費周期結束前保持有效。"
+        "q": "可以隨時取消嗎？",
+        "a": "無問題，你隨時可以喺帳戶控制面板取消訂閱。"
       }
     ],
     "plans": {
       "currency": "USD",
-      "billingIntervals": [
-        "monthly",
-        "yearly"
-      ],
+      "billingIntervals": ["每月", "每年"],
       "currentPlan": "free",
       "plans": [
         {
@@ -325,58 +246,64 @@ export default {
           "name": "免費",
           "monthly": 0,
           "yearly": 0,
-          "tagline": "免費開始",
-          "featuresBase": [
-            "1 個新聞來源"
-          ],
+          "tagline": "試下個技術先",
+          "featuresBase": ["1 個新聞來源", "最多 100 個用戶"],
           "featuresDelta": [],
-          "limits": {
-            "newsSources": 1
-          },
-          "ctaLabel": "當前計劃",
+          "limits": { "newsSources": 1, "users": 100 },
+          "ctaLabel": "目前計劃",
           "tier": 0
         },
         {
-          "id": "monthly",
-          "name": "月費",
+          "id": "starter",
+          "name": "入門",
           "monthly": 17,
-          "yearly": 108,
-          "tagline": "適合不斷增長嘅新聞通訊",
-          "featuresBase": [],
-          "featuresDelta": [
-            "最多 17 個新聞來源",
-            "無限用戶",
-            "用佢哋嘅語言自訂訊息",
-            "自訂應用程式密碼",
-            "自動報紙"
-          ],
-          "limits": {
-            "newsSources": 17
-          },
-          "ctaLabel": "升級到月費",
-          "productId": "f48b54e0-910a-46ca-b0a4-5678876512fe",
+          "yearly": 132,
+          "tagline": "適合增長中嘅電子報",
+          "featuresBase": ["5 個新聞來源", "最多 10 萬用戶"],
+          "featuresDelta": ["Email 支援", "基本翻譯"],
+          "limits": { "newsSources": 5, "users": 100000 },
+          "ctaLabel": "選擇入門版",
+          "productId": "prod_starter_id",
           "tier": 1
         },
         {
-          "id": "yearly",
-          "name": "年費",
-          "monthly": 9,
-          "yearly": 108,
-          "tagline": "選擇年費計劃更慳錢",
-          "featuresBase": [],
-          "featuresDelta": [
-            "最多 17 個新聞來源",
-            "無限用戶",
-            "用佢哋嘅語言自訂訊息",
-            "自訂應用程式密碼",
-            "自動報紙"
-          ],
-          "limits": {
-            "newsSources": 17
-          },
-          "ctaLabel": "升級到年費",
-          "productId": "e4ad16dc-dc39-4656-92f3-70b3140eddea",
+          "id": "growth",
+          "name": "增長",
+          "monthly": 35,
+          "yearly": 273,
+          "tagline": "平衡得最好",
+          "featuresBase": ["17 個新聞來源", "最多 25 萬用戶"],
+          "featuresDelta": ["自定義品牌風格", "高級分析"],
+          "limits": { "newsSources": 17, "users": 250000 },
+          "ctaLabel": "選擇增長版",
+          "productId": "prod_growth_id",
           "tier": 2
+        },
+        {
+          "id": "pro",
+          "name": "專業",
+          "monthly": 80,
+          "yearly": 624,
+          "tagline": "營銷專家之選",
+          "featuresBase": ["25 個新聞來源", "最多 50 萬用戶"],
+          "featuresDelta": ["API 接入", "優先處理"],
+          "limits": { "newsSources": 25, "users": 500000 },
+          "ctaLabel": "選擇專業版",
+          "productId": "prod_pro_id",
+          "tier": 3
+        },
+        {
+          "id": "master",
+          "name": "大師",
+          "monthly": 150,
+          "yearly": 1170,
+          "tagline": "無限擴充空間",
+          "featuresBase": ["50 個新聞來源", "無限用戶"],
+          "featuresDelta": ["貼身技術支援", "自定義 Webhooks"],
+          "limits": { "newsSources": 50, "users": -1 },
+          "ctaLabel": "選擇大師版",
+          "productId": "prod_master_id",
+          "tier": 4
         },
         {
           "id": "vipfree",
@@ -384,130 +311,152 @@ export default {
           "monthly": 0,
           "yearly": 0,
           "tagline": "合作夥伴專享",
-          "featuresBase": [],
-          "featuresDelta": [
-            "無限新聞來源"
-          ],
-          "limits": {
-            "newsSources": -1
-          },
-          "ctaLabel": "當前計劃",
+          "featuresBase": ["無限來源", "無限用戶"],
+          "featuresDelta": [],
+          "limits": { "newsSources": -1, "users": -1 },
+          "ctaLabel": "目前計劃",
           "internalOnly": true,
-          "tier": 3
+          "tier": 5
         }
       ],
       "contact": {
-        "text": "需要為你嘅業務提供更多功能？",
+        "text": "需要特別定制方案？",
         "cta": "聯絡我哋",
         "href": "/help"
       }
     },
     "article": {
       "notFound": "搵唔到文章。",
-      "errorFetching": "讀取文章時發生錯誤。",
-      "noArticleSpecified": "未指定文章。",
-      "goBack": "返回",
-      "loading": "載入中..."
+      "errorFetching": "讀取文章出咗錯。",
+      "noArticleSpecified": "未有指定文章。",
+      "goBack": "返去",
+      "loading": "讀取中..."
     },
     "pricing": {
-      "eyebrow": "定價",
-      "title": "計劃",
-      "currentPlan": "當前計劃：",
-      "monthly": "月費",
-      "yearly": "年費",
-      "everythingIn": "包含上一計劃所有功能，再加上：",
-      "isCurrentPlan": "呢個係你嘅當前計劃",
-      "downgradeTo": "降級到 {planName}",
-      "upgradeTo": "升級到 {planName}",
-      "mockMode": "已啟用模擬模式"
+      "eyebrow": "價錢計劃",
+      "title": "彈性計劃",
+      "currentPlan": "目前計劃：",
+      "monthly": "每月",
+      "yearly": "每年（慳返 35%）",
+      "everythingIn": "包埋之前嗰個計劃嘅所有嘢，再加：",
+      "isCurrentPlan": "呢個係你目前用緊嘅計劃",
+      "downgradeTo": "降級去 {planName}",
+      "upgradeTo": "升級去 {planName}",
+      "mockMode": "模擬模式已開啟",
+      "mostPopular": "最受歡迎",
+      "perMonth": "每個月",
+      "perYear": "每一年",
+      "youSave": "你慳咗"
     },
     "confirmSubscription": {
       "title": "確認你嘅訂閱",
-      "goBack": "返回",
-      "pleaseAccept": "請接受條款及細則以完成你嘅訂閱。",
-      "iAccept": "我接受",
+      "goBack": "返去",
+      "pleaseAccept": "請同意服務條款嚟完成訂閱。",
+      "iAccept": "我同意",
       "termsAndConditions": "條款及細則",
-      "and": "及",
+      "and": "同埋",
       "privacyPolicy": "私隱政策",
       "confirm": "確認訂閱",
-      "mustAccept": "你必須接受條款及細則才能訂閱。",
-      "invalidLink": "無效嘅確認連結。"
+      "mustAccept": "你一定要同意條款先可以訂閱。",
+      "invalidLink": "確認連結失效。"
     },
     "articles": {
-      "title": "最新見解",
-      "subtitle": "探索我哋精心挑選嘅文章、新聞同專家意見。",
-      "producedIn": "我哋用所有呢啲語言製作過新聞",
+      "title": "最新動態",
+      "subtitle": "睇下我哋為你揀選嘅文章同新聞。",
+      "producedIn": "我哋可以用晒呢啲語言嚟出新聞",
       "searchPlaceholder": "搜尋文章...",
-      "noArticlesFound": "搵唔到文章。",
-      "created": "創建時間：",
+      "noArticlesFound": "搵唔到相關文章。",
+      "created": "建立日期：",
       "language": "語言：",
       "rightsReserved": "版權所有。",
-      "errorFetching": "讀取文章時發生錯誤。",
-      "noArticleSpecified": "未指定文章。"
+      "errorFetching": "讀取文章列表出咗錯。"
     },
     "mainPage": {
-      "skipToMainContent": "跳到主要內容",
-      "dismissAnnouncement": "關閉公告",
+      "skipToMainContent": "跳至主要內容",
+      "dismissAnnouncement": "隱藏公告",
       "problem": "問題：",
-      "outcome": "成果：",
-      "disclaimer": "適用於每年 $108 嘅年費計劃。與每月 $17 嘅月費計劃相比，你可節省 $96。"
+      "outcome": "結果：",
+      "disclaimer": "六五折優惠只適用於年費計劃。"
     },
     "authForm": {
-      "emailValidation": "請輸入有效嘅電郵地址。",
-      "failedToSendCode": "發送驗證碼失敗。請再試一次。",
-      "sending": "發送中...",
-      "codeSent": "我哋已將驗證碼發送到你嘅電郵",
-      "invalidCode": "提供嘅驗證碼無效",
-      "regenerateCode": "如果你冇收到電郵，可以喺呢度重新生成驗證碼",
-      "back": "← 返回",
-      "byProceeding": "繼續即表示你同意 {appName} 嘅",
+      "emailValidation": "請輸入有效嘅 Email。",
+      "failedToSendCode": "send 唔到驗證碼，請再試下。",
+      "sending": "傳送中...",
+      "codeSent": "驗證碼已經 send 咗去你 Email",
+      "invalidCode": "驗證碼唔正確",
+      "regenerateCode": "重新傳送驗證碼",
+      "back": "← 返去",
+      "byProceeding": "如果你繼續，即係代表你同意",
       "termsOfService": "服務條款",
-      "and": "及",
-      "privacyPolicy": "私隱政策"
+      "and": "同埋",
+      "privacyPolicy": "私隱政策",
+      "appName": "AI 電子報"
     },
     "welcome": {
-      "title": "自動新聞通訊生成器",
-      "setItOnce": "設定一次...",
-      "useItForever": "...永久使用。"
+      "title": "自動電子報生成器",
+      "setItOnce": "整好一次...",
+      "useItForever": "...就一直用落去。"
     },
     "lead": {
-      "title": "為咗令客戶可以由新聞通訊去到你嘅網站",
-      "recommendation": "強烈建議咁做。呢個有助我哋嘅 AI 更好咁理解你新聞通訊嘅背景，並生成更相關嘅文章。",
-      "question": "你有網站嗎？（可選）",
-      "placeholder": "你網站嘅連結"
+      "title": "將訂戶變做訪客",
+      "recommendation": "連埋你個網頁，等 AI 了解下你嘅品牌風格。",
+      "question": "你有無網頁？（可選）",
+      "placeholder": "https://your-site.com"
     },
     "newsSource": {
-      "title": "為咗使用你嘅網誌或新聞資訊，我哋需要你輸入佢嘅連結",
-      "subtitle": "我哋會從你嘅資訊源生成內容，咁你就唔使由零開始創建新聞通訊",
-      "placeholder": "你新聞網站或網誌嘅連結"
+      "title": "連接你嘅內容來源",
+      "subtitle": "我哋會自動抓取你個 feed，咁你就唔使由零開始啦。",
+      "placeholder": "你嘅 Blog 或者 RSS 連結"
     },
     "subscribe": {
       "welcome": {
-        "title": "歡迎訂閱新聞通訊。",
-        "invitedBy": "你由 {configuratorId} 邀請。"
+        "title": "歡迎訂閱電子報。",
+        "invitedBy": "你係由 {configuratorId} 邀請入嚟嘅。"
       }
     },
     "header": {
-      "goToWorkspace": "前往工作區",
-      "inBilling": "你正在處理帳單",
+      "goToWorkspace": "去工作區",
+      "inBilling": "賬單管理",
       "vip": "VIP",
       "plan": "{planName} 計劃",
       "logIn": "登入",
-      "getStarted": "開始使用"
+      "getStarted": "即刻開始"
     },
     "fileInput": {
-      "chooseFile": "選擇檔案",
-      "dropFile": "或將檔案拖放到此處",
-      "release": "放開滑鼠以放置檔案"
+      "chooseFile": "揀文件",
+      "dropFile": "擺喺呢度",
+      "release": "鬆手就上傳"
     },
     "imageInput": {
-      "unsupportedFileType": "唔支援嘅檔案類型：{fileType}。請選擇 PNG、JPEG、JPG、GIF 或 WebP 圖片。",
-      "dropImage": "將圖片拖放到此處",
-      "dragDrop": "將圖片拖放到此處",
-      "browse": "或點擊瀏覽",
-      "selectImage": "選擇圖片",
+      "unsupportedFileType": "格式唔支援。請用 PNG, JPEG 或者 WebP。",
+      "dropImage": "擺張圖落嚟",
+      "dragDrop": "拖放圖片",
+      "browse": "或者瀏覽文件",
+      "selectImage": "選擇",
       "preview": "預覽",
-      "removeImage": "移除圖片"
+      "removeImage": "移除"
+    },
+    "billing": {
+      "title": "賬單與訂閱",
+      "currentPlanTitle": "你目前用緊嘅計劃",
+      "upgradePlanTitle": "更改計劃",
+      "manageSubscription": "管理訂閱",
+      "vipPlanName": "VIP 合作夥伴",
+      "vipPlanDescription": "由 AI Newsletter 提供嘅無限使用權限。",
+      "perMonth": "每個月",
+      "perYear": "每一年",
+      "monthAbbreviation": "月",
+      "equivalentTo": "等同於",
+      "mostPopular": "最受歡迎",
+      "upgradeTo": "升級至",
+      "downgradeTo": "轉用",
+      "currentPlanButton": "你嘅計劃",
+      "youSave": "你慳咗",
+      "users": "用戶",
+      "newsSources": "新聞來源",
+      "monthly": "月費",
+      "yearly": "年費",
+      "loadingPlan": "讀取計劃資料中..."
     },
     "languages": [
       { "code": "ab", "name": "阿布哈茲文" },

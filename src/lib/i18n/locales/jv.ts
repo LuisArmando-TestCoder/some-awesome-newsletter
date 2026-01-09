@@ -2,22 +2,22 @@ export default {
   "auth": {
     "logo": "/icons/logo.png",
     "login": {
-      "title": "Mlebu menyang Orkestrator Nawala Kita",
-      "subtitle": "Sambungake kanggo nerusake saka ngendi sampeyan mandheg.",
+      "title": "Mlebu menyang Newsletter Orchestrator kita",
+      "subtitle": "Sambungake kanggo nerusake apa sing wis koklakoni.",
       "google": "Terusake nganggo Google",
       "or": "utawa",
-      "emailPlaceholder": "you@example.com",
+      "emailPlaceholder": "sampeyan@tuladha.com",
       "continueWithEmail": "Terusake nganggo Email",
       "switchText": "Durung duwe akun?",
-      "switchLink": "Ndaftar",
+      "switchLink": "Daftar",
       "switchHref": "/signup"
     },
     "signup": {
       "title": "Gawe akun sampeyan",
-      "subtitle": "Ora perlu kertu kredit.",
+      "subtitle": "Ora butuh kertu kredit.",
       "google": "Terusake nganggo Google",
       "or": "utawa",
-      "emailPlaceholder": "you@example.com",
+      "emailPlaceholder": "sampeyan@tuladha.com",
       "continueWithEmail": "Terusake nganggo Email",
       "switchText": "Wis duwe akun?",
       "switchLink": "Mlebu",
@@ -25,8 +25,8 @@ export default {
     }
   },
   "mainContent": {
-    "title": "Generator Nawala AI: Konten Pribadi, Dikirim.",
-    "metaDescription": "Gawe nawala pribadi nganggo AI. Owahi sumber warta apa wae dadi artikel khusus kanggo pelanggan sampeyan, ing basa lan swara merek sampeyan.",
+    "title": "AI Newsletter Generator: Konten Personalisasi, Dikirim.",
+    "metaDescription": "Gawe buletin personalisasi nganggo AI. Owahi sumber pawarta apa wae dadi artikel khusus kanggo pelanggan sampeyan, nganggo basane dhewe, lan nganggo gaya merek sampeyan.",
     "ogImageUrl": "https://images.pexels.com/photos/261599/pexels-photo-261599.jpeg",
     "canonicalUrl": "https://example.com/ai-newsletter-generator",
     "organization": {
@@ -35,22 +35,22 @@ export default {
       "url": "https://example.com/"
     },
     "product": {
-      "name": "Generator Nawala AI",
-      "description": "Platform paling apik kanggo nggawe nawala pribadi sing didhukung AI."
+      "name": "AI Newsletter Generator",
+      "description": "Platform paling apik kanggo nggawe buletin personalisasi sing didhukung AI."
     },
     "announcement": {
-      "text": "Peluncuran Beta: Ndaftar saiki lan entuk diskon 50% kanggo 3 wulan pertama!",
-      "cta": "Miwiti"
+      "text": "Peluncuran Beta: Daftar saiki lan entuk diskon 35% kanggo paket tahunan!",
+      "cta": "Mulai Saiki"
     },
     "hero": {
-      "hook": "Nawala sing Didhukung AI, Tanpa Usaha.",
-      "subHook": "Owahi sumber warta apa wae dadi artikel pribadi kanggo pelanggan sampeyan, ing basa lan swara merek sampeyan.",
-      "primaryCta": "Miwiti Gratis",
-      "secondaryCta": "Nonton Demo",
+      "hook": "Buletin nganggo AI, Tanpa Ribet.",
+      "subHook": "Owahi sumber pawarta apa wae dadi artikel personalisasi kanggo pelanggan sampeyan, nganggo basane dhewe, lan nganggo gaya merek sampeyan.",
+      "primaryCta": "Mulai Gratis",
+      "secondaryCta": "Tonton Demo",
       "trustCues": [
-        "Ora perlu kertu kredit",
-        "Uji coba gratis 14 dina",
-        "Batal kapan wae"
+        "Ora butuh kertu kredit",
+        "Gratis nganti 100 pangguna",
+        "Bisa dibatalake kapan wae"
       ]
     },
     "socialProof": {
@@ -64,140 +64,123 @@ export default {
       "counts": "Dipercaya dening 10.000+ tim ing saindenging jagad"
     },
     "valueProps": {
-      "title": "Masa Depan Nawala Ana Kene",
-      "subTitle": "Libatake pamirsa sampeyan kaya sadurunge nganggo konten sing didhukung AI sing langsung ngomong karo dheweke.",
+      "title": "Masa Depan Buletin Wis Teka",
+      "subTitle": "Golek kawigaten pamirsa sing luwih jero nganggo konten AI sing ngomong langsung karo dheweke.",
       "props": [
         {
-          "title": "Personalisasi Hiper",
-          "description": "AI kita nganalisa situs web sampeyan kanggo mangerteni pamirsa sampeyan lan kanthi otomatis nyetel artikel miturut kapentingan lan basa."
+          "title": "Hiper-Personalisasi",
+          "description": "AI kita nganalisis situs web sampeyan kanggo mangerteni pamirsa lan kanthi otomatis nyelarasake artikel karo minat lan basane dheweke."
         },
         {
-          "title": "Nggawe Konten Otomatis",
-          "description": "Setel jadwal sampeyan, saben dina, saben minggu, utawa saben wulan, lan supaya AI kita milih, nulis, lan nerjemahake artikel kanggo sampeyan."
+          "title": "Gawe Konten Otomatis",
+          "description": "Atur jadwal sampeyan, saben dina, saben minggu, utawa saben sasi, lan jarké AI kita milih, nulis, lan nerjemahake artikel kanggo sampeyan."
         },
         {
           "title": "Merek Sampeyan, Swara Sampeyan",
-          "description": "AI sinau kepribadian merek sampeyan saka situs web utawa input khusus, mesthekake saben nawala muni kaya ditulis dening sampeyan."
+          "description": "AI sinau kepribadian merek sampeyan saka situs web utawa input khusus, mesthekake saben buletin muni kaya sampeyan dhewe sing nulis."
         }
       ]
     },
     "features": {
-      "title": "Fitur Lanjut kanggo Dampak Maksimal",
-      "subTitle": "Luwih saka nawala sederhana lan gawe saluran pemasaran sing kuat.",
+      "title": "Fitur Canggih kanggo Dampak Maksimal",
+      "subTitle": "Luwih saka mung buletin biasa lan gawe saluran pemasaran sing kuat.",
       "featureList": [
         {
-          "title": "Pilihan Artikel Cerdas",
-          "description": "AI kita mindai sumber warta lan milih artikel sing paling relevan adhedhasar analisis pamirsa target sampeyan, mesthekake keterlibatan sing dhuwur.",
+          "title": "Pamilihan Artikel Cerdas",
+          "description": "AI kita mindhai sumber pawarta lan milih artikel sing paling relevan adhedhasar analisis pamirsa target sampeyan.",
           "image": "https://images.pexels.com/photos/3760067/pexels-photo-3760067.jpeg",
           "cta": "Sinau luwih lengkap"
         },
         {
           "title": "Terjemahan Basa sing Lancar",
-          "description": "Tekan pamirsa global kanthi otomatis nerjemahake artikel menyang basa asli pelanggan sampeyan, ngilangi alangan komunikasi.",
+          "description": "Tekan pamirsa global kanthi otomatis nerjemahake artikel menyang basa asline pelanggan sampeyan.",
           "image": "https://images.pexels.com/photos/207756/pexels-photo-207756.jpeg",
           "cta": "Sinau luwih lengkap"
         },
         {
-          "title": "Pelacakan Timbal lan Analisis",
-          "description": "Tanamake pelacak timbal ing tautan perusahaan sampeyan kanggo ngawasi keterlibatan lan ngukur sukses kampanye sampeyan nganggo counter internal kita.",
+          "title": "Pelacakan Prospek & Analitik",
+          "description": "Pasang pelacak prospek ing tautan perusahaan sampeyan kanggo mantau keterlibatan lan ngukur kesuksesan kampanye.",
           "image": "https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg",
           "cta": "Sinau luwih lengkap"
         }
       ]
     },
     "howItWorks": {
-      "title": "Miwiti ing 3 Langkah Gampang",
+      "title": "Mulai nganggo 3 Langkah Gampang",
       "steps": [
         {
           "step": 1,
-          "title": "Sambungake Sumber Warta Sampeyan",
-          "description": "Tautake sumber warta apa wae, lan AI kita bakal miwiti nganalisa kanggo konten sing relevan."
+          "title": "Sambungake Sumber Pawarta",
+          "description": "Sambungake sumber pawarta apa wae, lan AI kita bakal mulai nganalisis kanggo golek konten sing relevan."
         },
         {
           "step": 2,
-          "title": "Definisikake Swara Sampeyan",
-          "description": "Supaya AI kita sinau kepribadian merek sampeyan saka situs web sampeyan utawa wenehi deskripsi khusus."
+          "title": "Tentukake Swara Sampeyan",
+          "description": "Jarké AI kita sinau kepribadian merek sampeyan saka situs web utawa wenehi katrangan khusus."
         },
         {
           "step": 3,
-          "title": "Luncurake Nawala Sampeyan",
-          "description": "Setel jadwal sampeyan lan deleng nawala pribadi, multi-basa dikirim kanthi otomatis menyang pelanggan sampeyan."
+          "title": "Luncurake Buletin Sampeyan",
+          "description": "Atur jadwal sampeyan lan deleng buletin personalisasi multibahasa dikirim menyang pelanggan sampeyan."
         }
       ]
     },
     "personas": {
-      "title": "Sampurna kanggo Bisnis Sampeyan",
-      "subTitle": "Saka startup nganti perusahaan, alat kita dirancang kanggo mbantu sampeyan tuwuh.",
+      "title": "Cocok kanggo Bisnis Sampeyan",
+      "subTitle": "Saka startup nganti perusahaan gedhe, alat kita dirancang kanggo mbantu sampeyan berkembang.",
       "personaList": [
         {
-          "persona": "Pencipta Konten",
-          "problem": "Mbuwang jam kanggo ngurus lan nulis konten kanggo pamirsa sampeyan.",
-          "outcome": "Otomatisake proses nggawe konten sampeyan lan fokus ing ngembangake komunitas sampeyan."
+          "persona": "Pembuat Konten",
+          "problem": "Ngoleki lan nulis konten kanggo pamirsa nganti jam-jaman.",
+          "outcome": "Otomatisake proses nggawe konten lan fokus kanggo ngembangake komunitas sampeyan."
         },
         {
           "persona": "Tim Pemasaran",
-          "problem": "Berjuang kanggo nggawe konten pribadi sing cocog karo pamirsa global.",
-          "outcome": "Tambah keterlibatan lan konversi nganggo nawala hiper-pribadi, multi-basa."
+          "problem": "Kangelan nggawe konten personalisasi kanggo pamirsa global.",
+          "outcome": "Tingkatake keterlibatan lan konversi nganggo buletin sing banget personal."
         },
         {
           "persona": "Bisnis",
-          "problem": "Kurang sumber daya kanggo nggawe nawala sing konsisten lan narik kawigaten.",
-          "outcome": "Bangun saluran pemasaran sing kuat sing ndorong lalu lintas lan penjualan kanthi usaha minimal."
+          "problem": "Kurang sumber daya kanggo nggawe buletin sing konsisten lan narik kawigaten.",
+          "outcome": "Gawe saluran pemasaran kuat sing nggawa trafik kanthi usaha minimal."
         }
       ]
     },
     "metrics": {
-      "title": "Asil Nyata, Didhukung dening Data",
+      "title": "Hasil Nyata, Didhukung Data",
       "metricList": [
-        {
-          "value": "90%",
-          "label": "Pengurangan wektu nggawe konten",
-          "proof": "Adhedhasar umpan balik pangguna beta."
-        },
-        {
-          "value": "2x",
-          "label": "Tambah keterlibatan pelanggan",
-          "proof": "Diamati ing tes A/B karo pangguna beta."
-        },
-        {
-          "value": "5x",
-          "label": "Pangiriman konten luwih cepet",
-          "proof": "Dibandhingake karo nggawe nawala manual."
-        }
+        { "value": "90%", "label": "Suda wektu nggawe", "proof": "Adhedhasar umpan balik pangguna beta." },
+        { "value": "2x", "label": "Munggah keterlibatan", "proof": "Katon ing tes A/B." },
+        { "value": "5x", "label": "Pengiriman konten luwih cepet", "proof": "Dibandhingake karo nggawe manual." }
       ]
     },
     "testimonials": {
-      "title": "Apa sing Diomongake Pelanggan Kita",
+      "title": "Apa Kandhane Pelanggan Kita",
       "testimonialList": [
         {
-          "quote": "Generator Nawala AI wis dadi game-changer kanggo strategi konten kita. Saiki kita bisa nggayuh pamirsa global kanthi konten pribadi sing cocog.",
+          "quote": "AI Newsletter Generator dadi pengubah kahanan. Kita saiki bisa nggayuh pamirsa global nganggo konten sing cocog.",
           "name": "Alex Chen",
           "title": "Kepala Pertumbuhan, Global Tech Inc."
         },
         {
-          "quote": "Aku ragu-ragu ing wiwitan, nanging konten sing digawe AI ditulis kanthi apik lan cocog karo merek. Pelanggan kita seneng!",
+          "quote": "Awalé aku ragu-ragu, nanging konten sing digawe AI iki ditulis kanthi apik banget. Pelanggan kita seneng banget!",
           "name": "Samantha Jones",
-          "title": "Pendhiri, The Content Corner"
-        },
-        {
-          "quote": "Jumlah wektu sing kita simpen luar biasa. Saiki kita bisa fokus ing area bisnis liyane nalika AI nangani nawala kita.",
-          "name": "David Rodriguez",
-          "title": "CEO, Startup Solutions"
+          "title": "Pendiri, The Content Corner"
         }
       ]
     },
     "pricing": {
-      "teaser": "Rencana Terjangkau kanggo Saben Bisnis",
-      "subTitle": "Rencana kita dirancang kanggo tuwuh bareng sampeyan.",
-      "plan": "Miwiti saka $9/wulan",
+      "teaser": "Paket Murah kanggo Saben Bisnis",
+      "subTitle": "Paket kita dirancang supaya bisa berkembang bareng sampeyan.",
+      "plan": "Mulai saka $17/sasi",
       "cta": "Deleng Rega"
     },
     "finalCta": {
-      "hook": "Siap Nggawe Revolusi Nawala Sampeyan?",
-      "cta": "Miwiti Uji Coba Gratis Sampeyan Dina Iki"
+      "hook": "Siap Ngerovulusi Buletin Sampeyan?",
+      "cta": "Mulai Tes Gratis Sampeyan Saiki"
     },
     "footer": {
-      "copyright": "© 2025 AI Newsletter, Inc. Kabeh hak dilindhungi undhang-undhang.",
+      "copyright": "© 2026 AI Newsletter, Inc. Kabeh hak dilindhungi undhang-undhang.",
       "companyLinks": {
         "title": "Perusahaan",
         "links": [
@@ -207,36 +190,631 @@ export default {
         ]
       },
       "legalLinks": {
-        "title": "Hukum",
+        "title": "Legal",
         "links": [
           { "text": "Kebijakan Privasi", "href": "/legal/privacy" },
-          { "text": "Syarat-syarat Layanan", "href": "/legal/terms" },
+          { "text": "Syarat Layanan", "href": "/legal/terms" },
           { "text": "Kebijakan Cookie", "href": "/legal/cookies" }
         ]
       },
       "contact": "support@ainewsletter.com"
     }
   },
+  "help": {
+    "title": "Nyuwun watesan sing luwih dhuwur",
+    "subtitle": "Pindhah menyang pay-as-you-go utawa tingkatake kuota supaya cocog karo pertumbuhan sampeyan.",
+    "contact": {
+      "cta": "Kirim panjalukan",
+      "successTitle": "Panjalukan ditampa",
+      "successBody": "Tim kita bakal hubungi sampeyan ora suwe maneh.",
+      "learnMore": "/plans"
+    },
+    "questions": {
+      "desiredLimitsHelp": "Wenehi ngerti watesan sing sampeyan butuhake (tuladhane 1 yuta pangguna).",
+      "useCaseHelp": "Jlentrehake beban kerja lan pola trafik sampeyan.",
+      "expectedSpendHelp": "Kira-kira biaya mbantu kita nyelarasake rega (opsional)."
+    },
+    "faqs": [
+      {
+        "id": "limits-how",
+        "q": "Kepiye carane watesan sing luwih dhuwur iki mlaku?",
+        "a": "Kita bakal mbukak kuota sing luwih gedhe langsung sawise disetujui. Tagihan bisa nganggo tarif tetep utawa pay-as-you-go."
+      }
+    ],
+    "links": {
+      "docs": "/plans",
+      "community": "/help"
+    }
+  },
+  "faq": [
+    {
+      "q": "Apa ana tes gratis?",
+      "a": "Iya! Sampeyan bisa miwiti nganggo paket Gratis sing diwatesi mung 100 pangguna kanggo nyoba teknologine."
+    },
+    {
+      "q": "Apa aku bisa mbatalake kapan wae?",
+      "a": "Iya, sampeyan bisa mbatalake langganan kapan wae saka dashboard akun sampeyan."
+    }
+  ],
+  "plans": {
+    "currency": "USD",
+    "billingIntervals": ["saben sasi", "saben taun"],
+    "currentPlan": "gratis",
+    "plans": [
+      {
+        "id": "free",
+        "name": "Gratis",
+        "monthly": 0,
+        "yearly": 0,
+        "tagline": "Coba teknologine",
+        "featuresBase": ["1 sumber pawarta", "Nganti 100 pangguna"],
+        "featuresDelta": [],
+        "limits": { "newsSources": 1, "users": 100 },
+        "ctaLabel": "Paket Saiki",
+        "tier": 0
+      },
+      {
+        "id": "starter",
+        "name": "Starter",
+        "monthly": 17,
+        "yearly": 132,
+        "tagline": "Kanggo buletin sing berkembang",
+        "featuresBase": ["5 sumber pawarta", "Nganti 100 ewu pangguna"],
+        "featuresDelta": ["Dukungan email", "Terjemahan dhasar"],
+        "limits": { "newsSources": 5, "users": 100000 },
+        "ctaLabel": "Pilih Starter",
+        "productId": "prod_starter_id",
+        "tier": 1
+      },
+      {
+        "id": "growth",
+        "name": "Growth",
+        "monthly": 35,
+        "yearly": 273,
+        "tagline": "Keseimbangan sing sampurna",
+        "featuresBase": ["17 sumber pawarta", "Nganti 250 ewu pangguna"],
+        "featuresDelta": ["Branding khusus", "Analitik canggih"],
+        "limits": { "newsSources": 17, "users": 250000 },
+        "ctaLabel": "Pilih Growth",
+        "productId": "prod_growth_id",
+        "tier": 2
+      },
+      {
+        "id": "pro",
+        "name": "Pro",
+        "monthly": 80,
+        "yearly": 624,
+        "tagline": "Kanggo profesional pemasaran",
+        "featuresBase": ["25 sumber pawarta", "Nganti 500 ewu pangguna"],
+        "featuresDelta": ["Akses API", "Prioritas pangolahan"],
+        "limits": { "newsSources": 25, "users": 500000 },
+        "ctaLabel": "Pilih Pro",
+        "productId": "prod_pro_id",
+        "tier": 3
+      },
+      {
+        "id": "master",
+        "name": "Master",
+        "monthly": 150,
+        "yearly": 1170,
+        "tagline": "Skalabilitas tanpa wates",
+        "featuresBase": ["50 sumber pawarta", "Pangguna tanpa wates"],
+        "featuresDelta": ["Dukungan layanan prima", "Webhook khusus"],
+        "limits": { "newsSources": 50, "users": -1 },
+        "ctaLabel": "Pilih Master",
+        "productId": "prod_master_id",
+        "tier": 4
+      },
+      {
+        "id": "vipfree",
+        "name": "VIP Gratis",
+        "monthly": 0,
+        "yearly": 0,
+        "tagline": "Akses lengkap kanggo mitra",
+        "featuresBase": ["Sumber pawarta tanpa wates", "Pangguna tanpa wates"],
+        "featuresDelta": [],
+        "limits": { "newsSources": -1, "users": -1 },
+        "ctaLabel": "Paket Saiki",
+        "internalOnly": true,
+        "tier": 5
+      }
+    ],
+    "contact": {
+      "text": "Butuh solusi khusus?",
+      "cta": "Hubungi Kita",
+      "href": "/help"
+    }
+  },
+  "article": {
+    "notFound": "Artikel ora ditemokake.",
+    "errorFetching": "Kaluputan njupuk artikel.",
+    "noArticleSpecified": "Ora ana artikel sing ditemtokake.",
+    "goBack": "Bali",
+    "loading": "Loading..."
+  },
+  "pricing": {
+    "eyebrow": "Rega",
+    "title": "Paket Fleksibel",
+    "currentPlan": "Paket Saiki:",
+    "monthly": "Saben Sasi",
+    "yearly": "Saben Taun (Ngirit 35%)",
+    "everythingIn": "Kabeh sing ana ing paket sadurunge, ditambah:",
+    "isCurrentPlan": "Iki paket sampeyan saiki",
+    "downgradeTo": "Mudhunake menyang {planName}",
+    "upgradeTo": "Munggahake menyang {planName}",
+    "mockMode": "Mode Mock Diaktifake",
+    "mostPopular": "Paling Populer",
+    "perMonth": "saben sasi",
+    "perYear": "saben taun",
+    "youSave": "Sampeyan ngirit"
+  },
+  "confirmSubscription": {
+    "title": "Konfirmasi Langganan Sampeyan",
+    "goBack": "Bali",
+    "pleaseAccept": "Mangga setujui syarat kasebut kanggo ngrampungake langganan sampeyan.",
+    "iAccept": "Aku nampa",
+    "termsAndConditions": "Syarat lan Katentuan",
+    "and": "lan",
+    "privacyPolicy": "Kebijakan Privasi",
+    "confirm": "Konfirmasi Langganan",
+    "mustAccept": "Sampeyan kudu nampa syarat kasebut kanggo langganan.",
+    "invalidLink": "Link konfirmasi ora sah."
+  },
+  "articles": {
+    "title": "Wawasan Paling Anyar",
+    "subtitle": "Jelajahi koleksi artikel lan pawarta pilihan kita.",
+    "producedIn": "Kita wis nggawe pawarta ing kabeh basa iki",
+    "searchPlaceholder": "Golek artikel...",
+    "noArticlesFound": "Ora ana artikel sing ditemokake.",
+    "created": "Digawe:",
+    "language": "Basa:",
+    "rightsReserved": "Kabeh Hak Dilindhungi.",
+    "errorFetching": "Kaluputan njupuk artikel."
+  },
+  "mainPage": {
+    "skipToMainContent": "Langsung menyang konten utama",
+    "dismissAnnouncement": "Tutup pengumuman",
+    "problem": "Masalah:",
+    "outcome": "Hasil:",
+    "disclaimer": "Tabungan 35% mung berlaku kanggo tagihan tahunan."
+  },
+  "authForm": {
+    "emailValidation": "Mangga lebokake email sing sah.",
+    "failedToSendCode": "Gagal ngirim kode. Mangga coba maneh.",
+    "sending": "Ngirim...",
+    "codeSent": "Kode wis dikirim menyang email sampeyan",
+    "invalidCode": "Kode sing dilebokake ora sah",
+    "regenerateCode": "Kirim ulang kode",
+    "back": "← Bali",
+    "byProceeding": "Kanthi nerusake, sampeyan setuju karo",
+    "termsOfService": "Syarat Layanan",
+    "and": "lan",
+    "privacyPolicy": "Kebijakan Privasi",
+    "appName": "AI Newsletter"
+  },
   "welcome": {
-    "title": "Generator nawala otomatis",
-    "setItOnce": "Setel sapisan...",
-    "useItForever": "...gunakake salawase."
+    "title": "Generator buletin otomatis",
+    "setItOnce": "Atur pisan...",
+    "useItForever": "...gunakake selawase."
   },
   "lead": {
-    "title": "Kanggo klien pindhah saka nawala menyang situs web sampeyan",
-    "recommendation": "Iki disaranake banget. Iku mbantu AI kita luwih ngerti konteks nawala sampeyan lan ngasilake artikel sing luwih relevan.",
-    "question": "Sampeyan duwe situs web? (opsional)",
-    "placeholder": "Link menyang situs web sampeyan"
+    "title": "Owahi pelanggan dadi pengunjung",
+    "recommendation": "Bantu AI kita mangerteni merek sampeyan kanthi nyambungake situs web sampeyan.",
+    "question": "Apa sampeyan duwe situs web? (opsional)",
+    "placeholder": "https://situs-sampeyan.com"
   },
   "newsSource": {
-    "title": "Kanggo nggunakake blog utawa feed warta, kita kudu sampeyan ngetik link kasebut",
-    "subtitle": "Kita bakal ngasilake konten saka feed sampeyan, dadi sampeyan ora perlu nggawe nawala saka awal",
-    "placeholder": "Link situs warta utawa blog sampeyan"
+    "title": "Sambungake sumber konten sampeyan",
+    "subtitle": "Kita bakal njupuk feed sampeyan supaya sampeyan ora kudu miwiti saka nol.",
+    "placeholder": "Blog utawa link RSS sampeyan"
   },
   "subscribe": {
     "welcome": {
-      "title": "Sugeng rawuh ing Nawala.",
-      "invitedBy": "Sampeyan diundang dening {configuratorId}."
+      "title": "Sugeng rawuh ing Newsletter.",
+      "invitedBy": "Sampeyan wis diundang dening {configuratorId}."
     }
-  }
+  },
+  "header": {
+    "goToWorkspace": "Menyang Ruang Kerja",
+    "inBilling": "Tagihan",
+    "vip": "VIP",
+    "plan": "Paket {planName}",
+    "logIn": "Mlebu",
+    "getStarted": "Mulai"
+  },
+  "fileInput": {
+    "chooseFile": "Pilih File",
+    "dropFile": "Selehake ing kene",
+    "release": "Lepasake kanggo ngunggah"
+  },
+  "imageInput": {
+    "unsupportedFileType": "Tipe ora didhukung. Gunakake PNG, JPEG, utawa WebP.",
+    "dropImage": "Selehake gambar",
+    "dragDrop": "Tarik & selehake",
+    "browse": "utawa goleki file",
+    "selectImage": "Pilih",
+    "preview": "Pratinjau",
+    "removeImage": "Hapus"
+  },
+  "billing": {
+    "title": "Tagihan & Langganan",
+    "currentPlanTitle": "Paket Sampeyan Saiki",
+    "upgradePlanTitle": "Ganti Paket Sampeyan",
+    "manageSubscription": "Atur Langganan",
+    "vipPlanName": "Mitra VIP",
+    "vipPlanDescription": "Akses tanpa wates saka AI Newsletter.",
+    "perMonth": "saben sasi",
+    "perYear": "saben taun",
+    "monthAbbreviation": "sasi",
+    "equivalentTo": "padha karo",
+    "mostPopular": "Paling Populer",
+    "upgradeTo": "Munggahake menyang",
+    "downgradeTo": "Pindah menyang",
+    "currentPlanButton": "Paket Sampeyan",
+    "youSave": "Sampeyan ngirit",
+    "users": "pangguna",
+    "newsSources": "sumber pawarta",
+    "monthly": "Saben Sasi",
+    "yearly": "Saben Taun",
+    "loadingPlan": "Loading data paket..."
+  },
+  "languages": [
+    { "code": "ab", "name": "Abkhazian" },
+    { "code": "aa", "name": "Afar" },
+    { "code": "af", "name": "Afrikaans" },
+    { "code": "ak", "name": "Akan" },
+    { "code": "sq", "name": "Albania" },
+    { "code": "am", "name": "Amharik" },
+    { "code": "ar", "name": "Arab" },
+    { "code": "an", "name": "Aragon" },
+    { "code": "hy", "name": "Armenia" },
+    { "code": "as", "name": "Assam" },
+    { "code": "av", "name": "Avaric" },
+    { "code": "ae", "name": "Avestan" },
+    { "code": "ay", "name": "Aymara" },
+    { "code": "az", "name": "Azerbaijan" },
+    { "code": "bm", "name": "Bambara" },
+    { "code": "ba", "name": "Bashkir" },
+    { "code": "eu", "name": "Basque" },
+    { "code": "be", "name": "Belarus" },
+    { "code": "bn", "name": "Bengali" },
+    { "code": "bi", "name": "Bislama" },
+    { "code": "bs", "name": "Bosnia" },
+    { "code": "br", "name": "Breton" },
+    { "code": "bg", "name": "Bulgaria" },
+    { "code": "my", "name": "Burma" },
+    { "code": "ca", "name": "Katalan" },
+    { "code": "ch", "name": "Chamorro" },
+    { "code": "ce", "name": "Chechen" },
+    { "code": "ny", "name": "Chichewa" },
+    { "code": "zh", "name": "Mandarin" },
+    { "code": "cu", "name": "Slavia Gereja" },
+    { "code": "cv", "name": "Chuvash" },
+    { "code": "kw", "name": "Cornish" },
+    { "code": "co", "name": "Korsika" },
+    { "code": "cr", "name": "Cree" },
+    { "code": "hr", "name": "Kroasia" },
+    { "code": "cs", "name": "Ceko" },
+    { "code": "da", "name": "Denmark" },
+    { "code": "dv", "name": "Divehi" },
+    { "code": "nl", "name": "Walanda" },
+    { "code": "dz", "name": "Dzongkha" },
+    { "code": "en", "name": "Inggris" },
+    { "code": "eo", "name": "Esperanto" },
+    { "code": "et", "name": "Estonia" },
+    { "code": "ee", "name": "Ewe" },
+    { "code": "fo", "name": "Faroe" },
+    { "code": "fj", "name": "Fiji" },
+    { "code": "fi", "name": "Finlandia" },
+    { "code": "fr", "name": "Prancis" },
+    { "code": "fy", "name": "Frisia Kulon" },
+    { "code": "ff", "name": "Fula" },
+    { "code": "gd", "name": "Gaelik Skotlandia" },
+    { "code": "gl", "name": "Galisia" },
+    { "code": "lg", "name": "Ganda" },
+    { "code": "ka", "name": "Georgia" },
+    { "code": "de", "name": "Jerman" },
+    { "code": "el", "name": "Yunani" },
+    { "code": "kl", "name": "Greenland" },
+    { "code": "gn", "name": "Guarani" },
+    { "code": "gu", "name": "Gujarati" },
+    { "code": "ht", "name": "Kreol Haiti" },
+    { "code": "ha", "name": "Hausa" },
+    { "code": "he", "name": "Ibrani" },
+    { "code": "hz", "name": "Herero" },
+    { "code": "hi", "name": "Hindi" },
+    { "code": "ho", "name": "Hiri Motu" },
+    { "code": "hu", "name": "Hungaria" },
+    { "code": "is", "name": "Islandia" },
+    { "code": "io", "name": "Ido" },
+    { "code": "ig", "name": "Igbo" },
+    { "code": "id", "name": "Indonesia" },
+    { "code": "ia", "name": "Interlingua" },
+    { "code": "ie", "name": "Interlingue" },
+    { "code": "iu", "name": "Inuktitut" },
+    { "code": "ik", "name": "Inupiaq" },
+    { "code": "ga", "name": "Irlandia" },
+    { "code": "it", "name": "Italia" },
+    { "code": "ja", "name": "Jepang" },
+    { "code": "jv", "name": "Jawa" },
+    { "code": "kn", "name": "Kannada" },
+    { "code": "kr", "name": "Kanuri" },
+    { "code": "ks", "name": "Kashmir" },
+    { "code": "kk", "name": "Kazakh" },
+    { "code": "km", "name": "Khmer" },
+    { "code": "ki", "name": "Kikuyu" },
+    { "code": "rw", "name": "Kinyarwanda" },
+    { "code": "ky", "name": "Kirgiz" },
+    { "code": "kv", "name": "Komi" },
+    { "code": "kg", "name": "Kongo" },
+    { "code": "ko", "name": "Korea" },
+    { "code": "kj", "name": "Kuanyama" },
+    { "code": "ku", "name": "Kurdi" },
+    { "code": "lo", "name": "Lao" },
+    { "code": "la", "name": "Latin" },
+    { "code": "lv", "name": "Latvia" },
+    { "code": "li", "name": "Limburg" },
+    { "code": "ln", "name": "Lingala" },
+    { "code": "lt", "name": "Lithuania" },
+    { "code": "lu", "name": "Luba-Katanga" },
+    { "code": "lb", "name": "Luksemburg" },
+    { "code": "mk", "name": "Makedonia" },
+    { "code": "mg", "name": "Malagasi" },
+    { "code": "ms", "name": "Melayu" },
+    { "code": "ml", "name": "Malayalam" },
+    { "code": "mt", "name": "Malta" },
+    { "code": "gv", "name": "Manx" },
+    { "code": "mi", "name": "Maori" },
+    { "code": "mr", "name": "Marathi" },
+    { "code": "mh", "name": "Marshall" },
+    { "code": "mn", "name": "Mongolia" },
+    { "code": "na", "name": "Nauru" },
+    { "code": "nv", "name": "Navajo" },
+    { "code": "nd", "name": "Ndebele Lor" },
+    { "code": "nr", "name": "Ndebele Kidul" },
+    { "code": "ng", "name": "Ndonga" },
+    { "code": "ne", "name": "Nepal" },
+    { "code": "no", "name": "Norwegia" },
+    { "code": "nb", "name": "Bokmål Norwegia" },
+    { "code": "nn", "name": "Nynorsk Norwegia" },
+    { "code": "oc", "name": "Oksitan" },
+    { "code": "oj", "name": "Ojibwa" },
+    { "code": "or", "name": "Odia" },
+    { "code": "om", "name": "Oromo" },
+    { "code": "os", "name": "Ossetia" },
+    { "code": "pi", "name": "Pali" },
+    { "code": "ps", "name": "Pashto" },
+    { "code": "fa", "name": "Persia" },
+    { "code": "pl", "name": "Polandia" },
+    { "code": "pt", "name": "Portugis" },
+    { "code": "pa", "name": "Punjabi" },
+    { "code": "qu", "name": "Quechua" },
+    { "code": "ro", "name": "Rumania" },
+    { "code": "rm", "name": "Reto-Roman" },
+    { "code": "rn", "name": "Rundi" },
+    { "code": "ru", "name": "Rusia" },
+    { "code": "se", "name": "Sami Lor" },
+    { "code": "sm", "name": "Samoa" },
+    { "code": "sg", "name": "Sango" },
+    { "code": "sa", "name": "Sanskerta" },
+    { "code": "sc", "name": "Sardinia" },
+    { "code": "sr", "name": "Serbia" },
+    { "code": "sn", "name": "Shona" },
+    { "code": "ii", "name": "Sichuan Yi" },
+    { "code": "sd", "name": "Sindhi" },
+    { "code": "si", "name": "Sinhala" },
+    { "code": "sk", "name": "Slovak" },
+    { "code": "sl", "name": "Slovenia" },
+    { "code": "so", "name": "Somalia" },
+    { "code": "st", "name": "Sotho Kidul" },
+    { "code": "es", "name": "Spanyol" },
+    { "code": "su", "name": "Sunda" },
+    { "code": "sw", "name": "Swahili" },
+    { "code": "ss", "name": "Swati" },
+    { "code": "sv", "name": "Swedia" },
+    { "code": "tl", "name": "Tagalog" },
+    { "code": "ty", "name": "Tahiti" },
+    { "code": "tg", "name": "Tajik" },
+    { "code": "ta", "name": "Tamil" },
+    { "code": "tt", "name": "Tatar" },
+    { "code": "te", "name": "Telugu" },
+    { "code": "th", "name": "Thai" },
+    { "code": "bo", "name": "Tibet" },
+    { "code": "ti", "name": "Tigrinya" },
+    { "code": "to", "name": "Tonga" },
+    { "code": "ts", "name": "Tsonga" },
+    { "code": "tn", "name": "Tswana" },
+    { "code": "tr", "name": "Turki" },
+    { "code": "tk", "name": "Turkmen" },
+    { "code": "tw", "name": "Twi" },
+    { "code": "ug", "name": "Uighur" },
+    { "code": "uk", "name": "Ukraina" },
+    { "code": "ur", "name": "Urdu" },
+    { "code": "uz", "name": "Uzbek" },
+    { "code": "ve", "name": "Venda" },
+    { "code": "vi", "name": "Vietnam" },
+    { "code": "vo", "name": "Volapük" },
+    { "code": "wa", "name": "Walloon" },
+    { "code": "cy", "name": "Wales" },
+    { "code": "wo", "name": "Wolof" },
+    { "code": "xh", "name": "Xhosa" },
+    { "code": "yi", "name": "Yiddish" },
+    { "code": "yo", "name": "Yoruba" },
+    { "code": "za", "name": "Zhuang" },
+    { "code": "zu", "name": "Zulu" }
+  ],
+  "countries": [
+    { "code": "AF", "name": "Afganistan" },
+    { "code": "AL", "name": "Albania" },
+    { "code": "DZ", "name": "Aljazair" },
+    { "code": "AS", "name": "Samoa Amerika" },
+    { "code": "AD", "name": "Andorra" },
+    { "code": "AO", "name": "Angola" },
+    { "code": "AI", "name": "Anguilla" },
+    { "code": "AQ", "name": "Antartika" },
+    { "code": "AG", "name": "Antigua lan Barbuda" },
+    { "code": "AR", "name": "Argentina" },
+    { "code": "AM", "name": "Armenia" },
+    { "code": "AW", "name": "Aruba" },
+    { "code": "AU", "name": "Australia" },
+    { "code": "AT", "name": "Austria" },
+    { "code": "AZ", "name": "Azerbaijan" },
+    { "code": "BS", "name": "Bahamas" },
+    { "code": "BH", "name": "Bahrain" },
+    { "code": "BD", "name": "Bangladesh" },
+    { "code": "BB", "name": "Barbados" },
+    { "code": "BY", "name": "Belarus" },
+    { "code": "BE", "name": "Belgia" },
+    { "code": "BZ", "name": "Belize" },
+    { "code": "BJ", "name": "Benin" },
+    { "code": "BM", "name": "Bermuda" },
+    { "code": "BT", "name": "Bhutan" },
+    { "code": "BO", "name": "Bolivia" },
+    { "code": "BA", "name": "Bosnia lan Herzegovina" },
+    { "code": "BW", "name": "Botswana" },
+    { "code": "BR", "name": "Brasil" },
+    { "code": "IO", "name": "Wilayah Inggris nang Samudra Hindia" },
+    { "code": "VG", "name": "Kepulauan Virgin Britania" },
+    { "code": "BN", "name": "Brunei" },
+    { "code": "BG", "name": "Bulgaria" },
+    { "code": "BF", "name": "Burkina Faso" },
+    { "code": "BI", "name": "Burundi" },
+    { "code": "KH", "name": "Kamboja" },
+    { "code": "CM", "name": "Kamerun" },
+    { "code": "CA", "name": "Kanada" },
+    { "code": "CV", "name": "Tanjung Verde" },
+    { "code": "KY", "name": "Kepulauan Cayman" },
+    { "code": "CF", "name": "Republik Afrika Tengah" },
+    { "code": "TD", "name": "Chad" },
+    { "code": "CL", "name": "Chili" },
+    { "code": "CN", "name": "Tiongkok" },
+    { "code": "CX", "name": "Pulo Natal" },
+    { "code": "CC", "name": "Kepulauan Cocos" },
+    { "code": "CO", "name": "Kolombia" },
+    { "code": "KM", "name": "Komoro" },
+    { "code": "CG", "name": "Kongo - Brazzaville" },
+    { "code": "CD", "name": "Kongo - Kinshasa" },
+    { "code": "CK", "name": "Kepulauan Cook" },
+    { "code": "CR", "name": "Kosta Rika" },
+    { "code": "CI", "name": "Pantai Gading" },
+    { "code": "HR", "name": "Kroasia" },
+    { "code": "CU", "name": "Kuba" },
+    { "code": "CY", "name": "Siprus" },
+    { "code": "CZ", "name": "Ceko" },
+    { "code": "DK", "name": "Denmark" },
+    { "code": "DJ", "name": "Djibouti" },
+    { "code": "DM", "name": "Dominika" },
+    { "code": "DO", "name": "Republik Dominika" },
+    { "code": "EC", "name": "Ekuador" },
+    { "code": "EG", "name": "Mesir" },
+    { "code": "SV", "name": "El Salvador" },
+    { "code": "GQ", "name": "Guinea Khatulistiwa" },
+    { "code": "ER", "name": "Eritrea" },
+    { "code": "EE", "name": "Estonia" },
+    { "code": "SZ", "name": "Eswatini" },
+    { "code": "ET", "name": "Etiopia" },
+    { "code": "FJ", "name": "Fiji" },
+    { "code": "FI", "name": "Finlandia" },
+    { "code": "FR", "name": "Prancis" },
+    { "code": "GA", "name": "Gabon" },
+    { "code": "GM", "name": "Gambia" },
+    { "code": "GE", "name": "Georgia" },
+    { "code": "DE", "name": "Jerman" },
+    { "code": "GH", "name": "Ghana" },
+    { "code": "GR", "name": "Yunani" },
+    { "code": "GT", "name": "Guatemala" },
+    { "code": "GN", "name": "Gini" },
+    { "code": "GY", "name": "Guyana" },
+    { "code": "HT", "name": "Haiti" },
+    { "code": "HN", "name": "Honduras" },
+    { "code": "HK", "name": "Hong Kong" },
+    { "code": "HU", "name": "Hungaria" },
+    { "code": "IS", "name": "Islandia" },
+    { "code": "IN", "name": "India" },
+    { "code": "ID", "name": "Indonesia" },
+    { "code": "IR", "name": "Iran" },
+    { "code": "IQ", "name": "Irak" },
+    { "code": "IE", "name": "Irlandia" },
+    { "code": "IL", "name": "Israel" },
+    { "code": "IT", "name": "Italia" },
+    { "code": "JM", "name": "Jamaika" },
+    { "code": "JP", "name": "Jepang" },
+    { "code": "JO", "name": "Yordania" },
+    { "code": "KZ", "name": "Kazakhstan" },
+    { "code": "KE", "name": "Kenya" },
+    { "code": "KR", "name": "Korea Kidul" },
+    { "code": "KW", "name": "Kuwait" },
+    { "code": "KG", "name": "Kirgizstan" },
+    { "code": "LA", "name": "Laos" },
+    { "code": "LV", "name": "Latvia" },
+    { "code": "LB", "name": "Lebanon" },
+    { "code": "LS", "name": "Lesotho" },
+    { "code": "LR", "name": "Liberia" },
+    { "code": "LY", "name": "Libya" },
+    { "code": "LI", "name": "Liechtenstein" },
+    { "code": "LT", "name": "Lithuania" },
+    { "code": "LU", "name": "Luksemburg" },
+    { "code": "MG", "name": "Madagaskar" },
+    { "code": "MW", "name": "Malawi" },
+    { "code": "MY", "name": "Malaysia" },
+    { "code": "MV", "name": "Maladewa" },
+    { "code": "ML", "name": "Mali" },
+    { "code": "MT", "name": "Malta" },
+    { "code": "MX", "name": "Meksiko" },
+    { "code": "MD", "name": "Moldova" },
+    { "code": "MC", "name": "Monako" },
+    { "code": "MN", "name": "Mongolia" },
+    { "code": "ME", "name": "Montenegro" },
+    { "code": "MA", "name": "Maroko" },
+    { "code": "MZ", "name": "Mozambik" },
+    { "code": "MM", "name": "Myanmar" },
+    { "code": "NA", "name": "Namibia" },
+    { "code": "NP", "name": "Nepal" },
+    { "code": "NL", "name": "Walanda" },
+    { "code": "NZ", "name": "Selandia Anyar" },
+    { "code": "NI", "name": "Nikaragua" },
+    { "code": "NE", "name": "Niger" },
+    { "code": "NG", "name": "Nigeria" },
+    { "code": "MK", "name": "Makedonia Lor" },
+    { "code": "NO", "name": "Norwegia" },
+    { "code": "OM", "name": "Oman" },
+    { "code": "PK", "name": "Pakistan" },
+    { "code": "PA", "name": "Panama" },
+    { "code": "PG", "name": "Papua Nugini" },
+    { "code": "PY", "name": "Paraguay" },
+    { "code": "PE", "name": "Peru" },
+    { "code": "PH", "name": "Filipina" },
+    { "code": "PL", "name": "Polandia" },
+    { "code": "PT", "name": "Portugal" },
+    { "code": "QA", "name": "Qatar" },
+    { "code": "RO", "name": "Rumania" },
+    { "code": "RU", "name": "Rusia" },
+    { "code": "RW", "name": "Rwanda" },
+    { "code": "SA", "name": "Arab Saudi" },
+    { "code": "SN", "name": "Senegal" },
+    { "code": "RS", "name": "Serbia" },
+    { "code": "SG", "name": "Singapura" },
+    { "code": "SK", "name": "Slovakia" },
+    { "code": "SI", "name": "Slovenia" },
+    { "code": "ZA", "name": "Afrika Kidul" },
+    { "code": "ES", "name": "Spanyol" },
+    { "code": "LK", "name": "Sri Lanka" },
+    { "code": "SE", "name": "Swedia" },
+    { "code": "CH", "name": "Swiss" },
+    { "code": "TW", "name": "Taiwan" },
+    { "code": "TH", "name": "Thailand" },
+    { "code": "TR", "name": "Turki" },
+    { "code": "UG", "name": "Uganda" },
+    { "code": "UA", "name": "Ukraina" },
+    { "code": "AE", "name": "Uni Emirat Arab" },
+    { "code": "GB", "name": "Britania Raya" },
+    { "code": "US", "name": "Amerika Serikat" },
+    { "code": "UY", "name": "Uruguay" },
+    { "code": "UZ", "name": "Uzbekistan" },
+    { "code": "VE", "name": "Venezuela" },
+    { "code": "VN", "name": "Vietnam" },
+    { "code": "YE", "name": "Yaman" },
+    { "code": "ZM", "name": "Zambia" },
+    { "code": "ZW", "name": "Zimbabwe" }
+  ]
 }

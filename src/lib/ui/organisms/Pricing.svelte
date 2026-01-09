@@ -9,6 +9,8 @@
     import Switch from "$lib/ui/components/Switch.svelte";
     import { t } from "$lib/i18n/translations";
 
+    $: $t;
+
     let state: PlansState;
     const unsub = plansStore.subscribe((v) => (state = v));
 

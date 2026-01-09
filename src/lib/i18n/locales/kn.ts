@@ -197,7 +197,7 @@ export default {
           { "text": "ಕುಕೀ ನೀತಿ", "href": "/legal/cookies" }
         ]
       },
-      "contact": "support@ainewsletter.com"
+      "contact": "oriens@aiexecutions.com"
     }
   },
   "help": {

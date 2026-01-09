@@ -197,7 +197,7 @@ export default {
           { "text": "Política de Cookies", "href": "/legal/cookies" }
         ]
       },
-      "contact": "support@ainewsletter.com"
+      "contact": "oriens@aiexecutions.com"
     }
   },
   "help": {

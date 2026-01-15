@@ -35,6 +35,7 @@
   on:click={toggle}
   on:keydown={handleKeyDown}
 >
+
   <div class="switch-track" class:toggled>
     <div class="switch-knob" class:toggled></div>
     <div

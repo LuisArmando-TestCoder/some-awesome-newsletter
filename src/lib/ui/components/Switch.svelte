@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { onMount } from "svelte";
   import { writable } from "svelte/store";
 
   // Prop: initial state of the switch (default: false)
   export let toggled: boolean = false;
+  
   // Callback to be invoked when the switch state changes.
   export let onChange: (newState: boolean) => void = () => {};
 
@@ -27,122 +27,167 @@
 </script>
 
 <div
-  class="glass-switch"
+  class="switch-wrapper"
   role="switch"
   tabindex="0"
   aria-checked={toggled}
+  aria-label="Toggle Period"
   on:click={toggle}
   on:keydown={handleKeyDown}
 >
   <div class="switch-track" class:toggled>
-    <div class="switch-knob" class:toggled></div>
-    <div
-      class="switch-knob"
-      class:toggled
-      style="transition-delay: .175s; transform: translateX(0);"
-    >
-      {["○", "ı"][+toggled]}
+    <div class="switch-fill"></div>
+    
+    <div class="switch-knob-container">
+      <div class="switch-knob">
+        <div class="knob-icon off">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </div>
+        <div class="knob-icon on">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- filters -->
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="0" height="0">
-  <defs>
-    <filter id="shadowed-goo">
-      <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="10" />
-      <feColorMatrix
-        in="blur"
-        mode="matrix"
-        values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
-        result="goo"
-      />
-      <feGaussianBlur in="goo" stdDeviation="3" result="shadow" />
-      <feColorMatrix
-        in="shadow"
-        mode="matrix"
-        values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 -0.2"
-        result="shadow"
-      />
-      <feOffset in="shadow" dx="1" dy="1" result="shadow" />
-      <feBlend in2="shadow" in="goo" result="goo" />
-      <feBlend in2="goo" in="SourceGraphic" result="mix" />
-    </filter>
-    <filter id="goo">
-      <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="10" />
-      <feColorMatrix
-        in="blur"
-        mode="matrix"
-        values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
-        result="goo"
-      />
-      <feBlend in2="goo" in="SourceGraphic" result="mix" />
-    </filter>
-  </defs>
-</svg>
-<filter id="goo">
-  <feGaussianBlur
-    in="SourceGraphic"
-    stdDeviation="10"
-    result="blur"
-    width="0"
-    height="0"
-  />
-  <feColorMatrix
-    in="blur"
-    type="matrix"
-    values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9"
-    result="goo"
-  />
-  <feComposite in="SourceGraphic" in2="goo" operator="atop" />
-</filter>
-
 <style lang="scss">
-  .glass-switch {
-    display: inline-block;
+  /* --- Variables derived from your Pricing Section --- */
+  :root {
+    --sw-width: 56px;
+    --sw-height: 32px;
+    --sw-pad: 4px;
+    
+    /* Colors */
+    --sw-bg-off: #e2e8f0;         /* Slate 200 */
+    --sw-bg-on: #4f46e5;          /* Indigo 600 (Brand Primary) */
+    --sw-knob: #ffffff;
+    --sw-icon-off: #94a3b8;       /* Slate 400 */
+    --sw-icon-on: #4f46e5;        /* Brand Primary */
+    
+    /* Physics */
+    --sw-ease: cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+
+  .switch-wrapper {
+    display: inline-flex;
     cursor: pointer;
     user-select: none;
     outline: none;
+    -webkit-tap-highlight-color: transparent;
+    border-radius: 99px;
 
-    &:focus {
+    /* Accessibility Focus Ring */
+    &:focus-visible .switch-track {
+      box-shadow: 
+        0 0 0 2px #fff,
+        0 0 0 4px var(--sw-bg-on);
     }
   }
 
   .switch-track {
-    width: 50px;
-    height: 24px;
-    background: var(--c-bg-alt);
-    backdrop-filter: blur(6px);
-    border-radius: 12px;
     position: relative;
-    transition:
-      background 0.3s ease,
-      border 0.3s ease;
-    border: 1px solid var(--c-border);
-    filter: url("#goo");
+    width: var(--sw-width);
+    height: var(--sw-height);
+    background: var(--sw-bg-off);
+    border-radius: 99px;
+    transition: background-color 0.4s var(--sw-ease), box-shadow 0.2s ease;
+    
+    /* Inner shadow creates the "recessed" groove look */
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);
+    border: 1px solid rgba(0,0,0,0.05);
 
-    &:hover {
-      border: 1px solid var(--c-text);
+    &.toggled {
+      background: var(--sw-bg-on);
+      /* Remove inner shadow when active for a "filled" look */
+      box-shadow: none;
+      border-color: transparent;
     }
   }
 
-  .switch-knob {
-    --unit: 20px;
-    width: var(--unit);
-    height: var(--unit);
-    background: var(--c-text);
-    border-radius: 50%;
+  /* The container moves the knob. 
+     Separating container (position) from knob (style) allows for 
+     morphing animations without layout shifts. */
+  .switch-knob-container {
     position: absolute;
-    top: 2px;
-    left: 2px;
-    transition: 0.5s;
-    transition-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1);
-    text-align: center;
+    top: var(--sw-pad);
+    left: var(--sw-pad);
+    width: calc(var(--sw-height) - (var(--sw-pad) * 2));
+    height: calc(var(--sw-height) - (var(--sw-pad) * 2));
+    transition: transform 0.4s var(--sw-ease);
+    will-change: transform;
+    pointer-events: none;
+  }
 
-    &.toggled {
-      transform: translateX(26px) !important;
-      background: var(--c-primary);
-      color: var(--c-white);
+  /* Move the knob when toggled */
+  .toggled .switch-knob-container {
+    transform: translateX(calc(var(--sw-width) - var(--sw-height)));
+  }
+
+  .switch-knob {
+    width: 100%;
+    height: 100%;
+    background: var(--sw-knob);
+    border-radius: 50%;
+    
+    /* High quality floating shadow */
+    box-shadow: 
+      0 2px 4px 0 rgba(0,0,0,0.2), 
+      0 1px 1px 0 rgba(0,0,0,0.1);
+      
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* --- Icon Animations --- */
+  .knob-icon {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s ease, transform 0.4s var(--sw-ease);
+    
+    svg {
+      width: 12px;
+      height: 12px;
     }
+
+    &.off {
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
+      color: var(--sw-icon-off);
+    }
+    
+    &.on {
+      opacity: 0;
+      transform: scale(0.5) rotate(-45deg);
+      color: var(--sw-icon-on);
+    }
+  }
+
+  /* State: Toggled Active */
+  .toggled {
+    .knob-icon.off {
+      opacity: 0;
+      transform: scale(0.5) rotate(45deg);
+    }
+    .knob-icon.on {
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
+    }
+  }
+
+  /* --- Hover Micro-interaction --- */
+  .switch-wrapper:hover .switch-knob {
+    /* Subtle scale up on hover */
+    transform: scale(1.05);
+    box-shadow: 
+      0 4px 6px -1px rgba(0,0,0,0.2), 
+      0 2px 4px -1px rgba(0,0,0,0.1);
   }
 </style>

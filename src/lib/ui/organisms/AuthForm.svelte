@@ -6,13 +6,13 @@
   import Code from '../../../components/systems/inputs/Code/Code.svelte';
   import MarkdownText from '../../../components/systems/texts/MarkdownText/MarkdownText.svelte';
   import askForNewAuthCode from '../../../components/systems/requests/askForNewAuthCode';
-  import type { Writable } from 'svelte/store';
+  import { writable, type Writable } from 'svelte/store';
   import store, { saveToStore } from '../../../components/store';
   import askIsAuthCodeValid from '../../../components/systems/requests/askIsAuthCodeValid';
   import { t } from '$lib/i18n/translations';
 
   export let mode: 'login' | 'signup' = 'login';
-  export let copy: any;
+  export let copy: any = writable({});
   export let legal: { termsUrl: string; privacyUrl: string } = { termsUrl: '/legal/terms', privacyUrl: '/legal/privacy' };
   let externalAuthCode: Writable<string>;
 
@@ -23,7 +23,7 @@
   let errorMsg = '';
   let loading = false;
 
-  $: $t;
+  $: $copy;
 
   let step: 'initial' | 'code' = 'initial';
 
@@ -60,9 +60,9 @@
       <div class="logo-wrapper">
         <img src="/logo/logo-inverted.png" alt="logo" class="logo-img" />
       </div>
-      <h1 class="auth-title">{copy?.title}</h1>
-      {#if copy?.subtitle}
-        <p class="auth-subtitle">{copy?.subtitle}</p>
+      <h1 class="auth-title">{$copy?.title}</h1>
+      {#if $copy?.subtitle}
+        <p class="auth-subtitle">{$copy?.subtitle}</p>
       {/if}
     </header>
 
@@ -71,7 +71,7 @@
         <div class="input-group">
            <EmailInput 
               bind:value={email} 
-              placeholder={copy?.emailPlaceholder} 
+              placeholder={$copy?.emailPlaceholder} 
               label="Work Email" 
               onEnter={() => onEmail()} 
               onChange={(value) => {
@@ -90,7 +90,7 @@
             <span class="spinner"></span>
             {$t.authForm.sending}
           {:else}
-            {copy?.continueWithEmail}
+            {$copy?.continueWithEmail}
           {/if}
         </button>
 
@@ -148,8 +148,8 @@
 
     <div class="auth-footer">
       <p class="switch-text">
-        {copy?.switchText}
-        <a href={copy?.switchHref} class="highlight-link">{copy?.switchLink}</a>
+        {$copy?.switchText}
+        <a href={$copy?.switchHref} class="highlight-link">{$copy?.switchLink}</a>
       </p>
 
       <p class="legal-text">

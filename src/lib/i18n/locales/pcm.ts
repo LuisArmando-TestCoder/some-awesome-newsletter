@@ -385,7 +385,7 @@ export default {
     "codeSent": "Code don land for your email",
     "invalidCode": "Di code wey you put no work",
     "regenerateCode": "Resend code",
-    "back": "← Back",
+    "back": "Back",
     "byProceeding": "As you dey go front, you gree for",
     "termsOfService": "Terms of Service",
     "and": "and",

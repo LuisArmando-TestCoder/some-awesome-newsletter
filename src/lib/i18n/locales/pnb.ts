@@ -385,7 +385,7 @@ export default {
     "codeSent": "کوڈ تہاڈی ای میل تے گھل دتا گیا اے",
     "invalidCode": "کوڈ درست نہیں اے",
     "regenerateCode": "کوڈ دوبارہ گھلو",
-    "back": "← واپس",
+    "back": "واپس",
     "byProceeding": "اگے ودھن دا مطلب اے تسی من دے او",
     "termsOfService": "سروس دیاں شرائط",
     "and": "تے",

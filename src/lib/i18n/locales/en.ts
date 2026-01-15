@@ -385,7 +385,7 @@ export default {
     "codeSent": "Code sent to your email",
     "invalidCode": "Invalid code provided",
     "regenerateCode": "Resend code",
-    "back": "← Back",
+    "back": "Back",
     "byProceeding": "By proceeding, you agree to the",
     "termsOfService": "Terms of Service",
     "and": "and",

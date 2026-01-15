@@ -385,7 +385,7 @@ export default {
     "codeSent": "验证码发到侬邮箱里哉",
     "invalidCode": "验证码弗对",
     "regenerateCode": "重发验证码",
-    "back": "← 转去",
+    "back": "转去",
     "byProceeding": "继续操作代表侬同意",
     "termsOfService": "服务条款",
     "and": "搭拉",

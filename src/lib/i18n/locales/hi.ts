@@ -385,7 +385,7 @@ export default {
     "codeSent": "आपके ईमेल पर कोड भेजा गया",
     "invalidCode": "प्रदान किया गया कोड अमान्य है",
     "regenerateCode": "कोड पुनः भेजें",
-    "back": "← वापस",
+    "back": "वापस",
     "byProceeding": "आगे बढ़कर, आप सहमत होते हैं",
     "termsOfService": "सेवा की शर्तें",
     "and": "और",

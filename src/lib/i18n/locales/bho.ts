@@ -385,7 +385,7 @@ export default {
     "codeSent": "राउर ईमेल पर कोड भेज दिहल गइल बा",
     "invalidCode": "गलत कोड",
     "regenerateCode": "कोड फेरु भेजीं",
-    "back": "← वापस",
+    "back": "वापस",
     "byProceeding": "आगे बढ़ के रउआ सहमत बानी",
     "termsOfService": "सेवा के शर्त",
     "and": "आ",

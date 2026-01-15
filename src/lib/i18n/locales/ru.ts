@@ -385,7 +385,7 @@ export default {
     "codeSent": "Код отправлен на ваш email",
     "invalidCode": "Неверный код",
     "regenerateCode": "Отправить код повторно",
-    "back": "← Назад",
+    "back": "Назад",
     "byProceeding": "Продолжая, вы соглашаетесь с",
     "termsOfService": "Условиями использования",
     "and": "и",

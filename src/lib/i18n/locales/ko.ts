@@ -385,7 +385,7 @@ export default {
     "codeSent": "이메일로 코드가 전송되었습니다",
     "invalidCode": "잘못된 코드입니다",
     "regenerateCode": "코드 재전송",
-    "back": "← 뒤로",
+    "back": "뒤로",
     "byProceeding": "계속 진행하면 다음에 동의하게 됩니다:",
     "termsOfService": "서비스 이용 약관",
     "and": "및",

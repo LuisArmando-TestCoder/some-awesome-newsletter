@@ -385,7 +385,7 @@ export default {
     "codeSent": "Kod e-postanıza gönderildi",
     "invalidCode": "Geçersiz kod girildi",
     "regenerateCode": "Kodu tekrar gönder",
-    "back": "← Geri",
+    "back": "Geri",
     "byProceeding": "Devam ederek şunları kabul etmiş olursunuz:",
     "termsOfService": "Hizmet Şartları",
     "and": "ve",

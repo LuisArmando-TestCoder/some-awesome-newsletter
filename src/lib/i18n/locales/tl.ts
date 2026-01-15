@@ -385,7 +385,7 @@ export default {
     "codeSent": "Naipadala na ang code sa iyong email",
     "invalidCode": "Maling code ang ibinigay",
     "regenerateCode": "Ipadala muli ang code",
-    "back": "← Balik",
+    "back": "Balik",
     "byProceeding": "Sa pagpapatuloy, sumasang-ayon ka sa",
     "termsOfService": "Kasunduan sa Serbisyo",
     "and": "at",

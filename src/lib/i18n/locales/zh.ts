@@ -385,7 +385,7 @@ export default {
     "codeSent": "验证码已发送至您的邮箱",
     "invalidCode": "提供的验证码无效",
     "regenerateCode": "重新发送验证码",
-    "back": "← 返回",
+    "back": "返回",
     "byProceeding": "继续操作即表示您同意",
     "termsOfService": "服务条款",
     "and": "以及",

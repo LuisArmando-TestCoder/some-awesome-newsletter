@@ -385,7 +385,7 @@ export default {
     "codeSent": "ኮዱ ወደ ኢሜይልዎ ተልኳል",
     "invalidCode": "የገባው ኮድ ልክ አይደለም",
     "regenerateCode": "ኮዱን እንደገና ላክ",
-    "back": "← ተመለስ",
+    "back": "ተመለስ",
     "byProceeding": "በመቀጠልዎ የሚከተሉትን ይቀበላሉ፡",
     "termsOfService": "የአገልግሎት ውሎች",
     "and": "እና",

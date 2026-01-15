@@ -385,7 +385,7 @@ export default {
     "codeSent": "メールにコードを送信しました",
     "invalidCode": "入力されたコードが無効です",
     "regenerateCode": "コードを再送する",
-    "back": "← 戻る",
+    "back": "戻る",
     "byProceeding": "続行することで、以下に同意したことになります：",
     "termsOfService": "利用規約",
     "and": "および",

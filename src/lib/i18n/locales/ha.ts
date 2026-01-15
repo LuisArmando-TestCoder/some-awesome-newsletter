@@ -385,7 +385,7 @@ export default {
     "codeSent": "An aika lamba zuwa imel ɗinka",
     "invalidCode": "Lambarmu da aka bayar ba ta da inganci",
     "regenerateCode": "Sake aika lamba",
-    "back": "← Koma baya",
+    "back": "Koma baya",
     "byProceeding": "Ta hanyar ci gaba, kun amince da",
     "termsOfService": "Sharuddan Sabis",
     "and": "kuma",

@@ -385,7 +385,7 @@ export default {
     "codeSent": "تم إرسال الرمز إلى بريدك الإلكتروني",
     "invalidCode": "الرمز المقدم غير صالح",
     "regenerateCode": "إعادة إرسال الرمز",
-    "back": "← رجوع",
+    "back": "رجوع",
     "byProceeding": "من خلال المتابعة، فإنك توافق على",
     "termsOfService": "شروط الخدمة",
     "and": "و",

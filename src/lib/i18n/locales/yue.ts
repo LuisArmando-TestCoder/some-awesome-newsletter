@@ -385,7 +385,7 @@ export default {
       "codeSent": "驗證碼已經 send 咗去你 Email",
       "invalidCode": "驗證碼唔正確",
       "regenerateCode": "重新傳送驗證碼",
-      "back": "← 返去",
+      "back": "返去",
       "byProceeding": "如果你繼續，即係代表你同意",
       "termsOfService": "服務條款",
       "and": "同埋",

@@ -385,7 +385,7 @@ export default {
     "codeSent": "Mã đã được gửi đến email của bạn",
     "invalidCode": "Mã cung cấp không hợp lệ",
     "regenerateCode": "Gửi lại mã",
-    "back": "← Quay lại",
+    "back": "Quay lại",
     "byProceeding": "Bằng cách tiếp tục, bạn đồng ý với",
     "termsOfService": "Điều khoản dịch vụ",
     "and": "và",

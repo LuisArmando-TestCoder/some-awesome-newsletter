@@ -385,7 +385,7 @@ export default {
     "codeSent": "کد به ایمیل شما ارسال شد",
     "invalidCode": "کد وارد شده نامعتبر است",
     "regenerateCode": "ارسال مجدد کد",
-    "back": "← بازگشت",
+    "back": "بازگشت",
     "byProceeding": "با ادامه دادن، شما با این موارد موافقت می‌کنید:",
     "termsOfService": "شرایط خدمات",
     "and": "و",

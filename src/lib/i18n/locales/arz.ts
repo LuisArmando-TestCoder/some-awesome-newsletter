@@ -385,7 +385,7 @@ export default {
     "codeSent": "الكود اتبعت لإيميلك",
     "invalidCode": "الكود ده مش صح",
     "regenerateCode": "ابعت الكود تاني",
-    "back": "← ارجع",
+    "back": "ارجع",
     "byProceeding": "لما بتكمل، إنت بتوافق على",
     "termsOfService": "شروط الخدمة",
     "and": "و",

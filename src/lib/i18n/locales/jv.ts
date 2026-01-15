@@ -385,7 +385,7 @@ export default {
     "codeSent": "Kode wis dikirim menyang email sampeyan",
     "invalidCode": "Kode sing dilebokake ora sah",
     "regenerateCode": "Kirim ulang kode",
-    "back": "← Bali",
+    "back": "Bali",
     "byProceeding": "Kanthi nerusake, sampeyan setuju karo",
     "termsOfService": "Syarat Layanan",
     "and": "lan",

@@ -3,17 +3,16 @@
   import { z } from 'zod';
   import { runtime } from '$lib/config/runtime';
   import EmailInput from '$lib/ui/components/EmailInput.svelte';
-    import Code from '../../../components/systems/inputs/Code/Code.svelte';
-    import MarkdownText from '../../../components/systems/texts/MarkdownText/MarkdownText.svelte';
-    import askForNewAuthCode from '../../../components/systems/requests/askForNewAuthCode';
-    import type { Writable } from 'svelte/store';
-    import store, { saveToStore, globalLanguage } from '../../../components/store';
-    import askIsAuthCodeValid from '../../../components/systems/requests/askIsAuthCodeValid';
-    import logout from '../../../components/systems/requests/logout';
+  import Code from '../../../components/systems/inputs/Code/Code.svelte';
+  import MarkdownText from '../../../components/systems/texts/MarkdownText/MarkdownText.svelte';
+  import askForNewAuthCode from '../../../components/systems/requests/askForNewAuthCode';
+  import type { Writable } from 'svelte/store';
+  import store, { saveToStore } from '../../../components/store';
+  import askIsAuthCodeValid from '../../../components/systems/requests/askIsAuthCodeValid';
   import { t } from '$lib/i18n/translations';
 
   export let mode: 'login' | 'signup' = 'login';
-  export let copy: any; // from auth.json (login or signup branch)
+  export let copy: any;
   export let legal: { termsUrl: string; privacyUrl: string } = { termsUrl: '/legal/terms', privacyUrl: '/legal/privacy' };
   let externalAuthCode: Writable<string>;
 
@@ -26,7 +25,6 @@
 
   $: $t;
 
-  // Step state: 'initial' = show Google + Email, 'code' = show code input
   let step: 'initial' | 'code' = 'initial';
 
   onMount(() => {
@@ -34,7 +32,6 @@
   });
 
   async function onEmail() {
-    // Validate email
     if (!emailSchema.safeParse(email).success) {
       errorMsg = $t.authForm.emailValidation;
       return;
@@ -52,370 +49,396 @@
 
   function goBack() {
     step = 'initial';
-    // Optionally clear code/email state if needed
   }
 </script>
 
-<div class="auth-form">
-  <div class="auth-form__card">
-    <div class="auth-form__header">
-      <img src="/logo/logo-inverted.png" width="175" alt="logo" class="auth-form__logo" />
-      <h1 class="auth-form__title">{copy?.title}</h1>
-    </div>
-    {#if copy?.subtitle}
-      <p class="auth-form__subtitle">{copy?.subtitle}</p>
-    {/if}
+<div class="auth-page-wrapper">
+  <div class="auth-ambient-mesh"></div>
 
-    <div class="auth-form__container {step === 'initial' ? 'show' : 'hide'}">
-      <!-- Google (form redirect) -->
-      <!-- <form class="auth-form__google-form" method="post" action="?/OAuth2" style="margin-bottom: var(--space-md);">
-        <button class="auth-form__button auth-form__button--google" type="submit">
-          <svg aria-hidden="true" viewBox="0 0 24 24" class="auth-form__icon"><path fill="currentColor" d="M21.35 11.1h-9.18v2.96h5.27c-.23 1.46-1.59 4.29-5.27 4.29-3.17 0-5.76-2.62-5.76-5.85s2.59-5.85 5.76-5.85c1.81 0 3.02.77 3.72 1.43l2.53-2.44C16.6 3.83 14.49 3 12.17 3 6.97 3 2.75 7.22 2.75 12.5S6.97 22 12.17 22c7.08 0 8.78-6.1 8.78-9.27 0-.63-.07-1.03-.17-1.63Z"/></svg>
-          <span>{copy?.google}</span>
-        </button>
-      </form> -->
-      <!-- Divider -->
-      <!-- <div class="auth-form__divider">
-        <span class="auth-form__divider-line"></span>
-        <span>{copy?.or}</span>
-        <span class="auth-form__divider-line"></span>
-      </div> -->
-      <!-- Email input -->
-      <EmailInput bind:value={email} placeholder={copy?.emailPlaceholder} label="Email" onEnter={() => onEmail()} 
-        onChange={(value) => {
-          saveToStore({
-            configuratorEmail: value,
-          });
-        }} />
-      <button onclick={onEmail} class="auth-form__button auth-form__button--primary" disabled={loading}>
-        {loading ? $t.authForm.sending : copy?.continueWithEmail}
-      </button>
-      {#if errorMsg}
-        <p class="auth-form__error">{errorMsg}</p>
-      {/if}
-    </div>
-
-    <div class="auth-form__container {step === 'code' ? 'show' : 'hide'}">
-      <div class="center">
-        <MarkdownText canReveal={$store.hasNewEmailCodeBeenSent}>
-          **{$t.authForm.codeSent}**
-        </MarkdownText>
+  <div class="auth-form-card">
+    <header class="auth-header">
+      <div class="logo-wrapper">
+        <img src="/logo/logo-inverted.png" alt="logo" class="logo-img" />
       </div>
-      <Code
-        bind:authCode={externalAuthCode}
-        onChange={(authCode) => {
-          saveToStore({
-            authCode,
-          });
-
-          if (authCode) {
-            saveToStore({
-              hasNewEmailCodeBeenSent: true,
-              isAuthCodeValid: true,
-            });
-            askIsAuthCodeValid(() => {              
-              window.location.href = `/dashboard?x-auth-email=${email}&x-auth-code=${authCode}`;
-            });
-          }
-        }}
-      />
-      {#if !$store.isAuthCodeValid && $store.authCode && $store.hasNewEmailCodeBeenSent}
-        <div class="error center">{$t.authForm.invalidCode}</div>
+      <h1 class="auth-title">{copy?.title}</h1>
+      {#if copy?.subtitle}
+        <p class="auth-subtitle">{copy?.subtitle}</p>
       {/if}
+    </header>
 
-      <button
-        aria-label="Request a new code"
-        class="resend"
-        onclick={() => {
-          askForNewAuthCode();
-        }}
-      >
-        {$t.authForm.regenerateCode}
-      </button>
-      <button onclick={goBack} class="auth-form__button auth-form__button--google" style="margin-top: 1rem;">
-        {$t.authForm.back}
-      </button>
+    <div class="step-container" class:active={step === 'initial'}>
+      <div class="step-content">
+        <div class="input-group">
+           <EmailInput 
+              bind:value={email} 
+              placeholder={copy?.emailPlaceholder} 
+              label="Work Email" 
+              onEnter={() => onEmail()} 
+              onChange={(value) => {
+                saveToStore({ configuratorEmail: value });
+              }} 
+           />
+        </div>
+
+        <button 
+          on:click={onEmail} 
+          class="btn-primary" 
+          disabled={loading}
+          class:loading={loading}
+        >
+          {#if loading}
+            <span class="spinner"></span>
+            {$t.authForm.sending}
+          {:else}
+            {copy?.continueWithEmail}
+          {/if}
+        </button>
+
+        {#if errorMsg}
+          <div class="error-banner" role="alert">
+            <svg class="error-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <span>{errorMsg}</span>
+          </div>
+        {/if}
+      </div>
     </div>
 
-    <!-- Switch link -->
-    <p class="auth-form__switch">
-      {copy?.switchText}
-      <a href={copy?.switchHref} class="auth-form__switch-link">{copy?.switchLink}</a>
-    </p>
+    <div class="step-container" class:active={step === 'code'}>
+      <div class="step-content">
+        <div class="code-header">
+           <MarkdownText canReveal={$store.hasNewEmailCodeBeenSent}>
+            **{$t.authForm.codeSent}**
+          </MarkdownText>
+          <p class="code-email-display">{email}</p>
+        </div>
 
-    <!-- Legal -->
-    <p class="auth-form__legal">
-      {$t.authForm.byProceeding.replace('{appName}', runtime.appName)}
-      <a href={legal.termsUrl} class="auth-form__legal-link">{$t.authForm.termsOfService}</a> {$t.authForm.and}
-      <a href={legal.privacyUrl} class="auth-form__legal-link">{$t.authForm.privacyPolicy}</a>.
-    </p>
+        <div class="code-input-wrapper">
+          <Code
+            bind:authCode={externalAuthCode}
+            onChange={(authCode) => {
+              saveToStore({ authCode });
+              if (authCode) {
+                saveToStore({ hasNewEmailCodeBeenSent: true, isAuthCodeValid: true });
+                askIsAuthCodeValid(() => {              
+                  window.location.href = `/dashboard?x-auth-email=${email}&x-auth-code=${authCode}`;
+                });
+              }
+            }}
+          />
+        </div>
+
+        {#if !$store.isAuthCodeValid && $store.authCode && $store.hasNewEmailCodeBeenSent}
+          <div class="error-banner">{$t.authForm.invalidCode}</div>
+        {/if}
+
+        <div class="code-actions">
+          <button
+            class="link-btn resend-btn"
+            on:click={() => askForNewAuthCode()}
+          >
+            {$t.authForm.regenerateCode}
+          </button>
+          
+          <button on:click={goBack} class="link-btn back-btn">
+             <span class="arrow">←</span> {$t.authForm.back}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="auth-footer">
+      <p class="switch-text">
+        {copy?.switchText}
+        <a href={copy?.switchHref} class="highlight-link">{copy?.switchLink}</a>
+      </p>
+
+      <p class="legal-text">
+        {$t.authForm.byProceeding.replace('{appName}', runtime.appName)}
+        <a href={legal.termsUrl}>{$t.authForm.termsOfService}</a> {$t.authForm.and}
+        <a href={legal.privacyUrl}>{$t.authForm.privacyPolicy}</a>.
+      </p>
+    </div>
   </div>
 </div>
 
 <style lang="scss">
   @use '../../../styles/global.scss';
 
-
-  .error {
-    color: red;
+  /* --- Tokens --- */
+  :root {
+    --auth-bg-color: #ffffff;
+    --auth-text-main: #0f172a;
+    --auth-text-muted: #64748b;
+    --auth-primary: #0f172a; /* Enterprise Black/Dark Blue */
+    --auth-primary-hover: #000000;
+    --auth-border: #e2e8f0;
+    --auth-radius: 20px;
+    --auth-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+    --auth-transition: cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .center {
-    display: grid;
-    place-items: center;
-    width: 100%;
-  }
-
-  .resend {
-    padding: 0;
-    margin: 0;
-    border: 0;
-    background: none;
-    cursor: pointer;
+  /* --- Page Layout --- */
+  .auth-page-wrapper {
+    min-height: 100vh;
     display: flex;
-    justify-content: end;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-md);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .auth-ambient-mesh {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 0%, #f1f5f9 0%, #ffffff 70%);
+    z-index: -1;
+  }
+
+  /* --- Card Component --- */
+  .auth-form-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     width: 100%;
-    text-decoration: underline;
+    max-width: 440px;
+    padding: 3rem 2.5rem;
+    border-radius: var(--auth-radius);
+    box-shadow: 
+        0 0 0 1px rgba(0,0,0,0.05),
+        var(--auth-shadow);
+    transition: transform 0.4s var(--auth-transition);
 
-    &::after {
-      content: "<";
-      display: inline-block;
-      position: relative;
-      animation: wave 1s ease-in-out infinite;
-      left: 0;
+    /* Subtle entrance animation */
+    animation: cardFloat 0.8s var(--auth-transition) forwards;
+    transform: translateY(10px);
+    opacity: 0;
+  }
 
-      @keyframes wave {
-        0% {
-          left: 0px;
+  @keyframes cardFloat {
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  /* --- Header --- */
+  .auth-header {
+    text-align: center;
+    margin-bottom: 2rem;
+
+    .logo-wrapper {
+        margin-bottom: 1.5rem;
+        display: flex;
+        justify-content: center;
+        
+        .logo-img {
+            height: 40px;
+            width: auto;
+            display: block;
         }
-
-        50% {
-          left: 10px;
-        }
-      }
     }
+
+    .auth-title {
+        font-size: 1.75rem;
+        font-weight: 800;
+        color: var(--auth-text-main);
+        margin-bottom: 0.5rem;
+        letter-spacing: -0.02em;
+    }
+
+    .auth-subtitle {
+        font-size: 0.95rem;
+        color: var(--auth-text-muted);
+        line-height: 1.5;
+    }
+  }
+
+  /* --- Transitions (Grid Accordion) --- */
+  .step-container {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition: 
+        grid-template-rows 0.5s var(--auth-transition),
+        opacity 0.3s ease,
+        transform 0.5s var(--auth-transition);
+    transform: translateX(20px);
+    pointer-events: none;
+
+    .step-content {
+        overflow: hidden;
+    }
+
+    &.active {
+        grid-template-rows: 1fr;
+        opacity: 1;
+        transform: translateX(0);
+        pointer-events: auto;
+    }
+  }
+
+  /* --- Inputs & Groups --- */
+  .input-group {
+    margin-bottom: 1.5rem;
+  }
+
+  /* --- Buttons --- */
+  .btn-primary {
+    width: 100%;
+    padding: 0.875rem;
+    background: var(--auth-primary);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
 
     &:hover {
-      text-decoration:wavy;
+        background: var(--auth-primary-hover);
+        transform: translateY(-1px);
+        box-shadow: 0 10px 15px -3px rgba(0,0,0,0.15);
+    }
 
-      &::after {
-        animation: none;
-      }
+    &:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+        transform: none;
     }
   }
 
-  .auth-form {
-    padding: var(--space-xl) 0;
-    height: 100vh;
-    display: grid;
-    place-items: center;
-
-    &__card {
-      background: var(--c-white);
-      border-radius: var(--radius-lg);
-      padding: var(--space-lg);
-      box-shadow: var(--shadow-md);
-      transition: transform var(--transition-normal), box-shadow var(--transition-normal);
-      max-width: 440px;
-      margin: 0 auto;
-      display: grid;
-
-      &:hover {
-        transform: translateY(-4px);
-        box-shadow: var(--shadow-lg);
-      }
-    }
-
-    &__header {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      place-items: center start;
-      grid-gap: var(--space-sm);
-      margin-bottom: var(--space-md);
-
-      @media (max-width: 480px) {
-        margin: 0 auto var(--space-md);
-      }
-
-    }
-
-    &__logo {
-      display: block;
-      @media (max-width: 480px) {
-        margin: 0 auto;
-      }
-    }
-
-    &__title {
-      margin: 0;
-      line-height: 1.2;
-      letter-spacing: -0.01em;
-      color: var(--c-text);
-      text-align: right;
-
-      @media (max-width: 480px) {
-        display: none;        
-      }
-    }
-
-    &__subtitle {
-      margin-bottom: var(--space-lg);
-
-      @media (max-width: 480px) {
-        text-align: center;
-      }
-    }
-
-    &__button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: var(--space-sm);
-      width: 100%;
-      padding: 0.5rem 1rem;
-      border-radius: var(--radius-md);
-      font-weight: 600;
-      margin-bottom: var(--space-md);
-      border: 0 solid #000;
-
-      &--google {
-        border: 1.5px solid var(--c-border);
-        background: #f8f8f8;
-        color: var(--c-text);
-        cursor: pointer;
-
-        &:hover {
-          background: var(--c-bg-alt);
-          color: var(--c-primary-dark);
-          text-decoration: none;
-        }
-      }
-
-      &--primary {
-        background: var(--c-primary);
-        color: var(--c-white);
-        font-weight: 700;
-        transition: .1s;
-        cursor: pointer;
-
-        &:hover {
-          background: var(--c-primary-dark);
-          transform: translateY(-2px);
-          box-shadow: var(--shadow-md);
-          text-decoration: none;
-          transform: scale(1.01);
-        }
-      }
-    }
-
-    &__icon {
-      width: 20px;
-      height: 20px;
-      opacity: 0.9;
-    }
-
-    &__divider {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: var(--space-sm);
-      margin: var(--space-lg) 0;
-      color: var(--c-text-light);
-      letter-spacing: 0.08em;
-    }
-
-    &__divider-line {
-      height: 1px;
-      background: var(--c-border);
-      width: 100%;
-      max-width: 120px;
-    }
-
-    &__label {
-      color: var(--c-text);
-      font-weight: 600;
-      margin-bottom: var(--space-xs);
-      display: block;
-    }
-
-    &__input {
-      appearance: none;
-      width: 100%;
-      background: var(--c-bg);
-      color: var(--c-text);
-      border: 1.5px solid var(--c-border);
-      border-radius: var(--radius-md);
-      padding: 0.7rem 0.9rem;
-      line-height: 1.4;
-      transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
-      margin-bottom: var(--space-md);
-
-      &::placeholder { color: var(--c-text-muted, #9aa3af); opacity: 0.9; }
-
-      &:hover { border-color: var(--c-border-strong, #cbd5e1); }
-
-      &:focus {
-        border-color: var(--c-primary);
-        outline: 0;
-        box-shadow: 0 0 0 3px color-mix(in oklab, var(--c-primary) 20%, transparent);
-        background: var(--c-white);
-      }
-    }
-
-    &__error {
-      margin: 0 0 var(--space-xs);
-      font-weight: 600;
-      animation: shake 280ms ease-in-out;
-      color: red;
-    }
-
-    &__switch {
-      color: var(--c-text-light);
-      margin-top: var(--space-md);
-    }
-
-    &__switch-link {
-      color: var(--c-primary);
-      font-weight: 700;
-      text-decoration: none;
-      &:hover { text-decoration: underline; }
-    }
-
-    &__legal {
-      max-width: 440px;
-      margin: var(--space-lg) auto 0;
-      color: var(--c-text-light);
-      line-height: 1.5;
-    }
-
-    &__legal-link {
-      color: var(--c-primary);
-      text-decoration: underline;
-      &:hover { color: var(--c-primary-dark); }
-    }
+  /* Loading Spinner */
+  .spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 0.8s linear infinite;
   }
+  @keyframes spin { to { transform: rotate(360deg); } }
 
+  /* --- Error State --- */
+  .error-banner {
+    margin-top: 1rem;
+    background: #fef2f2;
+    border: 1px solid #fee2e2;
+    color: #ef4444;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+  }
+  .error-icon { width: 18px; height: 18px; }
+  
   @keyframes shake {
-    10%, 90% { transform: translateX(-1px); }
-    20%, 80% { transform: translateX(2px); }
-    30%, 50%, 70% { transform: translateX(-4px); }
-    40%, 60% { transform: translateX(4px); }
+    10%, 90% { transform: translate3d(-1px, 0, 0); }
+    20%, 80% { transform: translate3d(2px, 0, 0); }
+    30%, 50%, 70% { transform: translate3d(-2px, 0, 0); }
+    40%, 60% { transform: translate3d(2px, 0, 0); }
   }
-  .auth-form__container {
-    transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.3s;
-    overflow: hidden;
-    max-height: 1000px;
-    opacity: 1;
-    will-change: max-height, opacity;
-    &.hide {
-      max-height: 0;
-      opacity: 0;
-      pointer-events: none;
+
+  /* --- Step 2: Code Styling --- */
+  .code-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    
+    /* Targeting MarkdownText output generically */
+    :global(p) {
+        margin: 0;
+        font-weight: 600;
+        color: var(--auth-text-main);
     }
-    &.show {
-      max-height: 1000px;
-      opacity: 1;
-      pointer-events: auto;
+  }
+
+  .code-email-display {
+    font-size: 0.9rem;
+    color: var(--auth-text-muted);
+    margin-top: 0.25rem;
+  }
+
+  .code-input-wrapper {
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .code-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  /* Text Buttons */
+  .link-btn {
+    background: none;
+    border: none;
+    font-size: 0.9rem;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.2s;
+
+    &.resend-btn {
+        color: var(--auth-primary);
+        font-weight: 600;
+        text-decoration: underline;
+        text-align: center;
+    }
+
+    &.back-btn {
+        color: var(--auth-text-muted);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        
+        .arrow { transition: transform 0.2s; }
+        
+        &:hover {
+            color: var(--auth-text-main);
+            .arrow { transform: translateX(-4px); }
+        }
+    }
+  }
+
+  /* --- Footer --- */
+  .auth-footer {
+    margin-top: 2.5rem;
+    text-align: center;
+    border-top: 1px solid var(--auth-border);
+    padding-top: 1.5rem;
+  }
+
+  .switch-text {
+    font-size: 0.95rem;
+    color: var(--auth-text-muted);
+    margin-bottom: 1rem;
+  }
+
+  .highlight-link {
+    color: var(--auth-primary);
+    font-weight: 700;
+    text-decoration: none;
+    &:hover { text-decoration: underline; }
+  }
+
+  .legal-text {
+    font-size: 0.75rem;
+    color: #94a3b8;
+    line-height: 1.5;
+    
+    a {
+        color: inherit;
+        text-decoration: underline;
+        &:hover { color: var(--auth-text-main); }
     }
   }
 </style>

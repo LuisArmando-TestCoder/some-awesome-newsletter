@@ -93,12 +93,12 @@
 		<div class="landing-page">
 			{#if showAnnouncement && $t.mainContent.announcement}
 				<div class="announcement-bar">
-					<p>
+					<i>
 						{$t.mainContent.announcement.text}
 						<a href="/signup"
 							>{$t.mainContent.announcement.cta} &rarr;</a
 						>
-					</p>
+					</i>
 					<button
 						aria-label="Dismiss announcement"
 						on:click={handleDismissAnnouncement}

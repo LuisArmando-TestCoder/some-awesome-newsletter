@@ -245,6 +245,7 @@
         color: var(--h-text);
         
         .logo-icon {
+            display: flex;
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
             transition: transform 0.3s ease;
         }

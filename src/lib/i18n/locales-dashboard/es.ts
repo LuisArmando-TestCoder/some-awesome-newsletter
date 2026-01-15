@@ -293,7 +293,7 @@ export default {
   "labels.addUsersFromFile": "Añadir Usuarios desde Archivo",
   "errors.selectFileFirst": "Por favor, selecciona un archivo primero.",
   "labels.noMetadata": "Sin metadatos",
-  "labels.unsubscribe": "Darse de baja",
+  "labels.unsubscribe": "Dar de baja",
   "notification.success": "Operación exitosa",
   "notification.error": "Ha ocurrido un error",
   "notification.copiedToClipboard": "Copiado al portapapeles",

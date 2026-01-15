@@ -186,7 +186,7 @@ export default {
         "links": [
           { "text": "关于阿拉", "href": "/about" },
           { "text": "寻生活", "href": "/careers" },
-          { "text": "博客", "href": "https://github.com/..." }
+          { "text": "博客", "href": "https://github.com/LuisArmando-TestCoder/scientia/tree/master/proposiciones" }
         ]
       },
       "legalLinks": {

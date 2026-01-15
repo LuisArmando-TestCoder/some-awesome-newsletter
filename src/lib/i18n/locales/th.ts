@@ -186,7 +186,7 @@ export default {
         "links": [
           { "text": "เกี่ยวกับเรา", "href": "/about" },
           { "text": "ร่วมงานกับเรา", "href": "/careers" },
-          { "text": "บล็อก", "href": "https://github.com/..." }
+          { "text": "บล็อก", "href": "https://github.com/LuisArmando-TestCoder/scientia/tree/master/proposiciones" }
         ]
       },
       "legalLinks": {

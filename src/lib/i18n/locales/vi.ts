@@ -186,7 +186,7 @@ export default {
         "links": [
           { "text": "Về chúng tôi", "href": "/about" },
           { "text": "Tuyển dụng", "href": "/careers" },
-          { "text": "Blog", "href": "https://github.com/..." }
+          { "text": "Blog", "href": "https://github.com/LuisArmando-TestCoder/scientia/tree/master/proposiciones" }
         ]
       },
       "legalLinks": {

@@ -186,7 +186,7 @@ export default {
         "links": [
           { "text": "ስለ እኛ", "href": "/about" },
           { "text": "ስራዎች", "href": "/careers" },
-          { "text": "ብሎግ", "href": "https://github.com/..." }
+          { "text": "ብሎግ", "href": "https://github.com/LuisArmando-TestCoder/scientia/tree/master/proposiciones" }
         ]
       },
       "legalLinks": {

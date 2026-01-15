@@ -186,7 +186,7 @@ export default {
         "links": [
           { "text": "ساڈے بارے", "href": "/about" },
           { "text": "نوکریاں", "href": "/careers" },
-          { "text": "بلاگ", "href": "https://github.com/..." }
+          { "text": "بلاگ", "href": "https://github.com/LuisArmando-TestCoder/scientia/tree/master/proposiciones" }
         ]
       },
       "legalLinks": {

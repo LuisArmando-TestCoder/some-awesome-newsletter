@@ -186,7 +186,7 @@ export default {
         "links": [
           { "text": "Tungkol sa Amin", "href": "/about" },
           { "text": "Careers", "href": "/careers" },
-          { "text": "Blog", "href": "https://github.com/..." }
+          { "text": "Blog", "href": "https://github.com/LuisArmando-TestCoder/scientia/tree/master/proposiciones" }
         ]
       },
       "legalLinks": {

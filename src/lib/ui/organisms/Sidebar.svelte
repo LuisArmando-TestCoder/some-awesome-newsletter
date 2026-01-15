@@ -224,7 +224,7 @@
 
   /* ===== Nav ===== */
 
-  .sidebar__nav { flex-grow: 1; overflow-y: auto; overflow-x: hidden; }
+  .sidebar__nav { flex-grow: 1; overflow-y: auto; overflow-x: hidden; display: flex; justify-content: center; }
   .sidebar__nav-list { list-style: none; padding: 0; margin: 0; }
   .sidebar__nav-item { /* host class for each SideLink row */ }
 

@@ -122,7 +122,7 @@
     background-position: center;
     --sidebar-expanded-w: 280px;
     --sidebar-collapsed-w: 80px;
-    --header-h: 83px;
+    --header-h: 72px;
     display: flex;
     max-height: calc(100dvh - var(--header-h));
     &.no-header { --header-h: 0px; }

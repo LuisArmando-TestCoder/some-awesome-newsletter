@@ -169,7 +169,7 @@
 
     /* ⬇️ NEW mobile behavior: anchored at left:0, width-only transitions */
     &.mobile {
-      --h: 83px;
+      --h: 72px;
       position: fixed;
       top: var(--h);
       left: 0;              /* always 0; never negative */

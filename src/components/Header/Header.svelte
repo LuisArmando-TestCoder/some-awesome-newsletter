@@ -15,7 +15,7 @@
 </script>
 
 <header class="nav-header">
-  <nav class="nav" style:top={$headerVisible ? '0' : '-87px'}>
+  <nav class="nav" style:top={$headerVisible ? '0' : '-72px'}>
     <div class="menu {menuOpen ? 'open' : ''}">
       <section class="menu-section left">
         <a

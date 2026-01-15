@@ -494,6 +494,7 @@
         }
 
         &__button {
+            box-sizing: border-box;
             display: block;
             width: 100%;
             text-align: center;

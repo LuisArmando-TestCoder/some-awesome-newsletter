@@ -1,20 +1,26 @@
 <script lang="ts">
-    import { faqs } from '../../../components/data/faq';
     import { writable, derived } from 'svelte/store';
     import PlainText from '../components/PlainText.svelte';
+    import { t } from '$lib/i18n/translations';
+    // We don't need to import 'faqs' anymore, as it comes from $t
 
     // Writable store for the search term
     const searchTerm = writable('');
 
     // Derived store for filtered FAQs
+    // This automatically updates when $t changes (language switch) or $searchTerm changes
     const filteredFaqs = derived(
-        [faqs, searchTerm],
-        ([$faqs, $searchTerm]) => {
-            if (!$searchTerm) return $faqs;
+        [t, searchTerm],
+        ([$t, $searchTerm]) => {
+            // Safety check: ensure the array exists in the translation object
+            const currentFaqs = $t.faq || []; 
+            
+            if (!$searchTerm) return currentFaqs;
+            
             const term = $searchTerm.toLowerCase();
-            return $faqs.filter(faq =>
-                faq.q.toLowerCase().includes(term) ||
-                faq.a.toLowerCase().includes(term)
+            return currentFaqs.filter(faq => 
+                (faq.q && faq.q.toLowerCase().includes(term)) || 
+                (faq.a && faq.a.toLowerCase().includes(term))
             );
         }
     );
@@ -22,7 +28,7 @@
     function handleFaqToggle(e: MouseEvent) {
         const button = e.currentTarget as HTMLButtonElement;
         const content = button.nextElementSibling as HTMLElement;
-        const parent = button.parentElement as HTMLElement; // Get wrapper for active state styling
+        const parent = button.parentElement as HTMLElement; 
         const isExpanded = button.getAttribute('aria-expanded') === 'true';
 
         button.setAttribute('aria-expanded', String(!isExpanded));
@@ -30,7 +36,8 @@
         // Toggle active class on parent for styling
         if (!isExpanded) {
             parent.classList.add('active');
-            content.style.maxHeight = content.scrollHeight + 30 + 'px'; // +30 for breathing room
+            // Dynamic height calculation for smooth animation
+            content.style.maxHeight = content.scrollHeight + 30 + 'px'; 
             content.style.opacity = '1';
         } else {
             parent.classList.remove('active');
@@ -43,46 +50,51 @@
 <section id="faq" class="faq-section">
     <div class="container">
         <div class="section-header">
-            <h2 class="gradient-text">Frequently Asked Questions</h2>
-            <p class="subtitle">Everything you need to know about the product.</p>
+            <h2 class="gradient-text">FAQs</h2>
         </div>
         
         <div class="search-wrapper">
             <div class="search-glass">
-                <PlainText bind:value={$searchTerm} placeholder="Type to search FAQs..." />
+                <PlainText bind:value={$searchTerm} placeholder="Frequently Asked Questions..." />
                 <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
             </div>
         </div>
 
         <div class="faq-grid">
-            {#each $filteredFaqs as item, i}
-                <div class="faq-card">
-                    <button
-                        class="faq-question"
-                        aria-expanded="false"
-                        aria-controls="faq-answer-{i}"
-                        on:click={handleFaqToggle}
-                    >
-                        <span class="question-text">{item.q}</span>
-                        <div class="icon-wrapper">
-                            <span class="faq-icon-line vertical"></span>
-                            <span class="faq-icon-line horizontal"></span>
-                        </div>
-                    </button>
-                    <div id="faq-answer-{i}" class="faq-answer" role="region">
-                        <div class="answer-inner">
-                            <p>{item.a}</p>
+            {#if $filteredFaqs.length > 0}
+                {#each $filteredFaqs as item, i}
+                    <div class="faq-card">
+                        <button
+                            class="faq-question"
+                            aria-expanded="false"
+                            aria-controls="faq-answer-{i}"
+                            on:click={handleFaqToggle}
+                        >
+                            <span class="question-text">{item.q}</span>
+                            <div class="icon-wrapper">
+                                <span class="faq-icon-line vertical"></span>
+                                <span class="faq-icon-line horizontal"></span>
+                            </div>
+                        </button>
+                        <div id="faq-answer-{i}" class="faq-answer" role="region">
+                            <div class="answer-inner">
+                                <p>{item.a}</p>
+                            </div>
                         </div>
                     </div>
+                {/each}
+            {:else}
+                <div class="empty-state">
+                    <p>No results found.</p>
                 </div>
-            {/each}
+            {/if}
         </div>
     </div>
 </section>
 
 <style lang="scss">
-    /* Define local variables for easy theming.
-       Using Modern HSL/RGB values for alpha transparency control.
+    /* Ultraprofessional Modern CSS 
+       Using CSS Variables for easy theming and Glassmorphism 
     */
     .faq-section {
         --primary-color: var(--c-primary, #007aff);
@@ -96,6 +108,7 @@
         
         padding: var(--space-xxl) 20px;
         position: relative;
+        /* Subtle modern background gradient */
         background: radial-gradient(circle at top right, rgba(0, 122, 255, 0.03), transparent 40%);
     }
 
@@ -114,15 +127,10 @@
             font-weight: 800;
             letter-spacing: -0.03em;
             margin-bottom: var(--space-xs);
-            /* Eye-catching Gradient Text */
+            /* Gradient Text Clip */
             background: linear-gradient(135deg, var(--c-text-dark, #111) 30%, var(--c-primary, #444));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-        }
-
-        .subtitle {
-            color: var(--c-text-light);
-            font-size: 1.1rem;
         }
     }
 
@@ -146,13 +154,6 @@
         display: flex;
         align-items: center;
 
-        &:focus-within {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md), var(--shadow-glow);
-            border-color: var(--primary-color);
-        }
-
-        /* Styling the Svelte Component container specifically */
         :global(input), :global(.plain-text-input) { 
             width: 100%;
             border: none;
@@ -178,6 +179,13 @@
         gap: 16px;
     }
 
+    .empty-state {
+        text-align: center;
+        color: var(--c-text-light);
+        padding: 2rem;
+        font-style: italic;
+    }
+
     /* ===== FAQ Card Style ===== */
     .faq-card {
         background: var(--bg-surface);
@@ -192,6 +200,7 @@
             transform: translateY(-1px);
         }
 
+        /* Active state styling handled by JS class toggle */
         &.active {
             border-color: var(--primary-color);
             background: #fff;
@@ -225,7 +234,7 @@
         }
     }
 
-    /* ===== Animated Icon (Plus to Minus) ===== */
+    /* ===== Animated Icon (CSS Shapes) ===== */
     .icon-wrapper {
         position: relative;
         width: 20px;
@@ -246,11 +255,11 @@
         &.vertical { width: 2px; height: 100%; }
     }
 
-    /* State: Expanded Icon */
+    /* Morph Plus to Minus on expand */
     .faq-question[aria-expanded='true'] {
         .faq-icon-line.vertical {
             transform: translate(-50%, -50%) rotate(90deg);
-            opacity: 0; /* Fade out vertical line to make minus */
+            opacity: 0; 
         }
         .faq-icon-line.horizontal {
             transform: translate(-50%, -50%) rotate(180deg);
@@ -263,7 +272,6 @@
         max-height: 0;
         opacity: 0;
         overflow: hidden;
-        /* Double transition for height and opacity feels more organic */
         transition: max-height 0.4s var(--ease-elastic), opacity 0.3s ease;
         
         .answer-inner {

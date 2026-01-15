@@ -48,6 +48,7 @@
   }
 
   input {
+    box-sizing: border-box;
     background: var(--color-background-inversion);
     border: 1px solid var(--color-background);
     border-radius: 8px;

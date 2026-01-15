@@ -15,9 +15,36 @@
   export let links = writable<{ name: string; url: string }[]>([]);
   let isMobileMenuOpen = false;
 
+  // --- Scroll Logic Variables ---
+  let y = 0;
+  let lastY = 0;
+  let showNavbar = true;
+
   $: middleIndex = Math.floor($links.length / 2);
   $: leftLinks = $links.slice(0, middleIndex);
   $: rightLinks = $links.slice(middleIndex);
+
+  // --- Reactive Scroll Handler ---
+  $: {
+    // Always show if at top or if mobile menu is open
+    if (y <= 0 || isMobileMenuOpen) {
+      showNavbar = true;
+    } else {
+      // Determine direction
+      const direction = y > lastY ? 'down' : 'up';
+      
+      // Hide if scrolling down AND we have passed the header height (72px)
+      if (direction === 'down' && y > 72) {
+        showNavbar = false;
+      } 
+      // Show if scrolling up
+      else if (direction === 'up') {
+        showNavbar = true;
+      }
+    }
+    // Update lastY for the next frame comparison
+    lastY = y;
+  }
 
   onMount(async () => {
     await loadPlansContent();
@@ -32,7 +59,9 @@
   };
 </script>
 
-<div class="header-wrapper" class:show={$store.header}>
+<svelte:window bind:scrollY={y} />
+
+<div class="header-wrapper" class:hidden-nav={!showNavbar}>
   <header class="header">
     <div class="header__glass-pane"></div>
     <div class="header__container">
@@ -200,11 +229,16 @@
     position: sticky;
     top: 0;
     z-index: 1000;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    /* Smooth transform animation */
+    transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
     
-    /* Using transform instead of clip-path for better performance */
-    transform: translateY(-100%);
-    &.show { transform: translateY(0); }
+    /* Default state: Visible (0) */
+    transform: translateY(0);
+
+    /* Hidden state: Moved up by 100% of its height */
+    &.hidden-nav { 
+        transform: translateY(-100%); 
+    }
   }
 
   /* --- Main Header --- */

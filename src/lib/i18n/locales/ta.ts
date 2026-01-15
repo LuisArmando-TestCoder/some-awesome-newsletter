@@ -180,7 +180,7 @@ export default {
       "cta": "இன்றே உங்கள் இலவச சோதனையைத் தொடங்குங்கள்"
     },
     "footer": {
-      "copyright": "© 2026 AI Newsletter, Inc. அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.",
+      "copyright": "AIBAN (Artificial Intelligence Business Acceleration Newsletter). அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.",
       "companyLinks": {
         "title": "நிறுவனம்",
         "links": [

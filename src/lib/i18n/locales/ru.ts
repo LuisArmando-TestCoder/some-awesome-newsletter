@@ -180,7 +180,7 @@ export default {
       "cta": "Начните бесплатный период сегодня"
     },
     "footer": {
-      "copyright": "© 2026 AI Newsletter, Inc. Все права защищены.",
+      "copyright": "AIBAN (Artificial Intelligence Business Acceleration Newsletter). Все права защищены.",
       "companyLinks": {
         "title": "Компания",
         "links": [

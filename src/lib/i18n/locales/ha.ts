@@ -180,7 +180,7 @@ export default {
       "cta": "Fara Gwajin Kyauta Yau"
     },
     "footer": {
-      "copyright": "© 2026 AI Newsletter, Inc. Duk haƙƙi ya tabbata.",
+      "copyright": "AIBAN (Artificial Intelligence Business Acceleration Newsletter). Duk haƙƙi ya tabbata.",
       "companyLinks": {
         "title": "Kamfani",
         "links": [

@@ -180,7 +180,7 @@ export default {
       "cta": "Mulai Tes Gratis Sampeyan Saiki"
     },
     "footer": {
-      "copyright": "© 2026 AI Newsletter, Inc. Kabeh hak dilindhungi undhang-undhang.",
+      "copyright": "AIBAN (Artificial Intelligence Business Acceleration Newsletter). Kabeh hak dilindhungi undhang-undhang.",
       "companyLinks": {
         "title": "Perusahaan",
         "links": [

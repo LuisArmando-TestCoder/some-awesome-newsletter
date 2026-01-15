@@ -180,7 +180,7 @@ export default {
         "cta": "即刻開始免費試用"
       },
       "footer": {
-        "copyright": "© 2026 AI Newsletter, Inc. 版權所有。",
+        "copyright": "AIBAN (Artificial Intelligence Business Acceleration Newsletter). 版權所有。",
         "companyLinks": {
           "title": "公司",
           "links": [

@@ -180,7 +180,7 @@ export default {
       "cta": "የነጻ ሙከራዎን ዛሬ ይጀምሩ"
     },
     "footer": {
-      "copyright": "© 2026 AI Newsletter, Inc. መብቱ በህግ የተጠበቀ ነው።",
+      "copyright": "AIBAN (Artificial Intelligence Business Acceleration Newsletter). መብቱ በህግ የተጠበቀ ነው።",
       "companyLinks": {
         "title": "ኩባንያ",
         "links": [

@@ -180,7 +180,7 @@ export default {
       "cta": "Simulan ang iyong Libreng Trial Ngayon"
     },
     "footer": {
-      "copyright": "© 2026 AI Newsletter, Inc. All rights reserved.",
+      "copyright": "AIBAN (Artificial Intelligence Business Acceleration Newsletter). All rights reserved.",
       "companyLinks": {
         "title": "Kumpanya",
         "links": [

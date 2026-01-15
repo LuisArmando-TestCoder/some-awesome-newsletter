@@ -180,7 +180,7 @@ export default {
       "cta": "आज ही अपना निःशुल्क परीक्षण शुरू करें"
     },
     "footer": {
-      "copyright": "© 2026 AI Newsletter, Inc. सर्वाधिकार सुरक्षित।",
+      "copyright": "AIBAN (Artificial Intelligence Business Acceleration Newsletter). सर्वाधिकार सुरक्षित।",
       "companyLinks": {
         "title": "कंपनी",
         "links": [

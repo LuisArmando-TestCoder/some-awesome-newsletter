@@ -180,7 +180,7 @@ export default {
       "cta": "Ücretsiz Denemenizi Bugün Başlatın"
     },
     "footer": {
-      "copyright": "© 2026 AI Newsletter, Inc. Tüm hakları saklıdır.",
+      "copyright": "AIBAN (Artificial Intelligence Business Acceleration Newsletter). Tüm hakları saklıdır.",
       "companyLinks": {
         "title": "Şirket",
         "links": [

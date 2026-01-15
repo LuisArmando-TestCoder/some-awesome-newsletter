@@ -180,7 +180,7 @@ export default {
       "cta": "આજે જ તમારી ફ્રી ટ્રાયલ શરૂ કરો"
     },
     "footer": {
-      "copyright": "© 2026 AI Newsletter, Inc. સર્વાધિકાર સુરક્ષિત.",
+      "copyright": "AIBAN (Artificial Intelligence Business Acceleration Newsletter). સર્વાધિકાર સુરક્ષિત.",
       "companyLinks": {
         "title": "કંપની",
         "links": [

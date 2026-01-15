@@ -180,7 +180,7 @@ export default {
       "cta": "اج ای مفت ٹرائل شروع کرو"
     },
     "footer": {
-      "copyright": "© 2026 AI Newsletter, Inc. سارے حق محفوظ نیں۔",
+      "copyright": "AIBAN (Artificial Intelligence Business Acceleration Newsletter). سارے حق محفوظ نیں۔",
       "companyLinks": {
         "title": "کمپنی",
         "links": [

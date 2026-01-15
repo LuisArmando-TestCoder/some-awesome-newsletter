@@ -180,7 +180,7 @@ export default {
       "cta": "Mulai Uji Coba Gratis Anda Hari Ini"
     },
     "footer": {
-      "copyright": "© 2026 AI Newsletter, Inc. Hak cipta dilindungi undang-undang.",
+      "copyright": "AIBAN (Artificial Intelligence Business Acceleration Newsletter). Hak cipta dilindungi undang-undang.",
       "companyLinks": {
         "title": "Perusahaan",
         "links": [

@@ -180,7 +180,7 @@ export default {
       "cta": "ఈరోజే మీ ఉచిత ట్రయల్‌ని ప్రారంభించండి"
     },
     "footer": {
-      "copyright": "© 2026 AI Newsletter, Inc. అన్ని హక్కులు రిజర్వ్ చేయబడ్డాయి.",
+      "copyright": "AIBAN (Artificial Intelligence Business Acceleration Newsletter). అన్ని హక్కులు రిజర్వ్ చేయబడ్డాయి.",
       "companyLinks": {
         "title": "కంపెనీ",
         "links": [

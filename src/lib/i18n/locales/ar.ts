@@ -180,7 +180,7 @@ export default {
       "cta": "ابدأ تجربتك المجانية اليوم"
     },
     "footer": {
-      "copyright": "© 2026 AI Newsletter, Inc. جميع الحقوق محفوظة.",
+      "copyright": "AIBAN (Artificial Intelligence Business Acceleration Newsletter). جميع الحقوق محفوظة.",
       "companyLinks": {
         "title": "الشركة",
         "links": [

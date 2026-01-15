@@ -180,7 +180,7 @@ export default {
       "cta": "오늘 무료 체험을 시작하세요"
     },
     "footer": {
-      "copyright": "© 2026 AI Newsletter, Inc. All rights reserved.",
+      "copyright": "AIBAN (Artificial Intelligence Business Acceleration Newsletter). All rights reserved.",
       "companyLinks": {
         "title": "회사 정보",
         "links": [

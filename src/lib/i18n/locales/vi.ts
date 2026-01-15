@@ -180,7 +180,7 @@ export default {
       "cta": "Bắt đầu dùng thử miễn phí ngay hôm nay"
     },
     "footer": {
-      "copyright": "© 2026 AI Newsletter, Inc. Bảo lưu mọi quyền.",
+      "copyright": "AIBAN (Artificial Intelligence Business Acceleration Newsletter). Bảo lưu mọi quyền.",
       "companyLinks": {
         "title": "Công ty",
         "links": [

@@ -180,7 +180,7 @@ export default {
       "cta": "ಇಂದೇ ಉಚಿತ ಪ್ರಯೋಗವನ್ನು ಪ್ರಾರಂಭಿಸಿ"
     },
     "footer": {
-      "copyright": "© 2026 AI Newsletter, Inc. ಸರ್ವಾಧಿಕಾರ ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ.",
+      "copyright": "AIBAN (Artificial Intelligence Business Acceleration Newsletter). ಸರ್ವಾಧಿಕಾರ ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ.",
       "companyLinks": {
         "title": "ಕಂಪನಿ",
         "links": [

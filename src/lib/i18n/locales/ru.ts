@@ -197,7 +197,7 @@ export default {
           { "text": "Политика использования файлов cookie", "href": "/legal/cookies" }
         ]
       },
-      "contact": "oriens@aiexecutions.com"
+      "contact": "oriens@aiban.news"
     }
   },
   "help": {

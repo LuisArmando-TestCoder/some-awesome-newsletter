@@ -197,7 +197,7 @@ export default {
           { "text": "Patakaran sa Cookie", "href": "/legal/cookies" }
         ]
       },
-      "contact": "oriens@aiexecutions.com"
+      "contact": "oriens@aiban.news"
     }
   },
   "help": {

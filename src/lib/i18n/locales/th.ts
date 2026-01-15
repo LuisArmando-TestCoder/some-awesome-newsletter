@@ -197,7 +197,7 @@ export default {
           { "text": "นโยบายคุกกี้", "href": "/legal/cookies" }
         ]
       },
-      "contact": "oriens@aiexecutions.com"
+      "contact": "oriens@aiban.news"
     }
   },
   "help": {

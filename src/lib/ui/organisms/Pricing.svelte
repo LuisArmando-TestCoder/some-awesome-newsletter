@@ -8,13 +8,14 @@
     } from "$lib/config/plans.config";
     import Switch from "$lib/ui/components/Switch.svelte";
     import { t } from "$lib/i18n/translations";
+    import store from "../../../components/store";
 
     $: $t;
 
     let state: PlansState;
+    let isProcessing = false;
     const unsub = plansStore.subscribe((v) => (state = v));
 
-    // Refined config to ensure clean naming and data flow
     const PLANS_CONFIG = [
         { id: "starter", mo: 17 },
         { id: "growth", mo: 35 },
@@ -27,6 +28,43 @@
     function calculatePrice(monthlyPrice: number, interval: string) {
         if (interval === "monthly") return monthlyPrice;
         return Math.floor(monthlyPrice * 12 * (1 - ANNUAL_DISCOUNT));
+    }
+
+    /**
+     * Triggers the backend subscription flow
+     */
+    async function handleSubscribe(planData: any, monthlyPrice: number) {
+        if (isProcessing) return;
+        isProcessing = true;
+
+        const finalAmount = calculatePrice(monthlyPrice, state.interval);
+
+        try {
+            const response = await fetch($store.apiURL() + '/api/subscribe', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    planName: planData.name,
+                    amount: finalAmount.toFixed(2),
+                    userId: $store?.user?.email || "landing_lead",
+                    currency: "USD"
+                })
+            });
+
+            const result = await response.json();
+            
+            if (result.success && result.data?.payment_url) {
+                // Redirect user to Tilopay Secure Checkout
+                window.location.href = result.data.payment_url;
+            } else {
+                alert("Subscription initialization failed. Please try again.");
+            }
+        } catch (error) {
+            console.error("Connection Error:", error);
+            alert("Could not reach the server.");
+        } finally {
+            isProcessing = false;
+        }
     }
 
     onDestroy(() => unsub());
@@ -66,7 +104,7 @@
             </div>
         </div>
 
-        <div class="pricing__grid">
+        <div class="pricing__grid" style:opacity={isProcessing ? '0.7' : '1'}>
             {#if state?.content?.plans}
                 {#each state.content.plans.filter((p) => p.id === "free") as plan}
                     <article class="pricing__card pricing__card--basic">
@@ -81,7 +119,9 @@
                             <div class="pricing__price-block">
                                 <span class="pricing__currency">$</span>
                                 <span class="pricing__amount">0</span>
-                                <span class="pricing__period">/mo</span>
+                                <span class="pricing__period-box">
+                                    <span class="period-text">/mo</span>
+                                </span>
                             </div>
 
                             <div class="pricing__divider"></div>
@@ -154,14 +194,21 @@
                                 </ul>
 
                                 <div class="pricing__footer">
-                                    <a
-                                        href={`/api/checkout?products=${planData.productId}&interval=${state.interval}`}
+                                    <button
+                                        on:click={() => handleSubscribe(planData, tier.mo)}
                                         class="pricing__button"
                                         class:pricing__button--primary={isFeatured}
                                         class:pricing__button--dark={!isFeatured}
+                                        disabled={isProcessing || $store?.config?.pricingPlan === planData.id}
                                     >
-                                        {$t.pricing.upgradeTo.replace("{planName}", planData.name)}
-                                    </a>
+                                        {#if isProcessing}
+                                            Processing...
+                                        {:else if $store?.config?.pricingPlan === planData.id}
+                                            {$t.billing.currentPlanButton}
+                                        {:else}
+                                            {$t.pricing.upgradeTo.replace("{planName}", planData.name)}
+                                        {/if}
+                                    </button>
                                 </div>
                             </div>
                         </article>
@@ -200,7 +247,6 @@
         font-family: var(--p-font-sans);
         overflow: hidden;
 
-        /* Ambient Background Mesh */
         &__backdrop {
             position: absolute;
             top: 0;
@@ -220,7 +266,6 @@
             margin: 0 auto;
         }
 
-        /* --- Header --- */
         &__header {
             text-align: center;
             margin-bottom: 4rem;
@@ -258,7 +303,6 @@
             margin-inline: auto;
         }
 
-        /* --- Toggle --- */
         &__toggle-wrapper {
             display: flex;
             justify-content: center;
@@ -303,15 +347,14 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
-        /* --- Grid --- */
         &__grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
             gap: 2rem;
-            align-items: stretch; /* Cards equal height */
+            align-items: stretch;
+            transition: opacity 0.3s ease;
         }
 
-        /* --- Card Architecture --- */
         &__card {
             position: relative;
             background: var(--p-c-surface);
@@ -320,19 +363,16 @@
             flex-direction: column;
             transition: transform 0.4s var(--p-transition), box-shadow 0.4s var(--p-transition);
             box-shadow: var(--p-shadow-sm);
-            border: 1px solid transparent; /* Placeholder for layout */
+            border: 1px solid transparent;
             
             &--basic {
                 border-color: var(--p-c-border);
             }
 
-            /* The Featured "Gradient Border" Trick */
             &--featured {
                 box-shadow: var(--p-shadow-xl);
                 z-index: 2;
-                transform: scale(1.02); /* Slight scale up */
-                
-                /* Gradient border via background origin */
+                transform: scale(1.02);
                 background: 
                     linear-gradient(var(--p-c-surface), var(--p-c-surface)) padding-box,
                     var(--p-gradient-glow) border-box;
@@ -357,7 +397,6 @@
             flex-direction: column;
         }
 
-        /* Top Badge for Featured */
         &__card-badge {
             position: absolute;
             top: -14px;
@@ -375,7 +414,6 @@
             z-index: 10;
         }
 
-        /* Featured Glow Effect */
         .featured-glow {
             position: absolute;
             inset: 0;
@@ -387,7 +425,6 @@
             pointer-events: none;
         }
 
-        /* --- Card Content --- */
         &__card-header {
             margin-bottom: 1.5rem;
         }
@@ -406,10 +443,9 @@
         &__card-tagline {
             font-size: 0.9rem;
             color: var(--p-c-text-muted);
-            min-height: 2.5em; /* Alignment fix */
+            min-height: 2.5em;
         }
 
-        /* --- Price Block --- */
         &__price-block {
             display: flex;
             align-items: flex-start;
@@ -458,12 +494,11 @@
             width: 100%;
         }
 
-        /* --- Features List --- */
         &__features {
             list-style: none;
             padding: 0;
             margin: 0 0 2rem 0;
-            flex-grow: 1; /* Pushes footer down */
+            flex-grow: 1;
             display: flex;
             flex-direction: column;
             gap: 1rem;
@@ -488,7 +523,6 @@
             }
         }
 
-        /* --- Buttons --- */
         &__footer {
             margin-top: auto;
         }
@@ -505,13 +539,16 @@
             transition: all 0.2s ease;
             position: relative;
             overflow: hidden;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
 
             &--primary {
                 background: var(--p-c-primary);
                 color: white;
                 box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.3);
                 
-                &:hover {
+                &:hover:not(:disabled) {
                     background: var(--p-c-primary-dark);
                     transform: translateY(-2px);
                     box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.4);
@@ -522,7 +559,7 @@
                 background: var(--p-c-text-main);
                 color: white;
                 
-                &:hover {
+                &:hover:not(:disabled) {
                     background: black;
                     transform: translateY(-2px);
                     box-shadow: 0 10px 15px -3px rgba(0,0,0,0.2);
@@ -534,19 +571,21 @@
                 border: 2px solid var(--p-c-border);
                 color: var(--p-c-text-main);
                 
-                &:hover {
+                &:hover:not(:disabled) {
                     border-color: var(--p-c-text-main);
                     background: white;
                 }
             }
+
+            &:disabled {
+                opacity: 0.6;
+                cursor: not-allowed;
+            }
         }
     }
 
-    /* --- Responsive --- */
     @media (max-width: 768px) {
-        .pricing {
-            padding: 4rem 1rem;
-        }
+        .pricing { padding: 4rem 1rem; }
         .pricing__grid {
             grid-template-columns: 1fr;
             max-width: 500px;
@@ -554,11 +593,9 @@
         }
         .pricing__card--featured {
             transform: none;
-            order: -1; /* Show featured first on mobile */
+            order: -1;
             margin-bottom: 1rem;
         }
-        .pricing__card--featured:hover {
-            transform: none;
-        }
+        .pricing__card--featured:hover { transform: none; }
     }
 </style>

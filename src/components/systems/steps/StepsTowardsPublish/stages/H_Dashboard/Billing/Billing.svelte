@@ -16,13 +16,17 @@
     const unsubPlans = plansStore.subscribe((v) => (state = v));
 
     // INSTANT UPDATE: Watch the global language writable
-    // This ensures that clicking the flag triggers loadPlansContent() immediately.
     $: if ($globalLanguage) {
         loadPlansContent();
     }
 
     const currentPlan = writable<Plan | undefined>(undefined);
     let isProcessing = false;
+
+    // YOUR TILOPAY CREDENTIALS (from provided info)
+    const TILOPAY_API_KEY = "7099-8501-1241-1964-6658";
+    const TILOPAY_ENDPOINT =
+        "https://app.tilopay.com/api/v1/collect/set/payments";
 
     const PLANS_CONFIG = [
         { id: "starter", mo: 17 },
@@ -35,6 +39,45 @@
         if (interval === "monthly") return monthlyPrice;
         const ANNUAL_DISCOUNT = 0.35;
         return Math.floor(monthlyPrice * 12 * (1 - ANNUAL_DISCOUNT));
+    }
+
+    /**
+     * Handles the subscription logic connecting to Tilopay
+     */
+    async function handleSubscribe(planData: any, price: number) {
+        if (isProcessing) return;
+        isProcessing = true;
+
+        try {
+            // Call YOUR backend, not Tilopay directly
+            const response = await fetch($store.apiURL() + "/api/subscribe", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    plan: planData.name,
+                    amount: price.toFixed(2),
+                    user_id: $store.user?.id || "guest",
+                    currency: "USD",
+                }),
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                alert("Payment processed successfully!");
+                // Redirect or refresh user state here
+            } else {
+                alert(
+                    "Payment failed: " +
+                        (result.details?.message || "Unknown error"),
+                );
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            alert("Server error. Please try again.");
+        } finally {
+            isProcessing = false;
+        }
     }
 
     onMount(async () => {
@@ -96,7 +139,7 @@
             </div>
         </div>
 
-        <div class="pricing__grid">
+        <div class="pricing__grid" class:pricing__grid--loading={isProcessing}>
             {#if state?.content?.plans}
                 {#each state.content.plans.filter((p) => p.id === "free") as plan}
                     <article
@@ -117,7 +160,8 @@
                         </ul>
                         <button
                             class="pricing__button pricing__button--outline"
-                            disabled={$store.config.pricingPlan === plan.id}
+                            disabled={$store.config.pricingPlan === plan.id ||
+                                isProcessing}
                         >
                             {$store.config.pricingPlan === plan.id
                                 ? $t.billing.currentPlanButton
@@ -155,13 +199,19 @@
                                     </li>
                                 {/each}
                             </ul>
+
                             <button
                                 class="pricing__button"
                                 class:pricing__button--primary={tier.id ===
                                     "growth"}
-                                disabled={$store.config.pricingPlan === tier.id}
+                                disabled={$store.config.pricingPlan ===
+                                    tier.id || isProcessing}
+                                on:click={() =>
+                                    handleSubscribe(planData, price)}
                             >
-                                {#if $store.config.pricingPlan === tier.id}
+                                {#if isProcessing && $store.config.pricingPlan !== tier.id}
+                                    Processing...
+                                {:else if $store.config.pricingPlan === tier.id}
                                     {$t.billing.currentPlanButton}
                                 {:else}
                                     {$t.pricing.upgradeTo.replace(

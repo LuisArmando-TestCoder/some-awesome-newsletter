@@ -30,7 +30,7 @@ export default {
     "ogImageUrl": "https://images.pexels.com/photos/261599/pexels-photo-261599.jpeg",
     "canonicalUrl": "https://example.com/ai-newsletter-generator",
     "organization": {
-      "name": "AI Newsletter, Inc.",
+      "name": "aiban.news",
       "logo": "https://example.com/logo.png",
       "url": "https://example.com/"
     },
@@ -186,7 +186,6 @@ export default {
         "links": [
           { "text": "私たちについて", "href": "/about" },
           { "text": "採用情報", "href": "/careers" },
-          { "text": "ブログ", "href": "https://github.com/LuisArmando-TestCoder/scientia/tree/master/proposiciones" }
         ]
       },
       "legalLinks": {

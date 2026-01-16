@@ -30,7 +30,7 @@ export default {
     "ogImageUrl": "https://images.pexels.com/photos/261599/pexels-photo-261599.jpeg",
     "canonicalUrl": "https://example.com/ai-newsletter-generator",
     "organization": {
-      "name": "AI Newsletter, Inc.",
+      "name": "aiban.news",
       "logo": "https://example.com/logo.png",
       "url": "https://example.com/"
     },
@@ -180,13 +180,12 @@ export default {
       "cta": "আজই আপনার ফ্রি ট্রায়াল শুরু করুন"
     },
     "footer": {
-      "copyright": "© ২০২৬ AI Newsletter, Inc. সর্বস্বত্ব সংরক্ষিত।",
+      "copyright": "© ২০২৬ aiban.news সর্বস্বত্ব সংরক্ষিত।",
       "companyLinks": {
         "title": "কোম্পানি",
         "links": [
           { "text": "আমাদের সম্পর্কে", "href": "/about" },
           { "text": "ক্যারিয়ার", "href": "/careers" },
-          { "text": "ব্লগ", "href": "https://github.com/LuisArmando-TestCoder/scientia/tree/master/proposiciones" }
         ]
       },
       "legalLinks": {

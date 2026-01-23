@@ -31,7 +31,7 @@
       on:click={() => link.callback?.()}
       class:has-children={hasChildren}
       class="sidebar__nav-link"
-      class:underline={$store.stepsIndex === stepsMapping[link.name as StepsKey]}
+      class:underline={$store.stepsIndex === stepsMapping[(link.key ?? link.name) as StepsKey]}
     >
       <span class="link-initials" class:dashed-border={hasChildren}>{getInitials(link.name)}</span>
       <span class="link-name">{link.name}</span>
@@ -121,8 +121,9 @@
   }
 
   .sidebar__nav-link.underline .link-initials {
-    background: var(--c-primary);
-    color: var(--c-white);
+    background: black;
+    color: white;
+    border-color: black;
   }
 
   .link-name,

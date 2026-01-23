@@ -23,7 +23,7 @@
   }
 
   function getLink(name: StepsKey, label?: string): SideLinkType {
-    return { name: label ?? name, callback: step(name) };
+    return { name: label ?? name, key: name, callback: step(name) };
   }
 
   $: links = [

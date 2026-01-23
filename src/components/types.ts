@@ -160,5 +160,6 @@ export type SideLinkType = {
   url?: string;
   callback?: Function;
   name: string;
+  key?: StepsKey;
   children?: SideLinkType[]
 }

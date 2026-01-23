@@ -193,9 +193,9 @@
 
       <div class="drawer-footer">
         <div class="legal-row">
-          <a href="/privacy" on:click={toggleMenu}>Privacy</a>
+          <a href="/legal/privacy" on:click={toggleMenu}>Privacy</a>
           <span class="dot">·</span>
-          <a href="/terms" on:click={toggleMenu}>Terms</a>
+          <a href="/legal/terms" on:click={toggleMenu}>Terms</a>
         </div>
         <div class="status-row">
             <div class="server-status">

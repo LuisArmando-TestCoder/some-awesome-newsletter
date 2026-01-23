@@ -30,7 +30,7 @@ export const POST: RequestHandler = async ({ request, url }) => {
       return json({ error: 'Missing required fields.' }, { status: 400 });
     }
 
-    if (url.origin.includes("aibanewsletter.club") || url.origin.includes("localhost")) {
+    if (url.origin.includes("aiban.news") || url.origin.includes("localhost")) {
       console.log('[subscribe] Internal request detected. Using THE_PASS to subscribe.');
       const response = await fetch(`${API_URL}/users/${configuratorId}/${newsSourceId}`, {
         method: 'POST',

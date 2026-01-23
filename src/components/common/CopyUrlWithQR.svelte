@@ -16,7 +16,7 @@
     // Reactive statement to update URL and QR code when props change
     $: {
         const leadParam = lead ? `&lead=${encodeURIComponent(lead)}` : "";
-        fullUrl = fullUrl || `https://aibanewsletter.club/subscribe?configuratorId=${encodeURIComponent(configuratorEmail)}&newsSourceId=${encodeURIComponent(newsSourceId)}${leadParam}`;
+        fullUrl = fullUrl || `https://aiban.news/subscribe?configuratorId=${encodeURIComponent(configuratorEmail)}&newsSourceId=${encodeURIComponent(newsSourceId)}${leadParam}`;
         generateQrCode(fullUrl);
     }
 

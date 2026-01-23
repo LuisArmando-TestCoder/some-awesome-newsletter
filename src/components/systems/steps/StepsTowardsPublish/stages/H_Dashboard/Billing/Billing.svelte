@@ -1,25 +1,29 @@
 <script lang="ts">
     import { onMount, onDestroy } from "svelte";
-    import { writable } from "svelte/store";
     import plansStore, {
         loadPlansContent,
         computeFeatures,
         setInterval,
-        type Plan,
         type PlansState,
     } from "$lib/config/plans.config";
     import store, { globalLanguage } from "../../../../../../store";
     import Switch from "$lib/ui/components/Switch.svelte";
+    
+    // 🆕 Import your new BillingForm component here
+    // Make sure this path matches where you saved the component
+    import BillingForm from "$lib/ui/organisms/BillingForm.svelte"; 
+    
     import { t } from "$lib/i18n/translations";
 
     // --- STATE MANAGEMENT ---
     let state: PlansState;
     const unsubPlans = plansStore.subscribe((v) => (state = v));
-    const currentPlan = writable<Plan | undefined>(undefined);
     let isProcessing = false;
-    let feedbackMessage = { type: "", text: "" }; // 🆕 For Success/Error messages
+    let feedbackMessage = { type: "", text: "" };
 
     // --- BILLING FORM STATE ---
+    // We initialize the object here. 
+    // The BillingForm component will handle pre-filling it with store data automatically.
     let billingInfo = {
         firstName: "",
         lastName: "",
@@ -31,27 +35,9 @@
         country: "CR", 
         zip: "",
     };
-
-    // Pre-fill logic
-    $: if ($store.user || $store.config) {
-        if (!billingInfo.email) billingInfo.email = $store.user?.email || "";
-        if (!billingInfo.firstName) {
-             const name = $store.user?.name || $store.config?.senderName || "";
-             const parts = name.split(" ");
-             if (parts.length > 0) billingInfo.firstName = parts[0];
-             if (parts.length > 1) billingInfo.lastName = parts.slice(1).join(" ");
-        }
-    }
-
-    // Validation
-    $: isFormValid =
-        billingInfo.firstName &&
-        billingInfo.lastName &&
-        billingInfo.email &&
-        billingInfo.phone &&
-        billingInfo.address &&
-        billingInfo.city &&
-        billingInfo.country;
+    
+    // This tracks if the child component considers the form valid
+    let isFormValid = false;
 
     const PLANS_CONFIG = [
         { id: "starter", mo: 17 },
@@ -77,7 +63,7 @@
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get("payment_success") === "true") {
             feedbackMessage = { type: "success", text: "Subscription activated successfully! Welcome aboard." };
-            // Optional: Clean URL
+            // Optional: Clean URL to preventing re-triggering on refresh
             window.history.replaceState({}, document.title, window.location.pathname);
         } else if (urlParams.get("payment_cancelled") === "true") {
             feedbackMessage = { type: "error", text: "Payment process was cancelled." };
@@ -91,9 +77,7 @@
     async function handleSubscribe(planData: any, price: number) {
         if (isProcessing) return;
         
-        // 🆕 Prevent double subscription: 
-        // If user already has a PAID plan (not free), warn them or handle upgrade logic.
-        // For MVP, we ask them to cancel first to avoid double billing in Tilopay.
+        // 🆕 Prevent double subscription logic
         if ($store.config?.pricingPlan !== "free" && $store.config?.pricingPlan !== "vipfree") {
             const confirmSwitch = confirm("You already have an active plan. To switch plans, please cancel your current subscription first to avoid double billing. Do you want to proceed anyway?");
             if (!confirmSwitch) return;
@@ -101,6 +85,7 @@
 
         if (!isFormValid) {
             alert("Please fill in all billing details above first.");
+            // Scroll to the form if invalid
             document.querySelector('.billing-form')?.scrollIntoView({ behavior: 'smooth' });
             return;
         }
@@ -120,13 +105,14 @@
                     interval: state.interval, 
                     user_id: $store.user?.id || "guest",
                     currency: "USD",
-                    ...billingInfo // Spread form data
+                    ...billingInfo // Spreads the bound data from the BillingForm component
                 }),
             });
 
             const result = await response.json();
 
             if (result.success && result.url) {
+                // Redirect to payment gateway
                 window.location.href = result.url;
             } else {
                 feedbackMessage = { type: "error", text: "Payment init failed: " + (result.details?.message || result.error) };
@@ -183,45 +169,10 @@
             {/if}
         </header>
 
-        <div class="billing-form">
-            <h3 class="billing-form__title">Billing Information</h3>
-            <p class="billing-form__subtitle">Required for secure payment processing.</p>
-            
-            <div class="billing-form__grid">
-                <div class="form-group">
-                    <label for="fname">First Name</label>
-                    <input id="fname" type="text" bind:value={billingInfo.firstName} placeholder="John" />
-                </div>
-                <div class="form-group">
-                    <label for="lname">Last Name</label>
-                    <input id="lname" type="text" bind:value={billingInfo.lastName} placeholder="Doe" />
-                </div>
-                <div class="form-group full-width">
-                    <label for="email">Email Address</label>
-                    <input id="email" type="email" bind:value={billingInfo.email} placeholder="john@example.com" />
-                </div>
-                <div class="form-group">
-                    <label for="phone">Phone Number</label>
-                    <input id="phone" type="tel" bind:value={billingInfo.phone} placeholder="8888-8888" />
-                </div>
-                 <div class="form-group">
-                    <label for="country">Country (ISO Code)</label>
-                    <input id="country" type="text" bind:value={billingInfo.country} placeholder="CR" maxlength="2" style="text-transform: uppercase;" />
-                </div>
-                <div class="form-group full-width">
-                    <label for="address">Address</label>
-                    <input id="address" type="text" bind:value={billingInfo.address} placeholder="Street address..." />
-                </div>
-                <div class="form-group">
-                    <label for="city">City</label>
-                    <input id="city" type="text" bind:value={billingInfo.city} placeholder="San Jose" />
-                </div>
-                <div class="form-group">
-                    <label for="zip">ZIP Code</label>
-                    <input id="zip" type="text" bind:value={billingInfo.zip} placeholder="10101" />
-                </div>
-            </div>
-        </div>
+        <BillingForm 
+            bind:formData={billingInfo} 
+            bind:isValid={isFormValid} 
+        />
 
         <div class="pricing__toggle-wrapper">
             <div class="pricing__toggle-container">
@@ -306,7 +257,7 @@
 </section>
 
 <style lang="scss">
-    /* 🆕 Added Feedback Styles */
+    /* 🆕 Feedback Message Styles */
     .feedback-message {
         padding: 12px;
         border-radius: 8px;
@@ -319,7 +270,7 @@
         &.error { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
     }
 
-    /* 🆕 Added Danger Button for Cancellation */
+    /* 🆕 Danger Button for Cancellation */
     .pricing__button--danger {
         background: #fff;
         border: 2px solid #ef4444;
@@ -330,62 +281,7 @@
         }
     }
 
-    /* --- Existing Styles Preserved Below --- */
-    .billing-form {
-        max-width: 700px;
-        margin: 0 auto 60px auto;
-        padding: 32px;
-        background: #f9fafb;
-        border: 1px solid #e5e7eb;
-        border-radius: 24px;
-        
-        &__title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #111827;
-            margin: 0 0 4px 0;
-            text-align: center;
-        }
-        &__subtitle {
-            text-align: center;
-            color: #6b7280;
-            margin-bottom: 24px;
-            font-size: 0.9rem;
-        }
-        &__grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            @media (max-width: 600px) { grid-template-columns: 1fr; }
-        }
-    }
-
-    .form-group {
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-        &.full-width { grid-column: 1 / -1; }
-        label {
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: #374151;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-        input {
-            padding: 10px 12px;
-            border: 1px solid #d1d5db;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            transition: border-color 0.2s;
-            outline: none;
-            &:focus {
-                border-color: #3b82f6;
-                box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-            }
-        }
-    }
-
+    /* --- Page Layout Styles --- */
     .pricing {
         padding: 40px 20px;
         background-color: #ffffff;

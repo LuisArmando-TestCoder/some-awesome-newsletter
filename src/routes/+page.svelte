@@ -383,13 +383,9 @@
 								<a href="/" class="logo" aria-label="Homepage">
 									<img
 										src="/logo/logo_large.png"
-										width="40"
+										width="140"
 										alt="logo"
 									/>
-									<span
-										>{$t.mainContent.organization
-											.name}</span
-									>
 								</a>
 								<p class="copyright">
 									&copy; {new Date().getFullYear()}
@@ -1407,6 +1403,10 @@
 
 			img {
 				display: block;
+				border-radius: 15px;
+				box-shadow: 0 0 12px -12px white;
+				padding: 7.5px 5px;
+				background: black;
 			}
 		}
 

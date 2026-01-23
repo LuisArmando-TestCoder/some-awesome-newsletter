@@ -58,7 +58,7 @@
   <div class="auth-form-card">
     <header class="auth-header">
       <div class="logo-wrapper">
-        <img src="/logo/logo-inverted.png" alt="logo" class="logo-img" />
+        <img src="/logo/logo.png" alt="logo" class="logo-img" />
       </div>
       <h1 class="auth-title">{$copy?.title}</h1>
       {#if $copy?.subtitle}

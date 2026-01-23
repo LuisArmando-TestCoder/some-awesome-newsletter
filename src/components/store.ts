@@ -6,7 +6,7 @@ import updateConfiguration from "./systems/requests/updateConfiguration";
 export const latestMessage = writable<string>("");
 
 export const socket = writable<Socket | null>(null);
-export const isScrollingDown = writable<boolean>(false); // Add state for scroll direction
+export const isScrollingDown = writable<boolean>(false);
 
 const colorPalette = [
   "#e91e63",
@@ -37,20 +37,27 @@ const store = writable<Store>({
     "config.newsletterTitle",
     "config.emailSignature",
     "config.logo",
-    "config.emailMaskSender", // New
+    "config.emailMaskSender",
     "config.vip",
     "config.pricingPlan",
-    "subscribers", // Added
-    "leads", // Added
-    "subscriberName", // Added for subscription flow
-    "subscriberCountry", // Added for subscription flow
+    // 🆕 Config keys for Billing Fallback
+    "config.phone",
+    "config.address",
+    "config.city",
+    "config.state",
+    "config.zip",
+    "config.country",
+    "subscribers",
+    "leads",
+    "subscriberName",
+    "subscriberCountry",
     "user",
     "tokenId",
     "clientId",
     "globalLanguage",
     "dashboardLanguage"
   ],
-  appLanguage: "en", // Added for global language setting
+  appLanguage: "en",
   globalLanguage: "en",
   dashboardLanguage: "en",
   header: true,
@@ -58,7 +65,7 @@ const store = writable<Store>({
   toggles: {},
   colorPalette,
   stepsIndex: 0,
-  hasInteracted: false, // don't save
+  hasInteracted: false,
   configuratorEmail: "",
   newsSource: "",
   lead: "",
@@ -66,24 +73,59 @@ const store = writable<Store>({
   authCode: "",
   directionsThatShouldDisappear: [],
   isAuthCodeValid: false,
+  
+  // 🆕 Initialize User Object (prevents null errors)
+  user: {
+      id: "",
+      email: "",
+      name: "",
+      phone: "",
+      address: "",
+      city: "",
+      state: "",
+      zip: "",
+      country: "",
+      avatar: ""
+  },
+
   apiURL: (origin?: string) => typeof window !== 'undefined' ? (
     window.location.origin.startsWith('http://localhost') ? "http://localhost:8000" : "https://ai-newsletter-translated.onrender.com"
   ) : (
     origin?.startsWith('http://localhost') ? "http://localhost:8000" : "https://ai-newsletter-translated.onrender.com"
   ),
+  
   config: {
-    emailMaskSender: "", // New
-    appPassword: "", // New
+    // 🆕 Expanded Config Defaults (matches keysToSave)
+    senderName: "",
+    brandColor: "#000000",
+    logo: "",
+    emailSignature: "",
+    newsletterTitle: "",
+    newsletterSubject: "",
+    scheduleTime: "",
+    newsSources: [],
+    
+    // Billing / Company Defaults
+    phone: "",
+    address: "",
+    city: "",
+    state: "",
+    zip: "",
+    country: "CR",
+
+    emailMaskSender: "",
+    appPassword: "",
     vip: false,
     pricingPlan: "free",
   },
-  subscribers: {}, // Added initial empty object for subscribers
-  leads: {}, // Added initial empty object for leads
-  isRefreshingSubscribers: false, // Flag for background refresh
+
+  subscribers: {},
+  leads: {},
+  isRefreshingSubscribers: false,
   subscriberEmail: "",
-  subscriberName: "", // Added for subscription flow
-  subscriberCountry: "", // Added for subscription flow
-  subscriberLanguage: "", // Specific to subscriber context
+  subscriberName: "",
+  subscriberCountry: "",
+  subscriberLanguage: "",
   subscriberConfiguratorId: "",
   subscriberNewsSourceId: "",
   subscriberLead: "",
@@ -106,8 +148,6 @@ export const emptyStoreSnapshot = JSON.parse(JSON.stringify(get(store)));
 export default store;
 
 export function saveToStore(objectValue: { [index: string]: any }) {
-  // console.log("objectValue", objectValue)
-  // setAllKeysToSaveInLocalStorage();
   store.set({
     ...get(store),
     ...objectValue,
@@ -146,19 +186,15 @@ function createObjectPopulator<T extends object>(obj: T): Populator<T> {
   return function (propertyPath: string, value: any): T {
     const keys = propertyPath.split(".");
 
-    // Recursive helper that builds a new nested object for the given chain.
     const updateNested = (current: any, keys: string[]): any => {
-      // Take the first key from the chain
       const [first, ...rest] = keys;
 
-      // If there are no more keys, assign the value to this key.
       if (rest.length === 0) {
         return {
           ...current,
           [first]: value,
         };
       }
-      // Otherwise, recursively update the nested object.
       return {
         ...current,
         [first]: updateNested(
@@ -168,7 +204,6 @@ function createObjectPopulator<T extends object>(obj: T): Populator<T> {
       };
     };
 
-    // Return a new object with the updated chain.
     return updateNested(obj, keys);
   };
 }
@@ -177,24 +212,19 @@ function createObjectGetter<T extends object>(
   obj: T
 ): (propertyPath: string) => any {
   return function (propertyPath: string): any {
-    // Split the property path into individual keys.
     const keys = propertyPath.split(".");
 
-    // Recursive helper function to traverse the object.
     const getNested = (current: any, keys: string[]): any => {
       const [first, ...rest] = keys;
 
-      // If the current object is nullish or the key doesn't exist, return undefined.
       if (current == null || !(first in current)) {
         return undefined;
       }
 
-      // If no further keys remain, return the value at the key.
       if (rest.length === 0) {
         return current[first];
       }
 
-      // Otherwise, recursively traverse deeper.
       return getNested(current[first], rest);
     };
 
@@ -256,7 +286,6 @@ function setAllKeysToSaveInLocalStorage() {
     // Save to localStorage if available
     if (isLocalStorageAvailable) {
       try {
-        // console.log("Here", key, value)
         localStorage.setItem(key, JSON.stringify(value || JSON.parse(localStorage.getItem(key) || "")));
       } catch {}
     }

@@ -151,7 +151,7 @@
         <ScheduleTime
           label={$t['newsSource.scheduleLabel']}
           value={updateFields.scheduleTime}
-          exclude={["minute", "hour", "dayOfMonth"]}
+          exclude={["minute", "dayOfMonth"]}
           onChange={(newValue) => {
             updateFields.scheduleTime = newValue;
             if (isMounted) handleUpdate();

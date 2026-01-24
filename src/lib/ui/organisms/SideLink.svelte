@@ -24,16 +24,23 @@
   }
 </script>
 
-<li class="sidebar__nav-item" class:is-collapsed={isCollapsed} class:is-open={isOpen}>
+<li
+  on:click={() => link.callback?.()}
+  class="sidebar__nav-item"
+  class:is-collapsed={isCollapsed}
+  class:is-open={isOpen}
+>
   <div class="link-container" on:click={toggle}>
     <a
       href={link.url}
-      on:click={() => link.callback?.()}
       class:has-children={hasChildren}
       class="sidebar__nav-link"
-      class:underline={$store.stepsIndex === stepsMapping[(link.key ?? link.name) as StepsKey]}
+      class:underline={$store.stepsIndex ===
+        stepsMapping[(link.key ?? link.name) as StepsKey]}
     >
-      <span class="link-initials" class:dashed-border={hasChildren}>{getInitials(link.name)}</span>
+      <span class="link-initials" class:dashed-border={hasChildren}
+        >{getInitials(link.name)}</span
+      >
       <span class="link-name">{link.name}</span>
     </a>
     {#if hasChildren}
@@ -41,7 +48,11 @@
     {/if}
   </div>
   {#if hasChildren}
-    <ul class="sidebar__nav-list--nested" class:collapsed={isCollapsed} class:is-open={isOpen}>
+    <ul
+      class="sidebar__nav-list--nested"
+      class:collapsed={isCollapsed}
+      class:is-open={isOpen}
+    >
       {#each [...(link.children ?? [])] as childLink}
         <svelte:self link={childLink} />
       {/each}
@@ -80,7 +91,7 @@
   .is-collapsed {
     .sidebar__nav-link {
       gap: 0;
-      transition-delay: .5s;
+      transition-delay: 0.5s;
     }
   }
 
@@ -94,7 +105,7 @@
     gap: var(--space-md);
     white-space: nowrap;
     overflow: hidden;
-    transition-delay: .5s;
+    transition-delay: 0.5s;
 
     &.underline {
       font-weight: 900;
@@ -117,7 +128,6 @@
     &.dashed-border {
       border-style: dashed;
     }
-
   }
 
   .sidebar__nav-link.underline .link-initials {
@@ -130,7 +140,9 @@
   .toggle-icon {
     opacity: 0;
     width: 0;
-    transition: opacity 0.3s ease, width 0.3s ease;
+    transition:
+      opacity 0.3s ease,
+      width 0.3s ease;
 
     :global(.sidebar:not(.collapsed)) & {
       opacity: 1;
@@ -147,7 +159,9 @@
     padding-left: calc(var(--space-md) + 30px);
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease, opacity 0.3s ease;
+    transition:
+      max-height 0.3s ease,
+      opacity 0.3s ease;
     opacity: 0;
 
     &.collapsed {

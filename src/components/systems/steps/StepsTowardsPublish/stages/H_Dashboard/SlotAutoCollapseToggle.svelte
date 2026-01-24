@@ -105,7 +105,6 @@
 {/if}
 
 <style lang="scss">
-  /* Add the same styles as the previous DynamicAutoCollapseToggle */
   .horizontal-controls {
     display: flex;
     align-items: center;

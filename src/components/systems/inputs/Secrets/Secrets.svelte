@@ -16,8 +16,7 @@
 
   async function fetchConfigData() {
     const authHeaders = await getAuthHeaders();
-    const configId = authHeaders["x-auth-email"];
-    const response = await fetch(`${get(store).apiURL()}/configurations/${configId}`, {
+    const response = await fetch(`${get(store).apiURL()}/config`, {
       headers: authHeaders,
     });
     const data = await response.json();

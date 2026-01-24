@@ -1,23 +1,20 @@
 <script lang="ts">
   import PlainText from "../../../../../../inputs/PlainText/PlainText.svelte";
-  import store, { saveToConfig } from "../../../../../../../store";
   import MarkdownText from "../../../../../../texts/MarkdownText/MarkdownText.svelte";
-  import { writable } from "svelte/store";
   import { t } from "$lib/i18n/dashboard-translations";
-  import type { Store } from "../../../../../../../types";
-  import { useConfigurator } from "../../../../../../useConfigurator";
+  import { getContext } from "svelte";
 
   export let canReveal = true;
 
-  $: $store;
+  const { draftConfig, updateDraft } = getContext('config-draft') as any;
 </script>
 
 <div>
   <PlainText
     placeholder={$t['placeholders.newsletterSubject']}
-    value={$store.newsletterSubject}
+    value={$draftConfig.newsletterSubject}
     onChange={(value) => {
-      saveToConfig({ newsletterSubject: value });
+      updateDraft({ newsletterSubject: value });
     }}
   />
   <MarkdownText {canReveal}>

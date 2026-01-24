@@ -5,6 +5,7 @@
   import { browser } from "$app/environment";
   import { isScrollingDown, saveToStore } from "../../components/store"; 
   import MainSteps from "../../components/systems/steps/StepsTowardsPublish/MainSteps.svelte";
+    import getConfiguratorSession from "../../components/systems/requests/getConfiguratorSession";
 
   let lastScrollY = 0;
 
@@ -26,6 +27,7 @@
 
   onDestroy(() => {
     if (browser) { // Only run in browser
+      getConfiguratorSession();
       window.removeEventListener("scroll", handleScroll);
     }
   });

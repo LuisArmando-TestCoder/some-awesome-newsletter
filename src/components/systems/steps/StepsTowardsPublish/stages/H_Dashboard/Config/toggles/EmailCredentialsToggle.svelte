@@ -1,31 +1,21 @@
 <script lang="ts">
   import EmailInput from "../../../../../../inputs/Email/Email.svelte";
   import PlainText from "../../../../../../inputs/PlainText/PlainText.svelte";
-  import { saveToConfig } from "../../../../../../../store";
-  import { writable } from "svelte/store";
-  import type { Store } from "../../../../../../../types";
   import { t } from "$lib/i18n/dashboard-translations";
-  import { useConfigurator } from "../../../../../../useConfigurator";
   import { slide } from 'svelte/transition';
+  import { getContext } from "svelte";
 
   export let canReveal = true;
 
-  const emailMaskSender = writable("");
-  const appPassword = writable("");
+  const { draftConfig, updateDraft } = getContext('config-draft') as any;
+
   let validationError = "";
   let showSteps = false;
 
-  useConfigurator((value: Store) => {
-    if (value.config.emailMaskSender) {
-      emailMaskSender.set(value.config.emailMaskSender);
-    }
-    if (value.config.appPassword) {
-      appPassword.set(value.config.appPassword);
-    }
-  });
-
   $: {
-    if (($emailMaskSender && !$appPassword) || (!$emailMaskSender && $appPassword)) {
+    const sender = $draftConfig.emailMaskSender;
+    const password = $draftConfig.appPassword;
+    if ((sender && !password) || (!sender && password)) {
       validationError = $t["credentials.errorBothRequired"];
     } else {
       validationError = "";
@@ -33,14 +23,12 @@
   }
 
   function handleEmailChange(value: string) {
-    emailMaskSender.set(value);
-    saveToConfig({ emailMaskSender: value, appPassword: $appPassword });
+    updateDraft({ emailMaskSender: value });
   }
 
   function handlePasswordChange(value: string) {
     const cleaned = value.replace(/\s/g, "");
-    appPassword.set(cleaned);
-    saveToConfig({ emailMaskSender: $emailMaskSender, appPassword: cleaned });
+    updateDraft({ appPassword: cleaned });
   }
 
   function toggleSteps() {
@@ -98,7 +86,7 @@
   <div class="form-container">
     <EmailInput
       placeholder={$t["placeholders.email"]}
-      value={$emailMaskSender}
+      value={$draftConfig.emailMaskSender}
       onChange={handleEmailChange}
       label={$t["labels.senderEmail"]}
     />
@@ -107,12 +95,12 @@
       <PlainText
         type="password"
         placeholder={$t["placeholders.appPassword"]}
-        value={$appPassword}
+        value={$draftConfig.appPassword}
         onChange={handlePasswordChange}
         label={$t["labels.appPassword"]}
       />
-      {#if $appPassword.length > 0 && $appPassword.length !== 16}
-        <span class="char-count">{$appPassword.length}/16</span>
+      {#if $draftConfig.appPassword && $draftConfig.appPassword.length > 0 && $draftConfig.appPassword.length !== 16}
+        <span class="char-count">{$draftConfig.appPassword.length}/16</span>
       {/if}
     </div>
   </div>

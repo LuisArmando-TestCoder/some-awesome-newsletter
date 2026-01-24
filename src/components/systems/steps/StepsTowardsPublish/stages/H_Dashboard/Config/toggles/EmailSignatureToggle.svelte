@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-  import { writable } from "svelte/store";
-  import store, { saveToConfig } from "../../../../../../../store";
+  import { onMount, getContext } from "svelte";
+  import { writable, get } from "svelte/store";
+  import store from "../../../../../../../store";
   import MarkdownText from "../../../../../../texts/MarkdownText/MarkdownText.svelte";
   import IconButton from "../../../../../../buttons/IconButton/IconButton.svelte";
   import { t } from "$lib/i18n/dashboard-translations";
@@ -10,9 +10,12 @@
 
   export let canReveal = true;
 
+  const { draftConfig, updateDraft } = getContext('config-draft') as any;
+
   const brandColor = writable("#ff0000");
   const facebookLink = writable("");
   const instagramLink = writable("");
+  const signatureBody = writable("");
 
   let editor: HTMLDivElement;
   let quill: any;
@@ -21,6 +24,7 @@
     brandColor.set(localStorage.getItem("brandColor") || "#000000");
     facebookLink.set(localStorage.getItem("facebookLink") || "");
     instagramLink.set(localStorage.getItem("instagramLink") || "");
+    signatureBody.set(localStorage.getItem("signatureBody") || "");
 
     brandColor.subscribe(value => {
       if (typeof window !== 'undefined') localStorage.setItem("brandColor", value)
@@ -30,6 +34,9 @@
     });
     instagramLink.subscribe(value => {
       if (typeof window !== 'undefined') localStorage.setItem("instagramLink", value)
+    });
+    signatureBody.subscribe(value => {
+      if (typeof window !== 'undefined') localStorage.setItem("signatureBody", value)
     });
 
     const { default: Quill } = await import("quill");
@@ -47,15 +54,23 @@
       },
     });
 
-    quill.on("text-change", () => {
-      $store.config.emailSignature = quill.root.innerHTML;
-    });
+    // Initialize content from local storage (body only)
+    const currentBody = get(signatureBody);
+    if (currentBody) {
+      quill.root.innerHTML = currentBody;
+    }
+
+    quill.on("text-change", (delta: any, oldDelta: any, source: string) => {
+      if (source === 'user') {
+        signatureBody.set(quill.root.innerHTML);
+      }
+    });ds
   });
 
   function generateSignature() {
-    const { logo, senderName, newsletterTitle } = $store.config;
+    const { logo, senderName, newsletterTitle } = $draftConfig;
     const email = $store.configuratorEmail;
-    const phoneNumber = "+506 7108 6045"; // Placeholder
+    const bodyContent = get(signatureBody);
 
     const signature = `
 <table cellpadding="0" cellspacing="0" border="0" role="presentation" style="border-collapse:collapse;background:#101010;font-family:Arial,Helvetica,sans-serif">
@@ -85,11 +100,16 @@
               </tr>
               <tr>
                 <td style="padding:8px 0 0 0;font-size:13px;line-height:18px;color:#ffffff">
-                  <a href="tel:${phoneNumber}" style="color:#ffffff;text-decoration:none" target="_blank">${phoneNumber}</a>
-                  &nbsp;&nbsp;•&nbsp;&nbsp;
                   <a href="mailto:${email}" style="color:#ffffff;text-decoration:none" target="_blank">${email}</a>
                 </td>
               </tr>
+              ${bodyContent ? `
+              <tr>
+                <td style="padding:8px 0 0 0;color:#ffffff;font-size:14px;line-height:1.5;">
+                  ${bodyContent}
+                </td>
+              </tr>
+              ` : ''}
               <tr>
                 <td style="padding:10px 0 0 0">
                   <table cellpadding="0" cellspacing="0" border="0" role="presentation" style="border-collapse:collapse">
@@ -120,18 +140,18 @@
   </tr>
 </tbody></table>
 `;
-    if ($store.config.emailSignature !== signature)
-    saveToConfig({ emailSignature: signature });
+    if ($draftConfig.emailSignature !== signature) {
+      updateDraft({ emailSignature: signature });
+    }
   }
 </script>
-
-<div class="editor-wrapper">
-  <div bind:this={editor} />
-</div>
 
 <div>
   <MarkdownText {canReveal}>{$t['markdown.emailSignature']}</MarkdownText>
   <div class="signature-container">
+    <div class="editor-wrapper">
+      <div bind:this={editor} />
+    </div>
     <Link
       placeholder={$t['placeholders.facebookProfile']}
       bind:value={$facebookLink}
@@ -151,7 +171,7 @@
       callback={generateSignature}
     />
     <div class="signature-preview">
-      {@html $store.config.emailSignature ? $store.config.emailSignature : $t['labels.noEmailSignatureSet']}
+      {@html $draftConfig.emailSignature ? $draftConfig.emailSignature : $t['labels.noEmailSignatureSet']}
     </div>
   </div>
 </div>

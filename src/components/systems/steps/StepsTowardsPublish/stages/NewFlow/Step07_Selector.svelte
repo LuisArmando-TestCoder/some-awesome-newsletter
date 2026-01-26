@@ -4,8 +4,8 @@
     import Centered from "../../../../wrappers/Centered/Centered.svelte";
     import PlainText from "../../../../inputs/PlainText/PlainText.svelte";
     import SubmitButton from "../../../../buttons/SubmitButton/SubmitButton.svelte";
-    import store, { saveToStore } from "../../../../../store";
-    import regenerateSelectors from "../../../../requests/regenerateSelectors";
+    import store, { saveToStore, topic } from "../../../../../store";
+    import generateSelector from "../../../../requests/generateSelector";
 
   export let canReveal = false;
   
@@ -13,32 +13,25 @@
     let isRegenerating = false;
   
     async function handleRegenerate() {
-      if (!$store.newsSource) return;
+      // In this flow, $store.newsSource holds the URL string
+      const url = $store.newsSource; 
       
-      let currentNewsSource = $store.config.newsSources?.find(ns => ns.url === $store.newsSource);
-      
-      // If exact match fails, try finding by matching just the hostname or pathname if needed, 
-      // but for now let's try to reload the store if not found, as it might be a sync issue.
-      if (!currentNewsSource) {
-        console.warn("News source not found in store, attempting to use the last added source if available.");
-        if ($store.config.newsSources && $store.config.newsSources.length > 0) {
-           // Fallback: If there's only one source, assume it's the one.
-           // Or if the user just added one, it might be the last one.
-           currentNewsSource = $store.config.newsSources[$store.config.newsSources.length - 1];
-        }
-      }
-
-      if (!currentNewsSource?.id) {
-        alert("News source not found. Please try creating it again.");
+      if (!url) {
+        alert("No news source URL found.");
         return;
       }
 
       isRegenerating = true;
       try {
-        const result = await regenerateSelectors($store.configuratorEmail, currentNewsSource.id);
+        const result = await generateSelector($store.configuratorEmail, {
+          url: url,
+          lead: $store.lead || $topic || "",
+          personality: $store.personality,
+          scheduleTime: $store.config.scheduleTime
+        });
         
-        if (result && result.linkSelector) {
-          selector = result.linkSelector;
+        if (result) {
+          selector = result;
           saveToStore({ linkSelector: selector });
         } else {
           alert("Failed to regenerate selector.");

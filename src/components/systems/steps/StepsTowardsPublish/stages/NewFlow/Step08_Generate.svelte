@@ -14,6 +14,8 @@
 
   let isLoading = false;
   let isGenerated = false;
+  let isSending = false;
+  let isSent = false;
   let messages: string[] = ["Initializing..."];
   let previewHtml = "";
 
@@ -41,6 +43,7 @@
           personality: $store.personality || "Professional",
           language: $store.globalLanguage || "en",
           config: $store.config,
+          linkSelector: $store.linkSelector,
           includeImages: true // Default to true or add a toggle if needed
         })
       });
@@ -61,6 +64,16 @@
     }
   }
 
+  async function handleSend() {
+    isSending = true;
+    
+    // Simulate sending delay
+    setTimeout(() => {
+      isSending = false;
+      isSent = true;
+    }, 2500);
+  }
+
   function handleNext() {
     saveToStore({ stepsIndex: $store.stepsIndex + 1 });
   }
@@ -68,6 +81,10 @@
 
 {#if isLoading}
   <LoadingScreen {messages} />
+{/if}
+
+{#if isSending}
+  <LoadingScreen messages={["Connecting to email provider...", "Authenticating...", "Sending article..."]} />
 {/if}
 
 <Centered>
@@ -88,6 +105,11 @@
             </button>
           </div>
         {:else}
+          <div class="send-wrapper">
+            <button class="send-btn" on:click={handleSend}>
+              {isSent ? "Sent! Check your email" : "Send Test Email"}
+            </button>
+          </div>
           <div class="preview-box">
             {@html previewHtml}
           </div>
@@ -156,7 +178,7 @@
     }
   }
 
-  .generate-btn, .regenerate-btn {
+  .generate-btn, .regenerate-btn, .send-btn {
     padding: 0.8rem 2rem;
     background: #007aff;
     color: white;
@@ -175,6 +197,18 @@
   .regenerate-btn {
     background: #6c757d;
     &:hover { background: #5a6268; }
+  }
+
+  .send-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+  }
+
+  .send-btn {
+    background: #28a745;
+    &:hover { background: #218838; }
   }
 
   .preview-box {

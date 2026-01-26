@@ -301,12 +301,12 @@ export function saveAllKeysToSaveInLocalStorage() {
 }
 
 export const stepsMapping = Object.freeze({
-  "News Sources": 14,
-  "Users": 15,
-  "Reports": 17,
-  "Profile": 13,
-  "Billing": 16,
-  "Exports": 18,
-  "Newspaper": 19,
-  "Secrets/Developer": 20
+  "News Sources": 11,
+  "Users": 12,
+  "Reports": 14,
+  "Profile": 10,
+  "Billing": 13,
+  "Exports": 15,
+  "Newspaper": 16,
+  "Secrets/Developer": 17
 });

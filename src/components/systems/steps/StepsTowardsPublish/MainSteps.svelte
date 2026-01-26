@@ -8,9 +8,6 @@
   import Step06_NewsWebsite from "./stages/NewFlow/Step06_NewsWebsite.svelte";
   import Step07_Selector from "./stages/NewFlow/Step07_Selector.svelte";
   import Step08_Generate from "./stages/NewFlow/Step08_Generate.svelte";
-  import Step09_AppPassword from "./stages/NewFlow/Step09_AppPassword.svelte";
-  import Step10_Gmail from "./stages/NewFlow/Step10_Gmail.svelte";
-  import Step11_Send from "./stages/NewFlow/Step11_Send.svelte";
   import Step12_Share from "./stages/NewFlow/Step12_Share.svelte";
   import Step13_Plan from "./stages/NewFlow/Step13_Plan.svelte";
   import StepsTowardsPublish from "./StepsTowardsPublish.svelte";
@@ -29,7 +26,7 @@
   const t = () => {
     if (
       $store.authCode &&
-      $store.stepsIndex > 12 &&
+      $store.stepsIndex > 9 &&
       $store.directionsThatShouldDisappear.length === 0
     ) {
         saveToStore({
@@ -37,7 +34,7 @@
         });
       } else if (
         $store.authCode &&
-        $store.stepsIndex <= 12 &&
+        $store.stepsIndex <= 9 &&
         $store.directionsThatShouldDisappear.length === 3
       ) {
         saveToStore({
@@ -58,13 +55,6 @@
     [(s: Store) => { t(); return !!s.config.community }, Step07_Selector],
     [(s: Store) => { t(); return !!s.linkSelector; }, Step08_Generate],
     
-    // todo: merge Step11_Send with Step08_Generate with send button on top, 
-    // ... so it's sent to the user email
-    // todo: take Step09_AppPassword, Step10_Gmail, Step11_Send out
-    // take into account stepsMapping in store.ts
-    [(s: Store) => { t(); return true; }, Step09_AppPassword], // Generation is action
-    [(s: Store) => { t(); return true; }, Step10_Gmail],
-    [(s: Store) => { t(); return true; }, Step11_Send], // Gmail optional
     [(s: Store) => { t(); return true; }, Step12_Share], // Send action
     [(s: Store) => { t(); return true; }, Step13_Plan], // Share display
     

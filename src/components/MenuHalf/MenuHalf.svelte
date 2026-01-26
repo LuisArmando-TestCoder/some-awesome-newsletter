@@ -56,7 +56,7 @@
   class="sidebar"
   class:collapsed={!$isMobileMenuOpen}
   aria-label="Primary Navigation"
-  style={$store.stepsIndex > 4 ? "" : "display: none;"}
+  style={$store.stepsIndex > 12 ? "" : "display: none;"}
 >
   <nav id="sidebar-nav" class="sidebar__nav" aria-label="Sections">
     <ul class="sidebar__nav-list">

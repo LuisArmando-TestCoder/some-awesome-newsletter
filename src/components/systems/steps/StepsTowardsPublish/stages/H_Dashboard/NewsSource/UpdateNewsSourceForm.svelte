@@ -50,7 +50,7 @@
       id: newsSource.id,
       emailMaskSender: newsSource.emailMaskSender || "",
       appPassword: newsSource.appPassword || "",
-      includeImages: newsSource.includeImages === undefined ? true : newsSource.includeImages,
+      includeImages: !!newsSource.includeImages,
       isPublic: newsSource.isPublic === undefined ? true : newsSource.isPublic,
     };
   }
@@ -164,11 +164,13 @@
           onError={(msg) => (errorMessage = msg)}
           onChange={(newValue) => { 
             updateFields.personality = newValue; 
-            if (isMounted) handleUpdate();
           }}
+          onSubmit={() => { if (isMounted) handleUpdate(); }}
         />
 
-        <div class="switch-container">
+        <!-- hidden until we have a proper use case for it -->
+
+        <!-- <div class="switch-container">
           <label for="include-images-switch">{$t['newsSource.includeImages']}</label>
           <Switch
             bind:toggled={updateFields.includeImages}
@@ -177,9 +179,11 @@
         </div>
         <MarkdownText {canReveal}>
           {$t['newsSource.includeImagesDesc']}
-        </MarkdownText>
+        </MarkdownText> -->
 
-        <div class="switch-container">
+        <!-- hidden until we have a proper use case for it -->
+
+        <!-- <div class="switch-container">
           <label for="is-public-switch">{$t['newsSource.publicVisible']}</label>
           <Switch
             bind:toggled={updateFields.isPublic}
@@ -188,7 +192,7 @@
         </div>
         <MarkdownText {canReveal}>
           {$t['newsSource.publicVisibleDesc']}
-        </MarkdownText>
+        </MarkdownText> -->
 
         <EmailInput
           label={$t['newsSource.senderEmailLabel']}

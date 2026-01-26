@@ -73,7 +73,7 @@
           return;
         }
 
-        setInitialNonInteractiveSlidesAutomaticSlideTime();
+        // setInitialNonInteractiveSlidesAutomaticSlideTime();
       },
       () => {
         window.location.href = "/login?message-from-developer=now+you+need+to+login+again+to+access+the+dashboard";
@@ -87,15 +87,15 @@
     }
   };
 
-  function setInitialNonInteractiveSlidesAutomaticSlideTime() {
-    const timings = [2.5e3, 2e3, 2e3];
-    let timing = 0;
-    timings.forEach((waitDuration, index) => {
-      if (index < $store.stepsIndex) return;
-      timing += waitDuration;
-      setTimeout(goNext(index + 1), timing);
-    });
-  }
+  // function setInitialNonInteractiveSlidesAutomaticSlideTime() {
+  //   const timings = [2.5e3, 2e3, 2e3];
+  //   let timing = 0;
+  //   timings.forEach((waitDuration, index) => {
+  //     if (index < $store.stepsIndex) return;
+  //     timing += waitDuration;
+  //     setTimeout(goNext(index + 1), timing);
+  //   });
+  // }
 </script>
 
 <div

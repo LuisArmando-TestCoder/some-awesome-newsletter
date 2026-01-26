@@ -137,20 +137,20 @@
   <label>{label}</label>
 {/if}
 <div class="cron-builder">
-  {#if !exclude.includes("minute")}
-    <CustomSelect label="Minute" options={minutes} store={minuteStore} />
-  {/if}
-  {#if !exclude.includes("hour")}
-    <CustomSelect label="Hour" options={hours} store={hourStore} />
+  {#if !exclude.includes("month")}
+    <CustomSelect label="Month" options={months} store={monthStore} />
   {/if}
   {#if !exclude.includes("dayOfMonth")}
     <CustomSelect label="Day of Month" options={daysOfMonth} store={dayOfMonthStore} />
   {/if}
-  {#if !exclude.includes("month")}
-    <CustomSelect label="Month" options={months} store={monthStore} />
-  {/if}
   {#if !exclude.includes("dayOfWeek")}
     <CustomSelect label="Day of Week" options={daysOfWeek} store={dayOfWeekStore} />
+  {/if}
+  {#if !exclude.includes("hour")}
+    <CustomSelect label="Hour" options={hours} store={hourStore} />
+  {/if}
+  {#if !exclude.includes("minute")}
+    <CustomSelect label="Minute" options={minutes} store={minuteStore} />
   {/if}
 </div>
 

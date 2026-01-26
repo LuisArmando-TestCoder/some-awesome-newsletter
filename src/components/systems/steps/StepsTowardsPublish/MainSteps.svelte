@@ -1,34 +1,43 @@
 <script lang="ts">
   import { saveToStore } from "../../../store";
-  import A_Welcome1 from "./stages/A_Welcome1.svelte";
-  import B_Welcome2 from "./stages/B_Welcome2.svelte";
-  import C_Welcome3 from "./stages/C_Welcome3.svelte";
-  import D_Lead from "./stages/D_Lead.svelte";
-  import E_NewsSource from "./stages/E_NewsSource.svelte";
+  import Step01_Frequency from "./stages/NewFlow/Step01_Frequency.svelte";
+  import Step02_Language from "./stages/NewFlow/Step02_Language.svelte";
+  import Step03_Redirect from "./stages/NewFlow/Step03_Redirect.svelte";
+  import Step04_Topic from "./stages/NewFlow/Step04_Topic.svelte";
+  import Step05_Signature from "./stages/NewFlow/Step05_Signature.svelte";
+  import Step06_NewsWebsite from "./stages/NewFlow/Step06_NewsWebsite.svelte";
+  import Step07_Selector from "./stages/NewFlow/Step07_Selector.svelte";
+  import Step08_Generate from "./stages/NewFlow/Step08_Generate.svelte";
+  import Step09_AppPassword from "./stages/NewFlow/Step09_AppPassword.svelte";
+  import Step10_Gmail from "./stages/NewFlow/Step10_Gmail.svelte";
+  import Step11_Send from "./stages/NewFlow/Step11_Send.svelte";
+  import Step12_Share from "./stages/NewFlow/Step12_Share.svelte";
+  import Step13_Plan from "./stages/NewFlow/Step13_Plan.svelte";
   import StepsTowardsPublish from "./StepsTowardsPublish.svelte";
   import Config from "./stages/H_Dashboard/Config/Config.svelte";
-  import NewsSource from "./stages/H_Dashboard/NewsSource/NewsSource.svelte"; // Explicit default import
-  import Users from "./stages/H_Dashboard/Users/Users.svelte"; // Corrected import (already was correct, maybe TS server lag?)
-  import Reports from "./stages/H_Dashboard/Reports/Reports.svelte"; // Corrected import (already was correct, maybe TS server lag?)
-  import Billing from "./stages/H_Dashboard/Billing/Billing.svelte"; // Corrected import (already was correct, maybe TS server lag?)
+  import NewsSource from "./stages/H_Dashboard/NewsSource/NewsSource.svelte";
+  import Users from "./stages/H_Dashboard/Users/Users.svelte";
+  import Reports from "./stages/H_Dashboard/Reports/Reports.svelte";
+  import Billing from "./stages/H_Dashboard/Billing/Billing.svelte";
   import store from "../../../store";
-    import { isValidURL } from "../../inputs/Link/isValidLink";
-    import Exports from "./stages/H_Dashboard/Exports/Exports.svelte";
-    import Newspaper from "./stages/H_Dashboard/Newspaper/Newspaper.svelte";
-    import Developer from "./stages/H_Dashboard/Developer/Developer.svelte";
+  import type { Store } from "../../../types";
+  import { isValidURL } from "../../inputs/Link/isValidLink";
+  import Exports from "./stages/H_Dashboard/Exports/Exports.svelte";
+  import Newspaper from "./stages/H_Dashboard/Newspaper/Newspaper.svelte";
+  import Developer from "./stages/H_Dashboard/Developer/Developer.svelte";
 
   const t = () => {
     if (
       $store.authCode &&
-      $store.stepsIndex > 3 &&
+      $store.stepsIndex > 12 &&
       $store.directionsThatShouldDisappear.length === 0
     ) {
         saveToStore({
-          directionsThatShouldDisappear: [-1, 1],
+          // directionsThatShouldDisappear: [-1, 1],
         });
       } else if (
         $store.authCode &&
-        $store.stepsIndex <= 3 &&
+        $store.stepsIndex <= 12 &&
         $store.directionsThatShouldDisappear.length === 3
       ) {
         saveToStore({
@@ -40,54 +49,54 @@
   };
 
   const components = [
-    A_Welcome1,
-    B_Welcome2,
-    C_Welcome3,
-    D_Lead,
-    E_NewsSource,
-    Config,
-    NewsSource,
-    Users,
-    Billing,
-    Reports,
-    Exports,
-    Newspaper,
-    Developer
-  ].map(v => [t, v]);
+    [(s: Store) => { t(); return true; }, Step01_Frequency],
+    [(s: Store) => { t(); return !!s.config?.scheduleTime; }, Step02_Language],
+    [(s: Store) => { t(); return !!s.config?.dashboardLanguage; }, Step03_Redirect],
+    [(s: Store) => { t(); return !!s.lead; }, Step05_Signature],
+    [(s: Store) => { t(); return !!s.config?.emailSignature; }, Step06_NewsWebsite],
+    [(s: Store) => { t(); return isValidURL(s.newsSource); }, Step04_Topic], // Redirect is optional
+    [(s: Store) => { t(); return !!s.config.community }, Step07_Selector],
+    [(s: Store) => { t(); return !!s.linkSelector; }, Step08_Generate],
+    
+    // todo: merge Step11_Send with Step08_Generate with send button on top, 
+    // ... so it's sent to the user email
+    // todo: take Step09_AppPassword, Step10_Gmail, Step11_Send out
+    // take into account stepsMapping in store.ts
+    [(s: Store) => { t(); return true; }, Step09_AppPassword], // Generation is action
+    [(s: Store) => { t(); return true; }, Step10_Gmail],
+    [(s: Store) => { t(); return true; }, Step11_Send], // Gmail optional
+    [(s: Store) => { t(); return true; }, Step12_Share], // Send action
+    [(s: Store) => { t(); return true; }, Step13_Plan], // Share display
+    
+    [(s: Store) => { t(); return isValidURL(s.newsSource); }, Config],
+    [(s: Store) => { t(); return isValidURL(s.newsSource); }, NewsSource],
+    [(s: Store) => { t(); return isValidURL(s.newsSource); }, Users],
+    [(s: Store) => { t(); return isValidURL(s.newsSource); }, Billing],
+    [(s: Store) => { t(); return isValidURL(s.newsSource); }, Reports],
+    [(s: Store) => { t(); return isValidURL(s.newsSource); }, Exports],
+    [(s: Store) => { t(); return isValidURL(s.newsSource); }, Newspaper],
+    [(s: Store) => { t(); return isValidURL(s.newsSource); }, Developer],
+  ];
+
+  $: {
+    if ($store) {
+      for (let i = 0; i < components.length; i++) {
+        const [validator] = components[i];
+        // If validation fails for a step, it means the prerequisites (previous steps) are not met.
+        // We should redirect to the previous step (i - 1) to fix the issue.
+        if (!validator($store)) {
+          // If we are currently at step 'i' or beyond, we must go back.
+          if ($store.stepsIndex >= i) {
+            const target = i > 0 ? i - 1 : 0;
+            if ($store.stepsIndex !== target) {
+               saveToStore({ stepsIndex: target });
+            }
+            break;
+          }
+        }
+      }
+    }
+  }
 </script>
 
 <StepsTowardsPublish {components} />
-
-<!-- USED TO BE:
-  const components = [
-    [t, A_Welcome1],
-    [t, B_Welcome2],
-    [t, C_Welcome3],
-    [t, D_Lead],
-    [t, E_NewsSource],
-    [(store: Store) => {
-      return isValidURL(store.newsSource); // NON FETCH VALIDATIONS
-    }, Config],
-    [(store: Store) => {
-      return isValidURL(store.newsSource);
-    }, NewsSource],
-    [(store: Store) => {
-      return isValidURL(store.newsSource);
-    }, Users],
-    [(store: Store) => {
-      return isValidURL(store.newsSource);
-    }, Billing],
-    [(store: Store) => {
-      return isValidURL(store.newsSource);
-    }, Reports],
-    [(store: Store) => {
-      return isValidURL(store.newsSource);
-    }, Exports],
-    [(store: Store) => {
-      return isValidURL(store.newsSource);
-    }, Newspaper],
-    [(store: Store) => {
-      return isValidURL(store.newsSource);
-    }, Developer],
-  ];
--->

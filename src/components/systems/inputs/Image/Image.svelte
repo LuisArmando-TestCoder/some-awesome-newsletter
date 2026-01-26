@@ -236,7 +236,7 @@
         margin-bottom: 0.5rem;
         font-size: 1.125rem;
         font-weight: 500;
-        color: var(--color-text, #111827);
+        color: var(--color-text, #fff);
       }
 
       .subtitle {

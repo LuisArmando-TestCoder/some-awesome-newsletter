@@ -44,7 +44,7 @@
   <div class="wrap-text">
     {#key $configuratorId}
       <MarkdownText {canReveal}>
-        ### {$t['subscribe.welcome.invitedBy', { configuratorId: $configuratorId }]}
+        ### {$t['subscribe.welcome.invitedBy'].replace("{configuratorId}", $configuratorId)}
       </MarkdownText>
     {/key}
   </div>

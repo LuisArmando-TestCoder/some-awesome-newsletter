@@ -11,6 +11,7 @@
   export let personality: string = "";
   export let newsSourceId: string;
   export let onChange: (value: string) => void = () => {};
+  export let onSubmit: () => void = () => {};
   export let onError: (message: string) => void = () => {};
 
   // --- State ---
@@ -48,6 +49,8 @@
     } finally {
       isGenerating.set(false);
     }
+
+    onSubmit();
   }
 </script>
 

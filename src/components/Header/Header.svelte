@@ -21,19 +21,19 @@
         <a
           class="menu-item hide-on-mobile"
           onclick={() => {
-            saveToStore({ stepsIndex: 5 });
+            saveToStore({ stepsIndex: 13 });
           }}>Config</a
         >
         <a
           class="menu-item hide-on-mobile"
           onclick={() => {
-            saveToStore({ stepsIndex: 6 });
+            saveToStore({ stepsIndex: 14 });
           }}>News Sources</a
         >
         <a
           class="menu-item hide-on-mobile"
           onclick={() => {
-            saveToStore({ stepsIndex: 7 });
+            saveToStore({ stepsIndex: 15 });
           }}>Users</a
         >
         <section class="menu-x hide-on-desktop interactive">

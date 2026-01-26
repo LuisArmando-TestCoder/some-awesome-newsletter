@@ -217,7 +217,7 @@
 
   :root {
       --h-height: 72px;
-      --h-bg: rgba(255, 255, 255, 0.85);
+      --h-bg: rgba(255, 255, 255, 0.5);
       --h-blur: blur(12px);
       --h-border: 1px solid rgba(0,0,0,0.05);
       --h-text: #0f172a;

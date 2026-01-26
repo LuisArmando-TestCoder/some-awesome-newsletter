@@ -21,24 +21,24 @@
     }
   };
 
-  function setInitialNonInteractiveSlidesAutomaticSlideTime() {
-    const timings = [6.5e3];
-    let timing = 0;
+  // function setInitialNonInteractiveSlidesAutomaticSlideTime() {
+  //   const timings = [6.5e3];
+  //   let timing = 0;
 
-    timings.forEach((waitDuration, index) => {
-      if (index < $store.stepsIndex) return;
+  //   timings.forEach((waitDuration, index) => {
+  //     if (index < $store.stepsIndex) return;
 
-      timing += waitDuration;
+  //     timing += waitDuration;
 
-      const wait = timing;
+  //     const wait = timing;
 
-      setTimeout(goNext(index + 1), wait);
-    });
-  }
+  //     setTimeout(goNext(index + 1), wait);
+  //   });
+  // }
 
   onMount(() => {
     setStorageFromKeysToSave();
-    setInitialNonInteractiveSlidesAutomaticSlideTime();
+    // setInitialNonInteractiveSlidesAutomaticSlideTime();
     saveAllKeysToSaveInLocalStorage();
   });
 </script>

@@ -5,6 +5,8 @@ import updateConfiguration from "./systems/requests/updateConfiguration";
 
 export const latestMessage = writable<string>("");
 
+export const topic = writable<string>("");
+
 export const socket = writable<Socket | null>(null);
 export const isScrollingDown = writable<boolean>(false);
 
@@ -299,12 +301,12 @@ export function saveAllKeysToSaveInLocalStorage() {
 }
 
 export const stepsMapping = Object.freeze({
-  "News Sources": 6,
-  "Users": 7,
-  "Reports": 9,
-  "Profile": 5,
-  "Billing": 8,
-  "Exports": 10,
-  // "Newspaper": 11,
-  "Secrets/Developer": 12
+  "News Sources": 14,
+  "Users": 15,
+  "Reports": 17,
+  "Profile": 13,
+  "Billing": 16,
+  "Exports": 18,
+  "Newspaper": 19,
+  "Secrets/Developer": 20
 });

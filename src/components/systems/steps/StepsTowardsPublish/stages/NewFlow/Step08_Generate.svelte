@@ -7,6 +7,7 @@
   import store, { latestMessage, saveToStore } from "../../../../../store";
   import { processNewsSourceAction } from "../H_Dashboard/NewsSource/newsSourceActions";
   import createNewsSource from "../../../../requests/createNewsSource";
+  import sendEmail from "../../../../requests/sendEmail";
   import getAuthHeaders from "../../../../requests/getAuthHeaders";
   import { onDestroy } from 'svelte';
 
@@ -67,11 +68,21 @@
   async function handleSend() {
     isSending = true;
     
-    // Simulate sending delay
-    setTimeout(() => {
-      isSending = false;
+    try {
+      await sendEmail({
+        html: previewHtml,
+        subject: $store.config?.newsletterSubject || "Your Generated Newsletter Preview",
+        config: $store.config,
+        emails: [$store.configuratorEmail]
+      });
+
       isSent = true;
-    }, 2500);
+    } catch (err: any) {
+      console.error(err);
+      alert("Failed to send email: " + (err.message || err));
+    } finally {
+      isSending = false;
+    }
   }
 
   function handleNext() {

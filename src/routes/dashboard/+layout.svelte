@@ -68,7 +68,7 @@
           saveToStore({
             newsSource: url,
             lead,
-            stepsIndex: stepsMapping["News Sources"],
+            // stepsIndex: stepsMapping["News Sources"], // todo: get this back once you have the main flow set
           });
           return;
         }

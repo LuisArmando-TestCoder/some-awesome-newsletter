@@ -40,10 +40,6 @@ export default async (onSuccessCallback?: Function, onFailureCallback?: Function
       errorMessage = `Authentication failed (${response.status} ${response.statusText})`;
       console.log(`Authentication failed with non-JSON response: ${errorMessage}`); // Use console.log
     }
-    // Reset step index only on failure
-    saveToStore({
-      stepsIndex: 3, // todo: review: this is hard coded => if you change the position of the auth, you will be taken aback
-    });
   }
 
   saveToStore({ isAuthCodeValid }); // Persist valid state

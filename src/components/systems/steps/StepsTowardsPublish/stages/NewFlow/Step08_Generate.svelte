@@ -7,6 +7,7 @@
   import store, { latestMessage, saveToStore } from "../../../../../store";
   import { processNewsSourceAction } from "../H_Dashboard/NewsSource/newsSourceActions";
   import createNewsSource from "../../../../requests/createNewsSource";
+  import getConfiguratorSession from "../../../../requests/getConfiguratorSession";
   import sendEmail from "../../../../requests/sendEmail";
   import getAuthHeaders from "../../../../requests/getAuthHeaders";
   import { onDestroy } from 'svelte';
@@ -17,6 +18,7 @@
   let isGenerated = false;
   let isSending = false;
   let isSent = false;
+  let isCreating = false;
   let messages: string[] = ["Initializing..."];
   let previewHtml = "";
 
@@ -85,8 +87,40 @@
     }
   }
 
-  function handleNext() {
-    saveToStore({ stepsIndex: $store.stepsIndex + 1 });
+  async function handleNext() {
+    if (isCreating) return;
+    isCreating = true;
+
+    try {
+      // Create the news source using the current store data
+      const newSource = await createNewsSource({
+        type: "website",
+        url: $store.newsSource,
+        lead: $store.lead || "General News",
+        personality: $store.personality,
+        country: "US", // Default or from store if available
+        community: "World Wide Expats", // Default or from store
+        scheduleTime: $store.config?.scheduleTime // Use schedule time if set
+      });
+
+      if (newSource && newSource.id) {
+        // Save the ID to the store
+        saveToStore({ createdNewsSourceId: newSource.id });
+        
+        // Refresh session to sync everything
+        await getConfiguratorSession();
+        
+        // Proceed to next step
+        saveToStore({ stepsIndex: $store.stepsIndex + 1 });
+      } else {
+        alert("Failed to create news source. Please try again.");
+      }
+    } catch (err: any) {
+      console.error(err);
+      alert("Error creating news source: " + (err.message || err));
+    } finally {
+      isCreating = false;
+    }
   }
 </script>
 
@@ -96,6 +130,10 @@
 
 {#if isSending}
   <LoadingScreen messages={["Connecting to email provider...", "Authenticating...", "Sending article..."]} />
+{/if}
+
+{#if isCreating}
+  <LoadingScreen messages={["Creating news source...", "Saving configuration...", "Finalizing setup..."]} />
 {/if}
 
 <Centered>

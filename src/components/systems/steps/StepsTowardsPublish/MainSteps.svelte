@@ -29,14 +29,18 @@
       $store.stepsIndex > 9 &&
       $store.directionsThatShouldDisappear.length === 0
     ) {
-        saveToStore({
-          // directionsThatShouldDisappear: [-1, 1],
-        });
+        // Prevent infinite loop by checking current state
+        if (JSON.stringify($store.directionsThatShouldDisappear) !== JSON.stringify([-1, 1])) {
+           saveToStore({
+             directionsThatShouldDisappear: [-1, 1],
+           });
+        }
       } else if (
         $store.authCode &&
         $store.stepsIndex <= 9 &&
-        $store.directionsThatShouldDisappear.length === 3
+        $store.directionsThatShouldDisappear.length !== 0
       ) {
+        // Reset if we went back to steps <= 9
         saveToStore({
           directionsThatShouldDisappear: [],
         });

@@ -57,7 +57,8 @@ const store = writable<Store>({
     "tokenId",
     "clientId",
     "globalLanguage",
-    "dashboardLanguage"
+    "dashboardLanguage",
+    "createdNewsSourceId"
   ],
   appLanguage: "en",
   globalLanguage: "en",
@@ -71,6 +72,7 @@ const store = writable<Store>({
   configuratorEmail: "",
   newsSource: "",
   lead: "",
+  createdNewsSourceId: "",
   hasNewEmailCodeBeenSent: false,
   authCode: "",
   directionsThatShouldDisappear: [],
@@ -301,11 +303,11 @@ export function saveAllKeysToSaveInLocalStorage() {
 }
 
 export const stepsMapping = Object.freeze({
+  "Profile": 10,
   "News Sources": 11,
   "Users": 12,
-  "Reports": 14,
-  "Profile": 10,
   "Billing": 13,
+  "Reports": 14,
   "Exports": 15,
   "Newspaper": 16,
   "Secrets/Developer": 17

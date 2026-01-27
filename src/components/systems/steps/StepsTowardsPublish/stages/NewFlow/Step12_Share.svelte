@@ -7,7 +7,7 @@
 
   export let canReveal = false;
 
-  const shareLink = `${$store.apiURL()}/subscribe/${$store.configuratorEmail}`;
+  $: shareLink = `https://aiban.news/subscribe?configuratorId=${$store.configuratorEmail}&newsSourceId=${$store.createdNewsSourceId || ''}&lead=${encodeURIComponent($store.lead || '')}`;
 
   function handleNext() {
     saveToStore({ stepsIndex: $store.stepsIndex + 1 });

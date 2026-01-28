@@ -6,15 +6,26 @@
     import SubmitButton from "../../../../buttons/SubmitButton/SubmitButton.svelte";
     import store, { saveToStore, topic } from "../../../../../store";
     import generateSelector from "../../../../requests/generateSelector";
+    import stepsStore, { updateStepStore } from "./stepsStore";
 
   export let canReveal = false;
-  
-    let selector = $store.linkSelector || "";
+
+    // Initialize from global store if stepsStore is empty (bridging the gap)
+    $: if (!$stepsStore.url && $store.newsSource) {
+      updateStepStore({ 
+        url: $store.newsSource,
+        lead: $store.lead || $topic || "",
+        personality: $store.personality,
+        config: $store.config
+      });
+    }
+
+    $: selector = $stepsStore.linkSelector || $store.linkSelector || "";
+
     let isRegenerating = false;
-  
+
     async function handleRegenerate() {
-      // In this flow, $store.newsSource holds the URL string
-      const url = $store.newsSource; 
+      const url = $stepsStore.url || $store.newsSource; 
       
       if (!url) {
         alert("No news source URL found.");
@@ -22,16 +33,21 @@
       }
 
       isRegenerating = true;
+      updateStepStore({ isRegeneratingSelector: true });
+
       try {
         const result = await generateSelector($store.configuratorEmail, {
           url: url,
-          lead: $store.lead || $topic || "",
-          personality: $store.personality,
+          lead: $stepsStore.lead || $store.lead || $topic || "",
+          personality: $stepsStore.personality || $store.personality,
           scheduleTime: $store.config.scheduleTime
         });
         
         if (result) {
           selector = result;
+          // Save to stepsStore primarily
+          updateStepStore({ linkSelector: selector });
+          // Also save to global store for compatibility with other steps if needed
           saveToStore({ linkSelector: selector });
         } else {
           alert("Failed to regenerate selector.");
@@ -41,10 +57,14 @@
         alert("An error occurred while regenerating selector.");
       } finally {
         isRegenerating = false;
+        updateStepStore({ isRegeneratingSelector: false });
       }
     }
   
     function handleNext() {
+      // Ensure we save the selector to the store before proceeding
+      updateStepStore({ linkSelector: selector });
+      
       saveToStore({
         linkSelector: selector,
         stepsIndex: $store.stepsIndex + 1

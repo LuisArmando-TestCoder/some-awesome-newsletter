@@ -5,17 +5,21 @@
   import Language from "../../../../inputs/Language/Language.svelte";
   import SubmitButton from "../../../../buttons/SubmitButton/SubmitButton.svelte";
   import store, { globalLanguage, saveToStore } from "../../../../../store";
-    import { onMount } from 'svelte';
+  import { onMount } from 'svelte';
+  import stepsStore, { updateStepStore } from "./stepsStore";
 
   export let canReveal = false;
 
-  let language = "en";
+  let language = $stepsStore.language || "en";
 
   globalLanguage.subscribe((val) => {
-    if (val) language = val;
+    // Only update if stepsStore doesn't have a value set by user in this flow?
+    // Or just default to global language if not set.
+    if (val && !$stepsStore.language) language = val;
   });
 
   function handleNext() {
+    updateStepStore({ language });
     saveToStore({
       config: { ...$store.config, dashboardLanguage: language },
       stepsIndex: $store.stepsIndex + 1
@@ -39,7 +43,12 @@
         <div class="input-wrapper">
           <Language 
             defaultLanguageCode={language}
-            onSelect={(code) => { if(code) language = code; }}
+            onSelect={(code) => { 
+              if(code) {
+                language = code; 
+                updateStepStore({ language: code });
+              }
+            }}
           />
         </div>
       </div>

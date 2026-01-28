@@ -6,10 +6,11 @@
   import SubmitButton from "../../../../buttons/SubmitButton/SubmitButton.svelte";
   import store, { saveToStore } from "../../../../../store";
   import { onMount } from 'svelte';
+  import stepsStore, { updateStepStore } from "./stepsStore";
 
   export let canReveal = false;
 
-  let schedule = $store.config?.scheduleTime || "0 9 * * 1";
+  let schedule = $stepsStore.config?.scheduleTime || $store.config?.scheduleTime || "0 9 * * 1";
 
   onMount(() => {
     if ($store.config?.newsSources?.length > 0) {
@@ -19,6 +20,9 @@
   });
 
   function handleNext() {
+    const currentConfig = $stepsStore.config || {};
+    updateStepStore({ config: { ...currentConfig, scheduleTime: schedule } });
+    
     saveToStore({
       config: { ...$store.config, scheduleTime: schedule },
       stepsIndex: $store.stepsIndex + 1
@@ -43,7 +47,11 @@
           <ScheduleTime 
             value={schedule} 
             exclude={[ "minute"]}
-            onChange={(val) => schedule = val}
+            onChange={(val) => {
+              schedule = val;
+              const currentConfig = $stepsStore.config || {};
+              updateStepStore({ config: { ...currentConfig, scheduleTime: val } });
+            }}
           />
         </div>
       </div>

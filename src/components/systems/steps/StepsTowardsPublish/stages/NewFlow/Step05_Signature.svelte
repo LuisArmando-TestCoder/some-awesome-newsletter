@@ -6,6 +6,7 @@
   import Centered from "../../../../wrappers/Centered/Centered.svelte";
   import SubmitButton from "../../../../buttons/SubmitButton/SubmitButton.svelte";
   import store, { saveToStore } from "../../../../../store";
+  import stepsStore, { updateStepStore } from "./stepsStore";
   
   // Import input components
   import Image from "../../../../inputs/Image/Image.svelte";
@@ -87,9 +88,10 @@
 
   // Reactive generation of signature HTML
   $: {
-    const _logo = $store.config?.logo;
-    const _name = $store.config?.senderName;
-    const _title = $store.config?.newsletterTitle;
+    // Prefer stepsStore, fallback to store
+    const _logo = $stepsStore.config?.logo || $store.config?.logo;
+    const _name = $stepsStore.config?.senderName || $store.config?.senderName;
+    const _title = $stepsStore.config?.newsletterTitle || $store.config?.newsletterTitle;
     const _body = $signatureBody;
     const _color = $brandColor;
     const _fb = $facebookLink;
@@ -174,14 +176,20 @@
   }
 
   function handleLogoChange(imageData: string | null) {
+    const stepsConfig = $stepsStore.config || {};
+    updateStepStore({ config: { ...stepsConfig, logo: imageData } });
     saveToStore({ config: { ...$store.config, logo: imageData } });
   }
 
   function handleNameChange(val: string) {
+    const stepsConfig = $stepsStore.config || {};
+    updateStepStore({ config: { ...stepsConfig, senderName: val } });
     saveToStore({ config: { ...$store.config, senderName: val } });
   }
 
   function handleTitleChange(val: string) {
+    const stepsConfig = $stepsStore.config || {};
+    updateStepStore({ config: { ...stepsConfig, newsletterTitle: val } });
     saveToStore({ config: { ...$store.config, newsletterTitle: val } });
   }
 
@@ -199,9 +207,13 @@
   }
 
   function handleNext() {
+    const signature = isManualMode ? manualSignature : generatedSignature;
+    const stepsConfig = $stepsStore.config || {};
+    updateStepStore({ config: { ...stepsConfig, emailSignature: signature } });
+
     saveToStore({
       // Use manualSignature if we are in code mode or have made manual edits
-      config: { ...$store.config, emailSignature: isManualMode ? manualSignature : generatedSignature },
+      config: { ...$store.config, emailSignature: signature },
       stepsIndex: $store.stepsIndex + 1
     });
   }

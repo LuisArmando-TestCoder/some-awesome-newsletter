@@ -5,13 +5,15 @@
   import PlainText from "../../../../inputs/PlainText/PlainText.svelte";
   import SubmitButton from "../../../../buttons/SubmitButton/SubmitButton.svelte";
   import store, { saveToStore, topic as topicStore } from "../../../../../store";
+  import stepsStore, { updateStepStore } from "./stepsStore";
 
   export let canReveal = false;
 
-  let topic = $store.lead || "";
+  let topic = $stepsStore.lead || $store.lead || "";
   $: if ($topicStore) topic = $topicStore.split(" / ").slice(1).join(" / ") || "";
 
   function handleNext() {
+    updateStepStore({ lead: topic });
     saveToStore({
       lead: topic,
       stepsIndex: $store.stepsIndex + 1
@@ -36,7 +38,10 @@
           <PlainText 
             value={topic}
             placeholder="e.g. Artificial Intelligence, Marketing, Health..."
-            onChange={(val) => topic = val}
+            onChange={(val) => {
+              topic = val;
+              updateStepStore({ lead: val });
+            }}
           />
         </div>
       </div>

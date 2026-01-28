@@ -10,10 +10,11 @@
   import { writable } from "svelte/store";
   import CollapsibleTags from "../../../../selectors/Tags/CollapsibleTags.svelte";
   import categoriesTree from "../../../../inputs/Country/newssourcesthemetree";
+  import stepsStore, { updateStepStore } from "./stepsStore";
 
   export let canReveal = false;
 
-  let url = $store.newsSource || "";
+  let url = $stepsStore.url || $store.newsSource || "";
   const isLoading = writable(false);
   const selectedTags = writable<string[]>([]);
   let tagUrlMap = new Map<string, string[]>();
@@ -49,7 +50,8 @@
           url = urls[0];
           const path = tagPathMap.get(tagName);
           if (path) {
-            saveToStore({ lead: path });
+            updateStepStore({ url, lead: path });
+            saveToStore({ newsSource: url, lead: path });
             topic.set(path);
           }
           break;
@@ -68,17 +70,20 @@
           type: "website",
           url: url,
           community: "Newsletter Users",
-          lead: $store.lead,
-          personality: $store.personality,
-          scheduleTime: $store.config?.scheduleTime
+          lead: $stepsStore.lead || $store.lead,
+          personality: $stepsStore.personality || $store.personality,
+          scheduleTime: $stepsStore.config?.scheduleTime || $store.config?.scheduleTime
         };
 
         const result = await createNewsSource(newsSourceData);
 
         if (result) {
+          const selector = result.linkSelector || "";
+          updateStepStore({ url, linkSelector: selector });
+          
           saveToStore({
             newsSource: url,
-            linkSelector: result.linkSelector || "",
+            linkSelector: selector,
             stepsIndex: $store.stepsIndex + 1
           });
         } else {
@@ -119,7 +124,11 @@
           <Link 
             value={url}
             placeholder="https://example.com"
-            onChange={(val) => url = val}
+            onChange={(val) => {
+              url = val;
+              updateStepStore({ url: val });
+              saveToStore({ newsSource: val });
+            }}
           />
           
           <div class="categories-grid" in:fly={{ y: 10, duration: 400 }}>

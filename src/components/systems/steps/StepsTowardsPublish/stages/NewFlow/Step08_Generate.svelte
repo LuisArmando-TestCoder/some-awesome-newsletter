@@ -4,13 +4,14 @@
   import Centered from "../../../../wrappers/Centered/Centered.svelte";
   import SubmitButton from "../../../../buttons/SubmitButton/SubmitButton.svelte";
   import LoadingScreen from "../../../../loading/LoadingScreen.svelte";
-  import store, { latestMessage, saveToStore } from "../../../../../store";
+  import store, { latestMessage, saveToStore, topic } from "../../../../../store";
   import { processNewsSourceAction } from "../H_Dashboard/NewsSource/newsSourceActions";
   import createNewsSource from "../../../../requests/createNewsSource";
   import getConfiguratorSession from "../../../../requests/getConfiguratorSession";
   import sendEmail from "../../../../requests/sendEmail";
   import getAuthHeaders from "../../../../requests/getAuthHeaders";
   import { onDestroy } from 'svelte';
+  import stepsStore, { updateStepStore } from "./stepsStore";
 
   export let canReveal = false;
 
@@ -34,6 +35,7 @@
 
   async function handleGenerate() {
     isLoading = true;
+    updateStepStore({ isGeneratingNewsletter: true });
     messages = ["Starting generation...", "Scraping content...", "Translating article...", "Formatting email..."];
 
     try {
@@ -41,13 +43,17 @@
         method: "POST",
         headers: getAuthHeaders(),
         body: JSON.stringify({
-          newsSourceUrl: $store.newsSource,
-          lead: $store.lead || "General News",
-          personality: $store.personality || "Professional",
-          language: $store.globalLanguage || "en",
-          config: $store.config,
-          linkSelector: $store.linkSelector,
-          includeImages: true // Default to true or add a toggle if needed
+          // Send structured data
+          newsSource: {
+            url: $stepsStore.url || $store.newsSource,
+            lead: $stepsStore.lead || $store.lead || $topic || "General News",
+            personality: $stepsStore.personality || $store.personality || "Professional",
+            linkSelector: $stepsStore.linkSelector || $store.linkSelector,
+            includeImages: true // Default to true or add a toggle if needed
+          },
+          // Additional config context
+          language: $stepsStore.language || $store.globalLanguage || "en",
+          config: $stepsStore.config || $store.config
         })
       });
 
@@ -58,17 +64,20 @@
       }
 
       previewHtml = data.html;
+      updateStepStore({ generatedHtml: previewHtml });
       isGenerated = true;
     } catch (err: any) {
       console.error(err);
       alert("Generation failed: " + (err.message || err));
     } finally {
       isLoading = false;
+      updateStepStore({ isGeneratingNewsletter: false });
     }
   }
 
   async function handleSend() {
     isSending = true;
+    updateStepStore({ isSendingEmail: true });
     
     try {
       await sendEmail({
@@ -84,20 +93,23 @@
       alert("Failed to send email: " + (err.message || err));
     } finally {
       isSending = false;
+      updateStepStore({ isSendingEmail: false });
     }
   }
 
   async function handleNext() {
     if (isCreating) return;
     isCreating = true;
+    updateStepStore({ isCreatingNewsSource: true });
 
     try {
       // Create the news source using the current store data
       const newSource = await createNewsSource({
         type: "website",
-        url: $store.newsSource,
-        lead: $store.lead || "General News",
-        personality: $store.personality,
+        url: $stepsStore.url || $store.newsSource,
+        lead: $stepsStore.lead || $store.lead || $topic || "General News",
+        personality: $stepsStore.personality || $store.personality,
+        linkSelector: $stepsStore.linkSelector || $store.linkSelector,
         country: "US", // Default or from store if available
         community: "World Wide Expats", // Default or from store
         scheduleTime: $store.config?.scheduleTime // Use schedule time if set
@@ -106,6 +118,7 @@
       if (newSource && newSource.id) {
         // Save the ID to the store
         saveToStore({ createdNewsSourceId: newSource.id });
+        updateStepStore({ createdNewsSourceId: newSource.id });
         
         // Refresh session to sync everything
         await getConfiguratorSession();
@@ -120,6 +133,7 @@
       alert("Error creating news source: " + (err.message || err));
     } finally {
       isCreating = false;
+      updateStepStore({ isCreatingNewsSource: false });
     }
   }
 </script>

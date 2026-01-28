@@ -22,6 +22,12 @@
   import Exports from "./stages/H_Dashboard/Exports/Exports.svelte";
   import Newspaper from "./stages/H_Dashboard/Newspaper/Newspaper.svelte";
   import Developer from "./stages/H_Dashboard/Developer/Developer.svelte";
+  import { onMount } from "svelte";
+  import { resetStepsStore } from "./stages/NewFlow/stepsStore";
+
+  onMount(() => {
+    resetStepsStore();
+  });
 
   const t = () => {
     if (

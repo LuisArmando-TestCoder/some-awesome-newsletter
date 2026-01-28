@@ -4,10 +4,11 @@
   import Centered from "../../../../wrappers/Centered/Centered.svelte";
   import SubmitButton from "../../../../buttons/SubmitButton/SubmitButton.svelte";
   import store, { saveToStore } from "../../../../../store";
+  import stepsStore from "./stepsStore";
 
   export let canReveal = false;
 
-  $: shareLink = `https://aiban.news/subscribe?configuratorId=${$store.configuratorEmail}&newsSourceId=${$store.createdNewsSourceId || ''}&lead=${encodeURIComponent($store.lead || '')}`;
+  $: shareLink = `https://aiban.news/subscribe?configuratorId=${$store.configuratorEmail}&newsSourceId=${$stepsStore.createdNewsSourceId || $store.createdNewsSourceId || ''}&lead=${encodeURIComponent($stepsStore.lead || $store.lead || '')}`;
 
   function handleNext() {
     saveToStore({ stepsIndex: $store.stepsIndex + 1 });

@@ -1,12 +1,14 @@
 <script lang="ts">
-  import MarkdownText from "../../../texts/MarkdownText/MarkdownText.svelte";
   import PlainText from "../../../inputs/PlainText/PlainText.svelte";
   import store, { saveToStore } from "../../../../store";
   import Centered from "../../../wrappers/Centered/Centered.svelte";
   import SubmitButton from "../../../buttons/SubmitButton/SubmitButton.svelte";
-    import Email from "../../../inputs/Email/Email.svelte";
+  import Email from "../../../inputs/Email/Email.svelte";
+  import { t } from '$lib/i18n/subscribe-translations';
 
   export let canReveal = false;
+
+  $: $t;
 
   function isValidEmail(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -15,11 +17,9 @@
 </script>
 
 <Centered>
-  <MarkdownText {canReveal}>
-    ### Where should we send your insights?
-  </MarkdownText>
+  <h3>{$t.email.title}</h3>
   <Email
-    placeholder="Your email"
+    placeholder={$t.email.placeholder}
     onChange={(value) => {
       saveToStore({
         subscriberEmail: value,
@@ -36,6 +36,14 @@
 </Centered>
 
 <style>
+  h3 {
+    font-family: var(--font-title);
+    font-size: 22px;
+    color: var(--color-background);
+    line-height: 1.5;
+    margin: 0.5em 0;
+  }
+
   .right-align {
     display: flex;
     justify-content: flex-end;

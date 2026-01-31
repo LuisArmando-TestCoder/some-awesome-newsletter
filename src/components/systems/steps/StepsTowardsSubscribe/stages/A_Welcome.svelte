@@ -2,11 +2,10 @@
   import { onMount } from "svelte";
   import { page } from "$app/state"; // Use $app/state instead
   import store, { saveToStore } from "../../../../store"; // Import saveToStore function
-  import MarkdownText from "../../../texts/MarkdownText/MarkdownText.svelte";
   import Centered from "../../../wrappers/Centered/Centered.svelte";
   import { writable } from "svelte/store";
   import SubmitButton from "../../../buttons/SubmitButton/SubmitButton.svelte";
-  import { t } from '$lib/i18n/translations';
+  import { t } from '$lib/i18n/subscribe-translations';
 
   export let canReveal = false;
   const configuratorId = writable("");
@@ -34,18 +33,16 @@
       );
     }
   });
+
+  $: $t;
 </script>
 
 <Centered>
-  <MarkdownText {canReveal}>
-    ## {$t['subscribe.welcome.title']}
-  </MarkdownText>
+  <h2>{$t.welcome.title}</h2>
 
   <div class="wrap-text">
     {#key $configuratorId}
-      <MarkdownText {canReveal}>
-        ### {$t['subscribe.welcome.invitedBy'].replace("{configuratorId}", $configuratorId)}
-      </MarkdownText>
+      <h3>{$t.welcome.invitedBy.replace("{configuratorId}", $configuratorId)}</h3>
     {/key}
   </div>
 
@@ -57,6 +54,22 @@
 </Centered>
 
 <style>
+  h2 {
+    font-family: var(--font-title);
+    font-size: 30px;
+    color: var(--color-foreground);
+    line-height: 1.5;
+    margin: 1em 0;
+  }
+
+  h3 {
+    font-family: var(--font-title);
+    font-size: 22px;
+    color: var(--color-background);
+    line-height: 1.5;
+    margin: 0.5em 0;
+  }
+
   .wrap-text .wrapper-letter {
     transition-delay: 0.89588s;
     width: 200px;

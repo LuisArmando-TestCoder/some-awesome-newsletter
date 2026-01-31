@@ -1,23 +1,23 @@
 <script lang="ts">
   // Removed onMount and related imports
   import store from "../../../../store";
-  import MarkdownText from "../../../texts/MarkdownText/MarkdownText.svelte";
   import Centered from "../../../wrappers/Centered/Centered.svelte";
   import { page } from "$app/state"; // Use $app/state instead
   import SubmitButton from "../../../buttons/SubmitButton/SubmitButton.svelte";
+  import { t } from '$lib/i18n/subscribe-translations';
 
   export let canReveal = false;
+
+  $: $t;
 </script>
 
 <Centered>
-  <MarkdownText {canReveal}>## You're **In!** Welcome Aboard.</MarkdownText>
+  <h2>{$t.subscribed.title}</h2>
 
-  <MarkdownText {canReveal}>
-    ### Get Ready for **Exclusive Insights** Landing in Your Inbox Soon.
-  </MarkdownText>
+  <h3>{$t.subscribed.subtitle}</h3>
 
   <!-- Read lead directly from URL using page state -->
-  {@const leadUrl = page.url.searchParams.get("lead")}
+  {@const leadUrl = decodeURIComponent(page.url.searchParams.get("lead") || "")}
   {#if leadUrl}
     <div class="right">
       <SubmitButton
@@ -27,13 +27,31 @@
           }&newsSourceId=${
             $store.subscriberNewsSourceId
           }&newsletterUserId=${$store.subscriberEmail}`)}
-        label="Continue to {new URL(leadUrl).host.replace("www.", "")}"
+        label="{$t.subscribed.continueTo} {new URL(leadUrl).host.replace("www.", "")}"
       />
     </div>
   {:else}
     <!-- Optionally show a message if lead URL is missing -->
     <p style="margin-top: 1rem; color: grey; font-size: 0.9em;">
-      Finishing up...
+      {$t.subscribed.finishingUp}
     </p>
   {/if}
 </Centered>
+
+<style>
+  h2 {
+    font-family: var(--font-title);
+    font-size: 30px;
+    color: var(--color-foreground);
+    line-height: 1.5;
+    margin: 1em 0;
+  }
+
+  h3 {
+    font-family: var(--font-title);
+    font-size: 22px;
+    color: var(--color-background);
+    line-height: 1.5;
+    margin: 0.5em 0;
+  }
+</style>

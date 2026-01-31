@@ -6,13 +6,16 @@
     const innerText = writable<string>();
     export const transitionSpeed: number = .5;
 
-    onMount(() => {
+    function processText(text: string) {
+        if (typeof document === "undefined") return;
+
         const GhostHTML = document.createElement("DIV");
 
         setTimeout(() => {
-                innerText.set(`<span>${HTMLText}</span>`);
+                const initialHTML = `<span>${text}</span>`;
+                innerText.set(initialHTML);
 
-                GhostHTML.innerHTML = $innerText;
+                GhostHTML.innerHTML = initialHTML;
 
                 const allElements = GhostHTML.querySelectorAll("*");
                 // Filter elements that do not have child elements
@@ -38,7 +41,9 @@
                 innerText.set(GhostHTML.innerHTML);
                 // console.log("$innerText", $innerText);
         }, 1000);
-    });
+    }
+
+    $: processText(HTMLText);
 </script>
 
 {@html $innerText || ""}

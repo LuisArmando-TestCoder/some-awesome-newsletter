@@ -12,7 +12,7 @@
   onMount(() => {
     steps.set(
       components.map(([_, component], index) => {
-        // console.log("can u reveal", index, $store.stepsIndex === index);
+        console.log("can u reveal", index, $store.stepsIndex === index);
 
         return [
           (store: Store) => {

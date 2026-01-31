@@ -83,7 +83,11 @@
   
         <div class="input-group" in:fly={{ y: 20, duration: 800, delay: 150, easing: quadOut }}>
           <p class="subtitle">
-            We will use a selector like this to find articles. It should be populated automatically.
+            Think of every website as a <strong>library with a unique layout</strong>. 
+            <br><br>
+            This <strong>'Selector'</strong> is the specific map we created for this website. It tells our system exactly where to look to pick up the articles you want, while ignoring menu buttons and advertisements. 
+            <br><br>
+            <strong>We have populated this map for you automatically.</strong>
           </p>
           <div class="input-wrapper">
             <PlainText 
@@ -160,7 +164,7 @@
       font-size: 0.9rem;
       color: #666;
       margin: 0 0 0.5rem 0;
-      font-style: italic;
+      line-height: 1.5;
     }
   
     .input-wrapper {

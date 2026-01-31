@@ -9,13 +9,13 @@
 
   export let canReveal = false;
 
-  let topic = $stepsStore.lead || $store.lead || "";
+  let topic = "";
   $: if ($topicStore) topic = $topicStore.split(" / ").slice(1).join(" / ") || "";
 
   function handleNext() {
-    updateStepStore({ lead: topic });
+    updateStepStore({ topic });
+    topicStore.set(topic);
     saveToStore({
-      lead: topic,
       stepsIndex: $store.stepsIndex + 1
     });
   }
@@ -40,7 +40,7 @@
             placeholder="e.g. Artificial Intelligence, Marketing, Health..."
             onChange={(val) => {
               topic = val;
-              updateStepStore({ lead: val });
+              updateStepStore({ topic: val });
             }}
           />
         </div>

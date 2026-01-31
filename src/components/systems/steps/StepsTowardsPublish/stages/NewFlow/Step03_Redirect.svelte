@@ -8,11 +8,11 @@
 
   export let canReveal = false;
 
-  let redirectLink = $store.config?.facebookLink || "";
+  let redirectLink = $store.config?.lead || "";
 
   function handleNext() {
     saveToStore({
-      config: { ...$store.config, facebookLink: redirectLink },
+      config: { ...$store.config, lead: redirectLink },
       stepsIndex: $store.stepsIndex + 1
     });
   }

@@ -50,8 +50,8 @@
           url = urls[0];
           const path = tagPathMap.get(tagName);
           if (path) {
-            updateStepStore({ url, lead: path });
-            saveToStore({ newsSource: url, lead: path });
+            updateStepStore({ url, topic: path });
+            saveToStore({ newsSource: url });
             topic.set(path);
           }
           break;

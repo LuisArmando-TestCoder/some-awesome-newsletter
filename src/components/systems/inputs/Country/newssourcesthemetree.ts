@@ -96,9 +96,7 @@ export default () => ({
                 "https://modernfarmer.com/feed/"
             ],
             "Law": [
-                "https://feeds.feedblitz.com/law/legal-news/",
-                "https://www.jurist.org/news/feed/",
-                "https://www.lexblog.com/feed/"
+                "https://www.npr.org/sections/law/"
             ],
             "Education": [
                 "https://www.teachthought.com/feed/"

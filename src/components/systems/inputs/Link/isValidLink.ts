@@ -36,16 +36,16 @@ function isValidURL(str: string): boolean {
     // This basic regex ensures that the pathname contains only allowed characters.
     if (
       url.pathname &&
-      !/^\/[a-zA-Z0-9\-._~%!$&'()*+,;=\/]*$/.test(url.pathname)
+      !/^\/[a-zA-Z0-9\-._~%!$&'()*+,;=:@\/]*$/.test(url.pathname)
     ) {
       return false;
     }
 
     // Optional: Validate search parameters.
     // Ensure that query keys and values only contain allowed characters.
-    // Allowed characters: alphanumerics and -._~%!$&'()*+,;=
+    // Allowed characters: alphanumerics and -._~%!$&'()*+,;=:@/?
     if (url.search) {
-      const queryParamRegex = /^[a-zA-Z0-9\-._~%!$&'()*+,;=]*$/;
+      const queryParamRegex = /^[a-zA-Z0-9\-._~%!$&'()*+,;=:@\/?]*$/;
       for (const [key, value] of url.searchParams) {
         if (!queryParamRegex.test(key) || !queryParamRegex.test(value)) {
           return false;

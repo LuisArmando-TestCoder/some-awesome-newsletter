@@ -303,12 +303,12 @@ export function saveAllKeysToSaveInLocalStorage() {
 }
 
 export const stepsMapping = Object.freeze({
-  "Profile": 10,
-  "News Sources": 11,
-  "Users": 12,
-  "Billing": 13,
-  "Reports": 14,
-  "Exports": 15,
-  "Newspaper": 16,
-  "Secrets/Developer": 17
+  "Profile": 9,
+  "News Sources": 10,
+  "Users": 11,
+  "Billing": 12,
+  "Reports": 13,
+  "Exports": 14,
+  "Newspaper": 15,
+  "Secrets/Developer": 16
 });

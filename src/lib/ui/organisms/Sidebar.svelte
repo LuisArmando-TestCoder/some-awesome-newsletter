@@ -90,7 +90,7 @@
   class:shape-a={shapeA}
   class:shape-b={shapeB}
   aria-label="Primary Navigation"
-  style={$store.stepsIndex >= 10 ? '' : 'display: none;'}
+  style={$store.stepsIndex >= stepsMapping["Profile"] ? '' : 'display: none;'}
 >
   <button
     class="sidebar__toggle"

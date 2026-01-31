@@ -1,10 +1,9 @@
 <script lang="ts">
-  import { saveToStore } from "../../../store";
+  import { saveToStore, stepsMapping } from "../../../store";
   import Step01_Frequency from "./stages/NewFlow/Step01_Frequency.svelte";
   import Step02_Language from "./stages/NewFlow/Step02_Language.svelte";
   import Step03_Redirect from "./stages/NewFlow/Step03_Redirect.svelte";
   import Step04_Topic from "./stages/NewFlow/Step04_Topic.svelte";
-  import Step05_Signature from "./stages/NewFlow/Step05_Signature.svelte";
   import Step06_NewsWebsite from "./stages/NewFlow/Step06_NewsWebsite.svelte";
   import Step07_Selector from "./stages/NewFlow/Step07_Selector.svelte";
   import Step08_Generate from "./stages/NewFlow/Step08_Generate.svelte";
@@ -32,7 +31,7 @@
   const t = () => {
     if (
       $store.authCode &&
-      $store.stepsIndex > 9 &&
+      $store.stepsIndex > stepsMapping["Profile"] &&
       $store.directionsThatShouldDisappear.length === 0
     ) {
         // Prevent infinite loop by checking current state
@@ -43,10 +42,10 @@
         }
       } else if (
         $store.authCode &&
-        $store.stepsIndex <= 9 &&
+        $store.stepsIndex <= stepsMapping["Profile"] &&
         $store.directionsThatShouldDisappear.length !== 0
       ) {
-        // Reset if we went back to steps <= 9
+        // Reset if we went back to steps <= stepsMapping["Profile"]
         saveToStore({
           directionsThatShouldDisappear: [],
         });
@@ -59,8 +58,7 @@
     [(s: Store) => { t(); return true; }, Step01_Frequency],
     [(s: Store) => { t(); return !!s.config?.scheduleTime; }, Step02_Language],
     [(s: Store) => { t(); return !!s.config?.dashboardLanguage; }, Step03_Redirect],
-    [(s: Store) => { t(); return !!s.lead; }, Step05_Signature],
-    [(s: Store) => { t(); return !!s.config?.emailSignature; }, Step06_NewsWebsite],
+    [(s: Store) => { t(); return !!s.config?.dashboardLanguage; }, Step06_NewsWebsite],
     [(s: Store) => { t(); return isValidURL(s.newsSource); }, Step04_Topic], // Redirect is optional
     [(s: Store) => { t(); return !!s.config.community }, Step07_Selector],
     [(s: Store) => { t(); return !!s.linkSelector; }, Step08_Generate],

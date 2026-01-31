@@ -29,6 +29,7 @@ export default async function createNewsSource(newsSource: {
   lead: string;
   scheduleTime?: string;
   personality?: string;
+  linkSelector?: string;
 }) {
   console.log("[createNewsSource.ts] createNewsSource called with", newsSource);
   const configId = get(store).configuratorEmail;

@@ -3,7 +3,6 @@
   import EmailCredentialsToggle from "./toggles/EmailCredentialsToggle.svelte"; // New combined toggle
   import Page from "../../../../../wrappers/Page/Page.svelte";
   import { writable, get } from "svelte/store";
-  import InteractiveSignatureEditor from "./toggles/InteractiveSignatureEditor.svelte";
   import { setContext } from "svelte";
   import store, { saveToConfig } from "../../../../../../store";
   import SubmitButton from "../../../../../buttons/SubmitButton/SubmitButton.svelte";
@@ -46,7 +45,6 @@
 <Page>
   <AutoCollapseToggle {canReveal}
     toggles={{
-      interactiveSignature: [InteractiveSignatureEditor],
       emailCredentials: [EmailCredentialsToggle], // New combined toggle
     }}
   />

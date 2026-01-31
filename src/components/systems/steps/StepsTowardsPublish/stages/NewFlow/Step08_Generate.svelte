@@ -46,12 +46,12 @@
           // Send structured data
           newsSource: {
             url: $stepsStore.url || $store.newsSource,
-            lead: $stepsStore.lead || $store.lead || $topic || "General News",
+            lead: $store.config?.lead || $stepsStore.lead || $store.lead || $stepsStore.url || $store.url,
             personality: $stepsStore.personality || $store.personality || "Professional",
             linkSelector: $stepsStore.linkSelector || $store.linkSelector,
             includeImages: true // Default to true or add a toggle if needed
           },
-          // Additional config context
+          // Additional config context // maybe this todo: 
           language: $stepsStore.language || $store.globalLanguage || "en",
           config: $stepsStore.config || $store.config
         })
@@ -75,29 +75,7 @@
     }
   }
 
-  async function handleSend() {
-    isSending = true;
-    updateStepStore({ isSendingEmail: true });
-    
-    try {
-      await sendEmail({
-        html: previewHtml,
-        subject: $store.config?.newsletterSubject || "Your Generated Newsletter Preview",
-        config: $store.config,
-        emails: [$store.configuratorEmail]
-      });
-
-      isSent = true;
-    } catch (err: any) {
-      console.error(err);
-      alert("Failed to send email: " + (err.message || err));
-    } finally {
-      isSending = false;
-      updateStepStore({ isSendingEmail: false });
-    }
-  }
-
-  async function handleNext() {
+  async function createAndNavigate() {
     if (isCreating) return;
     isCreating = true;
     updateStepStore({ isCreatingNewsSource: true });
@@ -107,11 +85,11 @@
       const newSource = await createNewsSource({
         type: "website",
         url: $stepsStore.url || $store.newsSource,
-        lead: $stepsStore.lead || $store.lead || $topic || "General News",
+        lead: $store.config?.lead || $stepsStore.lead || $store.lead || $stepsStore.url || $store.url,
         personality: $stepsStore.personality || $store.personality,
         linkSelector: $stepsStore.linkSelector || $store.linkSelector,
         country: "US", // Default or from store if available
-        community: "World Wide Expats", // Default or from store
+        community: $topic, // Default or from store
         scheduleTime: $store.config?.scheduleTime // Use schedule time if set
       });
 
@@ -135,6 +113,37 @@
       isCreating = false;
       updateStepStore({ isCreatingNewsSource: false });
     }
+  }
+
+  async function handleSend() {
+    if (isSending || isCreating) return;
+    isSending = true;
+    updateStepStore({ isSendingEmail: true });
+    
+    try {
+      await sendEmail({
+        html: previewHtml,
+        subject: $store.config?.newsletterSubject || "Your Generated Newsletter Preview",
+        config: $store.config,
+        emails: [$store.configuratorEmail]
+      });
+
+      isSent = true;
+
+      // After sending email successfully, proceed to create news source and navigate
+      await createAndNavigate();
+
+    } catch (err: any) {
+      console.error(err);
+      alert("Failed to send email: " + (err.message || err));
+    } finally {
+      isSending = false;
+      updateStepStore({ isSendingEmail: false });
+    }
+  }
+
+  async function handleNext() {
+    await createAndNavigate();
   }
 </script>
 

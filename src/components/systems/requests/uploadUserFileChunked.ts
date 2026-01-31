@@ -6,11 +6,13 @@ import getAuthHeaders from './getAuthHeaders';
 export async function uploadUserFileChunked({
   file,
   newsSourceId,
-  onProgress
+  onProgress,
+  onUserAdded
 }: {
   file: File;
   newsSourceId: string;
   onProgress?: (processed: number, total: number) => void;
+  onUserAdded?: (email: string) => void;
 }): Promise<{ successMessage: string; errorMessage: string | null }> {
   const CHUNK_SIZE = 500; // Rows per chunk
   let chunks: string[] = [];
@@ -97,10 +99,59 @@ export async function uploadUserFileChunked({
           continue;
         }
 
-        const data = await response.json();
-        const added = data.addedCount || 0;
-        totalAdded += added;
-        console.log(`[uploadUserFileChunked] Chunk ${i + 1} success. Added ${added} users.`);
+        if (!response.body) {
+           const errorMsg = `Chunk ${i + 1} failed: No response body`;
+           console.error(errorMsg);
+           errors.push(errorMsg);
+           continue;
+        }
+
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let buffer = '';
+        let chunkAddedCount = 0;
+
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          buffer += decoder.decode(value, { stream: true });
+          const lines = buffer.split('\n');
+          buffer = lines.pop() || ''; // Keep incomplete line in buffer
+
+          for (const line of lines) {
+            if (!line.trim()) continue;
+            try {
+                const data = JSON.parse(line);
+                if (data.type === 'user') {
+                    if (onUserAdded) onUserAdded(data.email);
+                } else if (data.type === 'summary') {
+                    chunkAddedCount = data.addedCount || 0;
+                } else if (data.type === 'error') {
+                    console.error(`[uploadUserFileChunked] Stream error: ${data.message}`);
+                    errors.push(`Chunk ${i + 1} stream error: ${data.message}`);
+                }
+            } catch (e) {
+                console.error('[uploadUserFileChunked] Error parsing stream line:', line, e);
+            }
+          }
+        }
+        
+        // Process any remaining buffer
+        if (buffer.trim()) {
+             try {
+                const data = JSON.parse(buffer);
+                if (data.type === 'user') {
+                    if (onUserAdded) onUserAdded(data.email);
+                } else if (data.type === 'summary') {
+                    chunkAddedCount = data.addedCount || 0;
+                }
+             } catch (e) {
+                 // ignore incomplete json at very end
+             }
+        }
+
+        totalAdded += chunkAddedCount;
+        console.log(`[uploadUserFileChunked] Chunk ${i + 1} success. Added ${chunkAddedCount} users.`);
         
         if (onProgress) {
           const processedItems = Math.min((i + 1) * CHUNK_SIZE, totalItems);

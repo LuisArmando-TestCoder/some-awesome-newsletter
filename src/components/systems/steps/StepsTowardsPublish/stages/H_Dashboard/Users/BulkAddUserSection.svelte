@@ -16,6 +16,7 @@
   export let disabled: boolean = false;
   export let newsSourceId: string;
   export let onUpload: (file: File | null) => void | Promise<void> = () => {};
+  export let addedUsers: string[] = [];
 
   // --- Internal State ---
   let selectedFilesStore: Writable<FileList | null> = writable(null); // Create store
@@ -122,6 +123,17 @@
       <p class="error-message">{fileError}</p>
     {/if}
 
+    {#if addedUsers.length > 0}
+      <div class="added-users-list">
+        <p class="list-title">Added Users ({addedUsers.length}):</p>
+        <ul>
+          {#each addedUsers as email}
+            <li>{email}</li>
+          {/each}
+        </ul>
+      </div>
+    {/if}
+
     <div class="send-end">
       <!-- Submit Button (check store for file presence) -->
       <SubmitButton
@@ -191,6 +203,40 @@
     font-size: 0.9rem;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
+  }
+
+  .added-users-list {
+    margin-top: 0.5rem;
+    border: 1px solid var(--color-border-light, #ddd);
+    border-radius: 4px;
+    padding: 0.5rem;
+    background: #f9f9f9;
+
+    .list-title {
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+        color: #555;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        max-height: 150px;
+        overflow-y: auto;
+        
+        li {
+            font-size: 0.85rem;
+            padding: 0.1rem 0;
+            border-bottom: 1px solid #eee;
+            color: #333;
+
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+    }
   }
 
   :global(.submit-button-wrapper) {

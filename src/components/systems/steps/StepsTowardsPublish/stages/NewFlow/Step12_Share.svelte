@@ -28,6 +28,7 @@
   let isUploading = false;
   let feedbackMessage = "";
   let feedbackType = ""; // "success" | "error"
+  let addedUsers: string[] = [];
 
   async function handleBulkAdd(file: File | null) {
     if (!file) return;
@@ -39,10 +40,13 @@
     }
 
     feedbackMessage = "";
+    addedUsers = [];
     isUploading = true;
 
     try {
-      const result = await UserDataService.processBulkUpload(file, newsSourceId);
+      const result = await UserDataService.processBulkUpload(file, newsSourceId, (email) => {
+          addedUsers = [email, ...addedUsers]; // Prepend for latest on top
+      });
       if (result.errorMessage) {
           feedbackMessage = result.errorMessage;
           feedbackType = "error";
@@ -89,6 +93,7 @@
                 {newsSourceId} 
                 onUpload={handleBulkAdd} 
                 disabled={isUploading} 
+                {addedUsers}
              />
              {#if feedbackMessage}
                 <div class="feedback-message {feedbackType}">

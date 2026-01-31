@@ -202,7 +202,8 @@ export async function addUserAndSubscribe(
 
 export async function processBulkUpload(
   file: File,
-  newsSourceId: string
+  newsSourceId: string,
+  onUserAdded?: (email: string) => void
 ): Promise<{ successMessage: string; errorMessage: string | null }> {
   console.log(`[UserDataService] processBulkUpload: Starting for file ${file.name} and newsSourceId ${newsSourceId}.`);
   const configId = getConfigId();
@@ -217,7 +218,8 @@ export async function processBulkUpload(
         newsSourceId,
         onProgress: (processed: number, total: number) => {
             console.log(`[UserDataService] Upload progress: ${processed}/${total}`);
-        }
+        },
+        onUserAdded
     });
 
     console.log(`[UserDataService] processBulkUpload: Finished. Result:`, result);

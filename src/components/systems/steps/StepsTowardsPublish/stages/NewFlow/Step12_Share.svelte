@@ -6,12 +6,15 @@
   import store, { saveToStore } from "../../../../../store";
   import stepsStore from "./stepsStore";
   import { t } from "$lib/i18n/newflow-translations";
+  import BulkAddUserSection from "../H_Dashboard/Users/BulkAddUserSection.svelte";
+  import * as UserDataService from "../H_Dashboard/Users/UserDataService";
 
   export let canReveal = false;
 
   $: $t;
 
   $: shareLink = `https://aiban.news/subscribe?configuratorId=${$store.configuratorEmail}&newsSourceId=${$stepsStore.createdNewsSourceId || $store.createdNewsSourceId || ''}&lead=${encodeURIComponent($stepsStore.lead || $store.lead || '')}`;
+  $: newsSourceId = $stepsStore.createdNewsSourceId || $store.createdNewsSourceId;
 
   function handleNext() {
     saveToStore({ stepsIndex: $store.stepsIndex + 1 });
@@ -20,6 +23,45 @@
   function copyLink() {
     navigator.clipboard.writeText(shareLink);
     alert($t.step12.copied);
+  }
+
+  let isUploading = false;
+  let feedbackMessage = "";
+  let feedbackType = ""; // "success" | "error"
+
+  async function handleBulkAdd(file: File | null) {
+    if (!file) return;
+    
+    if (!newsSourceId) {
+        feedbackMessage = "No News Source ID found.";
+        feedbackType = "error";
+        return;
+    }
+
+    feedbackMessage = "";
+    isUploading = true;
+
+    try {
+      const result = await UserDataService.processBulkUpload(file, newsSourceId);
+      if (result.errorMessage) {
+          feedbackMessage = result.errorMessage;
+          feedbackType = "error";
+      } else {
+          feedbackMessage = result.successMessage;
+          feedbackType = "success";
+      }
+    } catch (error: any) {
+      feedbackMessage = error.message || "Upload failed.";
+      feedbackType = "error";
+    } finally {
+      isUploading = false;
+      // Clear success message after some time
+      if (feedbackType === "success") {
+          setTimeout(() => {
+              feedbackMessage = "";
+          }, 5000);
+      }
+    }
   }
 </script>
 
@@ -40,6 +82,21 @@
           <code class="share-link">{shareLink}</code>
           <button class="copy-btn" on:click={copyLink}>{$t.step12.copy}</button>
         </div>
+
+        {#if newsSourceId}
+          <div class="bulk-add-wrapper">
+             <BulkAddUserSection 
+                {newsSourceId} 
+                onUpload={handleBulkAdd} 
+                disabled={isUploading} 
+             />
+             {#if feedbackMessage}
+                <div class="feedback-message {feedbackType}">
+                  {feedbackMessage}
+                </div>
+             {/if}
+          </div>
+        {/if}
       </div>
 
       <div class="submit-wrapper" in:fly={{ y: 10, duration: 800, delay: 300, easing: quadOut }}>
@@ -142,6 +199,32 @@
     cursor: pointer;
     
     &:hover { background: #0062cc; }
+  }
+
+  .bulk-add-wrapper {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .feedback-message {
+    padding: 0.75rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+
+    &.success {
+      background-color: #e8f5e9;
+      color: #1b5e20;
+      border: 1px solid #4caf50;
+    }
+
+    &.error {
+      background-color: #ffebee;
+      color: #c62828;
+      border: 1px solid #f44336;
+    }
   }
 
   .submit-wrapper {

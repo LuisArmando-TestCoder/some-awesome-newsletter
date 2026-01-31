@@ -11,8 +11,11 @@
   import CollapsibleTags from "../../../../selectors/Tags/CollapsibleTags.svelte";
   import categoriesTree from "../../../../inputs/Country/newssourcesthemetree";
   import stepsStore, { updateStepStore } from "./stepsStore";
+  import { t } from "$lib/i18n/newflow-translations";
 
   export let canReveal = false;
+
+  $: $t;
 
   let url = $stepsStore.url || $store.newsSource || "";
   const isLoading = writable(false);
@@ -87,16 +90,16 @@
             stepsIndex: $store.stepsIndex + 1
           });
         } else {
-          alert("Failed to generate selector. Please try again or check the URL.");
+          alert($t.step06.errors.failedToGenerate);
         }
       } catch (e) {
         console.error(e);
-        alert("An error occurred while generating selector.");
+        alert($t.step06.errors.errorGenerating);
       } finally {
         isLoading.set(false);
       }
     } else {
-      alert("Please enter a valid URL or pick a source.");
+      alert($t.step06.errors.invalidUrl);
     }
   }
 </script>
@@ -105,25 +108,25 @@
   <div class="step-container">
       <div class="header-group" in:fly={{ y: 20, duration: 800, easing: quadOut }}>
         <h1 class="main-title">
-          News Source
+          {$t.step06.title}
         </h1>
       </div>
 
       <div class="input-group" in:fly={{ y: 20, duration: 800, delay: 150, easing: quadOut }}>
         <h3 class="impact-statement">
-          Which news website do you want to use?
+          {$t.step06.subtitle}
         </h3>
         <p class="subtitle">
-          Enter a URL or let us pick one for you based on your topic.
+          {$t.step06.description}
           <br>
           <span style="font-size: 0.8em; opacity: 0.8;">
-            We will analyze the website to find the best content. This might take a few seconds.
+            {$t.step06.descriptionSmall}
           </span>
         </p>
         <div class="input-wrapper">
           <Link 
             value={url}
-            placeholder="https://example.com"
+            placeholder={$t.step06.placeholder}
             onChange={(val) => {
               url = val;
               updateStepStore({ url: val });
@@ -140,7 +143,7 @@
         <SubmitButton 
           callback={handleNext} 
           loading={$isLoading}
-          label={$isLoading ? "Analyzing..." : "Next"}
+          label={$isLoading ? $t.step06.analyzing : $t.step06.next}
         />
       </div>
   </div>

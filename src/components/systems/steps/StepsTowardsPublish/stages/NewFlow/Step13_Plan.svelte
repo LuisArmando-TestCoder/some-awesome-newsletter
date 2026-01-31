@@ -3,19 +3,22 @@
   import { quadOut } from 'svelte/easing';
   import Centered from "../../../../wrappers/Centered/Centered.svelte";
   import SubmitButton from "../../../../buttons/SubmitButton/SubmitButton.svelte";
-  import store, { saveToStore } from "../../../../../store";
+  import store, { saveToStore, stepsMapping } from "../../../../../store";
+  import { t } from "$lib/i18n/newflow-translations";
 
   export let canReveal = false;
 
+  $: $t;
+
   let plan = $store.config?.pricingPlan || "free";
-  let limits: Record<string, string> = {
-    free: "100 users limit",
-    starter: "5 sources, 100k users",
-    growth: "17 sources, 250k users",
-    pro: "25 sources, 500k users",
-    master: "50 sources, unlimited users",
-    vipfree: "VIP Free"
-  };
+  $: limits = {
+    free: $t.step13.limitDetails.free,
+    starter: $t.step13.limitDetails.starter,
+    growth: $t.step13.limitDetails.growth,
+    pro: $t.step13.limitDetails.pro,
+    master: $t.step13.limitDetails.master,
+    vipfree: $t.step13.limitDetails.vipfree
+  } as Record<string, string>;
 
   let usage = "10 / 100 users (10%)"; // Mock usage
 
@@ -24,7 +27,7 @@
   }
 
   function handleChangePlan() {
-    alert("Redirecting to billing...");
+    saveToStore({ stepsIndex: stepsMapping["Billing"] }); // Assuming -1 takes user to dashboard or plan change section
   }
 </script>
 
@@ -33,33 +36,33 @@
     {#if canReveal}
       <div class="header-group" in:fly={{ y: 20, duration: 800, easing: quadOut }}>
         <h1 class="main-title">
-          Plan & Limits
+          {$t.step13.title}
         </h1>
       </div>
 
       <div class="info-card" in:fly={{ y: 20, duration: 800, delay: 150, easing: quadOut }}>
-        <h3 class="impact-statement">Current Plan: <span class="highlight">{plan.toUpperCase()}</span></h3>
-        <p class="limits">Limits: {limits[plan] || "Unknown"}</p>
+        <h3 class="impact-statement">{$t.step13.currentPlan} <span class="highlight">{plan.toUpperCase()}</span></h3>
+        <p class="limits">{$t.step13.limits} {limits[plan] || $t.step13.unknown}</p>
         
         {#if plan !== "master"}
           <div class="usage-bar">
             <div class="bar-fill" style="width: 10%;"></div>
           </div>
-          <p class="usage-text">Usage: {usage}</p>
+          <p class="usage-text">{$t.step13.usage} {usage}</p>
           
           <button class="change-plan-btn" on:click={handleChangePlan}>
-            Change Plan
+            {$t.step13.changePlan}
           </button>
         {/if}
       </div>
 
       <div class="dev-section" in:fly={{ y: 20, duration: 800, delay: 300, easing: quadOut }}>
-        <p>Need more advanced features?</p>
-        <p class="small">Check out our developer section to integrate this newsletter subscription funnel on your server, a blog of all your generated articles, and subscribing users from your codebase with our API Key.</p>
+        <p>{$t.step13.advancedFeatures}</p>
+        <p class="small">{$t.step13.developerText}</p>
       </div>
 
       <div class="submit-wrapper" in:fly={{ y: 10, duration: 800, delay: 450, easing: quadOut }}>
-        <SubmitButton label="Go to Dashboard" callback={handleFinish} />
+        <SubmitButton label={$t.step13.dashboardBtn} callback={handleFinish} />
       </div>
     {/if}
   </div>

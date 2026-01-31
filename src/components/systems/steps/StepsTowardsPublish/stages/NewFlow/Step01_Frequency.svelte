@@ -7,8 +7,11 @@
   import store, { saveToStore } from "../../../../../store";
   import { onMount } from 'svelte';
   import stepsStore, { updateStepStore } from "./stepsStore";
+  import { t } from "$lib/i18n/newflow-translations";
 
   export let canReveal = false;
+
+  $: $t;
 
   let schedule = $stepsStore.config?.scheduleTime || $store.config?.scheduleTime || "0 9 * * 1";
 
@@ -35,13 +38,13 @@
     {#if canReveal}
       <div class="header-group" in:fly={{ y: 20, duration: 800, easing: quadOut }}>
         <h1 class="main-title">
-          The human sounding AI writes newsletters for your subscribers on automatic
+          {$t.step01.title}
         </h1>
       </div>
 
       <div class="input-group" in:fly={{ y: 20, duration: 800, delay: 150, easing: quadOut }}>
         <h3 class="impact-statement">
-          How frequent, select <u>every month</u> or <u>every week</u> or <u>every day</u> or <u>what time</u>
+          {@html $t.step01.subtitle}
         </h3>
         <div class="input-wrapper">
           <ScheduleTime 

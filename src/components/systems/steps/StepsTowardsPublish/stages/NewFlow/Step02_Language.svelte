@@ -7,8 +7,11 @@
   import store, { globalLanguage, saveToStore } from "../../../../../store";
   import { onMount } from 'svelte';
   import stepsStore, { updateStepStore } from "./stepsStore";
+  import { t } from "$lib/i18n/newflow-translations";
 
   export let canReveal = false;
+
+  $: $t;
 
   let language = $stepsStore.language || "en";
 
@@ -32,13 +35,13 @@
     {#if canReveal}
       <div class="header-group" in:fly={{ y: 20, duration: 800, easing: quadOut }}>
         <h1 class="impact-statement">
-          Language of the newsletter
+          {$t.step02.title}
         </h1>
       </div>
 
       <div class="input-group" in:fly={{ y: 20, duration: 800, delay: 150, easing: quadOut }}>
         <p class="subtitle">
-          “your newsletter will also be sent in every user’s specific language if they are any different”
+          {$t.step02.subtitle}
         </p>
         <div class="input-wrapper">
           <Language 

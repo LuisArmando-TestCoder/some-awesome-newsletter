@@ -5,8 +5,11 @@
   import PlainText from "../../../../inputs/PlainText/PlainText.svelte";
   import SubmitButton from "../../../../buttons/SubmitButton/SubmitButton.svelte";
   import store, { saveToStore } from "../../../../../store";
+  import { t } from "$lib/i18n/newflow-translations";
 
   export let canReveal = false;
+
+  $: $t;
 
   let appPassword = $store.config?.appPassword || "";
 
@@ -23,23 +26,23 @@
     {#if canReveal}
       <div class="header-group" in:fly={{ y: 20, duration: 800, easing: quadOut }}>
         <h1 class="main-title">
-          To send the article from your email
+          {$t.step09.title}
         </h1>
       </div>
 
       <div class="input-group" in:fly={{ y: 20, duration: 800, delay: 150, easing: quadOut }}>
         <h3 class="impact-statement">
-          App Password (Optional)
+          {$t.step09.subtitle}
         </h3>
         <p class="subtitle">
-          (If you have gmail services, put your app password here)
+          {$t.step09.description}
         </p>
         <div class="input-wrapper">
           <PlainText 
             type="password"
-            label="App Password"
+            label={$t.step09.label}
             value={appPassword}
-            placeholder="Your App Password"
+            placeholder={$t.step09.placeholder}
             onChange={(val) => appPassword = val}
           />
         </div>

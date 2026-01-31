@@ -12,15 +12,22 @@
   import getAuthHeaders from "../../../../requests/getAuthHeaders";
   import { onDestroy } from 'svelte';
   import stepsStore, { updateStepStore } from "./stepsStore";
+  import { t } from "$lib/i18n/newflow-translations";
 
   export let canReveal = false;
+
+  $: $t;
 
   let isLoading = false;
   let isGenerated = false;
   let isSending = false;
   let isSent = false;
   let isCreating = false;
-  let messages: string[] = ["Initializing..."];
+  let messages: string[] = []; 
+  
+  // Initialize messages reactively if empty
+  $: if (messages.length === 0 && $t) messages = [$t.step08.loading.initializing];
+
   let previewHtml = "";
 
   const unsubscribe = latestMessage.subscribe(msg => {
@@ -36,7 +43,7 @@
   async function handleGenerate() {
     isLoading = true;
     updateStepStore({ isGeneratingNewsletter: true });
-    messages = ["Starting generation...", "Scraping content...", "Translating article...", "Formatting email..."];
+    messages = [$t.step08.loading.starting, $t.step08.loading.scraping, $t.step08.loading.translating, $t.step08.loading.formatting];
 
     try {
       const response = await fetch(`${$store.apiURL()}/news-source/generate-newsletter`, {
@@ -49,7 +56,7 @@
             lead: $store.config?.lead || $stepsStore.lead || $store.lead || $stepsStore.url || $store.url,
             personality: $stepsStore.personality || $store.personality || "Professional",
             linkSelector: $stepsStore.linkSelector || $store.linkSelector,
-            includeImages: true // Default to true or add a toggle if needed
+            includeImages: false // Default to false or add a toggle if needed
           },
           // Additional config context // maybe this todo: 
           language: $stepsStore.language || $store.globalLanguage || "en",
@@ -68,7 +75,7 @@
       isGenerated = true;
     } catch (err: any) {
       console.error(err);
-      alert("Generation failed: " + (err.message || err));
+      alert($t.step08.errors.generationFailed + (err.message || err));
     } finally {
       isLoading = false;
       updateStepStore({ isGeneratingNewsletter: false });
@@ -104,11 +111,11 @@
         // Proceed to next step
         saveToStore({ stepsIndex: $store.stepsIndex + 1 });
       } else {
-        alert("Failed to create news source. Please try again.");
+        alert($t.step08.errors.createFailed);
       }
     } catch (err: any) {
       console.error(err);
-      alert("Error creating news source: " + (err.message || err));
+      alert($t.step08.errors.errorCreating + (err.message || err));
     } finally {
       isCreating = false;
       updateStepStore({ isCreatingNewsSource: false });
@@ -123,7 +130,7 @@
     try {
       await sendEmail({
         html: previewHtml,
-        subject: $store.config?.newsletterSubject || "Your Generated Newsletter Preview",
+        subject: $store.config?.newsletterSubject || $t.step08.defaultSubject,
         config: $store.config,
         emails: [$store.configuratorEmail]
       });
@@ -135,7 +142,7 @@
 
     } catch (err: any) {
       console.error(err);
-      alert("Failed to send email: " + (err.message || err));
+      alert($t.step08.errors.sendFailed + (err.message || err));
     } finally {
       isSending = false;
       updateStepStore({ isSendingEmail: false });
@@ -152,11 +159,11 @@
 {/if}
 
 {#if isSending}
-  <LoadingScreen messages={["Connecting to email provider...", "Authenticating...", "Sending article..."]} />
+  <LoadingScreen messages={[$t.step08.loading.sending, $t.step08.loading.authenticating, $t.step08.loading.sendingArticle]} />
 {/if}
 
 {#if isCreating}
-  <LoadingScreen messages={["Creating news source...", "Saving configuration...", "Finalizing setup..."]} />
+  <LoadingScreen messages={[$t.step08.loading.creating, $t.step08.loading.saving, $t.step08.loading.finalizing]} />
 {/if}
 
 <Centered>
@@ -164,22 +171,22 @@
     {#if canReveal}
       <div class="header-group" in:fly={{ y: 20, duration: 800, easing: quadOut }}>
         <h1 class="main-title">
-          Preview
+          {$t.step08.title}
         </h1>
       </div>
 
       <div class="content-area" in:fly={{ y: 20, duration: 800, delay: 150, easing: quadOut }}>
         {#if !isGenerated}
           <div class="placeholder">
-            <p>Ready to generate your first newsletter?</p>
+            <p>{$t.step08.placeholder}</p>
             <button class="generate-btn" on:click={handleGenerate}>
-              Generate Newsletter Email
+              {$t.step08.generateBtn}
             </button>
           </div>
         {:else}
           <div class="send-wrapper">
             <button class="send-btn" on:click={handleSend}>
-              {isSent ? "Sent! Check your email" : "Send Test Email"}
+              {isSent ? $t.step08.sentBtn : $t.step08.sendTestBtn}
             </button>
           </div>
           <div class="preview-box">
@@ -187,7 +194,7 @@
           </div>
           <div class="actions">
             <button class="regenerate-btn" on:click={handleGenerate}>
-              Regenerate
+              {$t.step08.regenerateBtn}
             </button>
           </div>
         {/if}

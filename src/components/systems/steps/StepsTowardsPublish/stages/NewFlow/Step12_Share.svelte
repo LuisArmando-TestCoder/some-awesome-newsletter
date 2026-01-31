@@ -5,8 +5,11 @@
   import SubmitButton from "../../../../buttons/SubmitButton/SubmitButton.svelte";
   import store, { saveToStore } from "../../../../../store";
   import stepsStore from "./stepsStore";
+  import { t } from "$lib/i18n/newflow-translations";
 
   export let canReveal = false;
+
+  $: $t;
 
   $: shareLink = `https://aiban.news/subscribe?configuratorId=${$store.configuratorEmail}&newsSourceId=${$stepsStore.createdNewsSourceId || $store.createdNewsSourceId || ''}&lead=${encodeURIComponent($stepsStore.lead || $store.lead || '')}`;
 
@@ -16,7 +19,7 @@
 
   function copyLink() {
     navigator.clipboard.writeText(shareLink);
-    alert("Link copied!");
+    alert($t.step12.copied);
   }
 </script>
 
@@ -25,17 +28,17 @@
     {#if canReveal}
       <div class="header-group" in:fly={{ y: 20, duration: 800, easing: quadOut }}>
         <h1 class="impact-statement">
-          Share this newsletter with your followers
+          {$t.step12.title}
         </h1>
       </div>
 
       <div class="input-group" in:fly={{ y: 20, duration: 800, delay: 150, easing: quadOut }}>
         <p class="subtitle">
-          Link to subscription funnel (before they start receiving email, they would have to accept your invitation)
+          {$t.step12.subtitle}
         </p>
         <div class="input-wrapper link-box">
           <code class="share-link">{shareLink}</code>
-          <button class="copy-btn" on:click={copyLink}>Copy</button>
+          <button class="copy-btn" on:click={copyLink}>{$t.step12.copy}</button>
         </div>
       </div>
 

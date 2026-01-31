@@ -7,8 +7,11 @@
     import store, { saveToStore, topic } from "../../../../../store";
     import generateSelector from "../../../../requests/generateSelector";
     import stepsStore, { updateStepStore } from "./stepsStore";
+    import { t } from "$lib/i18n/newflow-translations";
 
   export let canReveal = false;
+
+  $: $t;
 
     // Initialize from global store if stepsStore is empty (bridging the gap)
     $: if (!$stepsStore.url && $store.newsSource) {
@@ -28,7 +31,7 @@
       const url = $stepsStore.url || $store.newsSource; 
       
       if (!url) {
-        alert("No news source URL found.");
+        alert($t.step07.errors.noUrl);
         return;
       }
 
@@ -50,11 +53,11 @@
           // Also save to global store for compatibility with other steps if needed
           saveToStore({ linkSelector: selector });
         } else {
-          alert("Failed to regenerate selector.");
+          alert($t.step07.errors.failedRegenerate);
         }
       } catch (e) {
         console.error(e);
-        alert("An error occurred while regenerating selector.");
+        alert($t.step07.errors.errorRegenerate);
       } finally {
         isRegenerating = false;
         updateStepStore({ isRegeneratingSelector: false });
@@ -77,26 +80,26 @@
       {#if canReveal}
       <div class="header-group" in:fly={{ y: 20, duration: 800, easing: quadOut }}>
         <h1 class="impact-statement">
-          Content Selector
+          {$t.step07.title}
         </h1>
       </div>
   
         <div class="input-group" in:fly={{ y: 20, duration: 800, delay: 150, easing: quadOut }}>
           <p class="subtitle">
-            Think of every website as a <strong>library with a unique layout</strong>. 
+            {@html $t.step07.subtitle} 
             <br><br>
-            This <strong>'Selector'</strong> is the specific map we created for this website. It tells our system exactly where to look to pick up the articles you want, while ignoring menu buttons and advertisements. 
+            {@html $t.step07.explanation1} 
             <br><br>
-            <strong>We have populated this map for you automatically.</strong>
+            {@html $t.step07.explanation2}
           </p>
           <div class="input-wrapper">
             <PlainText 
               value={selector}
-              placeholder="Selector string..."
+              placeholder={$t.step07.placeholder}
               disabled={true}
             />
             <button class="regen-btn" on:click={handleRegenerate}>
-              {isRegenerating ? "Regenerating..." : "Regenerate Selector"}
+              {isRegenerating ? $t.step07.regenerating : $t.step07.regenerate}
             </button>
           </div>
         </div>

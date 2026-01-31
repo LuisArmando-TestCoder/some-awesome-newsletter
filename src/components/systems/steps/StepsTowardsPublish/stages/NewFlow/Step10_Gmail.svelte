@@ -5,8 +5,11 @@
   import Email from "../../../../inputs/Email/Email.svelte";
   import SubmitButton from "../../../../buttons/SubmitButton/SubmitButton.svelte";
   import store, { saveToStore } from "../../../../../store";
+  import { t } from "$lib/i18n/newflow-translations";
 
   export let canReveal = false;
+
+  $: $t;
 
   let emailSender = $store.config?.emailMaskSender || "";
 
@@ -23,21 +26,21 @@
     {#if canReveal}
       <div class="header-group" in:fly={{ y: 20, duration: 800, easing: quadOut }}>
         <h1 class="main-title">
-          Gmail Address (Optional)
+          {$t.step10.title}
         </h1>
       </div>
 
       <div class="input-group" in:fly={{ y: 20, duration: 800, delay: 150, easing: quadOut }}>
         <h3 class="impact-statement">
-          Gmail Email Address
+          {$t.step10.subtitle}
         </h3>
         <p class="subtitle">
-          If you want to send from a specific Gmail address
+          {$t.step10.description}
         </p>
         <div class="input-wrapper">
           <Email 
             value={emailSender}
-            placeholder="your-email@gmail.com"
+            placeholder={$t.step10.placeholder}
             onChange={(val) => emailSender = val}
           />
         </div>

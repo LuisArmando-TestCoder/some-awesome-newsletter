@@ -7,6 +7,7 @@
   import SubmitButton from "../../../../buttons/SubmitButton/SubmitButton.svelte";
   import store, { saveToStore } from "../../../../../store";
   import stepsStore, { updateStepStore } from "./stepsStore";
+  import { t } from "$lib/i18n/newflow-translations";
   
   // Import input components
   import Image from "../../../../inputs/Image/Image.svelte";
@@ -14,6 +15,8 @@
   import ColorPicker from "../../../../inputs/ColorPicker/ColorPicker.svelte";
 
   export let canReveal = false;
+
+  $: $t;
 
   // Local state for fields not in global config or requiring local persistence
   const brandColor = writable("#000000");
@@ -118,12 +121,12 @@
             <table cellpadding="0" cellspacing="0" border="0" role="presentation" style="border-collapse:collapse">
               <tbody><tr>
                 <td style="padding:0 0 4px 0;font-size:19px;line-height:22px;font-weight:700;color:#ffffff;letter-spacing:.2px;font-family:${_font}">
-                  ${_name || 'Your Name'}
+                  ${_name || $t.step05.yourName}
                 </td>
               </tr>
               <tr>
                 <td style="padding:6px 0 0 0;border-top:1px solid rgba(255,255,255,.35);font-size:12px;line-height:16px;color:${_color || '#00c2a8'};text-transform:uppercase;letter-spacing:.6px;font-family:${_font}">
-                  ${_title || 'Your Title'}
+                  ${_title || $t.step05.yourTitle}
                 </td>
               </tr>
               <tr>
@@ -234,25 +237,25 @@
     {#if canReveal}
       <div class="header-group" in:fly={{ y: 20, duration: 800, easing: quadOut }}>
         <h1 class="impact-statement">
-          Customize Your Signature
+          {$t.step05.title}
         </h1>
       </div>
 
       <div class="input-group" in:fly={{ y: 20, duration: 800, delay: 150, easing: quadOut }}>
         <p class="subtitle">
-          Design visually or edit the code directly
+          {$t.step05.subtitle}
         </p>
 
         <!-- Mode Toggle -->
         <div class="tabs">
-          <button class:active={activeTab === 'visual'} on:click={() => toggleMode('visual')}>Visual Editor</button>
-          <button class:active={activeTab === 'code'} on:click={() => toggleMode('code')}>HTML Source</button>
+          <button class:active={activeTab === 'visual'} on:click={() => toggleMode('visual')}>{$t.step05.visualEditor}</button>
+          <button class:active={activeTab === 'code'} on:click={() => toggleMode('code')}>{$t.step05.htmlSource}</button>
         </div>
         
         <div class="signature-wysiwyg">
           <!-- Live Preview Section -->
           <div class="preview-section">
-             <p class="preview-label">Live Preview</p>
+             <p class="preview-label">{$t.step05.livePreview}</p>
              <div class="signature-preview">
                 {@html stripScripts(isManualMode ? manualSignature : generatedSignature)}
              </div>
@@ -275,7 +278,7 @@
                   type="text" 
                   value={$store.config.senderName || ''} 
                   on:input={(e) => handleNameChange(e.currentTarget.value)}
-                  placeholder="Your Name"
+                  placeholder={$t.step05.yourName}
                 />
 
                 <!-- Title -->
@@ -284,7 +287,7 @@
                   type="text" 
                   value={$store.config.newsletterTitle || ''} 
                   on:input={(e) => handleTitleChange(e.currentTarget.value)}
-                  placeholder="Your Title"
+                  placeholder={$t.step05.yourTitle}
                   style="color: {$brandColor};"
                 />
 
@@ -306,11 +309,11 @@
                 <div class="socials-config">
                   <div class="links">
                      <Link
-                        placeholder="Facebook Profile"
+                        placeholder={$t.step05.facebookProfile}
                         bind:value={$facebookLink}
                       />
                       <Link
-                        placeholder="Instagram Profile"
+                        placeholder={$t.step05.instagramProfile}
                         bind:value={$instagramLink}
                       />
                   </div>
@@ -326,12 +329,12 @@
             <div class="code-editor-wrapper">
               <textarea 
                 bind:value={manualSignature}
-                placeholder="Edit HTML directly..."
+                placeholder={$t.step05.editHtml}
                 rows="20"
                 class="code-textarea"
               ></textarea>
               <p class="warning-text">
-                ⚠️ Edits made here will be overwritten if you switch back to Visual Editor and make changes.
+                {$t.step05.warning}
               </p>
             </div>
           {/if}

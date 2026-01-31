@@ -6,8 +6,11 @@
   import SubmitButton from "../../../../buttons/SubmitButton/SubmitButton.svelte";
   import store, { saveToStore, topic as topicStore } from "../../../../../store";
   import stepsStore, { updateStepStore } from "./stepsStore";
+  import { t } from "$lib/i18n/newflow-translations";
 
   export let canReveal = false;
+
+  $: $t;
 
   let topic = "";
   $: if ($topicStore) topic = $topicStore.split(" / ").slice(1).join(" / ") || "";
@@ -26,18 +29,18 @@
     {#if canReveal}
       <div class="header-group" in:fly={{ y: 20, duration: 800, easing: quadOut }}>
         <h1 class="impact-statement">
-          Type of news you want the AI to pick
+          {$t.step04.title}
         </h1>
       </div>
 
       <div class="input-group" in:fly={{ y: 20, duration: 800, delay: 150, easing: quadOut }}>
         <p class="subtitle">
-          Which theme of conversation or topic (inferred from redirect link if set, otherwise empty)
+          {$t.step04.subtitle}
         </p>
         <div class="input-wrapper">
           <PlainText 
             value={topic}
-            placeholder="e.g. Artificial Intelligence, Marketing, Health..."
+            placeholder={$t.step04.placeholder}
             onChange={(val) => {
               topic = val;
               updateStepStore({ topic: val });

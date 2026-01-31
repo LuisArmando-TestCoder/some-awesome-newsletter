@@ -6,8 +6,10 @@
 
     import { t } from "$lib/i18n/dashboard-translations";
     import { t as t2 } from "$lib/i18n/translations";
+    import { t as t3 } from "$lib/i18n/newflow-translations";
     import translations from "$lib/i18n/locales-dashboard/translations";
     import translations2 from "$lib/i18n/translations";
+    import translations3 from "$lib/i18n/locales-newflow/translations";
     import languagesData from "../../../components/systems/inputs/Language/languages";
 
     const availableCodes = Object.keys(translations);
@@ -36,6 +38,7 @@
         // 4. Update the translation content stores immediately
         const dashboardTranslations = translations[code as keyof typeof translations] || translations.en;
         const appTranslations = translations2[code as keyof typeof translations2] || translations2.en;
+        const newFlowTranslations = translations3[code as keyof typeof translations3] || translations3.en;
 
         t.set({
             ...translations.en,
@@ -45,6 +48,11 @@
         t2.set({
             ...translations2.en,
             ...appTranslations,
+        });
+
+        t3.set({
+            ...translations3.en,
+            ...newFlowTranslations,
         });
 
         // 5. Persistence

@@ -84,7 +84,7 @@
 
           <li>
             <a href="/pricing" class="nav-link special-link" class:active={$page.url.pathname === '/pricing'}>
-              {$t?.header?.pricing || 'Pricing'}
+              {$t?.header?.inBilling || 'Pricing'}
             </a>
           </li>
 
@@ -153,7 +153,7 @@
             {/each}
             <li>
                 <a href="/pricing" class="drawer-link highlight" on:click={toggleMenu}>
-                    Pricing
+                    {$t.header.inBilling || 'Pricing'}
                     <span class="arrow">&rarr;</span>
                 </a>
             </li>

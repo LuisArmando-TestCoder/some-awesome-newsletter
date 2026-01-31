@@ -5,8 +5,11 @@
   import Link from "../../../../inputs/Link/Link.svelte";
   import SubmitButton from "../../../../buttons/SubmitButton/SubmitButton.svelte";
   import store, { saveToStore } from "../../../../../store";
+  import { t } from "$lib/i18n/newflow-translations";
 
   export let canReveal = false;
+
+  $: $t;
 
   let redirectLink = $store.config?.lead || "";
 
@@ -23,21 +26,21 @@
     {#if canReveal}
       <div class="header-group" in:fly={{ y: 20, duration: 800, easing: quadOut }}>
         <h1 class="main-title">
-          Redirect (Optional)
+          {$t.step03.title}
         </h1>
       </div>
 
       <div class="input-group" in:fly={{ y: 20, duration: 800, delay: 150, easing: quadOut }}>
         <h3 class="impact-statement">
-          Do you want to redirect the user to your page?
+          {$t.step03.subtitle}
         </h3>
         <p class="subtitle">
-          You can paste a link to your page here, we will be counting how many enter from the emails the AI creates
+          {$t.step03.description}
         </p>
         <div class="input-wrapper">
           <Link 
             value={redirectLink}
-            placeholder="https://your-page.com"
+            placeholder={$t.step03.placeholder}
             onChange={(val) => redirectLink = val}
           />
         </div>

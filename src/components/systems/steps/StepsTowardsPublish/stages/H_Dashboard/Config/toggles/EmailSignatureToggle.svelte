@@ -64,7 +64,7 @@
       if (source === 'user') {
         signatureBody.set(quill.root.innerHTML);
       }
-    });ds
+    });
   });
 
   function generateSignature() {

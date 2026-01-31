@@ -5,8 +5,11 @@
   import SubmitButton from "../../../../buttons/SubmitButton/SubmitButton.svelte";
   import store, { saveToStore } from "../../../../../store";
   import LoadingScreen from "../../../../loading/LoadingScreen.svelte";
+  import { t } from "$lib/i18n/newflow-translations";
 
   export let canReveal = false;
+
+  $: $t;
 
   let isSending = false;
   let isSent = false;
@@ -27,7 +30,7 @@
 </script>
 
 {#if isSending}
-  <LoadingScreen messages={["Connecting to email provider...", "Authenticating...", "Sending article..."]} />
+  <LoadingScreen messages={[$t.step11.loading.connecting, $t.step11.loading.authenticating, $t.step11.loading.sending]} />
 {/if}
 
 <Centered>
@@ -35,17 +38,17 @@
     {#if canReveal}
       <div class="header-group" in:fly={{ y: 20, duration: 800, easing: quadOut }}>
         <h1 class="impact-statement">
-          Send Test Email
+          {$t.step11.title}
         </h1>
       </div>
 
       <div class="input-group" in:fly={{ y: 20, duration: 800, delay: 150, easing: quadOut }}>
         <p class="subtitle">
-          Send a test email to yourself to verify the configuration.
+          {$t.step11.subtitle}
         </p>
         <div class="input-wrapper">
           <button class="send-btn" on:click={handleSend}>
-            {isSent ? "Sent! Check your email" : "Send Now"}
+            {isSent ? $t.step11.sent : $t.step11.sendNow}
           </button>
         </div>
       </div>

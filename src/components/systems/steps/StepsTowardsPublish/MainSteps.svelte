@@ -56,12 +56,12 @@
 
   const components = [
     [(s: Store) => { t(); return true; }, Step01_Frequency],
-    [(s: Store) => { t(); return !!s.config?.scheduleTime; }, Step02_Language],
-    [(s: Store) => { t(); return !!s.config?.dashboardLanguage; }, Step03_Redirect],
-    [(s: Store) => { t(); return !!s.config?.dashboardLanguage; }, Step06_NewsWebsite],
-    [(s: Store) => { t(); return isValidURL(s.newsSource); }, Step04_Topic], // Redirect is optional
-    [(s: Store) => { t(); return !!s.config.community }, Step07_Selector],
-    [(s: Store) => { t(); return !!s.linkSelector; }, Step08_Generate],
+    [(s: Store) => { t(); return $store.config.newsSources?.length || !!s.config?.scheduleTime; }, Step02_Language],
+    [(s: Store) => { t(); return $store.config.newsSources?.length || !!s.config?.dashboardLanguage; }, Step03_Redirect],
+    [(s: Store) => { t(); return $store.config.newsSources?.length || !!s.config?.dashboardLanguage; }, Step06_NewsWebsite],
+    [(s: Store) => { t(); return $store.config.newsSources?.length || isValidURL(s.newsSource); }, Step04_Topic], // Redirect is optional
+    [(s: Store) => { t(); return $store.config.newsSources?.length || !!s.config.community }, Step07_Selector],
+    [(s: Store) => { t(); return $store.config.newsSources?.length || !!s.linkSelector; }, Step08_Generate],
     
     [(s: Store) => { t(); return true; }, Step12_Share], // Send action
     [(s: Store) => { t(); return true; }, Step13_Plan], // Share display

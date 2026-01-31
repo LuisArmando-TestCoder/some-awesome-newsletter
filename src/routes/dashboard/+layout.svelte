@@ -14,6 +14,10 @@
   import getLeadsForConfigurator from "../../components/systems/requests/getLeadsForConfigurator";
   import Notification from '../../components/Notification/Notification.svelte';
   import { refreshSubscribers } from "../../components/systems/steps/StepsTowardsPublish/stages/H_Dashboard/Users/UserDataService";
+    import LoadingScreen from "../../components/systems/loading/LoadingScreen.svelte";
+    import { writable } from "svelte/store";
+
+  let load = writable(true);
 
   onMount(async () => {
     const params = new URLSearchParams($page.url.search);
@@ -68,11 +72,11 @@
           saveToStore({
             newsSource: url,
             lead,
-            // stepsIndex: stepsMapping["News Sources"], // todo: get this back once you have the main flow set
+            stepsIndex: stepsMapping["Users"],
           });
-          return;
         }
 
+        load.set(false);
         // setInitialNonInteractiveSlidesAutomaticSlideTime();
       },
       () => {
@@ -108,11 +112,12 @@
     <slot />
   </main>
 </div>
-
 <Notification />
 <MenuHalf />
 <MenuHalfTrigger />
-
+{#if $load}
+  <LoadingScreen />
+{/if}
 <style lang="scss">
   /* Styles remain unchanged */
   .dashboard-layout {

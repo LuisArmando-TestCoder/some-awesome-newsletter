@@ -1,6 +1,9 @@
 <script lang="ts">
-    import { t } from "$lib/i18n/dashboard-translations";
+    import { t } from "$lib/i18n/billing-form-translations";
     import store from "../../../components/store";
+    import { onMount } from "svelte";
+    import { browser } from "$app/environment";
+
     // standard import for svelte-i18n, adjust path if using a different library
 
     // --- PROPS ---
@@ -17,6 +20,27 @@
     };
     
     export let isValid = false;
+
+    // --- LOCAL STORAGE PERSISTENCE ---
+    const STORAGE_KEY = "billing_form_persistence";
+
+    onMount(() => {
+        if (browser) {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            if (stored) {
+                try {
+                    const parsed = JSON.parse(stored);
+                    formData = { ...formData, ...parsed };
+                } catch (e) {
+                    console.error("Failed to parse stored billing data", e);
+                }
+            }
+        }
+    });
+
+    $: if (browser && formData) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
+    }
 
     // --- PRE-FILL LOGIC ---
     $: if ($store.user || $store.config) {
@@ -57,72 +81,72 @@
 
 <div class="billing-card">
     <div class="billing-header">
-        <h3 class="billing-header__title">{$t['billing.header.title']}</h3>
-        <p class="billing-header__subtitle">{$t['billing.header.subtitle']}</p>
+        <h3 class="billing-header__title">{$t.billing.header.title}</h3>
+        <p class="billing-header__subtitle">{$t.billing.header.subtitle}</p>
     </div>
     
     <div class="billing-grid">
         <div class="form-group">
-            <label for="fname">{$t['billing.fields.firstName.label']}</label>
+            <label for="fname">{$t.billing.fields.firstName.label}</label>
             <div class="input-wrapper">
                 <input 
                     id="fname" 
                     type="text" 
                     bind:value={formData.firstName} 
-                    placeholder={$t['billing.fields.firstName.placeholder']} 
+                    placeholder={$t.billing.fields.firstName.placeholder} 
                     autocomplete="given-name" 
                 />
             </div>
         </div>
 
         <div class="form-group">
-            <label for="lname">{$t['billing.fields.lastName.label']}</label>
+            <label for="lname">{$t.billing.fields.lastName.label}</label>
             <div class="input-wrapper">
                 <input 
                     id="lname" 
                     type="text" 
                     bind:value={formData.lastName} 
-                    placeholder={$t['billing.fields.lastName.placeholder']} 
+                    placeholder={$t.billing.fields.lastName.placeholder} 
                     autocomplete="family-name" 
                 />
             </div>
         </div>
 
         <div class="form-group full-width">
-            <label for="email">{$t['billing.fields.email.label']}</label>
+            <label for="email">{$t.billing.fields.email.label}</label>
             <div class="input-wrapper">
                 <input 
                     id="email" 
                     type="email" 
                     bind:value={formData.email} 
-                    placeholder={$t['billing.fields.email.placeholder']} 
+                    placeholder={$t.billing.fields.email.placeholder} 
                     autocomplete="email" 
                 />
             </div>
         </div>
 
         <div class="form-group">
-            <label for="phone">{$t['billing.fields.phone.label']}</label>
+            <label for="phone">{$t.billing.fields.phone.label}</label>
             <div class="input-wrapper">
                 <input 
                     id="phone" 
                     type="tel" 
                     bind:value={formData.phone} 
-                    placeholder={$t['billing.fields.phone.placeholder']} 
+                    placeholder={$t.billing.fields.phone.placeholder} 
                     autocomplete="tel" 
                 />
             </div>
         </div>
 
         <div class="form-group">
-            <label for="country">{$t['billing.fields.country.label']}</label>
+            <label for="country">{$t.billing.fields.country.label}</label>
             <div class="input-wrapper">
                 <input 
                     id="country" 
                     class="code-input"
                     type="text" 
                     bind:value={formData.country} 
-                    placeholder={$t['billing.fields.country.placeholder']} 
+                    placeholder={$t.billing.fields.country.placeholder} 
                     maxlength="2" 
                     autocomplete="country"
                 />
@@ -130,39 +154,39 @@
         </div>
 
         <div class="form-group full-width">
-            <label for="address">{$t['billing.fields.address.label']}</label>
+            <label for="address">{$t.billing.fields.address.label}</label>
             <div class="input-wrapper">
                 <input 
                     id="address" 
                     type="text" 
                     bind:value={formData.address} 
-                    placeholder={$t['billing.fields.address.placeholder']} 
+                    placeholder={$t.billing.fields.address.placeholder} 
                     autocomplete="street-address" 
                 />
             </div>
         </div>
 
         <div class="form-group">
-            <label for="city">{$t['billing.fields.city.label']}</label>
+            <label for="city">{$t.billing.fields.city.label}</label>
             <div class="input-wrapper">
                 <input 
                     id="city" 
                     type="text" 
                     bind:value={formData.city} 
-                    placeholder={$t['billing.fields.city.placeholder']} 
+                    placeholder={$t.billing.fields.city.placeholder} 
                     autocomplete="address-level2" 
                 />
             </div>
         </div>
 
         <div class="form-group">
-            <label for="zip">{$t['billing.fields.zip.label']}</label>
+            <label for="zip">{$t.billing.fields.zip.label}</label>
             <div class="input-wrapper">
                 <input 
                     id="zip" 
                     type="text" 
                     bind:value={formData.zip} 
-                    placeholder={$t['billing.fields.zip.placeholder']} 
+                    placeholder={$t.billing.fields.zip.placeholder} 
                     autocomplete="postal-code" 
                 />
             </div>

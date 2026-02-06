@@ -8,10 +8,12 @@
     import { t as t2 } from "$lib/i18n/translations";
     import { t as t3 } from "$lib/i18n/newflow-translations";
     import { t as tSubscribe } from "$lib/i18n/subscribe-translations";
+    import { t as tBillingForm } from "$lib/i18n/billing-form-translations";
     import translations from "$lib/i18n/locales-dashboard/translations";
     import translations2 from "$lib/i18n/translations";
     import translations3 from "$lib/i18n/locales-newflow/translations";
     import translationsSubscribe from "$lib/i18n/locales-subscribe/translations";
+    import translationsBillingForm from "$lib/i18n/locales-billing-form/translations";
     import languagesData from "../../../components/systems/inputs/Language/languages";
 
     const availableCodes = Object.keys(translations);
@@ -42,6 +44,7 @@
         const appTranslations = translations2[code as keyof typeof translations2] || translations2.en;
         const newFlowTranslations = translations3[code as keyof typeof translations3] || translations3.en;
         const subscribeTranslations = translationsSubscribe[code as keyof typeof translationsSubscribe] || translationsSubscribe.en;
+        const billingTranslations = translationsBillingForm[code as keyof typeof translationsBillingForm] || translationsBillingForm.en;
 
         t.set({
             ...translations.en,
@@ -61,6 +64,11 @@
         tSubscribe.set({
             ...translationsSubscribe.en,
             ...subscribeTranslations,
+        });
+
+        tBillingForm.set({
+            ...translationsBillingForm.en,
+            ...billingTranslations,
         });
 
         // 5. Persistence

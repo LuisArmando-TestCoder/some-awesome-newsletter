@@ -13,6 +13,7 @@
   import Pagination from "../../../../../../Pagination/Pagination.svelte";
   import SearchBar from "../../../../../../SearchBar/SearchBar.svelte";
   import { t } from "$lib/i18n/dashboard-translations";
+  import { checkPlanLimit } from "$lib/utils/checkPlanLimits";
 
   export let canReveal = true;
 
@@ -63,6 +64,9 @@
 
   // Define a stable ID for the static "Add" card
   const ADD_NEWS_SOURCE_CARD_ID = "add-news-source";
+
+  $: limitCheck = checkPlanLimit("newsSources");
+  $: isLimitReached = !limitCheck.allowed;
 </script>
 
 <Page>
@@ -76,9 +80,10 @@
     <!-- ^-- let:getToggleProps provides the helper function -->
 
     <!-- Toggle card for adding a new news source -->
+    <!-- Toggle card for adding a new news source -->
     <ToggleCard
       {canReveal}
-      cardTitle={$t['newsSource.addTitle']}
+      cardTitle={`${$t['newsSource.addTitle']} ${isLimitReached ? '(Limit Reached)' : ''}`}
       {...getToggleProps(ADD_NEWS_SOURCE_CARD_ID)}
     >
       <!-- Pass canReveal down if AddNewsSourceForm needs it -->

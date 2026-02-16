@@ -12,6 +12,7 @@
 
   export let newsSource: NewsSource;
   export let canReveal: boolean = true;
+  export let disabled: boolean = false;
 
   let linkSelector = newsSource.linkSelector || "";
   const isRegenerating = writable(false);
@@ -46,9 +47,9 @@
   };
 </script>
 
-<div class="developer-item-card">
-  <section class="config-row">
-    <div class="description">
+  <div class="developer-item-card" class:disabled>
+    <section class="config-row">
+      <div class="description">
       <h4>{$t['labels.connectionDetails'] || "Connection"}</h4>
       <p>{$t['descriptions.connection'] || "Use this link to sync your news source manually."}</p>
     </div>
@@ -75,11 +76,12 @@
           label="" 
           placeholder={$t['placeholders.linkSelector'] || "Enter selector..."}
           bind:value={linkSelector}
+          disabled={disabled}
         />
         <div class="inline-button">
           <IconButton
             src="./icons/refresh.svg"
-            disabled={$isRegenerating}
+            disabled={$isRegenerating || disabled}
             loading={$isRegenerating}
             label={$t['labels.autoDetect'] || "Auto-detect"}
             callback={handleRegenerate}
@@ -118,6 +120,12 @@
     background: #ffffff;
     border-radius: 12px;
     border: 1px solid #eaeaea;
+    transition: opacity 0.3s;
+
+    &.disabled {
+      opacity: 0.6;
+      pointer-events: none;
+    }
   }
 
   .config-row {

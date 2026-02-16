@@ -196,7 +196,7 @@ export default {
           { "text": "কুকি পলিসি", "href": "/legal/cookies" }
         ]
       },
-      "contact": "oriens@aiban.news"
+      "contact": "info@aiban.news"
     }
   },
   "help": {

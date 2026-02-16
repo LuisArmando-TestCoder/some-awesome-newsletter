@@ -14,6 +14,7 @@
     import BillingForm from "$lib/ui/organisms/BillingForm.svelte"; 
     
     import { t } from "$lib/i18n/translations";
+    import { checkPlanLimit } from "$lib/utils/checkPlanLimits";
 
     // --- STATE MANAGEMENT ---
     let state: PlansState;
@@ -69,6 +70,18 @@
             feedbackMessage = { type: "error", text: "Payment process was cancelled." };
         }
     });
+
+    $: newsSourcesCheck = checkPlanLimit("newsSources");
+    $: usersCheck = checkPlanLimit("users");
+    
+    $: if (!newsSourcesCheck.allowed || !usersCheck.allowed) {
+        if (!feedbackMessage.text) { // Don't overwrite existing success/error
+             feedbackMessage = { 
+                 type: "error", 
+                 text: "You have exceeded your plan limits. Some features are disabled until you upgrade." 
+             };
+        }
+    }
 
     onDestroy(() => unsubPlans());
 
@@ -197,7 +210,7 @@
                             <span class="pricing__currency">$</span><span class="pricing__amount">0</span>
                         </div>
                         <ul class="pricing__features">
-                            {#each computeFeatures(state.content, plan.id) as feature}
+                            {#each computeFeatures(state.content, plan.id as any) as feature}
                                 <li class="pricing__feature-item">{feature}</li>
                             {/each}
                         </ul>
@@ -225,7 +238,7 @@
                                 <span class="pricing__period">/{state.interval === "monthly" ? "mo" : "yr"}</span>
                             </div>
                             <ul class="pricing__features">
-                                {#each computeFeatures(state.content, tier.id) as feature}
+                                {#each computeFeatures(state.content, tier.id as any) as feature}
                                     <li class="pricing__feature-item">{feature}</li>
                                 {/each}
                             </ul>

@@ -14,6 +14,7 @@
   import store from "../../../../../../store";
   import { ping } from "../../../../../../Notification/notificationStore";
   import { t } from "$lib/i18n/dashboard-translations";
+  import { checkPlanLimit } from "$lib/utils/checkPlanLimits";
 
   // Type for the expected form data payload
   type FormDataPayload = Pick<
@@ -60,10 +61,11 @@
 
   /** Handles the form submission */
   async function handleSubmit() {
-    // if ($store.config.pricingPlan === "free" && $store.subscribers && $store.subscribers[$store.config.newsSources[0].id]?.length > 0) {
-    //   ping($t['errors.maxSubscribers'], "error");
-    //   return;
-    // }
+    const limitCheck = checkPlanLimit("users");
+    if (!limitCheck.allowed) {
+      validationError = $t['errors.maxSubscribers'] || `Plan limit reached: ${limitCheck.limit} subscribers.`;
+      return;
+    }
 
     if (disabled || isSubmitting) {
       return; // Prevent submission if disabled or already submitting
@@ -156,7 +158,7 @@
         disabled={disabled || isSubmitting}
       />
       <Email
-        label={`${$t['labels.email']} *`}
+        label={`${$t['labels.emailAddress']} *`}
         placeholder={$t['placeholders.userEmail']}
         bind:value={email}
         disabled={disabled || isSubmitting}

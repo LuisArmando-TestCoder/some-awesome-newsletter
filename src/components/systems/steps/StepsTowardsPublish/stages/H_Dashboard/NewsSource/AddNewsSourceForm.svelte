@@ -17,6 +17,7 @@
   
   // Import translation store
   import { t } from "$lib/i18n/dashboard-translations";
+  import { checkPlanLimit } from "$lib/utils/checkPlanLimits";
 
   export const addedNewsSource = writable<any>(null);
 
@@ -26,6 +27,9 @@
   let isAdding = false;
   let addErrorMessage = "";
 
+  $: limitCheck = checkPlanLimit("newsSources");
+  $: isLimitReached = !limitCheck.allowed;
+
   function clearAddForm() {
     addNewsSourceUrl = "";
     addNewsSourceLead = "";
@@ -33,6 +37,11 @@
   }
 
   async function handleAddNewsSource() {
+    if (isLimitReached) {
+      addErrorMessage = `Plan limit reached: ${limitCheck.limit} news sources. Upgrade to add more.`;
+      return;
+    }
+
     const fields = {
       url: addNewsSourceUrl,
       lead: addNewsSourceLead,
@@ -85,7 +94,13 @@
   }
 </script>
 
-<form class="news-source-form" on:submit|preventDefault={handleAddNewsSource}>
+<form class="news-source-form" on:submit|preventDefault={handleAddNewsSource} class:form-disabled={isLimitReached}>
+  {#if isLimitReached}
+    <div class="limit-warning">
+      <p><strong>Limit Reached:</strong> You have {limitCheck.current} news sources (Limit: {limitCheck.limit}). <a href="/plans">Upgrade Plan</a></p>
+    </div>
+  {/if}
+
   <div class="news-source-input news-source-wrapper">
     <Link
       placeholder={$t['newsSource.urlPlaceholder']}
@@ -111,7 +126,7 @@
   {/if}
 
   <SubmitButton
-    disabled={isAdding}
+    disabled={isAdding || isLimitReached}
     loading={isAdding}
     label={isAdding ? $t['newsSource.adding'] : $t['newsSource.uploadButton']}
     callback={handleAddNewsSource}
@@ -131,6 +146,26 @@
 
   .news-source-wrapper {
     max-width: 512px;
+  }
+
+  .form-disabled {
+    opacity: 0.7;
+  }
+
+  .limit-warning {
+    background-color: var(--color-warning-light, #fff3cd);
+    border: 1px solid var(--color-warning, #ffc107);
+    color: var(--color-warning-dark, #856404);
+    padding: 0.75rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    text-align: center;
+    
+    a {
+      color: inherit;
+      text-decoration: underline;
+      font-weight: bold;
+    }
   }
   
   .news-source-input {

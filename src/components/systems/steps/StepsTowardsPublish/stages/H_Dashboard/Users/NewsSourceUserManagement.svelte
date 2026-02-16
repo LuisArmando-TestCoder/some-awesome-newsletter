@@ -24,6 +24,7 @@
   
   import triggerNewsSourceSend from "../../../../../requests/triggerNewsSourceSend.js";
   import sendCustomContent from "../../../../../requests/sendCustomContent";
+  import { checkPlanLimit } from "$lib/utils/checkPlanLimits";
   
   // Import translation store
   import { t } from "$lib/i18n/dashboard-translations";
@@ -48,6 +49,9 @@
   $: isOpen = $openNewsSourceIdStore === newsSource.id;
   $: sourceName = newsSource.url?.split("//")[1]?.split("/")[0] ?? newsSource.id;
   
+  $: limitCheck = checkPlanLimit("users");
+  $: isLimitReached = !limitCheck.allowed;
+
   // Translated Titles
   $: cardTitle = `${$t['labels.subscribersFor']}: ${sourceName}`;
   $: subscriberCount = subscribers.length;
@@ -266,12 +270,18 @@
     />
   </div>
 
-  <div class="add-user-section">
+  <div class="add-user-section" class:section-disabled={isLimitReached}>
+    {#if isLimitReached}
+      <div class="limit-warning">
+        <p><strong>Plan Limit Reached:</strong> You have {limitCheck.current} subscribers (Limit: {limitCheck.limit}). <a href="/plans">Upgrade</a> to add more.</p>
+      </div>
+    {/if}
+
     <IconButton
       src="/icons/plus.svg"
       label={isAddingFormVisible ? $t['labels.cancelAdding'] : $t['labels.addNewSubscriber']}
       callback={toggleAddFormVisibility}
-      disabled={isPerformingAction}
+      disabled={isPerformingAction || isLimitReached}
     />
 
     {#if actionFeedback}
@@ -394,6 +404,27 @@
 
   .add-user-section {
     margin-bottom: 1rem;
+  }
+
+  .section-disabled {
+    opacity: 0.7;
+    /* We don't disable pointer events globally so the upgrade link works */
+  }
+
+  .limit-warning {
+    background-color: var(--color-warning-light, #fff3cd);
+    border: 1px solid var(--color-warning, #ffc107);
+    color: var(--color-warning-dark, #856404);
+    padding: 0.75rem;
+    border-radius: var(--radius-s);
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    
+    a {
+      color: inherit;
+      text-decoration: underline;
+      font-weight: bold;
+    }
   }
 
   .add-forms-container {

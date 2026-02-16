@@ -20,7 +20,20 @@
     vipfree: $t.step13.limitDetails.vipfree
   } as Record<string, string>;
 
-  let usage = "10 / 100 users (10%)"; // Mock usage
+  let usage = ""; // Populated reactively
+
+  // Calculate usage based on store data
+  $: if ($store.config) {
+    const subscriberCount = $store.stats?.totalSubscribers || 0; // Assuming store has stats
+    const limit = limits[plan] === "Unlimited" ? Infinity : parseInt(limits[plan] || "0", 10);
+    
+    if (limit === Infinity) {
+      usage = `${subscriberCount} / Unlimited`;
+    } else {
+      const percent = Math.min(100, Math.round((subscriberCount / limit) * 100));
+      usage = `${subscriberCount} / ${limit} users (${percent}%)`;
+    }
+  }
 
   function handleFinish() {
     saveToStore({ stepsIndex: $store.stepsIndex + 1 });
@@ -44,13 +57,25 @@
         <h3 class="impact-statement">{$t.step13.currentPlan} <span class="highlight">{plan.toUpperCase()}</span></h3>
         <p class="limits">{$t.step13.limits} {limits[plan] || $t.step13.unknown}</p>
         
-        {#if plan !== "master"}
-          <div class="usage-bar">
-            <div class="bar-fill" style="width: 10%;"></div>
+        {#if plan !== "master" && plan !== "vipfree"}
+          <div class="usage-container">
+            <div class="usage-header">
+              <span>{$t.step13.usage}</span>
+              <span class="usage-value">{usage}</span>
+            </div>
+            <!-- Calculate width safely -->
+            {#if $store.config}
+               {@const limitVal = limits[plan] === "Unlimited" ? 1 : parseInt(limits[plan] || "1", 10)}
+               {@const subCount = $store.stats?.totalSubscribers || 0}
+               {@const widthVal = limitVal === 1 ? 0 : Math.min(100, (subCount / limitVal) * 100)}
+               
+               <div class="usage-bar">
+                 <div class="bar-fill" style="width: {widthVal}%;"></div>
+               </div>
+            {/if}
           </div>
-          <p class="usage-text">{$t.step13.usage} {usage}</p>
           
-          <button class="change-plan-btn" on:click={handleChangePlan}>
+          <button class="change-plan-btn shimmer-btn" on:click={handleChangePlan}>
             {$t.step13.changePlan}
           </button>
         {/if}
@@ -143,38 +168,79 @@
     margin-bottom: 1.5rem;
   }
 
+  .usage-container {
+    margin: 1.5rem 0;
+    text-align: left;
+  }
+
+  .usage-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
   .usage-bar {
-    height: 8px;
-    background: #eee;
-    border-radius: 4px;
-    margin: 1rem 0;
+    height: 10px;
+    background: #f0f0f0;
+    border-radius: 5px;
     overflow: hidden;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
     
     .bar-fill {
       height: 100%;
-      background: #28a745;
+      background: linear-gradient(90deg, #4ade80 0%, #22c55e 100%);
+      transition: width 0.5s ease-out;
     }
-  }
-
-  .usage-text {
-    font-size: 0.9rem;
-    color: #666;
-    margin-bottom: 1.5rem;
   }
 
   .change-plan-btn {
     padding: 0.8rem 2rem;
-    background: #007aff;
+    background: #2563eb;
     color: white;
     border: none;
     border-radius: 8px;
     font-size: 1rem;
     cursor: pointer;
     transition: all 0.2s;
+    font-weight: 600;
+    box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
     
     &:hover {
-      background: #0062cc;
+      background: #1d4ed8;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 8px -1px rgba(37, 99, 235, 0.3);
     }
+  }
+
+  .shimmer-btn {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .shimmer-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.3) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-20deg);
+    animation: shimmer-btn-anim 3s infinite;
+  }
+
+  @keyframes shimmer-btn-anim {
+    0% { left: -100%; }
+    20% { left: 200%; }
+    100% { left: 200%; }
   }
 
   .dev-section {

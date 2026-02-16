@@ -19,6 +19,7 @@
   
   // Translation store import
   import { t } from "$lib/i18n/dashboard-translations";
+  import { checkPlanLimit } from "$lib/utils/checkPlanLimits";
 
   export let newsSource: NewsSource;
   export let errorMessage: string;
@@ -72,6 +73,9 @@
 
   export const updatedNewsSource = writable<NewsSource | null>(null);
 
+  $: limitCheck = checkPlanLimit("newsSources");
+  $: isLimitReached = !limitCheck.allowed;
+
   let isMounted = false;
   onMount(() => {
     isMounted = true;
@@ -80,6 +84,15 @@
   let rawContent: string = "";
 
   async function handleUpdate() {
+    // If limits reached, we might restrict *activating* a source if it was inactive,
+    // but typically update form handles existing sources.
+    // However, if the user downgraded, we might want to disable enabling.
+    // For now, let's just warn or disable the whole form if they are over limit and trying to activate?
+    // Actually, backend trigger check handles usage. Frontend form is for settings.
+    // We should probably allow editing settings even if over limit, but maybe not activating.
+    // But this form is Update settings, not just toggle active (Toggle is in NewsSourceUserManagement usually or ToggleCard header).
+    // Let's keep it editable but maybe show a warning.
+    
     if (!updateFields?.id || !updateFields.scheduleTime) {
         errorMessage = $t['newsSource.errorInit'];
         return;
@@ -121,6 +134,12 @@
 </script>
 
 <form class="news-source-update-form" on:submit|preventDefault={handleUpdate}>
+  {#if isLimitReached}
+    <div class="limit-warning">
+      <p><strong>Plan Limit Exceeded:</strong> You have {limitCheck.current} / {limitCheck.limit} news sources. Sends will be blocked until you <a href="/plans">upgrade</a> or remove excess sources.</p>
+    </div>
+  {/if}
+
   {#if updateFields}
     <ToggleCard {canReveal} cardTitle={$t['newsSource.basicSettings']} isOpen={false} onChange={() => {}}>
       <div class="selectors-group">
@@ -228,6 +247,23 @@
     flex-direction: column;
     gap: 1rem;
   }
+
+  .limit-warning {
+    background-color: var(--color-warning-light, #fff3cd);
+    border: 1px solid var(--color-warning, #ffc107);
+    color: var(--color-warning-dark, #856404);
+    padding: 0.75rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    text-align: center;
+    
+    a {
+      color: inherit;
+      text-decoration: underline;
+      font-weight: bold;
+    }
+  }
+
   .selectors-group {
     margin: 1rem 0;
     display: grid;

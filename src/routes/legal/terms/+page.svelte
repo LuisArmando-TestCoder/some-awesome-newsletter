@@ -1,6 +1,6 @@
 <script lang="ts">
   const lastUpdated = "January 06, 2026";
-  const contactEmail = "oriens@aiban.news";
+  const contactEmail = "info@aiban.news";
 </script>
 
 <svelte:head>

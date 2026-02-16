@@ -8,6 +8,7 @@
   import DeveloperNewsSourceItem from "./DeveloperNewsSourceItem.svelte";
   import ToggleCard from "../../../../../buttons/ToggleCard/ToggleCard.svelte";
   import { t } from "$lib/i18n/dashboard-translations";
+  import { checkPlanLimit } from "$lib/utils/checkPlanLimits";
 
   export let canReveal = true;
 
@@ -51,12 +52,15 @@
     const path = url.replace(/^(?:https?:\/\/)?(?:www\.)?[^\/]+/i, "");
     return path === "/" || path === "" ? "Root" : path;
   }
+
+  $: limitCheck = checkPlanLimit("newsSources");
+  $: isLimitReached = !limitCheck.allowed;
 </script>
 
 <div class="developer-sources-container">
   <header class="section-header">
     <div class="header-text">
-      <h3>{$t['newsSourceDeveloper.title'] || "API News Sources"}</h3>
+      <h3>{$t['newsSourceDeveloper.loading'] ? $t['newsSourceDeveloper.loading'].replace('Loading', 'API News Sources') : "API News Sources"}</h3>
       <p>{filteredNewsSources.length} sources found</p>
     </div>
     <div class="search-wrapper">
@@ -67,9 +71,15 @@
     </div>
   </header>
 
+  {#if isLimitReached}
+    <div class="limit-banner">
+      Plan limits exceeded. API access may be restricted. <a href="/plans">Upgrade</a>
+    </div>
+  {/if}
+
   <SlotAutoCollapseToggle {canReveal} autoCollapse={true} let:getToggleProps>
     {#if newsSourcesReversed && newsSourcesReversed.length}
-      <div class="sources-list">
+      <div class="sources-list" class:restricted-mode={isLimitReached}>
         {#each paginatedNewsSources as ns (ns.id)}
           <div class="source-card-wrapper">
             <ToggleCard
@@ -131,6 +141,16 @@
     .search-wrapper {
       width: 300px;
     }
+  }
+
+  .limit-banner {
+    background: #fff3cd;
+    color: #856404;
+    padding: 10px;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 0.9rem;
+    a { font-weight: bold; color: inherit; }
   }
 
   .sources-list {

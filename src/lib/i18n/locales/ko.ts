@@ -196,7 +196,7 @@ export default {
           { "text": "쿠키 정책", "href": "/legal/cookies" }
         ]
       },
-      "contact": "oriens@aiban.news"
+      "contact": "info@aiban.news"
     }
   },
   "help": {

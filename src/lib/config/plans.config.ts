@@ -3,7 +3,7 @@ import { writable, type Writable, get } from 'svelte/store';
 import { t } from '../i18n/translations';
 
 export type Interval = 'monthly' | 'yearly';
-export type PlanId = 'free' | 'starter' | 'growth' | 'pro' | 'master' | 'vipfree';
+export type PlanId = 'free' | 'starter' | 'growth' | 'pro' | 'master' | 'vipfree' | 'newsletter';
 
 export interface Plan {
   id: PlanId;
@@ -14,7 +14,7 @@ export interface Plan {
   featuresBase: string[];
   featuresDelta: string[];
   limits: {
-    sources: number;
+    newsSources: number;
     users: number; 
   };
   ctaLabel: string;
@@ -42,12 +42,13 @@ const ANNUAL_DISCOUNT = 0.35;
 const calcAnnual = (monthly: number) => Math.floor((monthly * 12) * (1 - ANNUAL_DISCOUNT));
 
 const PLAN_DEFINITIONS: Record<PlanId, Partial<Plan>> = {
-  free: { monthly: 0, yearly: 0, tier: 0, limits: { sources: 1, users: 100 } },
-  starter: { monthly: 17, yearly: calcAnnual(17), tier: 1, limits: { sources: 5, users: 100000 }, productId: 'price_starter_id' },
-  growth: { monthly: 35, yearly: calcAnnual(35), tier: 2, limits: { sources: 17, users: 250000 }, productId: 'price_growth_id' },
-  pro: { monthly: 80, yearly: calcAnnual(80), tier: 3, limits: { sources: 25, users: 500000 }, productId: 'price_pro_id' },
-  master: { monthly: 150, yearly: calcAnnual(150), tier: 4, limits: { sources: 50, users: -1 }, productId: 'price_master_id' },
-  vipfree: { monthly: 0, yearly: 0, tier: 99, limits: { sources: 100, users: -1 }, internalOnly: true }
+  free: { monthly: 0, yearly: 0, tier: 0, limits: { newsSources: 1, users: 100 } },
+  starter: { monthly: 17, yearly: calcAnnual(17), tier: 1, limits: { newsSources: 5, users: 100000 }, productId: 'price_starter_id' },
+  growth: { monthly: 35, yearly: calcAnnual(35), tier: 2, limits: { newsSources: 17, users: 250000 }, productId: 'price_growth_id' },
+  pro: { monthly: 80, yearly: calcAnnual(80), tier: 3, limits: { newsSources: 25, users: 500000 }, productId: 'price_pro_id' },
+  master: { monthly: 150, yearly: calcAnnual(150), tier: 4, limits: { newsSources: 50, users: -1 }, productId: 'price_master_id' },
+  vipfree: { monthly: 0, yearly: 0, tier: 99, limits: { newsSources: -1, users: -1 }, internalOnly: true },
+  newsletter: { monthly: 0, yearly: 0, tier: 5, limits: { newsSources: 10, users: 10000 }, productId: 'price_newsletter_id' }
 };
 
 export function computeFeatures(content: PlansContent, target: PlanId): string[] {

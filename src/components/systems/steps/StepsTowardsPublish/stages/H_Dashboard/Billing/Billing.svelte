@@ -45,6 +45,7 @@
         { id: "growth", mo: 35 },
         { id: "pro", mo: 80 },
         { id: "master", mo: 150 },
+        { id: "newsletter", mo: 0 },
     ];
 
     $: if ($globalLanguage) {

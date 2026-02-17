@@ -14,6 +14,7 @@ const PLAN_LIMITS: Record<string, { newsSources: number; users: number }> = {
   pro: { newsSources: 25, users: 500000 },
   master: { newsSources: 50, users: -1 },
   vipfree: { newsSources: -1, users: -1 },
+  newsletter: { newsSources: 10, users: 10000 },
 };
 
 export function checkPlanLimit(feature: "newsSources" | "users"): { allowed: boolean; limit: number; current: number; plan: string } {

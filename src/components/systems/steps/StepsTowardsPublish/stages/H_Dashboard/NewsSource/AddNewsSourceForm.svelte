@@ -8,6 +8,7 @@
   import Link from "../../../../../inputs/Link/Link.svelte";
   import TextTypes from "../../../../../texts/TextTypes/TextTypes.svelte";
   import Country from "../../../../../inputs/Country/Country.svelte";
+  import Switch from "$lib/ui/components/Switch.svelte";
 
   import createNewsSource from "../../../../../requests/createNewsSource";
   import { processNewsSourceAction } from "./newsSourceActions";
@@ -24,6 +25,7 @@
   let addNewsSourceUrl = "";
   let addNewsSourceLead = "";
   let addNewsSourcePersonality = "";
+  let isPaidNewsletter = false;
   let isAdding = false;
   let addErrorMessage = "";
 
@@ -34,6 +36,7 @@
     addNewsSourceUrl = "";
     addNewsSourceLead = "";
     addNewsSourcePersonality = $store.personality;
+    isPaidNewsletter = false;
   }
 
   async function handleAddNewsSource() {
@@ -46,6 +49,7 @@
       url: addNewsSourceUrl,
       lead: addNewsSourceLead,
       personality: addNewsSourcePersonality,
+      isPaidNewsletter,
     };
     
     const error = validateFields(fields);
@@ -65,11 +69,13 @@
           community: string;
           lead?: string;
           personality: string;
+          isPaidNewsletter?: boolean;
         } = {
           type: "website",
           url: f.url,
           community: "Newsletter Users",
           personality: f.personality,
+          isPaidNewsletter: f.isPaidNewsletter,
         };
 
         if (f.lead) {
@@ -119,6 +125,11 @@
       value={addNewsSourceLead}
       onChange={(val) => (addNewsSourceLead = val)}
     />
+  </div>
+
+  <div class="paid-toggle-wrapper">
+    <span class="paid-toggle-label">Paid Newsletter</span>
+    <Switch toggled={isPaidNewsletter} onChange={(v) => (isPaidNewsletter = v)} />
   </div>
 
   {#if isAdding}
@@ -179,5 +190,18 @@
     color: red;
     font-size: 0.9rem;
     text-align: center;
+  }
+
+  .paid-toggle-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+  }
+
+  .paid-toggle-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #4b5563;
   }
 </style>

@@ -13,7 +13,10 @@
   $: $t;
 
   let topic = "";
-  $: if ($topicStore) topic = $topicStore.split(" / ").slice(1).join(" / ") || "";
+  $: if ($topicStore) {
+    const parts = $topicStore.split(" / ");
+    topic = parts.length > 1 ? parts.slice(1).join(" / ") : $topicStore;
+  }
 
   function handleNext() {
     updateStepStore({ topic });

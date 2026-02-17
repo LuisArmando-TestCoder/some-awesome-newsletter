@@ -117,6 +117,7 @@ export interface Config {
    */
   pricingPlan?: PricingPlanId;
   billingInterval?: BillingInterval;
+  tilopaySubscriptionId?: string;
 }
 
 export interface NewsletterUser {

@@ -23,7 +23,7 @@
     {#if $store.subscriberLanguage}
       <SubmitButton
         callback={async () => {
-          await fetch("/subscribe-widget/subscribe", {
+          const response = await fetch("/subscribe-widget/subscribe", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -34,6 +34,13 @@
               newsSourceId: $store.subscriberNewsSourceId,
             }),
           });
+          const data = await response.json();
+
+          if (data.paymentUrl) {
+            window.location.href = data.paymentUrl;
+            return;
+          }
+
           saveToStore({ stepsIndex: $store.stepsIndex + 1 });
         }}
       />

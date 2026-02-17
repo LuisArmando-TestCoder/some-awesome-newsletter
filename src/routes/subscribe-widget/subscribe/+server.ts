@@ -111,6 +111,31 @@ export const POST: RequestHandler = async ({ request, url }) => {
     }
 
     const data = await response.json();
+
+    // 4. Initiate Billing (Get Payment Link) - Attempt to upgrade to paid/tracking subscription
+    // We do this after adding the user so they exist in the DB for the webhook to update.
+    try {
+      const billingResponse = await fetch(`${API_URL}/api/newsletter-subscribe`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          email, 
+          configuratorId, 
+          newsSourceId,
+          planId: "newsletter", 
+          interval: "monthly"
+        })
+      });
+
+      const billingData = await billingResponse.json();
+      if (billingData.success && billingData.url) {
+        return json({ ...data, paymentUrl: billingData.url }, { status: 201 });
+      }
+    } catch (billingError) {
+      console.error('[subscribe] Billing initiation failed:', billingError);
+      // Continue without payment URL (fallback to free/added state)
+    }
+
     return json(data, { status: 201 });
 
   } catch (error) {

@@ -5,6 +5,7 @@
   import SubmitButton from "../../../../buttons/SubmitButton/SubmitButton.svelte";
   import LoadingScreen from "../../../../loading/LoadingScreen.svelte";
   import store, { latestMessage, saveToStore, topic } from "../../../../../store";
+  import { ping } from "../../../../../Notification/notificationStore";
   import { processNewsSourceAction } from "../H_Dashboard/NewsSource/newsSourceActions";
   import createNewsSource from "../../../../requests/createNewsSource";
   import getConfiguratorSession from "../../../../requests/getConfiguratorSession";
@@ -75,7 +76,7 @@
       isGenerated = true;
     } catch (err: any) {
       console.error(err);
-      alert($t.step08.errors.generationFailed + (err.message || err));
+      ping("Error", $t.step08.errors.generationFailed + (err.message || err));
     } finally {
       isLoading = false;
       updateStepStore({ isGeneratingNewsletter: false });
@@ -111,11 +112,11 @@
         // Proceed to next step
         saveToStore({ stepsIndex: $store.stepsIndex + 1 });
       } else {
-        alert($t.step08.errors.createFailed);
+        ping("Error", $t.step08.errors.createFailed);
       }
     } catch (err: any) {
       console.error(err);
-      alert($t.step08.errors.errorCreating + (err.message || err));
+      ping("Error", $t.step08.errors.errorCreating + (err.message || err));
     } finally {
       isCreating = false;
       updateStepStore({ isCreatingNewsSource: false });
@@ -142,7 +143,7 @@
 
     } catch (err: any) {
       console.error(err);
-      alert($t.step08.errors.sendFailed + (err.message || err));
+      ping("Error", $t.step08.errors.sendFailed + (err.message || err));
     } finally {
       isSending = false;
       updateStepStore({ isSendingEmail: false });

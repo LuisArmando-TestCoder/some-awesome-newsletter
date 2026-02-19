@@ -36,9 +36,9 @@ export async function processNewsSourceAction<T>(
   let result;
   try {
     result = await apiCall(payload, payload.id);
-  } catch (e) {
+  } catch (e: any) {
     console.error("[NEWS-SOURCE-ERROR]", e);
-    setError(errorMessage);
+    setError(e.message || errorMessage);
     return;
   }
 

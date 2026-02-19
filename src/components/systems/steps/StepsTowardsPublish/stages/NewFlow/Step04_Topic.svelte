@@ -13,7 +13,7 @@
   $: $t;
 
   let topic = "";
-  $: if ($topicStore) {
+  $: if ($topicStore && !topic) {
     const parts = $topicStore.split(" / ");
     topic = parts.length > 1 ? parts.slice(1).join(" / ") : $topicStore;
   }
@@ -22,7 +22,11 @@
     updateStepStore({ topic });
     topicStore.set(topic);
     saveToStore({
-      stepsIndex: $store.stepsIndex + 1
+      stepsIndex: $store.stepsIndex + 1,
+      config: {
+        ...$store.config,
+        community: topic
+      }
     });
   }
 </script>

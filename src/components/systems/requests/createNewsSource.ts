@@ -1,6 +1,6 @@
 import { get } from "svelte/store";
 // Removed duplicate import
-import store, { globalLanguage, saveToConfig } from "../../store"; // Removed saveToStore
+import store, { globalLanguage, saveToConfig, saveToStore } from "../../store"; // Removed saveToStore
 import { addNewsletterUser } from "./addNewsletterUserEndpoint";
 import subscribeNewsletterUser from "./subscribeNewsletterUser";
 // Removed getAllSubscribersFromConfigEndpoint import
@@ -70,7 +70,18 @@ export default async function createNewsSource(newsSource: {
       "[CREATE-NEWSOURCE] Error creating news source. Status:",
       response.status
     );
-    return null;
+    // Parse error message if available
+    let errorMessage = "Error creating news source";
+    try {
+      const errorJson = await response.json();
+      if (errorJson && errorJson.error) {
+        errorMessage = errorJson.error;
+      }
+    } catch (e) {
+      console.error("[CREATE-NEWSOURCE] Could not parse error response:", e);
+    }
+    
+    throw new Error(errorMessage);
   }
 
   const json = await response.json();
@@ -141,6 +152,9 @@ export default async function createNewsSource(newsSource: {
   ); */ // Correctly closed comment
 
   console.log("[CREATE-NEWSOURCE] Updated store with new news source."); // This should not be commented
+
+  // Disable back navigation to prevent duplicate creation attempts (hitting plan limits)
+  saveToStore({ directionsThatShouldDisappear: [-1] });
 
   // Refetch the configuration to update the store
   await getConfigFetchResponse(getAuthHeaders());

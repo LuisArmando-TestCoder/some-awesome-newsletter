@@ -29,7 +29,7 @@
       ],
     },
     getLink("Secrets/Developer", $t["menuHalf.secretsDeveloper"]),
-    // getLink("Newspaper", $t["menuHalf.newspaper"]),
+    getLink("Newspaper", $t["menuHalf.newspaper"]),
     getLink("Billing", $t["menuHalf.billing"]),
   ];
 

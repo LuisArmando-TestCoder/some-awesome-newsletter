@@ -5,6 +5,7 @@
   import SubmitButton from "../../../../buttons/SubmitButton/SubmitButton.svelte";
   import store, { saveToStore, stepsMapping } from "../../../../../store";
   import { t } from "$lib/i18n/newflow-translations";
+  import { checkPlanLimit } from "$lib/utils/checkPlanLimits";
 
   export let canReveal = false;
 
@@ -24,10 +25,11 @@
 
   // Calculate usage based on store data
   $: if ($store.config) {
-    const subscriberCount = $store.stats?.totalSubscribers || 0; // Assuming store has stats
-    const limit = limits[plan] === "Unlimited" ? Infinity : parseInt(limits[plan] || "0", 10);
+    const limitCheck = checkPlanLimit("users");
+    const subscriberCount = limitCheck.current;
+    const limit = limitCheck.limit;
     
-    if (limit === Infinity) {
+    if (limit === -1) {
       usage = `${subscriberCount} / Unlimited`;
     } else {
       const percent = Math.min(100, Math.round((subscriberCount / limit) * 100));
@@ -57,23 +59,24 @@
         <h3 class="impact-statement">{$t.step13.currentPlan} <span class="highlight">{plan.toUpperCase()}</span></h3>
         <p class="limits">{$t.step13.limits} {limits[plan] || $t.step13.unknown}</p>
         
-        {#if plan !== "master" && plan !== "vipfree"}
-          <div class="usage-container">
-            <div class="usage-header">
-              <span>{$t.step13.usage}</span>
-              <span class="usage-value">{usage}</span>
-            </div>
-            <!-- Calculate width safely -->
-            {#if $store.config}
-               {@const limitVal = limits[plan] === "Unlimited" ? 1 : parseInt(limits[plan] || "1", 10)}
-               {@const subCount = $store.stats?.totalSubscribers || 0}
-               {@const widthVal = limitVal === 1 ? 0 : Math.min(100, (subCount / limitVal) * 100)}
-               
-               <div class="usage-bar">
-                 <div class="bar-fill" style="width: {widthVal}%;"></div>
-               </div>
-            {/if}
+      {#if plan !== "master" && plan !== "vipfree"}
+        <div class="usage-container">
+          <div class="usage-header">
+            <span>{$t.step13.usage}</span>
+            <span class="usage-value">{usage}</span>
           </div>
+          <!-- Calculate width safely -->
+          {#if $store.config}
+             {@const limitCheck = checkPlanLimit("users")}
+             {@const limitVal = limitCheck.limit === -1 ? 1 : limitCheck.limit}
+             {@const subCount = limitCheck.current}
+             {@const widthVal = limitCheck.limit === -1 ? 0 : Math.min(100, (subCount / limitVal) * 100)}
+             
+             <div class="usage-bar">
+               <div class="bar-fill" style="width: {widthVal}%;"></div>
+             </div>
+          {/if}
+        </div>
           
           <button class="change-plan-btn shimmer-btn" on:click={handleChangePlan}>
             {$t.step13.changePlan}

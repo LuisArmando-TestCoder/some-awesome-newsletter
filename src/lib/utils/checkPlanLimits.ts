@@ -29,19 +29,18 @@ export function checkPlanLimit(feature: "newsSources" | "users"): { allowed: boo
     current = state.config?.newsSources?.length || 0;
     limit = limits.newsSources;
   } else if (feature === "users") {
-    // Total subscribers across all lists? Or per list?
-    // Backend checks per list usually, but let's check total for Dashboard context 
-    // or use the store's stats if available.
-    // store.ts has 'subscribers' object.
-    // If we want total unique emails:
-    // const uniqueEmails = new Set();
-    // Object.values(state.subscribers || {}).forEach(list => list.forEach(u => uniqueEmails.add(u.email)));
-    // current = uniqueEmails.size;
+    // Calculate total subscribers from the subscribers object in store
+    const subscribersObj = state.subscribers || {};
+    const uniqueEmails = new Set();
+    Object.values(subscribersObj).forEach((list: any) => {
+      if (Array.isArray(list)) {
+        list.forEach(u => {
+          if (u && u.email) uniqueEmails.add(u.email);
+        });
+      }
+    });
     
-    // Simplification: Check store.stats if present (populated by backend), otherwise fallback.
-    // Assuming store doesn't track all subscribers locally in 'config', but in 'subscribers' dict.
-    // Let's use a safe fallback.
-    current = state.stats?.totalSubscribers || 0; 
+    current = uniqueEmails.size;
     limit = limits.users;
   }
 

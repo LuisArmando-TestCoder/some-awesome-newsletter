@@ -815,5 +815,41 @@ export default {
     { "code": "YE", "name": "Yemen" },
     { "code": "ZM", "name": "Zambia" },
     { "code": "ZW", "name": "Zimbabwe" }
-  ]
+  ],
+  "publishToWebsite": {
+    "title": "Buga to Your Website",
+    "newBadge": "New",
+    "description": "Automatically send each newsletter article to your website as post. E dey work with WordPress and any platform wey dey accept standard REST content.",
+    "whereToPublish": {
+      "title": "Where to Buga",
+      "urlLabel": "Your Website URL",
+      "urlPlaceholder": "https://your-website.com",
+      "urlHint": "Enter your site homepage URL — we go figure out where to send de content."
+    },
+    "whosPublishing": {
+      "title": "Who dey Buga",
+      "usernameLabel": "Login Username",
+      "usernamePlaceholder": "your-cms-username",
+      "usernameHint": "De username wey you dey use login to manage your website.",
+      "passwordLabel": "App Password",
+      "passwordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
+      "passwordHint": "Generate dis inside your website user settings. E be separate password just for apps — e no dey replace your regular login.",
+      "howToGetPassword": "How to get App Password?",
+      "authNote": "You no dey use username/password? If your platform dey use HMAC verification instead, scroll go down to de Security Signature section to set up shared secret."
+    },
+    "howToPublish": {
+      "title": "How to Buga",
+      "statusLabel": "Post Status",
+      "statusDraft": "Save as Draft — review am before e go live",
+      "authorLabel": "Author Name",
+      "authorPlaceholder": "Your name",
+      "authorHint": "How de author name go appear for de post wey you buga.",
+      "categoryLabel": "Category",
+      "categoryPlaceholder": "e.g. International Relocation",
+      "categoryHint": "Suggested based on your newsletter topic. Make sure say dis category dey your CMS. Leave am blank if no category.",
+      "tagsLabel": "Tags (auto-suggested)",
+      "tagsPlaceholder": "relocation, expat, real estate, ...",
+      "tagsHint": "Comma-separated tags wey we auto-suggest from your newsletter audience and topic. You fit edit or remove any."
+    }
+  }
 }

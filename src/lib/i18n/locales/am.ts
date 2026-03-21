@@ -815,5 +815,41 @@ export default {
     { "code": "YE", "name": "የመን" },
     { "code": "ZM", "name": "ዛምቢያ" },
     { "code": "ZW", "name": "ዝምባቡዌ" }
-  ]
+  ],
+  "publishToWebsite": {
+    "title": "በድረ-ገጽዎ ላይ ያትሙ",
+    "newBadge": "አዲስ",
+    "description": "እያንዳንዱን የጋዜጣ ጽሑፍ በራስ-ሰር ወደ ድረ-ገጽዎ እንደ ልጥፍ ይላኩ። ከዎርድፕረስ እና መደበኛ የ-REST ይዘትን ከሚቀበል ከማንኛውም መድረክ ጋር ይሰራል።",
+    "whereToPublish": {
+      "title": "የት እንደሚታተም",
+      "urlLabel": "የእርስዎ ድረ-ገጽ ዩአርኤል (URL)",
+      "urlPlaceholder": "https://your-website.com",
+      "urlHint": "የጣቢያዎን መነሻ ገጽ ዩአርኤል ያስገቡ — ይዘቱን የት እንደሚልኩ እኛ እንረዳለን።"
+    },
+    "whosPublishing": {
+      "title": "ማን እየታተመ ነው",
+      "usernameLabel": "የመግቢያ የተጠቃሚ ስም",
+      "usernamePlaceholder": "your-cms-username",
+      "usernameHint": "ድረ-ገጽዎን ለማስተዳደር ለመግባት የሚጠቀሙበት የተጠቃሚ ስም ነው።",
+      "passwordLabel": "የመተግበሪያ ይለፍ ቃል",
+      "passwordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
+      "passwordHint": "ይህንን በድረ-ገጽዎ የተጠቃሚ ቅንብሮች ውስጥ ይፍጠሩ። ለመተግበሪያዎች ብቻ የተለየ የይለፍ ቃል ነው — መደበኛ መግቢያዎን አይተካም።",
+      "howToGetPassword": "የመተግበሪያ ይለፍ ቃል እንዴት ማግኘት ይቻላል?",
+      "authNote": "የተጠቃሚ ስም/ይለፍ ቃል እየተጠቀሙ አይደሉም? የእርስዎ መድረክ በምትኩ የ-HMAC ማረጋገጫን የሚጠቀም ከሆነ፣ የተጋራ ምስጢር ለማዘጋጀት ወደ የደህንነት ፊርማ (Security Signature) ክፍል ወደ ታች ይውረዱ።"
+    },
+    "howToPublish": {
+      "title": "እንዴት እንደሚታተም",
+      "statusLabel": "የልጥፍ ሁኔታ",
+      "statusDraft": "እንደ ረቂቅ አስቀምጥ — በቀጥታ ከመሄዱ በፊት ይገምግሙ",
+      "authorLabel": "የደራሲ ስም",
+      "authorPlaceholder": "የእርስዎ ስም",
+      "authorHint": "የደራሲው ስም በታተመው ልጥፍ ላይ እንዴት እንደሚታይ።",
+      "categoryLabel": "ምድብ",
+      "categoryPlaceholder": "ለምሳሌ ዓለም አቀፍ ዝውውር",
+      "categoryHint": "በጋዜጣዎ ርዕስ ላይ በመመስረት የቀረበ። ይህ ምድብ በእርስዎ ሲኤምኤስ (CMS) ውስጥ መኖሩን ያረጋግጡ። ላልተመደቡ ባዶ ይተዉት።",
+      "tagsLabel": "መለያዎች (በራስ-ሰር የቀረቡ)",
+      "tagsPlaceholder": "ዝውውር፣ ስደተኛ፣ ሪል እስቴት፣ ...",
+      "tagsHint": "ከጋዜጣዎ ታዳሚ እና ርዕስ በራስ-ሰር የቀረቡ በኮማ የተለዩ መለያዎች። ማንኛውንም ማስተካከል ወይም ማስወገድ ይችላሉ።"
+    }
+  }
 }

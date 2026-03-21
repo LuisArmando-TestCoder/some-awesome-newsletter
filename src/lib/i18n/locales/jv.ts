@@ -815,5 +815,41 @@ export default {
     { "code": "YE", "name": "Yaman" },
     { "code": "ZM", "name": "Zambia" },
     { "code": "ZW", "name": "Zimbabwe" }
-  ]
+  ],
+  "publishToWebsite": {
+    "title": "Terbitake menyang Situs Web Sampeyan",
+    "newBadge": "Anyar",
+    "description": "Kirimi saben artikel buletin kanthi otomatis menyang situs web sampeyan minangka postingan. Bisa digunakake karo WordPress lan platform apa wae sing nampa konten REST standar.",
+    "whereToPublish": {
+      "title": "Ing endi Bakal Diterbitake",
+      "urlLabel": "URL Situs Web Sampeyan",
+      "urlPlaceholder": "https://situs-sampeyan.com",
+      "urlHint": "Lebokake URL homepage situs sampeyan — kita bakal nemokake ing endi konten kasebut dikirim."
+    },
+    "whosPublishing": {
+      "title": "Sapa sing Nerbitake",
+      "usernameLabel": "Jeneng Panganggo Login",
+      "usernamePlaceholder": "jeneng-panganggo-cms-sampeyan",
+      "usernameHint": "Jeneng panganggo sing sampeyan gunakake kanggo mlebu kanggo ngatur situs web sampeyan.",
+      "passwordLabel": "Sandi Aplikasi",
+      "passwordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
+      "passwordHint": "Gawe iki ing setelan panganggo situs web sampeyan. Iki sandi sing kapisah khusus kanggo aplikasi — iki ora ngganti login biasa sampeyan.",
+      "howToGetPassword": "Kepiye carane entuk Sandi Aplikasi?",
+      "authNote": "Ora nggunakake jeneng panganggo/sandi? Yen platform sampeyan nggunakake verifikasi HMAC, gulung mudhun menyang bagean Security Signature kanggo nyiyapake rahasia bareng."
+    },
+    "howToPublish": {
+      "title": "Cara Nerbitake",
+      "statusLabel": "Status Postingan",
+      "statusDraft": "Simpen minangka Draf — deleng sadurunge diterbitake langsung",
+      "authorLabel": "Jeneng Penulis",
+      "authorPlaceholder": "Jeneng sampeyan",
+      "authorHint": "Kepiye jeneng panulis katon ing postingan sing diterbitake.",
+      "categoryLabel": "Kategori",
+      "categoryPlaceholder": "contone: Relokasi Internasional",
+      "categoryHint": "Disaranake adhedhasar topik buletin sampeyan. Priksa manawa kategori iki ana ing CMS sampeyan. Kosongake yen ora ana kategori.",
+      "tagsLabel": "Tag (disaranake otomatis)",
+      "tagsPlaceholder": "relokasi, ekspat, real estate, ...",
+      "tagsHint": "Tag sing dipisahake koma sing disaranake kanthi otomatis saka pamirsa lan topik buletin sampeyan. Sampeyan bisa ngowahi utawa mbusak apa wae."
+    }
+  }
 }

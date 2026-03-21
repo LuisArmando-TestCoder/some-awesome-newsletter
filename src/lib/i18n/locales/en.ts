@@ -815,5 +815,41 @@ export default {
     { "code": "YE", "name": "Yemen" },
     { "code": "ZM", "name": "Zambia" },
     { "code": "ZW", "name": "Zimbabwe" }
-  ]
+  ],
+  "publishToWebsite": {
+    "title": "Publish to Your Website",
+    "newBadge": "New",
+    "description": "Automatically send each newsletter article to your website as a post. Works with WordPress and any platform that accepts standard REST content.",
+    "whereToPublish": {
+      "title": "Where to Publish",
+      "urlLabel": "Your Website URL",
+      "urlPlaceholder": "https://your-website.com",
+      "urlHint": "Enter your site's homepage URL — we'll figure out where to send the content."
+    },
+    "whosPublishing": {
+      "title": "Who's Publishing",
+      "usernameLabel": "Login Username",
+      "usernamePlaceholder": "your-cms-username",
+      "usernameHint": "The username you use to log in to manage your website.",
+      "passwordLabel": "App Password",
+      "passwordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
+      "passwordHint": "Generate this inside your website's user settings. It's a separate password just for apps — it doesn't replace your regular login.",
+      "howToGetPassword": "How to get an App Password?",
+      "authNote": "Not using username/password? If your platform uses HMAC verification instead, scroll down to the Security Signature section to set up a shared secret."
+    },
+    "howToPublish": {
+      "title": "How to Publish",
+      "statusLabel": "Post Status",
+      "statusDraft": "Save as Draft — review before going live",
+      "authorLabel": "Author Name",
+      "authorPlaceholder": "Your name",
+      "authorHint": "How the author's name appears on the published post.",
+      "categoryLabel": "Category",
+      "categoryPlaceholder": "e.g. International Relocation",
+      "categoryHint": "Suggested based on your newsletter topic. Make sure this category exists in your CMS. Leave blank for uncategorized.",
+      "tagsLabel": "Tags (auto-suggested)",
+      "tagsPlaceholder": "relocation, expat, real estate, ...",
+      "tagsHint": "Comma-separated tags auto-suggested from your newsletter audience and topic. You can edit or remove any."
+    }
+  }
 }

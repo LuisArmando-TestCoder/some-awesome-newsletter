@@ -815,5 +815,41 @@ export default {
     { "code": "YE", "name": "Yemen" },
     { "code": "ZM", "name": "Zambia" },
     { "code": "ZW", "name": "Zimbabwe" }
-  ]
+  ],
+  "publishToWebsite": {
+    "title": "I-publish sa Iyong Website",
+    "newBadge": "Bago",
+    "description": "Awtomatikong i-send ang bawat artikulo ng newsletter sa iyong website bilang post. Gumagana sa WordPress at sa anumang platform na tumatanggap ng standard REST content.",
+    "whereToPublish": {
+      "title": "Kung Saan I-pupublish",
+      "urlLabel": "URL ng Iyong Website",
+      "urlPlaceholder": "https://iyong-website.com",
+      "urlHint": "Ilagay ang homepage URL ng iyong site — kami na ang bahalang humanap kung saan ipapadala ang content."
+    },
+    "whosPublishing": {
+      "title": "Sino ang Nag-pupublish",
+      "usernameLabel": "Login Username",
+      "usernamePlaceholder": "iyong-cms-username",
+      "usernameHint": "Ang username na ginagamit mo sa pag-log in para i-manage ang iyong website.",
+      "passwordLabel": "App Password",
+      "passwordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
+      "passwordHint": "I-generate ito sa loob ng user settings ng iyong website. Ito ay hiwalay na password para sa mga app lang — hindi nito papalitan ang iyong regular na login.",
+      "howToGetPassword": "Paano kumuha ng App Password?",
+      "authNote": "Hindi gumagamit ng username/password? Kung HMAC verification ang gamit ng iyong platform, mag-scroll pababa sa Security Signature section para mag-set up ng shared secret."
+    },
+    "howToPublish": {
+      "title": "Paano I-publish",
+      "statusLabel": "Status ng Post",
+      "statusDraft": "I-save bilang Draft — i-review bago i-live",
+      "authorLabel": "Pangalan ng May-akda",
+      "authorPlaceholder": "Iyong pangalan",
+      "authorHint": "Kung paano lilitaw ang pangalan ng may-akda sa na-publish na post.",
+      "categoryLabel": "Kategorya",
+      "categoryPlaceholder": "hal. International Relocation",
+      "categoryHint": "Iminumungkahi batay sa paksa ng iyong newsletter. Siguraduhing mayroon ang kategoryang ito sa iyong CMS. Iwanang blangko para sa uncategorized.",
+      "tagsLabel": "Tags (auto-suggested)",
+      "tagsPlaceholder": "relocation, expat, real estate, ...",
+      "tagsHint": "Mga tag na pinaghihiwalay ng kuwit na awtomatikong iminumungkahi mula sa iyong mga mambabasa at paksa ng newsletter. Maaari mong i-edit o alisin ang alinman sa mga ito."
+    }
+  }
 }

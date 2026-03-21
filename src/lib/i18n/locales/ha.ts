@@ -815,5 +815,41 @@ export default {
     { "code": "YE", "name": "Yemen" },
     { "code": "ZM", "name": "Zambiya" },
     { "code": "ZW", "name": "Zimbabuwe" }
-  ]
+  ],
+  "publishToWebsite": {
+    "title": "Buga zuwa gidan yanar gizon ku",
+    "newBadge": "Sabo",
+    "description": "Aika kowane labarin wasiƙa kai tsaye zuwa gidan yanar gizon ku azaman rubutu. Yana aiki tare da WordPress da kowane dandamali da ke karɓar daidaitaccen abun ciki na REST.",
+    "whereToPublish": {
+      "title": "Inda za a buga",
+      "urlLabel": "Adireshin gidan yanar gizon ku (URL)",
+      "urlPlaceholder": "https://your-website.com",
+      "urlHint": "Shigar da adireshin babban shafin gidan yanar gizon ku — za mu gano inda za mu aika abun cikin."
+    },
+    "whosPublishing": {
+      "title": "Wanene ke bugawa",
+      "usernameLabel": "Sunan mai amfani (Username)",
+      "usernamePlaceholder": "your-cms-username",
+      "usernameHint": "Sunan mai amfani da kuke amfani da shi don shiga don sarrafa gidan yanar gizon ku.",
+      "passwordLabel": "Kalmar sirri ta App",
+      "passwordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
+      "passwordHint": "Samar da wannan a cikin saitunan mai amfani na gidan yanar gizon ku. Kalmar sirri ce ta daban don apps kawai — ba ta maye gurbin shigarku ta yau da kullun ba.",
+      "howToGetPassword": "Yadda ake samun Kalmar sirri ta App?",
+      "authNote": "Ba kwa amfani da sunan mai amfani/kalmar sirri? Idan dandamalin ku yana amfani da tantancewar HMAC maimakon haka, gungura ƙasa zuwa sashin Sa hannu na Tsaro (Security Signature) don saita sirri ɗaya."
+    },
+    "howToPublish": {
+      "title": "Yadda ake buga",
+      "statusLabel": "Matsayin rubutu",
+      "statusDraft": "Ajiye a matsayin Draft — duba kafin ya fita (live)",
+      "authorLabel": "Sunan marubuci",
+      "authorPlaceholder": "Sunan ku",
+      "authorHint": "Yadda sunan marubucin yake bayyana akan rubutun da aka buga.",
+      "categoryLabel": "Kashi (Category)",
+      "categoryPlaceholder": "misali: Hijira ta Duniya",
+      "categoryHint": "An ba da shawara dangane da batun wasiƙar ku. Tabbatar cewa wannan rukunin yana cikin CMS ɗin ku. Bar shi a sarari don marasa rukuni.",
+      "tagsLabel": "Tags (shawarwarin atomatik)",
+      "tagsPlaceholder": "hijira, baƙi, gidaje, ...",
+      "tagsHint": "Tags da aka raba da wakafi waɗanda aka ba da shawara ta atomatik daga masu sauraron wasiƙar ku da batun ku. Kuna iya gyara ko cire kowane."
+    }
+  }
 }

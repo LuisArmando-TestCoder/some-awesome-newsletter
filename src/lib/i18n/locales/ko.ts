@@ -815,5 +815,41 @@ export default {
     { "code": "YE", "name": "예멘" },
     { "code": "ZM", "name": "잠비아" },
     { "code": "ZW", "name": "짐바브웨" }
-  ]
+  ],
+  "publishToWebsite": {
+    "title": "웹사이트에 게시",
+    "newBadge": "신규",
+    "description": "각 뉴스레터 기사를 웹사이트에 포스트로 자동 전송합니다. WordPress 및 표준 REST 콘텐츠를 허용하는 모든 플랫폼에서 작동합니다.",
+    "whereToPublish": {
+      "title": "게시 위치",
+      "urlLabel": "웹사이트 URL",
+      "urlPlaceholder": "https://your-website.com",
+      "urlHint": "사이트의 홈페이지 URL을 입력하세요. 콘텐츠를 보낼 위치를 자동으로 파악합니다."
+    },
+    "whosPublishing": {
+      "title": "게시자 정보",
+      "usernameLabel": "로그인 사용자 이름",
+      "usernamePlaceholder": "your-cms-username",
+      "usernameHint": "웹사이트 관리를 위해 로그인할 때 사용하는 사용자 이름입니다.",
+      "passwordLabel": "앱 비밀번호",
+      "passwordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
+      "passwordHint": "웹사이트의 사용자 설정 내에서 이 비밀번호를 생성하세요. 앱 전용 별도 비밀번호이며 기존 로그인 비밀번호를 대체하지 않습니다.",
+      "howToGetPassword": "앱 비밀번호를 어떻게 받나요?",
+      "authNote": "사용자 이름/비밀번호를 사용하지 않으시나요? 플랫폼에서 대신 HMAC 인증을 사용하는 경우 보안 서명 섹션으로 내려가 공유 비밀 키를 설정하세요."
+    },
+    "howToPublish": {
+      "title": "게시 방법",
+      "statusLabel": "포스트 상태",
+      "statusDraft": "초안으로 저장 — 게시 전 검토",
+      "authorLabel": "작성자 이름",
+      "authorPlaceholder": "사용자 이름",
+      "authorHint": "게시된 포스트에 표시될 작성자 이름입니다.",
+      "categoryLabel": "카테고리",
+      "categoryPlaceholder": "예: 국제 이사",
+      "categoryHint": "뉴스레터 주제를 바탕으로 제안됩니다. 이 카테고리가 CMS에 존재하는지 확인하세요. 미분류로 두려면 비워 두세요.",
+      "tagsLabel": "태그 (자동 제안)",
+      "tagsPlaceholder": "이사, 국외 거주자, 부동산, ...",
+      "tagsHint": "뉴스레터 구독자 및 주제를 바탕으로 자동 제안된 쉼표로 구분된 태그입니다. 편집하거나 삭제할 수 있습니다."
+    }
+  }
 }

@@ -815,5 +815,41 @@ export default {
     { "code": "YE", "name": "Yemen" },
     { "code": "ZM", "name": "Zambia" },
     { "code": "ZW", "name": "Zimbabue" }
-  ]
+  ],
+  "publishToWebsite": {
+    "title": "Publicar en su sitio web",
+    "newBadge": "Nuevo",
+    "description": "Envíe automáticamente cada artículo del boletín a su sitio web como una publicación. Funciona con WordPress y cualquier plataforma que acepte contenido REST estándar.",
+    "whereToPublish": {
+      "title": "Dónde publicar",
+      "urlLabel": "URL de su sitio web",
+      "urlPlaceholder": "https://su-sitio-web.com",
+      "urlHint": "Ingrese la URL de la página de inicio de su sitio; nosotros descubriremos dónde enviar el contenido."
+    },
+    "whosPublishing": {
+      "title": "Quién publica",
+      "usernameLabel": "Nombre de usuario de inicio de sesión",
+      "usernamePlaceholder": "su-usuario-de-cms",
+      "usernameHint": "El nombre de usuario que utiliza para iniciar sesión y administrar su sitio web.",
+      "passwordLabel": "Contraseña de la aplicación",
+      "passwordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
+      "passwordHint": "Genere esto dentro de la configuración de usuario de su sitio web. Es una contraseña separada solo para aplicaciones; no reemplaza su inicio de sesión normal.",
+      "howToGetPassword": "¿Cómo obtener una contraseña de aplicación?",
+      "authNote": "¿No usa nombre de usuario/contraseña? Si su plataforma utiliza la verificación HMAC en su lugar, desplácese hacia abajo hasta la sección Firma de seguridad para configurar un secreto compartido."
+    },
+    "howToPublish": {
+      "title": "Cómo publicar",
+      "statusLabel": "Estado de la publicación",
+      "statusDraft": "Guardar como borrador: revisar antes de publicar",
+      "authorLabel": "Nombre del autor",
+      "authorPlaceholder": "Su nombre",
+      "authorHint": "Cómo aparece el nombre del autor en la publicación publicada.",
+      "categoryLabel": "Categoría",
+      "categoryPlaceholder": "ej. Reubicación Internacional",
+      "categoryHint": "Sugerido según el tema de su boletín. Asegúrese de que esta categoría exista en su CMS. Deje en blanco para sin categoría.",
+      "tagsLabel": "Etiquetas (sugeridas automáticamente)",
+      "tagsPlaceholder": "reubicación, expatriado, bienes raíces, ...",
+      "tagsHint": "Etiquetas separadas por comas sugeridas automáticamente según la audiencia y el tema de su boletín. Puede editar o eliminar cualquiera."
+    }
+  }
 }

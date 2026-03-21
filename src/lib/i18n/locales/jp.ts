@@ -815,5 +815,41 @@ export default {
     { "code": "YE", "name": "イエメン" },
     { "code": "ZM", "name": "ザンビア" },
     { "code": "ZW", "name": "ジンバブエ" }
-  ]
+  ],
+  "publishToWebsite": {
+    "title": "ウェブサイトに公開",
+    "newBadge": "新規",
+    "description": "各ニュースレター記事を投稿としてウェブサイトに自動送信します。WordPressおよび標準的なRESTコンテンツを受け入れるすべてのプラットフォームで動作します。",
+    "whereToPublish": {
+      "title": "公開先",
+      "urlLabel": "ウェブサイトのURL",
+      "urlPlaceholder": "https://your-website.com",
+      "urlHint": "サイトのホームページURLを入力してください。コンテンツの送信先を自動で判別します。"
+    },
+    "whosPublishing": {
+      "title": "公開者情報",
+      "usernameLabel": "ログインユーザー名",
+      "usernamePlaceholder": "your-cms-username",
+      "usernameHint": "ウェブサイトの管理に使用しているユーザー名。",
+      "passwordLabel": "アプリパスワード",
+      "passwordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
+      "passwordHint": "ウェブサイトのユーザー設定内で生成してください。アプリ専用のパスワードであり、通常のログインパスワードを置き換えるものではありません。",
+      "howToGetPassword": "アプリパスワードの取得方法",
+      "authNote": "ユーザー名/パスワードを使用しない場合：プラットフォームが代わりにHMAC認証を使用している場合は、「セキュリティ署名」セクションまでスクロールして共有シークレットを設定してください。"
+    },
+    "howToPublish": {
+      "title": "公開設定",
+      "statusLabel": "投稿ステータス",
+      "statusDraft": "下書きとして保存 — 公開前に確認する",
+      "authorLabel": "著者名",
+      "authorPlaceholder": "お名前",
+      "authorHint": "公開された投稿に表示される著者名。",
+      "categoryLabel": "カテゴリー",
+      "categoryPlaceholder": "例：海外移住",
+      "categoryHint": "ニュースレターのトピックに基づいて推奨されます。このカテゴリーがCMSに存在することを確認してください。未分類にする場合は空欄のままにしてください。",
+      "tagsLabel": "タグ（自動提案）",
+      "tagsPlaceholder": "移住, エクスパット, 不動産, ...",
+      "tagsHint": "ニュースレターのターゲット層とトピックから自動提案されたカンマ区切りのタグ。編集や削除が可能です。"
+    }
+  }
 }

@@ -815,5 +815,41 @@ export default {
     { "code": "YE", "name": "Yemen" },
     { "code": "ZM", "name": "Zambia" },
     { "code": "ZW", "name": "Zimbabwe" }
-  ]
+  ],
+  "publishToWebsite": {
+    "title": "Pubblica sul tuo sito web",
+    "newBadge": "Nuovo",
+    "description": "Invia automaticamente ogni articolo della newsletter al tuo sito web come post. Funziona con WordPress e qualsiasi piattaforma che accetti contenuti REST standard.",
+    "whereToPublish": {
+      "title": "Dove pubblicare",
+      "urlLabel": "URL del tuo sito web",
+      "urlPlaceholder": "https://tuosito.it",
+      "urlHint": "Inserisci l'URL della homepage del tuo sito: capiremo noi dove inviare i contenuti."
+    },
+    "whosPublishing": {
+      "title": "Chi pubblica",
+      "usernameLabel": "Nome utente per l'accesso",
+      "usernamePlaceholder": "tuo-username-cms",
+      "usernameHint": "Il nome utente che utilizzi per accedere e gestire il tuo sito web.",
+      "passwordLabel": "Password dell'app",
+      "passwordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
+      "passwordHint": "Generala nelle impostazioni utente del tuo sito web. È una password separata solo per le app e non sostituisce il tuo login normale.",
+      "howToGetPassword": "Come ottenere una password dell'app?",
+      "authNote": "Non usi nome utente/password? Se la tua piattaforma utilizza invece la verifica HMAC, scorri verso il basso fino alla sezione Firma di sicurezza per impostare un segreto condiviso."
+    },
+    "howToPublish": {
+      "title": "Come pubblicare",
+      "statusLabel": "Stato del post",
+      "statusDraft": "Salva come bozza — revisiona prima della pubblicazione",
+      "authorLabel": "Nome dell'autore",
+      "authorPlaceholder": "Il tuo nome",
+      "authorHint": "Come appare il nome dell'autore sul post pubblicato.",
+      "categoryLabel": "Categoria",
+      "categoryPlaceholder": "es. Relocation Internazionale",
+      "categoryHint": "Suggerito in base all'argomento della tua newsletter. Assicurati che questa categoria esista nel tuo CMS. Lascia vuoto per 'Senza categoria'.",
+      "tagsLabel": "Tag (suggeriti automaticamente)",
+      "tagsPlaceholder": "relocation, expat, immobiliare, ...",
+      "tagsHint": "Tag separati da virgole suggeriti automaticamente in base al pubblico e all'argomento della tua newsletter. Puoi modificarli o rimuoverli."
+    }
+  }
 }

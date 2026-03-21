@@ -815,5 +815,41 @@ export default {
     { "code": "YE", "name": "اليمن" },
     { "code": "ZM", "name": "زامبيا" },
     { "code": "ZW", "name": "زيمبابوي" }
-  ]
+  ],
+  "publishToWebsite": {
+    "title": "انشر في موقعك",
+    "newBadge": "جديد",
+    "description": "ارسل كل مقالة نشرة إخبارية تلقائياً لموقعك كمنشور. بيشتغل مع ووردبريس وأي منصة بتقبل محتوى REST القياسي.",
+    "whereToPublish": {
+      "title": "وين تنشر",
+      "urlLabel": "رابط موقعك",
+      "urlPlaceholder": "https://your-website.com",
+      "urlHint": "دخل رابط الصفحة الرئيسية لموقعك — ونحن بنعرف وين نبعت المحتوى."
+    },
+    "whosPublishing": {
+      "title": "مين عم ينشر",
+      "usernameLabel": "اسم المستخدم",
+      "usernamePlaceholder": "your-cms-username",
+      "usernameHint": "اسم المستخدم اللي بتستخدمه لتدخل وتدير موقعك.",
+      "passwordLabel": "كلمة مرور التطبيق",
+      "passwordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
+      "passwordHint": "طلع هاي الكلمة من إعدادات المستخدم بموقعك. هي كلمة مرور خاصة للتطبيقات — وما بتبدل كلمة مرورك العادية.",
+      "howToGetPassword": "كيف تجيب كلمة مرور التطبيق؟",
+      "authNote": "ما عم تستخدم اسم مستخدم وكلمة مرور؟ إذا منصتك بتستخدم توثيق HMAC، انزل لتحت لقسم توقيع الأمان لتضبط السر المشترك."
+    },
+    "howToPublish": {
+      "title": "كيف تنشر",
+      "statusLabel": "حالة المنشور",
+      "statusDraft": "حفظ كمسودة — راجعها قبل ما تنزلها",
+      "authorLabel": "اسم الكاتب",
+      "authorPlaceholder": "اسمك",
+      "authorHint": "كيف بيظهر اسم الكاتب على المنشور.",
+      "categoryLabel": "التصنيف",
+      "categoryPlaceholder": "مثلاً: الانتقال الدولي",
+      "categoryHint": "مقترح حسب موضوع نشرتك. تأكد إنه التصنيف موجود بموقعك. اتركه فاضي لغير المصنف.",
+      "tagsLabel": "الوسوم (مقترحة تلقائياً)",
+      "tagsPlaceholder": "انتقال، مغترب، عقارات، ...",
+      "tagsHint": "وسوم مفصولة بفاصلة مقترحة تلقائياً حسب جمهور نشرتك وموضوعها. فيك تعدل أو تحذف أي وسم."
+    }
+  }
 }

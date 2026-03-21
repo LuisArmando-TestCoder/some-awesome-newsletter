@@ -815,5 +815,41 @@ export default {
     { "code": "YE", "name": "اليمن" },
     { "code": "ZM", "name": "زامبيا" },
     { "code": "ZW", "name": "زيمبابوي" }
-  ]
+  ],
+  "publishToWebsite": {
+    "title": "انشر على موقعك",
+    "newBadge": "جديد",
+    "description": "ابعت كل مقالة نشرة إخبارية لموقعك كأنها بوست لوحده. شغال مع ووردبريس وأي موقع بيقبل محتوى REST العادي.",
+    "whereToPublish": {
+      "title": "هتنشر فين؟",
+      "urlLabel": "لينك موقعك",
+      "urlPlaceholder": "https://your-website.com",
+      "urlHint": "اكتب لينك الصفحة الرئيسية لموقعك — وإحنا هنعرف هنبعت المحتوى فين بالظبط."
+    },
+    "whosPublishing": {
+      "title": "مين اللي بينشر؟",
+      "usernameLabel": "اسم المستخدم",
+      "usernamePlaceholder": "your-cms-username",
+      "usernameHint": "اسم المستخدم اللي بتدخل بيه عشان تدير موقعك.",
+      "passwordLabel": "كلمة سر التطبيق",
+      "passwordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
+      "passwordHint": "اعمل كلمة السر دي من إعدادات المستخدم في موقعك. دي كلمة سر مخصصة للتطبيقات بس — مش بتبدل كلمة سر دخولك العادية.",
+      "howToGetPassword": "إزاي أجيب كلمة سر للتطبيق؟",
+      "authNote": "مش بتستخدم اسم مستخدم وكلمة سر؟ لو موقعك بيستخدم HMAC، انزل تحت لقسم توقيع الأمان عشان تظبط السر المشترك."
+    },
+    "howToPublish": {
+      "title": "طريقة النشر",
+      "statusLabel": "حالة البوست",
+      "statusDraft": "حفظ كمسودة — راجعه قبل ما يتنشر",
+      "authorLabel": "اسم الكاتب",
+      "authorPlaceholder": "اسمك",
+      "authorHint": "الاسم اللي هيظهر ككاتب للبوست.",
+      "categoryLabel": "القسم",
+      "categoryPlaceholder": "مثلاً: الانتقال الدولي",
+      "categoryHint": "مقترح بناءً على موضوع نشرتك. اتأكد إن القسم ده موجود في موقعك. سيبه فاضي لو مش عايز تحدد قسم.",
+      "tagsLabel": "الكلمات الدليلية (مقترحة)",
+      "tagsPlaceholder": "انتقال، مغتربين، عقارات، ...",
+      "tagsHint": "كلمات دليلية مقترحة بناءً على جمهورك وموضوع نشرتك. تقدر تعدل أو تمسح أي واحدة فيهم."
+    }
+  }
 }

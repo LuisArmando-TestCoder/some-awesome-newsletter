@@ -815,5 +815,41 @@ export default {
     { "code": "YE", "name": "Yemeni" },
     { "code": "ZM", "name": "Zambia" },
     { "code": "ZW", "name": "Zimbabwe" }
-  ]
+  ],
+  "publishToWebsite": {
+    "title": "Chapisha kwenye Tovuti Yako",
+    "newBadge": "Mpya",
+    "description": "Tuma kila makala ya jarida moja kwa moja kwenye tovuti yako kama chapisho. Inafanya kazi na WordPress na jukwaa lolote linalokubali maudhui ya kawaida ya REST.",
+    "whereToPublish": {
+      "title": "Mahali pa Kuchapisha",
+      "urlLabel": "URL ya Tovuti Yako",
+      "urlPlaceholder": "https://tovuti-yako.com",
+      "urlHint": "Ingiza URL ya ukurasa wa nyumbani wa tovuti yako — tutagundua mahali pa kutuma maudhui."
+    },
+    "whosPublishing": {
+      "title": "Nani Anachapisha",
+      "usernameLabel": "Jina la Mtumiaji",
+      "usernamePlaceholder": "jina-lako-la-cms",
+      "usernameHint": "Jina la mtumiaji unalotumia kuingia ili kudhibiti tovuti yako.",
+      "passwordLabel": "Nenosiri la Programu",
+      "passwordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
+      "passwordHint": "Tengeneza hii ndani ya mipangilio ya mtumiaji wa tovuti yako. Ni nenosiri tofauti kwa ajili ya programu tu — halichukui nafasi ya nenosiri lako la kawaida.",
+      "howToGetPassword": "Jinsi ya kupata Nenosiri la Programu?",
+      "authNote": "Hutumii jina la mtumiaji/nenosiri? Ikiwa jukwaa lako linatumia uthibitisho wa HMAC badala yake, nenda chini kwenye sehemu ya Sahihi ya Usalama (Security Signature) ili kuweka siri ya pamoja."
+    },
+    "howToPublish": {
+      "title": "Jinsi ya Kuchapisha",
+      "statusLabel": "Hali ya Chapisho",
+      "statusDraft": "Hifadhi kama Rasimu — kagua kabla ya kurushwa hewani",
+      "authorLabel": "Jina la Mwandishi",
+      "authorPlaceholder": "Jina lako",
+      "authorHint": "Jinsi jina la mwandishi linavyoonekana kwenye chapisho lililochapishwa.",
+      "categoryLabel": "Kategoria",
+      "categoryPlaceholder": "k.m. Uhamiaji wa Kimataifa",
+      "categoryHint": "Inapendekezwa kulingana na mada ya jarida lako. Hakikisha kategoria hii ipo kwenye CMS yako. Acha wazi kwa yasiyopangwa.",
+      "tagsLabel": "Lebo (zilizopendekezwa)",
+      "tagsPlaceholder": "uhamiaji, mgeni, mali isiyohamishika, ...",
+      "tagsHint": "Lebo zilizotenganishwa kwa mkato zilizopendekezwa kiotomatiki kutoka kwa wasikilizaji na mada ya jarida lako. Unaweza kuhariri au kuondoa yoyote."
+    }
+  }
 }

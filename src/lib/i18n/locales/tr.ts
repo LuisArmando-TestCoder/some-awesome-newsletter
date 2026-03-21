@@ -815,5 +815,41 @@ export default {
     { "code": "YE", "name": "Yemen" },
     { "code": "ZM", "name": "Zambiya" },
     { "code": "ZW", "name": "Zimbabve" }
-  ]
+  ],
+  "publishToWebsite": {
+    "title": "Web sitenizde yayınlayın",
+    "newBadge": "Yeni",
+    "description": "Her bülten makalesini otomatik olarak web sitenize bir yazı olarak gönderin. WordPress ve standart REST içeriğini kabul eden tüm platformlarla çalışır.",
+    "whereToPublish": {
+      "title": "Nerede Yayınlanacak",
+      "urlLabel": "Web Sitenizin URL'si",
+      "urlPlaceholder": "https://web-siteniz.com",
+      "urlHint": "Sitenizin ana sayfa URL'sini girin — içeriği nereye göndereceğimizi biz buluruz."
+    },
+    "whosPublishing": {
+      "title": "Kim Yayınlıyor",
+      "usernameLabel": "Giriş Kullanıcı Adı",
+      "usernamePlaceholder": "cms-kullanıcı-adınız",
+      "usernameHint": "Web sitenizi yönetmek için giriş yaparken kullandığınız kullanıcı adı.",
+      "passwordLabel": "Uygulama Şifresi",
+      "passwordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
+      "passwordHint": "Bunu web sitenizin kullanıcı ayarlarından oluşturun. Bu sadece uygulamalar için ayrı bir şifredir — normal giriş şifrenizin yerini almaz.",
+      "howToGetPassword": "Uygulama Şifresi nasıl alınır?",
+      "authNote": "Kullanıcı adı/şifre kullanmıyor musunuz? Platformunuz bunun yerine HMAC doğrulaması kullanıyorsa, paylaşılan bir anahtar ayarlamak için Güvenlik İmzası bölümüne gidin."
+    },
+    "howToPublish": {
+      "title": "Nasıl Yayınlanır",
+      "statusLabel": "Yazı Durumu",
+      "statusDraft": "Taslak olarak kaydet — yayına girmeden önce gözden geçir",
+      "authorLabel": "Yazar Adı",
+      "authorPlaceholder": "Adınız",
+      "authorHint": "Yazar adının yayınlanan yazıda nasıl görüneceği.",
+      "categoryLabel": "Kategori",
+      "categoryPlaceholder": "örn. Uluslararası Taşınma",
+      "categoryHint": "Bülten konunuza göre önerilir. Bu kategorinin CMS'nizde mevcut olduğundan emin olun. Kategorisiz bırakmak için boş bırakın.",
+      "tagsLabel": "Etiketler (otomatik önerilen)",
+      "tagsPlaceholder": "taşınma, gurbetçi, emlak, ...",
+      "tagsHint": "Bülten hedef kitlenizden ve konunuzdan otomatik olarak önerilen, virgülle ayrılmış etiketler. İstediğinizi düzenleyebilir veya kaldırabilirsiniz."
+    }
+  }
 }

@@ -815,5 +815,41 @@ export default {
     { "code": "YE", "name": "Iêmen" },
     { "code": "ZM", "name": "Zâmbia" },
     { "code": "ZW", "name": "Zimbábue" }
-  ]
+  ],
+  "publishToWebsite": {
+    "title": "Publicar no seu Site",
+    "newBadge": "Novo",
+    "description": "Envie automaticamente cada artigo da newsletter para o seu site como um post. Funciona com WordPress e qualquer plataforma que aceite conteúdo REST padrão.",
+    "whereToPublish": {
+      "title": "Onde Publicar",
+      "urlLabel": "URL do seu Site",
+      "urlPlaceholder": "https://seu-site.com",
+      "urlHint": "Insira o URL da página inicial do seu site — nós descobriremos para onde enviar o conteúdo."
+    },
+    "whosPublishing": {
+      "title": "Quem está Publicando",
+      "usernameLabel": "Nome de Usuário",
+      "usernamePlaceholder": "seu-usuario-cms",
+      "usernameHint": "O nome de usuário que você usa para entrar e gerenciar seu site.",
+      "passwordLabel": "Senha de Aplicativo",
+      "passwordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
+      "passwordHint": "Gere esta senha dentro das configurações de usuário do seu site. É uma senha separada apenas para apps — ela não substitui seu login normal.",
+      "howToGetPassword": "Como obter uma Senha de Aplicativo?",
+      "authNote": "Não está usando usuário/senha? Se a sua plataforma usa verificação HMAC, role até a seção Assinatura de Segurança para configurar um segredo compartilhado."
+    },
+    "howToPublish": {
+      "title": "Como Publicar",
+      "statusLabel": "Status do Post",
+      "statusDraft": "Salvar como Rascunho — revisar antes de publicar",
+      "authorLabel": "Nome do Autor",
+      "authorPlaceholder": "Seu nome",
+      "authorHint": "Como o nome do autor aparecerá no post publicado.",
+      "categoryLabel": "Categoria",
+      "categoryPlaceholder": "ex: Relocação Internacional",
+      "categoryHint": "Sugerida com base no tópico da sua newsletter. Certifique-se de que esta categoria exista no seu CMS. Deixe em branco para 'Sem categoria'.",
+      "tagsLabel": "Tags (sugeridas automaticamente)",
+      "tagsPlaceholder": "relocação, expat, imobiliário, ...",
+      "tagsHint": "Tags separadas por vírgulas sugeridas automaticamente com base no público e tópico da sua newsletter. Você pode editar ou remover qualquer uma."
+    }
+  }
 }

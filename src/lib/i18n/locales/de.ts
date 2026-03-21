@@ -815,5 +815,41 @@ export default {
     { "code": "YE", "name": "Jemen" },
     { "code": "ZM", "name": "Sambia" },
     { "code": "ZW", "name": "Simbabwe" }
-  ]
+  ],
+  "publishToWebsite": {
+    "title": "Auf Ihrer Website veröffentlichen",
+    "newBadge": "Neu",
+    "description": "Senden Sie jeden Newsletter-Artikel automatisch als Beitrag an Ihre Website. Funktioniert mit WordPress und jeder Plattform, die Standard-REST-Inhalte akzeptiert.",
+    "whereToPublish": {
+      "title": "Wo soll veröffentlicht werden?",
+      "urlLabel": "Ihre Website-URL",
+      "urlPlaceholder": "https://ihre-website.de",
+      "urlHint": "Geben Sie die URL der Homepage Ihrer Website ein – wir finden heraus, wohin der Inhalt gesendet werden soll."
+    },
+    "whosPublishing": {
+      "title": "Wer veröffentlicht?",
+      "usernameLabel": "Benutzername",
+      "usernamePlaceholder": "ihr-cms-benutzername",
+      "usernameHint": "Der Benutzername, mit dem Sie sich anmelden, um Ihre Website zu verwalten.",
+      "passwordLabel": "Anwendungspasswort",
+      "passwordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
+      "passwordHint": "Erstellen Sie dieses in den Benutzereinstellungen Ihrer Website. Es ist ein separates Passwort speziell für Apps – es ersetzt nicht Ihr reguläres Login.",
+      "howToGetPassword": "Wie bekomme ich ein Anwendungspasswort?",
+      "authNote": "Sie verwenden keinen Benutzernamen/Passwort? Wenn Ihre Plattform stattdessen die HMAC-Verifizierung verwendet, scrollen Sie nach unten zum Abschnitt 'Security Signature', um ein gemeinsames Geheimnis einzurichten."
+    },
+    "howToPublish": {
+      "title": "Wie soll veröffentlicht werden?",
+      "statusLabel": "Beitragsstatus",
+      "statusDraft": "Als Entwurf speichern – vor Veröffentlichung prüfen",
+      "authorLabel": "Autorenname",
+      "authorPlaceholder": "Ihr Name",
+      "authorHint": "Wie der Name des Autors im veröffentlichten Beitrag erscheint.",
+      "categoryLabel": "Kategorie",
+      "categoryPlaceholder": "z. B. Umzug & Relocation",
+      "categoryHint": "Vorgeschlagen basierend auf Ihrem Newsletter-Thema. Stellen Sie sicher, dass diese Kategorie in Ihrem CMS vorhanden ist. Für 'Nicht kategorisiert' leer lassen.",
+      "tagsLabel": "Tags (automatisch vorgeschlagen)",
+      "tagsPlaceholder": "Relocation, Expat, Immobilien, ...",
+      "tagsHint": "Kommagetrennte Tags, die basierend auf Ihrer Newsletter-Zielgruppe und Ihrem Thema automatisch vorgeschlagen werden. Sie können Tags bearbeiten oder entfernen."
+    }
+  }
 }

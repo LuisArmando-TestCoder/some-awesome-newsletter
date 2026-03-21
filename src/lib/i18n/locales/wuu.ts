@@ -815,5 +815,41 @@ export default {
     { "code": "YE", "name": "也门" },
     { "code": "ZM", "name": "赞比亚" },
     { "code": "ZW", "name": "津巴布韦" }
-  ]
+  ],
+  "publishToWebsite": {
+    "title": "发布到您的网站",
+    "newBadge": "新",
+    "description": "自动将每篇新闻通讯文章作为博文发送到您的网站。支持 WordPress 及任何接受标准 REST 内容的平台。",
+    "whereToPublish": {
+      "title": "发布位置",
+      "urlLabel": "您的网站 URL",
+      "urlPlaceholder": "https://your-website.com",
+      "urlHint": "输入您网站的主页 URL —— 我们将自动识别内容发送位置。"
+    },
+    "whosPublishing": {
+      "title": "发布者信息",
+      "usernameLabel": "登录用户名",
+      "usernamePlaceholder": "您的-cms-用户名",
+      "usernameHint": "您用于登录并管理网站的用户名。",
+      "passwordLabel": "应用密码",
+      "passwordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
+      "passwordHint": "在您网站的用户设置中生成。这是专为应用程序设置的独立密码 —— 不会替换您的常规登录密码。",
+      "howToGetPassword": "如何获取应用密码？",
+      "authNote": "不使用用户名/密码？如果您的平台使用 HMAC 验证，请向下滚动到“安全签名”部分以设置共享密钥。"
+    },
+    "howToPublish": {
+      "title": "发布设置",
+      "statusLabel": "文章状态",
+      "statusDraft": "保存为草稿 —— 发布前先预览",
+      "authorLabel": "作者姓名",
+      "authorPlaceholder": "您的姓名",
+      "authorHint": "作者姓名在已发布文章中的显示方式。",
+      "categoryLabel": "分类",
+      "categoryPlaceholder": "例如：国际搬迁",
+      "categoryHint": "根据您的新闻通讯主题建议。请确保此分类在您的 CMS 中已存在。留空则归为未分类。",
+      "tagsLabel": "标签（自动建议）",
+      "tagsPlaceholder": "搬迁, 移民, 房地产, ...",
+      "tagsHint": "根据您新闻通讯的受众和主题自动建议的逗号分隔标签。您可以编辑或删除任何标签。"
+    }
+  }
 }

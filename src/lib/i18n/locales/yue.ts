@@ -815,5 +815,41 @@ export default {
       { "code": "YE", "name": "也門" },
       { "code": "ZM", "name": "贊比亞" },
       { "code": "ZW", "name": "津巴布韋" }
-    ]
+    ],
+  "publishToWebsite": {
+    "title": "發布到您的網站",
+    "newBadge": "新",
+    "description": "自動將每篇電子報文章作為博文發送到您的網站。支援 WordPress 及任何接受標準 REST 內容的平台。",
+    "whereToPublish": {
+      "title": "發布位置",
+      "urlLabel": "您的網站 URL",
+      "urlPlaceholder": "https://your-website.com",
+      "urlHint": "輸入您網站的首頁 URL —— 我們將自動識別內容發送位置。"
+    },
+    "whosPublishing": {
+      "title": "發布者資訊",
+      "usernameLabel": "登入使用者名稱",
+      "usernamePlaceholder": "您的-cms-使用者名稱",
+      "usernameHint": "您用於登入並管理網站的使用者名稱。",
+      "passwordLabel": "應用程式密碼",
+      "passwordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
+      "passwordHint": "在您網站的使用者設定中產生。這是專為應用程式設置的獨立密碼 —— 不會替換您的常規登入密碼。",
+      "howToGetPassword": "如何獲取應用程式密碼？",
+      "authNote": "不使用使用者名稱/密碼？如果您的平台使用 HMAC 驗證，請向下滚动到「安全簽名」部分以設置共享密鑰。"
+    },
+    "howToPublish": {
+      "title": "發布設置",
+      "statusLabel": "文章狀態",
+      "statusDraft": "儲存為草稿 —— 發布前先預覽",
+      "authorLabel": "作者姓名",
+      "authorPlaceholder": "您的姓名",
+      "authorHint": "作者姓名在已發布文章中的顯示方式。",
+      "categoryLabel": "分類",
+      "categoryPlaceholder": "例如：國際搬遷",
+      "categoryHint": "根據您的電子報主題建議。請確保此分類在您的 CMS 中已存在。留空則歸為未分類。",
+      "tagsLabel": "標籤（自動建議）",
+      "tagsPlaceholder": "搬遷, 移民, 房地產, ...",
+      "tagsHint": "根據您電子報的受眾和主題自動建議的逗號分隔標籤。您可以編輯或刪除任何標籤。"
+    }
   }
+}

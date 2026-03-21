@@ -815,5 +815,41 @@ export default {
     { "code": "YE", "name": "Yemen" },
     { "code": "ZM", "name": "Zambia" },
     { "code": "ZW", "name": "Zimbabwe" }
-  ]
+  ],
+  "publishToWebsite": {
+    "title": "Xuất bản lên Trang web của bạn",
+    "newBadge": "Mới",
+    "description": "Tự động gửi từng bài viết bản tin đến trang web của bạn dưới dạng một bài đăng. Hoạt động với WordPress và bất kỳ nền tảng nào chấp nhận nội dung REST tiêu chuẩn.",
+    "whereToPublish": {
+      "title": "Nơi Xuất bản",
+      "urlLabel": "URL Trang web của bạn",
+      "urlPlaceholder": "https://trang-web-cua-ban.com",
+      "urlHint": "Nhập URL trang chủ trang web của bạn — chúng tôi sẽ tìm ra nơi gửi nội dung."
+    },
+    "whosPublishing": {
+      "title": "Người Xuất bản",
+      "usernameLabel": "Tên đăng nhập",
+      "usernamePlaceholder": "ten-dang-nhap-cms",
+      "usernameHint": "Tên người dùng bạn sử dụng để đăng nhập quản trị trang web.",
+      "passwordLabel": "Mật khẩu Ứng dụng",
+      "passwordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
+      "passwordHint": "Tạo mật khẩu này trong cài đặt người dùng trên trang web của bạn. Đây là mật khẩu riêng biệt chỉ dành cho ứng dụng — nó không thay thế mật khẩu đăng nhập thông thường của bạn.",
+      "howToGetPassword": "Cách lấy Mật khẩu Ứng dụng?",
+      "authNote": "Không sử dụng tên đăng nhập/mật khẩu? Nếu nền tảng của bạn sử dụng xác minh HMAC, hãy cuộn xuống phần Chữ ký Bảo mật để thiết lập khóa bí mật chung."
+    },
+    "howToPublish": {
+      "title": "Cách Xuất bản",
+      "statusLabel": "Trạng thái bài đăng",
+      "statusDraft": "Lưu dưới dạng bản nháp — xem lại trước khi đăng chính thức",
+      "authorLabel": "Tên Tác giả",
+      "authorPlaceholder": "Tên của bạn",
+      "authorHint": "Cách tên tác giả xuất hiện trên bài đăng đã xuất bản.",
+      "categoryLabel": "Danh mục",
+      "categoryPlaceholder": "vd: Định cư Quốc tế",
+      "categoryHint": "Được gợi ý dựa trên chủ đề bản tin của bạn. Đảm bảo danh mục này tồn tại trong CMS của bạn. Để trống nếu không phân loại.",
+      "tagsLabel": "Thẻ (gợi ý tự động)",
+      "tagsPlaceholder": "dinh cu, kieu bao, bat dong san, ...",
+      "tagsHint": "Các thẻ cách nhau bằng dấu phẩy được gợi ý tự động dựa trên khán giả và chủ đề bản tin của bạn. Bạn có thể chỉnh sửa hoặc xóa bất kỳ thẻ nào."
+    }
+  }
 }

@@ -815,5 +815,41 @@ export default {
     { "code": "YE", "name": "Yaman" },
     { "code": "ZM", "name": "Zambia" },
     { "code": "ZW", "name": "Zimbabwe" }
-  ]
+  ],
+  "publishToWebsite": {
+    "title": "Publikasikan ke Situs Web Anda",
+    "newBadge": "Baru",
+    "description": "Kirimkan setiap artikel buletin secara otomatis ke situs web Anda sebagai postingan. Berfungsi dengan WordPress dan platform apa pun yang menerima konten REST standar.",
+    "whereToPublish": {
+      "title": "Tempat Publikasi",
+      "urlLabel": "URL Situs Web Anda",
+      "urlPlaceholder": "https://situs-anda.com",
+      "urlHint": "Masukkan URL beranda situs Anda — kami akan mencari tahu ke mana harus mengirimkan kontennya."
+    },
+    "whosPublishing": {
+      "title": "Siapa yang Mempublikasikan",
+      "usernameLabel": "Nama Pengguna Login",
+      "usernamePlaceholder": "username-cms-anda",
+      "usernameHint": "Nama pengguna yang Anda gunakan untuk masuk guna mengelola situs web Anda.",
+      "passwordLabel": "Kata Sandi Aplikasi",
+      "passwordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
+      "passwordHint": "Buat ini di dalam pengaturan pengguna situs web Anda. Ini adalah kata sandi terpisah khusus untuk aplikasi — ini tidak menggantikan login reguler Anda.",
+      "howToGetPassword": "Bagaimana cara mendapatkan Kata Sandi Aplikasi?",
+      "authNote": "Tidak menggunakan nama pengguna/kata sandi? Jika platform Anda menggunakan verifikasi HMAC, gulir ke bawah ke bagian Tanda Tangan Keamanan untuk menyiapkan rahasia bersama."
+    },
+    "howToPublish": {
+      "title": "Cara Publikasi",
+      "statusLabel": "Status Postingan",
+      "statusDraft": "Simpan sebagai Draf — tinjau sebelum dipublikasikan",
+      "authorLabel": "Nama Penulis",
+      "authorPlaceholder": "Nama Anda",
+      "authorHint": "Bagaimana nama penulis muncul pada postingan yang dipublikasikan.",
+      "categoryLabel": "Kategori",
+      "categoryPlaceholder": "misalnya Relokasi Internasional",
+      "categoryHint": "Disarankan berdasarkan topik buletin Anda. Pastikan kategori ini ada di CMS Anda. Biarkan kosong untuk tanpa kategori.",
+      "tagsLabel": "Tag (disarankan otomatis)",
+      "tagsPlaceholder": "relokasi, ekspat, real estat, ...",
+      "tagsHint": "Tag yang dipisahkan koma yang disarankan secara otomatis berdasarkan audiens dan topik buletin Anda. Anda dapat mengedit atau menghapus tag apa pun."
+    }
+  }
 }

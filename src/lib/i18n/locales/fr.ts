@@ -815,5 +815,41 @@ export default {
     { "code": "YE", "name": "Yémen" },
     { "code": "ZM", "name": "Zambie" },
     { "code": "ZW", "name": "Zimbabwe" }
-  ]
+  ],
+  "publishToWebsite": {
+    "title": "Publier sur votre site web",
+    "newBadge": "Nouveau",
+    "description": "Envoyez automatiquement chaque article de la newsletter vers votre site web sous forme de publication. Compatible avec WordPress et toute plateforme acceptant le contenu REST standard.",
+    "whereToPublish": {
+      "title": "Où publier",
+      "urlLabel": "URL de votre site web",
+      "urlPlaceholder": "https://votre-site.com",
+      "urlHint": "Entrez l'URL de la page d'accueil de votre site — nous déterminerons où envoyer le contenu."
+    },
+    "whosPublishing": {
+      "title": "Qui publie",
+      "usernameLabel": "Nom d'utilisateur de connexion",
+      "usernamePlaceholder": "votre-nom-d-utilisateur-cms",
+      "usernameHint": "Le nom d'utilisateur que vous utilisez pour vous connecter et gérer votre site web.",
+      "passwordLabel": "Mot de passe d'application",
+      "passwordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
+      "passwordHint": "Générez-le dans les paramètres utilisateur de votre site web. Il s'agit d'un mot de passe distinct réservé aux applications — il ne remplace pas votre connexion habituelle.",
+      "howToGetPassword": "Comment obtenir un mot de passe d'application ?",
+      "authNote": "Vous n'utilisez pas de nom d'utilisateur/mot de passe ? Si votre plateforme utilise l'authentification HMAC, faites défiler jusqu'à la section Signature de sécurité pour configurer un secret partagé."
+    },
+    "howToPublish": {
+      "title": "Comment publier",
+      "statusLabel": "Statut de la publication",
+      "statusDraft": "Enregistrer comme brouillon — réviser avant publication",
+      "authorLabel": "Nom de l'auteur",
+      "authorPlaceholder": "Votre nom",
+      "authorHint": "Comment le nom de l'auteur apparaît sur l'article publié.",
+      "categoryLabel": "Catégorie",
+      "categoryPlaceholder": "ex: Relocalisation internationale",
+      "categoryHint": "Suggéré en fonction du sujet de votre newsletter. Assurez-vous que cette catégorie existe dans votre CMS. Laissez vide pour 'Non classé'.",
+      "tagsLabel": "Étiquettes (auto-suggérées)",
+      "tagsPlaceholder": "relocalisation, expatriation, immobilier, ...",
+      "tagsHint": "Étiquettes séparées par des virgules auto-suggérées en fonction de l'audience et du sujet de votre newsletter. Vous pouvez les modifier ou les supprimer."
+    }
+  }
 }

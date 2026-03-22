@@ -419,4 +419,42 @@ export default {
   "billing.fields.city.placeholder": "Madrid",
   "billing.fields.zip.label": "Código Postal",
   "billing.fields.zip.placeholder": "28001",
+
+  /* ── Publicar en el Sitio Web (Entrega de Contenido) ── */
+  "webhook.sectionTitle": "Publicar en tu Sitio Web",
+  "webhook.sectionBadge": "Nuevo",
+  "webhook.sectionDesc": "Envía automáticamente cada artículo del boletín a tu sitio web como una publicación. Funciona con WordPress y cualquier plataforma que acepte contenido REST estándar.",
+
+  "webhook.whereTitle": "Dónde Publicar",
+  "webhook.baseUrl": "URL de tu Sitio Web",
+  "webhook.baseUrlPlaceholder": "https://tu-sitio.com",
+  "webhook.baseUrlHint": "Introduce la URL de la página principal de tu sitio — nosotros determinaremos dónde enviar el contenido.",
+
+  "webhook.whoTitle": "Quién Publica",
+  "webhook.username": "Nombre de Usuario",
+  "webhook.usernamePlaceholder": "tu-usuario-cms",
+  "webhook.usernameHint": "El nombre de usuario que usas para iniciar sesión y gestionar tu sitio web.",
+  "webhook.appPassword": "Contraseña de Aplicación",
+  "webhook.appPasswordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
+  "webhook.appPasswordHint": "Genera esto en la configuración de usuario de tu sitio. Es una contraseña exclusiva para aplicaciones — no reemplaza tu inicio de sesión habitual.",
+  "webhook.appPasswordGuide": "¿Cómo obtener una Contraseña de Aplicación?",
+  "webhook.appPasswordGuideHide": "Ocultar guía",
+  "webhook.appPasswordStep1": "Ve al panel de administración de tu sitio web.",
+  "webhook.appPasswordStep2": "Navega a Usuarios → Tu Perfil.",
+  "webhook.appPasswordStep3": "Desplázate hasta \"Contraseñas de aplicaciones\", crea una llamada \"AIBAN\" y pégala aquí.",
+  "webhook.hmacAlternative": "¿No usas usuario/contraseña? Si tu plataforma usa verificación HMAC, desplázate hasta la sección Firma de Seguridad para configurar un secreto compartido.",
+
+  "webhook.howTitle": "Cómo Publicar",
+  "webhook.postStatus": "Estado de la Publicación",
+  "webhook.postStatusDraft": "Guardar como Borrador — revisar antes de publicar",
+  "webhook.postStatusPublish": "Publicar Inmediatamente — se publica al momento",
+  "webhook.authorName": "Nombre del Autor",
+  "webhook.authorNameHint": "Cómo aparece el nombre del autor en la publicación publicada.",
+  "webhook.categoryHint": "Categoría (pista de etiqueta)",
+  "webhook.categoryHintDesc": "Sugerido según el tema de tu boletín. Asegúrate de que esta categoría exista en tu CMS. Deja en blanco para sin categoría.",
+  "webhook.tagsHint": "Etiquetas (auto-sugeridas)",
+  "webhook.tagsHintDesc": "Etiquetas separadas por comas sugeridas automáticamente desde tu audiencia y tema. Puedes editar o eliminar cualquiera.",
+
+  "webhook.saveSettings": "Guardar Configuración de Publicación",
+  "webhook.savedSuccess": "Configuración de publicación guardada.",
 };

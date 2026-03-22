@@ -835,12 +835,17 @@ export default {
       "passwordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
       "passwordHint": "Generate this inside your website's user settings. It's a separate password just for apps — it doesn't replace your regular login.",
       "howToGetPassword": "How to get an App Password?",
+      "passwordGuideHide": "Hide guide",
+      "step1": "Go to your website's admin panel.",
+      "step2": "Navigate to Users → Your Profile.",
+      "step3": "Scroll down to \"Application Passwords\", create one named \"AIBAN\" and paste it here.",
       "authNote": "Not using username/password? If your platform uses HMAC verification instead, scroll down to the Security Signature section to set up a shared secret."
     },
     "howToPublish": {
       "title": "How to Publish",
       "statusLabel": "Post Status",
       "statusDraft": "Save as Draft — review before going live",
+      "statusPublish": "Publish Immediately — goes live right away",
       "authorLabel": "Author Name",
       "authorPlaceholder": "Your name",
       "authorHint": "How the author's name appears on the published post.",
@@ -850,6 +855,8 @@ export default {
       "tagsLabel": "Tags (auto-suggested)",
       "tagsPlaceholder": "relocation, expat, real estate, ...",
       "tagsHint": "Comma-separated tags auto-suggested from your newsletter audience and topic. You can edit or remove any."
-    }
+    },
+    "saveSettings": "Save Publish Settings",
+    "savedSuccess": "Publish settings saved."
   }
 }

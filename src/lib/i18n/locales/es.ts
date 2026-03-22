@@ -835,12 +835,17 @@ export default {
       "passwordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
       "passwordHint": "Genere esto dentro de la configuración de usuario de su sitio web. Es una contraseña separada solo para aplicaciones; no reemplaza su inicio de sesión normal.",
       "howToGetPassword": "¿Cómo obtener una contraseña de aplicación?",
+      "passwordGuideHide": "Ocultar guía",
+      "step1": "Ve al panel de administración de tu sitio web.",
+      "step2": "Navega a Usuarios → Tu Perfil.",
+      "step3": "Desplázate hasta \"Contraseñas de aplicaciones\", crea una llamada \"AIBAN\" y pégala aquí.",
       "authNote": "¿No usa nombre de usuario/contraseña? Si su plataforma utiliza la verificación HMAC en su lugar, desplácese hacia abajo hasta la sección Firma de seguridad para configurar un secreto compartido."
     },
     "howToPublish": {
       "title": "Cómo publicar",
       "statusLabel": "Estado de la publicación",
       "statusDraft": "Guardar como borrador: revisar antes de publicar",
+      "statusPublish": "Publicar inmediatamente — se publica al momento",
       "authorLabel": "Nombre del autor",
       "authorPlaceholder": "Su nombre",
       "authorHint": "Cómo aparece el nombre del autor en la publicación publicada.",
@@ -850,6 +855,8 @@ export default {
       "tagsLabel": "Etiquetas (sugeridas automáticamente)",
       "tagsPlaceholder": "reubicación, expatriado, bienes raíces, ...",
       "tagsHint": "Etiquetas separadas por comas sugeridas automáticamente según la audiencia y el tema de su boletín. Puede editar o eliminar cualquiera."
-    }
+    },
+    "saveSettings": "Guardar configuración de publicación",
+    "savedSuccess": "Configuración de publicación guardada."
   }
 }

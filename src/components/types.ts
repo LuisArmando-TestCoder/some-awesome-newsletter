@@ -56,6 +56,23 @@ export interface Article {
   lead: string;
 }
 
+/**
+ * A named set of publish credentials (URL + auth + preferences).
+ * Stored as an array on Config so the user can define multiple destinations
+ * (e.g. "Main Blog", "Client Site A") and assign any news source to one.
+ */
+export interface WebhookGroup {
+  id: string;             // generated with crypto.randomUUID() on client
+  name: string;           // user-friendly label, e.g. "Main Blog"
+  url: string;            // base site URL — backend appends /wp-json/wp/v2/posts etc.
+  username?: string;      // CMS login username
+  password?: string;      // CMS application password
+  postStatus?: 'publish' | 'draft';
+  authorName?: string;
+  categoryHint?: string;
+  tagsHint?: string;
+}
+
 export interface NewsSource {
   type: string;
   url: string;
@@ -72,7 +89,9 @@ export interface NewsSource {
   appPassword?: string; 
   active?: boolean;
   isPublic?: boolean; 
-  includeImages?: boolean; 
+  includeImages?: boolean;
+  /** ID of the WebhookGroup to publish to. Falls back to webhookGroups[0] when absent. */
+  webhookGroupId?: string;
 }
 
 export interface EmailAuth {
@@ -118,6 +137,13 @@ export interface Config {
   pricingPlan?: PricingPlanId;
   billingInterval?: BillingInterval;
   tilopaySubscriptionId?: string;
+
+  /**
+   * Named publish destinations. Index 0 = System Default applied to all
+   * news sources that don't have an explicit webhookGroupId.
+   * Persisted to Firestore as a top-level key via the standard PATCH mechanism.
+   */
+  webhookGroups?: WebhookGroup[];
 }
 
 export interface NewsletterUser {

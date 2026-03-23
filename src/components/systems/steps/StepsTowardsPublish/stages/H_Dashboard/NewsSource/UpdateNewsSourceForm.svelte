@@ -15,6 +15,7 @@
   import EmailInput from "../../../../../inputs/Email/Email.svelte";
   import MarkdownText from "../../../../../texts/MarkdownText/MarkdownText.svelte";
   import { onMount } from "svelte";
+  import { browser } from "$app/environment";
   import { ping } from "../../../../../../Notification/notificationStore";
   
   // Translation store import
@@ -37,6 +38,8 @@
     appPassword: string;
     includeImages: boolean;
     isPublic: boolean;
+    /** Which webhook group this source publishes to. Empty string = System Default (groups[0]) */
+    webhookGroupId: string;
   };
 
   let updateFields: UpdateFieldsType;
@@ -53,8 +56,16 @@
       appPassword: newsSource.appPassword || "",
       includeImages: !!newsSource.includeImages,
       isPublic: newsSource.isPublic === undefined ? true : newsSource.isPublic,
+      webhookGroupId: newsSource.webhookGroupId || "",
     };
   }
+
+  /* Webhook groups from the shared store — SSR-safe, defaults to [] */
+  $: webhookGroups = ($store.config.webhookGroups || []) as import("../../../../../../types").WebhookGroup[];
+
+  /* Session change tracking — read in onMount (browser only) */
+  let sessionChangedIds = new Set<string>();
+  const SESSION_KEY = "aiban_wh_session";
 
   let emailValidationError = "";
   $: {
@@ -79,6 +90,13 @@
   let isMounted = false;
   onMount(() => {
     isMounted = true;
+    // SSR-safe: read session-changed webhook group IDs from localStorage
+    if (browser) {
+      try {
+        const raw = localStorage.getItem(SESSION_KEY);
+        if (raw) sessionChangedIds = new Set(JSON.parse(raw));
+      } catch {}
+    }
   });
 
   let rawContent: string = "";
@@ -109,6 +127,8 @@
       appPassword: updateFields.appPassword || null,
       includeImages: updateFields.includeImages,
       isPublic: updateFields.isPublic,
+      // Persist the selected publish destination (empty string = System Default)
+      webhookGroupId: updateFields.webhookGroupId || null,
     };
 
     if (emailValidationError) {
@@ -141,6 +161,25 @@
   {/if}
 
   {#if updateFields}
+    <!-- ── Publish Destination (reactive from shared store) ── -->
+    {#if webhookGroups.length > 0}
+      <div class="webhook-group-selector">
+        <label class="wg-label">Publish Destination</label>
+        <select class="wg-select" bind:value={updateFields.webhookGroupId}
+          on:change={() => { if (isMounted) handleUpdate(); }}>
+          <option value="">★ System Default ({webhookGroups[0]?.name || webhookGroups[0]?.url || 'None'})</option>
+          {#each webhookGroups.slice(1) as group (group.id)}
+            <option value={group.id}>
+              {group.name || group.url}
+              {sessionChangedIds.has(group.id) ? ' · Updated this session' : ''}
+            </option>
+          {/each}
+        </select>
+        <p class="wg-hint">Choose which website this news source publishes to after each send.
+          Set up destinations in <strong>Secrets / Developer</strong>.</p>
+      </div>
+    {/if}
+
     <ToggleCard {canReveal} cardTitle={$t['newsSource.basicSettings']} isOpen={false} onChange={() => {}}>
       <div class="selectors-group">
         <PlainText
@@ -341,5 +380,39 @@
     color: red;
     font-size: 0.875rem;
     margin-top: -0.5rem; /* Adjust spacing if needed */
+  }
+
+  /* ── Publish Destination selector ── */
+  .webhook-group-selector {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background: #f8f8ff;
+    border: 1px solid #c7d2fe;
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .wg-label {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #4f46e5;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .wg-select {
+    border: 1px solid #c7d2fe;
+    border-radius: 8px;
+    padding: 9px 12px;
+    font-size: 0.9rem;
+    background: #fff;
+    cursor: pointer;
+    width: 100%;
+    color: #1e1b4b;
+    &:focus { outline: none; border-color: #4f46e5; }
+  }
+  .wg-hint {
+    font-size: 0.78rem;
+    color: #6366f1;
+    margin: 0;
   }
 </style>

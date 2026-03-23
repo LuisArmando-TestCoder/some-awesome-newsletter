@@ -121,6 +121,8 @@ const store = writable<Store>({
     appPassword: "",
     vip: false,
     pricingPlan: "free",
+    /** Named publish groups — empty by default; SSR-safe (no localStorage access) */
+    webhookGroups: [],
   },
 
   subscribers: {},

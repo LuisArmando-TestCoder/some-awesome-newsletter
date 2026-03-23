@@ -342,6 +342,6 @@
   {/if}
 </div>
 
-<style>
+<style lang="scss">
   @use "../../../../lib/styles/custom-select-styles.scss";
 </style>

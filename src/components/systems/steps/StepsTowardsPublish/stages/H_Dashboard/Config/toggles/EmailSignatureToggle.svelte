@@ -176,7 +176,7 @@
   </div>
 </div>
 
-<style>
+<style lang="scss">
   @use 'https://cdn.quilljs.com/1.3.6/quill.snow.css';
 
   .editor-wrapper {

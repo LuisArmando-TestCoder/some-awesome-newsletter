@@ -68,7 +68,7 @@
 </div>
 
 <style lang="scss">
-  @import "../../../../lib/styles/centralized-styles.scss";
+  @use "../../../../lib/styles/centralized-styles.scss";
 
   .email-input-wrapper {
     display: flex;

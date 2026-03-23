@@ -237,7 +237,7 @@
 </div>
 
 <style lang="scss">
-  @import 'https://cdn.quilljs.com/1.3.6/quill.snow.css';
+  @use 'https://cdn.quilljs.com/1.3.6/quill.snow.css';
 
   .interactive-editor {
     display: flex;

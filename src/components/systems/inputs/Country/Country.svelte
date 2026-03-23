@@ -343,5 +343,5 @@
 </div>
 
 <style>
-  @import "../../../../lib/styles/custom-select-styles.scss";
+  @use "../../../../lib/styles/custom-select-styles.scss";
 </style>

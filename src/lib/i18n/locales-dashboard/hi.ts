@@ -400,7 +400,47 @@ export default {
   "newsSource.errorInit": "फ़ॉर्म डेटा ठीक से इनिशियलाइज़ नहीं हुआ।",
   "newsSource.errorEmailBoth": "यदि कोई एक भी दिया गया है तो ईमेल और ऐप पासवर्ड दोनों आवश्यक हैं।",
   "newsSource.errorUpdateFail": "अपडेट करने में विफल। पुनः प्रयास करें।",
+
+  /* ── अपनी वेबसाइट पर प्रकाशित करें (कंटेंट डिलीवरी) ── */
+  "webhook.sectionTitle": "अपनी वेबसाइट पर प्रकाशित करें",
+  "webhook.sectionBadge": "नया",
+  "webhook.sectionDesc": "प्रत्येक न्यूज़लेटर लेख को अपनी वेबसाइट पर पोस्ट के रूप में स्वचालित रूप से भेजें। यह WordPress और REST कंटेंट स्वीकार करने वाले किसी भी प्लेटफॉर्म के साथ काम करता है।",
+
+  "webhook.whereTitle": "कहाँ प्रकाशित करें",
+  "webhook.baseUrl": "आपकी वेबसाइट URL",
+  "webhook.baseUrlPlaceholder": "https://your-website.com",
+  "webhook.baseUrlHint": "अपनी साइट का होमपेज URL दर्ज करें — हम पता लगा लेंगे कि कंटेंट कहाँ भेजना है।",
+
+  "webhook.whoTitle": "कौन प्रकाशित कर रहा है",
+  "webhook.username": "लॉगिन उपयोगकर्ता नाम",
+  "webhook.usernamePlaceholder": "your-cms-username",
+  "webhook.usernameHint": "अपनी वेबसाइट प्रबंधित करने के लिए आप जिस उपयोगकर्ता नाम का उपयोग करते हैं।",
+  "webhook.appPassword": "ऐप पासवर्ड",
+  "webhook.appPasswordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
+  "webhook.appPasswordHint": "इसे अपनी वेबसाइट की उपयोगकर्ता सेटिंग्स में बनाएँ। यह केवल ऐप्स के लिए एक अलग पासवर्ड है।",
+  "webhook.appPasswordGuide": "ऐप पासवर्ड कैसे प्राप्त करें?",
+  "webhook.appPasswordGuideHide": "मार्गदर्शिका छिपाएँ",
+  "webhook.appPasswordStep1": "अपनी वेबसाइट के एडमिन पैनल पर जाएँ।",
+  "webhook.appPasswordStep2": "उपयोगकर्ता (Users) → अपनी प्रोफ़ाइल पर जाएँ।",
+  "webhook.appPasswordStep3": "\"Application Passwords\" पर जाएँ, \"AIBAN\" नाम से एक बनाएँ और उसे यहाँ पेस्ट करें।",
+  "webhook.hmacAlternative": "उपयोगकर्ता नाम/पासवर्ड का उपयोग नहीं करते? यदि आपका प्लेटफॉर्म HMAC सत्यापन का उपयोग करता है, तो नीचे सुरक्षा हस्ताक्षर सेट अप करें।",
+
+  "webhook.howTitle": "कैसे प्रकाशित करें",
+  "webhook.postStatus": "पोस्ट स्थिति",
+  "webhook.postStatusDraft": "ड्राफ्ट के रूप में सहेजें — लाइव करने से पहले समीक्षा करें",
+  "webhook.postStatusPublish": "तुरंत प्रकाशित करें — सीधे लाइव हो जाएगा",
+  "webhook.authorName": "लेखक का नाम",
+  "webhook.authorNameHint": "प्रकाशित पोस्ट पर लेखक का नाम जिस तरह से दिखाई देगा।",
+  "webhook.categoryHint": "श्रेणी",
+  "webhook.categoryHintDesc": "आपके न्यूज़लेटर विषय पर आधारित सुझाव। सुनिश्चित करें कि यह श्रेणी आपके CMS में है।",
+  "webhook.tagsHint": "टैग (स्वचालित सुझाव)",
+  "webhook.tagsHintDesc": "आपके दर्शकों और विषय पर आधारित टैग। आप इन्हें संपादित या हटा सकते हैं।",
+
+  "webhook.saveSettings": "प्रकाशन सेटिंग्स सहेजें",
+  "webhook.savedSuccess": "प्रकाशन सेटिंग्स सहेजी गईं।",
+
   "billing.header.title": "बिलिंग जानकारी",
+
   "billing.header.subtitle": "अपना बिलिंग विवरण प्रबंधित करें",
   "billing.fields.firstName.label": "पहला नाम",
   "billing.fields.firstName.placeholder": "राहुल",

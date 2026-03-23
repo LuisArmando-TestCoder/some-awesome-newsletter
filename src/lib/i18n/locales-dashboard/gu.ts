@@ -400,7 +400,47 @@ export default {
   "newsSource.errorInit": "ફોર્મ ડેટા યોગ્ય રીતે પ્રારંભ થયો નથી.",
   "newsSource.errorEmailBoth": "જો કોઈ પણ એક આપેલ હોય તો ઇમેઇલ અને એપ પાસવર્ડ બંને જરૂરી છે.",
   "newsSource.errorUpdateFail": "અપડેટ કરવામાં નિષ્ફળ. ફરી પ્રયાસ કરો.",
+
+  /* ── તમારી વેબસાઇટ પર પ્રકાશિત કરો (કન્ટેન્ટ ડિલિવરી) ── */
+  "webhook.sectionTitle": "તમારી વેબસાઇટ પર પ્રકાશિત કરો",
+  "webhook.sectionBadge": "નવું",
+  "webhook.sectionDesc": "દરેક ન્યૂઝલેટર લેખને તમારી વેબસાઇટ પર પોસ્ટ તરીકે આપમેળે મોકલો. WordPress અને REST કન્ટેન્ટ સ્વીકારતા કોઈપણ પ્લેટફોર્મ સાથે કામ કરે છે.",
+
+  "webhook.whereTitle": "ક્યાં પ્રકાશિત કરવું",
+  "webhook.baseUrl": "તમારી વેબસાઇટ URL",
+  "webhook.baseUrlPlaceholder": "https://your-website.com",
+  "webhook.baseUrlHint": "તમારી સાઇટના હોમપેજ URL દાખલ કરો — કન્ટેન્ટ ક્યાં મોકલવું તે અમે શોધી લઈશું.",
+
+  "webhook.whoTitle": "કોણ પ્રકાશિત કરી રહ્યું છે",
+  "webhook.username": "લોગિન વપરાશકર્તાનામ",
+  "webhook.usernamePlaceholder": "your-cms-username",
+  "webhook.usernameHint": "તમારી વેબસાઇટ મેનેજ કરવા માટે તમે જે વપરાશકર્તાનામનો ઉપયોગ કરો છો તે.",
+  "webhook.appPassword": "એપ પાસવર્ડ",
+  "webhook.appPasswordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
+  "webhook.appPasswordHint": "તમારી વેબસાઇટના વપરાશકર્તા સેટિંગ્સમાં આ બનાવો. આ ફક્ત એપ્સ માટેનો એક અલગ પાસવર્ડ છે.",
+  "webhook.appPasswordGuide": "એપ પાસવર્ડ કેવી રીતે મેળવવો?",
+  "webhook.appPasswordGuideHide": "માર્ગદર્શિકા છુપાવો",
+  "webhook.appPasswordStep1": "તમારી વેબસાઇટના એડમિન પેનલ પર જાઓ.",
+  "webhook.appPasswordStep2": "વપરાશકર્તાઓ → તમારી પ્રોફાઇલ પર જાઓ.",
+  "webhook.appPasswordStep3": "\"Application Passwords\" પર જાઓ, \"AIBAN\" નામે એક બનાવો અને તેને અહીં પેસ્ટ કરો.",
+  "webhook.hmacAlternative": "વપરાશકર્તાનામ/પાસવર્ડનો ઉપયોગ નથી કરતા? જો તમારું પ્લેટફોર્મ HMAC વેરિફિકેશનનો ઉપયોગ કરતું હોય, તો નીચે સુરક્ષા સહી સેટ અપ કરો.",
+
+  "webhook.howTitle": "કેવી રીતે પ્રકાશિત કરવું",
+  "webhook.postStatus": "પોસ્ટ સ્ટેટસ",
+  "webhook.postStatusDraft": "ડ્રાફ્ટ તરીકે સાચવો — લાઇવ કરતા પહેલા તપાસો",
+  "webhook.postStatusPublish": "તરત જ પ્રકાશિત કરો — સીધું લાઇવ થઈ જશે",
+  "webhook.authorName": "લેખકનું નામ",
+  "webhook.authorNameHint": "પ્રકાશિત પોસ્ટ પર લેખકનું નામ જે રીતે દેખાશે.",
+  "webhook.categoryHint": "કેટેગરી",
+  "webhook.categoryHintDesc": "તમારા ન્યૂઝલેટર વિષય પર આધારિત સૂચિત. ખાતરી કરો કે આ કેટેગરી તમારા CMS માં છે.",
+  "webhook.tagsHint": "ટેગ્સ (આપમેળે સૂચિત)",
+  "webhook.tagsHintDesc": "તમારા પ્રેક્ષકો અને વિષય પર આધારિત ટેગ્સ. તમે તેને એડિટ કરી શકો છો.",
+
+  "webhook.saveSettings": "પ્રકાશન સેટિંગ્સ સાચવો",
+  "webhook.savedSuccess": "પ્રકાશન સેટિંગ્સ સાચવવામાં આવી.",
+
   "billing.header.title": "બિલિંગ માહિતી",
+
   "billing.header.subtitle": "તમારી બિલિંગ વિગતો મેનેજ કરો",
   "billing.fields.firstName.label": "પ્રથમ નામ",
   "billing.fields.firstName.placeholder": "રાહુલ",

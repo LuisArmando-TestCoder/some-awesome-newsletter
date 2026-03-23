@@ -402,7 +402,47 @@ export default {
   "newsSource.errorInit": "Data formulir ora diwiwiti kanthi bener.",
   "newsSource.errorEmailBoth": "Email Pangirim lan Sandi Aplikasi kudu diisi loro-lorone.",
   "newsSource.errorUpdateFail": "Gagal nganyari sumber pawarta. Mangga coba maneh.",
+
+  /* ── Terbitake menyang Website Sampeyan (Isi Konten) ── */
+  "webhook.sectionTitle": "Terbitake menyang Website Sampeyan",
+  "webhook.sectionBadge": "Anyar",
+  "webhook.sectionDesc": "Kirim saben artikel buletin otomatis menyang website sampeyan dadi postingan. Bisa kanggo WordPress lan platform apa wae sing nampa konten REST standar.",
+
+  "webhook.whereTitle": "Ing ngendi diterbitake",
+  "webhook.baseUrl": "URL Website Sampeyan",
+  "webhook.baseUrlPlaceholder": "https://website-sampeyan.com",
+  "webhook.baseUrlHint": "Lebokake URL homepage situs sampeyan — kita bakal nggoleki ing ngendi konten kudu dikirim.",
+
+  "webhook.whoTitle": "Sapa sing nerbitake",
+  "webhook.username": "Jeneng Pangguna Login",
+  "webhook.usernamePlaceholder": "jeneng-pangguna-cms-sampeyan",
+  "webhook.usernameHint": "Jeneng pangguna sing sampeyan gunakake kanggo login kanggo ngatur website.",
+  "webhook.appPassword": "Sandi Aplikasi",
+  "webhook.appPasswordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
+  "webhook.appPasswordHint": "Gawe iki ing njero setelan pangguna website sampeyan. Iki sandi khusus kanggo aplikasi.",
+  "webhook.appPasswordGuide": "Piye carane entuk Sandi Aplikasi?",
+  "webhook.appPasswordGuideHide": "Delikake pandhuan",
+  "webhook.appPasswordStep1": "Menyang panel admin website sampeyan.",
+  "webhook.appPasswordStep2": "Menyang Pangguna (Users) → Profil Sampeyan.",
+  "webhook.appPasswordStep3": "Goleki \"Application Passwords\", gawe siji jenenge \"AIBAN\" lan tempel kodenya ing kene.",
+  "webhook.hmacAlternative": "Ora nganggo jeneng pangguna/sandi? Yen platform sampeyan nganggo verifikasi HMAC, deleng bagean Tanda Tangan Keamanan ing ngisor.",
+
+  "webhook.howTitle": "Piye carane nerbitake",
+  "webhook.postStatus": "Status Postingan",
+  "webhook.postStatusDraft": "Simpen dadi Draft — dadi bisa dipriksa dhisik",
+  "webhook.postStatusPublish": "Langsung Terbitake — langsung live",
+  "webhook.authorName": "Jeneng Penulis",
+  "webhook.authorNameHint": "Piye jeneng penulis katon ing postingan sing diterbitake.",
+  "webhook.categoryHint": "Kategori",
+  "webhook.categoryHintDesc": "Saran adhedhasar topik buletin sampeyan. Pastike kategori iki ana ing CMS sampeyan.",
+  "webhook.tagsHint": "Tag (saran otomatis)",
+  "webhook.tagsHintDesc": "Tag sing dipisah nganggo koma, adhedhasar pamiarsa lan topik sampeyan. Sampeyan bisa nyunting utawa mbusak.",
+
+  "webhook.saveSettings": "Simpen Setelan Terbitan",
+  "webhook.savedSuccess": "Setelan terbitan kasil disimpen.",
+
   "billing.header.title": "Informasi Tagihan",
+
   "billing.header.subtitle": "Atur rincian tagihan sampeyan",
   "billing.fields.firstName.label": "Jeneng Ngarep",
   "billing.fields.firstName.placeholder": "Budi",

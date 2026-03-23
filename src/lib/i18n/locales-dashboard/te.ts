@@ -400,4 +400,43 @@ export default {
   "newsSource.errorInit": "ఫారమ్ డేటా సరిగ్గా ప్రారంభించబడలేదు.",
   "newsSource.errorEmailBoth": "ఏదైనా ఒక ఫీల్డ్ నింపినట్లయితే ఈమెయిల్ మరియు యాప్ పాస్‌వర్డ్ రెండూ అవసరం.",
   "newsSource.errorUpdateFail": "వనరును అప్‌డేట్ చేయడం విఫలమైంది. మళ్లీ ప్రయత్నించండి.",
+
+  /* ── మీ వెబ్‌సైట్‌లో ప్రచురించండి (కంటెంట్ డెలివరీ) ── */
+  "webhook.sectionTitle": "మీ వెబ్‌సైట్‌లో ప్రచురించండి",
+  "webhook.sectionBadge": "కొత్తది",
+  "webhook.sectionDesc": "ప్రతి న్యూస్‌లెటర్ కథనాన్ని మీ వెబ్‌సైట్‌కు పోస్ట్‌గా ఆటోమేటిక్‌గా పంపండి. ఇది WordPress మరియు REST కంటెంట్‌ను అంగీకరించే ఏ ప్లాట్‌ఫామ్‌తోనైనా పని చేస్తుంది.",
+
+  "webhook.whereTitle": "ఎక్కడ ప్రచురించాలి",
+  "webhook.baseUrl": "మీ వెబ్‌సైట్ URL",
+  "webhook.baseUrlPlaceholder": "https://your-website.com",
+  "webhook.baseUrlHint": "మీ సైట్ హోమ్‌పేజీ URLని నమోదు చేయండి — కంటెంట్‌ను ఎక్కడికి పంపాలో మేము గుర్తిస్తాము.",
+
+  "webhook.whoTitle": "ఎవరు ప్రచురిస్తున్నారు",
+  "webhook.username": "లాగిన్ యూజర్ నేమ్",
+  "webhook.usernamePlaceholder": "your-cms-username",
+  "webhook.usernameHint": "మీ వెబ్‌సైట్‌ను నిర్వహించడానికి మీరు ఉపయోగించే యూజర్ నేమ్.",
+  "webhook.appPassword": "యాప్ పాస్‌వర్డ్",
+  "webhook.appPasswordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
+  "webhook.appPasswordHint": "దీనిని మీ వెబ్‌సైట్ యూజర్ సెట్టింగ్‌లలో సృష్టించండి. ఇది యాప్‌ల కోసం మాత్రమే ఉండే ప్రత్యేక పాస్‌వర్డ్.",
+  "webhook.appPasswordGuide": "యాప్ పాస్‌వర్డ్‌ను పొందడం ఎలా?",
+  "webhook.appPasswordGuideHide": "మార్గదర్శిని దాచు",
+  "webhook.appPasswordStep1": "మీ వెబ్‌సైట్ అడ్మిన్ ప్యానెల్‌కు వెళ్లండి.",
+  "webhook.appPasswordStep2": "వినియోగదారులు (Users) → మీ ప్రొఫైల్ (Profile) కు వెళ్లండి.",
+  "webhook.appPasswordStep3": "\"Application Passwords\" కోసం వెతికి, \"AIBAN\" పేరుతో ఒక దానిని సృష్టించి ఇక్కడ పేస్ట్ చేయండి.",
+  "webhook.hmacAlternative": "యూజర్ నేమ్/పాస్‌వర్డ్ ఉపయోగించడం లేదా? మీ ప్లాట్‌ఫామ్ HMAC ధృవీకరణను ఉపయోగిస్తుంటే, కింద ఉన్న సెక్యూరిٹی సంతకం విభాగానికి వెళ్లండి.",
+
+  "webhook.howTitle": "ఎలా ప్రచురించాలి",
+  "webhook.postStatus": "పోస్ట్ స్థితి",
+  "webhook.postStatusDraft": "డ్రాఫ్ట్‌గా సేవ్ చేయండి — ప్రచురించే ముందు సమీక్షించండి",
+  "webhook.postStatusPublish": "వెంటనే ప్రచురించండి — నేరుగా లైవ్‌లోకి వెళ్తుంది",
+  "webhook.authorName": "రచయిత పేరు",
+  "webhook.authorNameHint": "ప్రచురించిన పోస్ట్‌పై రచయిత పేరు ఎలా కనిపించాలి.",
+  "webhook.categoryHint": "వర్గం (Category)",
+  "webhook.categoryHintDesc": "మీ న్యూస్‌లెటర్ విషయం ఆధారంగా సూచించబడింది. ఈ వర్గం మీ CMSలో ఉందో లేదో నిర్ధారించుకోండి.",
+  "webhook.tagsHint": "ట్యాగ్‌లు (ఆటో-సూచనలు)",
+  "webhook.tagsHintDesc": "మీ ప్రేక్షకులు మరియు విషయం ఆధారంగా సూచించిన ట్యాగ్‌లు. మీరు వీటిని మార్చవచ్చు లేదా తొలగించవచ్చు.",
+
+  "webhook.saveSettings": "ప్రచురణ సెట్టింగులను సేవ్ చేయి",
+  "webhook.savedSuccess": "ప్రచురణ సెట్టింగులు సేవ్ చేయబడ్డాయి.",
 };
+

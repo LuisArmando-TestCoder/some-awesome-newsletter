@@ -402,7 +402,47 @@ export default {
   "newsSource.errorInit": "ফর্ম ডেটা সঠিকভাবে শুরু করা যায়নি।",
   "newsSource.errorEmailBoth": "প্রেরকের ইমেল এবং অ্যাপ পাসওয়ার্ড উভয়ই প্রয়োজন।",
   "newsSource.errorUpdateFail": "খবরের উৎস আপডেট করতে ব্যর্থ। আবার চেষ্টা করুন।",
+
+  /* ── আপনার ওয়েবসাইটে প্রকাশ করুন (কন্টেন্ট ডেলিভারি) ── */
+  "webhook.sectionTitle": "আপনার ওয়েবসাইটে প্রকাশ করুন",
+  "webhook.sectionBadge": "নতুন",
+  "webhook.sectionDesc": "প্রতিটি নিউজলেটার নিবন্ধ স্বয়ংক্রিয়ভাবে আপনার ওয়েবসাইটে পোস্ট হিসেবে পাঠান। এটি WordPress এবং REST কন্টেন্ট গ্রহণকারী যেকোনো প্ল্যাটফর্মের সাথে কাজ করে।",
+
+  "webhook.whereTitle": "কোথায় প্রকাশ করবেন",
+  "webhook.baseUrl": "আপনার ওয়েবসাইটের URL",
+  "webhook.baseUrlPlaceholder": "https://your-website.com",
+  "webhook.baseUrlHint": "আপনার সাইটের হোমপেজ URL লিখুন — কন্টেন্ট কোথায় পাঠাতে হবে তা আমরা খুঁজে নেব।",
+
+  "webhook.whoTitle": "কে প্রকাশ করছেন",
+  "webhook.username": "লগইন ইউজারনেম",
+  "webhook.usernamePlaceholder": "your-cms-username",
+  "webhook.usernameHint": "আপনার ওয়েবসাইট পরিচালনা করতে আপনি যে ইউজারনেম দিয়ে লগইন করেন।",
+  "webhook.appPassword": "অ্যাপ পাসওয়ার্ড",
+  "webhook.appPasswordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
+  "webhook.appPasswordHint": "আপনার ওয়েবসাইটের ইউজার সেটিংসে এটি তৈরি করুন। এটি শুধুমাত্র অ্যাপের জন্য একটি আলাদা পাসওয়ার্ড।",
+  "webhook.appPasswordGuide": "কীভাবে অ্যাপ পাসওয়ার্ড পাবেন?",
+  "webhook.appPasswordGuideHide": "নির্দেশিকা লুকান",
+  "webhook.appPasswordStep1": "আপনার ওয়েবসাইটের অ্যাডমিন প্যানেলে যান।",
+  "webhook.appPasswordStep2": "Users → Your Profile-এ যান।",
+  "webhook.appPasswordStep3": "\"Application Passwords\"-এ যান, \"AIBAN\" নামে একটি তৈরি করুন এবং এখানে পেস্ট করুন।",
+  "webhook.hmacAlternative": "ইউজারনেম/পাসওয়ার্ড ব্যবহার করছেন না? যদি আপনার প্ল্যাটফর্ম HMAC ভেরিফিকেশন ব্যবহার করে, তবে নিচে সিকিউরিটি সিগনেচার সেট আপ করুন।",
+
+  "webhook.howTitle": "কীভাবে প্রকাশ করবেন",
+  "webhook.postStatus": "পোস্ট স্ট্যাটাস",
+  "webhook.postStatusDraft": "ড্রাফট হিসেবে সেভ করুন — লাইভ করার আগে যাচাই করুন",
+  "webhook.postStatusPublish": "তৎক্ষণাৎ প্রকাশ করুন — সরাসরি লাইভ হয়ে যাবে",
+  "webhook.authorName": "লেখকের নাম",
+  "webhook.authorNameHint": "প্রকাশিত পোস্টে লেখকের নাম যেভাবে দেখা যাবে।",
+  "webhook.categoryHint": "ক্যাটাগরি",
+  "webhook.categoryHintDesc": "আপনার নিউজলেটারের বিষয়ের ওপর ভিত্তি করে প্রস্তাবিত। নিশ্চিত করুন এই ক্যাটাগরি আপনার CMS-এ আছে।",
+  "webhook.tagsHint": "ট্যাগ (স্বয়ংক্রিয় প্রস্তাবিত)",
+  "webhook.tagsHintDesc": "নিউজলেটারের দর্শক এবং বিষয়ের ওপর ভিত্তি করে ট্যাগ। আপনি এগুলো এডিট বা রিমুভ করতে পারেন।",
+
+  "webhook.saveSettings": "প্রকাশের সেটিংস সংরক্ষণ করুন",
+  "webhook.savedSuccess": "প্রকাশের সেটিংস সংরক্ষিত হয়েছে।",
+
   "billing.header.title": "বিলিং তথ্য",
+
   "billing.header.subtitle": "আপনার বিলিং বিবরণ পরিচালনা করুন",
   "billing.fields.firstName.label": "নামের প্রথম অংশ",
   "billing.fields.firstName.placeholder": "রহিম",

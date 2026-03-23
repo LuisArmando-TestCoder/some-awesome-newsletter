@@ -400,7 +400,47 @@ export default {
   "newsSource.errorInit": "بيانات الفورم ما اتظبطت صح.",
   "newsSource.errorEmailBoth": "لازم تحط الإيميل وكلمة السر لو حطيت واحد فيهم.",
   "newsSource.errorUpdateFail": "فشل تحديث المصدر. حاول تاني.",
+
+  /* ── النشر في موقعك (توصيل المحتوى) ── */
+  "webhook.sectionTitle": "نشر في موقعك الإلكتروني",
+  "webhook.sectionBadge": "جديد",
+  "webhook.sectionDesc": "أرسل كل مقال في النشرة تلقائياً لموقعك كمنشور. شغال مع WordPress وأي منصة بتقبل REST.",
+
+  "webhook.whereTitle": "وين ح ينشر",
+  "webhook.baseUrl": "رابط موقعك",
+  "webhook.baseUrlPlaceholder": "https://your-website.com",
+  "webhook.baseUrlHint": "دخل رابط الصفحة الرئيسية لموقعك — نحن ح نعرف نرسل المحتوى وين.",
+
+  "webhook.whoTitle": "الناشر منو",
+  "webhook.username": "اسم المستخدم",
+  "webhook.usernamePlaceholder": "your-cms-username",
+  "webhook.usernameHint": "اسم المستخدم البتستخدمو عشان تدخل تدير موقعك.",
+  "webhook.appPassword": "كلمة سر التطبيق",
+  "webhook.appPasswordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
+  "webhook.appPasswordHint": "أعمل الكلمة دي من إعدادات المستخدم في موقعك. دي كلمة سر براها للتطبيقات.",
+  "webhook.appPasswordGuide": "كيف أجيب كلمة سر تطبيق؟",
+  "webhook.appPasswordGuideHide": "دس الدليل",
+  "webhook.appPasswordStep1": "أمشي للوحة تحكم موقعك.",
+  "webhook.appPasswordStep2": "أمشي للمستخدمين ← ملفك الشخصي.",
+  "webhook.appPasswordStep3": "فتش عن \"كلمات سر التطبيقات\"، أعمل واحدة باسم \"AIBAN\" وألصقها هنا.",
+  "webhook.hmacAlternative": "ما بتستخدم اسم مستخدم وكلمة سر؟ لو منصتك بتستخدم HMAC، أنزل لـ \"توقيع الأمان\" تحت.",
+
+  "webhook.howTitle": "كيف ح ينشر",
+  "webhook.postStatus": "حالة المنشور",
+  "webhook.postStatusDraft": "حفظ كمسودة — تراجعو قبل ما ينزل",
+  "webhook.postStatusPublish": "نشر طوالي — ينزل هسة",
+  "webhook.authorName": "اسم الكاتب",
+  "webhook.authorNameHint": "الاسم الح يظهر للناس في المنشور.",
+  "webhook.categoryHint": "التصنيف (تلميح)",
+  "webhook.categoryHintDesc": "مقترح حسب موضوع نشرتك. أتأكد إنو التصنيف ده موجود في موقعك.",
+  "webhook.tagsHint": "الوسوم (مقترحة)",
+  "webhook.tagsHintDesc": "وسوم مقترحة حسب جمهورك وموضوعك. بتقدر تغيرها أو تمسحها.",
+
+  "webhook.saveSettings": "حفظ إعدادات النشر",
+  "webhook.savedSuccess": "إعدادات النشر اتحفظت خلاص.",
+
   "billing.header.title": "معلومات الفواتير",
+
   "billing.header.subtitle": "إدارة تفاصيل الفواتير الخاصة بك",
   "billing.fields.firstName.label": "الاسم الأول",
   "billing.fields.firstName.placeholder": "أحمد",

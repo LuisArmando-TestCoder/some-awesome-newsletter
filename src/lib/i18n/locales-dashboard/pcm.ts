@@ -402,4 +402,43 @@ export default {
   "newsSource.errorInit": "Form data no ready correct.",
   "newsSource.errorEmailBoth": "You must put Email Sender and App Password if you put one of dem.",
   "newsSource.errorUpdateFail": "News source no fit update. Abeg try again.",
+
+  /* ── Publish to Your Website (Content Delivery) ── */
+  "webhook.sectionTitle": "Publish for your Website",
+  "webhook.sectionBadge": "New One",
+  "webhook.sectionDesc": "Automatically send every newsletter article go your website as post. E de work with WordPress and any other place wey de collect REST content.",
+
+  "webhook.whereTitle": "Where you wan Publish",
+  "webhook.baseUrl": "Your Website link (URL)",
+  "webhook.baseUrlPlaceholder": "https://your-website.com",
+  "webhook.baseUrlHint": "Put your website home link — we go sabi where we go send the news.",
+
+  "webhook.whoTitle": "Who de Publish",
+  "webhook.username": "Username take enter",
+  "webhook.usernamePlaceholder": "your-cms-username",
+  "webhook.usernameHint": "The name wey you de use enter manage your website.",
+  "webhook.appPassword": "App Password",
+  "webhook.appPasswordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
+  "webhook.appPasswordHint": "Create this one inside your website user settings. Na special password for only apps.",
+  "webhook.appPasswordGuide": "How I fit get App Password?",
+  "webhook.appPasswordGuideHide": "Hide guide",
+  "webhook.appPasswordStep1": "Go your website admin side.",
+  "webhook.appPasswordStep2": "Go Users → Your Profile.",
+  "webhook.appPasswordStep3": "Check down for \"Application Passwords\", create one wey name be \"AIBAN\" and paste am for here.",
+  "webhook.hmacAlternative": "You no de use username/password? If your platform de use HMAC verification, go the Security Signature bagean make you set am.",
+
+  "webhook.howTitle": "How to Publish",
+  "webhook.postStatus": "Post Status",
+  "webhook.postStatusDraft": "Save as Draft — check am before everyone see am",
+  "webhook.postStatusPublish": "Publish sharp-sharp — everyone go see am now",
+  "webhook.authorName": "Writer Name",
+  "webhook.authorNameHint": "How the writer name go show for the post.",
+  "webhook.categoryHint": "Category",
+  "webhook.categoryHintDesc": "The one wey we think say e match your news. Check say e de your CMS.",
+  "webhook.tagsHint": "Tags (We suggest am)",
+  "webhook.tagsHintDesc": "Words wey we think say match your news and people wey de read am. You fit change am abi goge am.",
+
+  "webhook.saveSettings": "Save Publish Settings",
+  "webhook.savedSuccess": "Publish settings don save.",
 };
+

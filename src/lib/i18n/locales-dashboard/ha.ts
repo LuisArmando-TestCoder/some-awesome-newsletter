@@ -402,4 +402,43 @@ export default {
   "newsSource.errorInit": "Bayanai ba su fara yadda ya kamata ba.",
   "newsSource.errorEmailBoth": "Ana buƙatar imel da kalmar sirrin app idan an sanya ɗaya.",
   "newsSource.errorUpdateFail": "An kasa sabunta hanyar labarai. Sake gwadawa.",
+
+  /* ── Wallafa zuwa Yanar Gizo (Isar da Abun ciki) ── */
+  "webhook.sectionTitle": "Wallafa zuwa Yanar Gizonka",
+  "webhook.sectionBadge": "Sabo",
+  "webhook.sectionDesc": "Tura kowane labarin wasiƙa kai tsaye zuwa yanar gizonka a matsayin rubutu (post). Yana aiki da WordPress da kowane dandali da ke karɓar daidaitaccen abun cikin REST.",
+
+  "webhook.whereTitle": "Inda za a Wallafa",
+  "webhook.baseUrl": "URL na Yanar Gizonka",
+  "webhook.baseUrlPlaceholder": "https://your-website.com",
+  "webhook.baseUrlHint": "Shigar da adireshin yanar gizonka — zamu gano inda zamu tura abun cikin.",
+
+  "webhook.whoTitle": "Wanda ke Wallafawa",
+  "webhook.username": "Sunan Mai Amfani (Login)",
+  "webhook.usernamePlaceholder": "your-cms-username",
+  "webhook.usernameHint": "Sunan da kake amfani da shi wajen shiga don sarrafa yanar gizonka.",
+  "webhook.appPassword": "Kalmar Sirrin App",
+  "webhook.appPasswordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
+  "webhook.appPasswordHint": "Samar da wannan a cikin saitunan mai amfani na yanar gizonka. Kalmar sirri ce ta musamman don apps.",
+  "webhook.appPasswordGuide": "Yadda zaka sami Kalmar Sirrin App?",
+  "webhook.appPasswordGuideHide": "Ɓoye jagora",
+  "webhook.appPasswordStep1": "Je zuwa admin panel na yanar gizonka.",
+  "webhook.appPasswordStep2": "Je zuwa Users → Your Profile.",
+  "webhook.appPasswordStep3": "Nemi \"Application Passwords\", ƙirƙiri ɗaya mai suna \"AIBAN\" sannan ka liƙa shi a nan.",
+  "webhook.hmacAlternative": "Ba ka amfani da sunan mai amfani/kalmar sirri? Idan dandalinka yana amfani da HMAC, je sashen Sa Hannun Tsaro.",
+
+  "webhook.howTitle": "Yadda za a Wallafa",
+  "webhook.postStatus": "Yanayin Rubutu",
+  "webhook.postStatusDraft": "Ajiye a matsayin Draft — duba kafin wallafawa",
+  "webhook.postStatusPublish": "Wallafa Nan take — zai fita kai tsaye",
+  "webhook.authorName": "Sunan Marubuci",
+  "webhook.authorNameHint": "Yadda sunan marubuci zai bayyana akan rubutun da aka wallafa.",
+  "webhook.categoryHint": "Sashe (Category)",
+  "webhook.categoryHintDesc": "Shawarwari dangane da batun wasiƙar labaranka. Tabbatar sashen akwai shi a CMS ɗinka.",
+  "webhook.tagsHint": "Tags (Shawarwari na atomatik)",
+  "webhook.tagsHintDesc": "Tags waɗanda aka raba da wakafi, dangane da masu karatunka da batunka. Zaka iya gyara ko gogewa.",
+
+  "webhook.saveSettings": "Ajiye Saitunan Wallafa",
+  "webhook.savedSuccess": "An ajiye saitunan wallafa.",
 };
+

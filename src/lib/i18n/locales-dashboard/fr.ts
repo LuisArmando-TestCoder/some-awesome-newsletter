@@ -402,7 +402,47 @@ export default {
   "newsSource.errorInit": "Données non initialisées.",
   "newsSource.errorEmailBoth": "L'e-mail et le mot de passe sont requis ensemble.",
   "newsSource.errorUpdateFail": "Échec de la mise à jour. Réessayez.",
+
+  /* ── Publier sur votre site web (Contenu) ── */
+  "webhook.sectionTitle": "Publier sur votre site web",
+  "webhook.sectionBadge": "Nouveau",
+  "webhook.sectionDesc": "Envoyez automatiquement chaque article de la newsletter vers votre site web. Compatible avec WordPress et toute plateforme acceptant le contenu REST standard.",
+
+  "webhook.whereTitle": "Où publier",
+  "webhook.baseUrl": "URL de votre site web",
+  "webhook.baseUrlPlaceholder": "https://votre-site.com",
+  "webhook.baseUrlHint": "Entrez l'URL de la page d'accueil de votre site — nous trouverons où envoyer le contenu.",
+
+  "webhook.whoTitle": "Qui publie",
+  "webhook.username": "Nom d'utilisateur",
+  "webhook.usernamePlaceholder": "votre-utilisateur-cms",
+  "webhook.usernameHint": "Le nom d'utilisateur que vous utilisez pour gérer votre site.",
+  "webhook.appPassword": "Mot de passe d'application",
+  "webhook.appPasswordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
+  "webhook.appPasswordHint": "Générez ceci dans les réglages utilisateur de votre site. C'est un mot de passe séparé pour les applications.",
+  "webhook.appPasswordGuide": "Comment obtenir un mot de passe d'application ?",
+  "webhook.appPasswordGuideHide": "Masquer le guide",
+  "webhook.appPasswordStep1": "Allez dans le panneau d'administration de votre site.",
+  "webhook.appPasswordStep2": "Allez dans Utilisateurs → Votre Profil.",
+  "webhook.appPasswordStep3": "Cherchez \"Mots de passe d'application\", créez-en un nommé \"AIBAN\" et collez-le ici.",
+  "webhook.hmacAlternative": "Vous n'utilisez pas de nom d'utilisateur/mot de passe ? Si votre plateforme utilise la vérification HMAC, configurez une signature de sécurité ci-dessous.",
+
+  "webhook.howTitle": "Comment publier",
+  "webhook.postStatus": "Statut de la publication",
+  "webhook.postStatusDraft": "Enregistrer comme brouillon — à relire avant publication",
+  "webhook.postStatusPublish": "Publier immédiatement",
+  "webhook.authorName": "Nom de l'auteur",
+  "webhook.authorNameHint": "Le nom qui apparaîtra sur l'article publié.",
+  "webhook.categoryHint": "Catégorie",
+  "webhook.categoryHintDesc": "Suggéré selon le sujet de votre newsletter. Vérifiez que cette catégorie existe sur votre CMS.",
+  "webhook.tagsHint": "Mots-clés (auto-suggérés)",
+  "webhook.tagsHintDesc": "Séparés par des virgules, basés sur votre audience et votre sujet. Vous pouvez les modifier.",
+
+  "webhook.saveSettings": "Enregistrer les réglages de publication",
+  "webhook.savedSuccess": "Réglages de publication enregistrés.",
+
   "billing.header.title": "Informations de Facturation",
+
   "billing.header.subtitle": "Gérez vos détails de facturation",
   "billing.fields.firstName.label": "Prénom",
   "billing.fields.firstName.placeholder": "Jean",

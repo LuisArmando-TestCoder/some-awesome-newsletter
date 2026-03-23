@@ -400,7 +400,47 @@ export default {
   "newsSource.errorInit": "Data ya fomu haijaanzishwa vizuri.",
   "newsSource.errorEmailBoth": "Barua pepe na nenosiri la programu vyote vinahitajika ikiwa moja imejazwa.",
   "newsSource.errorUpdateFail": "Imeshindwa kusasisha chanzo. Jaribu tena.",
+
+  /* ── Chapisha kwenye Tovuti Yako (Uwasilishaji wa Maudhui) ── */
+  "webhook.sectionTitle": "Chapisha kwenye Tovuti Yako",
+  "webhook.sectionBadge": "Mpya",
+  "webhook.sectionDesc": "Tuma kila makala ya jarida moja kwa moja kwenye tovuti yako kama chapisho. Inafanya kazi na WordPress na jukwaa lolote linalokubali maudhui ya REST.",
+
+  "webhook.whereTitle": "Mahali pa Kuchapisha",
+  "webhook.baseUrl": "URL ya Tovuti Yako",
+  "webhook.baseUrlPlaceholder": "https://tovuti-yako.com",
+  "webhook.baseUrlHint": "Weka URL ya ukurasa wa kwanza wa tovuti yako — tutatambua mahali pa kutuma maudhui.",
+
+  "webhook.whoTitle": "Nani Anachapisha",
+  "webhook.username": "Jina la Mtumiaji",
+  "webhook.usernamePlaceholder": "jina-lako-la-cms",
+  "webhook.usernameHint": "Jina la mtumiaji unalotumia kuingia ili kudhibiti tovuti yako.",
+  "webhook.appPassword": "Nenosiri la Programu",
+  "webhook.appPasswordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
+  "webhook.appPasswordHint": "Tengeneza hii ndani ya mipangilio ya mtumiaji wa tovuti yako. Ni nenosiri tofauti kwa ajili ya programu tu.",
+  "webhook.appPasswordGuide": "Jinsi ya kupata Nenosiri la Programu?",
+  "webhook.appPasswordGuideHide": "Ficha mwongozo",
+  "webhook.appPasswordStep1": "Nenda kwenye jopo la utawala la tovuti yako.",
+  "webhook.appPasswordStep2": "Nenda kwa Watumiaji → Wasifu Wako.",
+  "webhook.appPasswordStep3": "Tafuta \"Nenosiri la Programu\", tengeneza moja yenye jina \"AIBAN\" na uibandike hapa.",
+  "webhook.hmacAlternative": "Hutumii jina la mtumiaji/nenosiri? Ikiwa jukwaa lako linatumia uhakiki wa HMAC, nenda kwenye sehemu ya Sahihi ya Usalama.",
+
+  "webhook.howTitle": "Jinsi ya Kuchapisha",
+  "webhook.postStatus": "Hali ya Chapisho",
+  "webhook.postStatusDraft": "Hifadhi kama Rasimu — kagua kabla ya kwenda hewani",
+  "webhook.postStatusPublish": "Chapisha Mara Moja — inaenda hewani papo hapo",
+  "webhook.authorName": "Jina la Mwandishi",
+  "webhook.authorNameHint": "Jinsi jina la mwandishi litakavyoonekana kwenye chapisho.",
+  "webhook.categoryHint": "Kategoria",
+  "webhook.categoryHintDesc": "Inapendekezwa kulingana na mada ya jarida lako. Hakikisha kategoria hii ipo kwenye CMS yako.",
+  "webhook.tagsHint": "Lebo (Zinazopendekezwa)",
+  "webhook.tagsHintDesc": "Lebo zilizotenganishwa kwa mkato, kulingana na hadhira na mada yako. Unaweza kuhariri au kufuta.",
+
+  "webhook.saveSettings": "Hifadhi Mipangilio ya Kuchapisha",
+  "webhook.savedSuccess": "Mipangilio ya kuchapisha imehifadhiwa.",
+
   "billing.header.title": "Taarifa za Malipo",
+
   "billing.header.subtitle": "Dhibiti maelezo yako ya malipo",
   "billing.fields.firstName.label": "Jina la Kwanza",
   "billing.fields.firstName.placeholder": "Juma",

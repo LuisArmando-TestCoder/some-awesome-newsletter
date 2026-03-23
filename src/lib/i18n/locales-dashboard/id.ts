@@ -400,7 +400,47 @@ export default {
   "newsSource.errorInit": "Data formulir tidak diinisialisasi dengan benar.",
   "newsSource.errorEmailBoth": "Email dan kata sandi aplikasi keduanya diperlukan jika salah satu diisi.",
   "newsSource.errorUpdateFail": "Gagal memperbarui sumber. Silakan coba lagi.",
+
+  /* ── Publikasikan ke Situs Web Anda (Pengiriman Konten) ── */
+  "webhook.sectionTitle": "Publikasikan ke Situs Web Anda",
+  "webhook.sectionBadge": "Baru",
+  "webhook.sectionDesc": "Kirim setiap artikel buletin secara otomatis ke situs web Anda sebagai postingan. Berfungsi dengan WordPress dan platform apa pun yang menerima konten REST standar.",
+
+  "webhook.whereTitle": "Tempat Publikasi",
+  "webhook.baseUrl": "URL Situs Web Anda",
+  "webhook.baseUrlPlaceholder": "https://situs-anda.com",
+  "webhook.baseUrlHint": "Masukkan URL beranda situs Anda — kami akan mencari tahu ke mana harus mengirim kontennya.",
+
+  "webhook.whoTitle": "Siapa yang Mempublikasikan",
+  "webhook.username": "Nama Pengguna Login",
+  "webhook.usernamePlaceholder": "nama-pengguna-cms-anda",
+  "webhook.usernameHint": "Nama pengguna yang Anda gunakan untuk login guna mengelola situs web Anda.",
+  "webhook.appPassword": "Kata Sandi Aplikasi",
+  "webhook.appPasswordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
+  "webhook.appPasswordHint": "Buat ini di dalam pengaturan pengguna situs web Anda. Ini adalah kata sandi terpisah khusus untuk aplikasi.",
+  "webhook.appPasswordGuide": "Bagaimana cara mendapatkan Kata Sandi Aplikasi?",
+  "webhook.appPasswordGuideHide": "Sembunyikan panduan",
+  "webhook.appPasswordStep1": "Buka panel admin situs web Anda.",
+  "webhook.appPasswordStep2": "Buka Pengguna → Profil Anda.",
+  "webhook.appPasswordStep3": "Gulir ke bawah ke \"Kata Sandi Aplikasi\", buat satu dengan nama \"AIBAN\" dan tempel kodenya di sini.",
+  "webhook.hmacAlternative": "Tidak menggunakan nama pengguna/kata sandi? Jika platform Anda menggunakan verifikasi HMAC, gulir ke bagian Tanda Tangan Keamanan untuk mengatur rahasia bersama.",
+
+  "webhook.howTitle": "Cara Publikasi",
+  "webhook.postStatus": "Status Postingan",
+  "webhook.postStatusDraft": "Simpan sebagai Draf — tinjau sebelum ditayangkan",
+  "webhook.postStatusPublish": "Segera Publikasikan — langsung ditayangkan",
+  "webhook.authorName": "Nama Penulis",
+  "webhook.authorNameHint": "Bagaimana nama penulis muncul pada postingan yang dipublikasikan.",
+  "webhook.categoryHint": "Kategori",
+  "webhook.categoryHintDesc": "Disarankan berdasarkan topik buletin Anda. Pastikan kategori ini ada di CMS Anda.",
+  "webhook.tagsHint": "Tag (disarankan otomatis)",
+  "webhook.tagsHintDesc": "Tag yang dipisahkan koma disarankan secara otomatis dari audiens dan topik buletin Anda. Anda dapat mengedit atau menghapusnya.",
+
+  "webhook.saveSettings": "Simpan Pengaturan Publikasi",
+  "webhook.savedSuccess": "Pengaturan publikasi berhasil disimpan.",
+
   "billing.header.title": "Informasi Tagihan",
+
   "billing.header.subtitle": "Kelola detail tagihan Anda",
   "billing.fields.firstName.label": "Nama Depan",
   "billing.fields.firstName.placeholder": "Budi",

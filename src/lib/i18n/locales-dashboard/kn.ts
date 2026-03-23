@@ -400,4 +400,43 @@ export default {
   "newsSource.errorInit": "ಫಾರ್ಮ್ ಡೇಟಾ ಸರಿಯಾಗಿ ಇನಿಶಿಯಲೈಸ್ ಆಗಿಲ್ಲ.",
   "newsSource.errorEmailBoth": "ಯಾವುದಾದರೂ ಒಂದನ್ನು ನೀಡಿದ್ದರೆ ಇಮೇಲ್ ಮತ್ತು ಆ್ಯಪ್ ಪಾಸ್‌ವರ್ಡ್ ಎರಡೂ ಅಗತ್ಯವಿದೆ.",
   "newsSource.errorUpdateFail": "ಅಪ್‌ಡೇಟ್ ಮಾಡಲು ವಿಫಲವಾಗಿದೆ. ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.",
+
+  /* ── ನಿಮ್ಮ ವೆಬ್‌ಸೈಟ್‌ಗೆ ಪ್ರಕಟಿಸಿ (ವಿಷಯ ವಿತರಣೆ) ── */
+  "webhook.sectionTitle": "ನಿಮ್ಮ ವೆಬ್‌ಸೈಟ್‌ನಲ್ಲಿ ಪ್ರಕಟಿಸಿ",
+  "webhook.sectionBadge": "ಹೊಸತು",
+  "webhook.sectionDesc": "ಪ್ರತಿ ಸುದ್ದಿಪತ್ರದ ಲೇಖನವನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ನಿಮ್ಮ ವೆಬ್‌ಸೈಟ್‌ಗೆ ಪೋಸ್ಟ್ ಆಗಿ ಕಳುಹಿಸಿ. ಇದು WordPress ಮತ್ತು REST ವಿಷಯವನ್ನು ಸ್ವೀಕರಿಸುವ ಯಾವುದೇ ಪ್ಲಾಟ್‌ಫಾರ್ಮ್‌ನೊಂದಿಗೆ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತದೆ.",
+
+  "webhook.whereTitle": "ಎಲ್ಲಿ ಪ್ರಕಟಿಸಬೇಕು",
+  "webhook.baseUrl": "ನಿಮ್ಮ ವೆಬ್‌ಸೈಟ್ URL",
+  "webhook.baseUrlPlaceholder": "https://your-website.com",
+  "webhook.baseUrlHint": "ನಿಮ್ಮ ಸೈಟ್‌ನ ಮುಖಪುಟದ URL ಅನ್ನು ನಮೂದಿಸಿ — ವಿಷಯವನ್ನು ಎಲ್ಲಿಗೆ ಕಳುಹಿಸಬೇಕೆಂದು ನಾವು ಕಂಡುಕೊಳ್ಳುತ್ತೇವೆ.",
+
+  "webhook.whoTitle": "ಯಾರು ಪ್ರಕಟಿಸುತ್ತಿದ್ದಾರೆ",
+  "webhook.username": "ಲಾಗಿನ್ ಬಳಕೆದಾರಹೆಸರು",
+  "webhook.usernamePlaceholder": "your-cms-username",
+  "webhook.usernameHint": "ನಿಮ್ಮ ವೆಬ್‌ಸೈಟ್ ನಿರ್ವಹಿಸಲು ನೀವು ಬಳಸುವ ಬಳಕೆದಾರಹೆಸರು.",
+  "webhook.appPassword": "ಆ್ಯಪ್ ಪಾಸ್‌ವರ್ಡ್",
+  "webhook.appPasswordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
+  "webhook.appPasswordHint": "ನಿಮ್ಮ ವೆಬ್‌ಸೈಟ್‌ನ ಬಳಕೆದಾರ ಸೆಟ್ಟಿಂಗ್‌ಗಳಲ್ಲಿ ಇದನ್ನು ರಚಿಸಿ. ಇದು ಆ್ಯಪ್‌ಗಳಿಗಾಗಿ ಮಾತ್ರ ಇರುವ ಪ್ರತ್ಯೇಕ ಪಾಸ್‌ವರ್ಡ್.",
+  "webhook.appPasswordGuide": "ಆ್ಯಪ್ ಪಾಸ್‌ವರ್ಡ್ ಪಡೆಯುವುದು ಹೇಗೆ?",
+  "webhook.appPasswordGuideHide": "ಮಾರ್ಗದರ್ಶಿಯನ್ನು ಮರೆಮಾಡಿ",
+  "webhook.appPasswordStep1": "ನಿಮ್ಮ ವೆಬ್‌ಸೈಟ್‌ನ ಅಡ್ಮಿನ್ ಪ್ಯಾನಲ್‌ಗೆ ಹೋಗಿ.",
+  "webhook.appPasswordStep2": "ಬಳಕೆದಾರರು → ನಿಮ್ಮ ಪ್ರೊಫೈಲ್‌ಗೆ ಹೋಗಿ.",
+  "webhook.appPasswordStep3": "\"Application Passwords\" ಗೆ ಹೋಗಿ, \"AIBAN\" ಹೆಸರಿನಲ್ಲಿ ಒಂದನ್ನು ರಚಿಸಿ ಮತ್ತು ಅದನ್ನು ಇಲ್ಲಿ ಪೇಸ್ಟ್ ಮಾಡಿ.",
+  "webhook.hmacAlternative": "ಬಳಕೆದಾರಹೆಸರು/ಪಾಸ್‌ವರ್ಡ್ ಬಳಸುತ್ತಿಲ್ಲವೇ? ನಿಮ್ಮ ಪ್ಲಾಟ್‌ಫಾರ್ಮ್ HMAC ಪರಿಶೀಲನೆಯನ್ನು ಬಳಸುತ್ತಿದ್ದರೆ, ಕೆಳಗಿನ ಸೆಕ್ಯೂರಿಟಿ ಸಹಿ ವಿಭಾಗವನ್ನು ನೋಡಿ.",
+
+  "webhook.howTitle": "ಹೇಗೆ ಪ್ರಕಟಿಸಬೇಕು",
+  "webhook.postStatus": "ಪೋಸ್ಟ್ ಸ್ಥಿತಿ",
+  "webhook.postStatusDraft": "ಕರಡಿನಂತೆ ಉಳಿಸಿ — ಪ್ರಕಟಿಸುವ ಮೊದಲು ಪರಿಶೀಲಿಸಿ",
+  "webhook.postStatusPublish": "ತಕ್ಷಣವೇ ಪ್ರಕಟಿಸಿ — ನೇರವಾಗಿ ಲೈವ್ ಆಗುತ್ತದೆ",
+  "webhook.authorName": "ಲೇಖಕರ ಹೆಸರು",
+  "webhook.authorNameHint": "ಪ್ರಕಟಿತ ಪೋಸ್ಟ್‌ನಲ್ಲಿ ಲೇಖಕರ ಹೆಸರು ಹೇಗೆ ಕಾಣಿಸಿಕೊಳ್ಳುತ್ತದೆ.",
+  "webhook.categoryHint": "ವರ್ಗ (Category)",
+  "webhook.categoryHintDesc": "ನಿಮ್ಮ ಸುದ್ದಿಪತ್ರದ ವಿಷಯದ ಆಧಾರದ ಮೇಲೆ ಸೂಚಿಸಲಾಗಿದೆ. ಈ ವರ್ಗವು ನಿಮ್ಮ CMS ನಲ್ಲಿ ಇದೆಯೇ ಎಂದು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಿ.",
+  "webhook.tagsHint": "ಟ್ಯಾಗ್‌ಗಳು (ಸ್ವಯಂ-ಸೂಚಿಸಲಾಗಿದೆ)",
+  "webhook.tagsHintDesc": "ನಿಮ್ಮ ಓದುಗರು ಮತ್ತು ವಿಷಯದ ಆಧಾರದ ಮೇಲೆ ಸೂಚಿಸಲಾದ ಟ್ಯಾಗ್‌ಗಳು. ನೀವು ಇವುಗಳನ್ನು ಎಡಿಟ್ ಮಾಡಬಹುದು.",
+
+  "webhook.saveSettings": "ಪ್ರಕಟಣೆ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಉಳಿಸಿ",
+  "webhook.savedSuccess": "ಪ್ರಕಟಣೆ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಉಳಿಸಲಾಗಿದೆ.",
 };
+

@@ -400,4 +400,43 @@ export default {
   "newsSource.errorInit": "படிவத் தகவல்கள் சரியாகத் தொடங்கப்படவில்லை.",
   "newsSource.errorEmailBoth": "மின்னஞ்சல் அல்லது கடவுச்சொல் வழங்கப்பட்டால் இரண்டுமே அவசியம்.",
   "newsSource.errorUpdateFail": "புதுப்பிப்பதில் தோல்வி. மீண்டும் முயற்சிக்கவும்.",
+
+  /* ── உங்கள் இணையதளத்தில் வெளியிடவும் (உள்ளடக்க விநியோகம்) ── */
+  "webhook.sectionTitle": "உங்கள் இணையதளத்தில் வெளியிடவும்",
+  "webhook.sectionBadge": "புதியது",
+  "webhook.sectionDesc": "ஒவ்வொரு செய்திக் கடிதக் கட்டுரையையும் உங்கள் இணையதளத்தில் தானாகவே ஒரு பதிவாக அனுப்பவும். இது WordPress மற்றும் REST உள்ளடக்கத்தை ஏற்கும் எந்தவொரு தளத்துடனும் வேலை செய்கிறது.",
+
+  "webhook.whereTitle": "எங்கே வெளியிட வேண்டும்",
+  "webhook.baseUrl": "உங்கள் இணையதள URL",
+  "webhook.baseUrlPlaceholder": "https://your-website.com",
+  "webhook.baseUrlHint": "உங்கள் தளத்தின் முகப்புப் பக்கத்தின் URL-ஐ உள்ளிடவும் — உள்ளடக்கத்தை எங்கு அனுப்ப வேண்டும் என்பதை நாங்கள் கண்டறிவோம்.",
+
+  "webhook.whoTitle": "யார் வெளியிடுகிறார்கள்",
+  "webhook.username": "உள்நுழைவு பயனர் பெயர்",
+  "webhook.usernamePlaceholder": "your-cms-username",
+  "webhook.usernameHint": "உங்கள் இணையதளத்தை நிர்வகிக்க நீங்கள் பயன்படுத்தும் பயனர் பெயர்.",
+  "webhook.appPassword": "ஆப் கடவுச்சொல்",
+  "webhook.appPasswordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
+  "webhook.appPasswordHint": "இதை உங்கள் இணையதளத்தின் பயனர் அமைப்புகளுக்குள் உருவாக்கவும். இது ஆப்ஸ்களுக்கு மட்டுமேயான ஒரு தனி கடவுச்சொல்.",
+  "webhook.appPasswordGuide": "ஆப் கடவுச்சொல்லைப் பெறுவது எப்படி?",
+  "webhook.appPasswordGuideHide": "வழிகாட்டியை மறை",
+  "webhook.appPasswordStep1": "உங்கள் இணையதளத்தின் நிர்வாகப் பலகத்திற்குச் செல்லவும்.",
+  "webhook.appPasswordStep2": "பயனர்கள் (Users) → உங்கள் சுயவிவரம் (Profile) என்பதற்குச் செல்லவும்.",
+  "webhook.appPasswordStep3": "\"Application Passwords\" என்பதைத் தேடி, \"AIBAN\" என்ற பெயரில் ஒன்றை உருவாக்கி இங்கே ஒட்டவும்.",
+  "webhook.hmacAlternative": "பயனர் பெயர்/கடவுச்சொல்லைப் பயன்படுத்தவில்லையா? உங்கள் தளம் HMAC சரிபார்ப்பைப் பயன்படுத்தினால், கீழே உள்ள பாதுகாப்பு கையொப்பம் பகுதிக்குச் செல்லவும்.",
+
+  "webhook.howTitle": "எப்படி வெளியிட வேண்டும்",
+  "webhook.postStatus": "பதிவு நிலை",
+  "webhook.postStatusDraft": "வரைவாகச் சேமி — வெளியிடும் முன் சரிபார்க்கவும்",
+  "webhook.postStatusPublish": "உடனடியாக வெளியிடவும் — உடனே நேரலையில் வரும்",
+  "webhook.authorName": "ஆசிரியர் பெயர்",
+  "webhook.authorNameHint": "வெளியிடப்பட்ட பதிவில் ஆசிரியரின் பெயர் எவ்வாறு தோன்றும்.",
+  "webhook.categoryHint": "வகை (Category)",
+  "webhook.categoryHintDesc": "உங்கள் செய்திக் கடிதத் தலைப்பின் அடிப்படையில் பரிந்துரைக்கப்பட்டது. இந்த வகை உங்கள் CMS-இல் உள்ளதா என்பதை உறுதிப்படுத்தவும்.",
+  "webhook.tagsHint": "குறிச்சொற்கள் (Tags)",
+  "webhook.tagsHintDesc": "உங்கள் வாசகர்கள் மற்றும் தலைப்பின் அடிப்படையில் பரிந்துரைக்கப்பட்டவை. நீங்கள் எடிட் செய்யலாம் அல்லது நீக்கலாம்.",
+
+  "webhook.saveSettings": "வெளியீட்டு அமைப்புகளைச் சேமி",
+  "webhook.savedSuccess": "வெளியீட்டு அமைப்புகள் சேமிக்கப்பட்டன.",
 };
+

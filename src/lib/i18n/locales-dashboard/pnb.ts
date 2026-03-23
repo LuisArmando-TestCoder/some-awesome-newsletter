@@ -400,4 +400,43 @@ export default {
   "newsSource.errorInit": "ਡਾਟਾ ਲੋਡ ਨਹੀਂ ਹੋਇਆ।",
   "newsSource.errorEmailBoth": "ਈਮੇਲ ਅਤੇ ਪਾਸਵਰਡ ਦੋਵੇਂ ਚਾਹੀਦੇ ਹਨ।",
   "newsSource.errorUpdateFail": "ਅਪਡੇਟ ਨਾਕਾਮ।",
+
+  /* ── ਆਪਣੀ ਵੈੱਬਸਾਈਟ 'ਤੇ ਪ੍ਰਕਾਸ਼ਿਤ ਕਰੋ (Content Delivery) ── */
+  "webhook.sectionTitle": "ਆਪਣੀ ਵੈੱਬਸਾਈਟ 'ਤੇ ਪ੍ਰਕਾਸ਼ਿਤ ਕਰੋ",
+  "webhook.sectionBadge": "ਨਵਾਂ",
+  "webhook.sectionDesc": "ਹਰ ਨਿਊਜ਼ਲੈਟਰ ਲੇਖ ਨੂੰ ਆਪਣੀ ਵੈੱਬਸਾਈਟ 'ਤੇ ਪੋਸਟ ਦੇ ਤੌਰ 'ਤੇ ਆਪਣੇ ਆਪ ਭੇਜੋ। ਇਹ WordPress ਅਤੇ REST ਕੰਟੈਂਟ ਸਵੀਕਾਰ ਕਰਨ ਵਾਲੇ ਹਰ ਪਲੇਟਫਾਰਮ ਨਾਲ ਕੰਮ ਕਰਦਾ ਹੈ।",
+
+  "webhook.whereTitle": "ਕਿੱਥੇ ਪ੍ਰਕਾਸ਼ਿਤ ਕਰਨਾ ਹੈ",
+  "webhook.baseUrl": "ਤੁਹਾਡੀ ਵੈੱਬਸਾਈਟ ਦਾ URL",
+  "webhook.baseUrlPlaceholder": "https://your-website.com",
+  "webhook.baseUrlHint": "ਆਪਣੀ ਸਾਈਟ ਦੇ ਹੋਮਪੇਜ ਦਾ URL ਲਿਖੋ — ਅਸੀਂ ਖ਼ੁਦ ਪਤਾ ਲਗਾ ਲਵਾਂਗੇ ਕਿ ਕੰਟੈਂਟ ਕਿੱਥੇ ਭੇਜਣਾ ਹੈ।",
+
+  "webhook.whoTitle": "ਕੌਣ ਪ੍ਰਕਾਸ਼ਿਤ ਕਰ ਰਿਹਾ ਹੈ",
+  "webhook.username": "ਲੌਗਿਨ ਯੂਜ਼ਰਨੇਮ",
+  "webhook.usernamePlaceholder": "your-cms-username",
+  "webhook.usernameHint": "ਉਹ ਯੂਜ਼ਰਨੇਮ ਜਿਸ ਨਾਲ ਤੁਸੀਂ ਆਪਣੀ ਵੈੱਬਸਾਈਟ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰਨ ਲਈ ਲੌਗਿਨ ਕਰਦੇ ਹੋ।",
+  "webhook.appPassword": "ਐਪ ਪਾਸਵਰਡ",
+  "webhook.appPasswordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
+  "webhook.appPasswordHint": "ਇਸ ਨੂੰ ਆਪਣੀ ਵੈੱਬਸਾਈਟ ਦੀ ਯੂਜ਼ਰ ਸੈਟਿੰਗਜ਼ ਵਿੱਚ ਬਣਾਓ। ਇਹ ਸਿਰਫ਼ ਐਪਸ ਲਈ ਇੱਕ ਵੱਖਰਾ ਪਾਸਵਰਡ ਹੈ।",
+  "webhook.appPasswordGuide": "ਐਪ ਪਾਸਵਰਡ ਕਿਵੇਂ ਮਿਲੇਗਾ?",
+  "webhook.appPasswordGuideHide": "ਗਾਈਡ ਲੁਕਾਓ",
+  "webhook.appPasswordStep1": "ਆਪਣੀ ਵੈੱਬਸਾਈਟ ਦੇ ਐਡਮਿਨ ਪੈਨਲ 'ਤੇ ਜਾਓ।",
+  "webhook.appPasswordStep2": "Users → Your Profile 'ਤੇ ਜਾਓ।",
+  "webhook.appPasswordStep3": "\"Application Passwords\" ਲੱਭੋ, \"AIBAN\" ਨਾਂ ਦਾ ਇੱਕ ਕੋਡ ਬਣਾਓ ਅਤੇ ਇੱਥੇ ਪੇਸਟ ਕਰੋ।",
+  "webhook.hmacAlternative": "ਯੂਜ਼ਰਨੇਮ/ਪਾਸਵਰਡ ਨਹੀਂ ਵਰਤ ਰਹੇ? ਜੇ ਤੁਹਾਡਾ ਪਲੇਟਫਾਰਮ HMAC ਤਸਦੀਕ ਵਰਤਦਾ ਹੈ, ਤਾਂ ਹੇਠਾਂ ਸੁਰੱਖਿਆ ਸਿਗਨੇਚਰ ਸੈੱਟ ਕਰੋ।",
+
+  "webhook.howTitle": "ਕਿਵੇਂ ਪ੍ਰਕਾਸ਼ਿਤ ਕਰਨਾ ਹੈ",
+  "webhook.postStatus": "ਪੋਸਟ ਦੀ ਸਥਿਤੀ",
+  "webhook.postStatusDraft": "ਡਰਾਫਟ ਵਜੋਂ ਸੇਵ ਕਰੋ — ਪਬਲਿਸ਼ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਚੈੱਕ ਕਰੋ",
+  "webhook.postStatusPublish": "ਤੁਰੰਤ ਪ੍ਰਕਾਸ਼ਿਤ ਕਰੋ — ਸਿੱਧਾ ਲਾਈਵ ਹੋ ਜਾਵੇਗਾ",
+  "webhook.authorName": "ਲੇਖਕ ਦਾ ਨਾਂ",
+  "webhook.authorNameHint": "ਪ੍ਰਕਾਸ਼ਿਤ ਪੋਸਟ 'ਤੇ ਲੇਖਕ ਦਾ ਨਾਂ ਕਿਵੇਂ ਨਜ਼ਰ ਆਵੇਗਾ।",
+  "webhook.categoryHint": "ਕੈਟਾਗਰੀ",
+  "webhook.categoryHintDesc": "ਤੁਹਾਡੇ ਨਿਊਜ਼ਲੈਟਰ ਵਿਸ਼ੇ ਦੇ ਆਧਾਰ 'ਤੇ ਸੁਝਾਈ ਗਈ। ਚੈੱਕ ਕਰੋ ਕਿ ਇਹ ਕੈਟਾਗਰੀ ਤੁਹਾਡੇ CMS ਵਿੱਚ ਮੌਜੂਦ ਹੈ।",
+  "webhook.tagsHint": "ਟੈਗਸ (ਆਪਣੇ ਆਪ ਸੁਝਾਏ ਗਏ)",
+  "webhook.tagsHintDesc": "ਤੁਹਾਡੇ ਪਾਠਕਾਂ ਅਤੇ ਵਿਸ਼ੇ ਦੇ ਆਧਾਰ 'ਤੇ ਟੈਗਸ। ਤੁਸੀਂ ਇਹਨਾਂ ਨੂੰ ਬਦਲ ਜਾਂ ਹਟਾ ਸਕਦੇ ਹੋ।",
+
+  "webhook.saveSettings": "ਪਬਲਿਸ਼ਿੰਗ ਸੈਟਿੰਗਜ਼ ਸੇਵ ਕਰੋ",
+  "webhook.savedSuccess": "ਪਬਲਿਸ਼ਿੰਗ ਸੈਟਿੰਗਜ਼ ਸੇਵ ਹੋ ਗਈਆਂ ਹਨ।",
 };
+

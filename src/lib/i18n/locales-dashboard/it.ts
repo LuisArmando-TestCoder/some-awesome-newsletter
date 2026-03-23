@@ -400,7 +400,47 @@ export default {
   "newsSource.errorInit": "I dati del modulo non sono stati inizializzati correttamente.",
   "newsSource.errorEmailBoth": "Sia l'email che la password dell'app sono necessarie se una delle due è fornita.",
   "newsSource.errorUpdateFail": "Aggiornamento fallito. Riprova.",
+
+  /* ── Pubblica sul tuo sito web (Contenuto) ── */
+  "webhook.sectionTitle": "Pubblica sul tuo sito web",
+  "webhook.sectionBadge": "Nuovo",
+  "webhook.sectionDesc": "Invia automaticamente ogni articolo della newsletter al tuo sito web come post. Funziona con WordPress e qualsiasi piattaforma che accetti contenuti REST standard.",
+
+  "webhook.whereTitle": "Dove pubblicare",
+  "webhook.baseUrl": "URL del tuo sito web",
+  "webhook.baseUrlPlaceholder": "https://tuo-sito.it",
+  "webhook.baseUrlHint": "Inserisci l'URL della home page del tuo sito — capiremo noi dove inviare i contenuti.",
+
+  "webhook.whoTitle": "Chi pubblica",
+  "webhook.username": "Nome utente login",
+  "webhook.usernamePlaceholder": "tuo-utente-cms",
+  "webhook.usernameHint": "Il nome utente che usi per accedere e gestire il tuo sito web.",
+  "webhook.appPassword": "Password dell'app",
+  "webhook.appPasswordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
+  "webhook.appPasswordHint": "Generala nelle impostazioni utente del tuo sito. È una password separata solo per le app.",
+  "webhook.appPasswordGuide": "Come ottenere una Password dell'app?",
+  "webhook.appPasswordGuideHide": "Nascondi guida",
+  "webhook.appPasswordStep1": "Vai al pannello di amministrazione del tuo sito.",
+  "webhook.appPasswordStep2": "Vai su Utenti → Il tuo profilo.",
+  "webhook.appPasswordStep3": "Scorri fino a \"Password delle applicazioni\", creane una chiamata \"AIBAN\" e incollala qui.",
+  "webhook.hmacAlternative": "Non usi nome utente/password? Se la tua piattaforma usa la verifica HMAC, configura una firma di sicurezza qui sotto.",
+
+  "webhook.howTitle": "Come pubblicare",
+  "webhook.postStatus": "Stato del post",
+  "webhook.postStatusDraft": "Salva come bozza — da revisionare prima della pubblicazione",
+  "webhook.postStatusPublish": "Pubblica immediatamente",
+  "webhook.authorName": "Nome autore",
+  "webhook.authorNameHint": "Come apparirà il nome dell'autore sul post pubblicato.",
+  "webhook.categoryHint": "Categoria",
+  "webhook.categoryHintDesc": "Suggerita in base all'argomento della newsletter. Assicurati che esista nel tuo CMS.",
+  "webhook.tagsHint": "Tag (suggeriti)",
+  "webhook.tagsHintDesc": "Separati da virgole, basati sul tuo pubblico e argomento. Puoi modificarli o rimuoverli.",
+
+  "webhook.saveSettings": "Salva impostazioni di pubblicazione",
+  "webhook.savedSuccess": "Impostazioni di pubblicazione salvate.",
+
   "billing.header.title": "Informazioni di Fatturazione",
+
   "billing.header.subtitle": "Gestisci i dettagli di fatturazione",
   "billing.fields.firstName.label": "Nome",
   "billing.fields.firstName.placeholder": "Mario",

@@ -400,4 +400,43 @@ export default {
   "newsSource.errorInit": "داده‌های فرم به‌درستی مقداردهی اولیه نشده‌اند.",
   "newsSource.errorEmailBoth": "اگر یکی از فیلدها پر شده باشد، هم ایمیل و هم رمز عبور برنامه لازم هستند.",
   "newsSource.errorUpdateFail": "به‌روزرسانی منبع ناموفق بود. لطفاً دوباره تلاش کنید.",
+
+  /* ── انتشار در وب‌سایت شما (تحویل محتوا) ── */
+  "webhook.sectionTitle": "انتشار در وب‌سایت شما",
+  "webhook.sectionBadge": "جدید",
+  "webhook.sectionDesc": "ارسال خودکار هر مقاله خبرنامه به وب‌سایت شما به عنوان یک پست. سازگار با وردپرس و هر پلتفرمی که محتوای استاندارد REST را می‌پذیرد.",
+
+  "webhook.whereTitle": "کجا منتشر شود",
+  "webhook.baseUrl": "URL وب‌سایت شما",
+  "webhook.baseUrlPlaceholder": "https://your-website.com",
+  "webhook.baseUrlHint": "URL صفحه اصلی سایت خود را وارد کنید — ما محل ارسال محتوا را پیدا خواهیم کرد.",
+
+  "webhook.whoTitle": "چه کسی منتشر می‌کند",
+  "webhook.username": "نام کاربری ورود",
+  "webhook.usernamePlaceholder": "your-cms-username",
+  "webhook.usernameHint": "نام کاربری که برای مدیریت وب‌سایت خود از آن استفاده می‌کنید.",
+  "webhook.appPassword": "رمز عبور برنامه",
+  "webhook.appPasswordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
+  "webhook.appPasswordHint": "این رمز را در تنظیمات کاربر وب‌سایت خود بسازید. این یک رمز عبور جداگانه مخصوص برنامه‌هاست.",
+  "webhook.appPasswordGuide": "چگونه رمز عبور برنامه دریافت کنیم؟",
+  "webhook.appPasswordGuideHide": "پنهان کردن راهنما",
+  "webhook.appPasswordStep1": "به پنل مدیریت وب‌سایت خود بروید.",
+  "webhook.appPasswordStep2": "به بخش کاربران ← پروفایل شما بروید.",
+  "webhook.appPasswordStep3": "بخش \"رمزهای عبور برنامه\" را پیدا کنید، یکی با نام \"AIBAN\" بسازید و کد را اینجا کپی کنید.",
+  "webhook.hmacAlternative": "از نام کاربری/رمز عبور استفاده نمی‌کنید؟ اگر پلتفرم شما از تایید HMAC استفاده می‌کند، به بخش امضای امنیتی در پایین بروید.",
+
+  "webhook.howTitle": "چگونه منتشر شود",
+  "webhook.postStatus": "وضعیت پست",
+  "webhook.postStatusDraft": "ذخیره به عنوان پیش‌نویس — بررسی قبل از انتشار عمومی",
+  "webhook.postStatusPublish": "انتشار فوری — بلافاصله منتشر می‌شود",
+  "webhook.authorName": "نام نویسنده",
+  "webhook.authorNameHint": "نام نویسنده چگونه در پست منتشر شده نمایش داده شود.",
+  "webhook.categoryHint": "دسته (Category)",
+  "webhook.categoryHintDesc": "پیشنهادی بر اساس موضوع خبرنامه شما. مطمئن شوید این دسته در CMS شما وجود دارد.",
+  "webhook.tagsHint": "برچسب‌ها (پیشنهاد خودکار)",
+  "webhook.tagsHintDesc": "برچسب‌هایی که بر اساس مخاطبان و موضوع شما پیشنهاد شده‌اند. می‌توانید آن‌ها را ویرایش یا حذف کنید.",
+
+  "webhook.saveSettings": "ذخیره تنظیمات انتشار",
+  "webhook.savedSuccess": "تنظیمات انتشار ذخیره شد.",
 };
+

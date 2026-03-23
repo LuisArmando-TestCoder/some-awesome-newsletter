@@ -400,4 +400,43 @@ export default {
   "newsSource.errorInit": "فارم کا ڈیٹا صحیح طریقے سے شروع نہیں ہو سکا۔",
   "newsSource.errorEmailBoth": "اگر کوئی ایک فیلڈ پُر کی گئی ہو تو ای میل اور ایپ پاس ورڈ دونوں ضروری ہیں۔",
   "newsSource.errorUpdateFail": "ذریعہ اپ ڈیٹ کرنے میں ناکامی۔ براہ کرم دوبارہ کوشش کریں۔",
+
+  /* ── اپنی ویب سائٹ پر شائع کریں (مواد کی ترسیل) ── */
+  "webhook.sectionTitle": "اپنی ویب سائٹ پر شائع کریں",
+  "webhook.sectionBadge": "نیا",
+  "webhook.sectionDesc": "نیوز لیٹر کے ہر مضمون کو خودکار طور پر اپنی ویب سائٹ پر بطور پوسٹ بھیجیں۔ یہ WordPress اور کسی بھی ایسے پلیٹ فارم کے ساتھ کام کرتا ہے جو معیاری REST مواد قبول کرتا ہے۔",
+
+  "webhook.whereTitle": "کہاں شائع کرنا ہے",
+  "webhook.baseUrl": "آپ کی ویب سائٹ کا URL",
+  "webhook.baseUrlPlaceholder": "https://your-website.com",
+  "webhook.baseUrlHint": "اپنی سائٹ کے ہوم پیج کا URL درج کریں — ہم خود معلوم کر لیں گے کہ مواد کہاں بھیجنا ہے۔",
+
+  "webhook.whoTitle": "کون شائع کر رہا ہے",
+  "webhook.username": "لاگ ان صارف نام (Username)",
+  "webhook.usernamePlaceholder": "your-cms-username",
+  "webhook.usernameHint": "وہ صارف نام جو آپ اپنی ویب سائٹ کے انتظام کے لیے لاگ ان کرتے وقت استعمال کرتے ہیں۔",
+  "webhook.appPassword": "ایپ پاس ورڈ",
+  "webhook.appPasswordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
+  "webhook.appPasswordHint": "اسے اپنی ویب سائٹ کی صارف کی ترتیبات (User Settings) میں بنائیں۔ یہ صرف ایپس کے لیے ایک الگ پاس ورڈ ہے۔",
+  "webhook.appPasswordGuide": "ایپ پاس ورڈ کیسے حاصل کریں؟",
+  "webhook.appPasswordGuideHide": "گائیڈ چھپائیں",
+  "webhook.appPasswordStep1": "اپنی ویب سائٹ کے ایڈمن پینل پر جائیں۔",
+  "webhook.appPasswordStep2": "صارفین (Users) ← اپنے پروفائل (Profile) پر جائیں۔",
+  "webhook.appPasswordStep3": "\"Application Passwords\" تلاش کریں، \"AIBAN\" کے نام سے ایک کوڈ بنائیں اور یہاں پیسٹ کریں۔",
+  "webhook.hmacAlternative": "صارف نام/پاس ورڈ استعمال نہیں کر رہے؟ اگر آپ کا پلیٹ فارم HMAC تصدیق استعمال کرتا ہے، تو نیچے سیکیورٹی دستخط والے سیکشن پر جائیں۔",
+
+  "webhook.howTitle": "کیسے شائع کرنا ہے",
+  "webhook.postStatus": "پوسٹ کی صورتحال",
+  "webhook.postStatusDraft": "بطور ڈرافٹ محفوظ کریں — عوامی کرنے سے پہلے جائزہ لیں",
+  "webhook.postStatusPublish": "فوری شائع کریں — ابھی لائیو ہو جائے گا",
+  "webhook.authorName": "مصنف کا نام",
+  "webhook.authorNameHint": "شائع شدہ پوسٹ پر مصنف کا نام کیسے ظاہر ہوگا۔",
+  "webhook.categoryHint": "زمرہ (Category)",
+  "webhook.categoryHintDesc": "آپ کے نیوز لیٹر کے موضوع کی بنیاد پر تجویز کردہ۔ یقینی بنائیں کہ یہ زمرہ آپ کے CMS میں موجود ہے۔",
+  "webhook.tagsHint": "ٹیگز (خودکار تجویز کردہ)",
+  "webhook.tagsHintDesc": "آپ کے قارئین اور موضوع کی بنیاد پر تجویز کردہ ٹیگز۔ آپ انہیں تبدیل یا ختم کر سکتے ہیں۔",
+
+  "webhook.saveSettings": "اشاعت کی ترتیبات محفوظ کریں",
+  "webhook.savedSuccess": "اشاعت کی ترتیبات محفوظ کر لی گئیں۔",
 };
+

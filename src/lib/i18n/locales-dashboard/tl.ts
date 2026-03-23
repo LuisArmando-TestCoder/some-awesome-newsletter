@@ -400,7 +400,47 @@ export default {
   "newsSource.errorInit": "Ang data ng form ay hindi maayos na nasimulan.",
   "newsSource.errorEmailBoth": "Parehong email at app password ay kailangan kung ang isa ay sinagutan.",
   "newsSource.errorUpdateFail": "Bigo sa pag-update ng source. Pakisubukang muli.",
+
+  /* ── I-publish sa Iyong Website (Content Delivery) ── */
+  "webhook.sectionTitle": "I-publish sa Iyong Website",
+  "webhook.sectionBadge": "Bago",
+  "webhook.sectionDesc": "Awtomatikong ipadala ang bawat artikulo ng newsletter sa iyong website bilang post. Gumagana ito sa WordPress at anumang platform na tumatanggap ng standard REST content.",
+
+  "webhook.whereTitle": "Saan I-pu-publish",
+  "webhook.baseUrl": "URL ng Iyong Website",
+  "webhook.baseUrlPlaceholder": "https://iyong-website.com",
+  "webhook.baseUrlHint": "Ilagay ang home page URL ng iyong site — kami na ang mag-aalam kung saan ipapadala ang content.",
+
+  "webhook.whoTitle": "Sino ang Nag-pu-publish",
+  "webhook.username": "Login Username",
+  "webhook.usernamePlaceholder": "iyong-cms-username",
+  "webhook.usernameHint": "Ang username na ginagamit mo sa pag-login para pamahalaan ang iyong website.",
+  "webhook.appPassword": "App Password",
+  "webhook.appPasswordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
+  "webhook.appPasswordHint": "I-generate ito sa loob ng mga setting ng user ng iyong website. Ito ay isang hiwalay na password para lamang sa mga app.",
+  "webhook.appPasswordGuide": "Paano kumuha ng App Password?",
+  "webhook.appPasswordGuideHide": "Itago ang gabay",
+  "webhook.appPasswordStep1": "Pumunta sa admin panel ng iyong website.",
+  "webhook.appPasswordStep2": "Pumunta sa Mga User → Iyong Profile.",
+  "webhook.appPasswordStep3": "Mag-scroll pababa sa \"Application Passwords\", gumawa ng isa na may pangalang \"AIBAN\" at i-paste ang code rito.",
+  "webhook.hmacAlternative": "Hindi gumagamit ng username/password? Kung ang iyong platform ay gumagamit ng HMAC verification, pumunta sa seksyon ng Security Signature sa ibaba.",
+
+  "webhook.howTitle": "Paano I-publish",
+  "webhook.postStatus": "Status ng Post",
+  "webhook.postStatusDraft": "I-save bilang Draft — i-review muna bago i-publish",
+  "webhook.postStatusPublish": "I-publish Agad — mag-la-live agad",
+  "webhook.authorName": "Pangalan ng May-akda",
+  "webhook.authorNameHint": "Kung paano lalabas ang pangalan ng may-akda sa na-publish na post.",
+  "webhook.categoryHint": "Kategorya",
+  "webhook.categoryHintDesc": "Iminungkahi batay sa paksa ng iyong newsletter. Siguraduhing mayroon itong kategorya sa iyong CMS.",
+  "webhook.tagsHint": "Mga Tag (Awtomatikong iminungkahi)",
+  "webhook.tagsHintDesc": "Mga tag na pinaghiwalay ng kuwit, iminungkahi batay sa iyong audience at paksa. Maaari mong i-edit o alisin ang mga ito.",
+
+  "webhook.saveSettings": "I-save ang mga Setting ng Pag-publish",
+  "webhook.savedSuccess": "Naka-save na ang mga setting ng pag-publish.",
+
   "billing.header.title": "Impormasyon sa Pagsingil",
+
   "billing.header.subtitle": "Pamahalaan ang iyong mga detalye sa pagsingil",
   "billing.fields.firstName.label": "Pangalan",
   "billing.fields.firstName.placeholder": "Juan",

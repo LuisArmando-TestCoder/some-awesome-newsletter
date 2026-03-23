@@ -402,4 +402,43 @@ export default {
   "newsSource.errorInit": "फॉर्म डेटा सही से सेट नईखे भइल।",
   "newsSource.errorEmailBoth": "ईमेल अउरी पासवर्ड दूनो भरल जरूरी बा।",
   "newsSource.errorUpdateFail": "सोर्स अपडेट करे में फेल। दोबारा कोशिश करीं।",
+
+  /* ── अपन वेबसाइट पर पब्लिश करीं (कंटेंट डिलीवरी) ── */
+  "webhook.sectionTitle": "अपन वेबसाइट पर पब्लिश करीं",
+  "webhook.sectionBadge": "नया",
+  "webhook.sectionDesc": "हर न्यूजलेटर लेख के अपन वेबसाइट पर पोस्ट के तौर पर भेजल जाय। ई WordPress अउरी अईसन हर प्लेटफॉर्म के साथ काम करेला जवन REST कंटेंट स्वीकार करेला।",
+
+  "webhook.whereTitle": "कहाँ पब्लिश कइल जाय",
+  "webhook.baseUrl": "रउआ वेबसाइट के URL",
+  "webhook.baseUrlPlaceholder": "https://your-website.com",
+  "webhook.baseUrlHint": "अपन साइट के होमपेज URL डालीं — हमनी खुद पता लगा लेब कि कंटेंट कहाँ भेजे के बा।",
+
+  "webhook.whoTitle": "के पब्लिश करत बा",
+  "webhook.username": "लॉगिन यूजरनाम",
+  "webhook.usernamePlaceholder": "your-cms-username",
+  "webhook.usernameHint": "उ यूजरनाम जवना से रउआ अपन वेबसाइट मैनेज करे खातिर लॉगिन करेनी।",
+  "webhook.appPassword": "ऐप पासवर्ड",
+  "webhook.appPasswordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
+  "webhook.appPasswordHint": "अपन वेबसाइट के यूजर सेटिंग में एके बनाईं। ई सिर्फ ऐप्स खातिर एगो अलग पासवर्ड ह।",
+  "webhook.appPasswordGuide": "ऐप पासवर्ड कइसे मिली?",
+  "webhook.appPasswordGuideHide": "गाइड छुपाईं",
+  "webhook.appPasswordStep1": "अपन वेबसाइट के एडमिन पैनल पर जाईं।",
+  "webhook.appPasswordStep2": "Users → Your Profile पर जाईं।",
+  "webhook.appPasswordStep3": \"Application Passwords\" तक जाईं, \"AIBAN\" नाम के पासवर्ड बनाईं अउरी हियाँ चिपका दीं।",
+  "webhook.hmacAlternative": "यूजरनाम/पासवर्ड नईखे? अगर रउआ प्लेटफॉर्म HMAC वेरिफिकेशन के इस्तेमाल करेला, त सुरक्षा सिग्नेचर वाला हिस्सा देखीं।",
+
+  "webhook.howTitle": "कइसे पब्लिश कइल जाय",
+  "webhook.postStatus": "पोस्ट के स्थिति",
+  "webhook.postStatusDraft": "ड्राफ्ट के रूप में सेव करीं — लाइव करे से पहिले देखल जा सकेला",
+  "webhook.postStatusPublish": "तुरंत पब्लिश करीं — एके बार में लाइव हो जाई",
+  "webhook.authorName": "लेखक के नाम",
+  "webhook.authorNameHint": "पब्लिश पोस्ट पर लेखक के नाम कइसे लौकी।",
+  "webhook.categoryHint": "कैटेगरी (संकेत)",
+  "webhook.categoryHintDesc": "न्यूजलेटर के विषय के आधार पर सुझाव। पक्का करीं कि ई कैटेगरी रउआ CMS में मौजूद बा।",
+  "webhook.tagsHint": "टैग्स (सुझाव)",
+  "webhook.tagsHintDesc": "लेख अउरी विषय के आधार पर टैग्स। रउआ एके बदल चाहे हटा सकत बनीं।",
+
+  "webhook.saveSettings": "पब्लिश सेटिंग सेव करीं",
+  "webhook.savedSuccess": "पब्लिश सेटिंग सेव हो गइल।",
 };
+

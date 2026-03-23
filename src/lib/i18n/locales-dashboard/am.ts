@@ -400,7 +400,47 @@ export default {
   "newsSource.errorInit": "የፎርም መረጃ በትክክል አልተዘጋጀም።",
   "newsSource.errorEmailBoth": "ላኪ ኢሜል ወይም ይለፍ ቃል አንዱ ከተሞላ ሁለቱም ያስፈልጋሉ።",
   "newsSource.errorUpdateFail": "ምንጩን ማደስ አልተሳካም። እባክዎ ድጋሚ ይሞክሩ።",
+
+  /* ── ወደ ድህረ ገጽዎ ይለጥፉ (የይዘት አቅርቦት) ── */
+  "webhook.sectionTitle": "በእርስዎ ድህረ ገጽ ላይ ያትሙ",
+  "webhook.sectionBadge": "አዲስ",
+  "webhook.sectionDesc": "እያንዳንዱን የጋዜጣ ጽሑፍ በራስ-ሰር ወደ ድህረ ገጽዎ እንደ ልጥፍ ይላኩ። ከWordPress እና ማንኛውም መደበኛ የREST ይዘት ከሚቀበሉ ፕላትፎርሞች ጋር ይሰራል።",
+
+  "webhook.whereTitle": "የት ይታተም",
+  "webhook.baseUrl": "የእርስዎ ድህረ ገጽ ሊንክ (URL)",
+  "webhook.baseUrlPlaceholder": "https://your-website.com",
+  "webhook.baseUrlHint": "የጣቢያዎን መነሻ ገጽ ሊንክ ያስገቡ — ይዘቱን የት እንደሚላክ እኛ እንለያለን።",
+
+  "webhook.whoTitle": "ማን እያሳተመ ነው",
+  "webhook.username": "የመግቢያ ተጠቃሚ ስም",
+  "webhook.usernamePlaceholder": "your-cms-username",
+  "webhook.usernameHint": "ድህረ ገጽዎን ለማስተዳደር የሚጠቀሙበት የመግቢያ ስም።",
+  "webhook.appPassword": "የመተግበሪያ ይለፍ ቃል",
+  "webhook.appPasswordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
+  "webhook.appPasswordHint": "ይህንን በድህረ ገጽዎ የተጠቃሚ ቅንብሮች ውስጥ ይፍጠሩ። ለመተግበሪያዎች ብቻ የተዘጋጀ ልዩ ይለፍ ቃል ነው።",
+  "webhook.appPasswordGuide": "የመተግበሪያ ይለፍ ቃል እንዴት ማግኘት ይቻላል?",
+  "webhook.appPasswordGuideHide": "መመሪያውን ደብቅ",
+  "webhook.appPasswordStep1": "ወደ ድህረ ገጽዎ የአስተዳዳሪ ፓነል ይሂዱ።",
+  "webhook.appPasswordStep2": "ወደ ተጠቃሚዎች (Users) → የእርስዎ መገለጫ (Profile) ይሂዱ።",
+  "webhook.appPasswordStep3": "ወደ ታች ዝቅ ብለው \"Application Passwords\" የሚለውን ይፈልጉ፣ \"AIBAN\" በሚል ስም ይፍጠሩና እዚህ ይለጥፉት።",
+  "webhook.hmacAlternative": "የተጠቃሚ ስም/ይለፍ ቃል አይጠቀሙም? ፕላትፎርምዎ በHMAC ማረጋገጫ የሚጠቀም ከሆነ፣ ሚስጥራዊ ቁልፍ ለማዋቀር ወደ የደህንነት ፊርማ ክፍል ዝቅ ይበሉ።",
+
+  "webhook.howTitle": "እንዴት ይታተም",
+  "webhook.postStatus": "የልጥፍ ሁኔታ",
+  "webhook.postStatusDraft": "እንደ ረቂቅ አስቀምጥ — ከመታተሙ በፊት ለመገምገም",
+  "webhook.postStatusPublish": "ወዲያውኑ አትም",
+  "webhook.authorName": "የጸሐፊው ስም",
+  "webhook.authorNameHint": "በታተመው ልጥፍ ላይ የጸሐፊው ስም እንዴት እንደሚታይ።",
+  "webhook.categoryHint": "ምድብ (Category)",
+  "webhook.categoryHintDesc": "በጋዜጣዎ ርዕሰ ጉዳይ ላይ በመመስረት የቀረበ። ይህ ምድብ በእርስዎ CMS ውስጥ መኖሩን ያረጋግጡ።",
+  "webhook.tagsHint": "መለያዎች (Tags)",
+  "webhook.tagsHintDesc": "በአንባቢዎችዎ እና በርዕሰ ጉዳዩ ላይ በመመስረት የቀረቡ። ማስተካከል ወይም መሰረዝ ይችላሉ።",
+
+  "webhook.saveSettings": "የህትመት ቅንብሮችን አስቀምጥ",
+  "webhook.savedSuccess": "የህትመት ቅንብሮች ተቀምጠዋል።",
+
   "billing.header.title": "የክፍያ መረጃ",
+
   "billing.header.subtitle": "የክፍያ ዝርዝሮችዎን ያስተዳድሩ",
   "billing.fields.firstName.label": "ስም",
   "billing.fields.firstName.placeholder": "አበበ",

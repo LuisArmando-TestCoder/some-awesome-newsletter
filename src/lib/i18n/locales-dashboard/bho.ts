@@ -424,7 +424,7 @@ export default {
   "webhook.appPasswordGuideHide": "गाइड छुपाईं",
   "webhook.appPasswordStep1": "अपन वेबसाइट के एडमिन पैनल पर जाईं।",
   "webhook.appPasswordStep2": "Users → Your Profile पर जाईं।",
-  "webhook.appPasswordStep3": \"Application Passwords\" तक जाईं, \"AIBAN\" नाम के पासवर्ड बनाईं अउरी हियाँ चिपका दीं।",
+  "webhook.appPasswordStep3": "Application Passwords\" तक जाईं, \"AIBAN\" नाम के पासवर्ड बनाईं अउरी हियाँ चिपका दीं।",
   "webhook.hmacAlternative": "यूजरनाम/पासवर्ड नईखे? अगर रउआ प्लेटफॉर्म HMAC वेरिफिकेशन के इस्तेमाल करेला, त सुरक्षा सिग्नेचर वाला हिस्सा देखीं।",
 
   "webhook.howTitle": "कइसे पब्लिश कइल जाय",

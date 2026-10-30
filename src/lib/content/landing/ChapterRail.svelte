@@ -15,16 +15,31 @@
 	onMount(() => {
 		const nodes = Array.from(document.querySelectorAll<HTMLElement>('[data-chapter]'));
 		ids = nodes.map((n) => n.id);
-		const io = new IntersectionObserver(
-			(entries) => {
-				for (const e of entries) {
-					if (e.isIntersecting) current = nodes.indexOf(e.target as HTMLElement);
-				}
-			},
-			{ rootMargin: '-45% 0px -50% 0px' }
-		);
-		nodes.forEach((n) => io.observe(n));
-		return () => io.disconnect();
+		// The current chapter is the last one whose top has passed the middle of the screen.
+		// At the very bottom of the page the last chapter wins, even when it is short.
+		let raf = 0;
+		const measure = () => {
+			raf = 0;
+			const line = window.innerHeight * 0.5;
+			let i = 0;
+			nodes.forEach((n, k) => {
+				if (n.getBoundingClientRect().top <= line) i = k;
+			});
+			const last = nodes[nodes.length - 1];
+			if (last && last.getBoundingClientRect().bottom <= window.innerHeight) i = nodes.length - 1;
+			current = i;
+		};
+		const onScroll = () => {
+			if (!raf) raf = requestAnimationFrame(measure);
+		};
+		measure();
+		window.addEventListener('scroll', onScroll, { passive: true });
+		window.addEventListener('resize', onScroll);
+		return () => {
+			cancelAnimationFrame(raf);
+			window.removeEventListener('scroll', onScroll);
+			window.removeEventListener('resize', onScroll);
+		};
 	});
 
 	const pad = (n: number) => String(n).padStart(2, '0');
@@ -58,6 +73,8 @@
 		flex-direction: column;
 		align-items: flex-end;
 		gap: var(--space-3, 12px);
+		/* White drawn with "difference": ink on light chapters, white on the ink finale. */
+		mix-blend-mode: difference;
 		@media (min-width: 64rem) and (hover: hover) {
 			display: flex;
 		}
@@ -66,11 +83,11 @@
 		margin: 0;
 		font-size: var(--fs-xs, 0.75rem);
 		font-variant-numeric: tabular-nums;
-		color: var(--text-3, #6e6e73);
+		color: rgb(255 255 255 / 0.55);
 		letter-spacing: 0.04em;
 	}
 	.rail__now {
-		color: var(--text-1, #1d1d1f);
+		color: #fff;
 		font-weight: var(--fw-semibold, 600);
 	}
 	.rail__list {
@@ -89,20 +106,20 @@
 		gap: var(--space-2, 8px);
 		height: 1rem;
 		text-decoration: none;
-		color: var(--text-3, #6e6e73);
+		color: rgb(255 255 255 / 0.6);
 		&::after {
 			content: '';
 			width: 0.75rem;
 			height: 2px;
 			border-radius: var(--radius-full, 999px);
-			background: var(--border-2, #86868b);
+			background: rgb(255 255 255 / 0.45);
 			transition:
 				width var(--dur-base, 200ms) var(--ease-out, ease-out),
 				background-color var(--dur-base, 200ms) var(--ease-out, ease-out);
 		}
 		&.is-current::after {
 			width: 1.75rem;
-			background: var(--text-1, #1d1d1f);
+			background: #fff;
 		}
 		&:focus-visible {
 			outline: none;
@@ -119,14 +136,14 @@
 			transform var(--dur-base, 200ms) var(--ease-out, ease-out);
 		white-space: nowrap;
 	}
+	/* Labels show on hover or focus only, so they never sit on top of the big type. */
 	.rail:hover .rail__label,
-	.rail__dot:focus-visible .rail__label,
-	.rail__dot.is-current .rail__label {
+	.rail__dot:focus-visible .rail__label {
 		opacity: 1;
 		transform: none;
 	}
 	.rail__dot.is-current .rail__label {
-		color: var(--text-1, #1d1d1f);
+		color: #fff;
 	}
 	@media (prefers-reduced-motion: reduce) {
 		.rail__dot::after,

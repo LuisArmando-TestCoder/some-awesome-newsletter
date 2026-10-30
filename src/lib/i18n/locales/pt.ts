@@ -35,6 +35,11 @@ export default {
       "ogImageAlt": "Logo do AIBAN"
     },
     "skipLink": "Pular para o conteúdo principal",
+    "marquee": {
+      "label": "Alguns dos idiomas que seus leitores podem escolher",
+      "pause": "Pausar",
+      "play": "Reproduzir"
+    },
     "display": {
       "title": "Seu site, escrito como newsletter.",
       "kicker": "AIBAN"

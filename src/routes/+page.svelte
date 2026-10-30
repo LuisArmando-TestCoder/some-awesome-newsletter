@@ -15,6 +15,21 @@
 	import DashboardShowcase from '$lib/content/showcase/DashboardShowcase.svelte';
 	import { fill as fillShowcase } from '$lib/content/showcase/types';
 	import { reveal } from '$lib/content/landing/reveal';
+	import LanguageMarquee from '$lib/content/landing/LanguageMarquee.svelte';
+	import {
+		heroFx,
+		statementFx,
+		dealFx,
+		flapFx,
+		senderFx,
+		stackFx,
+		planeFx,
+		convergeFx,
+		ruledFx,
+		irisFx,
+		magnetic,
+		words
+	} from '$lib/content/landing/scrollFx';
 	import {
 		normalizeSite,
 		brandFromHost,
@@ -72,6 +87,9 @@
 	// the placeholder layout comes back only if the visitor asks for it after an error.
 	let showSampleLayout = $state(false);
 	const LIVE = $derived(L.live ?? en.landing.live);
+	const MARQUEE = $derived(L.marquee ?? en.landing.marquee);
+	// Real space between split words, so the heading still reads as a sentence to screen readers.
+	const SP = ' ';
 
 	const fill = (s: string, site: string) => s.replaceAll('{site}', site);
 	const brandName = $derived(host ? brandFromHost(host) : '');
@@ -164,10 +182,12 @@
 
 	<main id="main-content">
 		<!-- 01 Cold open -->
-		<section id="start" data-chapter class="open" aria-labelledby="hero-title">
+		<section id="start" data-chapter class="open" aria-labelledby="hero-title" use:heroFx>
 			<div class="wrap open__inner">
 				<p class="open__kicker">{L.hero.eyebrow}</p>
-				<h1 id="hero-title" class="open__title">{L.display.title}</h1>
+				<h1 id="hero-title" class="open__title">
+					{#each words(L.display.title) as w, i (i)}<span class="w" style:--i={i}><span class="w__in">{w}</span></span>{SP}{/each}
+				</h1>
 				<p class="open__lead">{L.hero.lead}</p>
 
 				<form class="site-form" novalidate onsubmit={onPreview}>
@@ -222,18 +242,23 @@
 		</section>
 
 		<!-- 02 Statement -->
-		<section id="why" data-chapter class="statement" aria-label={L.rail.chapters[1]}>
-			<div class="wrap">
-				<p class="statement__text">
-					{#each L.statement.lines as line}
-						<span class="statement__line">{line} </span>
-					{/each}
-				</p>
+		<section id="why" data-chapter class="statement" aria-label={L.rail.chapters[1]} use:statementFx>
+			<div class="statement__stage">
+				<div class="wrap">
+					<p class="visually-hidden">{L.statement.lines.join(' ')}</p>
+					<p class="statement__text" aria-hidden="true">
+						{#each L.statement.lines as line, li (li)}
+							<span class="statement__line">{#each words(line) as w, wi (wi)}<span class="w">{w}</span>{SP}{/each}</span>
+						{/each}
+					</p>
+				</div>
 			</div>
 		</section>
 
+		<LanguageMarquee label={MARQUEE.label} pause={MARQUEE.pause} play={MARQUEE.play} />
+
 		<!-- 03 Languages -->
-		<section id="languages" data-chapter class="chapter" aria-labelledby="lang-title">
+		<section id="languages" data-chapter class="chapter" aria-labelledby="lang-title" use:dealFx>
 			<div class="wrap">
 				<header class="chapter__head" use:reveal>
 					<p class="chapter__eyebrow">{L.languages.eyebrow}</p>
@@ -242,7 +267,7 @@
 				</header>
 				<div class="lang-grid">
 					{#each SAMPLE_LANGUAGES as code, i}
-						<div class="lang-grid__item" use:reveal style:--i={i}>
+						<div class="lang-grid__item" style:--i={i}>
 							<IssuePreview host={host} labels={L.preview} switchable={false} language={code} compact idPrefix="lang-{code}" />
 						</div>
 					{/each}
@@ -264,12 +289,13 @@
 			/>
 		</div>
 
-		<section class="also" aria-labelledby="also-title">
+		<section class="also" aria-labelledby="also-title" use:flapFx>
+			<span class="also__rule" aria-hidden="true"></span>
 			<div class="wrap">
 				<h3 id="also-title" class="also__title">{L.chain.alsoTitle}</h3>
 				<ul class="also__list">
 					{#each L.chain.also as item, i}
-						<li use:reveal style:--i={i}>
+						<li style:--i={i}>
 							<p class="also__item-title">{item.title}</p>
 							<p class="also__item-body">{item.body}</p>
 						</li>
@@ -279,14 +305,14 @@
 		</section>
 
 		<!-- 05 Sender -->
-		<section id="sender" data-chapter class="chapter chapter--tint" aria-labelledby="sender-title">
+		<section id="sender" data-chapter class="chapter chapter--tint" aria-labelledby="sender-title" use:senderFx>
 			<div class="wrap split">
 				<header class="chapter__head chapter__head--left" use:reveal>
 					<p class="chapter__eyebrow">{L.sender.eyebrow}</p>
 					<h2 id="sender-title" class="chapter__title">{L.sender.title}</h2>
 					<p class="chapter__lead">{L.sender.body}</p>
 				</header>
-				<figure class="inbox" use:reveal>
+				<figure class="inbox">
 					<figcaption class="inbox__caption">{L.sender.inboxLabel}</figcaption>
 					<ul class="inbox__list">
 						<li class="inbox__row inbox__row--dim" aria-hidden="true"><span class="bar bar--s"></span><span class="bar bar--l"></span></li>
@@ -306,7 +332,7 @@
 		</section>
 
 		<!-- 06 Grow -->
-		<section id="grow" data-chapter class="chapter" aria-labelledby="grow-title">
+		<section id="grow" data-chapter class="chapter" aria-labelledby="grow-title" use:stackFx>
 			<div class="wrap">
 				<header class="chapter__head" use:reveal>
 					<p class="chapter__eyebrow">{L.grow.eyebrow}</p>
@@ -314,7 +340,7 @@
 				</header>
 				<ul class="tiles">
 					{#each L.grow.items as item, i}
-						<li class="tile" use:reveal style:--i={i}>
+						<li class="tile" style:--i={i}>
 							{#if GROW_SCENES[i]}
 								<DashboardShowcase
 									class="tile__demo"
@@ -325,9 +351,11 @@
 									label="{item.title}. {SC.sampleBadge}"
 								/>
 							{/if}
-							<p class="tile__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</p>
-							<h3 class="tile__title">{item.title}</h3>
-							<p class="tile__body">{item.body}</p>
+							<div class="tile__text">
+								<p class="tile__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</p>
+								<h3 class="tile__title">{item.title}</h3>
+								<p class="tile__body">{item.body}</p>
+							</div>
 						</li>
 					{/each}
 				</ul>
@@ -335,7 +363,7 @@
 		</section>
 
 		<!-- 07 Use cases -->
-		<section id="who" data-chapter class="chapter chapter--tint" aria-labelledby="uses-title">
+		<section id="who" data-chapter class="chapter chapter--tint" aria-labelledby="uses-title" use:planeFx>
 			<div class="wrap">
 				<header class="chapter__head chapter__head--left" use:reveal>
 					<p class="chapter__eyebrow">{L.useCases.eyebrow}</p>
@@ -361,7 +389,7 @@
 							</button>
 						{/each}
 					</div>
-					<div id="usecase-panel" class="uses__panel" role="tabpanel" aria-labelledby="usecase-tab-{useCase}" use:reveal>
+					<div id="usecase-panel" class="uses__panel" role="tabpanel" aria-labelledby="usecase-tab-{useCase}">
 						<DashboardShowcase
 							example={useExample}
 							scenes={['home', 'issue', 'reports']}
@@ -375,11 +403,13 @@
 		</section>
 
 		<!-- 08 Offer: calm, no scroll effects near money -->
-		<section id="pricing" data-chapter class="chapter offer" aria-labelledby="pricing-title">
+		<section id="pricing" data-chapter class="chapter offer" aria-labelledby="pricing-title" use:convergeFx>
 			<div class="wrap">
 				<header class="chapter__head">
 					<p class="chapter__eyebrow">{L.pricingIntro.eyebrow}</p>
-					<h2 id="pricing-title" class="chapter__title">{L.pricingIntro.title}</h2>
+					<h2 id="pricing-title" class="chapter__title">
+						{#each words(L.pricingIntro.title) as w, wi (wi)}<span class="w">{w}</span>{SP}{/each}
+					</h2>
 					<p class="chapter__lead">{L.pricingIntro.lead}</p>
 				</header>
 				<Pricing showHeader={false} headingLevel={2} />
@@ -387,19 +417,28 @@
 		</section>
 
 		<!-- 09 FAQ -->
-		<section id="faq" data-chapter class="chapter chapter--tint">
+		<section id="faq" data-chapter class="chapter chapter--tint faq-chapter" aria-labelledby="landing-faq-title" use:ruledFx>
 			<div class="wrap wrap--narrow">
-				<Faq items={L.faq} title={L.faqTitle} idPrefix="landing-faq" />
+				<h2 id="landing-faq-title" class="faq-head">
+					<span class="visually-hidden">{L.faqTitle}</span>
+					<span aria-hidden="true">
+						{#each words(L.faqTitle) as w, wi (wi)}<span class="faq-head__w">{#each Array.from(w) as c, j (j)}<span class="ch" data-o={j - (Array.from(w).length - 1) / 2}>{c}</span>{/each}</span>{SP}{/each}
+					</span>
+				</h2>
+				<Faq items={L.faq} title="" idPrefix="landing-faq" />
 			</div>
 		</section>
 
 		<!-- 10 Finale -->
-		<section id="begin" data-chapter class="finale" aria-labelledby="final-title">
+		<section id="begin" data-chapter class="finale" aria-labelledby="final-title" use:irisFx>
+			<div class="finale__bg" aria-hidden="true"></div>
 			<div class="wrap finale__inner">
 				<h2 id="final-title" class="finale__title">{L.finalCta.title}</h2>
 				<p class="finale__body">{L.finalCta.body}</p>
 				<div class="finale__actions">
-					<a class="btn btn--primary btn--lg" href={startHref} onclick={onStart}>{L.finalCta.cta}</a>
+					<a class="btn btn--primary btn--lg btn--magnet" href={startHref} onclick={onStart} data-cta="finale" use:magnetic>
+						<span class="btn__label">{L.finalCta.cta}</span>
+					</a>
 					<a class="link-more" href="/help">{L.finalCta.secondary} <span aria-hidden="true">&#8250;</span></a>
 				</div>
 			</div>
@@ -571,6 +610,17 @@
 	}
 	.open__title {
 		margin: 0;
+		.w {
+			display: inline-block;
+			/* Mask for the load reveal; the padding keeps descenders inside it. */
+			overflow: clip;
+			padding-bottom: 0.1em;
+			margin-bottom: -0.1em;
+			vertical-align: top;
+		}
+		.w__in {
+			display: inline-block;
+		}
 		max-width: 13ch;
 		font-family: var(--font-display);
 		font-size: clamp(3rem, 8.4vw, 7.75rem);
@@ -685,12 +735,27 @@
 		color: var(--text-3);
 	}
 
-	/* 02 Statement: lines light up as they scroll into the middle of the screen. */
+	/* 02 Statement. With motion, the section grows tall and the sentence holds the centre of
+	   the screen while each word comes into focus (scrollFx statementFx). */
 	.statement {
 		padding-block: clamp(6rem, 25vh, 16rem);
 	}
+	.statement:global(.is-fx) {
+		height: 280svh;
+		padding-block: 0;
+	}
+	.statement:global(.is-fx) .statement__stage {
+		position: sticky;
+		top: 0;
+		height: 100svh;
+		display: grid;
+		align-items: center;
+	}
 	.statement__line {
 		display: block;
+	}
+	.statement__text :global(.w) {
+		display: inline-block;
 	}
 	.statement__text {
 		margin: 0;
@@ -771,7 +836,17 @@
 	}
 	.also {
 		padding-block: var(--space-8, 64px) clamp(6rem, 16vh, 10rem);
-		border-top: 1px solid var(--border-1);
+	}
+	.also__rule {
+		display: block;
+		height: 1px;
+		margin-bottom: var(--space-8, 64px);
+		margin-top: calc(-1 * var(--space-8, 64px));
+		background: var(--border-1);
+		transform-origin: 0 50%;
+	}
+	.also__list > li {
+		backface-visibility: hidden;
 	}
 	.also__title {
 		margin: 0 0 var(--space-6, 32px);
@@ -1019,12 +1094,111 @@
 	.tile :global(.tile__demo) {
 		margin: calc(var(--space-6, 32px) * -0.5) calc(var(--space-6, 32px) * -0.5) var(--space-6, 32px);
 	}
+	/* Stacking cards (desktop with motion, scrollFx stackFx): each card sticks a little lower
+	   than the one before, so the pile shows its edges. */
+	.tiles:global(.is-stack) {
+		grid-template-columns: minmax(0, 1fr);
+		gap: 8vh;
+		padding-bottom: 4vh;
+		.tile {
+			position: sticky;
+			top: calc(var(--header-h, 4rem) + 3vh + var(--i, 0) * 1.75rem);
+			display: grid;
+			grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+			align-items: center;
+			gap: var(--space-8, 64px);
+			min-height: min(66svh, 34rem);
+			padding: var(--space-7, 48px);
+			border: 1px solid var(--border-1);
+			box-shadow: var(--shadow-3);
+			transform-origin: 50% 0%;
+		}
+		.tile :global(.tile__demo) {
+			margin: 0;
+		}
+		.tile__title {
+			font-size: clamp(2rem, 3.4vw, 3.25rem);
+			line-height: 1.02;
+			margin-block: var(--space-4, 16px) var(--space-4, 16px);
+		}
+		.tile__body {
+			font-size: var(--fs-lg, 1.125rem);
+			max-width: 26rem;
+		}
+	}
 
-	/* 10 Finale */
+	/* 08 Pricing heading: words are boxes so they can slide (scrollFx convergeFx). */
+	.offer .chapter__title :global(.w) {
+		display: inline-block;
+	}
+
+	/* 09 FAQ heading drawn letter by letter, and ruled lines drawn under each question. */
+	.faq-head {
+		margin: 0 auto var(--space-7, 48px);
+		max-width: 18ch;
+		font-family: var(--font-display);
+		font-size: clamp(2.25rem, 5vw, 4rem);
+		font-weight: var(--fw-bold, 700);
+		line-height: 1.04;
+		letter-spacing: -0.035em;
+		text-align: center;
+		text-wrap: balance;
+		color: var(--text-1);
+	}
+	.faq-head__w {
+		display: inline-block;
+		white-space: nowrap;
+	}
+	.faq-head :global(.ch) {
+		display: inline-block;
+	}
+	.faq-chapter:global(.is-ruled) :global(.faq__item) {
+		position: relative;
+		border-bottom-color: transparent;
+	}
+	.faq-chapter:global(.is-ruled) :global(.faq__item::after) {
+		content: '';
+		position: absolute;
+		inset: auto 0 -1px 0;
+		height: 1px;
+		background: var(--border-1);
+		transform: scaleX(var(--draw, 1));
+		transform-origin: 0 50%;
+	}
+	.faq-chapter:global(.is-ruled) :global(.faq__button) {
+		overflow: clip;
+	}
+	.faq-chapter:global(.is-ruled) :global(.faq__text) {
+		display: inline-block;
+	}
+
+	/* 10 Finale: ink chapter. With motion, the ink opens as a circle (scrollFx irisFx). */
 	.finale {
-		padding-top: clamp(7rem, 22vh, 14rem);
+		position: relative;
+		isolation: isolate;
+		padding-block: clamp(7rem, 22vh, 14rem);
 		text-align: center;
 		overflow: hidden;
+		color: var(--text-inverse);
+	}
+	.finale__bg {
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		background: var(--surface-inverse);
+	}
+	.finale .btn--primary {
+		background: var(--surface-0);
+		color: var(--text-1);
+		&:hover {
+			background: var(--surface-2);
+		}
+	}
+	.finale .link-more {
+		color: var(--text-inverse);
+	}
+	.btn__label {
+		display: inline-block;
 	}
 	.finale__inner {
 		display: grid;
@@ -1032,6 +1206,7 @@
 	}
 	.finale__title {
 		margin: 0 0 var(--space-4, 16px);
+		color: var(--text-inverse);
 		font-family: var(--font-display);
 		font-size: clamp(2.5rem, 6vw, 5.5rem);
 		font-weight: var(--fw-bold, 700);
@@ -1043,7 +1218,7 @@
 		max-width: 32rem;
 		font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.3125rem);
 		line-height: 1.5;
-		color: var(--text-2);
+		color: color-mix(in oklch, var(--text-inverse) 74%, var(--surface-inverse));
 	}
 	.finale__actions {
 		display: flex;
@@ -1071,31 +1246,20 @@
 
 		/* Hero text arrives once, as real HTML (no wait for LCP). */
 		.open__kicker,
-		.open__title,
 		.open__lead,
 		.site-form,
 		.link-more {
 			animation: rise var(--dur-chapter) var(--ease-out) both;
 		}
-		.open__title { animation-delay: 60ms; }
+		/* Each headline word rises out of its own mask (transform only: the text is painted for LCP). */
+		.open__title .w__in {
+			animation: word-rise var(--dur-chapter) var(--ease-out) both;
+			animation-delay: calc(60ms + var(--i, 0) * 70ms);
+		}
 		.open__lead { animation-delay: 120ms; }
 		.site-form { animation-delay: 180ms; }
 		.open__inner .link-more { animation-delay: 240ms; }
 
-		@supports (animation-timeline: view()) {
-			/* The issue rises and settles as it scrolls in, like a product reveal. */
-			.open__device {
-				animation: settle linear both;
-				animation-timeline: view();
-				animation-range: entry 0% cover 45%;
-			}
-			/* Statement lines go from grey to ink as they reach the reading line. */
-			.statement__line {
-				animation: ink linear both;
-				animation-timeline: view();
-				animation-range: entry 70% cover 55%;
-			}
-		}
 	}
 	@keyframes rise {
 		from {
@@ -1103,22 +1267,9 @@
 			transform: translate3d(0, 18px, 0);
 		}
 	}
-	@keyframes settle {
+	@keyframes word-rise {
 		from {
-			opacity: 0.4;
-			transform: translate3d(0, 48px, 0) scale(0.92);
-		}
-		to {
-			opacity: 1;
-			transform: none;
-		}
-	}
-	@keyframes ink {
-		from {
-			color: var(--text-muted-large);
-		}
-		to {
-			color: var(--text-1);
+			transform: translate3d(0, 105%, 0);
 		}
 	}
 </style>

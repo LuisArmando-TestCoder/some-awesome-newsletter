@@ -27,12 +27,26 @@
 	let x = $state(0);
 	let progress = $state(0);
 	let active = $state(0);
+	// Scroll velocity leans the track (WS14). Decays back to upright when scrolling stops.
+	let skew = $state(0);
+	// 0..1 per step: how much of each outlined mark is filled with ink.
+	const fillOf = (i: number) => (pinned ? Math.min(1, Math.max(0, progress * (items.length - 1) - i + 1)) : 1);
 
 	onMount(() => {
 		const mqWide = window.matchMedia('(min-width: 56rem)');
 		const mqMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 		let distance = 0;
 		let raf = 0;
+		let skewRaf = 0;
+		let lastY = window.scrollY;
+		let lastT = performance.now();
+		let vel = 0;
+		const settle = () => {
+			vel *= 0.86;
+			skew = Math.max(-6, Math.min(6, vel * 0.0035));
+			skewRaf = Math.abs(vel) > 4 ? requestAnimationFrame(settle) : 0;
+			if (!skewRaf) skew = 0;
+		};
 
 		const measure = () => {
 			pinned = mqWide.matches && !mqMotion.matches;
@@ -58,6 +72,13 @@
 
 		const onScroll = () => {
 			if (!raf) raf = requestAnimationFrame(update);
+			if (!pinned) return;
+			const now = performance.now();
+			const dt = Math.max(8, now - lastT);
+			vel += ((window.scrollY - lastY) / dt) * 1000 * 0.25 - vel * 0.25;
+			lastY = window.scrollY;
+			lastT = now;
+			if (!skewRaf) skewRaf = requestAnimationFrame(settle);
 		};
 
 		measure();
@@ -70,6 +91,7 @@
 		return () => {
 			ro.disconnect();
 			cancelAnimationFrame(raf);
+			cancelAnimationFrame(skewRaf);
 			window.removeEventListener('scroll', onScroll);
 			window.removeEventListener('resize', measure);
 			mqWide.removeEventListener('change', measure);
@@ -93,10 +115,12 @@
 			<p class="history__lead">{lead}</p>
 		</header>
 
-		<ol class="history__track" bind:this={track} style:transform={pinned ? `translate3d(${x}px,0,0)` : null}>
+		<ol class="history__track" bind:this={track} style:transform={pinned ? `translate3d(${x}px,0,0) skewX(${-skew}deg)` : null}>
 			{#each items as item, i}
 				<li class="era" class:era--active={!pinned || i <= active}>
-					<p class="era__mark" aria-hidden="true">{item.mark}</p>
+					<p class="era__mark" aria-hidden="true" style:--fill={fillOf(i)}>
+						<span class="era__mark-line">{item.mark}</span><span class="era__mark-ink">{item.mark}</span>
+					</p>
 					<div class="era__text">
 						<p class="era__step"><span class="visually-hidden">{i + 1}. </span>{String(i + 1).padStart(2, '0')}</p>
 						<h3 class="era__title">{item.title}</h3>
@@ -216,11 +240,17 @@
 		min-width: min(30rem, 60vw);
 		border-top: 0;
 		padding-top: 0;
-		opacity: 0.28;
-		transition: opacity var(--dur-slow, 320ms) var(--ease-out, ease-out);
 	}
-	.history--pinned .era--active {
+	.history--pinned .era__text {
+		opacity: 0.28;
+		transform: translateY(12px);
+		transition:
+			opacity var(--dur-slow, 320ms) var(--ease-out, ease-out),
+			transform var(--dur-slow, 320ms) var(--ease-out, ease-out);
+	}
+	.history--pinned .era--active .era__text {
 		opacity: 1;
+		transform: none;
 	}
 	.era__mark {
 		margin: 0;
@@ -234,6 +264,28 @@
 	}
 	.history--pinned .era__mark {
 		font-size: clamp(5rem, 12vw, 11rem);
+	}
+	/* Outlined mark with an ink copy on top, revealed left to right as the step is reached. */
+	.era__mark {
+		display: grid;
+	}
+	.era__mark-line,
+	.era__mark-ink {
+		grid-area: 1 / 1;
+	}
+	.era__mark-line {
+		visibility: hidden;
+	}
+	.history--pinned .era__mark-line {
+		visibility: visible;
+		color: transparent;
+		-webkit-text-stroke: 1.5px var(--text-3, #6e6e73);
+	}
+	.history--pinned .era__mark-ink {
+		clip-path: inset(-10% calc((1 - var(--fill, 1)) * 100%) -10% -10%);
+	}
+	:global([dir='rtl']) .history--pinned .era__mark-ink {
+		clip-path: inset(-10% -10% -10% calc((1 - var(--fill, 1)) * 100%));
 	}
 	.history--pinned .era__text {
 		max-width: 30rem;

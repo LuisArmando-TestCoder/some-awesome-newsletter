@@ -240,6 +240,8 @@ export default {
     "errors": {
       "email": "Put full email address, like you@company.com.",
       "send": "We no fit send the code. Check your connection and try again.",
+      "busy": "Sign-in don dey pause for small time because AIBAN don reach im daily database limit. Try again after some hours.",
+      "tooMany": "You don ask for many codes one after the other. Wait small time, then try again.",
       "code": "That code no work. Check the 6 digits or ask for new code."
     }
   }

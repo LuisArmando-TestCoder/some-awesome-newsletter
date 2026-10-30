@@ -358,6 +358,8 @@ export default {
     errors: {
       email: "Enter a full email address, for example you@company.com.",
       send: "We could not send the code. Check your connection and try again.",
+      busy: "Sign-in is paused for a while because AIBAN reached its daily database limit. Try again in a few hours.",
+      tooMany: "You asked for several codes in a row. Wait a few minutes, then try again.",
       code: "That code did not work. Check the 6 digits or request a new code."
     }
   }

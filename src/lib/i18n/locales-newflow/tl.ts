@@ -240,6 +240,8 @@ export default {
     "errors": {
       "email": "Maglagay ng buong email address, halimbawa ikaw@kumpanya.com.",
       "send": "Hindi namin maipadala ang code. Tingnan ang koneksyon mo at subukan ulit.",
+      "busy": "Ang pag-sign in ay pansamantalang itinigil dahil naabot na ng AIBAN ang limitasyon ng database nito sa isang araw. Subukan muli pagkalipas ng ilang oras.",
+      "tooMany": "Humiling ka ng ilang code nang sunod-sunod. Maghintay ng ilang minuto, pagkatapos ay subukan muli.",
       "code": "Hindi gumana ang code na iyon. Tingnan ang 6 na digit o humingi ng bagong code."
     }
   }

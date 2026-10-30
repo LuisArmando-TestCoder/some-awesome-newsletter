@@ -240,6 +240,8 @@ export default {
     "errors": {
       "email": "Weka anwani kamili ya barua pepe, kwa mfano wewe@kampuni.com.",
       "send": "Hatukuweza kutuma msimbo. Angalia muunganisho wako na ujaribu tena.",
+      "busy": "Kuingia kumesimamishwa kwa muda kwa sababu AIBAN imefikia kikomo chake cha kila siku cha hifadhidata. Jaribu tena baada ya masaa machache.",
+      "tooMany": "Uliomba nambari kadhaa mfululizo. Subiri dakika chache, kisha jaribu tena.",
       "code": "Msimbo huo haukufanya kazi. Angalia tarakimu 6 au omba msimbo mpya."
     }
   }

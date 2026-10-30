@@ -240,6 +240,8 @@ export default {
     "errors": {
       "email": "Shigar da cikakken adireshin imel, misali you@company.com.",
       "send": "Ba mu iya aika lambar ba. Duba haɗinku kuma ku sake gwadawa.",
+      "busy": "Shiga an dakatar da shi na ɗan lokaci saboda AIBAN ya kai iyakar bayanai na yau. Sake gwadawa bayan 'yan sa'o'i.",
+      "tooMany": "Kun nemi lambobi da yawa a jere. Jira 'yan mintuna, sannan kuma sake gwadawa.",
       "code": "Wannan lambar ba ta yi aiki ba. Duba lambobi 6 ɗin ko ku nemi sabuwar lamba."
     }
   }

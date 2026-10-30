@@ -240,6 +240,8 @@ export default {
     "errors": {
       "email": "Geben Sie eine vollständige E-Mail-Adresse ein, zum Beispiel sie@firma.de.",
       "send": "Der Code konnte nicht gesendet werden. Prüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+      "busy": "Die Anmeldung ist vorübergehend pausiert, da AIBAN sein tägliches Datenbanklimit erreicht hat. Bitte versuchen Sie es in einigen Stunden erneut.",
+      "tooMany": "Sie haben mehrere Codes hintereinander angefordert. Warten Sie einige Minuten und versuchen Sie es dann erneut.",
       "code": "Dieser Code hat nicht funktioniert. Prüfen Sie die 6 Ziffern oder fordern Sie einen neuen Code an."
     }
   }

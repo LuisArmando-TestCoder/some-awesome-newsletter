@@ -240,6 +240,8 @@ export default {
     "errors": {
       "email": "Masukkan alamat email lengkap, misalnya anda@perusahaan.com.",
       "send": "Kami tidak bisa mengirim kode. Periksa koneksi Anda dan coba lagi.",
+      "busy": "Proses masuk dijeda sementara karena AIBAN mencapai batas harian basis data. Coba lagi dalam beberapa jam.",
+      "tooMany": "Anda meminta beberapa kode secara berurutan. Tunggu beberapa menit, lalu coba lagi.",
       "code": "Kode itu tidak berhasil. Periksa 6 digitnya atau minta kode baru."
     }
   }

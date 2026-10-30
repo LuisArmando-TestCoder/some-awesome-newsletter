@@ -240,6 +240,8 @@ export default {
     "errors": {
       "email": "Nhập địa chỉ email đầy đủ, ví dụ ban@congty.com.",
       "send": "Chúng tôi không gửi được mã. Kiểm tra kết nối và thử lại.",
+      "busy": "Đăng nhập tạm thời bị tạm dừng vì AIBAN đã đạt giới hạn cơ sở dữ liệu hàng ngày. Hãy thử lại sau vài giờ.",
+      "tooMany": "Bạn đã yêu cầu nhiều mã liên tiếp. Hãy đợi vài phút rồi thử lại.",
       "code": "Mã này không đúng. Kiểm tra 6 chữ số hoặc yêu cầu mã mới."
     }
   }

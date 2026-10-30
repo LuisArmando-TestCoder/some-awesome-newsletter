@@ -240,6 +240,8 @@ export default {
     "errors": {
       "email": "Tam bir e-posta adresi girin, örneğin siz@sirket.com.",
       "send": "Kodu gönderemedik. Bağlantınızı kontrol edip tekrar deneyin.",
+      "busy": "AIBAN günlük veritabanı limitine ulaştığı için giriş bir süreliğine duraklatıldı. Birkaç saat sonra tekrar deneyin.",
+      "tooMany": "Arka arkaya birkaç kod talep ettiniz. Birkaç dakika bekleyip tekrar deneyin.",
       "code": "Bu kod işe yaramadı. 6 haneyi kontrol edin veya yeni bir kod isteyin."
     }
   }

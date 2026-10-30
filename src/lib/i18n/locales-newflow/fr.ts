@@ -240,6 +240,8 @@ export default {
     "errors": {
       "email": "Saisissez une adresse e-mail complète, par exemple vous@entreprise.com.",
       "send": "Nous n'avons pas pu envoyer le code. Vérifiez votre connexion et réessayez.",
+      "busy": "La connexion est temporairement suspendue car AIBAN a atteint sa limite quotidienne de base de données. Réessayez dans quelques heures.",
+      "tooMany": "Vous avez demandé plusieurs codes d'affilée. Attendez quelques minutes, puis réessayez.",
       "code": "Ce code n'a pas fonctionné. Vérifiez les 6 chiffres ou demandez un nouveau code."
     }
   }

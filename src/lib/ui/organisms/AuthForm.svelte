@@ -92,6 +92,15 @@
     }, 1000);
   }
 
+  /** The translated reason a send failed: paused (503), too many requests (429), or the general message. */
+  function sendErrorText(): string {
+    const status = Number((get(store) as { authCodeRequestStatus?: number }).authCodeRequestStatus ?? 0);
+    const e = $at.errors as Record<string, string>;
+    if (status === 503 && e.busy) return e.busy;
+    if (status === 429 && e.tooMany) return e.tooMany;
+    return e.send;
+  }
+
   /** Sends a code to the stored email. Returns true when the backend accepted it. */
   async function sendCode(): Promise<boolean> {
     try {
@@ -130,7 +139,7 @@
     const ok = await sendCode();
     sending = false;
     if (!ok) {
-      emailError = $at.errors.send;
+      emailError = sendErrorText();
       return;
     }
     lastSentEmail = value;
@@ -154,7 +163,7 @@
     const ok = await sendCode();
     resending = false;
     if (!ok) {
-      resendError = $at.errors.send;
+      resendError = sendErrorText();
       return;
     }
     resendCount += 1;

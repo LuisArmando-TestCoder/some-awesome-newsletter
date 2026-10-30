@@ -240,6 +240,8 @@ export default {
     "errors": {
       "email": "Digite um e-mail completo, por exemplo voce@empresa.com.",
       "send": "Não foi possível enviar o código. Verifique sua conexão e tente novamente.",
+      "busy": "O login está pausado por um tempo porque o AIBAN atingiu seu limite diário do banco de dados. Tente novamente em algumas horas.",
+      "tooMany": "Você solicitou vários códigos seguidos. Aguarde alguns minutos e tente novamente.",
       "code": "Esse código não funcionou. Confira os 6 dígitos ou peça um novo código."
     }
   }

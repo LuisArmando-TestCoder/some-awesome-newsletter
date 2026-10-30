@@ -240,6 +240,8 @@ export default {
     "errors": {
       "email": "Lebokake alamat email lengkap, contone sampeyan@perusahaan.com.",
       "send": "Kita ora bisa ngirim kode. Priksa sambungan sampeyan lan coba maneh.",
+      "busy": "Mlebu mandheg sedhela amarga AIBAN wis tekan watesan basis data saben dinane. Coba maneh sawise sawetara jam.",
+      "tooMany": "Sampeyan wis njaluk pirang-pirang kode berturut-turut. Enteni sawetara menit, banjur coba maneh.",
       "code": "Kode kuwi ora bisa. Priksa 6 angkane utawa jaluk kode anyar."
     }
   }

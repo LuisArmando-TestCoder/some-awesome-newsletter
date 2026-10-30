@@ -182,21 +182,52 @@
   .color-picker {
     position: relative;
     display: flex;
-    gap: 1rem;
+    gap: var(--space-4);
     justify-content: space-between;
     flex-wrap: wrap;
     z-index: 1;
+    font-family: var(--font-body);
   }
 
   .picker-wrapper {
     display: flex;
     align-items: center;
-    gap: 0.5rem; /* Adjust gap as needed */
+    gap: var(--space-2);
+    min-height: var(--control-h);
+    padding: var(--space-1) var(--space-3) var(--space-1) var(--space-1);
+    border: 1px solid var(--border-2);
+    border-radius: var(--radius-full);
+    background: var(--surface-0);
+    transition:
+      border-color var(--t-out) var(--ease-out),
+      box-shadow var(--t-out) var(--ease-out);
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        border-color: var(--text-2);
+        transition-duration: var(--t-in);
+      }
+    }
+
+    &:has(:focus-visible) {
+      border-color: var(--text-1);
+      box-shadow: var(--focus-ring);
+    }
   }
 
   .color-name {
-    font-size: 0.9em;
-    color: var(--color-foreground-muted); /* Use a muted color */
-    margin-left: 5px; /* Space between picker and name */
+    font-size: var(--fs-sm);
+    color: var(--text-2);
+    font-variant-numeric: tabular-nums;
+  }
+
+  @media (forced-colors: active) {
+    .picker-wrapper {
+      border-color: ButtonText;
+    }
+    .picker-wrapper:has(:focus-visible) {
+      outline: 2px solid Highlight;
+      outline-offset: 2px;
+    }
   }
 </style>

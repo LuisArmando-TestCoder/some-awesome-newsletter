@@ -19,34 +19,38 @@
 </aside>
 
 <style lang="scss">
+  /* Closing chapter: a large invitation on the plain page, divided by a hairline. */
   .cta {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: flex-end;
     justify-content: space-between;
-    gap: var(--space-5, 24px);
-    padding: var(--space-6, 32px);
-    background: var(--accent-soft, #eef2ff);
-    border: 1px solid var(--border-1, #e5e5e5);
-    border-radius: var(--radius-xl, 24px);
+    gap: var(--space-6);
+    padding-top: var(--space-7);
+    border-top: 1px solid var(--text-1);
   }
 
   .cta__text {
-    flex: 1 1 18rem;
+    flex: 1 1 22rem;
   }
 
   h2 {
-    margin: 0 0 var(--space-2, 8px);
-    font-family: var(--font-display, inherit);
-    font-size: var(--fs-xl, 1.375rem);
-    font-weight: var(--fw-bold, 700);
-    line-height: var(--lh-tight, 1.2);
-    color: var(--text-1, #111);
+    margin: 0 0 var(--space-3);
+    max-width: 18ch;
+    font-family: var(--font-display);
+    font-size: var(--step-chapter);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-display);
+    letter-spacing: var(--tracking-display);
+    color: var(--text-1);
+    text-wrap: balance;
   }
 
   p {
     margin: 0;
-    color: var(--text-2, #444);
-    line-height: var(--lh-normal, 1.55);
+    max-width: 48ch;
+    font-size: var(--fs-lg);
+    color: var(--text-2);
+    line-height: var(--lh-snug);
   }
 </style>

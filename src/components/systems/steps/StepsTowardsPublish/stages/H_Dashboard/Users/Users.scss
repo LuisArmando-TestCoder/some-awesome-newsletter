@@ -76,13 +76,10 @@
     justify-content: space-between;
     align-items: flex-start; // Align items to the top
     padding: 1rem;
-    background-color: var(
-      --color-background-card,
-      var(--color-background-opaque)
-    ); // Card background
-    border: 1px solid var(--color-background-input-border);
-    border-radius: var(--radius-small);
-    box-shadow: var(--shadow-extra-soft); // Subtle shadow for cards
+    background-color: var(--surface-1);
+    border: 1px solid var(--border-1);
+    border-radius: var(--radius-md);
+    box-shadow: none; // Subtle shadow for cards
     gap: 1rem; // Gap between details and actions
   }
 
@@ -96,7 +93,7 @@
 
   .user-card-name {
     font-weight: 600;
-    color: var(--color-foreground);
+    color: var(--text-1);
     font-size: 1rem;
   }
 
@@ -117,15 +114,12 @@
 
   .user-card-bio {
     font-size: 0.85rem;
-    color: var(--color-foreground);
+    color: var(--text-1);
     margin-top: 0.5rem;
-    font-style: italic;
-    background-color: var(
-      --color-background-very-opaque
-    ); // Slight background for bio
+    background-color: var(--surface-2);
     padding: 0.3rem 0.5rem;
-    border-radius: var(--radius-tiny);
-    border-left: 2px solid var(--color-primary-soft, #a0cfff); // Accent border
+    border-radius: var(--radius-sm);
+    border-left: 2px solid var(--border-2); // Accent border
   }
 
   .user-card-actions {
@@ -140,7 +134,7 @@
       border-radius: 4px;
 
       :global(.icon svg path) {
-        fill: var(--color-error, #ff6b6b);
+        fill: var(--danger);
         transition: fill 0.2s ease;
       }
       :global(.icon) {
@@ -152,15 +146,12 @@
       }
 
       &:not(:disabled):hover {
-        background-color: var(
-          --color-error-opaque,
-          rgba(255, 107, 107, 0.1)
-        ) !important;
-        border-color: var(--color-error, #ff6b6b) !important;
-        color: var(--color-error, #ff6b6b) !important;
+        background-color: var(--danger-soft) !important;
+        border-color: var(--danger) !important;
+        color: var(--danger) !important;
 
         :global(.icon svg path) {
-          fill: var(--color-error, #ff6b6b) !important;
+          fill: var(--danger) !important;
         }
       }
     }

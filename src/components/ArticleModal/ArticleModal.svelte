@@ -36,10 +36,10 @@
         <div class="modal-overlay" on:click={handleClose}>
             <!-- svelte-ignore a11y_click_events_have_key_events -->
             <div class="modal-content" role="dialog" aria-modal="true" tabindex="-1" on:click|stopPropagation>
-                <button class="close-button" type="button" aria-label="Close" on:click={handleClose}><span aria-hidden="true">×</span></button>
+                <button class="close-button" type="button" aria-label="Close" on:click={handleClose}><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" /></svg></button>
                 <div class="modal-content-inner">
                     <h2>{getTitle(article.content)}</h2>
-                    <p><small>{$t['articleModal.created']}: {article.creation} | {$t['articleModal.language']}: {article.language}</small></p>
+                    <p class="modal-meta"><small>{$t['articleModal.created']}: {article.creation} | {$t['articleModal.language']}: {article.language}</small></p>
                     <!-- eslint-disable-next-line svelte/no-at-html-tags -- content passes through sanitizeHtml -->
                     {@html sanitizeHtml(article.content)}
                 </div>
@@ -49,73 +49,165 @@
 </Modal>
 
 <style>
+    /* Reading sheet: floats, so it gets the large shadow. Enters with @starting-style. */
     .modal-overlay {
         position: fixed;
         inset: 0;
-        background: var(--surface-overlay, rgba(0, 0, 0, 0.5));
+        background: var(--surface-overlay);
         display: flex;
         justify-content: center;
         align-items: center;
-        z-index: var(--z-modal, 1000);
-        padding: var(--space-4, 16px);
+        z-index: var(--z-modal);
+        padding: var(--space-4);
+        transition: opacity var(--dur-base) var(--ease-out);
     }
 
     .modal-content {
         position: relative;
-        background: var(--surface-1, #fff);
-        color: var(--text-1, #111);
-        border-radius: var(--radius-lg, 16px);
-        box-shadow: var(--shadow-3, none);
+        background: var(--surface-0);
+        color: var(--text-1);
+        border: 1px solid var(--border-1);
+        border-radius: var(--radius-2xl);
+        box-shadow: var(--shadow-3);
         width: min(100%, 52rem);
-        max-height: 85vh;
+        max-height: 88vh;
         overflow: hidden;
+        transition:
+            opacity var(--dur-slow) var(--ease-out),
+            transform var(--dur-slow) var(--ease-out);
+    }
+
+    @starting-style {
+        .modal-overlay {
+            opacity: 0;
+        }
+        .modal-content {
+            opacity: 0;
+            transform: translateY(12px) scale(0.98);
+        }
+    }
+
+    .modal-content:focus {
+        outline: none;
     }
 
     .modal-content-inner {
-        padding: var(--space-7, 48px) var(--space-6, 32px) var(--space-6, 32px);
-        max-height: 85vh;
+        padding: var(--space-8) var(--space-7) var(--space-7);
+        max-height: 88vh;
         overflow-y: auto;
-        line-height: 1.7;
+        overscroll-behavior: contain;
+        scrollbar-gutter: stable;
+        font-size: var(--fs-lg);
+        line-height: 1.65;
+    }
+
+    .modal-content-inner > :global(*) {
+        max-width: 68ch;
     }
 
     .modal-content-inner :global(img) {
+        display: block;
         max-width: 100%;
         height: auto;
-        border-radius: var(--radius-md, 8px);
+        border-radius: var(--radius-lg);
+    }
+
+    .modal-content-inner :global(a) {
+        color: var(--text-link);
+    }
+
+    .modal-meta {
+        margin: 0 0 var(--space-6);
+        padding-bottom: var(--space-4);
+        border-bottom: 1px solid var(--border-1);
+        color: var(--text-3);
+        font-size: var(--fs-sm);
+        font-variant-numeric: tabular-nums;
+    }
+
+    .modal-meta small {
+        font-size: inherit;
     }
 
     .close-button {
         position: absolute;
-        top: var(--space-3, 12px);
-        right: var(--space-3, 12px);
-        width: 2.5rem;
-        height: 2.5rem;
+        top: var(--space-4);
+        right: var(--space-4);
+        width: var(--control-h);
+        height: var(--control-h);
         display: grid;
         place-items: center;
-        background: var(--surface-1, #fff);
-        border: 1px solid var(--border-1, #e5e5e5);
-        border-radius: var(--radius-full, 999px);
-        font-size: var(--fs-xl, 1.5rem);
-        line-height: 1;
+        padding: 0;
+        background: var(--surface-glass);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--border-1);
+        border-radius: var(--radius-full);
         cursor: pointer;
-        color: var(--text-2, #444);
+        color: var(--text-1);
         z-index: 1;
+        transition:
+            background-color var(--t-out) var(--ease-out),
+            transform var(--dur-base) var(--ease-out);
     }
 
-    .close-button:hover {
-        color: var(--text-1, #111);
-        background: var(--surface-2, #f3f3f3);
+    .close-button svg {
+        width: 1rem;
+        height: 1rem;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.75;
+        stroke-linecap: round;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+        .close-button:hover {
+            background: var(--surface-2);
+            transition-duration: var(--t-in);
+        }
+    }
+
+    .close-button:active {
+        transform: scale(0.95);
+        transition-duration: 60ms;
     }
 
     .close-button:focus-visible {
-        outline: 2px solid var(--focus-color, #2563eb);
-        outline-offset: 2px;
+        outline: none;
+        box-shadow: var(--focus-ring);
     }
 
     h2 {
-        margin-top: 0;
-        font-family: var(--font-display, inherit);
-        font-size: var(--fs-2xl, 1.75rem);
-        line-height: var(--lh-tight, 1.2);
+        margin: 0 var(--space-8) var(--space-3) 0;
+        font-family: var(--font-display);
+        font-size: var(--fs-3xl);
+        font-weight: var(--fw-semibold);
+        line-height: var(--lh-tight);
+        letter-spacing: var(--tracking-display);
+        text-wrap: balance;
+    }
+
+    @media (max-width: 30rem) {
+        .modal-overlay {
+            align-items: flex-end;
+            padding: 0;
+        }
+
+        .modal-content {
+            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+            max-height: 92vh;
+        }
+
+        .modal-content-inner {
+            max-height: 92vh;
+            padding: var(--space-7) var(--space-4) calc(var(--space-6) + env(safe-area-inset-bottom));
+            font-size: var(--fs-md);
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .close-button:active {
+            transform: none;
+        }
     }
 </style>

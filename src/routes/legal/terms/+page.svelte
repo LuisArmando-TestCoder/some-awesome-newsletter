@@ -28,7 +28,7 @@
     terms, please do not use our dashboard or AI news services.
   </p>
 
-  <h2>1. Account registration</h2>
+  <h2 id="account-registration"><a class="legal-anchor" href="#account-registration">1. Account registration</a></h2>
   <p>
     To access certain features (Starter, Growth, Pro or Master plans), you must register for an account. You
     are responsible for:
@@ -39,7 +39,7 @@
     <li>Providing accurate billing information for paid plans.</li>
   </ul>
 
-  <h2>2. Use of AI services</h2>
+  <h2 id="use-of-ai-services"><a class="legal-anchor" href="#use-of-ai-services">2. Use of AI services</a></h2>
   <p>Our AI news engine produces automated summaries and analysis. You understand that:</p>
   <ul>
     <li>AI-generated content is for informational purposes only.</li>
@@ -47,25 +47,25 @@
     <li>You may not use our services to generate spam or malicious content.</li>
   </ul>
 
-  <h2>3. Payments and refunds</h2>
+  <h2 id="payments-and-refunds"><a class="legal-anchor" href="#payments-and-refunds">3. Payments and refunds</a></h2>
   <p>
     Subscription fees are billed in advance on a monthly or yearly basis, with a 35% discount applied to
     yearly plans. Refunds are handled case by case through our billing department.
   </p>
 
-  <h2>4. Intellectual property</h2>
+  <h2 id="intellectual-property"><a class="legal-anchor" href="#intellectual-property">4. Intellectual property</a></h2>
   <p>
     All software, design and AI models powering AIBAN are the exclusive property of AIBAN. Users are granted a
     limited, non-transferable license to access the dashboard according to their subscription level.
   </p>
 
-  <h2>5. Termination</h2>
+  <h2 id="termination"><a class="legal-anchor" href="#termination">5. Termination</a></h2>
   <p>
     We reserve the right to suspend or terminate accounts that violate our usage policies or fail to keep an
     active payment method for paid plans.
   </p>
 
-  <h2>6. Contact</h2>
+  <h2 id="contact"><a class="legal-anchor" href="#contact">6. Contact</a></h2>
   <p>
     For questions about these terms, write to <a href="mailto:{contactEmail}">{contactEmail}</a>.
   </p>

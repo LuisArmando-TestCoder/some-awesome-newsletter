@@ -42,113 +42,149 @@
   {/if}
 
   {#if secondaryLabel && secondaryHref}
-    <a class="btn-tertiary" href={secondaryHref}>{secondaryLabel}</a>
+    <a class="btn-tertiary" href={secondaryHref}>{secondaryLabel} <span aria-hidden="true">&rarr;</span></a>
   {/if}
 
   {#if $$slots.default}
-    <div class="empty-preview" aria-hidden="true"><slot /></div>
+    <div class="empty-preview" aria-hidden="true" inert><slot /></div>
   {/if}
 </div>
 
 <style>
+  /* Empty state that teaches one next action: an outlined icon, one sentence, one ink pill. */
   .empty-state {
     display: flex;
     flex-direction: column;
     align-items: center;
     max-width: 32rem;
     margin: 0 auto;
-    padding: var(--space-7, 48px) var(--space-4, 16px);
+    padding: var(--space-8) var(--space-4);
     text-align: center;
-    font-family: var(--font-body, inherit);
+    font-family: var(--font-body);
   }
 
   .empty-icon {
     display: grid;
     place-items: center;
-    width: 48px;
-    height: 48px;
-    margin-bottom: var(--space-4, 16px);
-    border-radius: var(--radius-lg, 12px);
-    background: var(--accent-soft, #eef2ff);
-    color: var(--accent, #4f46e5);
+    width: 3.5rem;
+    height: 3.5rem;
+    margin-bottom: var(--space-5);
+    border: 1px solid var(--border-1);
+    border-radius: var(--radius-lg);
+    background: var(--surface-1);
+    color: var(--text-1);
   }
 
   .empty-title {
     margin: 0;
-    font-size: var(--fs-lg, 1.125rem);
-    font-weight: var(--fw-semibold, 600);
-    line-height: var(--lh-tight, 1.3);
-    color: var(--text-1, #111827);
+    font-family: var(--font-display);
+    font-size: var(--fs-xl);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-tight);
+    letter-spacing: var(--tracking-tight);
+    color: var(--text-1);
+    text-wrap: balance;
   }
 
   .empty-body {
-    margin: var(--space-2, 8px) 0 0;
-    font-size: var(--fs-sm, 0.875rem);
-    line-height: var(--lh-normal, 1.55);
-    color: var(--text-2, #374151);
+    margin: var(--space-3) 0 0;
+    max-width: 44ch;
+    font-size: var(--fs-md);
+    line-height: var(--lh-normal);
+    color: var(--text-2);
+    text-wrap: pretty;
   }
 
   .empty-actions {
-    margin-top: var(--space-5, 24px);
+    margin-top: var(--space-6);
   }
 
   .btn-primary {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-height: 44px;
-    padding: 0 var(--space-5, 24px);
+    min-height: var(--control-h);
+    padding: 0 var(--space-6);
     border: 1px solid transparent;
-    border-radius: var(--radius-md, 8px);
-    background: var(--accent, #4f46e5);
-    color: var(--accent-contrast, #fff);
+    border-radius: var(--radius-full);
+    background: var(--accent);
+    color: var(--accent-contrast);
     font-family: inherit;
-    font-size: var(--fs-sm, 0.875rem);
-    font-weight: var(--fw-semibold, 600);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
     text-decoration: none;
     cursor: pointer;
-    transition: background-color var(--dur-fast, 120ms) var(--ease-out, ease-out);
+    box-shadow: none;
+    transition:
+      background-color var(--t-out) var(--ease-out),
+      transform var(--dur-base) var(--ease-out);
   }
 
-  .btn-primary:hover {
-    background: var(--accent-hover, #4338ca);
+  @media (hover: hover) and (pointer: fine) {
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      box-shadow: none;
+      transition-duration: var(--t-in);
+    }
+  }
+
+  .btn-primary:active {
+    transform: scale(0.97);
+    transition-duration: 60ms;
   }
 
   .btn-tertiary {
     display: inline-flex;
     align-items: center;
-    min-height: 44px;
-    margin-top: var(--space-2, 8px);
-    padding: 0 var(--space-2, 8px);
-    border-radius: var(--radius-sm, 4px);
-    color: var(--text-link, #4f46e5);
-    font-size: var(--fs-sm, 0.875rem);
-    font-weight: var(--fw-medium, 500);
-    text-decoration: none;
+    gap: var(--space-1);
+    min-height: var(--control-h);
+    margin-top: var(--space-2);
+    padding: 0 var(--space-2);
+    border-radius: var(--radius-sm);
+    color: var(--text-1);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 0.2em;
   }
 
-  .btn-tertiary:hover {
-    text-decoration: underline;
-    text-underline-offset: 3px;
+  .btn-tertiary span {
+    display: inline-block;
+    transition: transform var(--dur-base) var(--ease-out);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .btn-tertiary:hover {
+      text-decoration-color: currentColor;
+    }
+    .btn-tertiary:hover span {
+      transform: translateX(3px);
+    }
   }
 
   .btn-primary:focus-visible,
   .btn-tertiary:focus-visible {
-    outline: 2px solid var(--focus-color, #6366f1);
-    outline-offset: 2px;
+    outline: none;
+    box-shadow: var(--focus-ring);
   }
 
+  /* A faded example of what will appear here. Inert, so it cannot be clicked or focused. */
   .empty-preview {
     width: 100%;
-    margin-top: var(--space-6, 32px);
-    opacity: 0.6;
-    pointer-events: none;
+    margin-top: var(--space-7);
+    opacity: 0.5;
     user-select: none;
+    mask-image: linear-gradient(to bottom, currentColor 40%, transparent);
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .btn-primary {
+    .btn-primary,
+    .btn-tertiary span {
       transition: none;
+    }
+    .btn-primary:active {
+      transform: none;
     }
   }
 </style>

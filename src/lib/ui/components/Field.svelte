@@ -98,7 +98,7 @@
   }
 
   .field__required {
-    color: var(--danger);
+    color: var(--text-2);
     font-weight: var(--fw-semibold);
   }
 
@@ -138,5 +138,24 @@
     width: 1em;
     height: 1em;
     margin-top: 0.15em;
+  }
+
+  /* One short nudge when an error appears (off under reduced motion). */
+  @media (prefers-reduced-motion: no-preference) {
+    :global(:root:not([data-motion='reduced'])) .field__error {
+      animation: field-error-in var(--dur-base) var(--ease-out);
+    }
+  }
+  @keyframes field-error-in {
+    from {
+      opacity: 0;
+      transform: translateY(-0.25rem);
+    }
+  }
+
+  @media (forced-colors: active) {
+    .field__error {
+      color: CanvasText;
+    }
   }
 </style>

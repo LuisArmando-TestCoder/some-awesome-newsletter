@@ -7,7 +7,6 @@
   import Icon from "../ui/Icon.svelte";
   import Notice from "../ui/Notice.svelte";
   import EmptyState from "../ui/EmptyState.svelte";
-  import Skeleton from "../ui/Skeleton.svelte";
   import Button from "../ui/Button.svelte";
   import AutomationCard from "../AutomationCard.svelte";
   import { automations, loadAutomations, RECIPES } from "../data/automations";
@@ -38,7 +37,18 @@
 <section aria-labelledby="auto-yours" data-tour="automations-list">
   <h2 id="auto-yours" class="h2">{$dt("dash.automations.yours")}</h2>
   {#if $automations.status === "loading" || $automations.status === "idle"}
-    <div class="stack"><Card><Skeleton lines={3} /></Card><Card><Skeleton lines={3} /></Card></div>
+    <div class="stack" aria-busy="true">
+      {#each [0, 1] as i (i)}
+        <Card>
+          <div class="auto-skel" aria-hidden="true">
+            <span class="sk sk--icon"></span>
+            <div class="auto-skel__body"><span class="sk sk--title"></span><span class="sk sk--line"></span><span class="sk sk--line short"></span></div>
+            <span class="sk sk--switch"></span>
+          </div>
+        </Card>
+      {/each}
+      <span class="sr-only" role="status">{$dt("dash.state.loading")}</span>
+    </div>
   {:else if $automations.items.length === 0}
     <EmptyState icon="bolt" title={$dt("dash.automations.empty.title")} body={$dt("dash.automations.empty.body")}>
       <Button variant="primary" onclick={() => goTo("sources")}>{$dt("dash.automations.empty.action")}</Button>
@@ -76,13 +86,23 @@
   .stack { display: flex; flex-direction: column; gap: var(--space-4); }
   .mb { margin-bottom: var(--space-4); }
   .more { margin-top: var(--space-8); }
-  .muted { margin: 0 0 var(--space-4); color: var(--text-2); font-size: var(--fs-sm); &:empty { display: none; } }
-  .presets { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--space-3); }
-  .preset { display: flex; gap: var(--space-3); align-items: flex-start; padding: var(--space-4); border: 1px solid var(--border-1); border-radius: var(--radius-lg); background: var(--surface-1); }
-  .preset__icon { display: grid; place-items: center; width: 36px; height: 36px; border-radius: var(--radius-md); background: var(--surface-2); color: var(--text-2); flex-shrink: 0; }
+  .muted { margin: 0 0 var(--space-4); color: var(--text-2); font-size: var(--fs-sm); max-width: var(--measure); &:empty { display: none; } }
+  .presets { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 17.5rem), 1fr)); gap: var(--space-3); }
+  /* Presets are not actionable yet: dashed edge and a text label, never a hover lift. */
+  .preset { display: flex; gap: var(--space-3); align-items: flex-start; padding: var(--space-4); border: 1px dashed var(--border-1); border-radius: var(--radius-lg); background: transparent; }
+  .preset__icon { display: grid; place-items: center; width: 2.25rem; height: 2.25rem; border-radius: var(--radius-md); background: var(--surface-2); color: var(--text-2); flex-shrink: 0; }
   .preset__text { flex: 1; min-width: 0; }
   .preset__name { margin: 0; font-weight: var(--fw-semibold); font-size: var(--fs-sm); color: var(--text-1); }
   .preset__sentence { margin: var(--space-1) 0 0; font-size: var(--fs-sm); color: var(--text-2); line-height: var(--lh-normal); }
-  .preset__soon { font-size: var(--fs-xs); color: var(--text-2); background: var(--surface-2); border-radius: var(--radius-full); padding: 2px var(--space-2); white-space: nowrap; }
+  .preset__soon { font-size: var(--fs-xs); font-weight: var(--fw-medium); color: var(--text-2); border: 1px solid var(--border-1); border-radius: var(--radius-full); padding: 2px var(--space-2); white-space: nowrap; }
   .ws4-help { margin: calc(var(--space-4) * -1) 0 var(--space-5); }
+  .auto-skel { display: flex; gap: var(--space-4); align-items: flex-start; }
+  .auto-skel__body { flex: 1; display: flex; flex-direction: column; gap: var(--space-2); }
+  .sk { display: block; border-radius: var(--radius-sm); background: var(--surface-2); animation: auto-pulse 1.4s var(--ease-in-out) infinite; }
+  .sk--icon { width: 2.75rem; height: 2.75rem; border-radius: var(--radius-md); flex-shrink: 0; }
+  .sk--title { height: 1.125rem; width: 45%; }
+  .sk--line { height: 0.875rem; width: 85%; &.short { width: 55%; } }
+  .sk--switch { width: 2.75rem; height: 1.5rem; border-radius: var(--radius-full); flex-shrink: 0; }
+  @keyframes auto-pulse { 50% { opacity: 0.55; } }
+  @media (prefers-reduced-motion: reduce) { .sk { animation: none; } }
 </style>

@@ -93,91 +93,73 @@
   .link-container {
     display: flex;
     align-items: center;
+    gap: var(--space-2);
     cursor: pointer;
-    padding: var(--space-sm);
-    border-radius: var(--radius-sm);
-    transition: background-color 0.3s ease;
-
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.05);
-    }
+    min-height: var(--control-h);
+    padding: 0 var(--space-2);
+    border-radius: var(--radius-md);
+    transition: background-color var(--t-out) var(--ease-out);
+    &:active { background-color: var(--surface-3); transition-duration: 60ms; }
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .link-container:hover { background-color: var(--surface-2); transition-duration: var(--t-in); }
+    .sidebar__nav-item.is-collapsed .link-container:hover { background-color: transparent; }
   }
 
-  .sidebar__nav-item {
-    transition: height 0.3s ease;
+  .sidebar__nav-item.is-collapsed .link-container { padding: 0; }
 
-    &.is-collapsed {
-      .link-container {
-        padding: var(--space-sm) 0;
-
-        &:hover {
-          background-color: transparent;
-        }
-      }
-    }
-  }
-
-  .is-collapsed {
-    .sidebar__nav-link {
-      gap: 0;
-      transition-delay: 0.5s;
-    }
-  }
+  .is-collapsed .sidebar__nav-link { gap: 0; }
 
   .sidebar__nav-link {
     background: none;
     border: 0;
     padding: 0;
+    min-height: var(--control-h);
     font: inherit;
+    font-size: var(--fs-sm);
     text-align: start;
     cursor: pointer;
-    color: var(--c-text);
+    color: var(--text-2);
     text-decoration: none;
-    font-weight: 600;
+    font-weight: var(--fw-medium);
     flex-grow: 1;
     display: flex;
     align-items: center;
-    gap: var(--space-md);
+    gap: var(--space-3);
     white-space: nowrap;
     overflow: hidden;
-    transition-delay: 0.5s;
-
-    &.underline {
-      font-weight: 900;
-    }
+    border-radius: var(--radius-sm);
+    &:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+    &.underline { color: var(--text-1); font-weight: var(--fw-semibold); }
   }
 
   .link-initials {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
+    width: 1.875rem;
+    height: 1.875rem;
+    border-radius: var(--radius-full);
     background: transparent;
-    border: 2px solid var(--c-primary);
-    color: var(--c-primary);
+    border: 1px solid var(--border-2);
+    color: var(--text-1);
     display: grid;
     place-items: center;
-    font-size: 0.9rem;
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-semibold);
     flex-shrink: 0;
-    box-sizing: border-box;
-
-    &.dashed-border {
-      border-style: dashed;
-    }
+    &.dashed-border { border-style: dashed; }
   }
 
+  /* Current step: filled mark plus semibold label, not color alone. */
   .sidebar__nav-link.underline .link-initials {
-    background: black;
-    color: white;
-    border-color: black;
+    background: var(--surface-inverse);
+    color: var(--text-inverse);
+    border-color: var(--surface-inverse);
   }
 
   .link-name,
   .toggle-icon {
     opacity: 0;
     width: 0;
-    transition:
-      opacity 0.3s ease,
-      width 0.3s ease;
+    transition: opacity var(--dur-base) var(--ease-out);
 
     :global(.sidebar:not(.collapsed)) & {
       opacity: 1;
@@ -186,32 +168,41 @@
   }
 
   .toggle-icon {
+    display: grid;
+    place-items: center;
+    min-width: var(--control-h-sm);
+    min-height: var(--control-h-sm);
     margin-left: auto;
     background: none;
     border: 0;
+    border-radius: var(--radius-full);
     padding: 0;
     font: inherit;
-    color: inherit;
+    color: var(--text-2);
     cursor: pointer;
+    &:focus-visible { outline: none; box-shadow: var(--focus-ring); }
   }
 
   .sidebar__nav-list--nested {
     list-style: none;
-    padding-left: calc(var(--space-md) + 30px);
+    margin: 0;
+    padding-left: calc(var(--space-3) + 1.875rem);
     max-height: 0;
     overflow: hidden;
     transition:
-      max-height 0.3s ease,
-      opacity 0.3s ease;
+      max-height var(--dur-slow) var(--ease-out),
+      opacity var(--dur-base) var(--ease-out);
     opacity: 0;
 
-    &.collapsed {
-      padding-left: 0;
-    }
+    &.collapsed { padding-left: 0; }
 
     &.is-open {
-      max-height: 1000px; /* Arbitrary large value */
+      max-height: 1000px; /* open height cap for the transition */
       opacity: 1;
     }
+  }
+
+  @media (forced-colors: active) {
+    .sidebar__nav-link.underline .link-initials { forced-color-adjust: none; background: Highlight; color: HighlightText; border-color: Highlight; }
   }
 </style>

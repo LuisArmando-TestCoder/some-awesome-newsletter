@@ -138,7 +138,7 @@
   .loading-state {
     padding: 1rem;
     text-align: center;
-    color: #777; // Example style
+    color: var(--text-2);
     /* Add styles as needed */
   }
 

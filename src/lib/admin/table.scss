@@ -1,0 +1,234 @@
+// AIBAN admin: shared back-office styles (WS11). Pulled into each admin page with
+//   <style lang="scss">
+//     @use "../../../lib/admin/table.scss" as t;
+//     @include t.core;      // filters, count line, chips, table, sticky header and first column, pager
+//     @include t.numeric;   // .num cells: right aligned tabular numbers
+//     @include t.sortable;  // sort buttons in th with aria-sort arrows
+//     @include t.selectable; // tr.is-selected
+//     @include t.muted;
+//   </style>
+// Split into mixins so each page only emits the selectors it uses (no unused-selector warnings).
+// Dense, keyboard first, Mono: ink on paper, density aware through --row-pad-y.
+
+@mixin core {
+  // ---------- Filters ----------
+  .filters {
+    display: grid;
+    gap: var(--space-3) var(--space-4);
+    grid-template-columns: minmax(0, 1fr);
+    align-items: end;
+    margin-bottom: var(--space-4);
+  }
+  @container admin (min-width: 720px) {
+    .filters {
+      grid-template-columns: minmax(14rem, 2fr) repeat(auto-fit, minmax(10rem, 1fr));
+    }
+  }
+
+  // One line that says how many rows the filters left, and lets you clear them.
+  .count {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-3);
+    margin: 0 0 var(--space-3);
+    color: var(--text-2);
+    font-size: var(--fs-sm);
+    font-variant-numeric: tabular-nums;
+  }
+  .count strong {
+    color: var(--text-1);
+    font-weight: var(--fw-semibold);
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    min-height: 1.5rem;
+    padding: 0 var(--space-2);
+    border: 1px solid var(--text-1);
+    border-radius: var(--radius-full);
+    color: var(--text-1);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-semibold);
+  }
+
+  // ---------- Table ----------
+  // The wrapper scrolls on both axes so the header and the first column can stick.
+  .table-wrap {
+    overflow: auto;
+    max-height: min(72vh, 56rem);
+    overscroll-behavior: contain;
+    border-radius: inherit;
+  }
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: var(--fs-sm);
+    font-variant-numeric: tabular-nums;
+  }
+  th,
+  td {
+    text-align: left;
+    padding: var(--row-pad-y) var(--space-4);
+    border-bottom: 1px solid var(--border-1);
+    vertical-align: middle;
+    background: var(--surface-1);
+    transition: background-color var(--t-out) var(--ease-out);
+  }
+  thead th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    padding-block: var(--space-2);
+    color: var(--text-2);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-medium);
+    white-space: nowrap;
+    border-bottom-color: var(--border-2);
+  }
+  // First column (the row's name) stays put while wide tables scroll sideways.
+  th:first-child,
+  td:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    box-shadow: inset -1px 0 0 var(--border-1);
+  }
+  thead th:first-child {
+    z-index: 3;
+  }
+  tbody tr:last-child td {
+    border-bottom: 0;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    tbody tr:hover td {
+      background: var(--surface-2);
+      transition-duration: var(--t-in);
+    }
+  }
+  tbody tr:focus-within td {
+    background: var(--surface-2);
+  }
+
+  // Links inside rows: ink with underline on hover, ring on focus.
+  td a {
+    color: var(--text-1);
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    overflow-wrap: anywhere;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    td a:hover {
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.2em;
+    }
+  }
+  td a:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+
+  // ---------- Pager ----------
+  .pager {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-3);
+    margin-top: var(--space-4);
+    font-size: var(--fs-sm);
+    color: var(--text-2);
+    font-variant-numeric: tabular-nums;
+  }
+  .pager [aria-current="page"] {
+    color: var(--text-1);
+    font-weight: var(--fw-semibold);
+  }
+}
+
+@mixin numeric {
+  .num {
+    text-align: right;
+    white-space: nowrap;
+  }
+}
+
+@mixin sortable {
+  // Sortable headers: a real button, the arrow says the direction, aria-sort says it to screen readers.
+  th button {
+    all: unset;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    min-height: 1.5rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    color: inherit;
+    font: inherit;
+  }
+  th button::after {
+    content: "\2195";
+    font-size: 0.9em;
+    opacity: 0;
+    transition: opacity var(--t-out) var(--ease-out);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    th button:hover {
+      color: var(--text-1);
+    }
+    th button:hover::after {
+      opacity: 0.6;
+    }
+  }
+  th[aria-sort="ascending"],
+  th[aria-sort="descending"] {
+    color: var(--text-1);
+    font-weight: var(--fw-semibold);
+  }
+  th[aria-sort="ascending"] button::after {
+    content: "\2191";
+    opacity: 1;
+  }
+  th[aria-sort="descending"] button::after {
+    content: "\2193";
+    opacity: 1;
+  }
+  th button:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+
+  th.num button {
+    flex-direction: row-reverse;
+  }
+  @media (forced-colors: active) {
+    th[aria-sort="ascending"],
+    th[aria-sort="descending"] {
+      text-decoration: underline;
+    }
+  }
+}
+
+@mixin selectable {
+  tbody tr.is-selected td {
+    background: var(--surface-2);
+  }
+  tbody tr.is-selected td:first-child {
+    box-shadow:
+      inset 3px 0 0 var(--text-1),
+      inset -1px 0 0 var(--border-1);
+  }
+  @media (forced-colors: active) {
+    tbody tr.is-selected td:first-child {
+      box-shadow: inset 3px 0 0 Highlight;
+    }
+  }
+}
+
+@mixin muted {
+  .muted {
+    color: var(--text-3);
+  }
+}

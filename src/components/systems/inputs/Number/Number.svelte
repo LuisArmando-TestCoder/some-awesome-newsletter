@@ -18,6 +18,11 @@
   // Track validation state.
   let valid = false;
 
+  // Unique ids so several number fields can share a page.
+  const controlId = `number-input-${Math.random().toString(36).slice(2, 9)}`;
+  const errorId = `${controlId}-error`;
+  $: invalid = !valid && value !== "";
+
   // Checks if the string is a valid number.
   function isValidNumber(str: string): boolean {
     // Consider empty string as valid for now (optional)
@@ -60,19 +65,21 @@
 </script>
 
 <div class="number-input-wrapper">
-  <label class="input-label" for="number-input">{label}</label>
+  {#if label}<label class="input-label" for={controlId}>{label}</label>{/if}
   <input
-    id="number-input"
+    id={controlId}
     type="number"
     bind:value
     {placeholder}
     on:input={handleInput}
     on:keydown={handleKeyDown}
-    aria-label={label}
-    class:invalid={!valid && value !== ""}
+    aria-label={label ? undefined : placeholder || undefined}
+    aria-invalid={invalid ? "true" : undefined}
+    aria-describedby={invalid ? errorId : undefined}
+    class:invalid
   />
-  {#if !valid && value !== ""}
-    <span class="error-message">{$t['number.pleaseEnterAValidNumber']}</span>
+  {#if invalid}
+    <p class="error-message" id={errorId}><svg class="error-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.5" /><path d="M8 4.5v4.25M8 11.25v.25" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" /></svg><span>{$t['number.pleaseEnterAValidNumber']}</span></p>
   {/if}
 </div>
 
@@ -86,16 +93,87 @@
   }
 
   input {
-    color: black;
+    color: var(--text-1);
     text-align: center;
+    font-variant-numeric: tabular-nums;
   }
 
-  input.invalid {
-    border-color: var(--color-danger);
-    box-shadow: 0 0 10px -2px var(--color-danger);
+  /* Mono micro states on top of the shared field styles (tokens only). */
+  input {
+    caret-color: var(--text-1);
+    transition:
+      border-color var(--t-out) var(--ease-out),
+      background-color var(--t-out) var(--ease-out),
+      box-shadow var(--t-out) var(--ease-out);
+  }
+
+  /* Empty sits on the quiet surface, filled and focused on paper. */
+  input:not(:placeholder-shown),
+  input:focus {
+    background: var(--surface-0);
+  }
+
+  /* The shared hover applies on touch too; keep it to fine pointers. */
+  @media (hover: none), (pointer: coarse) {
+    input:hover:not(:disabled):not(:focus) {
+      border-color: var(--border-2);
+    }
+  }
+
+  input:focus {
+    border-color: var(--text-1);
+  }
+
+
+  input:disabled {
+    color: var(--text-2);
+    opacity: var(--disabled-opacity);
+  }
+
+  input.invalid,
+  input.invalid:focus,
+  input:user-invalid {
+    border-color: var(--danger);
+  }
+
+  /* Browser autofill: keep our ink and a calm tint instead of the default yellow or blue. */
+  input:-webkit-autofill {
+    -webkit-text-fill-color: var(--text-1);
+    box-shadow: inset 0 0 0 100vmax var(--surface-2);
+    transition: background-color 600000s 0s;
+  }
+  input:-webkit-autofill:focus {
+    box-shadow: var(--focus-ring), inset 0 0 0 100vmax var(--surface-2);
+  }
+  input:autofill {
+    box-shadow: inset 0 0 0 100vmax var(--surface-2);
   }
 
   .error-message {
-    color: var(--color-danger);
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-snug);
+  }
+
+  .error-icon {
+    flex: none;
+    width: 1em;
+    height: 1em;
+    margin-top: 0.15em;
+  }
+
+  @media (forced-colors: active) {
+    input {
+      border-color: FieldText;
+    }
+    input:focus {
+      outline: 2px solid Highlight;
+      outline-offset: 2px;
+    }
+    .error-message {
+      color: CanvasText;
+    }
   }
 </style>

@@ -8,8 +8,16 @@ Owner: WS1. Status: tokens, fonts, theme and the primitive library are live. Liv
 - Old names (`--c-*`, `--space-xs..xxl`, `--color-*`, `--font-title`, `--radius-s`, `--shadow-sm`...) still work. They are aliases. New code uses the new names.
 - Theme: `data-theme="light|dark"` on `<html>`. With no saved choice the theme follows the operating system. `data-density="compact"` and `data-motion="reduced"` come from the Display settings menu.
 
-## Direction: "Broadsheet"
-Calm and editorial, like a well set newspaper page. Warm paper surfaces, ink text, one deep pine green accent used sparingly for the main action, links and focus. Headlines in Lora (serif). Everything functional in Inter. Depth comes from soft, warm, low shadows and thin borders. Motion is short and only shows a change of state.
+## Direction: "Mono" (since 2026-10-30, WS11)
+Award-Grade Web Playbook 2026, applied site-wide. White page, near-black ink (#1d1d1f), greys for structure, a designed dark theme (#0a0a0b page, not an inversion). One family (SF Pro on Apple, self-hosted Inter elsewhere) used at extreme display scale next to quiet captions. `--accent` is the primary CTA fill (ink pill) and nothing else is filled with it. Links are ink with an underline. Focus is blue (`--focus-color`). Depth comes from thin borders; shadows only for things that float. The old "Broadsheet" (Lora + pine) is retired; Lora files stay in `static/fonts` but nothing references them.
+
+New tokens: `--step-hero`, `--step-display`, `--step-chapter`, `--tracking-display`, `--lh-display`, `--section-pad`, `--gutter`, `--container-xl`, `--surface-glass`, `--text-muted-large`, `--radius-2xl`, `--dur-reveal`, `--stagger`, `--ease-spring`, `--header-h-condensed`, `--measure-legal`. Page furniture classes: `.page-hero`, `.page-eyebrow`, `.page-title`, `.page-lede`, `.rise`, `.rise-2`, `.rise-3`.
+
+### Micro states (src/styles/states.scss)
+Every interactive element follows three axes: interaction (hover, focus-visible, pressed, dragged), selection (checked, mixed, selected, expanded, current) and availability (disabled, read-only, busy, success, invalid). Priority: invalid > busy > disabled > pressed > focus > selected > hover. Tokens: `--state-hover` 8%, `--state-focus` 10%, `--state-press` 12%, `--state-drag` 16%, `--disabled-opacity`, `--t-in` 120ms, `--t-out` 200ms, `--t-state` 180ms. `states.scss` gives zero-specificity defaults; components draw their own and must be at least as good. Rules: hover only inside `(hover: hover) and (pointer: fine)`; pressed lands in 60 ms (`scale(.97)`); never color alone for selected or error; prefer `aria-disabled` plus a `disabledReason` over `disabled`; spinners appear after 350 ms and stay 500 ms; success is announced with `role="status"`; errors show only after blur or submit, with border, icon and text; forced-colors and reduced-motion fallbacks everywhere.
+
+### Shared chrome
+`Header` (combo nav, condenses after 40px, hides on scroll down after 150px, "Menu" label, full-screen typographic mobile menu, hidden inside the owner dashboard), `SiteFooter` (variants `full`, `finale-less`, `compact`; chosen in `src/routes/+layout.svelte`), `src/routes/+error.svelte` (404 and 5xx).
 
 ## Tokens
 | Group | Names | Notes |

@@ -83,8 +83,8 @@
     z-index: var(--z-tooltip);
     width: max-content;
     max-width: 16rem;
-    padding: var(--space-1) var(--space-2);
-    border-radius: var(--radius-sm);
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-md);
     background: var(--surface-inverse);
     color: var(--text-inverse);
     box-shadow: var(--shadow-2);
@@ -96,10 +96,12 @@
     white-space: normal;
     opacity: 0;
     visibility: hidden;
-    transform: translateX(-50%);
+    pointer-events: none;
+    transform: translate(-50%, var(--_from, 0));
     transition:
-      opacity var(--dur-fast) var(--ease-out),
-      visibility 0s linear var(--dur-fast);
+      opacity var(--t-out) var(--ease-out),
+      transform var(--t-out) var(--ease-out),
+      visibility 0s linear var(--t-out);
   }
 
   /* Invisible bridge so the pointer can move onto the bubble without it closing (WCAG 1.4.13). */
@@ -113,6 +115,7 @@
 
   .tooltip--top .tooltip__bubble {
     bottom: calc(100% + var(--space-2));
+    --_from: 0.25rem;
   }
   .tooltip--top .tooltip__bubble::before {
     top: 100%;
@@ -120,22 +123,44 @@
 
   .tooltip--bottom .tooltip__bubble {
     top: calc(100% + var(--space-2));
+    --_from: -0.25rem;
   }
   .tooltip--bottom .tooltip__bubble::before {
     bottom: 100%;
   }
 
-  .tooltip:hover .tooltip__bubble,
-  .tooltip:focus-within .tooltip__bubble {
+  /* Pointer: a short intent delay so passing over does not flash it. Keyboard: at once. */
+  @media (hover: hover) and (pointer: fine) {
+    .tooltip:hover .tooltip__bubble {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translate(-50%, 0);
+      transition:
+        opacity var(--t-in) var(--ease-out) 300ms,
+        transform var(--t-in) var(--ease-out) 300ms,
+        visibility 0s linear 300ms;
+    }
+  }
+  .tooltip:has(:focus-visible) .tooltip__bubble {
     opacity: 1;
     visibility: visible;
+    pointer-events: auto;
+    transform: translate(-50%, 0);
     transition:
-      opacity var(--dur-fast) var(--ease-out),
+      opacity var(--t-in) var(--ease-out),
+      transform var(--t-in) var(--ease-out),
       visibility 0s;
   }
 
   .tooltip.is-dismissed .tooltip__bubble {
     opacity: 0;
     visibility: hidden;
+  }
+
+  @media (forced-colors: active) {
+    .tooltip__bubble {
+      border: 1px solid CanvasText;
+    }
   }
 </style>

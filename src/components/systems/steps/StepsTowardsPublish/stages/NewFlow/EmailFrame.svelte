@@ -41,25 +41,48 @@
 </div>
 
 <style lang="scss">
+  /* An inbox-style frame around the email preview. The email itself stays on white
+     (it is email content), whatever the page theme. */
   .email-frame {
-    border: 1px solid var(--border-1, #e3e6ea);
-    border-radius: var(--radius-md, 8px);
+    border: 1px solid var(--border-1);
+    border-radius: var(--radius-lg);
     overflow: hidden;
-    background: var(--surface-0, #fff);
+    background: var(--surface-0);
   }
   .email-frame__meta {
     margin: 0;
-    padding: var(--space-3, 12px) var(--space-4, 16px);
+    padding: var(--space-4) var(--space-5);
     display: flex;
     flex-direction: column;
-    gap: var(--space-1, 4px);
-    border-bottom: 1px solid var(--border-1, #e3e6ea);
-    background: var(--surface-2, #f7f8fa);
-    font-size: var(--fs-sm, 0.875rem);
-    div { display: flex; gap: var(--space-2, 8px); min-width: 0; }
-    dt { color: var(--text-3, #6b7280); min-width: 4.5rem; }
-    dd { margin: 0; color: var(--text-1, #14171a); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .subject { font-weight: var(--fw-semibold, 600); }
+    gap: var(--space-1);
+    border-bottom: 1px solid var(--border-1);
+    background: var(--surface-1);
+    font-size: var(--fs-sm);
+    div {
+      display: flex;
+      gap: var(--space-2);
+      min-width: 0;
+    }
+    dt {
+      color: var(--text-3);
+      min-width: 4.5rem;
+    }
+    dd {
+      margin: 0;
+      color: var(--text-1);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .subject {
+      font-weight: var(--fw-semibold);
+    }
   }
-  iframe { display: block; width: 100%; border: 0; background: #fff; }
+  iframe {
+    display: block;
+    width: 100%;
+    border: 0;
+    color-scheme: light;
+    background: Canvas;
+  }
 </style>

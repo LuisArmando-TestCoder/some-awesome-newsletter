@@ -7,6 +7,7 @@
   import store from '../../../components/store';
   import logout from '../../../components/systems/requests/logout';
   import { t } from '$lib/i18n/translations';
+  import { dashboardMode } from '$lib/dashboard/nav';
 
   type NavLink = { name: string; url: string };
 
@@ -56,7 +57,9 @@
 
   $: pathname = $page.url.pathname;
   $: hash = $page.url.hash;
-  $: isHidden = READER_ROUTES.some((r) => pathname === r || pathname.startsWith(r + '/'));
+  // The owner dashboard has its own app shell (sidebar, bottom nav): no marketing header inside it.
+  $: isHidden =
+    $dashboardMode || READER_ROUTES.some((r) => pathname === r || pathname.startsWith(r + '/'));
   $: isLoggedIn = Boolean($store?.isAuthCodeValid);
 
   function isActive(url: string, currentPath: string, currentHash: string): boolean {
@@ -70,7 +73,7 @@
   $: {
     if (y <= 0 || isMobileMenuOpen || focusInside) {
       showNavbar = true;
-    } else if (y > lastY && y > 72) {
+    } else if (y > lastY && y > 150) {
       showNavbar = false;
     } else if (y < lastY) {
       showNavbar = true;
@@ -142,8 +145,8 @@
     focusInside = Boolean(next && wrapper.contains(next));
   }
 
-  // The landing uses the white and black "mono" theme; the header follows it there.
-  $: isMono = $page.url.pathname === '/';
+  // Playbook: the header condenses after a short scroll and hides on the way down.
+  $: condensed = y > 40;
 
   onDestroy(() => {
     if (isMobileMenuOpen && typeof document !== 'undefined') {
@@ -157,7 +160,7 @@
 {#if !isHidden}
   <div
     class="header-wrapper"
-    class:mono={isMono}
+    class:condensed
     class:hidden-nav={!showNavbar}
     on:focusin={onFocusIn}
     on:focusout={onFocusOut}
@@ -213,9 +216,11 @@
             aria-controls={isMobileMenuOpen ? MENU_ID : undefined}
             aria-label={isMobileMenuOpen ? (nav.closeMenu ?? 'Close menu') : (nav.openMenu ?? 'Open menu')}
           >
-            <span class="bar top" aria-hidden="true"></span>
-            <span class="bar middle" aria-hidden="true"></span>
-            <span class="bar bottom" aria-hidden="true"></span>
+            <span class="bars" aria-hidden="true">
+              <span class="bar top"></span>
+              <span class="bar bottom"></span>
+            </span>
+            <span class="header__menu-label" aria-hidden="true">{nav.menu ?? 'Menu'}</span>
           </button>
         </div>
       </div>
@@ -223,7 +228,7 @@
   </div>
 
   {#if isMobileMenuOpen}
-    <div class="mobile-menu-overlay" class:mono={isMono} transition:fade={{ duration: reduceMotion ? 0 : 160 }}>
+    <div class="mobile-menu-overlay" transition:fade={{ duration: reduceMotion ? 0 : 160 }}>
       <!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
       <div class="mobile-backdrop" on:click={() => closeMenu()}></div>
 
@@ -236,7 +241,7 @@
         aria-labelledby={MENU_TITLE_ID}
         tabindex="-1"
         on:keydown={onDrawerKeydown}
-        transition:fly={{ x: 80, duration: reduceMotion ? 0 : 240, opacity: 1, easing: cubicOut }}
+        transition:fly={{ y: -16, duration: reduceMotion ? 0 : 320, opacity: 0, easing: cubicOut }}
       >
         <div class="drawer-header">
           <h2 id={MENU_TITLE_ID} class="drawer-title">{nav.menu ?? 'Menu'}</h2>
@@ -252,9 +257,9 @@
 
         <nav class="drawer-content" aria-label={nav.mainLabel ?? 'Main'}>
           <ul class="drawer-nav-list">
-            {#each navItems as link (link.url)}
+            {#each navItems as link, i (link.url)}
               {@const active = isActive(link.url, pathname, hash)}
-              <li>
+              <li style="--i: {i}">
                 <a
                   href={link.url}
                   class="drawer-link"
@@ -312,20 +317,6 @@
 {/if}
 
 <style lang="scss">
-  @use '../../content/landing/mono.scss' as mono;
-
-  .header-wrapper.mono,
-  .mobile-menu-overlay.mono {
-    @include mono.mono-theme;
-    background: transparent;
-    font-family: var(--font-body);
-    :global(a), :global(button) { font-family: inherit; }
-  }
-  .header-wrapper.mono .header {
-    background: color-mix(in srgb, #ffffff 80%, transparent);
-    backdrop-filter: saturate(180%) blur(20px);
-    -webkit-backdrop-filter: saturate(180%) blur(20px);
-  }
   .desktop-only {
     @media (max-width: 1024px) { display: none !important; }
   }
@@ -342,25 +333,34 @@
     top: 0;
     z-index: 1000;
     transform: translateY(0);
-    transition: transform var(--dur-slow, 320ms) var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));
+    transition: transform var(--dur-slow) var(--ease-out);
 
     &.hidden-nav { transform: translateY(-100%); }
   }
 
   .header {
-    height: var(--header-h, 72px);
+    height: var(--header-h);
     display: flex;
     align-items: center;
-    background: color-mix(in srgb, var(--surface-0, #fff) 85%, transparent);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border-1, #e5e7eb);
+    background: var(--surface-glass);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid transparent;
+    transition:
+      height var(--dur-slow) var(--ease-out),
+      border-color var(--dur-slow) var(--ease-out);
+  }
+  .condensed .header {
+    height: var(--header-h-condensed);
+    border-bottom-color: var(--border-1);
+  }
+  .header {
 
     &__container {
       width: 100%;
-      max-width: var(--container-lg, 1200px);
+      max-width: var(--container-xl);
       margin: 0 auto;
-      padding: 0 var(--space-5, 24px);
+      padding: 0 var(--gutter);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -379,10 +379,10 @@
     }
 
     &__logo-text {
-      font-family: var(--font-display, inherit);
-      font-weight: var(--fw-bold, 700);
-      font-size: var(--fs-lg, 1.125rem);
-      letter-spacing: -0.01em;
+      font-family: var(--font-display);
+      font-weight: var(--fw-semibold);
+      font-size: var(--fs-lg);
+      letter-spacing: -0.02em;
     }
 
     &__nav-list {
@@ -414,28 +414,32 @@
     transition: color var(--dur-fast, 120ms) var(--ease-out, ease-out),
       background-color var(--dur-fast, 120ms) var(--ease-out, ease-out);
 
+    /* Current page: a dot under the label plus weight, never color alone. */
     &::after {
       content: '';
       position: absolute;
-      left: var(--space-3, 12px);
-      right: var(--space-3, 12px);
-      bottom: 2px;
-      height: 2px;
-      border-radius: var(--radius-full, 999px);
-      background: var(--accent, #4f46e5);
-      transform: scaleX(0);
-      transition: transform var(--dur-base, 200ms) var(--ease-out, ease-out);
+      left: 50%;
+      bottom: 1px;
+      width: 4px;
+      height: 4px;
+      margin-left: -2px;
+      border-radius: var(--radius-full);
+      background: currentColor;
+      transform: scale(0);
+      transition: transform var(--dur-base) var(--ease-out);
     }
 
-    &:hover {
-      color: var(--text-1, #0f172a);
-      background: var(--surface-2, #f1f5f9);
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        color: var(--text-1);
+        background: var(--surface-2);
+      }
     }
+    &:active { background: var(--surface-3); }
 
     &.active {
-      color: var(--text-1, #0f172a);
-      font-weight: var(--fw-semibold, 600);
-      &::after { transform: scaleX(1); }
+      color: var(--text-1);
+      &::after { transform: scale(1); }
     }
   }
 
@@ -445,15 +449,19 @@
     align-items: center;
     justify-content: center;
     min-height: 40px;
-    padding: var(--space-2, 8px) var(--space-4, 16px);
-    border-radius: var(--radius-full, 999px);
-    font-weight: var(--fw-semibold, 600);
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-full);
+    font-weight: var(--fw-medium);
+    letter-spacing: -0.01em;
     font-size: var(--fs-sm, 0.9375rem);
     text-decoration: none;
     border: 1px solid transparent;
     transition: background-color var(--dur-fast, 120ms) var(--ease-out, ease-out),
       border-color var(--dur-fast, 120ms) var(--ease-out, ease-out),
-      color var(--dur-fast, 120ms) var(--ease-out, ease-out);
+      color var(--dur-fast, 120ms) var(--ease-out, ease-out),
+      transform var(--dur-base) var(--ease-out);
+
+    &:active { transform: scale(0.97); }
 
     &--primary {
       background: var(--accent, #4f46e5);
@@ -484,79 +492,90 @@
     outline-offset: 2px;
   }
 
+  /* Playbook: write "Menu" next to the icon. Two bars morph into a cross. */
   .header__hamburger {
-    background: none;
-    border: none;
-    width: 44px;
-    height: 44px;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    display: inline-flex;
     align-items: center;
-    gap: 6px;
-    border-radius: var(--radius-sm, 6px);
-    color: var(--text-1, #0f172a);
+    gap: var(--space-2);
+    min-height: 44px;
+    padding: 0 var(--space-3) 0 var(--space-2);
+    background: none;
+    border: 1px solid var(--border-1);
+    border-radius: var(--radius-full);
+    color: var(--text-1);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    cursor: pointer;
+    position: relative;
+    z-index: 2100;
 
-    .bar {
-      width: 22px;
-      height: 2px;
-      background: currentColor;
-      border-radius: var(--radius-full, 999px);
-      transition: transform var(--dur-base, 200ms) var(--ease-out, ease-out),
-        opacity var(--dur-base, 200ms) var(--ease-out, ease-out);
+    .bars {
+      position: relative;
+      display: inline-block;
+      width: 28px;
+      height: 28px;
     }
+    .bar {
+      position: absolute;
+      left: 6px;
+      width: 16px;
+      height: 1.5px;
+      background: currentColor;
+      border-radius: var(--radius-full);
+      transition: transform var(--dur-slow) var(--ease-spring);
+    }
+    .top { top: 10px; }
+    .bottom { top: 16px; }
 
     &.is-active {
-      .top { transform: translateY(8px) rotate(45deg); }
-      .middle { opacity: 0; }
-      .bottom { transform: translateY(-8px) rotate(-45deg); }
+      .top { transform: translateY(3px) rotate(45deg); }
+      .bottom { transform: translateY(-3px) rotate(-45deg); }
     }
   }
 
-  /* Mobile drawer */
+  /* Mobile menu: full-screen typographic layer, links reveal line by line. */
   .mobile-menu-overlay {
     position: fixed;
     inset: 0;
     z-index: 2000;
     display: flex;
-    justify-content: flex-end;
   }
 
   .mobile-backdrop {
     position: absolute;
     inset: 0;
-    background: color-mix(in srgb, var(--surface-inverse, #0f172a) 40%, transparent);
+    background: var(--surface-overlay);
   }
 
   .mobile-drawer {
     position: relative;
-    width: min(100%, 400px);
-    height: 100%;
-    background: var(--surface-1, #fff);
-    color: var(--text-1, #0f172a);
-    box-shadow: var(--shadow-3, 0 10px 30px rgba(0, 0, 0, 0.15));
+    width: 100%;
+    height: 100dvh;
+    background: var(--surface-0);
+    color: var(--text-1);
     display: flex;
     flex-direction: column;
-    gap: var(--space-5, 24px);
+    gap: var(--space-6);
     overflow-y: auto;
     overscroll-behavior: contain;
     outline: none;
+    padding-bottom: max(var(--space-4), env(safe-area-inset-bottom));
   }
 
   .drawer-header {
-    padding: var(--space-4, 16px) var(--space-5, 24px);
+    min-height: var(--header-h);
+    padding: 0 var(--gutter);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid var(--border-1, #e5e7eb);
   }
 
   .drawer-title {
     margin: 0;
-    font-family: var(--font-display, inherit);
-    font-weight: var(--fw-bold, 700);
-    font-size: var(--fs-lg, 1.125rem);
+    font-family: var(--font-body);
+    font-weight: var(--fw-semibold);
+    font-size: var(--fs-sm);
+    color: var(--text-3);
   }
 
   .close-btn {
@@ -566,14 +585,14 @@
     width: 44px;
     height: 44px;
     background: none;
-    border: none;
-    border-radius: var(--radius-sm, 6px);
-    color: var(--text-2, #475569);
+    border: 1px solid var(--border-1);
+    border-radius: var(--radius-full);
+    color: var(--text-1);
     cursor: pointer;
-    &:hover { background: var(--surface-2, #f1f5f9); color: var(--text-1, #0f172a); }
+    &:hover { background: var(--surface-2); }
   }
 
-  .drawer-content { padding: 0 var(--space-5, 24px); }
+  .drawer-content { padding: 0 var(--gutter); }
 
   .drawer-nav-list {
     list-style: none;
@@ -581,41 +600,59 @@
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: var(--space-1, 4px);
+
+    li {
+      border-bottom: 1px solid var(--border-1);
+      animation: menu-line var(--dur-reveal) var(--ease-out) both;
+      animation-delay: calc(var(--i, 0) * var(--stagger) + 80ms);
+    }
+  }
+
+  @keyframes menu-line {
+    from { opacity: 0; transform: translateY(24px); }
   }
 
   .drawer-link {
     display: flex;
     align-items: center;
-    min-height: 48px;
-    padding: var(--space-3, 12px) var(--space-4, 16px);
-    border-radius: var(--radius-md, 10px);
-    border-left: 3px solid transparent;
-    color: var(--text-1, #0f172a);
+    justify-content: space-between;
+    min-height: 64px;
+    padding: var(--space-3) 0;
+    color: var(--text-1);
     text-decoration: none;
-    font-weight: var(--fw-medium, 500);
-    font-size: var(--fs-lg, 1.125rem);
-    transition: background-color var(--dur-fast, 120ms) var(--ease-out, ease-out);
+    font-family: var(--font-display);
+    font-weight: var(--fw-semibold);
+    font-size: var(--fs-3xl);
+    letter-spacing: var(--tracking-display);
+    line-height: 1.1;
 
-    &:hover { background: var(--surface-2, #f1f5f9); }
-
-    &.active {
-      font-weight: var(--fw-semibold, 600);
-      background: var(--accent-soft, #eef2ff);
-      border-left-color: var(--accent, #4f46e5);
+    &::after {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: var(--radius-full);
+      background: currentColor;
+      opacity: 0;
     }
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover { color: var(--text-2); }
+    }
+    &:active { color: var(--text-3); }
+
+    &.active::after { opacity: 1; }
   }
 
   .auth-grid {
     display: flex;
     flex-direction: column;
-    gap: var(--space-3, 12px);
-    padding: 0 var(--space-5, 24px);
+    gap: var(--space-3);
+    padding: 0 var(--gutter);
   }
 
   .drawer-footer {
     margin-top: auto;
-    padding: var(--space-4, 16px) var(--space-5, 24px);
+    padding: var(--space-4) var(--gutter);
     border-top: 1px solid var(--border-1, #e5e7eb);
     display: flex;
     justify-content: space-between;
@@ -650,6 +687,11 @@
     border-radius: var(--radius-sm, 6px);
   }
 
+  @media print {
+    .header-wrapper,
+    .mobile-menu-overlay { display: none; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .header-wrapper,
     .nav-link,
@@ -659,5 +701,6 @@
     .drawer-link {
       transition: none;
     }
+    .drawer-nav-list li { animation: none; }
   }
 </style>

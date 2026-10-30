@@ -72,44 +72,43 @@
 
 <style lang="scss">
   .json-viewer {
-    font-family: monospace;
-    color: var(--color-foreground);
-    margin-bottom: 2rem;
+    font-family: var(--font-mono);
+    font-size: var(--fs-sm);
+    color: var(--text-1);
+    margin-bottom: var(--space-6);
   }
   .json-object {
-    margin-left: 0rem;
-    border-left: 2px solid var(--color-background);
-    padding-left: 1rem;
+    margin-left: 0;
+    border-left: 1px solid var(--border-1);
+    padding-left: var(--space-4);
   }
   .json-array {
-    margin-left: 1rem;
+    margin-left: var(--space-4);
     list-style: none;
     padding-left: 0;
   }
   .json-property {
-    margin-bottom: 0.25rem;
+    margin-bottom: var(--space-1);
     display: grid;
-    grid-gap: 1rem;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-4);
+    grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
   }
+  /* Types read from the value itself; weight and style, not color, tell keys and nulls apart. */
   .json-key {
-    font-weight: bold;
-    color: var(--color-foreground);
+    font-weight: var(--fw-semibold);
+    color: var(--text-1);
   }
-  .json-number {
-    color: #4caf50;
-  }
-  .json-string {
-    color: #f44336;
-  }
+  .json-number,
+  .json-string,
   .json-boolean {
-    color: #2196f3;
+    color: var(--text-1);
+    font-variant-numeric: tabular-nums;
   }
   .json-null {
-    color: red;
+    color: var(--text-3);
     font-style: italic;
   }
   .json-unknown {
-    color: #e91e63;
+    color: var(--text-2);
   }
 </style>

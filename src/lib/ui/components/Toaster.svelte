@@ -13,9 +13,19 @@
     closeLabel?: string;
     /** Accessible name of the notifications region. */
     regionLabel?: string;
+    /** Screen reader word read before each message, so the tone is never carried by color or icon alone. */
+    toneLabels?: Partial<Record<ToastItem['tone'], string>>;
   }
 
-  let { closeLabel = 'Close', regionLabel = 'Notifications' }: Props = $props();
+  let { closeLabel = 'Close', regionLabel = 'Notifications', toneLabels = {} }: Props = $props();
+
+  const TONE_WORDS: Record<ToastItem['tone'], string> = {
+    info: 'Note',
+    success: 'Done',
+    warning: 'Warning',
+    danger: 'Error'
+  };
+  const toneWord = (tone: ToastItem['tone']) => toneLabels[tone] ?? TONE_WORDS[tone];
 
   let active = $state(false);
   let reduceMotion = $state(false);
@@ -114,8 +124,8 @@
       </svg>
     </span>
     <div class="body">
-      {#if item.title}<p class="title">{item.title}</p>{/if}
-      <p class="message">{item.message}</p>
+      {#if item.title}<p class="title"><span class="sr-only">{toneWord(item.tone)}: </span>{item.title}</p>{/if}
+      <p class="message">{#if !item.title}<span class="sr-only">{toneWord(item.tone)}: </span>{/if}{item.message}</p>
       {#if item.action}
         <button type="button" class="action" onclick={() => runAction(item)}>{item.action.label}</button>
       {/if}
@@ -145,8 +155,8 @@
   .toaster {
     position: fixed;
     z-index: var(--z-toast);
-    inset-inline: var(--space-3);
-    bottom: var(--space-3);
+    inset-inline: var(--space-4);
+    bottom: max(var(--space-4), env(safe-area-inset-bottom));
     display: flex;
     flex-direction: column;
     pointer-events: none;
@@ -176,35 +186,39 @@
     grid-template-columns: auto 1fr auto;
     align-items: start;
     gap: var(--space-3);
-    padding: var(--space-3) var(--space-3) var(--space-3) var(--space-4);
-    background: var(--surface-1);
+    padding: var(--space-3) var(--space-2) var(--space-3) var(--space-3);
+    background: var(--surface-0);
     color: var(--text-1);
     border: 1px solid var(--border-1);
-    border-inline-start: 3px solid var(--tone, var(--info));
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-lg);
     box-shadow: var(--shadow-3);
     font-family: var(--font-body);
   }
 
-  .toast[data-tone='info'] { --tone: var(--info); }
-  .toast[data-tone='success'] { --tone: var(--success); }
-  .toast[data-tone='warning'] { --tone: var(--warning); }
-  .toast[data-tone='danger'] { --tone: var(--danger); }
+  .toast[data-tone='info'] { --tone: var(--info); --tone-soft: var(--info-soft); }
+  .toast[data-tone='success'] { --tone: var(--success); --tone-soft: var(--success-soft); }
+  .toast[data-tone='warning'] { --tone: var(--warning); --tone-soft: var(--warning-soft); }
+  .toast[data-tone='danger'] { --tone: var(--danger); --tone-soft: var(--danger-soft); }
 
+  /* Tone: its own icon shape in a tinted disc, plus a spoken word (see toneWord). */
   .icon {
-    display: inline-flex;
-    color: var(--tone, var(--info));
-    padding-top: var(--space-1);
+    display: inline-grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: var(--radius-full);
+    background: var(--tone-soft, var(--surface-2));
+    color: var(--tone, var(--text-2));
   }
 
   .icon svg {
-    width: 1.25rem;
-    height: 1.25rem;
+    width: 1.125rem;
+    height: 1.125rem;
   }
 
   .body {
     min-width: 0;
-    padding-block: var(--space-1);
+    padding-block: 0.3rem 0;
   }
 
   .title {
@@ -212,13 +226,14 @@
     font-size: var(--fs-sm);
     font-weight: var(--fw-semibold);
     line-height: var(--lh-snug);
+    color: var(--text-1);
   }
 
   .message {
     margin: 0;
     font-size: var(--fs-sm);
     line-height: var(--lh-normal);
-    color: var(--text-2);
+    color: var(--text-1);
     overflow-wrap: anywhere;
   }
 
@@ -227,33 +242,43 @@
   }
 
   .action {
-    margin-top: var(--space-2);
-    padding: 0;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: 2rem;
+    margin: var(--space-2) 0 0 calc(-1 * var(--space-3));
+    padding: 0 var(--space-3);
     border: 0;
+    border-radius: var(--radius-full);
     background: none;
     color: var(--text-link);
     font: inherit;
     font-size: var(--fs-sm);
     font-weight: var(--fw-semibold);
     text-decoration: underline;
+    text-decoration-thickness: 1px;
     text-underline-offset: 0.2em;
     cursor: pointer;
-    border-radius: var(--radius-sm);
+    transition:
+      background-color var(--t-out) var(--ease-out),
+      transform var(--dur-base) var(--ease-out);
   }
 
   .close {
+    position: relative;
     display: inline-grid;
     place-items: center;
     width: var(--control-h-sm);
     height: var(--control-h-sm);
     border: 0;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-full);
     background: transparent;
     color: var(--text-3);
     cursor: pointer;
     transition:
-      background-color var(--dur-fast) var(--ease-out),
-      color var(--dur-fast) var(--ease-out);
+      background-color var(--t-out) var(--ease-out),
+      color var(--t-out) var(--ease-out),
+      transform var(--dur-base) var(--ease-out);
   }
 
   .close svg {
@@ -261,14 +286,46 @@
     height: 1.125rem;
   }
 
-  .close:hover {
-    background: var(--surface-2);
-    color: var(--text-1);
+  @media (hover: hover) and (pointer: fine) {
+    .close:hover,
+    .action:hover {
+      background: var(--surface-2);
+      color: var(--text-1);
+      transition-duration: var(--t-in);
+    }
+    .action:hover {
+      text-decoration-thickness: 2px;
+    }
+  }
+
+  .close:active,
+  .action:active {
+    background: var(--surface-3);
+    transform: scale(0.96);
+    transition-duration: 60ms;
   }
 
   .close:focus-visible,
   .action:focus-visible {
     outline: none;
     box-shadow: var(--focus-ring);
+  }
+
+  @media (forced-colors: active) {
+    .toast {
+      border: 1px solid CanvasText;
+    }
+    .close:focus-visible,
+    .action:focus-visible {
+      outline: 2px solid CanvasText;
+      outline-offset: 2px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .close:active,
+    .action:active {
+      transform: none;
+    }
   }
 </style>

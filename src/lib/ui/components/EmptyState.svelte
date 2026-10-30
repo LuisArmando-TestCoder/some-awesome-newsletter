@@ -74,9 +74,10 @@
     width: 3.5rem;
     height: 3.5rem;
     margin-bottom: var(--space-2);
+    border: 1px solid var(--border-1);
     border-radius: var(--radius-full);
-    background: var(--surface-2);
-    color: var(--text-3);
+    background: var(--surface-1);
+    color: var(--text-2);
   }
   .empty__icon :global(svg) {
     width: 1.75rem;
@@ -90,9 +91,10 @@
   .empty__title {
     margin: 0;
     font-family: var(--font-display);
-    font-size: var(--fs-xl);
+    font-size: var(--fs-2xl);
     font-weight: var(--fw-semibold);
-    line-height: var(--lh-snug);
+    line-height: var(--lh-tight);
+    letter-spacing: var(--tracking-tight);
     color: var(--text-1);
   }
   .empty--compact .empty__title {

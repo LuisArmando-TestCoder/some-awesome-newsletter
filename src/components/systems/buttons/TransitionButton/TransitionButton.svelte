@@ -69,22 +69,37 @@
 
   button {
     position: absolute;
-    min-height: var(--control-h-sm);
+    min-height: var(--control-h);
     padding: var(--space-2) var(--space-8);
-    background: var(--surface-1);
+    background: var(--surface-glass);
+    backdrop-filter: blur(12px) saturate(1.2);
+    -webkit-backdrop-filter: blur(12px) saturate(1.2);
     border: 1px solid var(--border-1);
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-full);
     box-shadow: var(--shadow-2);
     color: var(--text-2);
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
     transition:
       opacity var(--dur-base) var(--ease-out),
-      background-color var(--dur-fast) var(--ease-out),
-      color var(--dur-fast) var(--ease-out);
+      background-color var(--t-out) var(--ease-out),
+      border-color var(--t-out) var(--ease-out),
+      color var(--t-out) var(--ease-out),
+      scale var(--dur-base) var(--ease-out);
 
-    &:hover {
-      background: var(--surface-2);
-      color: var(--accent);
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background: var(--surface-0);
+        border-color: var(--border-2);
+        color: var(--text-1);
+        transition-duration: var(--t-in);
+      }
+    }
+
+    /* scale (not transform) so the rotation set per side is kept. */
+    &:active {
+      scale: 0.96;
+      transition-duration: 60ms;
     }
 
     &:focus-visible {
@@ -120,6 +135,16 @@
     }
   }
 
+  @media (forced-colors: active) {
+    button {
+      border-color: ButtonText;
+    }
+    button:focus-visible {
+      outline: 2px solid CanvasText;
+      outline-offset: 2px;
+    }
+  }
+
   @keyframes arrow-pulse {
     0% {
       transform: translateY(-5px);
@@ -142,6 +167,9 @@
   @media (prefers-reduced-motion: reduce) {
     button .arrow svg path {
       animation: none;
+    }
+    button:active {
+      scale: 1;
     }
   }
 

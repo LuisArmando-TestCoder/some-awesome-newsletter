@@ -147,7 +147,12 @@
       <circle cx="16" cy="7" r="2" />
       <circle cx="10" cy="17" r="2" />
     </svg>
-    {#if !compact}<span>{L.trigger}</span>{/if}
+    {#if !compact}
+      <span>{L.trigger}</span>
+      <svg class="chevron" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 6.25 8 10.25l4-4" />
+      </svg>
+    {/if}
   </button>
 
   <div bind:this={panel} id={panelId} class="panel" role="dialog" aria-labelledby={titleId} hidden={!open}>
@@ -213,22 +218,26 @@
   }
 
   .trigger {
+    position: relative;
     display: inline-flex;
     align-items: center;
     gap: var(--space-2);
     min-height: var(--control-h-sm);
     padding: 0 var(--space-3);
-    border: 1px solid var(--border-1);
+    border: 1px solid var(--border-2);
     border-radius: var(--radius-full);
-    background: var(--surface-1);
+    background: var(--surface-0);
     color: var(--text-1);
     font-family: var(--font-body);
     font-size: var(--fs-sm);
     font-weight: var(--fw-medium);
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
     transition:
-      background-color var(--dur-fast) var(--ease-out),
-      border-color var(--dur-fast) var(--ease-out);
+      background-color var(--t-out) var(--ease-out),
+      border-color var(--t-out) var(--ease-out),
+      box-shadow var(--t-out) var(--ease-out),
+      transform var(--dur-base) var(--ease-out);
   }
 
   .trigger.compact {
@@ -237,10 +246,24 @@
     padding: 0;
   }
 
-  .trigger:hover,
+  @media (hover: hover) and (pointer: fine) {
+    .trigger:hover {
+      background: var(--surface-2);
+      border-color: var(--text-2);
+      transition-duration: var(--t-in);
+    }
+  }
+
+  .trigger:active {
+    background: var(--surface-3);
+    transform: scale(0.97);
+    transition-duration: 60ms;
+  }
+
+  /* Expanded: the trigger reads as held down and the chevron turns over. */
   .trigger[aria-expanded='true'] {
     background: var(--surface-2);
-    border-color: var(--border-2);
+    border-color: var(--text-1);
   }
 
   .trigger:focus-visible {
@@ -254,18 +277,42 @@
     flex: none;
   }
 
+  .chevron {
+    width: 0.875rem;
+    height: 0.875rem;
+    flex: none;
+    margin-inline-start: calc(-1 * var(--space-1));
+    color: var(--text-2);
+    transition: transform var(--dur-slow) var(--ease-out);
+  }
+
+  .trigger[aria-expanded='true'] .chevron {
+    transform: rotate(180deg);
+  }
+
   .panel {
     position: absolute;
     z-index: var(--z-drawer);
     width: min(19rem, calc(100vw - 2 * var(--space-4)));
     padding: var(--space-4);
     border: 1px solid var(--border-1);
-    border-radius: var(--radius-lg);
-    background: var(--surface-1);
+    border-radius: var(--radius-xl);
+    background: var(--surface-0);
     color: var(--text-1);
     box-shadow: var(--shadow-3);
     font-family: var(--font-body);
-    animation: panel-in var(--dur-base) var(--ease-out);
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity var(--dur-base) var(--ease-out),
+      transform var(--dur-base) var(--ease-out);
+  }
+
+  @starting-style {
+    .panel {
+      opacity: 0;
+      transform: var(--panel-from);
+    }
   }
 
   .panel[hidden] {
@@ -275,6 +322,7 @@
   .placement-bottom .panel {
     top: calc(100% + var(--space-2));
     --panel-from: translateY(-0.5rem);
+    transform-origin: top right;
   }
 
   .placement-top .panel {
@@ -290,16 +338,14 @@
     left: 0;
   }
 
-  @keyframes panel-in {
-    from {
-      opacity: 0;
-      transform: var(--panel-from);
-    }
-  }
-
   @media (prefers-reduced-motion: reduce) {
-    .panel {
-      animation: none;
+    .panel,
+    .chevron {
+      transition: none;
+    }
+    .trigger:active,
+    .option:active {
+      transform: none;
     }
   }
 
@@ -329,7 +375,7 @@
     gap: var(--space-1);
     padding: var(--space-1);
     border: 1px solid var(--border-1);
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-full);
     background: var(--surface-2);
   }
 
@@ -347,16 +393,19 @@
     place-items: center;
     min-height: var(--control-h-sm);
     padding: 0 var(--space-2);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-full);
     color: var(--text-2);
     font-size: var(--fs-xs);
     font-weight: var(--fw-medium);
     text-align: center;
     line-height: var(--lh-snug);
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
     transition:
-      background-color var(--dur-fast) var(--ease-out),
-      color var(--dur-fast) var(--ease-out);
+      background-color var(--t-out) var(--ease-out),
+      color var(--t-out) var(--ease-out),
+      box-shadow var(--t-out) var(--ease-out),
+      transform var(--dur-base) var(--ease-out);
   }
 
   .option input {
@@ -367,15 +416,25 @@
     cursor: pointer;
   }
 
-  .option:hover {
-    color: var(--text-1);
+  @media (hover: hover) and (pointer: fine) {
+    .option:hover:not(:has(input:checked)) {
+      color: var(--text-1);
+      background: color-mix(in srgb, var(--text-1) var(--state-hover), transparent);
+      transition-duration: var(--t-in);
+    }
   }
 
+  .option:active {
+    transform: scale(0.97);
+    transition-duration: 60ms;
+  }
+
+  /* Selected: raised paper chip and semibold label, never color alone. */
   .option:has(input:checked) {
-    background: var(--surface-1);
+    background: var(--surface-0);
     color: var(--text-1);
     font-weight: var(--fw-semibold);
-    box-shadow: var(--shadow-1);
+    box-shadow: var(--shadow-1), 0 0 0 1px var(--border-1);
   }
 
   .option:has(input:focus-visible) {
@@ -397,16 +456,17 @@
     appearance: none;
     position: relative;
     flex: none;
-    width: 2.5rem;
-    height: 1.5rem;
+    width: 2.75rem;
+    height: 1.625rem;
     margin: 0;
     border: 1px solid var(--border-2);
     border-radius: var(--radius-full);
     background: var(--surface-3);
     cursor: pointer;
     transition:
-      background-color var(--dur-fast) var(--ease-out),
-      border-color var(--dur-fast) var(--ease-out);
+      background-color var(--dur-base) var(--ease-out),
+      border-color var(--dur-base) var(--ease-out),
+      box-shadow var(--t-out) var(--ease-out);
   }
 
   .switch::before {
@@ -414,27 +474,73 @@
     position: absolute;
     top: 50%;
     left: 0.1875rem;
-    width: 1.0625rem;
-    height: 1.0625rem;
+    width: 1.25rem;
+    height: 1.25rem;
     border-radius: var(--radius-full);
-    background: var(--surface-1);
-    box-shadow: var(--shadow-1);
+    background: var(--surface-0);
+    box-shadow: var(--shadow-1), 0 0 0 0.5px var(--border-2);
     transform: translateY(-50%);
-    transition: transform var(--dur-fast) var(--ease-out);
+    transition:
+      transform var(--dur-base) var(--ease-out),
+      width var(--dur-fast) var(--ease-out),
+      left var(--dur-fast) var(--ease-out);
   }
 
+  @media (hover: hover) and (pointer: fine) {
+    .switch-row:hover .switch:not(:checked) {
+      border-color: var(--text-2);
+    }
+  }
+
+  /* Pressed: the knob stretches toward where it will travel. */
+  .switch-row:active .switch::before {
+    width: 1.5rem;
+    transition-duration: 60ms;
+  }
+  .switch-row:active .switch:checked::before {
+    left: -0.0625rem;
+  }
+
+  /* On: ink track; the knob moves to the end (position is the non-color cue). */
   .switch:checked {
-    background: var(--accent);
-    border-color: var(--accent);
+    background: var(--text-1);
+    border-color: var(--text-1);
   }
 
   .switch:checked::before {
-    background: var(--accent-contrast);
-    transform: translate(1rem, -50%);
+    transform: translate(1.125rem, -50%);
   }
 
   .switch:focus-visible {
     outline: none;
     box-shadow: var(--focus-ring);
+  }
+
+  @media (forced-colors: active) {
+    .trigger:focus-visible,
+    .switch:focus-visible,
+    .option:has(input:focus-visible) {
+      outline: 2px solid CanvasText;
+      outline-offset: 2px;
+    }
+    .option:has(input:checked) {
+      forced-color-adjust: none;
+      background: Highlight;
+      color: HighlightText;
+    }
+    .switch {
+      border-color: CanvasText;
+    }
+    .switch::before {
+      forced-color-adjust: none;
+      background: CanvasText;
+    }
+    .switch:checked {
+      forced-color-adjust: none;
+      background: Highlight;
+    }
+    .switch:checked::before {
+      background: HighlightText;
+    }
   }
 </style>

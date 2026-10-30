@@ -31,7 +31,6 @@
   let wasRevealed = false;
 
   const total = ONBOARDING_STEP_COUNT;
-  $: percent = Math.round(((index + 1) / total) * 100);
 
   $: if (canReveal && !wasRevealed) {
     wasRevealed = true;
@@ -49,14 +48,21 @@
     if (loading || primaryDisabled) return;
     await onPrimary();
   }
+
+  function skip() {
+    if (loading) return;
+    onSkip();
+  }
 </script>
 
 {#if canReveal}
   <section class="ob-shell" aria-labelledby="ob-title-{index}">
     <div class="ob-progress" aria-label={$ob.progressLabel}>
       <span class="ob-progress__text">{fmt($ob.progress, { current: index + 1, total })}</span>
-      <div class="ob-progress__track" role="progressbar" aria-valuemin="1" aria-valuemax={total} aria-valuenow={index + 1}>
-        <div class="ob-progress__fill" style="width: {percent}%"></div>
+      <div class="ob-progress__track" role="progressbar" aria-valuemin="1" aria-valuemax={total} aria-valuenow={index + 1} aria-valuetext={fmt($ob.progress, { current: index + 1, total })}>
+        {#each Array(total) as _, i (i)}
+          <span class="ob-progress__seg" class:is-done={i < index} class:is-current={i === index} aria-hidden="true"></span>
+        {/each}
       </div>
     </div>
 
@@ -73,24 +79,37 @@
       </div>
 
       {#if skipNote}
-        <p class="ob-skipnote">{skipNote}</p>
+        <p class="ob-skipnote">
+          <svg class="ob-skipnote__icon" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" /><path d="M8 7.25v4M8 4.75v.25" /></svg>
+          <span>{skipNote}</span>
+        </p>
       {/if}
 
       {#if !hideFooter}
         <footer class="ob-footer">
           {#if showBack && index > 0}
-            <button type="button" class="ob-btn ob-btn--tertiary" on:click={onBack}>{$ob.back}</button>
+            <button type="button" class="ob-btn ob-btn--tertiary ob-back" on:click={onBack}>
+              <span aria-hidden="true">&larr;</span> {$ob.back}
+            </button>
           {:else}
-            <span></span>
+            <span class="ob-footer__spacer"></span>
           {/if}
           <div class="ob-footer__right">
             {#if optional}
-              <button type="button" class="ob-btn ob-btn--secondary" on:click={onSkip} disabled={loading}>
+              <button type="button" class="ob-btn ob-btn--secondary" on:click={skip} aria-disabled={loading ? "true" : undefined}>
                 {skipLabel || $ob.skip}
               </button>
             {/if}
-            <button type="submit" data-ob-primary class="ob-btn ob-btn--primary" disabled={primaryDisabled || loading} aria-busy={loading}>
-              {#if loading}<span class="ob-spinner" aria-hidden="true"></span>{loadingLabel || $ob.working}{:else}{primaryLabel || $ob.continue}{/if}
+            <button
+              type="submit"
+              data-ob-primary
+              class="ob-btn ob-btn--primary"
+              class:is-loading={loading}
+              aria-disabled={primaryDisabled || loading ? "true" : undefined}
+              aria-busy={loading}
+            >
+              <span class="ob-btn__label">{primaryLabel || $ob.continue}</span>
+              <span class="ob-btn__busy" aria-hidden={!loading}><span class="ob-spinner" aria-hidden="true"></span>{loadingLabel || $ob.working}</span>
             </button>
           </div>
         </footer>
@@ -101,202 +120,462 @@
 {/if}
 
 <style lang="scss">
+  /* Onboarding: one question per screen in large type, a step indicator above it, and the
+     action bar pinned to the thumb zone on phones. Open layout, no card chrome. */
   .ob-shell {
-    width: min(var(--container-sm, 40rem), 100%);
+    width: min(var(--container-md), 100%);
     margin: 0 auto;
-    padding: var(--space-6, 32px) var(--space-4, 16px) var(--space-8, 64px);
+    padding: var(--space-7) var(--gutter) var(--space-9);
     display: flex;
     flex-direction: column;
-    gap: var(--space-4, 16px);
-    font-family: var(--font-body, inherit);
-    color: var(--text-1, #14171a);
-    animation: ob-enter var(--dur-slow, 320ms) var(--ease-out, ease-out);
+    gap: var(--space-7);
+    font-family: var(--font-body);
+    color: var(--text-1);
+    animation: ob-enter var(--dur-slow) var(--ease-out);
   }
 
   @keyframes ob-enter {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: none; }
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .ob-shell { animation: none; }
-    .ob-progress__fill { transition: none !important; }
-  }
-
+  /* ---------- Step indicator: one segment per step, current one wider ---------- */
   .ob-progress {
     display: flex;
     flex-direction: column;
-    gap: var(--space-2, 8px);
+    gap: var(--space-3);
   }
   .ob-progress__text {
-    font-size: var(--fs-sm, 0.875rem);
-    color: var(--text-2, #4a5058);
-    font-weight: var(--fw-medium, 500);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-semibold);
+    color: var(--text-3);
+    font-variant-numeric: tabular-nums;
   }
   .ob-progress__track {
-    height: 6px;
-    border-radius: var(--radius-full, 999px);
-    background: var(--surface-2, #eceef1);
-    overflow: hidden;
+    display: flex;
+    gap: var(--space-1);
+    align-items: center;
   }
-  .ob-progress__fill {
-    height: 100%;
-    background: var(--accent, #3b5bdb);
-    border-radius: inherit;
-    transition: width var(--dur-slow, 320ms) var(--ease-out, ease-out);
+  .ob-progress__seg {
+    flex: 1 1 0;
+    height: 4px;
+    border-radius: var(--radius-full);
+    background: var(--border-1);
+    transition:
+      background-color var(--dur-slow) var(--ease-out),
+      flex-grow var(--dur-slow) var(--ease-out);
+
+    &.is-done {
+      background: var(--text-1);
+    }
+
+    /* Current: ink, twice as wide, and taller, so it reads without color. */
+    &.is-current {
+      flex-grow: 2.5;
+      height: 6px;
+      background: var(--text-1);
+    }
   }
 
+  /* ---------- Question ---------- */
   .ob-card {
-    background: var(--surface-1, #fff);
-    border: 1px solid var(--border-1, #e3e6ea);
-    border-radius: var(--radius-lg, 16px);
-    box-shadow: var(--shadow-2, 0 4px 16px rgba(0, 0, 0, 0.06));
-    padding: var(--space-6, 32px);
     display: flex;
     flex-direction: column;
-    gap: var(--space-5, 24px);
-  }
-  @media (max-width: 560px) {
-    .ob-card { padding: var(--space-5, 24px) var(--space-4, 16px); }
+    gap: var(--space-7);
   }
 
-  .ob-header { display: flex; flex-direction: column; gap: var(--space-2, 8px); }
+  .ob-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
   .ob-title {
     margin: 0;
-    font-family: var(--font-display, inherit);
-    font-size: var(--fs-2xl, 1.75rem);
-    line-height: var(--lh-tight, 1.2);
-    font-weight: var(--fw-bold, 700);
-    color: var(--text-1, #14171a);
+    max-width: 20ch;
+    font-family: var(--font-display);
+    font-size: var(--fs-4xl);
+    line-height: var(--lh-display);
+    letter-spacing: var(--tracking-display);
+    font-weight: var(--fw-semibold);
+    color: var(--text-1);
     text-wrap: balance;
-    &:focus { outline: none; }
-    &:focus-visible { outline: 2px solid var(--focus-color, #7b93ff); outline-offset: 4px; border-radius: var(--radius-sm, 4px); }
+    &:focus {
+      outline: none;
+    }
+    &:focus-visible {
+      outline: 2px solid var(--focus-color);
+      outline-offset: 4px;
+      border-radius: var(--radius-sm);
+    }
   }
   .ob-why {
     margin: 0;
-    font-size: var(--fs-md, 1rem);
-    line-height: var(--lh-normal, 1.5);
-    color: var(--text-2, #4a5058);
+    max-width: 56ch;
+    font-size: var(--fs-lg);
+    line-height: var(--lh-snug);
+    color: var(--text-2);
+    text-wrap: pretty;
   }
-  .ob-why__label { font-weight: var(--fw-semibold, 600); color: var(--text-1, #14171a); }
+  .ob-why__label {
+    font-weight: var(--fw-semibold);
+    color: var(--text-1);
+  }
 
-  .ob-body { display: flex; flex-direction: column; gap: var(--space-4, 16px); }
+  .ob-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
 
   .ob-skipnote {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
     margin: 0;
-    padding: var(--space-3, 12px) var(--space-4, 16px);
-    border-radius: var(--radius-md, 8px);
-    background: var(--surface-2, #f4f5f7);
-    color: var(--text-2, #4a5058);
-    font-size: var(--fs-sm, 0.875rem);
-    line-height: var(--lh-normal, 1.5);
+    max-width: 60ch;
+    color: var(--text-3);
+    font-size: var(--fs-sm);
+    line-height: var(--lh-normal);
+  }
+  .ob-skipnote__icon {
+    flex-shrink: 0;
+    width: 1rem;
+    height: 1rem;
+    margin-top: 0.15em;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.4;
+    stroke-linecap: round;
   }
 
+  /* ---------- Action bar ---------- */
   .ob-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: var(--space-3, 12px);
+    gap: var(--space-3);
     flex-wrap: wrap;
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--border-1);
   }
-  .ob-footer__right { display: flex; gap: var(--space-3, 12px); margin-left: auto; flex-wrap: wrap; }
+  .ob-footer__right {
+    display: flex;
+    gap: var(--space-3);
+    margin-left: auto;
+    flex-wrap: wrap;
+    align-items: center;
+  }
 
-  /* Shared field styles for every onboarding step. Hint text is smaller and lighter than input text. */
-  .ob-shell :global(.ob-field) { display: flex; flex-direction: column; gap: var(--space-2, 8px); }
+  /* Phones: the bar sticks to the bottom, primary full width in the thumb zone,
+     back as a text link above it, safe-area padding for the home indicator. */
+  @media (max-width: 40rem) {
+    .ob-shell {
+      padding-bottom: var(--space-6);
+      gap: var(--space-6);
+    }
+    .ob-card {
+      gap: var(--space-6);
+    }
+    .ob-title {
+      font-size: var(--fs-3xl);
+    }
+    .ob-footer {
+      position: sticky;
+      bottom: 0;
+      z-index: 5;
+      margin-inline: calc(-1 * var(--gutter));
+      padding: var(--space-3) var(--gutter) calc(var(--space-3) + env(safe-area-inset-bottom));
+      background: var(--surface-glass);
+      backdrop-filter: saturate(1.8) blur(20px);
+      -webkit-backdrop-filter: saturate(1.8) blur(20px);
+      flex-direction: column-reverse;
+      align-items: stretch;
+      gap: var(--space-2);
+    }
+    .ob-footer__spacer {
+      display: none;
+    }
+    .ob-footer__right {
+      flex-direction: column-reverse;
+      align-items: stretch;
+      margin-left: 0;
+      gap: var(--space-2);
+    }
+    .ob-footer__right :global(.ob-btn--primary) {
+      width: 100%;
+      min-height: 3.25rem;
+    }
+    .ob-back {
+      align-self: center;
+    }
+  }
+
+  /* ---------- Shared field styles for every onboarding step ---------- */
+  .ob-shell :global(.ob-field) {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
   .ob-shell :global(.ob-label) {
-    font-size: var(--fs-sm, 0.875rem);
-    font-weight: var(--fw-semibold, 600);
-    color: var(--text-1, #14171a);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    color: var(--text-1);
   }
   .ob-shell :global(.ob-hint) {
     margin: 0;
-    font-size: var(--fs-xs, 0.8125rem);
-    color: var(--text-3, #6b7280);
-    line-height: var(--lh-normal, 1.5);
+    font-size: var(--fs-xs);
+    color: var(--text-3);
+    line-height: var(--lh-normal);
   }
   .ob-shell :global(.ob-input),
   .ob-shell :global(.ob-textarea),
   .ob-shell :global(.ob-select) {
     width: 100%;
     box-sizing: border-box;
+    min-height: 3.5rem;
     font: inherit;
-    font-size: var(--fs-lg, 1.125rem);
-    color: var(--text-1, #14171a);
-    background: var(--surface-0, #fff);
-    border: 1px solid var(--border-2, #c9ced6);
-    border-radius: var(--radius-md, 8px);
-    padding: var(--space-3, 12px) var(--space-4, 16px);
-    transition: border-color var(--dur-fast, 120ms), box-shadow var(--dur-fast, 120ms);
+    font-size: var(--fs-lg);
+    color: var(--text-1);
+    background: var(--surface-0);
+    border: 1px solid var(--border-2);
+    border-radius: var(--radius-md);
+    padding: var(--space-3) var(--space-4);
+    transition:
+      border-color var(--t-out) var(--ease-out),
+      box-shadow var(--t-out) var(--ease-out);
   }
-  .ob-shell :global(.ob-textarea) { min-height: 6rem; resize: vertical; font-size: var(--fs-md, 1rem); }
+  .ob-shell :global(.ob-select) {
+    cursor: pointer;
+  }
+  .ob-shell :global(.ob-textarea) {
+    min-height: 6rem;
+    resize: vertical;
+    font-size: var(--fs-md);
+  }
   .ob-shell :global(.ob-input::placeholder),
-  .ob-shell :global(.ob-textarea::placeholder) { color: var(--text-3, #8a9099); font-size: var(--fs-md, 1rem); }
+  .ob-shell :global(.ob-textarea::placeholder) {
+    color: var(--text-3);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .ob-shell :global(.ob-input:hover:not(:focus)),
+    .ob-shell :global(.ob-textarea:hover:not(:focus)),
+    .ob-shell :global(.ob-select:hover:not(:focus)) {
+      border-color: var(--text-2);
+      transition-duration: var(--t-in);
+    }
+  }
   .ob-shell :global(.ob-input:focus-visible),
   .ob-shell :global(.ob-textarea:focus-visible),
-  .ob-shell :global(.ob-select:focus-visible) {
+  .ob-shell :global(.ob-select:focus-visible),
+  .ob-shell :global(.ob-input:focus),
+  .ob-shell :global(.ob-textarea:focus) {
     outline: none;
-    border-color: var(--accent, #3b5bdb);
+    border-color: var(--text-1);
     box-shadow: var(--focus-ring);
   }
   .ob-shell :global(.ob-input[aria-invalid="true"]),
-  .ob-shell :global(.ob-textarea[aria-invalid="true"]) { border-color: var(--danger, #c92a2a); }
-  .ob-shell :global(.ob-error) {
+  .ob-shell :global(.ob-textarea[aria-invalid="true"]) {
+    border-color: var(--danger);
+  }
+  /* Error and success: icon + text, not a colored box alone. */
+  .ob-shell :global(.ob-error),
+  .ob-shell :global(.ob-success) {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
     margin: 0;
-    font-size: var(--fs-sm, 0.875rem);
-    color: var(--danger, #c92a2a);
-    background: var(--danger-soft, #fff0f0);
-    border-radius: var(--radius-md, 8px);
-    padding: var(--space-2, 8px) var(--space-3, 12px);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-snug);
+  }
+  .ob-shell :global(.ob-error) {
+    color: var(--danger);
   }
   .ob-shell :global(.ob-success) {
-    margin: 0;
-    font-size: var(--fs-sm, 0.875rem);
-    color: var(--success, #2b8a3e);
-    background: var(--success-soft, #ebfbee);
-    border-radius: var(--radius-md, 8px);
-    padding: var(--space-2, 8px) var(--space-3, 12px);
+    color: var(--success);
+  }
+  .ob-shell :global(.ob-error)::before,
+  .ob-shell :global(.ob-success)::before {
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    width: 1.125rem;
+    height: 1.125rem;
+    margin-top: 0.05em;
+    border: 1.5px solid currentColor;
+    border-radius: var(--radius-full);
+    font-size: 0.6875rem;
+    font-weight: var(--fw-bold);
+    line-height: 1;
+  }
+  .ob-shell :global(.ob-error)::before {
+    content: "!";
+  }
+  .ob-shell :global(.ob-success)::before {
+    content: "\2713";
   }
 
-  /* One primary, one secondary, one tertiary (text link) style. */
+  /* ---------- Buttons: ink pill, outlined pill, text link ---------- */
   .ob-shell :global(.ob-btn) {
+    position: relative;
     font: inherit;
-    font-size: var(--fs-md, 1rem);
-    font-weight: var(--fw-semibold, 600);
-    border-radius: var(--radius-md, 8px);
-    padding: var(--space-3, 12px) var(--space-5, 24px);
+    font-size: var(--fs-md);
+    font-weight: var(--fw-medium);
+    letter-spacing: -0.01em;
+    border-radius: var(--radius-full);
+    padding: 0 var(--space-6);
     cursor: pointer;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: var(--space-2, 8px);
-    min-height: 44px;
+    gap: var(--space-2);
+    min-height: var(--control-h);
     border: 1px solid transparent;
-    transition: background var(--dur-fast, 120ms), border-color var(--dur-fast, 120ms), color var(--dur-fast, 120ms);
+    white-space: nowrap;
+    transition:
+      background-color var(--t-out) var(--ease-out),
+      border-color var(--t-out) var(--ease-out),
+      color var(--t-out) var(--ease-out),
+      transform var(--dur-base) var(--ease-out);
   }
-  .ob-shell :global(.ob-btn:focus-visible) { outline: 2px solid var(--focus-color, #7b93ff); outline-offset: 2px; }
-  .ob-shell :global(.ob-btn:disabled) { opacity: 0.55; cursor: not-allowed; }
-  .ob-shell :global(.ob-btn--primary) { background: var(--accent, #3b5bdb); color: var(--accent-contrast, #fff); }
-  .ob-shell :global(.ob-btn--primary:hover:not(:disabled)) { background: var(--accent-hover, #2f4ac0); }
-  .ob-shell :global(.ob-btn--secondary) { background: var(--surface-1, #fff); color: var(--text-1, #14171a); border-color: var(--border-2, #c9ced6); }
-  .ob-shell :global(.ob-btn--secondary:hover:not(:disabled)) { background: var(--surface-2, #f4f5f7); }
+  .ob-shell :global(.ob-btn:focus-visible) {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+  .ob-shell :global(.ob-btn:active:not([aria-disabled="true"]):not(:disabled)) {
+    transform: scale(0.97);
+    transition-duration: 60ms;
+  }
+  .ob-shell :global(.ob-btn:disabled),
+  .ob-shell :global(.ob-btn[aria-disabled="true"]:not([aria-busy="true"])) {
+    opacity: var(--disabled-opacity);
+    cursor: not-allowed;
+  }
+  .ob-shell :global(.ob-btn[aria-busy="true"]) {
+    cursor: progress;
+  }
+  .ob-shell :global(.ob-btn--primary) {
+    min-height: 3rem;
+    background: var(--accent);
+    color: var(--accent-contrast);
+  }
+  .ob-shell :global(.ob-btn--secondary) {
+    background: var(--surface-0);
+    color: var(--text-1);
+    border-color: var(--border-2);
+  }
   .ob-shell :global(.ob-btn--tertiary) {
     background: none;
-    color: var(--text-link, #3b5bdb);
-    padding-left: var(--space-2, 8px);
-    padding-right: var(--space-2, 8px);
+    color: var(--text-link);
+    padding-inline: var(--space-2);
     text-decoration: underline;
-    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    text-decoration-color: transparent;
+    text-underline-offset: 0.2em;
   }
-  .ob-shell :global(.ob-btn--tertiary:hover:not(:disabled)) { color: var(--accent-hover, #2f4ac0); }
+  @media (hover: hover) and (pointer: fine) {
+    .ob-shell :global(.ob-btn--primary:hover:not(:disabled):not([aria-disabled="true"])) {
+      background: var(--accent-hover);
+      transition-duration: var(--t-in);
+    }
+    .ob-shell :global(.ob-btn--secondary:hover:not(:disabled):not([aria-disabled="true"])) {
+      background: var(--surface-2);
+      transition-duration: var(--t-in);
+    }
+    .ob-shell :global(.ob-btn--tertiary:hover:not(:disabled)) {
+      box-shadow: none;
+      text-decoration-color: currentColor;
+    }
+  }
+  .ob-back span {
+    display: inline-block;
+    transition: transform var(--dur-base) var(--ease-out);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .ob-back:hover span {
+      transform: translateX(-3px);
+    }
+  }
+
+  /* Pending: label and busy text share one cell so the width never jumps; the busy
+     text and spinner appear only after 350 ms. */
+  .ob-footer .ob-btn--primary {
+    display: inline-grid;
+    place-items: center;
+  }
+  .ob-btn__label,
+  .ob-btn__busy {
+    grid-area: 1 / 1;
+  }
+  .ob-btn__busy {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    visibility: hidden;
+  }
+  .is-loading .ob-btn__label {
+    animation: ob-swap-out 1ms 350ms forwards;
+  }
+  .is-loading .ob-btn__busy {
+    visibility: visible;
+    opacity: 0;
+    animation: ob-swap-in 1ms 350ms forwards;
+  }
+  @keyframes ob-swap-out {
+    to {
+      opacity: 0;
+    }
+  }
+  @keyframes ob-swap-in {
+    to {
+      opacity: 1;
+    }
+  }
 
   .ob-spinner {
     width: 1em;
     height: 1em;
     border: 2px solid currentColor;
     border-right-color: transparent;
-    border-radius: 50%;
+    border-radius: var(--radius-full);
     animation: ob-spin 0.8s linear infinite;
   }
-  @keyframes ob-spin { to { transform: rotate(360deg); } }
-  @media (prefers-reduced-motion: reduce) { .ob-spinner { animation-duration: 2s; } }
+  @keyframes ob-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @media (forced-colors: active) {
+    .ob-progress__seg {
+      background: GrayText;
+    }
+    .ob-progress__seg.is-done,
+    .ob-progress__seg.is-current {
+      background: CanvasText;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ob-shell {
+      animation: none;
+    }
+    .ob-progress__seg {
+      transition: none;
+    }
+    .ob-shell :global(.ob-btn:active) {
+      transform: none !important;
+    }
+    .ob-spinner {
+      animation: none;
+      border-right-color: currentColor;
+      opacity: 0.6;
+    }
+    .is-loading .ob-btn__label,
+    .is-loading .ob-btn__busy {
+      animation-duration: 1ms;
+    }
+  }
 </style>

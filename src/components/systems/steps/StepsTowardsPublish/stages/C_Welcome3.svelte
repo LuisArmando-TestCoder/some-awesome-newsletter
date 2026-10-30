@@ -5,11 +5,15 @@
   import { t } from '$lib/i18n/translations';
 
   export let canReveal = false;
+  // Entrance motion is skipped for people who asked for less motion.
+  const still =
+    typeof window !== 'undefined' &&
+    (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches || document.documentElement.dataset.motion === 'reduced');
 </script>
 
 <Centered>
   {#if canReveal}
-    <div class="benefit-wrapper" in:fly={{ x: 20, y: 20, duration: 900, delay: 200, easing: cubicOut }}>
+    <div class="benefit-wrapper" in:fly={{ y: 16, duration: still ? 0 : 900, delay: still ? 0 : 200, easing: cubicOut }}>
       <h3 class="impact-statement">
         {$t.welcome.useItForever}
       </h3>
@@ -20,41 +24,22 @@
 <style lang="scss">
   .benefit-wrapper {
     display: flex;
-    justify-content: center; /* Keeps it centered within the wrapper */
+    justify-content: center;
     width: 100%;
-    padding: 0 1rem;
+    padding: 0 var(--gutter);
   }
 
+  /* The payoff line: ink and weight, no color or shimmer. */
   .impact-statement {
-    /* Responsive sizing: slightly larger/bolder than the previous subtitle */
-    font-size: clamp(1.5rem, 5vw, 2rem);
-    font-weight: 800;
-    line-height: 1.2;
     margin: 0;
-    text-align: center; /* Default center */
-    letter-spacing: -0.03em;
+    max-width: 22ch;
+    font-family: var(--font-display);
+    font-size: var(--step-chapter);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-display);
+    letter-spacing: var(--tracking-display);
+    text-align: center;
+    color: var(--text-1);
     text-wrap: balance;
-
-    /* Infinite Shimmer Effect: 
-       Creates a living, "forever" feel using a moving gradient background.
-    */
-    background: linear-gradient(
-      120deg, 
-      var(--c-primary, #2563eb) 0%, 
-      var(--c-primary-light, #60a5fa) 50%, 
-      var(--c-primary, #2563eb) 100%
-    );
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    
-    animation: shine 4s linear infinite;
-  }
-
-  @keyframes shine {
-    to {
-      background-position: 200% center;
-    }
   }
 </style>

@@ -59,7 +59,7 @@
   {#if hint}
     <p class="textarea-hint" id={hintId}>{hint}</p>
   {/if}
-  <div class="textarea-wrapper" class:invalid={showError} class:disabled>
+  <div class="textarea-wrapper" class:invalid={showError} class:disabled class:filled={!!internalValue}>
     <textarea
       id={fieldId}
       class="custom-textarea"
@@ -81,7 +81,7 @@
     ></textarea>
   </div>
   {#if showError}
-    <p class="textarea-error" id={errorId}>{error}</p>
+    <p class="textarea-error" id={errorId}><svg class="error-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.5" /><path d="M8 4.5v4.25M8 11.25v.25" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" /></svg><span>{error}</span></p>
   {/if}
 </div>
 
@@ -104,7 +104,7 @@
 
   .required-mark {
     margin-left: var(--space-1);
-    color: var(--danger);
+    color: var(--text-2);
   }
 
   .textarea-hint {
@@ -115,33 +115,61 @@
   }
 
   .textarea-error {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
     margin: 0;
     font-size: var(--fs-sm);
-    line-height: var(--lh-normal);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-snug);
     color: var(--danger);
   }
 
+  .error-icon {
+    flex: none;
+    width: 1em;
+    height: 1em;
+    margin-top: 0.15em;
+  }
+
+  /* Field shell: thin edge, soft radius, ink focus. Empty on the quiet surface, filled on paper. */
   .textarea-wrapper {
     display: flex; // Ensures textarea fills wrapper
     background: var(--surface-1);
     border: 1px solid var(--border-2);
     border-radius: var(--radius-md);
     transition:
-      border-color var(--dur-fast) var(--ease-out),
-      box-shadow var(--dur-fast) var(--ease-out);
+      border-color var(--t-out) var(--ease-out),
+      background-color var(--t-out) var(--ease-out),
+      box-shadow var(--t-out) var(--ease-out);
+
+    &.filled,
+    &:focus-within {
+      background: var(--surface-0);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover:not(.disabled):not(:focus-within) {
+        border-color: var(--text-2);
+        transition-duration: var(--t-in);
+      }
+    }
 
     &:focus-within {
-      border-color: var(--accent);
+      border-color: var(--text-1);
       box-shadow: var(--focus-ring);
     }
 
-    &.invalid {
+    &.invalid,
+    &.invalid:hover,
+    &:has(.custom-textarea:user-invalid) {
       border-color: var(--danger);
     }
 
     &.disabled {
       background: var(--surface-2);
-      opacity: 0.6;
+      border-color: var(--border-1);
+      opacity: var(--disabled-opacity);
     }
   }
 
@@ -155,6 +183,7 @@
     font-size: var(--fs-md);
     line-height: var(--lh-normal);
     color: var(--text-1);
+    caret-color: var(--text-1);
     background: transparent;
     border: none;
     border-radius: var(--radius-md);
@@ -173,7 +202,21 @@
     }
 
     &:disabled {
+      color: var(--text-2);
       cursor: not-allowed;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .textarea-wrapper {
+      border-color: FieldText;
+    }
+    .textarea-wrapper:focus-within {
+      outline: 2px solid Highlight;
+      outline-offset: 2px;
+    }
+    .textarea-error {
+      color: CanvasText;
     }
   }
 </style>

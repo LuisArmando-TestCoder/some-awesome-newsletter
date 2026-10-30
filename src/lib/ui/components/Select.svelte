@@ -22,6 +22,8 @@
     size?: 'sm' | 'md';
     id?: string;
     class?: string;
+    /** Why the select is unavailable, shown under the label while disabled. */
+    disabledReason?: string;
   }
 
   let {
@@ -38,12 +40,17 @@
     size = 'md',
     id,
     class: className = '',
+    disabledReason,
     'aria-describedby': extraDescribedBy,
     ...rest
   }: Props = $props();
+
+  const shownHint = $derived(
+    disabled && disabledReason ? [hint, disabledReason].filter(Boolean).join(' ') : hint
+  );
 </script>
 
-<Field {label} {id} {hint} {error} {required} {optional} {hideLabel} class={className}>
+<Field {label} {id} hint={shownHint} {error} {required} {optional} {hideLabel} class={className}>
   {#snippet children({ id: controlId, describedBy, invalid })}
     <div
       class="select"
@@ -69,7 +76,9 @@
           <option value={option.value} disabled={option.disabled}>{option.label}</option>
         {/each}
       </select>
-      <span class="select__chevron" aria-hidden="true"></span>
+      <svg class="select__chevron" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+        <path d="M4 6.25 8 10.25l4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
     </div>
   {/snippet}
 </Field>
@@ -80,53 +89,81 @@
     display: flex;
   }
 
+  /* Field: thin edge, soft radius, ink focus. Empty sits on the quiet surface, filled on paper. */
   .select__control {
+    box-sizing: border-box;
     width: 100%;
     min-height: var(--control-h);
     margin: 0;
-    padding: 0 calc(var(--control-pad-x) + var(--space-5)) 0 var(--control-pad-x);
+    padding: 0 var(--control-pad-x);
     background: var(--surface-1);
     border: 1px solid var(--border-2);
     border-radius: var(--radius-md);
     color: var(--text-1);
+    caret-color: var(--text-1);
     font-family: var(--font-body);
     font-size: var(--fs-md);
     line-height: var(--lh-snug);
-    appearance: none;
-    cursor: pointer;
     transition:
-      border-color var(--dur-fast) var(--ease-out),
-      box-shadow var(--dur-fast) var(--ease-out);
+      border-color var(--t-out) var(--ease-out),
+      background-color var(--t-out) var(--ease-out),
+      box-shadow var(--t-out) var(--ease-out);
 
-    &:hover {
-      border-color: var(--text-3);
+    &::placeholder {
+      color: var(--text-3);
+      opacity: 1;
+    }
+
+    &:focus {
+      background: var(--surface-0);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover:not(:disabled, [readonly], :focus) {
+        border-color: var(--text-2);
+        transition-duration: var(--t-in);
+      }
     }
 
     &:focus-visible {
       outline: none;
-      border-color: var(--accent);
+      border-color: var(--text-1);
       box-shadow: var(--focus-ring);
     }
 
-    &--empty {
-      color: var(--text-3);
+    &[readonly] {
+      background: var(--surface-2);
+      border-color: transparent;
+      cursor: text;
     }
 
     &:disabled {
       background: var(--surface-2);
       border-color: var(--border-1);
-      color: var(--text-3);
+      color: var(--text-2);
+      opacity: var(--disabled-opacity);
       cursor: not-allowed;
     }
 
-    option {
-      color: var(--text-1);
-      background: var(--surface-1);
+    /* Invalid wins over hover and focus: the parent error, or the browser's after-blur check. */
+    &[aria-invalid='true'],
+    &:user-invalid {
+      border-color: var(--danger);
     }
   }
 
-  .select--sm .select__control {
-    min-height: var(--control-h-sm);
+  /* Browser autofill: keep our ink and a calm tint instead of the default yellow or blue. */
+  .select__control:-webkit-autofill {
+    -webkit-text-fill-color: var(--text-1);
+    caret-color: var(--text-1);
+    box-shadow: inset 0 0 0 100vmax var(--surface-2);
+    transition: background-color 600000s 0s;
+  }
+  .select__control:-webkit-autofill:focus-visible {
+    box-shadow: var(--focus-ring), inset 0 0 0 100vmax var(--surface-2);
+  }
+  .select__control:autofill {
+    box-shadow: inset 0 0 0 100vmax var(--surface-2);
   }
 
   .select--invalid .select__control,
@@ -134,19 +171,73 @@
     border-color: var(--danger);
   }
 
+  @media (forced-colors: active) {
+    .select__control {
+      border-color: FieldText;
+    }
+    .select__control:focus-visible {
+      outline: 2px solid Highlight;
+      outline-offset: 2px;
+    }
+    .select__control[aria-invalid='true'] {
+      border-style: dashed;
+    }
+  }
+
+  .select__control {
+    padding: 0 calc(var(--control-pad-x) + var(--space-5)) 0 var(--control-pad-x);
+    appearance: none;
+    cursor: pointer;
+    background: var(--surface-0);
+
+    &--empty {
+      color: var(--text-3);
+      background: var(--surface-1);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+
+    option {
+      color: var(--text-1);
+      background: var(--surface-0);
+    }
+  }
+
+  .select--sm .select__control {
+    min-height: var(--control-h-sm);
+  }
+
   .select__chevron {
     position: absolute;
     top: 50%;
     right: var(--control-pad-x);
-    width: 0.5rem;
-    height: 0.5rem;
-    border-right: 2px solid var(--text-2);
-    border-bottom: 2px solid var(--text-2);
-    transform: translateY(-70%) rotate(45deg);
+    width: 1rem;
+    height: 1rem;
+    color: var(--text-2);
+    transform: translateY(-50%);
     pointer-events: none;
+    transition: transform var(--dur-base) var(--ease-out), color var(--t-out) var(--ease-out);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .select:hover .select__control:not(:disabled) ~ .select__chevron {
+      color: var(--text-1);
+      transform: translateY(calc(-50% + 1px));
+    }
+  }
+  .select__control:focus-visible ~ .select__chevron {
+    color: var(--text-1);
   }
 
   .select--disabled .select__chevron {
-    border-color: var(--text-3);
+    color: var(--text-3);
+  }
+
+  @media (forced-colors: active) {
+    .select__chevron {
+      color: FieldText;
+    }
   }
 </style>

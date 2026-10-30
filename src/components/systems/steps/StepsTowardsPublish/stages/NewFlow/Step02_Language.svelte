@@ -84,12 +84,12 @@
       placeholder={$ob.readers.readerPlaceholder}
       bind:value={reader}
       aria-invalid={error ? "true" : undefined}
-      aria-describedby="ob-reader-hint"
+      aria-describedby={error ? "ob-reader-hint ob-reader-error" : "ob-reader-hint"}
     ></textarea>
     <p class="ob-hint" id="ob-reader-hint">{$ob.readers.readerHint}</p>
   </div>
 
   {#if error}
-    <p class="ob-error" role="alert">{error}</p>
+    <p class="ob-error shake" id="ob-reader-error" role="alert">{error}</p>
   {/if}
 </OnboardingShell>

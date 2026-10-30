@@ -1,0 +1,175 @@
+// AIBAN micro states (Award-Grade Web Playbook, "micro states on interactive components").
+// Loaded once through tokens.scss. Every rule sits inside :where() (zero specificity), so a
+// component's own styles always win; anything that does not style a state still gets a correct one.
+//
+// Three independent axes:
+//   interaction   rest, hover, focus-visible, pressed, dragged      (pseudo-classes)
+//   selection     pressed/checked/selected/expanded/current         (ARIA attributes)
+//   availability  disabled, read-only, busy, invalid                (attributes and ARIA)
+// Visual priority when they collide: invalid > busy > disabled > pressed > focus > selected > hover.
+// The focus ring is always drawn in addition, never instead.
+
+:root {
+  // State layer: content color laid over the control at a fixed strength.
+  --state-hover: 8%;
+  --state-focus: 10%;
+  --state-press: 12%;
+  --state-drag: 16%;
+  --state-selected: 10%;
+  --disabled-opacity: 0.45;
+  // Timing: hover arrives fast, leaves slower; press is instant.
+  --t-in: 120ms;
+  --t-out: 200ms;
+  --t-state: 180ms;
+  --ring-width: 2px;
+  --ring-offset: 2px;
+}
+
+// Everything that acts like a button. Links are handled separately (underline, not fill).
+// `.button` is the primitive in $lib/ui/components/Button.svelte, which draws its own layer.
+$controls: 'button:not(.button), [role="button"]:not(a, .button), [role="tab"], [role="menuitem"], [role="menuitemcheckbox"], [role="menuitemradio"], [role="option"], [role="switch"], summary, input:is([type="button"], [type="submit"], [type="reset"])';
+$inactive: ':disabled, [aria-disabled="true"], [aria-busy="true"]';
+
+:where(#{$controls}) {
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    box-shadow var(--t-out) var(--ease-out),
+    background-color var(--t-state) var(--ease-out),
+    color var(--t-state) var(--ease-out),
+    transform var(--t-out) var(--ease-out);
+}
+
+// Hover: only on devices that really hover, so phones never get a sticky hover.
+@media (hover: hover) and (pointer: fine) {
+  :where(#{$controls}):where(:hover:not(#{$inactive})) {
+    box-shadow: inset 0 0 0 100vmax color-mix(in srgb, currentColor var(--state-hover), transparent);
+    transition-duration: var(--t-in);
+  }
+}
+
+:where(#{$controls}):where(:focus-visible:not(#{$inactive})) {
+  box-shadow: inset 0 0 0 100vmax color-mix(in srgb, currentColor var(--state-focus), transparent);
+}
+
+// Pressed: lands within one frame (NN/g 0.1 s), eases out slower.
+:where(#{$controls}):where(:active:not(#{$inactive})) {
+  box-shadow: inset 0 0 0 100vmax color-mix(in srgb, currentColor var(--state-press), transparent);
+  transition-duration: 0ms;
+}
+
+// ---------- Focus (WCAG 2.4.7, 2.4.11) ----------
+// tokens.scss draws the ring on :focus-visible. Keep focused things clear of the sticky header.
+:where(a, button, input, select, textarea, summary, [tabindex]) {
+  scroll-margin-block: calc(var(--header-h) + var(--space-4)) var(--space-6);
+}
+
+// ---------- Links ----------
+:where(a[href]) {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  transition:
+    color var(--t-state) var(--ease-out),
+    text-decoration-color var(--t-state) var(--ease-out),
+    text-decoration-thickness var(--t-state) var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  :where(a[href]:hover) {
+    text-decoration-thickness: 2px;
+  }
+}
+:where(a[aria-current]:not([aria-current='false'])) {
+  font-weight: var(--fw-semibold);
+}
+
+// ---------- Selection and value ----------
+// Native checkboxes, radios and ranges take the action color.
+:where(input[type='checkbox'], input[type='radio'], input[type='range'], progress) {
+  accent-color: var(--accent);
+}
+:where(input[type='checkbox'], input[type='radio']) {
+  cursor: pointer;
+}
+
+// Expanded: a chevron inside the trigger turns over (200 to 300 ms).
+:where([aria-expanded]) :where(.chevron, [data-chevron], .icon-chevron) {
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+:where([aria-expanded='true']) :where(.chevron, [data-chevron], .icon-chevron) {
+  transform: rotate(180deg);
+}
+:where(details) > :where(summary) {
+  list-style-position: outside;
+}
+
+// ---------- Availability ----------
+:where(button:disabled, [aria-disabled='true']) {
+  cursor: not-allowed;
+}
+:where(button:disabled, input:disabled, select:disabled, textarea:disabled) {
+  opacity: var(--disabled-opacity);
+}
+:where([aria-busy='true']) {
+  cursor: progress;
+}
+
+// Read-only keeps the value readable and copyable, drops the field chrome.
+:where(input[readonly]:not([type='checkbox'], [type='radio']), textarea[readonly]) {
+  background-color: var(--surface-2);
+  cursor: text;
+}
+
+// Invalid only after the person interacted (:user-invalid) or the app said so (aria-invalid).
+:where(input, select, textarea):where([aria-invalid='true'], :user-invalid) {
+  border-color: var(--danger);
+}
+
+// Error nudge for a field or form after a failed submit. Add .shake for one run.
+:where(.shake) {
+  animation: aiban-shake 300ms var(--ease-out) 1;
+}
+@keyframes aiban-shake {
+  25% {
+    translate: -6px 0;
+  }
+  75% {
+    translate: 6px 0;
+  }
+}
+
+// ---------- Dragging ----------
+:where([aria-grabbed='true'], .is-dragging) {
+  box-shadow: var(--shadow-3);
+  transform: scale(1.02) rotate(-0.5deg);
+  cursor: grabbing;
+}
+:where(.is-drop-target) {
+  outline: 2px dashed var(--focus-color);
+  outline-offset: 2px;
+}
+
+// ---------- Forced colors (Windows High Contrast) ----------
+@media (forced-colors: active) {
+  :where(:focus-visible) {
+    outline: 2px solid CanvasText;
+  }
+  :where([aria-pressed='true'], [aria-selected='true'], [aria-checked='true'], [aria-current]:not([aria-current='false'])) {
+    forced-color-adjust: none;
+    background: Highlight;
+    color: HighlightText;
+  }
+  :where(button:disabled, [aria-disabled='true']) {
+    color: GrayText;
+  }
+}
+
+// ---------- Reduced motion ----------
+@media (prefers-reduced-motion: reduce) {
+  :where(.shake) {
+    animation: none;
+  }
+  :where([aria-grabbed='true'], .is-dragging) {
+    transform: none;
+  }
+}

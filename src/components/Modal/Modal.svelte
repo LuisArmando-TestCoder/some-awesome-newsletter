@@ -111,28 +111,46 @@
     margin: auto;
     padding: 0;
     border: 1px solid var(--border-1);
-    border-radius: var(--radius-lg);
-    background: var(--surface-1);
+    border-radius: var(--radius-xl);
+    background: var(--surface-0);
     color: var(--text-1);
     box-shadow: var(--shadow-3);
     font-family: var(--font-body);
     overflow: hidden;
   }
 
+  /* Playbook overlay: opens from 24px below, the page behind blurs. */
   .modal[open] {
     display: flex;
-    animation: modal-in var(--dur-base) var(--ease-out);
+    animation: modal-in var(--dur-slow) var(--ease-out);
   }
 
   .modal::backdrop {
     background: var(--surface-overlay);
-    animation: backdrop-in var(--dur-base) var(--ease-out);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    animation: backdrop-in var(--dur-slow) var(--ease-out);
+  }
+
+  :global(html:has(dialog.modal[open])) {
+    overflow: hidden;
+  }
+
+  /* Phones: a sheet anchored to the bottom, close button in thumb reach. */
+  @media (max-width: 40rem) {
+    .modal {
+      width: 100vw;
+      max-height: 92dvh;
+      margin: auto 0 0;
+      border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+      padding-bottom: env(safe-area-inset-bottom);
+    }
   }
 
   @keyframes modal-in {
     from {
       opacity: 0;
-      transform: translateY(0.5rem);
+      transform: translateY(24px);
     }
   }
 
@@ -146,6 +164,9 @@
     .modal[open],
     .modal::backdrop {
       animation: none;
+    }
+    .close:active {
+      transform: none;
     }
   }
 
@@ -184,16 +205,22 @@
     flex: none;
     display: inline-grid;
     place-items: center;
-    width: var(--control-h-sm);
-    height: var(--control-h-sm);
-    border: 0;
-    border-radius: var(--radius-sm);
-    background: transparent;
-    color: var(--text-2);
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--border-1);
+    border-radius: var(--radius-full);
+    background: var(--surface-0);
+    color: var(--text-1);
     cursor: pointer;
     transition:
-      background-color var(--dur-fast) var(--ease-out),
-      color var(--dur-fast) var(--ease-out);
+      background-color var(--t-out) var(--ease-out),
+      transform var(--t-out) var(--ease-out);
+  }
+
+  .close:active {
+    transform: scale(0.94);
+    background: var(--surface-3);
+    transition-duration: 0ms;
   }
 
   .close svg {
@@ -201,9 +228,11 @@
     height: 1.25rem;
   }
 
-  .close:hover {
-    background: var(--surface-2);
-    color: var(--text-1);
+  @media (hover: hover) and (pointer: fine) {
+    .close:hover {
+      background: var(--surface-2);
+      transition-duration: var(--t-in);
+    }
   }
 
   .close:focus-visible {

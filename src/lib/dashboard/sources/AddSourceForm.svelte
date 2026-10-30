@@ -126,7 +126,7 @@
 </Card>
 
 <style lang="scss">
-  .form { display: flex; flex-direction: column; gap: var(--space-4); max-width: 560px; }
+  .form { display: flex; flex-direction: column; gap: var(--space-4); max-width: 35rem; }
   .block { margin-bottom: var(--space-2); }
   .usage { margin: 0 0 var(--space-4); font-size: var(--fs-sm); color: var(--text-2); }
   .note { margin: 0; font-size: var(--fs-sm); color: var(--text-2); line-height: var(--lh-normal); }

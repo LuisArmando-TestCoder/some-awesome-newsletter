@@ -384,7 +384,7 @@
   .custom-content-send-section {
     margin-top: 1.5rem;
     padding-top: 1rem;
-    border-top: 1px solid var(--color-border-light, #eee);
+    border-top: 1px solid var(--border-1);
   }
   
   .custom-send-button-container {
@@ -416,9 +416,9 @@
   }
 
   .limit-warning {
-    background-color: var(--color-warning-light, #fff3cd);
-    border: 1px solid var(--color-warning, #ffc107);
-    color: var(--color-warning-dark, #856404);
+    background-color: var(--warning-soft);
+    border: 1px solid var(--warning);
+    color: var(--warning);
     padding: 0.75rem;
     border-radius: var(--radius-s);
     margin-bottom: 1rem;
@@ -434,14 +434,14 @@
   .add-forms-container {
     margin-top: 1rem;
     padding: 1rem;
-    border: 1px dashed var(--color-border-light, #ccc);
+    border: 1px dashed var(--border-1);
     border-radius: var(--radius-m);
-    background-color: var(--color-background-inversion);
+    background-color: var(--surface-1);
   }
 
   .section-separator {
     border: none;
-    border-top: 1px solid var(--color-border-light, #eee);
+    border-top: 1px solid var(--border-1);
     margin: 1.5rem 0;
   }
 
@@ -465,15 +465,15 @@
     border: 1px solid transparent;
 
     &.success {
-      background-color: var(--color-success-light, #e8f5e9);
-      border-color: var(--color-success, #4caf50);
-      color: var(--color-success-dark, #1b5e20);
+      background-color: var(--success-soft);
+      border-color: var(--success);
+      color: var(--success);
     }
 
     &.error {
-      background-color: var(--color-error-light, #ffebee);
-      border-color: var(--color-error, #f44336);
-      color: var(--color-error-dark, #c62828);
+      background-color: var(--danger-soft);
+      border-color: var(--danger);
+      color: var(--danger);
     }
 
     .close-feedback {
@@ -498,7 +498,7 @@
   .loading-indicator {
     margin-top: 1rem;
     padding: 1rem;
-    background-color: var(--color-background-secondary);
+    background-color: var(--surface-2);
     border-radius: var(--radius-m);
     text-align: center;
     color: var(--color-text-secondary);

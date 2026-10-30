@@ -255,9 +255,9 @@
   }
 
   .limit-warning {
-    background-color: var(--color-warning-light, #fff3cd);
-    border: 1px solid var(--color-warning, #ffc107);
-    color: var(--color-warning-dark, #856404);
+    background-color: var(--warning-soft);
+    border: 1px solid var(--warning);
+    color: var(--warning);
     padding: 0.75rem;
     border-radius: 4px;
     font-size: 0.9rem;
@@ -290,33 +290,32 @@
   .webhook-group-selector {
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    background: #f8f8ff;
-    border: 1px solid #c7d2fe;
-    border-radius: 10px;
-    padding: 14px 16px;
+    gap: var(--space-2);
+    background: var(--surface-1);
+    border: 1px solid var(--border-1);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
   }
   .wg-label {
-    font-size: 0.82rem;
-    font-weight: 700;
-    color: #4f46e5;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-semibold);
+    color: var(--text-1);
   }
   .wg-select {
-    border: 1px solid #c7d2fe;
-    border-radius: 8px;
-    padding: 9px 12px;
-    font-size: 0.9rem;
-    background: #fff;
+    border: 1px solid var(--border-2);
+    border-radius: var(--radius-md);
+    min-height: var(--control-h);
+    padding: 0 var(--space-3);
+    font-size: var(--fs-sm);
+    background: var(--surface-0);
     cursor: pointer;
     width: 100%;
-    color: #1e1b4b;
-    &:focus { outline: none; border-color: #4f46e5; }
+    color: var(--text-1);
+    &:focus-visible { outline: none; border-color: var(--text-1); box-shadow: var(--focus-ring); }
   }
   .wg-hint {
-    font-size: 0.78rem;
-    color: #6366f1;
+    font-size: var(--fs-xs);
+    color: var(--text-3);
     margin: 0;
   }
 </style>

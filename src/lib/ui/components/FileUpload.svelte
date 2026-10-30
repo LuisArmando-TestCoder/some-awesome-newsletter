@@ -300,6 +300,9 @@
     <ul class="upload__files">
       {#each chosen as file (file.name + file.size)}
         <li class="upload__file">
+          <svg class="upload__file-check" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+            <path d="M3.5 8.5 6.5 11.5 12.5 4.5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
           <span class="upload__file-name">{file.name}</span>
           <span class="upload__file-size">{formatSize(file.size)}</span>
         </li>
@@ -315,7 +318,10 @@
 
   <div class="upload__error-region" aria-live="polite">
     {#if shownError}
-      <p id={errorId} class="upload__error">{shownError}</p>
+      <p id={errorId} class="upload__error">
+        <svg class="upload__error-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.5" /><path d="M8 4.5v4.25M8 11.25v.25" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" /></svg>
+        <span>{shownError}</span>
+      </p>
     {/if}
   </div>
 </div>
@@ -375,31 +381,55 @@
     border-radius: var(--radius-lg);
     color: var(--text-2);
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
     transition:
-      background-color var(--dur-fast) var(--ease-out),
-      border-color var(--dur-fast) var(--ease-out),
-      box-shadow var(--dur-fast) var(--ease-out);
+      background-color var(--t-out) var(--ease-out),
+      border-color var(--t-out) var(--ease-out),
+      box-shadow var(--t-out) var(--ease-out),
+      transform var(--dur-base) var(--ease-out);
 
-    &:hover {
-      border-color: var(--text-3);
-      background: var(--surface-2);
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        border-color: var(--text-2);
+        background: var(--surface-2);
+        transition-duration: var(--t-in);
+      }
+      &:hover .upload__icon {
+        transform: translateY(-3px);
+        color: var(--text-1);
+      }
     }
 
+    &:active {
+      transform: scale(0.99);
+      transition-duration: 60ms;
+    }
+
+    &--filled {
+      border-style: solid;
+      border-color: var(--border-1);
+      background: var(--surface-0);
+    }
+
+    /* Dragging over: solid ink edge and a raised surface, plus the cursor says copy. */
     &--dragging,
     &--dragging:hover {
       border-style: solid;
-      border-color: var(--accent);
-      background: var(--accent-soft);
+      border-color: var(--text-1);
+      background: var(--surface-2);
+      box-shadow: inset 0 0 0 1px var(--text-1);
     }
   }
 
   .upload__input:focus-visible + .upload__zone {
     border-style: solid;
-    border-color: var(--accent);
+    border-color: var(--text-1);
     box-shadow: var(--focus-ring);
   }
 
-  .upload--invalid .upload__zone {
+  .upload--invalid .upload__zone,
+  .upload--invalid .upload__zone:hover {
+    border-style: solid;
     border-color: var(--danger);
   }
 
@@ -408,6 +438,9 @@
     width: var(--space-6);
     height: var(--space-6);
     color: var(--text-3);
+    transition:
+      transform var(--dur-base) var(--ease-out),
+      color var(--t-out) var(--ease-out);
   }
 
   .upload__preview {
@@ -432,7 +465,14 @@
     font-size: var(--fs-md);
     font-weight: var(--fw-medium);
     text-decoration: underline;
+    text-decoration-thickness: 1px;
     text-underline-offset: 0.2em;
+    transition: text-decoration-thickness var(--t-out) var(--ease-out);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .upload__zone:hover .upload__choose {
+      text-decoration-thickness: 2px;
+    }
   }
 
   .upload__drop {
@@ -447,6 +487,14 @@
     margin: 0;
     padding: 0;
     list-style: none;
+  }
+
+  .upload__file-check {
+    flex: none;
+    align-self: center;
+    width: 0.875rem;
+    height: 0.875rem;
+    color: var(--success);
   }
 
   .upload__file {
@@ -476,21 +524,32 @@
   }
 
   .upload__remove {
-    min-height: var(--space-5);
-    padding: var(--space-1) var(--space-2);
-    margin-left: calc(-1 * var(--space-2));
+    position: relative;
+    min-height: 2rem;
+    padding: var(--space-1) var(--space-3);
+    margin-left: calc(-1 * var(--space-3));
     background: transparent;
     border: 0;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-full);
     color: var(--danger);
     font-family: var(--font-body);
     font-size: var(--fs-sm);
     font-weight: var(--fw-medium);
     cursor: pointer;
-    transition: background-color var(--dur-fast) var(--ease-out);
+    transition:
+      background-color var(--t-out) var(--ease-out),
+      transform var(--dur-base) var(--ease-out);
 
-    &:hover {
-      background: var(--danger-soft);
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background: var(--danger-soft);
+        transition-duration: var(--t-in);
+      }
+    }
+
+    &:active {
+      transform: scale(0.97);
+      transition-duration: 60ms;
     }
 
     &:focus-visible {
@@ -504,22 +563,64 @@
   }
 
   .upload__error {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
     margin: 0;
     color: var(--danger);
     font-size: var(--fs-sm);
     font-weight: var(--fw-medium);
+    line-height: var(--lh-snug);
+  }
+
+  .upload__error-icon {
+    flex: none;
+    width: 1em;
+    height: 1em;
+    margin-top: 0.15em;
   }
 
   .upload--disabled {
-    .upload__zone {
+    .upload__zone,
+    .upload__zone:hover {
       background: var(--surface-2);
       border-color: var(--border-1);
+      opacity: var(--disabled-opacity);
       cursor: not-allowed;
+      transform: none;
     }
 
     .upload__choose,
-    .upload__icon {
+    .upload__icon,
+    .upload__zone:hover .upload__icon {
       color: var(--text-3);
+      transform: none;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .upload__zone {
+      border-color: CanvasText;
+    }
+    .upload__zone--dragging {
+      border-color: Highlight;
+    }
+    .upload__input:focus-visible + .upload__zone {
+      outline: 2px solid CanvasText;
+      outline-offset: 2px;
+    }
+    .upload__error {
+      color: CanvasText;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .upload__zone:active,
+    .upload__remove:active {
+      transform: none;
+    }
+    .upload__icon {
+      transition: none;
     }
   }
 </style>

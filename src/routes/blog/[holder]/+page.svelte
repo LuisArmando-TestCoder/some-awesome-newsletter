@@ -63,9 +63,9 @@
 <BlogShell {blogName} {homeHref} {subscribeHref}>
   <section class="hero" aria-labelledby="blog-title">
     <div class="wrap">
-      <p class="hero__eyebrow">{$t.blog.eyebrow}</p>
-      <h1 id="blog-title">{heroTitle}</h1>
-      <p class="hero__desc">{$t.blog.heroDescription}</p>
+      <p class="hero__eyebrow rise">{$t.blog.eyebrow}</p>
+      <h1 id="blog-title" class="rise rise-2">{heroTitle}</h1>
+      <p class="hero__desc rise rise-3">{$t.blog.heroDescription}</p>
       <div class="hero__actions">
         <BlogSearch holder={data.holder} newsSourceId={data.ns} lang={data.activeLang} localCards={allCards} />
         <a class="btn btn--primary" href={subscribeHref}>{$t.blog.subscribe}</a>
@@ -129,86 +129,95 @@
 
 <style lang="scss">
   .wrap {
-    max-width: var(--container-lg, 1200px);
+    max-width: var(--container-xl);
     margin: 0 auto;
-    padding-inline: var(--space-5, 24px);
+    padding-inline: var(--gutter);
   }
 
+  /* Masthead: eyebrow, the publication name at display scale, one quiet line. */
   .hero {
-    padding: var(--space-8, 64px) 0 var(--space-7, 48px);
-    background: linear-gradient(180deg, var(--accent-soft, transparent), var(--surface-0, #fff));
-    border-bottom: 1px solid var(--border-1, #e5e5e5);
+    padding: calc(var(--section-pad) * 0.6) 0 calc(var(--section-pad) * 0.4);
   }
 
   .hero__eyebrow {
-    margin: 0 0 var(--space-3, 12px);
-    font-size: var(--fs-xs, 0.75rem);
-    font-weight: var(--fw-semibold, 600);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text-2, #444);
+    margin: 0 0 var(--space-4);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-semibold);
+    color: var(--text-3);
   }
 
   h1 {
     margin: 0;
-    max-width: 22ch;
-    font-family: var(--font-display, inherit);
-    font-size: var(--fs-4xl, 2.75rem);
-    font-weight: var(--fw-bold, 700);
-    line-height: var(--lh-tight, 1.1);
-    letter-spacing: -0.02em;
-    color: var(--text-1, #111);
+    max-width: 18ch;
+    font-family: var(--font-display);
+    font-size: var(--step-display);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-display);
+    letter-spacing: var(--tracking-display);
+    color: var(--text-1);
+    text-wrap: balance;
     overflow-wrap: anywhere;
   }
 
   .hero__desc {
-    margin: var(--space-4, 16px) 0 0;
-    max-width: 60ch;
-    font-size: var(--fs-lg, 1.125rem);
-    line-height: var(--lh-normal, 1.55);
-    color: var(--text-2, #444);
+    margin: var(--space-5) 0 0;
+    max-width: 40ch;
+    font-size: var(--fs-xl);
+    line-height: var(--lh-snug);
+    color: var(--text-2);
+    text-wrap: pretty;
   }
 
   .hero__actions {
-    margin-top: var(--space-6, 32px);
+    margin-top: var(--space-7);
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: var(--space-3, 12px);
+    gap: var(--space-3);
   }
 
   .content {
-    padding-top: var(--space-6, 32px);
-    padding-bottom: var(--space-9, 96px);
+    padding-top: var(--space-5);
+    padding-bottom: var(--section-pad);
   }
 
   .count {
-    margin: var(--space-4, 16px) 0 var(--space-5, 24px);
-    font-size: var(--fs-sm, 0.875rem);
-    color: var(--text-2, #444);
+    margin: var(--space-4) 0 var(--space-6);
+    font-size: var(--fs-sm);
+    color: var(--text-3);
+    font-variant-numeric: tabular-nums;
   }
 
   .featured {
-    margin-bottom: var(--space-8, 64px);
+    margin-bottom: var(--space-9);
   }
 
   .section-head {
-    margin-bottom: var(--space-5, 24px);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-2) var(--space-5);
+    margin-bottom: var(--space-6);
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--text-1);
 
     h2 {
       margin: 0;
-      font-family: var(--font-display, inherit);
-      font-size: var(--fs-2xl, 1.75rem);
-      font-weight: var(--fw-bold, 700);
-      line-height: var(--lh-tight, 1.2);
-      color: var(--text-1, #111);
+      font-family: var(--font-display);
+      font-size: var(--fs-3xl);
+      font-weight: var(--fw-semibold);
+      line-height: var(--lh-tight);
+      letter-spacing: var(--tracking-display);
+      color: var(--text-1);
     }
   }
 
   .section-hint {
-    margin: var(--space-2, 8px) 0 0;
-    font-size: var(--fs-sm, 0.875rem);
-    color: var(--text-2, #444);
+    margin: 0;
+    max-width: 48ch;
+    font-size: var(--fs-sm);
+    color: var(--text-3);
   }
 
   .grid {
@@ -216,20 +225,11 @@
     margin: 0;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
-    gap: var(--space-5, 24px);
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+    gap: var(--space-8) var(--space-6);
   }
 
   .cta-wrap {
-    margin-top: var(--space-9, 96px);
-  }
-
-  @media (max-width: 600px) {
-    .wrap {
-      padding-inline: var(--space-4, 16px);
-    }
-    .hero {
-      padding-top: var(--space-7, 48px);
-    }
+    margin-top: var(--section-pad);
   }
 </style>

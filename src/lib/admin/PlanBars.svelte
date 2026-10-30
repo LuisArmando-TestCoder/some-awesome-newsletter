@@ -10,13 +10,13 @@
   );
 </script>
 
-<ul class="bars">
+<ul class="bars" aria-label={`Customers by plan, ${num(total)} in total`}>
   {#each rows as r (r.id)}
     <li>
       <a class="bars__row" href={`/admin/customers?plan=${r.id}`}>
         <span class="bars__label">{r.label}</span>
         <span class="bars__track" aria-hidden="true"><span class="bars__fill" style={`width: ${Math.max(2, (r.count / total) * 100)}%`}></span></span>
-        <span class="bars__value">{num(r.count)}</span>
+        <span class="bars__value">{num(r.count)}<span class="bars__share"> {Math.round((r.count / total) * 100)}%</span></span>
       </a>
     </li>
   {/each}
@@ -28,40 +28,65 @@
     margin: 0;
     padding: 0;
     display: grid;
-    gap: var(--space-2, 8px);
+    gap: 2px;
   }
   .bars__row {
     display: grid;
-    grid-template-columns: minmax(7rem, 10rem) 1fr 3.5rem;
+    grid-template-columns: minmax(6rem, 9rem) minmax(0, 1fr) minmax(5rem, auto);
     align-items: center;
-    gap: var(--space-3, 12px);
-    padding: var(--space-1, 4px) var(--space-2, 8px);
-    border-radius: var(--radius-sm, 4px);
-    color: var(--text-1, inherit);
+    gap: var(--space-3);
+    min-height: var(--control-h-sm);
+    padding: 0 var(--space-2);
+    border-radius: var(--radius-sm);
+    color: var(--text-1);
     text-decoration: none;
-    font-size: var(--fs-sm, 0.875rem);
+    font-size: var(--fs-sm);
+    transition: background-color var(--t-out) var(--ease-out);
   }
-  .bars__row:hover {
-    background: var(--surface-2, transparent);
+  @media (hover: hover) and (pointer: fine) {
+    .bars__row:hover {
+      background: var(--surface-2);
+      transition-duration: var(--t-in);
+    }
+    .bars__row:hover .bars__fill {
+      background: var(--text-1);
+    }
+  }
+  .bars__row:active {
+    background: var(--surface-3);
+    transition-duration: 60ms;
   }
   .bars__row:focus-visible {
-    outline: 2px solid var(--focus-ring, currentColor);
+    outline: none;
+    box-shadow: var(--focus-ring);
   }
   .bars__track {
-    height: 8px;
-    border-radius: var(--radius-full, 999px);
-    background: var(--surface-2, transparent);
+    height: 6px;
+    border-radius: var(--radius-full);
+    background: var(--surface-2);
     overflow: hidden;
   }
   .bars__fill {
     display: block;
     height: 100%;
     border-radius: inherit;
-    background: var(--accent, currentColor);
+    background: var(--text-2);
+    transition: background-color var(--t-out) var(--ease-out);
   }
   .bars__value {
     text-align: right;
     font-variant-numeric: tabular-nums;
-    color: var(--text-2, inherit);
+    font-weight: var(--fw-semibold);
+    color: var(--text-1);
+    white-space: nowrap;
+  }
+  .bars__share {
+    color: var(--text-3);
+    font-weight: var(--fw-regular);
+  }
+  @media (forced-colors: active) {
+    .bars__fill {
+      background: CanvasText;
+    }
   }
 </style>

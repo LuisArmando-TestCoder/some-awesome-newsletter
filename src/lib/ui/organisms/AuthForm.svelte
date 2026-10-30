@@ -16,7 +16,8 @@
   import { get, writable, type Writable } from 'svelte/store';
   import { z } from 'zod';
   import { runtime } from '$lib/config/runtime';
-  import Code from '../../../components/systems/inputs/Code/Code.svelte';
+  import Button from '$lib/ui/components/Button.svelte';
+  import Spinner from '$lib/ui/components/Spinner.svelte';
   import askForNewAuthCode from '../../../components/systems/requests/askForNewAuthCode';
   import store, { saveToStore } from '../../../components/store';
   import askIsAuthCodeValid from '../../../components/systems/requests/askIsAuthCodeValid';
@@ -44,7 +45,11 @@
   let sending = false;
 
   // Step 2 state
-  let externalAuthCode: Writable<string>;
+  const CODE_LENGTH = 6;
+  // One real input for the code (playbook skill 13): paste, autofill and screen readers all work.
+  let externalAuthCode: Writable<string> = writable('');
+  let codeInput: HTMLInputElement;
+  let verified = false;
   let attempted = false;
   let verifying = false;
   let codeError = false;
@@ -170,13 +175,30 @@
     await Promise.resolve();
     askIsAuthCodeValid(
       () => {
+        verified = true;
         window.location.href = `/dashboard?x-auth-email=${encodeURIComponent(email)}&x-auth-code=${encodeURIComponent(authCode)}`;
       },
       () => {
         verifying = false;
         codeError = attempted;
+        // Keep focus in the field and select the digits so a retype replaces them.
+        codeInput?.select();
       }
     );
+  }
+
+  /** Digits only, capped at 6. A full code goes to onCode; anything shorter clears it. */
+  function onCodeInput(event: Event) {
+    const target = event.currentTarget as HTMLInputElement;
+    const clean = target.value.replace(/[^0-9]/g, '').slice(0, CODE_LENGTH);
+    target.value = clean;
+    externalAuthCode.set(clean);
+    onCode(clean.length === CODE_LENGTH ? clean : '');
+  }
+
+  function onResendClick() {
+    if (verifying) return;
+    onResend();
   }
 
   function onChangeEmail() {
@@ -203,6 +225,7 @@
             id="{uid}-email"
             class="field-input"
             class:has-error={!!emailError}
+            class:shake={!!emailError}
             type="email"
             name="email"
             autocomplete="email"
@@ -213,47 +236,83 @@
             aria-invalid={emailError ? 'true' : undefined}
             aria-describedby="{uid}-email-hint{emailError ? ` ${uid}-email-error` : ''}"
           />
-          <p class="field-hint" id="{uid}-email-hint">{$at.emailHint}</p>
           {#if emailError}
-            <p class="field-error" id="{uid}-email-error" role="alert">{emailError}</p>
+            <p class="field-error" id="{uid}-email-error" role="alert">
+              <svg class="field-error__icon" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.5" /><path d="M8 4.5v4.25M8 11.1v.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+              <span>{emailError}</span>
+            </p>
           {/if}
+          <p class="field-hint" id="{uid}-email-hint">{$at.emailHint}</p>
         </div>
 
-        <button type="submit" class="btn btn-primary" disabled={sending} aria-busy={sending}>
-          {#if sending}
-            <span class="spinner" aria-hidden="true"></span>
-            {$t.authForm.sending}
-          {:else}
-            {$copy?.continueWithEmail ?? ''}
-          {/if}
-        </button>
+        <Button type="submit" size="lg" fullWidth loading={sending} loadingLabel={$t.authForm.sending}>
+          {$copy?.continueWithEmail ?? ''}
+        </Button>
       </form>
     {:else}
       <section class="auth-step" aria-labelledby="{uid}-code-title">
         <div class="code-intro">
           <h2 class="code-title" id="{uid}-code-title" tabindex="-1" bind:this={codeHeading}>{$at.codeTitle}</h2>
-          <p class="code-sent">{fmt($at.codeSentTo, { email })}</p>
-          <p class="field-hint">{$at.codeHint}</p>
+          <p class="code-sent" id="{uid}-code-sent">
+            <span>{fmt($at.codeSentTo, { email })}</span>
+            <span class="code-sent__sep" aria-hidden="true">&middot;</span>
+            <button type="button" class="link" on:click={onChangeEmail}>{$at.changeEmail}</button>
+          </p>
         </div>
 
-        <div class="code-input">
-          <Code bind:authCode={externalAuthCode} onChange={onCode} />
+        <div class="code-field" class:is-error={codeError && attempted && !verifying} class:is-busy={verifying} class:is-done={verified}>
+          <label class="sr-only" for="{uid}-code">{$t.authForm.codeLabel}</label>
+          <input
+            bind:this={codeInput}
+            id="{uid}-code"
+            class="code-input"
+            class:shake={codeError && attempted && !verifying}
+            type="text"
+            name="one-time-code"
+            inputmode="numeric"
+            autocomplete="one-time-code"
+            pattern="[0-9]*"
+            maxlength={CODE_LENGTH}
+            spellcheck="false"
+            autocapitalize="off"
+            value={$externalAuthCode}
+            on:input={onCodeInput}
+            aria-invalid={codeError && attempted && !verifying ? 'true' : undefined}
+            aria-busy={verifying ? 'true' : undefined}
+            aria-describedby="{uid}-code-sent {uid}-code-hint{codeError && attempted && !verifying ? ` ${uid}-code-error` : ''}"
+          />
         </div>
 
         <div class="status" role="status" aria-live="polite" aria-atomic="true">
-          {#if verifying}
-            <p class="status-text">{$at.verifying}</p>
+          {#if verified}
+            <p class="status-text status-success">
+              <svg class="status-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" /></svg>
+              {$t.authForm.codeAccepted}
+            </p>
+          {:else if verifying}
+            <p class="status-text"><Spinner size="sm" label="" />{$at.verifying}</p>
           {:else if showResent}
-            <p class="status-text status-success">{$at.resent}</p>
+            <p class="status-text status-success">
+              <svg class="status-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" /></svg>
+              {$at.resent}
+            </p>
           {/if}
         </div>
 
         {#if codeError && attempted && !verifying}
-          <p class="field-error banner" id="{uid}-code-error" role="alert">{$at.errors.code}</p>
+          <p class="field-error field-error--center" id="{uid}-code-error" role="alert">
+            <svg class="field-error__icon" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.5" /><path d="M8 4.5v4.25M8 11.1v.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+            <span>{$at.errors.code}</span>
+          </p>
         {/if}
         {#if resendError}
-          <p class="field-error banner" role="alert">{resendError}</p>
+          <p class="field-error field-error--center" role="alert">
+            <svg class="field-error__icon" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.5" /><path d="M8 4.5v4.25M8 11.1v.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+            <span>{resendError}</span>
+          </p>
         {/if}
+
+        <p class="field-hint field-hint--center" id="{uid}-code-hint">{$at.codeHint}</p>
 
         <div class="code-actions">
           {#if resendLimitReached}
@@ -263,19 +322,22 @@
           {:else}
             <button
               type="button"
-              class="btn btn-secondary"
-              on:click={onResend}
-              disabled={resending || cooldown > 0 || verifying}
-              aria-busy={resending}
+              class="link resend"
+              on:click={onResendClick}
+              aria-disabled={resending || cooldown > 0 || verifying ? 'true' : undefined}
+              aria-busy={resending ? 'true' : undefined}
+              aria-describedby={cooldown > 0 ? `${uid}-cooldown` : undefined}
             >
+              {#if resending}<Spinner size="sm" label="" />{/if}
               {$at.resend}
             </button>
             {#if cooldown > 0}
-              <p class="cooldown" aria-live="off">{fmt($at.resendIn, { seconds: cooldown })}</p>
+              <p class="cooldown" id="{uid}-cooldown" aria-live="off">
+                <span class="cooldown__ring" style="--p: {cooldown / RESEND_COOLDOWN_S}" aria-hidden="true"></span>
+                {fmt($at.resendIn, { seconds: cooldown })}
+              </p>
             {/if}
           {/if}
-
-          <button type="button" class="link" on:click={onChangeEmail}>{$at.changeEmail}</button>
         </div>
       </section>
     {/if}
@@ -298,68 +360,65 @@
 </div>
 
 <style lang="scss">
-  @use '../../../styles/global.scss';
+  /* Calm, centred sign-in (playbook skill 13, Mono): one field, one ink pill, the code as one
+     real input drawn as six underlined slots. Base type and colors come from tokens.scss. */
 
   .auth-page {
-    min-height: 100%;
     width: 100%;
+    min-height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: var(--space-4, 16px);
-    box-sizing: border-box;
+    padding: var(--space-6) var(--gutter);
   }
 
   .auth-card {
-    box-sizing: border-box;
     width: 100%;
-    max-width: 440px;
-    padding: var(--space-7, 48px) var(--space-6, 32px);
-    background: var(--surface-1, #ffffff);
-    color: var(--text-1, #0f172a);
-    border: 1px solid var(--border-1, rgba(15, 23, 42, 0.08));
-    border-radius: var(--radius-xl, 20px);
-    box-shadow: var(--shadow-3, 0 24px 48px -12px rgba(15, 23, 42, 0.18));
-    animation: card-in var(--dur-slow, 320ms) var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)) both;
+    max-width: 28rem;
+    padding: var(--space-8) var(--space-7);
+    background: var(--surface-0);
+    color: var(--text-1);
+    border: 1px solid var(--border-1);
+    border-radius: var(--radius-2xl);
+  }
 
-    @media (max-width: 480px) {
-      padding: var(--space-6, 32px) var(--space-5, 24px);
+  /* Phones: an open layout, no box inside the box. */
+  @media (max-width: 30rem) {
+    .auth-card {
+      padding: var(--space-4) 0;
+      border: 0;
+      border-radius: 0;
     }
   }
 
-  @keyframes card-in {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: none; }
-  }
-
-  /* Header */
+  /* ---------- Header ---------- */
   .auth-header {
-    text-align: center;
-    margin-bottom: var(--space-6, 32px);
+    margin-bottom: var(--space-7);
   }
 
   .auth-logo {
     display: block;
-    height: 40px;
+    height: 2rem;
     width: auto;
-    margin: 0 auto var(--space-5, 24px);
+    margin: 0 0 var(--space-7);
   }
 
   .auth-title {
-    margin: 0 0 var(--space-2, 8px);
-    font-family: var(--font-display, inherit);
-    font-size: var(--fs-2xl, 1.75rem);
-    font-weight: var(--fw-bold, 700);
-    line-height: var(--lh-tight, 1.2);
-    letter-spacing: -0.02em;
-    color: var(--text-1, #0f172a);
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--fs-3xl);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-tight);
+    letter-spacing: var(--tracking-display);
+    color: var(--text-1);
+    text-wrap: balance;
   }
 
   .auth-subtitle {
-    margin: 0;
-    font-size: var(--fs-md, 1rem);
-    line-height: var(--lh-normal, 1.5);
-    color: var(--text-2, #475569);
+    margin: var(--space-3) 0 0;
+    font-size: var(--fs-lg);
+    line-height: var(--lh-snug);
+    color: var(--text-2);
   }
 
   .auth-title:focus,
@@ -368,281 +427,357 @@
   }
   .auth-title:focus-visible,
   .code-title:focus-visible {
-    outline: 2px solid var(--focus-color, #2563eb);
+    outline: 2px solid var(--focus-color);
     outline-offset: 4px;
-    border-radius: var(--radius-sm, 4px);
+    border-radius: var(--radius-sm);
   }
 
   .auth-step {
     display: flex;
     flex-direction: column;
-    gap: var(--space-5, 24px);
-    animation: step-in var(--dur-base, 200ms) var(--ease-out, ease-out) both;
+    gap: var(--space-5);
+    animation: step-in var(--dur-base) var(--ease-out) both;
   }
 
   @keyframes step-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+      opacity: 0;
+    }
   }
 
-  /* Field */
+  /* ---------- Email field ---------- */
   .field {
     display: flex;
     flex-direction: column;
-    gap: var(--space-2, 8px);
+    gap: var(--space-2);
   }
 
   .field-label {
-    font-size: var(--fs-sm, 0.875rem);
-    font-weight: var(--fw-semibold, 600);
-    color: var(--text-1, #0f172a);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    color: var(--text-1);
   }
 
   .field-input {
-    box-sizing: border-box;
     width: 100%;
-    min-height: 48px;
-    padding: var(--space-3, 12px) var(--space-4, 16px);
-    font: inherit;
-    font-size: var(--fs-md, 1rem);
-    color: var(--text-1, #0f172a);
-    background: var(--surface-1, #ffffff);
-    border: 1px solid var(--border-2, #cbd5e1);
-    border-radius: var(--radius-md, 10px);
-    transition: border-color var(--dur-fast, 120ms) var(--ease-out, ease-out),
-      box-shadow var(--dur-fast, 120ms) var(--ease-out, ease-out);
+    min-height: 3.25rem;
+    padding: 0 var(--space-4);
+    font-size: var(--fs-md);
+    color: var(--text-1);
+    background: var(--surface-0);
+    border: 1px solid var(--border-2);
+    border-radius: var(--radius-md);
+    transition:
+      border-color var(--t-out) var(--ease-out),
+      box-shadow var(--t-out) var(--ease-out);
 
     &::placeholder {
-      color: var(--text-3, #94a3b8);
+      color: var(--text-3);
     }
 
+    @media (hover: hover) and (pointer: fine) {
+      &:hover:not(:focus) {
+        border-color: var(--text-2);
+        transition-duration: var(--t-in);
+      }
+    }
+
+    &:focus-visible,
     &:focus {
       outline: none;
-      border-color: var(--accent, #0f172a);
+      border-color: var(--text-1);
       box-shadow: var(--focus-ring);
     }
 
     &.has-error {
-      border-color: var(--danger, #dc2626);
+      border-color: var(--danger);
     }
   }
 
   .field-hint {
     margin: 0;
-    font-size: var(--fs-xs, 0.75rem);
-    line-height: var(--lh-normal, 1.5);
-    color: var(--text-3, #64748b);
-  }
+    font-size: var(--fs-xs);
+    line-height: var(--lh-normal);
+    color: var(--text-3);
 
-  .field-error {
-    margin: 0;
-    font-size: var(--fs-sm, 0.875rem);
-    font-weight: var(--fw-medium, 500);
-    line-height: var(--lh-normal, 1.5);
-    color: var(--danger, #dc2626);
-
-    &.banner {
-      padding: var(--space-3, 12px);
-      background: var(--danger-soft, rgba(220, 38, 38, 0.08));
-      border-radius: var(--radius-md, 8px);
+    &--center {
       text-align: center;
     }
   }
 
-  /* Buttons: one primary, one secondary, one tertiary (link) */
-  .btn {
-    box-sizing: border-box;
-    width: 100%;
-    min-height: 48px;
+  .field-error {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+    margin: 0;
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-snug);
+    color: var(--danger);
+
+    &--center {
+      justify-content: center;
+      text-align: left;
+    }
+  }
+
+  .field-error__icon,
+  .status-icon {
+    flex-shrink: 0;
+    width: 1rem;
+    height: 1rem;
+    margin-top: 0.1em;
+  }
+
+  /* ---------- Links (text buttons) ---------- */
+  .link {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    gap: var(--space-2, 8px);
-    padding: var(--space-3, 12px) var(--space-5, 24px);
-    font: inherit;
-    font-size: var(--fs-md, 1rem);
-    font-weight: var(--fw-semibold, 600);
-    border-radius: var(--radius-md, 10px);
-    cursor: pointer;
-    transition: background-color var(--dur-fast, 120ms) var(--ease-out, ease-out),
-      border-color var(--dur-fast, 120ms) var(--ease-out, ease-out),
-      color var(--dur-fast, 120ms) var(--ease-out, ease-out);
-
-    &:focus-visible {
-      outline: 2px solid var(--focus-color, #2563eb);
-      outline-offset: 2px;
-    }
-
-    &:disabled {
-      cursor: not-allowed;
-      opacity: 0.6;
-    }
-  }
-
-  .btn-primary {
-    background: var(--accent, #0f172a);
-    color: var(--accent-contrast, #ffffff);
-    border: 1px solid transparent;
-    box-shadow: var(--shadow-1, 0 1px 2px rgba(15, 23, 42, 0.08));
-
-    &:hover:not(:disabled) {
-      background: var(--accent-hover, #000000);
-    }
-  }
-
-  .btn-secondary {
-    background: transparent;
-    color: var(--text-1, #0f172a);
-    border: 1px solid var(--border-2, #cbd5e1);
-
-    &:hover:not(:disabled) {
-      background: var(--surface-2, #f1f5f9);
-    }
-  }
-
-  .link {
+    gap: var(--space-2);
+    min-height: 1.5rem;
     padding: 0;
     background: none;
-    border: none;
+    border: 0;
     font: inherit;
-    font-size: var(--fs-sm, 0.875rem);
-    font-weight: var(--fw-semibold, 600);
-    color: var(--text-link, var(--accent, #0f172a));
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    color: var(--text-link);
     text-decoration: underline;
-    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
     cursor: pointer;
+    transition: text-decoration-thickness var(--t-out) var(--ease-out);
 
-    &:hover {
-      color: var(--accent-hover, #000000);
+    @media (hover: hover) and (pointer: fine) {
+      &:hover:not([aria-disabled='true']) {
+        text-decoration-thickness: 2px;
+        transition-duration: var(--t-in);
+      }
+    }
+
+    /* The global state layer paints a fill; a text link uses its underline instead. */
+    &:is(button) {
+      box-shadow: none;
     }
 
     &:focus-visible {
-      outline: 2px solid var(--focus-color, #2563eb);
+      outline: 2px solid var(--focus-color);
       outline-offset: 2px;
-      border-radius: var(--radius-sm, 4px);
+      border-radius: var(--radius-sm);
+    }
+
+    &:active:not([aria-disabled='true']) {
+      opacity: 0.7;
+      transition-duration: 0ms;
+    }
+
+    &[aria-disabled='true'] {
+      color: var(--text-3);
+      text-decoration-color: transparent;
+      cursor: not-allowed;
+    }
+
+    &[aria-busy='true'] {
+      cursor: progress;
     }
   }
 
-  .spinner {
-    width: 16px;
-    height: 16px;
-    border: 2px solid currentColor;
-    border-right-color: transparent;
-    border-radius: var(--radius-full, 50%);
-    animation: spin 0.8s linear infinite;
-  }
-
-  @keyframes spin {
-    to { transform: rotate(360deg); }
-  }
-
-  /* Step 2 */
+  /* ---------- Code step ---------- */
   .code-intro {
     display: flex;
     flex-direction: column;
-    gap: var(--space-2, 8px);
-    text-align: center;
+    gap: var(--space-2);
   }
 
   .code-title {
     margin: 0;
-    font-size: var(--fs-xl, 1.25rem);
-    font-weight: var(--fw-semibold, 600);
-    color: var(--text-1, #0f172a);
+    font-size: var(--fs-xl);
+    font-weight: var(--fw-semibold);
+    letter-spacing: var(--tracking-tight);
+    color: var(--text-1);
   }
 
   .code-sent {
     margin: 0;
-    font-size: var(--fs-md, 1rem);
-    line-height: var(--lh-normal, 1.5);
-    color: var(--text-2, #475569);
+    font-size: var(--fs-md);
+    line-height: var(--lh-normal);
+    color: var(--text-2);
     overflow-wrap: anywhere;
   }
 
-  .code-input :global(.auth-wrapper) {
-    margin: 0;
+  .code-sent__sep {
+    margin-inline: var(--space-1);
+    color: var(--text-3);
   }
 
+  /* One input, six slots: monospace digits spread with letter-spacing, and a repeating
+     underline drawn under each slot. Slot = 1ch glyph + 1ch spacing. */
+  .code-field {
+    --_line: var(--border-2);
+    display: flex;
+    justify-content: center;
+    padding-block: var(--space-3);
+  }
+  .code-field:focus-within {
+    --_line: var(--text-1);
+  }
+  .code-field.is-error {
+    --_line: var(--danger);
+  }
+  .code-field.is-done {
+    --_line: var(--success);
+  }
+  .code-field.is-busy {
+    --_line: var(--text-3);
+  }
+
+  .code-input {
+    box-sizing: border-box;
+    width: 13ch;
+    height: 1.6em;
+    padding: 0 0 0 0.5ch;
+    border: 0;
+    border-radius: var(--radius-sm);
+    background-color: transparent;
+    background-image: repeating-linear-gradient(
+      90deg,
+      transparent 0 0.25ch,
+      var(--_line) 0.25ch 1.75ch,
+      transparent 1.75ch 2ch
+    );
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 12ch 2px;
+    background-origin: border-box;
+    font-family: var(--font-mono);
+    font-size: clamp(1.75rem, 1.4rem + 1.6vw, 2.25rem);
+    font-weight: var(--fw-medium);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 1ch;
+    line-height: 1;
+    color: var(--text-1);
+    caret-color: var(--text-1);
+    text-align: left;
+    transition: opacity var(--t-state) var(--ease-out);
+
+    &:focus,
+    &:focus-visible {
+      outline: none;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--focus-color);
+      outline-offset: 0.35em;
+    }
+
+    &[aria-busy='true'] {
+      opacity: 0.6;
+    }
+  }
+
+  /* ---------- Status ---------- */
   .status {
     min-height: 1.5em;
     text-align: center;
   }
 
   .status-text {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
     margin: 0;
-    font-size: var(--fs-sm, 0.875rem);
-    color: var(--text-2, #475569);
+    font-size: var(--fs-sm);
+    color: var(--text-2);
   }
 
   .status-success {
-    color: var(--success, #15803d);
-    font-weight: var(--fw-medium, 500);
+    color: var(--success);
+    font-weight: var(--fw-medium);
   }
 
   .code-actions {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--space-3, 12px);
+    gap: var(--space-2);
+  }
+
+  .resend {
+    min-height: var(--control-h);
   }
 
   .cooldown,
   .resend-limit {
     margin: 0;
-    font-size: var(--fs-sm, 0.875rem);
-    line-height: var(--lh-normal, 1.5);
-    color: var(--text-2, #475569);
+    font-size: var(--fs-sm);
+    line-height: var(--lh-normal);
+    color: var(--text-3);
     text-align: center;
+    font-variant-numeric: tabular-nums;
   }
 
-  /* Footer */
+  .cooldown {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  /* A ring that empties with the countdown. */
+  .cooldown__ring {
+    width: 0.875rem;
+    height: 0.875rem;
+    border-radius: var(--radius-full);
+    background: conic-gradient(var(--text-3) calc(var(--p) * 360deg), var(--border-1) 0);
+    mask: radial-gradient(circle, transparent 48%, currentColor 52%);
+    transition: background var(--dur-base) linear;
+  }
+
+  /* ---------- Footer ---------- */
   .auth-footer {
-    margin-top: var(--space-7, 48px);
-    padding-top: var(--space-5, 24px);
-    border-top: 1px solid var(--border-1, #e2e8f0);
-    text-align: center;
+    margin-top: var(--space-7);
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--border-1);
   }
 
   .switch-text {
-    margin: 0 0 var(--space-4, 16px);
-    font-size: var(--fs-sm, 0.875rem);
-    color: var(--text-2, #475569);
+    margin: 0 0 var(--space-3);
+    font-size: var(--fs-sm);
+    color: var(--text-2);
   }
 
   .legal-text {
     margin: 0;
-    font-size: var(--fs-xs, 0.75rem);
-    line-height: var(--lh-normal, 1.5);
-    color: var(--text-3, #64748b);
+    font-size: var(--fs-xs);
+    line-height: var(--lh-normal);
+    color: var(--text-3);
 
     a {
       color: inherit;
       text-decoration: underline;
 
-      &:hover {
-        color: var(--text-1, #0f172a);
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          color: var(--text-1);
+        }
       }
 
       &:focus-visible {
-        outline: 2px solid var(--focus-color, #2563eb);
+        outline: 2px solid var(--focus-color);
         outline-offset: 2px;
+        border-radius: var(--radius-sm);
       }
     }
   }
 
+  @media (forced-colors: active) {
+    .code-input {
+      border-bottom: 2px solid CanvasText;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
-    .auth-card,
     .auth-step {
       animation: none;
-    }
-    .spinner {
-      animation: none;
-      border-right-color: currentColor;
-      opacity: 0.6;
-    }
-    .field-input,
-    .btn {
-      transition: none;
     }
   }
 </style>

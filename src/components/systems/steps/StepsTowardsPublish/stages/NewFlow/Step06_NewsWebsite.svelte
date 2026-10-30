@@ -155,7 +155,7 @@
   {/if}
 
   {#if error}
-    <p class="ob-error" id="ob-website-error" role="alert">{error}</p>
+    <p class="ob-error shake" id="ob-website-error" role="alert">{error}</p>
   {/if}
 
   <button
@@ -174,8 +174,13 @@
   .topics {
     max-height: 22rem;
     overflow: auto;
-    padding: var(--space-2, 8px) 0;
-    border-top: 1px solid var(--border-1, #e3e6ea);
+    overscroll-behavior: contain;
+    padding: var(--space-3) 0;
+    border-top: 1px solid var(--border-1);
+    border-bottom: 1px solid var(--border-1);
   }
-  .switch { align-self: flex-start; }
+  .switch {
+    align-self: flex-start;
+    min-height: var(--control-h);
+  }
 </style>

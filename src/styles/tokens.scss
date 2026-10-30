@@ -1,28 +1,32 @@
 // AIBAN design tokens. Owner: WS1. Contract: docs/aiban/CHARTER.md section 4.
 // Imported once, globally, from src/routes/+layout.svelte.
 // Components use only these custom properties. Raw values live here and nowhere else.
-// Direction: "Broadsheet". Warm paper, ink text, one deep pine accent, Lora serif headlines, Inter for UI.
+// Direction: "Mono" (Award-Grade Web Playbook 2026, adopted site-wide 2026-10-30).
+// White paper, near-black ink, one display face at extreme scale, one action color
+// (the primary CTA is solid ink, nothing else uses it as a fill). Dark is designed, not inverted.
 // Light theme is the default. Dark applies with [data-theme="dark"] on <html>,
 // or with prefers-color-scheme: dark when no explicit [data-theme] is set.
 
 @use './fonts.scss';
+@use './states.scss';
 
 :root {
   color-scheme: light;
 
   // ---------- Palette (private, do not use in components) ----------
-  --_paper-0: #faf8f4;
-  --_paper-1: #ffffff;
-  --_paper-2: #f2efe8;
-  --_paper-3: #e8e4da;
-  --_ink-1: #1a1a17;
-  --_ink-2: #4a4943;
-  --_ink-3: #6b6a63;
-  --_line-1: #e3dfd5;
-  --_line-2: #8c887d;
-  --_pine: #1f5c4f;
-  --_pine-hover: #174a3f;
-  --_pine-soft: #e6f0ec;
+  --_paper-0: #ffffff;
+  --_paper-1: #fbfbfd;
+  --_paper-2: #f5f5f7;
+  --_paper-3: #e8e8ed;
+  --_ink-1: #1d1d1f;
+  --_ink-2: #545458; // 7:1 on white
+  --_ink-3: #6e6e73; // 4.9:1 on white
+  --_line-1: #e5e5ea;
+  --_line-2: #86868b; // 3.5:1, input edges
+  --_action: #1d1d1f; // primary CTA fill
+  --_action-hover: #000000;
+  --_action-soft: #f0f0f2;
+  --_focus: #0066cc;
 
   // ---------- Surfaces ----------
   --surface-0: var(--_paper-0);
@@ -30,20 +34,23 @@
   --surface-2: var(--_paper-2);
   --surface-3: var(--_paper-3);
   --surface-inverse: var(--_ink-1);
-  --surface-overlay: rgb(26 26 23 / 0.48);
+  --surface-overlay: rgb(0 0 0 / 0.4);
+  --surface-glass: rgb(255 255 255 / 0.78); // sticky header, sheets (with backdrop blur)
 
   // ---------- Text ----------
   --text-1: var(--_ink-1);
   --text-2: var(--_ink-2);
   --text-3: var(--_ink-3);
   --text-inverse: var(--_paper-0);
-  --text-link: var(--_pine);
+  --text-link: var(--_ink-1); // links are ink + underline, never a second color
+  --text-muted-large: #a1a1a6; // display-size text only (3:1)
 
   // ---------- Brand and state ----------
-  --accent: var(--_pine);
-  --accent-hover: var(--_pine-hover);
+  // The accent belongs to the primary CTA. Use it as a fill nowhere else.
+  --accent: var(--_action);
+  --accent-hover: var(--_action-hover);
   --accent-contrast: #ffffff;
-  --accent-soft: var(--_pine-soft);
+  --accent-soft: var(--_action-soft);
   --success: #1f7a3e;
   --success-soft: #e7f4ec;
   --warning: #8a5a00;
@@ -59,13 +66,15 @@
   // ---------- Lines ----------
   --border-1: var(--_line-1); // dividers, card edges (decorative)
   --border-2: var(--_line-2); // input edges, meets 3:1 non-text contrast
-  --focus-ring: 0 0 0 2px var(--surface-0), 0 0 0 4px var(--accent);
-  --focus-color: var(--accent);
+  --focus-ring: 0 0 0 2px var(--surface-0), 0 0 0 4px var(--_focus);
+  --focus-color: var(--_focus);
 
   // ---------- Type ----------
-  --font-display: 'Lora', 'Libre Baskerville', Georgia, 'Noto Serif', 'Times New Roman', serif;
-  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', 'Helvetica Neue', Arial,
-    sans-serif;
+  // One family, two optical sizes. SF on Apple devices, self-hosted Inter everywhere else.
+  --font-display: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, 'Noto Sans',
+    'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, 'Noto Sans',
+    'Helvetica Neue', Arial, sans-serif;
   --font-mono: ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, Consolas, monospace;
 
   // Fluid scale, 360px to 1440px viewport. Ratio about 1.2 on mobile, 1.25 on desktop.
@@ -77,6 +86,12 @@
   --fs-2xl: clamp(1.5625rem, 1.42rem + 0.65vw, 1.9375rem); // 25 to 31
   --fs-3xl: clamp(1.875rem, 1.62rem + 1.11vw, 2.625rem); // 30 to 42
   --fs-4xl: clamp(2.25rem, 1.8rem + 2vw, 3.75rem); // 36 to 60
+  // Display steps (playbook: one face at extreme scale, a whisper-quiet caption next to it)
+  --step-hero: clamp(3rem, 1.6rem + 7vw, 8.5rem); // 48 to 136, cold opens
+  --step-display: clamp(2.5rem, 1.6rem + 4.4vw, 5.5rem); // 40 to 88, page titles
+  --step-chapter: clamp(2rem, 1.4rem + 2.8vw, 4rem); // 32 to 64, chapter titles
+  --tracking-display: -0.035em;
+  --lh-display: 1.02;
   --lh-tight: 1.15;
   --lh-snug: 1.3;
   --lh-normal: 1.55;
@@ -87,6 +102,7 @@
   --tracking-tight: -0.015em;
   --tracking-caps: 0.06em;
   --measure: 68ch;
+  --measure-legal: 72ch;
 
   // ---------- Space (4px base) ----------
   --space-1: 0.25rem; // 4
@@ -112,6 +128,7 @@
   --radius-md: 0.625rem; // 10
   --radius-lg: 1rem; // 16
   --radius-xl: 1.5rem; // 24
+  --radius-2xl: 2rem; // 32, feature panels
   --radius-full: 999px;
   // Legacy aliases
   --radius-s: var(--radius-sm);
@@ -119,10 +136,10 @@
   --radius-m: var(--radius-md);
   --radius-base: var(--radius-md);
 
-  // ---------- Elevation (warm, low, layered) ----------
-  --shadow-1: 0 1px 2px rgb(26 26 23 / 0.06), 0 1px 1px rgb(26 26 23 / 0.04);
-  --shadow-2: 0 4px 12px -2px rgb(26 26 23 / 0.08), 0 2px 4px -2px rgb(26 26 23 / 0.06);
-  --shadow-3: 0 18px 40px -12px rgb(26 26 23 / 0.18), 0 6px 12px -6px rgb(26 26 23 / 0.08);
+  // ---------- Elevation (neutral, soft, mostly borders) ----------
+  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.04);
+  --shadow-2: 0 8px 24px rgb(0 0 0 / 0.06), 0 1px 2px rgb(0 0 0 / 0.04);
+  --shadow-3: 0 30px 60px -20px rgb(0 0 0 / 0.18), 0 8px 16px -8px rgb(0 0 0 / 0.06);
   // Legacy aliases
   --shadow-sm: var(--shadow-1);
   --shadow-md: var(--shadow-2);
@@ -131,9 +148,17 @@
   // ---------- Motion ----------
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
-  --dur-fast: 120ms;
-  --dur-base: 200ms;
-  --dur-slow: 320ms;
+  --ease-spring: linear(0, 0.5 7%, 1.1 22%, 0.98 35%, 1.01 50%, 1);
+  --dur-fast: 120ms; // hover, press
+  --dur-base: 200ms; // small UI
+  --dur-slow: 320ms; // panels, menus
+  --dur-reveal: 900ms; // section reveals (marketing pages only)
+  --stagger: 60ms;
+  // Playbook names (aliases)
+  --dur-xs: var(--dur-fast);
+  --dur-s: var(--dur-base);
+  --dur-m: var(--dur-slow);
+  --dur-l: var(--dur-reveal);
   // Legacy aliases
   --transition-fast: var(--dur-base) var(--ease-in-out);
   --transition-normal: var(--dur-slow) var(--ease-in-out);
@@ -149,7 +174,11 @@
   --container-sm: 40rem; // 640
   --container-md: 52rem; // 832
   --container-lg: 72rem; // 1152
+  --container-xl: 84rem; // 1344, marketing bleed
+  --gutter: clamp(1rem, 0.6rem + 2vw, 2.5rem); // page side padding, 16 to 40
+  --section-pad: clamp(4.5rem, 3rem + 7vw, 10rem); // chapter breathing room
   --header-h: 4rem;
+  --header-h-condensed: 3.5rem;
   --sidebar-w: 16rem;
   --sidebar-collapsed-w: 4.5rem;
   --z-header: 50;
@@ -193,36 +222,39 @@
 
 @mixin dark-theme {
   color-scheme: dark;
-  --_paper-0: #121311;
-  --_paper-1: #1a1b19;
-  --_paper-2: #232421;
-  --_paper-3: #2d2e2a;
-  --_ink-1: #eceae4;
-  --_ink-2: #b4b1a8;
-  --_ink-3: #8c897f;
-  --_line-1: #2f302c;
-  --_line-2: #6f6c63;
-  --_pine: #7cc7b0;
-  --_pine-hover: #98d6c3;
-  --_pine-soft: #1c2f29;
+  --_paper-0: #0a0a0b;
+  --_paper-1: #141416;
+  --_paper-2: #1c1c1f;
+  --_paper-3: #2a2a2e;
+  --_ink-1: #f5f5f7;
+  --_ink-2: #c7c7cc;
+  --_ink-3: #98989d; // 6.9:1 on the dark page
+  --_line-1: #26262a;
+  --_line-2: #6e6e73;
+  --_action: #f5f5f7;
+  --_action-hover: #ffffff;
+  --_action-soft: #1f1f22;
+  --_focus: #4ea1ff;
 
-  --surface-inverse: #eceae4;
-  --surface-overlay: rgb(0 0 0 / 0.6);
-  --text-inverse: #121311;
-  --accent-contrast: #0b201a;
+  --surface-inverse: #f5f5f7;
+  --surface-overlay: rgb(0 0 0 / 0.64);
+  --surface-glass: rgb(10 10 11 / 0.72);
+  --text-inverse: #0a0a0b;
+  --text-muted-large: #636366;
+  --accent-contrast: #0a0a0b;
   --success: #5bc583;
-  --success-soft: #16291d;
+  --success-soft: #12261a;
   --warning: #e8a33d;
-  --warning-soft: #2e2412;
-  --danger: #f97066;
-  --danger-hover: #fb8a82;
-  --danger-soft: #331916;
+  --warning-soft: #2b2112;
+  --danger: #ff6b61;
+  --danger-hover: #ff8a82;
+  --danger-soft: #2f1513;
   --info: #7ab2f5;
-  --info-soft: #172436;
+  --info-soft: #14213a;
 
-  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.4);
-  --shadow-2: 0 6px 16px -4px rgb(0 0 0 / 0.5), 0 0 0 1px rgb(255 255 255 / 0.04);
-  --shadow-3: 0 24px 48px -12px rgb(0 0 0 / 0.6), 0 0 0 1px rgb(255 255 255 / 0.05);
+  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.5);
+  --shadow-2: 0 8px 24px rgb(0 0 0 / 0.5), 0 0 0 1px rgb(255 255 255 / 0.05);
+  --shadow-3: 0 30px 60px -20px rgb(0 0 0 / 0.7), 0 0 0 1px rgb(255 255 255 / 0.06);
 }
 
 :root[data-theme='dark'] {
@@ -232,6 +264,16 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
     @include dark-theme;
+  }
+}
+
+// The logo mark is a black PNG: flip it to white on dark surfaces.
+:root[data-theme='dark'] img[src^='/logo/logo'] {
+  filter: invert(1);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) img[src^='/logo/logo'] {
+    filter: invert(1);
   }
 }
 
@@ -249,6 +291,8 @@
   --dur-fast: 0ms;
   --dur-base: 0ms;
   --dur-slow: 0ms;
+  --dur-reveal: 0ms;
+  --stagger: 0ms;
 
   *,
   *::before,
@@ -277,8 +321,8 @@
 }
 
 ::selection {
-  background: var(--accent-soft);
-  color: var(--text-1);
+  background: var(--text-1);
+  color: var(--surface-0);
 }
 
 .sr-only {
@@ -291,4 +335,123 @@
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+// ---------- Base (playbook: real text, fluid type, no horizontal scroll) ----------
+// Low specificity on purpose (:where) so any component style wins.
+:where(*, *::before, *::after) {
+  box-sizing: border-box;
+}
+
+:where(html) {
+  background: var(--surface-0);
+  scrollbar-gutter: stable;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--header-h) + var(--space-4));
+}
+
+:where(body) {
+  margin: 0;
+  min-height: 100svh;
+  background: var(--surface-0);
+  color: var(--text-1);
+  font-family: var(--font-body);
+  font-size: var(--fs-md);
+  line-height: var(--lh-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+:where(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--font-display);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-tight);
+  text-wrap: balance;
+  color: var(--text-1);
+}
+
+:where(h1) {
+  letter-spacing: var(--tracking-display);
+}
+
+:where(p, li, dd, figcaption) {
+  text-wrap: pretty;
+}
+
+:where(img, svg, video, canvas, picture) {
+  max-width: 100%;
+}
+
+:where(img, video) {
+  height: auto;
+}
+
+:where(a) {
+  color: var(--text-link);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+:where(button, input, select, textarea) {
+  font: inherit;
+  color: inherit;
+}
+
+:where(table) {
+  font-variant-numeric: tabular-nums;
+}
+
+// Shared page furniture for every public page (about, help, legal, careers, demo, pricing...).
+// One eyebrow + giant title + quiet value line, like a slide.
+.page-hero {
+  padding-block: calc(var(--section-pad) * 0.7) calc(var(--section-pad) * 0.45);
+}
+.page-eyebrow {
+  margin: 0 0 var(--space-4);
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--text-3);
+  letter-spacing: 0;
+}
+.page-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--step-display);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-display);
+  letter-spacing: var(--tracking-display);
+  color: var(--text-1);
+  text-wrap: balance;
+}
+.page-lede {
+  max-width: 40ch;
+  margin: var(--space-5) 0 0;
+  font-size: var(--fs-xl);
+  line-height: var(--lh-snug);
+  color: var(--text-2);
+  text-wrap: pretty;
+}
+
+// One-time enter reveal for public pages. Content is painted first (LCP), then rises.
+@media (prefers-reduced-motion: no-preference) {
+  :root:not([data-motion='reduced']) .rise {
+    animation: aiban-rise var(--dur-reveal) var(--ease-out) both;
+  }
+  :root:not([data-motion='reduced']) .rise-2 {
+    animation-delay: calc(var(--stagger) * 2);
+  }
+  :root:not([data-motion='reduced']) .rise-3 {
+    animation-delay: calc(var(--stagger) * 4);
+  }
+}
+@keyframes aiban-rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.6em);
+  }
 }

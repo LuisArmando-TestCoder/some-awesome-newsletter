@@ -22,18 +22,18 @@
       type="button"
       class="pagination-btn newer"
       on:click={() => goToPage(currentPage - 1)}
-      disabled={currentPage === 0}
+      aria-disabled={currentPage === 0 ? 'true' : undefined}
     >
       <span aria-hidden="true">&larr;</span> {$t['pagination.newerEntries']}
     </button>
     <span class="pagination-status" aria-live="polite">
-      {$t['pagination.page']} {currentPage + 1} {$t['pagination.of']} {totalPages}
+      {$t['pagination.page']} <strong aria-current="page">{currentPage + 1}</strong> {$t['pagination.of']} {totalPages}
     </span>
     <button
       type="button"
       class="pagination-btn older"
       on:click={() => goToPage(currentPage + 1)}
-      disabled={currentPage + 1 >= totalPages}
+      aria-disabled={currentPage + 1 >= totalPages ? 'true' : undefined}
     >
       {$t['pagination.olderEntries']} <span aria-hidden="true">&rarr;</span>
     </button>
@@ -45,52 +45,96 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
-    gap: var(--space-4, 16px);
-    margin-top: var(--space-7, 48px);
+    justify-content: space-between;
+    gap: var(--space-4);
+    margin-top: var(--space-8);
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--border-1);
   }
 
+  /* Current page: semibold ink number, the rest quiet. */
   .pagination-status {
-    font-size: var(--fs-sm, 0.875rem);
-    color: var(--text-2, #444);
+    font-size: var(--fs-sm);
+    color: var(--text-3);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .pagination-status strong {
+    color: var(--text-1);
+    font-weight: var(--fw-semibold);
   }
 
   .pagination-btn {
     display: inline-flex;
     align-items: center;
-    gap: var(--space-2, 8px);
-    min-height: 2.5rem;
-    padding: var(--space-2, 8px) var(--space-4, 16px);
-    background: var(--surface-1, #fff);
-    color: var(--text-1, #111);
-    border: 1px solid var(--border-2, #ccc);
-    border-radius: var(--radius-full, 999px);
+    gap: var(--space-2);
+    min-height: var(--control-h);
+    padding: 0 var(--space-5);
+    background: var(--surface-0);
+    color: var(--text-1);
+    border: 1px solid var(--border-2);
+    border-radius: var(--radius-full);
     font: inherit;
-    font-size: var(--fs-sm, 0.875rem);
-    font-weight: var(--fw-medium, 500);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
     cursor: pointer;
-    transition: background-color var(--dur-fast, 120ms) var(--ease-out, ease-out),
-      border-color var(--dur-fast, 120ms) var(--ease-out, ease-out);
+    box-shadow: none;
+    transition:
+      background-color var(--t-out) var(--ease-out),
+      transform var(--dur-base) var(--ease-out);
   }
 
-  .pagination-btn:not(:disabled):hover {
-    background: var(--surface-2, #f3f3f3);
-    border-color: var(--accent, #2563eb);
+  .pagination-btn span {
+    display: inline-block;
+    transition: transform var(--dur-base) var(--ease-out);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .pagination-btn:not([aria-disabled='true']):hover {
+      background: var(--surface-2);
+      box-shadow: none;
+      transition-duration: var(--t-in);
+    }
+    .newer:not([aria-disabled='true']):hover span {
+      transform: translateX(-3px);
+    }
+    .older:not([aria-disabled='true']):hover span {
+      transform: translateX(3px);
+    }
+  }
+
+  .pagination-btn:not([aria-disabled='true']):active {
+    transform: scale(0.97);
+    transition-duration: 60ms;
   }
 
   .pagination-btn:focus-visible {
-    outline: 2px solid var(--focus-color, #2563eb);
-    outline-offset: 2px;
+    outline: none;
+    box-shadow: var(--focus-ring);
   }
 
-  .pagination-btn:disabled {
-    opacity: 0.45;
+  .pagination-btn[aria-disabled='true'] {
+    color: var(--text-3);
+    border-color: var(--border-1);
     cursor: not-allowed;
   }
 
+  @media (max-width: 30rem) {
+    .pagination {
+      justify-content: center;
+    }
+    .pagination-status {
+      order: -1;
+      flex-basis: 100%;
+      text-align: center;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
-    .pagination-btn {
+    .pagination-btn,
+    .pagination-btn span {
       transition: none;
+      transform: none !important;
     }
   }
 </style>

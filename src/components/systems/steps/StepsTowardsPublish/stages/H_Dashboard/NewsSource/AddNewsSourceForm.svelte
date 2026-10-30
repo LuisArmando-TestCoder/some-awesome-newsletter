@@ -171,9 +171,9 @@
   }
 
   .limit-warning {
-    background-color: var(--color-warning-light, #fff3cd);
-    border: 1px solid var(--color-warning, #ffc107);
-    color: var(--color-warning-dark, #856404);
+    background-color: var(--warning-soft);
+    border: 1px solid var(--warning);
+    color: var(--warning);
     padding: 0.75rem;
     border-radius: 4px;
     font-size: 0.9rem;
@@ -209,6 +209,6 @@
   .paid-toggle-label {
     font-size: 0.9rem;
     font-weight: 600;
-    color: #4b5563;
+    color: var(--text-2);
   }
 </style>

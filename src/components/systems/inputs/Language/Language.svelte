@@ -348,6 +348,7 @@
           {/if}
           <span class="custom-select-name">{language.name}</span>
           <span class="custom-select-code">({language.code})</span>
+          {#if selectedLanguage?.code === language.code}<svg class="custom-select-check" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3.5 8.5 6.5 11.5 12.5 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>{/if}
         </li>
       {:else}
         <li class="custom-select-empty" role="option" aria-disabled="true" aria-selected="false">
@@ -361,4 +362,106 @@
 <style lang="scss">
   @use "../../../../lib/styles/custom-select-styles.scss";
   @include custom-select-styles.flag-parts;
+
+  /* Mono micro states on top of the shared combobox styles (tokens only). */
+  .custom-select-input,
+  .custom-select-button {
+    background: var(--surface-0);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* The shared hover applies on touch too; keep it to fine pointers. */
+  @media (hover: none), (pointer: coarse) {
+    .custom-select-button:hover:not(:disabled) {
+      background: var(--surface-0);
+      border-color: var(--border-2);
+    }
+  }
+
+  .custom-select-button:active:not(:disabled) {
+    background: var(--surface-2);
+    transform: scale(0.99);
+    transition-duration: 60ms;
+  }
+
+  .custom-select-input:focus,
+  .custom-select-button:focus-visible {
+    border-color: var(--text-1);
+  }
+
+  .custom-select-button[aria-expanded='true'],
+  .custom-select-input.open {
+    border-color: var(--text-1);
+  }
+
+  .custom-select-input:disabled,
+  .custom-select-button:disabled {
+    opacity: var(--disabled-opacity);
+  }
+
+  .custom-select-arrow {
+    transition: transform var(--dur-slow) var(--ease-out);
+  }
+
+  .custom-select-list {
+    background: var(--surface-0);
+    border-radius: var(--radius-lg);
+    overscroll-behavior: contain;
+  }
+
+  .custom-select-list-item {
+    border-radius: var(--radius-md);
+  }
+
+  .custom-select-list-item:hover {
+    background: transparent;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .custom-select-list-item:hover {
+      background: var(--surface-2);
+    }
+  }
+
+  /* Keyboard highlight: a quiet fill plus an inset edge. */
+  .custom-select-list-item.highlighted {
+    background: var(--surface-2);
+    box-shadow: inset 0 0 0 1px var(--border-2);
+  }
+
+  /* Selected: weight and a check mark, never color alone. */
+  .custom-select-list-item.selected {
+    color: var(--text-1);
+    font-weight: var(--fw-semibold);
+  }
+
+  .custom-select-check {
+    flex: none;
+    width: 1rem;
+    height: 1rem;
+    margin-inline-start: auto;
+    color: var(--text-1);
+  }
+
+  @media (forced-colors: active) {
+    .custom-select-input,
+    .custom-select-button {
+      border-color: ButtonText;
+    }
+    .custom-select-input:focus,
+    .custom-select-button:focus-visible {
+      outline: 2px solid Highlight;
+      outline-offset: 2px;
+    }
+    .custom-select-list-item.highlighted {
+      outline: 2px solid Highlight;
+      outline-offset: -2px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .custom-select-button:active {
+      transform: none;
+    }
+  }
 </style>

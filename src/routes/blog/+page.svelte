@@ -17,11 +17,12 @@
 <style lang="scss">
   .page {
     min-height: 70vh;
-    padding: var(--space-8, 64px) var(--space-4, 16px);
-    background: var(--surface-0, #fff);
+    padding: var(--section-pad) var(--gutter);
+    background: var(--surface-0);
   }
   .home {
-    color: var(--text-link, #2563eb);
+    color: var(--text-link);
+    font-weight: var(--fw-medium);
     text-decoration: underline;
   }
 </style>

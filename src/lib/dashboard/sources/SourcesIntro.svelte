@@ -39,7 +39,7 @@
   .lead { margin: 0; color: var(--text-1); font-size: var(--fs-md); line-height: var(--lh-normal); max-width: 68ch; }
   .points { list-style: none; margin: var(--space-4) 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--space-4); }
   .points li { display: flex; gap: var(--space-3); align-items: flex-start; }
-  .points__icon { display: grid; place-items: center; width: 32px; height: 32px; border-radius: var(--radius-full); background: var(--surface-2); color: var(--accent); flex-shrink: 0; }
+  .points__icon { display: grid; place-items: center; width: 2rem; height: 2rem; border-radius: var(--radius-full); background: var(--surface-2); color: var(--text-1); flex-shrink: 0; }
   .points__title { margin: 0 0 var(--space-1); font-size: var(--fs-sm); font-weight: var(--fw-semibold); color: var(--text-1); }
   .points p { margin: 0; font-size: var(--fs-sm); color: var(--text-2); line-height: var(--lh-normal); }
 </style>

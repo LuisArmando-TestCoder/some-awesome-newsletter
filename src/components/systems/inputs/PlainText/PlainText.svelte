@@ -114,7 +114,7 @@
     />
   {/if}
   {#if showError}
-    <p class="error-message" id={errorId}>{error}</p>
+    <p class="error-message" id={errorId}><svg class="error-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.5" /><path d="M8 4.5v4.25M8 11.25v.25" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" /></svg><span>{error}</span></p>
   {/if}
 </div>
 
@@ -127,5 +127,147 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+  }
+
+
+  /* Mono micro states on top of the shared field styles (tokens only). */
+  input {
+    caret-color: var(--text-1);
+    transition:
+      border-color var(--t-out) var(--ease-out),
+      background-color var(--t-out) var(--ease-out),
+      box-shadow var(--t-out) var(--ease-out);
+  }
+
+  /* Empty sits on the quiet surface, filled and focused on paper. */
+  input:not(:placeholder-shown),
+  input:focus {
+    background: var(--surface-0);
+  }
+
+  /* The shared hover applies on touch too; keep it to fine pointers. */
+  @media (hover: none), (pointer: coarse) {
+    input:hover:not(:disabled):not(:focus) {
+      border-color: var(--border-2);
+    }
+  }
+
+  input:focus {
+    border-color: var(--text-1);
+  }
+
+
+  input:disabled {
+    color: var(--text-2);
+    opacity: var(--disabled-opacity);
+  }
+
+  input.invalid,
+  input.invalid:focus,
+  input:user-invalid {
+    border-color: var(--danger);
+  }
+
+  /* Browser autofill: keep our ink and a calm tint instead of the default yellow or blue. */
+  input:-webkit-autofill {
+    -webkit-text-fill-color: var(--text-1);
+    box-shadow: inset 0 0 0 100vmax var(--surface-2);
+    transition: background-color 600000s 0s;
+  }
+  input:-webkit-autofill:focus {
+    box-shadow: var(--focus-ring), inset 0 0 0 100vmax var(--surface-2);
+  }
+  input:autofill {
+    box-shadow: inset 0 0 0 100vmax var(--surface-2);
+  }
+
+  .error-message {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-snug);
+  }
+
+  .error-icon {
+    flex: none;
+    width: 1em;
+    height: 1em;
+    margin-top: 0.15em;
+  }
+
+  @media (forced-colors: active) {
+    input {
+      border-color: FieldText;
+    }
+    input:focus {
+      outline: 2px solid Highlight;
+      outline-offset: 2px;
+    }
+    .error-message {
+      color: CanvasText;
+    }
+  }
+
+  /* Mono micro states on top of the shared field styles (tokens only). */
+  textarea {
+    caret-color: var(--text-1);
+    transition:
+      border-color var(--t-out) var(--ease-out),
+      background-color var(--t-out) var(--ease-out),
+      box-shadow var(--t-out) var(--ease-out);
+  }
+
+  /* Empty sits on the quiet surface, filled and focused on paper. */
+  textarea:not(:placeholder-shown),
+  textarea:focus {
+    background: var(--surface-0);
+  }
+
+  /* The shared hover applies on touch too; keep it to fine pointers. */
+  @media (hover: none), (pointer: coarse) {
+    textarea:hover:not(:disabled):not(:focus) {
+      border-color: var(--border-2);
+    }
+  }
+
+  textarea:focus {
+    border-color: var(--text-1);
+  }
+
+
+  textarea:disabled {
+    color: var(--text-2);
+    opacity: var(--disabled-opacity);
+  }
+
+  textarea.invalid,
+  textarea.invalid:focus,
+  textarea:user-invalid {
+    border-color: var(--danger);
+  }
+
+  /* Browser autofill: keep our ink and a calm tint instead of the default yellow or blue. */
+  textarea:-webkit-autofill {
+    -webkit-text-fill-color: var(--text-1);
+    box-shadow: inset 0 0 0 100vmax var(--surface-2);
+    transition: background-color 600000s 0s;
+  }
+  textarea:-webkit-autofill:focus {
+    box-shadow: var(--focus-ring), inset 0 0 0 100vmax var(--surface-2);
+  }
+  textarea:autofill {
+    box-shadow: inset 0 0 0 100vmax var(--surface-2);
+  }
+
+
+  @media (forced-colors: active) {
+    textarea {
+      border-color: FieldText;
+    }
+    textarea:focus {
+      outline: 2px solid Highlight;
+      outline-offset: 2px;
+    }
   }
 </style>

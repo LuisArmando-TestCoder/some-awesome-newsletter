@@ -62,14 +62,14 @@
     your rights to control our use of them.
   </p>
 
-  <h2>What are cookies?</h2>
+  <h2 id="what-are-cookies"><a class="legal-anchor" href="#what-are-cookies">What are cookies?</a></h2>
   <p>
     Cookies are small data files placed on your computer or mobile device when you visit a website. Website
     owners use them to make their websites work, or work more efficiently, and to provide reporting
     information.
   </p>
 
-  <h2>How we use cookies</h2>
+  <h2 id="how-we-use-cookies"><a class="legal-anchor" href="#how-we-use-cookies">How we use cookies</a></h2>
   <p>
     We use first-party and third-party cookies for several reasons. Some cookies are required for technical
     reasons so that our website can operate; we call these "essential" or "strictly necessary" cookies. Other
@@ -77,9 +77,9 @@
   </p>
 
   {#each cookieCategories as category (category.id)}
-    <h3>{category.title}</h3>
+    <h3 id={category.id}><a class="legal-anchor" href={`#${category.id}`}>{category.title}</a></h3>
     <p>{category.description}</p>
-    <div class="legal-table-wrap">
+    <div class="legal-table-wrap legal-table-wrap--stack">
       <table>
         <caption class="visually-hidden">{category.title}</caption>
         <thead>
@@ -93,10 +93,10 @@
         <tbody>
           {#each category.cookies as cookie (cookie.name)}
             <tr>
-              <td><code>{cookie.name}</code></td>
-              <td>{cookie.provider}</td>
-              <td>{cookie.purpose}</td>
-              <td>{cookie.expiry}</td>
+              <td data-label="Cookie name"><code>{cookie.name}</code></td>
+              <td data-label="Provider">{cookie.provider}</td>
+              <td data-label="Purpose">{cookie.purpose}</td>
+              <td data-label="Expiry">{cookie.expiry}</td>
             </tr>
           {/each}
         </tbody>
@@ -104,7 +104,7 @@
     </div>
   {/each}
 
-  <h2>How can I control cookies?</h2>
+  <h2 id="how-can-i-control-cookies"><a class="legal-anchor" href="#how-can-i-control-cookies">How can I control cookies?</a></h2>
   <p>
     You have the right to decide whether to accept or reject cookies. You can set or change your web browser
     controls to accept or refuse cookies. If you reject cookies, you can still use our website, though some
@@ -116,7 +116,7 @@
     <a href="https://www.youronlinechoices.com" rel="noopener noreferrer">Your Online Choices</a>.
   </p>
 
-  <h2>Contact</h2>
+  <h2 id="contact"><a class="legal-anchor" href="#contact">Contact</a></h2>
   <p>
     If you have questions about our use of cookies or other technologies, email us at
     <a href="mailto:{contactEmail}">{contactEmail}</a>.

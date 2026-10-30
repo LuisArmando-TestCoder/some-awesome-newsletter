@@ -649,6 +649,7 @@ export default {
       "suggestions": "Suggestions",
       "recent": "Recent searches",
       "clearRecent": "Clear recent searches",
+      "clear": "Clear search",
       "title": "Search results",
       "resultsFor": "Results for \"{q}\"",
       "count": "{count} articles found",
@@ -753,6 +754,7 @@ export default {
   "legal": {
     "navLabel": "Legal documents",
     "lastUpdated": "Last updated: {date}",
+    "onThisPage": "On this page",
     "privacy": {
       "title": "Privacy policy",
       "metaTitle": "Privacy policy | AIBAN",
@@ -981,6 +983,8 @@ export default {
     "codeSent": "We sent a code to your email.",
     "invalidCode": "That code is not correct. Check the latest email we sent you, or resend the code.",
     "regenerateCode": "Resend code",
+    "codeAccepted": "Code accepted. Opening your dashboard.",
+    "codeLabel": "6-digit code",
     "back": "Back",
     "byProceeding": "By proceeding, you agree to the",
     "termsOfService": "Terms of Service",
@@ -1009,6 +1013,24 @@ export default {
       "title": "Welcome to the newsletter.",
       "invitedBy": "You have been invited by {configuratorId}."
     }
+  },
+  "errorPage": {
+    "notFoundEyebrow": "Error 404",
+    "notFoundTitle": "We could not find this page",
+    "notFoundBody": "The link may be old or have a typo. These pages are a good place to continue.",
+    "serverEyebrow": "Error {status}",
+    "serverTitle": "Something went wrong on our side",
+    "serverBody": "We could not load this page. Try again in a minute. If it keeps happening, write to info@aiban.news.",
+    "retry": "Try again",
+    "home": "Go to the home page",
+    "popularTitle": "Popular pages",
+    "links": {
+      "howItWorks": "How AIBAN works",
+      "pricing": "Pricing",
+      "help": "Help center",
+      "login": "Log in to your dashboard"
+    },
+    "report": "If a link on our site brought you here, tell us at info@aiban.news so we can fix it."
   },
   "header": {
     "goToWorkspace": "Open dashboard",

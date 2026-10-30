@@ -18,6 +18,11 @@
   // Track validation state.
   let valid = true;
 
+  // Unique ids so several date fields can share a page.
+  const controlId = `date-input-${Math.random().toString(36).slice(2, 9)}`;
+  const errorId = `${controlId}-error`;
+  $: invalid = !valid && value !== "";
+
   // Checks if the string is a valid date.
   function isValidDate(str: string): boolean {
     if (str === "") return true;
@@ -48,66 +53,130 @@
 </script>
 
 <div class="date-input-wrapper">
-  <label class="input-label" for="date-input">{label}</label>
+  {#if label}<label class="input-label" for={controlId}>{label}</label>{/if}
   <input
-    id="date-input"
+    id={controlId}
     type="date"
     bind:value
     {placeholder}
     on:input={handleInput}
     on:keydown={handleKeyDown}
-    aria-label={label}
-    class:invalid={!valid && value !== ""}
+    aria-label={label ? undefined : placeholder || undefined}
+    aria-invalid={invalid ? "true" : undefined}
+    aria-describedby={invalid ? errorId : undefined}
+    class:invalid
+    class:filled={value !== ""}
   />
-  {#if !valid && value !== ""}
-    <span class="error-message">{$t['date.validDate']}</span>
-  {/if}
+  <div class="error-region" aria-live="polite">
+    {#if invalid}
+      <p id={errorId} class="error-message">
+        <svg class="error-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.5" /><path d="M8 4.5v4.25M8 11.25v.25" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" /></svg>
+        <span>{$t['date.validDate']}</span>
+      </p>
+    {/if}
+  </div>
 </div>
 
 <style lang="scss">
   .date-input-wrapper {
     display: flex;
     flex-direction: column;
+    gap: var(--space-2);
     width: 100%;
+    font-family: var(--font-body);
   }
 
   .input-label {
-    margin-bottom: 0.5rem;
-    color: var(--color-foreground);
-    font-size: 1rem;
+    color: var(--text-1);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-snug);
   }
 
   input {
-    background: var(--color-background-inversion);
-    border: 1px solid var(--color-background);
-    border-radius: 8px;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    color: var(--color-foreground);
+    box-sizing: border-box;
+    width: 100%;
+    min-height: var(--control-h);
+    margin: 0;
+    padding: 0 var(--control-pad-x);
+    background: var(--surface-1);
+    border: 1px solid var(--border-2);
+    border-radius: var(--radius-md);
+    color: var(--text-2);
+    font-family: var(--font-body);
+    font-size: var(--fs-md);
+    font-variant-numeric: tabular-nums;
     transition:
-      border 0.3s ease,
-      box-shadow 0.3s ease;
-    outline: none;
-    text-align: center;
+      border-color var(--t-out) var(--ease-out),
+      background-color var(--t-out) var(--ease-out),
+      box-shadow var(--t-out) var(--ease-out);
+
+    &.filled,
+    &:focus {
+      background: var(--surface-0);
+      color: var(--text-1);
+    }
+
+    &::-webkit-calendar-picker-indicator {
+      cursor: pointer;
+      opacity: 0.6;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover:not(:focus) {
+        border-color: var(--text-2);
+        transition-duration: var(--t-in);
+      }
+      &:hover::-webkit-calendar-picker-indicator {
+        opacity: 1;
+      }
+    }
+
+    &:focus-visible {
+      outline: none;
+      border-color: var(--text-1);
+      box-shadow: var(--focus-ring);
+    }
+
+    &.invalid,
+    &.invalid:hover,
+    &:user-invalid {
+      border-color: var(--danger);
+    }
   }
 
-  input::placeholder {
-    color: var(--color-foreground-opaque);
-  }
-
-  input:focus {
-    border-color: var(--color-foreground);
-    box-shadow: 0 0 10px -2px var(--color-foreground);
-  }
-
-  input.invalid {
-    border-color: var(--color-danger);
-    box-shadow: 0 0 10px -2px var(--color-danger);
+  .error-region:not(:has(.error-message)) {
+    margin-top: calc(-1 * var(--space-2));
   }
 
   .error-message {
-    margin-top: 0.25rem;
-    font-size: 0.875rem;
-    color: var(--color-danger);
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+    margin: 0;
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-snug);
+    color: var(--danger);
+  }
+
+  .error-icon {
+    flex: none;
+    width: 1em;
+    height: 1em;
+    margin-top: 0.15em;
+  }
+
+  @media (forced-colors: active) {
+    input {
+      border-color: FieldText;
+    }
+    input:focus-visible {
+      outline: 2px solid Highlight;
+      outline-offset: 2px;
+    }
+    .error-message {
+      color: CanvasText;
+    }
   }
 </style>

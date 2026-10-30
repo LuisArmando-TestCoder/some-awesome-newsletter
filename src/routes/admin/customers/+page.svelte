@@ -80,6 +80,18 @@
       filtered.map((t) => [t.id, t.newsletterTitle, t.senderName, t.plan.id, t.vip, t.sourceCount, t.activeSourceCount, t.paidSourceCount, t.hasOwnSender, t.createdAt ?? "", t.updatedAt ?? "", t.adminNote ?? ""])
     );
     downloadText(`aiban-customers-${new Date().toISOString().slice(0, 10)}.csv`, csv);
+    flashExported(filtered.length);
+  }
+
+  // Export result: the button says "Exported" for a moment and the count is announced.
+  let exported = $state(false);
+  let exportNote = $state("");
+  let exportTimer: ReturnType<typeof setTimeout> | undefined;
+  function flashExported(n: number) {
+    exported = true;
+    exportNote = `Exported ${plural(n, "customer", "customers")} as CSV.`;
+    clearTimeout(exportTimer);
+    exportTimer = setTimeout(() => (exported = false), 1800);
   }
 
   const planOptions = [{ value: "", label: "All plans" }, ...PLAN_OPTIONS];
@@ -91,15 +103,25 @@
     { value: "no_source", label: "No newsletter yet" },
     { value: "paused", label: "Every newsletter paused" },
   ];
+  const activeFilters = $derived(
+    [
+      (params.get("q") ?? "").trim() ? `Search: ${(params.get("q") ?? "").trim()}` : "",
+      plan ? `Plan: ${PLAN_OPTIONS.find((p) => p.value === plan)?.label ?? plan}` : "",
+      filter ? filterOptions.find((f) => f.value === filter)?.label ?? filter : "",
+    ].filter(Boolean)
+  );
 </script>
 
 <svelte:head><title>Customers · AIBAN admin</title></svelte:head>
 
 <PageHeader title="Customers" description="Everyone who has an AIBAN account. Open a customer to change their plan or their newsletters.">
   {#snippet actions()}
-    <Button variant="secondary" size="sm" onclick={exportCsv} disabled={filtered.length === 0}>Export CSV</Button>
+    <Button variant="secondary" size="sm" onclick={exportCsv} disabled={filtered.length === 0} disabledReason="No customers match the filters">
+      {exported ? "Exported" : "Export CSV"}
+    </Button>
   {/snippet}
 </PageHeader>
+<p class="sr-only" role="status">{exportNote}</p>
 
 <section class="filters" aria-label="Filter customers">
   <TextField label="Search" placeholder="Email, title or website" bind:value={search} oninput={onSearch} />
@@ -114,9 +136,15 @@
 {:else if $tenantsLoading && $tenants.length === 0}
   <div aria-busy="true"><Skeleton lines={10} /></div>
 {:else}
-  <p class="count" aria-live="polite">
-    {plural(filtered.length, "customer", "customers")}{filtered.length !== $tenants.length ? ` of ${num($tenants.length)}` : ""}
-  </p>
+  <div class="count">
+    <p class="count__text" aria-live="polite">
+      <strong>{plural(filtered.length, "customer", "customers")}</strong>{filtered.length !== $tenants.length ? ` of ${num($tenants.length)}` : ""}
+    </p>
+    {#each activeFilters as f (f)}<span class="chip">{f}</span>{/each}
+    {#if activeFilters.length}
+      <Button variant="tertiary" size="sm" href="/admin/customers" onclick={() => (search = "")}>Clear filters</Button>
+    {/if}
+  </div>
 
   {#if filtered.length === 0}
     <EmptyState compact title="No customers match" description="Clear the search or change the filters.">
@@ -130,7 +158,7 @@
             <tr>
               <th scope="col" aria-sort={ariaSort("email")}><button type="button" onclick={() => sortBy("email")}>Customer</button></th>
               <th scope="col" aria-sort={ariaSort("plan")}><button type="button" onclick={() => sortBy("plan")}>Plan</button></th>
-              <th scope="col" aria-sort={ariaSort("sources")}><button type="button" onclick={() => sortBy("sources")}>Newsletters</button></th>
+              <th scope="col" class="num" aria-sort={ariaSort("sources")}><button type="button" onclick={() => sortBy("sources")}>Newsletters</button></th>
               <th scope="col">Sending</th>
               <th scope="col" aria-sort={ariaSort("created")}><button type="button" onclick={() => sortBy("created")}>Joined</button></th>
               <th scope="col" aria-sort={ariaSort("updated")}><button type="button" onclick={() => sortBy("updated")}>Last change</button></th>
@@ -151,7 +179,7 @@
                     {#if t.vip}<Badge tone="info">VIP</Badge>{/if}
                   </span>
                 </td>
-                <td>
+                <td class="num">
                   {#if t.sourceCount === 0}
                     <span class="muted">None yet</span>
                   {:else}
@@ -172,101 +200,40 @@
     {#if pages > 1}
       <nav class="pager" aria-label="Pages">
         <Button variant="secondary" size="sm" disabled={pageNo <= 1} onclick={() => setParams({ page: String(pageNo - 1) })}>Previous</Button>
-        <span>Page {Math.min(pageNo, pages)} of {pages}</span>
+        <span aria-current="page">Page {Math.min(pageNo, pages)} of {pages}</span>
         <Button variant="secondary" size="sm" disabled={pageNo >= pages} onclick={() => setParams({ page: String(pageNo + 1) })}>Next</Button>
       </nav>
     {/if}
   {/if}
 {/if}
 
-<style>
-  .filters {
-    display: grid;
-    gap: var(--space-4, 16px);
-    grid-template-columns: minmax(220px, 2fr) repeat(2, minmax(160px, 1fr));
-    align-items: end;
-    margin-bottom: var(--space-4, 16px);
-  }
-  @media (max-width: 720px) {
-    .filters {
-      grid-template-columns: 1fr;
-    }
-  }
-  .count,
-  .muted {
-    color: var(--text-2, inherit);
-    font-size: var(--fs-sm, 0.875rem);
-  }
-  .count {
-    margin: 0 0 var(--space-3, 12px);
-  }
-  .table-wrap {
-    overflow-x: auto;
-  }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: var(--fs-sm, 0.875rem);
-  }
-  th,
-  td {
-    text-align: left;
-    padding: var(--space-3, 12px) var(--space-4, 16px);
-    border-bottom: 1px solid var(--border-1, currentColor);
-    vertical-align: middle;
-  }
-  th {
-    color: var(--text-2, inherit);
-    font-weight: var(--fw-semibold, 600);
-    white-space: nowrap;
-  }
-  th button {
-    all: unset;
-    cursor: pointer;
-  }
-  th[aria-sort="ascending"] button::after {
-    content: " ↑";
-  }
-  th[aria-sort="descending"] button::after {
-    content: " ↓";
-  }
-  th button:focus-visible,
-  .cust:focus-visible {
-    outline: 2px solid var(--focus-ring, currentColor);
-    outline-offset: 2px;
-  }
-  tbody tr:last-child td {
-    border-bottom: 0;
-  }
-  tbody tr:hover td {
-    background: var(--surface-2, transparent);
+<style lang="scss">
+  @use "../../../lib/admin/table.scss" as t;
+  @include t.core;
+  @include t.numeric;
+  @include t.sortable;
+  @include t.muted;
+  .count__text {
+    margin: 0;
   }
   .cust {
     display: grid;
     gap: 2px;
-    text-decoration: none;
     min-width: 0;
+    max-width: 32ch;
   }
   .cust__email {
-    color: var(--text-1, inherit);
-    font-weight: var(--fw-medium, 500);
+    color: var(--text-1);
+    font-weight: var(--fw-medium);
     overflow-wrap: anywhere;
   }
   .cust__sub {
-    color: var(--text-3, inherit);
+    color: var(--text-3);
+    font-size: var(--fs-xs);
   }
   .badges {
     display: inline-flex;
-    gap: var(--space-1, 4px);
+    gap: var(--space-1);
     flex-wrap: wrap;
-  }
-  .pager {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: var(--space-3, 12px);
-    margin-top: var(--space-4, 16px);
-    font-size: var(--fs-sm, 0.875rem);
-    color: var(--text-2, inherit);
   }
 </style>

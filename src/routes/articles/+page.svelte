@@ -45,11 +45,13 @@
 <style lang="scss">
   .page {
     min-height: 70vh;
-    padding: var(--space-8, 64px) var(--space-4, 16px);
-    background: var(--surface-0, #fff);
+    padding: var(--section-pad) var(--gutter);
+    background: var(--surface-0);
   }
   .redirect {
+    margin: 0;
     text-align: center;
-    color: var(--text-2, #444);
+    color: var(--text-3);
+    font-size: var(--fs-sm);
   }
 </style>

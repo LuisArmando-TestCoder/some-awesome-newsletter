@@ -177,7 +177,7 @@
 {:else if !detail}
   <div aria-busy="true" class="stack">
     <Skeleton width="20rem" height="2rem" />
-    <Skeleton height="104px" />
+    <div class="stats"><Skeleton height="6.5rem" /><Skeleton height="6.5rem" /><Skeleton height="6.5rem" /></div>
     <Skeleton lines={8} />
   </div>
 {:else}
@@ -188,7 +188,7 @@
     {/snippet}
   </PageHeader>
 
-  <div class="badges">
+  <div class="badges badges--summary">
     <Badge tone={detail.plan.id === "free" ? "neutral" : "accent"}>{detail.plan.name}</Badge>
     {#if detail.vip}<Badge tone="info">VIP</Badge>{/if}
     <Badge tone="neutral">{detail.hasOwnSender ? "Sends from their own address" : "Sends from the AIBAN address"}</Badge>
@@ -313,114 +313,162 @@
 
 <style>
   .crumbs {
-    font-size: var(--fs-sm, 0.875rem);
-    color: var(--text-2, inherit);
-    margin-bottom: var(--space-3, 12px);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--fs-sm);
+    color: var(--text-2);
+    margin-bottom: var(--space-3);
     overflow-wrap: anywhere;
   }
   .crumbs a {
-    color: var(--text-link, inherit);
+    color: var(--text-2);
+    border-radius: var(--radius-sm);
+  }
+  .crumbs a:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+  .crumbs > span:last-child {
+    color: var(--text-1);
+    font-weight: var(--fw-medium);
   }
   .stack {
     display: grid;
-    gap: var(--space-4, 16px);
+    gap: var(--space-4);
   }
   .badges {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: var(--space-2, 8px);
+    gap: var(--space-2);
   }
-  .badges:first-of-type {
-    margin: calc(var(--space-3, 12px) * -1) 0 var(--space-5, 24px);
+  .badges--summary {
+    margin: calc(var(--space-3) * -1) 0 var(--space-5);
   }
   .muted {
-    color: var(--text-3, inherit);
-    font-size: var(--fs-sm, 0.875rem);
+    color: var(--text-3);
+    font-size: var(--fs-sm);
     margin: 0;
   }
   .stats {
     display: grid;
-    gap: var(--space-4, 16px);
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    margin-bottom: var(--space-4, 16px);
+    gap: var(--space-3);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+    margin-bottom: var(--space-4);
   }
   .meters {
     display: grid;
-    gap: var(--space-4, 16px);
+    gap: var(--space-4);
   }
   .grid {
     display: grid;
-    gap: var(--space-4, 16px);
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
-    margin-block: var(--space-4, 16px);
+    gap: var(--space-4);
+    grid-template-columns: minmax(0, 1fr);
+    margin-block: var(--space-4);
+  }
+  @container admin (min-width: 800px) {
+    .grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
   .form {
     display: grid;
-    gap: var(--space-4, 16px);
+    gap: var(--space-4);
   }
   .form__actions {
     display: flex;
     justify-content: flex-end;
-    gap: var(--space-2, 8px);
+    flex-wrap: wrap;
+    gap: var(--space-2);
   }
+  /* Change history: a quiet rail with a dot per entry, newest first. */
   .timeline {
     list-style: none;
     margin: 0;
     padding: 0;
     display: grid;
-    gap: var(--space-3, 12px);
-    font-size: var(--fs-sm, 0.875rem);
+    font-size: var(--fs-sm);
   }
   .timeline li {
+    position: relative;
     display: grid;
     gap: 2px;
-    padding-left: var(--space-4, 16px);
-    border-left: 2px solid var(--border-2, currentColor);
+    padding: 0 0 var(--space-3) var(--space-5);
+    border-left: 1px solid var(--border-1);
+    line-height: var(--lh-snug);
+  }
+  .timeline li:last-child {
+    padding-bottom: 0;
+    border-left-color: transparent;
+  }
+  .timeline li::before {
+    content: "";
+    position: absolute;
+    left: -4px;
+    top: 0.45em;
+    width: 7px;
+    height: 7px;
+    border-radius: var(--radius-full);
+    background: var(--surface-1);
+    box-shadow: inset 0 0 0 1.5px var(--text-2);
+  }
+  .timeline li:first-child::before {
+    background: var(--text-1);
+    box-shadow: none;
+  }
+  .timeline .muted {
+    font-size: var(--fs-xs);
   }
   .sources h2 {
-    font-size: var(--fs-xl, 1.25rem);
-    margin: var(--space-6, 24px) 0 var(--space-4, 16px);
+    font-size: var(--fs-xl);
+    margin: var(--space-6) 0 var(--space-4);
   }
   .source-grid {
     display: grid;
-    gap: var(--space-4, 16px);
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+    gap: var(--space-4);
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 21rem), 1fr));
   }
   .source {
     display: grid;
-    gap: var(--space-3, 12px);
+    gap: var(--space-3);
     min-width: 0;
   }
   .source__head {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    gap: var(--space-2, 8px);
+    gap: var(--space-2);
   }
   .source__head h3 {
     margin: 0;
-    font-size: var(--fs-md, 1rem);
+    font-size: var(--fs-md);
     overflow-wrap: anywhere;
   }
   .source__url {
-    color: var(--text-link, inherit);
-    font-size: var(--fs-sm, 0.875rem);
+    color: var(--text-2);
+    font-size: var(--fs-sm);
     overflow-wrap: anywhere;
+    border-radius: var(--radius-sm);
+  }
+  .source__url:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
   }
   .switches {
     display: grid;
-    gap: var(--space-2, 8px);
-    padding-top: var(--space-2, 8px);
-    border-top: 1px solid var(--border-1, currentColor);
+    gap: var(--space-2);
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--border-1);
   }
   .source__links {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-2, 8px);
+    gap: var(--space-2) var(--space-3);
   }
   code {
-    font-family: var(--font-mono, monospace);
-    font-size: var(--fs-xs, 0.75rem);
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
   }
 </style>

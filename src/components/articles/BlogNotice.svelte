@@ -19,43 +19,66 @@
 </div>
 
 <style lang="scss">
+  /* Empty, end-of-list and error states: centred, plain, with one next action. */
   .notice {
-    max-width: var(--container-sm, 640px);
-    margin: var(--space-7, 48px) auto;
-    padding: var(--space-7, 48px) var(--space-6, 32px);
+    max-width: var(--container-sm);
+    margin: var(--space-8) auto;
+    padding: var(--space-8) var(--space-6);
     text-align: center;
-    background: var(--surface-1, #fff);
-    border: 1px dashed var(--border-2, #ccc);
-    border-radius: var(--radius-xl, 24px);
+    background: var(--surface-0);
+    border: 1px solid var(--border-1);
+    border-radius: var(--radius-2xl);
   }
 
   .notice--error {
-    border-style: solid;
-    border-color: var(--danger, #b91c1c);
-    background: var(--danger-soft, var(--surface-1, #fff));
+    border-color: var(--danger);
+  }
+
+  .notice--error .notice__title::before {
+    content: "!";
+    display: grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin: 0 auto var(--space-4);
+    font-family: var(--font-body);
+    font-size: var(--fs-md);
+    font-weight: var(--fw-bold);
+    color: var(--danger);
+    border: 1.5px solid currentColor;
+    border-radius: var(--radius-full);
   }
 
   .notice__title {
-    margin: 0 0 var(--space-2, 8px);
-    font-family: var(--font-display, inherit);
-    font-size: var(--fs-xl, 1.375rem);
-    font-weight: var(--fw-bold, 700);
-    line-height: var(--lh-tight, 1.2);
-    color: var(--text-1, #111);
+    margin: 0 0 var(--space-3);
+    font-family: var(--font-display);
+    font-size: var(--fs-2xl);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-tight);
+    letter-spacing: var(--tracking-tight);
+    color: var(--text-1);
+    text-wrap: balance;
   }
 
   .notice__body {
     margin: 0 auto;
     max-width: 48ch;
-    color: var(--text-2, #444);
-    line-height: var(--lh-normal, 1.55);
+    color: var(--text-2);
+    line-height: var(--lh-normal);
   }
 
   .notice__actions {
-    margin-top: var(--space-5, 24px);
+    margin-top: var(--space-6);
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: var(--space-3, 12px);
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  @media (max-width: 30rem) {
+    .notice {
+      padding: var(--space-7) var(--space-4);
+    }
   }
 </style>

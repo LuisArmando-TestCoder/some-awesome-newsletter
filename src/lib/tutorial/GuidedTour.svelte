@@ -216,7 +216,14 @@
       tabindex="-1"
       style={docked ? "" : `top: ${cardTop}px; left: ${cardLeft}px;`}
     >
-      <p class="tour-count">{fmt($tt.tour.stepOf, { current, total })}</p>
+      <div class="tour-top">
+        <p class="tour-count">{fmt($tt.tour.stepOf, { current, total })}</p>
+        <span class="tour-dots" aria-hidden="true">
+          {#each Array(total) as _, i (i)}
+            <span class="tour-dot" class:done={i + 1 < current} class:on={i + 1 === current}></span>
+          {/each}
+        </span>
+      </div>
       <h2 id="{uid}-title" class="tour-title">{step.title}</h2>
       <p id="{uid}-body" class="tour-body">{step.body}</p>
       <div class="tour-actions">
@@ -229,6 +236,7 @@
         {/if}
         <button type="button" class="btn-primary" on:click={onNext}>
           {isLast ? $tt.tour.finish : $tt.tour.next}
+          {#if !isLast}<span class="tour-arrow" aria-hidden="true">&rarr;</span>{/if}
         </button>
       </div>
     </div>
@@ -236,40 +244,52 @@
 {/if}
 
 <style>
+  /* Guided tour: the target is cut out of a dimmed page with a focus-colored ring; the card
+     floats next to it (docked to the bottom on phones). Esc skips, arrow keys step. */
   .tour-layer {
     position: fixed;
     inset: 0;
-    z-index: 1000;
+    z-index: var(--z-tooltip);
     pointer-events: none;
   }
 
   .tour-ring {
     position: fixed;
-    border-radius: var(--radius-md, 8px);
+    border-radius: var(--radius-md);
     box-shadow:
-      0 0 0 3px var(--focus-color, #6366f1),
-      0 0 0 9999px color-mix(in srgb, var(--surface-inverse, #0f172a) 32%, transparent);
+      0 0 0 2px var(--surface-0),
+      0 0 0 4px var(--focus-color),
+      0 0 0 9999px var(--surface-overlay);
     transition:
-      top var(--dur-base, 200ms) var(--ease-out, ease-out),
-      left var(--dur-base, 200ms) var(--ease-out, ease-out),
-      width var(--dur-base, 200ms) var(--ease-out, ease-out),
-      height var(--dur-base, 200ms) var(--ease-out, ease-out);
+      top var(--dur-slow) var(--ease-out),
+      left var(--dur-slow) var(--ease-out),
+      width var(--dur-slow) var(--ease-out),
+      height var(--dur-slow) var(--ease-out);
   }
 
   .tour-card {
     position: fixed;
     pointer-events: auto;
-    width: min(22rem, calc(100vw - 2 * var(--space-4, 16px)));
-    padding: var(--space-5, 24px);
-    background: var(--surface-1, #fff);
-    color: var(--text-1, #111827);
-    border: 1px solid var(--border-1, #e5e7eb);
-    border-radius: var(--radius-lg, 12px);
-    box-shadow: var(--shadow-3, 0 12px 32px rgba(0, 0, 0, 0.18));
-    font-family: var(--font-body, system-ui, sans-serif);
+    width: min(23rem, calc(100vw - 2 * var(--space-4)));
+    padding: var(--space-5);
+    background: var(--surface-0);
+    color: var(--text-1);
+    border: 1px solid var(--border-1);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-3);
+    font-family: var(--font-body);
     transition:
-      top var(--dur-base, 200ms) var(--ease-out, ease-out),
-      left var(--dur-base, 200ms) var(--ease-out, ease-out);
+      top var(--dur-slow) var(--ease-out),
+      left var(--dur-slow) var(--ease-out),
+      opacity var(--dur-base) var(--ease-out),
+      transform var(--dur-base) var(--ease-out);
+  }
+
+  @starting-style {
+    .tour-card {
+      opacity: 0;
+      transform: translateY(6px);
+    }
   }
 
   .tour-card:focus {
@@ -277,47 +297,81 @@
   }
 
   .tour-card:focus-visible {
-    outline: 2px solid var(--focus-color, #6366f1);
+    outline: 2px solid var(--focus-color);
     outline-offset: 2px;
   }
 
   .tour-card.docked {
     top: auto;
-    left: var(--space-4, 16px);
-    right: var(--space-4, 16px);
-    bottom: var(--space-4, 16px);
+    left: var(--space-3);
+    right: var(--space-3);
+    bottom: var(--space-3);
     width: auto;
-    padding-bottom: calc(var(--space-5, 24px) + env(safe-area-inset-bottom, 0px));
+    padding-bottom: calc(var(--space-5) + env(safe-area-inset-bottom, 0px));
+  }
+
+  .tour-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    margin-bottom: var(--space-3);
   }
 
   .tour-count {
-    margin: 0 0 var(--space-2, 8px);
-    font-size: var(--fs-xs, 0.75rem);
-    font-weight: var(--fw-medium, 500);
-    color: var(--text-3, #6b7280);
+    margin: 0;
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-semibold);
+    color: var(--text-3);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Step dots: done = ink, current = wide ink pill, upcoming = hairline. */
+  .tour-dots {
+    display: inline-flex;
+    gap: 4px;
+  }
+  .tour-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: var(--radius-full);
+    background: var(--border-1);
+    transition:
+      width var(--dur-base) var(--ease-out),
+      background-color var(--dur-base) var(--ease-out);
+  }
+  .tour-dot.done {
+    background: var(--text-3);
+  }
+  .tour-dot.on {
+    width: 18px;
+    background: var(--text-1);
   }
 
   .tour-title {
-    margin: 0 0 var(--space-2, 8px);
-    font-size: var(--fs-lg, 1.125rem);
-    font-weight: var(--fw-semibold, 600);
-    line-height: var(--lh-tight, 1.3);
-    color: var(--text-1, #111827);
+    margin: 0 0 var(--space-2);
+    font-family: var(--font-display);
+    font-size: var(--fs-xl);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-tight);
+    letter-spacing: var(--tracking-tight);
+    color: var(--text-1);
+    text-wrap: balance;
   }
 
   .tour-body {
     margin: 0;
-    font-size: var(--fs-sm, 0.875rem);
-    line-height: var(--lh-normal, 1.55);
-    color: var(--text-2, #374151);
+    font-size: var(--fs-sm);
+    line-height: var(--lh-normal);
+    color: var(--text-2);
   }
 
   .tour-actions {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: var(--space-2, 8px);
-    margin-top: var(--space-5, 24px);
+    gap: var(--space-2);
+    margin-top: var(--space-5);
   }
 
   .tour-spacer {
@@ -325,50 +379,90 @@
   }
 
   button {
-    min-height: 44px;
-    padding: 0 var(--space-4, 16px);
-    border-radius: var(--radius-md, 8px);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: var(--control-h);
+    padding: 0 var(--space-5);
+    border-radius: var(--radius-full);
     font-family: inherit;
-    font-size: var(--fs-sm, 0.875rem);
-    font-weight: var(--fw-semibold, 600);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
     cursor: pointer;
+    box-shadow: none;
     transition:
-      background-color var(--dur-fast, 120ms) var(--ease-out, ease-out),
-      color var(--dur-fast, 120ms) var(--ease-out, ease-out);
+      background-color var(--t-out) var(--ease-out),
+      color var(--t-out) var(--ease-out),
+      transform var(--dur-base) var(--ease-out);
+  }
+
+  button:active {
+    transform: scale(0.97);
+    transition-duration: 60ms;
   }
 
   button:focus-visible {
-    outline: 2px solid var(--focus-color, #6366f1);
-    outline-offset: 2px;
+    outline: none;
+    box-shadow: var(--focus-ring);
   }
 
   .btn-primary {
     border: 1px solid transparent;
-    background: var(--accent, #4f46e5);
-    color: var(--accent-contrast, #fff);
+    background: var(--accent);
+    color: var(--accent-contrast);
   }
 
-  .btn-primary:hover {
-    background: var(--accent-hover, #4338ca);
+  .tour-arrow {
+    display: inline-block;
+    transition: transform var(--dur-base) var(--ease-out);
   }
 
   .btn-tertiary {
-    padding: 0 var(--space-2, 8px);
+    padding: 0 var(--space-2);
     border: 1px solid transparent;
     background: transparent;
-    color: var(--text-link, #4f46e5);
+    color: var(--text-2);
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 0.2em;
   }
 
-  .btn-tertiary:hover {
-    text-decoration: underline;
-    text-underline-offset: 3px;
+  @media (hover: hover) and (pointer: fine) {
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      box-shadow: none;
+      transition-duration: var(--t-in);
+    }
+    .btn-primary:hover .tour-arrow {
+      transform: translateX(3px);
+    }
+    .btn-tertiary:hover {
+      box-shadow: none;
+      color: var(--text-1);
+      text-decoration-color: currentColor;
+      transition-duration: var(--t-in);
+    }
+  }
+
+  @media (forced-colors: active) {
+    .tour-ring {
+      outline: 3px solid Highlight;
+    }
+    .tour-dot.on,
+    .tour-dot.done {
+      background: CanvasText;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .tour-ring,
     .tour-card,
+    .tour-dot,
     button {
       transition: none;
+    }
+    button:active {
+      transform: none;
     }
   }
 </style>

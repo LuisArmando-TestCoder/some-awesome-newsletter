@@ -94,21 +94,31 @@
 
   .progress__track {
     position: relative;
-    height: 0.5rem;
+    height: 0.375rem;
     overflow: hidden;
     border-radius: var(--radius-full);
     background: var(--surface-3);
+  }
+
+  @media (forced-colors: active) {
+    .progress__track {
+      border: 1px solid CanvasText;
+    }
+    .progress__fill {
+      forced-color-adjust: none;
+      background: Highlight;
+    }
   }
 
   .progress__fill {
     height: 100%;
     border-radius: inherit;
     background: var(--_fill);
-    transition: width var(--dur-base) var(--ease-out);
+    transition: width var(--dur-slow) var(--ease-out);
   }
 
   .progress--accent {
-    --_fill: var(--accent);
+    --_fill: var(--text-1);
   }
   .progress--success {
     --_fill: var(--success);

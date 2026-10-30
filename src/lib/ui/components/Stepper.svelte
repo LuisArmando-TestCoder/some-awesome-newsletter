@@ -133,7 +133,7 @@
     background: var(--border-2);
   }
   .stepper--horizontal .stepper__step--complete:not(:last-child)::after {
-    background: var(--accent);
+    background: var(--text-1);
   }
 
   .stepper--vertical .stepper__step:not(:last-child) {
@@ -149,7 +149,7 @@
     background: var(--border-2);
   }
   .stepper--vertical .stepper__step--complete:not(:last-child)::after {
-    background: var(--accent);
+    background: var(--text-1);
   }
 
   .stepper {
@@ -166,18 +166,41 @@
   }
 
   .stepper__item--button {
-    margin: 0;
-    padding: 0;
+    margin: calc(-1 * var(--space-1));
+    padding: var(--space-1);
+    padding-inline-end: var(--space-2);
     border: 0;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-full);
     background: none;
+    color: var(--text-2);
     font: inherit;
     text-align: start;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition:
+      background-color var(--t-out) var(--ease-out),
+      transform var(--dur-base) var(--ease-out);
   }
-  .stepper__item--button:hover .stepper__label {
+  .stepper__item--button .stepper__label {
     text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: transparent;
     text-underline-offset: 0.2em;
+    transition: text-decoration-color var(--t-out) var(--ease-out);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .stepper__item--button:hover {
+      background: var(--surface-2);
+      transition-duration: var(--t-in);
+    }
+    .stepper__item--button:hover .stepper__label {
+      text-decoration-color: currentColor;
+    }
+  }
+  .stepper__item--button:active {
+    background: var(--surface-3);
+    transform: scale(0.97);
+    transition-duration: 60ms;
   }
   .stepper__item--button:focus-visible {
     outline: none;
@@ -193,7 +216,7 @@
     height: var(--_marker);
     border: 1px solid var(--border-2);
     border-radius: var(--radius-full);
-    background: var(--surface-1);
+    background: var(--surface-0);
     color: var(--text-2);
     font-size: var(--fs-xs);
     font-weight: var(--fw-semibold);
@@ -233,9 +256,9 @@
     color: var(--text-2);
   }
   .stepper__step--complete .stepper__marker {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: var(--accent-contrast);
+    background: var(--text-1);
+    border-color: var(--text-1);
+    color: var(--surface-0);
   }
 
   .stepper__step--current .stepper__item {
@@ -245,9 +268,33 @@
     font-weight: var(--fw-semibold);
   }
   .stepper__step--current .stepper__marker {
-    border: 2px solid var(--accent);
-    background: var(--accent-soft);
-    color: var(--accent);
+    border: 2px solid var(--text-1);
+    background: var(--surface-0);
+    color: var(--text-1);
+    box-shadow: 0 0 0 4px var(--surface-2);
+  }
+
+  @media (forced-colors: active) {
+    .stepper__marker {
+      border-color: CanvasText;
+    }
+    .stepper__step--complete .stepper__marker,
+    .stepper__step--current .stepper__marker {
+      forced-color-adjust: none;
+      background: Highlight;
+      border-color: Highlight;
+      color: HighlightText;
+    }
+    .stepper__item--button:focus-visible {
+      outline: 2px solid CanvasText;
+      outline-offset: 2px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stepper__item--button:active {
+      transform: none;
+    }
   }
 
   @media (max-width: 40rem) {

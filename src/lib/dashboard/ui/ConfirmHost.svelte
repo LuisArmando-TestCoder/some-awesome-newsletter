@@ -33,15 +33,64 @@
 <style lang="scss">
   .cdlg {
     border: 1px solid var(--border-1);
-    border-radius: var(--radius-lg);
-    background: var(--surface-1);
+    border-radius: var(--radius-xl);
+    background: var(--surface-0);
     color: var(--text-1);
     box-shadow: var(--shadow-3);
     padding: var(--space-6);
-    width: min(92vw, 440px);
-    &::backdrop { background: var(--surface-overlay, rgba(0, 0, 0, 0.45)); }
+    width: min(calc(100vw - 2 * var(--space-4)), 440px);
+    max-height: min(90vh, 90dvh);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+
+    &[open] {
+      opacity: 1;
+      transform: none;
+      transition:
+        opacity var(--dur-base) var(--ease-out),
+        transform var(--dur-slow) var(--ease-out);
+    }
+
+    &::backdrop {
+      background: var(--surface-overlay);
+      backdrop-filter: blur(8px) saturate(1.2);
+      -webkit-backdrop-filter: blur(8px) saturate(1.2);
+      opacity: 1;
+      transition: opacity var(--dur-base) var(--ease-out);
+    }
   }
-  h2 { margin: 0 0 var(--space-2); font-size: var(--fs-lg); font-weight: var(--fw-semibold); }
-  p { margin: 0; color: var(--text-2); font-size: var(--fs-sm); line-height: var(--lh-normal); }
-  .cdlg__actions { display: flex; justify-content: flex-end; gap: var(--space-2); margin-top: var(--space-5); flex-wrap: wrap; }
+
+  /* Enter: fades up and settles; the backdrop fades in under it. */
+  @starting-style {
+    .cdlg[open] {
+      opacity: 0;
+      transform: translateY(0.5rem) scale(0.97);
+    }
+    .cdlg[open]::backdrop {
+      opacity: 0;
+    }
+  }
+
+  h2 {
+    margin: 0 0 var(--space-2);
+    font-family: var(--font-display);
+    font-size: var(--fs-xl);
+    font-weight: var(--fw-semibold);
+    letter-spacing: var(--tracking-tight);
+    line-height: var(--lh-tight);
+  }
+  p { margin: 0; color: var(--text-2); font-size: var(--fs-md); line-height: var(--lh-normal); }
+  .cdlg__actions { display: flex; justify-content: flex-end; gap: var(--space-2); margin-top: var(--space-6); flex-wrap: wrap; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cdlg[open],
+    .cdlg::backdrop {
+      transition: none;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .cdlg { border-color: CanvasText; }
+  }
 </style>

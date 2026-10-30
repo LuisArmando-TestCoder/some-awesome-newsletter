@@ -67,19 +67,19 @@
     justify-content: space-between;
     align-items: flex-start; // Align items to the top
     padding: 0.8rem 1rem;
-    background-color: var(--color-background-opaque-inversion);
-    border: 1px solid var(--color-border-light, #e0e0e0);
-    border-radius: var(--radius-m);
+    background-color: var(--surface-1);
+    border: 1px solid var(--border-1);
+    border-radius: var(--radius-md);
     transition: box-shadow 0.2s ease-in-out;
     gap: 1rem; // Space between details and actions
 
     &:hover {
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      box-shadow: var(--shadow-1);
     }
 
     &.disabled {
       opacity: 0.6;
-      background-color: var(--color-background-disabled, #f5f5f5);
+      background-color: var(--surface-2);
       pointer-events: none; // Prevent interactions on the whole card if disabled (optional)
     }
   }
@@ -95,26 +95,25 @@
 
   .user-card-name {
     font-weight: 600;
-    color: var(--color-foreground);
+    color: var(--text-1);
     font-size: 1rem;
   }
 
   .user-card-email {
     font-size: 0.9rem;
-    color: var(--color-text-secondary, #555);
+    color: var(--text-2);
   }
 
   .user-card-meta {
     font-size: 0.8rem;
-    color: var(--color-text-tertiary, #777);
+    color: var(--text-3);
     margin-top: 0.2rem;
   }
 
   .user-card-bio {
     font-size: 0.85rem;
-    color: var(--color-text-secondary, #666);
+    color: var(--text-2);
     margin-top: 0.4rem;
-    font-style: italic;
     max-width: 100%; // Ensure bio doesn't overflow card horizontally
     white-space: pre-wrap; // Respect line breaks if any in bio
   }

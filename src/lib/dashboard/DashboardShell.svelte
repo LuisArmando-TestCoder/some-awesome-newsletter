@@ -37,12 +37,15 @@
 <style lang="scss">
   .shell {
     width: 100%;
-    max-width: var(--container-lg, 1200px);
+    max-width: var(--container-lg);
     margin: 0 auto;
-    padding: var(--space-6) var(--space-6) var(--space-9);
+    padding: var(--space-6) var(--gutter) var(--space-9);
     box-sizing: border-box;
+    container-type: inline-size;
+    container-name: dash;
   }
   @media (max-width: 767px) {
-    .shell { padding: var(--space-5) var(--space-4) calc(var(--space-9) + 56px); }
+    /* Room for the bottom bar (3.5rem plus its padding) and the home indicator. */
+    .shell { padding: var(--space-5) var(--gutter) calc(var(--space-8) + 4rem + env(safe-area-inset-bottom)); }
   }
 </style>

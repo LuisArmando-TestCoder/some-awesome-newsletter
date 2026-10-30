@@ -103,10 +103,18 @@
     />
   </div>
   {#if hasExisting}<p class="ob-hint">{$ob.signature.existingNote}</p>{/if}
-  {#if error}<p class="ob-error" role="alert">{error}</p>{/if}
+  {#if error}<p class="ob-error shake" role="alert">{error}</p>{/if}
 </OnboardingShell>
 
 <style lang="scss">
-  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4, 16px); }
-  @media (max-width: 560px) { .grid { grid-template-columns: 1fr; } }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+  }
+  @media (max-width: 560px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>

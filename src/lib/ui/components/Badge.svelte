@@ -44,6 +44,13 @@
     line-height: var(--lh-tight);
     white-space: nowrap;
     vertical-align: middle;
+    font-variant-numeric: tabular-nums;
+  }
+
+  @media (forced-colors: active) {
+    .badge {
+      border-color: CanvasText;
+    }
   }
 
   .badge__dot {
@@ -60,8 +67,9 @@
     border-color: var(--border-1);
   }
   .badge--accent {
-    --_bg: var(--accent-soft);
-    --_fg: var(--accent);
+    --_bg: var(--surface-0);
+    --_fg: var(--text-1);
+    border-color: var(--text-1);
   }
   .badge--success {
     --_bg: var(--success-soft);

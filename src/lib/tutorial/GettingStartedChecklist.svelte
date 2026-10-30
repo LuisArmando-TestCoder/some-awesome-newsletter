@@ -23,6 +23,8 @@
   }
 
   $: percent = Math.round(($checklist.done / $checklist.total) * 100);
+  /** The next thing to do: the first open item. Marked as the current step. */
+  $: currentId = $checklist.items.find((i) => !i.done)?.id;
 </script>
 
 {#if !$checklistHidden || !dismissible}
@@ -46,11 +48,11 @@
       {/if}
     </header>
     <div class="gs__bar" role="progressbar" aria-valuemin="0" aria-valuemax={$checklist.total} aria-valuenow={$checklist.done} aria-label={$tt.checklistTitle}>
-      <div style="width: {percent}%"></div>
+      <div style="--gs-pct: {percent / 100}"></div>
     </div>
     <ol class="gs__list">
       {#each $checklist.items as item (item.id)}
-        <li class="gs__item" class:done={item.done}>
+        <li class="gs__item" class:done={item.done} class:current={item.id === currentId} aria-current={item.id === currentId ? "step" : undefined}>
           <span class="gs__check" aria-hidden="true">
             {#if item.done}
               <svg viewBox="0 0 16 16" width="14" height="14"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
@@ -64,7 +66,7 @@
             {#if !item.done}<span class="gs__item-body">{$tt.items[item.id].body}</span>{/if}
           </div>
           {#if showActions && !item.done}
-            <button type="button" class="gs__open" on:click={() => open(item)}>{$tt.open}</button>
+            <button type="button" class="gs__open" on:click={() => open(item)}>{$tt.open}<span class="gs__arrow" aria-hidden="true">&rarr;</span></button>
           {/if}
         </li>
       {/each}
@@ -73,77 +75,235 @@
 {/if}
 
 <style lang="scss">
+  /* Getting started: a numbered list with clear done / current / to do states.
+     Done = filled check + struck title. Current = ink ring + bold title + action. */
   .gs {
-    background: var(--surface-1, #fff);
-    border: 1px solid var(--border-1, #e3e6ea);
-    border-radius: var(--radius-lg, 16px);
-    padding: var(--space-5, 24px);
+    background: var(--surface-0);
+    border: 1px solid var(--border-1);
+    border-radius: var(--radius-xl);
+    padding: var(--space-5) var(--space-5) var(--space-3);
     display: flex;
     flex-direction: column;
-    gap: var(--space-3, 12px);
-    color: var(--text-1, #14171a);
-    font-family: var(--font-body, inherit);
+    gap: var(--space-4);
+    color: var(--text-1);
+    font-family: var(--font-body);
   }
-  .gs__head { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--space-3, 12px); }
-  .gs__title { margin: 0; font-size: var(--fs-lg, 1.125rem); font-weight: var(--fw-bold, 700); }
-  .gs__progress { margin: var(--space-1, 4px) 0 0; font-size: var(--fs-sm, 0.875rem); color: var(--text-2, #4a5058); }
+  .gs__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+  .gs__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--fs-xl);
+    font-weight: var(--fw-semibold);
+    letter-spacing: var(--tracking-tight);
+  }
+  .gs__progress {
+    margin: var(--space-1) 0 0;
+    font-size: var(--fs-sm);
+    color: var(--text-3);
+    font-variant-numeric: tabular-nums;
+  }
   .gs__link {
+    flex: none;
     background: none;
     border: 0;
-    padding: var(--space-2, 8px);
-    min-height: 44px;
+    padding: 0 var(--space-2);
+    min-height: var(--control-h);
     font: inherit;
-    font-size: var(--fs-sm, 0.875rem);
-    color: var(--text-link, #3b5bdb);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    color: var(--text-2);
     text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 0.2em;
     cursor: pointer;
+    box-shadow: none;
+    border-radius: var(--radius-sm);
+    transition:
+      color var(--t-out) var(--ease-out),
+      text-decoration-color var(--t-out) var(--ease-out);
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        box-shadow: none;
+        color: var(--text-1);
+        text-decoration-color: currentColor;
+        transition-duration: var(--t-in);
+      }
+    }
   }
   .gs__bar {
-    height: 6px;
-    border-radius: var(--radius-full, 999px);
-    background: var(--surface-2, #eceef1);
+    height: 4px;
+    border-radius: var(--radius-full);
+    background: var(--border-1);
     overflow: hidden;
-    div { height: 100%; background: var(--success, #2b8a3e); transition: width var(--dur-slow, 320ms) var(--ease-out, ease-out); }
+
+    div {
+      height: 100%;
+      width: 100%;
+      background: var(--text-1);
+      border-radius: inherit;
+      transform-origin: left center;
+      transform: scaleX(var(--gs-pct));
+      transition: transform var(--dur-slow) var(--ease-out);
+    }
   }
-  .gs__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+  .gs__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
   .gs__item {
     display: flex;
     align-items: center;
-    gap: var(--space-3, 12px);
-    padding: var(--space-3, 12px) 0;
-    border-top: 1px solid var(--border-1, #e3e6ea);
-    &:first-child { border-top: 0; }
+    gap: var(--space-4);
+    min-height: 3.5rem;
+    padding: var(--space-3) 0;
+    border-top: 1px solid var(--border-1);
+    &:first-child {
+      border-top: 0;
+    }
   }
   .gs__check {
     flex: none;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    border: 2px solid var(--border-2, #c9ced6);
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: var(--radius-full);
+    border: 1.5px solid var(--border-2);
     display: grid;
     place-items: center;
-    color: var(--accent-contrast, #fff);
+    color: var(--surface-0);
+    transition:
+      background-color var(--t-state) var(--ease-out),
+      border-color var(--t-state) var(--ease-out);
   }
-  .done .gs__check { background: var(--success, #2b8a3e); border-color: var(--success, #2b8a3e); }
-  .gs__text { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
-  .gs__item-title { font-size: var(--fs-md, 1rem); font-weight: var(--fw-medium, 500); }
-  .done .gs__item-title { color: var(--text-2, #4a5058); text-decoration: line-through; }
-  .gs__item-body { font-size: var(--fs-sm, 0.875rem); color: var(--text-3, #6b7280); }
+  .done .gs__check {
+    background: var(--text-1);
+    border-color: var(--text-1);
+  }
+  .current .gs__check {
+    border: 2px solid var(--text-1);
+    box-shadow: inset 0 0 0 3px var(--surface-0), inset 0 0 0 8px var(--text-1);
+  }
+  .gs__text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+    min-width: 0;
+  }
+  .gs__item-title {
+    font-size: var(--fs-md);
+    font-weight: var(--fw-medium);
+  }
+  .current .gs__item-title {
+    font-weight: var(--fw-semibold);
+  }
+  .done .gs__item-title {
+    color: var(--text-3);
+    text-decoration: line-through;
+    text-decoration-color: var(--border-2);
+  }
+  .gs__item-body {
+    font-size: var(--fs-sm);
+    color: var(--text-3);
+  }
   .gs__open {
     flex: none;
-    min-height: 36px;
-    padding: var(--space-1, 4px) var(--space-3, 12px);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: var(--control-h-sm);
+    padding: 0 var(--space-4);
     font: inherit;
-    font-size: var(--fs-sm, 0.875rem);
-    font-weight: var(--fw-semibold, 600);
-    color: var(--text-1, #14171a);
-    background: var(--surface-1, #fff);
-    border: 1px solid var(--border-2, #c9ced6);
-    border-radius: var(--radius-md, 8px);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    color: var(--text-1);
+    background: var(--surface-0);
+    border: 1px solid var(--border-2);
+    border-radius: var(--radius-full);
     cursor: pointer;
-    &:hover { background: var(--surface-2, #f4f5f7); }
+    box-shadow: none;
+    transition:
+      background-color var(--t-out) var(--ease-out),
+      transform var(--dur-base) var(--ease-out);
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background: var(--surface-2);
+        box-shadow: none;
+        transition-duration: var(--t-in);
+
+        .gs__arrow {
+          transform: translateX(3px);
+        }
+      }
+    }
+
+    &:active {
+      transform: scale(0.97);
+      transition-duration: 60ms;
+    }
   }
-  .gs__link:focus-visible, .gs__open:focus-visible { outline: 2px solid var(--focus-color, #7b93ff); outline-offset: 2px; }
-  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-  @media (prefers-reduced-motion: reduce) { .gs__bar div { transition: none; } }
+  /* The next step's action is the strong one. */
+  .current .gs__open {
+    background: var(--accent);
+    color: var(--accent-contrast);
+    border-color: var(--accent);
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background: var(--accent-hover);
+      }
+    }
+  }
+  .gs__arrow {
+    display: inline-block;
+    transition: transform var(--dur-base) var(--ease-out);
+  }
+  .gs__link:focus-visible,
+  .gs__open:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+  @media (max-width: 30rem) {
+    .gs {
+      padding-inline: var(--space-4);
+    }
+    .gs__item {
+      flex-wrap: wrap;
+    }
+    .gs__open {
+      margin-left: calc(1.5rem + var(--space-4));
+    }
+  }
+  @media (forced-colors: active) {
+    .done .gs__check,
+    .gs__bar div {
+      background: CanvasText;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .gs__bar div,
+    .gs__open {
+      transition: none;
+    }
+    .gs__open:active {
+      transform: none;
+    }
+  }
 </style>

@@ -142,6 +142,16 @@
     }
   }
 
+  function onClear() {
+    value = "";
+    localHits = [];
+    serverHits = [];
+    activeIndex = -1;
+    clearTimeout(debounce);
+    ctrl?.abort();
+    inputEl?.focus();
+  }
+
   function onClearRecent() {
     clearRecent(holder);
     recent = [];
@@ -181,7 +191,12 @@
       onblur={() => setTimeout(() => (open = false), 120)}
       onkeydown={onKeydown}
     />
-    <button class="btn btn--primary search__button" type="submit">{$t.blog.search.button}</button>
+    {#if value}
+      <button type="button" class="search__x" aria-label={$t.blog.search.clear ?? "Clear search"} onclick={onClear}>
+        <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 4l8 8M12 4l-8 8" /></svg>
+      </button>
+    {/if}
+    <button class="btn btn--secondary search__button" type="submit">{$t.blog.search.button}</button>
   </div>
 
   <div class="search__panel" hidden={!expanded}>
@@ -232,23 +247,33 @@
   .search {
     position: relative;
     width: 100%;
-    max-width: var(--container-sm, 640px);
+    max-width: var(--container-sm);
   }
 
+  /* One pill: icon, field, clear, then the ink search button inside it. */
   .search__field {
     display: flex;
     align-items: center;
-    gap: var(--space-2, 8px);
-    padding: var(--space-1, 4px) var(--space-1, 4px) var(--space-1, 4px) var(--space-4, 16px);
-    background: var(--surface-1, #fff);
-    border: 1px solid var(--border-2, #ccc);
-    border-radius: var(--radius-full, 999px);
-    transition: border-color var(--dur-fast, 120ms) var(--ease-out, ease-out),
-      box-shadow var(--dur-fast, 120ms) var(--ease-out, ease-out);
+    gap: var(--space-2);
+    min-height: calc(var(--control-h) + var(--space-2));
+    padding: var(--space-1) var(--space-1) var(--space-1) var(--space-4);
+    background: var(--surface-0);
+    border: 1px solid var(--border-2);
+    border-radius: var(--radius-full);
+    transition:
+      border-color var(--t-out) var(--ease-out),
+      box-shadow var(--t-out) var(--ease-out);
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover:not(:focus-within) {
+        border-color: var(--text-2);
+        transition-duration: var(--t-in);
+      }
+    }
 
     &:focus-within {
-      border-color: var(--accent, #2563eb);
-      box-shadow: 0 0 0 3px var(--accent-soft, transparent);
+      border-color: var(--text-1);
+      box-shadow: var(--focus-ring);
     }
   }
 
@@ -257,7 +282,7 @@
     height: 1.25rem;
     flex-shrink: 0;
     fill: none;
-    stroke: var(--text-3, #777);
+    stroke: var(--text-3);
     stroke-width: 2;
     stroke-linecap: round;
   }
@@ -267,13 +292,13 @@
     min-width: 0;
     border: 0;
     background: transparent;
-    padding: var(--space-2, 8px) 0;
+    padding: var(--space-2) 0;
     font: inherit;
-    font-size: var(--fs-md, 1rem);
-    color: var(--text-1, #111);
+    font-size: var(--fs-md);
+    color: var(--text-1);
 
     &::placeholder {
-      color: var(--text-3, #777);
+      color: var(--text-3);
     }
 
     &:focus,
@@ -281,8 +306,56 @@
       outline: none;
     }
 
-    &::-webkit-search-cancel-button {
-      cursor: pointer;
+    /* Our own clear button replaces the browser's. */
+    &::-webkit-search-cancel-button,
+    &::-webkit-search-decoration {
+      -webkit-appearance: none;
+      appearance: none;
+    }
+  }
+
+  .search__x {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius-full);
+    background: transparent;
+    color: var(--text-3);
+    cursor: pointer;
+
+    svg {
+      width: 0.875rem;
+      height: 0.875rem;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.75;
+      stroke-linecap: round;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        color: var(--text-1);
+      }
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--focus-ring);
+    }
+  }
+
+  /* The clear button stays 32px visually but gets a 44px hit area. */
+  .search__x {
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: -6px;
     }
   }
 
@@ -290,17 +363,18 @@
     flex-shrink: 0;
   }
 
+  /* Suggestions float, so they get the only shadow on the page. */
   .search__panel {
     position: absolute;
     z-index: 30;
-    top: calc(100% + var(--space-2, 8px));
+    top: calc(100% + var(--space-2));
     left: 0;
     right: 0;
-    padding: var(--space-2, 8px);
-    background: var(--surface-1, #fff);
-    border: 1px solid var(--border-1, #e5e5e5);
-    border-radius: var(--radius-lg, 16px);
-    box-shadow: var(--shadow-3, none);
+    padding: var(--space-2);
+    background: var(--surface-0);
+    border: 1px solid var(--border-1);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-3);
     text-align: left;
 
     &[hidden] {
@@ -308,12 +382,26 @@
     }
   }
 
+  @supports (transition-behavior: allow-discrete) {
+    .search__panel {
+      transition:
+        opacity var(--dur-base) var(--ease-out),
+        translate var(--dur-base) var(--ease-out),
+        display var(--dur-base) allow-discrete;
+
+      @starting-style {
+        opacity: 0;
+        translate: 0 -4px;
+      }
+    }
+  }
+
   .search__panel-title {
     margin: 0;
-    padding: var(--space-2, 8px) var(--space-3, 12px) var(--space-1, 4px);
-    font-size: var(--fs-xs, 0.75rem);
-    font-weight: var(--fw-semibold, 600);
-    color: var(--text-3, #777);
+    padding: var(--space-2) var(--space-3) var(--space-1);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-semibold);
+    color: var(--text-3);
   }
 
   ul {
@@ -323,16 +411,28 @@
   }
 
   li {
-    padding: var(--space-2, 8px) var(--space-3, 12px);
-    border-radius: var(--radius-md, 8px);
+    position: relative;
+    padding: var(--space-3) var(--space-3);
+    border-radius: var(--radius-md);
     cursor: pointer;
-    color: var(--text-1, #111);
-    font-size: var(--fs-sm, 0.875rem);
-    line-height: var(--lh-tight, 1.3);
+    color: var(--text-1);
+    font-size: var(--fs-sm);
+    line-height: var(--lh-tight);
+    box-shadow: none;
+    transition: background-color var(--t-out) var(--ease-out);
 
-    &:hover,
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background: var(--surface-2);
+        box-shadow: none;
+        transition-duration: var(--t-in);
+      }
+    }
+
+    /* Keyboard-active option: fill plus a leading bar, not color alone. */
     &.active {
-      background: var(--surface-2, #f3f3f3);
+      background: var(--surface-2);
+      box-shadow: inset 2px 0 0 var(--text-1);
     }
   }
 
@@ -345,24 +445,41 @@
   }
 
   .opt__recent {
-    color: var(--text-2, #444);
+    color: var(--text-2);
   }
 
   .search__clear {
-    margin: var(--space-1, 4px) var(--space-3, 12px) var(--space-2, 8px);
+    min-height: 1.5rem;
+    margin: var(--space-1) var(--space-3) var(--space-2);
     padding: 0;
     border: 0;
     background: none;
+    box-shadow: none;
     font: inherit;
-    font-size: var(--fs-xs, 0.75rem);
-    color: var(--text-link, #2563eb);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-medium);
+    color: var(--text-link);
     text-decoration: underline;
+    text-underline-offset: 0.2em;
     cursor: pointer;
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        box-shadow: none;
+        text-decoration-thickness: 2px;
+      }
+    }
+  }
+
+  @media (forced-colors: active) {
+    li.active {
+      outline: 2px solid Highlight;
+    }
   }
 
   @media (max-width: 480px) {
     .search__button {
-      padding-inline: var(--space-4, 16px);
+      padding-inline: var(--space-4);
     }
   }
 </style>

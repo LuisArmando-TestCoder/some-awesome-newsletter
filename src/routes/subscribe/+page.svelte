@@ -26,11 +26,12 @@
 </main>
 
 <style lang="scss">
+  /* Hosted signup: a calm centred card on the plain page, no shadow (nothing here floats). */
   .subscribe-page {
-    min-height: calc(100vh - var(--header-h));
+    min-height: calc(100svh - var(--header-h));
     display: grid;
     place-items: center;
-    padding: var(--space-8) var(--space-4);
+    padding: var(--space-8) var(--gutter);
     background: var(--surface-0);
   }
 
@@ -38,21 +39,23 @@
     box-sizing: border-box;
     width: 100%;
     max-width: var(--container-sm);
-    padding: var(--space-7) var(--space-6);
-    background: var(--surface-1);
+    padding: var(--space-8) var(--space-7);
+    background: var(--surface-0);
     border: 1px solid var(--border-1);
-    border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-2);
+    border-radius: var(--radius-2xl);
   }
 
-  @media (max-width: 480px) {
+  /* Phones: open layout, the form sits on the page. */
+  @media (max-width: 30rem) {
     .subscribe-page {
-      padding: var(--space-5) var(--space-3);
+      padding-block: var(--space-6);
       place-items: start center;
     }
 
     .subscribe-page__card {
-      padding: var(--space-6) var(--space-4);
+      padding: 0;
+      border: 0;
+      border-radius: 0;
     }
   }
 </style>

@@ -23,7 +23,7 @@
     gap: var(--space-2);
     padding: var(--space-8) var(--space-5);
     border: 1px dashed var(--border-2);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-xl);
     background: var(--surface-1);
     &.compact { padding: var(--space-5) var(--space-4); }
   }
@@ -33,12 +33,21 @@
     width: 52px;
     height: 52px;
     border-radius: var(--radius-full);
-    background: var(--accent-soft);
-    color: var(--accent);
+    border: 1px solid var(--border-1);
+    background: var(--surface-0);
+    color: var(--text-1);
     margin-bottom: var(--space-2);
     .compact & { width: 40px; height: 40px; }
   }
-  .empty__title { margin: 0; font-size: var(--fs-md); font-weight: var(--fw-semibold); color: var(--text-1); }
+  .empty__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--fs-lg);
+    font-weight: var(--fw-semibold);
+    letter-spacing: var(--tracking-tight);
+    color: var(--text-1);
+    .compact & { font-size: var(--fs-md); }
+  }
   .empty__body { margin: 0; max-width: 52ch; color: var(--text-2); font-size: var(--fs-sm); line-height: var(--lh-normal); }
   .empty__actions { display: flex; gap: var(--space-2); flex-wrap: wrap; justify-content: center; margin-top: var(--space-3); }
 </style>

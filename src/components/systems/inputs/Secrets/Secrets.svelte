@@ -189,7 +189,7 @@
           <div class="group-row">
             <div class="group-info">
               <span class="group-name">
-                {#if idx === 0}<span class="badge-default" title={$t['webhook.defaultBadge']}>★</span>{/if}
+                {#if idx === 0}<span class="badge-default" title={$t['webhook.defaultBadge']} aria-label={$t['webhook.defaultBadge']} role="img">★</span>{/if}
                 {group.name || domainLabel(group.url)}
               </span>
               <span class="group-url">{domainLabel(group.url)}</span>
@@ -199,12 +199,12 @@
               {/if}
             </div>
             <div class="group-actions">
-              <button class="btn-text" on:click={() => startEdit(group)}>{$t['labels.edit']}</button>
+              <button type="button" class="btn-text" on:click={() => startEdit(group)}>{$t['labels.edit']}</button>
               {#if confirmDeleteId === group.id}
-                <button class="btn-confirm" on:click={() => deleteGroup(group.id)}>{$t['labels.confirm']}</button>
-                <button class="btn-cancel" on:click={() => (confirmDeleteId = null)}>{$t['labels.cancel']}</button>
+                <button type="button" class="btn-confirm" on:click={() => deleteGroup(group.id)}>{$t['labels.confirm']}</button>
+                <button type="button" class="btn-cancel" on:click={() => (confirmDeleteId = null)}>{$t['labels.cancel']}</button>
               {:else}
-                <button class="btn-delete" aria-label={$t['webhook.deleteDestination']} title={$t['webhook.deleteDestination']} on:click={() => (confirmDeleteId = group.id)}>✕</button>
+                <button type="button" class="btn-delete" aria-label={$t['webhook.deleteDestination']} title={$t['webhook.deleteDestination']} on:click={() => (confirmDeleteId = group.id)}><svg class="icon-x" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg></button>
               {/if}
             </div>
           </div>
@@ -240,9 +240,11 @@
                 <PlainText bind:value={draft.password} type="password"
                   label={$t['webhook.appPassword']} placeholder={$t['webhook.appPasswordPlaceholder']} />
                 <p class="field-hint">{$t['webhook.appPasswordHint']}</p>
-                <button class="guide-toggle"
+                <button type="button" class="guide-toggle"
+                  aria-expanded={showPasswordGuideForId === group.id}
                   on:click={() => showPasswordGuideForId = showPasswordGuideForId === group.id ? null : group.id}>
-                  {showPasswordGuideForId === group.id ? $t['webhook.appPasswordGuideHide'] : $t['webhook.appPasswordGuide']}
+                  <span>{showPasswordGuideForId === group.id ? $t['webhook.appPasswordGuideHide'] : $t['webhook.appPasswordGuide']}</span>
+                  <svg class="chevron" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 6.25 8 10.25l4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg>
                 </button>
                 {#if showPasswordGuideForId === group.id}
                   <ol class="guide-steps">
@@ -273,10 +275,15 @@
 
             <div class="edit-footer">
               <SubmitButton label={$t['webhook.saveSettings']} callback={saveGroup} />
-              <button class="btn-cancel-edit" on:click={cancelEdit}>{$t['labels.cancel']}</button>
-              {#if groupSaveSuccess === group.id}
-                <span class="success-msg">{$t['webhook.savedSuccess']}</span>
-              {/if}
+              <button type="button" class="btn-cancel-edit" on:click={cancelEdit}>{$t['labels.cancel']}</button>
+              <span class="success-region" role="status">
+                {#if groupSaveSuccess === group.id}
+                  <span class="success-msg">
+                    <svg class="icon-check" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3.5 8.5 6.5 11.5 12.5 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                    {$t['webhook.savedSuccess']}
+                  </span>
+                {/if}
+              </span>
             </div>
           </div>
         {/if}
@@ -285,8 +292,9 @@
     {/each}
 
     <!-- Add new group -->
-    <button class="add-group-btn" on:click={addGroup}>
-      + {$t['webhook.addDestination']}
+    <button type="button" class="add-group-btn" on:click={addGroup}>
+      <svg class="icon-plus" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+      {$t['webhook.addDestination']}
     </button>
 
     {#if webhookGroups.length === 0}
@@ -310,11 +318,11 @@
         <p class="warning-text"><strong>{$t['secrets.copyNow']}</strong> {$t['secrets.wontShowAgain']}</p>
         <div class="new-api-key-wrapper">
           <code class="new-api-key-code">{newSharedSecret}</code>
-          <button class="copy-btn" on:click={() => newSharedSecret && copyToClipboard(newSharedSecret)}>{$t['secrets.copy']}</button>
+          <button type="button" class="copy-btn" on:click={() => newSharedSecret && copyToClipboard(newSharedSecret)}>{$t['secrets.copy']}</button>
         </div>
       </div>
     {:else}
-      <button class="secondary-btn" on:click={createSharedSecret}>{$t['secrets.generateSignature']}</button>
+      <button type="button" class="secondary-btn" on:click={createSharedSecret}>{$t['secrets.generateSignature']}</button>
     {/if}
   </div>
 
@@ -329,12 +337,12 @@
         <p class="warning-text"><strong>{$t['secrets.keyGenerated']}</strong></p>
         <div class="new-api-key-wrapper">
           <code class="new-api-key-code">{newApiKey}</code>
-          <button class="copy-btn" on:click={() => newApiKey && copyToClipboard(newApiKey)}>{$t['secrets.copy']}</button>
+          <button type="button" class="copy-btn" on:click={() => newApiKey && copyToClipboard(newApiKey)}>{$t['secrets.copy']}</button>
         </div>
         <p class="small-hint">{$t['secrets.storeSecurely']}</p>
       </div>
     {/if}
-    <button class="primary-btn" on:click={createApiKey}>{$t['secrets.createNewKey']}</button>
+    <button type="button" class="primary-btn" on:click={createApiKey}>{$t['secrets.createNewKey']}</button>
     <div class="table-container">
       <h4 class="sub-title">{$t['secrets.activeConnections']}</h4>
       <table class="api-key-table">
@@ -352,10 +360,10 @@
               <td>{new Date(key.createdAt).toLocaleDateString()}</td>
               <td>
                 {#if confirmingDeleteHash === key.hash}
-                  <button class="confirm-btn" on:click={() => deleteApiKey(key.hash)}>{$t['labels.confirm']}</button>
-                  <button class="btn-cancel" on:click={() => (confirmingDeleteHash = null)}>{$t['labels.cancel']}</button>
+                  <button type="button" class="confirm-btn" on:click={() => deleteApiKey(key.hash)}>{$t['labels.confirm']}</button>
+                  <button type="button" class="btn-cancel" on:click={() => (confirmingDeleteHash = null)}>{$t['labels.cancel']}</button>
                 {:else}
-                  <button class="delete-btn" on:click={() => (confirmingDeleteHash = key.hash)}>{$t['secrets.revokeAccess']}</button>
+                  <button type="button" class="delete-btn" on:click={() => (confirmingDeleteHash = key.hash)}>{$t['secrets.revokeAccess']}</button>
                 {/if}
               </td>
             </tr>
@@ -376,128 +384,242 @@
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 40px;
-    padding: 20px;
+    gap: var(--space-7);
+    padding: var(--space-5) 0;
+    font-family: var(--font-body);
+    color: var(--text-1);
   }
-  .card-section { display: flex; flex-direction: column; gap: 14px; }
-  .header-with-badge { display: flex; align-items: center; gap: 12px; }
-  .secrets-title { font-size: 1.25rem; font-weight: 700; margin: 0; color: #111; }
-  .sub-title { font-size: 1rem; font-weight: 600; margin: 4px 0; }
-  .section-desc, .field-hint { font-size: 0.88rem; color: #666; margin: 0; line-height: 1.5; }
-  .field-hint { color: #888; font-size: 0.82rem; }
-  .empty-hint { font-size: 0.85rem; color: #aaa; }
+  .card-section { display: flex; flex-direction: column; gap: var(--space-3); min-width: 0; }
+  .header-with-badge { display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-3); }
+  .secrets-title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--fs-xl);
+    font-weight: var(--fw-semibold);
+    letter-spacing: var(--tracking-tight);
+    color: var(--text-1);
+  }
+  .sub-title { font-size: var(--fs-md); font-weight: var(--fw-semibold); margin: var(--space-1) 0; }
+  .section-desc, .field-hint { font-size: var(--fs-sm); color: var(--text-2); margin: 0; line-height: var(--lh-normal); max-width: var(--measure); }
+  .field-hint { color: var(--text-3); font-size: var(--fs-xs); }
+  .empty-hint { font-size: var(--fs-sm); color: var(--text-3); margin: 0; }
 
+  /* Badges: the word carries the meaning; surface and edge only support it. */
   .badge {
-    padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
-    &.dev-only { background: #eef2ff; color: #4f46e5; border: 1px solid #c7d2fe; }
-    &.new-feature { background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; }
+    display: inline-flex;
+    align-items: center;
+    min-height: 1.5rem;
+    padding: 0 var(--space-2);
+    border-radius: var(--radius-full);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-medium);
+    border: 1px solid var(--border-1);
+    &.dev-only { background: var(--surface-2); color: var(--text-1); }
+    &.new-feature { background: var(--surface-0); color: var(--text-1); border-color: var(--text-1); }
   }
-  .badge-default { color: #f59e0b; margin-right: 4px; }
+  .badge-default { color: var(--text-1); margin-right: var(--space-1); }
   .badge-session {
-    display: inline-block;
-    background: #fef3c7; color: #92400e; border: 1px solid #fde68a;
-    font-size: 0.7rem; font-weight: 600; padding: 2px 6px; border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    min-height: 1.375rem;
+    background: var(--warning-soft); color: var(--text-1); border: 1px solid var(--warning);
+    font-size: var(--fs-xs); font-weight: var(--fw-medium); padding: 0 var(--space-2); border-radius: var(--radius-full);
   }
 
   /* ── Group cards ── */
   .group-card {
-    border: 1px solid #e5e7eb;
-    border-radius: 10px;
+    border: 1px solid var(--border-1);
+    border-radius: var(--radius-lg);
     overflow: hidden;
-    background: #fff;
-    transition: box-shadow 0.2s;
-    &.editing { border-color: #6366f1; box-shadow: 0 0 0 3px rgba(99,102,241,0.1); }
+    background: var(--surface-0);
+    transition: border-color var(--t-out) var(--ease-out), box-shadow var(--t-out) var(--ease-out);
+    @media (hover: hover) and (pointer: fine) {
+      &:not(.editing):hover { border-color: var(--border-2); }
+    }
+    /* Editing: ink edge plus a ring, never color alone (the edit form itself is the main cue). */
+    &.editing { border-color: var(--text-1); box-shadow: 0 0 0 3px var(--surface-2); }
   }
   .group-row {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 14px 16px; gap: 12px;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;
+    padding: var(--space-3) var(--space-4); gap: var(--space-3);
   }
   .group-info {
-    display: flex; align-items: center; flex-wrap: wrap; gap: 8px; flex: 1;
+    display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-2); flex: 1; min-width: 0;
   }
-  .group-name { font-weight: 600; font-size: 0.95rem; }
-  .group-url { font-size: 0.82rem; color: #999; font-family: monospace; }
+  .group-name { font-weight: var(--fw-semibold); font-size: var(--fs-md); }
+  .group-url { font-size: var(--fs-xs); color: var(--text-3); font-family: var(--font-mono); overflow-wrap: anywhere; }
   .pill {
-    font-size: 0.75rem; padding: 2px 8px;
-    background: #f3f4f6; border-radius: 999px; color: #444;
+    font-size: var(--fs-xs); padding: 0 var(--space-2); min-height: 1.375rem; display: inline-flex; align-items: center;
+    background: var(--surface-2); border-radius: var(--radius-full); color: var(--text-2);
   }
-  .group-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+  .group-actions { display: flex; align-items: center; gap: var(--space-1); flex-shrink: 0; }
 
   .group-edit {
-    display: flex; flex-direction: column; gap: 14px;
-    padding: 20px;
-    background: #fafafa;
+    display: flex; flex-direction: column; gap: var(--space-4);
+    padding: var(--space-5);
+    background: var(--surface-1);
   }
-  .edit-title { font-size: 0.95rem; font-weight: 600; margin: 0; }
+  .edit-title { font-size: var(--fs-md); font-weight: var(--fw-semibold); margin: 0; }
   .sub-group {
-    display: flex; flex-direction: column; gap: 8px;
-    background: #fff; border: 1px solid #eaeaea; border-radius: 8px; padding: 16px;
+    display: flex; flex-direction: column; gap: var(--space-2);
+    background: var(--surface-0); border: 1px solid var(--border-1); border-radius: var(--radius-md); padding: var(--space-4);
   }
-  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4);
     @media (max-width: 600px) { grid-template-columns: 1fr; }
   }
-  .field-group { display: flex; flex-direction: column; gap: 4px; }
-  .input-label { font-size: 0.82rem; font-weight: 600; color: #444; }
+  .field-group { display: flex; flex-direction: column; gap: var(--space-1); }
+  .input-label { font-size: var(--fs-sm); font-weight: var(--fw-medium); color: var(--text-1); }
+
   .status-select {
-    border: 1px solid #ddd; border-radius: 8px; padding: 9px 12px;
-    font-size: 0.88rem; background: #fff; cursor: pointer; width: 100%;
-    &:focus { outline: none; border-color: #6366f1; }
+    width: 100%;
+    min-height: var(--control-h);
+    padding: 0 var(--control-pad-x);
+    border: 1px solid var(--border-2);
+    border-radius: var(--radius-md);
+    background: var(--surface-0);
+    color: var(--text-1);
+    font: inherit;
+    font-size: var(--fs-md);
+    cursor: pointer;
+    transition: border-color var(--t-out) var(--ease-out), box-shadow var(--t-out) var(--ease-out);
+    @media (hover: hover) and (pointer: fine) {
+      &:hover:not(:focus) { border-color: var(--text-2); }
+    }
+    &:focus-visible { outline: none; border-color: var(--text-1); box-shadow: var(--focus-ring); }
   }
+
   .guide-toggle {
-    background: none; border: none; color: #4f46e5; font-size: 0.8rem;
-    cursor: pointer; padding: 0; text-decoration: underline; width: fit-content;
+    display: inline-flex; align-items: center; gap: var(--space-1);
+    min-height: 2rem;
+    background: none; border: none; color: var(--text-link); font: inherit; font-size: var(--fs-sm);
+    cursor: pointer; padding: 0 var(--space-1); width: fit-content; border-radius: var(--radius-sm);
+    text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em;
+    @media (hover: hover) and (pointer: fine) {
+      &:hover { text-decoration-thickness: 2px; }
+    }
+    &:focus-visible { outline: none; box-shadow: var(--focus-ring); }
   }
+  .chevron { width: 0.875rem; height: 0.875rem; transition: transform var(--dur-slow) var(--ease-out); }
+  .guide-toggle[aria-expanded='true'] .chevron { transform: rotate(180deg); }
   .guide-steps {
-    background: #f8f8ff; border: 1px solid #c7d2fe; border-radius: 8px;
-    padding: 10px 18px; font-size: 0.83rem; color: #333;
-    li { margin-bottom: 4px; }
+    margin: 0;
+    background: var(--surface-1); border: 1px solid var(--border-1); border-radius: var(--radius-md);
+    padding: var(--space-3) var(--space-5); font-size: var(--fs-sm); color: var(--text-1); line-height: var(--lh-normal);
+    li { margin-bottom: var(--space-1); }
   }
-  .edit-footer { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-  .success-msg { font-size: 0.85rem; color: #059669; font-weight: 500; }
+  .edit-footer { display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; }
+
+  /* Success: check plus past-tense text, announced by the status region. */
+  .success-region:empty { display: none; }
+  .success-msg {
+    display: inline-flex; align-items: center; gap: var(--space-1);
+    font-size: var(--fs-sm); color: var(--success); font-weight: var(--fw-medium);
+  }
+  .icon-check { width: 1rem; height: 1rem; flex: none; }
 
   .add-group-btn {
-    display: flex; align-items: center; justify-content: center; gap: 8px;
-    padding: 12px; border: 2px dashed #d1d5db; border-radius: 10px;
-    background: none; cursor: pointer; font-size: 0.9rem; color: #6b7280;
+    display: flex; align-items: center; justify-content: center; gap: var(--space-2);
+    min-height: var(--control-h);
+    padding: var(--space-3); border: 1px dashed var(--border-2); border-radius: var(--radius-lg);
+    background: none; cursor: pointer; font: inherit; font-size: var(--fs-sm); font-weight: var(--fw-medium); color: var(--text-2);
     width: 100%;
-    &:hover { border-color: #6366f1; color: #4f46e5; background: #f8f8ff; }
+    -webkit-tap-highlight-color: transparent;
+    transition: border-color var(--t-out) var(--ease-out), color var(--t-out) var(--ease-out), background-color var(--t-out) var(--ease-out), box-shadow var(--t-out) var(--ease-out), transform var(--dur-base) var(--ease-out);
+    @media (hover: hover) and (pointer: fine) {
+      &:hover { border-style: solid; border-color: var(--text-1); color: var(--text-1); background: var(--surface-1); }
+      &:hover .icon-plus { transform: rotate(90deg); }
+    }
+    &:active { transform: scale(0.99); background: var(--surface-2); transition-duration: 60ms; }
+    &:focus-visible { outline: none; box-shadow: var(--focus-ring); }
   }
+  .icon-plus { width: 1rem; height: 1rem; flex: none; transition: transform var(--dur-base) var(--ease-out); }
+
   .info-callout {
-    background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px;
-    padding: 10px 14px; font-size: 0.82rem; color: #92400e; margin: 0;
+    background: var(--surface-1); border: 1px solid var(--border-1); border-radius: var(--radius-md);
+    padding: var(--space-3) var(--space-4); font-size: var(--fs-sm); color: var(--text-2); margin: 0; line-height: var(--lh-normal);
   }
 
-  /* ── Buttons ── */
-  .btn-text { background: none; border: none; color: #4f46e5; font-size: 0.85rem; font-weight: 600; cursor: pointer; }
-  .btn-delete { background: none; border: none; color: #9ca3af; font-size: 1rem; cursor: pointer; &:hover { color: #dc2626; } }
-  .btn-cancel { background: none; border: none; color: #6b7280; font-size: 0.85rem; cursor: pointer; }
-  .btn-cancel-edit { background: none; border: 1px solid #ddd; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 0.85rem; }
-  .btn-confirm { background: none; border: none; color: #dc2626; font-size: 0.85rem; font-weight: 600; cursor: pointer; }
-  .confirm-btn { color: #dc2626; background: none; border: none; cursor: pointer; font-weight: 600; margin-right: 6px; }
-  .delete-btn { color: #dc2626; background: none; border: none; cursor: pointer; font-weight: 500; }
-  .primary-btn { background: #000; color: #fff; padding: 11px 22px; border-radius: 8px; font-weight: 600; cursor: pointer; border: none; width: fit-content; }
-  .secondary-btn { background: #fff; border: 1px solid #ddd; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-weight: 500; width: fit-content; }
+  /* ── Buttons: pills with the full state set ── */
+  .btn-text, .btn-delete, .btn-cancel, .btn-confirm, .confirm-btn, .delete-btn, .btn-cancel-edit, .primary-btn, .secondary-btn, .copy-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-1);
+    min-height: 2.25rem;
+    padding: 0 var(--space-3);
+    border: 1px solid transparent;
+    border-radius: var(--radius-full);
+    background: transparent;
+    font: inherit;
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    white-space: nowrap;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition:
+      background-color var(--t-out) var(--ease-out),
+      border-color var(--t-out) var(--ease-out),
+      color var(--t-out) var(--ease-out),
+      box-shadow var(--t-out) var(--ease-out),
+      transform var(--dur-base) var(--ease-out);
+    &:active { transform: scale(0.97); transition-duration: 60ms; }
+    &:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+  }
+  .btn-text, .btn-cancel { color: var(--text-1); }
+  .btn-cancel { color: var(--text-2); }
+  .btn-delete { width: 2.25rem; padding: 0; color: var(--text-3); }
+  .icon-x { width: 1rem; height: 1rem; }
+  .btn-confirm, .confirm-btn, .delete-btn { color: var(--danger); }
+  .btn-confirm, .confirm-btn { font-weight: var(--fw-semibold); border-color: var(--danger); }
+  .btn-cancel-edit, .secondary-btn { min-height: var(--control-h); padding: 0 var(--space-5); border-color: var(--border-2); background: var(--surface-0); color: var(--text-1); width: fit-content; }
+  .primary-btn { min-height: var(--control-h); padding: 0 var(--space-5); background: var(--text-1); color: var(--surface-0); width: fit-content; }
+  @media (hover: hover) and (pointer: fine) {
+    .btn-text:hover, .btn-cancel:hover { background: var(--surface-2); color: var(--text-1); }
+    .btn-delete:hover, .delete-btn:hover, .btn-confirm:hover, .confirm-btn:hover { background: var(--danger-soft); color: var(--danger); }
+    .btn-cancel-edit:hover, .secondary-btn:hover { border-color: var(--text-2); background: var(--surface-1); }
+    .primary-btn:hover { box-shadow: 0 0 0 2px color-mix(in srgb, var(--text-1) 16%, transparent); }
+  }
 
   /* ── Secret reveal ── */
-  .secret-reveal-box { background: #fffbeb; border: 1px solid #fde68a; padding: 18px; border-radius: 10px;
-    &.success { background: #f0fdf4; border-color: #bbf7d0; }
+  .secret-reveal-box {
+    display: flex; flex-direction: column; gap: var(--space-2);
+    background: var(--warning-soft); border: 1px solid var(--warning); padding: var(--space-4); border-radius: var(--radius-lg);
+    &.success { background: var(--success-soft); border-color: var(--success); }
   }
-  .warning-text { font-size: 0.85rem; color: #92400e; margin-bottom: 10px; }
-  .new-api-key-wrapper { display: flex; gap: 8px; background: #000; padding: 8px 12px; border-radius: 8px; align-items: center;
-    .new-api-key-code { color: #fff; font-family: 'Courier New', monospace; font-size: 0.88rem; flex: 1; overflow-x: auto; }
-    .copy-btn { background: #333; color: #fff; border: none; padding: 5px 10px; border-radius: 6px; cursor: pointer; font-size: 0.78rem;
-      &:hover { background: #444; }
+  .warning-text { font-size: var(--fs-sm); color: var(--text-1); margin: 0; }
+  .new-api-key-wrapper {
+    display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center;
+    background: var(--surface-inverse); padding: var(--space-2) var(--space-2) var(--space-2) var(--space-3); border-radius: var(--radius-md);
+    .new-api-key-code { color: var(--text-inverse); font-family: var(--font-mono); font-size: var(--fs-sm); flex: 1 1 12rem; min-width: 0; overflow-x: auto; overflow-wrap: anywhere; }
+    .copy-btn {
+      color: var(--text-inverse);
+      border-color: color-mix(in srgb, var(--text-inverse) 40%, transparent);
+      @media (hover: hover) and (pointer: fine) {
+        &:hover { background: color-mix(in srgb, var(--text-inverse) 12%, transparent); }
+      }
     }
   }
-  .small-hint { font-size: 0.78rem; color: #666; margin-top: 6px; }
+  .small-hint { font-size: var(--fs-xs); color: var(--text-2); margin: 0; }
 
   /* ── API key table ── */
-  .table-container { margin-top: 18px; }
-  .api-key-table { width: 100%; border-collapse: collapse; font-size: 0.88rem;
-    th { text-align: left; padding: 10px 12px; border-bottom: 2px solid #eee; color: #666; }
-    td { padding: 14px 12px; border-bottom: 1px solid #eee; }
+  .table-container { margin-top: var(--space-4); overflow-x: auto; }
+  .api-key-table { width: 100%; border-collapse: collapse; font-size: var(--fs-sm); font-variant-numeric: tabular-nums;
+    th { position: sticky; top: 0; text-align: left; padding: var(--space-2) var(--space-3); border-bottom: 1px solid var(--border-2); color: var(--text-2); font-size: var(--fs-xs); font-weight: var(--fw-medium); background: var(--surface-0); }
+    td { padding: var(--space-3); border-bottom: 1px solid var(--border-1); }
   }
-  .hash-preview { background: #f1f5f9; padding: 3px 7px; border-radius: 4px; }
-  .divider { border: 0; border-top: 1px solid #eee; margin: 8px 0; }
-  .empty-state { text-align: center; color: #999; padding: 36px; }
+  .hash-preview { background: var(--surface-2); padding: var(--space-1) var(--space-2); border-radius: var(--radius-sm); font-family: var(--font-mono); }
+  .divider { border: 0; border-top: 1px solid var(--border-1); margin: 0; }
+  .empty-state { text-align: center; color: var(--text-3); padding: var(--space-7); }
+
+  @media (forced-colors: active) {
+    .group-card.editing { border: 2px solid Highlight; }
+    .btn-text, .btn-delete, .btn-cancel, .btn-confirm, .confirm-btn, .delete-btn, .btn-cancel-edit, .primary-btn, .secondary-btn, .copy-btn, .add-group-btn, .guide-toggle, .status-select {
+      &:focus-visible { outline: 2px solid CanvasText; outline-offset: 2px; }
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .btn-text, .btn-delete, .btn-cancel, .btn-confirm, .confirm-btn, .delete-btn, .btn-cancel-edit, .primary-btn, .secondary-btn, .copy-btn, .add-group-btn { &:active { transform: none; } }
+    .add-group-btn:hover .icon-plus { transform: none; }
+  }
 </style>

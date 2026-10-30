@@ -95,7 +95,11 @@
 
 <Card title="Current admins" headingLevel={2} padding="none">
   {#if loading}
-    <div class="pad" aria-busy="true"><Skeleton lines={3} /></div>
+    <ul class="admins" aria-busy="true" aria-label="Loading admins">
+      {#each [0, 1, 2] as i (i)}
+        <li aria-hidden="true"><div class="who"><Skeleton width="16rem" height="0.875rem" /><Skeleton width="10rem" height="0.75rem" /></div><Skeleton width="6rem" height="1.75rem" radius="full" /></li>
+      {/each}
+    </ul>
   {:else if loadError}
     <div class="pad">
       <EmptyState compact title="We could not load the admin list" description={loadError}>
@@ -116,7 +120,7 @@
             {#if a.source === "env"}
               <Badge tone="info">Server setting</Badge>
             {:else if a.email !== me}
-              <Button variant="tertiary" size="sm" onclick={() => { toRemove = a; removeOpen = true; }}>Remove</Button>
+              <Button variant="ghost" size="sm" class="remove" aria-label={`Remove admin access for ${a.email}`} onclick={() => { toRemove = a; removeOpen = true; }}>Remove access</Button>
             {/if}
           </div>
         </li>
@@ -138,13 +142,13 @@
 <style>
   .grid {
     display: grid;
-    gap: var(--space-4, 16px);
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
-    margin-bottom: var(--space-4, 16px);
+    gap: var(--space-4);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+    margin-bottom: var(--space-4);
   }
   .add {
     display: grid;
-    gap: var(--space-3, 12px);
+    gap: var(--space-3);
   }
   .add__actions {
     display: flex;
@@ -152,14 +156,16 @@
   }
   .help {
     margin: 0;
-    padding-left: var(--space-5, 24px);
+    padding-left: var(--space-5);
     display: grid;
-    gap: var(--space-2, 8px);
-    color: var(--text-2, inherit);
-    font-size: var(--fs-sm, 0.875rem);
+    gap: var(--space-2);
+    color: var(--text-2);
+    font-size: var(--fs-sm);
+    line-height: var(--lh-normal);
+    max-width: var(--measure);
   }
   .pad {
-    padding: var(--space-4, 16px);
+    padding: var(--space-4);
   }
   .admins {
     list-style: none;
@@ -170,26 +176,46 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: var(--space-3, 12px);
-    padding: var(--space-3, 12px) var(--space-4, 16px);
-    border-bottom: 1px solid var(--border-1, currentColor);
+    gap: var(--space-3);
+    min-height: var(--control-h);
+    padding: var(--row-pad-y) var(--space-4);
+    border-bottom: 1px solid var(--border-1);
+    transition: background-color var(--t-out) var(--ease-out);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .admins li:hover {
+      background: var(--surface-2);
+      transition-duration: var(--t-in);
+    }
+  }
+  .admins li:focus-within {
+    background: var(--surface-2);
   }
   .admins li:last-child {
     border-bottom: 0;
   }
   .who {
     display: grid;
-    gap: 2px;
+    gap: var(--space-1);
     min-width: 0;
   }
   .who__email {
-    font-weight: var(--fw-medium, 500);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    color: var(--text-1);
     overflow-wrap: anywhere;
   }
   .you,
   .who__meta {
-    color: var(--text-3, inherit);
-    font-size: var(--fs-sm, 0.875rem);
-    font-weight: var(--fw-regular, 400);
+    color: var(--text-3);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-regular);
+  }
+  .row-actions {
+    flex-shrink: 0;
+  }
+  /* Destructive action reads as such in words and color, and only acts after the confirm dialog. */
+  .row-actions :global(.remove) {
+    color: var(--danger);
   }
 </style>

@@ -12,224 +12,233 @@
 </script>
 
 {#if loading}
-  <div class="loading-container">
-    <LoadingWheel />
+  <div class="news-item news-item--skeleton" aria-hidden="true">
+    <div class="news-item-image-wrapper sk"></div>
+    <div class="news-item-card">
+      <span class="sk sk--title"></span>
+      <span class="sk sk--line"></span>
+      <span class="sk sk--line sk--short"></span>
+    </div>
   </div>
+  <span class="sr-only"><LoadingWheel /></span>
 {:else}
+  <!-- The click handler stays on the card; the title button stretched over it makes it keyboard reachable. -->
   <!-- svelte-ignore a11y_click_events_have_key_events a11y_no_noninteractive_element_interactions -->
   <article class="news-item" class:no-image={!hasImage} on:click>
-        <div class="news-item-image-wrapper">
-          <img class="news-item-image" src={imageSrc} alt={imageAlt} />
-        </div>
-        <div class="news-item-card">
-          <span class="news-item-link">
-            <div class="news-item-texts">
-              <h5 class="news-item-title">{title}</h5>
-              <p class="news-item-desc">{excerpt}</p>
-              <span class="more-link">{readMoreText}</span>
-            </div>
-          </span>
-        </div>
-      </article>
+    {#if hasImage}
+      <div class="news-item-image-wrapper">
+        <img class="news-item-image" src={imageSrc} alt={imageAlt} loading="lazy" decoding="async" />
+      </div>
+    {/if}
+    <div class="news-item-card">
+      <div class="news-item-texts">
+        <h5 class="news-item-title"><button type="button" class="news-item-link">{title}</button></h5>
+        <p class="news-item-desc">{excerpt}</p>
+        <span class="more-link" aria-hidden="true">{readMoreText} <span class="more-arrow">&rarr;</span></span>
+      </div>
+    </div>
+  </article>
 {/if}
 
 <style lang="scss">
-.loading-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-}
-// Main section styling for card only (no section or grid styles)
-.news-item {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  background: transparent;
-  box-shadow: none;
-  border-radius: 0;
-  padding: 0;
-  min-width: 0;
-  max-width: 100%;
-  position: relative;
-  height: 100%;
-  justify-content: flex-end;
+  /* Editorial card: image first, title, two lines, a quiet "Read more". The card lifts 2px and
+     its edge darkens on hover; the title button carries keyboard focus for the whole card. */
+  .news-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-width: 0;
+    max-width: 100%;
+    background: var(--surface-0);
+    border: 1px solid var(--border-1);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    cursor: pointer;
+    transition:
+      transform var(--t-out) var(--ease-out),
+      border-color var(--t-out) var(--ease-out);
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        border-color: var(--border-2);
+        transform: translateY(-2px);
+        transition-duration: var(--t-in);
+
+        .news-item-image {
+          transform: scale(1.03);
+        }
+
+        .more-arrow {
+          transform: translateX(3px);
+        }
+      }
+    }
+
+    &:active {
+      transform: scale(0.99);
+      transition-duration: 60ms;
+    }
+
+    &:has(.news-item-link:focus-visible) {
+      outline: 2px solid var(--focus-color);
+      outline-offset: 2px;
+    }
+  }
 
   .news-item-image-wrapper {
-    position: relative;
-    width: 100%;
-    min-height: 220px;
-    height: 220px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    z-index: 1;
-    background: var(--surface-2, #eaf1f7);
-    border-radius: var(--radius-lg, 16px);
-    overflow: visible;
-    transition: height 1.1s cubic-bezier(.22,.61,.36,1), min-height 1.1s cubic-bezier(.22,.61,.36,1);
+    aspect-ratio: 3 / 2;
+    background: var(--surface-2);
+    overflow: hidden;
   }
 
   .news-item-image {
-    position: absolute;
-    left: 50%;
-    top: 0;
-    width: 92%;
-    height: 220px;
-    transform: translate(-50%, -50%) scale(0.95);
+    display: block;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    object-position: 50% 50%;
-    border-radius: var(--radius-lg, 16px);
-    box-shadow: var(--shadow-1, none);
-    z-index: 1;
-    transition:
-      height 1.1s cubic-bezier(.22,.61,.36,1),
-      transform 1.4s cubic-bezier(.22,.61,.36,1),
-      object-position 1.7s cubic-bezier(.22,.61,.36,1);
-    will-change: height, transform, object-position;
+    transition: transform var(--dur-reveal) var(--ease-out);
   }
 
   .news-item-card {
-    position: absolute;
-    left: 50%;
-    top: calc(60% + 3rem);
-    transform: translate(-50%, -50%) scale(0.95);
-    width: 78%;
-    min-width: 0;
-    background: var(--surface-1, #fff);
-    border-radius: var(--radius-lg, 16px);
-    box-shadow: var(--shadow-2, none);
-    padding: 1.3rem 1.1rem 1.1rem 1.1rem;
-    min-height: 170px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    align-items: flex-start;
-    z-index: 2;
-    transition:
-      box-shadow 2s cubic-bezier(.22,.61,.36,1),
-      transform 2.3s cubic-bezier(.22,.61,.36,1),
-      top 2.6s cubic-bezier(.22,.61,.36,1);
-    will-change: transform, box-shadow, top;
+    flex: 1;
+    gap: var(--space-2);
+    padding: var(--space-5);
   }
 
-  &:focus-within {
-    outline: 2px solid var(--focus-color, #2563eb);
-    outline-offset: 4px;
-    border-radius: var(--radius-lg, 16px);
+  .news-item-texts {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: var(--space-2);
   }
 
-  &:hover {
-    .news-item-image-wrapper {
-      min-height: 340px;
-      height: 340px;
+  .news-item-title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--fs-xl);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-tight);
+    letter-spacing: var(--tracking-tight);
+    color: var(--text-1);
+    text-wrap: balance;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    overflow: hidden;
+  }
+
+  .news-item-link {
+    all: unset;
+    cursor: pointer;
+
+    /* Stretched over the whole card. */
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 1;
     }
-    .news-item-image {
-      height: 340px;
-      transform: translateX(-50%) scale(1);
-      object-position: 50% 40%;
-    }
-    .news-item-card {
-      top: calc(50% + 3rem);
-      transform: translate(-50%, -50%) scale(1);
-      box-shadow: var(--shadow-3, none);
+
+    &:focus-visible {
+      outline: none;
     }
   }
 
-  &.no-image {
-    justify-content: flex-start;
-
-    .news-item-image-wrapper {
-      display: none;
-    }
-
-    .news-item-card {
-      position: relative;
-      left: auto;
-      top: auto;
-      transform: none;
-      width: 100%;
-      min-height: 0;
-    }
-
-    &:hover .news-item-card {
-      transform: scale(1);
-      top: auto;
-    }
+  .news-item-desc {
+    margin: 0;
+    font-size: var(--fs-sm);
+    line-height: var(--lh-normal);
+    color: var(--text-2);
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    overflow: hidden;
   }
-}
 
-.news-item-link {
-  display: block;
-  width: 100%;
-  text-decoration: none;
-  color: inherit;
-  cursor: pointer;
-}
+  .no-image .news-item-desc {
+    -webkit-line-clamp: 6;
+    line-clamp: 6;
+  }
 
-.news-item-texts {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3em;
-  width: 100%;
-  align-items: flex-start;
-  justify-content: flex-end;
-  min-height: 120px;
-}
-
-.news-item-title {
-  font-size: var(--fs-lg, 1.125rem);
-  font-weight: var(--fw-bold, 700);
-  color: var(--text-1, #111);
-  margin-bottom: 0.3rem;
-  line-height: 1.25;
-  max-height: 2.7em;
-  overflow: hidden;
-  text-align: left;
-  transform: scale(0.95);
-  transition: transform 0.3s cubic-bezier(.22,.61,.36,1);
-}
-
-.news-item-desc {
-  font-size: var(--fs-sm, 0.875rem);
-  color: var(--text-2, #555);
-  margin-bottom: 0.4rem;
-  line-height: 1.5;
-  max-height: 6.2em;
-  overflow: hidden;
-  text-align: left;
-  opacity: 0.92;
-  transform: scale(0.95);
-  transition: transform 0.45s cubic-bezier(.22,.61,.36,1);
-}
-
-.more-link {
-  color: var(--text-link, #2563eb);
-  font-weight: 700;
-  text-decoration: none;
-  font-size: var(--fs-sm, 0.875rem);
-  letter-spacing: 0.04em;
-  margin-top: 0.2em;
-  display: inline-block;
-  align-self: flex-start;
-  text-align: left;
-  opacity: 0.88;
-  cursor: pointer;
-  transform: scale(0.95);
-  transition: transform 0.6s cubic-bezier(.22,.61,.36,1);
-}
-
-.news-item:hover {
-  .news-item-title,
-  .news-item-desc,
   .more-link {
-    transform: scale(1);
+    margin-top: auto;
+    padding-top: var(--space-3);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    color: var(--text-1);
   }
-}
-@media (prefers-reduced-motion: reduce) {
-  .news-item,
-  .news-item * {
-    transition: none !important;
+
+  .more-arrow {
+    display: inline-block;
+    transition: transform var(--dur-base) var(--ease-out);
   }
-}
+
+  /* Loading: the same shape as the card. */
+  .news-item--skeleton {
+    cursor: default;
+  }
+
+  .sk {
+    display: block;
+    background: var(--surface-2);
+    border-radius: var(--radius-sm);
+    animation: news-pulse 1.4s var(--ease-in-out) infinite;
+  }
+
+  .news-item-image-wrapper.sk {
+    border-radius: 0;
+  }
+
+  .sk--title {
+    height: 1.5rem;
+    width: 80%;
+    margin-bottom: var(--space-2);
+  }
+
+  .sk--line {
+    height: 0.875rem;
+  }
+
+  .sk--short {
+    width: 50%;
+  }
+
+  @keyframes news-pulse {
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  @media (forced-colors: active) {
+    .news-item:has(.news-item-link:focus-visible) {
+      outline-color: CanvasText;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .news-item,
+    .news-item * {
+      transition: none !important;
+      animation: none !important;
+    }
+    .news-item:hover,
+    .news-item:active,
+    .news-item:hover .news-item-image {
+      transform: none;
+    }
+  }
 </style>

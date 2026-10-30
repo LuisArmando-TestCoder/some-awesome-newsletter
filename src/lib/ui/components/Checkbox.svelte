@@ -71,7 +71,10 @@
     </span>
   </label>
   {#if error}
-    <p id={errorId} class="checkbox__error">{error}</p>
+    <p id={errorId} class="checkbox__error">
+      <svg class="checkbox__error-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.5" /><path d="M8 4.5v4.25M8 11.25v.25" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" /></svg>
+      <span>{error}</span>
+    </p>
   {/if}
 </div>
 
@@ -89,8 +92,10 @@
     gap: var(--space-3);
     min-height: var(--space-5);
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
   }
 
+  /* 24px hit box around an 18px square. The ::before halo is the state layer. */
   .checkbox__control {
     position: relative;
     display: inline-flex;
@@ -99,6 +104,17 @@
     justify-content: center;
     width: var(--space-5);
     height: var(--space-5);
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -0.375rem;
+      border-radius: var(--radius-full);
+      background: var(--text-1);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--t-out) var(--ease-out);
+    }
   }
 
   .checkbox__input {
@@ -115,64 +131,88 @@
     position: relative;
     width: 1.125rem;
     height: 1.125rem;
-    background: var(--surface-1);
+    background: var(--surface-0);
     border: 1px solid var(--border-2);
     border-radius: var(--radius-sm);
     transition:
-      background-color var(--dur-fast) var(--ease-out),
-      border-color var(--dur-fast) var(--ease-out),
-      box-shadow var(--dur-fast) var(--ease-out);
+      background-color var(--t-state) var(--ease-out),
+      border-color var(--t-state) var(--ease-out),
+      box-shadow var(--t-out) var(--ease-out),
+      transform var(--dur-base) var(--ease-out);
     pointer-events: none;
 
     &::after {
       content: '';
       position: absolute;
       opacity: 0;
-      transition: opacity var(--dur-fast) var(--ease-out);
+      transition:
+        opacity var(--dur-fast) var(--ease-out),
+        transform var(--dur-base) var(--ease-spring);
     }
   }
 
-  .checkbox__row:hover .checkbox__box {
-    border-color: var(--text-3);
+  @media (hover: hover) and (pointer: fine) {
+    .checkbox:not(.checkbox--disabled) .checkbox__row:hover {
+      .checkbox__control::before {
+        opacity: 0.08;
+        transition-duration: var(--t-in);
+      }
+      .checkbox__box {
+        border-color: var(--text-2);
+      }
+    }
+  }
+
+  .checkbox:not(.checkbox--disabled) .checkbox__row:active {
+    .checkbox__control::before {
+      opacity: 0.12;
+      transition-duration: 0ms;
+    }
+    .checkbox__box {
+      transform: scale(0.9);
+      transition-duration: 60ms;
+    }
   }
 
   .checkbox__input:focus-visible + .checkbox__box {
-    border-color: var(--accent);
+    border-color: var(--text-1);
     box-shadow: var(--focus-ring);
   }
 
+  /* Checked and mixed: ink fill plus a mark, so the state never rests on color. */
   .checkbox__input:checked + .checkbox__box,
   .checkbox__input:indeterminate + .checkbox__box {
-    background: var(--accent);
-    border-color: var(--accent);
+    background: var(--text-1);
+    border-color: var(--text-1);
   }
 
-  /* Check mark */
   .checkbox__input:checked + .checkbox__box::after {
     left: 50%;
     top: 45%;
     width: 0.3125rem;
     height: 0.625rem;
-    border-right: 2px solid var(--accent-contrast);
-    border-bottom: 2px solid var(--accent-contrast);
+    border-right: 2px solid var(--surface-0);
+    border-bottom: 2px solid var(--surface-0);
     transform: translate(-50%, -50%) rotate(45deg);
     opacity: 1;
   }
 
-  /* Dash for a partly selected group */
   .checkbox__input:indeterminate + .checkbox__box::after {
     left: 50%;
     top: 50%;
     width: 0.625rem;
     height: 2px;
     border: 0;
-    background: var(--accent-contrast);
+    border-radius: 1px;
+    background: var(--surface-0);
     transform: translate(-50%, -50%);
     opacity: 1;
   }
 
-  .checkbox--invalid .checkbox__box {
+  .checkbox--invalid .checkbox__box,
+  .checkbox__input:user-invalid + .checkbox__box {
     border-color: var(--danger);
+    border-width: 2px;
   }
 
   .checkbox__text {
@@ -195,14 +235,27 @@
   }
 
   .checkbox__error {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
     margin: 0;
     padding-left: calc(var(--space-5) + var(--space-3));
     color: var(--danger);
     font-size: var(--fs-sm);
     font-weight: var(--fw-medium);
+    line-height: var(--lh-snug);
+  }
+
+  .checkbox__error-icon {
+    flex: none;
+    width: 1em;
+    height: 1em;
+    margin-top: 0.15em;
   }
 
   .checkbox--disabled {
+    opacity: var(--disabled-opacity);
+
     .checkbox__row {
       cursor: not-allowed;
     }
@@ -217,10 +270,36 @@
       background: var(--text-3);
       border-color: var(--text-3);
     }
+  }
 
-    .checkbox__label,
-    .checkbox__description {
-      color: var(--text-3);
+  @media (forced-colors: active) {
+    .checkbox__box {
+      border-color: CanvasText;
+    }
+    .checkbox__input:checked + .checkbox__box,
+    .checkbox__input:indeterminate + .checkbox__box {
+      forced-color-adjust: none;
+      background: Highlight;
+      border-color: Highlight;
+    }
+    .checkbox__input:checked + .checkbox__box::after {
+      border-color: HighlightText;
+    }
+    .checkbox__input:indeterminate + .checkbox__box::after {
+      background: HighlightText;
+    }
+    .checkbox__input:focus-visible + .checkbox__box {
+      outline: 2px solid CanvasText;
+      outline-offset: 2px;
+    }
+    .checkbox--disabled .checkbox__label {
+      color: GrayText;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .checkbox__row:active .checkbox__box {
+      transform: none;
     }
   }
 </style>

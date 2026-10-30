@@ -172,31 +172,31 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
   }
   .stats-container {
     display: flex;
     flex-direction: column;
-    gap: 2rem; // Space between charts
-    margin-top: 1rem;
+    gap: var(--space-6);
+    margin-top: var(--space-4);
   }
   .stat-wrapper {
-    padding: 1rem;
-    background-color: var(--color-background-opaque-inversion);
-    border-radius: var(--radius-l);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: var(--card-pad);
+    background-color: var(--surface-1);
+    border: 1px solid var(--border-1);
+    border-radius: var(--radius-lg);
   }
   .error-message {
-    color: var(--color-error, #f44336);
-    padding: 1rem;
-    background-color: var(--color-error-light, #ffebee);
-    border: 1px solid var(--color-error, #f44336);
-    border-radius: var(--radius-m);
+    color: var(--danger);
+    padding: var(--space-4);
+    background-color: var(--danger-soft);
+    border: 1px solid var(--danger);
+    border-radius: var(--radius-md);
   }
   .loading-message,
   .no-data-message {
-    padding: 1rem;
-    font-style: italic;
-    color: var(--color-text-secondary, #666);
+    padding: var(--space-4);
+    color: var(--text-2);
   }
 </style>

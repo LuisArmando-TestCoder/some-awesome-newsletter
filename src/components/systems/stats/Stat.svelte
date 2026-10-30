@@ -202,17 +202,12 @@
 <style>
   .chart-container {
     width: 100%;
-    height: 300px; /* Adjusted default height */
-    position: relative; /* Keep for potential absolute elements inside */
-    padding: 10px; /* Add some padding */
-    background-color: var(
-      --color-background-very-opaque,
-      rgba(255, 255, 255, 0.05)
-    ); /* Subtle background */
-    border: 1px solid
-      var(--color-background-input-border, rgba(255, 255, 255, 0.1)); /* Subtle border */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    height: 300px;
+    position: relative;
+    padding: var(--space-4);
+    background: var(--surface-1);
+    border: 1px solid var(--border-1);
+    border-radius: var(--radius-lg);
   }
 
   canvas {

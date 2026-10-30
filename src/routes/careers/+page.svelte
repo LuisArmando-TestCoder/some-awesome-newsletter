@@ -21,107 +21,167 @@
   <meta name="twitter:card" content="summary" />
 </svelte:head>
 
-<main class="page">
-  <header class="page__hero">
-    <p class="page__eyebrow">{c.eyebrow ?? 'Careers'}</p>
-    <h1 class="page__title">{c.title ?? 'Careers at AIBAN'}</h1>
-    <p class="page__lead">{c.lead ?? 'AIBAN has no open roles right now.'}</p>
+<main class="careers">
+  <header class="wrap page-hero">
+    <p class="page-eyebrow rise">{c.eyebrow ?? 'Careers'}</p>
+    <h1 class="page-title rise rise-2">{c.title ?? 'Careers at AIBAN'}</h1>
+    <p class="page-lede rise rise-3">{c.lead ?? 'AIBAN has no open roles right now.'}</p>
   </header>
 
-  <section class="section" aria-label={c.eyebrow ?? 'Careers'}>
-    <p>{c.body ?? ''}</p>
-    <div class="actions">
-      <a class="btn btn--primary" href={mailto}>{c.emailCta ?? `Email ${EMAIL}`}</a>
-      <a class="btn btn--tertiary" href="/about">{c.aboutCta ?? 'Read about AIBAN'}</a>
+  <!-- One chapter, 8/4: the note on the left, the ways to act on the right. -->
+  <section class="chapter" aria-label={c.eyebrow ?? 'Careers'}>
+    <div class="wrap split">
+      <p class="statement">{c.body ?? ''}</p>
+      <div class="actions">
+        <a class="pill" href={mailto}>
+          <svg class="pill__icon" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="M3 7l9 6 9-6" /></svg>
+          {c.emailCta ?? `Email ${EMAIL}`}
+        </a>
+        <a class="more" href="/about">{c.aboutCta ?? 'Read about AIBAN'} <span class="more__arrow" aria-hidden="true">&#8250;</span></a>
+      </div>
     </div>
   </section>
 </main>
 
 <style lang="scss">
-  .page {
-    max-width: var(--container-md, 880px);
-    margin: 0 auto;
-    padding: var(--space-8, 64px) var(--space-4, 16px) var(--space-10, 128px);
-    color: var(--text-1, #0f172a);
-    font-family: var(--font-body, inherit);
+  .careers {
+    color: var(--text-1);
+    font-family: var(--font-body);
+    overflow-x: clip;
   }
 
-  .page__hero { margin-bottom: var(--space-8, 64px); }
-
-  .page__eyebrow {
-    margin: 0 0 var(--space-2, 8px);
-    font-size: var(--fs-sm, 0.875rem);
-    font-weight: var(--fw-semibold, 600);
-    color: var(--text-2, #475569);
+  .wrap {
+    width: 100%;
+    max-width: var(--container-xl);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
   }
 
-  .page__title {
-    margin: 0 0 var(--space-4, 16px);
-    font-family: var(--font-display, inherit);
-    font-size: var(--fs-3xl, 2.5rem);
-    font-weight: var(--fw-bold, 700);
-    line-height: var(--lh-tight, 1.15);
+  .chapter {
+    padding-block: calc(var(--section-pad) * 0.6) var(--section-pad);
+    border-top: 1px solid var(--border-1);
   }
 
-  .page__lead {
+  .split {
+    display: grid;
+    gap: var(--space-7) var(--space-8);
+  }
+  @media (min-width: 56rem) {
+    .split {
+      grid-template-columns: 8fr 4fr;
+      align-items: end;
+    }
+  }
+
+  .statement {
     margin: 0;
-    max-width: 60ch;
-    font-size: var(--fs-lg, 1.125rem);
-    line-height: var(--lh-normal, 1.6);
-    color: var(--text-2, #475569);
-  }
-
-  .section { margin-bottom: var(--space-8, 64px); }
-
-
-  .section p {
-    margin: 0 0 var(--space-4, 16px);
-    max-width: 68ch;
-    font-size: var(--fs-md, 1rem);
-    line-height: var(--lh-normal, 1.7);
-    color: var(--text-2, #475569);
+    max-width: 30ch;
+    font-family: var(--font-display);
+    font-size: var(--fs-3xl);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-tight);
+    letter-spacing: var(--tracking-tight);
+    color: var(--text-1);
+    text-wrap: pretty;
   }
 
   .actions {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: var(--space-3, 12px);
-    margin-top: var(--space-5, 24px);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-4);
   }
 
-  .btn {
+  /* Secondary pill: the page's main action, but the solid ink fill stays reserved for "Start free". */
+  .pill {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    min-height: 44px;
-    padding: var(--space-2, 8px) var(--space-5, 24px);
-    border-radius: var(--radius-full, 999px);
-    border: 1px solid transparent;
-    font-size: var(--fs-md, 1rem);
-    font-weight: var(--fw-semibold, 600);
+    gap: var(--space-2);
+    max-width: 100%;
+    min-height: 3.5rem;
+    padding: 0 var(--space-6);
+    border: 1px solid var(--border-2);
+    border-radius: var(--radius-full);
+    background: var(--surface-0);
+    color: var(--text-1);
+    font-size: var(--fs-md);
+    font-weight: var(--fw-medium);
     text-decoration: none;
-    transition: background-color var(--dur-fast, 120ms) var(--ease-out, ease-out);
-
-    &--primary {
-      background: var(--accent, #4f46e5);
-      color: var(--accent-contrast, #fff);
-      &:hover { background: var(--accent-hover, #4338ca); }
+    overflow-wrap: anywhere;
+    transition:
+      background-color var(--t-out) var(--ease-out),
+      border-color var(--t-out) var(--ease-out),
+      transform var(--t-out) var(--ease-out);
+  }
+  .pill__icon {
+    flex: none;
+    transition: transform var(--t-out) var(--ease-out);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .pill:hover {
+      background: color-mix(in srgb, var(--text-1) var(--state-hover), var(--surface-0));
+      border-color: var(--text-1);
+      transition-duration: var(--t-in);
     }
-
-    &--tertiary {
-      padding-inline: var(--space-2, 8px);
-      color: var(--text-link, #4338ca);
-      &:hover { text-decoration: underline; }
+    .pill:hover .pill__icon {
+      transform: translateX(-2px);
     }
   }
+  .pill:active {
+    background: color-mix(in srgb, var(--text-1) var(--state-press), var(--surface-0));
+    transform: scale(0.97);
+    transition-duration: 60ms;
+  }
 
-  a:focus-visible {
-    outline: 2px solid var(--focus-color, #6366f1);
-    outline-offset: 2px;
+  .more {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    min-height: 2.75rem;
+    color: var(--text-1);
+    font-size: var(--fs-md);
+    font-weight: var(--fw-medium);
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 0.25em;
+    border-radius: var(--radius-sm);
+    transition: text-decoration-color var(--t-out) var(--ease-out);
+  }
+  .more__arrow {
+    display: inline-block;
+    transition: transform var(--t-out) var(--ease-out);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .more:hover {
+      text-decoration-color: currentColor;
+      text-decoration-thickness: 2px;
+      transition-duration: var(--t-in);
+    }
+    .more:hover .more__arrow {
+      transform: translateX(3px);
+    }
+  }
+  .more:active {
+    opacity: 0.7;
+  }
+
+  .pill:focus-visible,
+  .more:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .btn { transition: none; }
+    .pill:active {
+      transform: none;
+    }
+  }
+  :global(:root[data-motion='reduced']) .pill:active {
+    transform: none;
+  }
+  @media (forced-colors: active) {
+    .pill {
+      border-color: ButtonText;
+    }
   }
 </style>

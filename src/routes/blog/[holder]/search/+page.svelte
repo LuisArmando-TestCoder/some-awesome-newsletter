@@ -112,36 +112,52 @@
 
 <style lang="scss">
   .wrap {
-    max-width: var(--container-lg, 1200px);
+    max-width: var(--container-xl);
     margin: 0 auto;
-    padding: var(--space-6, 32px) var(--space-5, 24px) var(--space-9, 96px);
+    padding: var(--space-7) var(--gutter) var(--section-pad);
   }
 
   .back {
     display: inline-flex;
-    gap: var(--space-2, 8px);
-    font-size: var(--fs-sm, 0.875rem);
+    align-items: center;
+    gap: var(--space-2);
+    min-height: var(--control-h);
+    font-size: var(--fs-sm);
+
+    span {
+      transition: transform var(--dur-base) var(--ease-out);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover span {
+        transform: translateX(-3px);
+      }
+    }
   }
 
   h1 {
-    margin: var(--space-4, 16px) 0 var(--space-5, 24px);
-    font-family: var(--font-display, inherit);
-    font-size: var(--fs-3xl, 2.25rem);
-    font-weight: var(--fw-bold, 700);
-    line-height: var(--lh-tight, 1.15);
-    color: var(--text-1, #111);
+    margin: var(--space-4) 0 var(--space-6);
+    max-width: 22ch;
+    font-family: var(--font-display);
+    font-size: var(--step-chapter);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-display);
+    letter-spacing: var(--tracking-display);
+    color: var(--text-1);
+    text-wrap: balance;
     overflow-wrap: anywhere;
   }
 
   .search-row {
-    margin-bottom: var(--space-4, 16px);
+    margin-bottom: var(--space-5);
   }
 
   .count {
     min-height: 1.5em;
-    margin: 0 0 var(--space-5, 24px);
-    font-size: var(--fs-sm, 0.875rem);
-    color: var(--text-2, #444);
+    margin: 0 0 var(--space-6);
+    font-size: var(--fs-sm);
+    color: var(--text-3);
+    font-variant-numeric: tabular-nums;
   }
 
   .grid {
@@ -149,19 +165,13 @@
     margin: 0;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
-    gap: var(--space-5, 24px);
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+    gap: var(--space-8) var(--space-6);
   }
 
   .limit {
-    margin-top: var(--space-6, 32px);
-    font-size: var(--fs-sm, 0.875rem);
-    color: var(--text-2, #444);
-  }
-
-  @media (max-width: 600px) {
-    .wrap {
-      padding-inline: var(--space-4, 16px);
-    }
+    margin-top: var(--space-7);
+    font-size: var(--fs-sm);
+    color: var(--text-3);
   }
 </style>

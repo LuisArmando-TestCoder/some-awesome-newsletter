@@ -66,56 +66,72 @@
 
 <style lang="scss">
   .card {
-    background: var(--color-x-gradient-opaque);
-    backdrop-filter: blur(6px);
-    border-radius: 7px;
-    padding: 1rem 2rem;
+    background: var(--surface-glass);
+    backdrop-filter: blur(12px) saturate(1.2);
+    -webkit-backdrop-filter: blur(12px) saturate(1.2);
+    border: 1px solid var(--border-1);
+    border-radius: var(--radius-xl);
+    padding: var(--space-4) var(--space-6);
     cursor: pointer;
     text-align: left;
-    box-shadow: 0 0 10px -6.5px var(--color-background);
+    color: var(--text-1);
     max-height: 100%;
     position: sticky;
     top: 0;
     padding-bottom: 150px;
-    margin-bottom: 25px;
-    /* Horizontal expansion: expanded state happens immediately, collapsed state waits 0.5s */
+    margin-bottom: var(--space-5);
+    -webkit-tap-highlight-color: transparent;
+    /* Horizontal expansion: expanded state happens immediately, collapsed state waits. */
     &.expanded {
       overflow: auto;
       width: 100%;
       transition:
-        transform 0.6s ease,
-        box-shadow 0.6s ease,
-        border-color 0.6s ease,
-        width 0.4s ease 0.3s,
-        height 0.4s ease 0.3s,
-        overflow 0s ease 0.6s;
+        transform var(--dur-slow) var(--ease-out),
+        box-shadow var(--dur-slow) var(--ease-out),
+        border-color var(--dur-slow) var(--ease-out),
+        width var(--dur-slow) var(--ease-out) var(--dur-slow),
+        height var(--dur-slow) var(--ease-out) var(--dur-slow),
+        overflow 0s linear var(--dur-slow);
     }
 
     &.collapsed {
-      padding: 1rem 3rem;
-      width: 150px; /* Adjust as needed */
-      height: 150px; /* Square ratio */
+      padding: var(--space-4) var(--space-7);
+      width: 150px;
+      height: 150px;
       transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease,
-        border-color 0.3s ease,
-        width 0.4s ease 0.5s,
-        height 0.4s ease 0.5s,
-        padding 0.4s ease 0.5s,
-        overflow 0.4s ease;
+        transform var(--dur-base) var(--ease-out),
+        box-shadow var(--dur-base) var(--ease-out),
+        border-color var(--dur-base) var(--ease-out),
+        width var(--dur-slow) var(--ease-out) var(--dur-slow),
+        height var(--dur-slow) var(--ease-out) var(--dur-slow),
+        padding var(--dur-slow) var(--ease-out) var(--dur-slow),
+        overflow var(--dur-slow) var(--ease-out);
     }
   }
 
-  .card:hover {
-    box-shadow: 0 0 10px -3px var(--color-background);
+  @media (hover: hover) and (pointer: fine) {
+    .card:hover {
+      border-color: var(--border-2);
+      box-shadow: var(--shadow-2);
+    }
   }
 
+  .card:has(.card-title-button:active) {
+    transform: scale(0.99);
+  }
+
+  /* Selected: ink edge plus a heavier ring, never a color alone. */
   .card.selected {
-    box-shadow: 0 0 10px -2px var(--color-foreground);
+    border-color: var(--text-1);
+    box-shadow: inset 0 0 0 1px var(--text-1);
+  }
+
+  .card:has(.card-title-button:focus-visible) {
+    box-shadow: var(--focus-ring);
   }
 
   .card-title {
-    margin-bottom: 1rem;
+    margin-bottom: var(--space-4);
   }
 
   .card-title-button {
@@ -125,29 +141,30 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
+    border-radius: var(--radius-md);
   }
 
   .card-title-text,
   .card-title-icon {
     transition:
-      opacity 0.4s ease 0.5s,
-      width 0s ease 0.4s;
+      opacity var(--dur-slow) var(--ease-out) var(--dur-slow),
+      width 0s linear var(--dur-slow);
     width: auto;
   }
 
   .card-title-text.hidden,
   .card-title-icon.hidden {
     transition:
-      opacity 0.4s ease 0s,
-      width 0s ease 0.4s;
+      opacity var(--dur-slow) var(--ease-out) 0s,
+      width 0s linear var(--dur-slow);
     opacity: 0;
     width: 0;
     height: 125px;
 
     :global(svg) {
       transition:
-        width 0.3s ease 0.3s,
-        opacity 0.3s ease 0s;
+        width var(--dur-base) var(--ease-out) var(--dur-base),
+        opacity var(--dur-base) var(--ease-out) 0s;
       width: 0%;
       opacity: 0;
     }
@@ -155,24 +172,24 @@
 
   .card-title-text.visible,
   .card-title-icon.visible {
-    transition: opacity 1s ease 1s;
+    transition: opacity var(--dur-reveal) var(--ease-out) var(--dur-slow);
     opacity: 1;
 
     :global(svg) {
       width: 100%;
       opacity: 1;
       transition:
-        width 1s ease 0s,
-        opacity 1s ease 1s;
+        width var(--dur-reveal) var(--ease-out) 0s,
+        opacity var(--dur-reveal) var(--ease-out) var(--dur-slow);
     }
   }
 
-  /* The card-body container collapses vertically with a 500ms delay when expanding */
+  /* The card-body container collapses vertically after a short delay when expanding. */
   .card.expanded .card-body {
     transition:
-      max-height 0.4s ease 0.5s,
-      opacity 0.4s ease 0.5s;
-    max-height: 100vh; /* Adjust based on expected content height */
+      max-height var(--dur-slow) var(--ease-out) var(--dur-slow),
+      opacity var(--dur-slow) var(--ease-out) var(--dur-slow);
+    max-height: 100vh;
     opacity: 1;
     overflow: auto;
   }
@@ -180,9 +197,28 @@
   .card.collapsed .card-body {
     overflow: hidden;
     transition:
-      max-height 0.4s ease 0s,
-      opacity 0.4s ease 0s;
+      max-height var(--dur-slow) var(--ease-out) 0s,
+      opacity var(--dur-slow) var(--ease-out) 0s;
     max-height: 0;
     opacity: 0;
+  }
+
+  @media (forced-colors: active) {
+    .card {
+      border-color: CanvasText;
+    }
+    .card.selected {
+      border: 2px solid Highlight;
+    }
+    .card:has(.card-title-button:focus-visible) {
+      outline: 2px solid CanvasText;
+      outline-offset: 2px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card:has(.card-title-button:active) {
+      transform: none;
+    }
   }
 </style>

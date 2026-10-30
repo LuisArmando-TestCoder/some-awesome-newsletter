@@ -47,7 +47,7 @@
 {:else}
   <section class="stats" aria-label="Totals" aria-busy={!$overview}>
     {#if !$overview}
-      {#each [0, 1, 2, 3] as i (i)}<Skeleton height="104px" />{/each}
+      {#each [0, 1, 2, 3] as i (i)}<Skeleton height="6.5rem" radius="md" />{/each}
     {:else}
       <StatTile label="Customers" value={num($overview.tenants)} hint={plural($overview.withOwnSender, "sends from their own address", "send from their own address")} href="/admin/customers" />
       <StatTile label="Newsletters" value={num($overview.sources)} hint={`${num($overview.activeSources)} active`} href="/admin/newsletters" />
@@ -123,7 +123,7 @@
         <ul class="list">
           {#each audit as e (e.id)}
             <li>
-              <span>{describeAudit(e, sourceName)}</span>
+              <span class="list__what">{describeAudit(e, sourceName)}</span>
               <span class="muted">
                 {e.actor}, {fromNow(e.at)}
                 {#if e.tenantId}· <a href={`/admin/customers/${encodeURIComponent(e.tenantId)}`}>{e.tenantId}</a>{/if}
@@ -140,31 +140,60 @@
 <style>
   .stats {
     display: grid;
-    gap: var(--space-4, 16px);
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    margin-bottom: var(--space-6, 24px);
+    gap: var(--space-3);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-bottom: var(--space-5);
+  }
+  @container admin (min-width: 860px) {
+    .stats {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+  @container admin (max-width: 360px) {
+    .stats {
+      grid-template-columns: minmax(0, 1fr);
+    }
   }
   .grid {
     display: grid;
-    gap: var(--space-4, 16px);
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+    gap: var(--space-4);
+    grid-template-columns: minmax(0, 1fr);
+  }
+  @container admin (min-width: 820px) {
+    .grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
   .list {
     list-style: none;
     margin: 0;
     padding: 0;
     display: grid;
-    gap: var(--space-3, 12px);
   }
   .list li {
     display: grid;
     gap: 2px;
-    font-size: var(--fs-sm, 0.875rem);
+    padding: var(--row-pad-y) 0;
+    border-top: 1px solid var(--border-1);
+    font-size: var(--fs-sm);
     min-width: 0;
   }
+  .list li:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
   .list a {
-    color: var(--text-link, inherit);
+    color: var(--text-1);
     overflow-wrap: anywhere;
+    border-radius: var(--radius-sm);
+    text-underline-offset: 0.2em;
+  }
+  .list a:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+  .list__what {
+    color: var(--text-1);
   }
   .row {
     grid-template-columns: minmax(0, 1fr) auto;
@@ -172,15 +201,16 @@
   }
   .row__meta {
     display: flex;
-    gap: var(--space-2, 8px);
+    gap: var(--space-2);
     align-items: center;
   }
   .muted {
-    color: var(--text-3, inherit);
-    font-size: var(--fs-xs, 0.75rem);
+    color: var(--text-3);
+    font-size: var(--fs-xs);
     margin: 0;
+    font-variant-numeric: tabular-nums;
   }
   .more {
-    margin-top: var(--space-3, 12px);
+    margin-top: var(--space-3);
   }
 </style>

@@ -35,49 +35,75 @@
 <style lang="scss">
   .tabs {
     overflow-x: auto;
-    scrollbar-width: thin;
-    border-bottom: 1px solid var(--border-1, #e5e5e5);
+    scrollbar-width: none;
+    border-bottom: 1px solid var(--border-1);
+    margin-inline: calc(-1 * var(--space-1));
+  }
+
+  .tabs::-webkit-scrollbar {
+    display: none;
   }
 
   ul {
     display: flex;
-    gap: var(--space-1, 4px);
+    gap: var(--space-1);
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding: 0 var(--space-1);
   }
 
   a {
     display: inline-flex;
     align-items: center;
-    gap: var(--space-2, 8px);
-    padding: var(--space-3, 12px) var(--space-4, 16px);
+    gap: var(--space-2);
+    min-height: var(--control-h);
+    padding: 0 var(--space-3);
     border-bottom: 2px solid transparent;
     margin-bottom: -1px;
     white-space: nowrap;
-    color: var(--text-2, #444);
-    font-weight: var(--fw-medium, 500);
-    font-size: var(--fs-sm, 0.875rem);
+    color: var(--text-2);
+    font-weight: var(--fw-medium);
+    font-size: var(--fs-sm);
     text-decoration: none;
-    transition: color var(--dur-fast, 120ms) var(--ease-out, ease-out),
-      border-color var(--dur-fast, 120ms) var(--ease-out, ease-out);
+    transition:
+      color var(--t-out) var(--ease-out),
+      border-color var(--t-out) var(--ease-out);
 
-    &:hover {
-      color: var(--text-1, #111);
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        color: var(--text-1);
+        border-bottom-color: var(--border-2);
+        transition-duration: var(--t-in);
+      }
     }
 
+    &:focus-visible {
+      outline-offset: -2px;
+      border-radius: var(--radius-sm);
+    }
+
+    /* Current: ink underline plus weight. */
     &.active {
-      color: var(--text-1, #111);
-      font-weight: var(--fw-semibold, 600);
-      border-bottom-color: var(--accent, #2563eb);
+      color: var(--text-1);
+      font-weight: var(--fw-semibold);
+      border-bottom-color: var(--text-1);
     }
   }
 
   .count {
-    font-size: var(--fs-xs, 0.75rem);
-    color: var(--text-3, #777);
-    background: var(--surface-2, #f3f3f3);
-    border-radius: var(--radius-full, 999px);
-    padding: 0 var(--space-2, 8px);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-medium);
+    font-variant-numeric: tabular-nums;
+    color: var(--text-3);
+    background: var(--surface-2);
+    border-radius: var(--radius-full);
+    padding: 0 var(--space-2);
+    line-height: 1.6;
+  }
+
+  @media (forced-colors: active) {
+    a.active {
+      border-bottom-color: Highlight;
+    }
   }
 </style>

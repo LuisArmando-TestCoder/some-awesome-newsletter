@@ -94,12 +94,15 @@
 </Tabs>
 
 <style lang="scss">
-  .stack { display: flex; flex-direction: column; gap: var(--space-5); }
-  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); gap: var(--space-4); }
-  .two { display: grid; grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)); gap: var(--space-5); }
-  .note { margin: 0; }
-  .note + .note { margin-top: var(--space-2); }
-  @media (max-width: 40rem) {
-    .two { grid-template-columns: 1fr; }
+  .stack { display: flex; flex-direction: column; gap: var(--space-5); container-type: inline-size; }
+  .stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-3); }
+  @container (min-width: 760px) {
+    .stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   }
+  .two { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-5); }
+  @container dash (min-width: 820px) {
+    .two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  .note { margin: 0; max-width: var(--measure); }
+  .note + .note { margin-top: var(--space-2); }
 </style>

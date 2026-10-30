@@ -21,9 +21,9 @@
     gap: var(--space-3);
     align-items: flex-start;
     padding: var(--space-3) var(--space-4);
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-lg);
     border: 1px solid var(--border-1);
-    background: var(--surface-1);
+    background: var(--surface-0);
     color: var(--text-1);
     font-size: var(--fs-sm);
     line-height: var(--lh-normal);
@@ -38,4 +38,7 @@
   .notice__title { margin: 0 0 var(--space-1); font-weight: var(--fw-semibold); }
   .notice__text :global(p) { margin: 0; }
   .notice__actions { display: flex; gap: var(--space-2); align-items: center; flex-wrap: wrap; }
+  @media (forced-colors: active) {
+    .notice { border-color: CanvasText; }
+  }
 </style>

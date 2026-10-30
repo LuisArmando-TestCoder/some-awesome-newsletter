@@ -23,13 +23,13 @@
 
 <style lang="scss">
   .dcard {
-    background: var(--surface-1);
+    background: var(--surface-0);
     border: 1px solid var(--border-1);
     border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-1);
     min-width: 0;
     &.pad { padding: var(--card-pad, var(--space-5)); }
-    &.tone-accent { border-color: var(--accent); background: var(--accent-soft); }
+    /* Tones mark a card that needs attention. The heading and content say why; the edge only supports it. */
+    &.tone-accent { border-color: var(--text-1); }
     &.tone-warning { border-color: var(--warning); background: var(--warning-soft); }
     &.tone-danger { border-color: var(--danger); background: var(--danger-soft); }
   }
@@ -43,12 +43,17 @@
   }
   .dcard__title {
     margin: 0;
-    font-family: var(--font-body);
-    font-size: var(--fs-md);
+    font-family: var(--font-display);
+    font-size: var(--fs-lg);
     font-weight: var(--fw-semibold);
+    letter-spacing: var(--tracking-tight);
     color: var(--text-1);
     line-height: var(--lh-tight);
   }
   .dcard__sub { margin: var(--space-1) 0 0; font-size: var(--fs-sm); color: var(--text-2); line-height: var(--lh-normal); }
   .dcard__actions { display: flex; gap: var(--space-2); flex-wrap: wrap; }
+
+  @media (forced-colors: active) {
+    .dcard { border-color: CanvasText; }
+  }
 </style>

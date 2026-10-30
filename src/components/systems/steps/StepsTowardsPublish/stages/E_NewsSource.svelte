@@ -15,6 +15,11 @@
   import { t } from '$lib/i18n/translations';
 
   export let canReveal = false;
+  // Entrance motion is skipped for people who asked for less motion.
+  const still =
+    typeof window !== 'undefined' &&
+    (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches || document.documentElement.dataset.motion === 'reduced');
+  const d = (ms: number) => (still ? 0 : ms);
   let isLoading = false;
 
   // Clean title helper
@@ -64,20 +69,20 @@
 {/if}
 
 <Centered>
-  <div class="step-container" class:loading={isLoading}>
+  <div class="step-container" class:loading={isLoading} aria-busy={isLoading} inert={isLoading}>
     
     {#if canReveal}
-      <div class="header-group" in:fly={{ y: 20, duration: 800, easing: quadOut }}>
+      <div class="header-group" in:fly={{ y: 20, duration: d(800), easing: quadOut }}>
         <h1 class="main-title">
           {cleanTitle}
         </h1>
       </div>
 
-      <p class="subtitle" in:fly={{ y: 20, duration: 800, delay: 150, easing: quadOut }}>
+      <p class="subtitle" in:fly={{ y: 20, duration: d(800), delay: d(150), easing: quadOut }}>
         {$t.newsSource.subtitle}
       </p>
 
-      <div class="input-grid" in:fly={{ y: 20, duration: 800, delay: 300, easing: quadOut }}>
+      <div class="input-grid" in:fly={{ y: 20, duration: d(800), delay: d(300), easing: quadOut }}>
         
         <div class="link-wrapper">
           <Link
@@ -98,7 +103,7 @@
 
       </div>
 
-      <div class="submit-wrapper" in:fly={{ y: 10, duration: 800, delay: 450, easing: quadOut }}>
+      <div class="submit-wrapper" in:fly={{ y: 10, duration: d(800), delay: d(450), easing: quadOut }}>
         <SubmitButton callback={() => trigger(isValidURL($store.newsSource))}/>
       </div>
     {/if}
@@ -107,99 +112,98 @@
 </Centered>
 
 <style lang="scss">
-  /* Modern CSS Variables */
-  :global(:root) {
-    --ns-primary: #111;
-    --ns-accent: #f59e0b; /* Amber for news/alert feel */
-    --ns-text-light: #6b7280;
-  }
-
   .step-container {
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 700px;
+    max-width: var(--container-md);
     margin: 0 auto;
-    padding: 1rem 0;
-    transition: filter 0.4s ease, transform 0.4s ease, opacity 0.4s ease;
+    padding: var(--space-4) var(--gutter);
+    transition: opacity var(--dur-slow) var(--ease-out);
 
+    /* Busy: dimmed and inert while the source is created (inert blocks input, not CSS). */
     &.loading {
-      opacity: 0.6;
-      filter: blur(4px) grayscale(50%);
-      transform: scale(0.98);
-      pointer-events: none;
+      opacity: 0.5;
     }
   }
 
-  /* Typography */
   .header-group {
-    margin-bottom: 1rem;
+    margin-bottom: var(--space-5);
     text-align: center;
   }
 
   .main-title {
-    font-size: clamp(2rem, 5vw, 3rem);
-    font-weight: 800;
-    line-height: 1.1;
     margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--fs-4xl);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-display);
+    letter-spacing: var(--tracking-display);
+    color: var(--text-1);
     text-wrap: balance;
-    
-    /* Professional Gradient: Dark Grey to News-Alert color */
-    background: linear-gradient(135deg, var(--ns-primary) 0%, #434343 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
   }
 
   .subtitle {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: var(--ns-text-light);
+    margin: 0 auto var(--space-7);
+    max-width: 52ch;
+    font-size: var(--fs-lg);
+    line-height: var(--lh-snug);
+    color: var(--text-2);
     text-align: center;
-    margin: 0 0 2.5rem 0;
-    font-weight: 400;
     text-wrap: pretty;
   }
 
-  /* Input Grid Layout */
   .input-grid {
     display: grid;
-    /* Desktop: Link takes available space, Country takes auto width */
-    grid-template-columns: 1fr auto; 
-    align-items: end; /* Aligns them at the bottom so inputs line up */
-    gap: 1rem;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: var(--space-4);
     width: 100%;
-    margin-bottom: 1.5rem;
+    margin-bottom: var(--space-5);
 
-    /* Mobile Breakpoint */
     @media (max-width: 600px) {
-      grid-template-columns: 1fr; /* Stack vertically */
-      gap: 1.5rem;
+      grid-template-columns: 1fr;
+      gap: var(--space-5);
     }
   }
 
   .link-wrapper {
     width: 100%;
-    /* Ensure the input component fills the grid cell */
-    :global(.input-component-class) { width: 100%; } 
-  }
-
-  .country-wrapper {
-    /* Ensures the country selector doesn't stretch weirdly */
-    min-width: 140px; 
-    display: flex;
-    justify-content: flex-end; /* Align to right on desktop */
-    
-    @media (max-width: 600px) {
-      justify-content: center; /* Center on mobile */
+    :global(.input-component-class) {
+      width: 100%;
     }
   }
 
-  /* Submit Area */
+  .country-wrapper {
+    min-width: 140px;
+    display: flex;
+    justify-content: flex-end;
+
+    @media (max-width: 600px) {
+      justify-content: center;
+    }
+  }
+
   .submit-wrapper {
     display: flex;
     justify-content: flex-end;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(0,0,0,0.05);
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--border-1);
+  }
+
+  @media (max-width: 40rem) {
+    .submit-wrapper {
+      position: sticky;
+      bottom: 0;
+      margin-inline: calc(-1 * var(--gutter));
+      padding: var(--space-3) var(--gutter) calc(var(--space-3) + env(safe-area-inset-bottom));
+      background: var(--surface-glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+
+      > :global(*) {
+        flex: 1;
+      }
+    }
   }
 </style>

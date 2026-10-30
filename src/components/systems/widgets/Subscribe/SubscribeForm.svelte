@@ -265,7 +265,7 @@
   aria-busy={!infoLoaded}
 >
   {#if status === 'success'}
-    <div class="sf__success" aria-live="polite">
+    <div class="sf__success" role="status" aria-live="polite">
       <div class="sf__check" aria-hidden="true">
         <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
       </div>
@@ -313,6 +313,7 @@
             bind:value={email}
             on:input={onEmailInput}
             class="sf__input"
+            class:shake={emailError}
             id={ids.email}
             name="email"
             type="email"
@@ -327,8 +328,9 @@
             dir="ltr"
           />
           {#if layout === 'compact'}
-            <button class="sf__button" type="submit" disabled={status === 'submitting'} aria-busy={status === 'submitting'}>
-              {status === 'submitting' ? $ts.form.submitting : $ts.form.submit}
+            <button class="sf__button" type="submit" aria-disabled={status === 'submitting' ? 'true' : undefined} aria-busy={status === 'submitting'}>
+              <span class="sf__button-label">{status === 'submitting' ? $ts.form.submitting : $ts.form.submit}</span>
+              <span class="sf__spinner" aria-hidden="true"></span>
             </button>
           {/if}
         </div>
@@ -378,12 +380,16 @@
       </div>
 
       {#if errorKey}
-        <p class="sf__error" id={ids.error} role="alert">{$ts.errors[errorKey]}</p>
+        <p class="sf__error" id={ids.error} role="alert">
+          <svg class="sf__error-icon" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.5" /><path d="M8 4.5v4.25M8 11.1v.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+          <span>{$ts.errors[errorKey]}</span>
+        </p>
       {/if}
 
       {#if layout === 'full'}
-        <button class="sf__button sf__button--block" type="submit" disabled={status === 'submitting'} aria-busy={status === 'submitting'}>
-          {status === 'submitting' ? $ts.form.submitting : $ts.form.submit}
+        <button class="sf__button sf__button--block" type="submit" aria-disabled={status === 'submitting' ? 'true' : undefined} aria-busy={status === 'submitting'}>
+          <span class="sf__button-label">{status === 'submitting' ? $ts.form.submitting : $ts.form.submit}</span>
+          <span class="sf__spinner" aria-hidden="true"></span>
         </button>
       {/if}
 
@@ -400,6 +406,8 @@
 </section>
 
 <style lang="scss">
+  /* Neutral and light: this form is also embedded on other sites. The owner's brand color
+     (--sf-accent, set inline from the embed code or the backend) is the only color it adds. */
   .sf {
     box-sizing: border-box;
     --sf-accent: var(--accent);
@@ -420,7 +428,7 @@
   }
 
   .sf__header {
-    margin-block-end: var(--space-5);
+    margin-block-end: var(--space-6);
   }
 
   .sf__logo {
@@ -429,54 +437,74 @@
     width: auto;
     max-width: 200px;
     object-fit: contain;
-    margin-block-end: var(--space-4);
+    margin-block-end: var(--space-5);
   }
 
   .sf__title {
-    margin: 0 0 var(--space-2);
+    margin: 0 0 var(--space-3);
     font-family: var(--font-display);
-    font-size: var(--fs-2xl);
-    font-weight: var(--fw-bold);
+    font-size: var(--fs-3xl);
+    font-weight: var(--fw-semibold);
     line-height: var(--lh-tight);
-    letter-spacing: var(--tracking-tight);
+    letter-spacing: var(--tracking-display);
     color: var(--text-1);
+    text-wrap: balance;
     outline: none;
+  }
+
+  .sf__title:focus-visible {
+    outline: 2px solid var(--focus-color);
+    outline-offset: 4px;
+    border-radius: var(--radius-sm);
   }
 
   .sf--embedded .sf__title {
     font-size: var(--fs-xl);
+    letter-spacing: var(--tracking-tight);
   }
 
   .sf__text {
     margin: 0 0 var(--space-3);
+    color: var(--text-2);
+    text-wrap: pretty;
+  }
+
+  .sf__header .sf__text {
+    font-size: var(--fs-lg);
+    line-height: var(--lh-snug);
+  }
+
+  .sf__text :global(strong) {
     color: var(--text-1);
+    font-weight: var(--fw-semibold);
+    overflow-wrap: anywhere;
   }
 
   .sf__hint {
     margin: var(--space-1) 0 0;
     font-size: var(--fs-sm);
-    color: var(--text-2);
+    color: var(--text-3);
   }
 
   .sf__form {
     display: grid;
-    gap: var(--space-4);
+    gap: var(--space-5);
   }
 
   .sf__field {
     display: grid;
-    gap: var(--space-1);
+    gap: var(--space-2);
   }
 
   .sf__label {
     font-size: var(--fs-sm);
-    font-weight: var(--fw-semibold);
+    font-weight: var(--fw-medium);
     color: var(--text-1);
   }
 
   .sf__optional {
     font-weight: var(--fw-regular);
-    color: var(--text-2);
+    color: var(--text-3);
   }
 
   .sf__row {
@@ -487,24 +515,33 @@
   .sf__input {
     box-sizing: border-box;
     width: 100%;
-    min-height: 48px;
-    padding: var(--space-2) var(--space-3);
+    min-height: 3rem;
+    padding: var(--space-2) var(--space-4);
     font: inherit;
     font-size: var(--fs-md);
     color: var(--text-1);
-    background: var(--surface-1);
+    background: var(--surface-0);
     border: 1px solid var(--border-2);
     border-radius: var(--radius-md);
-    transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+    transition:
+      border-color var(--t-out, 200ms) var(--ease-out),
+      box-shadow var(--t-out, 200ms) var(--ease-out);
 
     &::placeholder {
       color: var(--text-3);
-      font-size: var(--fs-sm);
     }
 
+    @media (hover: hover) and (pointer: fine) {
+      &:hover:not(:focus) {
+        border-color: var(--text-2);
+        transition-duration: var(--t-in, 120ms);
+      }
+    }
+
+    &:focus,
     &:focus-visible {
       outline: none;
-      border-color: var(--sf-accent);
+      border-color: var(--text-1);
       box-shadow: var(--focus-ring);
     }
 
@@ -515,35 +552,69 @@
 
   .sf__select {
     appearance: auto;
+    cursor: pointer;
   }
 
   .sf__language {
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
-    gap: var(--space-1);
+    gap: var(--space-1) var(--space-2);
     margin: 0;
   }
 
+  /* Pill in the owner's color with a currentColor state layer (works on any brand color). */
   .sf__button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 48px;
-    padding: var(--space-2) var(--space-5);
+    position: relative;
+    display: inline-grid;
+    place-items: center;
+    min-height: 3rem;
+    padding: 0 var(--space-6);
     font: inherit;
-    font-weight: var(--fw-semibold);
+    font-size: var(--fs-md);
+    font-weight: var(--fw-medium);
+    letter-spacing: -0.01em;
     color: var(--sf-on-accent);
     background: var(--sf-accent);
     border: 0;
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-full);
     cursor: pointer;
     text-decoration: none;
     white-space: nowrap;
-    transition: filter var(--dur-fast) var(--ease-out);
+    isolation: isolate;
+    transition: transform var(--dur-base) var(--ease-out);
 
-    &:hover {
-      filter: brightness(0.92);
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      border-radius: inherit;
+      background: currentColor;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--t-out, 200ms) var(--ease-out);
+    }
+
+    > * {
+      grid-area: 1 / 1;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover:not([aria-disabled='true'])::before {
+        opacity: 0.1;
+        transition-duration: var(--t-in, 120ms);
+      }
+    }
+
+    &:active:not([aria-disabled='true']) {
+      transform: scale(0.97);
+      transition-duration: 60ms;
+
+      &::before {
+        opacity: 0.16;
+        transition-duration: 0ms;
+      }
     }
 
     &:focus-visible {
@@ -551,9 +622,47 @@
       box-shadow: var(--focus-ring);
     }
 
-    &:disabled {
+    &[aria-busy='true'] {
       cursor: progress;
-      opacity: 0.75;
+    }
+  }
+
+  /* Pending: the spinner fades in only after 350 ms, so fast replies never flash. */
+  .sf__spinner {
+    width: 1.125rem;
+    height: 1.125rem;
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+    border-radius: var(--radius-full);
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .sf__button[aria-busy='true'] {
+    .sf__spinner {
+      visibility: visible;
+      animation:
+        sf-show 1ms 350ms forwards,
+        sf-spin 0.8s linear infinite;
+    }
+    .sf__button-label {
+      animation: sf-hide 1ms 350ms forwards;
+    }
+  }
+
+  @keyframes sf-show {
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes sf-hide {
+    to {
+      opacity: 0;
+    }
+  }
+  @keyframes sf-spin {
+    to {
+      rotate: 360deg;
     }
   }
 
@@ -562,17 +671,31 @@
   }
 
   .sf__link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 1.5rem;
     padding: 0;
     font: inherit;
     font-size: inherit;
+    font-weight: var(--fw-medium);
     color: var(--text-link);
     background: none;
     border: 0;
+    box-shadow: none;
     text-decoration: underline;
-    text-underline-offset: 2px;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
     cursor: pointer;
 
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        box-shadow: none;
+        text-decoration-thickness: 2px;
+      }
+    }
+
     &:focus-visible {
+      box-shadow: none;
       outline: 2px solid var(--focus-color);
       outline-offset: 2px;
       border-radius: var(--radius-sm);
@@ -580,18 +703,28 @@
   }
 
   .sf__error {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
     margin: 0;
-    padding: var(--space-2) var(--space-3);
     font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-snug);
     color: var(--danger);
-    background: var(--danger-soft);
-    border-radius: var(--radius-sm);
+  }
+
+  .sf__error-icon {
+    flex-shrink: 0;
+    width: 1rem;
+    height: 1rem;
+    margin-top: 0.1em;
   }
 
   .sf__consent {
     margin: 0;
     font-size: var(--fs-xs);
-    color: var(--text-2);
+    line-height: var(--lh-normal);
+    color: var(--text-3);
 
     a {
       color: var(--text-2);
@@ -614,24 +747,36 @@
   .sf__check {
     display: grid;
     place-items: center;
-    width: 44px;
-    height: 44px;
-    margin-block-end: var(--space-3);
+    width: 3rem;
+    height: 3rem;
+    margin-block-end: var(--space-4);
     color: var(--success);
-    background: var(--success-soft);
+    border: 1.5px solid currentColor;
     border-radius: var(--radius-full);
+  }
+
+  .sf__check svg {
+    stroke-dasharray: 24;
+    stroke-dashoffset: 0;
+    animation: sf-draw var(--dur-slow) var(--ease-out) both;
+  }
+
+  @keyframes sf-draw {
+    from {
+      stroke-dashoffset: 24;
+    }
   }
 
   .sf__actions {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: var(--space-4);
-    margin-block-start: var(--space-4);
+    gap: var(--space-5);
+    margin-block-start: var(--space-5);
   }
 
   .sf__brand {
-    margin: var(--space-4) 0 0;
+    margin: var(--space-5) 0 0;
     font-size: var(--fs-xs);
     text-align: center;
 
@@ -639,8 +784,10 @@
       color: var(--text-3);
       text-decoration: none;
 
-      &:hover {
-        text-decoration: underline;
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
   }
@@ -651,10 +798,27 @@
     }
   }
 
+  @media (forced-colors: active) {
+    .sf__button {
+      border: 1px solid ButtonText;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .sf__input,
     .sf__button {
       transition: none;
+    }
+    .sf__button:active:not([aria-disabled='true']) {
+      transform: none;
+    }
+    .sf__check svg {
+      animation: none;
+    }
+    .sf__button[aria-busy='true'] .sf__spinner {
+      animation: sf-show 1ms 350ms forwards;
+      border-right-color: currentColor;
+      opacity: 0.6;
     }
   }
 </style>

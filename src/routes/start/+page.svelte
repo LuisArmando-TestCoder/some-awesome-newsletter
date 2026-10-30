@@ -33,18 +33,52 @@
   <meta name="robots" content="noindex" />
 </svelte:head>
 
-<main class="start">
-  <p>{$ob.start.opening} <a href={target}>{$ob.start.continueHere}</a>.</p>
+<main class="start" aria-busy="true">
+  <span class="start__dot" aria-hidden="true"></span>
+  <p role="status">{$ob.start.opening} <a href={target}>{$ob.start.continueHere}</a>.</p>
 </main>
 
 <style lang="scss">
+  /* A redirect page: quiet, centred, with a plain link in case the redirect is blocked. */
   .start {
     min-height: 60vh;
     display: grid;
     place-items: center;
-    padding: var(--space-6, 32px) var(--space-4, 16px);
-    color: var(--text-2, #4a5058);
-    font-size: var(--fs-md, 1rem);
-    a { color: var(--text-link, #3b5bdb); }
+    align-content: center;
+    gap: var(--space-4);
+    padding: var(--space-7) var(--gutter);
+    color: var(--text-2);
+    font-size: var(--fs-lg);
+    text-align: center;
+
+    p {
+      margin: 0;
+      max-width: 40ch;
+    }
+
+    a {
+      color: var(--text-link);
+      font-weight: var(--fw-medium);
+    }
+  }
+
+  .start__dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: var(--radius-full);
+    background: var(--text-1);
+    animation: start-pulse 1.2s var(--ease-in-out) infinite;
+  }
+
+  @keyframes start-pulse {
+    50% {
+      opacity: 0.25;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .start__dot {
+      animation: none;
+    }
   }
 </style>

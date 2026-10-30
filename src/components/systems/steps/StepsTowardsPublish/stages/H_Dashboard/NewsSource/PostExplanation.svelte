@@ -160,12 +160,12 @@ async function addUserToNewsletter({ email, name, bio, language }) {
     margin-bottom: 16px;
   }
   .feedback-message {
-    margin-top: 8px;
-    font-size: 0.9rem;
-    padding: 8px;
-    border-radius: 4px;
-    background-color: #f0f0f0;
-    border: 1px solid #ddd;
+    margin-top: var(--space-2);
+    font-size: var(--fs-sm);
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-md);
+    background-color: var(--surface-2);
+    border: 1px solid var(--border-1);
   }
   .input-grid {
     display: grid;

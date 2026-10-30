@@ -73,6 +73,6 @@
     }
     .loading-message,
     .no-data-message {
-      color: var(--color-text-secondary, #666);
+      color: var(--text-2);
     }
   </style>

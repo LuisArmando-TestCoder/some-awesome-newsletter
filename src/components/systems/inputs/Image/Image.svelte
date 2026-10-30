@@ -190,29 +190,49 @@
     width: 100%;
     max-width: 36rem;
     margin: 0 auto;
-    padding: 1.5rem;
+    padding: var(--space-5) 0;
+    font-family: var(--font-body);
 
     &.hidden {
       display: none;
     }
   }
 
+  /* Drop zone: dashed thin edge at rest, solid ink edge while a file is over it. */
   .dropzone {
-    border: 2px dashed var(--color-border, #ccc);
-    border-radius: 0.5rem;
-    padding: 2rem;
+    border: 1px dashed var(--border-2);
+    border-radius: var(--radius-xl);
+    padding: var(--space-6) var(--space-4);
+    background-color: var(--surface-1);
     text-align: center;
     cursor: pointer;
-    transition: all 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+    transition:
+      background-color var(--t-out) var(--ease-out),
+      border-color var(--t-out) var(--ease-out),
+      box-shadow var(--t-out) var(--ease-out);
 
-    &:hover {
-      border-color: var(--color-primary, #4f46e5);
-      background-color: rgba(79, 70, 229, 0.05);
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        border-color: var(--text-2);
+        background-color: var(--surface-2);
+        transition-duration: var(--t-in);
+
+        .icon {
+          transform: translateY(-3px);
+        }
+      }
+    }
+
+    &:has(.select-button:focus-visible) {
+      border-color: var(--text-1);
     }
 
     &.dragging {
-      border-color: var(--color-primary, #4f46e5);
-      background-color: rgba(79, 70, 229, 0.1);
+      border-style: solid;
+      border-color: var(--text-1);
+      background-color: var(--surface-2);
+      box-shadow: inset 0 0 0 1px var(--text-1);
     }
 
     .content {
@@ -222,47 +242,66 @@
       justify-content: center;
 
       .icon {
-        margin-bottom: 1rem;
+        margin-bottom: var(--space-4);
+        transition: transform var(--dur-base) var(--ease-out);
 
         .upload-icon {
-          color: var(--color-primary, #4f46e5);
+          color: var(--text-1);
         }
 
         .image-icon {
-          color: var(--color-text-muted, #6b7280);
+          color: var(--text-3);
         }
       }
 
       .title {
-        margin-bottom: 0.5rem;
-        font-size: 1.125rem;
-        font-weight: 500;
-        color: var(--color-text, #fff);
+        margin: 0 0 var(--space-2);
+        font-size: var(--fs-lg);
+        font-weight: var(--fw-medium);
+        color: var(--text-1);
       }
 
       .subtitle {
-        margin-bottom: 1rem;
-        font-size: 0.875rem;
-        color: var(--color-text-muted, #6b7280);
+        margin: 0 0 var(--space-4);
+        font-size: var(--fs-sm);
+        color: var(--text-2);
       }
 
+      /* Outlined pill; the page keeps its one solid primary CTA elsewhere. */
       .select-button {
-        padding: 0.5rem 1rem;
-        background-color: var(--color-primary, #4f46e5);
-        color: white;
-        border: none;
-        border-radius: 0.375rem;
-        font-weight: 500;
+        min-height: var(--control-h);
+        padding: 0 var(--space-5);
+        background-color: var(--surface-0);
+        color: var(--text-1);
+        border: 1px solid var(--border-2);
+        border-radius: var(--radius-full);
+        font: inherit;
+        font-size: var(--fs-sm);
+        font-weight: var(--fw-medium);
         cursor: pointer;
-        transition: background-color 0.2s;
+        transition:
+          background-color var(--t-out) var(--ease-out),
+          border-color var(--t-out) var(--ease-out),
+          box-shadow var(--t-out) var(--ease-out),
+          transform var(--dur-base) var(--ease-out);
 
-        &:hover {
-          background-color: var(--color-primary-dark, #4338ca);
+        @media (hover: hover) and (pointer: fine) {
+          &:hover {
+            background-color: var(--surface-0);
+            border-color: var(--text-1);
+            transition-duration: var(--t-in);
+          }
         }
 
-        &:focus {
+        &:active {
+          background-color: var(--surface-3);
+          transform: scale(0.97);
+          transition-duration: 60ms;
+        }
+
+        &:focus-visible {
           outline: none;
-          box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.5);
+          box-shadow: var(--focus-ring);
         }
       }
     }
@@ -275,45 +314,98 @@
   .preview {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: var(--space-4);
 
     .image-container {
       position: relative;
-      border-radius: 0.5rem;
+      border-radius: var(--radius-lg);
       overflow: hidden;
-      border: 1px solid var(--color-border, #e5e7eb);
+      border: 1px solid var(--border-1);
 
       img {
+        display: block;
         width: 100%;
         height: 16rem;
         object-fit: contain;
-        background-color: var(--color-bg-subtle, #f9fafb);
+        background-color: var(--surface-1);
       }
 
       .remove-button {
         position: absolute;
-        top: 0.5rem;
-        right: 0.5rem;
-        padding: 0.5rem 0.5rem 0.3rem;
-        background-color: white;
-        border: none;
-        border-radius: 50%;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        top: var(--space-2);
+        right: var(--space-2);
+        display: inline-grid;
+        place-items: center;
+        width: var(--control-h);
+        height: var(--control-h);
+        padding: 0;
+        background-color: var(--surface-glass);
+        backdrop-filter: blur(12px) saturate(1.2);
+        -webkit-backdrop-filter: blur(12px) saturate(1.2);
+        color: var(--text-1);
+        border: 1px solid var(--border-1);
+        border-radius: var(--radius-full);
+        box-shadow: var(--shadow-1);
         cursor: pointer;
-        transition: background-color 0.2s;
+        transition:
+          background-color var(--t-out) var(--ease-out),
+          color var(--t-out) var(--ease-out),
+          box-shadow var(--t-out) var(--ease-out),
+          transform var(--dur-base) var(--ease-out);
 
-        &:hover {
-          background-color: var(--color-bg-subtle, #f9fafb);
+        @media (hover: hover) and (pointer: fine) {
+          &:hover {
+            background-color: var(--danger-soft);
+            color: var(--danger);
+            transition-duration: var(--t-in);
+          }
+        }
+
+        &:active {
+          transform: scale(0.94);
+          transition-duration: 60ms;
+        }
+
+        &:focus-visible {
+          outline: none;
+          box-shadow: var(--focus-ring);
         }
       }
     }
 
     .filename {
-      font-size: 0.875rem;
-      color: var(--color-text-muted, #6b7280);
+      margin: 0;
+      font-size: var(--fs-sm);
+      color: var(--text-2);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .dropzone {
+      border-color: CanvasText;
+    }
+    .dropzone.dragging {
+      border-color: Highlight;
+    }
+    .select-button,
+    .remove-button {
+      border-color: ButtonText;
+    }
+    .select-button:focus-visible,
+    .remove-button:focus-visible {
+      outline: 2px solid CanvasText;
+      outline-offset: 2px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .dropzone .content .icon,
+    .select-button:active,
+    .remove-button:active {
+      transform: none;
     }
   }
 </style>

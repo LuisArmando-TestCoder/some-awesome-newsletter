@@ -100,7 +100,6 @@
 		}))
 	});
 
-	const year = new Date().getFullYear();
 </script>
 
 <svelte:head>
@@ -331,46 +330,9 @@
 					<a class="link-more" href="/help">{L.finalCta.secondary} <span aria-hidden="true">&#8250;</span></a>
 				</div>
 			</div>
-			<p class="finale__wordmark" aria-hidden="true">{L.display.kicker}</p>
 		</section>
 	</main>
 
-	<footer class="footer">
-		<div class="wrap footer__grid">
-			<div class="footer__about">
-				<a href="/" class="footer__logo" aria-label="AIBAN home">AIBAN</a>
-				<p class="footer__tagline">{L.footer.tagline}</p>
-				<p class="footer__contact">
-					{L.footer.contactLabel}: <a href="mailto:info@aiban.news">info@aiban.news</a>
-				</p>
-			</div>
-			<nav aria-label={L.footer.product}>
-				<h2 class="footer__h">{L.footer.product}</h2>
-				<ul>
-					<li><a href="/#how-it-works">{L.footer.links.howItWorks}</a></li>
-					<li><a href="/pricing">{L.footer.links.pricing}</a></li>
-					<li><a href="/demo">{L.footer.links.demo}</a></li>
-					<li><a href="/help">{L.footer.links.help}</a></li>
-				</ul>
-			</nav>
-			<nav aria-label={L.footer.company}>
-				<h2 class="footer__h">{L.footer.company}</h2>
-				<ul>
-					<li><a href="/about">{L.footer.links.about}</a></li>
-					<li><a href="/careers">{L.footer.links.careers}</a></li>
-				</ul>
-			</nav>
-			<nav aria-label={L.footer.legal}>
-				<h2 class="footer__h">{L.footer.legal}</h2>
-				<ul>
-					<li><a href="/legal/privacy">{L.footer.links.privacy}</a></li>
-					<li><a href="/legal/terms">{L.footer.links.terms}</a></li>
-					<li><a href="/legal/cookies">{L.footer.links.cookies}</a></li>
-				</ul>
-			</nav>
-		</div>
-		<p class="wrap footer__rights">&copy; {year} AIBAN. {L.footer.rights}</p>
-	</footer>
 </div>
 
 <style lang="scss">
@@ -412,8 +374,8 @@
 		top: calc(-1 * var(--space-10, 128px));
 		z-index: var(--z-toast, 100);
 		padding: var(--space-2, 8px) var(--space-4, 16px);
-		background: #1d1d1f;
-		color: #fff;
+		background: var(--surface-inverse);
+		color: var(--text-inverse);
 		border-radius: var(--radius-full, 999px);
 		&:focus {
 			top: var(--space-4, 16px);
@@ -444,15 +406,48 @@
 		text-decoration: none;
 		cursor: pointer;
 		white-space: nowrap;
+		position: relative;
+		isolation: isolate;
 		transition:
 			background-color var(--dur-fast, 120ms) var(--ease-out),
-			transform var(--dur-base, 200ms) var(--ease-out);
+			transform var(--t-out, 200ms) var(--ease-out);
+		/* State layer: hover 8%, focus 10%, pressed 12% of the label color. */
+		&::before {
+			content: '';
+			position: absolute;
+			inset: 0;
+			border-radius: inherit;
+			background: currentColor;
+			opacity: 0;
+			z-index: -1;
+			pointer-events: none;
+			transition: opacity var(--t-out, 200ms) var(--ease-out);
+		}
+		@media (hover: hover) and (pointer: fine) {
+			&:hover::before {
+				opacity: 0.08;
+				transition-duration: var(--t-in, 120ms);
+			}
+		}
 		&:focus-visible {
 			outline: none;
 			box-shadow: var(--focus-ring);
+			&::before {
+				opacity: 0.1;
+			}
 		}
 		&:active {
-			transform: scale(0.98);
+			transform: scale(0.97);
+			transition-duration: 60ms;
+			&::before {
+				opacity: 0.12;
+				transition-duration: 0ms;
+			}
+		}
+		@media (prefers-reduced-motion: reduce) {
+			&:active {
+				transform: none;
+			}
 		}
 	}
 	.btn--primary {
@@ -910,81 +905,6 @@
 		align-items: center;
 		gap: var(--space-6, 32px);
 	}
-	.finale__wordmark {
-		margin: clamp(4rem, 12vh, 8rem) 0 0;
-		font-family: var(--font-display);
-		font-size: 27vw;
-		font-weight: var(--fw-bold, 700);
-		letter-spacing: -0.07em;
-		line-height: 0.78;
-		color: var(--text-1);
-		user-select: none;
-		transform: translateY(0.08em);
-	}
-
-	/* Footer */
-	.footer {
-		background: var(--surface-2);
-		padding-block: var(--space-8, 64px) var(--space-6, 32px);
-		color: var(--text-2);
-		font-size: var(--fs-sm, 0.875rem);
-		a {
-			color: var(--text-2);
-			text-decoration: none;
-			&:hover {
-				color: var(--text-1);
-				text-decoration: underline;
-			}
-			&:focus-visible {
-				outline: none;
-				box-shadow: var(--focus-ring);
-				border-radius: var(--radius-sm, 6px);
-			}
-		}
-		ul {
-			display: grid;
-			gap: var(--space-2, 8px);
-		}
-	}
-	.footer__grid {
-		display: grid;
-		gap: var(--space-6, 32px);
-		grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
-	}
-	.footer__about {
-		grid-column: 1 / -1;
-		@media (min-width: 48rem) {
-			grid-column: auto;
-			min-width: 16rem;
-		}
-	}
-	.footer__logo {
-		font-weight: var(--fw-bold, 700);
-		letter-spacing: -0.03em;
-		font-size: var(--fs-lg, 1.125rem);
-		color: var(--text-1) !important;
-	}
-	.footer__tagline {
-		margin: var(--space-3, 12px) 0;
-		max-width: 22rem;
-		line-height: 1.55;
-	}
-	.footer__contact {
-		margin: 0;
-	}
-	.footer__h {
-		margin: 0 0 var(--space-3, 12px);
-		font-size: var(--fs-sm, 0.875rem);
-		font-weight: var(--fw-semibold, 600);
-		color: var(--text-1);
-	}
-	.footer__rights {
-		margin-top: var(--space-7, 48px);
-		padding-top: var(--space-4, 16px);
-		border-top: 1px solid var(--border-1);
-		color: var(--text-3);
-		font-size: var(--fs-xs, 0.75rem);
-	}
 
 	/* ---------- Motion (decorative only, final states without it) ---------- */
 	@media (prefers-reduced-motion: no-preference) {
@@ -1028,11 +948,6 @@
 				animation-timeline: view();
 				animation-range: entry 70% cover 55%;
 			}
-			.finale__wordmark {
-				animation: wordmark linear both;
-				animation-timeline: view();
-				animation-range: entry 0% entry 100%;
-			}
 		}
 	}
 	@keyframes rise {
@@ -1057,16 +972,6 @@
 		}
 		to {
 			color: var(--text-1);
-		}
-	}
-	@keyframes wordmark {
-		from {
-			opacity: 0;
-			transform: translate3d(0, 0.35em, 0);
-		}
-		to {
-			opacity: 1;
-			transform: translateY(0.08em);
 		}
 	}
 </style>

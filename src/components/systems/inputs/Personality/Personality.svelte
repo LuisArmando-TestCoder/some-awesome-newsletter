@@ -59,15 +59,17 @@
 <div class="personality-field">
   <!-- Loading Indicator -->
   {#if $isGenerating}
-    <div class="status-message loading" transition:slide|local>
-      {$latestMessage || $t['personality.generatingShort']}
+    <div class="status-message loading" role="status" transition:slide|local>
+      <span class="status-spinner" aria-hidden="true"></span>
+      <span>{$latestMessage || $t['personality.generatingShort']}</span>
     </div>
   {/if}
 
   <!-- Error Indicator -->
   {#if $generationError}
-    <div class="status-message error" transition:slide|local>
-      {$t['personality.errorPrefix']} {$generationError}
+    <div class="status-message error" role="alert" transition:slide|local>
+      <svg class="status-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.5" /><path d="M8 4.5v4.25M8 11.25v.25" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" /></svg>
+      <span>{$t['personality.errorPrefix']} {$generationError}</span>
     </div>
   {/if}
 
@@ -79,7 +81,7 @@
   {/if}
 
   <!-- Textarea Container (Optional - could be removed if no border needed) -->
-  <div class="textarea-wrapper">
+  <div class="textarea-wrapper" class:filled={!!currentContent} class:busy={$isGenerating} aria-busy={$isGenerating ? "true" : undefined}>
     <textarea
       id={textareaId}
       class="personality-textarea"
@@ -106,82 +108,152 @@
   .personality-field {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem; // Adjust gap between label, textarea, button
+    gap: var(--space-2);
+    font-family: var(--font-body);
   }
 
   .textarea-label {
-    display: block; // Ensure it takes its own line
-    font-size: 0.85rem; // Slightly smaller than main text
-    color: var(--color-foreground-muted, #aaa);
-    margin-bottom: 0.25rem; // Space between label and textarea
-    padding-left: 0.1rem; // Slight indent to align roughly with textarea padding
+    display: block;
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-snug);
+    color: var(--text-1);
   }
 
-  // Wrapper only needed if you want a border/background around JUST the textarea
+  /* Field shell: thin edge, soft radius, ink focus. Empty on the quiet surface, filled on paper. */
   .textarea-wrapper {
-    border: 1px solid var(--color-border, rgba(255, 255, 255, 0.3));
-    border-radius: 8px;
-    background: var(--color-input-background, rgba(255, 255, 255, 0.1));
-    transition: border-color 0.3s ease;
-    display: flex; // To contain the textarea properly
+    display: flex;
+    border: 1px solid var(--border-2);
+    border-radius: var(--radius-md);
+    background: var(--surface-1);
+    transition:
+      border-color var(--t-out) var(--ease-out),
+      background-color var(--t-out) var(--ease-out),
+      box-shadow var(--t-out) var(--ease-out);
+
+    &.filled,
+    &:focus-within {
+      background: var(--surface-0);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover:not(.busy):not(:focus-within) {
+        border-color: var(--text-2);
+        transition-duration: var(--t-in);
+      }
+    }
 
     &:focus-within {
-      border-color: var(--color-accent, #007bff);
+      border-color: var(--text-1);
+      box-shadow: var(--focus-ring);
+    }
+
+    /* Busy: the text stays readable while a draft is written. */
+    &.busy {
+      background: var(--surface-2);
+      border-color: var(--border-1);
+      cursor: progress;
     }
   }
 
   .personality-textarea {
     flex-grow: 1;
     width: 100%;
-    padding: 0.75rem;
-    font-size: 1rem;
+    min-height: 5rem;
+    padding: var(--space-3) var(--control-pad-x);
+    font-size: var(--fs-md);
+    line-height: var(--lh-normal);
     font-family: inherit;
-    background: transparent; // Make background transparent if using wrapper bg
-    border: none; // Border is on the wrapper now (if used)
-    // Alternatively, if NOT using wrapper, add border/bg here:
-    // border: 1px solid var(--color-border, rgba(255, 255, 255, 0.3));
-    // border-radius: 8px;
-    // background: var(--color-input-background, rgba(255, 255, 255, 0.1));
-
-    color: var(--color-foreground, #eee);
+    background: transparent;
+    border: none;
+    color: var(--text-1);
+    caret-color: var(--text-1);
     resize: vertical;
-    min-height: 80px;
     outline: none;
 
     &::placeholder {
-      color: var(--color-foreground-muted, #888);
+      color: var(--text-3);
       opacity: 1;
     }
 
     &:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
+      color: var(--text-2);
+      cursor: progress;
     }
   }
 
   .generate-button-container {
     display: flex;
     justify-content: flex-end;
-    margin-top: 0.5rem; // Add some space above the button
+    margin-top: var(--space-2);
   }
 
   .status-message {
-    padding: 0.5rem 0.75rem;
-    border-radius: 4px;
-    font-size: 0.9rem;
-    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-md);
+    font-size: var(--fs-sm);
+    line-height: var(--lh-snug);
+    margin-bottom: var(--space-2);
 
     &.loading {
-      background-color: var(--color-info-background, rgba(0, 123, 255, 0.2));
-      color: var(--color-info-text, #60a5fa);
-      border: 1px solid var(--color-info-border, rgba(0, 123, 255, 0.4));
+      background-color: var(--surface-1);
+      color: var(--text-1);
+      border: 1px solid var(--border-1);
     }
 
     &.error {
-      background-color: var(--color-error-background, rgba(220, 53, 69, 0.2));
-      color: var(--color-error-text, #f87171);
-      border: 1px solid var(--color-error-border, rgba(220, 53, 69, 0.4));
+      background-color: var(--danger-soft);
+      color: var(--danger);
+      border: 1px solid var(--danger);
+      font-weight: var(--fw-medium);
     }
   }
 
+  .status-icon {
+    flex: none;
+    width: 1em;
+    height: 1em;
+    margin-top: 0.15em;
+  }
+
+  .status-spinner {
+    flex: none;
+    width: 0.875rem;
+    height: 0.875rem;
+    margin-top: 0.15em;
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+    border-radius: var(--radius-full);
+    animation: personality-spin 0.7s linear infinite;
+  }
+
+  @keyframes personality-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .status-spinner {
+      animation: none;
+      border-right-color: currentColor;
+      opacity: 0.6;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .textarea-wrapper {
+      border-color: FieldText;
+    }
+    .textarea-wrapper:focus-within {
+      outline: 2px solid Highlight;
+      outline-offset: 2px;
+    }
+    .status-message {
+      border-color: CanvasText;
+    }
+  }
 </style>

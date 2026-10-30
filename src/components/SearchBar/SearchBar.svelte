@@ -50,88 +50,120 @@
 .search-bar-wrap {
   display: flex;
   justify-content: center;
-  margin: var(--space-4, 16px) auto;
+  margin: var(--space-4) auto;
   width: 100%;
 }
+/* One pill: icon, field, clear. Ink edge and focus ring while typing. */
 .search-bar {
   display: flex;
   align-items: center;
-  gap: var(--space-2, 8px);
-  background: var(--surface-1, #fff);
-  border: 1px solid var(--border-2, #ccc);
-  border-radius: var(--radius-full, 999px);
-  padding: 0 var(--space-3, 12px) 0 var(--space-4, 16px);
+  gap: var(--space-2);
+  min-height: calc(var(--control-h) + var(--space-1));
+  background: var(--surface-0);
+  border: 1px solid var(--border-2);
+  border-radius: var(--radius-full);
+  padding: 0 var(--space-2) 0 var(--space-4);
   min-width: 0;
   max-width: 30rem;
   width: 100%;
-  transition: border-color var(--dur-fast, 120ms) var(--ease-out, ease-out),
-    box-shadow var(--dur-fast, 120ms) var(--ease-out, ease-out);
+  transition:
+    border-color var(--t-out) var(--ease-out),
+    box-shadow var(--t-out) var(--ease-out);
 }
-.search-bar.focused {
-  border-color: var(--accent, #2563eb);
-  box-shadow: 0 0 0 3px var(--accent-soft, transparent);
+@media (hover: hover) and (pointer: fine) {
+  .search-bar:hover:not(:focus-within) {
+    border-color: var(--text-2);
+    transition-duration: var(--t-in);
+  }
+}
+.search-bar.focused,
+.search-bar:focus-within {
+  border-color: var(--text-1);
+  box-shadow: var(--focus-ring);
 }
 .search-icon {
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1.125rem;
+  height: 1.125rem;
   flex-shrink: 0;
   fill: none;
-  stroke: var(--text-3, #777);
+  stroke: var(--text-3);
   stroke-width: 2;
   stroke-linecap: round;
 }
 :global(.search-bar .text-input-wrapper) {
   width: 100%;
+  margin: 0;
 }
 :global(.search-bar .input-label) {
   display: none;
 }
 :global(.search-bar input) {
+  width: 100%;
   border: none;
   background: transparent;
-  padding: var(--space-3, 12px) 0;
-  font-size: var(--fs-md, 1rem);
-  color: var(--text-1, #111);
+  padding: var(--space-3) 0;
+  font-size: var(--fs-md);
+  color: var(--text-1);
 }
 :global(.search-bar input::placeholder) {
-  color: var(--text-3, #777);
+  color: var(--text-3);
 }
-:global(.search-bar input:focus) {
+:global(.search-bar input:focus),
+:global(.search-bar input:focus-visible) {
   box-shadow: none;
   outline: none;
 }
 .clear-btn {
+  position: relative;
   display: grid;
   place-items: center;
   width: 2rem;
   height: 2rem;
   flex-shrink: 0;
+  padding: 0;
   background: none;
   border: none;
-  border-radius: var(--radius-full, 999px);
+  border-radius: var(--radius-full);
   cursor: pointer;
-  color: var(--text-3, #777);
-  transition: background-color var(--dur-fast, 120ms) var(--ease-out, ease-out);
+  color: var(--text-3);
+  transition:
+    background-color var(--t-out) var(--ease-out),
+    color var(--t-out) var(--ease-out);
+}
+/* 44px hit area around the 32px visual. */
+.clear-btn::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
 }
 .clear-btn svg {
-  width: 1rem;
-  height: 1rem;
+  width: 0.875rem;
+  height: 0.875rem;
   stroke: currentColor;
   stroke-width: 2;
   stroke-linecap: round;
 }
-.clear-btn:hover {
-  background: var(--surface-2, #f3f3f3);
-  color: var(--text-1, #111);
+@media (hover: hover) and (pointer: fine) {
+  .clear-btn:hover {
+    background: var(--surface-2);
+    color: var(--text-1);
+    transition-duration: var(--t-in);
+  }
+}
+.clear-btn:active {
+  transform: scale(0.94);
 }
 .clear-btn:focus-visible {
-  outline: 2px solid var(--focus-color, #2563eb);
-  outline-offset: 2px;
+  outline: none;
+  box-shadow: var(--focus-ring);
 }
 @media (prefers-reduced-motion: reduce) {
   .search-bar,
   .clear-btn {
     transition: none;
+  }
+  .clear-btn:active {
+    transform: none;
   }
 }
 </style>

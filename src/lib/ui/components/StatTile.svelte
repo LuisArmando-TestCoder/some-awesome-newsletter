@@ -88,28 +88,42 @@
     padding: var(--card-pad);
     border: 1px solid var(--border-1);
     border-radius: var(--radius-lg);
-    background: var(--surface-1);
+    background: var(--surface-0);
     color: var(--text-1);
     text-decoration: none;
-    box-shadow: var(--shadow-1);
   }
 
+  /* Link tile: hover lift with a darker edge, ring on focus, settles when pressed. */
   .stat--link {
+    -webkit-tap-highlight-color: transparent;
     transition:
-      border-color var(--dur-fast) var(--ease-out),
-      box-shadow var(--dur-fast) var(--ease-out);
+      border-color var(--t-out) var(--ease-out),
+      box-shadow var(--t-out) var(--ease-out),
+      transform var(--dur-base) var(--ease-out);
   }
-  .stat--link:hover {
-    border-color: var(--border-2);
-    box-shadow: var(--shadow-2);
+  @media (hover: hover) and (pointer: fine) {
+    .stat--link:hover {
+      border-color: var(--border-2);
+      box-shadow: var(--shadow-2);
+      transform: translateY(-2px);
+      transition-duration: var(--t-in);
+    }
+  }
+  .stat--link:active {
+    transform: scale(0.99);
+    box-shadow: none;
+    transition-duration: 60ms;
   }
   .stat--link:focus-visible {
     outline: none;
     box-shadow: var(--focus-ring);
   }
+  .stat[aria-busy='true'] {
+    cursor: progress;
+  }
 
   .stat__label {
-    font-size: var(--fs-sm);
+    font-size: var(--fs-xs);
     font-weight: var(--fw-medium);
     line-height: var(--lh-snug);
     color: var(--text-2);
@@ -117,10 +131,11 @@
 
   .stat__value {
     display: block;
-    font-size: var(--fs-2xl);
+    font-family: var(--font-display);
+    font-size: var(--fs-3xl);
     font-weight: var(--fw-semibold);
     line-height: var(--lh-tight);
-    letter-spacing: var(--tracking-tight);
+    letter-spacing: var(--tracking-display);
     font-variant-numeric: tabular-nums;
     color: var(--text-1);
     overflow-wrap: anywhere;
@@ -156,5 +171,22 @@
   .stat__arrow {
     width: 0.875em;
     height: 0.875em;
+  }
+
+  @media (forced-colors: active) {
+    .stat {
+      border-color: CanvasText;
+    }
+    .stat--link:focus-visible {
+      outline: 2px solid CanvasText;
+      outline-offset: 2px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stat--link:hover,
+    .stat--link:active {
+      transform: none;
+    }
   }
 </style>

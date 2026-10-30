@@ -136,9 +136,8 @@ const pageSize = 5;
   }
 
   .refresh-indicator {
-    font-size: var(--font-size-s); // Smaller text
+    font-size: var(--fs-sm); // Smaller text
     color: var(--color-text-secondary); // Muted color
-    font-style: italic;
   }
 
   .loading-message,
@@ -149,6 +148,6 @@ const pageSize = 5;
   }
   .loading-message,
   .no-data-message {
-    color: var(--color-text-secondary, #666);
+    color: var(--text-2);
   }
 </style>

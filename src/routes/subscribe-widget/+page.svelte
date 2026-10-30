@@ -84,8 +84,14 @@
   /* The form keeps its own surface so text stays readable on any host page color. */
   .embed {
     padding: var(--space-5);
-    background: var(--surface-1);
+    background: var(--surface-0);
     border: 1px solid var(--border-1);
     border-radius: var(--radius-lg);
+  }
+
+  @media (max-width: 22rem) {
+    .embed {
+      padding: var(--space-4);
+    }
   }
 </style>

@@ -126,8 +126,8 @@
     margin: auto;
     padding: 0;
     border: 1px solid var(--border-1);
-    border-radius: var(--radius-lg);
-    background: var(--surface-1);
+    border-radius: var(--radius-xl);
+    background: var(--surface-0);
     color: var(--text-1);
     box-shadow: var(--shadow-3);
     font-family: var(--font-body);
@@ -138,25 +138,33 @@
   .size-md { --dialog-w: 36rem; }
   .size-lg { --dialog-w: 52rem; }
 
+  /* Enter: fades up and settles from 97%. @starting-style gives the first frame, no keyframes. */
   .dialog[open] {
     display: flex;
-    animation: dialog-in var(--dur-base) var(--ease-out);
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity var(--dur-base) var(--ease-out),
+      transform var(--dur-slow) var(--ease-out);
+  }
+
+  @starting-style {
+    .dialog[open] {
+      opacity: 0;
+      transform: translateY(0.5rem) scale(0.97);
+    }
   }
 
   .dialog::backdrop {
     background: var(--surface-overlay);
-    animation: backdrop-in var(--dur-base) var(--ease-out);
+    backdrop-filter: blur(8px) saturate(1.2);
+    -webkit-backdrop-filter: blur(8px) saturate(1.2);
+    opacity: 1;
+    transition: opacity var(--dur-base) var(--ease-out);
   }
 
-  @keyframes dialog-in {
-    from {
-      opacity: 0;
-      transform: translateY(0.5rem);
-    }
-  }
-
-  @keyframes backdrop-in {
-    from {
+  @starting-style {
+    .dialog[open]::backdrop {
       opacity: 0;
     }
   }
@@ -164,7 +172,7 @@
   @media (prefers-reduced-motion: reduce) {
     .dialog[open],
     .dialog::backdrop {
-      animation: none;
+      transition: none;
     }
   }
 
@@ -193,6 +201,7 @@
     font-size: var(--fs-xl);
     font-weight: var(--fw-semibold);
     line-height: var(--lh-snug);
+    letter-spacing: var(--tracking-tight);
     color: var(--text-1);
   }
 
@@ -203,31 +212,48 @@
     color: var(--text-2);
   }
 
+  /* Close: round ghost button with the full state set. */
   .close {
+    position: relative;
     flex: none;
     display: inline-grid;
     place-items: center;
-    width: var(--control-h-sm);
-    height: var(--control-h-sm);
-    margin: calc(-1 * var(--space-1)) calc(-1 * var(--space-2)) 0 0;
+    width: var(--control-h);
+    height: var(--control-h);
+    margin: calc(-1 * var(--space-2)) calc(-1 * var(--space-2)) 0 0;
     border: 0;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-full);
     background: transparent;
     color: var(--text-2);
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
     transition:
-      background-color var(--dur-fast) var(--ease-out),
-      color var(--dur-fast) var(--ease-out);
+      background-color var(--t-out) var(--ease-out),
+      color var(--t-out) var(--ease-out),
+      transform var(--dur-base) var(--ease-out);
   }
 
   .close svg {
     width: 1.25rem;
     height: 1.25rem;
+    transition: transform var(--dur-base) var(--ease-out);
   }
 
-  .close:hover {
-    background: var(--surface-2);
-    color: var(--text-1);
+  @media (hover: hover) and (pointer: fine) {
+    .close:hover {
+      background: var(--surface-2);
+      color: var(--text-1);
+      transition-duration: var(--t-in);
+    }
+    .close:hover svg {
+      transform: rotate(90deg);
+    }
+  }
+
+  .close:active {
+    background: var(--surface-3);
+    transform: scale(0.94);
+    transition-duration: 60ms;
   }
 
   .close:focus-visible {
@@ -240,6 +266,7 @@
     min-height: 0;
     overflow-y: auto;
     overscroll-behavior: contain;
+    scrollbar-gutter: stable;
     padding: 0 var(--space-5) var(--space-5);
     font-size: var(--fs-md);
     line-height: var(--lh-normal);
@@ -253,6 +280,23 @@
     gap: var(--space-2);
     padding: var(--space-4) var(--space-5);
     border-top: 1px solid var(--border-1);
-    background: var(--surface-1);
+    background: var(--surface-0);
+  }
+
+  @media (forced-colors: active) {
+    .dialog {
+      border: 1px solid CanvasText;
+    }
+    .close:focus-visible {
+      outline: 2px solid CanvasText;
+      outline-offset: 2px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .close:active,
+    .close:hover svg {
+      transform: none;
+    }
   }
 </style>

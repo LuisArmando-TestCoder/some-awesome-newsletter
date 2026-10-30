@@ -1,26 +1,29 @@
 // WS4. Shared layout for settings tabs: form column plus a sticky preview column.
 .tab {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 26rem);
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--space-5);
   align-items: start;
 }
+// Two columns only when the dashboard content box (container "dash") is wide enough.
+@container dash (min-width: 860px) {
+  .tab { grid-template-columns: minmax(0, 1fr) minmax(0, 26rem); }
+}
 .tab__form { display: flex; flex-direction: column; gap: var(--space-4); min-width: 0; }
 .tab__preview {
-  position: sticky;
+  position: static;
   top: var(--space-4);
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
   min-width: 0;
 }
-.tab__preview-title { margin: 0; font-size: var(--fs-sm); font-weight: var(--fw-semibold); color: var(--text-1); }
+.tab__preview-title { margin: 0; font-size: var(--fs-xs); font-weight: var(--fw-medium); color: var(--text-3); }
 .tab__preview-note { margin: 0; font-size: var(--fs-xs); color: var(--text-3); line-height: var(--lh-normal); }
 .tab__error { margin-top: var(--space-4); }
 .stack { display: flex; flex-direction: column; gap: var(--space-4); }
-@media (max-width: 960px) {
-  .tab { grid-template-columns: minmax(0, 1fr); }
-  .tab__preview { position: static; }
+@container dash (min-width: 860px) {
+  .tab__preview { position: sticky; }
 }
 
 // Two-column field row (SendingTab). Include after the @use:

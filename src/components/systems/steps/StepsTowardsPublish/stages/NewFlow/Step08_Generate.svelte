@@ -113,7 +113,7 @@
       <span></span><span></span><span class="short"></span><span></span>
     </div>
   {:else if error}
-    <p class="ob-error" role="alert">{error}</p>
+    <p class="ob-error shake" role="alert">{error}</p>
     <div class="row">
       <button type="button" class="ob-btn ob-btn--secondary" on:click={generate}>{$ob.tryAgain}</button>
       <button type="button" class="ob-btn ob-btn--tertiary" on:click={nextStep}>{$ob.preview.skipPreview}</button>
@@ -127,7 +127,17 @@
       labels={{ from: $ob.preview.inboxFrom, to: $ob.preview.inboxTo, subject: $ob.preview.inboxSubject }}
     />
     <div class="row">
-      <button type="button" class="ob-btn ob-btn--secondary" on:click={sendTest} disabled={testing || !owner}>
+      <button
+        type="button"
+        class="ob-btn ob-btn--secondary"
+        on:click={() => {
+          if (testing || !owner) return;
+          sendTest();
+        }}
+        aria-disabled={testing || !owner ? "true" : undefined}
+        aria-busy={testing}
+      >
+        {#if testing}<span class="mini-spin" aria-hidden="true"></span>{/if}
         {testing ? $ob.preview.sendingTest : $ob.preview.sendTest}
       </button>
       <button type="button" class="ob-btn ob-btn--tertiary" on:click={generate}>{$ob.preview.regenerate}</button>
@@ -138,13 +148,23 @@
 
   {#if !generating}
     <details class="how">
-      <summary>{$ob.preview.howTitle}</summary>
+      <summary>{$ob.preview.howTitle}<svg class="how__chev" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" /></svg></summary>
       <p class="ob-hint">{$ob.preview.howBody}</p>
       <div class="ob-field">
         <label class="ob-label" for="ob-rule">{$ob.preview.ruleLabel}</label>
         <input id="ob-rule" class="ob-input mono" type="text" readonly value={$onboarding.linkSelector} />
       </div>
-      <button type="button" class="ob-btn ob-btn--secondary" on:click={findRuleAgain} disabled={ruleBusy}>
+      <button
+        type="button"
+        class="ob-btn ob-btn--secondary"
+        on:click={() => {
+          if (ruleBusy) return;
+          findRuleAgain();
+        }}
+        aria-disabled={ruleBusy ? "true" : undefined}
+        aria-busy={ruleBusy}
+      >
+        {#if ruleBusy}<span class="mini-spin" aria-hidden="true"></span>{/if}
         {ruleBusy ? $ob.working : $ob.preview.findAgain}
       </button>
     </details>
@@ -152,51 +172,160 @@
 </OnboardingShell>
 
 <style lang="scss">
-  .row { display: flex; gap: var(--space-3, 12px); flex-wrap: wrap; align-items: center; }
+  .row {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  /* Working state: a calm line of text with a breathing dot, then a skeleton shaped like the email. */
   .generating {
     display: flex;
-    gap: var(--space-3, 12px);
+    gap: var(--space-3);
     align-items: flex-start;
-    padding: var(--space-4, 16px);
-    border-radius: var(--radius-md, 8px);
-    background: var(--info-soft, #eef3ff);
   }
-  .generating__text { margin: 0; color: var(--text-1, #14171a); }
+  .generating__text {
+    margin: 0;
+    color: var(--text-1);
+    font-size: var(--fs-lg);
+    font-weight: var(--fw-medium);
+  }
   .pulse {
     flex: none;
-    width: 12px;
-    height: 12px;
-    margin-top: 6px;
-    border-radius: 50%;
-    background: var(--accent, #3b5bdb);
-    animation: pulse 1.4s var(--ease-in-out, ease-in-out) infinite;
+    width: 10px;
+    height: 10px;
+    margin-top: 0.55em;
+    border-radius: var(--radius-full);
+    background: var(--text-1);
+    animation: pulse 1.4s var(--ease-in-out) infinite;
   }
-  @keyframes pulse { 50% { opacity: 0.3; } }
+  @keyframes pulse {
+    50% {
+      opacity: 0.25;
+      transform: scale(0.8);
+    }
+  }
   .skeleton {
     display: flex;
     flex-direction: column;
-    gap: var(--space-3, 12px);
-    padding: var(--space-4, 16px);
-    border: 1px solid var(--border-1, #e3e6ea);
-    border-radius: var(--radius-md, 8px);
-    span { display: block; height: 14px; border-radius: var(--radius-sm, 4px); background: var(--surface-2, #eceef1); }
-    .short { width: 60%; }
+    gap: var(--space-3);
+    padding: var(--space-6) var(--space-5);
+    border: 1px solid var(--border-1);
+    border-radius: var(--radius-lg);
+    background: var(--surface-0);
+
+    span {
+      display: block;
+      height: 14px;
+      border-radius: var(--radius-sm);
+      background: var(--surface-2);
+      animation: sk 1.4s var(--ease-in-out) infinite;
+    }
+    span:first-child {
+      height: 22px;
+      width: 70%;
+      margin-bottom: var(--space-2);
+    }
+    .short {
+      width: 60%;
+    }
   }
-  @media (prefers-reduced-motion: reduce) { .pulse { animation: none; } }
+  @keyframes sk {
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  .mini-spin {
+    width: 1em;
+    height: 1em;
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+    border-radius: var(--radius-full);
+    animation: mini-spin 0.8s linear infinite;
+  }
+  @keyframes mini-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Disclosure: a chevron that turns over when open. */
   .how {
-    border-top: 1px solid var(--border-1, #e3e6ea);
-    padding-top: var(--space-3, 12px);
+    border-top: 1px solid var(--border-1);
+    padding-top: var(--space-3);
     display: flex;
     flex-direction: column;
-    gap: var(--space-3, 12px);
+    gap: var(--space-3);
+
     summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-2);
+      min-height: var(--control-h);
+      list-style: none;
       cursor: pointer;
-      font-weight: var(--fw-semibold, 600);
-      color: var(--text-1, #14171a);
-      font-size: var(--fs-sm, 0.875rem);
+      font-weight: var(--fw-medium);
+      color: var(--text-1);
+      font-size: var(--fs-sm);
+      border-radius: var(--radius-sm);
+      box-shadow: none;
+
+      &::-webkit-details-marker {
+        display: none;
+      }
+
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          box-shadow: none;
+          text-decoration: underline;
+          text-underline-offset: 0.2em;
+        }
+      }
+
+      &:focus-visible {
+        box-shadow: none;
+        outline: 2px solid var(--focus-color);
+        outline-offset: 2px;
+      }
     }
-    &[open] summary { margin-bottom: var(--space-3, 12px); }
-    > * + * { margin-top: var(--space-3, 12px); }
+    &[open] summary {
+      margin-bottom: var(--space-3);
+    }
+    > * + * {
+      margin-top: var(--space-3);
+    }
   }
-  .mono { font-family: var(--font-mono, monospace); font-size: var(--fs-sm, 0.875rem) !important; }
+  .how__chev {
+    flex: none;
+    width: 1rem;
+    height: 1rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: transform var(--dur-slow) var(--ease-out);
+  }
+  .how[open] .how__chev {
+    transform: rotate(180deg);
+  }
+
+  .mono {
+    font-family: var(--font-mono);
+    font-size: var(--fs-sm) !important;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pulse,
+    .skeleton span,
+    .mini-spin {
+      animation: none;
+    }
+    .how__chev {
+      transition: none;
+    }
+  }
 </style>

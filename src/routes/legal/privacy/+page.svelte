@@ -28,7 +28,7 @@
     when you use our AI news and dashboard services.
   </p>
 
-  <h2>1. Information we collect</h2>
+  <h2 id="information-we-collect"><a class="legal-anchor" href="#information-we-collect">1. Information we collect</a></h2>
   <p>We collect information to provide our services to you. This includes:</p>
   <ul>
     <li>Account information: name, email address and billing details.</li>
@@ -36,7 +36,7 @@
     <li>Technical data: IP address, browser type and device information.</li>
   </ul>
 
-  <h2>2. How we use your data</h2>
+  <h2 id="how-we-use-your-data"><a class="legal-anchor" href="#how-we-use-your-data">2. How we use your data</a></h2>
   <p>We use your data to:</p>
   <ul>
     <li>Personalize your AI news experience.</li>
@@ -45,13 +45,13 @@
     <li>Improve our machine learning models (anonymized data only).</li>
   </ul>
 
-  <h2>3. Data security</h2>
+  <h2 id="data-security"><a class="legal-anchor" href="#data-security">3. Data security</a></h2>
   <p>
     We use industry-standard encryption to protect your data. Your credentials and personal information are
     stored using secure hashing algorithms and are never shared with unauthorized third parties.
   </p>
 
-  <h2>4. Your rights (GDPR and CCPA)</h2>
+  <h2 id="your-rights"><a class="legal-anchor" href="#your-rights">4. Your rights (GDPR and CCPA)</a></h2>
   <p>Depending on where you live, you have the right to:</p>
   <ul>
     <li>Access the personal data we hold about you.</li>
@@ -59,7 +59,7 @@
     <li>Opt out of data processing for marketing purposes.</li>
   </ul>
 
-  <h2>5. Contact us</h2>
+  <h2 id="contact-us"><a class="legal-anchor" href="#contact-us">5. Contact us</a></h2>
   <p>
     If you have questions about this privacy policy or want to exercise your data rights, contact us at
     <a href="mailto:{contactEmail}">{contactEmail}</a>.

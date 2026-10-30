@@ -167,63 +167,71 @@
 </div>
 
 <style lang="scss">
-  /* --- Tokens --- */
-  :root {
-    --otp-height: 3.5rem;
-    --otp-radius: 12px;
-    --otp-border: #e2e8f0;
-    --otp-border-focus: #0f172a;
-    --otp-bg: #ffffff;
-    --otp-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --otp-shadow-glow: 0 0 0 4px rgba(15, 23, 42, 0.1);
-    --otp-anim: cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
+  /* --- Local sizes (colors come from tokens only) --- */
   .auth-wrapper {
+    --otp-height: 3.5rem;
+    --otp-radius: var(--radius-md);
+
     width: 100%;
     display: flex;
     justify-content: center;
-    margin: 2rem 0;
+    margin: var(--space-6) 0;
   }
 
   /* --- Desktop Layout --- */
   .desktop-container {
     display: flex;
-    gap: 0.75rem;
+    gap: var(--space-3);
   }
 
   .digit-input {
     width: 3rem;
     height: var(--otp-height);
     text-align: center;
-    font-family: 'Inter', monospace;
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #1e293b;
-    background: var(--otp-bg);
-    border: 1px solid var(--otp-border);
+    font-family: var(--font-mono);
+    font-size: var(--fs-2xl);
+    font-weight: var(--fw-semibold);
+    font-variant-numeric: tabular-nums;
+    color: var(--text-1);
+    caret-color: var(--text-1);
+    background: var(--surface-1);
+    border: 1px solid var(--border-2);
     border-radius: var(--otp-radius);
-    box-shadow: var(--otp-shadow-sm);
     outline: none;
-    transition: all 0.2s var(--otp-anim);
-    
+    transition:
+      border-color var(--t-out) var(--ease-out),
+      background-color var(--t-out) var(--ease-out),
+      box-shadow var(--t-out) var(--ease-out),
+      transform var(--dur-base) var(--ease-out);
+
     /* Hide spinners */
     -moz-appearance: textfield;
     appearance: textfield;
     &::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 
-    &:hover { border-color: #cbd5e1; }
-    
+    @media (hover: hover) and (pointer: fine) {
+      &:hover:not(:focus) {
+        border-color: var(--text-2);
+        transition-duration: var(--t-in);
+      }
+    }
+
     &:focus {
-      border-color: var(--otp-border-focus);
-      box-shadow: var(--otp-shadow-glow);
+      border-color: var(--text-1);
+      background: var(--surface-0);
+      box-shadow: var(--focus-ring);
       transform: translateY(-2px);
       z-index: 2;
     }
 
+    /* Filled: paper surface and an ink edge, so progress reads without color. */
     &.filled {
-      background-color: #f8fafc;
-      border-color: #94a3b8;
+      background-color: var(--surface-0);
+      border-color: var(--text-1);
+    }
+
+    &:user-invalid {
+      border-color: var(--danger);
     }
   }
 
@@ -238,33 +246,66 @@
     box-sizing: border-box;
     width: 100%;
     height: var(--otp-height);
-    background: var(--otp-bg);
-    border: 1px solid var(--otp-border);
+    background: var(--surface-1);
+    border: 1px solid var(--border-2);
     border-radius: var(--otp-radius);
-    padding: 0 1rem;
-    
+    padding: 0 var(--space-4);
+
     /* Typography Tricks for Spacing */
-    font-family: 'Inter', monospace;
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-family: var(--font-mono);
+    font-size: var(--fs-2xl);
+    font-weight: var(--fw-semibold);
+    font-variant-numeric: tabular-nums;
     letter-spacing: 0.75em; /* Spreads out digits */
     text-align: center;
     /* Adjust text-indent to center visually because letter-spacing adds space at end */
-    text-indent: 0.75em; 
-    
-    color: #1e293b;
+    text-indent: 0.75em;
+
+    color: var(--text-1);
+    caret-color: var(--text-1);
     outline: none;
-    box-shadow: var(--otp-shadow-sm);
-    transition: all 0.2s var(--otp-anim);
+    transition:
+      border-color var(--t-out) var(--ease-out),
+      background-color var(--t-out) var(--ease-out),
+      box-shadow var(--t-out) var(--ease-out);
 
     &::placeholder {
-      color: #e2e8f0;
+      color: var(--text-3);
       letter-spacing: 0.75em;
     }
 
+    &:not(:placeholder-shown) {
+      background: var(--surface-0);
+    }
+
     &:focus {
-      border-color: var(--otp-border-focus);
-      box-shadow: var(--otp-shadow-glow);
+      border-color: var(--text-1);
+      background: var(--surface-0);
+      box-shadow: var(--focus-ring);
+    }
+
+    &:-webkit-autofill {
+      -webkit-text-fill-color: var(--text-1);
+      box-shadow: inset 0 0 0 100vmax var(--surface-2);
+      transition: background-color 600000s 0s;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .digit-input,
+    .single-input {
+      border-color: FieldText;
+    }
+    .digit-input:focus,
+    .single-input:focus {
+      outline: 2px solid Highlight;
+      outline-offset: 2px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .digit-input:focus {
+      transform: none;
     }
   }
 </style>

@@ -111,14 +111,13 @@
     gap: var(--space-3);
     min-width: 0;
     border: 1px solid var(--border-1);
-    border-radius: var(--radius-lg);
-    background: var(--surface-1);
+    border-radius: var(--radius-xl);
+    background: var(--surface-0);
     color: var(--text-1);
-    box-shadow: var(--shadow-1);
     transition:
-      box-shadow var(--dur-base) var(--ease-out),
+      box-shadow var(--t-out) var(--ease-out),
       transform var(--dur-base) var(--ease-out),
-      border-color var(--dur-base) var(--ease-out);
+      border-color var(--t-out) var(--ease-out);
   }
 
   .card--pad-none {
@@ -173,7 +172,7 @@
     border-top: 1px solid var(--border-1);
   }
 
-  /* Actionable: the title link or button stretches over the whole card. */
+  /* Actionable: one real link or button whose hit area stretches over the whole card. */
   .card__action {
     color: inherit;
     font: inherit;
@@ -183,6 +182,7 @@
     border: 0;
     padding: 0;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
   }
   .card__action::after {
     content: '';
@@ -196,27 +196,60 @@
   }
   .card__action:focus-visible {
     outline: none;
+    box-shadow: none;
   }
   .card:has(.card__action:focus-visible) {
     box-shadow: var(--focus-ring);
   }
-  .card--actionable:hover .card__title .card__action {
+  .card__title .card__action {
     text-decoration: underline;
     text-decoration-thickness: 1px;
+    text-decoration-color: transparent;
     text-underline-offset: 0.2em;
+    transition: text-decoration-color var(--t-out) var(--ease-out);
   }
   .card__footer {
     position: relative;
     z-index: 1;
   }
 
-  .card--raised:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-2);
-    border-color: var(--border-2);
+  .card--actionable {
+    cursor: pointer;
   }
-  .card--raised:active {
-    transform: translateY(0);
-    box-shadow: var(--shadow-1);
+
+  @media (hover: hover) and (pointer: fine) {
+    .card--actionable:hover {
+      border-color: var(--border-2);
+      transition-duration: var(--t-in);
+    }
+    .card--actionable:hover .card__title .card__action {
+      text-decoration-color: currentColor;
+    }
+    .card--raised:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-2);
+    }
+  }
+  .card:has(.card__action:active) {
+    transform: scale(0.99);
+    box-shadow: none;
+    transition-duration: 60ms;
+  }
+
+  @media (forced-colors: active) {
+    .card {
+      border-color: CanvasText;
+    }
+    .card:has(.card__action:focus-visible) {
+      outline: 2px solid CanvasText;
+      outline-offset: 2px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card--raised:hover,
+    .card:has(.card__action:active) {
+      transform: none;
+    }
   }
 </style>

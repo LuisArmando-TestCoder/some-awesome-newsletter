@@ -104,12 +104,18 @@
         <div class="embed-code__block">
           <div class="embed-code__label-row">
             <label class="embed-code__label" for={`embed-link-${uid}`}>{$ts.embed.linkLabel}</label>
-            <button class="embed-code__copy" type="button" on:click={() => copy(shareLink, 'link')}>
-              {copied === 'link' ? $ts.embed.copied : $ts.embed.copy}
+            <button class="embed-code__copy" class:is-done={copied === 'link'} type="button" on:click={() => copy(shareLink, 'link')}>
+              {#if copied === 'link'}
+                <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                {$ts.embed.copied}
+              {:else}
+                <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="5" y="5" width="8.5" height="8.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5" /><path d="M10.5 2.5h-6a2 2 0 0 0-2 2v6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                {$ts.embed.copy}
+              {/if}
             </button>
           </div>
           <input class="embed-code__input" id={`embed-link-${uid}`} type="text" readonly value={shareLink} on:focus={(e) => e.currentTarget.select()} />
-          <p class="embed-code__hint">{copyError === 'link' ? $ts.embed.copyFailed : $ts.embed.linkHint}</p>
+          <p class="embed-code__hint" class:is-error={copyError === 'link'}>{copyError === 'link' ? $ts.embed.copyFailed : $ts.embed.linkHint}</p>
         </div>
 
         <fieldset class="embed-code__options">
@@ -139,23 +145,35 @@
         <div class="embed-code__block">
           <div class="embed-code__label-row">
             <span class="embed-code__label" id={`embed-script-${uid}`}>{$ts.embed.scriptLabel}</span>
-            <button class="embed-code__copy" type="button" on:click={() => copy(scriptSnippet, 'script')}>
-              {copied === 'script' ? $ts.embed.copied : $ts.embed.copy}
+            <button class="embed-code__copy" class:is-done={copied === 'script'} type="button" on:click={() => copy(scriptSnippet, 'script')}>
+              {#if copied === 'script'}
+                <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                {$ts.embed.copied}
+              {:else}
+                <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="5" y="5" width="8.5" height="8.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5" /><path d="M10.5 2.5h-6a2 2 0 0 0-2 2v6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                {$ts.embed.copy}
+              {/if}
             </button>
           </div>
           <pre class="embed-code__pre" aria-labelledby={`embed-script-${uid}`}><code>{scriptSnippet}</code></pre>
-          <p class="embed-code__hint">{copyError === 'script' ? $ts.embed.copyFailed : $ts.embed.scriptHint}</p>
+          <p class="embed-code__hint" class:is-error={copyError === 'script'}>{copyError === 'script' ? $ts.embed.copyFailed : $ts.embed.scriptHint}</p>
         </div>
 
         <div class="embed-code__block">
           <div class="embed-code__label-row">
             <span class="embed-code__label" id={`embed-iframe-${uid}`}>{$ts.embed.iframeLabel}</span>
-            <button class="embed-code__copy" type="button" on:click={() => copy(iframeSnippet, 'iframe')}>
-              {copied === 'iframe' ? $ts.embed.copied : $ts.embed.copy}
+            <button class="embed-code__copy" class:is-done={copied === 'iframe'} type="button" on:click={() => copy(iframeSnippet, 'iframe')}>
+              {#if copied === 'iframe'}
+                <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                {$ts.embed.copied}
+              {:else}
+                <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="5" y="5" width="8.5" height="8.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5" /><path d="M10.5 2.5h-6a2 2 0 0 0-2 2v6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                {$ts.embed.copy}
+              {/if}
             </button>
           </div>
           <pre class="embed-code__pre" aria-labelledby={`embed-iframe-${uid}`}><code>{iframeSnippet}</code></pre>
-          <p class="embed-code__hint">{copyError === 'iframe' ? $ts.embed.copyFailed : $ts.embed.iframeHint}</p>
+          <p class="embed-code__hint" class:is-error={copyError === 'iframe'}>{copyError === 'iframe' ? $ts.embed.copyFailed : $ts.embed.iframeHint}</p>
         </div>
       </div>
 
@@ -171,45 +189,56 @@
     </div>
   {/if}
 
-  <span class="embed-code__sr" aria-live="polite">{copied ? $ts.embed.copied : ''}</span>
+  <span class="embed-code__sr" role="status" aria-live="polite">{copied ? $ts.embed.copied : ''}</span>
 </section>
 
 <style lang="scss">
+  /* Owner-facing share panel: a flat bordered card, code in quiet wells, live preview on the right. */
   .embed-code {
     box-sizing: border-box;
     display: grid;
-    gap: var(--space-5);
+    gap: var(--space-6);
     padding: var(--space-6);
     color: var(--text-1);
-    background: var(--surface-1);
+    background: var(--surface-0);
     border: 1px solid var(--border-1);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-xl);
     font-family: var(--font-body);
   }
 
   .embed-code__title {
     margin: 0 0 var(--space-2);
     font-family: var(--font-display);
-    font-size: var(--fs-xl);
-    line-height: var(--lh-snug);
+    font-size: var(--fs-2xl);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-tight);
+    letter-spacing: var(--tracking-tight);
   }
 
   .embed-code__text {
     margin: 0;
     max-width: var(--measure);
-    color: var(--text-1);
+    color: var(--text-2);
   }
 
   .embed-code__grid {
     display: grid;
     grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-    gap: var(--space-6);
+    gap: var(--space-7);
   }
 
   .embed-code__col {
     display: grid;
     align-content: start;
-    gap: var(--space-5);
+    gap: var(--space-6);
+  }
+
+  /* The preview follows the code while scrolling on wide screens. */
+  .embed-code__col:last-child {
+    position: sticky;
+    top: calc(var(--header-h) + var(--space-4));
+    align-self: start;
+    gap: var(--space-3);
   }
 
   .embed-code__block {
@@ -228,57 +257,109 @@
     margin: 0;
     font-size: var(--fs-sm);
     font-weight: var(--fw-semibold);
+    color: var(--text-1);
   }
 
   .embed-code__hint {
     margin: 0;
     font-size: var(--fs-sm);
-    color: var(--text-2);
+    color: var(--text-3);
+
+    &.is-error {
+      color: var(--danger);
+      font-weight: var(--fw-medium);
+    }
   }
 
   .embed-code__input {
     box-sizing: border-box;
     width: 100%;
-    min-height: 44px;
+    min-height: var(--control-h);
     padding: var(--space-2) var(--space-3);
     font: inherit;
     font-size: var(--fs-sm);
     color: var(--text-1);
-    background: var(--surface-1);
+    background: var(--surface-0);
     border: 1px solid var(--border-2);
     border-radius: var(--radius-md);
+    transition: border-color var(--t-out) var(--ease-out);
+
+    &[readonly] {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      background: var(--surface-2);
+      border-color: var(--border-1);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover:not([readonly]) {
+        border-color: var(--text-2);
+        transition-duration: var(--t-in);
+      }
+    }
 
     &:focus-visible {
       outline: none;
+      border-color: var(--text-1);
       box-shadow: var(--focus-ring);
     }
   }
 
+  select.embed-code__input {
+    cursor: pointer;
+  }
+
   .embed-code__copy {
-    min-height: 36px;
-    padding: var(--space-1) var(--space-3);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: var(--control-h-sm);
+    padding: 0 var(--space-3);
     font: inherit;
     font-size: var(--fs-sm);
-    font-weight: var(--fw-semibold);
+    font-weight: var(--fw-medium);
     color: var(--text-1);
-    background: var(--surface-2);
+    background: var(--surface-0);
     border: 1px solid var(--border-2);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-full);
     cursor: pointer;
+    white-space: nowrap;
+    transition:
+      background-color var(--t-out) var(--ease-out),
+      transform var(--dur-base) var(--ease-out);
 
-    &:hover {
-      background: var(--surface-3);
+    svg {
+      width: 1rem;
+      height: 1rem;
+      flex-shrink: 0;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background: var(--surface-2);
+        transition-duration: var(--t-in);
+      }
+    }
+
+    &:active {
+      transform: scale(0.97);
+      transition-duration: 60ms;
     }
 
     &:focus-visible {
       outline: none;
       box-shadow: var(--focus-ring);
+    }
+
+    &.is-done {
+      color: var(--success);
+      border-color: currentColor;
     }
   }
 
   .embed-code__pre {
     margin: 0;
-    padding: var(--space-3) var(--space-4);
+    padding: var(--space-4);
     overflow-x: auto;
     font-family: var(--font-mono);
     font-size: var(--fs-xs);
@@ -295,12 +376,12 @@
     display: grid;
     gap: var(--space-3);
     margin: 0;
-    padding: var(--space-4);
+    padding: var(--space-4) var(--space-5) var(--space-5);
     border: 1px solid var(--border-1);
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-lg);
 
     legend {
-      padding: 0 var(--space-1);
+      padding: 0 var(--space-2);
     }
   }
 
@@ -310,23 +391,29 @@
     align-items: center;
     gap: var(--space-3);
     font-size: var(--fs-sm);
+    color: var(--text-2);
   }
 
   .embed-code__color {
-    width: 56px;
-    height: 36px;
-    padding: 0;
+    width: 3.5rem;
+    height: var(--control-h-sm);
+    padding: 2px;
     border: 1px solid var(--border-2);
     border-radius: var(--radius-sm);
     background: none;
     cursor: pointer;
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--focus-ring);
+    }
   }
 
   .embed-code__preview {
     padding: var(--space-4);
     background: var(--surface-2);
-    border: 1px dashed var(--border-2);
-    border-radius: var(--radius-md);
+    border: 1px solid var(--border-1);
+    border-radius: var(--radius-lg);
 
     iframe {
       display: block;
@@ -347,6 +434,27 @@
   @media (max-width: 900px) {
     .embed-code__grid {
       grid-template-columns: 1fr;
+    }
+
+    .embed-code__col:last-child {
+      position: static;
+    }
+  }
+
+  @media (max-width: 30rem) {
+    .embed-code {
+      padding: var(--space-4);
+    }
+
+    .embed-code__option {
+      grid-template-columns: 1fr;
+      gap: var(--space-1);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .embed-code__copy:active {
+      transform: none;
     }
   }
 </style>

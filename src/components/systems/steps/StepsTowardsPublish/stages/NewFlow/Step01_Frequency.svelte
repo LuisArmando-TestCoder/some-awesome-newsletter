@@ -100,7 +100,10 @@
       {#each [["daily", $ob.schedule.daily], ["weekly", $ob.schedule.weekly], ["monthly", $ob.schedule.monthly]] as [value, label], itemIndex (itemIndex)}
         <label class="chip" class:on={frequency === value}>
           <input type="radio" name="ob-frequency" {value} bind:group={frequency} />
-          <span>{label}</span>
+          <span class="chip__mark" aria-hidden="true">
+            <svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7" /></svg>
+          </span>
+          <span class="chip__label">{label}</span>
         </label>
       {/each}
     </div>
@@ -143,64 +146,220 @@
     </button>
   </div>
 
-  {#if error}<p class="ob-error" role="alert">{error}</p>{/if}
+  {#if error}<p class="ob-error shake" role="alert">{error}</p>{/if}
 </OnboardingShell>
 
 <style lang="scss">
-  .freq { border: 0; padding: 0; margin: 0; }
-  .chips { display: flex; flex-wrap: wrap; gap: var(--space-2, 8px); }
+  .freq {
+    border: 0;
+    padding: 0;
+    margin: 0;
+  }
+
+  /* Choices as large selectable cards: checked = ink border + filled check, not color alone. */
+  .chips {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));
+    gap: var(--space-3);
+  }
   .chip {
     position: relative;
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    min-height: 44px;
-    padding: var(--space-2, 8px) var(--space-4, 16px);
-    border: 1px solid var(--border-2, #c9ced6);
-    border-radius: var(--radius-full, 999px);
-    background: var(--surface-1, #fff);
-    color: var(--text-1, #14171a);
-    font-size: var(--fs-md, 1rem);
+    gap: var(--space-3);
+    min-height: 4rem;
+    padding: var(--space-4) var(--space-5);
+    border: 1px solid var(--border-2);
+    border-radius: var(--radius-lg);
+    background: var(--surface-0);
+    color: var(--text-1);
+    font-size: var(--fs-lg);
+    font-weight: var(--fw-medium);
     cursor: pointer;
-    input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
-    &.on { border-color: var(--accent, #3b5bdb); background: var(--accent-soft, #eef2ff); font-weight: var(--fw-semibold, 600); }
-    &:focus-within { outline: 2px solid var(--focus-ring, #7b93ff); outline-offset: 2px; }
+    transition:
+      border-color var(--t-out) var(--ease-out),
+      background-color var(--t-out) var(--ease-out),
+      transform var(--dur-base) var(--ease-out);
+
+    input {
+      position: absolute;
+      opacity: 0;
+      inset: 0;
+      margin: 0;
+      cursor: pointer;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover:not(.on) {
+        border-color: var(--text-2);
+        background: var(--surface-1);
+        transition-duration: var(--t-in);
+      }
+    }
+
+    &:active {
+      transform: scale(0.98);
+      transition-duration: 60ms;
+    }
+
+    &.on {
+      border-color: var(--text-1);
+      box-shadow: inset 0 0 0 1px var(--text-1);
+      font-weight: var(--fw-semibold);
+    }
+
+    &:has(input:focus-visible) {
+      outline: 2px solid var(--focus-color);
+      outline-offset: 2px;
+    }
   }
-  .when { display: grid; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); gap: var(--space-4, 16px); }
+  .chip__mark {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 1.5px solid var(--border-2);
+    border-radius: var(--radius-full);
+    color: var(--accent-contrast);
+    transition:
+      background-color var(--t-state) var(--ease-out),
+      border-color var(--t-state) var(--ease-out);
+
+    svg {
+      width: 0.875rem;
+      height: 0.875rem;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      opacity: 0;
+      transform: scale(0.6);
+      transition:
+        opacity var(--t-state) var(--ease-out),
+        transform var(--dur-base) var(--ease-spring);
+    }
+  }
+  .chip.on .chip__mark {
+    background: var(--text-1);
+    border-color: var(--text-1);
+    color: var(--surface-0);
+
+    svg {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  .when {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+    gap: var(--space-4);
+  }
+
+  /* Automation card: on = ink edge, off = quiet edge; the switch and the state line say it in words too. */
   .recipe {
     display: flex;
-    gap: var(--space-4, 16px);
+    gap: var(--space-5);
     align-items: flex-start;
     justify-content: space-between;
-    padding: var(--space-4, 16px);
-    border: 1px solid var(--accent, #3b5bdb);
-    border-radius: var(--radius-md, 8px);
-    background: var(--accent-soft, #eef2ff);
-    &.off { border-color: var(--border-2, #c9ced6); background: var(--surface-1, #fff); }
+    padding: var(--space-5);
+    border: 1px solid var(--text-1);
+    border-radius: var(--radius-lg);
+    background: var(--surface-0);
+    transition: border-color var(--t-state) var(--ease-out);
+
+    &.off {
+      border-color: var(--border-1);
+      background: var(--surface-1);
+    }
   }
-  .recipe__text { display: flex; flex-direction: column; gap: var(--space-1, 4px); }
-  .recipe__state { margin: 0; font-size: var(--fs-sm, 0.875rem); font-weight: var(--fw-semibold, 600); color: var(--text-1, #14171a); }
+  .recipe__text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+  .recipe__state {
+    margin: var(--space-1) 0 0;
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-semibold);
+    color: var(--text-1);
+  }
+
   .switch {
+    position: relative;
     flex: none;
     width: 52px;
-    height: 30px;
-    border-radius: var(--radius-full, 999px);
-    border: 0;
+    height: 32px;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--border-2);
     padding: 3px;
     cursor: pointer;
-    background: var(--border-2, #c9ced6);
-    transition: background var(--dur-fast, 120ms);
-    &[aria-checked="true"] { background: var(--accent, #3b5bdb); }
-    &:focus-visible { outline: 2px solid var(--focus-ring, #7b93ff); outline-offset: 2px; }
+    background: var(--surface-3);
+    box-shadow: none;
+    transition:
+      background-color var(--t-state) var(--ease-out),
+      border-color var(--t-state) var(--ease-out);
+
+    /* 44px hit area. */
+    &::after {
+      content: "";
+      position: absolute;
+      inset: -6px;
+    }
+
+    &[aria-checked="true"] {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        box-shadow: none;
+      }
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--focus-ring);
+    }
   }
   .switch__knob {
     display: block;
     width: 24px;
     height: 24px;
-    border-radius: 50%;
-    background: var(--surface-0, #fff);
-    box-shadow: var(--shadow-1, 0 1px 2px rgba(0, 0, 0, 0.2));
-    transition: transform var(--dur-base, 200ms) var(--ease-out, ease-out);
+    border-radius: var(--radius-full);
+    background: var(--surface-0);
+    box-shadow: var(--shadow-1);
+    transition: transform var(--dur-base) var(--ease-out);
   }
-  .switch[aria-checked="true"] .switch__knob { transform: translateX(22px); }
-  @media (prefers-reduced-motion: reduce) { .switch, .switch__knob { transition: none; } }
+  .switch[aria-checked="true"] .switch__knob {
+    transform: translateX(20px);
+    background: var(--accent-contrast);
+  }
+  .switch:active .switch__knob {
+    width: 28px;
+  }
+
+  @media (forced-colors: active) {
+    .chip.on {
+      outline: 2px solid Highlight;
+    }
+    .switch[aria-checked="true"] {
+      background: Highlight;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .chip,
+    .switch,
+    .switch__knob,
+    .chip__mark svg {
+      transition: none;
+    }
+    .chip:active {
+      transform: none;
+    }
+  }
 </style>

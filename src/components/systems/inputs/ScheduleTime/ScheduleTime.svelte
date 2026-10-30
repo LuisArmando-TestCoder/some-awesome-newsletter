@@ -161,9 +161,21 @@
 </div>
 
 <style>
+  .cron-builder-label {
+    display: block;
+    margin-bottom: var(--space-2);
+    font-family: var(--font-body);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-snug);
+    color: var(--text-1);
+  }
+
   .cron-builder {
     display: flex;
-    gap: 1rem;
-    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    align-items: flex-end;
+    min-width: 0;
   }
 </style>

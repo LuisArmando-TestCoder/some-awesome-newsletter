@@ -67,8 +67,10 @@
     min-height: var(--space-5);
     font-family: var(--font-body);
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
   }
 
+  /* 24px hit box around an 18px ring. The ::before halo is the state layer. */
   .radio__control {
     position: relative;
     display: inline-flex;
@@ -77,6 +79,17 @@
     justify-content: center;
     width: var(--space-5);
     height: var(--space-5);
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -0.375rem;
+      border-radius: var(--radius-full);
+      background: var(--text-1);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--t-out) var(--ease-out);
+    }
   }
 
   .radio__input {
@@ -93,12 +106,14 @@
     position: relative;
     width: 1.125rem;
     height: 1.125rem;
-    background: var(--surface-1);
+    background: var(--surface-0);
     border: 1px solid var(--border-2);
     border-radius: var(--radius-full);
     transition:
-      border-color var(--dur-fast) var(--ease-out),
-      box-shadow var(--dur-fast) var(--ease-out);
+      background-color var(--t-state) var(--ease-out),
+      border-color var(--t-state) var(--ease-out),
+      box-shadow var(--t-out) var(--ease-out),
+      transform var(--dur-base) var(--ease-out);
     pointer-events: none;
 
     &::after {
@@ -109,32 +124,56 @@
       width: 0.5rem;
       height: 0.5rem;
       border-radius: var(--radius-full);
-      background: var(--accent-contrast);
+      background: var(--surface-0);
       transform: scale(0);
-      transition: transform var(--dur-fast) var(--ease-out);
+      transition: transform var(--dur-base) var(--ease-spring);
     }
   }
 
-  .radio:hover .radio__dot {
-    border-color: var(--text-3);
+  @media (hover: hover) and (pointer: fine) {
+    .radio:not(.radio--disabled):hover {
+      .radio__control::before {
+        opacity: 0.08;
+        transition-duration: var(--t-in);
+      }
+      .radio__dot {
+        border-color: var(--text-2);
+      }
+    }
+  }
+
+  .radio:not(.radio--disabled):active {
+    .radio__control::before {
+      opacity: 0.12;
+      transition-duration: 0ms;
+    }
+    .radio__dot {
+      transform: scale(0.9);
+      transition-duration: 60ms;
+    }
   }
 
   .radio__input:focus-visible + .radio__dot {
-    border-color: var(--accent);
+    border-color: var(--text-1);
     box-shadow: var(--focus-ring);
   }
 
+  /* Selected: ink ring with a paper dot inside, plus the label goes semibold. */
   .radio__input:checked + .radio__dot {
-    background: var(--accent);
-    border-color: var(--accent);
+    background: var(--text-1);
+    border-color: var(--text-1);
 
     &::after {
       transform: scale(1);
     }
   }
+  .radio:has(.radio__input:checked) .radio__label {
+    font-weight: var(--fw-medium);
+  }
 
   .radio--invalid .radio__dot {
     border-color: var(--danger);
+    border-width: 2px;
   }
 
   .radio__text {
@@ -158,6 +197,7 @@
 
   .radio--disabled {
     cursor: not-allowed;
+    opacity: var(--disabled-opacity);
 
     .radio__dot {
       background: var(--surface-2);
@@ -168,10 +208,33 @@
       background: var(--text-3);
       border-color: var(--text-3);
     }
+  }
 
-    .radio__label,
-    .radio__description {
-      color: var(--text-3);
+  @media (forced-colors: active) {
+    .radio__dot {
+      border-color: CanvasText;
+    }
+    .radio__input:checked + .radio__dot {
+      forced-color-adjust: none;
+      background: Highlight;
+      border-color: Highlight;
+
+      &::after {
+        background: HighlightText;
+      }
+    }
+    .radio__input:focus-visible + .radio__dot {
+      outline: 2px solid CanvasText;
+      outline-offset: 2px;
+    }
+    .radio--disabled .radio__label {
+      color: GrayText;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .radio:active .radio__dot {
+      transform: none;
     }
   }
 </style>

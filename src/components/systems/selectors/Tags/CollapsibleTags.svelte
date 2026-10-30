@@ -27,8 +27,8 @@
 	.tags-container {
 		display: flex;
 		flex-direction: column;
-		gap: 8px;
-		padding: 10px;
-		border-radius: 8px;
+		gap: var(--space-2);
+		padding: var(--space-3);
+		border-radius: var(--radius-lg);
 	}
 </style>

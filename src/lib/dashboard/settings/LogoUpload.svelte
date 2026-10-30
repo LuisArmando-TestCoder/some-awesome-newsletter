@@ -91,6 +91,7 @@
     class="logo__drop"
     class:over
     class:has={!!src}
+    class:invalid={!!error}
     role="group"
     aria-labelledby="{id}-label"
     aria-describedby="{id}-specs"
@@ -147,12 +148,13 @@
     align-items: center;
     padding: var(--space-4);
     border: 1px dashed var(--border-2);
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-lg);
     background: var(--surface-0);
-    transition: border-color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+    transition: border-color var(--t-out) var(--ease-out), background-color var(--t-out) var(--ease-out);
     flex-wrap: wrap;
-    &.over { border-color: var(--accent); background: var(--accent-soft); }
+    &.over { border-color: var(--focus-color); border-style: dashed; background: var(--surface-2); }
     &.has { border-style: solid; }
+    &.invalid { border-color: var(--danger); border-style: solid; }
   }
   .logo__thumb {
     flex: 0 0 auto;

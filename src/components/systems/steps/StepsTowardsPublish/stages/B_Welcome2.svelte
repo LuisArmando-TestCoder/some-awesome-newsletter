@@ -5,11 +5,15 @@
   import { t } from '$lib/i18n/translations';
 
   export let canReveal = false;
+  // Entrance motion is skipped for people who asked for less motion.
+  const still =
+    typeof window !== 'undefined' &&
+    (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches || document.documentElement.dataset.motion === 'reduced');
 </script>
 
 <Centered>
   {#if canReveal}
-    <div class="tagline-wrapper" in:fly={{ y: 20, duration: 800, easing: backOut }}>
+    <div class="tagline-wrapper" in:fly={{ y: 16, duration: still ? 0 : 800, easing: backOut }}>
       <h3 class="tagline">
         {$t.welcome.setItOnce}
       </h3>
@@ -22,35 +26,19 @@
     display: flex;
     justify-content: center;
     width: 100%;
-    padding: 0 1rem;
+    padding: 0 var(--gutter);
   }
 
   .tagline {
-    /* Responsive font size */
-    font-size: clamp(1.25rem, 4vw, 1.75rem);
-    
-    /* Modern, clean aesthetic */
-    font-weight: 500;
-    line-height: 1.4;
-    text-align: center;
-    color: var(--c-text-light, #64748b); /* Slate-500 equivalent */
     margin: 0;
-    
-    /* Layout control */
-    max-width: 600px;
-    text-wrap: balance; /* Prevents uneven line lengths */
-    letter-spacing: -0.02em;
-
-    /* Subtle shimmer/gradient for depth (optional, depends on background) */
-    background: linear-gradient(180deg, rgba(30, 41, 59, 0.9) 0%, rgba(30, 41, 59, 0.7) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    
-    /* Fallback color if gradient fails */
-    @supports not (background-clip: text) {
-      -webkit-text-fill-color: initial;
-      color: #475569;
-    }
+    max-width: 24ch;
+    font-family: var(--font-display);
+    font-size: var(--fs-3xl);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-tight);
+    letter-spacing: var(--tracking-tight);
+    text-align: center;
+    color: var(--text-2);
+    text-wrap: balance;
   }
 </style>

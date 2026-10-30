@@ -30,7 +30,11 @@
       on:click={toggle}
     >
       <span class="card-title">{cardTitle ?? ""}</span>
-      <span class="chevron" class:open={isOpen} aria-hidden="true"></span>
+      <span class="chevron-box" aria-hidden="true">
+        <svg class="chevron" class:open={isOpen} viewBox="0 0 16 16" focusable="false">
+          <path d="M4 6.25 8 10.25l4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </span>
     </button>
   </h3>
   <div
@@ -53,15 +57,21 @@
 <style lang="scss">
   .card {
     margin: var(--space-4) 0;
-    background: var(--surface-1);
+    background: var(--surface-0);
     border: 1px solid var(--border-1);
     border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-1);
     overflow: hidden;
-    transition: box-shadow var(--dur-base) var(--ease-out);
+    transition: border-color var(--t-out) var(--ease-out);
 
-    &:hover {
-      box-shadow: var(--shadow-2);
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        border-color: var(--border-2);
+        transition-duration: var(--t-in);
+      }
+    }
+
+    &.open {
+      border-color: var(--border-2);
     }
   }
 
@@ -84,15 +94,28 @@
     text-align: left;
     cursor: pointer;
     user-select: none;
-    border-radius: var(--radius-lg);
+    border-radius: inherit;
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color var(--t-out) var(--ease-out);
 
-    &:hover {
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background: var(--surface-1);
+        transition-duration: var(--t-in);
+      }
+      &:hover .chevron-box {
+        background: var(--surface-2);
+      }
+    }
+
+    &:active {
       background: var(--surface-2);
+      transition-duration: 0ms;
     }
 
     &:focus-visible {
       outline: none;
-      box-shadow: inset 0 0 0 2px var(--accent);
+      box-shadow: inset 0 0 0 2px var(--focus-color);
     }
   }
 
@@ -104,18 +127,35 @@
     color: var(--text-1);
   }
 
-  .chevron {
+  .chevron-box {
     flex: none;
-    width: 0.625rem;
-    height: 0.625rem;
-    margin-right: var(--space-1);
-    border-right: 2px solid var(--text-2);
-    border-bottom: 2px solid var(--text-2);
-    transform: translateY(-25%) rotate(45deg);
-    transition: transform var(--dur-base) var(--ease-out);
+    display: inline-grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: var(--radius-full);
+    color: var(--text-2);
+    transition: background-color var(--t-out) var(--ease-out);
+  }
+
+  /* Expanded: the chevron turns over (aria-expanded on the trigger carries the state). */
+  .chevron {
+    width: 1rem;
+    height: 1rem;
+    transition: transform var(--dur-slow) var(--ease-out);
 
     &.open {
-      transform: translateY(25%) rotate(225deg);
+      transform: rotate(180deg);
+    }
+  }
+
+  @media (forced-colors: active) {
+    .card {
+      border-color: CanvasText;
+    }
+    .card-header:focus-visible {
+      outline: 2px solid CanvasText;
+      outline-offset: -2px;
     }
   }
 

@@ -47,6 +47,12 @@
                 type="search"
                 bind:value={query}
                 autocomplete="off"
+                on:keydown={(e) => {
+                    if (e.key === 'Escape' && query) {
+                        e.preventDefault();
+                        query = '';
+                    }
+                }}
             />
         </div>
     {/if}
@@ -65,8 +71,10 @@
                             aria-controls={`${idPrefix}-a-${item.key}`}
                             on:click={() => toggle(item.key)}
                         >
-                            <span>{item.q}</span>
-                            <svg class="faq__icon" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6" /></svg>
+                            <span class="faq__text">{item.q}</span>
+                            <span class="faq__icon" aria-hidden="true">
+                                <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6" /></svg>
+                            </span>
                         </button>
                     </svelte:element>
                     <div
@@ -87,116 +95,197 @@
 </section>
 
 <style lang="scss">
+    /* The parent decides width and side padding (landing chapter, pricing page column). */
     .faq {
         width: 100%;
-        max-width: var(--container-md, 880px);
         margin: 0 auto;
-        padding: var(--space-8, 64px) var(--space-4, 16px);
-        color: var(--text-1, #0f172a);
-        font-family: var(--font-body, inherit);
+        color: var(--text-1);
+        font-family: var(--font-body);
     }
 
     .faq__title {
-        margin: 0 0 var(--space-6, 32px);
-        font-family: var(--font-display, inherit);
-        font-size: var(--fs-2xl, 2rem);
-        font-weight: var(--fw-bold, 700);
-        line-height: var(--lh-tight, 1.2);
+        margin: 0 auto var(--space-7);
+        max-width: 18ch;
+        font-family: var(--font-display);
+        font-size: var(--step-chapter);
+        font-weight: var(--fw-semibold);
+        line-height: var(--lh-display);
+        letter-spacing: var(--tracking-display);
         text-align: center;
     }
 
     .faq__search {
         display: flex;
         flex-direction: column;
-        gap: var(--space-2, 8px);
-        margin-bottom: var(--space-5, 24px);
+        gap: var(--space-2);
+        margin-bottom: var(--space-5);
     }
 
     .faq__search-label {
-        font-size: var(--fs-sm, 0.875rem);
-        font-weight: var(--fw-medium, 500);
-        color: var(--text-2, #475569);
+        font-size: var(--fs-sm);
+        font-weight: var(--fw-semibold);
+        color: var(--text-1);
     }
 
     .faq__search-input {
-        min-height: 44px;
-        padding: var(--space-2, 8px) var(--space-4, 16px);
-        border: 1px solid var(--border-2, #cbd5e1);
-        border-radius: var(--radius-md, 10px);
-        background: var(--surface-1, #fff);
-        color: var(--text-1, #0f172a);
-        font-size: var(--fs-md, 1rem);
+        min-height: var(--control-h);
+        padding: 0 var(--space-5);
+        border: 1px solid var(--border-2);
+        border-radius: var(--radius-full);
+        background: var(--surface-0);
+        color: var(--text-1);
+        font-size: var(--fs-md);
+        transition: border-color var(--t-out) var(--ease-out);
+
+        &:focus-visible {
+            outline: none;
+            border-color: var(--text-1);
+            box-shadow: var(--focus-ring);
+        }
+    }
+    @media (hover: hover) and (pointer: fine) {
+        .faq__search-input:hover:not(:focus-visible) {
+            border-color: var(--text-2);
+        }
     }
 
     .faq__list {
         list-style: none;
         margin: 0;
         padding: 0;
-        border-top: 1px solid var(--border-1, #e5e7eb);
+        border-top: 1px solid var(--border-1);
     }
 
     .faq__item {
-        border-bottom: 1px solid var(--border-1, #e5e7eb);
+        border-bottom: 1px solid var(--border-1);
     }
 
     .faq__q {
         margin: 0;
         font-size: inherit;
         font-weight: inherit;
+        letter-spacing: 0;
     }
 
+    /* Row: bleeds a little into the gutter so the hover layer frames the text. */
     .faq__button {
-        width: 100%;
+        width: calc(100% + 2 * var(--space-3));
+        margin-inline: calc(-1 * var(--space-3));
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: var(--space-4, 16px);
-        padding: var(--space-4, 16px) var(--space-1, 4px);
-        background: none;
-        border: none;
+        gap: var(--space-4);
+        min-height: 3.5rem;
+        padding: var(--space-5) var(--space-3);
+        border: 0;
+        border-radius: var(--radius-md);
+        background: transparent;
+        color: var(--text-1);
         text-align: left;
+        font-family: var(--font-body);
+        font-size: var(--fs-lg);
+        font-weight: var(--fw-medium);
+        line-height: var(--lh-snug);
+        letter-spacing: -0.01em;
         cursor: pointer;
-        color: var(--text-1, #0f172a);
-        font-family: inherit;
-        font-size: var(--fs-md, 1rem);
-        font-weight: var(--fw-semibold, 600);
-        line-height: var(--lh-normal, 1.5);
-        border-radius: var(--radius-sm, 6px);
+        transition:
+            background-color var(--t-out) var(--ease-out),
+            transform var(--t-out) var(--ease-out);
 
-        &:hover { color: var(--text-link, #4338ca); }
+        &:active {
+            background: color-mix(in srgb, currentColor var(--state-press), transparent);
+            transform: scale(0.995);
+            transition-duration: 0ms;
+        }
 
         &:focus-visible {
-            outline: 2px solid var(--focus-color, #6366f1);
-            outline-offset: 2px;
+            outline: none;
+            box-shadow: var(--focus-ring);
         }
+    }
+    .faq__text {
+        min-width: 0;
     }
 
     .faq__icon {
-        flex-shrink: 0;
-        color: var(--text-3, #64748b);
-        transition: transform var(--dur-base, 200ms) var(--ease-out, ease-out);
+        flex: none;
+        display: grid;
+        place-items: center;
+        width: 2rem;
+        height: 2rem;
+        border: 1px solid var(--border-2);
+        border-radius: var(--radius-full);
+        color: var(--text-2);
+        transition:
+            border-color var(--t-out) var(--ease-out),
+            color var(--t-out) var(--ease-out);
+
+        .chevron {
+            transition: transform var(--dur-slow) var(--ease-out);
+        }
+    }
+    .faq__item--open .faq__icon {
+        border-color: var(--text-1);
+        color: var(--text-1);
+
+        .chevron {
+            transform: rotate(180deg);
+        }
     }
 
-    .faq__item--open .faq__icon { transform: rotate(180deg); }
+    @media (hover: hover) and (pointer: fine) {
+        .faq__button:hover {
+            background: color-mix(in srgb, currentColor var(--state-hover), transparent);
+            transition-duration: var(--t-in);
+        }
+        .faq__button:hover .faq__icon {
+            border-color: var(--text-1);
+            color: var(--text-1);
+        }
+    }
 
     .faq__a {
-        padding: 0 var(--space-1, 4px) var(--space-4, 16px);
+        padding: 0 var(--space-8) var(--space-5) 0;
+        animation: faq-in var(--dur-base) var(--ease-out);
 
         p {
             margin: 0;
-            color: var(--text-2, #475569);
-            font-size: var(--fs-md, 1rem);
-            line-height: var(--lh-normal, 1.6);
-            max-width: 68ch;
+            max-width: 62ch;
+            color: var(--text-2);
+            font-size: var(--fs-md);
+            line-height: var(--lh-normal);
+        }
+    }
+    @keyframes faq-in {
+        from {
+            opacity: 0;
+            transform: translateY(-4px);
         }
     }
 
     .faq__empty {
-        color: var(--text-2, #475569);
+        color: var(--text-2);
         text-align: center;
     }
 
     @media (prefers-reduced-motion: reduce) {
-        .faq__icon { transition: none; }
+        .faq__a {
+            animation: none;
+        }
+        .faq__button:active {
+            transform: none;
+        }
+    }
+    :global(:root[data-motion='reduced']) .faq__a {
+        animation: none;
+    }
+    :global(:root[data-motion='reduced']) .faq__button:active {
+        transform: none;
+    }
+
+    @media (max-width: 30rem) {
+        .faq__a {
+            padding-right: 0;
+        }
     }
 </style>

@@ -103,15 +103,38 @@
     </div>
   {:else}
     <div class="sent" role="status">
-      <svg viewBox="0 0 24 24" width="40" height="40" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="var(--success-soft, #ebfbee)" /><path d="M7 12.5l3 3 7-7" fill="none" stroke="var(--success, #2b8a3e)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+      <span class="sent__mark" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M6 12.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
       <p>{fmt($ob.send.youAreSubscribed, { email: owner })}</p>
     </div>
   {/if}
   {#if info}<p class="ob-success" role="status">{info}</p>{/if}
   {#if warning}<p class="ob-hint" role="status">{warning}</p>{/if}
-  {#if error}<p class="ob-error" role="alert">{error}</p>{/if}
+  {#if error}<p class="ob-error shake" role="alert">{error}</p>{/if}
 </OnboardingShell>
 
 <style lang="scss">
-  .sent { display: flex; gap: var(--space-3, 12px); align-items: center; p { margin: 0; color: var(--text-2, #4a5058); } }
+  .sent {
+    display: flex;
+    gap: var(--space-4);
+    align-items: center;
+    padding: var(--space-5);
+    border: 1px solid var(--border-1);
+    border-radius: var(--radius-lg);
+
+    p {
+      margin: 0;
+      color: var(--text-2);
+      overflow-wrap: anywhere;
+    }
+  }
+  .sent__mark {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 1.5px solid currentColor;
+    border-radius: var(--radius-full);
+    color: var(--success);
+  }
 </style>

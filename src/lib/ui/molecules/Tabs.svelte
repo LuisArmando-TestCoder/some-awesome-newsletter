@@ -173,15 +173,27 @@
     line-height: var(--lh-snug);
     white-space: nowrap;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
     transition:
-      color var(--dur-fast) var(--ease-out),
-      background-color var(--dur-fast) var(--ease-out);
+      color var(--t-out) var(--ease-out),
+      background-color var(--t-out) var(--ease-out),
+      box-shadow var(--t-out) var(--ease-out),
+      transform var(--dur-base) var(--ease-out);
   }
 
-  .tab:hover:not([aria-disabled='true']) {
-    color: var(--text-1);
+  @media (hover: hover) and (pointer: fine) {
+    .tab:hover:not([aria-disabled='true']) {
+      color: var(--text-1);
+      transition-duration: var(--t-in);
+    }
   }
 
+  .tab:active:not([aria-disabled='true']) {
+    transform: scale(0.97);
+    transition-duration: 60ms;
+  }
+
+  /* Selected: ink text, semibold weight and an indicator (bar or raised pill), never color alone. */
   .tab[aria-selected='true'] {
     color: var(--text-1);
     font-weight: var(--fw-semibold);
@@ -189,13 +201,14 @@
 
   .tab[aria-disabled='true'] {
     color: var(--text-3);
+    opacity: var(--disabled-opacity);
     cursor: not-allowed;
   }
 
   .tab:focus-visible {
     outline: none;
     box-shadow: var(--focus-ring);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
   }
 
   /* Reserve the semibold width so selecting a tab never shifts the row. */
@@ -228,8 +241,8 @@
   }
 
   .tab[aria-selected='true'] .badge {
-    background: var(--accent-soft);
-    color: var(--accent);
+    background: var(--text-1);
+    color: var(--surface-0);
   }
 
   /* Underline */
@@ -244,16 +257,22 @@
     bottom: -1px;
     height: 2px;
     border-radius: var(--radius-full);
-    background: transparent;
-    transition: background-color var(--dur-fast) var(--ease-out);
+    background: var(--text-1);
+    transform: scaleX(0);
+    transition:
+      transform var(--dur-base) var(--ease-out),
+      background-color var(--t-out) var(--ease-out);
   }
 
   .variant-underline .tab[aria-selected='true']::after {
-    background: var(--accent);
+    transform: scaleX(1);
   }
 
-  .variant-underline .tab:hover:not([aria-selected='true']):not([aria-disabled='true'])::after {
-    background: var(--border-2);
+  @media (hover: hover) and (pointer: fine) {
+    .variant-underline .tab:hover:not([aria-selected='true']):not([aria-disabled='true'])::after {
+      background: var(--border-2);
+      transform: scaleX(1);
+    }
   }
 
   /* Pill */
@@ -276,9 +295,15 @@
     border-radius: var(--radius-full);
   }
 
+  @media (hover: hover) and (pointer: fine) {
+    .variant-pill .tab:hover:not([aria-selected='true']):not([aria-disabled='true']) {
+      background: color-mix(in srgb, var(--text-1) var(--state-hover), transparent);
+    }
+  }
+
   .variant-pill .tab[aria-selected='true'] {
-    background: var(--surface-1);
-    box-shadow: var(--shadow-1);
+    background: var(--surface-0);
+    box-shadow: var(--shadow-1), 0 0 0 1px var(--border-1);
   }
 
   .variant-pill .tab:focus-visible {
@@ -296,10 +321,30 @@
     border-radius: var(--radius-sm);
   }
 
+  @media (forced-colors: active) {
+    .tab[aria-selected='true'] {
+      forced-color-adjust: none;
+      color: Highlight;
+    }
+    .variant-underline .tab::after {
+      background: Highlight;
+    }
+    .variant-pill .tab[aria-selected='true'] {
+      border: 2px solid Highlight;
+    }
+    .tab:focus-visible {
+      outline: 2px solid CanvasText;
+      outline-offset: 2px;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .tab,
     .tab::after {
       transition: none;
+    }
+    .tab:active {
+      transform: none;
     }
   }
 </style>

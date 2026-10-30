@@ -49,9 +49,7 @@
     align-items: center;
     gap: var(--space-5);
     padding: var(--space-5);
-    background:
-      radial-gradient(circle at 50% 42%, var(--accent-soft) 0%, transparent 55%),
-      var(--surface-0);
+    background: var(--surface-0);
     color: var(--text-1);
     font-family: var(--font-body);
   }
@@ -69,8 +67,8 @@
   .ring {
     position: absolute;
     inset: 0;
-    border: 2px solid var(--border-1);
-    border-top-color: var(--accent);
+    border: 1.5px solid var(--border-1);
+    border-top-color: var(--text-1);
     border-radius: var(--radius-full);
     animation: spin 1.1s linear infinite;
   }
@@ -79,7 +77,7 @@
     width: 0.5rem;
     height: 0.5rem;
     border-radius: var(--radius-full);
-    background: var(--accent);
+    background: var(--text-1);
     animation: pulse 1.2s var(--ease-in-out) infinite;
   }
 

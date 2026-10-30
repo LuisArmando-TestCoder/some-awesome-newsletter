@@ -79,7 +79,7 @@
       placeholder={$ob.senderName.placeholder}
       bind:value={name}
       aria-invalid={error ? "true" : undefined}
-      aria-describedby="ob-sender-name-hint"
+      aria-describedby={error ? "ob-sender-name-hint ob-sender-name-error" : "ob-sender-name-hint"}
     />
     <p class="ob-hint" id="ob-sender-name-hint">{$ob.senderName.hint}</p>
   </div>
@@ -96,5 +96,5 @@
     />
   </div>
 
-  {#if error}<p class="ob-error" role="alert">{error}</p>{/if}
+  {#if error}<p class="ob-error shake" id="ob-sender-name-error" role="alert">{error}</p>{/if}
 </OnboardingShell>

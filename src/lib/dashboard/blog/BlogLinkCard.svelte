@@ -46,10 +46,10 @@
 </Card>
 
 <style lang="scss">
-  .link { display: flex; flex-direction: column; gap: var(--space-2); max-width: 640px; }
+  .link { display: flex; flex-direction: column; gap: var(--space-2); max-width: var(--container-sm); }
   .link__label { font-size: var(--fs-sm); font-weight: var(--fw-semibold); color: var(--text-1); }
-  .link__input { width: 100%; min-height: 44px; padding: var(--space-2) var(--space-3); border: 1px solid var(--border-2); border-radius: var(--radius-md); background: var(--surface-2); color: var(--text-1); font: inherit; font-size: var(--fs-sm); box-sizing: border-box; text-overflow: ellipsis; }
-  .link__input:focus-visible { outline: none; box-shadow: var(--focus-ring); border-color: var(--accent); }
+  .link__input { width: 100%; min-height: var(--control-h); padding: var(--space-2) var(--space-3); border: 1px solid var(--border-1); border-radius: var(--radius-md); background: var(--surface-2); color: var(--text-1); font: inherit; font-family: var(--font-mono); font-size: var(--fs-sm); box-sizing: border-box; text-overflow: ellipsis; }
+  .link__input:focus-visible { outline: none; box-shadow: var(--focus-ring); border-color: var(--text-1); }
   .row { display: flex; gap: var(--space-2); flex-wrap: wrap; margin-top: var(--space-4); }
   .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; margin: 0; }
 </style>

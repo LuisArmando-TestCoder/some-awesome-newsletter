@@ -5,57 +5,50 @@
   import { t } from '$lib/i18n/translations';
 
   export let canReveal = false;
+  // Entrance motion is skipped for people who asked for less motion.
+  const still =
+    typeof window !== 'undefined' &&
+    (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches || document.documentElement.dataset.motion === 'reduced');
 </script>
 
 <Centered>
   {#if canReveal}
-    <div class="welcome-wrapper" in:fly={{ y: 30, duration: 1000, easing: cubicOut }}>
+    <div class="welcome-wrapper" in:fly={{ y: 24, duration: still ? 0 : 900, easing: cubicOut }}>
       <h2 class="welcome-title">
         {$t.welcome.title}
       </h2>
-      <div class="decorator"></div>
+      <div class="decorator" aria-hidden="true"></div>
     </div>
   {/if}
 </Centered>
 
 <style lang="scss">
+  /* Cold open: one line at hero scale, ink on paper, a short rule under it. */
   .welcome-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 0 1rem;
-    max-width: 900px;
+    padding: 0 var(--gutter);
+    max-width: var(--container-lg);
   }
 
   .welcome-title {
-    /* Responsive Fluid Typography: Scales smoothly between 2.5rem and 4.5rem */
-    font-size: clamp(2.5rem, 8vw, 4.5rem);
-    font-weight: 800;
-    line-height: 1.1;
-    letter-spacing: -0.04em;
-    margin: 0 0 1.5rem 0;
-    
-    /* Modern Text Balancing (prevents "orphan" words) */
+    margin: 0 0 var(--space-6);
+    font-family: var(--font-display);
+    font-size: var(--step-display);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-display);
+    letter-spacing: var(--tracking-display);
+    color: var(--text-1);
     text-wrap: balance;
-    
-    /* Premium Gradient Text */
-    color: #111; /* Fallback */
-    background: linear-gradient(135deg, #1a1a1a 0%, #4a5568 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-
-    /* Subtle text shadow for depth without "fuzziness" */
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));
   }
 
   .decorator {
-    width: 80px;
-    height: 4px;
-    background: linear-gradient(90deg, var(--c-primary, #007aff), transparent);
-    border-radius: 2px;
-    opacity: 0.8;
+    width: 3rem;
+    height: 2px;
+    background: var(--text-1);
+    border-radius: var(--radius-full);
   }
 </style>

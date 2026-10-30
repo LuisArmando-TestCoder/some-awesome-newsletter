@@ -24,16 +24,24 @@
 <Dialog bind:open {title} {description} size="sm">
   {#snippet footer()}
     <div class="row">
-      <Button variant="tertiary" onclick={() => (open = false)} disabled={busy}>Cancel</Button>
+      <Button variant="secondary" onclick={() => (open = false)} disabled={busy} disabledReason="Wait for the change to finish">Cancel</Button>
       <Button variant={danger ? "danger" : "primary"} loading={busy} loadingLabel="Working" onclick={onconfirm}>{confirmLabel}</Button>
     </div>
   {/snippet}
 </Dialog>
 
 <style>
+  /* Cancel first and plain; the named action last. Danger actions use the danger fill, never the ink CTA. */
   .row {
     display: flex;
     justify-content: flex-end;
-    gap: var(--space-2, 8px);
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+  @media (max-width: 30rem) {
+    .row {
+      flex-direction: column-reverse;
+      align-items: stretch;
+    }
   }
 </style>

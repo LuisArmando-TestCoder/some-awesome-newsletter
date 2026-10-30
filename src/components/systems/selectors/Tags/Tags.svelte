@@ -30,9 +30,10 @@
 	.tags-container {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 8px;
-		padding: 10px;
-		border-radius: 8px;
-		background-color: #f0f2f5;
+		gap: var(--space-2);
+		padding: var(--space-3);
+		border: 1px solid var(--border-1);
+		border-radius: var(--radius-lg);
+		background-color: var(--surface-1);
 	}
 </style>

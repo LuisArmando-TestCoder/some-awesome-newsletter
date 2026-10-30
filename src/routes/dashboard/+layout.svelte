@@ -152,19 +152,28 @@
   .dashboard-layout__content {
     flex: 1 1 auto;
     min-width: 0;
+    /* Programmatic focus target for the skip link; the skip link itself shows focus. */
     &:focus { outline: none; }
+    &:focus-visible { outline: none; }
   }
-  .boot-error { max-width: var(--container-sm, 640px); margin: var(--space-8) auto; padding: 0 var(--space-4); }
+  .boot-error { max-width: var(--container-sm); margin: var(--space-8) auto; padding: 0 var(--gutter); }
   .skip {
     position: absolute;
     left: var(--space-3);
-    top: -100px;
-    z-index: var(--z-modal, 60);
-    padding: var(--space-2) var(--space-4);
-    background: var(--surface-1);
-    color: var(--text-1);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-2);
-    &:focus { top: var(--space-3); outline: none; box-shadow: var(--focus-ring); }
+    top: var(--space-3);
+    z-index: var(--z-toast);
+    min-height: var(--control-h);
+    display: inline-flex;
+    align-items: center;
+    padding: 0 var(--space-4);
+    background: var(--surface-inverse);
+    color: var(--text-inverse);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    text-decoration: none;
+    border-radius: var(--radius-full);
+    transform: translateY(-200%);
+    transition: transform var(--dur-base) var(--ease-out);
+    &:focus { transform: none; outline: none; box-shadow: var(--focus-ring); }
   }
 </style>

@@ -55,9 +55,9 @@
   .meter { display: flex; flex-direction: column; gap: var(--space-2); min-width: 0; }
   .meter__head { display: flex; justify-content: space-between; gap: var(--space-2); flex-wrap: wrap; align-items: baseline; }
   .meter__label { font-size: var(--fs-sm); font-weight: var(--fw-semibold); color: var(--text-1); }
-  .meter__value { font-size: var(--fs-sm); color: var(--text-2); font-variant-numeric: tabular-nums; }
-  .meter__track { height: 8px; border-radius: var(--radius-full); background: var(--surface-3); overflow: hidden; }
-  .meter__bar { display: block; height: 100%; border-radius: inherit; background: var(--accent); transition: width var(--dur-slow) var(--ease-out); }
+  .meter__value { font-size: var(--fs-sm); color: var(--text-1); font-weight: var(--fw-medium); font-variant-numeric: tabular-nums; }
+  .meter__track { height: 6px; border-radius: var(--radius-full); background: var(--surface-3); overflow: hidden; }
+  .meter__bar { display: block; height: 100%; border-radius: inherit; background: var(--text-1); transition: width var(--dur-slow) var(--ease-out); }
   .tone-warning .meter__bar { background: var(--warning); }
   .tone-danger .meter__bar { background: var(--danger); }
   .meter__status { margin: 0; font-size: var(--fs-xs); color: var(--text-3); }

@@ -10,6 +10,7 @@
 
 <script lang="ts">
   import { z } from 'zod';
+  import Button from '$lib/ui/components/Button.svelte';
 
   /** Signed-in user, used to prefill name and email. May be null for visitors. */
   export let user: { name?: string; email?: string; company?: string } | null = null;
@@ -95,12 +96,18 @@
     return `mailto:${contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   }
 
+  /** Error nudge on the submit row after a failed attempt (one run, off under reduced motion). */
+  let shake = false;
+
   async function handleSubmit() {
+    if (sending) return; // no double submit while a request is in flight
     const payload = { ...formData, company: formData.company.trim() || undefined };
     const result = upliftRequestSchema.safeParse(payload);
     if (!result.success) {
       errors = result.error.flatten().fieldErrors;
       submitted = false;
+      shake = false;
+      requestAnimationFrame(() => (shake = true));
       const first = Object.keys(errors)[0];
       if (first) document.getElementById(`help-${first}`)?.focus();
       return;
@@ -136,99 +143,117 @@
   }
 </script>
 
-<form on:submit|preventDefault={handleSubmit} class="help-form" novalidate>
-  <div class="help-form__row">
+<form on:submit|preventDefault={handleSubmit} class="help-form" novalidate aria-busy={sending ? 'true' : undefined}>
+  <div class="help-form__row help-form__row--2">
     <div class="help-form__group">
       <label for="help-name" class="help-form__label">{f.nameLabel ?? 'Name'}</label>
       <input id="help-name" type="text" autocomplete="name" bind:value={formData.name} class="help-form__input"
-        aria-invalid={!!errors.name} aria-describedby={errors.name ? 'help-name-error' : undefined} />
-      {#if errors.name}<p id="help-name-error" class="help-form__error">{err('name')}</p>{/if}
+        aria-invalid={errors.name ? 'true' : undefined} aria-describedby={errors.name ? 'help-name-error' : undefined} />
+      {#if errors.name}<p id="help-name-error" class="help-form__error"><svg class="help-form__error-icon" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9" /><path d="M12 7.5v5.5M12 16.5v.01" /></svg><span>{err('name')}</span></p>{/if}
     </div>
 
     <div class="help-form__group">
       <label for="help-email" class="help-form__label">{f.emailLabel ?? 'Email'}</label>
-      <input id="help-email" type="email" autocomplete="email" bind:value={formData.email} class="help-form__input"
-        aria-invalid={!!errors.email} aria-describedby={errors.email ? 'help-email-error' : undefined} />
-      {#if errors.email}<p id="help-email-error" class="help-form__error">{err('email')}</p>{/if}
+      <input id="help-email" type="email" inputmode="email" autocomplete="email" spellcheck="false" bind:value={formData.email} class="help-form__input"
+        aria-invalid={errors.email ? 'true' : undefined} aria-describedby={errors.email ? 'help-email-error' : undefined} />
+      {#if errors.email}<p id="help-email-error" class="help-form__error"><svg class="help-form__error-icon" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9" /><path d="M12 7.5v5.5M12 16.5v.01" /></svg><span>{err('email')}</span></p>{/if}
     </div>
   </div>
 
   <div class="help-form__group">
     <label for="help-company" class="help-form__label">{f.companyLabel ?? 'Company'} <span class="help-form__optional">{f.optional ?? '(optional)'}</span></label>
     <input id="help-company" type="text" autocomplete="organization" bind:value={formData.company} class="help-form__input"
-      aria-invalid={!!errors.company} aria-describedby={errors.company ? 'help-company-error' : undefined} />
-    {#if errors.company}<p id="help-company-error" class="help-form__error">{err('company')}</p>{/if}
+      aria-invalid={errors.company ? 'true' : undefined} aria-describedby={errors.company ? 'help-company-error' : undefined} />
+    {#if errors.company}<p id="help-company-error" class="help-form__error"><svg class="help-form__error-icon" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9" /><path d="M12 7.5v5.5M12 16.5v.01" /></svg><span>{err('company')}</span></p>{/if}
   </div>
 
   <div class="help-form__group">
     <label for="help-desiredLimits" class="help-form__label">{f.limitsLabel ?? 'Limits you need'}</label>
-    <textarea id="help-desiredLimits" rows="3" bind:value={formData.desiredLimits} class="help-form__input"
-      aria-invalid={!!errors.desiredLimits} aria-describedby="help-desiredLimits-hint{errors.desiredLimits ? ' help-desiredLimits-error' : ''}"></textarea>
     <p id="help-desiredLimits-hint" class="help-form__help">{content?.questions?.desiredLimitsHelp ?? ''}</p>
-    {#if errors.desiredLimits}<p id="help-desiredLimits-error" class="help-form__error">{err('desiredLimits')}</p>{/if}
+    <textarea id="help-desiredLimits" rows="3" bind:value={formData.desiredLimits} class="help-form__input help-form__input--area"
+      aria-invalid={errors.desiredLimits ? 'true' : undefined} aria-describedby="help-desiredLimits-hint{errors.desiredLimits ? ' help-desiredLimits-error' : ''}"></textarea>
+    {#if errors.desiredLimits}<p id="help-desiredLimits-error" class="help-form__error"><svg class="help-form__error-icon" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9" /><path d="M12 7.5v5.5M12 16.5v.01" /></svg><span>{err('desiredLimits')}</span></p>{/if}
   </div>
 
   <div class="help-form__group">
     <label for="help-useCase" class="help-form__label">{f.useCaseLabel ?? 'How you use AIBAN'}</label>
-    <textarea id="help-useCase" rows="4" bind:value={formData.useCase} class="help-form__input"
-      aria-invalid={!!errors.useCase} aria-describedby="help-useCase-hint{errors.useCase ? ' help-useCase-error' : ''}"></textarea>
     <p id="help-useCase-hint" class="help-form__help">{content?.questions?.useCaseHelp ?? ''}</p>
-    {#if errors.useCase}<p id="help-useCase-error" class="help-form__error">{err('useCase')}</p>{/if}
+    <textarea id="help-useCase" rows="4" bind:value={formData.useCase} class="help-form__input help-form__input--area"
+      aria-invalid={errors.useCase ? 'true' : undefined} aria-describedby="help-useCase-hint{errors.useCase ? ' help-useCase-error' : ''}"></textarea>
+    {#if errors.useCase}<p id="help-useCase-error" class="help-form__error"><svg class="help-form__error-icon" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9" /><path d="M12 7.5v5.5M12 16.5v.01" /></svg><span>{err('useCase')}</span></p>{/if}
   </div>
 
-  <div class="help-form__row">
+  <div class="help-form__row help-form__row--3">
     <div class="help-form__group">
       <label for="help-expectedSpend" class="help-form__label">{f.spendLabel ?? 'Expected monthly spend'}</label>
-      <select id="help-expectedSpend" bind:value={formData.expectedSpend} class="help-form__input" aria-describedby="help-expectedSpend-hint">
-        {#each Object.entries(spendLabels) as [value, label] (value)}
-          <option {value}>{label}</option>
-        {/each}
-      </select>
-      <p id="help-expectedSpend-hint" class="help-form__help">{content?.questions?.expectedSpendHelp ?? ''}</p>
+      <div class="help-form__select">
+        <select id="help-expectedSpend" bind:value={formData.expectedSpend} class="help-form__input" aria-describedby="help-expectedSpend-hint">
+          {#each Object.entries(spendLabels) as [value, label] (value)}
+            <option {value}>{label}</option>
+          {/each}
+        </select>
+        <svg class="help-form__chevron" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6" /></svg>
+      </div>
     </div>
 
     <div class="help-form__group">
       <label for="help-urgency" class="help-form__label">{f.urgencyLabel ?? 'Urgency'}</label>
-      <select id="help-urgency" bind:value={formData.urgency} class="help-form__input">
-        <option value="low">{f.urgency?.low ?? 'Low'}</option>
-        <option value="normal">{f.urgency?.normal ?? 'Normal'}</option>
-        <option value="high">{f.urgency?.high ?? 'High'}</option>
-      </select>
+      <div class="help-form__select">
+        <select id="help-urgency" bind:value={formData.urgency} class="help-form__input">
+          <option value="low">{f.urgency?.low ?? 'Low'}</option>
+          <option value="normal">{f.urgency?.normal ?? 'Normal'}</option>
+          <option value="high">{f.urgency?.high ?? 'High'}</option>
+        </select>
+        <svg class="help-form__chevron" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6" /></svg>
+      </div>
     </div>
 
     <div class="help-form__group">
       <label for="help-contact" class="help-form__label">{f.replyLabel ?? 'How should we reply?'}</label>
-      <select id="help-contact" bind:value={formData.contact} class="help-form__input">
-        <option value="email">{f.reply?.email ?? 'By email'}</option>
-        <option value="call">{f.reply?.call ?? 'By phone call'}</option>
-      </select>
+      <div class="help-form__select">
+        <select id="help-contact" bind:value={formData.contact} class="help-form__input">
+          <option value="email">{f.reply?.email ?? 'By email'}</option>
+          <option value="call">{f.reply?.call ?? 'By phone call'}</option>
+        </select>
+        <svg class="help-form__chevron" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6" /></svg>
+      </div>
     </div>
   </div>
+  <p id="help-expectedSpend-hint" class="help-form__help help-form__help--after">{content?.questions?.expectedSpendHelp ?? ''}</p>
 
   <label class="help-form__check">
     <input type="checkbox" bind:checked={formData.payAsYouGo} />
     <span>{f.payAsYouGo ?? 'I am interested in paying as I go'}</span>
   </label>
 
-  <div class="help-form__actions">
-    <button type="submit" class="help-form__button" disabled={sending} aria-busy={sending}>
-      {sending ? (f.sending ?? 'Sending...') : (content?.contact?.cta ?? 'Submit request')}
-    </button>
+  <div class="help-form__actions" class:shake on:animationend={() => (shake = false)}>
+    <Button type="submit" size="lg" loading={sending} loadingLabel={typeof f.sending === 'string' ? f.sending : 'Sending...'}>
+      {content?.contact?.cta ?? 'Submit request'}
+    </Button>
   </div>
 
   {#if submitted}
     <div class="help-form__success" role="status">
-      {#if sentToServer}
-        <p class="help-form__success-title">{f.sentTitle ?? 'Request sent'}</p>
-        <p>{f.sentBody ?? 'We received your request and will answer at the email address you gave.'}</p>
-      {:else}
-        <p class="help-form__success-title">{content?.contact?.successTitle ?? 'Request ready to send'}</p>
-        <p>{content?.contact?.successBody ?? ''}</p>
-        <p>
-          {f.retryBefore ?? 'If your email app did not open,'} <a href={mailtoHref}>{f.retryLink ?? 'open the request again'}</a> {f.retryAfter ?? 'or write to'}
-          <a href={`mailto:${contactEmail}`}>{contactEmail}</a>.
-        </p>
-      {/if}
+      <span class="help-form__success-icon" aria-hidden="true">
+        {#if sentToServer}
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7" /></svg>
+        {:else}
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="M3 7l9 6 9-6" /></svg>
+        {/if}
+      </span>
+      <div class="help-form__success-text">
+        {#if sentToServer}
+          <p class="help-form__success-title">{f.sentTitle ?? 'Request sent'}</p>
+          <p>{f.sentBody ?? 'We received your request and will answer at the email address you gave.'}</p>
+        {:else}
+          <p class="help-form__success-title">{content?.contact?.successTitle ?? 'Request ready to send'}</p>
+          <p>{content?.contact?.successBody ?? ''}</p>
+          <p>
+            {f.retryBefore ?? 'If your email app did not open,'} <a href={mailtoHref}>{f.retryLink ?? 'open the request again'}</a> {f.retryAfter ?? 'or write to'}
+            <a href={`mailto:${contactEmail}`}>{contactEmail}</a>.
+          </p>
+        {/if}
+      </div>
     </div>
   {/if}
 </form>
@@ -236,113 +261,230 @@
 <style lang="scss">
   .help-form {
     display: grid;
-    gap: var(--space-5, 24px);
-    color: var(--text-1, #0f172a);
+    gap: var(--space-6);
+    color: var(--text-1);
   }
 
   .help-form__row {
     display: grid;
-    gap: var(--space-5, 24px);
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-6) var(--space-5);
+  }
+  @media (min-width: 36rem) {
+    .help-form__row--2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  .help-form__row--3 {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
   }
 
   .help-form__group {
     display: flex;
     flex-direction: column;
-    gap: var(--space-2, 8px);
+    gap: var(--space-2);
+    min-width: 0;
   }
 
   .help-form__label {
-    font-size: var(--fs-sm, 0.875rem);
-    font-weight: var(--fw-semibold, 600);
-    color: var(--text-1, #0f172a);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-semibold);
+    color: var(--text-1);
   }
 
   .help-form__optional {
-    font-weight: var(--fw-regular, 400);
-    color: var(--text-2, #475569);
+    font-weight: var(--fw-regular);
+    color: var(--text-3);
   }
 
   .help-form__input {
     width: 100%;
-    min-height: 44px;
-    padding: var(--space-2, 8px) var(--space-3, 12px);
-    border: 1px solid var(--border-2, #cbd5e1);
-    border-radius: var(--radius-md, 10px);
-    background: var(--surface-1, #fff);
-    color: var(--text-1, #0f172a);
+    min-height: var(--control-h);
+    padding: var(--space-2) var(--space-4);
+    border: 1px solid var(--border-2);
+    border-radius: var(--radius-md);
+    background: var(--surface-0);
+    color: var(--text-1);
     font: inherit;
-    font-size: var(--fs-md, 1rem);
+    font-size: var(--fs-md);
+    transition:
+      border-color var(--t-out) var(--ease-out),
+      box-shadow var(--t-out) var(--ease-out),
+      background-color var(--t-out) var(--ease-out);
 
     &:focus-visible {
-      outline: 2px solid var(--focus-color, #6366f1);
-      outline-offset: 1px;
+      outline: none;
+      border-color: var(--text-1);
+      box-shadow: var(--focus-ring);
     }
 
-    &[aria-invalid='true'] { border-color: var(--danger, #b91c1c); }
+    /* Invalid: border here, icon and text under the field. Shown only after submit. */
+    &[aria-invalid='true'] {
+      border-color: var(--danger);
+      box-shadow: inset 0 0 0 1px var(--danger);
+    }
+    &[aria-invalid='true']:focus-visible {
+      box-shadow: var(--focus-ring), inset 0 0 0 1px var(--danger);
+    }
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .help-form__input:hover:not(:focus-visible):not([aria-invalid='true']) {
+      border-color: var(--text-2);
+      transition-duration: var(--t-in);
+    }
   }
 
-  textarea.help-form__input { resize: vertical; }
+  .help-form__input--area {
+    min-height: 6.5rem;
+    padding-block: var(--space-3);
+    line-height: var(--lh-normal);
+    resize: vertical;
+  }
+
+  /* Native select, custom chevron so it matches the other fields. */
+  .help-form__select {
+    position: relative;
+
+    select {
+      appearance: none;
+      padding-right: var(--space-8);
+      cursor: pointer;
+      text-overflow: ellipsis;
+    }
+  }
+  .help-form__chevron {
+    position: absolute;
+    top: 50%;
+    right: var(--space-4);
+    color: var(--text-2);
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
 
   .help-form__help {
     margin: 0;
-    font-size: var(--fs-sm, 0.875rem);
-    color: var(--text-3, #64748b);
+    font-size: var(--fs-sm);
+    line-height: var(--lh-normal);
+    color: var(--text-3);
+  }
+  .help-form__help--after {
+    margin-top: calc(-1 * var(--space-4));
   }
 
   .help-form__error {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
     margin: 0;
-    font-size: var(--fs-sm, 0.875rem);
-    color: var(--danger, #b91c1c);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-snug);
+    color: var(--danger);
+  }
+  .help-form__error-icon {
+    flex: none;
+    margin-top: 0.1em;
   }
 
   .help-form__check {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: var(--space-2, 8px);
-    font-size: var(--fs-md, 1rem);
+    gap: var(--space-3);
+    min-height: 2.75rem;
+    justify-self: start;
+    padding-right: var(--space-3);
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-md);
+    cursor: pointer;
 
     input {
-      width: 18px;
-      height: 18px;
-      accent-color: var(--accent, #4f46e5);
+      flex: none;
+      width: 1.25rem;
+      height: 1.25rem;
+      margin: 0;
+      accent-color: var(--accent);
+      cursor: pointer;
     }
-  }
-
-  .help-form__button {
-    min-height: 48px;
-    padding: var(--space-3, 12px) var(--space-6, 32px);
-    background: var(--accent, #4f46e5);
-    color: var(--accent-contrast, #fff);
-    border: none;
-    border-radius: var(--radius-full, 999px);
-    font-size: var(--fs-md, 1rem);
-    font-weight: var(--fw-semibold, 600);
-    cursor: pointer;
-    transition: background-color var(--dur-fast, 120ms) var(--ease-out, ease-out);
-
-    &:hover { background: var(--accent-hover, #4338ca); }
-
-    &:focus-visible {
-      outline: 2px solid var(--focus-color, #6366f1);
+    input:focus-visible {
+      outline: 2px solid var(--focus-color);
       outline-offset: 2px;
     }
   }
-
-  .help-form__success {
-    padding: var(--space-4, 16px);
-    border-radius: var(--radius-md, 10px);
-    background: var(--success-soft, #ecfdf5);
-    color: var(--text-1, #0f172a);
-
-    p { margin: 0 0 var(--space-2, 8px); }
-    p:last-child { margin-bottom: 0; }
-    a { color: var(--text-link, #4338ca); }
+  @media (hover: hover) and (pointer: fine) {
+    .help-form__check:hover span {
+      text-decoration: underline;
+      text-decoration-color: var(--border-2);
+      text-underline-offset: 0.2em;
+    }
   }
 
-  .help-form__success-title { font-weight: var(--fw-semibold, 600); }
+  .help-form__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-4);
+    padding-top: var(--space-2);
+  }
+
+  /* Success: check (or envelope for the email fallback), past-tense title, announced politely. */
+  .help-form__success {
+    display: flex;
+    gap: var(--space-4);
+    padding: var(--space-5);
+    border: 1px solid var(--border-1);
+    border-radius: var(--radius-lg);
+    background: var(--surface-1);
+    color: var(--text-1);
+    animation: help-form-in var(--dur-base) var(--ease-out);
+
+    p {
+      margin: 0 0 var(--space-2);
+      color: var(--text-2);
+      line-height: var(--lh-normal);
+    }
+    p:last-child {
+      margin-bottom: 0;
+    }
+    a {
+      color: var(--text-1);
+      font-weight: var(--fw-medium);
+      border-radius: var(--radius-sm);
+    }
+    a:focus-visible {
+      outline: none;
+      box-shadow: var(--focus-ring);
+    }
+  }
+  .help-form__success-icon {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: var(--radius-full);
+    background: var(--success-soft);
+    color: var(--success);
+  }
+  .help-form__success-text {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+  .help-form .help-form__success-title {
+    color: var(--text-1);
+    font-weight: var(--fw-semibold);
+  }
+  @keyframes help-form-in {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+  }
 
   @media (prefers-reduced-motion: reduce) {
-    .help-form__button { transition: none; }
+    .help-form__success {
+      animation: none;
+    }
+  }
+  :global(:root[data-motion='reduced']) .help-form__success {
+    animation: none;
   }
 </style>

@@ -34,6 +34,8 @@
         }
     }
 
+    let copyState: "idle" | "success" | "error" = "idle";
+
     async function copyUrl() {
         if (!navigator.clipboard) {
             alert("Your browser blocked copying. Select the link and copy it by hand."); // Basic fallback
@@ -42,14 +44,18 @@
         try {
             await navigator.clipboard.writeText(fullUrl);
             copyButtonText = $t['copyUrlWithQR.copied'];
+            copyState = "success";
             setTimeout(() => {
                 copyButtonText = $t['copyUrlWithQR.copyUrl'];
+                copyState = "idle";
             }, 1500); // Reset text after 1.5 seconds
         } catch (err) {
             console.error("Failed to copy URL:", err);
             copyButtonText = $t['copyUrlWithQR.failed'];
+            copyState = "error";
             setTimeout(() => {
                 copyButtonText = $t['copyUrlWithQR.copyUrl'];
+                copyState = "idle";
             }, 1500);
         }
     }
@@ -93,17 +99,18 @@
                     alt="QR code for your signup link"
                     class="qr-image"
                 />
-                <div>
-                    <button on:click={copyUrl} class="copy-button"
-                        >{copyButtonText}</button
+                <div class="actions">
+                    <button type="button" on:click={copyUrl} class="copy-button" data-state={copyState}
+                        ><span class="mark" aria-hidden="true"></span>{copyButtonText}</button
                     >
-                    <button on:click={downloadQr} class="download-button"
+                    <button type="button" on:click={downloadQr} class="download-button"
                         >{downloadButtonText}</button
                     >
                 </div>
-                <a on:click={copyUrl} href={fullUrl} target="_blank">
+                <a on:click={copyUrl} href={fullUrl} target="_blank" rel="noopener">
                     {label}
                 </a>
+                <span class="sr-only" role="status">{copyState === "idle" ? "" : copyButtonText}</span>
             </div>
         {:else}
             <p>{$t['copyUrlWithQR.generating']}</p>
@@ -113,62 +120,115 @@
 
 <style lang="scss">
     a {
-        cursor: pointer;
-        color: var(--color-foreground);
-        &:hover {
-            text-decoration: underline;
-        }
+        color: var(--text-link);
+        font-weight: var(--fw-medium);
+        overflow-wrap: anywhere;
     }
 
     .copy-url-container {
-        font-family: sans-serif;
-        border-radius: 8px;
-        padding: 15px;
-        background-color: var(--color-background-inversion-opaque);
-        backdrop-filter: blur(6px);
         max-width: 100%;
-        box-sizing: border-box;
-        box-shadow: 0 0 10px -8.5px var(--color-background);
+        padding: var(--space-4);
+        border: 1px solid var(--border-1);
+        border-radius: var(--radius-lg);
+        background: var(--surface-1);
+        font-family: var(--font-body);
+        font-size: var(--fs-sm);
     }
 
     .controls {
         display: flex;
-        flex-direction: column; /* Stack controls vertically */
-        gap: 15px; /* Space between URL copy and QR section */
-        align-items: flex-start; /* Align items to the start */
+        flex-direction: column;
+        gap: var(--space-4);
+        align-items: flex-start;
     }
 
     .qr-section {
         display: flex;
-        align-items: center; /* Vertically align QR and download button */
-        gap: 10px; /* Space between QR image and download button */
+        flex-wrap: wrap;
+        align-items: center;
+        gap: var(--space-3) var(--space-4);
     }
 
     .qr-image {
         display: block;
-        max-width: 32.55px; /* Adjust size as needed */
+        width: 3.5rem;
         height: auto;
-        border: 1px solid #eee;
+        padding: var(--space-1);
+        border: 1px solid var(--border-1);
+        border-radius: var(--radius-sm);
+        background: #ffffff; /* QR codes need a white quiet zone in both themes */
     }
 
+    .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-2);
+    }
+
+    /* Secondary buttons with every state: hover layer, focus ring, press, success and error. */
     button {
-        padding: 8px 12px;
-        border: 0;
-        border-radius: 4px;
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-2);
+        min-height: var(--control-h-sm);
+        padding: 0 var(--space-4);
+        border: 1px solid var(--border-2);
+        border-radius: var(--radius-full);
+        background: var(--surface-0);
+        color: var(--text-1);
+        font-size: var(--fs-sm);
+        font-weight: var(--fw-medium);
         cursor: pointer;
-        font-size: 0.9em;
-        transition: .35s;
+        transition:
+            background-color var(--t-out) var(--ease-out),
+            border-color var(--t-out) var(--ease-out),
+            transform var(--t-out) var(--ease-out);
     }
-
-    button:hover {
-        padding: 8px 20px;
-        background-color: var(--color-foreground);
-        color: var(--color-background);        
+    @media (hover: hover) and (pointer: fine) {
+        button:hover {
+            background: var(--surface-2);
+            transition-duration: var(--t-in);
+        }
     }
-
+    button:focus-visible {
+        outline: none;
+        box-shadow: var(--focus-ring);
+    }
     button:active {
-        background-color: #e0e0e0;
+        transform: scale(0.97);
+        background: var(--surface-3);
+        transition-duration: 0ms;
     }
-
-
+    .mark {
+        display: none;
+    }
+    button[data-state="success"] {
+        border-color: var(--success);
+        color: var(--success);
+    }
+    button[data-state="success"] .mark {
+        display: inline-block;
+        width: 0.7em;
+        height: 0.4em;
+        border-left: 2px solid currentColor;
+        border-bottom: 2px solid currentColor;
+        transform: translateY(-0.1em) rotate(-45deg);
+    }
+    button[data-state="error"] {
+        border-color: var(--danger);
+        color: var(--danger);
+    }
+    button[data-state="error"] .mark {
+        display: inline-block;
+        font-weight: var(--fw-bold);
+    }
+    button[data-state="error"] .mark::before {
+        content: "!";
+    }
+    @media (prefers-reduced-motion: reduce) {
+        button:active {
+            transform: none;
+        }
+    }
 </style>

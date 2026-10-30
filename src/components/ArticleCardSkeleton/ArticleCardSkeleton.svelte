@@ -8,50 +8,48 @@
 </div>
 
 <style lang="scss">
+  /* Same shape as BlogArticleCard: 3:2 image, title, two lines, meta. */
   @keyframes pulse {
-    0%,
-    100% {
-      opacity: 1;
-    }
     50% {
-      opacity: 0.45;
+      opacity: 0.5;
     }
   }
 
   .skeleton-card {
     height: 100%;
-    border-radius: var(--radius-lg, 16px);
+    border-radius: var(--radius-xl);
     overflow: hidden;
-    background: var(--surface-1, #fff);
-    border: 1px solid var(--border-1, #e5e5e5);
+    background: var(--surface-0);
+    border: 1px solid var(--border-1);
   }
 
   .shimmer {
-    background: var(--surface-2, #f0f0f0);
-    animation: pulse 1.5s var(--ease-in-out, ease-in-out) infinite;
+    background: var(--surface-2);
+    animation: pulse 1.4s var(--ease-in-out) infinite;
   }
 
   .skeleton-image {
     width: 100%;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 3 / 2;
   }
 
   .skeleton-text {
-    padding: var(--space-5, 24px);
+    padding: var(--space-5);
   }
 
   .skeleton-line {
     height: 0.875rem;
-    margin-bottom: var(--space-3, 12px);
-    border-radius: var(--radius-sm, 4px);
+    margin-bottom: var(--space-3);
+    border-radius: var(--radius-sm);
 
     &.title {
-      height: 1.25rem;
-      width: 70%;
+      height: 1.5rem;
+      width: 80%;
+      margin-bottom: var(--space-4);
     }
 
     &.short {
-      width: 50%;
+      width: 45%;
       margin-bottom: 0;
     }
   }

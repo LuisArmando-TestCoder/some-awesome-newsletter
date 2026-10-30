@@ -56,23 +56,45 @@
 </OnboardingShell>
 
 <style lang="scss">
+  /* What you set up: a quiet checklist of facts, each with a check mark. */
   .summary {
     margin: 0;
-    padding-left: var(--space-5, 24px);
+    padding: 0;
+    list-style: none;
     display: flex;
     flex-direction: column;
-    gap: var(--space-1, 4px);
-    color: var(--text-2, #4a5058);
+    border-top: 1px solid var(--border-1);
+    color: var(--text-1);
     overflow-wrap: anywhere;
+
+    li {
+      position: relative;
+      padding: var(--space-3) 0 var(--space-3) var(--space-6);
+      border-bottom: 1px solid var(--border-1);
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0.15rem;
+        top: calc(var(--space-3) + 0.45em);
+        width: 0.7rem;
+        height: 0.4rem;
+        border-left: 2px solid var(--success);
+        border-bottom: 2px solid var(--success);
+        transform: rotate(-45deg);
+      }
+    }
   }
   .plan {
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: var(--space-3, 12px);
-    font-size: var(--fs-sm, 0.875rem);
-    color: var(--text-2, #4a5058);
-    a { text-decoration: none; }
+    gap: var(--space-3);
+    padding: var(--space-4) var(--space-5);
+    border: 1px solid var(--border-1);
+    border-radius: var(--radius-lg);
+    font-size: var(--fs-sm);
+    color: var(--text-2);
   }
 </style>

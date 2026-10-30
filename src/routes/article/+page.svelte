@@ -66,33 +66,56 @@
 <style lang="scss">
   .page {
     min-height: 70vh;
-    padding: var(--space-8, 64px) var(--space-4, 16px);
-    background: var(--surface-0, #fff);
-    color: var(--text-1, #111);
+    padding: var(--space-8) var(--gutter) var(--section-pad);
+    background: var(--surface-0);
+    color: var(--text-1);
   }
   .redirect {
+    margin: 0;
     text-align: center;
-    color: var(--text-2, #444);
+    color: var(--text-3);
+    font-size: var(--fs-sm);
   }
   .fallback {
     max-width: 68ch;
     margin: 0 auto;
+
     h1 {
-      font-family: var(--font-display, inherit);
-      font-size: var(--fs-3xl, 2.25rem);
-      line-height: var(--lh-tight, 1.15);
+      margin: 0 0 var(--space-7);
+      font-family: var(--font-display);
+      font-size: clamp(2.25rem, 1.5rem + 3.2vw, 4.25rem);
+      font-weight: var(--fw-semibold);
+      line-height: var(--lh-display);
+      letter-spacing: var(--tracking-display);
+      text-wrap: balance;
+      overflow-wrap: anywhere;
     }
   }
   .prose {
-    font-size: var(--fs-lg, 1.125rem);
-    line-height: 1.7;
+    font-size: var(--fs-lg);
+    line-height: 1.65;
+    overflow-wrap: break-word;
+
     :global(img) {
+      display: block;
       max-width: 100%;
       height: auto;
-      border-radius: var(--radius-lg, 16px);
+      border-radius: var(--radius-lg);
     }
     :global(a) {
-      color: var(--text-link, #2563eb);
+      color: var(--text-link);
+    }
+    :global(h2),
+    :global(h3) {
+      margin-top: 2em;
+      font-family: var(--font-display);
+      font-weight: var(--fw-semibold);
+      letter-spacing: var(--tracking-tight);
+    }
+  }
+  @media (max-width: 600px) {
+    .prose {
+      font-size: var(--fs-md);
     }
   }
 </style>

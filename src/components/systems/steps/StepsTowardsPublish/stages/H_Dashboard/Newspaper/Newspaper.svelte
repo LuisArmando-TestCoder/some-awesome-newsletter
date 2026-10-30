@@ -382,7 +382,7 @@
 <style lang="scss">
   .newspaper-container {
     width: 100%;
-    max-width: 1400px;
+    max-width: var(--container-xl);
     margin: 0 auto;
     padding: 0;
   }
@@ -402,16 +402,23 @@
   }
 
   .article-link {
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    background-color: #007bff;
-    color: white;
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--control-h);
+    padding: 0 var(--control-pad-x);
+    background-color: var(--surface-1);
+    border: 1px solid var(--border-2);
+    color: var(--text-1);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
     text-decoration: none;
-    border-radius: 8px;
-    transition: background-color 0.3s cubic-bezier(0.6, -0.28, 0.735, 1);
+    border-radius: var(--radius-full);
+    transition: background-color var(--t-out) var(--ease-out), transform var(--t-out) var(--ease-out);
 
-    &:hover {
-      background-color: #0056b3;
+    &:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+    &:active { transform: scale(0.97); transition-duration: 60ms; }
+    @media (hover: hover) and (pointer: fine) {
+      &:hover { background-color: var(--surface-2); transition-duration: var(--t-in); }
     }
   }
 

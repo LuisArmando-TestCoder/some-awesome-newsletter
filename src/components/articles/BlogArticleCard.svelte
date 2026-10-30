@@ -48,37 +48,46 @@
 </article>
 
 <style lang="scss">
+  /* Editorial card: image first, confident title, quiet meta. One real link stretched over
+     the whole card; hover lifts 2px and darkens the edge; press settles to .99. */
   .card {
     position: relative;
     display: flex;
     flex-direction: column;
     height: 100%;
-    background: var(--surface-1, #fff);
-    border: 1px solid var(--border-1, #e5e5e5);
-    border-radius: var(--radius-lg, 16px);
+    background: var(--surface-0);
+    border: 1px solid var(--border-1);
+    border-radius: var(--radius-xl);
     overflow: hidden;
-    transition: box-shadow var(--dur-base, 200ms) var(--ease-out, ease-out),
-      transform var(--dur-base, 200ms) var(--ease-out, ease-out),
-      border-color var(--dur-base, 200ms) var(--ease-out, ease-out);
+    transition:
+      transform var(--t-out) var(--ease-out),
+      border-color var(--t-out) var(--ease-out);
 
-    &:hover {
-      box-shadow: var(--shadow-2, none);
-      border-color: var(--border-2, #ccc);
-      transform: translateY(-2px);
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        border-color: var(--border-2);
+        transform: translateY(-2px);
+        transition-duration: var(--t-in);
 
-      img {
-        transform: scale(1.03);
+        img {
+          transform: scale(1.03);
+        }
+
+        .card__link {
+          text-decoration-color: currentColor;
+        }
       }
     }
 
-    &:focus-within {
-      border-color: var(--accent, #2563eb);
+    &:active {
+      transform: scale(0.99);
+      transition-duration: 60ms;
     }
   }
 
   .card__media {
-    aspect-ratio: 16 / 9;
-    background: var(--surface-2, #f3f3f3);
+    aspect-ratio: 3 / 2;
+    background: var(--surface-2);
     overflow: hidden;
 
     img {
@@ -86,46 +95,51 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform var(--dur-slow, 320ms) var(--ease-out, ease-out);
+      transition: transform var(--dur-reveal) var(--ease-out);
     }
   }
 
   .card__body {
     display: flex;
     flex-direction: column;
-    gap: var(--space-2, 8px);
-    padding: var(--space-5, 24px);
+    gap: var(--space-3);
+    padding: var(--space-5) var(--space-5) var(--space-5);
     flex: 1;
   }
 
   .card__eyebrow {
     margin: 0;
-    font-size: var(--fs-xs, 0.75rem);
-    font-weight: var(--fw-semibold, 600);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--accent, #2563eb);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-semibold);
+    color: var(--text-3);
   }
 
   .card__title {
     margin: 0;
-    font-family: var(--font-display, inherit);
-    font-size: var(--fs-lg, 1.125rem);
-    font-weight: var(--fw-bold, 700);
-    line-height: var(--lh-tight, 1.25);
-    color: var(--text-1, #111);
+    font-family: var(--font-display);
+    font-size: var(--fs-xl);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-tight);
+    letter-spacing: var(--tracking-tight);
+    color: var(--text-1);
+    text-wrap: balance;
     overflow-wrap: anywhere;
   }
 
   .card__link {
     color: inherit;
-    text-decoration: none;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.15em;
+    text-decoration-color: transparent;
+    transition: text-decoration-color var(--t-out) var(--ease-out);
 
     /* The whole card is clickable through this one link. */
     &::after {
       content: "";
       position: absolute;
       inset: 0;
+      z-index: 1;
     }
 
     &:focus-visible {
@@ -134,15 +148,15 @@
   }
 
   .card:has(.card__link:focus-visible) {
-    outline: 2px solid var(--focus-color, #2563eb);
+    outline: 2px solid var(--focus-color);
     outline-offset: 2px;
   }
 
   .card__excerpt {
     margin: 0;
-    color: var(--text-2, #444);
-    font-size: var(--fs-sm, 0.875rem);
-    line-height: var(--lh-normal, 1.55);
+    color: var(--text-2);
+    font-size: var(--fs-sm);
+    line-height: var(--lh-normal);
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
@@ -155,45 +169,74 @@
     line-clamp: 6;
   }
 
-  .card__meta {
-    margin: auto 0 0;
-    padding-top: var(--space-2, 8px);
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2, 8px);
-    font-size: var(--fs-xs, 0.75rem);
-    color: var(--text-3, #777);
+  .card--text .card__body {
+    padding-top: var(--space-6);
   }
 
+  .card__meta {
+    margin: auto 0 0;
+    padding-top: var(--space-2);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    font-size: var(--fs-xs);
+    color: var(--text-3);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Featured: a cover story. Big image, display-size title. */
   .card--featured {
+    border-radius: var(--radius-2xl);
+
     @media (min-width: 860px) {
       display: grid;
       grid-template-columns: 3fr 2fr;
 
       .card__media {
         aspect-ratio: auto;
-        min-height: 22rem;
+        min-height: 28rem;
       }
 
       .card__body {
-        padding: var(--space-7, 48px) var(--space-6, 32px);
+        padding: var(--space-8) var(--space-7);
         justify-content: center;
+        gap: var(--space-4);
       }
     }
 
     .card__title {
-      font-size: var(--fs-2xl, 1.75rem);
+      font-size: var(--step-chapter);
+      line-height: var(--lh-display);
+      letter-spacing: var(--tracking-display);
     }
 
     .card__excerpt {
-      font-size: var(--fs-md, 1rem);
-      -webkit-line-clamp: 5;
-      line-clamp: 5;
+      font-size: var(--fs-lg);
+      line-height: var(--lh-snug);
+      -webkit-line-clamp: 4;
+      line-clamp: 4;
     }
   }
 
   .card--featured.card--text {
     display: flex;
+
+    .card__body {
+      padding: var(--space-8) var(--space-7);
+    }
+  }
+
+  @media (max-width: 30rem) {
+    .card--featured .card__body,
+    .card--featured.card--text .card__body {
+      padding: var(--space-5);
+    }
+  }
+
+  @media (forced-colors: active) {
+    .card:has(.card__link:focus-visible) {
+      outline-color: CanvasText;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -201,9 +244,8 @@
     .card img {
       transition: none;
     }
-    .card:hover {
-      transform: none;
-    }
+    .card:hover,
+    .card:active,
     .card:hover img {
       transform: none;
     }

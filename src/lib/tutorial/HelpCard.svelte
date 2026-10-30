@@ -58,6 +58,7 @@
 
   let dismissed = false;
   let expanded = false;
+  let toggleEl: HTMLButtonElement;
 
   onMount(() => {
     if (id) dismissed = isHelpDismissed(id);
@@ -72,6 +73,15 @@
     dismissHelp(id);
     dismissed = true;
     dispatch("dismiss", { id });
+  }
+
+  /** Esc closes the inline panel and returns focus to its toggle. */
+  function onPanelKeydown(e: KeyboardEvent) {
+    if (compact && e.key === "Escape" && expanded) {
+      e.stopPropagation();
+      expanded = false;
+      toggleEl?.focus();
+    }
   }
 
   function runAction() {
@@ -90,6 +100,7 @@
         class="help-toggle"
         aria-expanded={expanded}
         aria-controls="{uid}-panel"
+        bind:this={toggleEl}
         on:click={() => (expanded = !expanded)}
       >
         <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false">
@@ -104,16 +115,20 @@
           <circle cx="10" cy="14.25" r="0.9" fill="currentColor" />
         </svg>
         <span>{$tt.help.whatIsThis}</span>
+        <svg class="chevron" viewBox="0 0 16 16" width="12" height="12" aria-hidden="true" focusable="false"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg>
       </button>
     </span>
   {/if}
 
   {#if !compact || expanded}
+    <!-- Esc from anywhere inside the panel closes it (keyboard delegation, not a click target). -->
+    <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
     <section
       id="{uid}-panel"
       class="help-card"
       class:inline={compact}
       aria-labelledby="{uid}-title"
+      on:keydown={onPanelKeydown}
     >
       <div class="help-head">
         <h3 id="{uid}-title" class="help-title">{title}</h3>
@@ -142,6 +157,8 @@
 {/if}
 
 <style>
+  /* Contextual help: a quiet bordered note. Compact mode is a "What is this?" disclosure
+     with a turning chevron; Esc closes it and returns focus to the toggle. */
   .help-compact {
     display: inline-flex;
   }
@@ -149,125 +166,187 @@
   .help-toggle {
     display: inline-flex;
     align-items: center;
-    gap: var(--space-1, 4px);
-    min-height: 44px;
-    padding: 0 var(--space-2, 8px);
-    border: 1px solid transparent;
-    border-radius: var(--radius-md, 8px);
+    gap: var(--space-1);
+    min-height: var(--control-h);
+    padding: 0 var(--space-2);
+    border: 0;
+    border-radius: var(--radius-full);
     background: transparent;
-    color: var(--text-link, #4f46e5);
-    font-family: var(--font-body, inherit);
-    font-size: var(--fs-sm, 0.875rem);
-    font-weight: var(--fw-medium, 500);
+    color: var(--text-2);
+    font-family: var(--font-body);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
     cursor: pointer;
+    box-shadow: none;
+    transition: color var(--t-out) var(--ease-out);
   }
 
-  .help-toggle:hover {
-    text-decoration: underline;
-    text-underline-offset: 3px;
+  @media (hover: hover) and (pointer: fine) {
+    .help-toggle:hover {
+      box-shadow: none;
+      color: var(--text-1);
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+      transition-duration: var(--t-in);
+    }
+  }
+
+  .help-toggle[aria-expanded='true'] {
+    color: var(--text-1);
+  }
+
+  .help-toggle .chevron {
+    transition: transform var(--dur-slow) var(--ease-out);
+  }
+
+  .help-toggle[aria-expanded='true'] .chevron {
+    transform: rotate(180deg);
   }
 
   .help-card {
-    padding: var(--space-4, 16px) var(--space-5, 24px) var(--space-5, 24px);
-    background: var(--accent-soft, #eef2ff);
-    color: var(--text-1, #111827);
-    border: 1px solid var(--border-1, #e5e7eb);
-    border-radius: var(--radius-lg, 12px);
-    font-family: var(--font-body, inherit);
+    padding: var(--space-4) var(--space-5) var(--space-5);
+    background: var(--surface-1);
+    color: var(--text-1);
+    border: 1px solid var(--border-1);
+    border-radius: var(--radius-lg);
+    font-family: var(--font-body);
   }
 
   .help-card.inline {
-    margin-top: var(--space-2, 8px);
-    background: var(--surface-1, #fff);
-    box-shadow: var(--shadow-1, 0 1px 2px rgba(0, 0, 0, 0.06));
+    margin-top: var(--space-2);
+    background: var(--surface-0);
+    box-shadow: var(--shadow-2);
+    transition:
+      opacity var(--dur-base) var(--ease-out),
+      transform var(--dur-base) var(--ease-out);
+  }
+
+  @starting-style {
+    .help-card.inline {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
   }
 
   .help-head {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: var(--space-3, 12px);
+    gap: var(--space-3);
   }
 
   .help-title {
     margin: 0;
-    padding: var(--space-2, 8px) 0;
-    font-size: var(--fs-md, 1rem);
-    font-weight: var(--fw-semibold, 600);
-    line-height: var(--lh-tight, 1.3);
-    color: var(--text-1, #111827);
+    padding: var(--space-2) 0;
+    font-family: var(--font-display);
+    font-size: var(--fs-md);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-tight);
+    letter-spacing: var(--tracking-tight);
+    color: var(--text-1);
   }
 
   .help-close {
     display: inline-grid;
     place-items: center;
     flex: none;
-    width: 44px;
-    height: 44px;
-    margin-right: calc(-1 * var(--space-3, 12px));
+    width: var(--control-h);
+    height: var(--control-h);
+    margin-right: calc(-1 * var(--space-3));
+    padding: 0;
     border: 0;
-    border-radius: var(--radius-full, 9999px);
+    border-radius: var(--radius-full);
     background: transparent;
-    color: var(--text-2, #374151);
+    color: var(--text-2);
     cursor: pointer;
+    box-shadow: none;
+    transition:
+      background-color var(--t-out) var(--ease-out),
+      color var(--t-out) var(--ease-out);
   }
 
-  .help-close:hover {
-    background: var(--surface-2, #f3f4f6);
-    color: var(--text-1, #111827);
+  @media (hover: hover) and (pointer: fine) {
+    .help-close:hover {
+      background: var(--surface-2);
+      box-shadow: none;
+      color: var(--text-1);
+      transition-duration: var(--t-in);
+    }
+  }
+
+  .help-close:active {
+    background: var(--surface-3);
   }
 
   .help-what,
   .help-why {
     margin: 0;
-    font-size: var(--fs-sm, 0.875rem);
-    line-height: var(--lh-normal, 1.55);
-    color: var(--text-2, #374151);
+    max-width: 60ch;
+    font-size: var(--fs-sm);
+    line-height: var(--lh-normal);
+    color: var(--text-2);
   }
 
   .help-label {
-    margin: var(--space-3, 12px) 0 var(--space-1, 4px);
-    font-size: var(--fs-xs, 0.75rem);
-    font-weight: var(--fw-semibold, 600);
-    color: var(--text-1, #111827);
+    margin: var(--space-4) 0 var(--space-1);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-semibold);
+    color: var(--text-1);
   }
 
   .help-actions {
-    margin-top: var(--space-4, 16px);
+    margin-top: var(--space-4);
   }
 
   .btn-secondary {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-height: 44px;
-    padding: 0 var(--space-4, 16px);
-    border: 1px solid var(--border-2, #d1d5db);
-    border-radius: var(--radius-md, 8px);
-    background: var(--surface-1, #fff);
-    color: var(--text-1, #111827);
+    min-height: var(--control-h-sm);
+    padding: 0 var(--space-4);
+    border: 1px solid var(--border-2);
+    border-radius: var(--radius-full);
+    background: var(--surface-0);
+    color: var(--text-1);
     font-family: inherit;
-    font-size: var(--fs-sm, 0.875rem);
-    font-weight: var(--fw-semibold, 600);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
     text-decoration: none;
     cursor: pointer;
-    transition: background-color var(--dur-fast, 120ms) var(--ease-out, ease-out);
+    box-shadow: none;
+    transition:
+      background-color var(--t-out) var(--ease-out),
+      transform var(--dur-base) var(--ease-out);
   }
 
-  .btn-secondary:hover {
-    background: var(--surface-2, #f3f4f6);
+  @media (hover: hover) and (pointer: fine) {
+    .btn-secondary:hover {
+      background: var(--surface-2);
+      box-shadow: none;
+      transition-duration: var(--t-in);
+    }
+  }
+
+  .btn-secondary:active {
+    transform: scale(0.97);
+    transition-duration: 60ms;
   }
 
   .help-toggle:focus-visible,
   .help-close:focus-visible,
   .btn-secondary:focus-visible {
-    outline: 2px solid var(--focus-color, #6366f1);
-    outline-offset: 2px;
+    outline: none;
+    box-shadow: var(--focus-ring);
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .btn-secondary {
+    .btn-secondary,
+    .help-toggle .chevron,
+    .help-card.inline {
       transition: none;
+    }
+    .btn-secondary:active {
+      transform: none;
     }
   }
 </style>

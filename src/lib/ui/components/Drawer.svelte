@@ -128,7 +128,7 @@
     max-width: none;
     max-height: none;
     border: 0;
-    background: var(--surface-1);
+    background: var(--surface-0);
     color: var(--text-1);
     box-shadow: var(--shadow-3);
     font-family: var(--font-body);
@@ -150,17 +150,17 @@
   .side-right {
     inset-inline: auto 0;
     border-inline-start: 1px solid var(--border-1);
-    border-start-start-radius: var(--radius-lg);
-    border-end-start-radius: var(--radius-lg);
-    --drawer-from: translateX(0.5rem);
+    border-start-start-radius: var(--radius-xl);
+    border-end-start-radius: var(--radius-xl);
+    --drawer-from: translateX(1.5rem);
   }
 
   .side-left {
     inset-inline: 0 auto;
     border-inline-end: 1px solid var(--border-1);
-    border-start-end-radius: var(--radius-lg);
-    border-end-end-radius: var(--radius-lg);
-    --drawer-from: translateX(-0.5rem);
+    border-start-end-radius: var(--radius-xl);
+    border-end-end-radius: var(--radius-xl);
+    --drawer-from: translateX(-1.5rem);
   }
 
   .side-bottom {
@@ -169,9 +169,9 @@
     width: 100%;
     max-height: min(85vh, 85dvh);
     border-top: 1px solid var(--border-1);
-    border-start-start-radius: var(--radius-lg);
-    border-start-end-radius: var(--radius-lg);
-    --drawer-from: translateY(0.5rem);
+    border-start-start-radius: var(--radius-xl);
+    border-start-end-radius: var(--radius-xl);
+    --drawer-from: translateY(1.5rem);
   }
 
   @media (max-width: 28rem) {
@@ -181,25 +181,33 @@
     }
   }
 
+  /* Enter: slides in from its edge. @starting-style gives the first frame, no keyframes. */
   .drawer[open] {
     display: flex;
-    animation: drawer-in var(--dur-base) var(--ease-out);
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity var(--dur-base) var(--ease-out),
+      transform var(--dur-slow) var(--ease-out);
   }
 
-  .drawer::backdrop {
-    background: var(--surface-overlay);
-    animation: backdrop-in var(--dur-base) var(--ease-out);
-  }
-
-  @keyframes drawer-in {
-    from {
+  @starting-style {
+    .drawer[open] {
       opacity: 0;
       transform: var(--drawer-from);
     }
   }
 
-  @keyframes backdrop-in {
-    from {
+  .drawer::backdrop {
+    background: var(--surface-overlay);
+    backdrop-filter: blur(8px) saturate(1.2);
+    -webkit-backdrop-filter: blur(8px) saturate(1.2);
+    opacity: 1;
+    transition: opacity var(--dur-base) var(--ease-out);
+  }
+
+  @starting-style {
+    .drawer[open]::backdrop {
       opacity: 0;
     }
   }
@@ -207,7 +215,7 @@
   @media (prefers-reduced-motion: reduce) {
     .drawer[open],
     .drawer::backdrop {
-      animation: none;
+      transition: none;
     }
   }
 
@@ -245,31 +253,48 @@
     color: var(--text-2);
   }
 
+  /* Close: round ghost button with the full state set. */
   .close {
+    position: relative;
     flex: none;
     display: inline-grid;
     place-items: center;
-    width: var(--control-h-sm);
-    height: var(--control-h-sm);
-    margin: calc(-1 * var(--space-1)) calc(-1 * var(--space-2)) 0 0;
+    width: var(--control-h);
+    height: var(--control-h);
+    margin: calc(-1 * var(--space-2)) calc(-1 * var(--space-2)) 0 0;
     border: 0;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-full);
     background: transparent;
     color: var(--text-2);
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
     transition:
-      background-color var(--dur-fast) var(--ease-out),
-      color var(--dur-fast) var(--ease-out);
+      background-color var(--t-out) var(--ease-out),
+      color var(--t-out) var(--ease-out),
+      transform var(--dur-base) var(--ease-out);
   }
 
   .close svg {
     width: 1.25rem;
     height: 1.25rem;
+    transition: transform var(--dur-base) var(--ease-out);
   }
 
-  .close:hover {
-    background: var(--surface-2);
-    color: var(--text-1);
+  @media (hover: hover) and (pointer: fine) {
+    .close:hover {
+      background: var(--surface-2);
+      color: var(--text-1);
+      transition-duration: var(--t-in);
+    }
+    .close:hover svg {
+      transform: rotate(90deg);
+    }
+  }
+
+  .close:active {
+    background: var(--surface-3);
+    transform: scale(0.94);
+    transition-duration: 60ms;
   }
 
   .close:focus-visible {
@@ -282,6 +307,7 @@
     min-height: 0;
     overflow-y: auto;
     overscroll-behavior: contain;
+    scrollbar-gutter: stable;
     padding: 0 var(--space-5) var(--space-5);
     font-size: var(--fs-md);
     line-height: var(--lh-normal);
@@ -295,6 +321,24 @@
     gap: var(--space-2);
     padding: var(--space-4) var(--space-5);
     border-top: 1px solid var(--border-1);
-    background: var(--surface-1);
+    background: var(--surface-0);
+    padding-bottom: max(var(--space-4), env(safe-area-inset-bottom));
+  }
+
+  @media (forced-colors: active) {
+    .drawer {
+      border: 1px solid CanvasText;
+    }
+    .close:focus-visible {
+      outline: 2px solid CanvasText;
+      outline-offset: 2px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .close:active,
+    .close:hover svg {
+      transform: none;
+    }
   }
 </style>

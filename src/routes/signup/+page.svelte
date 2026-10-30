@@ -19,8 +19,19 @@
   <title>{$t.auth.signup.pageTitle ?? 'Sign up'} • {runtime.appName}</title>
 </svelte:head>
 
-<div class="mx-auto flex min-h-[80svh] w-full max-w-7xl items-center justify-center px-4 py-10">
+<main class="auth-route">
   {#key copy}  
     <AuthForm mode="signup" bind:copy={copy} legal={{ termsUrl: runtime.legal.termsUrl, privacyUrl: runtime.legal.privacyUrl }} />
   {/key}
-</div>
+</main>
+
+<style>
+  /* Centred sign-in surface. The card owns its own spacing; this only gives it room. */
+  .auth-route {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    min-height: calc(100svh - var(--header-h));
+    padding-block: var(--space-7);
+  }
+</style>

@@ -15,6 +15,10 @@
   export let target: string | null = null;
   export let ariaLabel: string | null = null;
   export let onclick: ((e: MouseEvent) => void) | null = null;
+  /** Why the button is unavailable. Read by screen readers and shown as a tooltip while disabled. */
+  export let disabledReason: string | null = null;
+  /** Announced while loading, e.g. "Saving". */
+  export let loadingLabel: string | null = null;
 </script>
 
 <UIButton
@@ -23,7 +27,9 @@
   {type}
   href={href ?? undefined}
   {disabled}
+  disabledReason={disabledReason ?? undefined}
   {loading}
+  loadingLabel={loadingLabel ?? undefined}
   fullWidth={full}
   target={target ?? undefined}
   rel={target === "_blank" ? "noopener noreferrer" : undefined}

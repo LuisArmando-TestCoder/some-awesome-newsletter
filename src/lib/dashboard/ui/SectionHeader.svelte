@@ -25,9 +25,9 @@
   .shead__title {
     margin: 0;
     font-family: var(--font-display);
-    font-size: var(--fs-2xl);
+    font-size: var(--fs-3xl);
     font-weight: var(--fw-semibold);
-    letter-spacing: var(--tracking-tight, 0);
+    letter-spacing: var(--tracking-display);
     line-height: var(--lh-tight);
     color: var(--text-1);
   }

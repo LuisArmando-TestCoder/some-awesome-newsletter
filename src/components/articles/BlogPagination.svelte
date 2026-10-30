@@ -36,8 +36,10 @@
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    gap: var(--space-4, 16px);
-    margin-top: var(--space-8, 64px);
+    gap: var(--space-4);
+    margin-top: var(--space-9);
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--border-1);
 
     > :first-child {
       justify-self: start;
@@ -45,11 +47,39 @@
     > :last-child {
       justify-self: end;
     }
+
+    a span {
+      display: inline-block;
+      transition: transform var(--dur-base) var(--ease-out);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      a[rel="prev"]:hover span {
+        transform: translateX(-3px);
+      }
+      a[rel="next"]:hover span {
+        transform: translateX(3px);
+      }
+    }
   }
 
+  /* The current page is marked with weight and a filled dot, not color alone. */
   .pager__current {
-    font-size: var(--fs-sm, 0.875rem);
-    color: var(--text-2, #444);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-semibold);
+    color: var(--text-1);
+    font-variant-numeric: tabular-nums;
+
+    &::before {
+      content: "";
+      width: 0.375rem;
+      height: 0.375rem;
+      border-radius: var(--radius-full);
+      background: currentColor;
+    }
   }
 
   @media (max-width: 520px) {

@@ -303,16 +303,17 @@
   .detail__nav :global(svg) { transform: rotate(180deg); }
   .detail__head { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--space-4); flex-wrap: wrap; }
   .detail__title { min-width: 0; }
-  .detail__title h2 { margin: var(--space-1) 0 var(--space-2); font-size: var(--fs-xl); font-family: var(--font-display); color: var(--text-1); overflow-wrap: anywhere; outline: none; }
+  .detail__title h2 { margin: var(--space-1) 0 var(--space-2); font-size: var(--fs-2xl); font-family: var(--font-display); letter-spacing: var(--tracking-tight); line-height: var(--lh-tight); color: var(--text-1); overflow-wrap: anywhere; outline: none; }
   .detail__kind { font-size: var(--fs-xs); font-weight: var(--fw-semibold); color: var(--text-3); }
   .detail__meta { margin: 0; display: flex; gap: var(--space-3); align-items: center; flex-wrap: wrap; font-size: var(--fs-sm); color: var(--text-2); }
-  .detail__link { display: inline-flex; align-items: center; gap: var(--space-1); color: var(--accent); min-height: 44px; }
-  .form { display: flex; flex-direction: column; gap: var(--space-4); max-width: 640px; }
+  .detail__link { display: inline-flex; align-items: center; gap: var(--space-1); color: var(--text-link); min-height: var(--control-h); text-decoration: underline; text-underline-offset: 0.2em; &:focus-visible { outline: none; box-shadow: var(--focus-ring); border-radius: var(--radius-sm); } }
+  @media (hover: hover) and (pointer: fine) { .detail__link:hover { text-decoration-thickness: 2px; } }
+  .form { display: flex; flex-direction: column; gap: var(--space-4); max-width: var(--container-sm); }
   .actions { display: flex; gap: var(--space-2); justify-content: flex-end; flex-wrap: wrap; }
   .actions--start { justify-content: flex-start; }
   .sched__words { display: flex; align-items: center; gap: var(--space-2); margin: 0; font-size: var(--fs-lg); font-weight: var(--fw-semibold); color: var(--text-1); }
   .sched__next { margin: var(--space-2) 0 var(--space-4); min-height: 1.4em; font-size: var(--fs-sm); color: var(--text-2); }
   .status { margin: 0; min-height: 1.4em; font-size: var(--fs-sm); color: var(--text-2); }
   .mt { margin-top: var(--space-3); }
-  .mono { font-family: var(--font-mono, ui-monospace, monospace); }
+  .mono { font-family: var(--font-mono); }
 </style>

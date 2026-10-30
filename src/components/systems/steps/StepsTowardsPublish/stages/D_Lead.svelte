@@ -8,6 +8,11 @@
   import { t } from '$lib/i18n/translations';
 
   export let canReveal = false;
+  // Entrance motion is skipped for people who asked for less motion.
+  const still =
+    typeof window !== 'undefined' &&
+    (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches || document.documentElement.dataset.motion === 'reduced');
+  const d = (ms: number) => (still ? 0 : ms);
 
   // Helper function to clean the markdown dashes from the title if they exist in translation
   $: cleanTitle = $t.lead.title.replace(/--/g, '').trim();
@@ -17,18 +22,18 @@
   <div class="lead-container">
     
     {#if canReveal}
-      <div class="header-group" in:fly={{ y: 20, duration: 800, easing: quadOut }}>
+      <div class="header-group" in:fly={{ y: 20, duration: d(800), easing: quadOut }}>
         <h1 class="main-title">
           {cleanTitle}
         </h1>
-        <div class="underline"></div>
+        <div class="underline" aria-hidden="true"></div>
       </div>
 
-      <p class="recommendation-text" in:fly={{ y: 20, duration: 800, delay: 150, easing: quadOut }}>
+      <p class="recommendation-text" in:fly={{ y: 20, duration: d(800), delay: d(150), easing: quadOut }}>
         {$t.lead.recommendation}
       </p>
 
-      <div class="input-group" in:fly={{ y: 20, duration: 800, delay: 300, easing: quadOut }}>
+      <div class="input-group" in:fly={{ y: 20, duration: d(800), delay: d(300), easing: quadOut }}>
         <h3 class="question-label">
           {$t.lead.question}
         </h3>
@@ -43,7 +48,7 @@
         </div>
       </div>
 
-      <div class="submit-wrapper" in:fly={{ y: 10, duration: 800, delay: 450, easing: quadOut }}>
+      <div class="submit-wrapper" in:fly={{ y: 10, duration: d(800), delay: d(450), easing: quadOut }}>
         <SubmitButton callback={() => saveToStore({ stepsIndex: $store.stepsIndex + 1 })}/>
       </div>
     {/if}
@@ -52,99 +57,90 @@
 </Centered>
 
 <style lang="scss">
-  /* Global Modern Variables */
-  :global(:root) {
-    --lead-primary: #1a1a1a;
-    --lead-secondary: #666;
-    --lead-accent: #007aff; /* Adjust to your brand color */
-    --ease-elastic: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  }
-
+  /* One question per screen: display title, one quiet line, the field, the action. */
   .lead-container {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: var(--space-6);
     width: 100%;
-    max-width: 600px; /* Optimal reading width */
+    max-width: var(--container-sm);
     margin: 0 auto;
-    padding: 1rem 0;
+    padding: var(--space-4) var(--gutter);
   }
 
-  /* Typography & Titles */
   .header-group {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    gap: var(--space-5);
     text-align: center;
   }
 
   .main-title {
-    font-size: clamp(2rem, 5vw, 3rem); /* Responsive typography */
-    font-weight: 800;
-    line-height: 1.1;
     margin: 0;
-    letter-spacing: -0.03em;
-    text-wrap: balance; /* Modern CSS: balances text lines automatically */
-    
-    /* Gradient Text Effect */
-    background: linear-gradient(135deg, var(--lead-primary) 0%, #434343 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    font-family: var(--font-display);
+    font-size: var(--fs-4xl);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-display);
+    letter-spacing: var(--tracking-display);
+    color: var(--text-1);
+    text-wrap: balance;
   }
 
-  /* Decorative underline */
   .underline {
-    width: 60px;
-    height: 4px;
-    background: var(--lead-accent);
-    border-radius: 2px;
+    width: 3rem;
+    height: 2px;
+    background: var(--text-1);
+    border-radius: var(--radius-full);
   }
 
-  /* Body Text */
   .recommendation-text {
-    font-size: 1.125rem;
-    line-height: 1.6;
-    color: var(--lead-secondary);
-    text-align: center;
     margin: 0;
-    font-weight: 400;
-    text-wrap: pretty; /* Prevents orphans/widows */
+    font-size: var(--fs-lg);
+    line-height: var(--lh-snug);
+    color: var(--text-2);
+    text-align: center;
+    text-wrap: pretty;
   }
 
-  /* Input Section */
   .input-group {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
-    margin-top: 1rem;
+    gap: var(--space-2);
+    margin-top: var(--space-3);
   }
 
   .question-label {
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-weight: 700;
-    color: var(--lead-secondary);
     margin: 0;
-    margin-left: 4px; /* Align slightly with input field curvature */
+    font-family: var(--font-body);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    letter-spacing: 0;
+    color: var(--text-1);
   }
 
-  .input-wrapper {
-    /* Wraps the Link component to ensure it sits nicely */
-    transition: transform 0.2s ease;
-    &:focus-within {
-      transform: translateY(-2px);
-    }
-  }
-
-  /* Button Area */
   .submit-wrapper {
     display: flex;
     justify-content: flex-end;
-    margin-top: 0.5rem;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(0,0,0,0.05); /* Subtle separation */
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--border-1);
+  }
+
+  /* Phones: the action sits in the thumb zone. */
+  @media (max-width: 40rem) {
+    .submit-wrapper {
+      position: sticky;
+      bottom: 0;
+      justify-content: stretch;
+      margin-inline: calc(-1 * var(--gutter));
+      padding: var(--space-3) var(--gutter) calc(var(--space-3) + env(safe-area-inset-bottom));
+      background: var(--surface-glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+
+      > :global(*) {
+        flex: 1;
+      }
+    }
   }
 </style>

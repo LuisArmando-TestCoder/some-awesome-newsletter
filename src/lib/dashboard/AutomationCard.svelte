@@ -6,7 +6,6 @@
   import Button from "./ui/Button.svelte";
   import ToggleSwitch from "./ui/ToggleSwitch.svelte";
   import StatusPill from "./ui/StatusPill.svelte";
-  import Skeleton from "./ui/Skeleton.svelte";
   import ScheduleEditor from "./ScheduleEditor.svelte";
   import { confirmAction } from "./ui/confirm";
   import { toast } from "$lib/ui/components/toast";
@@ -117,11 +116,14 @@
 </script>
 
 <Card as="article">
-  <div class="ac">
+  <div class="ac" class:is-off={!automation.enabled} aria-busy={busy || running || savingSchedule}>
     <span class="ac__icon" class:off={!automation.enabled} aria-hidden="true"><Icon name={icon} size={22} /></span>
     <div class="ac__body">
       <div class="ac__top">
-        <h3 class="ac__title">{title}</h3>
+        <h3 class="ac__title">
+          <span class="ac__state" aria-hidden="true"></span>
+          {title}
+        </h3>
         <ToggleSwitch checked={automation.enabled} label={automation.enabled ? $dtx("dash.common.on") : $dtx("dash.common.off")} {busy} onchange={toggle} />
       </div>
       <p class="ac__sentence">{sentence}</p>
@@ -152,19 +154,28 @@
           <Button size="sm" variant="secondary" icon="play" loading={running} onclick={runNow}>{$dtx("dash.automations.runNow")}</Button>
         {/if}
         {#if automation.trigger?.type === "schedule" && automation.newsSourceIds?.length}
-          <Button size="sm" variant="tertiary" icon="clock" onclick={() => (editing = !editing)}>{$dtx("dash.automations.schedule")}</Button>
+          <button type="button" class="ac__disclose" aria-expanded={editing} aria-controls="ac-sched-{automation.id}" on:click={() => (editing = !editing)}>
+            <Icon name="clock" size={16} />
+            <span>{$dtx("dash.automations.schedule")}</span>
+            <svg class="chevron" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          </button>
         {/if}
-        <Button size="sm" variant="tertiary" onclick={toggleRuns}>{$dtx("dash.automations.history")}</Button>
+        <button type="button" class="ac__disclose" aria-expanded={showRuns} aria-controls="ac-runs-{automation.id}" on:click={toggleRuns}>
+          <span>{$dtx("dash.automations.history")}</span>
+          <svg class="chevron" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        </button>
       </div>
       {#if editing}
-        <div class="ac__panel">
+        <div class="ac__panel" id="ac-sched-{automation.id}">
           <ScheduleEditor {cron} timezone={(automation.trigger?.params?.tz as string) || null} saving={savingSchedule} onsave={saveSchedule} oncancel={() => (editing = false)} />
         </div>
       {/if}
       {#if showRuns}
-        <div class="ac__panel" aria-live="polite">
+        <div class="ac__panel" id="ac-runs-{automation.id}" aria-live="polite" aria-busy={runsState === "loading"}>
           {#if runsState === "loading"}
-            <Skeleton lines={3} />
+            <ul class="runs runs--skeleton" aria-hidden="true">
+              {#each [0, 1, 2] as i (i)}<li><span class="sk sk--pill"></span><span class="sk sk--line"></span><span class="sk sk--time"></span></li>{/each}
+            </ul>
           {:else if runs.length === 0}
             <p class="muted">{$dtx("dash.automations.historyEmpty")}</p>
           {:else}
@@ -186,24 +197,62 @@
 </Card>
 
 <style lang="scss">
-  .ac { display: flex; gap: var(--space-4); align-items: flex-start; }
-  .ac__icon { display: grid; place-items: center; width: 44px; height: 44px; border-radius: var(--radius-md); background: var(--accent-soft); color: var(--accent); flex-shrink: 0;
-    &.off { background: var(--surface-2); color: var(--text-3); } }
+  .ac { display: flex; gap: var(--space-4); align-items: flex-start; transition: opacity var(--dur-base) var(--ease-out); }
+  .ac[aria-busy="true"] { cursor: progress; }
+  .ac__icon {
+    display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border-radius: var(--radius-md);
+    background: var(--surface-2); color: var(--text-1); border: 1px solid var(--border-1); flex-shrink: 0;
+    transition: color var(--dur-base) var(--ease-out), background-color var(--dur-base) var(--ease-out);
+    &.off { color: var(--text-3); background: transparent; border-style: dashed; }
+  }
   .ac__body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--space-3); }
   .ac__top { display: flex; justify-content: space-between; align-items: center; gap: var(--space-3); flex-wrap: wrap; }
-  .ac__title { margin: 0; font-size: var(--fs-md); font-weight: var(--fw-semibold); color: var(--text-1); overflow-wrap: anywhere; }
+  .ac__title { display: flex; align-items: center; gap: var(--space-2); margin: 0; font-size: var(--fs-md); font-weight: var(--fw-semibold); color: var(--text-1); overflow-wrap: anywhere; }
+  /* Running or paused, shown by a filled or hollow dot next to the title; the switch label says it in words. */
+  .ac__state { width: 8px; height: 8px; border-radius: var(--radius-full); background: var(--success); flex-shrink: 0; }
+  .is-off .ac__state { background: transparent; box-shadow: inset 0 0 0 1.5px var(--text-3); }
+  .is-off .ac__sentence { color: var(--text-3); }
   .ac__sentence { margin: 0; color: var(--text-2); font-size: var(--fs-sm); line-height: var(--lh-normal); max-width: 70ch; }
-  .ac__meta { display: flex; gap: var(--space-5); flex-wrap: wrap; margin: 0;
+  .ac__meta {
+    display: flex; gap: var(--space-2) var(--space-6); flex-wrap: wrap; margin: 0; padding: var(--space-3) 0 0; border-top: 1px solid var(--border-1);
     div { display: flex; flex-direction: column; gap: var(--space-1); }
     dt { font-size: var(--fs-xs); color: var(--text-3); font-weight: var(--fw-medium); }
-    dd { margin: 0; display: flex; gap: var(--space-2); align-items: center; font-size: var(--fs-sm); color: var(--text-1); } }
-  .ac__actions { display: flex; gap: var(--space-2); flex-wrap: wrap; align-items: center; }
-  .ac__panel { border-top: 1px solid var(--border-1); padding-top: var(--space-4); }
+    dd { margin: 0; display: flex; gap: var(--space-2); align-items: center; font-size: var(--fs-sm); color: var(--text-1); font-variant-numeric: tabular-nums; }
+  }
+  .ac__actions { display: flex; gap: var(--space-2) var(--space-3); flex-wrap: wrap; align-items: center; }
+  .ac__disclose {
+    display: inline-flex; align-items: center; gap: var(--space-2);
+    min-height: var(--control-h-sm); padding: 0 var(--space-3);
+    border: 0; border-radius: var(--radius-full); background: transparent;
+    color: var(--text-1); font: inherit; font-size: var(--fs-sm); font-weight: var(--fw-medium); cursor: pointer;
+    transition: background-color var(--t-out) var(--ease-out), transform var(--t-out) var(--ease-out);
+    &:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+    &:active { transform: scale(0.97); transition-duration: 60ms; }
+    &[aria-expanded="true"] { background: var(--surface-2); }
+    .chevron { color: var(--text-3); }
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .ac__disclose:hover { background: var(--surface-2); transition-duration: var(--t-in); }
+  }
+  .ac__panel { border-top: 1px solid var(--border-1); padding-top: var(--space-4); animation: ac-open var(--dur-base) var(--ease-out); }
   .muted { margin: 0; color: var(--text-2); font-size: var(--fs-sm); }
-  .runs { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-2);
-    li { display: flex; gap: var(--space-3); align-items: center; font-size: var(--fs-sm); flex-wrap: wrap; }
-    time { color: var(--text-3); font-size: var(--fs-xs); margin-left: auto; } }
-  .runs__what { color: var(--text-1); min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1 1 160px; }
-  .runs__n { color: var(--text-2); }
+  .runs {
+    list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column;
+    li { display: flex; gap: var(--space-3); align-items: center; font-size: var(--fs-sm); flex-wrap: wrap; padding: var(--space-2) 0; border-top: 1px solid var(--border-1); }
+    li:first-child { border-top: 0; padding-top: 0; }
+    time { color: var(--text-3); font-size: var(--fs-xs); margin-left: auto; font-variant-numeric: tabular-nums; }
+  }
+  .runs__what { color: var(--text-1); min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1 1 10rem; }
+  .runs__n { color: var(--text-2); font-variant-numeric: tabular-nums; }
+  .sk { display: block; border-radius: var(--radius-sm); background: var(--surface-2); animation: ac-pulse 1.4s var(--ease-in-out) infinite; }
+  .sk--pill { width: 4.5rem; height: 1.375rem; border-radius: var(--radius-full); }
+  .sk--line { flex: 1; height: 0.875rem; }
+  .sk--time { width: 3rem; height: 0.75rem; }
+  @keyframes ac-pulse { 50% { opacity: 0.55; } }
+  @keyframes ac-open { from { opacity: 0; transform: translateY(-4px); } }
   @media (max-width: 480px) { .ac { flex-direction: column; } }
+  @media (prefers-reduced-motion: reduce) {
+    .sk, .ac__panel { animation: none; }
+    .ac__disclose:active { transform: none; }
+  }
 </style>

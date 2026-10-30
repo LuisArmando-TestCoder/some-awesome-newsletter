@@ -1014,6 +1014,316 @@ export default {
       "invitedBy": "You have been invited by {configuratorId}."
     }
   },
+  "showcase": {
+    "sampleBadge": "Sample data",
+    "exampleLabel": "Example business",
+    "caption": "{business} is an example {kind}. Names, articles and numbers in this view are placeholders that show what your dashboard looks like after a few weeks.",
+    "pause": "Pause the animation",
+    "play": "Play the animation",
+    "scenesLabel": "Parts of the dashboard",
+    "examplesLabel": "Example businesses",
+    "appUrl": "app.aiban.news",
+    "nav": { "home": "Home", "automations": "Automations", "sources": "Sources", "subscribers": "Subscribers", "reports": "Reports", "blog": "Blog" },
+    "scenes": {
+      "home": "Overview",
+      "issue": "The issue",
+      "reports": "Clicks",
+      "subscribers": "Subscribers",
+      "automation": "Schedule",
+      "source": "Your website",
+      "voice": "Your voice",
+      "signup": "Signup form",
+      "blog": "Blog",
+      "import": "Import"
+    },
+    "ui": {
+      "hello": "Hello, {business}",
+      "narrative": "{subscribers} readers in {languages} languages. The next issue goes out {schedule}.",
+      "kpiSubscribers": "Subscribers",
+      "kpiLanguages": "Languages",
+      "kpiClicks": "Clicks, last 7 days",
+      "kpiAutomations": "Automations on",
+      "kpiNew": "{count} new this week",
+      "nextIssue": "Next issue",
+      "ready": "Ready",
+      "activity": "Recent activity",
+      "from": "From",
+      "subject": "Subject",
+      "readMore": "Read the full article",
+      "readerLanguage": "Reader language",
+      "clicksTitle": "Clicks, last 7 days",
+      "mostClicked": "Most clicked",
+      "clicks": "clicks",
+      "days": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+      "subscribersTitle": "Subscribers",
+      "language": "Language",
+      "joinedVia": "Joined via",
+      "newSubscriber": "New subscriber",
+      "automationTitle": "Weekly issue",
+      "automationSentence": "{schedule}, write an issue from the newest article and send it to every reader in their language.",
+      "on": "On",
+      "off": "Off",
+      "automationOn": "Automation turned on",
+      "sourceLabel": "Where your content comes from",
+      "sourceButton": "Read my site",
+      "reading": "Reading your site",
+      "found": "Found {count} articles",
+      "voiceReader": "Your ideal reader",
+      "voiceTone": "How it should sound",
+      "signupHeading": "Get our weekly notes",
+      "signupEmail": "Email address",
+      "signupLanguage": "Language",
+      "signupButton": "Subscribe",
+      "signupDone": "Check your inbox to confirm.",
+      "blogTitle": "Articles from {business}",
+      "importFile": "clients.csv",
+      "importing": "Importing contacts",
+      "imported": "{count} contacts added",
+      "sources": { "form": "Signup form", "import": "Import", "manual": "Added by hand" }
+    },
+    "examples": [
+      {
+        "business": "Northfield Studio",
+        "kind": "web design agency",
+        "site": "northfield.studio",
+        "schedule": "every Monday at 9:00",
+        "subscribers": 312,
+        "newThisWeek": 9,
+        "clicks7": 84,
+        "automationsOn": 2,
+        "languages": [
+          { "code": "en", "name": "English", "share": 58 },
+          { "code": "es", "name": "Spanish", "share": 31 },
+          { "code": "pt", "name": "Portuguese", "share": 11 }
+        ],
+        "reader": "Owners of clinics, shops and studios who want a website that brings in clients, not a portfolio piece.",
+        "tones": ["Warm", "Plain", "Practical"],
+        "articles": [
+          "How we rebuilt a dental clinic website in six weeks",
+          "Five things to fix before you redesign",
+          "Why your booking button should be orange"
+        ],
+        "issue": {
+          "title": "How we rebuilt a dental clinic website in six weeks",
+          "langs": [
+            { "code": "en", "name": "English", "subject": "A clinic website rebuilt in six weeks", "summary": "We moved booking to the top of every page and cut the forms from nine fields to three. Here is what changed for the clinic." },
+            { "code": "es", "name": "Español", "subject": "El sitio de una clínica, renovado en seis semanas", "summary": "Pusimos la reserva arriba en cada página y redujimos los formularios de nueve campos a tres. Esto es lo que cambió para la clínica." },
+            { "code": "pt", "name": "Português", "subject": "O site de uma clínica, refeito em seis semanas", "summary": "Colocamos o agendamento no topo de cada página e reduzimos os formulários de nove campos para três. Veja o que mudou para a clínica." }
+          ]
+        },
+        "clicksByDay": [21, 17, 12, 9, 11, 6, 8],
+        "topLinks": [
+          { "title": "Clinic case study", "clicks": 38 },
+          { "title": "Five things to fix before you redesign", "clicks": 27 },
+          { "title": "Book a call", "clicks": 19 }
+        ],
+        "people": [
+          { "email": "lucia.r@example.com", "lang": "ES", "via": "form" },
+          { "email": "mark@example.org", "lang": "EN", "via": "import" },
+          { "email": "joana.s@example.net", "lang": "PT", "via": "form" },
+          { "email": "dr.chen@example.com", "lang": "EN", "via": "manual" }
+        ],
+        "activity": [
+          "Issue sent to 312 readers in 3 languages",
+          "38 clicks on the clinic case study",
+          "Lucia joined from the signup form and reads in Spanish"
+        ],
+        "importCount": 148
+      },
+      {
+        "business": "Brightline Software",
+        "kind": "software company",
+        "site": "brightline.dev",
+        "schedule": "on the 1st of each month at 10:00",
+        "subscribers": 1240,
+        "newThisWeek": 23,
+        "clicks7": 211,
+        "automationsOn": 1,
+        "languages": [
+          { "code": "en", "name": "English", "share": 64 },
+          { "code": "de", "name": "German", "share": 22 },
+          { "code": "fr", "name": "French", "share": 14 }
+        ],
+        "reader": "Office managers and IT leads at clients who use our booking software every day.",
+        "tones": ["Clear", "Short", "Friendly"],
+        "articles": [
+          "Release 4.2: recurring appointments",
+          "Faster reports for large teams",
+          "How to move your calendar from a spreadsheet"
+        ],
+        "issue": {
+          "title": "Release 4.2: recurring appointments",
+          "langs": [
+            { "code": "en", "name": "English", "subject": "New this month: recurring appointments", "summary": "You can now repeat any appointment weekly or monthly. Reports for teams over 50 people also load faster." },
+            { "code": "de", "name": "Deutsch", "subject": "Neu diesen Monat: wiederkehrende Termine", "summary": "Sie können jetzt jeden Termin wöchentlich oder monatlich wiederholen. Berichte für Teams ab 50 Personen laden außerdem schneller." },
+            { "code": "fr", "name": "Français", "subject": "Nouveau ce mois-ci : les rendez-vous récurrents", "summary": "Vous pouvez désormais répéter un rendez-vous chaque semaine ou chaque mois. Les rapports des équipes de plus de 50 personnes s'affichent aussi plus vite." }
+          ]
+        },
+        "clicksByDay": [64, 48, 33, 25, 19, 9, 13],
+        "topLinks": [
+          { "title": "Recurring appointments guide", "clicks": 96 },
+          { "title": "Release notes 4.2", "clicks": 71 },
+          { "title": "Moving from a spreadsheet", "clicks": 44 }
+        ],
+        "people": [
+          { "email": "it@example.de", "lang": "DE", "via": "import" },
+          { "email": "sophie.m@example.fr", "lang": "FR", "via": "form" },
+          { "email": "ops@example.com", "lang": "EN", "via": "import" },
+          { "email": "k.weber@example.de", "lang": "DE", "via": "form" }
+        ],
+        "activity": [
+          "Issue sent to 1240 readers in 3 languages",
+          "96 clicks on the recurring appointments guide",
+          "23 contacts imported from clients.csv"
+        ],
+        "importCount": 412
+      },
+      {
+        "business": "Casa Verde Realty",
+        "kind": "real estate agency",
+        "site": "casaverde.homes",
+        "schedule": "every Thursday at 8:00",
+        "subscribers": 586,
+        "newThisWeek": 14,
+        "clicks7": 163,
+        "automationsOn": 2,
+        "languages": [
+          { "code": "es", "name": "Spanish", "share": 47 },
+          { "code": "en", "name": "English", "share": 41 },
+          { "code": "fr", "name": "French", "share": 12 }
+        ],
+        "reader": "Families and retirees from abroad looking for a home near the coast, and owners who may sell.",
+        "tones": ["Warm", "Local", "Calm"],
+        "articles": [
+          "Three new homes near the beach this week",
+          "What closing costs look like for foreign buyers",
+          "Prices in the old town, autumn update"
+        ],
+        "issue": {
+          "title": "Three new homes near the beach this week",
+          "langs": [
+            { "code": "es", "name": "Español", "subject": "Tres casas nuevas cerca de la playa", "summary": "Una casa de dos habitaciones con jardín, un apartamento con vista al mar y una casa para reformar a diez minutos del centro." },
+            { "code": "en", "name": "English", "subject": "Three new homes near the beach", "summary": "A two bedroom house with a garden, a flat with a sea view and a house to renovate ten minutes from the center." },
+            { "code": "fr", "name": "Français", "subject": "Trois nouvelles maisons près de la plage", "summary": "Une maison de deux chambres avec jardin, un appartement avec vue sur la mer et une maison à rénover à dix minutes du centre." }
+          ]
+        },
+        "clicksByDay": [12, 9, 15, 52, 38, 21, 16],
+        "topLinks": [
+          { "title": "Flat with a sea view", "clicks": 71 },
+          { "title": "Two bedroom house with a garden", "clicks": 54 },
+          { "title": "Closing costs for foreign buyers", "clicks": 38 }
+        ],
+        "people": [
+          { "email": "familia.ortiz@example.com", "lang": "ES", "via": "form" },
+          { "email": "j.dupont@example.fr", "lang": "FR", "via": "form" },
+          { "email": "tom.and.ann@example.org", "lang": "EN", "via": "manual" },
+          { "email": "rmora@example.net", "lang": "ES", "via": "import" }
+        ],
+        "activity": [
+          "Issue sent to 586 readers in 3 languages",
+          "71 clicks on the flat with a sea view",
+          "A reader in France joined from the signup form"
+        ],
+        "importCount": 203
+      },
+      {
+        "business": "Mora and Partners",
+        "kind": "accounting firm",
+        "site": "morapartners.co",
+        "schedule": "every other Tuesday at 7:30",
+        "subscribers": 428,
+        "newThisWeek": 6,
+        "clicks7": 97,
+        "automationsOn": 1,
+        "languages": [
+          { "code": "en", "name": "English", "share": 52 },
+          { "code": "es", "name": "Spanish", "share": 38 },
+          { "code": "it", "name": "Italian", "share": 10 }
+        ],
+        "reader": "Owners of small companies who want to know what changes in taxes and payroll, without the jargon.",
+        "tones": ["Calm", "Precise", "Plain"],
+        "articles": [
+          "The quarterly tax deadline moves to the 15th",
+          "What to keep when you hire your first employee",
+          "Receipts: paper or photo?"
+        ],
+        "issue": {
+          "title": "The quarterly tax deadline moves to the 15th",
+          "langs": [
+            { "code": "en", "name": "English", "subject": "Your quarterly deadline moves to the 15th", "summary": "The filing date for the next quarter moves five days later. Here is what to send us and when, so nothing is late." },
+            { "code": "es", "name": "Español", "subject": "Tu plazo trimestral pasa al día 15", "summary": "La fecha de presentación del próximo trimestre se mueve cinco días. Esto es lo que debes enviarnos y cuándo, para que nada llegue tarde." },
+            { "code": "it", "name": "Italiano", "subject": "La scadenza trimestrale passa al 15", "summary": "La data di presentazione del prossimo trimestre slitta di cinque giorni. Ecco cosa inviarci e quando, perché nulla arrivi in ritardo." }
+          ]
+        },
+        "clicksByDay": [33, 24, 14, 8, 7, 4, 7],
+        "topLinks": [
+          { "title": "Checklist for the 15th", "clicks": 46 },
+          { "title": "Hiring your first employee", "clicks": 29 },
+          { "title": "Book a review call", "clicks": 22 }
+        ],
+        "people": [
+          { "email": "bakery.owner@example.com", "lang": "EN", "via": "import" },
+          { "email": "c.rossi@example.it", "lang": "IT", "via": "form" },
+          { "email": "taller.luna@example.net", "lang": "ES", "via": "import" },
+          { "email": "finance@example.org", "lang": "EN", "via": "manual" }
+        ],
+        "activity": [
+          "Issue sent to 428 readers in 3 languages",
+          "46 clicks on the checklist for the 15th",
+          "6 new readers this week"
+        ],
+        "importCount": 97
+      },
+      {
+        "business": "Run Better Coaching",
+        "kind": "running coach",
+        "site": "runbetter.coach",
+        "schedule": "every Sunday at 18:00",
+        "subscribers": 907,
+        "newThisWeek": 31,
+        "clicks7": 248,
+        "automationsOn": 2,
+        "languages": [
+          { "code": "en", "name": "English", "share": 49 },
+          { "code": "es", "name": "Spanish", "share": 33 },
+          { "code": "de", "name": "German", "share": 18 }
+        ],
+        "reader": "Adults training for their first half marathon who run three times a week before work.",
+        "tones": ["Encouraging", "Direct", "Short"],
+        "articles": [
+          "This week: the long run, slower than you think",
+          "Shoes after 500 kilometers",
+          "A 20 minute strength routine"
+        ],
+        "issue": {
+          "title": "This week: the long run, slower than you think",
+          "langs": [
+            { "code": "en", "name": "English", "subject": "Your long run should feel too easy", "summary": "Keep it slow enough to talk. This week's plan adds ten minutes and one short hill session." },
+            { "code": "es", "name": "Español", "subject": "Tu tirada larga debería sentirse demasiado fácil", "summary": "Mantén un ritmo que te deje hablar. El plan de esta semana suma diez minutos y una sesión corta de cuestas." },
+            { "code": "de", "name": "Deutsch", "subject": "Dein langer Lauf sollte sich zu leicht anfühlen", "summary": "Lauf so langsam, dass du noch reden kannst. Der Plan dieser Woche bringt zehn Minuten mehr und eine kurze Bergeinheit." }
+          ]
+        },
+        "clicksByDay": [18, 22, 26, 31, 35, 49, 67],
+        "topLinks": [
+          { "title": "This week's training plan", "clicks": 121 },
+          { "title": "20 minute strength routine", "clicks": 78 },
+          { "title": "Shoes after 500 kilometers", "clicks": 49 }
+        ],
+        "people": [
+          { "email": "ana.runs@example.com", "lang": "ES", "via": "form" },
+          { "email": "felix.k@example.de", "lang": "DE", "via": "form" },
+          { "email": "sam@example.org", "lang": "EN", "via": "form" },
+          { "email": "club.secretary@example.net", "lang": "EN", "via": "import" }
+        ],
+        "activity": [
+          "Issue sent to 907 readers in 3 languages",
+          "121 clicks on this week's training plan",
+          "31 new readers this week, most from the signup form"
+        ],
+        "importCount": 260
+      }
+    ]
+  },
   "errorPage": {
     "notFoundEyebrow": "Error 404",
     "notFoundTitle": "We could not find this page",

@@ -10,6 +10,8 @@
 	import IssuePreview from '$lib/content/landing/IssuePreview.svelte';
 	import HistoryTimeline from '$lib/content/landing/HistoryTimeline.svelte';
 	import ChapterRail from '$lib/content/landing/ChapterRail.svelte';
+	import DashboardShowcase from '$lib/content/showcase/DashboardShowcase.svelte';
+	import { fill as fillShowcase } from '$lib/content/showcase/types';
 	import { reveal } from '$lib/content/landing/reveal';
 	import {
 		normalizeSite,
@@ -35,6 +37,28 @@
 
 	// Locale files that predate the landing keys fall back to English.
 	const L = $derived(($t as typeof en).landing ?? en.landing);
+	// Sample dashboards (placeholder data, labelled as such): one example business per use case.
+	const SC = $derived(($t as typeof en).showcase ?? en.showcase);
+	let useCase = $state(0);
+	let useScene = $state(0);
+	const useExample = $derived(SC.examples[useCase % SC.examples.length]);
+	function pickUseCase(i: number) {
+		useCase = i;
+		useScene = 0;
+	}
+	function onUseCaseKey(e: KeyboardEvent, i: number) {
+		const n = L.useCases.items.length;
+		let to = -1;
+		if (e.key === 'ArrowDown' || e.key === 'ArrowRight') to = (i + 1) % n;
+		else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') to = (i - 1 + n) % n;
+		else if (e.key === 'Home') to = 0;
+		else if (e.key === 'End') to = n - 1;
+		if (to < 0) return;
+		e.preventDefault();
+		pickUseCase(to);
+		document.getElementById(`usecase-tab-${to}`)?.focus();
+	}
+	const GROW_SCENES = ['signup', 'blog', 'import'] as const;
 
 	let siteInput = $state('');
 	let host = $state<string | null>(null);
@@ -273,6 +297,16 @@
 				<ul class="tiles">
 					{#each L.grow.items as item, i}
 						<li class="tile" use:reveal style:--i={i}>
+							{#if GROW_SCENES[i]}
+								<DashboardShowcase
+									class="tile__demo"
+									example={SC.examples[0]}
+									scenes={[GROW_SCENES[i]]}
+									variant="bare"
+									duration={7000}
+									label="{item.title}. {SC.sampleBadge}"
+								/>
+							{/if}
 							<p class="tile__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</p>
 							<h3 class="tile__title">{item.title}</h3>
 							<p class="tile__body">{item.body}</p>
@@ -290,14 +324,35 @@
 					<h2 id="uses-title" class="chapter__title">{L.useCases.title}</h2>
 					<p class="chapter__lead">{L.useCases.lead}</p>
 				</header>
-				<ul class="uses">
-					{#each L.useCases.items as item}
-						<li class="uses__item" use:reveal>
-							<h3 class="uses__title">{item.title}</h3>
-							<p class="uses__body">{item.body}</p>
-						</li>
-					{/each}
-				</ul>
+				<div class="uses">
+					<div class="uses__list" role="tablist" aria-orientation="vertical" aria-label={SC.examplesLabel}>
+						{#each L.useCases.items as item, i (item.title)}
+							<button
+								id="usecase-tab-{i}"
+								type="button"
+								role="tab"
+								class="uses__tab"
+								aria-selected={i === useCase}
+								aria-controls="usecase-panel"
+								tabindex={i === useCase ? 0 : -1}
+								onclick={() => pickUseCase(i)}
+								onkeydown={(e) => onUseCaseKey(e, i)}
+							>
+								<span class="uses__title">{item.title}</span>
+								<span class="uses__body">{item.body}</span>
+							</button>
+						{/each}
+					</div>
+					<div id="usecase-panel" class="uses__panel" role="tabpanel" aria-labelledby="usecase-tab-{useCase}" use:reveal>
+						<DashboardShowcase
+							example={useExample}
+							scenes={['home', 'issue', 'reports']}
+							bind:scene={useScene}
+							onloop={() => pickUseCase((useCase + 1) % L.useCases.items.length)}
+							caption={fillShowcase(SC.caption, { business: useExample.business, kind: useExample.kind })}
+						/>
+					</div>
+				</div>
 			</div>
 		</section>
 
@@ -813,26 +868,26 @@
 	.tiles {
 		display: grid;
 		gap: var(--space-5, 24px);
-		@media (min-width: 48rem) {
-			grid-template-columns: repeat(3, 1fr);
+		@media (min-width: 64rem) {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
 		}
 	}
 	.tile {
 		background: var(--surface-2);
 		border-radius: var(--radius-xl, 24px);
-		padding: var(--space-7, 48px) var(--space-6, 32px);
-		min-height: 18rem;
+		padding: var(--space-6, 32px);
+		min-width: 0;
 		display: flex;
 		flex-direction: column;
 	}
 	.tile__num {
-		margin: 0 0 auto;
+		margin: 0;
 		font-size: var(--fs-sm, 0.875rem);
 		font-variant-numeric: tabular-nums;
 		color: var(--text-3);
 	}
 	.tile__title {
-		margin: var(--space-7, 48px) 0 var(--space-2, 8px);
+		margin: var(--space-3, 12px) 0 var(--space-2, 8px);
 		font-family: var(--font-display);
 		font-size: var(--fs-2xl, 1.75rem);
 		font-weight: var(--fw-bold, 700);
@@ -844,33 +899,102 @@
 		line-height: 1.55;
 	}
 
-	/* 07 Use cases: an editorial list with type hanging left. */
-	.uses__item {
+	/* 07 Use cases: pick a business on the left, its sample dashboard plays on the right. */
+	.uses {
 		display: grid;
-		gap: var(--space-2, 8px) var(--space-7, 48px);
-		padding-block: var(--space-6, 32px);
-		border-top: 1px solid var(--border-1);
-		@media (min-width: 48rem) {
-			grid-template-columns: 5fr 7fr;
-			align-items: baseline;
+		gap: var(--space-6, 32px) var(--space-8, 64px);
+		@media (min-width: 64rem) {
+			grid-template-columns: 4fr 8fr;
+			align-items: start;
 		}
-		&:last-child {
-			border-bottom: 1px solid var(--border-1);
+	}
+	.uses__list {
+		display: grid;
+		border-top: 1px solid var(--border-1);
+		@media (max-width: 63.99rem) {
+			display: flex;
+			flex-wrap: wrap;
+			gap: var(--space-2, 8px);
+			border-top: 0;
+		}
+	}
+	.uses__tab {
+		display: grid;
+		gap: var(--space-2, 8px);
+		width: 100%;
+		padding: var(--space-4, 16px) 0 var(--space-4, 16px) var(--space-4, 16px);
+		border: 0;
+		border-bottom: 1px solid var(--border-1);
+		border-radius: 0;
+		background: none;
+		color: var(--text-3);
+		font: inherit;
+		text-align: left;
+		cursor: pointer;
+		box-shadow: inset 2px 0 0 transparent;
+		transition:
+			color var(--t-state) var(--ease-out),
+			box-shadow var(--t-state) var(--ease-out);
+		@media (hover: hover) and (pointer: fine) {
+			&:hover {
+				color: var(--text-1);
+				box-shadow: inset 2px 0 0 var(--border-2);
+			}
+		}
+		&:focus-visible {
+			outline: none;
+			box-shadow: var(--focus-ring);
+			border-radius: var(--radius-sm, 6px);
+		}
+		&:active {
+			transform: scale(0.99);
+		}
+		&[aria-selected='true'] {
+			color: var(--text-1);
+			box-shadow: inset 2px 0 0 var(--text-1);
+		}
+		@media (max-width: 63.99rem) {
+			width: auto;
+			min-height: 44px;
+			padding: var(--space-2, 8px) var(--space-4, 16px);
+			border: 1px solid var(--border-1);
+			border-radius: var(--radius-full, 999px);
+			box-shadow: none;
+			&[aria-selected='true'] {
+				border-color: var(--text-1);
+				box-shadow: inset 0 0 0 1px var(--text-1);
+			}
 		}
 	}
 	.uses__title {
-		margin: 0;
 		font-family: var(--font-display);
-		font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.25rem);
+		font-size: clamp(1.125rem, 1rem + 0.5vw, 1.5rem);
 		font-weight: var(--fw-semibold, 600);
-		letter-spacing: -0.03em;
-		line-height: 1.1;
+		letter-spacing: -0.02em;
+		line-height: 1.15;
+		@media (max-width: 63.99rem) {
+			font-size: var(--fs-sm, 0.875rem);
+			letter-spacing: 0;
+		}
 	}
 	.uses__body {
-		margin: 0;
-		font-size: var(--fs-lg, 1.125rem);
+		display: none;
+		font-size: var(--fs-md, 1rem);
 		color: var(--text-2);
 		line-height: 1.55;
+	}
+	@media (min-width: 64rem) {
+		.uses__tab[aria-selected='true'] .uses__body {
+			display: block;
+		}
+	}
+	.uses__panel {
+		min-width: 0;
+	}
+
+	/* Grow tiles carry a live mini view of the feature above their text. */
+	.tile :global(.tile__demo) {
+		margin: calc(var(--space-6, 32px) * -0.5) calc(var(--space-6, 32px) * -0.5) var(--space-6, 32px);
 	}
 
 	/* 10 Finale */

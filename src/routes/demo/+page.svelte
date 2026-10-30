@@ -1,6 +1,34 @@
 <script lang="ts">
   import { t } from '$lib/i18n/translations';
   import VideoFacade from '../../components/demo/VideoFacade.svelte';
+  import DashboardShowcase from '$lib/content/showcase/DashboardShowcase.svelte';
+  import { fill, type SceneId } from '$lib/content/showcase/types';
+  import en from '$lib/i18n/locales/en';
+  import { onMount } from 'svelte';
+
+  // One sample dashboard view per step (placeholder data, labelled as such).
+  const STEP_SCENES: SceneId[] = ['source', 'voice', 'automation', 'import', 'issue'];
+  let scene = 0;
+  let stepsEl: HTMLOListElement;
+  $: sc = $t?.showcase ?? en.showcase;
+  $: example = sc.examples[0];
+
+  // On wide screens the view follows the step you are reading.
+  onMount(() => {
+    if (!('IntersectionObserver' in window) || !stepsEl) return;
+    const wide = window.matchMedia('(min-width: 56rem)');
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (!wide.matches) return;
+        for (const e of entries) {
+          if (e.isIntersecting) scene = Number(e.target.getAttribute('data-step'));
+        }
+      },
+      { rootMargin: '-45% 0px -45% 0px' }
+    );
+    stepsEl.querySelectorAll('[data-step]').forEach((el: Element) => io.observe(el));
+    return () => io.disconnect();
+  });
 
   const CANONICAL = 'https://aibanewsletter.club/demo';
   // Walkthrough video that the previous demo page already embedded.
@@ -37,21 +65,34 @@
     <p class="caption">{d.videoNote ?? ''}</p>
   </section>
 
-  <!-- Steps: the title stays in view on wide screens while the list scrolls (5/7). -->
+  <!-- Steps: each step has a matching sample view of the dashboard, which stays in view on wide screens. -->
   <section class="chapter" aria-labelledby="steps-title">
-    <div class="wrap split">
+    <div class="wrap">
       <h2 id="steps-title" class="chapter__title">{d.stepsTitle ?? 'What happens after you sign up'}</h2>
-      <ol class="steps">
+    </div>
+    <div class="wrap split">
+      <ol class="steps" bind:this={stepsEl}>
         {#each d.steps ?? [] as step, i (i)}
-          <li class="step">
+          <li class="step" class:is-current={i === scene} data-step={i} aria-current={i === scene ? 'step' : undefined}>
             <span class="step__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
             <div class="step__text">
-              <h3 class="step__title">{step.title}</h3>
+              <h3 class="step__title">
+                <button type="button" class="step__btn" aria-controls="demo-showcase" on:click={() => (scene = i)}>{step.title}</button>
+              </h3>
               <p class="step__body">{step.body}</p>
             </div>
           </li>
         {/each}
       </ol>
+      <div class="showcase" id="demo-showcase">
+        <DashboardShowcase
+          {example}
+          scenes={STEP_SCENES}
+          bind:scene
+          duration={7000}
+          caption={fill(sc.caption, { business: example.business, kind: example.kind })}
+        />
+      </div>
     </div>
   </section>
 
@@ -104,20 +145,32 @@
     display: grid;
     gap: var(--space-7) var(--space-8);
   }
+  .split {
+    margin-top: var(--space-7);
+  }
   @media (min-width: 56rem) {
     .split {
       grid-template-columns: 5fr 7fr;
       align-items: start;
     }
-    .chapter__title {
+    .showcase {
       position: sticky;
-      top: calc(var(--header-h) + var(--space-6));
+      top: calc(var(--header-h) + var(--space-5));
     }
+  }
+  /* Phones: the view comes first, the steps read below it. */
+  @media (max-width: 55.99rem) {
+    .showcase {
+      order: -1;
+    }
+  }
+  .showcase {
+    min-width: 0;
   }
 
   .chapter__title {
     margin: 0;
-    max-width: 14ch;
+    max-width: 18ch;
     font-family: var(--font-display);
     font-size: var(--fs-4xl);
     font-weight: var(--fw-semibold);
@@ -137,6 +190,45 @@
     gap: var(--space-4);
     padding-block: var(--space-6);
     border-bottom: 1px solid var(--border-1);
+    box-shadow: inset 2px 0 0 transparent;
+    transition: box-shadow var(--t-state) var(--ease-out);
+  }
+  /* The step whose view is showing: ink rule + ink number, never color alone. */
+  .step.is-current {
+    box-shadow: inset 2px 0 0 var(--text-1);
+  }
+  .step.is-current .step__num {
+    color: var(--text-1);
+    font-weight: var(--fw-semibold);
+  }
+  .step__num {
+    padding-left: var(--space-4);
+  }
+  .step__btn {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    letter-spacing: inherit;
+    text-align: left;
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+    box-shadow: none;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 0.2em;
+    transition: text-decoration-color var(--t-out) var(--ease-out);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .step__btn:hover {
+      text-decoration-color: currentColor;
+      box-shadow: none;
+    }
+  }
+  .step__btn:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
   }
   .step__num {
     padding-top: 0.2em;

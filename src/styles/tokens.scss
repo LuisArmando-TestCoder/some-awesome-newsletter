@@ -267,6 +267,13 @@
   }
 }
 
+// Integer custom property so sample dashboards can count numbers up in CSS (pausable, no JS).
+@property --sc-n {
+  syntax: '<integer>';
+  inherits: false;
+  initial-value: 0;
+}
+
 // The logo mark is a black PNG: flip it to white on dark surfaces.
 :root[data-theme='dark'] img[src^='/logo/logo'] {
   filter: invert(1);

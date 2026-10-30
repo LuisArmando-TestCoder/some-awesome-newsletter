@@ -23,3 +23,10 @@ Luis asked for every page to follow the Award-Grade Web Playbook 2026 skills, th
 - `src/lib/styles/custom-select-styles.scss` and `centralized-styles.scss` still carry old hover and focus rules (overridden per component).
 - `src/styles/global.scss` (Meyer reset) is still pulled in by MenuHalf and HelpContextCard.
 - Admin strings are hard-coded English, as before.
+
+## Follow-up: animated dashboard showcases (same day)
+Luis asked that every place showing the dashboard UI plays realistic sample data and presents use cases and output.
+- `src/lib/content/showcase/DashboardShowcase.svelte` plus 10 scenes in `scenes/` (overview, the issue in three languages, clicks, subscribers, schedule, your website, your voice, signup form, blog, import). Built in HTML with the site tokens, so it follows light and dark mode. Count-ups, typing and a pointer that clicks are pure CSS, so Pause, hover, offscreen and hidden tabs freeze them. A visible Pause button is shown (WCAG 2.2.2). With reduced motion nothing plays: final states only, the tabs switch views by hand.
+- Sample data in en.ts `showcase.examples`: one fictional business per use case (agency, software company, real estate, accounting firm, running coach). The window is labelled "Sample data" and a caption says the names and numbers are placeholders. Numbers are consistent (daily clicks add up to the 7-day total, top links too).
+- Landing "Who it is for": pick a business, its dashboard plays overview, issue and clicks, then moves to the next business. "Grow your list" tiles: live signup form, blog and import. Demo page: each step has its view; on wide screens the view follows the step you are reading.
+- `/test-showcase` (noindex) previews any scene: `?scene=voice&ex=2`.

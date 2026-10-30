@@ -26,3 +26,5 @@ _deprecated
 _aiban_backups
 _ws3_tmp
 _ws4_tmp
+# Local pre-overhaul snapshots (contain secrets)
+_aiban_backups/

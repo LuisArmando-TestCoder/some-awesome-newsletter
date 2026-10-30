@@ -34,10 +34,12 @@
 //   --no-build          only fill the cache
 //
 // Provider (environment):
-//   I18N_LLM_PROVIDER   openai (default) | gemini | openrouter | anthropic | custom | echo
+//   I18N_LLM_PROVIDER   deepseek (default, DeepSeek V4 Flash) | openai | gemini | openrouter | anthropic | custom | echo
 //                       echo returns the English text unchanged: a free end-to-end test.
-//   I18N_LLM_API_KEY    falls back to OPENAI_API_KEY, GEMINI_API_KEY, OPENROUTER_API_KEY or ANTHROPIC_API_KEY
-//   I18N_LLM_MODEL      default per provider (openai: gpt-4.1-mini, gemini: gemini-2.5-flash, ...)
+//   I18N_LLM_API_KEY    falls back to DEEPSEEK_API_KEY (or OPENAI_API_KEY, GEMINI_API_KEY, ... for other providers)
+//   I18N_LLM_MODEL      default per provider (deepseek: deepseek-flash, the current id of DeepSeek V4 Flash;
+//                       the older id deepseek-v4-flash is still accepted by DeepSeek)
+//   I18N_LLM_THINKING   1 turns DeepSeek thinking mode on (off by default: faster and cheaper)
 //   I18N_LLM_BASE_URL   any OpenAI-compatible /chat/completions base URL (required for custom)
 //   I18N_LLM_JSON_MODE  1 (default) sends response_format json_object; set 0 if the provider rejects it
 
@@ -242,7 +244,7 @@ function systemPrompt(ns, code) {
     'Why you are asked: English is the only source text. Every other language file is regenerated from English by a script, a chunk at a time, and your answer is merged back by key automatically. It must therefore be machine-exact.',
     '',
     'Input: one JSON object. Each key is a JSON pointer showing where the text sits in the English file (use it and the neighbouring keys as context). Each value is the English text.',
-    'Output: the same JSON object with the same keys, in the same order, with nothing added, removed or renamed. Replace each value with its translation. Reply with the JSON object only: no explanation, no code fences.',
+    'Output (json): the same JSON object with the same keys, in the same order, with nothing added, removed or renamed. Replace each value with its translation. Reply with the JSON object only: no explanation, no code fences.',
     '',
     'Rules:',
     '- Keep every placeholder in braces exactly as written, for example {name}, {count}, {email}. Never translate or reorder the text inside the braces.',
@@ -258,6 +260,7 @@ function systemPrompt(ns, code) {
 // ---------------------------------------------------------------- LLM
 
 const PROVIDERS = {
+  deepseek: { base: 'https://api.deepseek.com', model: 'deepseek-flash', key: 'DEEPSEEK_API_KEY' },
   openai: { base: 'https://api.openai.com/v1', model: 'gpt-4.1-mini', key: 'OPENAI_API_KEY' },
   gemini: { base: 'https://generativelanguage.googleapis.com/v1beta/openai', model: 'gemini-2.5-flash', key: 'GEMINI_API_KEY' },
   openrouter: { base: 'https://openrouter.ai/api/v1', model: 'openai/gpt-4.1-mini', key: 'OPENROUTER_API_KEY' },
@@ -265,7 +268,7 @@ const PROVIDERS = {
   custom: { base: '', model: '', key: '' },
   echo: { base: '', model: 'echo', key: '' },
 };
-const PROVIDER = process.env.I18N_LLM_PROVIDER || 'openai';
+const PROVIDER = process.env.I18N_LLM_PROVIDER || 'deepseek';
 if (!PROVIDERS[PROVIDER]) die(`Unknown I18N_LLM_PROVIDER "${PROVIDER}".`);
 const P = PROVIDERS[PROVIDER];
 const BASE = (process.env.I18N_LLM_BASE_URL || P.base).replace(/\/$/, '');
@@ -284,6 +287,11 @@ async function callLLM(system, user) {
     ],
   };
   if (JSON_MODE) body.response_format = { type: 'json_object' };
+  if (PROVIDER === 'deepseek') {
+    // Thinking is on by default for DeepSeek V4 and ignores temperature; a translation does not need it.
+    body.thinking = { type: process.env.I18N_LLM_THINKING === '1' ? 'enabled' : 'disabled' };
+    body.max_tokens = 16000;
+  }
   for (let attempt = 1; ; attempt++) {
     const res = await fetch(`${BASE}/chat/completions`, {
       method: 'POST',

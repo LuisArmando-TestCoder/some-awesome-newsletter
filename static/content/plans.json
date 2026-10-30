@@ -16,7 +16,7 @@
       "limits": {
         "newsSources": 1
       },
-      "ctaLabel": "Current Plan",
+      "ctaLabel": "Current plan",
       "tier": 0
     },
     {
@@ -31,7 +31,7 @@
         "Unlimited users",
         "Custom messages in their languages",
         "Custom app password",
-        "Automatic newspaper"
+        "Automatic newsletter"
       ],
       "limits": {
         "newsSources": 17
@@ -52,7 +52,7 @@
         "Unlimited users",
         "Custom messages in their languages",
         "Custom app password",
-        "Automatic newspaper"
+        "Automatic newsletter"
       ],
       "limits": {
         "newsSources": 17
@@ -74,14 +74,14 @@
       "limits": {
         "newsSources": -1
       },
-      "ctaLabel": "Current Plan",
+      "ctaLabel": "Current plan",
       "internalOnly": true,
       "tier": 3
     }
   ],
   "contact": {
-    "text": "Need more capabilities for your business?",
-    "cta": "Contact Us",
+    "text": "Tell us what your business needs and we will change your plan for you.",
+    "cta": "Contact us",
     "href": "/help"
   }
 }

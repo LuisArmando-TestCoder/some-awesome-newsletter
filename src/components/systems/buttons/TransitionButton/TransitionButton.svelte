@@ -5,13 +5,26 @@
   export let active: boolean;
   export let direction: -1 | 1;
   export let callback: MouseEventHandler<HTMLButtonElement>;
+  // Optional accessible name. Defaults to "Next step" or "Previous step".
+  export let label: string = "";
+
+  $: accessibleName = label || (direction < 0 ? "Previous step" : "Next step");
 </script>
 
 <div class="transition-button {direction < 0 ? 'previous' : 'next'}">
-  <button class:active class:inactive={!active} onclick={callback}>
-    <span class="arrow">
-      <!-- SVG arrow pointing down -->
-      <svg width="24" height="24" viewBox="0 0 24 24">
+  <button
+    type="button"
+    class:active
+    class:inactive={!active}
+    disabled={!active}
+    aria-hidden={active ? undefined : "true"}
+    tabindex={active ? undefined : -1}
+    aria-label={accessibleName}
+    title={accessibleName}
+    on:click={(event) => active && callback?.(event)}
+  >
+    <span class="arrow" aria-hidden="true">
+      <svg width="24" height="24" viewBox="0 0 24 24" focusable="false">
         <path d="M12 16l-6-6h12z" />
       </svg>
     </span>
@@ -21,10 +34,7 @@
 <style lang="scss">
   .transition-button {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     width: 100vw;
     height: 100vh;
     display: grid;
@@ -34,24 +44,24 @@
 
     @media (max-width: 1024px) {
       &.previous button {
-        top: 25px;
+        top: var(--space-5);
         transform: rotate(180deg);
       }
 
       &.next button {
-        bottom: 25px;
+        bottom: var(--space-5);
         transform: rotate(0deg);
       }
     }
 
     @media (min-width: 1025px) {
       &.previous button {
-        left: 25px;
+        left: var(--space-5);
         transform: rotate(90deg);
       }
 
       &.next button {
-        right: 25px;
+        right: var(--space-5);
         transform: rotate(-90deg);
       }
     }
@@ -59,26 +69,27 @@
 
   button {
     position: absolute;
-    background: var(--color-background-very-opaque); // Glassmorphism effect
-    backdrop-filter: blur(6px);
-    padding: 0.5rem 5rem;
-    opacity: 0.75; // Base opacity
-    transition: 0.3s;
-    box-shadow: 0 0 10px -6.5px var(--color-background);
-    border: 0;
+    min-height: var(--control-h-sm);
+    padding: var(--space-2) var(--space-8);
+    background: var(--surface-1);
+    border: 1px solid var(--border-1);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-2);
+    color: var(--text-2);
     cursor: pointer;
-    border-radius: 5px;
+    transition:
+      opacity var(--dur-base) var(--ease-out),
+      background-color var(--dur-fast) var(--ease-out),
+      color var(--dur-fast) var(--ease-out);
 
     &:hover {
-      background: var(--color-background-very-opaque-inversion); // Glassmorphism effect
+      background: var(--surface-2);
+      color: var(--accent);
+    }
 
-      box-shadow: 0 0 10px -8px var(--color-background);
-
-      .arrow svg path {
-        fill: var(
-          --color-background
-        ); // Arrow color transitions to pure white on hover
-      }
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--focus-ring);
     }
 
     &.active {
@@ -89,6 +100,7 @@
     &.inactive {
       pointer-events: none;
       opacity: 0;
+      visibility: hidden;
     }
 
     .arrow {
@@ -97,13 +109,12 @@
       align-items: center;
 
       svg {
-        width: 24px;
-        height: 24px;
+        width: 1.5rem;
+        height: 1.5rem;
 
         path {
-          fill: var(--color-background-opaque);
-          transition: fill 0.3s ease;
-          animation: arrow-pulse 2s infinite;
+          fill: currentColor;
+          animation: arrow-pulse 2s var(--ease-in-out) infinite;
         }
       }
     }
@@ -126,5 +137,15 @@
       transform: translateY(2.5px);
       opacity: 0;
     }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    button .arrow svg path {
+      animation: none;
+    }
+  }
+
+  :global(:root[data-motion='reduced']) button .arrow svg path {
+    animation: none;
   }
 </style>

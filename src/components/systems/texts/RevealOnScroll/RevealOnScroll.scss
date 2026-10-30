@@ -1,26 +1,14 @@
+// Whole-block reveal. The pending class is toggled by the `reveal` action
+// (../reveal.ts) only when canReveal is true and motion is allowed.
 .reveal-on-scroll {
   position: relative;
-  display: inline-block;
+  display: block;
+  transition:
+    opacity var(--dur-slow) var(--ease-out),
+    transform var(--dur-slow) var(--ease-out);
 
-  & :global(*.wrapper-letter) {
-    transition: 1s, 
-    transform 2s cubic-bezier(0.01, 0.12, 0.02, 1), 
-    opacity 2.5s cubic-bezier(0.01, 0.12, 0.02, 1);
+  &:global(.is-reveal-pending) {
     opacity: 0;
-    display: inline-block;
-    transform: translateY(20px);
-  }
-
-  &:not(.revealed) {
-    & :global(*.wrapper-letter) {
-      transition-delay: 0s !important;
-    }
-  }
-
-  &.revealed {
-    & :global(*.wrapper-letter) {
-      transform: translateY(0px);
-      opacity: 1;
-    }
+    transform: translateY(var(--space-2));
   }
 }

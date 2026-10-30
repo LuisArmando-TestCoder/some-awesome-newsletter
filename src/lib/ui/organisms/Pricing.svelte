@@ -5,18 +5,22 @@
         computeFeatures,
         setInterval,
         type PlansState,
+        type PlanId,
+        planChangeMailto,
+        SUPPORT_EMAIL,
     } from "$lib/config/plans.config";
-    import Switch from "$lib/ui/components/Switch.svelte";
     import { t } from "$lib/i18n/translations";
     import store from "../../../components/store";
 
-    $: $t;
+    /** Show the eyebrow, title and subtitle. Pages with their own heading pass false. */
+    export let showHeader = true;
+    /** Heading level of the section title. Plan names use the next level. */
+    export let headingLevel: 1 | 2 = 2;
 
     let state: PlansState;
-    let isProcessing = false;
     const unsub = plansStore.subscribe((v) => (state = v));
 
-    const PLANS_CONFIG = [
+    const PLANS_CONFIG: { id: PlanId; mo: number }[] = [
         { id: "starter", mo: 17 },
         { id: "growth", mo: 35 },
         { id: "pro", mo: 80 },
@@ -30,42 +34,9 @@
         return Math.floor(monthlyPrice * 12 * (1 - ANNUAL_DISCOUNT));
     }
 
-    /**
-     * Triggers the backend subscription flow
-     */
-    async function handleSubscribe(planData: any, monthlyPrice: number) {
-        if (isProcessing) return;
-        isProcessing = true;
-
-        const finalAmount = calculatePrice(monthlyPrice, state.interval);
-
-        try {
-            const response = await fetch($store.apiURL() + '/api/subscribe', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    planName: planData.name,
-                    amount: finalAmount.toFixed(2),
-                    userId: $store?.user?.email || "landing_lead",
-                    currency: "USD"
-                })
-            });
-
-            const result = await response.json();
-            
-            if (result.success && result.data?.payment_url) {
-                // Redirect user to Tilopay Secure Checkout
-                window.location.href = result.data.payment_url;
-            } else {
-                alert("Subscription initialization failed. Please try again.");
-            }
-        } catch (error) {
-            console.error("Connection Error:", error);
-            alert("Could not reach the server.");
-        } finally {
-            isProcessing = false;
-        }
-    }
+    // Billing providers are off (Luis, 2026-10-30). Nobody pays in the app: every account starts on
+    // Free and the team changes plans by hand when an owner writes to support.
+    $: askLine = (($t as any)?.pricing?.askMore ?? 'Every account starts on the Free plan. If you need more, write to us at {email} and we will change your plan.').replace('{email}', SUPPORT_EMAIL);
 
     onDestroy(() => unsub());
 
@@ -74,528 +45,408 @@
     });
 </script>
 
-<section class="pricing">
-    <div class="pricing__backdrop"></div>
-
+<section class="pricing" aria-labelledby={showHeader ? 'pricing-title' : undefined} aria-label={showHeader ? undefined : ($t?.pricing?.eyebrow ?? 'Pricing')}>
     <div class="pricing__container">
-        <header class="pricing__header">
-            <span class="pricing__eyebrow">{$t.pricing.eyebrow || "Flexible Pricing"}</span>
-            <h1 class="pricing__title">{$t.pricing.title}</h1>
-            <p class="pricing__subtitle">
-                {$t.mainPage.disclaimer || "Simple, transparent pricing. No surprise fees."}
-            </p>
-        </header>
+        {#if showHeader}
+            <header class="pricing__header">
+                <p class="pricing__eyebrow">{$t?.pricing?.eyebrow ?? 'Pricing'}</p>
+                <svelte:element this={`h${headingLevel}`} id="pricing-title" class="pricing__title">
+                    {$t?.pricing?.title ?? 'Plans and pricing'}
+                </svelte:element>
+                <p class="pricing__subtitle">
+                    {$t?.mainPage?.disclaimer ?? ''}
+                </p>
+            </header>
+        {/if}
 
         <div class="pricing__toggle-wrapper">
-            <div class="pricing__toggle-container">
-                <span class="pricing__toggle-text" class:pricing__toggle-text--active={state.interval === "monthly"}>
-                    {$t.pricing.monthly}
-                </span>
-                <div class="pricing__switch">
-                    <Switch
-                        toggled={state.interval === "yearly"}
-                        onChange={(toggled) => setInterval(toggled ? "yearly" : "monthly")}
-                    />
-                </div>
-                <span class="pricing__toggle-text" class:pricing__toggle-text--active={state.interval === "yearly"}>
-                    {$t.pricing.yearly}
-                    <span class="pricing__discount-badge">Save 35%</span>
-                </span>
+            <div class="pricing__toggle" role="group" aria-label={$t?.pricing?.intervalLabel ?? 'Billing period'}>
+                <button
+                    type="button"
+                    class="pricing__toggle-btn"
+                    class:pricing__toggle-btn--active={state.interval === 'monthly'}
+                    aria-pressed={state.interval === 'monthly'}
+                    on:click={() => setInterval('monthly')}
+                >
+                    {$t?.pricing?.monthly ?? 'Monthly'}
+                </button>
+                <button
+                    type="button"
+                    class="pricing__toggle-btn"
+                    class:pricing__toggle-btn--active={state.interval === 'yearly'}
+                    aria-pressed={state.interval === 'yearly'}
+                    on:click={() => setInterval('yearly')}
+                >
+                    {$t?.pricing?.yearly ?? 'Yearly'}
+                    <span class="pricing__discount-badge">{$t?.pricing?.yearlySave ?? 'Save 35%'}</span>
+                </button>
             </div>
         </div>
 
-        <div class="pricing__grid" style:opacity={isProcessing ? '0.7' : '1'}>
+
+        <div class="pricing__grid">
             {#if state?.content?.plans}
-                {#each state.content.plans.filter((p) => p.id === "free") as plan}
-                    <article class="pricing__card pricing__card--basic">
-                        <div class="pricing__card-content">
-                            <div class="pricing__card-header">
-                                <h2 class="pricing__card-name">{plan.name}</h2>
-                                <p class="pricing__card-tagline">
-                                    {$t.plans.plans.find((p) => p.id === "free")?.tagline}
-                                </p>
-                            </div>
+                {#each state.content.plans.filter((p) => p.id === 'free') as plan}
+                    <article class="pricing__card" aria-labelledby="plan-{plan.id}-name">
+                        <div class="pricing__card-header">
+                            <svelte:element this={`h${headingLevel + 1}`} id="plan-{plan.id}-name" class="pricing__card-name">{plan.name}</svelte:element>
+                            <p class="pricing__card-tagline">
+                                {$t?.plans?.plans?.find((p) => p.id === 'free')?.tagline ?? ''}
+                            </p>
+                        </div>
 
-                            <div class="pricing__price-block">
-                                <span class="pricing__currency">$</span>
-                                <span class="pricing__amount">0</span>
-                                <span class="pricing__period-box">
-                                    <span class="period-text">/mo</span>
-                                </span>
-                            </div>
+                        <p class="pricing__price-block">
+                            <span class="pricing__amount">$0</span>
+                            <span class="pricing__period">{$t?.pricing?.perMonthShort ?? '/mo'}</span>
+                        </p>
 
-                            <div class="pricing__divider"></div>
+                        <ul class="pricing__features" aria-label={$t?.pricing?.includes ?? 'Includes'}>
+                            {#each computeFeatures(state.content, plan.id) as feature}
+                                <li class="pricing__feature-item">
+                                    <svg class="pricing__check" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7" /></svg>
+                                    {feature}
+                                </li>
+                            {/each}
+                        </ul>
 
-                            <ul class="pricing__features">
-                                {#each computeFeatures(state.content, plan.id) as feature}
-                                    <li class="pricing__feature-item">
-                                        <span class="check-icon">✓</span>
-                                        {feature}
-                                    </li>
-                                {/each}
-                            </ul>
-
-                            <div class="pricing__footer">
-                                <a href="/signup" class="pricing__button pricing__button--outline">
-                                    {$t.header.getStarted}
-                                </a>
-                            </div>
+                        <div class="pricing__footer">
+                            <a href="/signup" class="pricing__button pricing__button--secondary">
+                                {$t?.pricing?.freeCta ?? $t?.header?.getStarted ?? 'Start free'}
+                            </a>
                         </div>
                     </article>
                 {/each}
 
                 {#each PLANS_CONFIG as tier}
                     {@const planData = state.content.plans.find((p) => p.id === tier.id)}
-                    {@const isFeatured = tier.id === "growth"}
+                    {@const isFeatured = tier.id === 'growth'}
                     {#if planData}
+                        {@const isCurrent = $store?.config?.pricingPlan === planData.id}
                         <article
                             class="pricing__card"
                             class:pricing__card--featured={isFeatured}
+                            aria-labelledby="plan-{tier.id}-name"
+                            aria-describedby={isFeatured ? `plan-${tier.id}-badge` : undefined}
                         >
                             {#if isFeatured}
-                                <div class="featured-glow"></div>
-                                <div class="pricing__card-badge">
-                                    {$t.pricing.mostPopular}
-                                </div>
+                                <p class="pricing__card-badge" id="plan-{tier.id}-badge">
+                                    {$t?.pricing?.mostPopular ?? 'Most popular'}
+                                </p>
                             {/if}
 
-                            <div class="pricing__card-content">
-                                <div class="pricing__card-header">
-                                    <h2 class="pricing__card-name" class:highlight-text={isFeatured}>
-                                        {planData.name}
-                                    </h2>
-                                    <p class="pricing__card-tagline">
-                                        {$t.plans.plans.find((p) => p.id === tier.id)?.tagline}
-                                    </p>
-                                </div>
+                            <div class="pricing__card-header">
+                                <svelte:element this={`h${headingLevel + 1}`} id="plan-{tier.id}-name" class="pricing__card-name">{planData.name}</svelte:element>
+                                <p class="pricing__card-tagline">
+                                    {$t?.plans?.plans?.find((p) => p.id === tier.id)?.tagline ?? ''}
+                                </p>
+                            </div>
 
-                                <div class="pricing__price-block">
-                                    <span class="pricing__currency">$</span>
-                                    <span class="pricing__amount">
-                                        {calculatePrice(tier.mo, state.interval)}
+                            <p class="pricing__price-block">
+                                <span class="pricing__amount">${calculatePrice(tier.mo, state.interval)}</span>
+                                <span class="pricing__period">
+                                    {state.interval === 'monthly' ? ($t?.pricing?.perMonthShort ?? '/mo') : ($t?.pricing?.perYearShort ?? '/yr')}
+                                </span>
+                                {#if state.interval === 'yearly'}
+                                    <span class="pricing__billed">{$t?.pricing?.billedYearly ?? 'billed yearly'}</span>
+                                {/if}
+                            </p>
+
+                            <ul class="pricing__features" aria-label={$t?.pricing?.includes ?? 'Includes'}>
+                                {#each computeFeatures(state.content, tier.id) as feature}
+                                    <li class="pricing__feature-item">
+                                        <svg class="pricing__check" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7" /></svg>
+                                        {feature}
+                                    </li>
+                                {/each}
+                            </ul>
+
+                            <div class="pricing__footer">
+{#if isCurrent}
+                                    <span class="pricing__button pricing__button--secondary" aria-disabled="true">
+                                        {$t?.billing?.currentPlanButton ?? 'Your plan'}
                                     </span>
-                                    <div class="pricing__period-box">
-                                        <span class="period-text">/{state.interval === "monthly" ? "mo" : "yr"}</span>
-                                        {#if state.interval === "yearly"}
-                                            <span class="period-billed">billed annually</span>
-                                        {/if}
-                                    </div>
-                                </div>
-
-                                <div class="pricing__divider"></div>
-
-                                <ul class="pricing__features">
-                                    {#each computeFeatures(state.content, tier.id) as feature}
-                                        <li class="pricing__feature-item">
-                                            <span class="check-icon filled">✓</span>
-                                            {feature}
-                                        </li>
-                                    {/each}
-                                </ul>
-
-                                <div class="pricing__footer">
-                                    <button
-                                        on:click={() => handleSubscribe(planData, tier.mo)}
+                                {:else}
+                                    <a
+                                        href={planChangeMailto($store?.configuratorEmail, `Plan request: ${planData.name}`)}
                                         class="pricing__button"
                                         class:pricing__button--primary={isFeatured}
-                                        class:pricing__button--dark={!isFeatured}
-                                        disabled={isProcessing || $store?.config?.pricingPlan === planData.id}
+                                        class:pricing__button--secondary={!isFeatured}
                                     >
-                                        {#if isProcessing}
-                                            Processing...
-                                        {:else if $store?.config?.pricingPlan === planData.id}
-                                            {$t.billing.currentPlanButton}
-                                        {:else}
-                                            {$t.pricing.upgradeTo.replace("{planName}", planData.name)}
-                                        {/if}
-                                    </button>
-                                </div>
+                                        {(($t as any)?.pricing?.askFor ?? 'Ask for {planName}').replace('{planName}', planData.name)}
+                                    </a>
+                                {/if}
                             </div>
                         </article>
                     {/if}
                 {/each}
             {/if}
         </div>
+
+        <p class="pricing__ask">
+            {askLine}
+            <a href={planChangeMailto($store?.configuratorEmail)} class="pricing__ask-link">{($t as any)?.pricing?.askAction ?? 'Write to us'}</a>
+        </p>
     </div>
 </section>
 
 <style lang="scss">
-    /* --- CSS Variables & Tokens --- */
-    :root {
-        --p-font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        --p-c-bg: #f8fafc;
-        --p-c-surface: #ffffff;
-        --p-c-primary: #4f46e5; /* Indigo 600 */
-        --p-c-primary-dark: #4338ca; /* Indigo 700 */
-        --p-c-text-main: #0f172a;
-        --p-c-text-muted: #64748b;
-        --p-c-border: #e2e8f0;
-        
-        --p-gradient-glow: linear-gradient(135deg, #4f46e5 0%, #ec4899 100%);
-        --p-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-        --p-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-        --p-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-        
-        --p-radius: 20px;
-        --p-transition: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-
     .pricing {
-        position: relative;
-        padding: 6rem 1.5rem;
-        background-color: var(--p-c-bg);
-        font-family: var(--p-font-sans);
-        overflow: hidden;
+        padding: var(--space-8, 64px) var(--space-4, 16px);
+        color: var(--text-1, #0f172a);
+        font-family: var(--font-body, inherit);
+    }
 
-        &__backdrop {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 800px;
-            background: radial-gradient(circle at 50% 0%, #e0e7ff 0%, transparent 60%);
-            z-index: 0;
-            opacity: 0.6;
-            pointer-events: none;
-        }
+    .pricing__container {
+        max-width: var(--container-lg, 1200px);
+        margin: 0 auto;
+    }
 
-        &__container {
-            position: relative;
-            z-index: 1;
-            max-width: 1280px;
-            margin: 0 auto;
-        }
+    .pricing__header {
+        text-align: center;
+        max-width: 640px;
+        margin: 0 auto var(--space-6, 32px);
+    }
 
-        &__header {
-            text-align: center;
-            margin-bottom: 4rem;
-            max-width: 700px;
-            margin-inline: auto;
-        }
+    .pricing__eyebrow {
+        margin: 0 0 var(--space-2, 8px);
+        font-size: var(--fs-sm, 0.875rem);
+        font-weight: var(--fw-semibold, 600);
+        color: var(--text-2, #475569);
+    }
 
-        &__eyebrow {
-            display: inline-block;
-            color: var(--p-c-primary);
-            font-weight: 700;
-            font-size: 0.875rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            margin-bottom: 1rem;
-            background: #eef2ff;
-            padding: 0.25rem 0.75rem;
-            border-radius: 99px;
-        }
+    .pricing__title {
+        margin: 0 0 var(--space-3, 12px);
+        font-family: var(--font-display, inherit);
+        font-size: var(--fs-3xl, 2.25rem);
+        font-weight: var(--fw-bold, 700);
+        line-height: var(--lh-tight, 1.15);
+    }
 
-        &__title {
-            font-size: clamp(2.5rem, 5vw, 3.75rem);
-            font-weight: 800;
-            color: var(--p-c-text-main);
-            letter-spacing: -0.03em;
-            line-height: 1.1;
-            margin-bottom: 1rem;
-        }
+    .pricing__subtitle {
+        margin: 0;
+        color: var(--text-2, #475569);
+        font-size: var(--fs-md, 1rem);
+    }
 
-        &__subtitle {
-            color: var(--p-c-text-muted);
-            font-size: 1.25rem;
-            line-height: 1.6;
-            max-width: 45ch;
-            margin-inline: auto;
-        }
+    .pricing__toggle-wrapper {
+        display: flex;
+        justify-content: center;
+        margin-bottom: var(--space-6, 32px);
+    }
 
-        &__toggle-wrapper {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 4rem;
-        }
+    .pricing__toggle {
+        display: inline-flex;
+        padding: var(--space-1, 4px);
+        gap: var(--space-1, 4px);
+        border: 1px solid var(--border-1, #e5e7eb);
+        border-radius: var(--radius-full, 999px);
+        background: var(--surface-2, #f1f5f9);
+    }
 
-        &__toggle-container {
-            display: flex;
-            align-items: center;
-            gap: 1.25rem;
-            padding: 0.5rem 0.75rem;
-            background: rgba(255,255,255,0.6);
-            backdrop-filter: blur(8px);
-            border: 1px solid var(--p-c-border);
-            border-radius: 99px;
-            box-shadow: var(--p-shadow-sm);
-        }
+    .pricing__toggle-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-2, 8px);
+        min-height: 40px;
+        padding: var(--space-2, 8px) var(--space-4, 16px);
+        border: none;
+        border-radius: var(--radius-full, 999px);
+        background: transparent;
+        color: var(--text-2, #475569);
+        font: inherit;
+        font-size: var(--fs-sm, 0.875rem);
+        font-weight: var(--fw-semibold, 600);
+        cursor: pointer;
+        transition: background-color var(--dur-fast, 120ms) var(--ease-out, ease-out),
+            color var(--dur-fast, 120ms) var(--ease-out, ease-out);
 
-        &__toggle-text {
-            font-size: 0.95rem;
-            font-weight: 500;
-            color: var(--p-c-text-muted);
-            transition: color 0.3s ease;
-            cursor: pointer;
-            padding: 0.25rem 0.5rem;
+        &:hover { color: var(--text-1, #0f172a); }
 
-            &--active {
-                color: var(--p-c-text-main);
-                font-weight: 700;
-            }
-        }
-
-        &__discount-badge {
-            background: linear-gradient(90deg, #dcfce7, #bbf7d0);
-            color: #15803d;
-            padding: 0.2rem 0.6rem;
-            border-radius: 99px;
-            font-size: 0.7rem;
-            font-weight: 700;
-            margin-left: 0.5rem;
-            vertical-align: middle;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-
-        &__grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-            gap: 2rem;
-            align-items: stretch;
-            transition: opacity 0.3s ease;
-        }
-
-        &__card {
-            position: relative;
-            background: var(--p-c-surface);
-            border-radius: var(--p-radius);
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.4s var(--p-transition), box-shadow 0.4s var(--p-transition);
-            box-shadow: var(--p-shadow-sm);
-            border: 1px solid transparent;
-            
-            &--basic {
-                border-color: var(--p-c-border);
-            }
-
-            &--featured {
-                box-shadow: var(--p-shadow-xl);
-                z-index: 2;
-                transform: scale(1.02);
-                background: 
-                    linear-gradient(var(--p-c-surface), var(--p-c-surface)) padding-box,
-                    var(--p-gradient-glow) border-box;
-                border: 2px solid transparent;
-
-                &:hover {
-                    transform: scale(1.03) translateY(-5px);
-                }
-            }
-
-            &:not(&--featured):hover {
-                transform: translateY(-5px);
-                box-shadow: var(--p-shadow-lg);
-                border-color: #cbd5e1;
-            }
-        }
-
-        &__card-content {
-            padding: 2.5rem 2rem;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-
-        &__card-badge {
-            position: absolute;
-            top: -14px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--p-c-primary);
-            color: white;
-            padding: 0.35rem 1rem;
-            border-radius: 99px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            box-shadow: 0 4px 10px rgba(79, 70, 229, 0.4);
-            z-index: 10;
-        }
-
-        .featured-glow {
-            position: absolute;
-            inset: 0;
-            background: var(--p-gradient-glow);
-            filter: blur(40px);
-            opacity: 0.15;
-            z-index: -1;
-            border-radius: var(--p-radius);
-            pointer-events: none;
-        }
-
-        &__card-header {
-            margin-bottom: 1.5rem;
-        }
-
-        &__card-name {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--p-c-text-main);
-            margin-bottom: 0.5rem;
-
-            &.highlight-text {
-                color: var(--p-c-primary);
-            }
-        }
-
-        &__card-tagline {
-            font-size: 0.9rem;
-            color: var(--p-c-text-muted);
-            min-height: 2.5em;
-        }
-
-        &__price-block {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 2rem;
-            line-height: 1;
-        }
-
-        &__currency {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--p-c-text-muted);
-            margin-top: 8px;
-            margin-right: 2px;
-        }
-
-        &__amount {
-            font-size: 3.5rem;
-            font-weight: 800;
-            color: var(--p-c-text-main);
-            letter-spacing: -0.04em;
-        }
-
-        &__period-box {
-            display: flex;
-            flex-direction: column;
-            margin-left: 6px;
-            margin-top: 12px;
-        }
-        
-        .period-text {
-            font-size: 1rem;
-            font-weight: 500;
-            color: var(--p-c-text-muted);
-        }
-
-        .period-billed {
-            font-size: 0.7rem;
-            color: #94a3b8;
-            white-space: nowrap;
-        }
-
-        &__divider {
-            height: 1px;
-            background: var(--p-c-border);
-            margin-bottom: 2rem;
-            width: 100%;
-        }
-
-        &__features {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 2rem 0;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        &__feature-item {
-            font-size: 0.95rem;
-            color: #334155;
-            display: flex;
-            align-items: flex-start;
-            line-height: 1.4;
-
-            .check-icon {
-                color: #cbd5e1;
-                margin-right: 12px;
-                font-weight: 900;
-                flex-shrink: 0;
-                
-                &.filled {
-                    color: var(--p-c-primary);
-                }
-            }
-        }
-
-        &__footer {
-            margin-top: auto;
-        }
-
-        &__button {
-            box-sizing: border-box;
-            display: block;
-            width: 100%;
-            text-align: center;
-            padding: 1rem;
-            border-radius: 12px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.2s ease;
-            position: relative;
-            overflow: hidden;
-            border: none;
-            cursor: pointer;
-            font-family: inherit;
-
-            &--primary {
-                background: var(--p-c-primary);
-                color: white;
-                box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.3);
-                
-                &:hover:not(:disabled) {
-                    background: var(--p-c-primary-dark);
-                    transform: translateY(-2px);
-                    box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.4);
-                }
-            }
-
-            &--dark {
-                background: var(--p-c-text-main);
-                color: white;
-                
-                &:hover:not(:disabled) {
-                    background: black;
-                    transform: translateY(-2px);
-                    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.2);
-                }
-            }
-
-            &--outline {
-                background: transparent;
-                border: 2px solid var(--p-c-border);
-                color: var(--p-c-text-main);
-                
-                &:hover:not(:disabled) {
-                    border-color: var(--p-c-text-main);
-                    background: white;
-                }
-            }
-
-            &:disabled {
-                opacity: 0.6;
-                cursor: not-allowed;
-            }
+        &--active {
+            background: var(--surface-1, #fff);
+            color: var(--text-1, #0f172a);
+            box-shadow: var(--shadow-1, 0 1px 2px rgba(0, 0, 0, 0.08));
         }
     }
 
-    @media (max-width: 768px) {
-        .pricing { padding: 4rem 1rem; }
-        .pricing__grid {
-            grid-template-columns: 1fr;
-            max-width: 500px;
-            margin: 0 auto;
+    .pricing__discount-badge {
+        padding: 0 var(--space-2, 8px);
+        border-radius: var(--radius-full, 999px);
+        background: var(--success-soft, #dcfce7);
+        color: var(--text-1, #0f172a);
+        font-size: var(--fs-xs, 0.75rem);
+        font-weight: var(--fw-semibold, 600);
+        line-height: 1.6;
+    }
+
+    .pricing__ask {
+        max-width: 640px;
+        margin: var(--space-6, 32px) auto 0;
+        text-align: center;
+        font-size: var(--fs-sm, 0.875rem);
+        color: var(--text-2, #475569);
+    }
+
+    .pricing__ask-link {
+        margin-left: var(--space-1, 4px);
+        color: var(--accent, #4f46e5);
+        font-weight: var(--fw-semibold, 600);
+        text-decoration: underline;
+        text-underline-offset: 2px;
+    }
+
+
+    .pricing__grid {
+        display: grid;
+        gap: var(--space-4, 16px);
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        align-items: stretch;
+
+        &[aria-busy='true'] { opacity: 0.7; }
+    }
+
+    .pricing__card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-4, 16px);
+        padding: var(--space-6, 32px) var(--space-5, 24px);
+        border: 1px solid var(--border-1, #e5e7eb);
+        border-radius: var(--radius-lg, 14px);
+        background: var(--surface-1, #fff);
+        box-shadow: var(--shadow-1, 0 1px 2px rgba(0, 0, 0, 0.06));
+
+        &--featured {
+            border: 2px solid var(--accent, #4f46e5);
+            box-shadow: var(--shadow-2, 0 8px 24px rgba(0, 0, 0, 0.1));
         }
-        .pricing__card--featured {
-            transform: none;
-            order: -1;
-            margin-bottom: 1rem;
+    }
+
+    .pricing__card-badge {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        margin: 0;
+        padding: var(--space-1, 4px) var(--space-3, 12px);
+        border-radius: var(--radius-full, 999px);
+        background: var(--accent, #4f46e5);
+        color: var(--accent-contrast, #fff);
+        font-size: var(--fs-xs, 0.75rem);
+        font-weight: var(--fw-semibold, 600);
+        white-space: nowrap;
+    }
+
+    .pricing__card-name {
+        margin: 0 0 var(--space-1, 4px);
+        font-family: var(--font-display, inherit);
+        font-size: var(--fs-xl, 1.25rem);
+        font-weight: var(--fw-bold, 700);
+    }
+
+    .pricing__card-tagline {
+        margin: 0;
+        color: var(--text-2, #475569);
+        font-size: var(--fs-sm, 0.875rem);
+    }
+
+    .pricing__price-block {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: var(--space-1, 4px);
+        margin: 0;
+        padding-bottom: var(--space-4, 16px);
+        border-bottom: 1px solid var(--border-1, #e5e7eb);
+    }
+
+    .pricing__amount {
+        font-family: var(--font-display, inherit);
+        font-size: var(--fs-3xl, 2.25rem);
+        font-weight: var(--fw-bold, 700);
+        line-height: 1;
+        font-variant-numeric: tabular-nums;
+    }
+
+    .pricing__period {
+        color: var(--text-2, #475569);
+        font-size: var(--fs-sm, 0.875rem);
+    }
+
+    .pricing__billed {
+        flex-basis: 100%;
+        color: var(--text-3, #64748b);
+        font-size: var(--fs-xs, 0.75rem);
+    }
+
+    .pricing__features {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-2, 8px);
+        flex: 1;
+    }
+
+    .pricing__feature-item {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--space-2, 8px);
+        font-size: var(--fs-sm, 0.875rem);
+        color: var(--text-1, #0f172a);
+        line-height: var(--lh-normal, 1.5);
+    }
+
+    .pricing__check {
+        flex-shrink: 0;
+        margin-top: 0.2em;
+        color: var(--success, #15803d);
+    }
+
+    .pricing__button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        min-height: 44px;
+        padding: var(--space-2, 8px) var(--space-4, 16px);
+        border-radius: var(--radius-full, 999px);
+        border: 1px solid transparent;
+        font: inherit;
+        font-size: var(--fs-sm, 0.875rem);
+        font-weight: var(--fw-semibold, 600);
+        text-decoration: none;
+        cursor: pointer;
+        transition: background-color var(--dur-fast, 120ms) var(--ease-out, ease-out);
+
+        &--primary {
+            background: var(--accent, #4f46e5);
+            color: var(--accent-contrast, #fff);
+            &:hover:not(:disabled) { background: var(--accent-hover, #4338ca); }
         }
-        .pricing__card--featured:hover { transform: none; }
+
+        &--secondary {
+            background: var(--surface-1, #fff);
+            color: var(--text-1, #0f172a);
+            border-color: var(--border-2, #cbd5e1);
+            &:hover:not(:disabled) { background: var(--surface-2, #f1f5f9); }
+        }
+
+        &:disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+    }
+
+    .pricing button:focus-visible,
+    .pricing a:focus-visible {
+        outline: 2px solid var(--focus-color, #6366f1);
+        outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .pricing__toggle-btn,
+        .pricing__button { transition: none; }
     }
 </style>

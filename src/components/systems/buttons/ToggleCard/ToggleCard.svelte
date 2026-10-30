@@ -1,107 +1,158 @@
-<script lang="ts">
-  import TextTypes from "../../texts/TextTypes/TextTypes.svelte";
+<script context="module" lang="ts">
+  let instanceCount = 0;
+</script>
 
+<script lang="ts">
   export let cardTitle: string;
   export let canReveal = false;
   export let isOpen = false;
   export let expanded = false;
-  let contentEl: HTMLDivElement;
+  export let onChange: (isOpen: boolean) => void;
+
+  const uid = `toggle-card-${++instanceCount}`;
+  const headerId = `${uid}-header`;
+  const contentId = `${uid}-content`;
 
   function toggle() {
     isOpen = !isOpen;
     onChange?.(isOpen);
   }
-
-  export let onChange: (isOpen: boolean) => void;
 </script>
 
-<div class="card">
-  <button
-    class="card-header"
-    on:click={toggle}
-    aria-expanded={isOpen}
-    type="button"
+<div class="card" class:open={isOpen} class:can-reveal={canReveal}>
+  <h3 class="card-heading">
+    <button
+      id={headerId}
+      class="card-header"
+      type="button"
+      aria-expanded={isOpen}
+      aria-controls={contentId}
+      on:click={toggle}
+    >
+      <span class="card-title">{cardTitle ?? ""}</span>
+      <span class="chevron" class:open={isOpen} aria-hidden="true"></span>
+    </button>
+  </h3>
+  <div
+    id={contentId}
+    class="content-wrapper"
+    class:open={isOpen}
+    role="region"
+    aria-labelledby={headerId}
+    aria-hidden={isOpen ? undefined : "true"}
+    inert={!isOpen}
   >
-    <span>
-      <TextTypes type="paragraph">
-        {cardTitle?.split(" ")[0]}
-      </TextTypes>
-      <TextTypes type="highlight">
-        {cardTitle?.split(" ").slice(1).join(" ")}
-      </TextTypes>
-    </span>
-    <span class="arrow" class:open={isOpen}></span>
-  </button>
-  <div class="content-wrapper" bind:this={contentEl} class:open={isOpen}>
-    <div class="content" class:expanded>
-      <slot></slot>
+    <div class="content-inner">
+      <div class="content" class:expanded>
+        <slot></slot>
+      </div>
     </div>
   </div>
 </div>
 
 <style lang="scss">
   .card {
-    background: #fffa;
-    backdrop-filter: blur(5px);
-    border-radius: 4px;
-    border: 0;
-    margin: 1rem 0;
+    margin: var(--space-4) 0;
+    background: var(--surface-1);
+    border: 1px solid var(--border-1);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-1);
     overflow: hidden;
-    box-shadow: 0 0 10px -9px var(--color-background);
-    transition: 0.1s;
+    transition: box-shadow var(--dur-base) var(--ease-out);
 
     &:hover {
-      box-shadow: 0 0 5px -5px var(--color-background);
-      .arrow {
-        border-right: 2px solid var(--color-background);
-        border-bottom: 2px solid var(--color-background);
-      }
+      box-shadow: var(--shadow-2);
     }
+  }
+
+  .card-heading {
+    margin: 0;
+    font: inherit;
   }
 
   .card-header {
     width: 100%;
+    min-height: var(--control-h);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--card-pad);
     border: none;
-    padding: 0.5rem 1rem;
     background: transparent;
+    color: var(--text-1);
+    text-align: left;
     cursor: pointer;
     user-select: none;
+    border-radius: var(--radius-lg);
+
+    &:hover {
+      background: var(--surface-2);
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: inset 0 0 0 2px var(--accent);
+    }
   }
 
-  .arrow {
-    border-right: 2px solid var(--color-background);
-    border-bottom: 2px solid var(--color-background);
-    display: inline-block;
-    width: 1rem;
-    height: 1rem;
-    border-right: 2px solid #333;
-    border-bottom: 2px solid #333;
-    transform: rotate(45deg);
-    transition: transform 0.5s ease;
+  .card-title {
+    font-family: var(--font-body);
+    font-size: var(--fs-md);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-snug);
+    color: var(--text-1);
   }
-  .arrow.open {
-    transform: rotate(225deg);
+
+  .chevron {
+    flex: none;
+    width: 0.625rem;
+    height: 0.625rem;
+    margin-right: var(--space-1);
+    border-right: 2px solid var(--text-2);
+    border-bottom: 2px solid var(--text-2);
+    transform: translateY(-25%) rotate(45deg);
+    transition: transform var(--dur-base) var(--ease-out);
+
+    &.open {
+      transform: translateY(25%) rotate(225deg);
+    }
   }
 
   .content-wrapper {
-    overflow: auto;
-    height: 0;
-    transition: height 0.3s ease;
+    display: grid;
+    grid-template-rows: 0fr;
+    visibility: hidden;
+    transition:
+      grid-template-rows var(--dur-slow) var(--ease-out),
+      visibility 0s linear var(--dur-slow);
+
+    &.open {
+      grid-template-rows: 1fr;
+      visibility: visible;
+      transition:
+        grid-template-rows var(--dur-slow) var(--ease-out),
+        visibility 0s linear 0s;
+    }
   }
-  .content-wrapper.open {
-    height: auto;
+
+  .content-inner {
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .content-wrapper.open .content-inner {
+    overflow: visible;
   }
 
   .content {
-    padding: 0.5rem 1rem;
     display: grid;
-    grid-gap: 1rem;
+    gap: var(--space-4);
+    padding: var(--space-2) var(--card-pad) var(--card-pad);
+    border-top: 1px solid var(--border-1);
 
     &.expanded {
-      padding: 0.5rem 1rem;
+      padding: var(--space-2) var(--card-pad) var(--card-pad);
     }
   }
 </style>

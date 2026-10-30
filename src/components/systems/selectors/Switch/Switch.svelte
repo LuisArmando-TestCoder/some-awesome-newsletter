@@ -1,151 +1,156 @@
+<script context="module" lang="ts">
+  let switchCount = 0;
+</script>
+
 <script lang="ts">
+  import { createEventDispatcher } from "svelte";
   import { writable } from "svelte/store";
-  import { getContrastColor } from "../../inputs/ColorPicker/getColorSuggestions";
-  import { complementaryColor, foregroundColor, themeIndex } from "../../../ThemeChanger/theme-store";
 
   // Prop: initial state of the switch (default: false)
   export let toggled: boolean = false;
   // Callback to be invoked when the switch state changes.
   export let onChange: (newState: boolean) => void = () => {};
 
+  // Optional props
+  /** Visible label rendered next to the switch. */
+  export let label: string = "";
+  /** Accessible name when there is no visible label. */
+  export let ariaLabel: string = "";
+  export let disabled: boolean = false;
+  export let id: string | undefined = undefined;
+
   // Create a writable store for the switch state.
   export const switchStore = writable<boolean>(toggled);
 
-  // Toggle function updates both the local state and the store, then calls onChange.
+  const dispatch = createEventDispatcher<{ change: boolean }>();
+  const fallbackId = `switch-${++switchCount}`;
+  $: buttonId = id || fallbackId;
+  $: labelId = `${buttonId}-label`;
+
+  // Keep the store in sync when the parent changes the prop.
+  $: switchStore.set(toggled);
+
+  // Toggle function updates both the local state and the store, then notifies listeners.
   function toggle() {
+    if (disabled) return;
     toggled = !toggled;
     switchStore.set(toggled);
     onChange(toggled);
-  }
-
-  // Keyboard handler for accessibility: toggles on Enter or Space.
-  function handleKeyDown(event: KeyboardEvent) {
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-      toggle();
-    }
+    dispatch("change", toggled);
   }
 </script>
 
-<div
-  class="glass-switch"
-  role="switch"
-  tabindex="0"
-  aria-checked={toggled}
-  on:click={toggle}
-  on:keydown={handleKeyDown}
->
-
-  <div class="switch-track" class:toggled>
-    <div class="switch-knob" class:toggled></div>
-    <div
-      class="switch-knob"
-      class:toggled
-      style="transition-delay: .175s; transform: translateX(0); color: {toggled
-        ? getContrastColor([$foregroundColor, $complementaryColor][$themeIndex])
-        : 'var(--color-background-inversion)'};"
-    >
-      {["○", "ı"][+toggled]}
-    </div>
-  </div>
-</div>
-
-<!-- filters -->
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="0" height="0">
-  <defs>
-    <filter id="shadowed-goo">
-      <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="10" />
-      <feColorMatrix
-        in="blur"
-        mode="matrix"
-        values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
-        result="goo"
-      />
-      <feGaussianBlur in="goo" stdDeviation="3" result="shadow" />
-      <feColorMatrix
-        in="shadow"
-        mode="matrix"
-        values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 -0.2"
-        result="shadow"
-      />
-      <feOffset in="shadow" dx="1" dy="1" result="shadow" />
-      <feBlend in2="shadow" in="goo" result="goo" />
-      <feBlend in2="goo" in="SourceGraphic" result="mix" />
-    </filter>
-    <filter id="goo">
-      <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="10" />
-      <feColorMatrix
-        in="blur"
-        mode="matrix"
-        values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
-        result="goo"
-      />
-      <feBlend in2="goo" in="SourceGraphic" result="mix" />
-    </filter>
-  </defs>
-</svg>
-<filter id="goo">
-  <feGaussianBlur
-    in="SourceGraphic"
-    stdDeviation="10"
-    result="blur"
-    width="0"
-    height="0"
-  />
-  <feColorMatrix
-    in="blur"
-    type="matrix"
-    values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9"
-    result="goo"
-  />
-  <feComposite in="SourceGraphic" in2="goo" operator="atop" />
-</filter>
+<span class="switch-field" class:disabled>
+  <button
+    id={buttonId}
+    type="button"
+    role="switch"
+    class="switch"
+    class:toggled
+    aria-checked={toggled}
+    aria-labelledby={label ? labelId : undefined}
+    aria-label={!label && ariaLabel ? ariaLabel : undefined}
+    {disabled}
+    on:click={toggle}
+  >
+    <span class="switch-track" aria-hidden="true">
+      <span class="switch-knob"></span>
+    </span>
+  </button>
+  {#if label}
+    <label id={labelId} for={buttonId} class="switch-label">{label}</label>
+  {/if}
+</span>
 
 <style lang="scss">
-  .glass-switch {
-    display: inline-block;
-    cursor: pointer;
-    user-select: none;
-    outline: none;
+  .switch-field {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
 
-    &:focus {
+    &.disabled {
+      opacity: 0.5;
+    }
+  }
+
+  .switch {
+    --track-w: 2.75rem;
+    --track-h: 1.5rem;
+    --knob: 1.125rem;
+    --gap: 0.1875rem;
+
+    display: inline-flex;
+    align-items: center;
+    padding: 0;
+    border: none;
+    background: transparent;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--focus-ring);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
     }
   }
 
   .switch-track {
-    width: 50px;
-    height: 24px;
-    background: var(--color-background-inversion);
-    border-radius: 12px;
     position: relative;
+    display: block;
+    width: var(--track-w);
+    height: var(--track-h);
+    background: var(--surface-3);
+    border: 1px solid var(--border-2);
+    border-radius: var(--radius-full);
     transition:
-      background 0.3s ease,
-      box-shadow 0.3s ease;
-    box-shadow: 0 0 10px -6.5px var(--color-background);
-    filter: url("#goo");
-
-    &:hover {
-      box-shadow: 0 0 10px -3px var(--color-background);
-    }
+      background-color var(--dur-base) var(--ease-out),
+      border-color var(--dur-base) var(--ease-out);
   }
 
   .switch-knob {
-    --unit: 20px;
-    width: var(--unit);
-    height: var(--unit);
-    background: var(--color-background);
-    border-radius: 50%;
     position: absolute;
-    top: 2px;
-    left: 2px;
-    transition: 0.5s;
-    transition-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1);
-    text-align: center;
+    top: 50%;
+    left: var(--gap);
+    width: var(--knob);
+    height: var(--knob);
+    background: var(--surface-1);
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-1);
+    transform: translateY(-50%);
+    transition: transform var(--dur-base) var(--ease-out);
+  }
 
-    &.toggled {
-      transform: translateX(26px) !important;
-      background: var(--color-foreground);
-      color: var(--color-background);
+  .switch.toggled {
+    .switch-track {
+      background: var(--accent);
+      border-color: var(--accent);
     }
+
+    .switch-knob {
+      transform: translate(calc(var(--track-w) - var(--knob) - 2 * var(--gap) - 2px), -50%);
+    }
+  }
+
+  .switch:not(:disabled):hover .switch-track {
+    border-color: var(--text-2);
+  }
+
+  .switch.toggled:not(:disabled):hover .switch-track {
+    background: var(--accent-hover);
+    border-color: var(--accent-hover);
+  }
+
+  .switch-label {
+    font-family: var(--font-body);
+    font-size: var(--fs-md);
+    color: var(--text-1);
+    cursor: pointer;
+  }
+
+  .disabled .switch-label {
+    cursor: not-allowed;
   }
 </style>

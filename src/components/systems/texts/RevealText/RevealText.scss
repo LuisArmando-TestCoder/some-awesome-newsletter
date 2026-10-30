@@ -1,0 +1,9 @@
+// Inline text, revealed as one piece. Inline boxes ignore transforms, so the
+// inline case is an opacity fade only.
+.reveal-text {
+  transition: opacity var(--dur-slow) var(--ease-out);
+
+  &:global(.is-reveal-pending) {
+    opacity: 0;
+  }
+}

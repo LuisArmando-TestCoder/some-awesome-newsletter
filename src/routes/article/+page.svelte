@@ -1,80 +1,97 @@
 <script lang="ts">
+  import { sanitizeHtml } from '$lib/utils/sanitizeHtml';
+  // Legacy URL: /article?q=<id>. Forwards to /blog/<author>/<id>.
+  // If the lookup fails, the article is rendered here so the old link still works.
+  // The old page body lives in _deprecated/src/routes/article/+page.svelte.
   import { onMount } from "svelte";
-  import { page } from "$app/stores";
-    import ThemeChanger from "../../components/ThemeChanger/ThemeChanger.svelte";
-    import store, { globalLanguage } from "../../components/store";
+  import { goto } from "$app/navigation";
+  import { page } from "$app/state";
   import { t } from "../../lib/i18n/translations";
+  import BlogNotice from "../../components/articles/BlogNotice.svelte";
+  import { apiBase, articlePath, fetchWithTimeout, plainText } from "../../components/articles/blog";
 
-  let article: any = null;
-  let error: string | null = null;
-
-  $: $t;
+  let phase = $state<"loading" | "missing" | "notfound" | "error" | "fallback">("loading");
+  let article = $state<{ title: string; content: string; language: string } | null>(null);
 
   onMount(async () => {
-    const id = $page.url.searchParams.get("q");
-    if (id) {
-      try {
-        console.log("$store.apiURL()", $store.apiURL())
-        const response = await fetch(`${$store.apiURL()}/article/${id}`);
-        if (response.ok) {
-          article = await response.json();
-        } else {
-          error = $t.article.notFound;
-        }
-      } catch (e) {
-        error = $t.article.errorFetching;
+    const id = page.url.searchParams.get("q");
+    if (!id) {
+      phase = "missing";
+      return;
+    }
+    try {
+      const r = await fetchWithTimeout(fetch, `${apiBase()}/article/${encodeURIComponent(id)}`);
+      if (r.status === 404) {
+        phase = "notfound";
+        return;
       }
-    } else {
-      error = $t.article.noArticleSpecified;
+      if (!r.ok) {
+        phase = "error";
+        return;
+      }
+      const raw = await r.json();
+      if (raw?.author) {
+        await goto(articlePath(raw.author, id), { replaceState: true });
+        return;
+      }
+      article = { title: plainText(raw?.title ?? ""), content: raw?.content ?? "", language: raw?.language ?? "" };
+      phase = "fallback";
+    } catch {
+      phase = "error";
     }
   });
 </script>
 
-<ThemeChanger visible={false} />
+<svelte:head>
+  <meta name="robots" content="noindex" />
+  {#if article}<title>{article.title}</title>{/if}
+</svelte:head>
 
-<div class="article-page">
-  {#if error}
-    <p class="error">{error}</p>
+<div class="page">
+  {#if phase === "loading"}
+    <p class="redirect" role="status">{$t.article?.loading ?? $t.blog.redirecting}</p>
+  {:else if phase === "missing" || phase === "notfound"}
+    <BlogNotice headingLevel={1} title={$t.blog.article.notFoundTitle} body={$t.blog.article.notFoundBody} />
+  {:else if phase === "error"}
+    <BlogNotice headingLevel={1} tone="error" title={$t.blog.article.errorTitle} body={$t.blog.article.errorBody} />
   {:else if article}
-  <article>
-    <a onclick={() => {
-        window.history.go(-1);
-    }} class="back">{$t.article.goBack}</a>
-    {@html article.content}
-  </article>
-  {:else}
-    <p>{$t.article.loading}</p>
+    <article class="fallback" lang={article.language || undefined}>
+      <h1>{article.title}</h1>
+      <div class="prose">{@html sanitizeHtml(article.content)}</div>
+    </article>
   {/if}
 </div>
 
 <style lang="scss">
-  @use "../styles/everything.scss";
-
-  .back {
-    position: absolute;
-    top: 25px;
-    left: 25px;
-    cursor: pointer;
-
-    &:hover {
-        text-decoration: underline;
+  .page {
+    min-height: 70vh;
+    padding: var(--space-8, 64px) var(--space-4, 16px);
+    background: var(--surface-0, #fff);
+    color: var(--text-1, #111);
+  }
+  .redirect {
+    text-align: center;
+    color: var(--text-2, #444);
+  }
+  .fallback {
+    max-width: 68ch;
+    margin: 0 auto;
+    h1 {
+      font-family: var(--font-display, inherit);
+      font-size: var(--fs-3xl, 2.25rem);
+      line-height: var(--lh-tight, 1.15);
     }
   }
-
-  article {
-    display: grid;
-    place-items: center;
-    background: #fff;
-    padding: 150px 0;
-    position: relative;
-  }
-
-  .article-page {
-    padding: 2rem;
-    line-height: 2;
-  }
-
-  .error {
-    color: red;
+  .prose {
+    font-size: var(--fs-lg, 1.125rem);
+    line-height: 1.7;
+    :global(img) {
+      max-width: 100%;
+      height: auto;
+      border-radius: var(--radius-lg, 16px);
+    }
+    :global(a) {
+      color: var(--text-link, #2563eb);
+    }
   }
 </style>

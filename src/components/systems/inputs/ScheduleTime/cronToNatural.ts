@@ -89,6 +89,14 @@ function listToSentence(
   return list.slice(0, -1).join(", ") + conjunction + list[list.length - 1];
 }
 
+// True when `names` is the day-of-week list built by DAY_NAMES().
+// DAY_NAMES returns a new array on every call, so compare by content.
+function isDayNames(names: string[] | null): boolean {
+  if (!names) return false;
+  const days = DAY_NAMES();
+  return names.length === days.length && names.every((name, i) => name === days[i]);
+}
+
 function parseSegment(
   segment: string,
   min: number,
@@ -168,7 +176,7 @@ function parseSegment(
   const originalValue = parseInt(segment, 10);
     if (!isNaN(originalValue)) {
     if (originalValue < min || originalValue > max) {
-      if (!(names === DAY_NAMES && originalValue === 7)) {
+      if (!(isDayNames(names) && originalValue === 7)) {
         throw new Error(
           `Value '${segment}' is out of range [${min}-${max}]`
         );
@@ -191,7 +199,7 @@ function parseSegment(
   }
 
   // Adjust for Sunday=7
-  if (names === DAY_NAMES && value === 7) {
+  if (isDayNames(names) && value === 7) {
     value = 0;
   }
 

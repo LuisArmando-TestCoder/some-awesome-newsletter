@@ -8,6 +8,8 @@
   import getConfiguratorSession from "../../../../../requests/getConfiguratorSession";
   import * as UserDataService from "./UserDataService";
   import { userRemovalRequestStore } from "./userActions";
+  import { planChangeMailto } from "$lib/config/plans.config";
+  import { dt } from "$lib/dashboard/i18n";
 
   import ManualAddUserForm from "./ManualAddUserForm.svelte";
   import BulkAddUserSection from "./BulkAddUserSection.svelte";
@@ -273,7 +275,7 @@
   <div class="add-user-section" class:section-disabled={isLimitReached}>
     {#if isLimitReached}
       <div class="limit-warning">
-        <p><strong>Plan Limit Reached:</strong> You have {limitCheck.current} subscribers (Limit: {limitCheck.limit}). <a href="/plans">Upgrade</a> to add more.</p>
+        <p>{$dt("dash.users.limit.reached", { count: limitCheck.current, limit: limitCheck.limit })} <a href={planChangeMailto($store.configuratorEmail)}>{$dt("dash.billing.askAction")}</a></p>
       </div>
     {/if}
 
@@ -408,7 +410,7 @@
 
   .section-disabled {
     opacity: 0.7;
-    /* We don't disable pointer events globally so the upgrade link works */
+    /* We don't disable pointer events globally so the plan contact link works */
   }
 
   .limit-warning {

@@ -1,324 +1,231 @@
 <script lang="ts">
-    import { fade } from "svelte/transition";
+  import { t } from '$lib/i18n/translations';
 
-    // Integrating your actual portfolio projects as the "Ecosystem"
-    const projects = [
-        {
-            name: "Engagement AI",
-            url: "https://aiban.news",
-            desc: "The flagship IRP system for automated audience growth and news delivery.",
-        },
-        {
-            name: "Scene Preset",
-            url: "https://github.com/LuisArmando-TestCoder/scene-preset",
-            desc: "A library focused on avoiding boilerplates when using Three.js and 3D Web APIs.",
-        },
-        {
-            name: "Atomic Framework",
-            url: "https://github.com/LuisArmando-TestCoder/atomic-gatsby-typescript-recoiljs",
-            desc: "A high-performance template built from an atomic design standpoint for scalability.",
-        },
-        {
-            name: "Canvas Preset",
-            url: "https://github.com/LuisArmando-TestCoder/canvas-preset",
-            desc: "Abstracting common Web API use cases to streamline developer experience.",
-        },
-        {
-            name: "VFX Trigger",
-            url: "https://github.com/LuisArmando-TestCoder",
-            desc: "One-click 3D, 2D, and shader effects for immersive web experiences.",
-        },
-        {
-            name: "3D-Rooms",
-            url: "https://github.com/LuisArmando-TestCoder/3D-Rooms",
-            desc: "Experimental First Person Camera controllers for Three.js environments.",
-        },
-    ];
+  const CANONICAL = 'https://aibanewsletter.club/about';
+  const GITHUB = 'https://github.com/LuisArmando-TestCoder';
+
+  $: a = ($t as any)?.about ?? {};
+  $: metaTitle = a.metaTitle ?? 'About | AIBAN';
+  $: metaDescription = a.metaDescription ?? '';
 </script>
 
 <svelte:head>
-    <title>About Us • A I B A N</title>
+  <title>{metaTitle}</title>
+  <meta name="description" content={metaDescription} />
+  <link rel="canonical" href={CANONICAL} />
+  <meta property="og:title" content={metaTitle} />
+  <meta property="og:description" content={metaDescription} />
+  <meta property="og:url" content={CANONICAL} />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
 </svelte:head>
 
-<main class="about">
-    <section class="about__hero" in:fade={{ duration: 800 }}>
-        <div class="about__container">
-            <span class="about__badge">The Creator's Philosophy</span>
-            <h1 class="about__title">
-                We turn job-trapped founders into <span class="highlight">owners</span>.
-            </h1>
-            <p class="about__lead">
-                Most people with great ideas get stuck in the execution. We build the 
-                <strong>leverage</strong> so you can focus on the exploration.
-            </p>
-        </div>
-    </section>
+<main class="page">
+  <header class="page__hero">
+    <p class="page__eyebrow">{a.eyebrow ?? 'About'}</p>
+    <h1 class="page__title">{a.title ?? 'About AIBAN'}</h1>
+    <p class="page__lead">{a.lead ?? ''}</p>
+  </header>
 
-    <section class="about__mission">
-        <div class="about__container grid">
-            <div class="about__content">
-                <h2 class="about__subtitle">Why we exist</h2>
-                <p class="about__text">
-                    Founded by <strong>Luis Murillo Baltodano</strong> (Senior Creative Engineer), AIBAN is the result of a passion for computer graphics, automation, and optimization. 
-                </p>
-                <p class="about__text">
-                    If a business falls apart without the owner, it’s not a business—it’s a job. We build systems that ensure quality in all axes, allowing humans to do what they do best.
-                </p>
-                <blockquote class="about__quote">
-                    "We want humans to do what humans do best: <strong>explore</strong>."
-                </blockquote>
-            </div>
-            <div class="about__visual">
-                <div class="abstract-lever">
-                    <div class="lever-arm"></div>
-                    <div class="lever-pivot"></div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <section class="section" aria-labelledby="what-title">
+    <h2 id="what-title" class="section__title">{a.whatTitle ?? 'What AIBAN does'}</h2>
+    {#each a.whatBody ?? [] as paragraph}
+      <p>{paragraph}</p>
+    {/each}
+    <div class="actions">
+      <a class="btn btn--primary" href="/start">{a.startCta ?? 'Start free'}</a>
+      <a class="btn btn--tertiary" href="/help">{a.helpCta ?? 'Read the help center'}</a>
+    </div>
+  </section>
 
-    <section class="about__how">
-        <div class="about__container">
-            <h2 class="about__subtitle centered">The AIBAN Method</h2>
-            <div class="about__steps">
-                <div class="step">
-                    <span class="step__num">01</span>
-                    <h3>Build Systems Fast</h3>
-                    <p>
-                        Using custom frameworks like Atomic Design, we turn ideas into functional web systems in days.
-                    </p>
-                </div>
-                <div class="step">
-                    <span class="step__num">02</span>
-                    <h3>Automate Execution</h3>
-                    <p>
-                        We leverage Go and Python for server-side automation so your business works while you sleep.
-                    </p>
-                </div>
-                <div class="step">
-                    <span class="step__num">03</span>
-                    <h3>Multiply Reach</h3>
-                    <p>
-                        We use generative principles to grow your impact without multiplying your hours.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
+  <section class="section" aria-labelledby="who-title">
+    <h2 id="who-title" class="section__title">{a.whoTitle ?? 'Who makes it'}</h2>
+    {#each a.whoBody ?? [] as paragraph}
+      <p>{paragraph}</p>
+    {/each}
+    <a class="btn btn--tertiary" href={GITHUB} target="_blank" rel="noopener noreferrer">
+      {a.githubLabel ?? 'Luis on GitHub'}<span class="visually-hidden"> {a.newTab ?? '(opens in a new tab)'}</span>
+    </a>
+  </section>
 
-    <section class="about__projects">
-        <div class="about__container">
-            <h2 class="about__subtitle centered">The Engineering Ecosystem</h2>
-            <div class="project-grid">
-                {#each projects as project}
-                    <a href={project.url} target="_blank" class="project-card">
-                        <h4 class="project-card__title">{project.name}</h4>
-                        <p class="project-card__desc">{project.desc}</p>
-                        <span class="project-card__link">Explore Source →</span>
-                    </a>
-                {/each}
-            </div>
-        </div>
+  {#if a.projects?.length}
+    <section class="section" aria-labelledby="projects-title">
+      <h2 id="projects-title" class="section__title">{a.projectsTitle ?? 'Open source work by the founder'}</h2>
+      <ul class="projects">
+        {#each a.projects as project}
+          <li class="project">
+            <h3 class="project__name">
+              <a href={project.url} target="_blank" rel="noopener noreferrer">
+                {project.name}<span class="visually-hidden"> {a.newTab ?? '(opens in a new tab)'}</span>
+              </a>
+            </h3>
+            <p class="project__desc">{project.desc}</p>
+          </li>
+        {/each}
+      </ul>
     </section>
+  {/if}
 
-    <section class="about__identity">
-        <div class="about__container">
-            <div class="identity-card">
-                <h2 class="about__subtitle">What are we?</h2>
-                <p class="about__text">
-                    We are systems, automation, and execution. 
-                    Built on a foundation of creative engineering and 3D web expertise.
-                </p>
-                <div class="identity-actions">
-                    <a href="https://github.com/LuisArmando-TestCoder" target="_blank" class="about__btn">GitHub</a>
-                    <a href="mailto:info@aiban.news" target="_blank" class="about__btn about__btn--outline">Contact Lab</a>
-                </div>
-                <p class="about__disclaimer">
-                    Delivered through high-performance platform subscriptions.
-                </p>
-            </div>
-        </div>
-    </section>
+  <section class="section contact" aria-labelledby="contact-title">
+    <h2 id="contact-title" class="section__title">{a.contactTitle ?? 'Get in touch'}</h2>
+    <p>{a.contactBody ?? ''}</p>
+    <a class="btn btn--secondary" href="mailto:info@aiban.news">{a.emailCta ?? 'Email info@aiban.news'}</a>
+  </section>
 </main>
 
 <style lang="scss">
-    .about {
-        --primary: #3b82f6;
-        --text-main: #1f2937;
-        --text-muted: #6b7280;
-        --bg-light: #f9fafb;
+  .page {
+    max-width: var(--container-md, 880px);
+    margin: 0 auto;
+    padding: var(--space-8, 64px) var(--space-4, 16px) var(--space-10, 128px);
+    color: var(--text-1, #0f172a);
+    font-family: var(--font-body, inherit);
+  }
 
-        background: white;
-        color: var(--text-main);
-        line-height: 1.6;
+  .page__hero { margin-bottom: var(--space-8, 64px); }
 
-        &__container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 24px;
+  .page__eyebrow {
+    margin: 0 0 var(--space-2, 8px);
+    font-size: var(--fs-sm, 0.875rem);
+    font-weight: var(--fw-semibold, 600);
+    color: var(--text-2, #475569);
+  }
 
-            &.grid {
-                display: grid;
-                grid-template-columns: 1.2fr 0.8fr;
-                gap: 60px;
-                align-items: center;
-            }
-        }
+  .page__title {
+    margin: 0 0 var(--space-4, 16px);
+    font-family: var(--font-display, inherit);
+    font-size: var(--fs-3xl, 2.5rem);
+    font-weight: var(--fw-bold, 700);
+    line-height: var(--lh-tight, 1.15);
+  }
 
-        &__hero {
-            padding: 100px 0;
-            text-align: center;
-            background: radial-gradient(circle at top right, #eff6ff 0%, transparent 40%);
-        }
+  .page__lead {
+    margin: 0;
+    max-width: 60ch;
+    font-size: var(--fs-lg, 1.125rem);
+    line-height: var(--lh-normal, 1.6);
+    color: var(--text-2, #475569);
+  }
 
-        &__badge {
-            display: inline-block;
-            padding: 6px 16px;
-            background: #dbeafe;
-            color: var(--primary);
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 0.875rem;
-            margin-bottom: 24px;
-        }
+  .section { margin-bottom: var(--space-8, 64px); }
 
-        &__title {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            margin-bottom: 24px;
-            .highlight { color: var(--primary); }
-        }
+  .section__title {
+    margin: 0 0 var(--space-4, 16px);
+    font-family: var(--font-display, inherit);
+    font-size: var(--fs-2xl, 1.75rem);
+    font-weight: var(--fw-bold, 700);
+    line-height: var(--lh-tight, 1.2);
+  }
 
-        &__lead {
-            font-size: 1.25rem;
-            color: var(--text-muted);
-            max-width: 700px;
-            margin: 0 auto;
-        }
+  .section p {
+    margin: 0 0 var(--space-4, 16px);
+    max-width: 68ch;
+    font-size: var(--fs-md, 1rem);
+    line-height: var(--lh-normal, 1.7);
+    color: var(--text-2, #475569);
+  }
 
-        &__subtitle {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 24px;
-            &.centered {
-                text-align: center;
-                margin-bottom: 60px;
-            }
-        }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3, 12px);
+    margin-top: var(--space-5, 24px);
+  }
 
-        &__mission { padding: 80px 0; }
-        &__text { font-size: 1.125rem; color: var(--text-muted); margin-bottom: 24px; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: var(--space-2, 8px) var(--space-5, 24px);
+    border-radius: var(--radius-full, 999px);
+    border: 1px solid transparent;
+    font-size: var(--fs-md, 1rem);
+    font-weight: var(--fw-semibold, 600);
+    text-decoration: none;
+    transition: background-color var(--dur-fast, 120ms) var(--ease-out, ease-out);
 
-        &__quote {
-            border-left: 4px solid var(--primary);
-            padding-left: 24px;
-            font-size: 1.5rem;
-            font-style: italic;
-            color: var(--text-main);
-            margin: 40px 0;
-        }
-
-        &__how { background: var(--bg-light); padding: 100px 0; }
-        &__steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; }
-
-        .step {
-            background: white;
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            &__num { font-size: 3rem; font-weight: 800; color: #e5e7eb; display: block; margin-bottom: 16px; }
-            h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 12px; }
-            p { color: var(--text-muted); }
-        }
-
-        &__identity {
-            padding: 100px 0;
-            .identity-card {
-                background: #111827;
-                color: white;
-                padding: 60px;
-                border-radius: 24px;
-                text-align: center;
-                .about__subtitle { color: white; }
-                .about__text { color: #9ca3af; margin-bottom: 32px; }
-            }
-            .identity-actions {
-                display: flex;
-                gap: 16px;
-                justify-content: center;
-            }
-            .about__disclaimer { font-size: 0.875rem; color: #6b7280; margin-top: 32px; font-style: italic; }
-        }
-
-        &__btn {
-            padding: 12px 32px;
-            background: var(--primary);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 700;
-            transition: transform 0.2s;
-            &:hover { transform: translateY(-2px); }
-            &--outline {
-                background: transparent;
-                border: 1px solid #374151;
-                &:hover { background: #1f2937; }
-            }
-        }
-
-        &__projects { padding: 100px 0; }
-        .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
-
-        .project-card {
-            text-decoration: none;
-            color: inherit;
-            padding: 30px;
-            border: 1px solid #e5e7eb;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            &:hover {
-                border-color: var(--primary);
-                transform: translateY(-4px);
-                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            }
-            &__title { font-weight: 700; margin-bottom: 8px; color: var(--primary); }
-            &__desc { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 16px; }
-            &__link { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; color: var(--text-main); }
-        }
-
-        .abstract-lever {
-            position: relative;
-            height: 200px;
-            width: 200px;
-            margin: 0 auto;
-            .lever-arm {
-                position: absolute;
-                top: 50%;
-                left: 10%;
-                width: 80%;
-                height: 8px;
-                background: var(--primary);
-                transform-origin: 60% 50%;
-                transform: rotate(-20deg);
-                border-radius: 4px;
-            }
-            .lever-pivot {
-                position: absolute;
-                top: 50%;
-                left: 55%;
-                width: 30px;
-                height: 30px;
-                background: #111827;
-                transform: translate(-50%, -50%);
-                clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-            }
-        }
+    &--primary {
+      background: var(--accent, #4f46e5);
+      color: var(--accent-contrast, #fff);
+      &:hover { background: var(--accent-hover, #4338ca); }
     }
 
-    @media (max-width: 850px) {
-        .about__container.grid { grid-template-columns: 1fr; }
-        .about__hero { padding: 60px 0; }
-        .identity-actions { flex-direction: column; }
+    &--secondary {
+      background: var(--surface-1, #fff);
+      color: var(--text-1, #0f172a);
+      border-color: var(--border-2, #cbd5e1);
+      &:hover { background: var(--surface-2, #f1f5f9); }
     }
+
+    &--tertiary {
+      padding-inline: var(--space-2, 8px);
+      color: var(--text-link, #4338ca);
+      &:hover { text-decoration: underline; }
+    }
+  }
+
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--focus-color, #6366f1);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn { transition: none; }
+  }
+  .projects {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-4, 16px);
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+
+  .project {
+    position: relative;
+    padding: var(--space-5, 24px);
+    border: 1px solid var(--border-1, #e5e7eb);
+    border-radius: var(--radius-lg, 14px);
+    background: var(--surface-1, #fff);
+    transition: border-color var(--dur-fast, 120ms) var(--ease-out, ease-out);
+
+    &:hover { border-color: var(--border-2, #cbd5e1); }
+  }
+
+  .project__name {
+    margin: 0 0 var(--space-2, 8px);
+    font-size: var(--fs-lg, 1.125rem);
+    font-weight: var(--fw-semibold, 600);
+
+    a {
+      color: var(--text-1, #0f172a);
+      text-decoration: none;
+      &::after { content: ''; position: absolute; inset: 0; border-radius: inherit; }
+      &:hover { color: var(--text-link, #4338ca); }
+    }
+  }
+
+  .section .project__desc { margin: 0; font-size: var(--fs-sm, 0.875rem); }
+
+  .project:focus-within { outline: 2px solid var(--focus-color, #6366f1); outline-offset: 2px; }
+  .project__name a:focus-visible { outline: none; }
+
+  .contact {
+    padding: var(--space-6, 32px);
+    border-radius: var(--radius-lg, 14px);
+    background: var(--surface-2, #f1f5f9);
+    margin-bottom: 0;
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
 </style>

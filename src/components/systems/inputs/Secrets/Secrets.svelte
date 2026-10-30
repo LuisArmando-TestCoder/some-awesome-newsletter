@@ -52,7 +52,7 @@
       id,
       name: "",
       url: cfg.webhookUrl || "",
-      username: cfg.webhookUsername || cfg.emailMaskSender || cfg.configuratorId || "",
+      username: cfg.webhookUsername || cfg.configuratorId || "",
       password: "",
       postStatus: cfg.webhookPostStatus || "draft",
       authorName: cfg.webhookAuthorName || cfg.senderName || "",
@@ -105,7 +105,7 @@
     try {
       return new URL(url).hostname;
     } catch {
-      return url || "—";
+      return url || $t['labels.notApplicable'];
     }
   }
 
@@ -186,13 +186,13 @@
           <div class="group-row">
             <div class="group-info">
               <span class="group-name">
-                {#if idx === 0}<span class="badge-default" title="System Default">★</span>{/if}
+                {#if idx === 0}<span class="badge-default" title={$t['webhook.defaultBadge']}>★</span>{/if}
                 {group.name || domainLabel(group.url)}
               </span>
               <span class="group-url">{domainLabel(group.url)}</span>
-              <span class="group-status pill">{group.postStatus === 'publish' ? '→ Publish' : '→ Draft'}</span>
+              <span class="group-status pill">{group.postStatus === 'publish' ? $t['webhook.statusPublish'] : $t['webhook.statusDraft']}</span>
               {#if sessionChangedIds.has(group.id)}
-                <span class="badge-session">Updated this session</span>
+                <span class="badge-session">{$t['webhook.updatedThisSession']}</span>
               {/if}
             </div>
             <div class="group-actions">
@@ -201,7 +201,7 @@
                 <button class="btn-confirm" on:click={() => deleteGroup(group.id)}>{$t['labels.confirm']}</button>
                 <button class="btn-cancel" on:click={() => (confirmDeleteId = null)}>{$t['labels.cancel']}</button>
               {:else}
-                <button class="btn-delete" on:click={() => (confirmDeleteId = group.id)}>✕</button>
+                <button class="btn-delete" aria-label={$t['webhook.deleteDestination']} title={$t['webhook.deleteDestination']} on:click={() => (confirmDeleteId = group.id)}>✕</button>
               {/if}
             </div>
           </div>
@@ -210,13 +210,13 @@
         {:else if draft}
           <div class="group-edit">
             <h4 class="edit-title">
-              {idx === 0 ? `★ ${$t['webhook.whereTitle']} (System Default)` : $t['webhook.whereTitle']}
+              {idx === 0 ? `★ ${$t['webhook.whereTitle']} ${$t['webhook.defaultSuffix']}` : $t['webhook.whereTitle']}
             </h4>
 
             <PlainText
               bind:value={draft.name}
-              label="Destination name"
-              placeholder='e.g. "Main Blog", "Client Site A"'
+              label={$t['webhook.destinationName']}
+              placeholder={$t['webhook.destinationNamePlaceholder']}
             />
 
             <!-- WHERE -->
@@ -239,7 +239,7 @@
                 <p class="field-hint">{$t['webhook.appPasswordHint']}</p>
                 <button class="guide-toggle"
                   on:click={() => showPasswordGuideForId = showPasswordGuideForId === group.id ? null : group.id}>
-                  {showPasswordGuideForId === group.id ? $t['webhook.appPasswordGuideHide'] : $t['webhook.appPasswordGuide']} ↕
+                  {showPasswordGuideForId === group.id ? $t['webhook.appPasswordGuideHide'] : $t['webhook.appPasswordGuide']}
                 </button>
                 {#if showPasswordGuideForId === group.id}
                   <ol class="guide-steps">
@@ -261,18 +261,18 @@
                 </select>
               </div>
               <PlainText bind:value={draft.authorName}
-                label={$t['webhook.authorName']} placeholder={draft.authorName || "Your name"} />
+                label={$t['webhook.authorName']} placeholder={draft.authorName || $t['webhook.authorNamePlaceholder']} />
               <PlainText bind:value={draft.categoryHint}
-                label={$t['webhook.categoryHint']} placeholder={draft.categoryHint || "e.g. International Relocation"} />
+                label={$t['webhook.categoryHint']} placeholder={draft.categoryHint || $t['webhook.categoryPlaceholder']} />
               <PlainText bind:value={draft.tagsHint}
-                label={$t['webhook.tagsHint']} placeholder="relocation, expat, ..." />
+                label={$t['webhook.tagsHint']} placeholder={$t['webhook.tagsPlaceholder']} />
             </div>
 
             <div class="edit-footer">
               <SubmitButton label={$t['webhook.saveSettings']} callback={saveGroup} />
               <button class="btn-cancel-edit" on:click={cancelEdit}>{$t['labels.cancel']}</button>
               {#if groupSaveSuccess === group.id}
-                <span class="success-msg">✅ {$t['webhook.savedSuccess']}</span>
+                <span class="success-msg">{$t['webhook.savedSuccess']}</span>
               {/if}
             </div>
           </div>
@@ -283,11 +283,11 @@
 
     <!-- Add new group -->
     <button class="add-group-btn" on:click={addGroup}>
-      + Add Publish Destination
+      + {$t['webhook.addDestination']}
     </button>
 
     {#if webhookGroups.length === 0}
-      <p class="empty-hint">No destinations yet. Click "+ Add Publish Destination" to set one up.</p>
+      <p class="empty-hint">{$t['webhook.emptyHint']}</p>
     {/if}
 
     <p class="info-callout">{$t['webhook.hmacAlternative']}</p>
@@ -304,7 +304,7 @@
     <p class="section-desc">{$t['secrets.signatureDesc']}</p>
     {#if newSharedSecret}
       <div class="secret-reveal-box">
-        <p class="warning-text">⚠️ <strong>{$t['secrets.copyNow']}</strong> {$t['secrets.wontShowAgain']}</p>
+        <p class="warning-text"><strong>{$t['secrets.copyNow']}</strong> {$t['secrets.wontShowAgain']}</p>
         <div class="new-api-key-wrapper">
           <code class="new-api-key-code">{newSharedSecret}</code>
           <button class="copy-btn" on:click={() => newSharedSecret && copyToClipboard(newSharedSecret)}>{$t['secrets.copy']}</button>
@@ -323,7 +323,7 @@
     <p class="section-desc">{$t['secrets.apiDesc']}</p>
     {#if newApiKey}
       <div class="secret-reveal-box success">
-        <p class="warning-text">✅ <strong>{$t['secrets.keyGenerated']}</strong></p>
+        <p class="warning-text"><strong>{$t['secrets.keyGenerated']}</strong></p>
         <div class="new-api-key-wrapper">
           <code class="new-api-key-code">{newApiKey}</code>
           <button class="copy-btn" on:click={() => newApiKey && copyToClipboard(newApiKey)}>{$t['secrets.copy']}</button>

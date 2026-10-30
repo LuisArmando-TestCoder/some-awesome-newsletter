@@ -11,6 +11,12 @@
   height: calc(var(--ham-size) * 1.1);
   outline: none;
 
+  &:focus-visible {
+    outline: 2px solid var(--focus-color, #6366f1);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm, 6px);
+  }
+
   &:after,
   &:before {
     content: '';
@@ -19,7 +25,11 @@
     background: var(--color-background);
     display: block;
     position: absolute;
-    transition: 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    transition: transform var(--dur-slow, 320ms) cubic-bezier(0.075, 0.82, 0.165, 1), top var(--dur-slow, 320ms) cubic-bezier(0.075, 0.82, 0.165, 1);
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
     border-radius: 50px;
   }
 

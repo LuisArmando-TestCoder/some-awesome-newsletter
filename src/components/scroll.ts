@@ -1,9 +1,8 @@
+/** Smooth-scroll to an element id. Does nothing when the element is missing or on the server. */
 export default function scroll(id: string) {
-    const element = document.getElementById(id);
-
-    if (!element) {
-        throw Error(`id ${id} doesn't exists`)
-    }
-
-    window.scrollTo(window.scrollX + element.getBoundingClientRect().left, window.scrollY + element.getBoundingClientRect().top)
+  if (typeof document === "undefined") return;
+  const element = document.getElementById(id);
+  if (!element) return;
+  const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+  element.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
 }

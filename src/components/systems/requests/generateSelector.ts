@@ -1,24 +1,20 @@
-import { get } from "svelte/store";
-import store from "../../store";
-import getAuthHeaders from "./getAuthHeaders";
+import { request, seg } from "$lib/api/client";
+import { LLM_TIMEOUT_MS } from "$lib/api/config";
 
-export default async function generateSelector(configId: string, data: { url: string, lead: string, personality: string, scheduleTime: string }) {
-  const response = await fetch(
-    `${get(store).apiURL()}/news-source/generate-selector/${configId}`,
-    {
+/** Ask the backend to find the CSS selector for article links. Returns the selector or null. */
+export default async function generateSelector(
+  configId: string,
+  data: { url: string; lead: string; personality: string; scheduleTime: string }
+) {
+  try {
+    const json = await request<{ selector?: string }>(`/news-source/generate-selector/${seg(configId)}`, {
       method: "POST",
-      headers: getAuthHeaders(),
-      body: JSON.stringify(data),
-    }
-  );
-
-  if (!response.ok) {
-    console.error("Failed to generate selector", response);
+      body: data,
+      timeoutMs: LLM_TIMEOUT_MS,
+    });
+    return json?.selector ?? null;
+  } catch (e) {
+    console.error("[generateSelector] Failed", e);
     return null;
   }
-
-  const json = await response.json();
-  console.log("Generated selector:", json?.selector);
-
-  return json?.selector;
 }

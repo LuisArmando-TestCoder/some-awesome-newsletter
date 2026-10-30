@@ -55,7 +55,7 @@
 <aside
   class="sidebar"
   class:collapsed={!$isMobileMenuOpen}
-  aria-label="Primary Navigation"
+  aria-label="Primary navigation"
   style={$store.stepsIndex > 12 ? "" : "display: none;"}
 >
   <nav id="sidebar-nav" class="sidebar__nav" aria-label="Sections">
@@ -70,7 +70,7 @@
     <div class="sidebar__profile">
       <img
         src={$store?.picture || ""}
-        alt="User avatar"
+        alt="Your avatar"
         class="sidebar__profile-avatar outlined"
         on:error={(e) =>
           ((e.currentTarget as HTMLElement).style.display = "none")}

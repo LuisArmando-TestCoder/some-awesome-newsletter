@@ -1,3 +1,7 @@
+<script lang="ts" module>
+  let emailInputCount = 0;
+</script>
+
 <script lang="ts">
   import { onMount } from "svelte";
   import { writable } from "svelte/store";
@@ -5,8 +9,12 @@
   // Props for the email input.
   export let value: string = "";
   export let placeholder: string = "Enter your email...";
+  /** Visible label. When empty, the placeholder becomes the accessible name. */
   export let label: string = "";
   export let onEnter: (isValid: boolean) => void = () => {};
+  export let id: string | undefined = undefined;
+  /** Shown after Enter or after leaving the field, when the address is not valid. */
+  export let errorMessage: string = "Enter a valid email address, like name@example.com.";
 
   // Callback to be invoked when the input changes.
   export let onChange: (newValue: string) => void = () => {};
@@ -14,14 +22,26 @@
   // Create a writable store for the email input value.
   export const emailStore = writable(value);
 
-  // Track validation state.
+  const autoId = `email-input-${++emailInputCount}`;
+  $: controlId = id ?? autoId;
+  $: errorId = `${controlId}-error`;
+
+  // Track validation state. The message waits until Enter or blur.
   let valid = false;
+  let touched = false;
+  $: showError = touched && !valid && value !== "";
+
+  function check(v: string) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  }
 
   // Validate email format on input, update the store, and call onChange.
   function handleInput(event: Event | null, newValue?: string) {
     const target = event?.target as HTMLInputElement;
-    value = target?.value?.trim?.() || (newValue as string);
-    valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+    value = target?.value?.trim?.() || (newValue as string) || "";
+    valid = check(value);
+    // Never raise an error while typing. A fixed address clears it right away.
+    if (valid) touched = false;
     emailStore.set(value);
 
     // Call onChange with empty string if invalid or empty, otherwise with the value
@@ -30,10 +50,13 @@
 
   function handleKeyDown(event: KeyboardEvent) {
     if (event.key === "Enter") {
-      // If you want to prevent the default form submission (if inside a <form>), uncomment:
-      // event.preventDefault();
+      touched = true;
       onEnter(valid);
     }
+  }
+
+  function handleBlur() {
+    touched = true;
   }
 
   onMount(() => {
@@ -43,22 +66,32 @@
   });
 </script>
 
-<div class="email-input-wrapper">
-  <label class="input-label"
-    >{value ? label || placeholder : label}</label
-  >
+<div class="email-input-wrapper" class:email-input-wrapper--invalid={showError}>
+  {#if label}
+    <label class="input-label" for={controlId}>{label}</label>
+  {/if}
   <input
+    autocomplete="email"
+    {...$$restProps}
+    id={controlId}
     type="email"
+    inputmode="email"
     bind:value
     {placeholder}
+    aria-label={label ? undefined : placeholder || undefined}
+    aria-invalid={showError ? true : undefined}
+    aria-describedby={showError ? errorId : undefined}
     on:input={handleInput}
     on:keydown={handleKeyDown}
-    aria-label={label}
-    class:invalid={!valid && value !== ""}
+    on:blur={handleBlur}
+    on:focus
+    on:blur
   />
-  {#if !valid && value !== ""}
-    <span class="error-message">Please enter a valid email.</span>
-  {/if}
+  <div class="error-region" aria-live="polite">
+    {#if showError}
+      <p id={errorId} class="error-message">{errorMessage}</p>
+    {/if}
+  </div>
 </div>
 
 <style lang="scss">
@@ -66,41 +99,72 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    gap: .5rem;
-    margin-bottom: var(--space-md);
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+    font-family: var(--font-body);
+  }
+
+  .input-label {
+    color: var(--text-1);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-snug);
   }
 
   input {
-    background: var(--color-background-inversion);
-    border: 1px solid #0004;
-    border-radius: 8px;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    color: var(--color-foreground);
+    box-sizing: border-box;
+    width: 100%;
+    min-height: var(--control-h);
+    margin: 0;
+    padding: 0 var(--control-pad-x);
+    background: var(--surface-1);
+    border: 1px solid var(--border-2);
+    border-radius: var(--radius-md);
+    color: var(--text-1);
+    font-family: var(--font-body);
+    font-size: var(--fs-md);
+    line-height: var(--lh-snug);
     transition:
-      border 0.3s ease,
-      box-shadow 0.3s ease;
-    outline: none;
-    text-align: center;
+      border-color var(--dur-fast) var(--ease-out),
+      box-shadow var(--dur-fast) var(--ease-out);
+
+    &::placeholder {
+      color: var(--text-3);
+      opacity: 1;
+    }
+
+    &:hover {
+      border-color: var(--text-3);
+    }
+
+    &:focus-visible {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: var(--focus-ring);
+    }
+
+    &:disabled {
+      background: var(--surface-2);
+      border-color: var(--border-1);
+      color: var(--text-3);
+      cursor: not-allowed;
+    }
   }
 
-  input::placeholder {
-    color: var(--color-foreground-opaque);
+  .email-input-wrapper--invalid input,
+  .email-input-wrapper--invalid input:hover {
+    border-color: var(--danger);
   }
 
-  input:focus {
-    border-color: var(--color-foreground);
-    box-shadow: 0 0 10px -2px var(--color-foreground);
-  }
-
-  input.invalid {
-    border-color: red;
-    box-shadow: 0 0 10px -2px red;
+  .error-region:not(:has(.error-message)) {
+    margin-top: calc(-1 * var(--space-2));
   }
 
   .error-message {
-    margin-top: 0.25rem;
-    font-size: 0.875rem;
-    color: red;
+    margin: 0;
+    color: var(--danger);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-snug);
   }
 </style>

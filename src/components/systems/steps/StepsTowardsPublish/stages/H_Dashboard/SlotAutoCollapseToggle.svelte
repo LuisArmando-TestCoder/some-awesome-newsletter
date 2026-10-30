@@ -1,6 +1,7 @@
 <script lang="ts">
   import TextTypes from "../../../../texts/TextTypes/TextTypes.svelte";
   import Switch from "../../../../selectors/Switch/Switch.svelte";
+  import { t } from "$lib/i18n/dashboard-translations";
   // We don't import ToggleCard here, the consumer does.
 
   // --- Props ---
@@ -78,10 +79,10 @@
   <!-- Auto Collapse Control UI -->
   <div class="horizontal">
     <div class="pad-right">
-      <TextTypes type="sub-italic">Auto collapse is</TextTypes>
+      <TextTypes type="sub-italic">{$t['autoCollapse.label'] ?? "Close other sections when you open one:"}</TextTypes>
       <span class="text-space" class:highlight={autoCollapse}>
         {#key autoCollapse}
-          {autoCollapse ? "on" : "off"}
+          {autoCollapse ? ($t['autoCollapse.on'] ?? "on") : ($t['autoCollapse.off'] ?? "off")}
         {/key}
       </span>
     </div>

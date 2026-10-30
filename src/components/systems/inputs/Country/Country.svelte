@@ -1,3 +1,7 @@
+<script context="module" lang="ts">
+  let countrySelectCount = 0;
+</script>
+
 <script lang="ts">
   import { onMount, onDestroy, tick } from "svelte";
   import { writable } from "svelte/store";
@@ -25,6 +29,17 @@
   export let onSelect: (selection: CountrySelection | null) => void = () => {};
   export let disabled: boolean = false;
   export let whitelist: string[] = [];
+
+  // Unique ids per instance so several pickers can share a page.
+  const uid = `country-select-${++countrySelectCount}`;
+  const labelId = `${uid}-label`;
+  const listboxId = `${uid}-listbox`;
+  const valueId = `${uid}-value`;
+  const optionId = (code: string) => `${uid}-option-${code}`;
+  $: activeDescendant =
+    open && highlightedIndex >= 0 && highlightedIndex < countries.length
+      ? optionId(countries[highlightedIndex].code)
+      : undefined;
 
   // State
   let selectedCountry: Country | null = null;
@@ -240,17 +255,14 @@
   }
 </script>
 
+<!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
   class="custom-select-wrapper"
   bind:this={dropdownRef}
   on:keydown={handleKeydown}
-  role="combobox"
-  aria-haspopup="listbox"
-  aria-expanded={open}
-  aria-owns={open ? "country-listbox" : undefined}
 >
   {#if label}
-    <span class="custom-select-label" id="country-select-label">
+    <span class="custom-select-label" id={labelId}>
       {label}
     </span>
   {/if}
@@ -263,9 +275,16 @@
       on:input={handleInput}
       placeholder={$t['country.typeToSearch']}
       class="custom-select-input {open ? 'open' : ''}"
+      role="combobox"
       aria-autocomplete="list"
-      aria-controls={open ? "country-listbox" : undefined}
-      aria-labelledby="country-select-label"
+      aria-haspopup="listbox"
+      aria-expanded={open}
+      aria-controls={open ? listboxId : undefined}
+      aria-activedescendant={activeDescendant}
+      aria-labelledby={label ? labelId : undefined}
+      aria-label={label ? undefined : $t['country.typeToSearch']}
+      tabindex={open ? undefined : -1}
+      autocomplete="off"
       {disabled}
     />
     <button
@@ -273,23 +292,27 @@
       bind:this={buttonRef}
       on:click={toggleOpen}
       class="custom-select-button {!open ? 'visible' : ''}"
-      aria-controls={open ? "country-listbox" : undefined}
-      aria-labelledby="country-select-label {selectedCountry ? 'selected-country-label' : ''}"
+      aria-haspopup="listbox"
+      aria-expanded={open}
+      aria-controls={open ? listboxId : undefined}
+      aria-labelledby={label ? `${labelId} ${valueId}` : valueId}
+      tabindex={open ? -1 : undefined}
       {disabled}
     >
       {#if selectedCountry}
-        <span class="flex items-center gap-2 truncate">
+        <span class="custom-select-value" id={valueId}>
           {#if selectedCountry.flag}
-            <span class="text-lg" aria-hidden="true">{selectedCountry.flag}</span>
+            <span class="custom-select-flag" aria-hidden="true">{selectedCountry.flag}</span>
           {/if}
-          <span class="truncate">{selectedCountry.name}</span>
-          <span class="text-gray-500 text-xs">({selectedCountry.code})</span>
+          <span class="custom-select-name">{selectedCountry.name}</span>
+          <span class="custom-select-code">({selectedCountry.code})</span>
         </span>
       {:else}
-        <span class="text-gray-500">{$t['country.selectACountry']}</span>
+        <span class="custom-select-placeholder" id={valueId}>{$t['country.selectACountry']}</span>
       {/if}
       <svg
-        class="custom-select-arrow w-4 h-4 transform transition-transform duration-200 {open ? 'rotate-180' : ''}"
+        class="custom-select-arrow"
+        class:open
         fill="currentColor"
         viewBox="0 0 24 24"
         aria-hidden="true"
@@ -303,17 +326,18 @@
     <ul
       bind:this={listRef}
       role="listbox"
-      id="country-listbox"
+      id={listboxId}
       class="custom-select-list"
       tabindex="-1"
-      aria-labelledby="country-select-label"
+      aria-labelledby={label ? labelId : undefined}
+      aria-label={label ? undefined : $t['country.selectACountry']}
       in:slide={{ duration: 200 }}
       out:slide={{ duration: 200 }}
     >
       {#each countries as country, index (country.code)}
         <li
           bind:this={listItems[index]}
-          id={`country-option-${country.code}`}
+          id={optionId(country.code)}
           class="custom-select-list-item"
           class:highlighted={highlightedIndex === index}
           class:selected={selectedCountry?.code === country.code}
@@ -326,15 +350,13 @@
           }}
         >
           {#if country.flag}
-            <span class="text-lg" aria-hidden="true">{country.flag}</span>
+            <span class="custom-select-flag" aria-hidden="true">{country.flag}</span>
           {/if}
-          <span class="truncate">{country.name}</span>
-          <span class="{highlightedIndex === index ? 'text-white' : 'text-gray-500'} text-xs">
-            ({country.code})
-          </span>
+          <span class="custom-select-name">{country.name}</span>
+          <span class="custom-select-code">({country.code})</span>
         </li>
       {:else}
-        <li class="px-4 py-2 text-sm text-gray-500" role="option" aria-disabled="true">
+        <li class="custom-select-empty" role="option" aria-disabled="true" aria-selected="false">
           {$t['country.noCountriesAvailable']}
         </li>
       {/each}

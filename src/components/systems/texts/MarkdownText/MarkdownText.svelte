@@ -1,174 +1,186 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-  import Text from "../Text/Text.svelte";
-  import type { Block, TextNode } from "../../../types";
+  import { onDestroy, onMount } from "svelte";
+  import TextTypes from "../TextTypes/TextTypes.svelte";
+  import { reveal } from "../reveal";
 
-  let blocks: Block[] = [];
-  let slotContainer: HTMLDivElement;
+  /** When true, the whole block fades in once as it enters the viewport. */
   export let canReveal = false;
 
-  // parseInline: same as before
-  function parseInline(
-    text: string,
-    context: "title" | "subtitle" | "paragraph" = "paragraph"
-  ) {
-    const segments = [];
-    const regex = /(\*\*|==|--|\*)(.+?)\1/g;
+  /**
+   * Supported markup (one block per blank-line separated chunk):
+   *   ## Title         -> TextTypes "title"
+   *   ### Subtitle     -> TextTypes "subtitle"
+   *   **strong**       -> bold
+   *   ==highlight==    -> semibold, primary text colour
+   *   *emphasis*       -> semibold emphasis (not italic)
+   * Double hyphens (--x--) are literal text.
+   */
+  type InlineKind = "text" | "strong" | "highlight" | "emphasis";
+  type Segment = { kind: InlineKind; text: string };
+  type MdBlock = { kind: "title" | "subtitle" | "paragraph"; segments: Segment[] };
+
+  const MARKER_KIND: Record<string, InlineKind> = {
+    "**": "strong",
+    "==": "highlight",
+    "*": "emphasis",
+  };
+
+  let blocks: MdBlock[] = [];
+  let slotContainer: HTMLDivElement;
+  let observer: MutationObserver | undefined;
+  let lastSource: string | null = null;
+
+  function parseInline(text: string): Segment[] {
+    const segments: Segment[] = [];
+    const regex = /(\*\*|==|\*)(.+?)\1/g;
     let lastIndex = 0;
-    let match;
+    let match: RegExpExecArray | null;
 
     while ((match = regex.exec(text)) !== null) {
-      // Text before the match
       if (match.index > lastIndex) {
-        segments.push({
-          type: context,
-          text: text.slice(lastIndex, match.index),
-        });
+        segments.push({ kind: "text", text: text.slice(lastIndex, match.index) });
       }
-      const marker = match[1];
-      const content = match[2];
-      let segType: string = "";
-
-      if (marker === "**" || marker === "==") {
-        segType =
-          context === "title"
-            ? "title-highlight"
-            : context === "subtitle"
-              ? "subtitle-highlight"
-              : "highlight";
-      } else if (marker === "*") {
-        segType =
-          context === "title"
-            ? "title-sub-italic"
-            : context === "subtitle"
-              ? "subtitle-sub-italic"
-              : "sub-italic";
-      } else if (marker === "--") {
-        segType =
-          context === "title"
-            ? "title-sub-highlight-italic"
-            : context === "subtitle"
-              ? "subtitle-sub-highlight-italic"
-              : "sub-highlight-italic";
-      }
-      segments.push({ type: segType, text: content });
+      segments.push({ kind: MARKER_KIND[match[1]] ?? "text", text: match[2] });
       lastIndex = regex.lastIndex;
     }
-    // Any trailing text
     if (lastIndex < text.length) {
-      segments.push({
-        type: context,
-        text: text.slice(lastIndex),
-      });
+      segments.push({ kind: "text", text: text.slice(lastIndex) });
     }
     return segments;
   }
 
-  // parseMarkdown: store segments for titles/subtitles
-  function parseMarkdown(md: string) {
-    const rawBlocks = md.split(/\n\s*\n/);
-
-    (blocks as any) = rawBlocks.map((block) => {
-      const trimmed = block.trim();
-
-      // Level 2 header => title
-      if (trimmed.startsWith("## ")) {
-        const content = trimmed.slice(3).trim();
-        return {
-          header: true,
-          type: "title",
-          segments: parseInline(content, "title"),
-        };
-      }
-      // Level 3 header => subtitle
-      if (trimmed.startsWith("### ")) {
-        const content = trimmed.slice(4).trim();
-        return {
-          header: true,
-          type: "subtitle",
-          segments: parseInline(content, "subtitle"),
-        };
-      }
-      // Otherwise => paragraph
-      return {
-        header: false,
-        type: "paragraph",
-        segments: parseInline(trimmed, "paragraph"),
-      };
-    });
+  function parseMarkdown(md: string): MdBlock[] {
+    return md
+      .split(/\n\s*\n/)
+      .map((raw) => raw.trim().replace(/\s*\n\s*/g, " "))
+      .filter((chunk) => chunk.length > 0)
+      .map((chunk): MdBlock => {
+        if (chunk.startsWith("### ")) {
+          return { kind: "subtitle", segments: parseInline(chunk.slice(4).trim()) };
+        }
+        if (chunk.startsWith("## ")) {
+          return { kind: "title", segments: parseInline(chunk.slice(3).trim()) };
+        }
+        return { kind: "paragraph", segments: parseInline(chunk) };
+      });
   }
 
   function processSlot() {
-    if (slotContainer) {
-      const slotText = slotContainer?.textContent?.trim() || "";
-      parseMarkdown(slotText);
-    }
+    if (!slotContainer) return;
+    const source = slotContainer.textContent?.trim() ?? "";
+    if (source === lastSource) return;
+    lastSource = source;
+    blocks = parseMarkdown(source);
   }
 
   onMount(() => {
     processSlot();
+    if (typeof MutationObserver !== "undefined") {
+      // Re-parse when the slotted text changes (e.g. language switch).
+      observer = new MutationObserver(processSlot);
+      observer.observe(slotContainer, {
+        characterData: true,
+        childList: true,
+        subtree: true,
+      });
+    }
   });
 
-  $: canReveal;
+  onDestroy(() => {
+    observer?.disconnect();
+    observer = undefined;
+  });
 </script>
 
-<!-- Hidden container for the slotted text -->
-<div bind:this={slotContainer} style="display: none;">
+<!-- Source text from the slot. Hidden; it is parsed and rendered below. -->
+<div bind:this={slotContainer} class="markdown-source" hidden>
   <slot />
 </div>
 
-<!-- Render the parsed blocks -->
-<div class="markdown-text">
+<div class="markdown-text" use:reveal={canReveal}>
   {#each blocks as block}
-    {#if block.header}
-      <!--
-        Wrap the entire title/subtitle line in a block container.
-        But render each segment as inline.
-      -->
-      {#if block.type === "title"}
-        <div class="title-block">
-          {#each block.segments as TextNode[] as seg}
-            <Text text={seg.text} type={seg.type} {canReveal} />
+    {#if block.kind === "title" || block.kind === "subtitle"}
+      <div class="md-heading md-heading--{block.kind}">
+        <TextTypes type={block.kind}>
+          {#each block.segments as seg}
+            {#if seg.kind === "text"}{seg.text}{:else if seg.kind === "emphasis"}<em
+                class="md-inline md-inline--{seg.kind}">{seg.text}</em
+              >{:else}<strong class="md-inline md-inline--{seg.kind}">{seg.text}</strong
+              >{/if}
           {/each}
-        </div>
-      {:else if block.type === "subtitle"}
-        <div class="subtitle-block">
-          {#each block.segments as TextNode[] as seg}
-            <Text text={seg.text} type={seg.type} {canReveal} />
-          {/each}
-        </div>
-      {/if}
-    {:else}
-      <!-- Paragraph line, also inline segments -->
-      <div class="paragraph-block">
-        {#each block.segments as TextNode[] as seg}
-          <Text text={seg.text} type={seg.type} {canReveal} />
-        {/each}
+        </TextTypes>
       </div>
+    {:else}
+      <p class="md-paragraph">
+        {#each block.segments as seg}
+          {#if seg.kind === "text"}{seg.text}{:else if seg.kind === "emphasis"}<em
+              class="md-inline md-inline--{seg.kind}">{seg.text}</em
+            >{:else}<strong class="md-inline md-inline--{seg.kind}">{seg.text}</strong
+            >{/if}
+        {/each}
+      </p>
     {/if}
   {/each}
 </div>
 
 <style lang="scss">
+  .markdown-source {
+    display: none;
+  }
+
   .markdown-text {
-    user-select: none;
+    display: block;
+    transition:
+      opacity var(--dur-slow) var(--ease-out),
+      transform var(--dur-slow) var(--ease-out);
+
+    &:global(.is-reveal-pending) {
+      opacity: 0;
+      transform: translateY(var(--space-2));
+    }
+
+    > * + * {
+      margin-top: var(--space-3);
+    }
+
+    > .md-heading + .md-paragraph {
+      margin-top: var(--space-2);
+    }
   }
 
-  .title-block {
+  .md-heading {
     display: block;
-    margin: 1em 0;
-    /* style as you like */
+    margin: 0;
   }
 
-  .subtitle-block {
-    display: block;
-    margin: 0.5em 0;
-    /* style as you like */
+  .md-paragraph {
+    margin: 0;
+    max-width: var(--measure);
+    font-family: var(--font-body);
+    font-size: var(--fs-md);
+    font-weight: var(--fw-regular);
+    line-height: var(--lh-normal);
+    color: var(--text-2);
+    text-wrap: pretty;
   }
 
-  .paragraph-block {
-    display: block;
-    margin: 0.75em 0;
-    /* style as you like */
+  .md-inline {
+    font-style: normal;
+    color: var(--text-1);
+
+    &--strong {
+      font-weight: var(--fw-bold);
+    }
+
+    &--highlight,
+    &--emphasis {
+      font-weight: var(--fw-semibold);
+    }
+  }
+
+  // Inside headings the base weight is already semibold; step up to bold.
+  .md-heading .md-inline {
+    color: inherit;
+    font-weight: var(--fw-bold);
   }
 </style>

@@ -6,7 +6,10 @@
   import ThemeChanger from "../ThemeChanger/ThemeChanger.svelte";
     import logout from "../systems/requests/logout";
 
-  let menuOpen = false;
+  import { isMobileMenuOpen } from "$lib/stores/mobile-menu.store";
+
+  // MenuHalf drives its open state through the shared mobile menu store.
+  $: menuOpen = $isMobileMenuOpen;
   let headerVisible = writable(true); // Regular boolean variable
 
   // Logic: Show only if authenticated AND not scrolling down (using store value)
@@ -22,13 +25,13 @@
           class="menu-item hide-on-mobile"
           onclick={() => {
             saveToStore({ stepsIndex: 13 });
-          }}>Config</a
+          }}>Settings</a
         >
         <a
           class="menu-item hide-on-mobile"
           onclick={() => {
             saveToStore({ stepsIndex: 14 });
-          }}>News Sources</a
+          }}>Sources</a
         >
         <a
           class="menu-item hide-on-mobile"
@@ -51,14 +54,14 @@
       </section>
       <section class="menu-section right">
         <div class="menu-x hide-on-desktop interactive">
-          <MenuHalf bind:isChecked={menuOpen} />
+          <MenuHalf />
         </div>
         <section class="menu-x hide-on-mobile interactive">
           <a
             class="menu-half--anchor menu-half--logout"
             onclick={() => {  
               logout();
-            }}>Log Out</a
+            }}>Log out</a
           >
         </section>
 

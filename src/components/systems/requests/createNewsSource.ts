@@ -1,25 +1,26 @@
 import { get } from "svelte/store";
-// Removed duplicate import
-import store, { globalLanguage, saveToConfig, saveToStore } from "../../store"; // Removed saveToStore
+import store, { globalLanguage, saveToStore } from "../../store";
 import { addNewsletterUser } from "./addNewsletterUserEndpoint";
 import subscribeNewsletterUser from "./subscribeNewsletterUser";
-// Removed getAllSubscribersFromConfigEndpoint import
-import { refreshSubscribers } from "../steps/StepsTowardsPublish/stages/H_Dashboard/Users/UserDataService"; // Import the centralized refresh function
-import getAuthHeaders from "./getAuthHeaders";
-import { getConfigFetchResponse } from "./getConfiguratorSession";
+import { request, seg } from "$lib/api/client";
+import { LLM_TIMEOUT_MS } from "$lib/api/config";
+import { newsSourceEnvelope } from "$lib/api/schemas";
+import { refreshSubscribersSafely, replaceNewsSourceInStore } from "./_internal";
 
+/** Kept for existing importers. Prefer DEFAULT_SCHEDULE. */
 export function getRandomScheduleTime() {
-  // Generate random schedule: random hour (0-23), random day of week (0-6)
   const randomHour = Math.floor(Math.random() * 24);
   const randomDayOfWeek = Math.floor(Math.random() * 7);
-  const randomScheduleTime = `0 ${randomHour} * * ${randomDayOfWeek}`;
-
-  return randomScheduleTime;
+  return `0 ${randomHour} * * ${randomDayOfWeek}`;
 }
 
+/** Default schedule when the caller sends none: Mondays at 9:00 UTC (STRATEGY section 3). */
+export const DEFAULT_SCHEDULE = "0 9 * * 1";
+
 /**
- * Crea una nueva fuente de noticias asociada a una configuración.
- * Este endpoint autocompleta los selectores faltantes usando GPT y guarda la fuente en Firestore.
+ * Create a news source for the signed-in owner. The backend fills missing
+ * selectors with the LLM, so this can take up to two minutes.
+ * Throws an Error whose `message` is safe to show. Returns the new source.
  */
 export default async function createNewsSource(newsSource: {
   type?: string;
@@ -28,136 +29,71 @@ export default async function createNewsSource(newsSource: {
   community?: string;
   lead: string;
   scheduleTime?: string;
+  /** IANA zone the cron is read in (missing = UTC). */
+  scheduleTimezone?: string;
   personality?: string;
   linkSelector?: string;
+  active?: boolean;
+  includeImages?: boolean;
 }) {
-  console.log("[createNewsSource.ts] createNewsSource called with", newsSource);
   const configId = get(store).configuratorEmail;
-  console.log(
-    "[CREATE-NEWSOURCE] Using configuratorEmail (configId):",
-    configId
-  );
 
-  const randomScheduleTime = getRandomScheduleTime();
-
-  console.log("[CREATE-NEWSOURCE] Generated random scheduleTime:", randomScheduleTime);
-
-  const body = JSON.stringify({
+  const body = {
     type: "website",
-    personality: get(store).personality, // Consider if this should also be from input or have a default
-    community: "World Wide Expats", // Consider if this should be from input or have a default
-    country: "US", // Consider if this should be from input or have a default
-    scheduleTime: newsSource.scheduleTime || randomScheduleTime, // Use the generated random schedule as default
-    ...Object.fromEntries(
-      // Filter out falsy values from the input, allowing input to override defaults
-      Object.entries(newsSource).filter(([_, value]) => value)
-    ),
-  });
-  console.log("[CREATE-NEWSOURCE] Request body:", body);
+    personality: get(store).personality,
+    community: "World Wide Expats",
+    // The backend requires `country` (addNewsSourceEndpoint requiredFields). "US" stays the default until WS7 makes it optional.
+    country: "US",
+    scheduleTime: newsSource.scheduleTime || DEFAULT_SCHEDULE,
+    // Keep explicit booleans (for example active: false); drop empty strings and undefined.
+    ...Object.fromEntries(Object.entries(newsSource).filter(([, value]) => value !== undefined && value !== null && value !== "")),
+  };
 
-  const apiURL = `${get(store).apiURL()}/news-source/${configId}`;
-  console.log("[CREATE-NEWSOURCE] Sending POST request to:", apiURL);
-
-  const response = await fetch(apiURL, {
+  const json = await request(`/news-source/${seg(configId)}`, {
     method: "POST",
-    headers: getAuthHeaders(),
     body,
+    timeoutMs: LLM_TIMEOUT_MS,
+    schema: newsSourceEnvelope,
+    errorMessage: "We could not add this source. Check the address and try again.",
   });
-  console.log("[CREATE-NEWSOURCE] Received response:", response);
+  const created = json.newsSource as any;
 
-  if (!response.ok) {
-    console.error(
-      "[CREATE-NEWSOURCE] Error creating news source. Status:",
-      response.status
-    );
-    // Parse error message if available
-    let errorMessage = "Error creating news source";
-    try {
-      const errorJson = await response.json();
-      if (errorJson && errorJson.error) {
-        errorMessage = errorJson.error;
-      }
-    } catch (e) {
-      console.error("[CREATE-NEWSOURCE] Could not parse error response:", e);
-    }
-    
-    throw new Error(errorMessage);
-  }
+  await replaceNewsSourceInStore(created);
 
-  const json = await response.json();
-  const newsSourceFromResponse = json?.newsSource;
-  console.log("[CREATE-NEWSOURCE] newsSource from JSON:", newsSourceFromResponse);
-
-  // Save the returned news source to the store if it's the first one
-  const currentSources = get(store).config.newsSources || [];
-  console.log("[CREATE-NEWSOURCE] Current newsSources in store:", currentSources);
-
-  if (currentSources.length === 0 && newsSourceFromResponse) {
-    // No need to filter an empty array—just push the complete object from the server.
-    saveToConfig({ newsSources: [newsSourceFromResponse] });
-  }
-
-  // Ensure configurator exists as a user and subscribe them to the new source
+  // The owner receives their own newsletter: make sure they exist as a subscriber.
   const configuratorEmail = get(store).configuratorEmail;
-  const newSourceId = json?.newsSource?.id;
-
-  if (configuratorEmail && newSourceId) {
+  if (configuratorEmail && created?.id) {
     try {
-      console.log(`[CREATE-NEWSOURCE] Ensuring configurator user exists: ${configuratorEmail}`);
-      // Add user (backend should handle if already exists)
       await addNewsletterUser(
-        { // Basic user data
+        {
           email: configuratorEmail,
-          name: configuratorEmail, // Use email as name default
+          name: configuratorEmail,
           bio: "Newsletter Configurator",
-          language: get(globalLanguage) || "en", // Default
-          countryOfResidence: "US", // Default
-          newsSourcesConfigTuples: [], // Backend manages this
+          language: get(globalLanguage) || "en",
+          countryOfResidence: "US",
+          newsSourcesConfigTuples: [],
         },
-        configuratorEmail, // configId
-        newSourceId
+        configuratorEmail,
+        created.id
       );
-      console.log(`[CREATE-NEWSOURCE] addNewsletterUser call completed for ${configuratorEmail}.`);
-
-      console.log(`[CREATE-NEWSOURCE] Subscribing configurator ${configuratorEmail} to new source ${newSourceId}`);
-      await subscribeNewsletterUser(
-        configuratorEmail, // configId
-        newSourceId,
-        configuratorEmail // userEmail
-      );
-      console.log(`[CREATE-NEWSOURCE] subscribeNewsletterUser call completed for ${configuratorEmail}.`);
-
+      await subscribeNewsletterUser(configuratorEmail, created.id, configuratorEmail);
     } catch (error) {
-      console.error(`[CREATE-NEWSOURCE] Error adding/subscribing configurator ${configuratorEmail} to source ${newSourceId}:`, error);
-      // Decide if this error should prevent returning the newsSource or just log
+      console.error("[createNewsSource] Could not subscribe the owner to the new source", error);
     }
-  } else {
-    console.warn("[CREATE-NEWSOURCE] Could not add/subscribe configurator - missing email or new source ID.");
   }
 
-  // Refresh subscribers using the centralized function
-  try {
-    console.log("[CREATE-NEWSOURCE] Calling centralized subscriber refresh...");
-    await refreshSubscribers();
-    console.log("[CREATE-NEWSOURCE] Centralized subscriber refresh completed.");
-  } catch (error) {
-     console.error("[CREATE-NEWSOURCE] Error calling centralized subscriber refresh:", error);
-  }
-
-  // Original subscribe call removed as it's now handled above
-  /* await subscribeNewsletterUser(
-    get(store).configuratorEmail,
-    json?.newsSource.id,
-    get(store).configuratorEmail
-  ); */ // Correctly closed comment
-
-  console.log("[CREATE-NEWSOURCE] Updated store with new news source."); // This should not be commented
+  await refreshSubscribersSafely();
 
   // Disable back navigation to prevent duplicate creation attempts (hitting plan limits)
   saveToStore({ directionsThatShouldDisappear: [-1] });
 
-  // Refetch the configuration to update the store
-  await getConfigFetchResponse(getAuthHeaders());
+  // Refresh the saved config so the store has the server's version.
+  try {
+    const fresh = await request<any>("/config", { dedupe: false });
+    if (fresh) saveToStore({ config: { ...get(store).config, ...fresh } });
+  } catch {
+    /* the local copy is already updated */
+  }
 
-  return json?.newsSource;
+  return created;
 }

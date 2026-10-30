@@ -1,72 +1,55 @@
+<!-- WS4. Legacy export step: download your sources as JSON. The explanation is plain
+     visible text (the old hover-only tooltip was not reachable by keyboard or touch). -->
 <script lang="ts">
   import type { NewsSource } from "../../../../../../types";
   import store from "../../../../../../store";
-  import Page from "../../../../../wrappers/Page/Page.svelte";
-  import SubmitButton from "../../../../../buttons/SubmitButton/SubmitButton.svelte";
-  import TextTypes from "../../../../../texts/TextTypes/TextTypes.svelte";
-  import CodeFormatter from "../../../../../../common/CodeFormatter.svelte";
-  import { onMount } from "svelte";
-    import ToggleCard from "../../../../../buttons/ToggleCard/ToggleCard.svelte";
-  import { t } from "$lib/i18n/dashboard-translations";
+  import Card from "$lib/dashboard/ui/Card.svelte";
+  import Button from "$lib/dashboard/ui/Button.svelte";
+  import { dt } from "$lib/dashboard/i18n";
 
-  let tooltipElement: HTMLElement;
-  let infoIconElement: HTMLElement;
-  let tooltipPosition: "top" | "bottom" = "bottom";
+  export let canReveal = true;
+  $: canReveal;
 
-  $: newsSources = $store.config?.newsSources || [];
-
-  $: exportedData = newsSources.map((ns: NewsSource) => ({
-    id: ns.id,
-    lead: ns.lead,
-    url: ns.url
-  }));
-
-  $: jsonString = JSON.stringify(exportedData, null, 2);
+  $: newsSources = ($store.config?.newsSources || []) as NewsSource[];
+  $: jsonString = JSON.stringify(newsSources.map((ns) => ({ id: ns.id, lead: ns.lead, url: ns.url })), null, 2);
 
   function downloadJson() {
-    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(jsonString);
-    const downloadAnchorNode = document.createElement('a');
-    downloadAnchorNode.setAttribute("href", dataStr);
-    downloadAnchorNode.setAttribute("download", "news_sources_export.json");
-    document.body.appendChild(downloadAnchorNode); // required for firefox
-    downloadAnchorNode.click();
-    downloadAnchorNode.remove();
+    const blob = new Blob([jsonString], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "aiban-sources.json";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
 </script>
 
-<Page>
-  <ToggleCard  onChange={() => {}} isOpen={false} cardTitle={$t['labels.apiNewsSources']}>
-    <div class="exports-page">
-      <div class="title-container">
-        <TextTypes type="title">{$t['labels.exportNewsSources']}</TextTypes>
-        <div class="info-icon" bind:this={infoIconElement}>
-          <span class="info-icon-span">&#8505;</span>
-          <div class="tooltip {tooltipPosition}" bind:this={tooltipElement}>
-            <p class="tooltip-paragraph">
-              {$t['markdown.exportNewsSources']}
-            </p>
-            <p class="tooltip-paragraph">
-              {$t['markdown.exportNewsSourcesExample']}
-            </p>
-          </div>
-        </div>
-      </div>
-  
-      <div class="code-formatter-container">
-        <div class="download-button">
-          <SubmitButton label={$t['labels.downloadJson']} callback={downloadJson} />
-        </div>
-        
-        <CodeFormatter code={`
-  ${
-          jsonString
-  }
-  `} lang="json" />
-      </div>
-    </div>
-  </ToggleCard>
-</Page>
+<div class="exports">
+  <Card title={$dt("dash.dev.exportTitle")} subtitle={$dt("dash.dev.exportSub")}>
+    <svelte:fragment slot="actions">
+      <Button variant="secondary" icon="download" onclick={downloadJson}>{$dt("dash.dev.exportButton")}</Button>
+    </svelte:fragment>
+    <p class="exports__text">{$dt("dash.dev.exportText")}</p>
+    <pre class="exports__code" tabindex="0" aria-label={$dt("dash.dev.exportPreview")}><code>{jsonString}</code></pre>
+  </Card>
+</div>
 
 <style lang="scss">
-  @use "./Exports.scss";
+  .exports { padding: var(--space-4); }
+  .exports__text { margin: 0; font-size: var(--fs-sm); color: var(--text-2); line-height: var(--lh-normal); max-width: var(--measure); }
+  .exports__code {
+    margin: var(--space-3) 0 0;
+    max-height: 18rem;
+    overflow: auto;
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-md);
+    background: var(--surface-2);
+    border: 1px solid var(--border-1);
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    color: var(--text-1);
+    &:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+  }
 </style>

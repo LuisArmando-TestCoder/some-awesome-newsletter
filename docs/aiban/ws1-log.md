@@ -1,0 +1,31 @@
+# WS1 log
+
+## 2026-10-30
+- Read CHARTER, COPY_RULES, UX diagnostic, requests/1.md (empty).
+- Computer folders were not connected at start; requested access, granted.
+- Environment: the computer shell is Linux arm64 and has no network. node_modules was installed on macOS, so `npm run check` and `npm run build` fail here with "Cannot find module @rollup/rollup-linux-arm64-gnu" (not caused by code). The cloud workspace has no npm registry access either. Workaround for type checks: `$HOME/ws1/checkroot` (outside the project) symlinks src, node_modules, .svelte-kit and uses svelte-preprocess instead of vitePreprocess. Baseline: 30 errors, all pre-existing. `npm run build` cannot run in this environment; Luis or WS10 must run it on the Mac.
+- Created `src/styles/tokens.scss` (charter section 4 names, light and dark, fluid type, density, reduced motion, legacy aliases) and `src/styles/fonts.scss`.
+- Fonts: no network for Fraunces or similar. Built OFL subsets of Lora (variable) and Inter from the cloud workspace's system fonts into `static/fonts/aiban/` (WOFF, core + extended ranges, 26 to 63 KB each) with FONTS_LICENSE.txt.
+- `src/styles/global.scss`: fixed the 'Jost' 900 face that pointed at Poppins, added Jost 400, removed hard-coded :root colors (now aliases in tokens), headings use token sizes. Backup of the old file kept outside the project.
+- `src/routes/styles/global.scss`: removed :root font and color overrides that would beat the tokens, body uses tokens, removed the `* { font-family }` rule (form controls inherit instead).
+- `src/routes/+layout.svelte`: imports tokens once; navigation logs only in dev.
+- `src/app.html`: pre-paint theme script (no flash), theme-color metas, font preloads, absolute favicon path.
+- ThemeChanger: rewritten. Preferences light/dark/system, density, reduced motion, stored in localStorage; sets data-theme/data-density/data-motion on <html>; legacy --color-* variables now map to tokens (they used to be hex values and the brand sky blue, which failed contrast on white). Visible toggle now has an icon and a text label.
+- Decision: the dashboard no longer recolors itself with the customer's brand color (ColorPicker still stores it for emails). Reason: arbitrary brand colors broke text contrast. The brand color belongs in the customer's newsletter and widgets.
+- Wrote DESIGN_SYSTEM.md stub.
+- Subagent audit wrote `ws1-audit.md` (inventory with exact props and importers, bugs, a11y, deps). Benchmark and customer-data research fed STRATEGY.md.
+- STRATEGY.md v1: who pays (BNI service businesses, from `sales_letters/`), job to be done, "Automations" naming, preset catalog aligned with WS8 recipe ids, onboarding inputs, activation, north star "weekly readers reached", retention and expansion loops, IA and renames, per-workstream implications, decisions. Later recorded the decisions WS3 and WS5 relayed from Luis.
+- Primitives, built by 5 parallel subagents on disjoint files and reviewed:
+  - New (runes): Button, IconButton, Spinner, Badge, Card, Skeleton, EmptyState, StatTile, Progress, Stepper, Tooltip, Field, TextField, Select, Checkbox, Radio, RadioGroup, FileUpload, Dialog, Drawer, Toaster, toast.ts, molecules/SettingsMenu; barrel `src/lib/ui/components/index.ts`.
+  - Rebuilt with old APIs kept: lib Switch, PlainText, EmailInput, Textarea; molecules/Tabs; components/Modal (native dialog); Notification (`ping` forwards to toasts).
+  - Retrofitted in place: SubmitButton (variants, real loading and disabled, type rule), IconButton, ToggleCard (closed content inert), TransitionButton, systems Switch (dispatches `change`, fixes the non-saving switches in UpdateNewsSourceForm), PlainText, Email, Link (no https:// while typing), TextArea, Language, Country, CustomSelect, SearchSelector (unique ids, aria-activedescendant), centralized-styles.scss, custom-select-styles.scss, LoadingScreen (was transparent), LoadingWheel, Container (`show`), cronToNatural.ts (2 TS errors).
+  - Text chain (MarkdownText, Text, RevealText, RevealOnScroll, HTMLTextLettersClassWrapper, TextTypes): static text, no per-word animation, no {@html}, reacts to language changes, no scroll-listener leak, emphasis by weight. New helper `texts/reveal.ts`.
+- Root layout: mounts one Toaster; hides Header and LanguagePicker on /subscribe-widget (WS5 request).
+- package.json: added `test:unit` script (WS6 request). `isomorphic-dompurify` needs a network install: open.
+- `src/lib/anim`: gsap.client.ts no longer logs or downloads SplitText; ScrollSmoother only on demand and never with reduced motion. useSmoothPage and useScrollSection were broken actions (onMount inside an action); rewritten.
+- SmoothScrollWrapper: fixed `.ts` import error.
+- `/test-styles` is now the living style guide (old page copied to `_deprecated/src/routes/test-styles/+page.svelte`).
+- Requests sent: requests/2.md, 3.md, 4.md, 5.md, 8.md, 9.md, 10.md.
+- Final type check (harness): 27 errors, 0 in WS1 files (others: stale `./$types` for new routes, Hey/How `.ts` imports, qrcode types, Pricing importing a missing `$lib/api/billing`). All WS1 SCSS compiles with sass.
+- Luis answered the decisions: free plan keeps translation and voice (limits and prices unchanged); Polar stays until he tells WS6; he is verifying the sending domain; unused packages go through a script.
+- Created `scripts/ws1-remove-unused-deps.sh` (new file, frontend). Dry run here lists all 34 packages as still unused. It must run on the Mac because it needs the npm registry.

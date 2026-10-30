@@ -1,86 +1,25 @@
 import { get } from "svelte/store";
 import store from "../../store";
-import getAuthHeaders from "./getAuthHeaders";
+import { importContacts } from "$lib/api/imports";
 
 /**
- * Puedes usar esta función para enviar un archivo o texto crudo
- * y recibir un arreglo de usuarios estandarizados.
+ * Send a file or pasted text to the backend, which cleans it and adds the
+ * contacts. Returns the list of added emails, or null on failure.
+ * `newsSourceId` defaults to the first news source of the owner.
  */
 export default async function getUsersFromRawFileOrText({
   file,
   text,
+  newsSourceId,
 }: {
   file?: File;
   text?: string;
+  newsSourceId?: string;
 }) {
-  let response: Response;
-  const apiURL = get(store).apiURL();
-  const endpoint = `${apiURL}/news-source/any-user-data-base-file-to-standard-format/${get(store).configuratorEmail}`;
-  console.log(`[getUsersFromRawFileOrText] Starting. Input:`, { file: file?.name, text: text ? 'Provided' : undefined });
-  console.log(`[getUsersFromRawFileOrText] Using endpoint: ${endpoint}`);
-
-  // --- MODIFIED: Read file as text on frontend ---
-  if (file) {
-    console.log(`[getUsersFromRawFileOrText] Reading file as text: ${file.name}`);
-    try {
-      const fileText = await file.text();
-      console.log(`[getUsersFromRawFileOrText] File read successfully, length: ${fileText.length}`);
-
-      const headers = getAuthHeaders();
-
-      const body = JSON.stringify({ text: fileText }); // Send file content as text in JSON body
-
-      console.log(`[getUsersFromRawFileOrText] Attempting fetch to ${endpoint} with text from file: ${file.name}`);
-      console.log("[getUsersFromRawFileOrText] Headers being sent:", headers);
-      // console.log("[getUsersFromRawFileOrText] Body being sent:", body); // Avoid logging potentially large body
-
-      console.log("[getUsersFromRawFileOrText] Sending POST request with text data...");
-      response = await fetch(endpoint, {
-        method: "POST",
-        body: body,
-        headers: headers
-      });
-
-    } catch (readError) {
-      console.error(`[getUsersFromRawFileOrText] Error reading file ${file.name}:`, readError);
-      return null; // Return null if file reading fails
-    }
-  // --- END MODIFIED ---
-  } else if (text) { // Keep existing text handling logic
-    console.log("[getUsersFromRawFileOrText] Processing raw text.");
-    // Ensure auth code is trimmed of whitespace/newlines
-    const authCode = get(store).authCode?.trim() ?? '';
-    const configuratorEmail = get(store).configuratorEmail ?? '';
-    console.log("[getUsersFromRawFileOrText] Sending POST request with text data...");
-    response = await fetch(endpoint, {
-      method: "POST",
-        headers: getAuthHeaders(),
-        body: JSON.stringify({ text }),
-      }
-    );
-  } else {
-    console.warn("[getUsersFromRawFileOrText] No file or text provided. Aborting.");
-    return null;
-  }
-
-  console.log(`[getUsersFromRawFileOrText] Received response status: ${response.status}`);
-  if (!response.ok) {
-    console.error("[getUsersFromRawFileOrText] Request failed. Status:", response.status, response.statusText);
-    try {
-      const errorBody = await response.text(); // Try to get error body
-      console.error("[getUsersFromRawFileOrText] Error body:", errorBody);
-    } catch (e) {
-      console.error("[getUsersFromRawFileOrText] Could not read error body:", e);
-    }
-    return null;
-  }
-
-  try {
-    const data = await response.json();
-    console.log("[getUsersFromRawFileOrText] Successfully parsed response JSON:", data);
-    return data;
-  } catch (error) {
-    console.error("[getUsersFromRawFileOrText] Failed to parse response JSON:", error);
-    return null;
-  }
+  if (!file && !text) return null;
+  const nsId = newsSourceId || get(store).config?.newsSources?.[0]?.id;
+  if (!nsId) return null;
+  const r = await importContacts({ file, text, newsSourceId: nsId });
+  if (!r.added && r.errors.length) return null;
+  return r.addedEmails.map((email) => ({ email }));
 }

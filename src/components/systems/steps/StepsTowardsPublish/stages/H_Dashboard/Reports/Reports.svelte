@@ -41,7 +41,7 @@
       <div class="column">
         <!-- Similar check for analytics -->
         {#if newsSources && newsSources.length > 0}
-          {@const subsReadyForAnalytics = subscribersByNewsSource && Object.keys(subscribersByNewsSource).length > 0}
+          {@const subsReadyForAnalytics = !$store.isRefreshingSubscribers || Object.keys(subscribersByNewsSource || {}).length > 0}
            {#if subsReadyForAnalytics}
             <UserAnalytics
               {subscribersByNewsSource}
@@ -55,7 +55,7 @@
           {/if}
         {:else}
           <!-- Optional: Message if no news sources, hence no analytics -->
-          <p class="no-data-message">{$t['errors.noNewsSources']}</p>
+          <p class="no-data-message">{$t['errors.noNewsSourcesConfigured'] || "Add a source first. Reports appear once you have subscribers."}</p>
         {/if}
       </div> <!-- Correctly closing charts-column -->
   </Page>

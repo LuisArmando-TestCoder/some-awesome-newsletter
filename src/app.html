@@ -3,10 +3,29 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="shortcut icon" href="logo/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="/logo/favicon.ico" type="image/x-icon" />
+		<meta name="theme-color" content="#faf8f4" media="(prefers-color-scheme: light)" />
+		<meta name="theme-color" content="#121311" media="(prefers-color-scheme: dark)" />
+		<link rel="preload" href="/fonts/aiban/Inter-Regular.core.woff" as="font" type="font/woff" crossorigin />
+		<link rel="preload" href="/fonts/aiban/Lora-Variable.core.woff" as="font" type="font/woff" crossorigin />
+		<script>
+			// Apply the saved theme before first paint to avoid a light/dark flash. Values: light, dark, system.
+			try {
+				var t = localStorage.getItem('theme');
+				if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+				var d = localStorage.getItem('density');
+				if (d === 'compact') document.documentElement.setAttribute('data-density', 'compact');
+				var l = localStorage.getItem('lang');
+				if (l && /^[a-z]{2,3}([-_][A-Za-z]{2,4})?$/.test(l)) {
+					document.documentElement.lang = l;
+					if (/^(ar|fa|ur|he|ps|sd|ug|yi|dv|ks|ku|arz|apc|apd|pes|pnb)([-_]|$)/.test(l)) document.documentElement.dir = 'rtl';
+				}
+			} catch (e) {}
+		</script>
 		%sveltekit.head%
 	</head>
 	<body data-sveltekit-preload-data="hover">
+		<noscript><p style="margin: 0; padding: 16px; font-family: system-ui, sans-serif;">AIBAN needs JavaScript to run. Turn it on in your browser settings, then reload this page.</p></noscript>
 		<div style="display: contents">%sveltekit.body%</div>
 	</body>
 </html>

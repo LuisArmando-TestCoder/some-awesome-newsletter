@@ -7,7 +7,7 @@ import store, { saveToStore } from "../../../../../../store";
 import type { NewsletterUser } from "../../../../../../types";
 import { addNewsletterUser } from "../../../../../requests/addNewsletterUserEndpoint";
 import subscribeNewsletterUser from "../../../../../requests/subscribeNewsletterUser";
-import getNewsletterUsersByNewsSource from "../../../../../requests/getNewsletterUsersByNewsSource";
+import { request, seg } from "$lib/api/client";
 import unsubscribeUserToConfigNewsSource from "../../../../../requests/unsubscribeUserToConfigNewsSource";
 import getLeadsForConfigurator from "../../../../../requests/getLeadsForConfigurator";
 import getUsersFromRawFileOrText from "../../../../../requests/getUsersFromRawFileOrText";
@@ -21,30 +21,37 @@ function getConfigId(): string | null {
 
 // --- Centralized Refresh Function ---
 export async function refreshSubscribers(): Promise<void> {
-  try {
-    const configId = getConfigId();
-    if (!configId) throw new Error("Config ID missing");
+  const configId = getConfigId();
+  if (!configId) throw new Error("Your session has ended. Sign in again to continue.");
 
-    const currentStore = get(store);
-    const newsSources = currentStore.config?.newsSources || [];
-    const subscribersToSave: { [key: string]: NewsletterUser[] } = {};
+  const currentStore = get(store);
+  const newsSources = currentStore.config?.newsSources || [];
+  const previous = (currentStore.subscribers || {}) as { [key: string]: NewsletterUser[] };
+  const subscribersToSave: { [key: string]: NewsletterUser[] } = {};
+  let failed = 0;
 
-    console.log(`[UserDataService] refreshSubscribers: Fetching subscribers for ${newsSources.length} sources.`);
+  await Promise.all(
+    newsSources.map(async (source: any) => {
+      if (!source?.id) return;
+      try {
+        const data = await request<NewsletterUser[]>(`/newsletter/users/${seg(configId)}/${seg(source.id)}`);
+        subscribersToSave[source.id] = Array.isArray(data) ? data : [];
+      } catch (err) {
+        failed++;
+        console.error(`[UserDataService] refreshSubscribers: source ${source.id} failed`, err);
+        // Keep what we had for this source instead of showing an empty list.
+        if (Array.isArray(previous[source.id])) subscribersToSave[source.id] = previous[source.id];
+      }
+    })
+  );
 
-    await Promise.all(newsSources.map(async (source: any) => {
-        if (source.id) {
-            const users = await getNewsletterUsersByNewsSource(configId, source.id);
-            subscribersToSave[source.id] = users;
-        }
-    }));
-
-    console.log("[UserDataService] refreshSubscribers: Fetched all subscribers. Updating store.");
-    saveToStore({ subscribers: subscribersToSave });
-    console.log("[UserDataService] refreshSubscribers: Updated central store with subscribers.");
-
-  } catch (err: any) {
-    console.error("[UserDataService] refreshSubscribers: Error fetching/processing subscribers:", err);
-    throw new Error(err.message || "Failed to refresh subscriber list.");
+  saveToStore({ subscribers: subscribersToSave });
+  if (failed > 0) {
+    throw new Error(
+      failed === newsSources.length
+        ? "We could not load your subscribers. Check your connection and try again."
+        : "Some subscriber lists did not load. Try again in a moment."
+    );
   }
 }
 
@@ -216,15 +223,11 @@ export async function processBulkUpload(
     const result = await uploadUserFileChunked({
         file,
         newsSourceId,
-        onProgress: (processed: number, total: number) => {
-            console.log(`[UserDataService] Upload progress: ${processed}/${total}`);
-        },
         onUserAdded
     });
 
-    console.log(`[UserDataService] processBulkUpload: Finished. Result:`, result);
-
-    await refreshSubscribers();
+    // The import itself succeeded; a failed list refresh should not report it as failed.
+    await refreshSubscribers().catch((e) => console.error("[UserDataService] processBulkUpload: refresh failed", e));
 
     return result;
 
@@ -241,8 +244,7 @@ export async function unsubscribeUserFromSource(
   console.log(`[UserDataService] unsubscribeUserFromSource: Starting for user ${userEmail} from newsSourceId ${newsSourceId}.`);
   const configId = getConfigId();
   if (!configId) {
-    console.error("[UserDataService] unsubscribeUserFromSource: Config ID not found.");
-    return false;
+    throw new Error("Your session has ended. Sign in again to continue.");
   }
   console.log(`[UserDataService] unsubscribeUserFromSource: Using configId: ${configId}`);
 
@@ -253,7 +255,10 @@ export async function unsubscribeUserFromSource(
       configId,
       newsSourceId
     );
-    console.log(`[UserDataService] unsubscribeUserFromSource: API call returned: ${success}`);
+    if (!success) {
+      // Keep the subscriber in the list: the backend did not confirm the removal.
+      throw new Error("We could not remove this subscriber. Check your connection and try again.");
+    }
 
     const currentStore = get(store);
     const currentSubscribers = currentStore.subscribers || {};

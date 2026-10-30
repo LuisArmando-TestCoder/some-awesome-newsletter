@@ -1,6 +1,13 @@
-import { writable } from 'svelte/store';
-import translations from './locales-dashboard/translations';
+// Dashboard strings. English is bundled; other languages load on demand (see lazy.ts).
+import en from './locales-dashboard/en';
+import { createNamespace } from './lazy';
 
-export const t = writable(translations.en);
+const ns = createNamespace(
+  en,
+  import.meta.glob(['./locales-dashboard/*.ts', '!./locales-dashboard/en.ts', '!./locales-dashboard/translations.ts'], { import: 'default' }),
+);
 
-export const locales = Object.keys(translations);
+export const t = ns.t;
+export const locales = ns.locales;
+export const loadLocale = ns.load;
+export const setLocale = ns.setLocale;

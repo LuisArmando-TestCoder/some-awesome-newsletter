@@ -6,7 +6,7 @@
   export let title: string;
   export let excerpt: string;
   export let link: string | undefined = undefined;
-  export let readMoreText: string = "READ MORE";
+  export let readMoreText: string = "Read more";
   export let loading: boolean = false;
 
   const hasImage = imageSrc && imageSrc !== 'placeholder.jpg';
@@ -17,6 +17,7 @@
     <LoadingWheel />
   </div>
 {:else}
+  <!-- svelte-ignore a11y_click_events_have_key_events a11y_no_noninteractive_element_interactions -->
   <article class="news-item" class:no-image={!hasImage} on:click>
         <div class="news-item-image-wrapper">
           <img class="news-item-image" src={imageSrc} alt={imageAlt} />
@@ -64,8 +65,8 @@
     align-items: flex-end;
     justify-content: center;
     z-index: 1;
-    background: #eaf1f7;
-    border-radius: 18px;
+    background: var(--surface-2, #eaf1f7);
+    border-radius: var(--radius-lg, 16px);
     overflow: visible;
     transition: height 1.1s cubic-bezier(.22,.61,.36,1), min-height 1.1s cubic-bezier(.22,.61,.36,1);
   }
@@ -79,8 +80,8 @@
     transform: translate(-50%, -50%) scale(0.95);
     object-fit: cover;
     object-position: 50% 50%;
-    border-radius: 18px;
-    box-shadow: 0 2px 16px rgba(30,144,255,0.08);
+    border-radius: var(--radius-lg, 16px);
+    box-shadow: var(--shadow-1, none);
     z-index: 1;
     transition:
       height 1.1s cubic-bezier(.22,.61,.36,1),
@@ -96,9 +97,9 @@
     transform: translate(-50%, -50%) scale(0.95);
     width: 78%;
     min-width: 0;
-    background: #fff;
-    border-radius: 16px;
-    box-shadow: 0 4px 24px rgba(30,144,255,0.10);
+    background: var(--surface-1, #fff);
+    border-radius: var(--radius-lg, 16px);
+    box-shadow: var(--shadow-2, none);
     padding: 1.3rem 1.1rem 1.1rem 1.1rem;
     min-height: 170px;
     display: flex;
@@ -111,6 +112,12 @@
       transform 2.3s cubic-bezier(.22,.61,.36,1),
       top 2.6s cubic-bezier(.22,.61,.36,1);
     will-change: transform, box-shadow, top;
+  }
+
+  &:focus-within {
+    outline: 2px solid var(--focus-color, #2563eb);
+    outline-offset: 4px;
+    border-radius: var(--radius-lg, 16px);
   }
 
   &:hover {
@@ -126,7 +133,7 @@
     .news-item-card {
       top: calc(50% + 3rem);
       transform: translate(-50%, -50%) scale(1);
-      box-shadow: 0 8px 32px rgba(30,144,255,0.16);
+      box-shadow: var(--shadow-3, none);
     }
   }
 
@@ -172,9 +179,9 @@
 }
 
 .news-item-title {
-  font-size: 1.18rem;
-  font-weight: 800;
-  color: var(--color-highlight-1);
+  font-size: var(--fs-lg, 1.125rem);
+  font-weight: var(--fw-bold, 700);
+  color: var(--text-1, #111);
   margin-bottom: 0.3rem;
   line-height: 1.25;
   max-height: 2.7em;
@@ -185,8 +192,8 @@
 }
 
 .news-item-desc {
-  font-size: 1.01rem;
-  color: #7a7a7a;
+  font-size: var(--fs-sm, 0.875rem);
+  color: var(--text-2, #555);
   margin-bottom: 0.4rem;
   line-height: 1.5;
   max-height: 6.2em;
@@ -198,10 +205,10 @@
 }
 
 .more-link {
-  color: var(--color-highlight-1);
+  color: var(--text-link, #2563eb);
   font-weight: 700;
   text-decoration: none;
-  font-size: 0.93rem;
+  font-size: var(--fs-sm, 0.875rem);
   letter-spacing: 0.04em;
   margin-top: 0.2em;
   display: inline-block;
@@ -218,6 +225,12 @@
   .news-item-desc,
   .more-link {
     transform: scale(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .news-item,
+  .news-item * {
+    transition: none !important;
   }
 }
 </style>

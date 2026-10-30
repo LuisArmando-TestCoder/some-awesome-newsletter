@@ -18,7 +18,9 @@
   
   // Import translation store
   import { t } from "$lib/i18n/dashboard-translations";
-  import { checkPlanLimit } from "$lib/utils/checkPlanLimits";
+  import { dt } from "$lib/dashboard/i18n";
+  import { goTo } from "$lib/dashboard/nav";
+  import { sourceUsage } from "$lib/dashboard/sources/sourceUtils";
 
   export const addedNewsSource = writable<any>(null);
 
@@ -29,8 +31,9 @@
   let isAdding = false;
   let addErrorMessage = "";
 
-  $: limitCheck = checkPlanLimit("newsSources");
-  $: isLimitReached = !limitCheck.allowed;
+  // Reactive plan usage (checkPlanLimit reads the store once and never updates).
+  $: usage = sourceUsage($store.config, $store.subscribers);
+  $: isLimitReached = !usage.unlimited && usage.atLimit;
 
   function clearAddForm() {
     addNewsSourceUrl = "";
@@ -40,8 +43,10 @@
   }
 
   async function handleAddNewsSource() {
+    // In-flight guard: one POST per submit, even on double click or Enter.
+    if (isAdding) return;
     if (isLimitReached) {
-      addErrorMessage = `Plan limit reached: ${limitCheck.limit} news sources. Upgrade to add more.`;
+      addErrorMessage = $dt("dash.sources.limit.usage", { used: usage.used, limit: usage.limit });
       return;
     }
 
@@ -59,7 +64,7 @@
     }
     
     isAdding = true;
-
+    try {
     await processNewsSourceAction(
       fields,
       (f) => {
@@ -95,15 +100,16 @@
         ping($t['newsSource.successTitle'], $t['newsSource.successDescription']);
       }
     );
-
-    isAdding = false;
+    } finally {
+      isAdding = false;
+    }
   }
 </script>
 
-<form class="news-source-form" on:submit|preventDefault={handleAddNewsSource} class:form-disabled={isLimitReached}>
+<form class="news-source-form" novalidate on:submit|preventDefault={handleAddNewsSource} class:form-disabled={isLimitReached}>
   {#if isLimitReached}
-    <div class="limit-warning">
-      <p><strong>Limit Reached:</strong> You have {limitCheck.current} news sources (Limit: {limitCheck.limit}). <a href="/plans">Upgrade Plan</a></p>
+    <div class="limit-warning" role="status">
+      <p>{$dt("dash.sources.limit.usage", { used: usage.used, limit: usage.limit })}. <a href="/dashboard?section=settings&tab=billing" on:click|preventDefault={() => goTo("settings", "billing")}>{$dt("dash.sources.limit.action")}</a></p>
     </div>
   {/if}
 
@@ -128,7 +134,7 @@
   </div>
 
   <div class="paid-toggle-wrapper">
-    <span class="paid-toggle-label">Paid Newsletter</span>
+    <span class="paid-toggle-label">{$t['newsSource.paidNewsletter']}</span>
     <Switch toggled={isPaidNewsletter} onChange={(v) => (isPaidNewsletter = v)} />
   </div>
 
@@ -140,11 +146,11 @@
     disabled={isAdding || isLimitReached}
     loading={isAdding}
     label={isAdding ? $t['newsSource.adding'] : $t['newsSource.uploadButton']}
-    callback={handleAddNewsSource}
+    type="submit"
   />
 
   {#if addErrorMessage}
-    <div class="error-message">{addErrorMessage}</div>
+    <div class="error-message" role="alert">{addErrorMessage}</div>
   {/if}
 </form>
 

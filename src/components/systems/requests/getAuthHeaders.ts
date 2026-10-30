@@ -1,41 +1,15 @@
-import { get } from "svelte/store";
-import { getCookie } from "../../store"
+import { authHeaders } from "$lib/api/credentials";
 
-function safeParse(json: string | null, fallback: any = null) {
-    try {
-        return json ? JSON.parse(json) : fallback;
-    } catch {
-        return fallback;
-    }
-}
-
-function safeGet(storage: Storage | undefined, key: string): any {
-    if (!storage) return null;
-    return safeParse(storage.getItem(key), null);
-}
-
-function getMixedStore(key: string, keyedValue?: string) {
-    const k = keyedValue || key;
-
-    const directLS = safeGet(typeof localStorage !== "undefined" ? localStorage : undefined, k);
-
-    return {
-        [key]: directLS
-    };
-}
-
+/**
+ * Legacy helper kept for existing callers. Returns JSON headers plus the auth
+ * headers the backend reads (x-auth-email, x-auth-code, optional Google token
+ * ids, x-user-language). The old `given_name` and `picture` headers were never
+ * read by the backend and made fetch() throw for names outside Latin-1.
+ */
 export default function getAuthHeaders(): { [index: string]: string } {
-    const picture = getMixedStore("picture").picture || getMixedStore("config")?.config?.logo;
-
-    return {
-        "Accept": "application/json",
-        "Content-Type": "application/json",
-        ...getMixedStore("x-auth-email", "configuratorEmail"),
-        ...getMixedStore("x-auth-code", "authCode"),
-        ...getMixedStore("x-auth-token-id", "tokenId"),
-        ...getMixedStore("x-auth-client-id", "clientId"),
-        ...getMixedStore("x-user-language", "lang"),
-        ...getMixedStore("given_name"),
-        picture,
-    }
+  return {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+    ...authHeaders(),
+  };
 }

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="tokens.css">
+<style>body{margin:0;background:var(--surface-0);font-family:var(--font-body)} .card{max-width:640px;margin:24px auto;padding:48px 32px;background:var(--surface-1);border:1px solid var(--border-1);border-radius:var(--radius-xl)} .wide{max-width:1100px;margin:24px auto}</style>
+<script type="importmap">
+{ "imports": {
+  "svelte": "./svelte/index-client.js",
+  "svelte/store": "./svelte/store/index-client.js",
+  "svelte/internal/client": "./svelte/internal/client/index.js",
+  "svelte/internal/disclose-version": "./svelte/internal/disclose-version.js",
+  "svelte/internal/flags/legacy": "./svelte/internal/flags/legacy.js",
+  "svelte/internal/flags/async": "./svelte/internal/flags/async.js",
+  "#client/constants": "./svelte/internal/client/constants.js",
+  "esm-env": "./esm-env-stub.js",
+  "clsx": "./clsx/clsx.mjs"
+} }
+</script>
+</head>
+<body>
+<div id="app"></div>
+<script type="module">
+  const q = new URLSearchParams(location.search);
+  const scenario = q.get('s') || 'ok';
+  if (q.get('theme')) document.documentElement.dataset.theme = q.get('theme');
+  window.fetch = async (url, opts) => {
+    const u = String(url);
+    await new Promise(r => setTimeout(r, 50));
+    if (u.includes('public-config-info')) return new Response(JSON.stringify({ newsletterTitle: 'Riverside Weekly', senderName: 'Riverside Cycling Club' }), { status: 200 });
+    if (u.includes('public-subscribe')) {
+      window.__lastBody = opts && opts.body;
+      if (scenario === 'limit') return new Response(JSON.stringify({ error: 'limit' }), { status: 403 });
+      return new Response(JSON.stringify({ success: true }), { status: 200 });
+    }
+    if (u.includes('confirm-subscription')) return new Response(JSON.stringify({ message: 'ok' }), { status: scenario === 'notfound' ? 404 : 200 });
+    return new Response('{}', { status: 404 });
+  };
+  const { mount } = await import('svelte');
+  const view = q.get('view') || 'form';
+  const target = document.getElementById('app');
+  if (view === 'form') {
+    const C = (await import('./lib/SubscribeForm.js')).default;
+    const wrap = document.createElement('div'); wrap.className = 'card'; target.appendChild(wrap);
+    mount(C, { target: wrap, props: { configuratorId: 'owner@example.com', newsSourceId: 'ns1', lead: 'https://riverside.example.com', layout: q.get('layout') || 'full', uiLanguage: q.get('ui'), accent: q.get('accent'), embedded: q.get('embedded') === '1' } });
+  } else if (view === 'embed') {
+    const C = (await import('./lib/EmbedCode.js')).default;
+    const wrap = document.createElement('div'); wrap.className = 'wide'; target.appendChild(wrap);
+    mount(C, { target: wrap, props: { configuratorId: 'owner@example.com', newsSourceId: 'ns1', brandColor: '#c2410c' } });
+  }
+  else if (view === 'signature') {
+    const C = (await import('./lib/SignatureEditor.js')).default;
+    const wrap = document.createElement('div'); wrap.className = 'wide'; target.appendChild(wrap);
+    const demo = q.get('demo') === '1' ? { name: 'Ana Ruiz', role: 'Founder', company: 'Riverside Studio', phone: '+1 555 010 2030', email: 'ana@example.com', website: 'riverside.example.com', socials: { linkedin: 'linkedin.com/in/ana', instagram: 'instagram.com/riverside' }, ctaLabel: 'Book a call', ctaUrl: 'cal.com/ana', layout: q.get('layout') || 'bar' } : null;
+    mount(C, { target: wrap, props: { value: demo, brandColor: '#c2410c', onchange: (d, h) => { window.__sigHtml = h; } } });
+  }
+  else if (view === 'confirm') {
+    const C = (await import('./lib/Confirm.js')).default;
+    mount(C, { target, props: {} });
+  }
+  window.__mounted = true;
+</script>
+</body></html>

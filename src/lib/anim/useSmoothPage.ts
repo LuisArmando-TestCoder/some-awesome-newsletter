@@ -1,6 +1,8 @@
-import { onMount } from 'svelte';
 import { browser } from '$app/environment';
-import { createSmoother, getSmoother, refreshAll } from './gsap.client';
+import { createSmoother, prefersReducedMotion } from './gsap.client';
+
+// Svelte action (WS1). Usage: <div id="smooth-wrapper" use:useSmoothPage><div id="smooth-content">...</div></div>
+// Fixed: it used to call onMount inside the action, which throws. Skips itself under reduced motion.
 
 type SmoothPageOptions = {
     smooth?: number;
@@ -15,52 +17,32 @@ type SmoothPageOptions = {
 export function useSmoothPage(node: HTMLElement, options: SmoothPageOptions = {}) {
     if (!browser) return;
 
-    const {
-        smooth = 1,
-        smoothTouch = 0.1,
-        effects = true,
-        normalizeScroll = true,
-        onUpdate,
-        onStop,
-        disableOnReduceMotion = true
-    } = options;
+    const { onUpdate, onStop, disableOnReduceMotion = true } = options;
+    let smoother: any = null;
+    let destroyed = false;
 
-    let smoother: Awaited<ReturnType<typeof createSmoother>> | null = null;
-
-    onMount(() => {
-        const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-        if (disableOnReduceMotion && mediaQuery.matches) {
-            console.log('anim.smoother: Reduced motion enabled, skipping ScrollSmoother.');
-            return;
-        }
-
-        const wrapper = document.getElementById('smooth-wrapper');
-        const content = document.getElementById('smooth-content');
-
+    if (!(disableOnReduceMotion && prefersReducedMotion())) {
+        const wrapper = document.getElementById('smooth-wrapper') ?? node;
+        const content = document.getElementById('smooth-content') ?? (node.firstElementChild as HTMLElement | null);
         if (wrapper && content) {
             createSmoother(wrapper, content).then((s) => {
+                if (destroyed) {
+                    s?.kill?.();
+                    return;
+                }
                 smoother = s;
-                if (onUpdate) smoother.effects().forEach((effect: any) => effect.onUpdate(onUpdate));
-                if (onStop) smoother.effects().forEach((effect: any) => effect.onStop(onStop));
+                if (!smoother) return;
+                if (onUpdate) smoother.effects().forEach((effect: any) => effect.onUpdate?.(onUpdate));
+                if (onStop) smoother.effects().forEach((effect: any) => effect.onStop?.(onStop));
             });
         }
-
-        return () => {
-            if (smoother && typeof smoother.kill === 'function') {
-                console.log('anim.smoother: Destroying ScrollSmoother instance.');
-                smoother.kill();
-                smoother = null;
-            }
-        };
-    });
+    }
 
     return {
         destroy() {
-            if (smoother && typeof smoother.kill === 'function') {
-                console.log('anim.smoother: Destroying ScrollSmoother instance from action.');
-                smoother.kill();
-                smoother = null;
-            }
+            destroyed = true;
+            smoother?.kill?.();
+            smoother = null;
         }
     };
 }

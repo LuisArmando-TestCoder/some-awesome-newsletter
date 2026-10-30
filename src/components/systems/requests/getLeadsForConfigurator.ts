@@ -1,24 +1,12 @@
 import { get } from "svelte/store";
 import store from "../../store";
-import getAuthHeaders from "./getAuthHeaders";
+import { request, seg } from "$lib/api/client";
 
+/** Lead counters of the owner, keyed by subscriber email. Returns null on failure. */
 export default async function getLeadsForConfigurator() {
-  const response = await fetch(
-    `${get(store).apiURL()}/leads/${get(store).configuratorEmail}`,
-    {
-      headers: getAuthHeaders(),
-    }
-  );
-
-  if (!response.ok) {
-    console.log("leads response", response)
-
+  try {
+    return await request<Record<string, unknown>>(`/leads/${seg(get(store).configuratorEmail)}`);
+  } catch {
     return null;
   }
-  
-  const object =  await response.json();
-
-  console.log(object, "object N")
-
-  return object;
 }

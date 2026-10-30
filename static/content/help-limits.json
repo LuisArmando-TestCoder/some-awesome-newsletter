@@ -8,7 +8,7 @@
     "learnMore": "/plans"
   },
   "questions": {
-    "desiredLimitsHelp": "Tell us the limits you need (e.g., 100k API calls/day).",
+    "desiredLimitsHelp": "Tell us the limits you need (for example, 100k API calls a day).",
     "useCaseHelp": "Describe your workload and traffic pattern.",
     "expectedSpendHelp": "An estimate helps us tailor pricing (optional)."
   },
@@ -16,7 +16,7 @@
     {
       "id": "limits-how",
       "q": "How do higher limits work?",
-      "a": "We unlock larger quotas immediately after approval. Billing can be flat-rate or pay-as-you-go."
+      "a": "We raise your quotas right after approval. Billing can be flat-rate or pay-as-you-go."
     },
     {
       "id": "pricing-payg",
@@ -26,7 +26,7 @@
     {
       "id": "timeline",
       "q": "How long does approval take?",
-      "a": "Most requests are reviewed within 1–2 business days. Urgent cases can be escalated."
+      "a": "Most requests are reviewed within 1 to 2 business days. Urgent cases can be escalated."
     }
   ],
   "links": {

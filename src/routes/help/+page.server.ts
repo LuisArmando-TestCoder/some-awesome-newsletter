@@ -1,45 +1,16 @@
-import type { Session } from '$lib/stores/session';
+import type { PageServerLoad } from './$types';
 
-export const load = async ({ locals }) => {
-  const mockMode = !import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
-  let user: Session | null = null;
-
-  if (mockMode) {
-    user = {
-      id: 'mock-id',
-      email: 'mock@example.com',
-      name: 'Mock User',
-      provider: 'mock'
-    };
-  } else {
-    // TODO: implement real user logic
-  }
-
-  // Mock data for now, replace with actual service calls
-  const usage = {
-    apiCallsPerDay: {
-      used: 50,
-      limit: 100,
-      remaining: 50,
-      resetAt: new Date()
-    },
-    projects: {
-      used: 1,
-      limit: 1,
-      remaining: 0,
-      resetAt: new Date()
-    }
-  };
-  const plan = {
-    id: 'trial',
-    name: 'Trial',
-    interval: 'monthly'
-  };
-
-  return {
-    user,
-    usage,
-    plan,
-    mockMode
-  };
+/**
+ * Help page data. Sign-in lives in the browser (localStorage), so the server
+ * does not know who is visiting: the page renders for everyone and the form
+ * fills in the owner's details on the client when they are signed in.
+ * The old version returned a made-up user and invented usage numbers.
+ */
+export const load: PageServerLoad = async () => {
+	return {
+		user: null,
+		usage: null,
+		plan: null,
+		mockMode: false
+	};
 };

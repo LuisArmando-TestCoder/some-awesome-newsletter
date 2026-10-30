@@ -1,99 +1,73 @@
 import { get } from "svelte/store";
-import store, { getCookie, saveToConfig, saveToStore } from "../../store";
-import {
-  foregroundColor,
-  complementaryColor,
-} from "../../ThemeChanger/theme-store"; // Corrected casing
-import { getComplementaryColor } from "../inputs/ColorPicker/getColorSuggestions";
+import store, { saveToStore } from "../../store";
 import createInitialConfiguratorConfig from "./createInitialConfiguratorConfig";
 import createNewsSource from "./createNewsSource";
-// Removed unused imports: addNewsletterUser, subscribeNewsletterUser
-import { loadInitialData, refreshSubscribers } from "../steps/StepsTowardsPublish/stages/H_Dashboard/Users/UserDataService"; // Import refresh function
 import getAuthHeaders from "./getAuthHeaders";
+import { request } from "$lib/api/client";
+import { refreshSubscribersSafely } from "./_internal";
 
+/**
+ * Raw GET /config for the given auth headers. Returns the Response so the
+ * callers can read `.ok` and `.json()`. Also used on the server (oauth route),
+ * where `origin` selects the local or production backend.
+ */
 export async function getConfigFetchResponse(authHeaders: Record<string, string>, origin?: string) {
-  console.log(get(store).apiURL(origin), get(store).configuratorEmail);
-  let response = await fetch(
-    `${get(store).apiURL()}/config`,
-    {
-      method: "GET",
-      headers: (authHeaders || getAuthHeaders()),
-    }
-  );
-
-  return response;
+  return request<Response>("/config", {
+    auth: { headers: authHeaders || getAuthHeaders() },
+    responseType: "response",
+    origin,
+    dedupe: false,
+  });
 }
 
-export default async () => {
-  console.log("get(store).authCode", get(store).authCode)
-
-  let response = await getConfigFetchResponse(getAuthHeaders());
-
-  if (!response.ok) {
-    await createInitialConfiguratorConfig(getAuthHeaders());
-    response = await getConfigFetchResponse(getAuthHeaders());
+async function fetchConfigJson(): Promise<any | null> {
+  try {
+    return await request("/config", { auth: "user", retries: 2 });
+  } catch {
+    return null;
   }
+}
 
-  const json = await response.json();
+/**
+ * Load the owner's session after sign in: config (created when missing), the
+ * first news source when onboarding collected one, then subscribers.
+ * Returns true when the config loaded.
+ */
+export default async () => {
+  let json = await fetchConfigJson();
 
-  saveToStore({
-    config: json,
-  });
+  if (!json) {
+    await createInitialConfiguratorConfig(getAuthHeaders());
+    json = await fetchConfigJson();
+  }
+  if (!json) return false;
+
+  saveToStore({ config: json });
 
   if (get(store).newsSource && (!json.newsSources || json.newsSources.length === 0)) {
-    await createNewsSource({
-      type: "website",
-      url: get(store).newsSource,
-      country: "US", // Consider if these should be configurable defaults
-      community: "Expats from US", // Consider if these should be configurable defaults
-      lead: get(store).lead,
-      // Generate random schedule: random hour (0-23), random day of week (0-6)
-      scheduleTime: `0 ${Math.floor(Math.random() * 24)} * * ${Math.floor(Math.random() * 7)}`,
-      personality: "Warm and professional journalist voice.", // Consider if this should be configurable default
-    });
-
-    // User addition/subscription moved to createNewsSource.ts
-
-    // --- Refetch config AFTER potentially creating the first news source ---
-    // This ensures the store reflects the newly added source
-    console.log("[GET-SESSION] Refetching config after potential news source creation..."); // Use console.log
-    const updatedResponse = await getConfigFetchResponse(getAuthHeaders());
-    if (!updatedResponse.ok) {
-       // Handle error if refetch fails - maybe throw or log and proceed with potentially stale config?
-       console.error("[GET-SESSION] Failed to refetch configuration after news source creation.");
-       // For now, proceed with the potentially stale 'json' object, but log error.
-    } else {
-       const updatedJson = await updatedResponse.json();
-       console.log("[GET-SESSION] Successfully refetched config. Updating store."); // Use console.log
-       saveToStore({ config: updatedJson, ...updatedJson }); // Save the UPDATED config
-       // Update theme based on potentially updated config
-       // foregroundColor.set(updatedJson.brandColor);
-       // complementaryColor.set(getComplementaryColor(updatedJson.brandColor));
+    try {
+      await createNewsSource({
+        type: "website",
+        url: get(store).newsSource,
+        country: "US",
+        community: "Expats from US",
+        lead: get(store).lead,
+        scheduleTime: `0 ${Math.floor(Math.random() * 24)} * * ${Math.floor(Math.random() * 7)}`,
+        personality: "Warm and professional journalist voice.",
+      });
+      const updated = await fetchConfigJson();
+      if (updated) saveToStore({ config: updated, ...updated });
+    } catch (e) {
+      console.error("[getConfiguratorSession] Could not create the first news source", e);
     }
-    // --- End refetch ---
-
-  } else {
-    // If news sources already existed, just update theme from initial fetch
-    // foregroundColor.set(json.brandColor);
-    // complementaryColor.set(getComplementaryColor(json.brandColor));
   }
 
-
-  // --- Ensure subscribers are fetched immediately after login/session setup ---
-  saveToStore({ isRefreshingSubscribers: true }); // Set flag before fetch
+  saveToStore({ isRefreshingSubscribers: true });
   try {
-    console.log("[GET-SESSION] Triggering initial subscriber refresh after config load...");
-    await refreshSubscribers();
-    console.log("[GET-SESSION] Initial subscriber refresh completed.");
-  } catch (error) {
-    console.error("[GET-SESSION] Error during initial subscriber refresh:", error);
-    // Decide if login should fail or proceed with potentially missing subscriber data
+    await refreshSubscribersSafely();
   } finally {
-    // await loadInitialData();
-    saveToStore({ isRefreshingSubscribers: false }); // Clear flag after fetch (success or error)
+    saveToStore({ isRefreshingSubscribers: false });
   }
-  // loadInitialData();
-  // --- End subscriber fetch ---
 
-  return response.ok;
+  return true;
 };

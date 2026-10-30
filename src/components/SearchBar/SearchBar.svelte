@@ -3,10 +3,11 @@
   import PlainText from '../systems/inputs/PlainText/PlainText.svelte';
 
   export let value = '';
-  export let placeholder = 'Search...';
+  export let placeholder = 'Search';
+  /** Accessible name. Defaults to the placeholder text. */
+  export let label = '';
 
   let focused = false;
-  let touched = false;
 
   const dispatch = createEventDispatcher();
 
@@ -21,24 +22,24 @@
   }
 </script>
 
-<div class="search-bar-wrap">
-  <div class="search-bar" class:focused class:empty={touched && !value}>
-    <svg class="search-icon" width="22" height="22" viewBox="0 0 22 22" fill="none">
-      <circle  fill="white" cx="10" cy="10" r="8" stroke="#bbb" stroke-width="2"/>
-      <line x1="16.2" y1="16.2" x2="21" y2="21" stroke="#bbb" stroke-width="2" stroke-linecap="round"/>
+<div class="search-bar-wrap" role="search" aria-label={label || placeholder}>
+  <div class="search-bar" class:focused>
+    <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <circle cx="11" cy="11" r="7" />
+      <line x1="16.5" y1="16.5" x2="21" y2="21" />
     </svg>
     <PlainText
       {placeholder}
       bind:value
       onChange={handleInput}
-      on:focus={() => { focused = true; touched = true; }}
+      on:focus={() => { focused = true; }}
       on:blur={() => { focused = false; }}
     />
     {#if value}
-      <button class="clear-btn" on:click={clear} aria-label="Clear search">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-          <line x1="4" y1="4" x2="14" y2="14" stroke="#bbb" stroke-width="2" stroke-linecap="round"/>
-          <line x1="14" y1="4" x2="4" y2="14" stroke="#bbb" stroke-width="2" stroke-linecap="round"/>
+      <button type="button" class="clear-btn" on:click={clear} aria-label="Clear search">
+        <svg viewBox="0 0 18 18" aria-hidden="true" focusable="false">
+          <line x1="4" y1="4" x2="14" y2="14" />
+          <line x1="14" y1="4" x2="4" y2="14" />
         </svg>
       </button>
     {/if}
@@ -49,33 +50,35 @@
 .search-bar-wrap {
   display: flex;
   justify-content: center;
-  margin: 1rem auto;
-  z-index: 20;
+  margin: var(--space-4, 16px) auto;
+  width: 100%;
 }
 .search-bar {
   display: flex;
   align-items: center;
-  background: #fff;
-  border-radius: 2.5em;
-  box-shadow: 0 2px 16px 0 rgba(0,0,0,0.07);
-  padding: 0.2em 1.2em 0.2em 0.8em;
-  min-width: 320px;
-  max-width: 480px;
+  gap: var(--space-2, 8px);
+  background: var(--surface-1, #fff);
+  border: 1px solid var(--border-2, #ccc);
+  border-radius: var(--radius-full, 999px);
+  padding: 0 var(--space-3, 12px) 0 var(--space-4, 16px);
+  min-width: 0;
+  max-width: 30rem;
   width: 100%;
-  transition: box-shadow 0.3s cubic-bezier(0.4,0,0.2,1), border 0.3s cubic-bezier(0.4,0,0.2,1);
-  border: 2px solid transparent;
-  position: relative;
+  transition: border-color var(--dur-fast, 120ms) var(--ease-out, ease-out),
+    box-shadow var(--dur-fast, 120ms) var(--ease-out, ease-out);
 }
 .search-bar.focused {
-  box-shadow: 0 4px 32px 0 rgba(0,0,0,0.13);
-  border: 2px solid #0077cc;
-}
-.search-bar.empty {
-  border: 2px solid #ffb3b3;
+  border-color: var(--accent, #2563eb);
+  box-shadow: 0 0 0 3px var(--accent-soft, transparent);
 }
 .search-icon {
-  margin-right: 0.7em;
+  width: 1.25rem;
+  height: 1.25rem;
   flex-shrink: 0;
+  fill: none;
+  stroke: var(--text-3, #777);
+  stroke-width: 2;
+  stroke-linecap: round;
 }
 :global(.search-bar .text-input-wrapper) {
   width: 100%;
@@ -86,27 +89,49 @@
 :global(.search-bar input) {
   border: none;
   background: transparent;
-  padding: 0.7em 0;
-  font-size: 1.08rem;
-  color: #222;
+  padding: var(--space-3, 12px) 0;
+  font-size: var(--fs-md, 1rem);
+  color: var(--text-1, #111);
+}
+:global(.search-bar input::placeholder) {
+  color: var(--text-3, #777);
 }
 :global(.search-bar input:focus) {
   box-shadow: none;
+  outline: none;
 }
 .clear-btn {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
   background: none;
   border: none;
-  outline: none;
+  border-radius: var(--radius-full, 999px);
   cursor: pointer;
-  margin-left: 0.5em;
-  padding: 0.2em;
-  border-radius: 50%;
-  transition: background 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  color: var(--text-3, #777);
+  transition: background-color var(--dur-fast, 120ms) var(--ease-out, ease-out);
+}
+.clear-btn svg {
+  width: 1rem;
+  height: 1rem;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
 }
 .clear-btn:hover {
-  background: #f3f3f3;
+  background: var(--surface-2, #f3f3f3);
+  color: var(--text-1, #111);
+}
+.clear-btn:focus-visible {
+  outline: 2px solid var(--focus-color, #2563eb);
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .search-bar,
+  .clear-btn {
+    transition: none;
+  }
 }
 </style>

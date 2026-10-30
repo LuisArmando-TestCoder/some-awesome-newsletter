@@ -1,42 +1,59 @@
+// am strings for locales-billing-form. English (en.ts) is the source. Key order and shape follow en.ts.
+// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale am
 export default {
-  billing: {
-    header: {
-      title: "የቢል ዝርዝሮዬች",
-      subtitle: "ደረሰኝ ለሜውልድ ለመግነዶር የተስማኒ የግዕቭዮንት ዝርዝሮዬች ያስፈልጋሉኛ፡",
+  "billing": {
+    "header": {
+      "title": "የክፍያ ዝርዝሮች",
+      "subtitle": "እነዚህን ዝርዝሮች በደረሰኝዎ ላይ እናስቀምጣለን። ቀጥሎ የክፍያ ገጹ ካርድዎን ይጠይቃል።"
     },
-    fields: {
-      firstName: {
-        label: "የመጀምሬፔ ስም",
-        placeholder: "ሀይለ",
+    "fields": {
+      "firstName": {
+        "label": "የመጀመሪያ ስም",
+        "placeholder": "ሀይለ"
       },
-      lastName: {
-        label: "የአባት ስም",
-        placeholder: "ደስታ",
+      "lastName": {
+        "label": "የአባት ስም",
+        "placeholder": "ደስታ"
       },
-      email: {
-        label: "የኢመይል አድራሳ",
-        placeholder: "jane.doe@company.com",
+      "email": {
+        "label": "ለደረሰኞች የሚሆን ኢሜል",
+        "placeholder": "jane.doe@company.com"
       },
-      phone: {
-        label: "የስልክ ኮ፥ር",
-        placeholder: "+1 (555) 000-0000",
+      "phone": {
+        "label": "ስልክ ቁጥር",
+        "placeholder": "+1 (555) 000-0000"
       },
-      country: {
-        label: "የአገር ኮዶ",
-        placeholder: "ET",
+      "country": {
+        "label": "የሀገር ኮድ",
+        "placeholder": "ET"
       },
-      address: {
-        label: "የቢል አድራሳ",
-        placeholder: "123 ኢኖቬሽን መንገድ",
+      "address": {
+        "label": "የክፍያ አድራሻ",
+        "placeholder": "123 Main Street"
       },
-      city: {
-        label: "ከተማ",
-        placeholder: "አዲስ አበባ",
+      "city": {
+        "label": "ከተማ",
+        "placeholder": "አዲስ አበባ"
       },
-      zip: {
-        label: "ፖዳሳ ኮዶ",
-        placeholder: "10101",
+      "state": {
+        "label": "ክልል ወይም አውራጃ",
+        "placeholder": "San Jose"
       },
+      "zip": {
+        "label": "የፖስታ ኮድ",
+        "placeholder": "10101"
+      }
     },
-  },
+    "hints": {
+      "country": "ሁለት ፊደላት፣ ለምሳሌ US፣ MX ወይም CR።",
+      "state": "አማራጭ ነው። ሀገርዎ የማይጠቀምበት ከሆነ ባዶ ይተዉት።",
+      "zip": "አማራጭ ነው። አድራሻዎ የፖስታ ኮድ ከሌለው ባዶ ይተዉት።"
+    },
+    "errors": {
+      "required": "ለመቀጠል ይህን መስክ ይሙሉ።",
+      "email": "እንደ name@example.com ያለ የኢሜል አድራሻ ያስገቡ።",
+      "country": "ባለ ሁለት ፊደል የሀገር ኮድ ያስገቡ፣ ለምሳሌ US።"
+    },
+    "optional": "አማራጭ"
+  }
 };

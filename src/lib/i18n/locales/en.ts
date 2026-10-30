@@ -2,26 +2,159 @@ export default {
   "auth": {
     "logo": "/icons/logo.png",
     "login": {
-      "title": "Log in to our Newsletter Orchestrator",
+      "pageTitle": "Log in",
+      "title": "Log in to AIBAN",
       "subtitle": "Connect to continue where you left off.",
       "google": "Continue with Google",
       "or": "or",
       "emailPlaceholder": "you@example.com",
-      "continueWithEmail": "Continue with Email",
+      "continueWithEmail": "Continue with email",
       "switchText": "Don't have an account?",
-      "switchLink": "Sign Up",
+      "switchLink": "Sign up",
       "switchHref": "/signup"
     },
     "signup": {
+      "pageTitle": "Sign up",
       "title": "Create your account",
-      "subtitle": "No credit card required.",
+      "subtitle": "You do not need a credit card.",
       "google": "Continue with Google",
       "or": "or",
       "emailPlaceholder": "you@example.com",
-      "continueWithEmail": "Continue with Email",
+      "continueWithEmail": "Continue with email",
       "switchText": "Already have an account?",
-      "switchLink": "Log In",
+      "switchLink": "Log in",
       "switchHref": "/login"
+    }
+  },
+  "landing": {
+    "seo": {
+      "title": "AIBAN | Your website, turned into a newsletter in every reader's language",
+      "description": "AIBAN reads what you already publish, writes a newsletter issue in your voice and sends it under your name. Each subscriber gets it in their own language.",
+      "ogImageAlt": "AIBAN logo"
+    },
+    "skipLink": "Skip to main content",
+    "hero": {
+      "eyebrow": "Newsletters for service businesses",
+      "title": "Your website becomes a weekly newsletter, in each reader's language",
+      "lead": "AIBAN reads the content you already publish, writes an issue in your voice and sends it under your name. Every subscriber gets it in the language they read. You set it up once and it keeps running.",
+      "formLabel": "Your website",
+      "formPlaceholder": "yourcompany.com",
+      "formHint": "We build a sample issue from the address you enter. Starting is free and you do not need a card.",
+      "formSubmit": "Preview my newsletter",
+      "formError": "Enter a web address such as yourcompany.com.",
+      "secondaryCta": "See how it works"
+    },
+    "preview": {
+      "badge": "Sample preview",
+      "note": "This is a sample layout with placeholder text. When you start, AIBAN writes the real issue from your newest article.",
+      "fromLabel": "From",
+      "toLabel": "To",
+      "subjectLabel": "Subject",
+      "languageLabel": "Reader language",
+      "readOnBlog": "Read on the blog",
+      "startCta": "Start free with {site}",
+      "startCtaGeneric": "Start free",
+      "liveRegion": "Sample preview updated for {site}."
+    },
+    "chain": {
+      "eyebrow": "How it works",
+      "title": "One input, then it runs by itself",
+      "lead": "You give AIBAN your website once. After that, each step below happens on its own, on the schedule you pick.",
+      "triggerLabel": "When",
+      "actionLabel": "Then",
+      "trigger": { "title": "It is Monday at 9:00", "body": "Or any schedule you choose: daily, weekly or monthly." },
+      "steps": [
+        { "title": "AIBAN finds your newest article", "body": "It checks your website and picks the piece your ideal reader will care about most." },
+        { "title": "It writes the issue in your voice", "body": "The text is rewritten to sound like you, based on how your site is written." },
+        { "title": "It translates the issue for each reader", "body": "Every subscriber receives the language they chose when they signed up." },
+        { "title": "It sends under your name", "body": "Readers see your name, and their replies arrive in your inbox." },
+        { "title": "It publishes the issue on your blog", "body": "Each issue also gets a public article page with its own link." },
+        { "title": "It shows you what happened", "body": "Your dashboard lists who joined and which links readers clicked." }
+      ],
+      "alsoTitle": "It also runs when",
+      "also": [
+        { "title": "Someone signs up on your site", "body": "They confirm by email and start receiving your issues." },
+        { "title": "You paste a link or a text", "body": "AIBAN writes and sends an issue about it through the same steps." },
+        { "title": "You upload a contact list", "body": "AIBAN cleans the list, removes duplicates and guesses each contact's language." }
+      ]
+    },
+    "languages": {
+      "eyebrow": "Every language",
+      "title": "Each reader gets the issue in their own language",
+      "body": "You do not write separate versions. AIBAN translates each issue into every language your subscribers read and keeps your tone in each one. The list includes Spanish, Portuguese, French, German, Hindi, Arabic, Japanese and many more.",
+      "sampleNote": "The same sample issue, as three readers would receive it."
+    },
+    "sender": {
+      "eyebrow": "Your address",
+      "title": "Sent under your name",
+      "body": "Issues arrive with your name and your email signature. AIBAN sends them from its own verified address, so you never share an email password with us. When a reader replies, the reply goes to your inbox.",
+      "inboxLabel": "How it looks in a reader's inbox",
+      "inboxFrom": "You",
+      "inboxSubject": "This week from {site}",
+      "inboxSnippet": "A short summary of your newest article, written in your voice.",
+      "inboxTime": "9:00"
+    },
+    "grow": {
+      "eyebrow": "Grow your list",
+      "title": "A signup form for your site and a blog that fills itself",
+      "items": [
+        { "title": "Signup form", "body": "Add the AIBAN form to your website. New readers pick their language and confirm by email." },
+        { "title": "Automatic blog", "body": "Every issue becomes a public article page that people can find in search and share with a link." },
+        { "title": "Contact import", "body": "Bring the clients you already have from a CSV or Excel file, or paste a list." }
+      ]
+    },
+    "useCases": {
+      "eyebrow": "Who it is for",
+      "title": "Made for businesses that grow through relationships",
+      "lead": "If your clients come from referrals and trust, a regular note from you keeps you in mind. AIBAN writes that note for you.",
+      "items": [
+        { "title": "Agencies and web designers", "body": "Send clients and prospects your newest work and articles each week, and run the same setup for client sites." },
+        { "title": "IT and software firms", "body": "Turn release notes and blog posts into a short update that each client reads in their language." },
+        { "title": "Real estate", "body": "Share new listings and market posts with buyers and sellers who speak different languages." },
+        { "title": "Lawyers and accountants", "body": "Keep clients informed about the topics you already write about, in a calm and consistent format." },
+        { "title": "Coaches and trainers", "body": "Send your latest lesson or article to your community on a fixed day, without writing it again." }
+      ]
+    },
+    "pricingIntro": {
+      "eyebrow": "Pricing",
+      "title": "Start free, upgrade when your list grows",
+      "lead": "The free plan includes 1 source and up to 100 subscribers. Paid plans add more sources and more subscribers."
+    },
+    "faqTitle": "Questions people ask before starting",
+    "faq": [
+      { "id": "what-do-i-need", "q": "What do I need to start?", "a": "Your website address and an email address. AIBAN reads your site to learn your topics and how you write." },
+      { "id": "do-i-write", "q": "Do I have to write anything?", "a": "You do not have to. AIBAN writes each issue from your content. When you want an issue about something specific, you can paste a link or a text." },
+      { "id": "languages", "q": "Which languages can my readers get?", "a": "AIBAN translates each issue into the language each subscriber reads. You can see the full list of languages when you set up your newsletter." },
+      { "id": "sender", "q": "Who do the emails come from?", "a": "From AIBAN's sending address, with your name as the sender. Replies go straight to your inbox. You never give us an email password." },
+      { "id": "contacts", "q": "Can I bring my existing contacts?", "a": "Yes. Upload a CSV or Excel file, or paste a list. AIBAN cleans it, removes duplicates and guesses each contact's language." },
+      { "id": "schedule", "q": "How often are issues sent?", "a": "You choose the schedule when you set up, and you can change it at any time in your dashboard." },
+      { "id": "free-plan", "q": "Is there a free plan?", "a": "Yes. The free plan includes 1 source and up to 100 subscribers. Paid plans add more sources and subscribers." },
+      { "id": "cancel", "q": "Can I cancel?", "a": "Yes. Write to info@aiban.news at any time and we will cancel your paid plan or move you back to the free plan." }
+    ],
+    "finalCta": {
+      "title": "Start with your website",
+      "body": "Give AIBAN your website, check your first issue, then turn it on when you are ready.",
+      "cta": "Start free",
+      "secondary": "Read the help center"
+    },
+    "footer": {
+      "tagline": "Newsletters written from your own content and sent in each reader's language.",
+      "product": "Product",
+      "company": "Company",
+      "legal": "Legal",
+      "links": {
+        "howItWorks": "How it works",
+        "pricing": "Pricing",
+        "demo": "Demo",
+        "help": "Help center",
+        "about": "About",
+        "careers": "Careers",
+        "privacy": "Privacy policy",
+        "terms": "Terms of service",
+        "cookies": "Cookie policy"
+      },
+      "contactLabel": "Contact",
+      "rights": "All rights reserved."
     }
   },
   "mainContent": {
@@ -201,23 +334,57 @@ export default {
   },
   "help": {
     "title": "Request higher limits",
-    "subtitle": "Move to pay-as-you-go or increase quotas to match your growth.",
+    "subtitle": "Tell us the limits you need and we will reply by email.",
     "contact": {
       "cta": "Submit request",
-      "successTitle": "Request received",
-      "successBody": "Our team will reach out shortly.",
+      "successTitle": "Request ready to send",
+      "successBody": "Your email app opened with your request. Send it from there and we will reply by email.",
       "learnMore": "/plans"
     },
     "questions": {
-      "desiredLimitsHelp": "Tell us the limits you need (e.g., 1M users).",
-      "useCaseHelp": "Describe your workload and traffic pattern.",
-      "expectedSpendHelp": "An estimate helps us tailor pricing (optional)."
+      "desiredLimitsHelp": "Tell us the limits you need, for example how many subscribers and sources.",
+      "useCaseHelp": "Describe what you send, to whom and how often.",
+      "expectedSpendHelp": "A rough estimate helps us suggest a plan. You can leave it as unknown."
+    },
+    "form": {
+      "nameLabel": "Name",
+      "emailLabel": "Email",
+      "companyLabel": "Company",
+      "optional": "(optional)",
+      "limitsLabel": "Limits you need",
+      "useCaseLabel": "How you use AIBAN",
+      "spendLabel": "Expected monthly spend",
+      "spend": {
+        "lt500": "Less than $500",
+        "500_2k": "$500 to $2,000",
+        "2k_10k": "$2,000 to $10,000",
+        "gt10k": "More than $10,000",
+        "unknown": "I do not know yet"
+      },
+      "urgencyLabel": "Urgency",
+      "urgency": { "low": "Low", "normal": "Normal", "high": "High" },
+      "replyLabel": "How should we reply?",
+      "reply": { "email": "By email", "call": "By phone call" },
+      "payAsYouGo": "I am interested in paying as I go",
+      "sending": "Sending...",
+      "sentTitle": "Request sent",
+      "sentBody": "We received your request and will answer at the email address you gave.",
+      "retryBefore": "If your email app did not open,",
+      "retryLink": "open the request again",
+      "retryAfter": "or write to",
+      "errors": {
+        "name": "Enter your name (at least 2 characters).",
+        "email": "Enter an email address we can reply to, like name@example.com.",
+        "company": "Enter at least 2 characters, or leave this empty.",
+        "desiredLimits": "Describe the limits you need in at least 10 characters.",
+        "useCase": "Describe your use in at least 20 characters."
+      }
     },
     "faqs": [
       {
         "id": "limits-how",
         "q": "How do higher limits work?",
-        "a": "We unlock larger quotas immediately after approval. Billing can be flat-rate or pay-as-you-go."
+        "a": "Send a request with the limits you need. We reply by email with the options for your account."
       }
     ],
     "links": {
@@ -227,12 +394,28 @@ export default {
   },
   "faq": [
     {
-      "q": "Is there a free trial?",
-      "a": "Yes! You can start with our Free plan limited to 100 users to test the technology."
+      "q": "What does AIBAN do?",
+      "a": "AIBAN reads content you already publish, such as your website, your blog or news sites you choose. It writes new issues in your voice and sends them as a newsletter. Each subscriber gets it in the language they picked, with your name as the sender."
+    },
+    {
+      "q": "Is there a free plan?",
+      "a": "Yes. The free plan includes 1 source and up to 100 subscribers. If you need more, write to us and we will change your plan."
+    },
+    {
+      "q": "How do subscribers get the newsletter in their language?",
+      "a": "Each subscriber picks a preferred language when they sign up. AIBAN translates every issue into that language before sending it."
+    },
+    {
+      "q": "Can issues come from my own email address?",
+      "a": "Issues go out from AIBAN's sending address with your name and your email signature, and replies go to your inbox. We do not ask for your email password, so there is nothing of yours to leak."
+    },
+    {
+      "q": "How do people subscribe?",
+      "a": "You get a signup page and a signup widget you can place on your website. You can also add people yourself or upload a list."
     },
     {
       "q": "Can I cancel at any time?",
-      "a": "Yes, you can cancel your subscription at any time from your account dashboard."
+      "a": "Yes. Write to info@aiban.news at any time and we will cancel your paid plan or move you back to the free plan."
     }
   ],
   "plans": {
@@ -245,11 +428,11 @@ export default {
         "name": "Free",
         "monthly": 0,
         "yearly": 0,
-        "tagline": "Test the technology",
-        "featuresBase": ["1 news source", "Up to 100 users"],
+        "tagline": "Try AIBAN with one source",
+        "featuresBase": ["1 source", "Up to 100 subscribers"],
         "featuresDelta": [],
         "limits": { "newsSources": 1, "users": 100 },
-        "ctaLabel": "Current Plan",
+        "ctaLabel": "Current plan",
         "tier": 0
       },
       {
@@ -258,7 +441,7 @@ export default {
         "monthly": 17,
         "yearly": 132,
         "tagline": "For growing newsletters",
-        "featuresBase": ["5 news sources", "Up to 100k users"],
+        "featuresBase": ["5 sources", "Up to 100k subscribers"],
         "featuresDelta": ["Email support", "Basic translation"],
         "limits": { "newsSources": 5, "users": 100000 },
         "ctaLabel": "Choose Starter",
@@ -270,8 +453,8 @@ export default {
         "name": "Growth",
         "monthly": 35,
         "yearly": 273,
-        "tagline": "The perfect balance",
-        "featuresBase": ["17 news sources", "Up to 250k users"],
+        "tagline": "For established newsletters",
+        "featuresBase": ["17 sources", "Up to 250k subscribers"],
         "featuresDelta": ["Custom branding", "Advanced analytics"],
         "limits": { "newsSources": 17, "users": 250000 },
         "ctaLabel": "Choose Growth",
@@ -284,8 +467,8 @@ export default {
         "monthly": 80,
         "yearly": 624,
         "tagline": "For marketing professionals",
-        "featuresBase": ["25 news sources", "Up to 500k users"],
-        "featuresDelta": ["API Access", "Priority processing"],
+        "featuresBase": ["25 sources", "Up to 500k subscribers"],
+        "featuresDelta": ["API access", "Priority processing"],
         "limits": { "newsSources": 25, "users": 500000 },
         "ctaLabel": "Choose Pro",
         "productId": "prod_pro_id",
@@ -296,8 +479,8 @@ export default {
         "name": "Master",
         "monthly": 150,
         "yearly": 1170,
-        "tagline": "Unlimited scalability",
-        "featuresBase": ["50 news sources", "Unlimited users"],
+        "tagline": "For large audiences",
+        "featuresBase": ["50 sources", "Unlimited subscribers"],
         "featuresDelta": ["White-glove support", "Custom webhooks"],
         "limits": { "newsSources": 50, "users": -1 },
         "ctaLabel": "Choose Master",
@@ -310,65 +493,446 @@ export default {
         "monthly": 0,
         "yearly": 0,
         "tagline": "Full access for partners",
-        "featuresBase": ["Unlimited sources", "Unlimited users"],
+        "featuresBase": ["Unlimited sources", "Unlimited subscribers"],
         "featuresDelta": [],
         "limits": { "newsSources": -1, "users": -1 },
-        "ctaLabel": "Current Plan",
+        "ctaLabel": "Current plan",
         "internalOnly": true,
         "tier": 5
       }
     ],
     "contact": {
       "text": "Need a custom solution?",
-      "cta": "Contact Us",
+      "cta": "Contact us",
       "href": "/help"
     }
   },
   "article": {
     "notFound": "Article not found.",
-    "errorFetching": "Error fetching article.",
+    "errorFetching": "We could not load this article. Reload the page in a minute to try again.",
     "noArticleSpecified": "No article specified.",
-    "goBack": "Go Back",
+    "goBack": "Go back",
     "loading": "Loading..."
   },
   "pricing": {
     "eyebrow": "Pricing",
-    "title": "Flexible Plans",
-    "currentPlan": "Current Plan:",
+    "title": "Plans and pricing",
+    "currentPlan": "Current plan:",
     "monthly": "Monthly",
-    "yearly": "Yearly (Save 35%)",
+    "yearly": "Yearly",
+    "yearlySave": "Save 35%",
+    "intervalLabel": "Billing period",
+    "billedYearly": "billed yearly",
+    "perMonthShort": "/mo",
+    "perYearShort": "/yr",
+    "freeCta": "Start free",
+    "processing": "Opening checkout...",
+    "askMore": "Every account starts on the Free plan. If you need more, write to us at {email} and we will change your plan.",
+    "askFor": "Ask for {planName}",
+    "askAction": "Write to us",
+    "checkoutError": "We could not open checkout. Please try again in a moment.",
+    "networkError": "We could not reach the server. Check your connection and try again.",
+    "includes": "Includes",
+    "pageMetaTitle": "Pricing | AIBAN",
+    "pageMetaDescription": "AIBAN plans and prices. Start free with 1 source and up to 100 subscribers, then move to a monthly or yearly plan when you need more.",
+    "pageTitle": "Pricing",
+    "pageLead": "Start on the free plan with 1 source and up to 100 subscribers. When you need more sources or more subscribers, write to us and we will move you to a paid plan, billed monthly or yearly.",
+    "faqTitle": "Billing questions",
+    "contactText": "Need higher limits or a custom setup?",
+    "contactCta": "Contact us",
     "everythingIn": "Everything in previous plan, plus:",
     "isCurrentPlan": "This is your current plan",
-    "downgradeTo": "Downgrade to {planName}",
-    "upgradeTo": "Upgrade to {planName}",
-    "mockMode": "Mock Mode Enabled",
-    "mostPopular": "Most Popular",
+    "downgradeTo": "Switch to {planName}",
+    "upgradeTo": "Choose {planName}",
+    "mockMode": "Test mode",
+    "mostPopular": "Most popular",
     "perMonth": "per month",
     "perYear": "per year",
     "youSave": "You save"
   },
   "confirmSubscription": {
-    "title": "Confirm Your Subscription",
-    "goBack": "Go Back",
+    "title": "Confirm your subscription",
+    "goBack": "Go back",
     "pleaseAccept": "Please accept the terms to complete your subscription.",
     "iAccept": "I accept the",
     "termsAndConditions": "Terms and Conditions",
     "and": "and",
     "privacyPolicy": "Privacy Policy",
-    "confirm": "Confirm Subscription",
+    "confirm": "Confirm subscription",
     "mustAccept": "You must accept the terms to subscribe.",
-    "invalidLink": "Invalid confirmation link."
+    "invalidLink": "This confirmation link is incomplete. Open the latest email we sent you and use the link in it."
   },
   "articles": {
-    "title": "The Latest Insights",
-    "subtitle": "Explore our curated collection of articles and news.",
-    "producedIn": "We've produced news in all these languages",
+    "title": "Latest articles",
+    "subtitle": "Articles AIBAN has written for the newsletters it sends.",
+    "producedIn": "Languages these articles are available in",
     "searchPlaceholder": "Search articles...",
     "noArticlesFound": "No articles found.",
     "created": "Created:",
     "language": "Language:",
-    "rightsReserved": "All Rights Reserved.",
-    "errorFetching": "Error fetching articles."
+    "rightsReserved": "All rights reserved.",
+    "errorFetching": "We could not load the articles. Reload the page in a minute to try again."
+  },
+  "blog": {
+    "metaTitle": "{name} blog",
+    "metaDescription": "Articles from {name}. Subscribe to get new ones by email.",
+    "eyebrow": "Newsletter blog",
+    "heroFrom": "Articles from {name}",
+    "heroDescription": "These are the articles this newsletter has published. Subscribe to get new ones by email.",
+    "subscribe": "Subscribe",
+    "home": "Blog home",
+    "featured": "Latest article",
+    "latest": "Latest articles",
+    "latestHint": "Newest first. Some articles have no image, so they show as text only.",
+    "articleCount": "{count} articles in {language}",
+    "articleCountOne": "1 article in {language}",
+    "languages": "Choose a language",
+    "minRead": "{n} min read",
+    "readArticle": "Read article",
+    "page": "Page {page}",
+    "newer": "Newer articles",
+    "older": "Older articles",
+    "pagination": "Article pages",
+    "emptyTitle": "No articles yet",
+    "emptyBody": "This newsletter has not published any articles here yet. Subscribe to get the first one by email.",
+    "endTitle": "No older articles",
+    "endBody": "You reached the end of the list.",
+    "backToNewest": "Go to the newest articles",
+    "errorTitle": "We could not load these articles",
+    "errorBody": "The article server did not respond in time. Reload the page in a minute to try again.",
+    "reload": "Reload the page",
+    "missingHolder": "This blog link is incomplete because it does not say whose blog to open. Ask the newsletter owner for the full link.",
+    "redirecting": "Opening the blog...",
+    "publishedWith": "Published with AIBAN",
+    "cta": {
+      "title": "Get the next article by email",
+      "body": "Subscribe to {name} and new articles arrive in your inbox. You can unsubscribe at any time.",
+      "button": "Subscribe"
+    },
+    "search": {
+      "label": "Search articles",
+      "placeholder": "Search by word or phrase",
+      "button": "Search",
+      "suggestions": "Suggestions",
+      "recent": "Recent searches",
+      "clearRecent": "Clear recent searches",
+      "title": "Search results",
+      "resultsFor": "Results for \"{q}\"",
+      "count": "{count} articles found",
+      "countOne": "1 article found",
+      "searching": "Searching articles",
+      "emptyTitle": "No articles match \"{q}\"",
+      "emptyBody": "Check the spelling or try a shorter word. You can also browse every article on the blog.",
+      "browseAll": "Browse all articles",
+      "noQuery": "Type a word or phrase above to search this blog.",
+      "error": "The search stopped because the article server did not respond. Try again in a minute.",
+      "tryAgain": "Try again",
+      "limitNote": "Showing the first {count} matches. Use a more specific phrase to narrow the list."
+    },
+    "article": {
+      "back": "All articles",
+      "published": "Published {date}",
+      "by": "By {name}",
+      "otherLanguages": "Read more in other languages",
+      "otherLanguagesHint": "This newsletter also publishes in these languages. Each link opens the blog in that language.",
+      "share": "Share this article",
+      "copyLink": "Copy link",
+      "copied": "Link copied. You can paste it anywhere.",
+      "copyFailed": "Could not copy the link. Copy it from your browser's address bar instead.",
+      "notFoundTitle": "Article not found",
+      "notFoundBody": "This article may have been removed, or the link is incomplete. Open the blog to see the other articles.",
+      "errorTitle": "We could not load this article",
+      "errorBody": "The article server did not respond in time. Reload the page in a minute to try again.",
+      "goToBlog": "Go to the blog"
+    }
+  },
+  "nav": {
+    "mainLabel": "Main",
+    "legalLabel": "Legal",
+    "home": "AIBAN home",
+    "menu": "Menu",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "howItWorks": "How it works",
+    "pricing": "Pricing",
+    "help": "Help",
+    "about": "About",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "cookies": "Cookies",
+    "signOut": "Sign out",
+    "chooseLanguage": "Choose a language",
+    "currentLanguage": "Language: {name}"
+  },
+  "about": {
+    "metaTitle": "About | AIBAN",
+    "metaDescription": "AIBAN turns the content a business already publishes into a newsletter that goes out on its own, in each subscriber's language, under the owner's name.",
+    "eyebrow": "About",
+    "title": "About AIBAN",
+    "lead": "AIBAN turns the content a business already publishes into a newsletter that goes out on its own. Each subscriber reads it in their own language, and it arrives under the owner's name.",
+    "whatTitle": "What AIBAN does",
+    "whatBody": [
+      "You tell AIBAN where your content lives: your website, your blog or news sites you follow. When something new appears there, AIBAN writes an issue from it in the voice you described and sends it to your subscribers on the schedule you chose.",
+      "Every subscriber picks a language when they sign up, and each issue is translated into that language before it goes out. The articles are also published as web pages, and you can send them to your own site."
+    ],
+    "whoTitle": "Who makes it",
+    "whoBody": [
+      "AIBAN is built by Luis Murillo Baltodano, its founder. Luis is a creative engineer with a background in computer graphics and automation.",
+      "Some of his open source work is listed below."
+    ],
+    "projectsTitle": "Open source work by the founder",
+    "projects": [
+      {
+        "name": "Scene Preset",
+        "url": "https://github.com/LuisArmando-TestCoder/scene-preset",
+        "desc": "A library that removes boilerplate when working with Three.js and 3D web APIs."
+      },
+      {
+        "name": "Canvas Preset",
+        "url": "https://github.com/LuisArmando-TestCoder/canvas-preset",
+        "desc": "Helpers for common Canvas API tasks."
+      },
+      {
+        "name": "Atomic Gatsby template",
+        "url": "https://github.com/LuisArmando-TestCoder/atomic-gatsby-typescript-recoiljs",
+        "desc": "A starter template organized with atomic design."
+      }
+    ],
+    "githubLabel": "Luis on GitHub",
+    "newTab": "(opens in a new tab)",
+    "contactTitle": "Get in touch",
+    "contactBody": "For questions, feedback or partnership ideas, write to info@aiban.news.",
+    "emailCta": "Email info@aiban.news",
+    "startCta": "Start free",
+    "helpCta": "Read the help center"
+  },
+  "careers": {
+    "metaTitle": "Careers | AIBAN",
+    "metaDescription": "AIBAN has no open roles right now. You can still write to us at info@aiban.news.",
+    "eyebrow": "Careers",
+    "title": "Careers at AIBAN",
+    "lead": "AIBAN has no open roles right now.",
+    "body": "When a role opens, it will be listed on this page. If you would like to work on AIBAN later, send a short note about yourself and what you would like to build.",
+    "emailCta": "Email info@aiban.news",
+    "emailSubject": "Working on AIBAN",
+    "aboutCta": "Read about AIBAN"
+  },
+  "legal": {
+    "navLabel": "Legal documents",
+    "lastUpdated": "Last updated: {date}",
+    "privacy": {
+      "title": "Privacy policy",
+      "metaTitle": "Privacy policy | AIBAN",
+      "metaDescription": "How AIBAN collects, uses and protects your data, and how to exercise your data rights."
+    },
+    "terms": {
+      "title": "Terms of service",
+      "metaTitle": "Terms of service | AIBAN",
+      "metaDescription": "The terms that apply when you create an account and use AIBAN."
+    },
+    "cookies": {
+      "title": "Cookie policy",
+      "metaTitle": "Cookie policy | AIBAN",
+      "metaDescription": "Which cookies AIBAN uses, what they do, how long they last and how you can control them."
+    }
+  },
+  "demoPage": {
+    "metaTitle": "Demo | AIBAN",
+    "metaDescription": "Watch a walkthrough of AIBAN and see what happens after you sign up, from adding your website to sending your first issue.",
+    "eyebrow": "Demo",
+    "title": "See how AIBAN works",
+    "lead": "Watch the walkthrough, then read what happens after you sign up.",
+    "videoTitle": "AIBAN walkthrough video",
+    "playLabel": "Play the walkthrough video",
+    "videoNote": "The video plays from YouTube.",
+    "stepsTitle": "What happens after you sign up",
+    "steps": [
+      {
+        "title": "Add your website",
+        "body": "Enter the address of your site, your blog or a news site you follow. AIBAN reads it for new content."
+      },
+      {
+        "title": "Describe your readers and your voice",
+        "body": "Tell AIBAN who reads your newsletter and how it should sound. You can also let it suggest a description from your site."
+      },
+      {
+        "title": "Choose a schedule",
+        "body": "Pick how often issues go out. You can change it later in your dashboard."
+      },
+      {
+        "title": "Add subscribers",
+        "body": "Upload a list, add people one by one or share your signup page and widget. Each subscriber picks a language."
+      },
+      {
+        "title": "Add your sender name and signature",
+        "body": "Add the name and email signature readers will see. AIBAN sends each issue from its verified address under your name, and replies go to your inbox."
+      }
+    ],
+    "ctaTitle": "Try it with your own website",
+    "ctaBody": "The free plan includes 1 source and up to 100 subscribers.",
+    "primaryCta": "Start free",
+    "secondaryCta": "See pricing"
+  },
+  "helpCenter": {
+    "metaTitle": "Help | AIBAN",
+    "metaDescription": "Answers about setting up AIBAN: sources, languages, sending under your name, subscribers, the signup widget, the blog and billing.",
+    "eyebrow": "Help center",
+    "title": "How can we help?",
+    "lead": "Find answers about setting up and running your newsletter. If you do not find what you need, write to us.",
+    "searchLabel": "Search the help center",
+    "searchPlaceholder": "Try language, widget or cancel",
+    "clearSearch": "Clear search",
+    "resultsCount": "{count} answers match your search.",
+    "noResults": "No answers match your search. Try another word or email info@aiban.news.",
+    "topicsLabel": "Topics",
+    "copyLink": "Copy link",
+    "linkCopied": "Link copied",
+    "contactTitle": "Still need help?",
+    "contactBody": "Write to info@aiban.news and include the email address you signed up with.",
+    "emailCta": "Email info@aiban.news",
+    "limitsTitle": "Request higher limits",
+    "limitsBody": "Tell us the limits you need and we will reply by email. If the request cannot be sent from this page, your email app opens with it filled in so you can send it to us.",
+    "faqFilterLabel": "Filter questions",
+    "faqNoMatch": "No questions match your filter.",
+    "groups": [
+      {
+        "id": "getting-started",
+        "title": "Getting started",
+        "items": [
+          {
+            "id": "what-is-aiban",
+            "q": "What is AIBAN?",
+            "a": "AIBAN turns content you already publish into a recurring newsletter. It reads your website, your blog or news sites you choose, writes new issues in your voice and sends them to your subscribers. Each subscriber reads it in the language they picked."
+          },
+          {
+            "id": "how-to-start",
+            "q": "How do I start?",
+            "a": "Create an account on the signup page. Setup asks for the address of your site and a few details about your readers. After that you can add subscribers and manage everything from your dashboard."
+          },
+          {
+            "id": "change-settings",
+            "q": "Can I change my setup later?",
+            "a": "Yes. You can change sources, schedule, sender details and subscribers later in your dashboard. To change your plan, write to info@aiban.news."
+          }
+        ]
+      },
+      {
+        "id": "sources",
+        "title": "Sources and content",
+        "items": [
+          {
+            "id": "what-is-a-source",
+            "q": "What can I use as a source?",
+            "a": "A source is a web address AIBAN reads for new content, such as your website, your blog or a news site you follow. You add sources in your dashboard. How many you can add depends on your plan."
+          },
+          {
+            "id": "how-often",
+            "q": "How often does my newsletter go out?",
+            "a": "You choose how often it publishes when you set up a source. You can change the schedule later in your dashboard."
+          },
+          {
+            "id": "your-voice",
+            "q": "How does AIBAN write in my voice?",
+            "a": "You describe the personality of your newsletter, or let AIBAN generate a description for you. Issues are written with that description. You can edit it at any time in your dashboard."
+          }
+        ]
+      },
+      {
+        "id": "languages",
+        "title": "Languages",
+        "items": [
+          {
+            "id": "subscriber-language",
+            "q": "How do subscribers get the newsletter in their language?",
+            "a": "Each subscriber picks a preferred language when they sign up. AIBAN translates every issue into that language before sending it."
+          },
+          {
+            "id": "site-language",
+            "q": "Can I use the site in my language?",
+            "a": "Yes. Use the language button at the bottom right of the screen to switch the language of the site and the dashboard."
+          }
+        ]
+      },
+      {
+        "id": "sending",
+        "title": "Sending under your name",
+        "items": [
+          {
+            "id": "own-address",
+            "q": "Can issues come from my own email address?",
+            "a": "Issues go out from AIBAN's sending address with your sender name and email signature, and replies go to your inbox. We do not ask for your email password, so there is nothing of yours to leak."
+          },
+          {
+            "id": "app-password",
+            "q": "Do I need to give AIBAN my email password?",
+            "a": "No. AIBAN never asks for your email password or an app password. Issues are sent from AIBAN's address under your name, and replies come to you."
+          }
+        ]
+      },
+      {
+        "id": "subscribers",
+        "title": "Subscribers and signup widget",
+        "items": [
+          {
+            "id": "add-subscribers",
+            "q": "How do I add subscribers?",
+            "a": "You can add people one by one in your dashboard or upload a file with your list. People can also join through your signup page or the signup widget."
+          },
+          {
+            "id": "signup-widget",
+            "q": "What is the signup widget?",
+            "a": "The widget is a signup form you can place on your own website. Visitors enter their email address and pick their language, and they join your list."
+          },
+          {
+            "id": "subscriber-limit",
+            "q": "Is there a limit on subscribers?",
+            "a": "Each plan has its own subscriber limit. The free plan includes up to 100 subscribers. The pricing page lists the limits of the other plans."
+          }
+        ]
+      },
+      {
+        "id": "blog",
+        "title": "Blog",
+        "items": [
+          {
+            "id": "blog-pages",
+            "q": "Are my newsletter articles published on the web?",
+            "a": "Yes. The articles AIBAN writes for your newsletter are also published as web pages, so people can read them outside their inbox."
+          },
+          {
+            "id": "post-to-site",
+            "q": "Can I post articles to my own website?",
+            "a": "Yes. In your dashboard you can set up a webhook that sends each newsletter article to your website as a post. It works with WordPress and with any platform that accepts standard REST content."
+          }
+        ]
+      },
+      {
+        "id": "billing",
+        "title": "Billing",
+        "items": [
+          {
+            "id": "free-plan",
+            "q": "Is there a free plan?",
+            "a": "Yes. The free plan includes 1 source and up to 100 subscribers. You can move to a paid plan when you need more."
+          },
+          {
+            "id": "monthly-yearly",
+            "q": "Can I pay monthly or yearly?",
+            "a": "Yes. Paid plans are billed monthly or yearly. The yearly price is 35% lower than paying monthly for 12 months. Write to info@aiban.news to choose a plan."
+          },
+          {
+            "id": "cancel",
+            "q": "Can I cancel at any time?",
+            "a": "Yes. Write to info@aiban.news at any time and we will cancel your paid plan or move you back to the free plan."
+          },
+          {
+            "id": "higher-limits",
+            "q": "What if I need more than the largest plan?",
+            "a": "Use the request form on the help page to tell us the limits you need. We reply by email."
+          }
+        ]
+      }
+    ]
   },
   "mainPage": {
     "skipToMainContent": "Skip to main content",
@@ -378,28 +942,28 @@ export default {
     "disclaimer": "35% savings apply to annual billing only."
   },
   "authForm": {
-    "emailValidation": "Please enter a valid email.",
-    "failedToSendCode": "Failed to send code. Please try again.",
+    "emailValidation": "Enter an email address such as name@example.com.",
+    "failedToSendCode": "We could not send the code. Check the email address and try again in a minute.",
     "sending": "Sending...",
-    "codeSent": "Code sent to your email",
-    "invalidCode": "Invalid code provided",
+    "codeSent": "We sent a code to your email.",
+    "invalidCode": "That code is not correct. Check the latest email we sent you, or resend the code.",
     "regenerateCode": "Resend code",
     "back": "Back",
     "byProceeding": "By proceeding, you agree to the",
     "termsOfService": "Terms of Service",
     "and": "and",
     "privacyPolicy": "Privacy Policy",
-    "appName": "AI Newsletter"
+    "appName": "AIBAN"
   },
   "welcome": {
     "title": "Automatic newsletter generator",
-    "setItOnce": "Set it once...",
-    "useItForever": "...use it forever."
+    "setItOnce": "Set it up once.",
+    "useItForever": "It keeps running after that."
   },
   "lead": {
     "title": "Turn subscribers into visitors",
     "recommendation": "Help our AI understand your brand by connecting your website.",
-    "question": "Do you have a website? (optional)",
+    "question": "Do you have a website? (optional, you can add it later)",
     "placeholder": "https://your-site.com"
   },
   "newsSource": {
@@ -409,20 +973,20 @@ export default {
   },
   "subscribe": {
     "welcome": {
-      "title": "Welcome to the Newsletter.",
+      "title": "Welcome to the newsletter.",
       "invitedBy": "You have been invited by {configuratorId}."
     }
   },
   "header": {
-    "goToWorkspace": "Go to Workspace",
-    "inBilling": "Billing",
+    "goToWorkspace": "Open dashboard",
+    "inBilling": "Pricing",
     "vip": "VIP",
     "plan": "{planName} plan",
-    "logIn": "Log In",
-    "getStarted": "Get Started"
+    "logIn": "Log in",
+    "getStarted": "Start free"
   },
   "fileInput": {
-    "chooseFile": "Choose File",
+    "chooseFile": "Choose file",
     "dropFile": "Drop here",
     "release": "Release to upload"
   },
@@ -436,20 +1000,20 @@ export default {
     "removeImage": "Remove"
   },
   "billing": {
-    "title": "Billing & Subscription",
-    "currentPlanTitle": "Your Current Plan",
-    "upgradePlanTitle": "Change Your Plan",
-    "manageSubscription": "Manage Subscription",
+    "title": "Billing and subscription",
+    "currentPlanTitle": "Your current plan",
+    "upgradePlanTitle": "Change your plan",
+    "manageSubscription": "Manage subscription",
     "vipPlanName": "VIP Partner",
-    "vipPlanDescription": "Unlimited access courtesy of AI Newsletter.",
+    "vipPlanDescription": "Unlimited access courtesy of AIBAN.",
     "perMonth": "per month",
     "perYear": "per year",
     "monthAbbreviation": "mo",
     "equivalentTo": "equivalent to",
-    "mostPopular": "Most Popular",
+    "mostPopular": "Most popular",
     "upgradeTo": "Upgrade to",
     "downgradeTo": "Switch to",
-    "currentPlanButton": "Your Plan",
+    "currentPlanButton": "Your plan",
     "youSave": "You save",
     "users": "users",
     "newsSources": "news sources",
@@ -695,7 +1259,7 @@ export default {
     { "code": "CD", "name": "Congo - Kinshasa" },
     { "code": "CK", "name": "Cook Islands" },
     { "code": "CR", "name": "Costa Rica" },
-    { "code": "CI", "name": "Côte d’Ivoire" },
+    { "code": "CI", "name": "Côte d'Ivoire" },
     { "code": "HR", "name": "Croatia" },
     { "code": "CU", "name": "Cuba" },
     { "code": "CY", "name": "Cyprus" },
@@ -824,7 +1388,7 @@ export default {
       "title": "Where to Publish",
       "urlLabel": "Your Website URL",
       "urlPlaceholder": "https://your-website.com",
-      "urlHint": "Enter your site's homepage URL — we'll figure out where to send the content."
+      "urlHint": "Enter your site's homepage URL and we'll figure out where to send the content."
     },
     "whosPublishing": {
       "title": "Who's Publishing",
@@ -833,7 +1397,7 @@ export default {
       "usernameHint": "The username you use to log in to manage your website.",
       "passwordLabel": "App Password",
       "passwordPlaceholder": "xxxx xxxx xxxx xxxx xxxx xxxx",
-      "passwordHint": "Generate this inside your website's user settings. It's a separate password just for apps — it doesn't replace your regular login.",
+      "passwordHint": "Generate this inside your website's user settings. It's a separate password just for apps. It doesn't replace your regular login.",
       "howToGetPassword": "How to get an App Password?",
       "passwordGuideHide": "Hide guide",
       "step1": "Go to your website's admin panel.",
@@ -844,8 +1408,8 @@ export default {
     "howToPublish": {
       "title": "How to Publish",
       "statusLabel": "Post Status",
-      "statusDraft": "Save as Draft — review before going live",
-      "statusPublish": "Publish Immediately — goes live right away",
+      "statusDraft": "Save as draft (review before it goes live)",
+      "statusPublish": "Publish now (goes live right away)",
       "authorLabel": "Author Name",
       "authorPlaceholder": "Your name",
       "authorHint": "How the author's name appears on the published post.",

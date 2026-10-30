@@ -1,139 +1,243 @@
+// id strings for locales-newflow. English (en.ts) is the source. Key order and shape follow en.ts.
+// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale id
 export default {
-  step01: {
-    title: "AI yang terdengar seperti manusia menulis buletin untuk pelanggan Anda secara otomatis",
-    subtitle: "Seberapa sering, pilih <u>setiap bulan</u> atau <u>setiap minggu</u> atau <u>setiap hari</u> atau <u>pukul berapa</u>"
-  },
-  step02: {
-    title: "Bahasa buletin",
-    subtitle: "“buletin Anda juga akan dikirim dalam bahasa spesifik setiap pengguna jika berbeda”"
-  },
-  step03: {
-    title: "Pengalihan (Opsional)",
-    subtitle: "Apakah Anda ingin mengarahkan pengguna ke halaman Anda?",
-    description: "Anda dapat menempelkan tautan ke halaman Anda di sini, kami akan menghitung berapa banyak yang masuk dari email yang dibuat AI",
-    placeholder: "https://halaman-anda.com"
-  },
-  step04: {
-    title: "Jenis berita yang Anda ingin AI pilih",
-    subtitle: "Tema percakapan atau topik mana (disimpulkan dari tautan pengalihan jika disetel, jika tidak kosong)",
-    placeholder: "mis. Kecerdasan Buatan, Pemasaran, Kesehatan..."
-  },
-  step05: {
-    title: "Sesuaikan Tanda Tangan Anda",
-    subtitle: "Desain secara visual atau edit kode secara langsung",
-    visualEditor: "Editor Visual",
-    htmlSource: "Sumber HTML",
-    livePreview: "Pratinjau Langsung",
-    yourName: "Nama Anda",
-    yourTitle: "Gelar Anda",
-    facebookProfile: "Profil Facebook",
-    instagramProfile: "Profil Instagram",
-    editHtml: "Edit HTML secara langsung...",
-    warning: "⚠️ Edit yang dilakukan di sini akan ditimpa jika Anda beralih kembali ke Editor Visual dan membuat perubahan."
-  },
-  step06: {
-    title: "Sumber Berita",
-    subtitle: "Situs web berita mana yang ingin Anda gunakan?",
-    description: "Masukkan URL atau biarkan kami memilih satu untuk Anda berdasarkan topik Anda.",
-    descriptionSmall: "Kami akan menganalisis situs web untuk menemukan konten terbaik. Ini mungkin memakan waktu beberapa detik.",
-    placeholder: "https://contoh.com",
-    analyzing: "Menganalisis...",
-    next: "Selanjutnya",
-    errors: {
-      failedToGenerate: "Gagal membuat pemilih. Silakan coba lagi atau periksa URL.",
-      errorGenerating: "Terjadi kesalahan saat membuat pemilih.",
-      invalidUrl: "Harap masukkan URL yang valid atau pilih sumber."
-    }
-  },
-  step07: {
-    title: "Pemilih Konten",
-    subtitle: "Anggap setiap situs web sebagai <strong>perpustakaan dengan tata letak unik</strong>.",
-    explanation1: "<strong>'Pemilih'</strong> ini adalah peta spesifik yang kami buat untuk situs web ini. Ini memberi tahu sistem kami dengan tepat di mana harus mencari untuk mengambil artikel yang Anda inginkan, sambil mengabaikan tombol menu dan iklan.",
-    explanation2: "<strong>Kami telah mengisi peta ini untuk Anda secara otomatis.</strong>",
-    placeholder: "String pemilih...",
-    regenerate: "Buat Ulang Pemilih",
-    regenerating: "Membuat ulang...",
-    errors: {
-      noUrl: "URL sumber berita tidak ditemukan.",
-      failedRegenerate: "Gagal membuat ulang pemilih.",
-      errorRegenerate: "Terjadi kesalahan saat membuat ulang pemilih."
-    }
-  },
-  step08: {
-    title: "Pratinjau",
-    placeholder: "Siap membuat buletin pertama Anda?",
-    generateBtn: "Buat Email Buletin",
-    sentBtn: "Terkirim! Periksa email Anda",
-    sendTestBtn: "Kirim Email Tes",
-    regenerateBtn: "Buat Ulang",
-    loading: {
-      initializing: "Menginisialisasi...",
-      starting: "Memulai pembuatan...",
-      scraping: "Mengambil konten...",
-      translating: "Menerjemahkan artikel...",
-      formatting: "Memformat email...",
-      sending: "Menghubungkan ke penyedia email...",
-      authenticating: "Mengautentikasi...",
-      sendingArticle: "Mengirim artikel...",
-      creating: "Membuat sumber berita...",
-      saving: "Menyimpan konfigurasi...",
-      finalizing: "Menyelesaikan pengaturan..."
+  "onboarding": {
+    "progress": "Langkah {current} dari {total}",
+    "progressLabel": "Progres penyiapan",
+    "back": "Kembali",
+    "skip": "Lewati langkah ini",
+    "continue": "Lanjutkan",
+    "whyLabel": "Mengapa kami bertanya",
+    "skipLabel": "Jika Anda melewati",
+    "working": "Sedang diproses...",
+    "start": {
+      "title": "Mulai buletin Anda",
+      "opening": "Membuka penyiapan. Jika tidak terjadi apa-apa,",
+      "continueHere": "lanjutkan di sini"
     },
-    errors: {
-      generationFailed: "Pembuatan gagal: ",
-      createFailed: "Gagal membuat sumber berita. Silakan coba lagi.",
-      errorCreating: "Kesalahan membuat sumber berita: ",
-      sendFailed: "Gagal mengirim email: "
+    "tryAgain": "Coba lagi",
+    "website": {
+      "title": "Apa situs web Anda?",
+      "why": "Kami membaca situs Anda untuk menemukan artikel yang akan menjadi bahan buletin, dan untuk menebak siapa pembaca Anda.",
+      "skipNote": "Jika Anda belum punya situs web, pilih topik dan kami akan memakai situs berita tentang topik itu.",
+      "label": "Alamat situs web",
+      "hint": "Misalnya perusahaananda.com atau perusahaananda.com/blog",
+      "placeholder": "perusahaananda.com",
+      "submit": "Lanjutkan",
+      "checking": "Membaca situs Anda...",
+      "noWebsite": "Saya tidak punya situs web",
+      "haveWebsite": "Saya punya situs web",
+      "topicTitle": "Pilih topik",
+      "topicHint": "Kami akan memakai situs berita tentang topik ini sebagai sumber pertama Anda. Anda bisa mengubahnya nanti.",
+      "errors": {
+        "empty": "Masukkan alamat situs web Anda untuk melanjutkan.",
+        "invalid": "Ini tidak terlihat seperti alamat web. Periksa ejaannya, misalnya perusahaananda.com.",
+        "unreachable": "Kami tidak menemukan artikel di halaman ini. Coba halaman blog atau berita Anda, misalnya perusahaananda.com/blog.",
+        "network": "Kami tidak bisa menghubungi server kami. Periksa koneksi Anda dan coba lagi."
+      }
     },
-    defaultSubject: "Pratinjau Buletin Anda yang Dibuat"
-  },
-  step09: {
-    title: "Untuk mengirim artikel dari email Anda",
-    subtitle: "Kata Sandi Aplikasi (Opsional)",
-    description: "(Jika Anda memiliki layanan gmail, letakkan kata sandi aplikasi Anda di sini)",
-    label: "Kata Sandi Aplikasi",
-    placeholder: "Kata Sandi Aplikasi Anda"
-  },
-  step10: {
-    title: "Alamat Gmail (Opsional)",
-    subtitle: "Alamat Email Gmail",
-    description: "Jika Anda ingin mengirim dari alamat Gmail tertentu",
-    placeholder: "email-anda@gmail.com"
-  },
-  step11: {
-    title: "Kirim Email Tes",
-    subtitle: "Kirim email tes ke diri Anda sendiri untuk memverifikasi konfigurasi.",
-    sendNow: "Kirim Sekarang",
-    sent: "Terkirim! Periksa email Anda",
-    loading: {
-      connecting: "Menghubungkan ke penyedia email...",
-      authenticating: "Mengautentikasi...",
-      sending: "Mengirim artikel..."
+    "readers": {
+      "title": "Siapa yang membaca buletin Anda?",
+      "why": "Kami menulis setiap edisi untuk pembaca ini, dalam bahasa ini. Pelanggan yang berbicara bahasa lain mendapat salinan terjemahan mereka sendiri.",
+      "skipNote": "Kami mengisinya dari situs Anda. Ubah apa pun yang terlihat salah.",
+      "languageLabel": "Bahasa utama",
+      "languageHint": "Kami memilihnya dari pengaturan browser Anda.",
+      "readerLabel": "Pembaca ideal Anda",
+      "readerHint": "Satu kalimat sudah cukup. Misalnya: pemilik restoran kecil di Lisbon.",
+      "readerPlaceholder": "Untuk siapa buletin ini?",
+      "errors": {
+        "reader": "Jelaskan pembaca Anda dalam beberapa kata agar kami tahu untuk siapa kami menulis."
+      }
+    },
+    "preview": {
+      "title": "Ini edisi pertama Anda",
+      "why": "Ini email yang akan diterima pelanggan Anda, ditulis dari artikel terbaru Anda. Belum ada yang dikirim.",
+      "generating": "Menulis edisi pertama Anda dari artikel terbaru. Biasanya ini memakan waktu kurang dari semenit.",
+      "inboxFrom": "Dari",
+      "inboxTo": "Kepada",
+      "inboxSubject": "Subjek",
+      "defaultSubject": "Edisi pertama Anda",
+      "sendTest": "Kirimi saya email uji",
+      "sendingTest": "Mengirim...",
+      "testSent": "Email uji dikirim ke {email}. Periksa kotak masuk dan folder spam Anda.",
+      "regenerate": "Tulis ulang",
+      "looksGood": "Sudah bagus, lanjutkan",
+      "skipPreview": "Lanjutkan tanpa pratinjau",
+      "howTitle": "Cara kami menemukan artikel Anda",
+      "howBody": "Kami menyimpan aturan singkat yang memberi tahu kami di mana tautan artikel berada di halaman Anda, sehingga menu dan iklan diabaikan. Anda hanya perlu mengubahnya jika pratinjau mengambil konten yang salah.",
+      "ruleLabel": "Aturan artikel",
+      "findAgain": "Cari artikel lagi",
+      "errors": {
+        "generate": "Kami tidak bisa menulis edisi ini. Halaman mungkin memblokir pembacaan otomatis. Coba lagi, atau kembali dan gunakan halaman blog Anda.",
+        "test": "Email uji tidak terkirim. Coba lagi sebentar lagi."
+      }
+    },
+    "senderName": {
+      "title": "Bagaimana nama Anda tampil di kotak masuk?",
+      "why": "Pelanggan melihat nama ini di samping setiap edisi, jadi mereka mengenalinya dan membukanya.",
+      "skipNote": "Jika Anda melewati ini, pengirim tampil sebagai AIBAN. Anda bisa mengubah nama nanti di Pengaturan.",
+      "label": "Nama pengirim",
+      "hint": "Nama Anda, perusahaan Anda, atau nama buletin. Maksimal 60 karakter.",
+      "placeholder": "Silva Studio",
+      "previewLabel": "Tampilannya di kotak masuk",
+      "previewBody": "Edisi Anda tampil dengan nama pengirim ini. Email dikirim dari alamat pengiriman AIBAN.",
+      "save": "Simpan dan lanjutkan",
+      "errors": {
+        "empty": "Masukkan nama pengirim minimal 2 karakter.",
+        "long": "Nama pengirim maksimal 60 karakter.",
+        "save": "Kami tidak bisa menyimpan nama ini. Coba lagi sebentar lagi."
+      }
+    },
+    "signature": {
+      "title": "Tanda tangan email",
+      "why": "Tanda tangan Anda ada di akhir setiap edisi, sehingga pembaca tahu siapa penulisnya dan cara menghubungi Anda.",
+      "skipNote": "Jika Anda melewati ini, edisi hanya diakhiri dengan nama buletin Anda.",
+      "nameLabel": "Nama Anda",
+      "namePlaceholder": "Ana Silva",
+      "roleLabel": "Jabatan atau perusahaan",
+      "rolePlaceholder": "Pendiri, Silva Studio",
+      "linkLabel": "Tautan",
+      "linkHint": "Situs web atau profil media sosial Anda. Opsional.",
+      "linkPlaceholder": "perusahaananda.com",
+      "previewLabel": "Tampilannya di akhir email",
+      "previewBody": "Terima kasih sudah membaca. Sampai jumpa di edisi berikutnya.",
+      "save": "Simpan tanda tangan",
+      "existingNote": "Anda sudah punya tanda tangan. Menyimpan di sini akan menggantinya."
+    },
+    "schedule": {
+      "title": "Kapan edisi baru dikirim?",
+      "why": "Kami memeriksa situs Anda sebelum setiap pengiriman dan menulis edisi baru dari artikel terbaru.",
+      "skipNote": "Anda bisa mengubah hari dan jam, atau menjeda pengiriman, kapan saja di dasbor.",
+      "scheduleLabel": "Waktu kirim",
+      "frequencyLabel": "Seberapa sering",
+      "daily": "Setiap hari",
+      "weekly": "Setiap minggu",
+      "monthly": "Setiap bulan, pada tanggal 1",
+      "dayLabel": "Hari",
+      "timeLabel": "Jam",
+      "timeHint": "Dalam waktu setempat Anda.",
+      "recipeTitle": "Kirim edisi baru secara otomatis",
+      "recipeBody": "Sesuai jadwal di atas, kami memilih artikel baru terbaik Anda, menulisnya dengan gaya bahasa Anda, menerjemahkannya untuk setiap pembaca, lalu mengirimkannya lewat email.",
+      "recipeOn": "Aktif",
+      "recipeOff": "Nonaktif. Edisi hanya dikirim saat Anda menekan Kirim.",
+      "save": "Simpan dan lanjutkan",
+      "saving": "Menyimpan buletin Anda...",
+      "errors": {
+        "create": "Kami tidak bisa menyimpan buletin Anda. Coba lagi sebentar lagi.",
+        "limit": "Paket Anda tidak mengizinkan sumber lain. Untuk menambahkannya, tulis kepada kami dan kami akan mengubah paket Anda."
+      }
+    },
+    "send": {
+      "title": "Kirim edisi pertama Anda",
+      "why": "Mengirim sekarang menunjukkan alur lengkapnya: edisi Anda tiba di kotak masuk sungguhan, dalam bahasa pembaca.",
+      "skipNote": "Jika Anda melewati ini, edisi pertama dikirim pada jadwal Anda.",
+      "youAreSubscribed": "Anda sudah berlangganan sebagai {email}.",
+      "othersLabel": "Undang orang lain (opsional)",
+      "othersHint": "Tempelkan alamat email yang dipisahkan koma atau baris baru. Setiap orang mendapat undangan pribadi dari Anda. Mereka hanya menerima edisi jika menerima undangan, dan kami menghapus undangan yang tidak diterima setelah 30 hari.",
+      "othersPlaceholder": "ana@example.com, li@example.com",
+      "sendNow": "Kirim sekarang",
+      "sending": "Mengirim edisi pertama Anda...",
+      "sentTitle": "Edisi pertama Anda sedang dikirim",
+      "sentBody": "Edisi dikirim ke semua orang di daftar Anda yang sudah mengonfirmasi langganan. Mungkin perlu beberapa menit sampai tiba.",
+      "invited": "Undangan dikirim ke {count} orang. Mereka bergabung ke daftar Anda setelah menerima.",
+      "invitesUnavailable": "Undangan belum tersedia, jadi kami tidak menyimpan alamat-alamat ini. Di langkah berikutnya, salin tautan pendaftaran Anda dan kirimkan sendiri kepada mereka.",
+      "continue": "Lanjutkan",
+      "errors": {
+        "invalidEmails": "Alamat berikut terlihat salah: {list}. Perbaiki atau hapus.",
+        "add": "Kami tidak bisa mengundang: {list}. Coba lagi nanti dari Pelanggan.",
+        "send": "Edisi tidak terkirim. Coba lagi sebentar lagi."
+      }
+    },
+    "share": {
+      "title": "Dapatkan pelanggan pertama Anda",
+      "why": "Orang yang mendaftar di sini menerima setiap edisi dalam bahasa mereka sendiri.",
+      "skipNote": "Anda bisa menemukan tautan ini dan kode sematnya nanti di Pelanggan, pada bagian Formulir pendaftaran.",
+      "linkLabel": "Halaman pendaftaran",
+      "linkHint": "Bagikan di media sosial, di footer email, atau di kode QR.",
+      "embedLabel": "Formulir pendaftaran untuk situs web Anda",
+      "embedHint": "Tempelkan kode ini di tempat Anda ingin formulir muncul di situs Anda.",
+      "copy": "Salin",
+      "copied": "Disalin",
+      "open": "Buka halaman pendaftaran"
+    },
+    "done": {
+      "title": "Buletin Anda sudah siap",
+      "why": "Berikut yang terjadi selanjutnya dan apa yang masih perlu dilakukan.",
+      "planLine": "Paket saat ini: {plan}",
+      "changePlan": "Lihat paket",
+      "toDashboard": "Ke dasbor",
+      "summarySource": "Sumber: {url}",
+      "summarySchedule": "Jadwal: {schedule}",
+      "summaryAutomation": "Pengiriman otomatis: {state}",
+      "on": "aktif",
+      "off": "nonaktif"
     }
   },
-  step12: {
-    title: "Bagikan buletin ini dengan pengikut Anda",
-    subtitle: "Tautan ke corong langganan (sebelum mereka mulai menerima email, mereka harus menerima undangan Anda)",
-    copy: "Salin",
-    copied: "Tautan disalin!"
+  "tutorial": {
+    "checklistTitle": "Memulai",
+    "checklistProgress": "{done} dari {total} selesai",
+    "checklistDone": "Semua siap. Buletin Anda sekarang berjalan sendiri.",
+    "dismiss": "Sembunyikan daftar periksa",
+    "doneLabel": "selesai",
+    "todoLabel": "belum",
+    "show": "Tampilkan panduan memulai",
+    "items": {
+      "source": {
+        "title": "Tambahkan asal konten Anda",
+        "body": "Situs web atau blog yang kami periksa untuk artikel baru."
+      },
+      "sender": {
+        "title": "Pilih nama pengirim Anda",
+        "body": "Nama yang dilihat pelanggan di samping setiap edisi."
+      },
+      "subscriber": {
+        "title": "Dapatkan pelanggan pertama Anda",
+        "body": "Seseorang selain Anda mendaftar atau ditambahkan."
+      },
+      "send": {
+        "title": "Kirim edisi pertama Anda",
+        "body": "Satu edisi nyata sampai ke orang-orang di daftar Anda."
+      },
+      "automation": {
+        "title": "Aktifkan pengiriman otomatis",
+        "body": "Edisi baru dikirim sesuai jadwal Anda."
+      },
+      "widget": {
+        "title": "Tambahkan formulir pendaftaran ke situs Anda",
+        "body": "Pengunjung bisa berlangganan tanpa meninggalkan situs Anda."
+      }
+    },
+    "open": "Buka",
+    "tour": {
+      "start": "Ikuti tur singkat",
+      "next": "Berikutnya",
+      "back": "Kembali",
+      "skip": "Lewati tur",
+      "finish": "Selesai",
+      "stepOf": "{current} dari {total}"
+    },
+    "help": {
+      "whatIsThis": "Apa ini?",
+      "whyItMatters": "Mengapa ini penting",
+      "close": "Tutup"
+    }
   },
-  step13: {
-    title: "Rencana & Batas",
-    currentPlan: "Rencana Saat Ini:",
-    limits: "Batas:",
-    unknown: "Tidak Diketahui",
-    changePlan: "Ubah Rencana",
-    advancedFeatures: "Butuh fitur lebih canggih?",
-    developerText: "Lihat bagian pengembang kami untuk mengintegrasikan corong langganan buletin ini di server Anda, blog dari semua artikel yang Anda buat, dan berlangganan pengguna dari basis kode Anda dengan Kunci API kami.",
-    dashboardBtn: "Pergi ke Dasbor",
-    usage: "Penggunaan:",
-    limitDetails: {
-      free: "Batas 100 pengguna",
-      starter: "5 sumber, 100rb pengguna",
-      growth: "17 sumber, 250rb pengguna",
-      pro: "25 sumber, 500rb pengguna",
-      master: "50 sumber, pengguna tak terbatas",
-      vipfree: "VIP Gratis"
+  "auth": {
+    "emailLabel": "Alamat email",
+    "emailHint": "Kami mengirim kode 6 digit ke alamat ini. Anda tidak memerlukan sandi.",
+    "codeTitle": "Periksa email Anda",
+    "codeSentTo": "Kami mengirim kode 6 digit ke {email}.",
+    "codeHint": "Kode bisa butuh semenit untuk tiba. Periksa juga folder spam Anda.",
+    "changeEmail": "Gunakan email lain",
+    "resend": "Kirim kode baru",
+    "resendIn": "Anda bisa meminta kode baru dalam {seconds} detik",
+    "resendLimit": "Jika kode masih belum tiba, tulis kepada kami dari halaman Bantuan dan kami akan membantu menyelesaikannya.",
+    "resent": "Kami sudah mengirim kode baru.",
+    "verifying": "Memeriksa kode Anda...",
+    "errors": {
+      "email": "Masukkan alamat email lengkap, misalnya anda@perusahaan.com.",
+      "send": "Kami tidak bisa mengirim kode. Periksa koneksi Anda dan coba lagi.",
+      "code": "Kode itu tidak berhasil. Periksa 6 digitnya atau minta kode baru."
     }
   }
 };

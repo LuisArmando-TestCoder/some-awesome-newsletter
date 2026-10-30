@@ -38,6 +38,20 @@ export interface PlansState {
   content: PlansContent | null;
 }
 
+/**
+ * Billing providers are off (Luis decision, 2026-10-30). Plans stay on each account's config,
+ * new accounts start on the free plan, and the team changes plans by hand. Owners who need more
+ * write to this address. Same address as the help, about and legal pages.
+ */
+export const SUPPORT_EMAIL = 'info@aiban.news';
+
+/** mailto link an owner uses to ask for a plan change. */
+export function planChangeMailto(accountEmail?: string | null, subject = 'Plan change request'): string {
+  const body = accountEmail ? `Account email: ${accountEmail}\n\nThe plan I would like:\n` : '';
+  const q = `subject=${encodeURIComponent(subject)}` + (body ? `&body=${encodeURIComponent(body)}` : '');
+  return `mailto:${SUPPORT_EMAIL}?${q}`;
+}
+
 const ANNUAL_DISCOUNT = 0.35;
 const calcAnnual = (monthly: number) => Math.floor((monthly * 12) * (1 - ANNUAL_DISCOUNT));
 
@@ -59,7 +73,8 @@ export function computeFeatures(content: PlansContent, target: PlanId): string[]
 }
 
 const initial: PlansState = {
-  mockMode: !import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY,
+  // Billing providers are off (Luis, 2026-10-30). Plans are set by hand.
+  mockMode: true,
   interval: 'monthly',
   currentPlan: 'free',
   content: null

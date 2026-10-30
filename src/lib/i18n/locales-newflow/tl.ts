@@ -1,139 +1,243 @@
+// tl strings for locales-newflow. English (en.ts) is the source. Key order and shape follow en.ts.
+// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale tl
 export default {
-  step01: {
-    title: "Ang AI na parang tao ay awtomatikong nagsusulat ng mga newsletter para sa iyong mga subscriber",
-    subtitle: "Gaano kadalas, piliin ang <u>bawat buwan</u> o <u>bawat linggo</u> o <u>bawat araw</u> o <u>anong oras</u>"
-  },
-  step02: {
-    title: "Wika ng newsletter",
-    subtitle: "“ipapadala rin ang iyong newsletter sa partikular na wika ng bawat user kung magkaiba sila”"
-  },
-  step03: {
-    title: "I-redirect (Opsyonal)",
-    subtitle: "Gusto mo bang i-redirect ang user sa iyong pahina?",
-    description: "Maaari mong i-paste ang isang link sa iyong pahina dito, bibilangin namin kung ilan ang pumasok mula sa mga email na ginawa ng AI",
-    placeholder: "https://iyong-pahina.com"
-  },
-  step04: {
-    title: "Uri ng balita na gusto mong piliin ng AI",
-    subtitle: "Aling tema ng pag-uusap o paksa (hinuhulaan mula sa link ng pag-redirect kung nakatakda, kung hindi ay blangko)",
-    placeholder: "hal. Artificial Intelligence, Marketing, Kalusugan..."
-  },
-  step05: {
-    title: "I-customize ang Iyong Lagda",
-    subtitle: "Magdisenyo nang biswal o direktang i-edit ang code",
-    visualEditor: "Visual Editor",
-    htmlSource: "HTML Source",
-    livePreview: "Live Preview",
-    yourName: "Iyong Pangalan",
-    yourTitle: "Iyong Titulo",
-    facebookProfile: "Facebook Profile",
-    instagramProfile: "Instagram Profile",
-    editHtml: "Direktang i-edit ang HTML...",
-    warning: "⚠️ Ang mga pag-edit na ginawa dito ay mapapatungan kung babalik ka sa Visual Editor at gumawa ng mga pagbabago."
-  },
-  step06: {
-    title: "Pinagmulan ng Balita",
-    subtitle: "Aling website ng balita ang gusto mong gamitin?",
-    description: "Maglagay ng URL o hayaan kaming pumili ng isa para sa iyo batay sa iyong paksa.",
-    descriptionSmall: "Susuriin namin ang website upang mahanap ang pinakamahusay na nilalaman. Maaaring tumagal ito ng ilang segundo.",
-    placeholder: "https://halimbawa.com",
-    analyzing: "Sinusuri...",
-    next: "Susunod",
-    errors: {
-      failedToGenerate: "Nabigo ang pagbuo ng selector. Pakisubukan muli o tingnan ang URL.",
-      errorGenerating: "Nagkaroon ng error habang bumubuo ng selector.",
-      invalidUrl: "Mangyaring maglagay ng valid na URL o pumili ng pinagmulan."
-    }
-  },
-  step07: {
-    title: "Selector ng Nilalaman",
-    subtitle: "Isipin ang bawat website bilang isang <strong>aklatan na may natatanging layout</strong>.",
-    explanation1: "Ang <strong>'Selector'</strong> na ito ay ang partikular na mapa na ginawa namin para sa website na ito. Sinasabi nito sa aming system kung saan eksaktong titingin upang kunin ang mga artikulong gusto mo, habang binabalewala ang mga pindutan ng menu at mga patalastas.",
-    explanation2: "<strong>Awtomatiko naming pinunan ang mapang ito para sa iyo.</strong>",
-    placeholder: "Selector string...",
-    regenerate: "Bumuo Muli ng Selector",
-    regenerating: "Bumubuo muli...",
-    errors: {
-      noUrl: "Walang URL ng pinagmulan ng balita na natagpuan.",
-      failedRegenerate: "Nabigo ang pagbuo muli ng selector.",
-      errorRegenerate: "Nagkaroon ng error habang bumubuo muli ng selector."
-    }
-  },
-  step08: {
-    title: "Silipin",
-    placeholder: "Handa na bang bumuo ng iyong unang newsletter?",
-    generateBtn: "Bumuo ng Newsletter Email",
-    sentBtn: "Naipadala na! Tingnan ang iyong email",
-    sendTestBtn: "Magpadala ng Test Email",
-    regenerateBtn: "Bumuo Muli",
-    loading: {
-      initializing: "Nagsisimula...",
-      starting: "Nagsisimula ang pagbuo...",
-      scraping: "Kinukuha ang nilalaman...",
-      translating: "Isinasalin ang artikulo...",
-      formatting: "Pina-format ang email...",
-      sending: "Kumokonekta sa email provider...",
-      authenticating: "Nagpapatunay...",
-      sendingArticle: "Ipinapadala ang artikulo...",
-      creating: "Lumilikha ng pinagmulan ng balita...",
-      saving: "Sine-save ang configuration...",
-      finalizing: "Tinatapos ang pag-set up..."
+  "onboarding": {
+    "progress": "Hakbang {current} ng {total}",
+    "progressLabel": "Progreso ng setup",
+    "back": "Bumalik",
+    "skip": "Laktawan ang hakbang na ito",
+    "continue": "Magpatuloy",
+    "whyLabel": "Bakit namin ito tinatanong",
+    "skipLabel": "Kung lalaktawan mo",
+    "working": "Pinoproseso...",
+    "start": {
+      "title": "Simulan ang newsletter mo",
+      "opening": "Binubuksan ang setup. Kung walang mangyari,",
+      "continueHere": "magpatuloy dito"
     },
-    errors: {
-      generationFailed: "Nabigo ang pagbuo: ",
-      createFailed: "Nabigo ang paglikha ng pinagmulan ng balita. Pakisubukan muli.",
-      errorCreating: "Error sa paglikha ng pinagmulan ng balita: ",
-      sendFailed: "Nabigo ang pagpapadala ng email: "
+    "tryAgain": "Subukan ulit",
+    "website": {
+      "title": "Ano ang website mo?",
+      "why": "Binabasa namin ang site mo para mahanap ang mga artikulong pagbabatayan ng newsletter mo, at para mahulaan kung sino ang mga mambabasa mo.",
+      "skipNote": "Kung wala ka pang website, pumili ng paksa at gagamit kami ng news site tungkol dito.",
+      "label": "Address ng website",
+      "hint": "Halimbawa: kumpanyamo.com o kumpanyamo.com/blog",
+      "placeholder": "kumpanyamo.com",
+      "submit": "Magpatuloy",
+      "checking": "Binabasa ang site mo...",
+      "noWebsite": "Wala akong website",
+      "haveWebsite": "May website ako",
+      "topicTitle": "Pumili ng paksa",
+      "topicHint": "Gagamit kami ng news site tungkol sa paksang ito bilang unang source mo. Puwede mo itong palitan mamaya.",
+      "errors": {
+        "empty": "Ilagay ang address ng website mo para makapagpatuloy.",
+        "invalid": "Mukhang hindi ito web address. Tingnan ang spelling, halimbawa kumpanyamo.com.",
+        "unreachable": "Wala kaming nahanap na artikulo sa pahinang ito. Subukan ang blog o news page mo, halimbawa kumpanyamo.com/blog.",
+        "network": "Hindi namin maabot ang mga server namin. Tingnan ang koneksyon mo at subukan ulit."
+      }
     },
-    defaultSubject: "Ang Iyong Nabuo na Newsletter Preview"
-  },
-  step09: {
-    title: "Upang ipadala ang artikulo mula sa iyong email",
-    subtitle: "App Password (Opsyonal)",
-    description: "(Kung mayroon kang mga serbisyo ng gmail, ilagay ang iyong app password dito)",
-    label: "App Password",
-    placeholder: "Iyong App Password"
-  },
-  step10: {
-    title: "Gmail Address (Opsyonal)",
-    subtitle: "Gmail Email Address",
-    description: "Kung gusto mong magpadala mula sa isang partikular na Gmail address",
-    placeholder: "iyong-email@gmail.com"
-  },
-  step11: {
-    title: "Magpadala ng Test Email",
-    subtitle: "Magpadala ng test email sa iyong sarili upang i-verify ang configuration.",
-    sendNow: "Ipadala Ngayon",
-    sent: "Naipadala na! Tingnan ang iyong email",
-    loading: {
-      connecting: "Kumokonekta sa email provider...",
-      authenticating: "Nagpapatunay...",
-      sending: "Ipinapadala ang artikulo..."
+    "readers": {
+      "title": "Sino ang nagbabasa ng newsletter mo?",
+      "why": "Isinusulat namin ang bawat isyu para sa mambabasang ito, at sa wikang ito. May sariling isinaling kopya ang mga subscriber na ibang wika ang gamit.",
+      "skipNote": "Pinunan namin ang mga ito mula sa site mo. Baguhin ang anumang mukhang mali.",
+      "languageLabel": "Pangunahing wika",
+      "languageHint": "Pinili namin ito mula sa settings ng browser mo.",
+      "readerLabel": "Ang ideal mong mambabasa",
+      "readerHint": "Sapat na ang isang pangungusap. Halimbawa: mga may-ari ng maliit na restaurant sa Lisbon.",
+      "readerPlaceholder": "Para kanino ang newsletter na ito?",
+      "errors": {
+        "reader": "Ilarawan ang mambabasa mo sa ilang salita para malaman namin kung para kanino kami susulat."
+      }
+    },
+    "preview": {
+      "title": "Ito ang unang isyu mo",
+      "why": "Ito ang email na matatanggap ng mga subscriber mo, isinulat mula sa pinakabago mong artikulo. Wala pang naipapadala.",
+      "generating": "Isinusulat ang unang isyu mo mula sa pinakabago mong artikulo. Karaniwang wala pang isang minuto ito.",
+      "inboxFrom": "Mula kay",
+      "inboxTo": "Para kay",
+      "inboxSubject": "Subject",
+      "defaultSubject": "Ang unang isyu mo",
+      "sendTest": "Padalhan ako ng test",
+      "sendingTest": "Ipinapadala...",
+      "testSent": "Naipadala ang test sa {email}. Tingnan ang inbox at spam folder mo.",
+      "regenerate": "Isulat ulit",
+      "looksGood": "Maayos na, magpatuloy",
+      "skipPreview": "Magpatuloy nang walang preview",
+      "howTitle": "Paano namin hinahanap ang mga artikulo mo",
+      "howBody": "Nag-save kami ng maikling panuntunan na nagsasabi kung nasaan ang mga link ng artikulo sa pahina mo, kaya hindi pinapansin ang mga menu at ad. Kailangan mo lang itong baguhin kung maling content ang napili ng preview.",
+      "ruleLabel": "Panuntunan sa artikulo",
+      "findAgain": "Hanapin ulit ang mga artikulo",
+      "errors": {
+        "generate": "Hindi namin maisulat ang isyu. Maaaring hinaharangan ng pahina ang awtomatikong pagbasa. Subukan ulit, o bumalik at gamitin ang blog page mo.",
+        "test": "Hindi naipadala ang test email. Subukan ulit maya-maya."
+      }
+    },
+    "senderName": {
+      "title": "Paano dapat lumabas ang pangalan mo sa inbox?",
+      "why": "Nakikita ng mga subscriber ang pangalang ito sa tabi ng bawat isyu, kaya nakikilala nila ito at binubuksan.",
+      "skipNote": "Kung lalaktawan mo, AIBAN ang lalabas na sender. Puwede mong palitan ang pangalan mamaya sa Settings.",
+      "label": "Pangalan ng sender",
+      "hint": "Ang pangalan mo, ng kumpanya mo, o ng newsletter. Hanggang 60 character.",
+      "placeholder": "Silva Studio",
+      "previewLabel": "Ganito ang itsura nito sa inbox",
+      "previewBody": "Lalabas ang isyu mo na may ganitong pangalan ng sender. Ipinapadala ito mula sa sending address ng AIBAN.",
+      "save": "I-save at magpatuloy",
+      "errors": {
+        "empty": "Maglagay ng pangalan ng sender na may hindi bababa sa 2 character.",
+        "long": "Hanggang 60 character lang ang pangalan ng sender.",
+        "save": "Hindi namin ma-save ang pangalan. Subukan ulit maya-maya."
+      }
+    },
+    "signature": {
+      "title": "Pirma sa email",
+      "why": "Nasa dulo ng bawat isyu ang signature mo, para malaman ng mga mambabasa kung sino ang sumulat at paano ka makokontak.",
+      "skipNote": "Kung lalaktawan mo, pangalan lang ng newsletter mo ang nasa dulo ng mga isyu.",
+      "nameLabel": "Ang pangalan mo",
+      "namePlaceholder": "Ana Silva",
+      "roleLabel": "Posisyon o kumpanya",
+      "rolePlaceholder": "Founder, Silva Studio",
+      "linkLabel": "Link",
+      "linkHint": "Ang website mo o isang social profile. Opsyonal.",
+      "linkPlaceholder": "kumpanyamo.com",
+      "previewLabel": "Ganito ang itsura nito sa dulo ng email",
+      "previewBody": "Salamat sa pagbabasa. Kita tayo sa susunod na isyu.",
+      "save": "I-save ang signature",
+      "existingNote": "May signature ka na. Papalitan ito kapag nag-save ka rito."
+    },
+    "schedule": {
+      "title": "Kailan dapat ipadala ang mga bagong isyu?",
+      "why": "Sinusuri namin ang site mo bago ang bawat pagpapadala at sumusulat ng bagong isyu mula sa mga pinakabagong artikulo.",
+      "skipNote": "Puwede mong baguhin ang araw at oras, o i-pause ang pagpapadala, anumang oras sa dashboard.",
+      "scheduleLabel": "Oras ng pagpapadala",
+      "frequencyLabel": "Gaano kadalas",
+      "daily": "Araw-araw",
+      "weekly": "Linggo-linggo",
+      "monthly": "Buwan-buwan, tuwing ika-1",
+      "dayLabel": "Araw",
+      "timeLabel": "Oras",
+      "timeHint": "Sa lokal mong oras.",
+      "recipeTitle": "Awtomatikong ipadala ang mga bagong isyu",
+      "recipeBody": "Ayon sa iskedyul sa itaas, pipiliin namin ang pinakamahusay mong bagong artikulo, isusulat ito sa boses mo, isasalin para sa bawat mambabasa, at ipapadala sa email.",
+      "recipeOn": "Naka-on",
+      "recipeOff": "Naka-off. Naipapadala lang ang mga isyu kapag pinindot mo ang Ipadala.",
+      "save": "I-save at magpatuloy",
+      "saving": "Sine-save ang newsletter mo...",
+      "errors": {
+        "create": "Hindi namin ma-save ang newsletter mo. Subukan ulit maya-maya.",
+        "limit": "Hindi pinapayagan ng plan mo ang isa pang source. Para magdagdag, sumulat sa amin at papalitan namin ang plan mo."
+      }
+    },
+    "send": {
+      "title": "Ipadala ang unang isyu mo",
+      "why": "Kapag nagpadala ka ngayon, makikita mo ang buong proseso: darating ang isyu mo sa totoong inbox, sa wika ng mambabasa.",
+      "skipNote": "Kung lalaktawan mo, ipapadala ang unang isyu sa nakaiskedyul mong oras.",
+      "youAreSubscribed": "Naka-subscribe ka na bilang {email}.",
+      "othersLabel": "Mag-imbita ng ibang tao (opsyonal)",
+      "othersHint": "Mag-paste ng mga email address na pinaghihiwalay ng kuwit o bagong linya. Makakatanggap ang bawat tao ng personal na imbitasyon mula sa iyo. Makakatanggap lang sila ng mga isyu kung tatanggapin nila ito, at binubura namin ang mga imbitasyong hindi tinanggap pagkalipas ng 30 araw.",
+      "othersPlaceholder": "ana@example.com, li@example.com",
+      "sendNow": "Ipadala ngayon",
+      "sending": "Ipinapadala ang unang isyu mo...",
+      "sentTitle": "Papunta na ang unang isyu mo",
+      "sentBody": "Ipapadala ito sa lahat ng nasa listahan mo na nakumpirma na ang subscription. Maaaring ilang minuto bago ito dumating.",
+      "invited": "Naipadala ang imbitasyon sa {count} tao. Sasali sila sa listahan mo kapag tinanggap nila ito.",
+      "invitesUnavailable": "Hindi pa available ang mga imbitasyon, kaya hindi namin na-save ang mga address na ito. Sa susunod na hakbang, kopyahin ang signup link mo at ipadala ito sa kanila mismo.",
+      "continue": "Magpatuloy",
+      "errors": {
+        "invalidEmails": "Mukhang mali ang mga address na ito: {list}. Ayusin o tanggalin ang mga ito.",
+        "add": "Hindi namin maimbitahan ang: {list}. Subukan ulit mamaya mula sa Mga subscriber.",
+        "send": "Hindi naipadala ang isyu. Subukan ulit maya-maya."
+      }
+    },
+    "share": {
+      "title": "Kunin ang mga unang subscriber mo",
+      "why": "Natatanggap ng mga nag-sign up dito ang bawat isyu sa sarili nilang wika.",
+      "skipNote": "Makikita mo ulit ang link na ito at ang embed code sa Mga subscriber, sa ilalim ng Signup form.",
+      "linkLabel": "Pahina ng pag-sign up",
+      "linkHint": "Ibahagi ito sa social media, sa footer ng email mo, o sa isang QR code.",
+      "embedLabel": "Signup form para sa website mo",
+      "embedHint": "I-paste ang code na ito kung saan mo gustong lumabas ang form sa site mo.",
+      "copy": "Kopyahin",
+      "copied": "Nakopya",
+      "open": "Buksan ang signup page"
+    },
+    "done": {
+      "title": "Naka-set up na ang newsletter mo",
+      "why": "Ito ang susunod na mangyayari at ang natitira pang gagawin.",
+      "planLine": "Kasalukuyang plan: {plan}",
+      "changePlan": "Tingnan ang mga plan",
+      "toDashboard": "Pumunta sa dashboard",
+      "summarySource": "Source: {url}",
+      "summarySchedule": "Iskedyul: {schedule}",
+      "summaryAutomation": "Awtomatikong pagpapadala: {state}",
+      "on": "naka-on",
+      "off": "naka-off"
     }
   },
-  step12: {
-    title: "Ibahagi ang newsletter na ito sa iyong mga tagasunod",
-    subtitle: "Link sa subscription funnel (bago sila magsimulang makatanggap ng email, kailangan nilang tanggapin ang iyong imbitasyon)",
-    copy: "Kopyahin",
-    copied: "Nakopya na ang link!"
+  "tutorial": {
+    "checklistTitle": "Magsimula",
+    "checklistProgress": "{done} sa {total} ang tapos na",
+    "checklistDone": "Handa na ang lahat. Kusa nang tumatakbo ang newsletter mo.",
+    "dismiss": "Itago ang checklist",
+    "doneLabel": "tapos na",
+    "todoLabel": "gagawin",
+    "show": "Ipakita ang gabay sa pagsisimula",
+    "items": {
+      "source": {
+        "title": "Idagdag kung saan galing ang content mo",
+        "body": "Website o blog na sinusuri namin para sa mga bagong artikulo."
+      },
+      "sender": {
+        "title": "Piliin ang pangalan ng sender mo",
+        "body": "Ang pangalang nakikita ng mga subscriber sa tabi ng bawat isyu."
+      },
+      "subscriber": {
+        "title": "Kunin ang unang subscriber mo",
+        "body": "May ibang tao bukod sa iyo na nag-sign up o naidagdag."
+      },
+      "send": {
+        "title": "Ipadala ang unang isyu mo",
+        "body": "May isang totoong isyu na makakarating sa mga tao sa listahan mo."
+      },
+      "automation": {
+        "title": "I-on ang awtomatikong pagpapadala",
+        "body": "Ipinapadala ang mga bagong isyu ayon sa iskedyul mo."
+      },
+      "widget": {
+        "title": "Idagdag ang signup form sa site mo",
+        "body": "Makakapag-subscribe ang mga bisita nang hindi umaalis sa site mo."
+      }
+    },
+    "open": "Buksan",
+    "tour": {
+      "start": "Mabilisang tour",
+      "next": "Susunod",
+      "back": "Bumalik",
+      "skip": "Laktawan ang tour",
+      "finish": "Tapusin",
+      "stepOf": "{current} ng {total}"
+    },
+    "help": {
+      "whatIsThis": "Ano ito?",
+      "whyItMatters": "Bakit ito mahalaga",
+      "close": "Isara"
+    }
   },
-  step13: {
-    title: "Plano at Mga Limitasyon",
-    currentPlan: "Kasalukuyang Plano:",
-    limits: "Mga Limitasyon:",
-    unknown: "Hindi alam",
-    changePlan: "Baguhin ang Plano",
-    advancedFeatures: "Kailangan ng mas advanced na mga tampok?",
-    developerText: "Tingnan ang aming seksyon ng developer upang isama ang newsletter subscription funnel na ito sa iyong server, isang blog ng lahat ng iyong nabuong artikulo, at pag-subscribe sa mga user mula sa iyong codebase gamit ang aming API Key.",
-    dashboardBtn: "Pumunta sa Dashboard",
-    usage: "Paggamit:",
-    limitDetails: {
-      free: "Limitasyon na 100 user",
-      starter: "5 pinagmulan, 100k user",
-      growth: "17 pinagmulan, 250k user",
-      pro: "25 pinagmulan, 500k user",
-      master: "50 pinagmulan, walang limitasyong user",
-      vipfree: "VIP Libre"
+  "auth": {
+    "emailLabel": "Address ng email",
+    "emailHint": "Magpapadala kami ng 6 na digit na code sa address na ito. Hindi mo kailangan ng password.",
+    "codeTitle": "Tingnan ang email mo",
+    "codeSentTo": "Nagpadala kami ng 6 na digit na code sa {email}.",
+    "codeHint": "Maaaring isang minuto bago dumating ang code. Tingnan din ang spam folder mo.",
+    "changeEmail": "Gumamit ng ibang email",
+    "resend": "Magpadala ng bagong code",
+    "resendIn": "Puwede kang humingi ng bagong code sa loob ng {seconds} s",
+    "resendLimit": "Kung hindi pa rin dumarating ang code, sumulat sa amin mula sa Help page at aayusin namin ito.",
+    "resent": "Nagpadala kami ng bagong code.",
+    "verifying": "Sinusuri ang code mo...",
+    "errors": {
+      "email": "Maglagay ng buong email address, halimbawa ikaw@kumpanya.com.",
+      "send": "Hindi namin maipadala ang code. Tingnan ang koneksyon mo at subukan ulit.",
+      "code": "Hindi gumana ang code na iyon. Tingnan ang 6 na digit o humingi ng bagong code."
     }
   }
 };

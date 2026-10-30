@@ -1,45 +1,39 @@
 import { get } from "svelte/store";
-import store, { saveToConfig } from "../../store.js"; // Add .js extension
-import type { NewsSource } from "../../types.js"; // Add .js extension
-import getAuthHeaders from "./getAuthHeaders.js";
+import store from "../../store";
+import { request, seg } from "$lib/api/client";
+import { newsSourceEnvelope } from "$lib/api/schemas";
+import { replaceNewsSourceInStore } from "./_internal";
 
-// Adjust signature: make newsSourceId optional, broaden updateData type
+/**
+ * Update one news source. Returns the updated source, or null on failure
+ * (callers check the return value). `updateNewsSourceOrThrow` throws ApiError.
+ */
 export default async function updateNewsSource(
-  updateData: { [index: string]: string | boolean | null }, // Allow boolean/null for 'active' and optional fields
-  newsSourceId?: string // Make id optional to match expected callback
+  updateData: { [index: string]: string | boolean | null },
+  newsSourceId?: string
 ) {
-  console.log("[updateNewsSource.ts] updateData:", updateData);
-  const configId = get(store).configuratorEmail;
-  // Ensure newsSourceId is provided, otherwise throw error or handle appropriately
-  if (!newsSourceId) {
-    console.error("Error: newsSourceId is required for updating.");
-    return null; // Or throw new Error("newsSourceId is required");
-  }
-  const response = await fetch(
-    `${get(store).apiURL()}/news-source/${configId}/${newsSourceId}`,
-    {
-      method: "PUT",
-      headers: getAuthHeaders(),
-      body: JSON.stringify(updateData),
-    }
-  );
-
-  if (!response.ok) {
-    console.error("Error updating news source");
+  try {
+    return await updateNewsSourceOrThrow(updateData, newsSourceId);
+  } catch (e) {
+    console.error("[updateNewsSource] Update failed", e);
     return null;
   }
+}
 
-  const json = await response.json();
-  console.log("[updateNewsSource.ts] Response from server:", JSON.stringify(json, null, 2));
-
-  // Replace the existing news source with the updated one
-  const currentSources = get(store).config.newsSources || [];
-  const updatedSources = currentSources.map((source: NewsSource) =>
-    source.id === json?.newsSource.id ? json?.newsSource : source
-  );
-  saveToConfig({
-    newsSources: updatedSources,
+export async function updateNewsSourceOrThrow(
+  updateData: { [index: string]: unknown },
+  newsSourceId?: string
+) {
+  if (!newsSourceId) throw new Error("Choose a source first.");
+  const configId = get(store).configuratorEmail;
+  const json = await request(`/news-source/${seg(configId)}/${seg(newsSourceId)}`, {
+    method: "PUT",
+    body: updateData,
+    idempotent: true,
+    retries: 1,
+    schema: newsSourceEnvelope,
+    errorMessage: "We could not save this source. Try again.",
   });
-
-  return json?.newsSource;
+  await replaceNewsSourceInStore(json.newsSource as any);
+  return json.newsSource as any;
 }

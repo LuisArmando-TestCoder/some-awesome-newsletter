@@ -1,139 +1,243 @@
+// sw strings for locales-newflow. English (en.ts) is the source. Key order and shape follow en.ts.
+// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale sw
 export default {
-  step01: {
-    title: "AI inayosikika kama binadamu huandika barua za habari kwa wanaokufuatilia kiotomatiki",
-    subtitle: "Mara ngapi, chagua <u>kila mwezi</u> au <u>kila wiki</u> au <u>kila siku</u> au <u>saa ngapi</u>"
-  },
-  step02: {
-    title: "Lugha ya barua ya habari",
-    subtitle: "“barua yako ya habari pia itatumwa katika lugha mahususi ya kila mtumiaji ikiwa ni tofauti”"
-  },
-  step03: {
-    title: "Elekeza upya (Si lazima)",
-    subtitle: "Je, unataka kumwelekeza mtumiaji kwenye ukurasa wako?",
-    description: "Unaweza kubandika kiungo cha ukurasa wako hapa, tutahesabu wangapi wanaingia kutoka kwa barua pepe zinazoundwa na AI",
-    placeholder: "https://ukurasa-wako.com"
-  },
-  step04: {
-    title: "Aina ya habari unayotaka AI ichague",
-    subtitle: "Ni mada gani ya mazungumzo au mada (inayotolewa kutoka kwa kiungo cha kuelekeza upya ikiwa imewekwa, vinginevyo tupu)",
-    placeholder: "mfano. Akili Bandia, Masoko, Afya..."
-  },
-  step05: {
-    title: "Binafsisha Sahihi Yako",
-    subtitle: "Buni kwa kuona au hariri msimbo moja kwa moja",
-    visualEditor: "Mhariri wa Kuona",
-    htmlSource: "Chanzo cha HTML",
-    livePreview: "Onyesho la Moja kwa Moja",
-    yourName: "Jina Lako",
-    yourTitle: "Cheo Chako",
-    facebookProfile: "Wasifu wa Facebook",
-    instagramProfile: "Wasifu wa Instagram",
-    editHtml: "Hariri HTML moja kwa moja...",
-    warning: "⚠️ Marekebisho yaliyofanywa hapa yatafutwa ukirudi kwenye Mhariri wa Kuona na kufanya mabadiliko."
-  },
-  step06: {
-    title: "Chanzo cha Habari",
-    subtitle: "Unataka kutumia tovuti gani ya habari?",
-    description: "Weka URL au uturuhusu tukuchagulie moja kulingana na mada yako.",
-    descriptionSmall: "Tutachambua tovuti ili kupata maudhui bora. Hii inaweza kuchukua sekunde chache.",
-    placeholder: "https://mfano.com",
-    analyzing: "Inachambua...",
-    next: "Ijayo",
-    errors: {
-      failedToGenerate: "Imeshindwa kuzalisha kiteuzi. Tafadhali jaribu tena au angalia URL.",
-      errorGenerating: "Hitilafu imetokea wakati wa kuzalisha kiteuzi.",
-      invalidUrl: "Tafadhali weka URL halali au chagua chanzo."
-    }
-  },
-  step07: {
-    title: "Kiteuzi cha Maudhui",
-    subtitle: "Fikiria kila tovuti kama <strong>maktaba yenye mpangilio wa kipekee</strong>.",
-    explanation1: "<strong>'Kiteuzi'</strong> hiki ni ramani maalum tuliyounda kwa ajili ya tovuti hii. Inauambia mfumo wetu mahali hasa pa kutafuta ili kuchukua makala unayotaka, huku ikipuuza vitufe vya menyu na matangazo.",
-    explanation2: "<strong>Tumekujazia ramani hii kiotomatiki.</strong>",
-    placeholder: "Kamba ya kiteuzi...",
-    regenerate: "Zalisha Upya Kiteuzi",
-    regenerating: "Inazalisha upya...",
-    errors: {
-      noUrl: "URL ya chanzo cha habari haikupatikana.",
-      failedRegenerate: "Imeshindwa kuzalisha upya kiteuzi.",
-      errorRegenerate: "Hitilafu imetokea wakati wa kuzalisha upya kiteuzi."
-    }
-  },
-  step08: {
-    title: "Onyesho la awali",
-    placeholder: "Je, uko tayari kuzalisha barua yako ya kwanza ya habari?",
-    generateBtn: "Zalisha Barua pepe ya Habari",
-    sentBtn: "Imetumwa! Angalia barua pepe yako",
-    sendTestBtn: "Tuma Barua pepe ya Jaribio",
-    regenerateBtn: "Zalisha Upya",
-    loading: {
-      initializing: "Inaanza...",
-      starting: "Inaanza kuzalisha...",
-      scraping: "Inakusanya maudhui...",
-      translating: "Inatafsiri makala...",
-      formatting: "Inapanga barua pepe...",
-      sending: "inaunganisha kwa mtoa huduma wa barua pepe...",
-      authenticating: "Inathibitisha...",
-      sendingArticle: "Inatuma makala...",
-      creating: "Inatengeneza chanzo cha habari...",
-      saving: "Inahifadhi usanidi...",
-      finalizing: "Inakamilisha usanidi..."
+  "onboarding": {
+    "progress": "Hatua {current} kati ya {total}",
+    "progressLabel": "Maendeleo ya mipangilio",
+    "back": "Rudi",
+    "skip": "Ruka hatua hii",
+    "continue": "Endelea",
+    "whyLabel": "Kwa nini tunauliza",
+    "skipLabel": "Ukiruka",
+    "working": "Inashughulikia...",
+    "start": {
+      "title": "Anzisha jarida lako",
+      "opening": "Inafungua mipangilio. Kama hakuna kinachotokea,",
+      "continueHere": "endelea hapa"
     },
-    errors: {
-      generationFailed: "Uzalishaji umeshindwa: ",
-      createFailed: "Imeshindwa kuunda chanzo cha habari. Tafadhali jaribu tena.",
-      errorCreating: "Hitilafu katika kuunda chanzo cha habari: ",
-      sendFailed: "Imeshindwa kutuma barua pepe: "
+    "tryAgain": "Jaribu tena",
+    "website": {
+      "title": "Tovuti yako ni ipi?",
+      "why": "Tunasoma tovuti yako ili kupata makala ambazo jarida lako litajengwa kutoka kwazo, na ili kukisia wasomaji wako ni akina nani.",
+      "skipNote": "Kama bado huna tovuti, chagua mada na tutatumia tovuti ya habari kuhusu mada hiyo.",
+      "label": "Anwani ya tovuti",
+      "hint": "Kwa mfano kampuniyako.com au kampuniyako.com/blog",
+      "placeholder": "kampuniyako.com",
+      "submit": "Endelea",
+      "checking": "Inasoma tovuti yako...",
+      "noWebsite": "Sina tovuti",
+      "haveWebsite": "Nina tovuti",
+      "topicTitle": "Chagua mada",
+      "topicHint": "Tutatumia tovuti ya habari kuhusu mada hii kama chanzo chako cha kwanza. Unaweza kuibadilisha baadaye.",
+      "errors": {
+        "empty": "Weka anwani ya tovuti yako ili kuendelea.",
+        "invalid": "Hii haionekani kuwa anwani ya tovuti. Angalia tahajia, kwa mfano kampuniyako.com.",
+        "unreachable": "Hatukupata makala kwenye ukurasa huu. Jaribu ukurasa wa blogu au habari, kwa mfano kampuniyako.com/blog.",
+        "network": "Hatukuweza kufikia seva zetu. Angalia muunganisho wako na ujaribu tena."
+      }
     },
-    defaultSubject: "Onyesho la awali la Barua yako ya Habari Iliyozalishwa"
-  },
-  step09: {
-    title: "Kutuma makala kutoka kwa barua pepe yako",
-    subtitle: "Nenosiri la Programu (Si lazima)",
-    description: "(Ikiwa una huduma za gmail, weka nenosiri lako la programu hapa)",
-    label: "Nenosiri la Programu",
-    placeholder: "Nenosiri Lako la Programu"
-  },
-  step10: {
-    title: "Anwani ya Gmail (Si lazima)",
-    subtitle: "Anwani ya Barua pepe ya Gmail",
-    description: "Ikiwa unataka kutuma kutoka kwa anwani maalum ya Gmail",
-    placeholder: "barua-pepe-yako@gmail.com"
-  },
-  step11: {
-    title: "Tuma Barua pepe ya Jaribio",
-    subtitle: "Jitumie barua pepe ya jaribio ili kuthibitisha usanidi.",
-    sendNow: "Tuma Sasa",
-    sent: "Imetumwa! Angalia barua pepe yako",
-    loading: {
-      connecting: "Inaunganisha kwa mtoa huduma wa barua pepe...",
-      authenticating: "Inathibitisha...",
-      sending: "Inatuma makala..."
+    "readers": {
+      "title": "Nani anasoma jarida lako?",
+      "why": "Tunaandika kila toleo kwa ajili ya msomaji huyu, na kwa lugha hii. Waliojisajili wanaozungumza lugha nyingine hupata nakala yao iliyotafsiriwa.",
+      "skipNote": "Tumejaza haya kutoka kwa tovuti yako. Badilisha chochote kinachoonekana si sahihi.",
+      "languageLabel": "Lugha kuu",
+      "languageHint": "Tumechagua hii kutoka kwa mipangilio ya kivinjari chako.",
+      "readerLabel": "Msomaji wako bora",
+      "readerHint": "Sentensi moja inatosha. Kwa mfano: wamiliki wa migahawa midogo jijini Lisbon.",
+      "readerPlaceholder": "Jarida hili ni kwa ajili ya nani?",
+      "errors": {
+        "reader": "Eleza msomaji wako kwa maneno machache ili tujue tunamwandikia nani."
+      }
+    },
+    "preview": {
+      "title": "Hili ndilo toleo lako la kwanza",
+      "why": "Hii ndiyo barua pepe ambayo waliojisajili kwako watapokea, iliyoandikwa kutoka kwa makala yako mpya zaidi. Bado hakuna kilichotumwa.",
+      "generating": "Inaandika toleo lako la kwanza kutoka kwa makala yako mpya zaidi. Kwa kawaida huchukua chini ya dakika moja.",
+      "inboxFrom": "Kutoka",
+      "inboxTo": "Kwa",
+      "inboxSubject": "Mada",
+      "defaultSubject": "Toleo lako la kwanza",
+      "sendTest": "Nitumie jaribio",
+      "sendingTest": "Inatuma...",
+      "testSent": "Jaribio limetumwa kwa {email}. Angalia kikasha chako na folda ya barua taka.",
+      "regenerate": "Liandike tena",
+      "looksGood": "Liko sawa, endelea",
+      "skipPreview": "Endelea bila onyesho",
+      "howTitle": "Jinsi tunavyopata makala zako",
+      "howBody": "Tumehifadhi kanuni fupi inayotuonyesha viungo vya makala viko wapi kwenye ukurasa wako, kwa hiyo menyu na matangazo hupuuzwa. Unahitaji kuibadilisha tu kama onyesho limechagua maudhui yasiyo sahihi.",
+      "ruleLabel": "Kanuni ya makala",
+      "findAgain": "Tafuta makala tena",
+      "errors": {
+        "generate": "Hatukuweza kuandika toleo. Huenda ukurasa unazuia usomaji wa kiotomatiki. Jaribu tena, au rudi nyuma na utumie ukurasa wako wa blogu.",
+        "test": "Barua pepe ya jaribio haikutumwa. Jaribu tena baada ya muda mfupi."
+      }
+    },
+    "senderName": {
+      "title": "Jina lako lionekane vipi kwenye kikasha?",
+      "why": "Waliojisajili huona jina hili kando ya kila toleo, kwa hiyo wanalitambua na kulifungua.",
+      "skipNote": "Ukiruka, mtumaji ataonekana kama AIBAN. Unaweza kubadilisha jina baadaye katika Mipangilio.",
+      "label": "Jina la mtumaji",
+      "hint": "Jina lako, la kampuni yako, au la jarida. Hadi herufi 60.",
+      "placeholder": "Silva Studio",
+      "previewLabel": "Jinsi linavyoonekana kwenye kikasha",
+      "previewBody": "Toleo lako linaonekana na jina hili la mtumaji. Linatumwa kutoka kwa anwani ya kutuma ya AIBAN.",
+      "save": "Hifadhi na uendelee",
+      "errors": {
+        "empty": "Weka jina la mtumaji lenye angalau herufi 2.",
+        "long": "Jina la mtumaji lisizidi herufi 60.",
+        "save": "Hatukuweza kuhifadhi jina. Jaribu tena baada ya muda mfupi."
+      }
+    },
+    "signature": {
+      "title": "Sahihi ya barua pepe",
+      "why": "Sahihi yako huwekwa mwishoni mwa kila toleo, ili wasomaji wajue nani aliliandika na jinsi ya kukufikia.",
+      "skipNote": "Ukiruka, matoleo yataishia na jina la jarida lako pekee.",
+      "nameLabel": "Jina lako",
+      "namePlaceholder": "Ana Silva",
+      "roleLabel": "Cheo au kampuni",
+      "rolePlaceholder": "Mwanzilishi, Silva Studio",
+      "linkLabel": "Kiungo",
+      "linkHint": "Tovuti yako au wasifu wa mitandao ya kijamii. Si lazima.",
+      "linkPlaceholder": "kampuniyako.com",
+      "previewLabel": "Jinsi inavyoonekana mwishoni mwa barua pepe",
+      "previewBody": "Asante kwa kusoma. Tuonane kwenye toleo lijalo.",
+      "save": "Hifadhi sahihi",
+      "existingNote": "Tayari una sahihi. Ukihifadhi hapa, itabadilishwa."
+    },
+    "schedule": {
+      "title": "Matoleo mapya yatumwe lini?",
+      "why": "Tunakagua tovuti yako kabla ya kila utumaji na kuandika toleo jipya kutoka kwa makala mpya zaidi.",
+      "skipNote": "Unaweza kubadilisha siku na saa, au kusitisha utumaji, wakati wowote kwenye dashibodi.",
+      "scheduleLabel": "Muda wa kutuma",
+      "frequencyLabel": "Mara ngapi",
+      "daily": "Kila siku",
+      "weekly": "Kila wiki",
+      "monthly": "Kila mwezi, tarehe 1",
+      "dayLabel": "Siku",
+      "timeLabel": "Saa",
+      "timeHint": "Kwa saa za eneo lako.",
+      "recipeTitle": "Tuma matoleo mapya kiotomatiki",
+      "recipeBody": "Kwa ratiba iliyo hapo juu, tunachagua makala yako mpya iliyo bora zaidi, tunaiandika kwa sauti yako, tunaitafsiri kwa kila msomaji, na kuituma kwa barua pepe.",
+      "recipeOn": "Imewashwa",
+      "recipeOff": "Imezimwa. Matoleo hutumwa tu unapobonyeza Tuma.",
+      "save": "Hifadhi na uendelee",
+      "saving": "Inahifadhi jarida lako...",
+      "errors": {
+        "create": "Hatukuweza kuhifadhi jarida lako. Jaribu tena baada ya muda mfupi.",
+        "limit": "Mpango wako hauruhusu chanzo kingine. Ili kuongeza, tuandikie na tutabadilisha mpango wako."
+      }
+    },
+    "send": {
+      "title": "Tuma toleo lako la kwanza",
+      "why": "Kutuma sasa kunakuonyesha njia nzima: toleo lako linafika kwenye kikasha halisi, kwa lugha ya msomaji.",
+      "skipNote": "Ukiruka, toleo la kwanza litatumwa kwa wakati uliopangwa.",
+      "youAreSubscribed": "Tayari umejisajili kama {email}.",
+      "othersLabel": "Alika watu (si lazima)",
+      "othersHint": "Bandika anwani za barua pepe zilizotenganishwa kwa koma au mistari mipya. Kila mtu atapokea mwaliko binafsi kutoka kwako. Watapokea matoleo tu wakikubali, na tunafuta mialiko ambayo hakuna aliyeikubali baada ya siku 30.",
+      "othersPlaceholder": "ana@example.com, li@example.com",
+      "sendNow": "Tuma sasa",
+      "sending": "Inatuma toleo lako la kwanza...",
+      "sentTitle": "Toleo lako la kwanza liko njiani",
+      "sentBody": "Linaenda kwa kila mtu kwenye orodha yako aliyethibitisha usajili wake. Linaweza kuchukua dakika chache kufika.",
+      "invited": "Mialiko imetumwa kwa watu {count}. Watajiunga na orodha yako wakikubali.",
+      "invitesUnavailable": "Mialiko bado haipatikani, kwa hiyo hatukuhifadhi anwani hizi. Katika hatua inayofuata, nakili kiungo chako cha kujisajili na uwatumie wewe mwenyewe.",
+      "continue": "Endelea",
+      "errors": {
+        "invalidEmails": "Anwani hizi zinaonekana si sahihi: {list}. Zirekebishe au uziondoe.",
+        "add": "Hatukuweza kualika: {list}. Jaribu tena baadaye kutoka Waliojisajili.",
+        "send": "Toleo halikutumwa. Jaribu tena baada ya muda mfupi."
+      }
+    },
+    "share": {
+      "title": "Pata waliojisajili wako wa kwanza",
+      "why": "Watu wanaojisajili hapa hupata kila toleo kwa lugha yao.",
+      "skipNote": "Unaweza kupata kiungo hiki na msimbo wa kupachika baadaye katika Waliojisajili, chini ya Fomu ya kujisajili.",
+      "linkLabel": "Ukurasa wa kujisajili",
+      "linkHint": "Kishiriki kwenye mitandao ya kijamii, kwenye sehemu ya chini ya barua pepe yako, au kwenye msimbo wa QR.",
+      "embedLabel": "Fomu ya kujisajili kwa tovuti yako",
+      "embedHint": "Bandika msimbo huu mahali unapotaka fomu ionekane kwenye tovuti yako.",
+      "copy": "Nakili",
+      "copied": "Imenakiliwa",
+      "open": "Fungua ukurasa wa kujisajili"
+    },
+    "done": {
+      "title": "Jarida lako limewekwa",
+      "why": "Hiki ndicho kitakachofuata na kilichobaki kufanya.",
+      "planLine": "Mpango wa sasa: {plan}",
+      "changePlan": "Ona mipango",
+      "toDashboard": "Nenda kwenye dashibodi",
+      "summarySource": "Chanzo: {url}",
+      "summarySchedule": "Ratiba: {schedule}",
+      "summaryAutomation": "Kutuma kiotomatiki: {state}",
+      "on": "imewashwa",
+      "off": "imezimwa"
     }
   },
-  step12: {
-    title: "Shiriki barua hii ya habari na wafuasi wako",
-    subtitle: "Kiungo cha faneli ya usajili (kabla ya kuanza kupokea barua pepe, watalazimika kukubali mwaliko wako)",
-    copy: "Nakili",
-    copied: "Kiungo kimenakiliwa!"
+  "tutorial": {
+    "checklistTitle": "Anza",
+    "checklistProgress": "{done} kati ya {total} zimekamilika",
+    "checklistDone": "Kila kitu kiko tayari. Jarida lako sasa linajiendesha lenyewe.",
+    "dismiss": "Ficha orodha ya kukagua",
+    "doneLabel": "imekamilika",
+    "todoLabel": "ya kufanya",
+    "show": "Onyesha mwongozo wa kuanza",
+    "items": {
+      "source": {
+        "title": "Ongeza maudhui yako yanapotoka",
+        "body": "Tovuti au blogu tunayoikagua kwa makala mpya."
+      },
+      "sender": {
+        "title": "Chagua jina lako la mtumaji",
+        "body": "Jina ambalo waliojisajili huona kando ya kila toleo."
+      },
+      "subscriber": {
+        "title": "Pata aliyejisajili wa kwanza",
+        "body": "Mtu mwingine zaidi yako anajisajili au anaongezwa."
+      },
+      "send": {
+        "title": "Tuma toleo lako la kwanza",
+        "body": "Toleo moja halisi linawafikia watu walio kwenye orodha yako."
+      },
+      "automation": {
+        "title": "Washa kutuma kiotomatiki",
+        "body": "Matoleo mapya hutumwa kwa ratiba yako."
+      },
+      "widget": {
+        "title": "Ongeza fomu ya kujisajili kwenye tovuti yako",
+        "body": "Wageni wanaweza kujisajili bila kuondoka kwenye tovuti yako."
+      }
+    },
+    "open": "Fungua",
+    "tour": {
+      "start": "Ziara fupi",
+      "next": "Inayofuata",
+      "back": "Rudi",
+      "skip": "Ruka ziara",
+      "finish": "Maliza",
+      "stepOf": "{current} kati ya {total}"
+    },
+    "help": {
+      "whatIsThis": "Hiki ni nini?",
+      "whyItMatters": "Kwa nini ni muhimu",
+      "close": "Funga"
+    }
   },
-  step13: {
-    title: "Mpango na Vizuizi",
-    currentPlan: "Mpango wa Sasa:",
-    limits: "Vizuizi:",
-    unknown: "Haijulikani",
-    changePlan: "Badilisha Mpango",
-    advancedFeatures: "Unahitaji vipengele vya juu zaidi?",
-    developerText: "Angalia sehemu yetu ya wasanidi programu ili kuunganisha faneli hii ya usajili wa barua za habari kwenye seva yako, blogu ya makala zako zote zilizozalishwa, na kusajili watumiaji kutoka kwa msingi wako wa msimbo na Ufunguo wetu wa API.",
-    dashboardBtn: "Nenda kwenye Dashibodi",
-    usage: "Matumizi:",
-    limitDetails: {
-      free: "Kikomo cha watumiaji 100",
-      starter: "Vyanzo 5, watumiaji 100k",
-      growth: "Vyanzo 17, watumiaji 250k",
-      pro: "Vyanzo 25, watumiaji 500k",
-      master: "Vyanzo 50, watumiaji wasio na kikomo",
-      vipfree: "VIP Bure"
+  "auth": {
+    "emailLabel": "Anwani ya barua pepe",
+    "emailHint": "Tutatuma msimbo wa tarakimu 6 kwa anwani hii. Huhitaji nenosiri.",
+    "codeTitle": "Angalia barua pepe yako",
+    "codeSentTo": "Tumetuma msimbo wa tarakimu 6 kwa {email}.",
+    "codeHint": "Msimbo unaweza kuchukua dakika moja kufika. Angalia pia folda ya barua taka.",
+    "changeEmail": "Tumia barua pepe nyingine",
+    "resend": "Tuma msimbo mpya",
+    "resendIn": "Unaweza kuomba msimbo mpya baada ya sekunde {seconds}",
+    "resendLimit": "Kama msimbo bado haujafika, tuandikie kutoka ukurasa wa Msaada na tutalishughulikia.",
+    "resent": "Tumetuma msimbo mpya.",
+    "verifying": "Inakagua msimbo wako...",
+    "errors": {
+      "email": "Weka anwani kamili ya barua pepe, kwa mfano wewe@kampuni.com.",
+      "send": "Hatukuweza kutuma msimbo. Angalia muunganisho wako na ujaribu tena.",
+      "code": "Msimbo huo haukufanya kazi. Angalia tarakimu 6 au omba msimbo mpya."
     }
   }
 };

@@ -1,21 +1,11 @@
-import { get } from "svelte/store";
-import store from "../../store";
-import getAuthHeaders from "./getAuthHeaders";
+import { request } from "$lib/api/client";
 
-export default async function subscribeNewsletterUser(
-  configId: string,
-  newsSourceId: string,
-  email: string
-) {
-  const response = await fetch(`${get(store).apiURL()}/subscribe`, {
-    method: "POST",
-    headers: getAuthHeaders(),
-    body: JSON.stringify({
-      configId,
-      newsSourceId,
-      email,
-    }),
-  });
-
-  return response.ok;
+/** Subscribe an existing user to a news source. Returns true on success. */
+export default async function subscribeNewsletterUser(configId: string, newsSourceId: string, email: string) {
+  try {
+    await request("/subscribe", { method: "POST", body: { configId, newsSourceId, email } });
+    return true;
+  } catch {
+    return false;
+  }
 }

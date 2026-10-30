@@ -1,0 +1,10 @@
+# WS6 plan
+
+1. API client in `src/lib/api/`: `config` (one base URL from `PUBLIC_API_URL`, fallback by host), `credentials` (SSR-safe), `errors` (`ApiError` with status, code, user message following COPY_RULES), `client` (`request<T>()` with timeout, retries with backoff for GET/HEAD/PUT-idempotent, AbortSignal, zod schema option, NDJSON streaming helper), `schemas`.
+2. Re-implement every file in `src/components/systems/requests/` on the client. Keep each export name, signature and failure contract the callers rely on (see `ws6-callers.md`). Drop `given_name`/`picture` headers. Fix `getPublicConfig` (public-config-info) and `getUsersFromRawFileOrText` (newsSourceId, NDJSON). Dead modules stay, rewritten as wrappers, until WS10 confirms; then `_deprecated/`.
+3. State: stop writing auth values to cookies and expire existing ones; SSR guards; `saveStatus` store and debounced, coalesced `saveToConfig`; `optimisticToggle` helper with rollback; break the store/updateConfiguration cycle with a lazy import; `useConfigurator` without the leaked interval.
+4. Socket: `src/lib/api/socket.ts` typed client (reconnect with backoff, re-register on reconnect, `automation:run` and `log` events, disconnect on logout, one instance). `SocketClient.svelte` becomes a thin mount.
+5. New product helpers in `src/lib/api/` plus stores in `src/lib/stores/`: automations (AUTOMATIONS.md v1), activity feed, onboarding checklist, usage vs plan limits, import progress, preview rendering, billing portal. Each falls back when the endpoint returns 404 or is missing.
+6. Server: `src/hooks.server.ts` (security headers, no-store for private routes), CSP in report-only mode via `kit.csp`, hardened Polar portal (POST, verified identity), checkout allow-list, webhook idempotency and forwarding, subscribe proxy without THE_PASS, help loader without mock data.
+7. Tooling: `npm run check` with zero errors in WS6 files; vitest for client and stores (request to WS1 for the devDependency).
+8. Docs: `API_CONTRACT.md`, log, summary, requests to WS3/WS4/WS5/WS7.

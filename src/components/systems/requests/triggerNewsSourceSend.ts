@@ -1,63 +1,29 @@
 import { get } from "svelte/store";
-import store, { globalLanguage } from "../../store.js"; // Add .js extension
-import type { Store } from "../../types.js"; // Import Store type from types.ts
-import getAuthHeaders from "./getAuthHeaders.js";
+import store from "../../store";
+import { request, seg } from "$lib/api/client";
+import { toUserMessage } from "$lib/api/errors";
 
+/**
+ * Send the newsletter for one news source now.
+ * Contract kept for existing callers: returns `true` on success and a user
+ * facing message string on failure (callers check `typeof r === "boolean" && r`).
+ * The backend answers after the whole send finishes, so the timeout is long.
+ */
 export default async function triggerNewsSourceSend(newsSourceId: string): Promise<boolean> {
-  // Cast the store value to the imported type
-  const storeValue = get(store) as Store; // Use the imported Store type
-  const configId = storeValue.configuratorEmail;
-  const apiURL = storeValue.apiURL();
-  const authCode = storeValue.authCode;
+  const { configuratorEmail: configId, authCode } = get(store);
 
-  if (!newsSourceId) {
-    console.error("Error: newsSourceId is required to trigger send.");
-    // Optionally, notify the user via a toast or alert
-    return false;
-  }
-
-  if (!configId || !authCode) {
-    console.error("Error: Missing configuration ID or authentication code.");
-    // Optionally, notify the user
-    return false;
-  }
-
-  const url = `${apiURL}/news-source/${configId}/${newsSourceId}/trigger`;
+  if (!newsSourceId) return "Choose a source first." as unknown as boolean;
+  if (!configId || !authCode) return "Your session has ended. Sign in again to continue." as unknown as boolean;
 
   try {
-    const response = await fetch(url, {
+    await request(`/news-source/${seg(configId)}/${seg(newsSourceId)}/trigger`, {
       method: "POST",
-      headers: getAuthHeaders(),
-      // No body is needed for this trigger endpoint
+      timeoutMs: 5 * 60_000,
+      retries: 0,
+      errorMessage: "We could not send this newsletter. Try again in a few minutes.",
     });
-
-    if (!response.ok) {
-      // Log detailed error if possible
-      const errorBody = await response.text();
-      // Log the error body for debugging, but don't prevent throwing
-      console.error(`Error triggering news source send (${response.status}): ${errorBody}`);
-      // Throw an error object that includes the response details
-      const error: any = new Error(`HTTP error! status: ${response.status}`);
-      error.response = response; // Attach the full response
-      throw JSON.parse(errorBody).message; // Throw the error so the calling component can catch it
-    }
-
-    // Backend returns 202 Accepted on success
-    console.log(
-      `Successfully initiated send for news source ${newsSourceId}. Status: ${response.status}`
-    );
-    // Optionally, show a success message to the user
-    return true; // Indicate success
-  } catch (error: any) { // Added type annotation
-    // Check if it's the specific error we threw with the response attached
-    if (error && error.response) {
-      console.error("Re-throwing HTTP error from triggerNewsSourceSend:", error);
-      throw error; // Re-throw the error with response details
-    } else {
-      // Handle genuine network errors or other unexpected issues
-      console.error("Network or other error triggering news source send:", error);
-      // Optionally, show a user-friendly error message for network issues
-      return error; // Return false only for non-HTTP errors caught here
-    }
+    return true;
+  } catch (error) {
+    return toUserMessage(error, "We could not send this newsletter. Try again in a few minutes.") as unknown as boolean;
   }
 }

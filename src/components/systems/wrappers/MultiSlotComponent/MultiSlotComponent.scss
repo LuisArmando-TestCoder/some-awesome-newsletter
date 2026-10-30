@@ -2,6 +2,7 @@
   position: relative;
   overflow: hidden;
   height: 100vh;
+  height: 100dvh;
 
   &--component-slot {
     transition: 0.75s cubic-bezier(0.35, 0.23, 0.54, 1);
@@ -23,6 +24,10 @@
       padding: 25px;
       transform: translate(0, 0px);
       box-sizing: border-box;
+      /* Tall steps (email preview, Gmail guide) scroll inside the slot instead of being cut off. */
+      max-height: 100%;
+      overflow-y: auto;
+      overscroll-behavior: contain;
     }
 
     &.collapsed {
@@ -39,5 +44,12 @@
         transform: translate(0px, 0);
       }
     }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .multi-slot-component--component-slot {
+    transition: opacity 0.15s linear;
+    transform: none !important;
   }
 }

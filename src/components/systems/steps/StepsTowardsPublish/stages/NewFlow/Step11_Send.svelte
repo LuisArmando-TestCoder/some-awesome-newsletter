@@ -1,148 +1,117 @@
 <script lang="ts">
-  import { fly } from 'svelte/transition';
-  import { quadOut } from 'svelte/easing';
-  import Centered from "../../../../wrappers/Centered/Centered.svelte";
-  import SubmitButton from "../../../../buttons/SubmitButton/SubmitButton.svelte";
-  import store, { saveToStore } from "../../../../../store";
-  import LoadingScreen from "../../../../loading/LoadingScreen.svelte";
-  import { t } from "$lib/i18n/newflow-translations";
+  // Onboarding slot 4: send the first real issue. The owner was subscribed when the
+  // source was created. People typed in here are invited, never subscribed directly.
+  import store from "../../../../../store";
+  import { refreshSubscribers } from "../H_Dashboard/Users/UserDataService";
+  import OnboardingShell from "./OnboardingShell.svelte";
+  import { ob, fmt } from "$lib/tutorial/copy";
+  import { onboarding, updateOnboarding, trackOnboardingEvent } from "$lib/tutorial/onboardingState";
+  import { nextStep } from "./nav";
+  import { parseEmailList } from "./infer";
+  import { inviteContacts, sendHtml, triggerSend } from "./onboardingApi";
 
   export let canReveal = false;
+  const INDEX = 4;
 
-  $: $t;
+  let others = "";
+  let sending = false;
+  let error = "";
+  let warning = "";
+  let info = "";
+  let sentCount = 0;
 
-  let isSending = false;
-  let isSent = false;
+  $: owner = $store.configuratorEmail || "";
+  $: alreadySent = !!$onboarding.firstSendAt;
 
-  async function handleSend() {
-    isSending = true;
-    
-    // Simulate sending delay
-    setTimeout(() => {
-      isSending = false;
-      isSent = true;
-    }, 2500);
-  }
+  async function send() {
+    error = "";
+    warning = "";
+    info = "";
+    const id = $onboarding.newsSourceId;
+    const { valid, invalid } = parseEmailList(others);
+    if (invalid.length) {
+      error = fmt($ob.send.errors.invalidEmails, { list: invalid.join(", ") });
+      return;
+    }
+    sending = true;
+    try {
+      const toInvite = valid.filter((e) => e.toLowerCase() !== owner.toLowerCase());
+      const added: string[] = [];
+      if (toInvite.length) {
+        const result = await inviteContacts(id, toInvite, $onboarding.language || "en");
+        if (result.status === "unavailable") {
+          warning = $ob.send.invitesUnavailable;
+        } else {
+          added.push(...result.invited);
+          if (result.invited.length) info = fmt($ob.send.invited, { count: result.invited.length });
+          if (result.failed.length) warning = fmt($ob.send.errors.add, { list: result.failed.join(", ") });
+        }
+      }
 
-  function handleNext() {
-    saveToStore({ stepsIndex: $store.stepsIndex + 1 });
+      try {
+        await triggerSend(id);
+      } catch (e) {
+        // The trigger can refuse (rate limit, no new article). The preview is still a real
+        // issue, so deliver it to the owner, who is subscriber number one.
+        console.warn("[onboarding/send] trigger failed, sending preview to owner", e);
+        if (!$onboarding.previewHtml) throw e;
+        await sendHtml($onboarding.previewHtml, $onboarding.previewSubject || $ob.preview.defaultSubject, $store.config ?? {}, [owner]);
+      }
+      sentCount = 1;
+      // "first_issue_delivered" (STRATEGY.md activation) needs a confirmed non-owner subscriber and
+      // delivery data from the backend, so the client records only that the first send happened.
+      trackOnboardingEvent("first_issue_sent");
+      // Only the date is kept locally. Invited addresses are never stored in the browser.
+      updateOnboarding({ firstSendAt: new Date().toISOString() });
+      others = "";
+      refreshSubscribers().catch(() => {});
+    } catch (e) {
+      console.error("[onboarding/send]", e);
+      error = $ob.send.errors.send;
+    } finally {
+      sending = false;
+    }
   }
 </script>
 
-{#if isSending}
-  <LoadingScreen messages={[$t.step11.loading.connecting, $t.step11.loading.authenticating, $t.step11.loading.sending]} />
-{/if}
-
-<Centered>
-  <div class="step-container">
-    {#if canReveal}
-      <div class="header-group" in:fly={{ y: 20, duration: 800, easing: quadOut }}>
-        <h1 class="impact-statement">
-          {$t.step11.title}
-        </h1>
-      </div>
-
-      <div class="input-group" in:fly={{ y: 20, duration: 800, delay: 150, easing: quadOut }}>
-        <p class="subtitle">
-          {$t.step11.subtitle}
-        </p>
-        <div class="input-wrapper">
-          <button class="send-btn" on:click={handleSend}>
-            {isSent ? $t.step11.sent : $t.step11.sendNow}
-          </button>
-        </div>
-      </div>
-
-      {#if isSent}
-        <div class="submit-wrapper" in:fly={{ y: 10, duration: 800, delay: 300, easing: quadOut }}>
-          <SubmitButton callback={handleNext} />
-        </div>
-      {/if}
-    {/if}
-  </div>
-</Centered>
+<OnboardingShell
+  {canReveal}
+  index={INDEX}
+  title={alreadySent ? $ob.send.sentTitle : $ob.send.title}
+  why={alreadySent ? fmt($ob.send.sentBody, { count: Math.max(sentCount, 1) }) : $ob.send.why}
+  skipNote={alreadySent ? "" : $ob.send.skipNote}
+  primaryLabel={alreadySent ? $ob.send.continue : $ob.send.sendNow}
+  onPrimary={alreadySent ? nextStep : send}
+  loading={sending}
+  loadingLabel={$ob.send.sending}
+  optional={!alreadySent}
+  onSkip={nextStep}
+>
+  {#if !alreadySent}
+    <p class="ob-success">{fmt($ob.send.youAreSubscribed, { email: owner })}</p>
+    <div class="ob-field">
+      <label class="ob-label" for="ob-send-others">{$ob.send.othersLabel}</label>
+      <textarea
+        id="ob-send-others"
+        class="ob-textarea"
+        rows="3"
+        placeholder={$ob.send.othersPlaceholder}
+        bind:value={others}
+        aria-describedby="ob-send-others-hint"
+      ></textarea>
+      <p class="ob-hint" id="ob-send-others-hint">{$ob.send.othersHint}</p>
+    </div>
+  {:else}
+    <div class="sent" role="status">
+      <svg viewBox="0 0 24 24" width="40" height="40" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="var(--success-soft, #ebfbee)" /><path d="M7 12.5l3 3 7-7" fill="none" stroke="var(--success, #2b8a3e)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+      <p>{fmt($ob.send.youAreSubscribed, { email: owner })}</p>
+    </div>
+  {/if}
+  {#if info}<p class="ob-success" role="status">{info}</p>{/if}
+  {#if warning}<p class="ob-hint" role="status">{warning}</p>{/if}
+  {#if error}<p class="ob-error" role="alert">{error}</p>{/if}
+</OnboardingShell>
 
 <style lang="scss">
-  .step-container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 700px;
-    margin: 0 auto;
-    padding: 1rem 0;
-    gap: 2rem;
-  }
-
-  .header-group { text-align: center; }
-
-  .impact-statement {
-    /* Responsive sizing: slightly larger/bolder than the previous subtitle */
-    font-size: clamp(1.5rem, 5vw, 2rem);
-    font-weight: 800;
-    line-height: 1.2;
-    margin: 0;
-    text-align: center; /* Default center */
-    letter-spacing: -0.03em;
-    text-wrap: balance;
-
-    /* Infinite Shimmer Effect: 
-       Creates a living, "forever" feel using a moving gradient background.
-    */
-    background: linear-gradient(
-      120deg, 
-      var(--c-primary, #2563eb) 0%, 
-      var(--c-primary-light, #60a5fa) 50%, 
-      var(--c-primary, #2563eb) 100%
-    );
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    
-    animation: shine 4s linear infinite;
-  }
-
-  @keyframes shine {
-    to {
-      background-position: 200% center;
-    }
-  }
-
-  .input-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .subtitle {
-    font-size: 0.9rem;
-    color: #666;
-    margin: 0 0 0.5rem 0;
-    font-style: italic;
-  }
-
-  .input-wrapper {
-    /* Transparent */
-    padding: 1rem 0;
-  }
-
-  .send-btn {
-    align-self: flex-start;
-    padding: 0.8rem 2rem;
-    background: #28a745;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.2s;
-    
-    &:hover { background: #218838; }
-  }
-
-  .submit-wrapper {
-    display: flex;
-    justify-content: flex-end;
-    padding-top: 1rem;
-  }
+  .sent { display: flex; gap: var(--space-3, 12px); align-items: center; p { margin: 0; color: var(--text-2, #4a5058); } }
 </style>

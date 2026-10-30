@@ -1,41 +1,94 @@
+// Shared field styles for legacy inputs (Email, Link, Number, PlainText).
+// Imported inside each component's <style>, so Svelte scopes these rules per component.
+// Tokens only. See src/styles/tokens.scss.
+
 .input-label {
-  margin-bottom: 0.5rem;
-  color: var(--color-foreground);
-  font-size: 1rem;
+  display: block;
+  margin-bottom: var(--space-2);
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-snug);
+  color: var(--text-1);
 }
 
-input {
+.required-mark {
+  margin-left: var(--space-1);
+  color: var(--danger);
+}
+
+.input-hint {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-normal);
+  color: var(--text-2);
+}
+
+input,
+textarea {
   width: 100%;
   box-sizing: border-box;
-  background: var(--color-background-inversion);
-  border: 2px solid transparent;
-  border-radius: 12px;
-  box-shadow: 0 2px 16px 0 rgba(0,0,0,0.07);
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  color: var(--color-background);
+  min-height: var(--control-h);
+  padding: 0 var(--control-pad-x);
+  background: var(--surface-1);
+  border: 1px solid var(--border-2);
+  border-radius: var(--radius-md);
+  box-shadow: none;
+  font-family: var(--font-body);
+  font-size: var(--fs-md);
+  line-height: var(--lh-normal);
+  color: var(--text-1);
   transition:
-    border 0.3s cubic-bezier(0.4,0,0.2,1),
-    box-shadow 0.3s cubic-bezier(0.4,0,0.2,1);
+    border-color var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out);
+}
+
+textarea {
+  padding: var(--space-3) var(--control-pad-x);
+  resize: vertical;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-3);
+  opacity: 1;
+}
+
+input:hover:not(:disabled):not(:focus),
+textarea:hover:not(:disabled):not(:focus) {
+  border-color: var(--text-2);
+}
+
+// The token focus ring replaces the default outline.
+input:focus,
+textarea:focus {
   outline: none;
+  border-color: var(--accent);
+  box-shadow: var(--focus-ring);
 }
 
-input::placeholder {
-  color: var(--color-foreground-opaque);
+input.invalid,
+textarea.invalid {
+  border-color: var(--danger);
 }
 
-input:focus {
-  border-color: var(--color-foreground, #0077cc);
-  box-shadow: 0 4px 32px 0 rgba(0,0,0,0.13);
+input.invalid:focus,
+textarea.invalid:focus {
+  border-color: var(--danger);
 }
 
-input.invalid {
-  border-color: var(--color-danger, #ffb3b3);
-  box-shadow: 0 2px 16px 0 rgba(0,0,0,0.07);
+input:disabled,
+textarea:disabled {
+  background: var(--surface-2);
+  color: var(--text-3);
+  cursor: not-allowed;
 }
 
 .error-message {
-  margin-top: 0.25rem;
-  font-size: 0.875rem;
-  color: var(--color-danger, red);
+  margin: var(--space-1) 0 0;
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-normal);
+  color: var(--danger);
 }

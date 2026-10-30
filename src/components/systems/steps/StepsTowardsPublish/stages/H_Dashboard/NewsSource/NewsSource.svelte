@@ -13,7 +13,7 @@
   import Pagination from "../../../../../../Pagination/Pagination.svelte";
   import SearchBar from "../../../../../../SearchBar/SearchBar.svelte";
   import { t } from "$lib/i18n/dashboard-translations";
-  import { checkPlanLimit } from "$lib/utils/checkPlanLimits";
+  import { sourceUsage } from "$lib/dashboard/sources/sourceUtils";
 
   export let canReveal = true;
 
@@ -54,19 +54,14 @@
   // No longer need local isAddCardOpen state
   // let isAddCardOpen = false; <--- REMOVED
 
-  function handleAddSuccess() {
-    // Logic after a source is successfully added (e.g., show message)
-    // The card closing is now handled automatically by SlotAutoCollapseToggle if autoCollapse=true
-    // or by the user clicking again otherwise.
-    console.log("News source added successfully!");
-    // Maybe refetch data or wait for store update
-  }
 
   // Define a stable ID for the static "Add" card
   const ADD_NEWS_SOURCE_CARD_ID = "add-news-source";
 
-  $: limitCheck = checkPlanLimit("newsSources");
-  $: isLimitReached = !limitCheck.allowed;
+  // Reactive: the child forms update the store directly (replaceNewsSourceInStore),
+  // so this list re-renders without listening for child events.
+  $: usage = sourceUsage($store.config, $store.subscribers);
+  $: isLimitReached = !usage.unlimited && usage.atLimit;
 </script>
 
 <Page>
@@ -83,37 +78,27 @@
     <!-- Toggle card for adding a new news source -->
     <ToggleCard
       {canReveal}
-      cardTitle={`${$t['newsSource.addTitle']} ${isLimitReached ? '(Limit Reached)' : ''}`}
+      cardTitle={isLimitReached ? `${$t['newsSource.addTitle']} (${usage.used}/${usage.limit})` : $t['newsSource.addTitle']}
       {...getToggleProps(ADD_NEWS_SOURCE_CARD_ID)}
     >
       <!-- Pass canReveal down if AddNewsSourceForm needs it -->
-      <AddNewsSourceForm on:added={handleAddSuccess} />
+      <AddNewsSourceForm />
     </ToggleCard>
 
     <!-- List of existing news sources -->
     <!-- No need for the extra div.news-sources-list unless needed for specific styling -->
     <!-- The SlotAutoCollapseToggle already provides a .toggle-group div -->
     {#if newsSourcesReversed && newsSourcesReversed.length}
-      {#each paginatedNewsSources as ns, i (ns.id)}
+      {#each paginatedNewsSources as ns (ns.id)}
         <ToggleCard
           {canReveal}
           cardTitle={`${ns.url?.split("//")[1] ?? $t['labels.notApplicable']} ⟫ ${ns.lead?.split("//")[1] ?? $t['labels.notApplicable']}`}
           {...getToggleProps(ns.id)}
         >
           <UpdateNewsSourceForm
-            bind:newsSource={paginatedNewsSources[i]}
+            newsSource={ns}
             errorMessage={updateErrorMessages[ns.id]}
             {canReveal}
-            on:updated={() => {
-              console.log(`Update form for ${ns.id} reported update`);
-              // Find the index of the news source in the original array and update it
-              const index = $store.config.newsSources.findIndex(
-                (source: NewsSource) => source.id === ns.id
-              );
-              if (index !== -1) {
-                $store.config.newsSources[index] = paginatedNewsSources[i];
-              }
-            }}
           />
         </ToggleCard>
       {/each}

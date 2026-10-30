@@ -50,8 +50,7 @@
             message = result.message || $t['success.subscribed'];
         } catch (error) {
             console.error("Subscription error:", error);
-            const errorMessage = error instanceof Error ? error.message : $t['errors.unknown'];
-            message = `${$t['errors.failedToSubscribe']}: ${errorMessage}`;
+            message = error instanceof Error && error.message ? error.message : $t['errors.failedToSubscribe'];
         } finally {
             isLoading = false;
         }
@@ -119,7 +118,7 @@ async function addUserToNewsletter({ email, name, bio, language }) {
   />
 
   <p>
-    {$t['markdown.apiPlayground']}
+    {($t['markdown.apiPlayground'] ?? '').replace('{newsSource.url}', newsSource?.url ?? '')}
   </p>
 
   <SubmitButton

@@ -21,3 +21,8 @@ Thumbs.db
 # Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+_deprecated
+_aiban_backups
+_ws3_tmp
+_ws4_tmp

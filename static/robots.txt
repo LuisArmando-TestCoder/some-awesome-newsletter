@@ -1,3 +1,13 @@
-# allow crawling everything by default
+# AIBAN robots policy. Owner: WS2.
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /dashboard
+Disallow: /api/
+Disallow: /login
+Disallow: /signup
+Disallow: /oauth
+Disallow: /test-styles
+Disallow: /test-checklist
+Disallow: /tags-test
+
+Sitemap: https://aibanewsletter.club/sitemap.xml

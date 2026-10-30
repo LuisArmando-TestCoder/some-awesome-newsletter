@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { sanitizeHtml } from "$lib/utils/sanitizeHtml";
   /* ─────────────────── imports ─────────────────── */
   import { onMount } from "svelte";
   import { writable } from "svelte/store";
@@ -12,6 +13,7 @@
   import FeaturedArticlesGrid from "../../../../../../articles/FeaturedArticlesGrid.svelte";
   import TextArticlesGrid from "../../../../../../articles/TextArticlesGrid.svelte";
   import { t } from "$lib/i18n/dashboard-translations";
+  import { blogPath } from "../../../../../../articles/blog";
 
   /* ────────────────── types ─────────────────── */
   interface Article {
@@ -56,7 +58,7 @@
     pageParams.set("page", (pageToFetch + 1).toString()); // API is 1-based
     pageParams.set("lang", lang);
     if (newsSourceId) pageParams.set("newsSourceId", newsSourceId);
-    const url = `${$store.apiURL()}/articles/${$store.configuratorEmail}?${pageParams.toString()}&size=${ITEMS_PER_PAGE}`;
+    const url = `${$store.apiURL()}/articles/${encodeURIComponent($store.configuratorEmail)}?${pageParams.toString()}&size=${ITEMS_PER_PAGE}`;
 
     const resp = await fetch(url);
 
@@ -99,7 +101,7 @@
         fetchAndCachePage(lang, page + 1).catch((e) => console.error("Prefetch next failed:", e));
       }
     } catch (err) {
-      error = "Error fetching article list.";
+      error = $t['newspaper.errorList'];
     } finally {
       loading = false;
     }
@@ -107,7 +109,8 @@
 
   function handlePageChange(language: string, event: CustomEvent<{ page: number }>) {
     const newPage = event.detail.page;
-    languagePages.set(language, newPage);
+    // New Map so Svelte sees the change and the pagination highlight moves.
+    languagePages = new Map(languagePages).set(language, newPage);
     loadAndDisplayPage(language, newPage);
   }
   
@@ -142,10 +145,9 @@
       isStreaming = true;
       error = null;
       try {
-        let searchUrl = `${$store.apiURL()}/articles/${$store.configuratorEmail}?search=${search}`;
-        if (newsSourceId) {
-          searchUrl += `&newsSourceId=${newsSourceId}`;
-        }
+        const qs = new URLSearchParams({ search });
+        if (newsSourceId) qs.set("newsSourceId", newsSourceId);
+        let searchUrl = `${$store.apiURL()}/articles/${encodeURIComponent($store.configuratorEmail)}?${qs.toString()}`;
         const resp = await fetch(searchUrl);
         if (!resp.ok) throw new Error("Search fetch failed");
 
@@ -188,7 +190,7 @@
           noResults = true;
         }
       } catch (err) {
-        error = "Error fetching search results.";
+        error = $t['newspaper.errorSearch'];
       } finally {
         isStreaming = false;
       }
@@ -216,7 +218,7 @@
     activeTab = "";
     noResults = false;
     articlesCache.clear();
-    languagePages.clear();
+    languagePages = new Map();
 
     if (!newsSourceId || !$store.configuratorEmail) {
       return;
@@ -229,7 +231,7 @@
       pageParams.set("newsSourceId", newsSourceId);
       
       const resp = await fetch(
-        `${$store.apiURL()}/articles/${$store.configuratorEmail}?${pageParams.toString()}&size=${ITEMS_PER_PAGE}`
+        `${$store.apiURL()}/articles/${encodeURIComponent($store.configuratorEmail)}?${pageParams.toString()}&size=${ITEMS_PER_PAGE}`
       );
       if (!resp.ok) throw new Error("Initial fetch failed");
       const data = await resp.json();
@@ -250,7 +252,7 @@
         noResults = true;
       }
     } catch (err) {
-      error = "Error loading initial articles.";
+      error = $t['newspaper.errorList'];
     } finally {
       loading = false;
     }
@@ -273,7 +275,7 @@
       defaultSelectedValue={newsSourceId}
     />
     {#if newsSourceId}
-    <a href="/articles?holder={$store.configuratorEmail}&lang={activeTab}" target="_blank" class="article-link">{$t['labels.shareNewspaper']}</a>
+    <a href={blogPath($store.configuratorEmail, { ns: newsSourceId, lang: activeTab })} target="_blank" rel="noopener noreferrer" class="article-link">{$t['labels.shareNewspaper']}</a>
     {/if}
   </div>
 
@@ -345,17 +347,17 @@
       {/if}
 
       {#if !search}
-      <Pagination currentPage={languagePages.get(activeTab) || 0} {totalItems} pageSize={ITEMS_PER_PAGE} on:pageChange={(e) => handlePageChange(activeTab, e)} />
+      <Pagination currentPage={languagePages.get(activeTab) ?? 0} {totalItems} pageSize={ITEMS_PER_PAGE} on:pageChange={(e) => handlePageChange(activeTab, e)} />
       {/if}
     {/if}
     </div>
     <div class="article-viewer">
       {#if $isArticleOpen && $selectedArticle}
-        <Container show={isArticleOpen}>
+        <Container show={$isArticleOpen}>
           <div class="modal-content-inner">
-            <h2>{@html $selectedArticle.title}</h2>
+            <h2>{@html sanitizeHtml($selectedArticle.title)}</h2>
             <p><small>{$t['labels.created']}: {$selectedArticle.creation} | {$t['labels.language']}: {$selectedArticle.language}</small></p>
-            {@html $selectedArticle.content}
+            {@html sanitizeHtml($selectedArticle.content)}
           </div>
         </Container>
       {/if}

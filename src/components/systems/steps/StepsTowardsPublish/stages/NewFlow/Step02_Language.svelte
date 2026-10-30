@@ -1,135 +1,94 @@
 <script lang="ts">
-  import { fly } from 'svelte/transition';
-  import { quadOut } from 'svelte/easing';
-  import Centered from "../../../../wrappers/Centered/Centered.svelte";
+  // Onboarding slot 2: "Who reads your newsletter?" (language + ideal reader).
+  // Merges the old Step02 (language) and Step04 (topic). Both are pre-filled.
   import Language from "../../../../inputs/Language/Language.svelte";
-  import SubmitButton from "../../../../buttons/SubmitButton/SubmitButton.svelte";
-  import store, { globalLanguage, saveToStore } from "../../../../../store";
-  import { onMount } from 'svelte';
-  import stepsStore, { updateStepStore } from "./stepsStore";
-  import { t } from "$lib/i18n/newflow-translations";
+  import store, { globalLanguage, saveToStore, topic as topicStore } from "../../../../../store";
+  import getGeoIpLanguage from "../../../../requests/getGeoIpLanguage";
+  import { updateStepStore } from "./stepsStore";
+  import OnboardingShell from "./OnboardingShell.svelte";
+  import { ob } from "$lib/tutorial/copy";
+  import { onboarding, updateOnboarding } from "$lib/tutorial/onboardingState";
+  import { nextStep } from "./nav";
+  import { browserLanguage } from "./infer";
 
   export let canReveal = false;
+  const INDEX = 2;
 
-  $: $t;
+  let language = "";
+  let reader = "";
+  let error = "";
+  let seeded = false;
+  let languageKey = 0;
 
-  let language = $stepsStore.language || "en";
-
-  globalLanguage.subscribe((val) => {
-    // Only update if stepsStore doesn't have a value set by user in this flow?
-    // Or just default to global language if not set.
-    if (val && !$stepsStore.language) language = val;
-  });
-
-  function handleNext() {
-    updateStepStore({ language });
-    saveToStore({
-      config: { ...$store.config, dashboardLanguage: language },
-      stepsIndex: $store.stepsIndex + 1
-    });
-  }
-</script>
-
-<Centered>
-  <div class="step-container">
-    {#if canReveal}
-      <div class="header-group" in:fly={{ y: 20, duration: 800, easing: quadOut }}>
-        <h1 class="impact-statement">
-          {$t.step02.title}
-        </h1>
-      </div>
-
-      <div class="input-group" in:fly={{ y: 20, duration: 800, delay: 150, easing: quadOut }}>
-        <p class="subtitle">
-          {$t.step02.subtitle}
-        </p>
-        <div class="input-wrapper">
-          <Language 
-            defaultLanguageCode={language}
-            onSelect={(code) => { 
-              if(code) {
-                language = code; 
-                updateStepStore({ language: code });
-              }
-            }}
-          />
-        </div>
-      </div>
-
-      <div class="submit-wrapper" in:fly={{ y: 10, duration: 800, delay: 300, easing: quadOut }}>
-        <SubmitButton callback={handleNext} />
-      </div>
-    {/if}
-  </div>
-</Centered>
-
-<style lang="scss">
-  .step-container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 700px;
-    margin: 0 auto;
-    padding: 1rem 0;
-    gap: 2rem;
-  }
-
-  .header-group { text-align: center; }
-
-  .impact-statement {
-    /* Responsive sizing: slightly larger/bolder than the previous subtitle */
-    font-size: clamp(1.5rem, 5vw, 2rem);
-    font-weight: 800;
-    line-height: 1.2;
-    margin: 0;
-    text-align: center; /* Default center */
-    letter-spacing: -0.03em;
-    text-wrap: balance;
-
-    /* Infinite Shimmer Effect: 
-       Creates a living, "forever" feel using a moving gradient background.
-    */
-    background: linear-gradient(
-      120deg, 
-      var(--c-primary, #2563eb) 0%, 
-      var(--c-primary-light, #60a5fa) 50%, 
-      var(--c-primary, #2563eb) 100%
-    );
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    
-    animation: shine 4s linear infinite;
-  }
-
-  @keyframes shine {
-    to {
-      background-position: 200% center;
+  $: if (canReveal && !seeded) {
+    seeded = true;
+    reader = $onboarding.reader || $store.config?.community || "";
+    language = $onboarding.language || $store.config?.dashboardLanguage || browserLanguage() || $globalLanguage || "en";
+    if (!$onboarding.language) {
+      // Geo lookup only refines the guess; failures are ignored.
+      getGeoIpLanguage()
+        .then((geo) => {
+          if (geo && !$onboarding.language && !browserLanguage()) {
+            language = geo;
+            languageKey++;
+          }
+        })
+        .catch(() => {});
     }
   }
 
-  .input-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+  function submit() {
+    error = "";
+    const r = reader.trim();
+    if (r.length < 3) {
+      error = $ob.readers.errors.reader;
+      return;
+    }
+    updateOnboarding({ language, reader: r });
+    updateStepStore({ language, topic: r });
+    topicStore.set(r);
+    saveToStore({ config: { ...$store.config, dashboardLanguage: language, community: r } });
+    nextStep();
   }
+</script>
 
-  .subtitle {
-    font-size: 0.9rem;
-    color: #666;
-    margin: 0 0 0.5rem 0;
-    font-style: italic;
-  }
+<OnboardingShell
+  {canReveal}
+  index={INDEX}
+  title={$ob.readers.title}
+  why={$ob.readers.why}
+  skipNote={$ob.readers.skipNote}
+  onPrimary={submit}
+>
+  <div class="ob-field">
+    <span class="ob-label" id="ob-lang-label">{$ob.readers.languageLabel}</span>
+    {#key languageKey}
+      <Language
+        label=""
+        defaultLanguageCode={language}
+        onSelect={(code) => {
+          if (code) language = code;
+        }}
+      />
+    {/key}
+    <p class="ob-hint">{$ob.readers.languageHint}</p>
+  </div>
 
-  .input-wrapper {
-    /* Transparent */
-    padding: 1rem 0;
-  }
+  <div class="ob-field">
+    <label class="ob-label" for="ob-reader">{$ob.readers.readerLabel}</label>
+    <textarea
+      id="ob-reader"
+      class="ob-textarea"
+      rows="2"
+      placeholder={$ob.readers.readerPlaceholder}
+      bind:value={reader}
+      aria-invalid={error ? "true" : undefined}
+      aria-describedby="ob-reader-hint"
+    ></textarea>
+    <p class="ob-hint" id="ob-reader-hint">{$ob.readers.readerHint}</p>
+  </div>
 
-  .submit-wrapper {
-    display: flex;
-    justify-content: flex-end;
-    padding-top: 1rem;
-  }
-</style>
+  {#if error}
+    <p class="ob-error" role="alert">{error}</p>
+  {/if}
+</OnboardingShell>

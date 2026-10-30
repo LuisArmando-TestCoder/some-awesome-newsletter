@@ -1,119 +1,223 @@
 <script lang="ts">
-    import type { Writable } from 'svelte/store';
-    import { browser } from '$app/environment';
-    import { get } from 'svelte/store';
-    import { onDestroy } from 'svelte';
+  import type { Writable } from 'svelte/store';
+  import type { Snippet } from 'svelte';
 
-    export let showModal: Writable<boolean>;
-    export let onChange: (value: boolean) => void = () => {};
+  interface Props {
+    /** Open state. The modal sets it to false when it closes. */
+    showModal: Writable<boolean>;
+    /** Called on every change of showModal after the first value. */
+    onChange?: (value: boolean) => void;
+    /** Visible heading. Also names the dialog for assistive tech. */
+    title?: string;
+    /** Id of an element inside the content that names the dialog. Wins over title. */
+    labelledBy?: string;
+    children?: Snippet;
+  }
 
-    let visible: boolean;
-    let closing = false;
-    let unsubscribe: () => void | undefined;
+  let { showModal, onChange = () => {}, title, labelledBy, children }: Props = $props();
 
-    if (browser) {
-        let first = true;
-        unsubscribe = showModal.subscribe((value) => {
-            visible = value;
-            if (first) {
-                first = false
-                return;
-            }
-            onChange(value);
-        });
-        onDestroy(() => {
-            if (unsubscribe) unsubscribe();
-        });
-    } else {
-        visible = get(showModal);
+  const uid = $props.id();
+  const titleId = `modal-${uid}-title`;
+
+  let visible = $state(false);
+  let dialog: HTMLDialogElement | undefined = $state();
+  let opener: HTMLElement | null = null;
+  let pressedOnBackdrop = false;
+  let prevOverflow = '';
+
+  // Track the store. onChange skips the initial value, as before.
+  $effect(() => {
+    let first = true;
+    return showModal.subscribe((value) => {
+      visible = value;
+      if (first) {
+        first = false;
+        return;
+      }
+      onChange(value);
+    });
+  });
+
+  $effect(() => {
+    if (!dialog) return;
+    if (visible && !dialog.open) {
+      opener = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+      prevOverflow = document.documentElement.style.overflow;
+      document.documentElement.style.overflow = 'hidden';
+      dialog.showModal();
+    } else if (!visible && dialog.open) {
+      dialog.close();
     }
+  });
 
-    function close() {
-        closing = true;
-        setTimeout(() => {
-            showModal.set(false);
-            closing = false;
-        }, 500);
-    }
+  $effect(() => {
+    return () => {
+      if (dialog?.open) document.documentElement.style.overflow = prevOverflow;
+    };
+  });
+
+  function close() {
+    showModal.set(false);
+  }
+
+  function handleClose() {
+    document.documentElement.style.overflow = prevOverflow;
+    if (visible) showModal.set(false);
+    const target = opener;
+    opener = null;
+    if (target && target.isConnected) target.focus();
+  }
+
+  function handlePointerDown(event: PointerEvent) {
+    pressedOnBackdrop = event.target === dialog;
+  }
+
+  function handleClick(event: MouseEvent) {
+    if (pressedOnBackdrop && event.target === dialog) close();
+    pressedOnBackdrop = false;
+  }
+
+  const labelId = $derived(labelledBy ?? (title ? titleId : undefined));
 </script>
 
-{#if visible}
-    <div class="modal-backdrop" on:click={close}>
-        <div class="modal-content" class:closing on:click|stopPropagation>
-            <button class="close-button" on:click={close}>×</button>
-            <slot></slot>
-        </div>
+<!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_noninteractive_element_interactions -->
+<dialog
+  bind:this={dialog}
+  class="modal"
+  aria-labelledby={labelId}
+  onclose={handleClose}
+  onpointerdown={handlePointerDown}
+  onclick={handleClick}
+>
+  {#if visible}
+    <div class="panel">
+      <div class="head" class:has-title={!!title}>
+        {#if title}<h2 id={titleId} class="title">{title}</h2>{/if}
+        <button type="button" class="close" aria-label="Close" onclick={close}>
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18" /></svg>
+        </button>
+      </div>
+      <div class="body">
+        {@render children?.()}
+      </div>
     </div>
-{/if}
+  {/if}
+</dialog>
 
 <style>
-    .modal-backdrop {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: linear-gradient(90deg, rgba(0, 20, 18, 0.5) 0%, rgba(3, 9, 27, 0.5) 50%, rgba(22, 16, 69, 0.5) 100%);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 1000;
-        backdrop-filter: blur(5px);
-    }
+  .modal {
+    width: min(52rem, calc(100vw - 2 * var(--space-4)));
+    max-width: none;
+    max-height: min(90vh, 90dvh);
+    margin: auto;
+    padding: 0;
+    border: 1px solid var(--border-1);
+    border-radius: var(--radius-lg);
+    background: var(--surface-1);
+    color: var(--text-1);
+    box-shadow: var(--shadow-3);
+    font-family: var(--font-body);
+    overflow: hidden;
+  }
 
-    @keyframes open-modal {
-        from {
-            opacity: 0;
-            clip-path: inset(50% 50% 50% 50%);
-        }
-        to {
-            opacity: 1;
-            clip-path: inset(0% 0% 0% 0%);
-        }
-    }
+  .modal[open] {
+    display: flex;
+    animation: modal-in var(--dur-base) var(--ease-out);
+  }
 
-    @keyframes close-modal {
-        from {
-            opacity: 1;
-            clip-path: inset(0% 0% 0% 0%);
-        }
-        to {
-            opacity: 0;
-            clip-path: inset(50% 50% 50% 50%);
-        }
-    }
+  .modal::backdrop {
+    background: var(--surface-overlay);
+    animation: backdrop-in var(--dur-base) var(--ease-out);
+  }
 
-    .modal-content {
-        position: relative;
-        background: white;
-        padding: 40px 20px 20px 20px;
-        border-radius: 8px;
-        max-width: 80vw;
-        height: 80vh;
-        overflow-y: auto;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        animation: open-modal 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  @keyframes modal-in {
+    from {
+      opacity: 0;
+      transform: translateY(0.5rem);
     }
+  }
 
-    .modal-content.closing {
-        animation: close-modal 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-        user-select: none;
-        pointer-events: none;
+  @keyframes backdrop-in {
+    from {
+      opacity: 0;
     }
+  }
 
-    .close-button {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        border: none;
-        background: transparent;
-        font-size: 1.5rem;
-        cursor: pointer;
-        color: #333;
-        z-index: 1001;
+  @media (prefers-reduced-motion: reduce) {
+    .modal[open],
+    .modal::backdrop {
+      animation: none;
     }
+  }
 
-    .close-button:hover {
-        color: #000;
-    }
+  .panel {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 0;
+  }
+
+  .head {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-3) 0;
+  }
+
+  .head.has-title {
+    justify-content: space-between;
+    padding: var(--space-5) var(--space-5) var(--space-3);
+  }
+
+  .title {
+    margin: 0;
+    min-width: 0;
+    font-family: var(--font-display);
+    font-size: var(--fs-xl);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-snug);
+    color: var(--text-1);
+  }
+
+  .close {
+    flex: none;
+    display: inline-grid;
+    place-items: center;
+    width: var(--control-h-sm);
+    height: var(--control-h-sm);
+    border: 0;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--text-2);
+    cursor: pointer;
+    transition:
+      background-color var(--dur-fast) var(--ease-out),
+      color var(--dur-fast) var(--ease-out);
+  }
+
+  .close svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .close:hover {
+    background: var(--surface-2);
+    color: var(--text-1);
+  }
+
+  .close:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+
+  .body {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 0 var(--space-5) var(--space-5);
+    line-height: var(--lh-normal);
+  }
 </style>

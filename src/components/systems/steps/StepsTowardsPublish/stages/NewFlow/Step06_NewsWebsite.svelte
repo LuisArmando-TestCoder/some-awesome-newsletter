@@ -1,252 +1,178 @@
 <script lang="ts">
-  import { fly } from 'svelte/transition';
-  import { quadOut } from 'svelte/easing';
-  import Centered from "../../../../wrappers/Centered/Centered.svelte";
-  import Link from "../../../../inputs/Link/Link.svelte";
-  import SubmitButton from "../../../../buttons/SubmitButton/SubmitButton.svelte";
-  import store, { saveToStore, topic } from "../../../../../store";
-  import { isValidURL } from "../../../../inputs/Link/isValidLink";
-  import createNewsSource from "../../../../requests/createNewsSource";
+  // Onboarding slot 0: "What is your website?"
+  // Validates only on submit (UX diagnostic item d). Nothing is created in the backend here.
   import { writable } from "svelte/store";
+  import store, { saveToStore, topic as topicStore } from "../../../../../store";
+  import { isValidURL } from "../../../../inputs/Link/isValidLink";
+  import generateSelector from "../../../../requests/generateSelector";
   import CollapsibleTags from "../../../../selectors/Tags/CollapsibleTags.svelte";
   import categoriesTree from "../../../../inputs/Country/newssourcesthemetree";
-  import stepsStore, { updateStepStore } from "./stepsStore";
-  import { t } from "$lib/i18n/newflow-translations";
+  import { updateStepStore } from "./stepsStore";
+  import OnboardingShell from "./OnboardingShell.svelte";
+  import { ob } from "$lib/tutorial/copy";
+  import { onboarding, updateOnboarding, trackOnboardingEvent, takePrefillUrl } from "$lib/tutorial/onboardingState";
+  import { nextStep } from "./nav";
+  import { guessReaderFromUrl, normalizeUrl } from "./infer";
 
   export let canReveal = false;
+  const INDEX = 0;
 
-  $: $t;
+  let value = "";
+  let error = "";
+  let loading = false;
+  let noWebsite = false;
+  let seeded = false;
 
-  let url = $stepsStore.url || $store.newsSource || "";
-  const isLoading = writable(false);
-  const selectedTags = writable<string[]>([]);
-  let tagUrlMap = new Map<string, string[]>();
-  let tagPathMap = new Map<string, string>();
-
-  function buildTags(obj: any, parentPath: string = ""): any[] {
-    return Object.keys(obj).map(key => {
-      const currentPath = parentPath ? `${parentPath} / ${key}` : key;
-      const value = obj[key];
-      if (Array.isArray(value)) {
-        tagUrlMap.set(key, value);
-        tagPathMap.set(key, currentPath);
-        return { name: key };
-      } else {
-        return { name: key, children: buildTags(value, currentPath) };
-      }
-    });
+  // Pre-fill once from saved progress (resume) or the old global store.
+  $: if (canReveal && !seeded) {
+    seeded = true;
+    trackOnboardingEvent("onboarding_started");
+    noWebsite = $onboarding.noWebsite;
+    value = ($onboarding.noWebsite ? "" : $onboarding.url) || takePrefillUrl() || ($store.newsSource ?? "");
   }
 
-  const tagsData = writable(buildTags(categoriesTree()));
-
-  topic.subscribe(() => {
-    tagsData.set(buildTags(categoriesTree()));
-  });
-
-  selectedTags.subscribe(tags => {
-    if (tags.length > 0) {
-      // Use the last selected tag that has URLs mapped to it
-      for (let i = tags.length - 1; i >= 0; i--) {
-        const tagName = tags[i];
-        const urls = tagUrlMap.get(tagName);
-        if (urls && urls.length > 0) {
-          url = urls[0];
-          const path = tagPathMap.get(tagName);
-          if (path) {
-            updateStepStore({ url, topic: path });
-            saveToStore({ newsSource: url });
-            topic.set(path);
-          }
-          break;
-        }
+  // Topic picker for owners without a website.
+  const selectedTags = writable<string[]>([]);
+  const tagUrlMap = new Map<string, string[]>();
+  const tagPathMap = new Map<string, string>();
+  function buildTags(obj: Record<string, unknown>, parentPath = ""): { name: string; children?: unknown[] }[] {
+    return Object.keys(obj).map((key) => {
+      const path = parentPath ? `${parentPath} / ${key}` : key;
+      const v = obj[key];
+      if (Array.isArray(v)) {
+        tagUrlMap.set(key, v as string[]);
+        tagPathMap.set(key, path);
+        return { name: key };
+      }
+      return { name: key, children: buildTags(v as Record<string, unknown>, path) };
+    });
+  }
+  const tagsData = buildTags(categoriesTree() as Record<string, unknown>);
+  let pickedTopic = "";
+  let pickedUrl = "";
+  selectedTags.subscribe((tags) => {
+    for (let i = tags.length - 1; i >= 0; i--) {
+      const urls = tagUrlMap.get(tags[i]);
+      if (urls?.length) {
+        pickedUrl = urls[0];
+        const path = tagPathMap.get(tags[i]) ?? tags[i];
+        pickedTopic = path.split(" / ").slice(1).join(" / ") || path;
+        error = "";
+        return;
       }
     }
   });
 
-  async function handleNext() {
-    if ($isLoading) return;
-
-    if (isValidURL(url)) {
-      isLoading.set(true);
-      try {
-        const newsSourceData = {
-          type: "website",
-          url: url,
-          community: "Newsletter Users",
-          lead: $stepsStore.lead || $store.lead,
-          personality: $stepsStore.personality || $store.personality,
-          scheduleTime: $stepsStore.config?.scheduleTime || $store.config?.scheduleTime
-        };
-
-        const result = await createNewsSource(newsSourceData);
-
-        if (result) {
-          const selector = result.linkSelector || "";
-          updateStepStore({ url, linkSelector: selector });
-          
-          saveToStore({
-            newsSource: url,
-            linkSelector: selector,
-            stepsIndex: $store.stepsIndex + 1
-          });
-        } else {
-          alert($t.step06.errors.failedToGenerate);
-        }
-      } catch (e) {
-        console.error(e);
-        alert($t.step06.errors.errorGenerating);
-      } finally {
-        isLoading.set(false);
+  async function submit() {
+    error = "";
+    let url: string;
+    let topicText = "";
+    if (noWebsite) {
+      if (!pickedUrl) {
+        error = $ob.website.errors.empty;
+        return;
       }
+      url = pickedUrl;
+      topicText = pickedTopic;
     } else {
-      alert($t.step06.errors.invalidUrl);
+      if (!value.trim()) {
+        error = $ob.website.errors.empty;
+        return;
+      }
+      url = normalizeUrl(value);
+      if (!isValidURL(url)) {
+        error = $ob.website.errors.invalid;
+        return;
+      }
+      value = url;
+    }
+
+    loading = true;
+    try {
+      const reader = $onboarding.reader || (topicText ? topicText : guessReaderFromUrl(url));
+      const selector = await generateSelector($store.configuratorEmail, {
+        url,
+        lead: url,
+        personality: $store.personality || "",
+        scheduleTime: $onboarding.scheduleTime,
+      });
+      // A missing rule is not fatal: the preview step lets the owner retry.
+      const linkSelector = selector || "";
+      updateOnboarding({ url, noWebsite, topic: topicText, reader, linkSelector, previewHtml: "" });
+      updateStepStore({ url, linkSelector, topic: topicText, lead: url });
+      if (topicText) topicStore.set(topicText);
+      saveToStore({ newsSource: url, linkSelector, lead: url });
+      nextStep();
+    } catch (e) {
+      console.error("[onboarding/website]", e);
+      error = $ob.website.errors.network;
+    } finally {
+      loading = false;
     }
   }
 </script>
 
-<Centered>
-  <div class="step-container">
-      <div class="header-group" in:fly={{ y: 20, duration: 800, easing: quadOut }}>
-        <h1 class="main-title">
-          {$t.step06.title}
-        </h1>
+<OnboardingShell
+  {canReveal}
+  index={INDEX}
+  title={$ob.website.title}
+  why={$ob.website.why}
+  skipNote={noWebsite ? "" : $ob.website.skipNote}
+  primaryLabel={$ob.website.submit}
+  onPrimary={submit}
+  {loading}
+  loadingLabel={$ob.website.checking}
+>
+  {#if !noWebsite}
+    <div class="ob-field">
+      <label class="ob-label" for="ob-website">{$ob.website.label}</label>
+      <input
+        id="ob-website"
+        class="ob-input"
+        type="text"
+        inputmode="url"
+        autocomplete="url"
+        autocapitalize="off"
+        spellcheck="false"
+        placeholder={$ob.website.placeholder}
+        bind:value
+        aria-invalid={error ? "true" : undefined}
+        aria-describedby="ob-website-hint{error ? ' ob-website-error' : ''}"
+      />
+      <p class="ob-hint" id="ob-website-hint">{$ob.website.hint}</p>
+    </div>
+  {:else}
+    <div class="ob-field">
+      <span class="ob-label">{$ob.website.topicTitle}</span>
+      <p class="ob-hint">{$ob.website.topicHint}</p>
+      <div class="topics">
+        <CollapsibleTags tags={tagsData} {selectedTags} />
       </div>
+    </div>
+  {/if}
 
-      <div class="input-group" in:fly={{ y: 20, duration: 800, delay: 150, easing: quadOut }}>
-        <h3 class="impact-statement">
-          {$t.step06.subtitle}
-        </h3>
-        <p class="subtitle">
-          {$t.step06.description}
-          <br>
-          <span style="font-size: 0.8em; opacity: 0.8;">
-            {$t.step06.descriptionSmall}
-          </span>
-        </p>
-        <div class="input-wrapper">
-          <Link 
-            value={url}
-            placeholder={$t.step06.placeholder}
-            onChange={(val) => {
-              url = val;
-              updateStepStore({ url: val });
-              saveToStore({ newsSource: val });
-            }}
-          />
-          
-          <div class="categories-grid" in:fly={{ y: 10, duration: 400 }}>
-            <CollapsibleTags tags={$tagsData} {selectedTags} />
-          </div>
-      </div>
+  {#if error}
+    <p class="ob-error" id="ob-website-error" role="alert">{error}</p>
+  {/if}
 
-      <div class="submit-wrapper" in:fly={{ y: 10, duration: 800, delay: 300, easing: quadOut }}>
-        <SubmitButton 
-          callback={handleNext} 
-          loading={$isLoading}
-          label={$isLoading ? $t.step06.analyzing : $t.step06.next}
-        />
-      </div>
-  </div>
-</Centered>
+  <button
+    type="button"
+    class="ob-btn ob-btn--tertiary switch"
+    on:click={() => {
+      noWebsite = !noWebsite;
+      error = "";
+    }}
+  >
+    {noWebsite ? $ob.website.haveWebsite : $ob.website.noWebsite}
+  </button>
+</OnboardingShell>
 
 <style lang="scss">
-  .step-container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 700px;
-    margin: 0 auto;
-    padding: 1rem 0;
-    gap: 2rem;
+  .topics {
+    max-height: 22rem;
+    overflow: auto;
+    padding: var(--space-2, 8px) 0;
+    border-top: 1px solid var(--border-1, #e3e6ea);
   }
-
-  .header-group { text-align: center; }
-
-  .main-title {
-    font-size: clamp(1.5rem, 4vw, 2.5rem);
-    font-weight: 800;
-    line-height: 1.2;
-    margin: 0;
-    text-wrap: balance;
-    background: linear-gradient(135deg, #1a1a1a 0%, #4a5568 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .input-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .impact-statement {
-    /* Responsive sizing: slightly larger/bolder than the previous subtitle */
-    font-size: clamp(1.5rem, 5vw, 2rem);
-    font-weight: 800;
-    line-height: 1.2;
-    margin: 0;
-    text-align: center; /* Default center */
-    letter-spacing: -0.03em;
-    text-wrap: balance;
-
-    /* Infinite Shimmer Effect: 
-       Creates a living, "forever" feel using a moving gradient background.
-    */
-    background: linear-gradient(
-      120deg, 
-      var(--c-primary, #2563eb) 0%, 
-      var(--c-primary-light, #60a5fa) 50%, 
-      var(--c-primary, #2563eb) 100%
-    );
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    
-    animation: shine 4s linear infinite;
-  }
-
-  @keyframes shine {
-    to {
-      background-position: 200% center;
-    }
-  }
-
-  .subtitle {
-    font-size: 0.9rem;
-    color: #666;
-    margin: 0 0 0.5rem 0;
-    font-style: italic;
-  }
-
-  .input-wrapper {
-    padding: 1rem 0;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .pick-btn {
-    align-self: flex-start;
-    padding: 0.5rem 1rem;
-    background: #f5f5f5;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    cursor: pointer;
-    color: #333;
-    
-    &:hover { background: #e9e9e9; }
-  }
-
-  .categories-grid {
-    padding-top: 0.5rem;
-    border-top: 1px solid #eee;
-  }
-
-  .submit-wrapper {
-    display: flex;
-    justify-content: flex-end;
-    padding-top: 1rem;
-  }
+  .switch { align-self: flex-start; }
 </style>

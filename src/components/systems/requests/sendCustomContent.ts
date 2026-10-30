@@ -1,74 +1,17 @@
-import { get } from "svelte/store";
-import store from "../../store";
-import type { Store as AppStoreType } from "../../types";
-import getAuthHeaders from "./getAuthHeaders";
+import { request } from "$lib/api/client";
 
-export default async function sendCustomContent(
-  configId: string,
-  newsSourceId: string,
-  content: string
-): Promise<boolean> {
-  if (!configId || !newsSourceId || !content.trim()) {
-    console.error(
-      "[sendCustomContent] Missing required fields: configId, newsSourceId, or content."
-    );
-    return false;
-  }
-
-  const appStore = get(store) as AppStoreType;
-  const apiURLFunction = appStore.apiURL;
-  const authCode = appStore.authCode;
-
-  if (typeof apiURLFunction !== "function") {
-    console.error(
-      "[sendCustomContent] apiURL function not available in store."
-    );
-    return false;
-  }
-
-  // The backend endpoint will be POST /newsletter/send-custom-content
-  // The body will contain configId, newsSourceId, and content.
-  const endpointUrl = `${apiURLFunction()}/newsletter/send-custom-content`;
-
+/** Send an issue written from pasted content. Returns true when the backend accepted it. */
+export default async function sendCustomContent(configId: string, newsSourceId: string, content: string): Promise<boolean> {
+  if (!configId || !newsSourceId || !content?.trim()) return false;
   try {
-    const response = await fetch(endpointUrl, {
+    await request("/newsletter/send-custom-content", {
       method: "POST",
-      headers: getAuthHeaders(),
-      body: JSON.stringify({
-        configId: configId, // Sending configId in body as well for clarity/consistency
-        newsSourceId: newsSourceId,
-        content: content,
-      }),
+      body: { configId, newsSourceId, content },
+      timeoutMs: 120_000,
     });
-
-    if (!response.ok) {
-      try {
-        const errorData = await response.json();
-        console.error(
-          `[sendCustomContent] API Error ${response.status}:`,
-          errorData.message || errorData.error || response.statusText
-        );
-      } catch (e) {
-        console.error(
-          `[sendCustomContent] API Error ${response.status}: ${response.statusText}`
-        );
-      }
-      return false;
-    }
-    
-    // Assuming 202 Accepted means success for this async operation
-    if (response.status === 202) {
-        const successData = await response.json().catch(() => ({})); // Optional: get message from body
-        console.log("[sendCustomContent] Success (202 Accepted):", successData.message || "Request accepted for processing.");
-        return true;
-    }
-
-    // For other 2xx statuses, also treat as success
-    console.log("[sendCustomContent] Success:", await response.json().catch(() => ({})));
     return true;
-
   } catch (error) {
-    console.error("[sendCustomContent] Network or fetch error:", error);
+    console.error("[sendCustomContent] Failed", error);
     return false;
   }
 }

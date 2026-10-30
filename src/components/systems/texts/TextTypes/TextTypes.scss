@@ -1,87 +1,104 @@
+// Text variants mapped to design tokens (src/styles/tokens.scss).
+// Emphasis is carried by weight, never by colour or italics.
+// The 12 type names are kept for existing call sites.
+
+@mixin heading {
+  font-family: var(--font-display);
+  font-style: normal;
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-tight);
+  color: var(--text-1);
+  text-wrap: balance;
+}
+
+@mixin body {
+  font-family: var(--font-body);
+  font-style: normal;
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-normal);
+  text-wrap: pretty;
+}
+
 .text-type {
-  line-height: 1.5;
-  --unit-1: 16px;
-  --unit-2: 18px;
-  --unit-3: 20px;
-  --unit-4: 22px;
-  --unit-5: 24px;
-  --unit-6: 30px;
+  @include body;
+  font-size: var(--fs-md);
+  color: var(--text-2);
 
+  // ---- Body ----
   &--paragraph {
-    font-family: var(--font-paragraph);
-    font-size: var(--unit-3);
-    color: var(--color-background);
+    @include body;
+    font-size: var(--fs-md);
+    color: var(--text-2);
   }
 
-  &--sub-italic {
-    font-family: var(--font-paragraph);
-    font-size: var(--unit-1);
-    font-style: italic;
-    color: var(--color-background);
-  }
-
-  &--sub-highlight-italic {
-    font-family: var(--font-paragraph);
-    font-size: var(--unit-1);
-    font-style: italic;
-    color: var(--color-foreground);
-  }
-
+  // Inline emphasis inside a sentence: weight only, same size.
   &--highlight {
-    font-family: var(--font-paragraph);
-    font-size: var(--unit-3);
-    color: var(--color-foreground);
+    @include body;
+    font-size: var(--fs-md);
+    font-weight: var(--fw-semibold);
+    color: var(--text-1);
   }
 
+  // Captions, hints and status lines (formerly italic).
+  &--sub-italic {
+    @include body;
+    font-size: var(--fs-sm);
+    color: var(--text-3);
+  }
+
+  // Emphasised caption or status message (formerly italic + accent colour).
+  &--sub-highlight-italic {
+    @include body;
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-semibold);
+    color: var(--text-1);
+  }
+
+  // ---- Titles ----
   &--title {
-    font-family: var(--font-title);
-    font-size: var(--unit-6);
-    color: var(--color-foreground);
+    @include heading;
+    font-size: var(--fs-2xl);
   }
 
   &--title-highlight {
-    font-family: var(--font-title);
-    font-size: var(--unit-6);
-    color: var(--color-background);
+    @include heading;
+    font-size: var(--fs-2xl);
+    font-weight: var(--fw-bold);
   }
 
   &--title-sub-italic {
-    font-family: var(--font-title);
-    font-size: var(--unit-5);
-    font-style: italic;
-    color: var(--color-foreground);
+    @include heading;
+    font-size: var(--fs-xl);
+    font-weight: var(--fw-medium);
+    color: var(--text-2);
   }
 
   &--title-sub-highlight-italic {
-    font-family: var(--font-title);
-    font-size: var(--unit-5);
-    font-style: italic;
-    color: var(--color-background);
+    @include heading;
+    font-size: var(--fs-xl);
   }
 
+  // ---- Subtitles ----
   &--subtitle {
-    font-family: var(--font-title);
-    font-size: var(--unit-4);
-    color: var(--color-background);
+    @include heading;
+    font-size: var(--fs-xl);
   }
 
   &--subtitle-highlight {
-    font-family: var(--font-title);
-    font-size: var(--unit-4);
-    color: var(--color-foreground);
+    @include heading;
+    font-size: var(--fs-xl);
+    font-weight: var(--fw-bold);
   }
 
   &--subtitle-sub-italic {
-    font-family: var(--font-title);
-    font-size: var(--unit-2);
-    font-style: italic;
-    color: var(--color-background);
+    @include heading;
+    font-size: var(--fs-xl);
+    font-weight: var(--fw-medium);
+    color: var(--text-2);
   }
 
   &--subtitle-sub-highlight-italic {
-    font-family: var(--font-title);
-    font-size: var(--unit-2);
-    font-style: italic;
-    color: var(--color-foreground);
+    @include heading;
+    font-size: var(--fs-xl);
   }
 }

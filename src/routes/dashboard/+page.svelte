@@ -1,42 +1,24 @@
-<script>
+<script lang="ts">
+  // WS4. Onboarding (WS3's MainSteps) until the owner has a source and has
+  // finished the steps, then the dashboard shell.
   import GlobalData from "../../components/GlobalData/GlobalData.svelte";
   import SocketClient from "../../components/SocketClient.svelte";
-  import { onDestroy } from "svelte";
-  import { browser } from "$app/environment";
-  import { isScrollingDown, saveToStore, stepsMapping } from "../../components/store"; 
   import MainSteps from "../../components/systems/steps/StepsTowardsPublish/MainSteps.svelte";
-    import getConfiguratorSession from "../../components/systems/requests/getConfiguratorSession";
-
-  let lastScrollY = 0;
-
-  function handleScroll() {
-    const currentScrollY = window.scrollY;
-    let scrollingDownValue = false;
-    // Add a threshold to prevent hiding on small scrolls or bounces
-    if (Math.abs(currentScrollY - lastScrollY) > stepsMapping["Profile"]) {
-      // Only set scrollingDown to true after scrolling down a bit
-      scrollingDownValue = currentScrollY > lastScrollY && currentScrollY > 50;
-    }
-    // Always reset scrollingDown if scrolling up or near the top
-    if (currentScrollY < lastScrollY || currentScrollY <= 50) {
-       scrollingDownValue = false;
-    }
-    isScrollingDown.set(scrollingDownValue); // Update the store
-    lastScrollY = currentScrollY;
-  }
-
-  onDestroy(() => {
-    if (browser) { // Only run in browser
-      getConfiguratorSession();
-      window.removeEventListener("scroll", handleScroll);
-    }
-  });
+  import DashboardShell from "$lib/dashboard/DashboardShell.svelte";
+  import { dashboardMode } from "$lib/dashboard/nav";
 </script>
+
+<svelte:head>
+  <title>AIBAN dashboard</title>
+</svelte:head>
 
 <GlobalData />
 <SocketClient />
-<!-- <ChosenShader /> -->
-<MainSteps />
+{#if $dashboardMode}
+  <DashboardShell />
+{:else}
+  <MainSteps />
+{/if}
 
 <style lang="scss">
   @use "../styles/everything.scss";

@@ -1,40 +1,26 @@
 import { get } from "svelte/store";
-import store, { saveToConfig } from "../../store";
-import type { NewsSource } from "../../types";
-import getAuthHeaders from "./getAuthHeaders";
+import store from "../../store";
+import { request, seg } from "$lib/api/client";
+import { LLM_TIMEOUT_MS } from "$lib/api/config";
+import { newsSourceEnvelope } from "$lib/api/schemas";
+import { replaceNewsSourceInStore } from "./_internal";
 
+/**
+ * Build the writing voice of a source from sample text.
+ * Returns the updated news source (callers read `.personality`).
+ * Throws an Error whose `message` is safe to show.
+ */
 export async function generatePersonality(
   rawContent: string,
   newsSourceId: string
 ): Promise<{ message: string; newsSource: any; personality: string }> {
-  const url = `${get(store).apiURL()}/news-source/personality/${
-    get(store).configuratorEmail
-  }/${newsSourceId}`;
-
-  const response = await fetch(url, {
+  const json = await request(`/news-source/personality/${seg(get(store).configuratorEmail)}/${seg(newsSourceId)}`, {
     method: "PUT",
-    headers: getAuthHeaders(),
-    body: JSON.stringify({ rawContent }),
+    body: { rawContent },
+    timeoutMs: LLM_TIMEOUT_MS,
+    schema: newsSourceEnvelope,
+    errorMessage: "We could not build the writing voice from this text. Try a longer sample.",
   });
-
-  console.log("json?.newsSource RESPONSE", response);
-
-  if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(errorData.error || "Error generando la personalidad");
-  }
-
-  const json = await response.json();
-  console.log("json?.newsSource", json?.newsSource, response);
-
-  // Replace the existing news source with the updated one
-  const currentSources = get(store).config.newsSources || [];
-  const updatedSources = currentSources.map((source: NewsSource) =>
-    source.id === json?.newsSource.id ? json?.newsSource : source
-  );
-  saveToConfig({
-    newsSources: updatedSources,
-  });
-
-  return json?.newsSource;
+  await replaceNewsSourceInStore(json.newsSource as any);
+  return json.newsSource as any;
 }

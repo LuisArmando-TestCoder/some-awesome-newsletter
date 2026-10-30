@@ -1,6 +1,7 @@
 <!-- src/components/systems/stats/LeadStat.svelte -->
 <script lang="ts">
   import RenamedTextTypes from '../texts/TextTypes/TextTypes.svelte';
+  import { t } from '$lib/i18n/dashboard-translations';
 
   export let leadData: Record<string, Record<string, string>> = {};
 
@@ -12,11 +13,11 @@
 
 <div class="lead-stats">
   <div class="stat-item">
-    <RenamedTextTypes type="subtitle">Total Leads</RenamedTextTypes>
+    <RenamedTextTypes type="subtitle">{$t['analytics.totalLeads'] ?? 'Total leads'}</RenamedTextTypes>
     <RenamedTextTypes type="title">{totalLeads}</RenamedTextTypes>
   </div>
   <div class="stat-item">
-    <RenamedTextTypes type="subtitle">Total Clicks</RenamedTextTypes>
+    <RenamedTextTypes type="subtitle">{$t['analytics.totalClicks'] ?? 'Total clicks'}</RenamedTextTypes>
     <RenamedTextTypes type="title">{totalClicks}</RenamedTextTypes>
   </div>
 </div>

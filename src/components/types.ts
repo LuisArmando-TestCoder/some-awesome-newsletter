@@ -82,16 +82,23 @@ export interface NewsSource {
   lead: string;
   id: string;
   scheduleTime: string;
+  /** IANA time zone the scheduleTime cron is read in. Missing = UTC (older sources). */
+  scheduleTimezone?: string;
   personality: string;
   email?: EmailConfig;
   openAiApiKey?: string;
+  /** @deprecated Removed for security (2026-10-30). Issues go out from AIBAN's address; the frontend never sends or keeps this. */
   emailMaskSender?: string; 
+  /** @deprecated Removed for security (2026-10-30). Owner email app passwords are never asked for, stored or sent. */
   appPassword?: string; 
   active?: boolean;
   isPublic?: boolean; 
   includeImages?: boolean;
   /** ID of the WebhookGroup to publish to. Falls back to webhookGroups[0] when absent. */
   webhookGroupId?: string;
+  /** Paid newsletter flag, stored in the database and edited from /admin. No charging while payments are off. */
+  isPaidNewsletter?: boolean;
+  newsletterTitle?: string;
 }
 
 export interface EmailAuth {
@@ -101,6 +108,7 @@ export interface EmailAuth {
 
 export interface EmailConfig {
   host: string;
+  /** @deprecated Owner email login details are removed (2026-10-30). The frontend strips this before saving. */
   auth: EmailAuth;
   senderName: string;
   senderEmail: string;
@@ -136,7 +144,7 @@ export interface Config {
    */
   pricingPlan?: PricingPlanId;
   billingInterval?: BillingInterval;
-  tilopaySubscriptionId?: string;
+  /** @deprecated Billing providers are off (2026-10-30). Plans are changed by hand by the AIBAN team. */
 
   /**
    * Named publish destinations. Index 0 = System Default applied to all
@@ -144,6 +152,12 @@ export interface Config {
    * Persisted to Firestore as a top-level key via the standard PATCH mechanism.
    */
   webhookGroups?: WebhookGroup[];
+
+  /** Brand and footer fields used by the email templates (WS4, WS5). */
+  brandColor?: string;
+  postalAddress?: string;
+  showEmailSignature?: boolean;
+  emailSignatureFields?: { name?: string; role?: string; company?: string; phone?: string; website?: string };
 }
 
 export interface NewsletterUser {

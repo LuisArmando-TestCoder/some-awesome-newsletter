@@ -1,17 +1,14 @@
-import { get } from "svelte/store";
-import store from "../../store";
+import { request, seg } from "$lib/api/client";
 import type { NewsletterUser } from "../../types";
-import getAuthHeaders from "./getAuthHeaders";
 
 export interface AddNewsletterUserResponse {
   message: string;
 }
 
 /**
- * Adds a newsletter user by calling the backend endpoint.
- * @param user - The newsletter user object to add.
- * @param configId - (Optional) The configuration ID.
- * @returns A promise that resolves with the response from the server.
+ * Add a subscriber to a news source. Uses the owner's session, or an API key
+ * (Bearer) when given. Throws an Error whose `message` is safe to show
+ * (for example the plan limit message from the backend).
  */
 export async function addNewsletterUser(
   user: NewsletterUser,
@@ -19,36 +16,10 @@ export async function addNewsletterUser(
   newsSourceId: string,
   apiKey?: string
 ): Promise<AddNewsletterUserResponse> {
-  const url = `${get(store).apiURL()}/users/${configId}/${newsSourceId}`;
-  const authHeaders = await getAuthHeaders();
-
-  const headers: Record<string, string> = {
-    "Content-Type": "application/json",
-  };
-
-  if (apiKey) {
-    headers["Authorization"] = `Bearer ${apiKey}`;
-  } else {
-    Object.assign(headers, authHeaders);
-  }
-
-  try {
-    const response = await fetch(url, {
-      method: "POST",
-      headers,
-      body: JSON.stringify(user),
-    });
-
-    if (!response.ok) {
-      // Attempt to parse a JSON error message or fall back to status text
-      const errorResponse = await response.json().catch(() => ({}));
-      const errorMessage = errorResponse.message || response.statusText;
-      throw new Error(`Error adding newsletter user: ${errorMessage}`);
-    }
-
-    return await response.json();
-  } catch (error) {
-    console.error("Failed to add newsletter user:", error);
-    throw error;
-  }
+  return request<AddNewsletterUserResponse>(`/users/${seg(configId)}/${seg(newsSourceId)}`, {
+    method: "POST",
+    auth: apiKey ? { bearer: apiKey } : "user",
+    body: user,
+    errorMessage: "We could not add this subscriber. Try again.",
+  });
 }

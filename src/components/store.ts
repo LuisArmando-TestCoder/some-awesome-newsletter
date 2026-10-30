@@ -1,7 +1,8 @@
 import { get, writable } from "svelte/store";
 import type { Config, Populator, Store } from "./types";
 import type { Socket } from "socket.io-client";
-import updateConfiguration from "./systems/requests/updateConfiguration";
+import { getApiBaseUrl } from "$lib/api/config";
+import { saveStatus } from "$lib/stores/saveStatus";
 
 export const latestMessage = writable<string>("");
 
@@ -39,7 +40,6 @@ const store = writable<Store>({
     "config.newsletterTitle",
     "config.emailSignature",
     "config.logo",
-    "config.emailMaskSender",
     "config.vip",
     "config.pricingPlan",
     // 🆕 Config keys for Billing Fallback
@@ -49,8 +49,8 @@ const store = writable<Store>({
     "config.state",
     "config.zip",
     "config.country",
-    "subscribers",
-    "leads",
+    // "subscribers" and "leads" are no longer persisted: lists with thousands of
+    // entries filled localStorage on every store write. They reload from the API.
     "subscriberName",
     "subscriberCountry",
     "user",
@@ -92,11 +92,8 @@ const store = writable<Store>({
       avatar: ""
   },
 
-  apiURL: (origin?: string) => typeof window !== 'undefined' ? (
-    window.location.origin.startsWith('http://localhost') ? "http://localhost:8000" : "https://ai-newsletter-translated.onrender.com"
-  ) : (
-    origin?.startsWith('http://localhost') ? "http://localhost:8000" : "https://ai-newsletter-translated.onrender.com"
-  ),
+  /** Backend base URL. Kept for legacy callers; new code uses $lib/api/client. */
+  apiURL: (origin?: string) => getApiBaseUrl(origin),
   
   config: {
     // 🆕 Expanded Config Defaults (matches keysToSave)
@@ -117,8 +114,6 @@ const store = writable<Store>({
     zip: "",
     country: "CR",
 
-    emailMaskSender: "",
-    appPassword: "",
     vip: false,
     pricingPlan: "free",
     /** Named publish groups — empty by default; SSR-safe (no localStorage access) */
@@ -171,21 +166,61 @@ export function getFromStore(propertyPath: string) {
   return createObjectGetter(get(store))(propertyPath);
 }
 
+/**
+ * Merge `config` into the store and save it to the backend.
+ * Calls made within AUTOSAVE_DELAY_MS are coalesced into one save; every caller
+ * gets the same result (the saved config, or null on failure). Progress is
+ * published on `saveStatus` ($lib/stores/saveStatus) for a visible indicator.
+ * Pass `false` as the second argument to update the store only.
+ */
+export const AUTOSAVE_DELAY_MS = 600;
+let pendingPatch: Record<string, any> = {};
+let pendingTimer: ReturnType<typeof setTimeout> | null = null;
+let pendingWaiters: Array<(v: Config | null) => void> = [];
+
 export async function saveToConfig(config: { [index: string]: any }, shouldUpdateConfiguration: boolean = true): Promise<Config | null> {
-  if (get(store).isAuthCodeValid) {
-    saveToStore({
-      config: {
-        ...get(store).config,
-        ...config,
-      },
-    });
+  if (!get(store).isAuthCodeValid) return null;
 
-    if (shouldUpdateConfiguration) {
-      return await updateConfiguration(get(store).config);
-    }
+  saveToStore({
+    config: {
+      ...get(store).config,
+      ...config,
+    },
+  });
+
+  if (!shouldUpdateConfiguration) return null;
+
+  pendingPatch = { ...pendingPatch, ...config };
+  saveStatus.markDirty();
+  if (pendingTimer) clearTimeout(pendingTimer);
+  return new Promise<Config | null>((resolve) => {
+    pendingWaiters.push(resolve);
+    pendingTimer = setTimeout(flushConfigSave, AUTOSAVE_DELAY_MS);
+  });
+}
+
+/** Save pending config changes now (for example before navigating away). */
+export async function flushConfigSave(): Promise<Config | null> {
+  if (pendingTimer) clearTimeout(pendingTimer);
+  pendingTimer = null;
+  const waiters = pendingWaiters;
+  pendingWaiters = [];
+  // Send the full current config (as before) so fields edited elsewhere are not lost.
+  const body = { ...get(store).config, ...pendingPatch };
+  pendingPatch = {};
+  if (waiters.length === 0 && Object.keys(body).length === 0) return null;
+  saveStatus.markSaving();
+  let result: Config | null = null;
+  try {
+    const { updateConfigurationOrThrow } = await import("./systems/requests/updateConfiguration");
+    result = await updateConfigurationOrThrow(body);
+    saveStatus.markSaved();
+  } catch (e: any) {
+    saveStatus.markError(e?.userMessage || "We could not save your changes. Check your connection and try again.", () => saveToConfig({}, true));
+    result = null;
   }
-
-  return null;
+  waiters.forEach((w) => w(result));
+  return result;
 }
 
 function createObjectPopulator<T extends object>(obj: T): Populator<T> {
@@ -252,21 +287,6 @@ export function setStorageFromKeysToSave() {
   }
 }
 
-function setCookie(name: string, value: string, days = 365) {
-  try {
-    if (typeof document === "undefined") return;
-    let expires = "";
-    if (days) {
-      const date = new Date();
-      date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-      expires = "; expires=" + date.toUTCString();
-    }
-    document.cookie = name + "=" + encodeURIComponent(
-      JSON.stringify(value)
-    ) + expires + "; path=/";
-  } catch {}
-}
-
 export function getCookie(name: string) {
   try {
     if (typeof document === "undefined") return null;
@@ -283,18 +303,37 @@ export function getCookie(name: string) {
   }
 }
 
+/** Cookies written by older versions (auth values readable by any script, sent on every request). */
+const LEGACY_COOKIE_KEYS = ["authCode", "tokenId", "clientId", "configuratorEmail", "isAuthCodeValid", "user", "subscribers", "leads"];
+let legacyCookiesCleared = false;
+function expireLegacyCookies() {
+  if (legacyCookiesCleared || typeof document === "undefined") return;
+  legacyCookiesCleared = true;
+  try {
+    localStorage.removeItem("subscribers");
+    localStorage.removeItem("leads");
+  } catch {}
+  try {
+    const existing = document.cookie.split(";").map((c) => c.split("=")[0].trim());
+    for (const key of new Set([...LEGACY_COOKIE_KEYS, ...get(store).keysToSave])) {
+      if (existing.includes(key)) document.cookie = `${key}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
+    }
+  } catch {}
+}
+
 function setAllKeysToSaveInLocalStorage() {
   const isLocalStorageAvailable = typeof window !== "undefined" && typeof window.localStorage !== "undefined";
+  if (!isLocalStorageAvailable) return;
+  // Synchronous on purpose: request helpers read credentials from localStorage
+  // right after saveToStore() (for example the dashboard sign in).
+  expireLegacyCookies();
   for (const key of get(store).keysToSave) {
     const value = getFromStore(key);
-    // Save to cookies always
-    setCookie(key, value);
-    // Save to localStorage if available
-    if (isLocalStorageAvailable) {
-      try {
-        localStorage.setItem(key, JSON.stringify(value || JSON.parse(localStorage.getItem(key) || "")));
-      } catch {}
-    }
+    try {
+      // Falsy values keep the stored value (historical behavior: the store starts
+      // with empty defaults before hydration). Sign out clears storage explicitly.
+      localStorage.setItem(key, JSON.stringify(value || JSON.parse(localStorage.getItem(key) || "")));
+    } catch {}
   }
 }
 

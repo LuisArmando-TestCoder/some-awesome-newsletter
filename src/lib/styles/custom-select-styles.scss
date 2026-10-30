@@ -1,15 +1,20 @@
+// Shared styles for the legacy comboboxes (Country, Language, CustomSelect, SearchSelector).
+// Imported inside each component's <style>, so Svelte scopes these rules per component.
+// Tokens only. See src/styles/tokens.scss.
+
 .custom-select-wrapper {
   position: relative;
-  font-family: sans-serif;
+  font-family: var(--font-body);
   z-index: 2;
 }
 
 .custom-select-label {
   display: block;
-  margin-bottom: 0.5rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: #4a5568;
+  margin-bottom: var(--space-2);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-snug);
+  color: var(--text-1);
 }
 
 .custom-select-control {
@@ -22,32 +27,51 @@
 .custom-select-button {
   width: 100%;
   max-width: 20rem;
-  padding: 0.5rem 1rem;
-  font-size: 0.875rem;
-  border: none;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  border-radius: 0.5rem;
-  min-height: 2.5rem;
+  min-height: var(--control-h);
+  padding: 0 var(--control-pad-x);
   box-sizing: border-box;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: var(--surface-1);
+  border: 1px solid var(--border-2);
+  border-radius: var(--radius-md);
+  box-shadow: none;
+  font-family: var(--font-body);
+  font-size: var(--fs-md);
+  color: var(--text-1);
+  transition:
+    border-color var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-out),
+    opacity var(--dur-fast) var(--ease-out);
 }
 
+// The search field sits on top of the button and only shows while the list is open.
 .custom-select-input {
   position: absolute;
+  inset: 0 auto 0 0;
   opacity: 0;
   pointer-events: none;
-  width: calc(100% - 2rem); /* Adjust as needed */
 }
 
 .custom-select-input.open {
   opacity: 1;
   pointer-events: auto;
-  width: 100%;
+  z-index: 1;
+}
+
+.custom-select-input::placeholder {
+  color: var(--text-3);
+  opacity: 1;
 }
 
 .custom-select-button {
-  opacity: 1;
-  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding-right: calc(var(--control-pad-x) + 1.5rem);
+  text-align: left;
+  cursor: pointer;
 }
 
 .custom-select-button:not(.visible) {
@@ -55,71 +79,113 @@
   pointer-events: none;
 }
 
-.custom-select-input:focus,
-.custom-select-button:focus {
-  --tw-ring-color: #3b82f6;
-  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
-  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
-  border-color: #3b82f6;
+.custom-select-button:hover:not(:disabled) {
+  background: var(--surface-2);
+  border-color: var(--text-2);
 }
 
-.custom-select-button {
-  position: relative;
-  background-color: #ffffff;
+.custom-select-input:focus,
+.custom-select-button:focus-visible {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: var(--focus-ring);
+}
+
+.custom-select-input:disabled,
+.custom-select-button:disabled {
+  background: var(--surface-2);
+  color: var(--text-3);
+  cursor: not-allowed;
+}
+
+.custom-select-value {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding-right: 2.5rem; /* Add space for the arrow */
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.custom-select-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.custom-select-flag {
+  flex: none;
+  font-size: var(--fs-lg);
+  line-height: 1;
+}
+
+.custom-select-code {
+  flex: none;
+  font-size: var(--fs-xs);
+  color: var(--text-3);
+}
+
+.custom-select-placeholder {
+  color: var(--text-3);
 }
 
 .custom-select-arrow {
   position: absolute;
-  right: 1rem;
+  right: var(--control-pad-x);
   top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none; /* Prevent the arrow from capturing clicks */
   width: 1rem;
   height: 1rem;
+  color: var(--text-2);
+  transform: translateY(-50%);
+  transition: transform var(--dur-base) var(--ease-out);
+  pointer-events: none; // Prevent the arrow from capturing clicks
 }
 
-.custom-select-button:hover {
-  background-color: #f9fafb;
+.custom-select-arrow.open {
+  transform: translateY(-50%) rotate(180deg);
 }
 
 .custom-select-list {
   position: absolute;
   width: 100%;
   max-width: 20rem;
-  margin-top: 0.25rem;
-  background-color: #ffffff;
-  border: 1px solid #d1d5db;
-  border-radius: 0.5rem;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   max-height: 16rem;
+  margin: var(--space-1) 0 0;
+  padding: var(--space-1);
+  list-style: none;
   overflow-y: auto;
+  background: var(--surface-1);
+  border: 1px solid var(--border-1);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-3);
   z-index: 20;
 }
 
 .custom-select-list-item {
-  padding: 0.5rem 1rem;
-  font-size: 0.875rem;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--space-2);
+  min-height: var(--control-h-sm);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-sm);
+  color: var(--text-1);
   cursor: pointer;
-  transition: background-color 0.15s ease-in-out;
+  transition: background-color var(--dur-fast) var(--ease-out);
 }
 
+.custom-select-list-item:hover,
 .custom-select-list-item.highlighted {
-  background-color: #3b82f6;
-  color: #ffffff;
-}
-
-.custom-select-list-item:hover {
-  background-color: #000;
+  background: var(--accent-soft);
+  color: var(--text-1);
 }
 
 .custom-select-list-item.selected {
-  /* Add your selected styles here */
+  font-weight: var(--fw-semibold);
+  color: var(--accent);
+}
+
+.custom-select-empty {
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--fs-sm);
+  color: var(--text-3);
 }

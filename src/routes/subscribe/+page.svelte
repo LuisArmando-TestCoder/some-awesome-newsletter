@@ -1,87 +1,58 @@
+<!-- Hosted subscribe page: /subscribe?configuratorId=...&newsSourceId=...&lead=...&language=xx. Owner: WS5. -->
 <script lang="ts">
-    import ChosenShader from "../../components/ShaderToy/ChosenShader/ChosenShader.svelte";
-    import SocketClient from "../../components/SocketClient.svelte";
-    import { onMount, onDestroy } from "svelte";
-    import { browser } from "$app/environment";
-    import store, { isScrollingDown, saveToStore } from "../../components/store"; // Import the store variable
-    import ThemeChanger from "../../components/ThemeChanger/ThemeChanger.svelte";
-    import MainSteps from "../../components/systems/steps/StepsTowardsSubscribe/MainSteps.svelte";
-    import GlobalData from "../../components/GlobalData/GlobalData.svelte";
-    import type { PageData } from './$types.js'; // Import PageData type
-    import getPublicConfig from "../../components/systems/requests/getPublicConfig"; // Import request function
+  import { page } from '$app/stores';
+  import SubscribeForm from '../../components/systems/widgets/Subscribe/SubscribeForm.svelte';
+  import type { PageData } from './$types.js';
+  import { ts } from '$lib/i18n/subscribe-translations';
 
-    export let data: PageData; // Receive data from load function
+  export let data: PageData;
 
-    let logoUrl: string | null | undefined = null;
-    let newsletterTitle: string | null | undefined = null; // Added for consistency, though not explicitly requested for fixed display
-    let lastScrollY = 0;
- 
-    function handleScroll() {
-        const currentScrollY = window.scrollY;
-        let scrollingDownValue = false;
-        // Add a threshold to prevent hiding on small scrolls or bounces
-        if (Math.abs(currentScrollY - lastScrollY) > 10) {
-            // Only set scrollingDown to true after scrolling down a bit
-            scrollingDownValue =
-                currentScrollY > lastScrollY && currentScrollY > 50;
-        }
-        // Always reset scrollingDown if scrolling up or near the top
-        if (currentScrollY < lastScrollY || currentScrollY <= 50) {
-            scrollingDownValue = false;
-        }
-        isScrollingDown.set(scrollingDownValue); // Update the store
-        lastScrollY = currentScrollY;
-    }
-
-    onMount(async () => {
-        // Save data from load function to the store
-        if (data.newsSourceId && data.configuratorId && data.lead) {
-            saveToStore({
-                subscriberNewsSourceId: data.newsSourceId,
-                subscriberConfiguratorId: data.configuratorId,
-                subscriberLead: data.lead,
-                stepsIndex: 0 // Reset steps index here as well
-            });
-
-            // Fetch public config to get the logo and title
-            if (data.configuratorId) {
-                const publicConfig = await getPublicConfig(data.configuratorId);
-                if (publicConfig) {
-                    logoUrl = publicConfig.logo;
-                    newsletterTitle = publicConfig.newsletterTitle; // Store title for alt text
-                }
-            }
-        } else {
-             // Handle missing params if necessary, maybe redirect or show error
-            console.warn("Subscribe page loaded without required URL parameters (newsSourceId, configuratorId, lead).");
-            saveToStore({ stepsIndex: 0 }); // Still reset steps index
-        }
-        // localStorage saving is handled by the store subscription if keysToSave includes these items
-
-        if (browser) {
-            // Only run in browser
-            lastScrollY = window.scrollY; // Initialize lastScrollY
-            window.addEventListener("scroll", handleScroll, { passive: true });
-        }
-        
-        saveToStore({
-            header: false
-        });
-    });
-
-    onDestroy(() => {
-        if (browser) {
-            // Only run in browser
-            window.removeEventListener("scroll", handleScroll);
-        }
-    });
+  $: params = $page.url.searchParams;
+  $: configuratorId = data.configuratorId ?? params.get('configuratorId');
+  $: newsSourceId = data.newsSourceId ?? params.get('newsSourceId');
+  $: lead = data.lead ?? params.get('lead');
+  $: language = params.get('language') ?? params.get('lang');
 </script>
 
-<ThemeChanger visible={false} />
-<GlobalData />
-<SocketClient />
-<MainSteps />
+<svelte:head>
+  <title>{$ts.page.title}</title>
+  <meta name="robots" content="noindex" />
+</svelte:head>
+
+<main class="subscribe-page">
+  <div class="subscribe-page__card">
+    <SubscribeForm {configuratorId} {newsSourceId} {lead} defaultLanguage={language} headingLevel={1} />
+  </div>
+</main>
 
 <style lang="scss">
-    @use "../styles/everything.scss";
+  .subscribe-page {
+    min-height: calc(100vh - var(--header-h));
+    display: grid;
+    place-items: center;
+    padding: var(--space-8) var(--space-4);
+    background: var(--surface-0);
+  }
+
+  .subscribe-page__card {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: var(--container-sm);
+    padding: var(--space-7) var(--space-6);
+    background: var(--surface-1);
+    border: 1px solid var(--border-1);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-2);
+  }
+
+  @media (max-width: 480px) {
+    .subscribe-page {
+      padding: var(--space-5) var(--space-3);
+      place-items: start center;
+    }
+
+    .subscribe-page__card {
+      padding: var(--space-6) var(--space-4);
+    }
+  }
 </style>

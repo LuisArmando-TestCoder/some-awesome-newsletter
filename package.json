@@ -8,8 +8,13 @@
 		"build": "vite build",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
+		"i18n:generate": "node --experimental-strip-types --no-warnings scripts/i18n-generate.mjs",
+		"i18n:check": "node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --quiet",
+		"copy:lint": "node --experimental-strip-types --no-warnings scripts/copy-lint.mjs --summary",
+		"copy:lint:code": "node --experimental-strip-types --no-warnings scripts/copy-lint.mjs --code src --summary",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"test:unit": "node --experimental-strip-types --no-warnings --import ./src/lib/api/__tests__/register.mjs --test src/lib/api/__tests__/*.test.mjs",
 		"push": "git add -A && git commit -m 'update' && git push"
 	},
 	"devDependencies": {
@@ -26,8 +31,6 @@
 		"vite": "^7.0.4"
 	},
 	"dependencies": {
-		"@polar-sh/sdk": "^0.35.4",
-		"@polar-sh/sveltekit": "^0.4.9",
 		"@smui/button": "^8.0.0-beta.3",
 		"@smui/card": "^8.0.0-beta.3",
 		"@smui/checkbox": "^8.0.0-beta.3",

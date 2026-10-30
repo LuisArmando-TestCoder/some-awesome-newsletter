@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount, onDestroy, afterUpdate } from 'svelte';
     import { writable } from 'svelte/store';
-    import { smoothScrollTarget } from './store.ts';
+    import { smoothScrollTarget } from './store';
   
     // ——— Public props —————————————————————
     export let ease = 0.08;   // inertia factor

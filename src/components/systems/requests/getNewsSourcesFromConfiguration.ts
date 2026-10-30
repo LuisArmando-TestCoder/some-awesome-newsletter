@@ -1,20 +1,15 @@
 import { get } from "svelte/store";
 import store from "../../store";
-import getAuthHeaders from "./getAuthHeaders";
+import { request } from "$lib/api/client";
 
-export default async function getNewsSourcesFromConfiguration(
-  configId?: string
-) {
-  const response = await fetch(
-    `${get(store).apiURL()}/configuration-news-sources?configId=${
-      configId || get(store).configuratorEmail
-    }`,
-    {
-      headers: getAuthHeaders(),
-    }
-  );
-
-  if (!response.ok) return [];
-
-  return await response.json();
+/** List news sources of a configuration. Returns [] on failure. */
+export default async function getNewsSourcesFromConfiguration(configId?: string) {
+  try {
+    const data = await request<any[]>("/configuration-news-sources", {
+      query: { configId: configId || get(store).configuratorEmail },
+    });
+    return Array.isArray(data) ? data : [];
+  } catch {
+    return [];
+  }
 }

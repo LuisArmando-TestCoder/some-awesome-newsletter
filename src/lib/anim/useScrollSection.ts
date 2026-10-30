@@ -1,7 +1,10 @@
-import { onMount } from 'svelte';
 import { browser } from '$app/environment';
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { prefersReducedMotion } from './gsap.client';
+
+// Svelte action (WS1). Usage: <section use:useScrollSection={{ onActivate }}>
+// Fixed: it used to call onMount inside the action (throws) and never killed its trigger.
+// ScrollTrigger now loads on demand. Under reduced motion the section shows at once and callbacks still fire.
 
 type ScrollSectionOptions = {
     onActivate?: () => void;
@@ -16,61 +19,39 @@ export function useScrollSection(node: HTMLElement, options: ScrollSectionOption
     if (!browser) return;
 
     const { onActivate, onDeactivate, pin, snap, start = 'top 80%', end = 'bottom top' } = options;
+    let trigger: any = null;
+    let timeline: gsap.core.Timeline | null = null;
+    let destroyed = false;
 
-    let trigger: ScrollTrigger | null = null;
-
-    onMount(() => {
-        gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
-            const timeline = gsap.timeline({
-                scrollTrigger: {
-                    trigger: node,
-                    start,
-                    end,
-                    pin,
-                    snap,
-                    onEnter: () => {
-                        console.log(`anim.section: Section ${node.id || ''} entered`);
-                        if (onActivate) onActivate();
-                    },
-                    onLeave: () => {
-                        console.log(`anim.section: Section ${node.id || ''} left`);
-                        if (onDeactivate) onDeactivate();
-                    },
-                    onEnterBack: () => {
-                        console.log(`anim.section: Section ${node.id || ''} entered back`);
-                        if (onActivate) onActivate();
-                    },
-                    onLeaveBack: () => {
-                        console.log(`anim.section: Section ${node.id || ''} left back`);
-                        if (onDeactivate) onDeactivate();
-                    }
-                }
-            });
-
-            timeline.from(node, {
-                opacity: 0,
-                y: 50,
-                duration: 0.6,
-                ease: 'power3.out'
-            });
+    import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
+        if (destroyed) return;
+        gsap.registerPlugin(ScrollTrigger);
+        const reduced = prefersReducedMotion();
+        trigger = ScrollTrigger.create({
+            trigger: node,
+            start,
+            end,
+            pin: reduced ? false : pin,
+            snap: reduced ? undefined : snap,
+            onEnter: () => onActivate?.(),
+            onLeave: () => onDeactivate?.(),
+            onEnterBack: () => onActivate?.(),
+            onLeaveBack: () => onDeactivate?.()
         });
-
-        return () => {
-            if (trigger) {
-                console.log(`anim.section: Destroying ScrollTrigger for section ${node.id || ''}`);
-                trigger.kill();
-                trigger = null;
-            }
-        };
+        if (!reduced) {
+            timeline = gsap.timeline({ scrollTrigger: { trigger: node, start, end } });
+            timeline.from(node, { opacity: 0, y: 24, duration: 0.4, ease: 'power3.out' });
+        }
     });
 
     return {
         destroy() {
-            if (trigger) {
-                console.log(`anim.section: Destroying ScrollTrigger for section ${node.id || ''} from action`);
-                trigger.kill();
-                trigger = null;
-            }
+            destroyed = true;
+            trigger?.kill?.();
+            timeline?.scrollTrigger?.kill();
+            timeline?.kill();
+            trigger = null;
+            timeline = null;
         }
     };
 }

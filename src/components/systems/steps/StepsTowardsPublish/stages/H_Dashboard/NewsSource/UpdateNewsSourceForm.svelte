@@ -12,7 +12,6 @@
   import store, { latestMessage } from "../../../../../../store";
   import { generatePersonality } from "../../../../../requests/generatePersonality";
   import Personality from "../../../../../inputs/Personality/Personality.svelte";
-  import EmailInput from "../../../../../inputs/Email/Email.svelte";
   import MarkdownText from "../../../../../texts/MarkdownText/MarkdownText.svelte";
   import { onMount } from "svelte";
   import { browser } from "$app/environment";
@@ -20,7 +19,9 @@
   
   // Translation store import
   import { t } from "$lib/i18n/dashboard-translations";
-  import { checkPlanLimit } from "$lib/utils/checkPlanLimits";
+  import { dt } from "$lib/dashboard/i18n";
+  import { goTo } from "$lib/dashboard/nav";
+  import { sourceUsage } from "$lib/dashboard/sources/sourceUtils";
 
   export let newsSource: NewsSource;
   export let errorMessage: string;
@@ -34,8 +35,6 @@
     linkSelector: string;
     url: string;
     id: string;
-    emailMaskSender: string;
-    appPassword: string;
     includeImages: boolean;
     isPublic: boolean;
     /** Which webhook group this source publishes to. Empty string = System Default (groups[0]) */
@@ -52,40 +51,26 @@
       linkSelector: newsSource.linkSelector || "",
       url: newsSource.url || "",
       id: newsSource.id,
-      emailMaskSender: newsSource.emailMaskSender || "",
-      appPassword: newsSource.appPassword || "",
       includeImages: !!newsSource.includeImages,
       isPublic: newsSource.isPublic === undefined ? true : newsSource.isPublic,
       webhookGroupId: newsSource.webhookGroupId || "",
     };
   }
 
-  /* Webhook groups from the shared store — SSR-safe, defaults to [] */
+  /* Webhook groups from the shared store, SSR-safe, defaults to [] */
   $: webhookGroups = ($store.config.webhookGroups || []) as import("../../../../../../types").WebhookGroup[];
 
-  /* Session change tracking — read in onMount (browser only) */
+  /* Session change tracking: read in onMount (browser only) */
   let sessionChangedIds = new Set<string>();
   const SESSION_KEY = "aiban_wh_session";
 
-  let emailValidationError = "";
-  $: {
-    if (updateFields) {
-      const sender = updateFields.emailMaskSender;
-      const password = updateFields.appPassword;
-      if ((sender && !password) || (!sender && password)) {
-        emailValidationError = $t['newsSource.errorEmailBoth'];
-      } else {
-        emailValidationError = "";
-      }
-    } else {
-       emailValidationError = "";
-    }
-  }
-
   export const updatedNewsSource = writable<NewsSource | null>(null);
 
-  $: limitCheck = checkPlanLimit("newsSources");
-  $: isLimitReached = !limitCheck.allowed;
+  // Reactive plan usage. Only show the warning when the owner is OVER the limit (1 of 1 is fine).
+  $: usage = sourceUsage($store.config, $store.subscribers);
+  $: isOverLimit = usage.overLimit;
+  const wgId = `wg-${Math.random().toString(36).slice(2, 8)}`;
+  let isSaving = false;
 
   let isMounted = false;
   onMount(() => {
@@ -102,6 +87,8 @@
   let rawContent: string = "";
 
   async function handleUpdate() {
+    // In-flight guard: one PUT at a time (the button and the form used to both fire).
+    if (isSaving) return;
     // If limits reached, we might restrict *activating* a source if it was inactive,
     // but typically update form handles existing sources.
     // However, if the user downgraded, we might want to disable enabling.
@@ -123,19 +110,14 @@
       linkSelector: updateFields.linkSelector,
       url: updateFields.url,
       id: updateFields.id,
-      emailMaskSender: updateFields.emailMaskSender || null,
-      appPassword: updateFields.appPassword || null,
       includeImages: updateFields.includeImages,
       isPublic: updateFields.isPublic,
       // Persist the selected publish destination (empty string = System Default)
       webhookGroupId: updateFields.webhookGroupId || null,
     };
 
-    if (emailValidationError) {
-      errorMessage = emailValidationError;
-      return;
-    }
-
+    isSaving = true;
+    try {
     await processNewsSourceAction(
       payload,
       (f) => f,
@@ -150,13 +132,16 @@
         ping($t['newsSource.updateSuccessTitle'], $t['newsSource.updateSuccessMsg']);
       }
     );
+    } finally {
+      isSaving = false;
+    }
   }
 </script>
 
-<form class="news-source-update-form" on:submit|preventDefault={handleUpdate}>
-  {#if isLimitReached}
-    <div class="limit-warning">
-      <p><strong>Plan Limit Exceeded:</strong> You have {limitCheck.current} / {limitCheck.limit} news sources. Sends will be blocked until you <a href="/plans">upgrade</a> or remove excess sources.</p>
+<form class="news-source-update-form" novalidate on:submit|preventDefault={handleUpdate}>
+  {#if isOverLimit}
+    <div class="limit-warning" role="status">
+      <p>{$dt("dash.sources.limit.usage", { used: usage.used, limit: usage.limit })}. {$dt("dash.sources.limit.over")} <a href="/dashboard?section=settings&tab=billing" on:click|preventDefault={() => goTo("settings", "billing")}>{$dt("dash.sources.limit.action")}</a></p>
     </div>
   {/if}
 
@@ -164,10 +149,10 @@
     <!-- ── Publish Destination (reactive from shared store) ── -->
     {#if webhookGroups.length > 0}
       <div class="webhook-group-selector">
-        <label class="wg-label">Publish Destination</label>
-        <select class="wg-select" bind:value={updateFields.webhookGroupId}
+        <label class="wg-label" for={wgId}>{$dt("dash.sources.legacy.destination")}</label>
+        <select id={wgId} class="wg-select" aria-describedby="{wgId}-hint" bind:value={updateFields.webhookGroupId}
           on:change={() => { if (isMounted) handleUpdate(); }}>
-          <option value="">★ System Default ({webhookGroups[0]?.name || webhookGroups[0]?.url || 'None'})</option>
+          <option value="">{$dt("dash.sources.legacy.destinationDefault", { name: webhookGroups[0]?.name || webhookGroups[0]?.url || "" })}</option>
           {#each webhookGroups.slice(1) as group (group.id)}
             <option value={group.id}>
               {group.name || group.url}
@@ -175,8 +160,7 @@
             </option>
           {/each}
         </select>
-        <p class="wg-hint">Choose which website this news source publishes to after each send.
-          Set up destinations in <strong>Secrets / Developer</strong>.</p>
+        <p class="wg-hint" id="{wgId}-hint">{$dt("dash.sources.legacy.destinationHint")}</p>
       </div>
     {/if}
 
@@ -199,7 +183,7 @@
           bind:value={updateFields.lead}
         />
         <p class="info-message">
-          {$t['newsSource.leadNote']}
+          {$dt("dash.sources.field.leadHint")}
         </p>
       </div>
     </ToggleCard>
@@ -252,30 +236,15 @@
           {$t['newsSource.publicVisibleDesc']}
         </MarkdownText> -->
 
-        <EmailInput
-          label={$t['newsSource.senderEmailLabel']}
-          placeholder={$t['newsSource.senderEmailPlaceholder']}
-          bind:value={updateFields.emailMaskSender}
-        />
-        <PlainText
-          label={$t['newsSource.appPasswordLabel']}
-          type="password"
-          placeholder={$t['newsSource.appPasswordPlaceholder']}
-          bind:value={updateFields.appPassword}
-        />
-        {#if emailValidationError}
-          <p class="error-message">{emailValidationError}</p>
-        {/if}
-        <MarkdownText {canReveal}>
-          {$t['newsSource.emailCredentialsDesc']}
-        </MarkdownText>
+        <!-- Per-source sender address and email app password removed for security (2026-10-30).
+             Issues go out from AIBAN's address with the owner's sender name. -->
       </div>
     </ToggleCard>
     
-    <SubmitButton label={$t['newsSource.updateButton']} callback={handleUpdate} />
+    <SubmitButton label={$t['newsSource.updateButton']} type="submit" loading={isSaving} disabled={isSaving} />
 
     {#if errorMessage}
-      <div class="error-message">{errorMessage}</div>
+      <div class="error-message" role="alert">{errorMessage}</div>
     {/if}
   {/if}
 </form>

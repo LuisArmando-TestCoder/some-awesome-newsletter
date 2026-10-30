@@ -2,6 +2,7 @@
   import { writable, derived, get } from "svelte/store";
   import type { Writable } from "svelte/store";
   import CustomSelect from "./CustomSelect.svelte";
+  import { t } from "$lib/i18n/dashboard-translations";
   import { onMount } from "svelte";
 
   export let store: Writable<string> | undefined = undefined;
@@ -82,54 +83,54 @@
     parseCron(value);
   }
 
-  const minutes = [
-    { value: "*", label: "Every Minute" },
+  $: minutes = [
+    { value: "*", label: $t['scheduleTime.everyMinute'] ?? "Every Minute" },
     ...Array.from({ length: 60 }, (_, i) => ({
       value: i.toString(),
       label: i.toString().padStart(2, "0"),
     })),
   ];
-  const hours = [
-    { value: "*", label: "Every Hour" },
+  $: hours = [
+    { value: "*", label: $t['scheduleTime.everyHour'] ?? "Every Hour" },
     ...Array.from({ length: 24 }, (_, i) => ({
       value: i.toString(),
       label: i.toString().padStart(2, "0"),
     })),
   ];
-  const daysOfMonth = [
-    { value: "*", label: "Every Day" },
-    { value: "*/2", label: "Every Other Day" },
+  $: daysOfMonth = [
+    { value: "*", label: $t['scheduleTime.everyDay'] ?? "Every day" },
+    { value: "*/2", label: $t['scheduleTime.everyOtherDay'] ?? "Every Other Day" },
     ...Array.from({ length: 31 }, (_, i) => ({
       value: (i + 1).toString(),
       label: (i + 1).toString(),
     })),
   ];
-  const months = [
-    { value: "*", label: "Every Month" },
-    { value: "1", label: "January" },
-    { value: "2", label: "February" },
-    { value: "3", label: "March" },
-    { value: "4", label: "April" },
-    { value: "5", label: "May" },
-    { value: "6", label: "June" },
-    { value: "7", label: "July" },
-    { value: "8", label: "August" },
-    { value: "9", label: "September" },
-    { value: "10", label: "October" },
-    { value: "11", label: "November" },
-    { value: "12", label: "December" },
+  $: months = [
+    { value: "*", label: $t['scheduleTime.everyMonth'] ?? "Every Month" },
+    { value: "1", label: $t['cron.january'] ?? "January" },
+    { value: "2", label: $t['cron.february'] ?? "February" },
+    { value: "3", label: $t['cron.march'] ?? "March" },
+    { value: "4", label: $t['cron.april'] ?? "April" },
+    { value: "5", label: $t['cron.may'] ?? "May" },
+    { value: "6", label: $t['cron.june'] ?? "June" },
+    { value: "7", label: $t['cron.july'] ?? "July" },
+    { value: "8", label: $t['cron.august'] ?? "August" },
+    { value: "9", label: $t['cron.september'] ?? "September" },
+    { value: "10", label: $t['cron.october'] ?? "October" },
+    { value: "11", label: $t['cron.november'] ?? "November" },
+    { value: "12", label: $t['cron.december'] ?? "December" },
   ];
-  const daysOfWeek = [
-    { value: "*", label: "Every Day" },
-    { value: "1-5", label: "Weekdays" },
-    { value: "0,6", label: "Weekends" },
-    { value: "0", label: "Sunday" },
-    { value: "1", label: "Monday" },
-    { value: "2", label: "Tuesday" },
-    { value: "3", label: "Wednesday" },
-    { value: "4", label: "Thursday" },
-    { value: "5", label: "Friday" },
-    { value: "6", label: "Saturday" },
+  $: daysOfWeek = [
+    { value: "*", label: $t['scheduleTime.everyDay'] ?? "Every day" },
+    { value: "1-5", label: $t['scheduleTime.weekdays'] ?? "Weekdays" },
+    { value: "0,6", label: $t['scheduleTime.weekends'] ?? "Weekends" },
+    { value: "0", label: $t['cron.sunday'] ?? "Sunday" },
+    { value: "1", label: $t['cron.monday'] ?? "Monday" },
+    { value: "2", label: $t['cron.tuesday'] ?? "Tuesday" },
+    { value: "3", label: $t['cron.wednesday'] ?? "Wednesday" },
+    { value: "4", label: $t['cron.thursday'] ?? "Thursday" },
+    { value: "5", label: $t['cron.friday'] ?? "Friday" },
+    { value: "6", label: $t['cron.saturday'] ?? "Saturday" },
   ];
 </script>
 
@@ -138,19 +139,19 @@
 {/if}
 <div class="cron-builder">
   {#if !exclude.includes("month")}
-    <CustomSelect label="Month" options={months} store={monthStore} />
+    <CustomSelect label={$t['scheduleTime.month'] ?? "Month"} options={months} store={monthStore} />
   {/if}
   {#if !exclude.includes("dayOfMonth")}
-    <CustomSelect label="Day of Month" options={daysOfMonth} store={dayOfMonthStore} />
+    <CustomSelect label={$t['scheduleTime.dayOfMonth'] ?? "Day of the month"} options={daysOfMonth} store={dayOfMonthStore} />
   {/if}
   {#if !exclude.includes("dayOfWeek")}
-    <CustomSelect label="Day of Week" options={daysOfWeek} store={dayOfWeekStore} />
+    <CustomSelect label={$t['scheduleTime.dayOfWeek'] ?? "Day of the week"} options={daysOfWeek} store={dayOfWeekStore} />
   {/if}
   {#if !exclude.includes("hour")}
-    <CustomSelect label="Hour" options={hours} store={hourStore} />
+    <CustomSelect label={$t['scheduleTime.hour'] ?? "Hour"} options={hours} store={hourStore} />
   {/if}
   {#if !exclude.includes("minute")}
-    <CustomSelect label="Minute" options={minutes} store={minuteStore} />
+    <CustomSelect label={$t['scheduleTime.minute'] ?? "Minute"} options={minutes} store={minuteStore} />
   {/if}
 </div>
 

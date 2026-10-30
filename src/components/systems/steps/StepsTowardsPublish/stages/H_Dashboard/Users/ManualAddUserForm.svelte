@@ -1,258 +1,138 @@
-<!-- src/components/systems/steps/StepsTowardsPublish/stages/H_Dashboard/Users/ManualAddUserForm.svelte -->
+<!-- Add one subscriber by hand. Validates on submit only; a field's error clears as soon as that field changes.
+     Public API kept for older callers: props `disabled`, `onSubmit(formData)`, method `reset()`. -->
 <script lang="ts">
-  // REMOVED: import { createEventDispatcher } from "svelte";
-  // REMOVED: import { writable } from "svelte/store"; // Not needed for this pattern
-
-  // Import Input & Button Components (Adjust paths as needed)
-  import TextTypes from "../../../../../texts/TextTypes/TextTypes.svelte";
-  import PlainText from "../../../../../inputs/PlainText/PlainText.svelte";
-  import Email from "../../../../../inputs/Email/Email.svelte";
-  import Language from "../../../../../inputs/Language/Language.svelte";
-  import SubmitButton from "../../../../../buttons/SubmitButton/SubmitButton.svelte";
-  import type { NewsletterUser } from "../../../../../../types"; // Adjust path
-  import ToggleCard from "../../../../../buttons/ToggleCard/ToggleCard.svelte";
-  import store from "../../../../../../store";
-  import { ping } from "../../../../../../Notification/notificationStore";
-  import { t } from "$lib/i18n/dashboard-translations";
+  import type { NewsletterUser } from "../../../../../../types";
+  import Field from "$lib/dashboard/ui/Field.svelte";
+  import Button from "$lib/dashboard/ui/Button.svelte";
+  import Notice from "$lib/dashboard/ui/Notice.svelte";
+  import { dt } from "$lib/dashboard/i18n";
   import { checkPlanLimit } from "$lib/utils/checkPlanLimits";
+  import languagesData from "../../../../../inputs/Language/languages";
 
-  // Type for the expected form data payload
-  type FormDataPayload = Pick<
-    NewsletterUser,
-    "name" | "email" | "bio" | "language"
-  >;
+  type FormDataPayload = Pick<NewsletterUser, "name" | "email" | "bio" | "language">;
 
-  // --- Props ---
-  /** Disables the entire form, typically while a parent action is processing */
   export let disabled: boolean = false;
-  /** Callback function invoked on successful validation and submission */
-  export let onSubmit: (
-    formData: FormDataPayload
-  ) => void | Promise<void> = () => {};
+  export let onSubmit: (formData: FormDataPayload) => void | Promise<void> = () => {};
+  /** Language preselected in the form. */
+  export let defaultLanguage: string = "en";
 
-  // --- Internal Form State ---
-  // Using simple variables is often sufficient for form state within a component
-  let name: string = "";
-  let email: string = "";
-  let bio: string = "";
-  let language: string | null = "en"; // Default language
-  let isSubmitting: boolean = false; // Loading state specifically for this form's submission attempt
-  let validationError: string | null = null;
+  const uid = Math.random().toString(36).slice(2, 8);
+  const languages = [...languagesData].sort((a, b) => a.name.localeCompare(b.name));
 
-  // REMOVED: const dispatch = createEventDispatcher ...
+  let name = "";
+  let email = "";
+  let bio = "";
+  let language = defaultLanguage;
+  let isSubmitting = false;
+  let errors: { name?: string; email?: string; language?: string } = {};
+  let formError: string | null = null;
 
-  // --- Functions ---
+  function clear(field: keyof typeof errors) {
+    if (errors[field]) errors = { ...errors, [field]: undefined };
+    formError = null;
+  }
 
-  /** Resets the form fields to their default state and clears errors */
-  function resetForm() {
+  function validate(): boolean {
+    const next: typeof errors = {};
+    if (!name.trim()) next.name = $dt("dash.subs.add.nameRequired");
+    if (!email.trim()) next.email = $dt("dash.subs.add.emailRequired");
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) next.email = $dt("dash.subs.add.emailInvalid");
+    if (!language) next.language = $dt("dash.subs.add.languageRequired");
+    errors = next;
+    return Object.keys(next).length === 0;
+  }
+
+  async function handleSubmit() {
+    if (disabled || isSubmitting) return;
+    formError = null;
+    if (!validate()) return;
+    const limit = checkPlanLimit("users");
+    if (!limit.allowed) {
+      formError = $dt("dash.subs.add.limit", { limit: limit.limit });
+      return;
+    }
+    isSubmitting = true;
+    try {
+      await onSubmit({ name: name.trim(), email: email.trim(), bio: bio.trim(), language });
+    } catch (error) {
+      formError = error instanceof Error && error.message ? error.message : $dt("dash.subs.add.failed");
+    } finally {
+      isSubmitting = false;
+    }
+  }
+
+  export function reset() {
     name = "";
     email = "";
     bio = "";
-    language = "en";
-    validationError = null;
-    isSubmitting = false; // Ensure submitting state is also reset
-  }
-
-  function handleLanguageSelect(selectedLanguageCode: string | null) {
-    if (selectedLanguageCode) {
-      language = selectedLanguageCode;
-    }
-  }
-
-  /** Handles the form submission */
-  async function handleSubmit() {
-    const limitCheck = checkPlanLimit("users");
-    if (!limitCheck.allowed) {
-      validationError = $t['errors.maxSubscribers'] || `Plan limit reached: ${limitCheck.limit} subscribers.`;
-      return;
-    }
-
-    if (disabled || isSubmitting) {
-      return; // Prevent submission if disabled or already submitting
-    }
-
-    validationError = null; // Clear previous validation errors
-
-    // --- Basic Client-Side Validation ---
-    if (!name.trim()) {
-      validationError = $t['errors.nameRequired'];
-      return;
-    }
-    if (!email.trim()) {
-      validationError = $t['errors.emailRequired'];
-      return;
-    }
-    // Basic email format check (consider a more robust regex if needed)
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      validationError = $t['errors.invalidEmail'];
-      return;
-    }
-    if (!language) {
-      validationError = $t['errors.languageRequired'];
-      return;
-    }
-    // --- End Validation ---
-
-    // Set loading state for the submit button
-    isSubmitting = true;
-
-    // Prepare form data payload
-    const formData: FormDataPayload = {
-      name: name.trim(),
-      email: email.trim(),
-      bio: bio.trim(),
-      language,
-    };
-
-    // Call the parent's handler function passed via the onSubmit prop
-    try {
-      // Call the provided onSubmit function. It might be async.
-      await onSubmit(formData);
-      // If the onSubmit function is async, we might want to wait for it,
-      // but usually the parent handles its own loading state.
-      // For this pattern, we typically just trigger the parent and let it manage flow.
-    } catch (error) {
-      // It's generally better for the parent component (which owns the async logic)
-      // to handle errors and update feedback there. Catching here might be redundant
-      // unless this component needs to react specifically to an error during the *call* itself.
-      console.error("Error calling onSubmit:", error);
-      // Optionally set a generic error here, though parent feedback is preferred.
-      validationError = $t['errors.unexpectedError'];
-    } finally {
-      // Resetting isSubmitting state. The parent's 'disabled' prop should handle
-      // the broader loading state during the async operation. Resetting here allows
-      // the button to become active again *unless* the parent disables the whole form.
-      isSubmitting = false;
-    }
-
-    // We *don't* reset the form here automatically.
-    // The parent component (`NewsSourceUserManagement`) decides whether to hide this form
-    // or could potentially call the exported reset() function if needed.
-  }
-
-  // Reactive statement to clear validation error when user starts typing again
-  $: if (name || email || language) {
-    if (validationError) validationError = null;
-  }
-
-  // Expose the reset function if the parent needs to call it explicitly
-  export function reset() {
-    resetForm();
+    language = defaultLanguage;
+    errors = {};
+    formError = null;
+    isSubmitting = false;
   }
 </script>
 
-<div class="manual-add-form">
-  <ToggleCard
-    cardTitle={$t['labels.addUserManually']}
-    isOpen={false}
-    onChange={(isOpen) => {
-      console.log("ToggleCard state changed:", isOpen);
-    }}
-  >
-    <!-- Using form element's submit event is still good practice -->
-    <form class="form" on:submit|preventDefault={handleSubmit}>
-      <PlainText
-        label={`${$t['labels.name']} *`}
-        placeholder={$t['placeholders.userName']}
-        bind:value={name}
-        disabled={disabled || isSubmitting}
-      />
-      <Email
-        label={`${$t['labels.emailAddress']} *`}
-        placeholder={$t['placeholders.userEmail']}
+<form class="manual-add" on:submit|preventDefault={handleSubmit} novalidate>
+  <div class="grid">
+    <Field id="add-email-{uid}" label={$dt("labels.emailAddress")} error={errors.email ?? null}>
+      <input
+        id="add-email-{uid}"
+        type="email"
+        autocomplete="off"
+        inputmode="email"
         bind:value={email}
+        on:input={() => clear("email")}
         disabled={disabled || isSubmitting}
+        aria-invalid={!!errors.email}
+        aria-describedby={errors.email ? `add-email-${uid}-error` : undefined}
+        placeholder="ana@example.com"
       />
-      <Language
-        label={`${$t['labels.language']} *`}
-        defaultLanguageCode={language}
-        onSelect={handleLanguageSelect}
+    </Field>
+    <Field id="add-name-{uid}" label={$dt("labels.name")} error={errors.name ?? null}>
+      <input
+        id="add-name-{uid}"
+        type="text"
+        autocomplete="off"
+        bind:value={name}
+        on:input={() => clear("name")}
         disabled={disabled || isSubmitting}
+        aria-invalid={!!errors.name}
+        aria-describedby={errors.name ? `add-name-${uid}-error` : undefined}
       />
-      <PlainText
-        label={`${$t['labels.bio']} (${$t['labels.optional']})`}
-        placeholder={$t['placeholders.shortDescription']}
-        bind:value={bio}
-        isTextarea={true}
-        rows={3}
+    </Field>
+    <Field id="add-lang-{uid}" label={$dt("dash.subs.add.languageLabel")} hint={$dt("dash.subs.add.languageHint")} error={errors.language ?? null}>
+      <select
+        id="add-lang-{uid}"
+        bind:value={language}
+        on:change={() => clear("language")}
         disabled={disabled || isSubmitting}
-      />
+        aria-describedby="add-lang-{uid}-hint"
+      >
+        {#each languages as l (l.code)}
+          <option value={l.code}>{l.name}</option>
+        {/each}
+      </select>
+    </Field>
+    <Field id="add-bio-{uid}" label={$dt("dash.subs.add.bioLabel")} hint={$dt("dash.subs.add.bioHint")} optional optionalLabel={$dt("dash.common.optional")}>
+      <textarea id="add-bio-{uid}" rows="2" bind:value={bio} disabled={disabled || isSubmitting} aria-describedby="add-bio-{uid}-hint"></textarea>
+    </Field>
+  </div>
 
-      <!-- Display Validation Error -->
-      {#if validationError}
-        <p class="error-message">{validationError}</p>
-      {/if}
+  {#if formError}
+    <Notice tone="danger">{formError}</Notice>
+  {/if}
 
-      <!-- SubmitButton should trigger the form submission -->
-      <!-- Removing the callback prop as the form's on:submit handles it -->
-      <SubmitButton
-        label={isSubmitting ? $t['labels.submitting'] : $t['labels.addAndSubscribe']}
-        disabled={disabled || isSubmitting || !!validationError}
-        loading={isSubmitting}
-      />
-      <!-- If SubmitButton doesn't inherently trigger form submit, keep the callback:
-       <SubmitButton
-           label={isSubmitting ? "submitting" : "Add & Subscribe User"}
-           disabled={disabled || isSubmitting || !!validationError}
-           loading={isSubmitting}
-           callback={handleSubmit}  // Re-add if button doesn't bubble submit
-       />
-       -->
-    </form>
-  </ToggleCard>
-</div>
+  <div class="row">
+    <Button type="submit" variant="primary" icon="plus" loading={isSubmitting} disabled={disabled}>{$dt("dash.subs.add.submit")}</Button>
+  </div>
+</form>
 
-<!-- Use scoped styles or rely on global styles/parent styles -->
 <style lang="scss">
-  @use "./Users.scss";
-  @use "../Dashboard.scss";
-
-  .manual-add-form {
-    /* Add specific spacing or layout styles for the form if needed */
-  }
-
-  .form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem; // Spacing between form elements
-    margin-top: 0.75rem; // Space below the subtitle
-  }
-
-  .error-message {
-    color: var(--color-error-dark, #c62828);
-    background-color: var(--color-error-light, #ffebee);
-    border: 1px solid var(--color-error, #f44336);
-    padding: 0.5rem 0.75rem;
-    border-radius: var(--radius-s);
-    font-size: 0.9rem;
-    margin-top: -0.5rem; // Reduce gap above error message
-    margin-bottom: 0.5rem;
-  }
-
-  /* Ensure inputs/buttons take appropriate width if needed */
-  /* These might need adjustment based on the actual structure of child components */
-  :global(.plain-text-input-wrapper),
-  :global(.email-input-wrapper),
-  :global(.language-select-wrapper),
-  :global(.country-select-wrapper),
-  :global(.submit-button-wrapper) {
-    width: 100%; /* Example: Make inputs/buttons full width */
-    box-sizing: border-box; /* Important for width calculation */
-  }
-
-  /* Adjust SubmitButton alignment if needed */
-  :global(.submit-button-wrapper) {
-    margin-top: 0.5rem; /* Add some space before the button */
-    display: flex; /* Enable flex properties */
-    justify-content: flex-end; /* Example: Align button to the right */
-  }
-
-  /* Ensure Textarea within PlainText works well */
-  :global(.plain-text-input-wrapper textarea) {
-    resize: vertical; /* Allow vertical resize */
-  }
-
-  :global(.submit-button-wrapper button:disabled) {
-    opacity: 0.5;
+  .manual-add { display: flex; flex-direction: column; gap: var(--space-4); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: var(--space-4); }
+  .grid :global(.field:last-child) { grid-column: 1 / -1; }
+  .row { display: flex; justify-content: flex-end; }
+  @media (max-width: 40rem) {
+    .row :global(button) { width: 100%; min-height: 44px; }
   }
 </style>

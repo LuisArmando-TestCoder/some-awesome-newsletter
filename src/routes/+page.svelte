@@ -1,1433 +1,970 @@
 <script lang="ts">
-	import { onMount } from "svelte";
-	import { useSmoothPage } from "$lib/anim/useSmoothPage";
-	import { useScrollSection } from "$lib/anim/useScrollSection";
-	import { browser } from "$app/environment";
-	import { afterNavigate } from "$app/navigation";
-	import { getSmoother, refreshAll } from "$lib/anim/gsap.client";
-	import Faq from "$lib/ui/organisms/Faq.svelte";
-	import logout from "../components/systems/requests/logout";
-	import { t } from "$lib/i18n/translations";
-	import Pricing from "$lib/ui/organisms/Pricing.svelte";
-	// --- State ---
-	let showAnnouncement = true;
-	let prefersReducedMotion = false;
+	// AIBAN landing page. Owner: WS2. Previous version: _deprecated/src/routes/+page.svelte
+	import { tick } from 'svelte';
+	import { goto } from '$app/navigation';
+	import { t } from '$lib/i18n/translations';
+	import en from '$lib/i18n/locales/en';
+	import Faq from '$lib/ui/organisms/Faq.svelte';
+	import Pricing from '$lib/ui/organisms/Pricing.svelte';
+	import IssuePreview from '$lib/content/landing/IssuePreview.svelte';
+	import {
+		normalizeSite,
+		PENDING_SITE_KEY,
+		SAMPLE_LANGUAGES,
+		type SampleLanguage
+	} from '$lib/content/landingSample';
+	import {
+		canonical,
+		jsonLd,
+		organizationLd,
+		DEFAULT_OG_IMAGE,
+		SITE_NAME,
+		SITE_URL
+	} from '$lib/content/seo';
+	import store from '../components/store';
+	import logout from '../components/systems/requests/logout';
 
-	// --- Lifecycle & Interactions ---
-	onMount(() => {
-		if (!browser) return;
-		const mediaQuery = window.matchMedia(
-			"(prefers-reduced-motion: reduce)",
-		);
-		prefersReducedMotion = mediaQuery.matches;
-		mediaQuery.addEventListener(
-			"change",
-			(e) => (prefersReducedMotion = e.matches),
-		);
+	// Onboarding entry (WS3). /start sends signed-in owners to /dashboard and others to /signup,
+	// and pre-fills the first setup field from ?url=.
+	const START_HREF = '/start';
 
-		if (localStorage.getItem("announcementDismissed") === "true") {
-			showAnnouncement = false;
-		}
+	// Locale files that predate the landing keys fall back to English.
+	const L = $derived(($t as typeof en).landing ?? en.landing);
 
-		window.addEventListener("resize", refreshAll);
-		return () => {
-			window.removeEventListener("resize", refreshAll);
-		};
+	let siteInput = $state('');
+	let host = $state<string | null>(null);
+	let formError = $state('');
+	let announce = $state('');
+	let previewLanguage = $state<SampleLanguage>('en');
+	let previewEl = $state<HTMLElement | null>(null);
+
+	const fill = (s: string, site: string) => s.replaceAll('{site}', site);
+
+	const startHref = $derived.by(() => {
+		return host ? `${START_HREF}?url=${encodeURIComponent(`https://${host}`)}` : START_HREF;
 	});
 
-	afterNavigate(({ to }) => {
-		if (browser) {
-			const smoother = getSmoother();
-			if (smoother && to?.url.hash) {
-				smoother.scrollTo(to.url.hash, true, "top top");
-			} else if (smoother) {
-				smoother.scrollTo(0, true);
-			}
-			if (smoother) {
-				refreshAll();
-			}
+	async function onPreview(e: SubmitEvent) {
+		e.preventDefault();
+		const next = normalizeSite(siteInput);
+		if (!next) {
+			formError = L.hero.formError;
+			return;
 		}
-	});
-
-	function handleDismissAnnouncement() {
-		showAnnouncement = false;
-		localStorage.setItem("announcementDismissed", "true");
+		formError = '';
+		host = next;
+		announce = fill(L.preview.liveRegion, next);
+		await tick();
+		if (previewEl && window.matchMedia('(max-width: 60rem)').matches) {
+			const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+			previewEl.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+		}
 	}
+
+	function onStart(e: MouseEvent) {
+		e.preventDefault();
+		// Signed-out visitors start from a clean local state, as the header links do.
+		if (!$store.isAuthCodeValid) logout(false);
+		try {
+			if (host) localStorage.setItem(PENDING_SITE_KEY, `https://${host}`);
+		} catch {
+			/* storage blocked: the ?url= parameter still carries the address */
+		}
+		goto(startHref);
+	}
+
+	const softwareLd = $derived({
+		'@context': 'https://schema.org',
+		'@type': 'SoftwareApplication',
+		name: SITE_NAME,
+		url: `${SITE_URL}/`,
+		applicationCategory: 'BusinessApplication',
+		operatingSystem: 'Web',
+		description: L.seo.description,
+		offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD', description: 'Free plan' }
+	});
+
+	const faqLd = $derived({
+		'@context': 'https://schema.org',
+		'@type': 'FAQPage',
+		mainEntity: L.faq.map((f) => ({
+			'@type': 'Question',
+			name: f.q,
+			acceptedAnswer: { '@type': 'Answer', text: f.a }
+		}))
+	});
+
+	const year = new Date().getFullYear();
 </script>
 
 <svelte:head>
-	<title>{$t.mainContent.title}</title>
-	<meta name="description" content={$t.mainContent.metaDescription} />
-	<link rel="canonical" href={$t.mainContent.canonicalUrl} />
-	<meta property="og:title" content={$t.mainContent.title} />
-	<meta property="og:description" content={$t.mainContent.metaDescription} />
-	<meta property="og:image" content={$t.mainContent.ogImageUrl} />
-	<meta property="og:url" content={$t.mainContent.canonicalUrl} />
+	<title>{L.seo.title}</title>
+	<meta name="description" content={L.seo.description} />
+	<link rel="canonical" href={canonical('/')} />
+	<meta property="og:site_name" content={SITE_NAME} />
+	<meta property="og:title" content={L.seo.title} />
+	<meta property="og:description" content={L.seo.description} />
+	<meta property="og:url" content={canonical('/')} />
 	<meta property="og:type" content="website" />
-	<script type="application/ld+json">
-		{
-			"@context": "https://schema.org",
-			"@type": "Organization",
-			"name": "${$t.mainContent.organization.name}",
-			"url": "${$t.mainContent.organization.url}",
-			"logo": "${$t.mainContent.organization.logo}"
-		}
-	</script>
-	<script type="application/ld+json">
-		{
-			"@context": "https://schema.org",
-			"@type": "Product",
-			"name": "${$t.mainContent.product.name}",
-			"description": "${$t.mainContent.product.description}",
-			"brand": {
-				"@type": "Organization",
-				"name": "${$t.mainContent.organization.name}"
-			}
-		}
-	</script>
+	<meta property="og:image" content={DEFAULT_OG_IMAGE} />
+	<meta property="og:image:alt" content={L.seo.ogImageAlt} />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={L.seo.title} />
+	<meta name="twitter:description" content={L.seo.description} />
+	<meta name="twitter:image" content={DEFAULT_OG_IMAGE} />
+	{@html jsonLd(organizationLd)}
+	{@html jsonLd(softwareLd)}
+	{@html jsonLd(faqLd)}
 </svelte:head>
 
-<div>
-	<div>
-		<a href="#main-content" class="skip-link">Skip to main content</a>
-		<div class="landing-page">
-			{#if showAnnouncement && $t.mainContent.announcement}
-				<div class="announcement-bar">
-					<i>
-						{$t.mainContent.announcement.text}
-						<a href="/signup"
-							>{$t.mainContent.announcement.cta} &rarr;</a
-						>
-					</i>
-					<button
-						aria-label="Dismiss announcement"
-						on:click={handleDismissAnnouncement}
-						on:keydown={(e) =>
-							e.key === "Escape" && handleDismissAnnouncement()}
-					>
-						&times;
-					</button>
-				</div>
-			{/if}
+<a href="#main-content" class="skip-link">{L.skipLink}</a>
 
-			<main id="main-content">
-				{#if $t.mainContent.hero}
-					<section class="hero">
-						<div class="hero-overlay"></div>
-						<div class="container">
-							<h1 class="hero-hook">
-								<span>{$t.mainContent.hero.hook}</span>
-							</h1>
-							<p class="hero-sub-hook">
-								{$t.mainContent.hero.subHook}
-							</p>
-							<div class="hero-ctas">
-								<a
-									on:click={() => {
-										logout(false);
-									}}
-									href="/signup"
-									class="cta-primary"
-								>
-									{$t.mainContent.hero.primaryCta}
-								</a>
-								<a href="/demo" class="cta-secondary">
-									{$t.mainContent.hero.secondaryCta}
-								</a>
-							</div>
-							<div class="trust-cues-wrapper">
-								<p class="trust-label">Trusted by:</p>
-								<ul class="hero-trust-cues">
-									{#each $t.mainContent.hero.trustCues as cue}
-										<li>
-											<span class="check-icon">✓</span>
-											{cue}
-										</li>
-									{/each}
-								</ul>
-							</div>
-						</div>
-					</section>
-				{/if}
+<main id="main-content" class="landing">
+	<!-- Hero with the website preview -->
+	<section class="hero" aria-labelledby="hero-title">
+		<div class="wrap hero__grid">
+			<div class="hero__copy">
+				<p class="eyebrow">{L.hero.eyebrow}</p>
+				<h1 id="hero-title" class="hero__title">{L.hero.title}</h1>
+				<p class="hero__lead">{L.hero.lead}</p>
 
-				{#if $t.mainContent.socialProof}
-					<section class="social-proof">
-						<div class="container">
-							<p class="proof-label">
-								{$t.mainContent.socialProof.counts}
-							</p>
-							<div class="logo-strip-wrapper">
-								<div class="logo-strip">
-									{#each $t.mainContent.socialProof.logos as logo}
-										<img
-											src={logo.src}
-											alt="{logo.name} logo"
-											loading="lazy"
-											width="120"
-											height="40"
-										/>
-									{/each}
-								</div>
-							</div>
-						</div>
-					</section>
-				{/if}
-
-				{#if $t.mainContent.valueProps}
-					<section class="value-props">
-						<div class="bg-overlay"></div>
-						<div class="container">
-							<div class="section-header light-text">
-								<h2>{$t.mainContent.valueProps.title}</h2>
-								<p>{$t.mainContent.valueProps.subTitle}</p>
-							</div>
-							<div class="grid">
-								{#each $t.mainContent.valueProps.props as prop, i}
-									<div class="glass-card">
-										<div
-											class="card-icon-placeholder"
-										></div>
-										<h3>{prop.title}</h3>
-										<p>{prop.description}</p>
-									</div>
-								{/each}
-							</div>
-						</div>
-					</section>
-				{/if}
-
-				{#if $t.mainContent.features}
-					<section id="features" class="feature-grid">
-						<div class="container">
-							<div class="section-header">
-								<h2>{$t.mainContent.features.title}</h2>
-								<p>{$t.mainContent.features.subTitle}</p>
-							</div>
-							{#each $t.mainContent.features.featureList as feature, i}
-								<div
-									class="feature-item"
-									class:reverse={i % 2 !== 0}
-								>
-									<div class="feature-text">
-										<div class="feature-index">
-											0{i + 1}
-										</div>
-										<h3>{feature.title}</h3>
-										<p>{feature.description}</p>
-									</div>
-									<div class="feature-visual">
-										<div class="browser-chrome">
-											<span class="dot red"></span>
-											<span class="dot yellow"></span>
-											<span class="dot green"></span>
-										</div>
-										<img
-											src={feature.image}
-											alt="{feature.title} screenshot"
-											loading="lazy"
-											width="500"
-											height="350"
-										/>
-									</div>
-								</div>
-							{/each}
-						</div>
-					</section>
-				{/if}
-
-				{#if $t.mainContent.howItWorks}
-					<section class="how-it-works">
-						<div class="bg-overlay"></div>
-						<div class="container">
-							<div class="section-header light-text">
-								<h2>{$t.mainContent.howItWorks.title}</h2>
-							</div>
-							<div class="steps-grid">
-								{#each $t.mainContent.howItWorks.steps as item, i}
-									<div
-										class="step-card glass-card"
-										data-lag="0.1"
-									>
-										<div class="step-header">
-											<div class="step-number">
-												{item.step}
-											</div>
-											{#if i !== $t.mainContent.howItWorks.steps.length - 1}
-												<div
-													class="connector-line"
-												></div>
-											{/if}
-										</div>
-										<h4>{item.title}</h4>
-										<p>{item.description}</p>
-									</div>
-								{/each}
-							</div>
-						</div>
-					</section>
-				{/if}
-
-				{#if $t.mainContent.personas}
-					<section class="personas">
-						<div class="container">
-							<div class="section-header">
-								<h2>{$t.mainContent.personas.title}</h2>
-								<p>{$t.mainContent.personas.subTitle}</p>
-							</div>
-							<div class="grid">
-								{#each $t.mainContent.personas.personaList as persona, i}
-									<div class="card persona-card">
-										<div class="persona-tag">Persona</div>
-										<h4>{persona.persona}</h4>
-										<div class="persona-detail">
-											<strong>Problem:</strong>
-											<span>{persona.problem}</span>
-										</div>
-										<div class="persona-detail highlight">
-											<strong>Outcome:</strong>
-											<span>{persona.outcome}</span>
-										</div>
-									</div>
-								{/each}
-							</div>
-						</div>
-					</section>
-				{/if}
-
-				{#if $t.mainContent.metrics}
-					<section class="metrics">
-						<div class="container">
-							<div class="section-header">
-								<h2>{$t.mainContent.metrics.title}</h2>
-							</div>
-							<div class="metrics-grid">
-								{#each $t.mainContent.metrics.metricList as metric, i}
-									<div class="metric-item">
-										<div class="metric-value">
-											{metric.value}
-										</div>
-										<div class="metric-label">
-											{metric.label}
-										</div>
-										<div class="metric-divider"></div>
-										<p class="metric-proof">
-											{metric.proof}
-										</p>
-									</div>
-								{/each}
-							</div>
-						</div>
-					</section>
-				{/if}
-
-				{#if $t.mainContent.testimonials}
-					<section class="testimonials">
-						<div class="bg-overlay"></div>
-						<div class="container">
-							<div class="section-header light-text">
-								<h2>{$t.mainContent.testimonials.title}</h2>
-							</div>
-							<div class="grid">
-								{#each $t.mainContent.testimonials.testimonialList as testimonial, i}
-									<blockquote
-										class="glass-card testimonial-card"
-										data-lag="0.05"
-									>
-										<div class="quote-icon">“</div>
-										<p class="quote-text">
-											"{testimonial.quote}"
-										</p>
-										<footer>
-											<cite>
-												<strong
-													>{testimonial.name}</strong
-												>
-												<span>{testimonial.title}</span>
-											</cite>
-										</footer>
-									</blockquote>
-								{/each}
-							</div>
-						</div>
-					</section>
-				{/if}
-
-				<Pricing />
-
-				<Faq />
-
-				{#if $t.mainContent.finalCta}
-					<section id="demo" class="final-cta">
-						<div class="container">
-							<div class="cta-box">
-								<h2>{$t.mainContent.finalCta.hook}</h2>
-								<a
-									on:click={() => {
-										logout(false);
-									}}
-									href="/signup"
-									class="cta-primary-inverted"
-									>{$t.mainContent.finalCta.cta}</a
-								>
-							</div>
-						</div>
-					</section>
-				{/if}
-			</main>
-
-			{#if $t.mainContent.footer}
-				<footer class="page-footer">
-					<div class="container">
-						<div class="footer-main">
-							<div class="footer-about">
-								<a href="/" class="logo" aria-label="Homepage">
-									<img
-										src="/logo/logo_large.png"
-										width="140"
-										alt="logo"
-									/>
-								</a>
-								<p class="copyright">
-									&copy; {new Date().getFullYear()}
-									{$t.mainContent.footer.copyright}
-								</p>
-								<p class="contact">
-									<a
-										href="mailto:{$t.mainContent.footer
-											.contact}"
-										>{$t.mainContent.footer.contact}</a
-									>
-								</p>
-							</div>
-							<div class="footer-col">
-								<h4>
-									{$t.mainContent.footer.companyLinks.title}
-								</h4>
-								<ul>
-									{#each $t.mainContent.footer.companyLinks.links as link}
-										<li>
-											<a href={link.href}>{link.text}</a>
-										</li>
-									{/each}
-								</ul>
-							</div>
-							<div class="footer-col">
-								<h4>
-									{$t.mainContent.footer.legalLinks.title}
-								</h4>
-								<ul>
-									{#each $t.mainContent.footer.legalLinks.links as link}
-										<li>
-											<a href={link.href}>{link.text}</a>
-										</li>
-									{/each}
-								</ul>
-							</div>
-						</div>
+				<form class="site-form" novalidate onsubmit={onPreview}>
+					<label for="site-input" class="site-form__label">{L.hero.formLabel}</label>
+					<div class="site-form__row">
+						<input
+							id="site-input"
+							class="site-form__input"
+							type="text"
+							inputmode="url"
+							autocomplete="url"
+							spellcheck="false"
+							autocapitalize="off"
+							placeholder={L.hero.formPlaceholder}
+							bind:value={siteInput}
+							aria-describedby="site-hint{formError ? ' site-error' : ''}"
+							aria-invalid={formError ? 'true' : undefined}
+						/>
+						<button type="submit" class="btn btn--primary">{L.hero.formSubmit}</button>
 					</div>
-				</footer>
-			{/if}
+					{#if formError}
+						<p id="site-error" class="site-form__error" role="alert">{formError}</p>
+					{/if}
+					<p id="site-hint" class="site-form__hint">{L.hero.formHint}</p>
+				</form>
+
+				<a class="link-tertiary" href="#how-it-works">{L.hero.secondaryCta}</a>
+			</div>
+
+			<div class="hero__preview" bind:this={previewEl}>
+				<IssuePreview host={host} labels={L.preview} bind:language={previewLanguage} idPrefix="hero" />
+				<p class="hero__note">{L.preview.note}</p>
+				<a class="btn btn--primary btn--block" href={startHref} onclick={onStart}>
+					{host ? fill(L.preview.startCta, host) : L.preview.startCtaGeneric}
+				</a>
+				<p class="visually-hidden" aria-live="polite">{announce}</p>
+			</div>
 		</div>
+	</section>
+
+	<!-- Trigger to action chain -->
+	<section id="how-it-works" class="section section--alt" aria-labelledby="chain-title">
+		<div class="wrap">
+			<header class="section__head">
+				<p class="eyebrow">{L.chain.eyebrow}</p>
+				<h2 id="chain-title" class="section__title">{L.chain.title}</h2>
+				<p class="section__lead">{L.chain.lead}</p>
+			</header>
+
+			<div class="chain">
+				<div class="chain__trigger">
+					<p class="chain__label">{L.chain.triggerLabel}</p>
+					<div class="card card--trigger">
+						<span class="chain__icon" aria-hidden="true">
+							<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
+						</span>
+						<h3 class="card__title">{L.chain.trigger.title}</h3>
+						<p class="card__body">{L.chain.trigger.body}</p>
+					</div>
+				</div>
+
+				<div class="chain__actions">
+					<p class="chain__label">{L.chain.actionLabel}</p>
+					<ol class="steps">
+						{#each L.chain.steps as step, i}
+							<li class="steps__item">
+								<span class="steps__num" aria-hidden="true">{i + 1}</span>
+								<div>
+									<h3 class="steps__title">{step.title}</h3>
+									<p class="steps__body">{step.body}</p>
+								</div>
+							</li>
+						{/each}
+					</ol>
+				</div>
+			</div>
+
+			<div class="also">
+				<h3 class="also__title">{L.chain.alsoTitle}</h3>
+				<ul class="also__list">
+					{#each L.chain.also as item}
+						<li class="card">
+							<p class="card__title">{item.title}</p>
+							<p class="card__body">{item.body}</p>
+						</li>
+					{/each}
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<!-- Languages -->
+	<section class="section" aria-labelledby="lang-title">
+		<div class="wrap">
+			<header class="section__head section__head--left">
+				<p class="eyebrow">{L.languages.eyebrow}</p>
+				<h2 id="lang-title" class="section__title">{L.languages.title}</h2>
+				<p class="section__lead">{L.languages.body}</p>
+			</header>
+			<div class="lang-grid">
+				{#each SAMPLE_LANGUAGES as code}
+					<IssuePreview
+						host={host}
+						labels={L.preview}
+						switchable={false}
+						language={code}
+						compact
+						idPrefix="lang-{code}"
+					/>
+				{/each}
+			</div>
+			<p class="caption">{L.languages.sampleNote}</p>
+		</div>
+	</section>
+
+	<!-- Sender -->
+	<section class="section section--alt" aria-labelledby="sender-title">
+		<div class="wrap split">
+			<header class="section__head section__head--left">
+				<p class="eyebrow">{L.sender.eyebrow}</p>
+				<h2 id="sender-title" class="section__title">{L.sender.title}</h2>
+				<p class="section__lead">{L.sender.body}</p>
+			</header>
+			<figure class="inbox">
+				<figcaption class="inbox__caption">{L.sender.inboxLabel}</figcaption>
+				<ul class="inbox__list">
+					<li class="inbox__row inbox__row--dim" aria-hidden="true"><span class="bar bar--s"></span><span class="bar bar--l"></span></li>
+					<li class="inbox__row inbox__row--you">
+						<span class="inbox__avatar" aria-hidden="true">{(host ?? 'y').charAt(0).toUpperCase()}</span>
+						<div class="inbox__text">
+							<p class="inbox__from">
+								<strong>{L.sender.inboxFrom}</strong>
+								<span>&lt;hello@{host ?? 'yourcompany.com'}&gt;</span>
+							</p>
+							<p class="inbox__subject">{fill(L.sender.inboxSubject, host ?? 'yourcompany.com')}</p>
+							<p class="inbox__snippet">{L.sender.inboxSnippet}</p>
+						</div>
+						<span class="inbox__time">{L.sender.inboxTime}</span>
+					</li>
+					<li class="inbox__row inbox__row--dim" aria-hidden="true"><span class="bar bar--m"></span><span class="bar bar--l"></span></li>
+				</ul>
+			</figure>
+		</div>
+	</section>
+
+	<!-- Grow -->
+	<section class="section" aria-labelledby="grow-title">
+		<div class="wrap">
+			<header class="section__head">
+				<p class="eyebrow">{L.grow.eyebrow}</p>
+				<h2 id="grow-title" class="section__title">{L.grow.title}</h2>
+			</header>
+			<ul class="grid-3">
+				{#each L.grow.items as item}
+					<li class="card">
+						<h3 class="card__title">{item.title}</h3>
+						<p class="card__body">{item.body}</p>
+					</li>
+				{/each}
+			</ul>
+		</div>
+	</section>
+
+	<!-- Use cases -->
+	<section class="section section--alt" aria-labelledby="uses-title">
+		<div class="wrap">
+			<header class="section__head">
+				<p class="eyebrow">{L.useCases.eyebrow}</p>
+				<h2 id="uses-title" class="section__title">{L.useCases.title}</h2>
+				<p class="section__lead">{L.useCases.lead}</p>
+			</header>
+			<ul class="uses">
+				{#each L.useCases.items as item}
+					<li class="uses__item">
+						<h3 class="uses__title">{item.title}</h3>
+						<p class="uses__body">{item.body}</p>
+					</li>
+				{/each}
+			</ul>
+		</div>
+	</section>
+
+	<!-- Pricing (existing organism, prices unchanged) -->
+	<section id="pricing" class="section" aria-labelledby="pricing-title">
+		<div class="wrap">
+			<header class="section__head">
+				<p class="eyebrow">{L.pricingIntro.eyebrow}</p>
+				<h2 id="pricing-title" class="section__title">{L.pricingIntro.title}</h2>
+				<p class="section__lead">{L.pricingIntro.lead}</p>
+			</header>
+			<Pricing showHeader={false} headingLevel={2} />
+		</div>
+	</section>
+
+	<!-- FAQ -->
+	<section id="faq" class="section section--alt">
+		<div class="wrap wrap--narrow">
+			<Faq items={L.faq} title={L.faqTitle} idPrefix="landing-faq" />
+		</div>
+	</section>
+
+	<!-- Final CTA -->
+	<section class="final" aria-labelledby="final-title">
+		<div class="wrap final__box">
+			<h2 id="final-title" class="final__title">{L.finalCta.title}</h2>
+			<p class="final__body">{L.finalCta.body}</p>
+			<div class="final__actions">
+				<a class="btn btn--inverse" href={startHref} onclick={onStart}>{L.finalCta.cta}</a>
+				<a class="link-inverse" href="/help">{L.finalCta.secondary}</a>
+			</div>
+		</div>
+	</section>
+</main>
+
+<footer class="footer">
+	<div class="wrap footer__grid">
+		<div class="footer__about">
+			<a href="/" class="footer__logo" aria-label={($t as typeof en).nav?.home ?? 'AIBAN home'}>
+				<img src="/logo/logo.png" width="28" height="28" alt="" loading="lazy" decoding="async" />
+				<span>AIBAN</span>
+			</a>
+			<p class="footer__tagline">{L.footer.tagline}</p>
+			<p class="footer__contact">
+				{L.footer.contactLabel}: <a href="mailto:info@aiban.news">info@aiban.news</a>
+			</p>
+		</div>
+		<nav aria-label={L.footer.product}>
+			<h2 class="footer__h">{L.footer.product}</h2>
+			<ul>
+				<li><a href="/#how-it-works">{L.footer.links.howItWorks}</a></li>
+				<li><a href="/pricing">{L.footer.links.pricing}</a></li>
+				<li><a href="/demo">{L.footer.links.demo}</a></li>
+				<li><a href="/help">{L.footer.links.help}</a></li>
+			</ul>
+		</nav>
+		<nav aria-label={L.footer.company}>
+			<h2 class="footer__h">{L.footer.company}</h2>
+			<ul>
+				<li><a href="/about">{L.footer.links.about}</a></li>
+				<li><a href="/careers">{L.footer.links.careers}</a></li>
+			</ul>
+		</nav>
+		<nav aria-label={L.footer.legal}>
+			<h2 class="footer__h">{L.footer.legal}</h2>
+			<ul>
+				<li><a href="/legal/privacy">{L.footer.links.privacy}</a></li>
+				<li><a href="/legal/terms">{L.footer.links.terms}</a></li>
+				<li><a href="/legal/cookies">{L.footer.links.cookies}</a></li>
+			</ul>
+		</nav>
 	</div>
-</div>
+	<p class="wrap footer__rights">&copy; {year} AIBAN. {L.footer.rights}</p>
+</footer>
 
 <style lang="scss">
-	@use "../styles/global.scss";
-
-	/* --- GLOBAL VARIABLES & UTILITIES --- */
-	:root {
-		/* Colors */
-		--c-primary-dark: #3730a3; /* Darker shade of your primary */
-		--c-text-strong: #111827;
-		--c-text-body: #4b5563;
-
-		/* Spacing & Layout */
-		--section-padding: clamp(4rem, 8vh, 8rem);
-		--container-width: 1200px;
-
-		/* Effects */
-		--glass-bg: rgba(255, 255, 255, 0.7);
-		--glass-border: rgba(255, 255, 255, 0.4);
-		--glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
-		--backdrop-blur: blur(16px);
-
-		--shadow-elevation: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
-			0 10px 10px -5px rgba(0, 0, 0, 0.04);
-		--shadow-glow: 0 0 50px -10px var(--c-primary);
-
-		/* Transitions */
-		--ease-elastic: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-		
-		/* Modern CSS Reset / Variables for this section */
-		--hero-padding: clamp(6rem, 15vh, 12rem);
-		--hero-text-gradient: linear-gradient(
-			135deg,
-			#ffffff 0%,
-			#e0e0e0 50%,
-			#a0a0a0 100%
-		);
-		--primary-gradient: linear-gradient(90deg, #4f46e5 0%, #7c3aed 100%);
-		--primary-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.4);
-		--glass-bg: rgba(255, 255, 255, 0.1);
-		--glass-border: rgba(255, 255, 255, 0.2);
-		--anim-ease: cubic-bezier(0.16, 1, 0.3, 1);
+	.landing {
+		background: var(--surface-0, #faf8f4);
+		color: var(--text-1, #1a1a17);
+		font-family: var(--font-body, system-ui, sans-serif);
 	}
-
-	* {
-		box-sizing: border-box;
-	}
-
-	.landing-page {
-		animation: fadeIn 0.8s ease-in-out forwards;
-		overflow-x: hidden;
-	}
-
-	@keyframes fadeIn {
-		from {
-			opacity: 0;
-		}
-		to {
-			opacity: 1;
-		}
-	}
-
-	.container {
+	.wrap {
 		width: 100%;
-		max-width: var(--container-width);
+		max-width: var(--container-lg, 72rem);
 		margin-inline: auto;
-		padding-inline: var(--space-lg);
+		padding-inline: var(--space-5, 24px);
 	}
-
-	/* --- COMPONENT: Typography --- */
-	h2 {
-		font-size: clamp(2rem, 4vw, 3rem);
-		letter-spacing: -0.02em;
-		line-height: 1.1;
+	.wrap--narrow {
+		max-width: var(--container-md, 52rem);
 	}
-
-	.section-header {
-		text-align: center;
-		margin-bottom: var(--space-xxl);
-		max-width: 800px;
-		margin-inline: auto;
-
-		h2 {
-			margin-bottom: var(--space-sm);
-			text-wrap: balance;
-		}
-
-		p {
-			font-size: 1.125rem;
-			color: var(--c-text-body);
-			max-width: 60ch;
-			margin-inline: auto;
-			line-height: 1.6;
-		}
-
-		/* When over dark backgrounds */
-		&.light-text {
-			h2,
-			p {
-				color: white;
-			}
-			p {
-				opacity: 0.9;
-			}
+	.skip-link {
+		position: absolute;
+		left: var(--space-4, 16px);
+		top: calc(-1 * var(--space-10, 128px));
+		z-index: var(--z-toast, 100);
+		padding: var(--space-2, 8px) var(--space-4, 16px);
+		background: var(--surface-inverse, #1a1a17);
+		color: var(--text-inverse, #faf8f4);
+		border-radius: var(--radius-sm, 6px);
+		&:focus {
+			top: var(--space-4, 16px);
 		}
 	}
-
-	/* --- COMPONENT: Glass Card --- */
-	.glass-card {
-		background: var(--glass-bg);
-		backdrop-filter: var(--backdrop-blur);
-		-webkit-backdrop-filter: var(--backdrop-blur);
-		border: 1px solid var(--glass-border);
-		border-radius: var(--radius-lg);
-		padding: var(--space-lg);
-		box-shadow: var(--glass-shadow);
+	.visually-hidden {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+		clip: rect(0 0 0 0);
+		white-space: nowrap;
+	}
+	.eyebrow {
+		margin: 0 0 var(--space-3, 12px);
+		font-size: var(--fs-sm, 0.875rem);
+		font-weight: var(--fw-semibold, 600);
+		letter-spacing: var(--tracking-caps, 0.06em);
+		text-transform: uppercase;
+		color: var(--accent, #1f5c4f);
 	}
 
-	/* --- ATOMS: Buttons --- */
-	.cta-primary,
-	.cta-secondary,
-	.cta-primary-inverted {
+	/* Buttons: one primary, one inverse (on dark band), one tertiary link. */
+	.btn {
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		font-weight: 600;
-		border-radius: 99px; /* Pill */
-		padding: 0.875rem 2rem;
-		transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-		cursor: pointer;
+		gap: var(--space-2, 8px);
+		min-height: var(--control-h, 2.75rem);
+		padding: 0 var(--space-5, 24px);
+		border: 1px solid transparent;
+		border-radius: var(--radius-md, 10px);
+		font: inherit;
+		font-size: var(--fs-md, 1rem);
+		font-weight: var(--fw-semibold, 600);
 		text-decoration: none;
-		letter-spacing: 0.01em;
+		cursor: pointer;
+		white-space: nowrap;
+		transition:
+			background-color var(--dur-fast, 120ms) var(--ease-out, ease-out),
+			color var(--dur-fast, 120ms) var(--ease-out, ease-out);
+		&:focus-visible {
+			outline: none;
+			box-shadow: var(--focus-ring, 0 0 0 3px #1f5c4f);
+		}
 	}
-
-	.cta-primary {
-		background: var(--c-primary);
-		color: white;
-		box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.15);
+	.btn--primary {
+		background: var(--accent, #1f5c4f);
+		color: var(--accent-contrast, #fff);
 		&:hover {
-			transform: translateY(-2px);
-			box-shadow: 0 6px 20px rgba(0, 0, 0, 0.23);
+			background: var(--accent-hover, #174a3f);
 		}
 	}
-
-	.cta-secondary {
-		background: rgba(255, 255, 255, 0.1);
-		backdrop-filter: blur(10px);
-		color: white;
-		border: 1px solid rgba(255, 255, 255, 0.3);
+	.btn--inverse {
+		background: var(--surface-0, #faf8f4);
+		color: var(--text-1, #1a1a17);
 		&:hover {
-			background: rgba(255, 255, 255, 0.2);
+			background: var(--surface-2, #f2efe8);
 		}
 	}
-
-	.cta-primary-inverted {
-		background: white;
-		color: var(--c-primary);
-		&:hover {
-			background: #f3f4f6;
-		}
-	}
-
-	.skip-link {
-		position: absolute;
-		top: -100px;
-		left: 0;
-		background: var(--c-primary);
-		color: white;
-		padding: 1rem;
-		z-index: 9999;
-		transition: top 0.3s;
-		&:focus {
-			top: 0;
-		}
-	}
-
-	/* 3. Hero */
-	.hero {
-		position: relative;
+	.btn--block {
 		width: 100%;
-		min-height: 90vh; /* Full screen feel */
-		display: flex;
-		align-items: center;
-		justify-content: center;
+		white-space: normal;
 		text-align: center;
-		padding-block: var(--hero-padding);
-		overflow: hidden;
-
-		/* Background Image Handling */
-		background: url(https://images.pexels.com/photos/8086364/pexels-photo-8086364.jpeg);
-		background-size: cover;
-		background-position: center;
-		background-repeat: no-repeat;
-
-		/* 1. Dark Overlay with Blur for Text Readability */
-		&::before {
-			content: "";
-			position: absolute;
-			inset: 0;
-			background: radial-gradient(
-				circle at center,
-				rgba(0, 0, 0, 0.4) 0%,
-				rgba(0, 0, 0, 0.8) 100%
-			);
-			backdrop-filter: blur(2px); /* Subtle depth */
-			z-index: 1;
-		}
-
-		.container {
-			position: relative;
-			z-index: 2; /* Place content above overlay */
-			max-width: 900px;
-			padding-inline: var(--space-md);
-			margin-inline: auto;
-
-			/* Entry Animation Wrapper */
-			animation: fadeUp 1s var(--anim-ease) forwards;
-		}
-
-		/* 2. Typography: Modern & Fluid */
-		.hero-hook {
-			font-family: "Inter", sans-serif; /* Ensure you have a good font loaded */
-			font-weight: 800;
-			letter-spacing: -0.02em;
-			line-height: 1.1;
-			margin-bottom: var(--space-md);
-
-			/* Fluid Typography: Scales smoothly between 2.5rem and 4.5rem */
-			font-size: clamp(2.5rem, 5vw + 1rem, 5rem);
-
-			/* Modern Text Gradient */
-			span {
-				background: var(--hero-text-gradient);
-				-webkit-background-clip: text;
-				background-clip: text;
-				color: transparent;
-				text-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
-			}
-		}
-
-		.hero-sub-hook {
-			font-size: clamp(1.1rem, 2vw, 1.35rem);
-			line-height: 1.6;
-			color: rgba(255, 255, 255, 0.85); /* Softer white for subtext */
-			margin-inline: auto;
-			margin-bottom: var(--space-xl);
-			max-width: 60ch; /* Optimal reading length */
-			text-wrap: balance; /* Prevents typographic widows */
-		}
-
-		/* 3. CTAs: Flexbox & Glassmorphism */
-		.hero-ctas {
-			display: flex;
-			flex-wrap: wrap;
-			justify-content: center;
-			gap: var(--space-md);
-			margin-bottom: var(--space-xxl);
-
-			a {
-				text-decoration: none;
-				padding: 1rem 2rem;
-				border-radius: 50px; /* Pill shape */
-				font-weight: 600;
-				font-size: 1rem;
-				transition: all 0.3s var(--anim-ease);
-			}
-
-			/* Primary Button: Gradient & Glow */
-			.cta-primary {
-				background: var(--primary-gradient);
-				color: white;
-				box-shadow: var(--primary-shadow);
-				border: 1px solid transparent;
-
-				&:hover {
-					transform: translateY(-2px) scale(1.02);
-					box-shadow: 0 15px 30px -5px rgba(79, 70, 229, 0.6);
-				}
-			}
-
-			/* Secondary Button: Glass Effect */
-			.cta-secondary {
-				background: var(--glass-bg);
-				backdrop-filter: blur(10px);
-				border: 1px solid var(--glass-border);
-				color: white;
-
-				&:hover {
-					background: rgba(255, 255, 255, 0.2);
-					transform: translateY(-2px);
-				}
-			}
-		}
-
-		/* 4. Trust Cues: Clean Row */
-		.trust-cues-wrapper {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			gap: 0.5rem;
-
-			.trust-label {
-				font-size: 0.75rem;
-				text-transform: uppercase;
-				letter-spacing: 0.1em;
-				color: rgba(255, 255, 255, 0.5);
-				margin: 0;
-			}
-		}
-
-		.hero-trust-cues {
-			list-style: none;
-			padding: 0;
-			margin: 0;
-			display: flex;
-			flex-wrap: wrap;
-			justify-content: center;
-			gap: 1.5rem;
-
-			li {
-				display: flex;
-				align-items: center;
-				gap: 0.5rem;
-				font-size: 0.95rem;
-				font-weight: 500;
-				color: rgba(255, 255, 255, 0.9);
-
-				.check-icon {
-					color: #4f46e5; /* Match primary brand color */
-					background: rgba(255, 255, 255, 0.1);
-					border-radius: 50%;
-					width: 20px;
-					height: 20px;
-					display: flex;
-					align-items: center;
-					justify-content: center;
-					font-size: 0.7rem;
-				}
-			}
+		padding-block: var(--space-2, 8px);
+	}
+	.link-tertiary,
+	.link-inverse {
+		font-weight: var(--fw-semibold, 600);
+		text-underline-offset: 0.2em;
+		&:focus-visible {
+			outline: none;
+			box-shadow: var(--focus-ring, 0 0 0 3px #1f5c4f);
+			border-radius: var(--radius-sm, 6px);
 		}
 	}
-
-	/* 5. Animation Keyframes */
-	@keyframes fadeUp {
-		from {
-			opacity: 0;
-			transform: translateY(30px);
-		}
-		to {
-			opacity: 1;
-			transform: translateY(0);
-		}
+	.link-tertiary {
+		color: var(--text-link, #1f5c4f);
+	}
+	.link-inverse {
+		color: var(--text-inverse, #faf8f4);
 	}
 
-	/* Mobile Tweaks */
-	@media (max-width: 600px) {
-		.hero-ctas {
-			flex-direction: column;
-			width: 100%;
-
-			a {
-				width: 100%;
-				text-align: center;
-			}
-		}
+	/* Hero */
+	.hero {
+		padding-block: calc(var(--header-h, 4rem) + var(--space-7, 48px)) var(--space-8, 64px);
 	}
-	@keyframes fadeUp {
-		from {
-			opacity: 0;
-			transform: translateY(30px);
-		}
-		to {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
-
-	/* --- 4. SOCIAL PROOF (Refined) --- */
-	.social-proof {
-		padding: var(--space-xl) 0;
-		background: #f9fafb;
-		border-bottom: 1px solid #e5e7eb;
-
-		.container {
-			text-align: center;
-		}
-
-		.proof-label {
-			font-size: 0.9rem;
-			font-weight: 600;
-			text-transform: uppercase;
-			letter-spacing: 0.05em;
-			color: #9ca3af;
-			margin-bottom: var(--space-lg);
-		}
-
-		.logo-strip-wrapper {
-			/* Fades edges to transparency */
-			mask-image: linear-gradient(
-				to right,
-				transparent,
-				black 10%,
-				black 90%,
-				transparent
-			);
-			-webkit-mask-image: linear-gradient(
-				to right,
-				transparent,
-				black 10%,
-				black 90%,
-				transparent
-			);
-		}
-
-		.logo-strip {
-			display: flex;
-			flex-wrap: wrap;
-			justify-content: center;
-			align-items: center;
-			gap: clamp(2rem, 5vw, 4rem);
-
-			img {
-				max-height: 32px;
-				width: auto;
-				filter: grayscale(100%);
-				opacity: 0.5;
-				transition: all 0.3s ease;
-
-				&:hover {
-					filter: grayscale(0%);
-					opacity: 1;
-					transform: scale(1.05);
-				}
-			}
-		}
-	}
-
-	/* --- 5. VALUE PROPS (Glassmorphism) --- */
-	.value-props {
-		position: relative;
-		padding: var(--section-padding) 0;
-		background: url(https://images.pexels.com/photos/434337/pexels-photo-434337.jpeg)
-			no-repeat center center/cover fixed;
-
-		.bg-overlay {
-			position: absolute;
-			inset: 0;
-			background: linear-gradient(
-				to bottom,
-				rgba(17, 24, 39, 0.8),
-				rgba(17, 24, 39, 0.6)
-			);
-		}
-
-		.container {
-			position: relative;
-			z-index: 1;
-		}
-
-		.grid {
-			display: grid;
-			gap: var(--space-lg);
-			grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-		}
-
-		.glass-card {
-			display: flex;
-			flex-direction: column;
-			align-items: flex-start;
-			transition: transform 0.3s ease;
-
-			&:hover {
-				transform: translateY(-5px);
-				background: rgba(255, 255, 255, 0.8);
-			}
-
-			/* Decorative dot */
-			&::before {
-				content: "";
-				width: 40px;
-				height: 4px;
-				background: var(--c-primary);
-				border-radius: 2px;
-				margin-bottom: var(--space-md);
-			}
-
-			h3 {
-				color: var(--c-text-strong);
-				margin-bottom: var(--space-sm);
-				font-size: 1.5rem;
-			}
-
-			p {
-				color: var(--c-text-body);
-				line-height: 1.6;
-			}
-		}
-	}
-
-	/* --- 6. FEATURE GRID (Modern Layout) --- */
-	.feature-grid {
-		padding: var(--section-padding) 0;
-		background: #fff;
-	}
-
-	.feature-item {
+	.hero__grid {
 		display: grid;
-		align-items: center;
-		gap: clamp(3rem, 8vw, 6rem);
-		margin-bottom: clamp(4rem, 10vh, 8rem);
-
-		@media (min-width: 900px) {
-			grid-template-columns: 1fr 1fr;
-
-			&.reverse .feature-text {
-				order: 2; /* Text moves to right */
-			}
+		gap: var(--space-7, 48px);
+		align-items: start;
+		@media (min-width: 60rem) {
+			grid-template-columns: 1.05fr 0.95fr;
+			gap: var(--space-8, 64px);
 		}
+	}
+	.hero__title {
+		margin: 0 0 var(--space-4, 16px);
+		font-family: var(--font-display, Georgia, serif);
+		font-size: var(--fs-4xl, 3rem);
+		line-height: var(--lh-tight, 1.15);
+		letter-spacing: var(--tracking-tight, -0.01em);
+		font-weight: var(--fw-semibold, 600);
+		text-wrap: balance;
+	}
+	.hero__lead {
+		margin: 0 0 var(--space-6, 32px);
+		font-size: var(--fs-lg, 1.125rem);
+		line-height: var(--lh-normal, 1.6);
+		color: var(--text-2, #4a4943);
+		max-width: var(--measure, 68ch);
+	}
+	.hero__preview {
+		display: grid;
+		gap: var(--space-4, 16px);
+		scroll-margin-top: calc(var(--header-h, 4rem) + var(--space-4, 16px));
+	}
+	.hero__note {
+		margin: 0;
+		font-size: var(--fs-sm, 0.875rem);
+		color: var(--text-2, #4a4943);
+		line-height: var(--lh-normal, 1.6);
+	}
 
-		/* Last item margin fix */
-		&:last-child {
+	.site-form {
+		margin-bottom: var(--space-5, 24px);
+		max-width: 36rem;
+	}
+	.site-form__label {
+		display: block;
+		margin-bottom: var(--space-2, 8px);
+		font-weight: var(--fw-semibold, 600);
+		font-size: var(--fs-md, 1rem);
+	}
+	.site-form__row {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-2, 8px);
+	}
+	.site-form__input {
+		flex: 1 1 14rem;
+		min-width: 0;
+		min-height: var(--control-h, 2.75rem);
+		padding: 0 var(--space-4, 16px);
+		border: 1px solid var(--border-2, #8c887d);
+		border-radius: var(--radius-md, 10px);
+		background: var(--surface-1, #fff);
+		color: var(--text-1, #1a1a17);
+		font: inherit;
+		font-size: var(--fs-md, 1rem);
+		&::placeholder {
+			color: var(--text-3, #6b6a63);
+			font-size: var(--fs-sm, 0.875rem);
+		}
+		&:focus-visible {
+			outline: none;
+			border-color: var(--accent, #1f5c4f);
+			box-shadow: var(--focus-ring, 0 0 0 3px #1f5c4f);
+		}
+		&[aria-invalid='true'] {
+			border-color: var(--danger, #b42318);
+		}
+	}
+	.site-form__error {
+		margin: var(--space-2, 8px) 0 0;
+		color: var(--danger, #b42318);
+		font-size: var(--fs-sm, 0.875rem);
+		font-weight: var(--fw-medium, 500);
+	}
+	.site-form__hint {
+		margin: var(--space-2, 8px) 0 0;
+		color: var(--text-3, #6b6a63);
+		font-size: var(--fs-sm, 0.875rem);
+	}
+
+	/* Sections */
+	.section {
+		padding-block: var(--space-9, 96px);
+		@media (max-width: 40rem) {
+			padding-block: var(--space-8, 64px);
+		}
+	}
+	.section--alt {
+		background: var(--surface-1, #fff);
+		border-block: 1px solid var(--border-1, #e3dfd5);
+	}
+	.section__head {
+		max-width: var(--container-sm, 40rem);
+		margin: 0 auto var(--space-7, 48px);
+		text-align: center;
+	}
+	.section__head--left {
+		margin-inline: 0;
+		text-align: left;
+	}
+	.section__title {
+		margin: 0 0 var(--space-3, 12px);
+		font-family: var(--font-display, Georgia, serif);
+		font-size: var(--fs-3xl, 2.25rem);
+		line-height: var(--lh-tight, 1.15);
+		font-weight: var(--fw-semibold, 600);
+		text-wrap: balance;
+	}
+	.section__lead {
+		margin: 0;
+		font-size: var(--fs-lg, 1.125rem);
+		line-height: var(--lh-normal, 1.6);
+		color: var(--text-2, #4a4943);
+	}
+	.caption {
+		margin: var(--space-4, 16px) 0 0;
+		font-size: var(--fs-sm, 0.875rem);
+		color: var(--text-3, #6b6a63);
+	}
+
+	ul,
+	ol {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	.card {
+		background: var(--surface-0, #faf8f4);
+		border: 1px solid var(--border-1, #e3dfd5);
+		border-radius: var(--radius-lg, 16px);
+		padding: var(--space-5, 24px);
+	}
+	.section:not(.section--alt) .card {
+		background: var(--surface-1, #fff);
+	}
+	.card__title {
+		margin: 0 0 var(--space-2, 8px);
+		font-size: var(--fs-lg, 1.125rem);
+		font-weight: var(--fw-semibold, 600);
+		line-height: var(--lh-snug, 1.3);
+	}
+	.card__body {
+		margin: 0;
+		color: var(--text-2, #4a4943);
+		line-height: var(--lh-normal, 1.6);
+	}
+
+	/* Chain */
+	.chain {
+		display: grid;
+		gap: var(--space-6, 32px);
+		@media (min-width: 52rem) {
+			grid-template-columns: 18rem 1fr;
+			gap: var(--space-8, 64px);
+		}
+	}
+	.chain__trigger {
+		@media (min-width: 52rem) {
+			position: sticky;
+			top: calc(var(--header-h, 4rem) + var(--space-5, 24px));
+			align-self: start;
+		}
+	}
+	.chain__label {
+		margin: 0 0 var(--space-3, 12px);
+		font-size: var(--fs-sm, 0.875rem);
+		font-weight: var(--fw-semibold, 600);
+		color: var(--text-3, #6b6a63);
+		text-transform: uppercase;
+		letter-spacing: var(--tracking-caps, 0.06em);
+	}
+	.card--trigger {
+		border-color: var(--accent, #1f5c4f);
+		background: var(--accent-soft, #e6f0ec);
+	}
+	.chain__icon {
+		display: inline-flex;
+		margin-bottom: var(--space-3, 12px);
+		color: var(--accent, #1f5c4f);
+	}
+	.steps {
+		position: relative;
+		display: grid;
+		gap: var(--space-5, 24px);
+		&::before {
+			content: '';
+			position: absolute;
+			left: 1.125rem;
+			top: var(--space-2, 8px);
+			bottom: var(--space-2, 8px);
+			width: 2px;
+			background: var(--border-1, #e3dfd5);
+		}
+	}
+	.steps__item {
+		position: relative;
+		display: grid;
+		grid-template-columns: 2.25rem 1fr;
+		gap: var(--space-4, 16px);
+		align-items: start;
+	}
+	.steps__num {
+		position: relative;
+		display: grid;
+		place-items: center;
+		width: 2.25rem;
+		height: 2.25rem;
+		border-radius: var(--radius-full, 999px);
+		background: var(--surface-1, #fff);
+		border: 2px solid var(--accent, #1f5c4f);
+		color: var(--accent, #1f5c4f);
+		font-weight: var(--fw-bold, 700);
+		font-size: var(--fs-sm, 0.875rem);
+	}
+	.steps__title {
+		margin: var(--space-1, 4px) 0 var(--space-1, 4px);
+		font-size: var(--fs-lg, 1.125rem);
+		font-weight: var(--fw-semibold, 600);
+	}
+	.steps__body {
+		margin: 0;
+		color: var(--text-2, #4a4943);
+		line-height: var(--lh-normal, 1.6);
+		max-width: var(--measure, 68ch);
+	}
+	.also {
+		margin-top: var(--space-8, 64px);
+	}
+	.also__title {
+		margin: 0 0 var(--space-4, 16px);
+		font-size: var(--fs-xl, 1.3rem);
+		font-family: var(--font-display, Georgia, serif);
+		font-weight: var(--fw-semibold, 600);
+	}
+	.also__list,
+	.grid-3 {
+		display: grid;
+		gap: var(--space-4, 16px);
+		@media (min-width: 48rem) {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+
+	/* Languages */
+	.lang-grid {
+		display: grid;
+		gap: var(--space-4, 16px);
+		@media (min-width: 56rem) {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+
+	/* Sender */
+	.split {
+		display: grid;
+		gap: var(--space-7, 48px);
+		align-items: center;
+		@media (min-width: 56rem) {
+			grid-template-columns: 1fr 1fr;
+		}
+		.section__head {
 			margin-bottom: 0;
 		}
-
-		.feature-text {
-			.feature-index {
-				font-size: 4rem;
-				font-weight: 900;
-				color: #f3f4f6;
-				line-height: 1;
-				margin-bottom: -1rem;
-				margin-left: -0.5rem;
-				z-index: -1;
-			}
-			h3 {
-				font-size: 2rem;
-				color: var(--c-text-strong);
-				margin-bottom: var(--space-md);
-			}
-			p {
-				font-size: 1.125rem;
-				color: var(--c-text-body);
-				line-height: 1.7;
-			}
-		}
-
-		.feature-visual {
-			position: relative;
-			perspective: 1000px;
-
-			/* Browser Window Styling */
-			.browser-chrome {
-				background: #e5e7eb;
-				height: 24px;
-				border-top-left-radius: 8px;
-				border-top-right-radius: 8px;
-				display: flex;
-				align-items: center;
-				gap: 6px;
-				padding-left: 12px;
-
-				.dot {
-					width: 8px;
-					height: 8px;
-					border-radius: 50%;
-					&.red {
-						background: #ef4444;
-					}
-					&.yellow {
-						background: #f59e0b;
-					}
-					&.green {
-						background: #10b981;
-					}
-				}
-			}
-
-			img {
-				display: block;
-				width: 100%;
-				height: auto;
-				border-bottom-left-radius: 8px;
-				border-bottom-right-radius: 8px;
-				box-shadow: var(--shadow-elevation);
-				transition: transform 0.5s ease;
-			}
-
-			/* Subtle hover tilt */
-			&:hover img {
-				transform: rotateY(-2deg) rotateX(2deg);
-			}
-		}
 	}
-
-	/* --- 7. HOW IT WORKS (Connected Steps) --- */
-	.how-it-works {
-		position: relative;
-		padding: var(--section-padding) 0;
-		background: url(https://images.pexels.com/photos/190295/pexels-photo-190295.jpeg)
-			no-repeat center center/cover fixed;
-
-		.bg-overlay {
-			position: absolute;
-			inset: 0;
-			background: linear-gradient(
-				180deg,
-				rgba(0, 0, 0, 0.7) 0%,
-				rgba(0, 0, 0, 0.5) 100%
-			);
-		}
-
-		.container {
-			position: relative;
-			z-index: 1;
-		}
-
-		.steps-grid {
-			display: grid;
-			gap: var(--space-lg);
-			@media (min-width: 768px) {
-				grid-template-columns: repeat(3, 1fr);
-			}
-		}
-
-		.step-card {
-			text-align: left;
-			position: relative;
-			transition: transform 0.3s;
-			--c-text-body: rgba(255, 255, 255, 0.9);
-
-			&:hover {
-				transform: translateY(-5px);
-			}
-
-			.step-header {
-				display: flex;
-				align-items: center;
-				margin-bottom: var(--space-md);
-			}
-
-			.step-number {
-				width: 48px;
-				height: 48px;
-				border-radius: 12px;
-				background: var(--c-primary);
-				color: white;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				font-size: 1.25rem;
-				font-weight: 700;
-				box-shadow: 0 4px 10px rgba(79, 70, 229, 0.4);
-				flex-shrink: 0;
-			}
-
-			/* Dashed line connector */
-			.connector-line {
-				flex-grow: 1;
-				height: 2px;
-				background-image: linear-gradient(
-					to right,
-					var(--c-primary) 50%,
-					transparent 50%
-				);
-				background-size: 10px 100%;
-				margin: 0 var(--space-sm);
-				opacity: 0.5;
-
-				@media (max-width: 768px) {
-					display: none;
-				}
-			}
-
-			h4 {
-				font-size: 1.25rem;
-				margin-bottom: var(--space-sm);
-				color: var(--c-text-strong);
-			}
-
-			p {
-				font-size: 0.95rem;
-				color: var(--c-text-body);
-			}
-		}
+	.inbox {
+		margin: 0;
+		background: var(--surface-0, #faf8f4);
+		border: 1px solid var(--border-1, #e3dfd5);
+		border-radius: var(--radius-lg, 16px);
+		padding: var(--space-4, 16px);
+		box-shadow: var(--shadow-2, 0 4px 16px rgb(0 0 0 / 0.06));
 	}
-
-	/* --- 8. PERSONAS (Cards) --- */
-	.personas {
-		padding: var(--section-padding) 0;
-		background: #f8fafc;
-
-		.grid {
-			display: grid;
-			gap: var(--space-lg);
-			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-		}
-
-		.persona-card {
-			background: white;
-			padding: var(--space-lg);
-			border-radius: var(--radius-lg);
-			border: 1px solid #e2e8f0;
-			box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-			transition:
-				border-color 0.3s,
-				transform 0.3s;
-
-			&:hover {
-				border-color: var(--c-primary);
-				transform: translateY(-4px);
-			}
-
-			.persona-tag {
-				display: inline-block;
-				font-size: 0.75rem;
-				text-transform: uppercase;
-				letter-spacing: 0.05em;
-				color: var(--c-primary);
-				background: #eef2ff;
-				padding: 0.25rem 0.75rem;
-				border-radius: 99px;
-				margin-bottom: var(--space-md);
-			}
-
-			h4 {
-				font-size: 1.5rem;
-				margin-bottom: var(--space-md);
-			}
-
-			.persona-detail {
-				margin-bottom: 0.5rem;
-				font-size: 0.95rem;
-				color: var(--c-text-body);
-
-				strong {
-					color: var(--c-text-strong);
-				}
-
-				&.highlight {
-					margin-top: var(--space-md);
-					padding-top: var(--space-md);
-					border-top: 1px dashed #e2e8f0;
-					color: var(--c-primary);
-				}
-			}
-		}
+	.inbox__caption {
+		margin-bottom: var(--space-3, 12px);
+		font-size: var(--fs-sm, 0.875rem);
+		color: var(--text-3, #6b6a63);
 	}
-
-	/* --- 9. METRICS (Bold Layout) --- */
-	.metrics {
-		background-color: var(--c-primary);
-		color: white;
-		padding: var(--section-padding) 0;
-
-		/* Subtle background pattern */
-		background-image: radial-gradient(
-			circle at top right,
-			rgba(255, 255, 255, 0.1) 0%,
-			transparent 20%
-		);
-
-		.section-header h2 {
-			color: white;
-		}
-
-		.metrics-grid {
-			display: grid;
-			gap: 4rem;
-			text-align: center;
-			@media (min-width: 768px) {
-				grid-template-columns: repeat(3, 1fr);
-			}
-		}
-
-		.metric-item {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-		}
-
-		.metric-value {
-			font-size: clamp(3.5rem, 6vw, 5.5rem);
-			font-weight: 800;
-			line-height: 1;
-			margin-bottom: 0.5rem;
-			text-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-		}
-
-		.metric-label {
-			font-size: 1.25rem;
-			font-weight: 600;
-			opacity: 0.9;
-		}
-
-		.metric-divider {
-			width: 40px;
-			height: 2px;
-			background: rgba(255, 255, 255, 0.3);
-			margin: 1.5rem 0;
-		}
-
-		.metric-proof {
-			font-size: 0.9rem;
-			opacity: 0.7;
-			max-width: 250px;
-		}
+	.inbox__list {
+		display: grid;
+		gap: var(--space-2, 8px);
 	}
-
-	/* --- 11. TESTIMONIALS (Masonry style) --- */
-	.testimonials {
-		position: relative;
-		padding: var(--section-padding) 0;
-		background: url(https://images.pexels.com/photos/8293641/pexels-photo-8293641.jpeg)
-			no-repeat center center/cover fixed;
-
-		.bg-overlay {
-			position: absolute;
-			inset: 0;
-			background: rgba(0, 0, 0, 0.6);
-		}
-
-		.container {
-			position: relative;
-			z-index: 1;
-		}
-
-		.grid {
-			display: grid;
-			gap: var(--space-lg);
-			@media (min-width: 768px) {
-				grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-			}
-		}
-
-		.testimonial-card {
-			position: relative;
-			background: rgba(
-				255,
-				255,
-				255,
-				0.95
-			); /* Less transparent for readability */
-			padding: 2.5rem;
-
-			.quote-icon {
-				position: absolute;
-				top: 1rem;
-				left: 1.5rem;
-				font-size: 4rem;
-				color: var(--c-primary);
-				opacity: 0.2;
-				font-family: serif;
-				line-height: 1;
-			}
-
-			.quote-text {
-				position: relative;
-				font-size: 1.1rem;
-				font-style: italic;
-				color: var(--c-text-strong);
-				margin-bottom: 1.5rem;
-				z-index: 1;
-			}
-
-			footer cite {
-				display: flex;
-				flex-direction: column;
-				font-style: normal;
-
-				strong {
-					color: var(--c-text-strong);
-					font-weight: 700;
-				}
-				span {
-					font-size: 0.85rem;
-					color: var(--c-text-body);
-					margin-top: 2px;
-				}
-			}
-		}
-	}
-
-	/* --- 12. ANNOUNCEMENT BAR --- */
-	.announcement-bar {
-		background-color: var(--c-primary-dark);
-		color: white;
-		padding: 12px;
+	.inbox__row {
 		display: flex;
+		gap: var(--space-3, 12px);
+		align-items: flex-start;
+		padding: var(--space-3, 12px);
+		border-radius: var(--radius-md, 10px);
+		background: var(--surface-1, #fff);
+		border: 1px solid var(--border-1, #e3dfd5);
+	}
+	.inbox__row--dim {
+		flex-direction: column;
+		gap: var(--space-2, 8px);
+		opacity: 0.6;
+	}
+	.bar {
+		display: block;
+		height: 0.5rem;
+		border-radius: var(--radius-full, 999px);
+		background: var(--surface-3, #e8e4da);
+	}
+	.bar--s { width: 30%; }
+	.bar--m { width: 45%; }
+	.bar--l { width: 80%; }
+	.inbox__row--you {
+		border-color: var(--accent, #1f5c4f);
+		box-shadow: var(--shadow-1, 0 1px 2px rgb(0 0 0 / 0.06));
+	}
+	.inbox__avatar {
+		flex: none;
+		display: grid;
+		place-items: center;
+		width: 2.25rem;
+		height: 2.25rem;
+		border-radius: var(--radius-full, 999px);
+		background: var(--accent, #1f5c4f);
+		color: var(--accent-contrast, #fff);
+		font-weight: var(--fw-bold, 700);
+	}
+	.inbox__text {
+		flex: 1;
+		min-width: 0;
+		p {
+			margin: 0;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+	}
+	.inbox__from {
+		font-size: var(--fs-sm, 0.875rem);
+		span {
+			color: var(--text-3, #6b6a63);
+			margin-left: var(--space-1, 4px);
+		}
+	}
+	.inbox__subject {
+		font-weight: var(--fw-semibold, 600);
+	}
+	.inbox__snippet {
+		font-size: var(--fs-sm, 0.875rem);
+		color: var(--text-2, #4a4943);
+	}
+	.inbox__time {
+		font-size: var(--fs-xs, 0.75rem);
+		color: var(--text-3, #6b6a63);
+	}
+
+	/* Use cases */
+	.uses {
+		display: grid;
+		gap: var(--space-1, 4px) var(--space-7, 48px);
+		@media (min-width: 48rem) {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+	.uses__item {
+		padding: var(--space-5, 24px) 0;
+		border-top: 1px solid var(--border-1, #e3dfd5);
+	}
+	.uses__title {
+		margin: 0 0 var(--space-2, 8px);
+		font-family: var(--font-display, Georgia, serif);
+		font-size: var(--fs-xl, 1.3rem);
+		font-weight: var(--fw-semibold, 600);
+	}
+	.uses__body {
+		margin: 0;
+		color: var(--text-2, #4a4943);
+		line-height: var(--lh-normal, 1.6);
+	}
+
+	/* Final CTA */
+	.final {
+		padding-block: var(--space-9, 96px);
+	}
+	.final__box {
+		max-width: var(--container-md, 52rem);
+		background: var(--surface-inverse, #1a1a17);
+		color: var(--text-inverse, #faf8f4);
+		border-radius: var(--radius-xl, 24px);
+		padding: var(--space-8, 64px) var(--space-6, 32px);
+		text-align: center;
+	}
+	.final__title {
+		margin: 0 0 var(--space-3, 12px);
+		font-family: var(--font-display, Georgia, serif);
+		font-size: var(--fs-3xl, 2.25rem);
+		font-weight: var(--fw-semibold, 600);
+		line-height: var(--lh-tight, 1.15);
+	}
+	.final__body {
+		margin: 0 auto var(--space-6, 32px);
+		max-width: 34rem;
+		font-size: var(--fs-lg, 1.125rem);
+		line-height: var(--lh-normal, 1.6);
+		opacity: 0.85;
+	}
+	.final__actions {
+		display: flex;
+		flex-wrap: wrap;
 		justify-content: center;
 		align-items: center;
-		font-size: 0.9rem;
-		position: relative;
-		z-index: 50;
+		gap: var(--space-5, 24px);
+	}
 
+	/* Footer */
+	.footer {
+		background: var(--surface-1, #fff);
+		border-top: 1px solid var(--border-1, #e3dfd5);
+		padding-block: var(--space-8, 64px) var(--space-6, 32px);
+		color: var(--text-2, #4a4943);
+		font-size: var(--fs-sm, 0.875rem);
 		a {
-			color: white;
-			font-weight: 600;
+			color: var(--text-2, #4a4943);
 			text-decoration: none;
-			margin-left: 8px;
 			&:hover {
+				color: var(--text-1, #1a1a17);
 				text-decoration: underline;
 			}
-		}
-
-		button {
-			background: transparent;
-			border: none;
-			color: rgba(255, 255, 255, 0.7);
-			position: absolute;
-			right: 16px;
-			font-size: 1.25rem;
-			cursor: pointer;
-			&:hover {
-				color: white;
+			&:focus-visible {
+				outline: none;
+				box-shadow: var(--focus-ring, 0 0 0 3px #1f5c4f);
+				border-radius: var(--radius-sm, 6px);
 			}
 		}
-	}
-
-	/* --- 14. FINAL CTA --- */
-	.final-cta {
-		padding: 0;
-
-		.cta-box {
-			background: var(--c-primary);
-			border-radius: var(--radius-lg);
-			padding: clamp(3rem, 6vw, 6rem);
-			text-align: center;
-			margin: var(--space-xxl) auto; /* Floating box effect */
-			color: white;
-			box-shadow: var(--shadow-glow);
-
-			h2 {
-				color: white;
-				margin-bottom: var(--space-xl);
-				font-weight: 800;
-			}
-		}
-	}
-
-	/* --- 15. FOOTER (Professional Dark) --- */
-	.page-footer {
-		background-color: #0f172a;
-		color: #94a3b8;
-		padding: clamp(4rem, 8vh, 6rem) 0;
-		font-size: 0.95rem;
-
-		a {
-			color: #cbd5e1;
-			text-decoration: none;
-			transition: color 0.2s;
-			&:hover {
-				color: white;
-			}
-		}
-
-		.footer-main {
-			display: grid;
-			gap: 3rem;
-			@media (min-width: 768px) {
-				grid-template-columns: 2fr 1fr 1fr;
-			}
-		}
-
-		.logo {
-			display: flex;
-			align-items: center;
-			gap: 12px;
-			color: white;
-			font-weight: 700;
-			font-size: 1.25rem;
-			margin-bottom: 1.5rem;
-
-			img {
-				display: block;
-				border-radius: 15px;
-				box-shadow: 0 0 12px -12px white;
-				padding: 7.5px 5px;
-				background: black;
-			}
-		}
-
-		.copyright {
-			margin-bottom: 0.5rem;
-		}
-
-		h4 {
-			color: white;
-			font-size: 1rem;
-			margin-bottom: 1.5rem;
-			font-weight: 600;
-		}
-
 		ul {
-			list-style: none;
-			padding: 0;
-			margin: 0;
-			li {
-				margin-bottom: 0.75rem;
-			}
+			display: grid;
+			gap: var(--space-2, 8px);
 		}
+	}
+	.footer__grid {
+		display: grid;
+		gap: var(--space-6, 32px);
+		grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+	}
+	.footer__about {
+		grid-column: 1 / -1;
+		@media (min-width: 48rem) {
+			grid-column: auto;
+			min-width: 16rem;
+		}
+	}
+	.footer__logo {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--space-2, 8px);
+		font-weight: var(--fw-bold, 700);
+		color: var(--text-1, #1a1a17) !important;
+	}
+	.footer__tagline {
+		margin: var(--space-3, 12px) 0;
+		max-width: 22rem;
+		line-height: var(--lh-normal, 1.6);
+	}
+	.footer__contact {
+		margin: 0;
+	}
+	.footer__h {
+		margin: 0 0 var(--space-3, 12px);
+		font-size: var(--fs-sm, 0.875rem);
+		font-weight: var(--fw-semibold, 600);
+		color: var(--text-1, #1a1a17);
+	}
+	.footer__rights {
+		margin-top: var(--space-7, 48px);
+		color: var(--text-3, #6b6a63);
+		font-size: var(--fs-xs, 0.75rem);
 	}
 </style>

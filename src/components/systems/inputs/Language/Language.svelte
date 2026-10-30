@@ -1,3 +1,7 @@
+<script context="module" lang="ts">
+  let languageSelectCount = 0;
+</script>
+
 <script lang="ts">
   import { onMount, onDestroy, tick } from "svelte";
   import { writable } from "svelte/store";
@@ -20,6 +24,17 @@
   export let onSelect: (selectedCode: string | null) => void = () => {};
   export let disabled: boolean = false;
   export let whitelist: string[] = [];
+
+  // Unique ids per instance so several pickers can share a page.
+  const uid = `language-select-${++languageSelectCount}`;
+  const labelId = `${uid}-label`;
+  const listboxId = `${uid}-listbox`;
+  const valueId = `${uid}-value`;
+  const optionId = (code: string) => `${uid}-option-${code}`;
+  $: activeDescendant =
+    open && highlightedIndex >= 0 && highlightedIndex < languages.length
+      ? optionId(languages[highlightedIndex].code)
+      : undefined;
 
   // State
   let selectedLanguage: Language | null = null;
@@ -234,17 +249,14 @@
   }
 </script>
 
+<!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
   class="custom-select-wrapper"
   bind:this={dropdownRef}
   on:keydown={handleKeydown}
-  role="combobox"
-  aria-haspopup="listbox"
-  aria-expanded={open}
-  aria-owns={open ? "language-listbox" : undefined}
 >
   {#if label}
-    <span class="custom-select-label" id="language-select-label">
+    <span class="custom-select-label" id={labelId}>
       {label}
     </span>
   {/if}
@@ -257,9 +269,16 @@
       on:input={handleInput}
       placeholder={$t['language.typeToSearch']}
       class="custom-select-input {open ? 'open' : ''}"
+      role="combobox"
       aria-autocomplete="list"
-      aria-controls={open ? "language-listbox" : undefined}
-      aria-labelledby="language-select-label"
+      aria-haspopup="listbox"
+      aria-expanded={open}
+      aria-controls={open ? listboxId : undefined}
+      aria-activedescendant={activeDescendant}
+      aria-labelledby={label ? labelId : undefined}
+      aria-label={label ? undefined : $t['language.typeToSearch']}
+      tabindex={open ? undefined : -1}
+      autocomplete="off"
       {disabled}
     />
     <button
@@ -267,23 +286,27 @@
       bind:this={buttonRef}
       on:click={toggleOpen}
       class="custom-select-button {!open ? 'visible' : ''}"
-      aria-controls={open ? "language-listbox" : undefined}
-      aria-labelledby="language-select-label {selectedLanguage ? 'selected-language-label' : ''}"
+      aria-haspopup="listbox"
+      aria-expanded={open}
+      aria-controls={open ? listboxId : undefined}
+      aria-labelledby={label ? `${labelId} ${valueId}` : valueId}
+      tabindex={open ? -1 : undefined}
       {disabled}
     >
       {#if selectedLanguage}
-        <span class="flex items-center gap-2 truncate">
+        <span class="custom-select-value" id={valueId}>
           {#if selectedLanguage.flag}
-            <span class="text-lg" aria-hidden="true">{selectedLanguage.flag}</span>
+            <span class="custom-select-flag" aria-hidden="true">{selectedLanguage.flag}</span>
           {/if}
-          <span class="truncate">{selectedLanguage.name}</span>
-          <span class="text-gray-500 text-xs">({selectedLanguage.code})</span>
+          <span class="custom-select-name">{selectedLanguage.name}</span>
+          <span class="custom-select-code">({selectedLanguage.code})</span>
         </span>
       {:else}
-        <span class="text-gray-500">{$t['language.selectALanguage']}</span>
+        <span class="custom-select-placeholder" id={valueId}>{$t['language.selectALanguage']}</span>
       {/if}
       <svg
-        class="custom-select-arrow w-4 h-4 transform transition-transform duration-200 {open ? 'rotate-180' : ''}"
+        class="custom-select-arrow"
+        class:open
         fill="currentColor"
         viewBox="0 0 24 24"
         aria-hidden="true"
@@ -297,17 +320,18 @@
     <ul
       bind:this={listRef}
       role="listbox"
-      id="language-listbox"
+      id={listboxId}
       class="custom-select-list"
       tabindex="-1"
-      aria-labelledby="language-select-label"
+      aria-labelledby={label ? labelId : undefined}
+      aria-label={label ? undefined : $t['language.selectALanguage']}
       in:slide={{ duration: 200 }}
       out:slide={{ duration: 200 }}
     >
       {#each languages as language, index (language.code)}
         <li
           bind:this={listItems[index]}
-          id={`language-option-${language.code}`}
+          id={optionId(language.code)}
           class="custom-select-list-item"
           class:highlighted={highlightedIndex === index}
           class:selected={selectedLanguage?.code === language.code}
@@ -320,15 +344,13 @@
           }}
         >
           {#if language.flag}
-            <span class="text-lg" aria-hidden="true">{language.flag}</span>
+            <span class="custom-select-flag" aria-hidden="true">{language.flag}</span>
           {/if}
-          <span class="truncate">{language.name}</span>
-          <span class="{highlightedIndex === index ? 'text-white' : 'text-gray-500'} text-xs">
-            ({language.code})
-          </span>
+          <span class="custom-select-name">{language.name}</span>
+          <span class="custom-select-code">({language.code})</span>
         </li>
       {:else}
-        <li class="px-4 py-2 text-sm text-gray-500" role="option" aria-disabled="true">
+        <li class="custom-select-empty" role="option" aria-disabled="true" aria-selected="false">
           {$t['language.noLanguagesAvailable']}
         </li>
       {/each}

@@ -1,5 +1,9 @@
+<script context="module" lang="ts">
+  let textAreaCount = 0;
+</script>
+
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import type { HTMLTextareaAttributes } from "svelte/elements";
 
   export let value: string = "";
   export let label: string = "";
@@ -8,77 +12,136 @@
   export let disabled: boolean = false;
   export let onChange: (value: string) => void = () => {};
 
+  // Optional props
+  export let hint: string | undefined = undefined;
+  export let error: string | undefined = undefined;
+  export let required: boolean = false;
+  export let autocomplete: HTMLTextareaAttributes["autocomplete"] = undefined;
+  export let id: string | undefined = undefined;
+
   // Internal state to allow direct binding with textarea
   let internalValue: string = "";
 
   // Sync prop `value` to `internalValue`
   $: internalValue = value ?? ""; // Ensure internalValue is always a string
 
+  // Unique per instance and stable between server and client renders.
+  const uniqueId = `textarea-${++textAreaCount}`;
+  $: fieldId = id || uniqueId;
+  $: hintId = `${fieldId}-hint`;
+  $: errorId = `${fieldId}-error`;
+
+  // Errors stay hidden while the person is typing and show again on blur.
+  let editing = false;
+  $: showError = !!error && !editing;
+  $: describedBy = [hint ? hintId : "", showError ? errorId : ""].filter(Boolean).join(" ") || undefined;
+
   function handleInput(event: Event) {
     const target = event.target as HTMLTextAreaElement;
     internalValue = target.value;
     value = internalValue; // Update the bound prop
+    editing = true;
     onChange(internalValue);
   }
 
-  onMount(() => {
-    internalValue = value ?? ""; // Initialize on mount
-    // Ensure initial value from prop is reflected if onChange needs to be triggered
-    // However, typically onChange is for user interactions, not initial programmatic setting.
-    // If initial prop value needs to trigger parent's onChange, that's a different pattern.
-  });
-
-  // Create a unique ID for ARIA attributes
-  const uniqueId = `textarea-${label.toLowerCase().replace(/\s+/g, '-')}-${Math.random().toString(36).substring(2, 9)}`;
-
+  function commit() {
+    editing = false;
+  }
 </script>
 
 <div class="textarea-input-field">
   {#if label}
-    <label class="textarea-label" for={uniqueId}>
+    <label class="textarea-label" for={fieldId}>
       {label}
+      {#if required}<span class="required-mark" aria-hidden="true">*</span>{/if}
     </label>
   {/if}
-  <div class="textarea-wrapper">
+  {#if hint}
+    <p class="textarea-hint" id={hintId}>{hint}</p>
+  {/if}
+  <div class="textarea-wrapper" class:invalid={showError} class:disabled>
     <textarea
-      id={uniqueId}
+      id={fieldId}
       class="custom-textarea"
       bind:value={internalValue}
       on:input={handleInput}
+      on:input
+      on:focus
+      on:blur={commit}
+      on:blur
+      on:keydown
       {placeholder}
       {rows}
       {disabled}
-      aria-label={label || placeholder}
+      {required}
+      {autocomplete}
+      aria-label={label ? undefined : placeholder || undefined}
+      aria-describedby={describedBy}
+      aria-invalid={showError ? "true" : undefined}
     ></textarea>
   </div>
+  {#if showError}
+    <p class="textarea-error" id={errorId}>{error}</p>
+  {/if}
 </div>
 
 <style lang="scss">
   .textarea-input-field {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem; 
+    gap: var(--space-1);
     width: 100%;
   }
 
   .textarea-label {
-    font-size: 0.85rem;
-    color: var(--color-foreground-muted, #aaa);
-    padding-left: 0.1rem;
-    display: block; // Ensure label takes its own line if it has content
-    margin-bottom: 0.25rem;
+    display: block;
+    font-family: var(--font-body);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-snug);
+    color: var(--text-1);
+  }
+
+  .required-mark {
+    margin-left: var(--space-1);
+    color: var(--danger);
+  }
+
+  .textarea-hint {
+    margin: 0;
+    font-size: var(--fs-sm);
+    line-height: var(--lh-normal);
+    color: var(--text-2);
+  }
+
+  .textarea-error {
+    margin: 0;
+    font-size: var(--fs-sm);
+    line-height: var(--lh-normal);
+    color: var(--danger);
   }
 
   .textarea-wrapper {
-    border: 1px solid var(--color-border, rgba(255, 255, 255, 0.3));
-    border-radius: 8px;
-    background: var(--color-input-background, rgba(255, 255, 255, 0.1));
-    transition: border-color 0.3s ease;
     display: flex; // Ensures textarea fills wrapper
+    background: var(--surface-1);
+    border: 1px solid var(--border-2);
+    border-radius: var(--radius-md);
+    transition:
+      border-color var(--dur-fast) var(--ease-out),
+      box-shadow var(--dur-fast) var(--ease-out);
 
     &:focus-within {
-      border-color: var(--color-accent, #007bff);
-      box-shadow: 0 0 5px var(--color-accent-translucent, rgba(0, 123, 255, 0.5)); // Added focus shadow
+      border-color: var(--accent);
+      box-shadow: var(--focus-ring);
+    }
+
+    &.invalid {
+      border-color: var(--danger);
+    }
+
+    &.disabled {
+      background: var(--surface-2);
+      opacity: 0.6;
     }
   }
 
@@ -86,27 +149,31 @@
     field-sizing: content;
     flex-grow: 1;
     width: 100%;
-    padding: 0.75rem;
-    font-size: 1rem;
-    font-family: inherit;
+    min-height: 5rem;
+    padding: var(--space-3) var(--control-pad-x);
+    font-family: var(--font-body);
+    font-size: var(--fs-md);
+    line-height: var(--lh-normal);
+    color: var(--text-1);
     background: transparent;
     border: none;
-    color: var(--color-foreground, #eee);
+    border-radius: var(--radius-md);
     resize: vertical;
-    // min-height: calc(1.5em * var(rows) + 1.5rem); // Svelte doesn't support var() in calc like this for props
-    min-height: 80px; // Default min-height, can be adjusted or made dynamic differently
-    outline: none;
     box-sizing: border-box; // Ensure padding and border are included in width/height
 
+    // The wrapper draws the focus ring.
+    &:focus,
+    &:focus-visible {
+      outline: none;
+    }
+
     &::placeholder {
-      color: var(--color-foreground-muted, #888);
+      color: var(--text-3);
       opacity: 1;
     }
 
     &:disabled {
-      opacity: 0.6;
       cursor: not-allowed;
-      background-color: var(--color-disabled-background, rgba(200,200,200,0.1)); // Subtle disabled bg
     }
   }
 </style>

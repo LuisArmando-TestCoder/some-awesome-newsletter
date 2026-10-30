@@ -1,257 +1,182 @@
-<!-- src/components/systems/steps/StepsTowardsPublish/stages/H_Dashboard/Users/BulkAddUserSection.svelte -->
+<!-- Import many subscribers from a file or pasted text, with live progress.
+     Public API kept for older callers: props `disabled`, `newsSourceId`, `onUpload(file)`, `addedUsers`, method `reset()`. -->
 <script lang="ts">
-  import { writable } from 'svelte/store'; // Import writable
-  import type { Writable } from 'svelte/store';
+  import Field from "$lib/dashboard/ui/Field.svelte";
+  import Button from "$lib/dashboard/ui/Button.svelte";
+  import Notice from "$lib/dashboard/ui/Notice.svelte";
+  import { dt, formatNumber } from "$lib/dashboard/i18n";
+  import { importProgress, cancelImport, resetImport } from "$lib/api/imports";
 
-  // Import UI Components
-  import TextTypes from "../../../../../texts/TextTypes/TextTypes.svelte";
-  import SubmitButton from "../../../../../buttons/SubmitButton/SubmitButton.svelte";
-  import ToggleCard from "../../../../../buttons/ToggleCard/ToggleCard.svelte";
-  import FileInput from "../../../../../inputs/FileInput/FileInput.svelte";
-  import store from "../../../../../../store";
-  import { ping } from "../../../../../../Notification/notificationStore";
-  import { t } from "$lib/i18n/dashboard-translations";
-
-  // --- Props ---
   export let disabled: boolean = false;
   export let newsSourceId: string;
   export let onUpload: (file: File | null) => void | Promise<void> = () => {};
   export let addedUsers: string[] = [];
 
-  // --- Internal State ---
-  let selectedFilesStore: Writable<FileList | null> = writable(null); // Create store
-  // let selectedFile: File | null = null; // Replaced by store
-  let isSubmitting: boolean = false;
-  let fileError: string | null = null; // Keep local error state for validation/submit checks
+  const MAX_MB = 20;
+  const ACCEPT = ".csv,.tsv,.txt,.xlsx";
+  const uid = Math.random().toString(36).slice(2, 8);
 
-  // --- Functions ---
+  let mode: "file" | "paste" = "file";
+  let file: File | null = null;
+  let pasted = "";
+  let fileInput: HTMLInputElement;
+  let isSubmitting = false;
+  let error: string | null = null;
 
-  // REMOVED: handleFileChange function - FileInput updates the store directly.
-  // Validation (if needed) should happen *before* calling onUpload.
+  $: p = $importProgress;
+  $: busy = isSubmitting || p.status === "reading" || p.status === "uploading";
 
-  /** Handles the submission trigger */
-  function handleBulkSubmit() {
-    // if ($store.config.pricingPlan === "free" && $store.subscribers && $store.subscribers[$store.config.newsSources[0].id]?.length > 0) {
-    //   ping($t['errors.bulkAddNotAvailable'], "error");
-    //   return;
-    // }
-
-    const currentFiles = $selectedFilesStore; // Get files from store
-    const fileToUpload = currentFiles && currentFiles.length > 0 ? currentFiles[0] : null;
-
-    // Basic check if a file exists in the store
-    if (disabled || isSubmitting || !fileToUpload) {
-      if (!fileToUpload && !disabled && !fileError) { // Check store value
-        fileError = $t['errors.selectFileFirst'];
-      }
+  function onPick(e: Event) {
+    const f = (e.currentTarget as HTMLInputElement).files?.[0] ?? null;
+    error = null;
+    if (!f) { file = null; return; }
+    if (!/\.(csv|tsv|txt|xlsx)$/i.test(f.name)) {
+      error = $dt("dash.subs.import.badType");
+      file = null;
       return;
     }
+    if (f.size > MAX_MB * 1024 * 1024) {
+      error = $dt("dash.subs.import.tooBig", { max: MAX_MB });
+      file = null;
+      return;
+    }
+    file = f;
+  }
 
-    // --- Optional: Add validation here before calling onUpload ---
-    // Example:
-    // const allowedTypes = [".csv", ".txt", ".xlsx", ".xls"];
-    // const fileExtension = fileToUpload.name.includes(".") ? "." + fileToUpload.name.split(".").pop()?.toLowerCase() : "";
-    // if (!allowedTypes.includes(fileExtension)) {
-    //   fileError = `Invalid file type. Please select ${allowedTypes.join(", ")}.`;
-    //   return;
-    // }
-    // const maxSizeMB = 10;
-    // if (fileToUpload.size > maxSizeMB * 1024 * 1024) {
-    //   fileError = `File is too large. Maximum size is ${maxSizeMB}MB.`;
-    //   return;
-    // }
-    // --- End Optional Validation ---
-
-
-    fileError = null; // Clear error before proceeding
+  async function handleSubmit() {
+    if (disabled || busy) return;
+    error = null;
+    let toSend: File | null = null;
+    if (mode === "file") {
+      if (!file) { error = $dt("dash.subs.import.pickFile"); return; }
+      toSend = file;
+    } else {
+      if (!pasted.trim()) { error = $dt("dash.subs.import.pasteEmpty"); return; }
+      toSend = new File([pasted], "pasted-contacts.txt", { type: "text/plain" });
+    }
     isSubmitting = true;
-
     try {
-      onUpload(fileToUpload); // Pass the file from the store
-    } catch (error) {
-      console.error("Error calling onUpload:", error);
+      await onUpload(toSend);
+    } catch (e) {
+      error = e instanceof Error && e.message ? e.message : $dt("dash.subs.import.failed");
     } finally {
       isSubmitting = false;
     }
-    // Keep file selected for potential retries, parent controls flow.
   }
 
-  // Reactive statement to clear file error if user selects a file via the store
-  $: if ($selectedFilesStore && $selectedFilesStore.length > 0 && fileError) {
-    fileError = null;
-  }
-
-  // Expose reset function
   export function reset() {
-    selectedFilesStore.set(null); // Reset the store
+    file = null;
+    pasted = "";
+    error = null;
     isSubmitting = false;
-    fileError = null;
+    if (fileInput) fileInput.value = "";
+    if (!busy) resetImport();
   }
 </script>
 
-<div class="bulk-add-section">
-  <!-- Note: Consider updating cardTitle and label if accepting *any* file -->
-  <ToggleCard
-    cardTitle={$t['labels.addUsersFromFile']}
-    isOpen={false}
-    canReveal={true}
-    onChange={console.log}
-  >
-    <!-- FileInput component -->
-    <FileInput
-      id={`file-upload-${newsSourceId}`}
-      label={$t['labels.chooseFile']}
-      selectedFilesStore={selectedFilesStore}
-      {disabled}
-    />
-    <!-- Display Selected File Name (reading from store) -->
-    {#if $selectedFilesStore && $selectedFilesStore.length > 0 && !fileError}
-      {@const firstFile = $selectedFilesStore[0]}
-      <p class="selected-file-info">
-        {$t['labels.selected']}: <span class="file-name">{firstFile.name}</span>
-        <button
-          class="clear-selection"
-          on:click={() => reset()}
-          disabled={disabled || isSubmitting}
-          aria-label={$t['aria.clearFile']}>✕</button
-        >
-      </p>
-    {/if}
+<div class="bulk" data-source={newsSourceId}>
+  <fieldset class="modes">
+    <legend class="sr-only">{$dt("dash.subs.import.modeLegend")}</legend>
+    <label class="mode" class:active={mode === "file"}>
+      <input type="radio" name="mode-{uid}" value="file" bind:group={mode} disabled={busy} />
+      {$dt("dash.subs.import.modeFile")}
+    </label>
+    <label class="mode" class:active={mode === "paste"}>
+      <input type="radio" name="mode-{uid}" value="paste" bind:group={mode} disabled={busy} />
+      {$dt("dash.subs.import.modePaste")}
+    </label>
+  </fieldset>
 
-    <!-- Display File Selection Error -->
-    {#if fileError}
-      <p class="error-message">{fileError}</p>
-    {/if}
-
-    {#if addedUsers.length > 0}
-      <div class="added-users-list">
-        <p class="list-title">Added Users ({addedUsers.length}):</p>
-        <ul>
-          {#each addedUsers as email}
-            <li>{email}</li>
-          {/each}
-        </ul>
-      </div>
-    {/if}
-
-    <div class="send-end">
-      <!-- Submit Button (check store for file presence) -->
-      <SubmitButton
-        label={isSubmitting ? $t['labels.processing'] : $t['labels.uploadAndAdd']}
-        disabled={disabled || isSubmitting || !$selectedFilesStore || $selectedFilesStore.length === 0 || !!fileError}
-        loading={isSubmitting}
-        callback={handleBulkSubmit}
+  {#if mode === "file"}
+    <Field id="bulk-file-{uid}" label={$dt("labels.chooseFile")} hint={$dt("dash.subs.import.fileHint", { max: MAX_MB })}>
+      <input
+        bind:this={fileInput}
+        id="bulk-file-{uid}"
+        type="file"
+        accept={ACCEPT}
+        on:change={onPick}
+        disabled={disabled || busy}
+        aria-describedby="bulk-file-{uid}-hint"
       />
-    </div>
-  </ToggleCard>
+    </Field>
+    {#if file}
+      <p class="picked">{$dt("dash.subs.import.picked", { name: file.name })}</p>
+    {/if}
+  {:else}
+    <Field id="bulk-paste-{uid}" label={$dt("dash.subs.import.pasteLabel")} hint={$dt("dash.subs.import.pasteHint")}>
+      <textarea id="bulk-paste-{uid}" rows="6" bind:value={pasted} disabled={disabled || busy} aria-describedby="bulk-paste-{uid}-hint" placeholder="ana@example.com, Ana, es"></textarea>
+    </Field>
+  {/if}
+
+  {#if error}<Notice tone="danger">{error}</Notice>{/if}
+
+  <div class="progress-area" aria-live="polite">
+    {#if p.status === "reading" || p.status === "uploading"}
+      <div class="progress">
+        <div class="progress__label">
+          <span>{p.status === "reading" ? $dt("dash.subs.import.reading") : $dt("dash.subs.import.uploading", { done: formatNumber(p.processedRows), total: formatNumber(p.totalRows) })}</span>
+          <span>{p.percent}%</span>
+        </div>
+        <div class="progress__track" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={p.percent} aria-label={$dt("dash.subs.import.progressLabel")}>
+          <div class="progress__bar" style="width: {p.percent}%"></div>
+        </div>
+        <Button size="sm" variant="tertiary" onclick={cancelImport}>{$dt("dash.subs.import.cancel")}</Button>
+      </div>
+    {:else if p.status === "done" && p.fileName !== undefined}
+      <Notice tone={p.errors.length ? "warning" : "success"} title={$dt("dash.subs.import.doneTitle", { count: formatNumber(p.added) })}>
+        {#if p.errors.length}{$dt("dash.subs.import.doneErrors", { count: formatNumber(p.errors.length) })}{:else}{p.message ?? $dt("dash.subs.import.doneBody")}{/if}
+      </Notice>
+    {:else if p.status === "failed"}
+      <Notice tone="danger">{p.message ?? $dt("dash.subs.import.failed")}</Notice>
+    {:else if p.status === "cancelled"}
+      <Notice tone="info">{$dt("dash.subs.import.cancelled", { count: formatNumber(p.added) })}</Notice>
+    {/if}
+  </div>
+
+  {#if addedUsers.length > 0}
+    <details class="added">
+      <summary>{$dt("dash.subs.import.addedList", { count: formatNumber(addedUsers.length) })}</summary>
+      <ul>
+        {#each addedUsers.slice(0, 200) as email (email)}<li>{email}</li>{/each}
+      </ul>
+    </details>
+  {/if}
+
+  <div class="row">
+    <Button variant="primary" icon="upload" loading={busy} {disabled} onclick={handleSubmit}>{$dt("dash.subs.import.submit")}</Button>
+  </div>
 </div>
 
 <style lang="scss">
-  @use "./Users.scss";
-  @use "../Dashboard.scss";
-
-  .bulk-add-section {
-    margin-top: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .selected-file-info {
-    font-size: 0.9rem;
-    color: var(--color-text-secondary, #555);
-    margin-top: 0.5rem;
-    margin-bottom: 0.25rem;
-    display: flex;
+  .bulk { display: flex; flex-direction: column; gap: var(--space-4); }
+  .modes { display: inline-flex; gap: var(--space-1); padding: var(--space-1); margin: 0; border: 1px solid var(--border-1); border-radius: var(--radius-full); background: var(--surface-2); align-self: flex-start; }
+  .mode {
+    display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-
-    .file-name {
-      font-style: italic;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      max-width: 300px;
-    }
-  }
-
-  .clear-selection {
-    background: none;
-    border: none;
-    color: var(--color-text-secondary, #777);
+    min-height: var(--control-h-sm, 36px);
+    padding: 0 var(--space-4);
+    border-radius: var(--radius-full);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    color: var(--text-2);
     cursor: pointer;
-    font-size: 1.2em;
-    line-height: 1;
-    padding: 0.1rem 0.3rem;
-    border-radius: 50%;
-    &:hover:not(:disabled) {
-      color: var(--color-error-dark, #c62828);
-      background-color: var(--color-error-light, #ffebee);
-    }
-    &:disabled {
-      cursor: not-allowed;
-      opacity: 0.5;
-    }
+    transition: background var(--dur-fast) var(--ease-out);
+    input { position: absolute; opacity: 0; pointer-events: none; }
+    &.active { background: var(--surface-1); color: var(--text-1); box-shadow: var(--shadow-1); }
+    &:has(input:focus-visible) { box-shadow: var(--focus-ring); }
   }
-
-  .error-message {
-    color: var(--color-error-dark, #c62828);
-    background-color: var(--color-error-light, #ffebee);
-    border: 1px solid var(--color-error, #f44336);
-    padding: 0.5rem 0.75rem;
-    border-radius: var(--radius-s);
-    font-size: 0.9rem;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .added-users-list {
-    margin-top: 0.5rem;
-    border: 1px solid var(--color-border-light, #ddd);
-    border-radius: 4px;
-    padding: 0.5rem;
-    background: #f9f9f9;
-
-    .list-title {
-        font-size: 0.85rem;
-        font-weight: 600;
-        margin-bottom: 0.25rem;
-        color: #555;
-    }
-
-    ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        max-height: 150px;
-        overflow-y: auto;
-        
-        li {
-            font-size: 0.85rem;
-            padding: 0.1rem 0;
-            border-bottom: 1px solid #eee;
-            color: #333;
-
-            &:last-child {
-                border-bottom: none;
-            }
-        }
-    }
-  }
-
-  :global(.submit-button-wrapper) {
-    margin-top: 0.25rem;
-    width: 100%;
-    display: flex;
-    align-items: end;
-    justify-content: end;
-  }
-
-  .send-end {
-    margin-top: 1rem;
-    width: 100%;
-    display: flex;
-    align-items: end;
-    justify-content: end;
+  input[type="file"] { padding: var(--space-2); cursor: pointer; }
+  .picked { margin: 0; font-size: var(--fs-sm); color: var(--text-2); }
+  .progress { display: flex; flex-direction: column; gap: var(--space-2); align-items: flex-start; }
+  .progress__label { display: flex; justify-content: space-between; width: 100%; font-size: var(--fs-sm); color: var(--text-2); font-variant-numeric: tabular-nums; }
+  .progress__track { width: 100%; height: var(--space-2); background: var(--surface-3); border-radius: var(--radius-full); overflow: hidden; }
+  .progress__bar { height: 100%; background: var(--accent); border-radius: var(--radius-full); transition: width var(--dur-base) var(--ease-out); }
+  .added summary { cursor: pointer; font-size: var(--fs-sm); color: var(--text-link); min-height: 44px; display: flex; align-items: center; }
+  .added ul { margin: var(--space-2) 0 0; padding-left: var(--space-5); max-height: 12rem; overflow: auto; font-size: var(--fs-sm); color: var(--text-2); }
+  .row { display: flex; justify-content: flex-end; }
+  @media (max-width: 40rem) {
+    .modes { align-self: stretch; }
+    .mode { flex: 1; justify-content: center; min-height: 44px; }
+    .row :global(button) { width: 100%; min-height: 44px; }
   }
 </style>

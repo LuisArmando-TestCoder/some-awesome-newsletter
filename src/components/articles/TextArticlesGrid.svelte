@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { sanitizeHtml } from '$lib/utils/sanitizeHtml';
   import type { Writable } from "svelte/store";
 
   export let articles: Article[] = [];
@@ -29,6 +30,13 @@
     return div.innerText.trim().replace(/\s+/g, " ");
   }
 
+  function onKey(e: KeyboardEvent, article: Article) {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      openArticle(article);
+    }
+  }
+
   function openArticle(article: Article) {
     selectedArticle.set(article);
   }
@@ -44,9 +52,9 @@
   {#if textSlice1.length > 0}
     <div class="text-grid-wrapper grid-a">
       {#each textSlice1 as article (article.id)}
-        <div class="text-card" class:selected={article.id === $selectedArticle?.id} on:click={() => openArticle(article)}>
-          <h3>{@html article.title}</h3>
-          <p class="preview-text">{@html getPreview(noH1(article.content))}</p>
+        <div class="text-card" class:selected={article.id === $selectedArticle?.id} role="button" tabindex="0" on:click={() => openArticle(article)} on:keydown={(e) => onKey(e, article)}>
+          <h3>{@html sanitizeHtml(article.title)}</h3>
+          <p class="preview-text">{@html sanitizeHtml(getPreview(noH1(article.content)))}</p>
         </div>
       {/each}
     </div>
@@ -54,36 +62,32 @@
   {#if textSlice2.length > 0}
     <div class="text-grid-wrapper grid-b">
       {#each textSlice2 as article (article.id)}
-        <div class="text-card" class:selected={article.id === $selectedArticle?.id} on:click={() => openArticle(article)}><h4>{@html article.title}</h4></div>
+        <div class="text-card" class:selected={article.id === $selectedArticle?.id} role="button" tabindex="0" on:click={() => openArticle(article)} on:keydown={(e) => onKey(e, article)}><h4>{@html sanitizeHtml(article.title)}</h4></div>
       {/each}
     </div>
   {/if}
   {#if textSlice3.length > 0}
     <div class="text-grid-wrapper grid-c">
       {#each textSlice3 as article (article.id)}
-        <div class="text-card" class:selected={article.id === $selectedArticle?.id} on:click={() => openArticle(article)}><h4>{@html article.title}</h4></div>
+        <div class="text-card" class:selected={article.id === $selectedArticle?.id} role="button" tabindex="0" on:click={() => openArticle(article)} on:keydown={(e) => onKey(e, article)}><h4>{@html sanitizeHtml(article.title)}</h4></div>
       {/each}
     </div>
   {/if}
   {#if textSlice4.length > 0}
     <div class="text-grid-wrapper grid-d">
       {#each textSlice4 as article (article.id)}
-        <div class="text-card" class:selected={article.id === $selectedArticle?.id} on:click={() => openArticle(article)}><h4>{@html article.title}</h4></div>
+        <div class="text-card" class:selected={article.id === $selectedArticle?.id} role="button" tabindex="0" on:click={() => openArticle(article)} on:keydown={(e) => onKey(e, article)}><h4>{@html sanitizeHtml(article.title)}</h4></div>
       {/each}
     </div>
   {/if}
 </section>
 
 <style lang="scss">
-  :root {
-    --border-radius: 12px;
-    --transition-speed: 0.3s;
-  }
 
   .text-articles-section {
-    background-color: #f9f9f9;
+    background-color: var(--surface-2, #f9f9f9);
     padding: 3rem 2rem;
-    border-radius: var(--border-radius);
+    border-radius: var(--radius-lg, 16px);
     margin-bottom: 4rem;
   }
 
@@ -93,24 +97,24 @@
     margin-bottom: 2rem;
     
     .text-card {
-      background: #fff;
+      background: var(--surface-1, #fff);
       padding: 1.5rem;
-      border: 1px solid #eee;
-      border-radius: var(--border-radius);
+      border: 1px solid var(--border-1, #eee);
+      border-radius: var(--radius-lg, 16px);
       cursor: pointer;
-      transition: all var(--transition-speed) ease;
+      transition: all var(--dur-slow, 320ms) ease;
       box-sizing: border-box;
       min-width: 0;
       overflow-wrap: break-word;
       border: 2px solid transparent;
-      transition: all var(--transition-speed) ease;
+      transition: all var(--dur-slow, 320ms) ease;
       &:hover {
         transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        box-shadow: var(--shadow-2, none);
       }
     }
     .selected {
-      border-color: #007bff;
+      border-color: var(--accent, #2563eb);
     }
   }
 
@@ -119,9 +123,10 @@
     .text-card:first-child {
       grid-column: 1 / -1;
       text-align: center;
-      h3 { font-size: 2rem; }
+      h3 { font-size: var(--fs-2xl, 2rem); }
       .preview-text {
         -webkit-line-clamp: 4;
+        line-clamp: 4;
       }
     }
   }
@@ -144,6 +149,7 @@
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     overflow: hidden;
     text-overflow: ellipsis;
   }
@@ -157,7 +163,11 @@
       grid-template-columns: 1fr;
     }
     .grid-a .text-card:first-child h3 {
-      font-size: 1.5rem;
+      font-size: var(--fs-xl, 1.5rem);
     }
+  }
+  [role="button"]:focus-visible {
+    outline: 2px solid var(--focus-color, #2563eb);
+    outline-offset: 2px;
   }
 </style>

@@ -1,139 +1,243 @@
+// pt strings for locales-newflow. English (en.ts) is the source. Key order and shape follow en.ts.
+// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale pt
 export default {
-  step01: {
-    title: "A IA com som humano escreve newsletters para seus assinantes no automático",
-    subtitle: "Qual frequência, selecione <u>cada mês</u> ou <u>cada semana</u> ou <u>cada dia</u> ou <u>a que horas</u>"
-  },
-  step02: {
-    title: "Idioma da newsletter",
-    subtitle: "“sua newsletter também será enviada no idioma específico de cada usuário, se forem diferentes”"
-  },
-  step03: {
-    title: "Redirecionamento (Opcional)",
-    subtitle: "Você quer redirecionar o usuário para sua página?",
-    description: "Você pode colar um link para sua página aqui, contaremos quantos entram pelos e-mails que a IA cria",
-    placeholder: "https://sua-pagina.com"
-  },
-  step04: {
-    title: "Tipo de notícias que você quer que a IA escolha",
-    subtitle: "Qual tema de conversa ou tópico (inferido do link de redirecionamento se definido, caso contrário vazio)",
-    placeholder: "ex. Inteligência Artificial, Marketing, Saúde..."
-  },
-  step05: {
-    title: "Personalize sua Assinatura",
-    subtitle: "Projete visualmente ou edite o código diretamente",
-    visualEditor: "Editor Visual",
-    htmlSource: "Fonte HTML",
-    livePreview: "Visualização ao Vivo",
-    yourName: "Seu Nome",
-    yourTitle: "Seu Título",
-    facebookProfile: "Perfil do Facebook",
-    instagramProfile: "Perfil do Instagram",
-    editHtml: "Editar HTML diretamente...",
-    warning: "⚠️ As edições feitas aqui serão sobrescritas se você voltar para o Editor Visual e fizer alterações."
-  },
-  step06: {
-    title: "Fonte de Notícias",
-    subtitle: "Qual site de notícias você quer usar?",
-    description: "Insira uma URL ou deixe-nos escolher uma para você com base no seu tópico.",
-    descriptionSmall: "Analisaremos o site para encontrar o melhor conteúdo. Isso pode levar alguns segundos.",
-    placeholder: "https://exemplo.com",
-    analyzing: "Analisando...",
-    next: "Próximo",
-    errors: {
-      failedToGenerate: "Falha ao gerar o seletor. Por favor, tente novamente ou verifique a URL.",
-      errorGenerating: "Ocorreu um erro ao gerar o seletor.",
-      invalidUrl: "Por favor, insira uma URL válida ou escolha uma fonte."
-    }
-  },
-  step07: {
-    title: "Seletor de Conteúdo",
-    subtitle: "Pense em cada site como uma <strong>biblioteca com um layout único</strong>.",
-    explanation1: "Este <strong>'Seletor'</strong> é o mapa específico que criamos para este site. Ele diz ao nosso sistema exatamente onde procurar para pegar os artigos que você deseja, ignorando botões de menu e anúncios.",
-    explanation2: "<strong>Nós preenchemos este mapa para você automaticamente.</strong>",
-    placeholder: "String do seletor...",
-    regenerate: "Regenerar Seletor",
-    regenerating: "Regenerando...",
-    errors: {
-      noUrl: "Nenhuma URL de fonte de notícias encontrada.",
-      failedRegenerate: "Falha ao regenerar o seletor.",
-      errorRegenerate: "Ocorreu um erro ao regenerar o seletor."
-    }
-  },
-  step08: {
-    title: "Visualização",
-    placeholder: "Pronto para gerar sua primeira newsletter?",
-    generateBtn: "Gerar E-mail da Newsletter",
-    sentBtn: "Enviado! Verifique seu e-mail",
-    sendTestBtn: "Enviar E-mail de Teste",
-    regenerateBtn: "Regenerar",
-    loading: {
-      initializing: "Inicializando...",
-      starting: "Iniciando geração...",
-      scraping: "Extraindo conteúdo...",
-      translating: "Traduzindo artigo...",
-      formatting: "Formatando e-mail...",
-      sending: "Conectando ao provedor de e-mail...",
-      authenticating: "Autenticando...",
-      sendingArticle: "Enviando artigo...",
-      creating: "Criando fonte de notícias...",
-      saving: "Salvando configuração...",
-      finalizing: "Finalizando configuração..."
+  "onboarding": {
+    "progress": "Etapa {current} de {total}",
+    "progressLabel": "Progresso da configuração",
+    "back": "Voltar",
+    "skip": "Pular esta etapa",
+    "continue": "Continuar",
+    "whyLabel": "Por que perguntamos",
+    "skipLabel": "Se você pular",
+    "working": "Processando...",
+    "start": {
+      "title": "Crie sua newsletter",
+      "opening": "Abrindo a configuração. Se nada acontecer,",
+      "continueHere": "continue aqui"
     },
-    errors: {
-      generationFailed: "Geração falhou: ",
-      createFailed: "Falha ao criar fonte de notícias. Por favor, tente novamente.",
-      errorCreating: "Erro ao criar fonte de notícias: ",
-      sendFailed: "Falha ao enviar e-mail: "
+    "tryAgain": "Tentar novamente",
+    "website": {
+      "title": "Qual é o seu site?",
+      "why": "Lemos seu site para encontrar os artigos que vão formar sua newsletter e para deduzir quem são seus leitores.",
+      "skipNote": "Se você ainda não tem um site, escolha um tema e usaremos um site de notícias sobre ele.",
+      "label": "Endereço do site",
+      "hint": "Por exemplo suaempresa.com ou suaempresa.com/blog",
+      "placeholder": "suaempresa.com",
+      "submit": "Continuar",
+      "checking": "Lendo seu site...",
+      "noWebsite": "Não tenho site",
+      "haveWebsite": "Tenho um site",
+      "topicTitle": "Escolha um tema",
+      "topicHint": "Usaremos um site de notícias sobre este tema como sua primeira fonte. Você pode mudar depois.",
+      "errors": {
+        "empty": "Digite o endereço do seu site para continuar.",
+        "invalid": "Isso não parece um endereço web. Verifique a grafia, por exemplo suaempresa.com.",
+        "unreachable": "Não encontramos artigos nesta página. Tente seu blog ou sua página de notícias, por exemplo suaempresa.com/blog.",
+        "network": "Não foi possível conectar aos nossos servidores. Verifique sua conexão e tente novamente."
+      }
     },
-    defaultSubject: "Visualização da sua Newsletter Gerada"
-  },
-  step09: {
-    title: "Para enviar o artigo do seu e-mail",
-    subtitle: "Senha de App (Opcional)",
-    description: "(Se você tem serviços gmail, coloque sua senha de app aqui)",
-    label: "Senha de App",
-    placeholder: "Sua Senha de App"
-  },
-  step10: {
-    title: "Endereço Gmail (Opcional)",
-    subtitle: "Endereço de E-mail Gmail",
-    description: "Se você quiser enviar de um endereço Gmail específico",
-    placeholder: "seu-email@gmail.com"
-  },
-  step11: {
-    title: "Enviar E-mail de Teste",
-    subtitle: "Envie um e-mail de teste para si mesmo para verificar a configuração.",
-    sendNow: "Enviar Agora",
-    sent: "Enviado! Verifique seu e-mail",
-    loading: {
-      connecting: "Conectando ao provedor de e-mail...",
-      authenticating: "Autenticando...",
-      sending: "Enviando artigo..."
+    "readers": {
+      "title": "Quem lê sua newsletter?",
+      "why": "Escrevemos cada edição para este leitor e neste idioma. Assinantes que falam outro idioma recebem a própria cópia traduzida.",
+      "skipNote": "Preenchemos estes campos a partir do seu site. Altere o que estiver errado.",
+      "languageLabel": "Idioma principal",
+      "languageHint": "Pegamos isto das configurações do seu navegador.",
+      "readerLabel": "Seu leitor ideal",
+      "readerHint": "Uma frase basta. Por exemplo: donos de pequenos restaurantes em Lisboa.",
+      "readerPlaceholder": "Para quem é esta newsletter?",
+      "errors": {
+        "reader": "Descreva seu leitor em poucas palavras para sabermos para quem escrever."
+      }
+    },
+    "preview": {
+      "title": "Esta é sua primeira edição",
+      "why": "Este é o e-mail que seus assinantes vão receber, escrito a partir do seu artigo mais recente. Nada foi enviado ainda.",
+      "generating": "Escrevendo sua primeira edição a partir do seu artigo mais recente. Isso costuma levar menos de um minuto.",
+      "inboxFrom": "De",
+      "inboxTo": "Para",
+      "inboxSubject": "Assunto",
+      "defaultSubject": "Sua primeira edição",
+      "sendTest": "Enviar um teste para mim",
+      "sendingTest": "Enviando...",
+      "testSent": "Teste enviado para {email}. Confira sua caixa de entrada e a pasta de spam.",
+      "regenerate": "Escrever de novo",
+      "looksGood": "Está bom, continuar",
+      "skipPreview": "Continuar sem prévia",
+      "howTitle": "Como encontramos seus artigos",
+      "howBody": "Salvamos uma regra curta que indica onde estão os links dos artigos na sua página, para ignorar menus e anúncios. Você só precisa mudá-la se a prévia pegou o conteúdo errado.",
+      "ruleLabel": "Regra de artigos",
+      "findAgain": "Encontrar artigos de novo",
+      "errors": {
+        "generate": "Não foi possível escrever a edição. A página pode bloquear a leitura automática. Tente novamente ou volte e use a página do seu blog.",
+        "test": "O e-mail de teste não foi enviado. Tente novamente em instantes."
+      }
+    },
+    "senderName": {
+      "title": "Como seu nome deve aparecer na caixa de entrada?",
+      "why": "Os assinantes veem este nome ao lado de cada edição, assim eles reconhecem e abrem.",
+      "skipNote": "Se você pular, o remetente aparece como AIBAN. Você pode mudar o nome depois em Configurações.",
+      "label": "Nome do remetente",
+      "hint": "Seu nome, sua empresa ou o nome da newsletter. Até 60 caracteres.",
+      "placeholder": "Estúdio Silva",
+      "previewLabel": "Como aparece em uma caixa de entrada",
+      "previewBody": "Sua edição aparece com este nome de remetente. Ela é enviada do endereço de envio do AIBAN.",
+      "save": "Salvar e continuar",
+      "errors": {
+        "empty": "Digite um nome de remetente com pelo menos 2 caracteres.",
+        "long": "O nome do remetente deve ter no máximo 60 caracteres.",
+        "save": "Não foi possível salvar o nome. Tente novamente em instantes."
+      }
+    },
+    "signature": {
+      "title": "Assinatura de e-mail",
+      "why": "Sua assinatura vai no fim de cada edição, para que os leitores saibam quem escreveu e como falar com você.",
+      "skipNote": "Se você pular, as edições terminam só com o nome da sua newsletter.",
+      "nameLabel": "Seu nome",
+      "namePlaceholder": "Ana Silva",
+      "roleLabel": "Cargo ou empresa",
+      "rolePlaceholder": "Fundadora, Estúdio Silva",
+      "linkLabel": "Link",
+      "linkHint": "Seu site ou um perfil em rede social. Opcional.",
+      "linkPlaceholder": "suaempresa.com",
+      "previewLabel": "Como aparece no fim de um e-mail",
+      "previewBody": "Obrigado pela leitura. Até a próxima edição.",
+      "save": "Salvar assinatura",
+      "existingNote": "Você já tem uma assinatura. Salvar aqui vai substituí-la."
+    },
+    "schedule": {
+      "title": "Quando as novas edições devem ser enviadas?",
+      "why": "Verificamos seu site antes de cada envio e escrevemos uma nova edição com os artigos mais recentes.",
+      "skipNote": "Você pode mudar o dia e o horário, ou pausar os envios, quando quiser no painel.",
+      "scheduleLabel": "Horário de envio",
+      "frequencyLabel": "Frequência",
+      "daily": "Todos os dias",
+      "weekly": "Toda semana",
+      "monthly": "Todo mês, no dia 1",
+      "dayLabel": "Dia",
+      "timeLabel": "Horário",
+      "timeHint": "No seu horário local.",
+      "recipeTitle": "Enviar novas edições automaticamente",
+      "recipeBody": "Na frequência acima, escolhemos seu melhor artigo novo, escrevemos com a sua voz, traduzimos para cada leitor e enviamos por e-mail.",
+      "recipeOn": "Ativado",
+      "recipeOff": "Desativado. As edições só são enviadas quando você clica em Enviar.",
+      "save": "Salvar e continuar",
+      "saving": "Salvando sua newsletter...",
+      "errors": {
+        "create": "Não foi possível salvar sua newsletter. Tente novamente em instantes.",
+        "limit": "O seu plano não permite outra fonte. Para adicionar uma, escreva para nós e mudaremos o seu plano."
+      }
+    },
+    "send": {
+      "title": "Envie sua primeira edição",
+      "why": "Enviar agora mostra o caminho completo: sua edição chega a uma caixa de entrada real, no idioma do leitor.",
+      "skipNote": "Se você pular, a primeira edição é enviada no horário programado.",
+      "youAreSubscribed": "Você já está inscrito como {email}.",
+      "othersLabel": "Convidar pessoas (opcional)",
+      "othersHint": "Cole endereços de e-mail separados por vírgulas ou quebras de linha. Cada pessoa recebe um convite pessoal seu. Elas só recebem edições se aceitarem, e excluímos os convites não aceitos após 30 dias.",
+      "othersPlaceholder": "ana@example.com, li@example.com",
+      "sendNow": "Enviar agora",
+      "sending": "Enviando sua primeira edição...",
+      "sentTitle": "Sua primeira edição está a caminho",
+      "sentBody": "Ela vai para todas as pessoas da sua lista que confirmaram a inscrição. Pode levar alguns minutos para chegar.",
+      "invited": "Convites enviados para {count} pessoas. Elas entram na sua lista quando aceitarem.",
+      "invitesUnavailable": "Os convites ainda não estão disponíveis, então não salvamos estes endereços. Na próxima etapa, copie seu link de inscrição e envie você mesmo.",
+      "continue": "Continuar",
+      "errors": {
+        "invalidEmails": "Estes endereços parecem errados: {list}. Corrija ou remova.",
+        "add": "Não foi possível convidar: {list}. Tente de novo mais tarde em Assinantes.",
+        "send": "A edição não foi enviada. Tente novamente em instantes."
+      }
+    },
+    "share": {
+      "title": "Conquiste seus primeiros assinantes",
+      "why": "Quem se inscreve aqui recebe cada edição no próprio idioma.",
+      "skipNote": "Você encontra este link e o código de incorporação depois em Assinantes, em Formulário de inscrição.",
+      "linkLabel": "Página de inscrição",
+      "linkHint": "Compartilhe nas redes sociais, no rodapé dos seus e-mails ou em um QR code.",
+      "embedLabel": "Formulário de inscrição para seu site",
+      "embedHint": "Cole este código onde você quer que o formulário apareça no seu site.",
+      "copy": "Copiar",
+      "copied": "Copiado",
+      "open": "Abrir a página de inscrição"
+    },
+    "done": {
+      "title": "Sua newsletter está configurada",
+      "why": "Veja o que acontece agora e o que ainda falta fazer.",
+      "planLine": "Plano atual: {plan}",
+      "changePlan": "Ver planos",
+      "toDashboard": "Ir para o painel",
+      "summarySource": "Fonte: {url}",
+      "summarySchedule": "Frequência: {schedule}",
+      "summaryAutomation": "Envio automático: {state}",
+      "on": "ativado",
+      "off": "desativado"
     }
   },
-  step12: {
-    title: "Compartilhe esta newsletter com seus seguidores",
-    subtitle: "Link para o funil de inscrição (antes de começarem a receber e-mails, eles teriam que aceitar seu convite)",
-    copy: "Copiar",
-    copied: "Link copiado!"
+  "tutorial": {
+    "checklistTitle": "Primeiros passos",
+    "checklistProgress": "{done} de {total} concluídos",
+    "checklistDone": "Tudo pronto. Sua newsletter agora funciona sozinha.",
+    "dismiss": "Ocultar lista",
+    "doneLabel": "concluído",
+    "todoLabel": "pendente",
+    "show": "Mostrar primeiros passos",
+    "items": {
+      "source": {
+        "title": "Adicione de onde vem seu conteúdo",
+        "body": "Um site ou blog que verificamos em busca de artigos novos."
+      },
+      "sender": {
+        "title": "Escolha seu nome de remetente",
+        "body": "O nome que os assinantes veem ao lado de cada edição."
+      },
+      "subscriber": {
+        "title": "Conquiste seu primeiro assinante",
+        "body": "Alguém além de você se inscreve ou é adicionado."
+      },
+      "send": {
+        "title": "Envie sua primeira edição",
+        "body": "Uma edição real chega às pessoas da sua lista."
+      },
+      "automation": {
+        "title": "Ative o envio automático",
+        "body": "As novas edições são enviadas na sua programação."
+      },
+      "widget": {
+        "title": "Adicione o formulário de inscrição ao seu site",
+        "body": "Os visitantes podem se inscrever sem sair do seu site."
+      }
+    },
+    "open": "Abrir",
+    "tour": {
+      "start": "Fazer um tour rápido",
+      "next": "Próximo",
+      "back": "Voltar",
+      "skip": "Pular tour",
+      "finish": "Concluir",
+      "stepOf": "{current} de {total}"
+    },
+    "help": {
+      "whatIsThis": "O que é isto?",
+      "whyItMatters": "Por que é importante",
+      "close": "Fechar"
+    }
   },
-  step13: {
-    title: "Plano e Limites",
-    currentPlan: "Plano Atual:",
-    limits: "Limites:",
-    unknown: "Desconhecido",
-    changePlan: "Mudar Plano",
-    advancedFeatures: "Precisa de recursos mais avançados?",
-    developerText: "Confira nossa seção de desenvolvedores para integrar este funil de inscrição de newsletter em seu servidor, um blog de todos os seus artigos gerados e inscrever usuários de sua base de código com nossa chave de API.",
-    dashboardBtn: "Ir para o Painel",
-    usage: "Uso:",
-    limitDetails: {
-      free: "Limite de 100 usuários",
-      starter: "5 fontes, 100k usuários",
-      growth: "17 fontes, 250k usuários",
-      pro: "25 fontes, 500k usuários",
-      master: "50 fontes, usuários ilimitados",
-      vipfree: "VIP Gratuito"
+  "auth": {
+    "emailLabel": "Endereço de e-mail",
+    "emailHint": "Enviamos um código de 6 dígitos para este endereço. Você não precisa de senha.",
+    "codeTitle": "Confira seu e-mail",
+    "codeSentTo": "Enviamos um código de 6 dígitos para {email}.",
+    "codeHint": "O código pode levar um minuto para chegar. Confira também a pasta de spam.",
+    "changeEmail": "Usar outro e-mail",
+    "resend": "Enviar um novo código",
+    "resendIn": "Você pode pedir um novo código em {seconds} s",
+    "resendLimit": "Se o código ainda não chegou, escreva para nós pela página de Ajuda e resolveremos.",
+    "resent": "Enviamos um novo código.",
+    "verifying": "Verificando seu código...",
+    "errors": {
+      "email": "Digite um e-mail completo, por exemplo voce@empresa.com.",
+      "send": "Não foi possível enviar o código. Verifique sua conexão e tente novamente.",
+      "code": "Esse código não funcionou. Confira os 6 dígitos ou peça um novo código."
     }
   }
 };

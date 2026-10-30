@@ -76,7 +76,7 @@ const languages = [
   { code: "dv", name: "Divehi", flag: "🇲🇻" },
   { code: "nl", name: "Dutch", flag: "🇳🇱" },
   { code: "dz", name: "Dzongkha", flag: "🇧🇹" },
-  { code: "eo", name: "Esperanto", flag: "🏳️" },
+  { code: "eo", name: "Esperanto", flag: "🏳️" }, // copy-lint-ignore (decorative flag, aria-hidden)
   { code: "et", name: "Estonian", flag: "🇪🇪" },
   { code: "ee", name: "Ewe", flag: "🇬🇭" },
   { code: "fo", name: "Faroese", flag: "🇫🇴" },

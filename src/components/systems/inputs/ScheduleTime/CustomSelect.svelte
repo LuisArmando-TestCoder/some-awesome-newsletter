@@ -1,3 +1,7 @@
+<script context="module" lang="ts">
+  let customSelectCount = 0;
+</script>
+
 <script lang="ts">
   import { onMount, onDestroy, tick } from "svelte";
   import { browser } from "$app/environment";
@@ -16,6 +20,17 @@
   export let store: Writable<string | null>;
   export let label = "Select an option";
   export let disabled: boolean = false;
+
+  // Unique ids per instance so several selects can share a page.
+  const uid = `custom-select-${++customSelectCount}`;
+  const labelId = `${uid}-label`;
+  const listboxId = `${uid}-listbox`;
+  const valueId = `${uid}-value`;
+  const optionId = (index: number) => `${uid}-option-${index}`;
+  $: activeDescendant =
+    open && highlightedIndex >= 0 && highlightedIndex < options.length
+      ? optionId(highlightedIndex)
+      : undefined;
 
   // State
   let selectedOption: Option | null = null;
@@ -226,17 +241,14 @@
   }
 </script>
 
+<!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
   class="custom-select-wrapper"
   bind:this={dropdownRef}
   on:keydown={handleKeydown}
-  role="combobox"
-  aria-haspopup="listbox"
-  aria-expanded={open}
-  aria-owns={open ? "option-listbox" : undefined}
 >
   {#if label}
-    <span class="custom-select-label" id="option-select-label">
+    <span class="custom-select-label" id={labelId}>
       {label}
     </span>
   {/if}
@@ -249,9 +261,16 @@
       on:input={handleInput}
       placeholder={$t['customSelect.typeToSearch']}
       class="custom-select-input {open ? 'open' : ''}"
+      role="combobox"
       aria-autocomplete="list"
-      aria-controls={open ? "option-listbox" : undefined}
-      aria-labelledby="option-select-label"
+      aria-haspopup="listbox"
+      aria-expanded={open}
+      aria-controls={open ? listboxId : undefined}
+      aria-activedescendant={activeDescendant}
+      aria-labelledby={label ? labelId : undefined}
+      aria-label={label ? undefined : $t['customSelect.typeToSearch']}
+      tabindex={open ? undefined : -1}
+      autocomplete="off"
       {disabled}
     />
     <button
@@ -259,17 +278,21 @@
       bind:this={buttonRef}
       on:click={toggleOpen}
       class="custom-select-button {!open ? 'visible' : ''}"
-      aria-controls={open ? "option-listbox" : undefined}
-      aria-labelledby="option-select-label {selectedOption ? 'selected-option-label' : ''}"
+      aria-haspopup="listbox"
+      aria-expanded={open}
+      aria-controls={open ? listboxId : undefined}
+      aria-labelledby={label ? `${labelId} ${valueId}` : valueId}
+      tabindex={open ? -1 : undefined}
       {disabled}
     >
       {#if selectedOption}
-        <span class="truncate">{selectedOption.label}</span>
+        <span class="custom-select-name" id={valueId}>{selectedOption.label}</span>
       {:else}
-        <span class="text-gray-500">{$t['customSelect.selectAnOption']}</span>
+        <span class="custom-select-placeholder" id={valueId}>{$t['customSelect.selectAnOption']}</span>
       {/if}
       <svg
-        class="custom-select-arrow w-4 h-4 transform transition-transform duration-200 {open ? 'rotate-180' : ''}"
+        class="custom-select-arrow"
+        class:open
         fill="currentColor"
         viewBox="0 0 24 24"
         aria-hidden="true"
@@ -283,17 +306,18 @@
     <ul
       bind:this={listRef}
       role="listbox"
-      id="option-listbox"
+      id={listboxId}
       class="custom-select-list"
       tabindex="-1"
-      aria-labelledby="option-select-label"
+      aria-labelledby={label ? labelId : undefined}
+      aria-label={label ? undefined : $t['customSelect.selectAnOption']}
       in:slide={{ duration: 200 }}
       out:slide={{ duration: 200 }}
     >
       {#each options as option, index (option.value)}
         <li
           bind:this={listItems[index]}
-          id={`option-${option.value}`}
+          id={optionId(index)}
           class="custom-select-list-item"
           class:highlighted={highlightedIndex === index}
           class:selected={selectedOption?.value === option.value}
@@ -305,10 +329,10 @@
             highlightedIndex = index;
           }}
         >
-          <span class="truncate">{option.label}</span>
+          <span class="custom-select-name">{option.label}</span>
         </li>
       {:else}
-        <li class="px-4 py-2 text-sm text-gray-500" role="option" aria-disabled="true">
+        <li class="custom-select-empty" role="option" aria-disabled="true" aria-selected="false">
           {$t['customSelect.noOptionsAvailable']}
         </li>
       {/each}

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { sanitizeHtml } from '$lib/utils/sanitizeHtml';
   import type { Writable } from "svelte/store";
 
   export let articles: Article[] = [];
@@ -38,6 +39,13 @@
     return div.innerText.trim().replace(/\s+/g, " ");
   }
 
+  function onKey(e: KeyboardEvent, article: Article) {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      openArticle(article);
+    }
+  }
+
   function openArticle(article: Article) {
     selectedArticle.set(article);
   }
@@ -49,30 +57,30 @@
 
 <section class="featured-grid" class:rearranged style="--order: {order}">
   {#if mainArticle}
-    <div class="main-article" class:selected={mainArticle.id === $selectedArticle?.id} on:click={() => openArticle(mainArticle)}>
+    <div class="main-article" class:selected={mainArticle.id === $selectedArticle?.id} role="button" tabindex="0" on:click={() => openArticle(mainArticle)} on:keydown={(e) => onKey(e, mainArticle)}>
       <div class="image-container"><img src={getImage(mainArticle.content)?.src} alt={mainArticle.title} /></div>
       <div class="text-content">
-        <h2>{@html mainArticle.title}</h2>
-        <p class="preview-text">{@html getPreview(noH1(mainArticle.content))}</p>
+        <h2>{@html sanitizeHtml(mainArticle.title)}</h2>
+        <p class="preview-text">{@html sanitizeHtml(getPreview(noH1(mainArticle.content)))}</p>
       </div>
     </div>
   {/if}
   <div class="secondary-articles">
     {#if secondaryArticle1}
-      <div class="secondary-article" class:selected={secondaryArticle1.id === $selectedArticle?.id} on:click={() => openArticle(secondaryArticle1)}>
+      <div class="secondary-article" class:selected={secondaryArticle1.id === $selectedArticle?.id} role="button" tabindex="0" on:click={() => openArticle(secondaryArticle1)} on:keydown={(e) => onKey(e, secondaryArticle1)}>
         <div class="image-container"><img src={getImage(secondaryArticle1.content)?.src} alt={secondaryArticle1.title} /></div>
         <div class="text-content">
-          <h3>{@html secondaryArticle1.title}</h3>
-          <p class="preview-text">{@html getPreview(noH1(secondaryArticle1.content))}</p>
+          <h3>{@html sanitizeHtml(secondaryArticle1.title)}</h3>
+          <p class="preview-text">{@html sanitizeHtml(getPreview(noH1(secondaryArticle1.content)))}</p>
         </div>
       </div>
     {/if}
     {#if secondaryArticle2}
-      <div class="secondary-article" class:selected={secondaryArticle2.id === $selectedArticle?.id} on:click={() => openArticle(secondaryArticle2)}>
+      <div class="secondary-article" class:selected={secondaryArticle2.id === $selectedArticle?.id} role="button" tabindex="0" on:click={() => openArticle(secondaryArticle2)} on:keydown={(e) => onKey(e, secondaryArticle2)}>
         <div class="image-container"><img src={getImage(secondaryArticle2.content)?.src} alt={secondaryArticle2.title} /></div>
         <div class="text-content">
-          <h3>{@html secondaryArticle2.title}</h3>
-          <p class="preview-text">{@html getPreview(noH1(secondaryArticle2.content))}</p>
+          <h3>{@html sanitizeHtml(secondaryArticle2.title)}</h3>
+          <p class="preview-text">{@html sanitizeHtml(getPreview(noH1(secondaryArticle2.content)))}</p>
         </div>
       </div>
     {/if}
@@ -80,20 +88,16 @@
 </section>
 
 <style lang="scss">
-  :root {
-    --border-radius: 12px;
-    --transition-speed: 0.3s;
-  }
 
   .image-container {
     overflow: hidden;
-    border-radius: var(--border-radius);
+    border-radius: var(--radius-lg, 16px);
     flex: 1;
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform var(--transition-speed) ease;
+      transition: transform var(--dur-slow, 320ms) ease;
     }
   }
 
@@ -120,12 +124,13 @@
     }
 
     .selected {
-      border-color: #007bff;
+      border-color: var(--accent, #2563eb);
     }
 
     .main-article {
       .preview-text {
         -webkit-line-clamp: 4;
+        line-clamp: 4;
       }
       &:hover {
         img {
@@ -145,6 +150,7 @@
       gap: 2rem;
       .preview-text {
         -webkit-line-clamp: 2;
+        line-clamp: 2;
       }
       &:hover {
         img {
@@ -158,6 +164,7 @@
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     overflow: hidden;
     text-overflow: ellipsis;
   }
@@ -173,11 +180,17 @@
       gap: 2rem;
       .preview-text {
         -webkit-line-clamp: 10;
+        line-clamp: 10;
       }
     }
 
     .featured-grid.rearranged .main-article .preview-text {
       -webkit-line-clamp: 15;
+      line-clamp: 15;
     }
+  }
+  [role="button"]:focus-visible {
+    outline: 2px solid var(--focus-color, #2563eb);
+    outline-offset: 2px;
   }
 </style>

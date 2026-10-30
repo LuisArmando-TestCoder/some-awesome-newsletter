@@ -1,53 +1,53 @@
-import { get } from "svelte/store";
-import store, { saveToStore } from "../../store";
-import getAuthHeaders from "./getAuthHeaders";
+import { saveToStore } from "../../store";
+import { request, seg } from "$lib/api/client";
+import { getCredentials, setSessionToken } from "$lib/api/credentials";
+import { isApiError, toUserMessage } from "$lib/api/errors";
 
-export default async (onSuccessCallback?: Function, onFailureCallback?: Function) => {
-  const authCode = getAuthHeaders()["x-auth-code"];
-  const configuratorEmail = getAuthHeaders()["x-auth-email"];
-  const idToken = getAuthHeaders()["x-auth-token-id"];
-  const clientId = getAuthHeaders()["x-auth-client-id"];
-  
-  // console.log('[askIsAuthCodeValid.ts] authCode', authCode);
-  // console.log('[askIsAuthCodeValid.ts] configuratorEmail', configuratorEmail);
-  // console.log('[askIsAuthCodeValid.ts] idToken', idToken);
-  // console.log('[askIsAuthCodeValid.ts] clientId', clientId); 
+type VerifyResponse = { success?: boolean; sessionToken?: string; sessionExpiresAt?: string; method?: string };
 
-  const url = `${get(store).apiURL()}/auth/${configuratorEmail}?code=${
-    authCode
-  }`+ (idToken ? `&token_id=${idToken}&client_id=${clientId}` : '');
+/**
+ * Check the stored email + code (or Google token) with the backend.
+ * On success stores the session token (sent as a Bearer header from then on)
+ * and sets `isAuthCodeValid`.
+ *
+ * Callbacks:
+ * - onSuccess: the code is valid.
+ * - onFailure: the backend rejected the code (401/403/400) or nothing is stored.
+ * - onError: network or server problem; the code may still be fine. When no
+ *   onError is given, onFailure is called (previous behaviour).
+ * `authError` in the store holds a user facing message.
+ */
+export default async (onSuccessCallback?: Function, onFailureCallback?: Function, onErrorCallback?: Function) => {
+  const c = getCredentials();
 
-  // console.log('[askIsAuthCodeValid.ts] url', url);
-  // console.log('[askIsAuthCodeValid.ts] configuratorEmail', url);
-
-  const response = await fetch(url);
-
-  let isAuthCodeValid = response.ok;
-
-  let errorMessage = "Authentication failed. Please try again."; // Default error
-
-  if (response.ok) {
-    // Successful validation (200 OK)
-    console.log("Authentication successful via askIsAuthCodeValid."); // Use console.log
-  } else {
-    // Handle specific errors (e.g., 403 Forbidden for invalid code)
-    try {
-      const errorJson = await response.json();
-      errorMessage = errorJson.error || `Authentication failed (${response.status})`;
-      console.log(`Authentication failed: ${errorMessage}`); // Use console.log
-    } catch (e) {
-      // If parsing error response fails
-      errorMessage = `Authentication failed (${response.status} ${response.statusText})`;
-      console.log(`Authentication failed with non-JSON response: ${errorMessage}`); // Use console.log
-    }
+  if (!c.email || !c.code) {
+    saveToStore({ isAuthCodeValid: false, authError: "Enter your email and the code we sent you." });
+    return onFailureCallback?.();
   }
 
-  saveToStore({ isAuthCodeValid }); // Persist valid state
-
-  // Handle step progression only if validation was successful
-  if (isAuthCodeValid) {
+  try {
+    const res = await request<VerifyResponse>(`/auth/${seg(c.email)}`, {
+      auth: "none",
+      query: {
+        code: c.code,
+        token_id: c.tokenId && c.clientId ? c.tokenId : undefined,
+        client_id: c.tokenId && c.clientId ? c.clientId : undefined,
+      },
+      dedupe: true,
+      retries: 1,
+    });
+    if (res?.sessionToken) setSessionToken(res.sessionToken, res.sessionExpiresAt);
+    saveToStore({ isAuthCodeValid: true, authError: "" });
     return onSuccessCallback?.();
+  } catch (e) {
+    const rejected = isApiError(e) && [400, 401, 403, 404, 429].includes(e.status);
+    if (rejected) {
+      setSessionToken(undefined);
+      saveToStore({ isAuthCodeValid: false, authError: toUserMessage(e, "That code did not work. Check it or ask for a new one.") });
+      return onFailureCallback?.();
+    }
+    // Network or server trouble: keep the current sign-in state.
+    saveToStore({ authError: toUserMessage(e) });
+    return (onErrorCallback ?? onFailureCallback)?.();
   }
-  
-  return onFailureCallback?.();
 };

@@ -1,32 +1,11 @@
+<!-- Kept for existing imports. Renders the compact embedded signup form. Owner: WS5. -->
 <script lang="ts">
-  import type { Store } from "../../../types";
-  import Email from "./stages/Email.svelte";
-  import Name from "./stages/Name.svelte";
-  import Language from "./stages/Language.svelte";
-  import Confirmation from "./stages/Confirmation.svelte";
-  import WidgetSteps from "./WidgetSteps.svelte";
+  import SubscribeForm from './SubscribeForm.svelte';
 
   export let configuratorId: string;
   export let newsSourceId: string;
-
-  const components: [(store: Store) => boolean, any][] = [
-    [
-      (store: Store) => true,
-      Email,
-    ],
-    [
-      (store: Store) => store.widgetEmail,
-      Name,
-    ],
-    [
-      (store: Store) => store.widgetName,
-      Language,
-    ],
-    [
-      (store: Store) => store.widgetLanguage,
-      Confirmation,
-    ],
-  ];
+  export let accent: string | null = null;
+  export let lead: string | null = null;
 </script>
 
-<WidgetSteps {components} />
+<SubscribeForm {configuratorId} {newsSourceId} {accent} {lead} layout="compact" embedded headingLevel={2} />

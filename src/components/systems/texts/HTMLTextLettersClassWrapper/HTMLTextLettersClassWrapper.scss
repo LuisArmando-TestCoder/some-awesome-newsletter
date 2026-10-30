@@ -1,6 +1,2 @@
-.wrapper-letter {
-  // transition: 0.1s;
-  display: inline-block;
-  position: relative;
-  transition-property: color, opacity, transform;
-}
+// Intentionally empty. Text is no longer split into per-word spans;
+// HTMLTextLettersClassWrapper renders plain, escaped text.

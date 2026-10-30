@@ -1,62 +1,44 @@
 import { gsap } from 'gsap';
 
-console.log('anim.init: GSAP base loaded', {
-  version: gsap.version,
-  isClient: typeof window !== 'undefined'
-});
+// GSAP helpers for the landing page only (WS1). Functional screens do not animate.
+// Plugins load on demand: ScrollTrigger when something needs a refresh, ScrollSmoother only when a smoother is created.
+// SplitText is no longer loaded (nothing uses it, and per-word text animation is not allowed on functional screens).
 
-// --- Variables globales ---
 let smoother: any = null;
 let ScrollSmoother: any = null;
-let SplitText: any = null;
 let ScrollTrigger: any = null;
 
-/**
- * Carga dinámica de plugins en cliente.
- */
-async function loadClientPlugins() {
-  if (typeof window === 'undefined') return;
-
-  if (!ScrollTrigger) {
-    const triggerModule = await import('gsap/ScrollTrigger');
-    ScrollTrigger = triggerModule.ScrollTrigger;
-    gsap.registerPlugin(ScrollTrigger);
-  }
-
-  if (!ScrollSmoother || !SplitText) {
-    const smootherModule = await import('gsap/ScrollSmoother');
-    const splitTextModule = await import('gsap/SplitText');
-
-    ScrollSmoother = smootherModule.ScrollSmoother;
-    SplitText = splitTextModule.SplitText;
-
-    gsap.registerPlugin(ScrollSmoother, SplitText);
-  }
-
-  console.log('anim.init: Client GSAP plugins registered', {
-    hasTrigger: !!ScrollTrigger,
-    hasSmoother: !!ScrollSmoother,
-    hasSplitText: !!SplitText
-  });
+/** True when the person asked for less motion (OS setting or the Display settings menu). */
+export function prefersReducedMotion(): boolean {
+  if (typeof window === 'undefined') return true;
+  return (
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+    document.documentElement.getAttribute('data-motion') === 'reduced'
+  );
 }
 
-/**
- * Crea una nueva instancia de ScrollSmoother.
- */
+async function loadScrollTrigger() {
+  if (typeof window === 'undefined' || ScrollTrigger) return;
+  const triggerModule = await import('gsap/ScrollTrigger');
+  ScrollTrigger = triggerModule.ScrollTrigger;
+  gsap.registerPlugin(ScrollTrigger);
+}
+
+async function loadScrollSmoother() {
+  if (typeof window === 'undefined' || ScrollSmoother) return;
+  await loadScrollTrigger();
+  const smootherModule = await import('gsap/ScrollSmoother');
+  ScrollSmoother = smootherModule.ScrollSmoother;
+  gsap.registerPlugin(ScrollSmoother);
+}
+
+/** Creates a ScrollSmoother. Returns null on the server or when reduced motion is on. */
 export async function createSmoother(wrapper: HTMLElement, content: HTMLElement) {
-  await loadClientPlugins();
+  if (prefersReducedMotion()) return null;
+  await loadScrollSmoother();
+  if (!ScrollSmoother) return null;
 
-  if (!ScrollSmoother) {
-    console.warn('ScrollSmoother not available (SSR context).');
-    return null;
-  }
-
-  if (smoother) {
-    console.log('anim.smoother: Killing existing instance.');
-    smoother.kill();
-  }
-
-  console.log('anim.smoother: Creating new instance.');
+  if (smoother) smoother.kill();
   smoother = ScrollSmoother.create({
     wrapper,
     content,
@@ -65,7 +47,6 @@ export async function createSmoother(wrapper: HTMLElement, content: HTMLElement)
     smoothTouch: 0.1,
     normalizeScroll: true
   });
-
   return smoother;
 }
 
@@ -73,12 +54,9 @@ export function getSmoother() {
   return smoother;
 }
 
+/** Refreshes ScrollTriggers. Does nothing (and downloads nothing) when no trigger was ever created. */
 export async function refreshAll(): Promise<void> {
-  await loadClientPlugins();
-  if (ScrollTrigger) {
-    console.log('anim.refresh: Refreshing all ScrollTriggers.');
-    ScrollTrigger.refresh();
-  }
+  if (ScrollTrigger) ScrollTrigger.refresh();
 }
 
 export { gsap };

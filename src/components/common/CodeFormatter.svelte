@@ -1,18 +1,36 @@
 <script lang="ts">
-  import hljs from 'highlight.js';
+  // Core build plus the languages this app shows. The full build ships about 190 languages (about 1 MB).
+  import hljs from 'highlight.js/lib/core';
+  import javascript from 'highlight.js/lib/languages/javascript';
+  import typescript from 'highlight.js/lib/languages/typescript';
+  import json from 'highlight.js/lib/languages/json';
+  import xml from 'highlight.js/lib/languages/xml';
+  import bash from 'highlight.js/lib/languages/bash';
   import 'highlight.js/styles/atom-one-dark.css';
 
   export let code: string;
   export let lang: string;
 
+  if (!hljs.getLanguage('javascript')) {
+    hljs.registerLanguage('javascript', javascript);
+    hljs.registerLanguage('typescript', typescript);
+    hljs.registerLanguage('json', json);
+    hljs.registerLanguage('xml', xml);
+    hljs.registerLanguage('bash', bash);
+  }
+
   let htmlFormattedCode: string;
 
+  function escapeHtml(text: string): string {
+    return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
   $: {
-    const highlightedCode = hljs.highlight(code, {
-      language: lang,
-      ignoreIllegals: true,
-    });
-    htmlFormattedCode = highlightedCode.value;
+    const source = code ?? '';
+    // A language that is not registered is shown as plain, escaped text.
+    htmlFormattedCode = hljs.getLanguage(lang)
+      ? hljs.highlight(source, { language: lang, ignoreIllegals: true }).value
+      : escapeHtml(source);
   }
 </script>
 

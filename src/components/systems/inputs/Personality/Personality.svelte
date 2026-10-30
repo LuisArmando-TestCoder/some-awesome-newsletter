@@ -83,7 +83,7 @@
       bind:value={currentContent}
       on:input={handleInput}
       placeholder={!currentContent ? placeholderText : ""}
-      aria-label="Personality Description"
+      aria-label={$t['personality.ariaLabel'] ?? "Brand personality description"}
       rows="5"
       disabled={$isGenerating}
     ></textarea>

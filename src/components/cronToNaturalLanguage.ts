@@ -205,7 +205,7 @@ export function cronToNaturalLanguage(cron: string): string {
   if (parts.length === 6) {
     hasSeconds = true;
   } else if (parts.length !== 5) {
-    return "Invalid cron expression: expected 5 or 6 fields.";
+    return "This schedule is not valid. Use five fields, for example 0 9 * * 1.";
   }
 
   let secondsExpr = "";

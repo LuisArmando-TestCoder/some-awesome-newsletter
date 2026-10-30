@@ -1,7 +1,12 @@
+<script context="module" lang="ts">
+  let searchSelectorCount = 0;
+</script>
+
 <script lang="ts">
   import { onMount, onDestroy, tick } from "svelte";
   import { writable } from "svelte/store";
   import fuzzysort from "fuzzysort";
+  import { t } from "$lib/i18n/dashboard-translations";
   import { slide } from "svelte/transition";
 
   // Props
@@ -12,6 +17,17 @@
   export let label = "Select an option";
   export let onSelect: (selectedValue: any | null) => void = () => {};
   export let disabled: boolean = false;
+
+  // Unique ids per instance so several selectors can share a page.
+  const uid = `search-selector-${++searchSelectorCount}`;
+  const labelId = `${uid}-label`;
+  const listboxId = `${uid}-listbox`;
+  const valueId = `${uid}-value`;
+  const optionId = (index: number) => `${uid}-option-${index}`;
+  $: activeDescendant =
+    open && highlightedIndex >= 0 && highlightedIndex < items.length
+      ? optionId(highlightedIndex)
+      : undefined;
 
   // State
   let selectedItem: any | null = null;
@@ -220,17 +236,14 @@
   }
 </script>
 
+<!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
   class="custom-select-wrapper"
   bind:this={dropdownRef}
   on:keydown={handleKeydown}
-  role="combobox"
-  aria-haspopup="listbox"
-  aria-expanded={open}
-  aria-owns={open ? "custom-listbox" : undefined}
 >
   {#if label}
-    <span class="custom-select-label" id="custom-select-label">
+    <span class="custom-select-label" id={labelId}>
       {label}
     </span>
   {/if}
@@ -241,11 +254,18 @@
       bind:this={inputRef}
       value={typeahead}
       on:input={handleInput}
-      placeholder="Type to search..."
+      placeholder={$t['customSelect.typeToSearch'] ?? "Type to search"}
       class="custom-select-input {open ? 'open' : ''}"
+      role="combobox"
       aria-autocomplete="list"
-      aria-controls={open ? "custom-listbox" : undefined}
-      aria-labelledby="custom-select-label"
+      aria-haspopup="listbox"
+      aria-expanded={open}
+      aria-controls={open ? listboxId : undefined}
+      aria-activedescendant={activeDescendant}
+      aria-labelledby={label ? labelId : undefined}
+      aria-label={label ? undefined : ($t['customSelect.typeToSearch'] ?? "Type to search")}
+      tabindex={open ? undefined : -1}
+      autocomplete="off"
       {disabled}
     />
     <button
@@ -253,19 +273,21 @@
       bind:this={buttonRef}
       on:click={toggleOpen}
       class="custom-select-button {!open ? 'visible' : ''}"
-      aria-controls={open ? "custom-listbox" : undefined}
-      aria-labelledby="custom-select-label {selectedItem ? 'selected-item-label' : ''}"
+      aria-haspopup="listbox"
+      aria-expanded={open}
+      aria-controls={open ? listboxId : undefined}
+      aria-labelledby={label ? `${labelId} ${valueId}` : valueId}
+      tabindex={open ? -1 : undefined}
       {disabled}
     >
       {#if selectedItem}
-        <span class="flex items-center gap-2 truncate">
-          <span class="truncate">{selectedItem[displayFieldName]}</span>
-        </span>
+        <span class="custom-select-name" id={valueId}>{selectedItem[displayFieldName]}</span>
       {:else}
-        <span class="text-gray-500">Select an option</span>
+        <span class="custom-select-placeholder" id={valueId}>{$t['customSelect.selectAnOption'] ?? "Select an option"}</span>
       {/if}
       <svg
-        class="custom-select-arrow w-4 h-4 transform transition-transform duration-200 {open ? 'rotate-180' : ''}"
+        class="custom-select-arrow"
+        class:open
         fill="currentColor"
         viewBox="0 0 24 24"
         aria-hidden="true"
@@ -279,33 +301,34 @@
     <ul
       bind:this={listRef}
       role="listbox"
-      id="custom-listbox"
+      id={listboxId}
       class="custom-select-list"
       tabindex="-1"
-      aria-labelledby="custom-select-label"
+      aria-labelledby={label ? labelId : undefined}
+      aria-label={label ? undefined : "Options"}
       in:slide={{ duration: 200 }}
       out:slide={{ duration: 200 }}
     >
       {#each items as item, index (item[valueFieldName])}
         <li
           bind:this={listItems[index]}
-          id={`custom-option-${item[valueFieldName]}`}
+          id={optionId(index)}
           class="custom-select-list-item"
           class:highlighted={highlightedIndex === index}
           class:selected={selectedItem && selectedItem[valueFieldName] === item[valueFieldName]}
           role="option"
-          aria-selected={selectedItem && selectedItem[valueFieldName] === item[valueFieldName]}
+          aria-selected={!!selectedItem && selectedItem[valueFieldName] === item[valueFieldName]}
           tabindex="-1"
           on:click={() => selectOption(item)}
           on:mouseenter={() => {
             highlightedIndex = index;
           }}
         >
-          <span class="truncate">{item[displayFieldName]}</span>
+          <span class="custom-select-name">{item[displayFieldName]}</span>
         </li>
       {:else}
-        <li class="px-4 py-2 text-sm text-gray-500" role="option" aria-disabled="true">
-          No options available.
+        <li class="custom-select-empty" role="option" aria-disabled="true" aria-selected="false">
+          {$t['customSelect.noOptionsAvailable'] ?? "No options available."}
         </li>
       {/each}
     </ul>

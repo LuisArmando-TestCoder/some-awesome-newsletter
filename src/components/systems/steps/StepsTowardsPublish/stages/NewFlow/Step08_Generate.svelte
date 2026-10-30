@@ -1,344 +1,200 @@
 <script lang="ts">
-  import { fly } from 'svelte/transition';
-  import { quadOut } from 'svelte/easing';
-  import Centered from "../../../../wrappers/Centered/Centered.svelte";
-  import SubmitButton from "../../../../buttons/SubmitButton/SubmitButton.svelte";
-  import LoadingScreen from "../../../../loading/LoadingScreen.svelte";
-  import store, { latestMessage, saveToStore, topic } from "../../../../../store";
-  import { ping } from "../../../../../Notification/notificationStore";
-  import { processNewsSourceAction } from "../H_Dashboard/NewsSource/newsSourceActions";
-  import createNewsSource from "../../../../requests/createNewsSource";
-  import getConfiguratorSession from "../../../../requests/getConfiguratorSession";
-  import sendEmail from "../../../../requests/sendEmail";
-  import getAuthHeaders from "../../../../requests/getAuthHeaders";
-  import { onDestroy } from 'svelte';
-  import stepsStore, { updateStepStore } from "./stepsStore";
-  import { t } from "$lib/i18n/newflow-translations";
+  // Onboarding slot 1: live preview of the first issue. Generated when the step opens.
+  // Nothing is saved or sent to subscribers here. The owner can send a test to themselves.
+  import store, { latestMessage, saveToStore } from "../../../../../store";
+  import { updateStepStore } from "./stepsStore";
+  import OnboardingShell from "./OnboardingShell.svelte";
+  import EmailFrame from "./EmailFrame.svelte";
+  import { ob, fmt } from "$lib/tutorial/copy";
+  import { onboarding, updateOnboarding, trackOnboardingEvent } from "$lib/tutorial/onboardingState";
+  import { browserLanguage } from "./infer";
+  import { nextStep } from "./nav";
+  import { generatePreview, sendHtml, findArticleRule } from "./onboardingApi";
 
   export let canReveal = false;
+  const INDEX = 1;
 
-  $: $t;
+  let generating = false;
+  let error = "";
+  let progress = "";
+  let testing = false;
+  let testMsg = "";
+  let testErr = "";
+  let ruleBusy = false;
+  let requestedFor = "";
 
-  let isLoading = false;
-  let isGenerated = false;
-  let isSending = false;
-  let isSent = false;
-  let isCreating = false;
-  let messages: string[] = []; 
-  
-  // Initialize messages reactively if empty
-  $: if (messages.length === 0 && $t) messages = [$t.step08.loading.initializing];
+  $: html = $onboarding.previewHtml;
+  $: subject = $onboarding.previewSubject || $store.config?.newsletterSubject || $ob.preview.defaultSubject;
+  $: owner = $store.configuratorEmail || "";
+  $: senderLine = $store.config?.senderName || $store.config?.newsletterTitle || "AIBAN";
 
-  let previewHtml = "";
+  // Show backend progress messages while writing (socket log stream).
+  $: if (generating && $latestMessage) progress = $latestMessage;
 
-  const unsubscribe = latestMessage.subscribe(msg => {
-    if (msg && isLoading) {
-      messages = [...messages, msg];
-    }
-  });
+  // Generate once per website when the step becomes visible.
+  $: if (canReveal && !html && !generating && $onboarding.url && requestedFor !== $onboarding.url) {
+    requestedFor = $onboarding.url;
+    generate();
+  }
 
-  onDestroy(() => {
-    unsubscribe();
-  });
-
-  async function handleGenerate() {
-    isLoading = true;
-    updateStepStore({ isGeneratingNewsletter: true });
-    messages = [$t.step08.loading.starting, $t.step08.loading.scraping, $t.step08.loading.translating, $t.step08.loading.formatting];
-
+  async function generate() {
+    error = "";
+    progress = "";
+    generating = true;
     try {
-      const response = await fetch(`${$store.apiURL()}/news-source/generate-newsletter`, {
-        method: "POST",
-        headers: getAuthHeaders(),
-        body: JSON.stringify({
-          // Send structured data
-          newsSource: {
-            url: $stepsStore.url || $store.newsSource,
-            lead: $store.config?.lead || $stepsStore.lead || $store.lead || $stepsStore.url || $store.url,
-            personality: $stepsStore.personality || $store.personality || "Professional",
-            linkSelector: $stepsStore.linkSelector || $store.linkSelector,
-            includeImages: false // Default to false or add a toggle if needed
-          },
-          // Additional config context // maybe this todo: 
-          language: $stepsStore.language || $store.globalLanguage || "en",
-          config: $stepsStore.config || $store.config
-        })
+      const res = await generatePreview({
+        url: $onboarding.url,
+        lead: $store.config?.lead || $onboarding.url,
+        personality: $store.personality || "",
+        linkSelector: $onboarding.linkSelector,
+        language: $onboarding.language || browserLanguage() || "en",
+        config: { ...($store.config ?? {}), community: $onboarding.reader },
       });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Failed to generate newsletter");
-      }
-
-      previewHtml = data.html;
-      updateStepStore({ generatedHtml: previewHtml });
-      isGenerated = true;
-    } catch (err: any) {
-      console.error(err);
-      ping("Error", $t.step08.errors.generationFailed + (err.message || err));
+      updateOnboarding({ previewHtml: res.html, previewSubject: res.subject || "" });
+      updateStepStore({ generatedHtml: res.html });
+      trackOnboardingEvent("preview_shown");
+    } catch (e) {
+      console.error("[onboarding/preview]", e);
+      error = $ob.preview.errors.generate;
     } finally {
-      isLoading = false;
-      updateStepStore({ isGeneratingNewsletter: false });
+      generating = false;
     }
   }
 
-  async function createAndNavigate() {
-    if (isCreating) return;
-    isCreating = true;
-    updateStepStore({ isCreatingNewsSource: true });
-
+  async function sendTest() {
+    testMsg = "";
+    testErr = "";
+    testing = true;
     try {
-      // Create the news source using the current store data
-      const newSource = await createNewsSource({
-        type: "website",
-        url: $stepsStore.url || $store.newsSource,
-        lead: $store.config?.lead || $stepsStore.lead || $store.lead || $stepsStore.url || $store.url,
-        personality: $stepsStore.personality || $store.personality,
-        linkSelector: $stepsStore.linkSelector || $store.linkSelector,
-        country: "US", // Default or from store if available
-        community: $topic, // Default or from store
-        scheduleTime: $store.config?.scheduleTime // Use schedule time if set
-      });
-
-      if (newSource && newSource.id) {
-        // Save the ID to the store
-        saveToStore({ createdNewsSourceId: newSource.id });
-        updateStepStore({ createdNewsSourceId: newSource.id });
-        
-        // Refresh session to sync everything
-        await getConfiguratorSession();
-        
-        // Proceed to next step
-        saveToStore({ stepsIndex: $store.stepsIndex + 1 });
-      } else {
-        ping("Error", $t.step08.errors.createFailed);
-      }
-    } catch (err: any) {
-      console.error(err);
-      ping("Error", $t.step08.errors.errorCreating + (err.message || err));
+      await sendHtml(html, subject, $store.config ?? {}, [owner]);
+      updateOnboarding({ testSentTo: owner });
+      testMsg = fmt($ob.preview.testSent, { email: owner });
+      trackOnboardingEvent("test_sent");
+    } catch (e) {
+      console.error("[onboarding/test]", e);
+      testErr = $ob.preview.errors.test;
     } finally {
-      isCreating = false;
-      updateStepStore({ isCreatingNewsSource: false });
+      testing = false;
     }
   }
 
-  async function handleSend() {
-    if (isSending || isCreating) return;
-    isSending = true;
-    updateStepStore({ isSendingEmail: true });
-    
-    try {
-      await sendEmail({
-        html: previewHtml,
-        subject: $store.config?.newsletterSubject || $t.step08.defaultSubject,
-        config: $store.config,
-        emails: [$store.configuratorEmail]
-      });
-
-      isSent = true;
-
-      // After sending email successfully, proceed to create news source and navigate
-      await createAndNavigate();
-
-    } catch (err: any) {
-      console.error(err);
-      ping("Error", $t.step08.errors.sendFailed + (err.message || err));
-    } finally {
-      isSending = false;
-      updateStepStore({ isSendingEmail: false });
+  async function findRuleAgain() {
+    ruleBusy = true;
+    const rule = await findArticleRule($onboarding.url, $onboarding.scheduleTime);
+    ruleBusy = false;
+    if (rule) {
+      updateOnboarding({ linkSelector: rule, previewHtml: "" });
+      saveToStore({ linkSelector: rule });
+      requestedFor = "";
     }
-  }
-
-  async function handleNext() {
-    await createAndNavigate();
   }
 </script>
 
-{#if isLoading}
-  <LoadingScreen {messages} />
-{/if}
-
-{#if isSending}
-  <LoadingScreen messages={[$t.step08.loading.sending, $t.step08.loading.authenticating, $t.step08.loading.sendingArticle]} />
-{/if}
-
-{#if isCreating}
-  <LoadingScreen messages={[$t.step08.loading.creating, $t.step08.loading.saving, $t.step08.loading.finalizing]} />
-{/if}
-
-<Centered>
-  <div class="step-container" class:loading={isLoading}>
-    {#if canReveal}
-      <div class="header-group" in:fly={{ y: 20, duration: 800, easing: quadOut }}>
-        <h1 class="main-title">
-          {$t.step08.title}
-        </h1>
+<OnboardingShell
+  {canReveal}
+  index={INDEX}
+  title={$ob.preview.title}
+  why={$ob.preview.why}
+  primaryLabel={$ob.preview.looksGood}
+  onPrimary={nextStep}
+  primaryDisabled={!html || generating}
+>
+  {#if generating}
+    <div class="generating" role="status" aria-live="polite">
+      <span class="pulse" aria-hidden="true"></span>
+      <div>
+        <p class="generating__text">{$ob.preview.generating}</p>
+        {#if progress}<p class="ob-hint">{progress}</p>{/if}
       </div>
+    </div>
+    <div class="skeleton" aria-hidden="true">
+      <span></span><span></span><span class="short"></span><span></span>
+    </div>
+  {:else if error}
+    <p class="ob-error" role="alert">{error}</p>
+    <div class="row">
+      <button type="button" class="ob-btn ob-btn--secondary" on:click={generate}>{$ob.tryAgain}</button>
+      <button type="button" class="ob-btn ob-btn--tertiary" on:click={nextStep}>{$ob.preview.skipPreview}</button>
+    </div>
+  {:else if html}
+    <EmailFrame
+      from={senderLine}
+      to={owner}
+      {subject}
+      {html}
+      labels={{ from: $ob.preview.inboxFrom, to: $ob.preview.inboxTo, subject: $ob.preview.inboxSubject }}
+    />
+    <div class="row">
+      <button type="button" class="ob-btn ob-btn--secondary" on:click={sendTest} disabled={testing || !owner}>
+        {testing ? $ob.preview.sendingTest : $ob.preview.sendTest}
+      </button>
+      <button type="button" class="ob-btn ob-btn--tertiary" on:click={generate}>{$ob.preview.regenerate}</button>
+    </div>
+    {#if testMsg}<p class="ob-success" role="status">{testMsg}</p>{/if}
+    {#if testErr}<p class="ob-error" role="alert">{testErr}</p>{/if}
+  {/if}
 
-      <div class="content-area" in:fly={{ y: 20, duration: 800, delay: 150, easing: quadOut }}>
-        {#if !isGenerated}
-          <div class="placeholder">
-            <p>{$t.step08.placeholder}</p>
-            <button class="generate-btn" on:click={handleGenerate}>
-              {$t.step08.generateBtn}
-            </button>
-          </div>
-        {:else}
-          <div class="send-wrapper">
-            <button class="send-btn" on:click={handleSend}>
-              {isSent ? $t.step08.sentBtn : $t.step08.sendTestBtn}
-            </button>
-          </div>
-          <div class="preview-box">
-            {@html previewHtml}
-          </div>
-          <div class="actions">
-            <button class="regenerate-btn" on:click={handleGenerate}>
-              {$t.step08.regenerateBtn}
-            </button>
-          </div>
-        {/if}
+  {#if !generating}
+    <details class="how">
+      <summary>{$ob.preview.howTitle}</summary>
+      <p class="ob-hint">{$ob.preview.howBody}</p>
+      <div class="ob-field">
+        <label class="ob-label" for="ob-rule">{$ob.preview.ruleLabel}</label>
+        <input id="ob-rule" class="ob-input mono" type="text" readonly value={$onboarding.linkSelector} />
       </div>
-
-      {#if isGenerated}
-        <div class="submit-wrapper" in:fly={{ y: 10, duration: 800, delay: 300, easing: quadOut }}>
-          <SubmitButton callback={handleNext} />
-        </div>
-      {/if}
-    {/if}
-  </div>
-</Centered>
+      <button type="button" class="ob-btn ob-btn--secondary" on:click={findRuleAgain} disabled={ruleBusy}>
+        {ruleBusy ? $ob.working : $ob.preview.findAgain}
+      </button>
+    </details>
+  {/if}
+</OnboardingShell>
 
 <style lang="scss">
-  .step-container {
+  .row { display: flex; gap: var(--space-3, 12px); flex-wrap: wrap; align-items: center; }
+  .generating {
+    display: flex;
+    gap: var(--space-3, 12px);
+    align-items: flex-start;
+    padding: var(--space-4, 16px);
+    border-radius: var(--radius-md, 8px);
+    background: var(--info-soft, #eef3ff);
+  }
+  .generating__text { margin: 0; color: var(--text-1, #14171a); }
+  .pulse {
+    flex: none;
+    width: 12px;
+    height: 12px;
+    margin-top: 6px;
+    border-radius: 50%;
+    background: var(--accent, #3b5bdb);
+    animation: pulse 1.4s var(--ease-in-out, ease-in-out) infinite;
+  }
+  @keyframes pulse { 50% { opacity: 0.3; } }
+  .skeleton {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 1rem 0;
-    gap: 2rem;
-    
-    &.loading {
-      opacity: 0.5;
-      pointer-events: none;
-    }
+    gap: var(--space-3, 12px);
+    padding: var(--space-4, 16px);
+    border: 1px solid var(--border-1, #e3e6ea);
+    border-radius: var(--radius-md, 8px);
+    span { display: block; height: 14px; border-radius: var(--radius-sm, 4px); background: var(--surface-2, #eceef1); }
+    .short { width: 60%; }
   }
-
-  .header-group { text-align: center; }
-
-  .main-title {
-    font-size: clamp(1.5rem, 4vw, 2.5rem);
-    font-weight: 800;
-    line-height: 1.2;
-    margin: 0;
-    text-wrap: balance;
-    background: linear-gradient(135deg, #1a1a1a 0%, #4a5568 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .content-area {
-    /* Transparent */
-    padding: 2rem 0;
+  @media (prefers-reduced-motion: reduce) { .pulse { animation: none; } }
+  .how {
+    border-top: 1px solid var(--border-1, #e3e6ea);
+    padding-top: var(--space-3, 12px);
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .placeholder {
-    text-align: center;
-    p {
-      font-size: 1.2rem;
-      color: #666;
-      margin-bottom: 1.5rem;
+    gap: var(--space-3, 12px);
+    summary {
+      cursor: pointer;
+      font-weight: var(--fw-semibold, 600);
+      color: var(--text-1, #14171a);
+      font-size: var(--fs-sm, 0.875rem);
     }
+    &[open] summary { margin-bottom: var(--space-3, 12px); }
+    > * + * { margin-top: var(--space-3, 12px); }
   }
-
-  .generate-btn, .regenerate-btn, .send-btn {
-    padding: 0.8rem 2rem;
-    background: #007aff;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: all 0.2s;
-    
-    &:hover {
-      background: #0062cc;
-      transform: translateY(-2px);
-    }
-  }
-
-  .regenerate-btn {
-    background: #6c757d;
-    &:hover { background: #5a6268; }
-  }
-
-  .send-wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 1rem;
-  }
-
-  .send-btn {
-    background: #28a745;
-    &:hover { background: #218838; }
-  }
-
-  .preview-box {
-    width: 100%;
-    text-align: left;
-    margin-bottom: 1.5rem;
-    background: white; /* Preview box needs white bg */
-    padding: 1rem;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-  }
-
-  .actions { display: flex; gap: 1rem; }
-
-  .submit-wrapper {
-    display: flex;
-    justify-content: flex-end;
-    padding-top: 1rem;
-  }
-
-  :global(.impact-statement) {
-    /* Responsive sizing: slightly larger/bolder than the previous subtitle */
-    font-size: clamp(1.5rem, 5vw, 2rem);
-    font-weight: 800;
-    line-height: 1.2;
-    margin: 0;
-    text-align: center; /* Default center */
-    letter-spacing: -0.03em;
-    text-wrap: balance;
-
-    /* Infinite Shimmer Effect: 
-       Creates a living, "forever" feel using a moving gradient background.
-    */
-    background: linear-gradient(
-      120deg, 
-      var(--c-primary, #2563eb) 0%, 
-      var(--c-primary-light, #60a5fa) 50%, 
-      var(--c-primary, #2563eb) 100%
-    );
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    
-    animation: shine 4s linear infinite;
-  }
-
-  @keyframes shine {
-    to {
-      background-position: 200% center;
-    }
-  }
+  .mono { font-family: var(--font-mono, monospace); font-size: var(--fs-sm, 0.875rem) !important; }
 </style>

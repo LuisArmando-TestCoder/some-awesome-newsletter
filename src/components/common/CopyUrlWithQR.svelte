@@ -37,7 +37,7 @@
 
     async function copyUrl() {
         if (!navigator.clipboard) {
-            alert("Clipboard API not available."); // Basic fallback
+            alert("Your browser blocked copying. Select the link and copy it by hand."); // Basic fallback
             return;
         }
         try {
@@ -91,7 +91,7 @@
             <div class="qr-section">
                 <img
                     src={qrCodeDataUrl}
-                    alt="Subscription QR Code"
+                    alt="QR code for your signup link"
                     class="qr-image"
                 />
                 <div>

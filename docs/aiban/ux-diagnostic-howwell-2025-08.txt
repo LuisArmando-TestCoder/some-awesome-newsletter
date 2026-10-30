@@ -1,0 +1,768 @@
+Diagnóstico sitio web
+aibanewsletter
+
+
+
+
+Agosto 2025 - how well studio
+A continuación se muestra un análisis a alto nivel del sitio
+aibanewsletter.club
+El objetivo es poder mostrar problemáticas alrededor de:
+•   Cuánto el sitio está alineado a lo que los usuarios están
+    acostumbrados (convenciones y patrones de diseño)
+•   Cómo la estructura del sitio soporta los objetivos deseados
+    (elementos de diseño)
+Estos temas son relevantes, ya que en conjunto, terminan
+impactando la experiencia del usuario, lo que sin duda tiene
+consecuencias en el objetivo final del sitio: hacer que un potencial
+cliente decida inscribirse en el servicio y mantenerse como usuario
+activo.
+
+
+
+
+                                                                       2
+Para el análisis, se va a dividir el diagnóstico
+en:
+
+
+(1) Intro y flujo de registro
+(2) Flujos en el dashboard
+(3) Flujo subscripción individual
+(4) Blog automático
+
+
+
+
+ (1)                                          (2)   (3)   (4)
+
+
+
+
+                                                                3
+(1) Intro y ujo de registro
+
+
+                              (a) Cuando el usuario entra a un sitio
+ (a)                          nuevo, espera ver algún tipo de
+                              contenido y la incertidumbre es alta por
+                              lo que su atención inicial es un escaneo
+                              general muy rápido.
+                              Esta animación inicial tiene buena
+                              velocidad de lectura, pero el hecho de
+                              que el sitio esté vacío en el primer
+                              segundo hace que el usuario vaya a
+                              buscar algún otro elemento. Es decir,
+                              cuando aparece el texto, el usuario
+                              probablemente esté distraído y
+                              puede ser que pierda la primer
+                              parte del texto.
+                              Además de esto, este texto no vuelve a
+                              aparecer aunque se actualicé la página.
+                              Siendo el único texto que indica de
+                              qué trata el producto, no es
+                              recomendable que desaparezca y
+                              que el usuario no tenga cómo volverlo a
+                              ver.
+                              Se recomienda tener un landing page,
+                              donde se hable del producto y es hasta
+                              que el usuario intencionalmente escoja
+                              iniciar, se dispare el flujo inicial de
+                              creación.
+                                                                         4
+  fl
+(1) Intro y ujo de registro
+
+
+                                    (b) Cuando la introducción inicia (página
+                                    4), aparecen los botones de
+                                    navegación.
+                                    La introducción no es un elemento
+                                    que necesita ser navegado por el
+                                    usuario, pero cada uno de los pasos del
+                                    proceso sí.
+                                    Si se hace lo recomendado en la página
+                                    anterior, los botones de navegación
+                              (b)   solo deben estar presentes en el
+                                    proceso de subscripción.
+                                    Si se desea mantener una animación
+                                    para la introducción y que el usuario
+                                    tenga la posibilidad que adelantarla, se
+                                    recomienda un botón de ‘skip intro’.
+
+
+
+
+                                                                                5
+  fl
+(1) Intro y ujo de registro
+
+
+                                    (c) Cuando se utilizan animaciones en
+                                    las interfaces, deben o ayudar a
+                                    transmitir un mensaje o a reforzar el
+                                    significado de algún elemento.
+                                    En este caso las animaciones que van
+                                    mostrando el texto, no están
+                              (c)   cumpliendo ninguna de esas dos
+                                    opciones.
+                                    Al contrario, interrumpen el flujo de
+                                    lectura.
+                                    No es común animar cada una de las
+                                    palabras de cada uno uno de los pasos
+                                    de un proceso, es un distractor
+                                    innecesario para que el usuario cumpla
+                                    su función en cada paso.
+
+
+
+
+                                                                             6
+  fl
+(1) Intro y ujo de registro
+
+
+                              (d) Cuando un usuario está escribiendo
+                              la dirección de su sitio web, no será un
+                              URL válido hasta que la termine de
+                              escribirlo.
+                              Indicarle que está cometiendo un
+                              error, cuando no es así, genera una
+                              mala experiencia para el usuario.
+                              Si bien es cierto que al presionar
+                              ENTER, el usuario puede avanzar al
+                              siguiente paso, es mejor tener un CTA
+                              claro para el usuario donde él pueda
+                        (d)
+                              confirmar que ya terminó de llenar
+                              la información solicitada. Es hasta
+                              ese momento, donde se hace la
+                              validación y se le puede indicar que hay
+                              un error.
+
+
+
+
+                                                                         7
+  fl
+(1) Intro y ujo de registro
+
+
+                                  (e) Cuando se tienen textos con
+                                  diferentes naturalezas, se deben
+                                  ver distintos y aquella información
+                                  que cumple el mismo propósito,
+                                  debe verse igual.
+                                  En este caso e.1 y e.2 pertenecen al
+                                  mismo tipo de información. La primera
+                                  línea está explicando por qué se
+                          (e.1)
+                   (e)            necesita lo que se solicita en la segunda
+                          (e.2)   línea.
+                          (e.3)
+                                  Mientras que el texto que ingresa el
+                          (e.4)   usuario (e.3), se ve igual al texto del hint
+                                  (e.4).
+                                  Se recomienda que en las primeras
+                                  dos líneas se use el mismo color y
+                                  se remueva la itálica.
+                                  Además, el hint y el texto que ingresa
+                                  el usuario deben ser distintos. Una
+                                  convención es que el hint tiene un
+                                  tamaño más pequeño que lo que
+                                  ingresa el usuario.
+
+
+
+
+                                                                                 8
+  fl
+(1) Intro y ujo de registro
+
+
+                              (f) Cambiar los colores de las
+                              palabras en una sola oración,
+                              aumenta la carga cognitiva.
+                              Si lo que se busca es destacar las
+                              palabras claves, se recomienda hacerlo
+                              con bold.
+
+
+                       (f)
+
+
+
+
+                                                                       9
+  fl
+(1) Intro y ujo de registro
+
+
+                              (g) Mantener la consistencia a lo
+                              largo de la interfaz es fundamental.
+                              En los pasos anteriores del proceso, la
+                              itálica funcionaba como parte de las
+                              instrucciones y en este caso es un link,
+                              es decir, es un CTA.
+                              Se recomienda tener estandarizar
+                              las jerarquías de los distintos CTAs.
+                              En la siguiente imagen se pueden ver
+                              dos CTAs de Apple con distintas
+                              jerarquías.
+
+                       (g)    Estas jerarquías se usan a lo largo de
+                              todo el sitio web.
+
+
+
+
+                                                                         10
+  fl
+(2) Dashboard - con g
+
+
+                (h)     (h) Un principio importante de la
+                        usabillidad es indicarle al usuario en qué
+                        sección está y en este caso no hay
+                        ningún tipo de indicación.
+                        Se debe indicar con un elemento
+                        visual en qué sección se está.
+                        Ejemplos:
+
+
+
+
+                        Además, en el menú, es fundamental
+                        que los términos sean palabras
+                        completas y es importante
+                        asegurarse que se entiendan.
+                        Especialmente el término ‘new sources’
+                        vale la pena probarlo con usuarios para
+                        validar si están entendiendo lo que
+                        significa.
+
+
+
+
+                                                                     11
+           fi
+(2) Dashboard - con g
+
+
+                        (i)   (i) La animación que acompaña al
+                              ícono de dark mode no es suficiente
+                              para indicar al usuario que el círculo
+                              negro sirve para activar esta
+                              función.
+                              Dado que no existe un ícono
+                              estandarizado para el dark mode, se
+                              recomienda incluir texto de apoyo que
+                              aclare su propósito y evite confusiones.
+
+
+
+
+                                                                         12
+           fi
+(2) Dashboard - con g
+
+
+                              (j) La opción de colapsar los menús
+                              acordeón presenta algunos problemas:
+                               •   El término auto collapse es
+                                   técnico y poco común, por lo que un
+                        (j)        usuario promedio podría no
+                                   comprender su significado.
+                               •   Su ubicación ocupa un lugar
+                                   relativamente destacado en el
+                                   orden de lectura, pero decidir si el
+                                   menú colapsa o no, no parece ser
+                                   una tarea crítica para el usuario en
+                                   este contexto.
+                              Dado que ya existen opciones como el
+                              dark mode y esta funcionalidad, podría
+                              considerarse agruparlas en un
+                              pequeño menú de configuración.
+                              Esto ayudaría a contextualizar mejor al
+                              usuario sobre estas opciones y sus
+                              propósitos.
+
+
+
+
+                                                                          13
+           fi
+(2) Dashboard - con g
+
+
+                        (k) Los menú acordeón se usan
+                        frecuentemente para mostrar
+                        grandes cantidades de
+                        información.No es común usarlos para
+  (k)                   configurar un sistema.
+                        Este tipo de menú conlleva
+                        movimientos de los elementos de la
+                        interfaz, que en este caso, no solo son
+                        innecesarios, sino que interrumpen el
+                        flujo por el cual se desea llevar al
+                        usuario.
+                        En esta pantalla, se espera que el
+                        usuario vaya llenando los datos
+                        generales de su newsletter. El diseño
+                        debe fomentar esa guía, es decir, el
+                        diseño debe llevar al usuario a ese
+                        llenado, en orden. Cuando los
+                        elementos colapsan y se escoden,
+                        el flujo de esa guía se ve
+                        interrumpida.
+                        Se recomienda usar otro tipo de
+                        organización de información para esto,
+                        como pestañas o un submenú
+                        completo.
+
+
+
+                                                                  14
+           fi
+(2) Dashboard - con g
+
+
+                              (l) Cuando se le da opciones al usuario
+                              para que configure la forma en la que ve
+                              la información, es importante valorar
+                              cuánto nivel de granularidad
+                              realmente necesita.
+                              Las opciones que se le dan, deben ser
+                        (l)   porque tienen un objetivo claro, es
+                              decir, es útil para el usuario hacer eso.
+                              En este caso, darle la opción de auto
+                              colapsar los subniveles dentro de
+                              un menú ya colápsale, no parece
+                              ser necesario.
+                              Cada opción que se le brinda al usuario,
+                              es una opción que aumenta la carga
+                              cognitiva, es un elemento más que el
+                              cerebro debe procesar y cada uno de
+                              estos elementos, o interrumpe el flujo
+                              que deseamos o aporta. Se deben
+                              valorar cada una de las opciones que se
+                              incluyen desde esa perspectiva para
+                              intencionalmente darle al usuario lo que
+                              necesita.
+
+
+
+
+                                                                          15
+           fi
+(2) Dashboard - con g
+
+
+                         (m) Los comentarios de la página 8,
+                         aplican también para el contenido de
+                         toda esta sección.
+                         Definir los tipos de textos que existen
+                         y que sean consistentes a lo largo
+                         de la interfaz es básico para que el
+                         usuario pueda navegar el sitio
+                         fácilmente.
+
+
+
+                   (m)
+
+
+
+
+                                                                   16
+           fi
+(2) Dashboard - con g
+
+
+                              (n) Al solicitarle al usuario que suba una
+                              imagen, es importante darle los
+                              parámetros de selección de esa
+                              imagen:
+                              •   Tamaño máximo
+                              •   Tamaño mínimo
+                              •   Proporciones
+                              •   Formato
+                              •   Peso máximo
+                              También es bueno indicarle dónde y
+                              cómo será usado, es decir, qué
+                        (n)   puede esperar después de esto,
+                              cómo se hará uso de su logo en el
+                              Newsletter.
+                              Por otro lado, esta parte es
+                              sumamente distinta al resto de la
+                              interfaz, desde el CTA hasta el icono
+                              usado.
+                              Buscar consistencia no solo en los
+                              textos, sino también en la semántica
+                              general de una interfaz, ayuda a que la
+                              experiencia de usuario fluya. Cada
+                              elemento que el usuario sienta que no
+                              pertenece, es un elemento que influye a
+                              una mala percepción y experiencia.
+                                                                           17
+           fi
+(2) Dashboard - con g
+
+
+                                  (o) ‘Signature HTML’ requiere de
+                                  cierto conocimiento técnico para
+                                  saber lo que es.
+                                  Ya que esta interfaz tiene un público tan
+                                  amplio, es recomendable usar
+                                  términos más generales.
+                                  Además, cuando se muestra cómo se
+                                  ve la firma (o.1), es conveniente
+                                  contextualizar más la imagen para
+                                  que el usuario pueda imaginarse
+                                  cómo se puede ver la firma.
+                                  Por ejemplo DocuSign muestra cómo
+                    (o)           se va a ver en sus documentos.
+
+
+
+
+                          (o.1)
+                                  Si bien es cierto, en este caso no se
+                                  está haciendo una adaptación de la
+                                  letra, lo importante del ejemplo es que
+                                  se muestra cómo se va a ver la firma
+                                  cuando se vaya a usar.
+
+                                                                              18
+           fi
+(2) Dashboard - con g
+
+
+                              (p) En este caso hay inconsistencia
+                              en la posición del placeholder y del
+                              contenido que coloca el usuario. Se
+                              recomienda que haya consistencia en
+                              esas ubicaciones a lo largo de los
+                              campos de texto.
+                              Con respecto a la instrucción (p.1), es
+                              valioso para el usuario entender,
+                              cuando algo es ‘opcional’, entonces
+                              cuál es la versión por omisión.
+                        (p)   Es decir, si el usuario no hace esto,
+                              entonces desde dónde se envían los
+                              correos y por qué esto es importante,
+                              en qué le afecta que esté en una parte
+                              vs la otra.
+  (p.1)
+
+
+
+
+                                                                        19
+           fi
+(2) Dashboard - new sources
+
+
+                              (q) Ell título de esta configuración es
+                              diferente a las anteriores.
+                              Mientras que en las opciones
+                              previas, se habla de conceptos
+                              generales como ‘Information setup’
+                              o ‘Email credentials’, este es un
+                              CTA: ‘Add news sources’.
+                              Si conceptualmente esto es distinto,
+ (q)                          debe reflejarse visualmente en la
+                              interfaz. Si en realidad no lo es,
+                              entonces es importante cambiar la
+                              nomenclatura (add new sources).
+                              Por otro lado, es importante saber qué
+                              tanto un usuario puede entender el
+                              concepto de agregar nuevas
+                              fuentes.
+                              Sin el contexto apropiado, es probable
+                              que se les dificulte entender esta
+                              sección.
+                              Al igual que la página anterior, también
+                              vale la pena explicar con claridad qué
+                              beneficios conlleva esto, por qué un
+                              usuario quisiera agregar más fuentes y
+                              cómo impacta esto el contenido que se
+                              genera.
+
+                                                                         20
+(2) Dashboard - new sources
+
+
+                              (r) Esta sección presenta el mismo
+                              inconveniente que la anterior: mientras
+                              que la nomenclatura usada en las
+                              secciones anteriores se trata de
+                              conceptos generales, aquí se cuenta
+                              con el detalle de la fuente principal (que
+                              además es compleja, ya que son dos
+                              URLs).
+                      (r)     Toda la naturaleza de esta sección,
+                              no parece ser consistente con el
+                              tipo de información de la sección de
+                              Config, por lo que se recomienda
+                              usar una forma distinta de presentar
+                              la información.
+                              En general se recomienda analizar con
+                              más detalle esta sección, contemplando
+                              la lógica versus la de Config.
+                              ¿Cómo el usuario interpreta esta
+                              información versus la anterior?
+                              ¿La granularidad de la información, es
+                              relevante para el usuario como para
+                              hacer una diferenciación o en realidad
+                              esa granularidad solo es relevante para
+                              el backend?
+
+
+
+                                                                           21
+(2) Dashboard - new sources
+
+
+                              (s) Es importante tener seguridad que
+                              la nomenclatura usada en la
+                              interfaz, sea entendida por los
+                              usuarios.
+                              Si no se tiene claridad, es posible
+                              usar términos más descriptivos para
+                              que cualquier persona lo pueda
+           (s)                entender, como: ‘Your ideal client’,
+                              en vez de ‘Buyer Persona’.
+                              Además de esto, debe también quedar
+                              claro, qué objetivos cumplen estos
+                              datos.
+                              En otras palabras, cómo afecta que la
+                              plataforma sepa quién es el cliente ideal
+                              y de dónde es.
+
+
+
+
+                                                                          22
+(2) Dashboard - new sources
+
+
+                              (t) En esta sección, no queda claro
+                              que según cada fuente, las
+                              características del newsletter son
+                              diferentes.
+                              Esto empieza a hacerse obvio, hasta
+                              que se agrega una segunda fuente,
+                              entonces se puede ver que se puede
+                              configurar de forma individual.
+                              Además, es fundamental saber si
+ (t)                          cuando un usuario está creando un
+                              newsletter basado en una fuente
+                              específica, definir el tono de voz y la
+                              frecuencia se considera avanzado.
+                              Es frecuente usar el término
+                              avanzado, para referirse a opciones
+                              que solamente los usuarios
+                              avanzados tienden a usar, por lo
+                              que un usuario básico no ingresa a
+                              esas opciones, pero el tono de voz y
+                              frecuencia, parecen opciones que es
+                              importante definir, sin importar el nivel
+                              de expertise con el que cuente el
+                              usuario.
+
+
+
+
+                                                                          23
+(2) Dashboard - new sources
+
+
+                              (u) Si existen opciones que
+                              solamente se habilitan cuando
+                              alguna otra opción está activada, se
+                              recomienda que entonces solo
+                              aparezca en ese momento.
+                              Es decir, si en este caso no se ha
+                              colocado ninguna opción de Sender,
+                              este campo de texto es mejor que no
+                              esté visible.
+                              Entre más contenido el usuario deba
+                              leer y procesar, la experiencia se
+                              complejiza, por lo que es mejor hacerlo
+                              solo cuando es necesario.
+
+
+                   (u)
+
+
+
+
+                                                                        24
+(2) Dashboard - users
+
+
+                                      (v) Misma recomendación sobre el
+                                      menú acordeón (página 14).
+                                      Si un usuario tuviera una gran
+                                      cantidad de suscriptores, el scroll
+                        (v)           sería muy largo y no es necesario.
+                                      Es importante entender el escenario de
+                                      uso de esta pantalla: ¿los usuarios
+                                      necesitan ver la lista de subscriptores y
+                                      los gráficos a la vez? Al menos en otras
+                                      plataformas que tienen como objetivo la
+                                      administración de newsletter, se
+                                      encuentran separados.
+                                      Se puede usar pestañas para tener los
+                                      dos tipos de contenido, pero que el
+                                      usuario seleccione lo que quiere ver en
+                                      este momento.
+                              (v.1)
+                                      Por otro lado, es importante prestar
+                                      atención al movimiento del
+                                      contenido cuando no es necesario
+                                      (v.1). Si se tienen elementos uno al lado
+                                      del otro, si uno se mueve al haber
+                                      interactuado con el otro, debe ser por
+                                      una razón alineada al flujo o las tareas
+                                      que el usuario necesita realizar en esta
+                                      pantalla.
+
+                                                                                  25
+(3) Subscripción individual
+
+
+                                    (w) En este flujo aplican las
+                                    recomendaciones mencionadas desde
+                                    la página 6 hasta la 10.
+
+
+
+
+                              (w)
+
+
+
+
+                                                                        26
+(4) Blog automático
+
+
+                        (x) El hero no le está dando ningún
+                        tipo de información al usuario final:
+                        nombre del blog, objetivo, temática.
+                        Por otro lado, el usuario principal
+                        (creador del newsletter), al menos en
+                        las pantallas anteriores no parece
+                        tener control sobre cómo se puede
+                        ver esto y podría ser relevante en caso
+                        de que desee usar el branding de su
+                        empresa.
+                        La barra de búsqueda (x.1) no está
+  (x)                   funcionando. Es una buena práctica
+                        ayudar al usuario con posibilidades
+                        de búsqueda conforme va
+                        escribiendo sus palabras y mostrar
+                (x.1)
+                        búsquedas recientes. Además esto,
+                        agregar algún CTA o icono, para
+                        enfatizar la acción de buscar, es
+                        decir, no depender de que el usuario
+                        entienda que debe presionar Enter.
+                        Finalmente, la página de resultados
+                        de búsqueda es crítica para la
+                        experiencia de usuario.
+
+
+
+
+                                                                  27
+(4) Blog automático
+
+
+                              (y) En páginas de blog se
+                              acostumbra a destacar distintos
+                              artículos, es decir, existen distintas
+   (y)                        jerarquías para guiar al usuario por
+                              un journey de lectura.
+                              Vale la pena considerar si estos
+                              artículos deben tener algún tipo de
+                              jerarquía o si todos deben mantenerse
+                              con la misma importancia.
+                              Los artículos se abren en un pop-up
+                              y se recomienda que tengan su
+                      (y.1)
+                              propia página por distintas razones:
+                              1) No es común que un blog abra sus
+                                 artículos en un pop-up.
+                              2)Los artículos son largos y se debe
+                                pensar en el escenario de uso: los
+                                usuarios se van a tomar el tiempo
+                                para leer si ya decidieron entrar a un
+                                blog y abrir un artículo. Un pop-up no
+                                es un medio amigable para esto.
+
+
+
+
+                                                                         28
+(4) Blog automático
+
+
+                            (z) No queda claro cuál es la
+                      (z)   diferencia entre estos artículos y
+                            los anteriores y por qué ambos
+                            tienen paginación.
+                            Si la diferencia es porque son jerarquías
+                            distintas, es necesario indicarle al
+                            usuario cuál es la diferencia entre
+                            uno y otro.
+                            En el caso de Vox por ejemplo, hay
+                            distintas jerarquías, pero el usuario
+                            entiende la diferencia y además, forman
+                            una composición entre sí, no son
+                            elementos ajenos entre sí, como si está
+                            sucediendo en esta página (z).
+
+
+
+
+                                                                        29
+Conclusiones generales
+
+
+Todas estas decisiones de diseño que se          •   En un servicio como este, las entrevistas      •   El modelo de menú colapsable no es el
+toman consciente o inconscientemente                 y pruebas con usuarios se vuelven aún              más conveniente para el tipo de
+terminan conformando la experiencia de               más críticas. Cuando se está innovando,            información y acciones que el usuario
+usuario, lo que puede determinar si el               para garantizar que está siendo intuitivo,         debe llevar a cabo. Podrían considerar
+usuario se inscribe al servicio y si se              solo puede hacerse entendiendo los                 usar una navegación de barra lateral,
+convierte en un usuario activo y promotor            modelos mentales de los usuarios. El               más común de ver en dashboards con
+del servicio.                                        riesgo de abandono es muy alto si la curva         información compleja.
+•   Se debe contar con una landing page. Es          de aprendizaje es tan alta.
+    un servicio innovador y complejo y eso       •   La composición cromática no ayuda a
+    conlleva una curva de aprendizaje para el        la lecturabilidad ni a la legibilidad. No es
+    usuario. Con la información presentada en        necesario usar los colores del branding
+    las pantallas analizadas, la carga               como colores primarios y secundarios de
+    cognitiva es alta, hay muchos aspectos           un sitio web. En general tiene problemas
+    que el usuario tendría que resolver por su       de accesibilidad
+    cuenta, en vez de tener claridad desde el    •   Los flujos presentados en estas pantallas
+    inicio y esto promueve el abandono del           necesitan ser revisitados, para tener
+    sitio antes de la conversión.                    claridad sobre la lógica de cada uno de
+•   En general, la navegación y la                   ellos y cómo interactúan entre sí. Hay
+    estructura del sitio no favorece el              momentos donde esos flujos son
+    entendimiento del servicio.                      confusos. Por ejemplo, la lógica de los new
+•   El servicio que ofrecen ya es                    sources y lo que se puede hacer con ellos,
+    suficientemente complejo, si se explicara        no es clara, lo que también contribuye a la
+    con patrones de diseño reconocidos. Sin          disminución de la conversión.
+    embargo, se rompe con paradigmas
+    usuales y esto complica aún más el
+    entendimiento del servicio.
+                                                                                                                                                 30
+how well studio
+Contestar encuesta de
+feedback, son dos preguntas,
+tardás 1 minuto
+
+hello@nathaliehowell.com
+

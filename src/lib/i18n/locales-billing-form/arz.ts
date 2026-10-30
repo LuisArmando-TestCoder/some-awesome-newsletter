@@ -1,42 +1,59 @@
+// arz strings for locales-billing-form. English (en.ts) is the source. Key order and shape follow en.ts.
+// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale arz
 export default {
-  billing: {
-    header: {
-      title: "تفاصيل الفاتورة",
-      subtitle: "محتاجين تفاصيل عملية آمنة لإصدار الفاتورة.",
+  "billing": {
+    "header": {
+      "title": "بيانات الفوترة",
+      "subtitle": "بنحط البيانات دي على الفاتورة بتاعتك. بعدها صفحة الدفع هتطلب بيانات الكارت."
     },
-    fields: {
-      firstName: {
-        label: "الاسم الأول",
-        placeholder: "أحمد",
+    "fields": {
+      "firstName": {
+        "label": "الاسم الأول",
+        "placeholder": "أحمد"
       },
-      lastName: {
-        label: "اسم العيلة",
-        placeholder: "حسين",
+      "lastName": {
+        "label": "اسم العائلة",
+        "placeholder": "حسين"
       },
-      email: {
-        label: "البريد الإلكتروني",
-        placeholder: "jane.doe@company.com",
+      "email": {
+        "label": "الإيميل للفواتير",
+        "placeholder": "jane.doe@company.com"
       },
-      phone: {
-        label: "رقم التليفون",
-        placeholder: "+1 (555) 000-0000",
+      "phone": {
+        "label": "رقم الهاتف",
+        "placeholder": "+1 (555) 000-0000"
       },
-      country: {
-        label: "كود البلد",
-        placeholder: "EG",
+      "country": {
+        "label": "رمز الدولة",
+        "placeholder": "EG"
       },
-      address: {
-        label: "عنوان الفاتورة",
-        placeholder: "«١٢٣ شارع الابتكار»",
+      "address": {
+        "label": "عنوان الفوترة",
+        "placeholder": "123 الشارع الرئيسي"
       },
-      city: {
-        label: "المدينة",
-        placeholder: "القاهرة",
+      "city": {
+        "label": "المدينة",
+        "placeholder": "القاهرة"
       },
-      zip: {
-        label: "الرمز البريدي",
-        placeholder: "10101",
+      "state": {
+        "label": "الولاية أو المحافظة",
+        "placeholder": "سان خوسيه"
       },
+      "zip": {
+        "label": "الرمز البريدي",
+        "placeholder": "10101"
+      }
     },
-  },
+    "hints": {
+      "country": "حرفين، مثلًا US أو MX أو CR.",
+      "state": "اختياري. سيبه فاضي لو بلدك مش بتستخدمه.",
+      "zip": "اختياري. سيبه فاضي لو عنوانك معندوش رمز بريدي."
+    },
+    "errors": {
+      "required": "املا الخانة دي عشان تكمّل.",
+      "email": "اكتب إيميل زي name@example.com.",
+      "country": "اكتب رمز البلد اللي هو حرفين، مثلًا US."
+    },
+    "optional": "اختياري"
+  }
 };

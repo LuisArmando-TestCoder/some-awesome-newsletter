@@ -77,17 +77,13 @@
 
       return Object.entries(allLeadData).map(([newsSourceId, leadData]) => {
         const newsSource = newsSources.find(ns => ns.id === newsSourceId);
-        const name = newsSource ? new URL(newsSource.url).hostname : newsSourceId;
+        let name = newsSourceId;
+        try { if (newsSource?.url) name = new URL(newsSource.url).hostname; } catch { /* keep id */ }
 
         let totalClicks = 0;
         for (const user in leadData) {
           totalClicks += Object.keys(leadData[user]).length;
         }
-
-        console.log("Hay newsSources", newsSources.find(({id}) => id === newsSourceId)?.url)
-        console.log("Hay newsSourceId", newsSourceId)
-        console.log("Hay newsSources", newsSources.map(({id}) => id))
-        // the problem here is tyhat I may have created and deleted ns and now their leads dont exist
 
         return {
           id: newsSourceId,
@@ -130,7 +126,7 @@
     </p>
   {:else if loadingError}
     <p class="error-message">
-      {$t['errors.loadingAnalytics']}: {loadingError}
+      {$t['errors.loadingAnalytics']} {loadingError}
     </p>
   {:else}
     <!-- Only show charts container if not loading and no error -->

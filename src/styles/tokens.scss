@@ -1,0 +1,294 @@
+// AIBAN design tokens. Owner: WS1. Contract: docs/aiban/CHARTER.md section 4.
+// Imported once, globally, from src/routes/+layout.svelte.
+// Components use only these custom properties. Raw values live here and nowhere else.
+// Direction: "Broadsheet". Warm paper, ink text, one deep pine accent, Lora serif headlines, Inter for UI.
+// Light theme is the default. Dark applies with [data-theme="dark"] on <html>,
+// or with prefers-color-scheme: dark when no explicit [data-theme] is set.
+
+@use './fonts.scss';
+
+:root {
+  color-scheme: light;
+
+  // ---------- Palette (private, do not use in components) ----------
+  --_paper-0: #faf8f4;
+  --_paper-1: #ffffff;
+  --_paper-2: #f2efe8;
+  --_paper-3: #e8e4da;
+  --_ink-1: #1a1a17;
+  --_ink-2: #4a4943;
+  --_ink-3: #6b6a63;
+  --_line-1: #e3dfd5;
+  --_line-2: #8c887d;
+  --_pine: #1f5c4f;
+  --_pine-hover: #174a3f;
+  --_pine-soft: #e6f0ec;
+
+  // ---------- Surfaces ----------
+  --surface-0: var(--_paper-0);
+  --surface-1: var(--_paper-1);
+  --surface-2: var(--_paper-2);
+  --surface-3: var(--_paper-3);
+  --surface-inverse: var(--_ink-1);
+  --surface-overlay: rgb(26 26 23 / 0.48);
+
+  // ---------- Text ----------
+  --text-1: var(--_ink-1);
+  --text-2: var(--_ink-2);
+  --text-3: var(--_ink-3);
+  --text-inverse: var(--_paper-0);
+  --text-link: var(--_pine);
+
+  // ---------- Brand and state ----------
+  --accent: var(--_pine);
+  --accent-hover: var(--_pine-hover);
+  --accent-contrast: #ffffff;
+  --accent-soft: var(--_pine-soft);
+  --success: #1f7a3e;
+  --success-soft: #e7f4ec;
+  --warning: #8a5a00;
+  --warning-soft: #fbf0d9;
+  --danger: #b42318;
+  --danger-hover: #912018;
+  --danger-soft: #fdecea;
+  --info: #1d5fb8;
+  --info-soft: #e8f0fb;
+  // Legacy brand sky blue. Illustration and marketing only, never for text on light surfaces.
+  --brand-sky: #03a9f4;
+
+  // ---------- Lines ----------
+  --border-1: var(--_line-1); // dividers, card edges (decorative)
+  --border-2: var(--_line-2); // input edges, meets 3:1 non-text contrast
+  --focus-ring: 0 0 0 2px var(--surface-0), 0 0 0 4px var(--accent);
+  --focus-color: var(--accent);
+
+  // ---------- Type ----------
+  --font-display: 'Lora', 'Libre Baskerville', Georgia, 'Noto Serif', 'Times New Roman', serif;
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', 'Helvetica Neue', Arial,
+    sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, Consolas, monospace;
+
+  // Fluid scale, 360px to 1440px viewport. Ratio about 1.2 on mobile, 1.25 on desktop.
+  --fs-xs: clamp(0.75rem, 0.73rem + 0.09vw, 0.8125rem); // 12 to 13
+  --fs-sm: clamp(0.875rem, 0.85rem + 0.09vw, 0.9375rem); // 14 to 15
+  --fs-md: clamp(1rem, 0.97rem + 0.12vw, 1.0625rem); // 16 to 17
+  --fs-lg: clamp(1.125rem, 1.08rem + 0.19vw, 1.25rem); // 18 to 20
+  --fs-xl: clamp(1.3125rem, 1.23rem + 0.37vw, 1.5625rem); // 21 to 25
+  --fs-2xl: clamp(1.5625rem, 1.42rem + 0.65vw, 1.9375rem); // 25 to 31
+  --fs-3xl: clamp(1.875rem, 1.62rem + 1.11vw, 2.625rem); // 30 to 42
+  --fs-4xl: clamp(2.25rem, 1.8rem + 2vw, 3.75rem); // 36 to 60
+  --lh-tight: 1.15;
+  --lh-snug: 1.3;
+  --lh-normal: 1.55;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --tracking-tight: -0.015em;
+  --tracking-caps: 0.06em;
+  --measure: 68ch;
+
+  // ---------- Space (4px base) ----------
+  --space-1: 0.25rem; // 4
+  --space-2: 0.5rem; // 8
+  --space-3: 0.75rem; // 12
+  --space-4: 1rem; // 16
+  --space-5: 1.5rem; // 24
+  --space-6: 2rem; // 32
+  --space-7: 3rem; // 48
+  --space-8: 4rem; // 64
+  --space-9: 6rem; // 96
+  --space-10: 8rem; // 128
+  // Legacy aliases (keep)
+  --space-xs: var(--space-1);
+  --space-sm: var(--space-2);
+  --space-md: var(--space-4);
+  --space-lg: var(--space-6);
+  --space-xl: var(--space-8);
+  --space-xxl: var(--space-10);
+
+  // ---------- Radius ----------
+  --radius-sm: 0.375rem; // 6
+  --radius-md: 0.625rem; // 10
+  --radius-lg: 1rem; // 16
+  --radius-xl: 1.5rem; // 24
+  --radius-full: 999px;
+  // Legacy aliases
+  --radius-s: var(--radius-sm);
+  --radius-small: var(--radius-sm);
+  --radius-m: var(--radius-md);
+  --radius-base: var(--radius-md);
+
+  // ---------- Elevation (warm, low, layered) ----------
+  --shadow-1: 0 1px 2px rgb(26 26 23 / 0.06), 0 1px 1px rgb(26 26 23 / 0.04);
+  --shadow-2: 0 4px 12px -2px rgb(26 26 23 / 0.08), 0 2px 4px -2px rgb(26 26 23 / 0.06);
+  --shadow-3: 0 18px 40px -12px rgb(26 26 23 / 0.18), 0 6px 12px -6px rgb(26 26 23 / 0.08);
+  // Legacy aliases
+  --shadow-sm: var(--shadow-1);
+  --shadow-md: var(--shadow-2);
+  --shadow-lg: var(--shadow-3);
+
+  // ---------- Motion ----------
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 120ms;
+  --dur-base: 200ms;
+  --dur-slow: 320ms;
+  // Legacy aliases
+  --transition-fast: var(--dur-base) var(--ease-in-out);
+  --transition-normal: var(--dur-slow) var(--ease-in-out);
+
+  // ---------- Controls (density aware) ----------
+  --control-h: 2.75rem; // 44, comfortable touch target
+  --control-h-sm: 2.25rem; // 36
+  --control-pad-x: var(--space-4);
+  --row-pad-y: var(--space-3);
+  --card-pad: var(--space-5);
+
+  // ---------- Layout ----------
+  --container-sm: 40rem; // 640
+  --container-md: 52rem; // 832
+  --container-lg: 72rem; // 1152
+  --header-h: 4rem;
+  --sidebar-w: 16rem;
+  --sidebar-collapsed-w: 4.5rem;
+  --z-header: 50;
+  --z-drawer: 80;
+  --z-modal: 90;
+  --z-toast: 100;
+  --z-tooltip: 110;
+
+  // ---------- Legacy color aliases (pre-overhaul names, keep working) ----------
+  --c-primary: var(--text-1);
+  --c-primary-dark: var(--text-1);
+  --c-primary-light: var(--accent-soft);
+  --c-secondary: var(--text-2);
+  --c-text: var(--text-1);
+  --c-text-strong: var(--text-1);
+  --c-text-body: var(--text-2);
+  --c-text-light: var(--text-2);
+  --c-bg: var(--surface-0);
+  --c-bg-alt: var(--surface-2);
+  --c-border: var(--border-1);
+  --c-white: var(--surface-1);
+  --c-focus-ring: var(--accent);
+  --font-heading: var(--font-display);
+  --font-highlight: var(--font-body);
+  --font-title: var(--font-display);
+  --font-subtitle: var(--font-body);
+  --font-paragraph: var(--font-body);
+  --color-text-secondary: var(--text-2);
+  --color-foreground-muted: var(--text-3);
+  --color-primary: var(--accent);
+  --color-danger: var(--danger);
+  --color-error: var(--danger);
+  --color-error-light: var(--danger-soft);
+  --color-error-dark: var(--danger-hover);
+  --color-border: var(--border-1);
+  --color-border-light: var(--border-1);
+  --color-background-input-border: var(--border-2);
+  --text-main: var(--text-1);
+  --text-muted: var(--text-3);
+}
+
+@mixin dark-theme {
+  color-scheme: dark;
+  --_paper-0: #121311;
+  --_paper-1: #1a1b19;
+  --_paper-2: #232421;
+  --_paper-3: #2d2e2a;
+  --_ink-1: #eceae4;
+  --_ink-2: #b4b1a8;
+  --_ink-3: #8c897f;
+  --_line-1: #2f302c;
+  --_line-2: #6f6c63;
+  --_pine: #7cc7b0;
+  --_pine-hover: #98d6c3;
+  --_pine-soft: #1c2f29;
+
+  --surface-inverse: #eceae4;
+  --surface-overlay: rgb(0 0 0 / 0.6);
+  --text-inverse: #121311;
+  --accent-contrast: #0b201a;
+  --success: #5bc583;
+  --success-soft: #16291d;
+  --warning: #e8a33d;
+  --warning-soft: #2e2412;
+  --danger: #f97066;
+  --danger-hover: #fb8a82;
+  --danger-soft: #331916;
+  --info: #7ab2f5;
+  --info-soft: #172436;
+
+  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.4);
+  --shadow-2: 0 6px 16px -4px rgb(0 0 0 / 0.5), 0 0 0 1px rgb(255 255 255 / 0.04);
+  --shadow-3: 0 24px 48px -12px rgb(0 0 0 / 0.6), 0 0 0 1px rgb(255 255 255 / 0.05);
+}
+
+:root[data-theme='dark'] {
+  @include dark-theme;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    @include dark-theme;
+  }
+}
+
+// Compact density, chosen in Display settings.
+:root[data-density='compact'] {
+  --control-h: 2.25rem;
+  --control-h-sm: 1.875rem;
+  --control-pad-x: var(--space-3);
+  --row-pad-y: var(--space-2);
+  --card-pad: var(--space-4);
+}
+
+// ---------- Global base that only depends on tokens ----------
+@mixin reduced-motion {
+  --dur-fast: 0ms;
+  --dur-base: 0ms;
+  --dur-slow: 0ms;
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    @include reduced-motion;
+  }
+}
+
+// "Reduce motion" chosen in Display settings.
+:root[data-motion='reduced'] {
+  @include reduced-motion;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus-color);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--text-1);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

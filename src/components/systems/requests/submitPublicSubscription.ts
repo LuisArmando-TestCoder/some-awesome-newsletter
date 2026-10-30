@@ -1,76 +1,39 @@
-import { get } from "svelte/store";
-import store from "../../store";
-import type { NewsletterUser } from "../../../types"; // Assuming types are defined here
+import { request } from "$lib/api/client";
 
-// Define the expected payload structure for clarity
 interface PublicSubscriptionPayload {
   configuratorId: string;
   newsSourceId: string;
   email: string;
   name: string;
-  language?: string; // Optional based on API endpoint inspection
-  countryOfResidence?: string; // Optional based on API endpoint inspection
-  // bio?: string; // Add if needed based on API
+  language?: string;
+  countryOfResidence?: string;
 }
 
-/**
- * Submits subscriber data to the public-facing subscription endpoint.
- * Handles creating/updating the user and subscribing them to the specified newsletter.
- * Does NOT send authentication headers.
- *
- * @param payload - An object containing subscriber details.
- * @returns boolean - True if the API call was successful (status 2xx), false otherwise.
- */
-export default async function submitPublicSubscription(
-  payload: PublicSubscriptionPayload
-): Promise<boolean> {
-  // Basic validation on frontend before sending
-  if (!payload.configuratorId || !payload.newsSourceId || !payload.email || !payload.name) {
-    console.error("[submitPublicSubscription] Missing required fields:", payload);
+/** Public subscribe (no auth). Returns true on success. Use submitPublicSubscriptionOrThrow for the message. */
+export default async function submitPublicSubscription(payload: PublicSubscriptionPayload): Promise<boolean> {
+  try {
+    await submitPublicSubscriptionOrThrow(payload);
+    return true;
+  } catch {
     return false;
   }
+}
 
-  try {
-    const response = await fetch(`${get(store).apiURL()}/public-subscribe`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        // NO Authentication headers for public endpoint
-      },
-      body: JSON.stringify({
-        configuratorId: payload.configuratorId,
-        newsSourceId: payload.newsSourceId,
-        email: payload.email.trim(), // Trim email before sending
-        name: payload.name.trim(), // Trim name before sending
-        language: payload.language, // Send if provided
-        countryOfResidence: payload.countryOfResidence, // Send if provided
-        // bio: payload.bio // Send if provided
-      }),
-    });
-
-    if (!response.ok) {
-      // Log error details if available from the response body
-      try {
-        const errorData = await response.json();
-        console.error(
-          `[submitPublicSubscription] API Error ${response.status}:`,
-          errorData
-        );
-      } catch (e) {
-        console.error(
-          `[submitPublicSubscription] API Error ${response.status}: ${response.statusText}`
-        );
-      }
-      return false; // Indicate failure
-    }
-
-    // Optional: Log success or return response data if needed
-    // const successData = await response.json();
-    // console.log("[submitPublicSubscription] Success:", successData);
-    return true; // Indicate success
-
-  } catch (error) {
-    console.error("[submitPublicSubscription] Network or fetch error:", error);
-    return false; // Indicate failure due to network/fetch issues
+export async function submitPublicSubscriptionOrThrow(payload: PublicSubscriptionPayload) {
+  if (!payload.configuratorId || !payload.newsSourceId || !payload.email) {
+    throw new Error("Enter your email to subscribe.");
   }
+  return request<{ success?: boolean; message?: string }>("/public-subscribe", {
+    method: "POST",
+    auth: "none",
+    body: {
+      configuratorId: payload.configuratorId,
+      newsSourceId: payload.newsSourceId,
+      email: payload.email.trim(),
+      name: (payload.name || payload.email.split("@")[0]).trim(),
+      language: payload.language,
+      countryOfResidence: payload.countryOfResidence,
+    },
+    errorMessage: "We could not subscribe you. Try again in a minute.",
+  });
 }

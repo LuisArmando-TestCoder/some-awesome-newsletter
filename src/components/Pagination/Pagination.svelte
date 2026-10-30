@@ -11,61 +11,86 @@
   $: totalPages = Math.ceil(totalItems / pageSize);
 
   function goToPage(page: number) {
+    if (page < 0 || page >= totalPages) return;
     dispatch('pageChange', { page });
   }
 </script>
 
 {#if totalPages > 1}
-  <div class="pagination">
+  <nav class="pagination" aria-label="Pagination">
     <button
+      type="button"
       class="pagination-btn newer"
       on:click={() => goToPage(currentPage - 1)}
       disabled={currentPage === 0}
     >
-      « {$t['pagination.newerEntries']}
+      <span aria-hidden="true">&larr;</span> {$t['pagination.newerEntries']}
     </button>
-    <span>{$t['pagination.page']} {currentPage + 1} {$t['pagination.of']} {totalPages}</span>
+    <span class="pagination-status" aria-live="polite">
+      {$t['pagination.page']} {currentPage + 1} {$t['pagination.of']} {totalPages}
+    </span>
     <button
+      type="button"
       class="pagination-btn older"
       on:click={() => goToPage(currentPage + 1)}
-      disabled={(currentPage + 1) >= totalPages}
+      disabled={currentPage + 1 >= totalPages}
     >
-      {$t['pagination.olderEntries']} »
+      {$t['pagination.olderEntries']} <span aria-hidden="true">&rarr;</span>
     </button>
-  </div>
+  </nav>
 {/if}
 
 <style>
-.pagination {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1.5rem;
-  margin-top: 2.5rem;
-}
-.pagination-btn {
-  background: none;
-  border: none;
-  color: var(--color-foreground);
-  font-size: 1rem;
-  padding: 0.5em 1.2em;
-  border-radius: 999px;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition: background 0.2s cubic-bezier(0.4,0,0.2,1), color 0.2s cubic-bezier(0.4,0,0.2,1);
-  outline: none;
-  min-width: 120px;
-}
-.pagination-btn:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-}
-.pagination-btn:not(:disabled):hover {
-  background: #f3f3f3;
-  color: #0077cc;
-  transform: translateY(-2px) scale(1.04);
-  box-shadow: 0 2px 12px 0 rgba(0,119,204,0.07);
-  transition: background 0.2s cubic-bezier(0.4,0,0.2,1), color 0.2s cubic-bezier(0.4,0,0.2,1), transform 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s cubic-bezier(0.4,0,0.2,1);
-}
+  .pagination {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4, 16px);
+    margin-top: var(--space-7, 48px);
+  }
+
+  .pagination-status {
+    font-size: var(--fs-sm, 0.875rem);
+    color: var(--text-2, #444);
+  }
+
+  .pagination-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2, 8px);
+    min-height: 2.5rem;
+    padding: var(--space-2, 8px) var(--space-4, 16px);
+    background: var(--surface-1, #fff);
+    color: var(--text-1, #111);
+    border: 1px solid var(--border-2, #ccc);
+    border-radius: var(--radius-full, 999px);
+    font: inherit;
+    font-size: var(--fs-sm, 0.875rem);
+    font-weight: var(--fw-medium, 500);
+    cursor: pointer;
+    transition: background-color var(--dur-fast, 120ms) var(--ease-out, ease-out),
+      border-color var(--dur-fast, 120ms) var(--ease-out, ease-out);
+  }
+
+  .pagination-btn:not(:disabled):hover {
+    background: var(--surface-2, #f3f3f3);
+    border-color: var(--accent, #2563eb);
+  }
+
+  .pagination-btn:focus-visible {
+    outline: 2px solid var(--focus-color, #2563eb);
+    outline-offset: 2px;
+  }
+
+  .pagination-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pagination-btn {
+      transition: none;
+    }
+  }
 </style>

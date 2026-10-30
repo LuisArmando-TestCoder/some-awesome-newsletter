@@ -1,5 +1,5 @@
 <script>
-    import { andthisthingaswell } from "./store.ts"
+    import { andthisthingaswell } from "./store"
 </script>
 
 <button onclick={() => {

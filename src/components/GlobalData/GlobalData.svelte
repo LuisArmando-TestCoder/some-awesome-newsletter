@@ -1,24 +1,26 @@
 <script lang="ts">
+  /**
+   * App-wide data that loads once per visit: the visitor's language guess.
+   * Skips the lookup when the visitor already chose a language.
+   */
   import { onMount } from "svelte";
-  import { startTicks } from "./ticks.js";
-  import { populateToStore, getFromStore } from "../store"; // Import store helpers
-  import getGeoIpLanguage from "../systems/requests/getGeoIpLanguage"; // Corrected import path
+  import { populateToStore, getFromStore } from "../store";
+  import getGeoIpLanguage from "../systems/requests/getGeoIpLanguage";
 
-  onMount(async () => {
-    startTicks();
-
-    // Fetch global language if not already set (e.g., from localStorage)
+  onMount(() => {
+    let cancelled = false;
+    let chosen: string | null = null;
+    try {
+      chosen = localStorage.getItem("lang");
+    } catch {}
     const currentLang = getFromStore("appLanguage");
-    if (!currentLang || currentLang === "en") { // Check if default or unset
-      const detectedLanguage = await getGeoIpLanguage(); // Call the abstracted function
-      console.log("detectedLanguage", detectedLanguage);
-      if (detectedLanguage) {
-        populateToStore("appLanguage", detectedLanguage);
-        console.log(`Global language set to: ${detectedLanguage}`);
-      }
-      // Error logging is handled within getGeoIpLanguage
-    } else {
-      console.log(`Global language already set to: ${currentLang}`);
+    if (!chosen && (!currentLang || currentLang === "en")) {
+      getGeoIpLanguage().then((detected) => {
+        if (!cancelled && detected) populateToStore("appLanguage", detected);
+      });
     }
+    return () => {
+      cancelled = true;
+    };
   });
 </script>

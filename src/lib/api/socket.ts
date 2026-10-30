@@ -58,7 +58,12 @@ function attach(s: Socket<ServerToClientEvents, ClientToServerEvents>) {
 /** Connect (or switch user). Safe to call many times. */
 export function connectSocket(id: string, accessCode: string): Promise<void> {
 	if (typeof window === 'undefined' || !id || !accessCode) return Promise.resolve();
-	if (socket && identity?.id === id && identity.accessCode === accessCode) return Promise.resolve();
+	const same = identity?.id === id && identity.accessCode === accessCode;
+	if (socket && same) return Promise.resolve();
+	// Still connecting for the same owner: share that attempt. Without this, every store
+	// update during the first connection opened another socket (a burst of 10+ per page
+	// load that tripped the server's per-IP register limit).
+	if (connecting && same) return connecting;
 	if (socket) disconnectSocket();
 	identity = { id, accessCode };
 	status.set('connecting');

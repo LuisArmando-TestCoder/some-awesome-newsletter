@@ -23,8 +23,16 @@
   $: sourceHost = sources.find((s) => s.id === sourceId)?.host ?? "";
 
   async function addOne(formData: { name: string; email: string; bio: string; language: string }) {
-    await addUserAndSubscribe(formData, sourceId);
-    toast.success($dt("dash.subs.add.done", { email: formData.email, source: sourceHost }));
+    const result = await addUserAndSubscribe(formData, sourceId);
+    // Say what really happened: people added by hand confirm by email before issues start.
+    const key = result?.alreadySubscribed
+      ? "dash.subs.add.already"
+      : result?.status === "pending"
+        ? result.confirmationEmailSent === false
+          ? "dash.subs.add.pendingNoEmail"
+          : "dash.subs.add.pending"
+        : "dash.subs.add.done";
+    toast.success($dt(key, { email: formData.email, source: sourceHost }));
     manualForm?.reset();
   }
 

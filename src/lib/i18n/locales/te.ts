@@ -1,5 +1,5 @@
-// te strings for locales. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale te
+// te (Telugu) strings for locales. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "auth": {
     "logo": "/icons/logo.png",
@@ -35,6 +35,82 @@ export default {
       "ogImageAlt": "AIBAN లోగో"
     },
     "skipLink": "ప్రధాన కంటెంట్‌కు వెళ్లండి",
+    "display": {
+      "title": "మీ వెబ్‌సైట్, న్యూస్‌లెటర్‌గా రాసినది.",
+      "kicker": "AIBAN"
+    },
+    "statement": {
+      "lines": [
+        "మీరు ఇప్పటికే మంచి పనిని ప్రచురిస్తున్నారు.",
+        "మీ క్లయింట్లు దీన్ని ఒకటి కంటే ఎక్కువ భాషల్లో చదువుతారు.",
+        "AIBAN ప్రతి కొత్త వ్యాసాన్ని ఒక ఇష్యువుగా మారుస్తుంది",
+        "మరియు ప్రతి చదివేవారికి వారి భాషలో వెర్షన్‌ను పంపుతుంది."
+      ]
+    },
+    "history": {
+      "eyebrow": "ఇది ఎలా పని చేస్తుంది",
+      "title": "ఒక ఇష్యువు జీవితం.",
+      "lead": "మీ షెడ్యూల్ దాన్ని ప్రారంభించిన క్షణం నుండి అది మళ్లీ ప్రారంభించే క్షణం వరకు ఒకే ఇష్యువును అనుసరించండి. మీరు దీన్ని ఒకసారి సెటప్ చేస్తారు.",
+      "note": "ఉదాహరణ షెడ్యూల్. మీరు రోజు, సమయం మరియు ఎంత తరచుగా ఎంచుకుంటారు.",
+      "progressLabel": "ఒక ఇష్యువు యొక్క దశలు",
+      "items": [
+        {
+          "mark": "9:00",
+          "title": "మీ షెడ్యూల్ రన్‌ను ప్రారంభిస్తుంది",
+          "body": "ఈ ఉదాహరణలో ప్రతి సోమవారం 9:00 గంటలకు. మీరు రోజువారీ, వారంవారీ లేదా నెలవారీగా ఎంచుకోండి."
+        },
+        {
+          "mark": "చదవండి",
+          "title": "AIBAN మీ వెబ్‌సైట్‌ను చదువుతుంది",
+          "body": "ఇది మీ కొత్త వ్యాసాన్ని కనుగొంటుంది మరియు మీ ఆదర్శ రీడర్‌కు చాలా ముఖ్యమైన భాగాన్ని ఎంచుకుంటుంది."
+        },
+        {
+          "mark": "రాయండి",
+          "title": "ఇది మీ వాయిస్‌లో ఇష్యువును రాస్తుంది",
+          "body": "టెక్స్ట్ మీ సైట్ ఎలా రాయబడిందో అనుసరిస్తుంది, కాబట్టి ఇది మీలాగే ధ్వనిస్తుంది."
+        },
+        {
+          "mark": "అనువదించండి",
+          "title": "ప్రతి రీడర్‌కు వారి భాష లభిస్తుంది",
+          "body": "ఒక ఇష్యువు మీ సభ్యులకు అవసరమైనంత వెర్షన్లుగా మారుతుంది."
+        },
+        {
+          "mark": "పంపండి",
+          "title": "ఇది మీ పేరు కింద వస్తుంది",
+          "body": "మీ పేరు మరియు మీ ఇమెయిల్ సంతకంతో. ప్రత్యుత్తరాలు మీ ఇన్‌బాక్స్‌కు వెళతాయి."
+        },
+        {
+          "mark": "ప్రచురించండి",
+          "title": "ఇది మీ బ్లాగ్‌లో ఒక వ్యాసంగా మారుతుంది",
+          "body": "దాని స్వంత లింక్‌తో, దీన్ని శోధనలో కనుగొని షేర్ చేయవచ్చు."
+        },
+        {
+          "mark": "నివేదించండి",
+          "title": "ఏమి జరిగిందో మీరు చూస్తారు",
+          "body": "మీ డాష్‌బోర్డ్ ఎవరు చేరారు మరియు రీడర్లు ఏ లింక్‌లపై క్లిక్ చేశారో జాబితా చేస్తుంది."
+        },
+        {
+          "mark": "మళ్లీ",
+          "title": "తదుపరి సోమవారం, ఇది మళ్లీ రన్ అవుతుంది",
+          "body": "మీరు మీ డాష్‌బోర్డ్‌లో దీన్ని ఆపే వరకు ఇది కొనసాగుతుంది."
+        }
+      ]
+    },
+    "rail": {
+      "label": "పేజీ అధ్యాయాలు",
+      "chapters": [
+        "ప్రారంభం",
+        "ఎందుకు",
+        "భాషలు",
+        "ఇది ఎలా పని చేస్తుంది",
+        "మీ పేరు",
+        "వృద్ధి చెందండి",
+        "ఇది ఎవరికోసం",
+        "ధరలు",
+        "ప్రశ్నలు",
+        "ప్రారంభించండి"
+      ]
+    },
     "hero": {
       "eyebrow": "సేవా వ్యాపారాల కోసం న్యూస్‌లెటర్లు",
       "title": "మీ వెబ్‌సైట్ ప్రతి పాఠకుడి భాషలో వారపు న్యూస్‌లెటర్‌గా మారుతుంది",
@@ -57,6 +133,26 @@ export default {
       "startCta": "{site} తో ఉచితంగా ప్రారంభించండి",
       "startCtaGeneric": "ఉచితంగా ప్రారంభించండి",
       "liveRegion": "{site} కోసం నమూనా ప్రివ్యూ అప్‌డేట్ అయింది."
+    },
+    "live": {
+      "badge": "ఇప్పుడే రాయబడింది",
+      "loadingTitle": "{site} నుండి నమూనా ఇష్యూ రాయడం",
+      "steps": [
+        "{site} చదవడం",
+        "మీ కొత్త వ్యాసాన్ని కనుగొంటోంది",
+        "దీన్ని {language}లో రాయడం",
+        "మీ ఇమెయిల్ టెంప్లేట్లో ఉంచడం"
+      ],
+      "takes": "ఇది సాధారణంగా 20 నుండి 40 సెకన్లు పడుతుంది. మీరు స్క్రోల్ చేస్తూనే ఉండవచ్చు.",
+      "readyNote": "AIBAN {site}లోని కొత్త వ్యాసం నుండి ఈ నమూనాను రాస్తుంది. ఏమీ సేవ్ చేయబడదు లేదా పంపబడదు. మీరు ప్రారంభించినప్పుడు, ఇది మీ స్వంత స్వరం మరియు షెడ్యూల్ను ఉపయోగిస్తుంది.",
+      "readyAnnounce": "{site} నుండి మీ నమూనా ఇష్యూ సిద్ధంగా ఉంది.",
+      "languageLabel": "రీడర్ భాష",
+      "loadingLanguage": "దీన్ని {language}లో రాయడం",
+      "errorTitle": "మేము {site} నుండి ప్రివ్యూను రాయలేకపోయాము",
+      "retry": "మళ్లీ ప్రయత్నించండి",
+      "showSample": "నమూనా లేఅవుట్ చూపించు",
+      "frameTitle": "{site} నుండి రాయబడిన నమూనా ఇష్యూ",
+      "openFull": "కొత్త ట్యాబ్లో తెరువు"
     },
     "chain": {
       "eyebrow": "ఇది ఎలా పనిచేస్తుంది",
@@ -587,6 +683,7 @@ export default {
       "suggestions": "సూచనలు",
       "recent": "ఇటీవలి శోధనలు",
       "clearRecent": "ఇటీవలి శోధనలను క్లియర్ చేయండి",
+      "clear": "శోధనను తొలగించు",
       "title": "శోధన ఫలితాలు",
       "resultsFor": "\"{q}\" కోసం ఫలితాలు",
       "count": "{count} ఆర్టికల్స్ దొరికాయి",
@@ -691,6 +788,7 @@ export default {
   "legal": {
     "navLabel": "చట్టపరమైన పత్రాలు",
     "lastUpdated": "చివరిగా అప్‌డేట్ చేసింది: {date}",
+    "onThisPage": "ఈ పేజీలో",
     "privacy": {
       "title": "గోప్యతా విధానం",
       "metaTitle": "గోప్యతా విధానం | AIBAN",
@@ -919,6 +1017,8 @@ export default {
     "codeSent": "మీ ఈమెయిల్‌కు ఒక కోడ్ పంపాము.",
     "invalidCode": "ఆ కోడ్ సరైనది కాదు. మేము పంపిన తాజా ఈమెయిల్ చూడండి, లేదా కోడ్‌ను మళ్లీ పంపండి.",
     "regenerateCode": "కోడ్‌ను మళ్ళీ పంపండి",
+    "codeAccepted": "కోడ్ అంగీకరించబడింది. మీ డాష్‌బోర్డ్‌ను తెరుస్తోంది.",
+    "codeLabel": "6-అంకెల కోడ్",
     "back": "వెనక్కి",
     "byProceeding": "కొనసాగడం ద్వారా, మీరు వీటిని అంగీకరిస్తున్నారు:",
     "termsOfService": "సేవా నిబంధనలు",
@@ -947,6 +1047,673 @@ export default {
       "title": "న్యూస్‌లెటర్‌కు స్వాగతం.",
       "invitedBy": "మిమ్మల్ని {configuratorId} ఆహ్వానించారు."
     }
+  },
+  "showcase": {
+    "sampleBadge": "నమూనా డేటా",
+    "exampleLabel": "ఉదాహరణ వ్యాపారం",
+    "caption": "{business} ఒక ఉదాహరణ {kind}. ఈ వీక్షణలోని పేర్లు, వ్యాసాలు మరియు సంఖ్యలు మీ డాష్‌బోర్డ్ కొన్ని వారాల తర్వాత ఎలా కనిపిస్తుందో చూపించే ప్లేస్‌హోల్డర్లు.",
+    "pause": "యానిమేషన్‌ను నిలిపివేయి",
+    "play": "యానిమేషన్‌ను ఆడించు",
+    "scenesLabel": "డాష్‌బోర్డ్ యొక్క భాగాలు",
+    "examplesLabel": "ఉదాహరణ వ్యాపారాలు",
+    "appUrl": "app.aiban.news",
+    "nav": {
+      "home": "హోమ్",
+      "automations": "ఆటోమేషన్లు",
+      "sources": "మూలాలు",
+      "subscribers": "చందాదారులు",
+      "reports": "రిపోర్టులు",
+      "blog": "బ్లాగ్"
+    },
+    "scenes": {
+      "home": "అవలోకనం",
+      "issue": "ఇష్యూ",
+      "reports": "క్లిక్‌లు",
+      "subscribers": "చందాదారులు",
+      "automation": "షెడ్యూల్",
+      "source": "మీ వెబ్‌సైట్",
+      "voice": "మీ వాయిస్",
+      "signup": "సైన్ అప్ ఫారమ్",
+      "blog": "బ్లాగ్",
+      "import": "దిగుమతి"
+    },
+    "ui": {
+      "hello": "హలో, {business}",
+      "narrative": "{subscribers} రీడర్లు {languages} భాషల్లో. తదుపరి ఇష్యూ {schedule}లో బయలుదేరుతుంది.",
+      "kpiSubscribers": "చందాదారులు",
+      "kpiLanguages": "భాషలు",
+      "kpiClicks": "క్లిక్‌లు, గత 7 రోజులు",
+      "kpiAutomations": "ఆటోమేషన్‌లు ఆన్",
+      "kpiNew": "ఈ వారం {count} కొత్తవి",
+      "nextIssue": "తదుపరి ఇష్యూ",
+      "ready": "సిద్ధంగా ఉంది",
+      "activity": "ఇటీవలి కార్యకలాపం",
+      "from": "నుండి",
+      "subject": "విషయం",
+      "readMore": "పూర్తి వ్యాసం చదవండి",
+      "readerLanguage": "రీడర్ భాష",
+      "clicksTitle": "క్లిక్‌లు, గత 7 రోజులు",
+      "mostClicked": "ఎక్కువగా క్లిక్ చేయబడినవి",
+      "clicks": "క్లిక్‌లు",
+      "days": [
+        "సోమ",
+        "మంగళ",
+        "బుధ",
+        "గురు",
+        "శుక్ర",
+        "శని",
+        "ఆది"
+      ],
+      "subscribersTitle": "చందాదారులు",
+      "language": "భాష",
+      "joinedVia": "ద్వారా చేరారు",
+      "newSubscriber": "కొత్త చందాదారు",
+      "automationTitle": "వారపు ఇష్యూ",
+      "automationSentence": "{schedule}, కొత్త వ్యాసం నుండి ఒక ఇష్యూను రాయండి మరియు ప్రతి రీడర్‌కు వారి భాషలో పంపండి.",
+      "on": "ఆన్",
+      "off": "ఆఫ్",
+      "automationOn": "ఆటోమేషన్ ఆన్ చేయబడింది",
+      "sourceLabel": "మీ కంటెంట్ ఎక్కడ నుండి వస్తుంది",
+      "sourceButton": "నా సైట్ చదవండి",
+      "reading": "మీ సైట్ చదవడం",
+      "found": "{count} వ్యాసాలు కనుగొనబడ్డాయి",
+      "voiceReader": "మీ ఆదర్శ రీడర్",
+      "voiceTone": "ఇది ఎలా ధ్వనించాలి",
+      "signupHeading": "మా వారపు నోట్లను పొందండి",
+      "signupEmail": "ఇమెయిల్ చిరునామా",
+      "signupLanguage": "భాష",
+      "signupButton": "చందా పొందండి",
+      "signupDone": "నిర్ధారించడానికి మీ ఇన్బాక్స్‌ను తనిఖీ చేయండి.",
+      "blogTitle": "{business} నుండి వ్యాసాలు",
+      "importFile": "clients.csv",
+      "importing": "కాంటాక్ట్లను దిగుమతి చేస్తోంది",
+      "imported": "{count} కాంటాక్ట్లు జోడించబడ్డాయి",
+      "sources": {
+        "form": "సైన్ అప్ ఫారం",
+        "import": "దిగుమతి",
+        "manual": "చేతితో జోడించబడింది"
+      }
+    },
+    "examples": [
+      {
+        "business": "Northfield Studio",
+        "kind": "వెబ్ డిజైన్ ఏజెన్సీ",
+        "site": "northfield.studio",
+        "schedule": "ప్రతి సోమవారం 9:00 గంటలకు",
+        "subscribers": 312,
+        "newThisWeek": 9,
+        "clicks7": 84,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 58
+          },
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 31
+          },
+          {
+            "code": "pt",
+            "name": "Portuguese",
+            "share": 11
+          }
+        ],
+        "reader": "క్లినిక్‌లు, దుకాణాలు మరియు స్టూడియోల యజమానులు, ఇష్టపడే వారు పోర్ట్‌ఫోలియో కాకుండా క్లయింట్లను తీసుకురావడానికి వెబ్‌సైట్.",
+        "tones": [
+          "వెచ్చదనం",
+          "సాధారణ",
+          "ప్రాక్టికల్"
+        ],
+        "articles": [
+          "ఆరు వారాలలో డెంటల్ క్లినిక్ వెబ్‌సైట్‌ను మేము ఎలా పునర్నిర్మించాము",
+          "మీరు రీడిజైన్ చేసే ముందు పరిష్కరించవలసిన ఐదు విషయాలు",
+          "మీ బుకింగ్ బటన్ నారింజ రంగులో ఎందుకు ఉండాలి"
+        ],
+        "issue": {
+          "title": "ఆరు వారాలలో డెంటల్ క్లినిక్ వెబ్‌సైట్‌ను మేము ఎలా పునర్నిర్మించాము",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "A clinic website rebuilt in six weeks",
+              "summary": "We moved booking to the top of every page and cut the forms from nine fields to three. Here is what changed for the clinic."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "El sitio de una clínica, renovado en seis semanas",
+              "summary": "Pusimos la reserva arriba en cada página y redujimos los formularios de nueve campos a tres. Esto es lo que cambió para la clínica."
+            },
+            {
+              "code": "pt",
+              "name": "Português",
+              "subject": "O site de uma clínica, refeito em seis semanas",
+              "summary": "Colocamos o agendamento no topo de cada página e reduzimos os formulários de nove campos para três. Veja o que mudou para a clínica."
+            }
+          ]
+        },
+        "clicksByDay": [
+          21,
+          17,
+          12,
+          9,
+          11,
+          6,
+          8
+        ],
+        "topLinks": [
+          {
+            "title": "క్లినిక్ కేస్ స్టడీ",
+            "clicks": 38
+          },
+          {
+            "title": "మీరు రీడిజైన్ చేసే ముందు పరిష్కరించవలసిన ఐదు విషయాలు",
+            "clicks": 27
+          },
+          {
+            "title": "కాల్ బుక్ చేయండి",
+            "clicks": 19
+          }
+        ],
+        "people": [
+          {
+            "email": "lucia.r@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "mark@example.org",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "joana.s@example.net",
+            "lang": "PT",
+            "via": "form"
+          },
+          {
+            "email": "dr.chen@example.com",
+            "lang": "EN",
+            "via": "manual"
+          }
+        ],
+        "activity": [
+          "3 భాషలలో 312 రీడర్లకు ఇష్యూ పంపబడింది",
+          "క్లినిక్ కేస్ స్టడీపై 38 క్లిక్‌లు",
+          "లూసియా సైన్ అప్ ఫారం నుండి చేరారు మరియు స్పానిష్‌లో చదువుతారు"
+        ],
+        "importCount": 148
+      },
+      {
+        "business": "Brightline Software",
+        "kind": "సాఫ్ట్‌వేర్ కంపెనీ",
+        "site": "brightline.dev",
+        "schedule": "ప్రతి నెల 1వ తేదీ 10:00 గంటలకు",
+        "subscribers": 1240,
+        "newThisWeek": 23,
+        "clicks7": 211,
+        "automationsOn": 1,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 64
+          },
+          {
+            "code": "de",
+            "name": "జర్మన్",
+            "share": 22
+          },
+          {
+            "code": "fr",
+            "name": "ఫ్రెంచ్",
+            "share": 14
+          }
+        ],
+        "reader": "మా బుకింగ్ సాఫ్ట్‌వేర్‌ను ప్రతిరోజూ ఉపయోగించే క్లయింట్‌లలోని ఆఫీస్ మేనేజర్లు మరియు ఐటీ లీడ్‌లు.",
+        "tones": [
+          "స్పష్టమైన",
+          "చిన్న",
+          "స్నేహపూర్వక"
+        ],
+        "articles": [
+          "రిలీజ్ 4.2: పునరావృత అపాయింట్‌మెంట్‌లు",
+          "పెద్ద టీమ్‌లకు వేగవంతమైన నివేదికలు",
+          "స్ప్రెడ్‌షీట్ నుండి మీ క్యాలెండర్‌ను ఎలా తరలించాలి"
+        ],
+        "issue": {
+          "title": "రిలీజ్ 4.2: పునరావృత అపాయింట్‌మెంట్‌లు",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "New this month: recurring appointments",
+              "summary": "You can now repeat any appointment weekly or monthly. Reports for teams over 50 people also load faster."
+            },
+            {
+              "code": "de",
+              "name": "Deutsch",
+              "subject": "Neu diesen Monat: wiederkehrende Termine",
+              "summary": "Sie können jetzt jeden Termin wöchentlich oder monatlich wiederholen. Berichte für Teams ab 50 Personen laden außerdem schneller."
+            },
+            {
+              "code": "fr",
+              "name": "Français",
+              "subject": "Nouveau ce mois-ci : les rendez-vous récurrents",
+              "summary": "Vous pouvez désormais répéter un rendez-vous chaque semaine ou chaque mois. Les rapports des équipes de plus de 50 personnes s'affichent aussi plus vite."
+            }
+          ]
+        },
+        "clicksByDay": [
+          64,
+          48,
+          33,
+          25,
+          19,
+          9,
+          13
+        ],
+        "topLinks": [
+          {
+            "title": "పునరావృత అపాయింట్‌మెంట్‌ల గైడ్",
+            "clicks": 96
+          },
+          {
+            "title": "రిలీజ్ నోట్స్ 4.2",
+            "clicks": 71
+          },
+          {
+            "title": "స్ప్రెడ్‌షీట్ నుండి తరలించడం",
+            "clicks": 44
+          }
+        ],
+        "people": [
+          {
+            "email": "it@example.de",
+            "lang": "DE",
+            "via": "import"
+          },
+          {
+            "email": "sophie.m@example.fr",
+            "lang": "FR",
+            "via": "form"
+          },
+          {
+            "email": "ops@example.com",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "k.weber@example.de",
+            "lang": "DE",
+            "via": "form"
+          }
+        ],
+        "activity": [
+          "3 భాషలలో 1240 రీడర్‌లకు ఇష్యూ పంపబడింది",
+          "పునరావృత అపాయింట్‌మెంట్‌ల గైడ్‌పై 96 క్లిక్‌లు",
+          "clients.csv నుండి 23 కాంటాక్ట్‌లు దిగుమతి చేయబడ్డాయి"
+        ],
+        "importCount": 412
+      },
+      {
+        "business": "Casa Verde Realty",
+        "kind": "రియల్ ఎస్టేట్ ఏజెన్సీ",
+        "site": "casaverde.homes",
+        "schedule": "ప్రతి గురువారం 8:00 గంటలకు",
+        "subscribers": 586,
+        "newThisWeek": 14,
+        "clicks7": 163,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "es",
+            "name": "స్పానిష్",
+            "share": 47
+          },
+          {
+            "code": "en",
+            "name": "ఆంగ్లం",
+            "share": 41
+          },
+          {
+            "code": "fr",
+            "name": "ఫ్రెంచ్",
+            "share": 12
+          }
+        ],
+        "reader": "విదేశాల నుండి తీరం దగ్గర ఇల్లు కోసం చూస్తున్న కుటుంబాలు మరియు పదవీ విరమణ పొందినవారు, మరియు విక్రయించే స్వంతదారులు.",
+        "tones": [
+          "ఉష్ణమైన",
+          "స్థానిక",
+          "శాంతమైన"
+        ],
+        "articles": [
+          "ఈ వారం బీచ్ దగ్గర మూడు కొత్త ఇళ్లు",
+          "విదేశీ కొనుగోలుదారులకు క్లోజింగ్ ఖర్చులు ఎలా ఉంటాయి",
+          "పాత పట్టణంలో ధరలు, శరదృతువు నవీకరణ"
+        ],
+        "issue": {
+          "title": "ఈ వారం బీచ్ దగ్గర మూడు కొత్త ఇళ్లు",
+          "langs": [
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tres casas nuevas cerca de la playa",
+              "summary": "Una casa de dos habitaciones con jardín, un apartamento con vista al mar y una casa para reformar a diez minutos del centro."
+            },
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Three new homes near the beach",
+              "summary": "A two bedroom house with a garden, a flat with a sea view and a house to renovate ten minutes from the center."
+            },
+            {
+              "code": "fr",
+              "name": "Français",
+              "subject": "Trois nouvelles maisons près de la plage",
+              "summary": "Une maison de deux chambres avec jardin, un appartement avec vue sur la mer et une maison à rénover à dix minutes du centre."
+            }
+          ]
+        },
+        "clicksByDay": [
+          12,
+          9,
+          15,
+          52,
+          38,
+          21,
+          16
+        ],
+        "topLinks": [
+          {
+            "title": "సముద్ర దృశ్యంతో ఫ్లాట్",
+            "clicks": 71
+          },
+          {
+            "title": "తోటతో రెండు బెడ్ రూం ఇల్లు",
+            "clicks": 54
+          },
+          {
+            "title": "విదేశీ కొనుగోలుదారులకు క్లోజింగ్ ఖర్చులు",
+            "clicks": 38
+          }
+        ],
+        "people": [
+          {
+            "email": "familia.ortiz@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "j.dupont@example.fr",
+            "lang": "FR",
+            "via": "form"
+          },
+          {
+            "email": "tom.and.ann@example.org",
+            "lang": "EN",
+            "via": "manual"
+          },
+          {
+            "email": "rmora@example.net",
+            "lang": "ES",
+            "via": "import"
+          }
+        ],
+        "activity": [
+          "3 భాషలలో 586 రీడర్‌లకు ఇష్యూ పంపబడింది",
+          "సముద్ర దృశ్యంతో ఫ్లాట్‌పై 71 క్లిక్‌లు",
+          "ఫ్రాన్స్‌లోని ఒక రీడర్ సైన్ అప్ ఫారమ్ నుండి చేరారు"
+        ],
+        "importCount": 203
+      },
+      {
+        "business": "Mora and Partners",
+        "kind": "అకౌంటింగ్ ఫర్మ్",
+        "site": "morapartners.co",
+        "schedule": "ప్రతి రెండవ మంగళవారం 7:30 గంటలకు",
+        "subscribers": 428,
+        "newThisWeek": 6,
+        "clicks7": 97,
+        "automationsOn": 1,
+        "languages": [
+          {
+            "code": "en",
+            "name": "ఆంగ్లం",
+            "share": 52
+          },
+          {
+            "code": "es",
+            "name": "స్పానిష్",
+            "share": 38
+          },
+          {
+            "code": "it",
+            "name": "ఇటాలియన్",
+            "share": 10
+          }
+        ],
+        "reader": "చిన్న కంపెనీల యజమానులు, జార్గాన్ లేకుండా పన్నులు మరియు పేరోల్‌లో మార్పులను తెలుసుకోవాలనుకుంటున్నారు.",
+        "tones": [
+          "శాంతమైన",
+          "ఖచ్చితమైన",
+          "సాధారణ"
+        ],
+        "articles": [
+          "త్రైమాసిక పన్ను గడువు 15వ తేదీకి మార్చబడింది",
+          "మీ మొదటి ఉద్యోగిని నియమించుకున్నప్పుడు ఏమి ఉంచాలి",
+          "రసీదులు: కాగితం లేదా ఫోటో?"
+        ],
+        "issue": {
+          "title": "త్రైమాసిక పన్ను గడువు 15వ తేదీకి మార్చబడింది",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Your quarterly deadline moves to the 15th",
+              "summary": "The filing date for the next quarter moves five days later. Here is what to send us and when, so nothing is late."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tu plazo trimestral pasa al día 15",
+              "summary": "La fecha de presentación del próximo trimestre se mueve cinco días. Esto es lo que debes enviarnos y cuándo, para que nada llegue tarde."
+            },
+            {
+              "code": "it",
+              "name": "Italiano",
+              "subject": "La scadenza trimestrale passa al 15",
+              "summary": "La data di presentazione del prossimo trimestre slitta di cinque giorni. Ecco cosa inviarci e quando, perché nulla arrivi in ritardo."
+            }
+          ]
+        },
+        "clicksByDay": [
+          33,
+          24,
+          14,
+          8,
+          7,
+          4,
+          7
+        ],
+        "topLinks": [
+          {
+            "title": "15వ తేదీకి చెక్‌లిస్ట్",
+            "clicks": 46
+          },
+          {
+            "title": "మీ మొదటి ఉద్యోగిని నియమించుకోవడం",
+            "clicks": 29
+          },
+          {
+            "title": "రివ్యూ కాల్ బుక్ చేయండి",
+            "clicks": 22
+          }
+        ],
+        "people": [
+          {
+            "email": "bakery.owner@example.com",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "c.rossi@example.it",
+            "lang": "IT",
+            "via": "form"
+          },
+          {
+            "email": "taller.luna@example.net",
+            "lang": "ES",
+            "via": "import"
+          },
+          {
+            "email": "finance@example.org",
+            "lang": "EN",
+            "via": "manual"
+          }
+        ],
+        "activity": [
+          "3 భాషలలో 428 రీడర్‌లకు ఇష్యూ పంపబడింది",
+          "15వ తేదీకి చెక్‌లిస్ట్‌పై 46 క్లిక్‌లు",
+          "ఈ వారం 6 కొత్త రీడర్‌లు"
+        ],
+        "importCount": 97
+      },
+      {
+        "business": "Run Better Coaching",
+        "kind": "రన్నింగ్ కోచ్",
+        "site": "runbetter.coach",
+        "schedule": "ప్రతి ఆదివారం 18:00 గంటలకు",
+        "subscribers": 907,
+        "newThisWeek": 31,
+        "clicks7": 248,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 49
+          },
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 33
+          },
+          {
+            "code": "de",
+            "name": "German",
+            "share": 18
+          }
+        ],
+        "reader": "వారం మూడు రోజులు పనికి ముందు పరిగెత్తే, తమ మొదటి హాఫ్ మారథాన్ కోసం శిక్షణ పొందే పెద్దలు.",
+        "tones": [
+          "ప్రోత్సాహకరమైన",
+          "నేరుగా",
+          "చిన్న"
+        ],
+        "articles": [
+          "ఈ వారం: లాంగ్ రన్, మీరు అనుకున్నదానికంటే నెమ్మదిగా",
+          "500 కిలోమీటర్ల తర్వాత షూస్",
+          "20 నిమిషాల స్ట్రెంత్ రూటీన్"
+        ],
+        "issue": {
+          "title": "ఈ వారం: లాంగ్ రన్, మీరు అనుకున్నదానికంటే నెమ్మదిగా",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Your long run should feel too easy",
+              "summary": "Keep it slow enough to talk. This week's plan adds ten minutes and one short hill session."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tu tirada larga debería sentirse demasiado fácil",
+              "summary": "Mantén un ritmo que te deje hablar. El plan de esta semana suma diez minutos y una sesión corta de cuestas."
+            },
+            {
+              "code": "de",
+              "name": "Deutsch",
+              "subject": "Dein langer Lauf sollte sich zu leicht anfühlen",
+              "summary": "Lauf so langsam, dass du noch reden kannst. Der Plan dieser Woche bringt zehn Minuten mehr und eine kurze Bergeinheit."
+            }
+          ]
+        },
+        "clicksByDay": [
+          18,
+          22,
+          26,
+          31,
+          35,
+          49,
+          67
+        ],
+        "topLinks": [
+          {
+            "title": "ఈ వారం ట్రైనింగ్ ప్లాన్",
+            "clicks": 121
+          },
+          {
+            "title": "20 నిమిషాల స్ట్రెంత్ రూటీన్",
+            "clicks": 78
+          },
+          {
+            "title": "500 కిలోమీటర్ల తర్వాత షూస్",
+            "clicks": 49
+          }
+        ],
+        "people": [
+          {
+            "email": "ana.runs@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "felix.k@example.de",
+            "lang": "DE",
+            "via": "form"
+          },
+          {
+            "email": "sam@example.org",
+            "lang": "EN",
+            "via": "form"
+          },
+          {
+            "email": "club.secretary@example.net",
+            "lang": "EN",
+            "via": "import"
+          }
+        ],
+        "activity": [
+          "3 భాషలలో 907 రీడర్‌లకు ఇష్యూ పంపబడింది",
+          "ఈ వారం ట్రైనింగ్ ప్లాన్‌పై 121 క్లిక్‌లు",
+          "ఈ వారం 31 కొత్త రీڈర్స్, చాలా మంది సైన్ అప్ ఫారం నుండి"
+        ],
+        "importCount": 260
+      }
+    ]
+  },
+  "errorPage": {
+    "notFoundEyebrow": "ఎర్రర్ 404",
+    "notFoundTitle": "మేము ఈ పేజీని కనుగొనలేకపోయాము",
+    "notFoundBody": "లింక్ పాతది కావచ్చు లేదా టైపో ఉండవచ్చు. ఈ పేజీలు కొనసాగించడానికి మంచి స్థలం.",
+    "serverEyebrow": "ఎర్రర్ {status}",
+    "serverTitle": "మా వైపు ఏదో తప్పు జరిగింది",
+    "serverBody": "మేము ఈ పేజీని లోడ్ చేయలేకపోయాము. ఒక నిమిషంలో మళ్లీ ప్రయత్నించండి. ఇది కొనసాగితే, info@aiban.news కి రాయండి.",
+    "retry": "మళ్లీ ప్రయత్నించండి",
+    "home": "హోమ్ పేజీకి వెళ్ళండి",
+    "popularTitle": "జనాదరణ పొందిన పేజీలు",
+    "links": {
+      "howItWorks": "AIBAN ఎలా పనిచేస్తుంది",
+      "pricing": "ధరలు",
+      "help": "సహాయ కేంద్రం",
+      "login": "మీ డాష్బోర్డ్‌లోకి లాగిన్ చేయండి"
+    },
+    "report": "మా సైట్‌లోని లింక్ మిమ్మల్ని ఇక్కడకు తీసుకువస్తే, దాన్ని సరిచేయడానికి info@aiban.newsకు మాకు తెలియజేయండి."
   },
   "header": {
     "goToWorkspace": "డాష్‌బోర్డ్ తెరవండి",
@@ -982,1429 +1749,5 @@ export default {
     "monthly": "నెలవారీ",
     "yearly": "వార్షికం",
     "loadingPlan": "ప్లాన్ డేటా లోడ్ అవుతోంది..."
-  },
-  "languages": [
-    {
-      "code": "ab",
-      "name": "అబ్ఖాజియన్"
-    },
-    {
-      "code": "aa",
-      "name": "అఫార్"
-    },
-    {
-      "code": "af",
-      "name": "ఆఫ్రికాన్స్"
-    },
-    {
-      "code": "ak",
-      "name": "అకాన్"
-    },
-    {
-      "code": "sq",
-      "name": "అల్బేనియన్"
-    },
-    {
-      "code": "am",
-      "name": "అమ్హారిక్"
-    },
-    {
-      "code": "ar",
-      "name": "అరబిక్"
-    },
-    {
-      "code": "an",
-      "name": "అరగోనీస్"
-    },
-    {
-      "code": "hy",
-      "name": "ఆర్మేనియన్"
-    },
-    {
-      "code": "as",
-      "name": "అస్సామీ"
-    },
-    {
-      "code": "av",
-      "name": "అవారిక్"
-    },
-    {
-      "code": "ae",
-      "name": "అవెస్తాన్"
-    },
-    {
-      "code": "ay",
-      "name": "అయ్మారా"
-    },
-    {
-      "code": "az",
-      "name": "అజర్బైజానీ"
-    },
-    {
-      "code": "bm",
-      "name": "బంబారా"
-    },
-    {
-      "code": "ba",
-      "name": "బాష్కిర్"
-    },
-    {
-      "code": "eu",
-      "name": "బాస్క్"
-    },
-    {
-      "code": "be",
-      "name": "బెలారసియన్"
-    },
-    {
-      "code": "bn",
-      "name": "బెంగాలీ"
-    },
-    {
-      "code": "bi",
-      "name": "బిస్లామా"
-    },
-    {
-      "code": "bs",
-      "name": "బోస్నియన్"
-    },
-    {
-      "code": "br",
-      "name": "బ్రెటన్"
-    },
-    {
-      "code": "bg",
-      "name": "బల్గేరియన్"
-    },
-    {
-      "code": "my",
-      "name": "బర్మీస్"
-    },
-    {
-      "code": "ca",
-      "name": "కాటలాన్"
-    },
-    {
-      "code": "ch",
-      "name": "చమోరో"
-    },
-    {
-      "code": "ce",
-      "name": "చెచెన్"
-    },
-    {
-      "code": "ny",
-      "name": "న్యాంజా"
-    },
-    {
-      "code": "zh",
-      "name": "చైనీస్"
-    },
-    {
-      "code": "cu",
-      "name": "చర్చ్ స్లావిక్"
-    },
-    {
-      "code": "cv",
-      "name": "చువాష్"
-    },
-    {
-      "code": "kw",
-      "name": "కార్నిష్"
-    },
-    {
-      "code": "co",
-      "name": "కోర్సికన్"
-    },
-    {
-      "code": "cr",
-      "name": "క్రీ"
-    },
-    {
-      "code": "hr",
-      "name": "క్రొయేషియన్"
-    },
-    {
-      "code": "cs",
-      "name": "చెక్"
-    },
-    {
-      "code": "da",
-      "name": "డానిష్"
-    },
-    {
-      "code": "dv",
-      "name": "దివేహి"
-    },
-    {
-      "code": "nl",
-      "name": "డచ్"
-    },
-    {
-      "code": "dz",
-      "name": "జొంఖా"
-    },
-    {
-      "code": "en",
-      "name": "ఇంగ్లీష్"
-    },
-    {
-      "code": "eo",
-      "name": "ఎస్పెరాంటో"
-    },
-    {
-      "code": "et",
-      "name": "ఎస్టోనియన్"
-    },
-    {
-      "code": "ee",
-      "name": "ఈవీ"
-    },
-    {
-      "code": "fo",
-      "name": "ఫారోయీస్"
-    },
-    {
-      "code": "fj",
-      "name": "ఫిజియన్"
-    },
-    {
-      "code": "fi",
-      "name": "ఫిన్నిష్"
-    },
-    {
-      "code": "fr",
-      "name": "ఫ్రెంచ్"
-    },
-    {
-      "code": "fy",
-      "name": "పశ్చిమ ఫ్రిసియన్"
-    },
-    {
-      "code": "ff",
-      "name": "ఫులా"
-    },
-    {
-      "code": "gd",
-      "name": "స్కాటిష్ గేలిక్"
-    },
-    {
-      "code": "gl",
-      "name": "గెలీషియన్"
-    },
-    {
-      "code": "lg",
-      "name": "గాండా"
-    },
-    {
-      "code": "ka",
-      "name": "జార్జియన్"
-    },
-    {
-      "code": "de",
-      "name": "జర్మన్"
-    },
-    {
-      "code": "el",
-      "name": "గ్రీక్"
-    },
-    {
-      "code": "kl",
-      "name": "గ్రీన్లాండిక్"
-    },
-    {
-      "code": "gn",
-      "name": "గ్వారానీ"
-    },
-    {
-      "code": "gu",
-      "name": "గుజరాతీ"
-    },
-    {
-      "code": "ht",
-      "name": "హైటియన్ క్రియోల్"
-    },
-    {
-      "code": "ha",
-      "name": "హౌసా"
-    },
-    {
-      "code": "he",
-      "name": "హీబ్రూ"
-    },
-    {
-      "code": "hz",
-      "name": "హెరెరో"
-    },
-    {
-      "code": "hi",
-      "name": "హిందీ"
-    },
-    {
-      "code": "ho",
-      "name": "హిరి మోటు"
-    },
-    {
-      "code": "hu",
-      "name": "హంగేరియన్"
-    },
-    {
-      "code": "is",
-      "name": "ఐస్లాండిక్"
-    },
-    {
-      "code": "io",
-      "name": "ఇడో"
-    },
-    {
-      "code": "ig",
-      "name": "ఇగ్బో"
-    },
-    {
-      "code": "id",
-      "name": "ఇండోనేషియన్"
-    },
-    {
-      "code": "ia",
-      "name": "ఇంటర్లింగ్వా"
-    },
-    {
-      "code": "ie",
-      "name": "ఇంటర్లింగ్వే"
-    },
-    {
-      "code": "iu",
-      "name": "ఇనుక్టిటుట్"
-    },
-    {
-      "code": "ik",
-      "name": "ఇనుపియాక్"
-    },
-    {
-      "code": "ga",
-      "name": "ఐరిష్"
-    },
-    {
-      "code": "it",
-      "name": "ఇటాలియన్"
-    },
-    {
-      "code": "ja",
-      "name": "జపనీస్"
-    },
-    {
-      "code": "jv",
-      "name": "జావానీస్"
-    },
-    {
-      "code": "kn",
-      "name": "కన్నడ"
-    },
-    {
-      "code": "kr",
-      "name": "కనూరి"
-    },
-    {
-      "code": "ks",
-      "name": "కాశ్మీరీ"
-    },
-    {
-      "code": "kk",
-      "name": "కజఖ్"
-    },
-    {
-      "code": "km",
-      "name": "ఖైమర్"
-    },
-    {
-      "code": "ki",
-      "name": "కికుయు"
-    },
-    {
-      "code": "rw",
-      "name": "కిన్యర్వాండా"
-    },
-    {
-      "code": "ky",
-      "name": "కిర్గిజ్"
-    },
-    {
-      "code": "kv",
-      "name": "కోమి"
-    },
-    {
-      "code": "kg",
-      "name": "కాంగో"
-    },
-    {
-      "code": "ko",
-      "name": "కొరియన్"
-    },
-    {
-      "code": "kj",
-      "name": "క్వాన్యామా"
-    },
-    {
-      "code": "ku",
-      "name": "కుర్దిష్"
-    },
-    {
-      "code": "lo",
-      "name": "లావో"
-    },
-    {
-      "code": "la",
-      "name": "లాటిన్"
-    },
-    {
-      "code": "lv",
-      "name": "లాట్వియన్"
-    },
-    {
-      "code": "li",
-      "name": "లింబర్గిష్"
-    },
-    {
-      "code": "ln",
-      "name": "లింగాల"
-    },
-    {
-      "code": "lt",
-      "name": "లిథువేనియన్"
-    },
-    {
-      "code": "lu",
-      "name": "లుబా-కటంగ"
-    },
-    {
-      "code": "lb",
-      "name": "లక్సెంబర్గిష్"
-    },
-    {
-      "code": "mk",
-      "name": "మాసిడోనియన్"
-    },
-    {
-      "code": "mg",
-      "name": "మలగస్సీ"
-    },
-    {
-      "code": "ms",
-      "name": "మలయ్"
-    },
-    {
-      "code": "ml",
-      "name": "మలయాళం"
-    },
-    {
-      "code": "mt",
-      "name": "మాల్టీస్"
-    },
-    {
-      "code": "gv",
-      "name": "మాంక్స్"
-    },
-    {
-      "code": "mi",
-      "name": "మావోరీ"
-    },
-    {
-      "code": "mr",
-      "name": "మరాఠీ"
-    },
-    {
-      "code": "mh",
-      "name": "మార్షలీస్"
-    },
-    {
-      "code": "mn",
-      "name": "మంగోలియన్"
-    },
-    {
-      "code": "na",
-      "name": "నౌరు"
-    },
-    {
-      "code": "nv",
-      "name": "నవాజో"
-    },
-    {
-      "code": "nd",
-      "name": "ఉత్తర ఎన్డెబెలే"
-    },
-    {
-      "code": "nr",
-      "name": "దక్షిణ ఎన్డెబెలే"
-    },
-    {
-      "code": "ng",
-      "name": "న్డోంగా"
-    },
-    {
-      "code": "ne",
-      "name": "నేపాలీ"
-    },
-    {
-      "code": "no",
-      "name": "నార్వేజియన్"
-    },
-    {
-      "code": "nb",
-      "name": "నార్వేజియన్ బోక్మాల్"
-    },
-    {
-      "code": "nn",
-      "name": "నార్వేజియన్ నైనోర్స్క్"
-    },
-    {
-      "code": "oc",
-      "name": "ఆక్సిటన్"
-    },
-    {
-      "code": "oj",
-      "name": "ఓజిబ్వా"
-    },
-    {
-      "code": "or",
-      "name": "ఒడియా"
-    },
-    {
-      "code": "om",
-      "name": "ఒరోమో"
-    },
-    {
-      "code": "os",
-      "name": "ఒస్సెటిక్"
-    },
-    {
-      "code": "pi",
-      "name": "పాలి"
-    },
-    {
-      "code": "ps",
-      "name": "పష్టో"
-    },
-    {
-      "code": "fa",
-      "name": "పర్షియన్"
-    },
-    {
-      "code": "pl",
-      "name": "పోలిష్"
-    },
-    {
-      "code": "pt",
-      "name": "పోర్చుగీస్"
-    },
-    {
-      "code": "pa",
-      "name": "పంజాబీ"
-    },
-    {
-      "code": "qu",
-      "name": "క్వెచువా"
-    },
-    {
-      "code": "ro",
-      "name": "రోమేనియన్"
-    },
-    {
-      "code": "rm",
-      "name": "రోమన్ష్"
-    },
-    {
-      "code": "rn",
-      "name": "రుండి"
-    },
-    {
-      "code": "ru",
-      "name": "రష్యన్"
-    },
-    {
-      "code": "se",
-      "name": "ఉత్తర సామీ"
-    },
-    {
-      "code": "sm",
-      "name": "సమోవన్"
-    },
-    {
-      "code": "sg",
-      "name": "సాంగో"
-    },
-    {
-      "code": "sa",
-      "name": "సంస్కృతం"
-    },
-    {
-      "code": "sc",
-      "name": "సార్డీనియన్"
-    },
-    {
-      "code": "sr",
-      "name": "సెర్బియన్"
-    },
-    {
-      "code": "sn",
-      "name": "షోనా"
-    },
-    {
-      "code": "ii",
-      "name": "సిచువాన్ యీ"
-    },
-    {
-      "code": "sd",
-      "name": "సింధీ"
-    },
-    {
-      "code": "si",
-      "name": "సింహళం"
-    },
-    {
-      "code": "sk",
-      "name": "స్లోవాక్"
-    },
-    {
-      "code": "sl",
-      "name": "స్లోవేనియన్"
-    },
-    {
-      "code": "so",
-      "name": "సోమాలి"
-    },
-    {
-      "code": "st",
-      "name": "దక్షిణ సోతో"
-    },
-    {
-      "code": "es",
-      "name": "స్పానిష్"
-    },
-    {
-      "code": "su",
-      "name": "సుందనీస్"
-    },
-    {
-      "code": "sw",
-      "name": "స్వాహిలీ"
-    },
-    {
-      "code": "ss",
-      "name": "స్వాతి"
-    },
-    {
-      "code": "sv",
-      "name": "స్వీడిష్"
-    },
-    {
-      "code": "tl",
-      "name": "తగలాగ్"
-    },
-    {
-      "code": "ty",
-      "name": "తహితియన్"
-    },
-    {
-      "code": "tg",
-      "name": "తాజిక్"
-    },
-    {
-      "code": "ta",
-      "name": "తమిళం"
-    },
-    {
-      "code": "tt",
-      "name": "టాటర్"
-    },
-    {
-      "code": "te",
-      "name": "తెలుగు"
-    },
-    {
-      "code": "th",
-      "name": "థాయ్"
-    },
-    {
-      "code": "bo",
-      "name": "టిబెటన్"
-    },
-    {
-      "code": "ti",
-      "name": "టిగ్రిన్యా"
-    },
-    {
-      "code": "to",
-      "name": "టోంగన్"
-    },
-    {
-      "code": "ts",
-      "name": "త్సోంగా"
-    },
-    {
-      "code": "tn",
-      "name": "త్వానా"
-    },
-    {
-      "code": "tr",
-      "name": "టర్కిష్"
-    },
-    {
-      "code": "tk",
-      "name": "తుర్క్మెన్"
-    },
-    {
-      "code": "tw",
-      "name": "ట్వి"
-    },
-    {
-      "code": "ug",
-      "name": "ఉయ్ఘర్"
-    },
-    {
-      "code": "uk",
-      "name": "ఉక్రేనియన్"
-    },
-    {
-      "code": "ur",
-      "name": "ఉర్దూ"
-    },
-    {
-      "code": "uz",
-      "name": "ఉజ్బెక్"
-    },
-    {
-      "code": "ve",
-      "name": "వెండా"
-    },
-    {
-      "code": "vi",
-      "name": "వియత్నామీస్"
-    },
-    {
-      "code": "vo",
-      "name": "వోలాపుక్"
-    },
-    {
-      "code": "wa",
-      "name": "వాలూన్"
-    },
-    {
-      "code": "cy",
-      "name": "వెల్ష్"
-    },
-    {
-      "code": "wo",
-      "name": "వొలోఫ్"
-    },
-    {
-      "code": "xh",
-      "name": "ఖోసా"
-    },
-    {
-      "code": "yi",
-      "name": "యిడ్డిష్"
-    },
-    {
-      "code": "yo",
-      "name": "యోరుబా"
-    },
-    {
-      "code": "za",
-      "name": "జువాంగ్"
-    },
-    {
-      "code": "zu",
-      "name": "జూలూ"
-    }
-  ],
-  "countries": [
-    {
-      "code": "AF",
-      "name": "ఆఫ్ఘనిస్తాన్"
-    },
-    {
-      "code": "AL",
-      "name": "అల్బేనియా"
-    },
-    {
-      "code": "DZ",
-      "name": "అల్జీరియా"
-    },
-    {
-      "code": "AS",
-      "name": "అమెరికన్ సమోవా"
-    },
-    {
-      "code": "AD",
-      "name": "అండొర్రా"
-    },
-    {
-      "code": "AO",
-      "name": "అంగోలా"
-    },
-    {
-      "code": "AI",
-      "name": "అంగుయిలా"
-    },
-    {
-      "code": "AQ",
-      "name": "అంటార్కిటికా"
-    },
-    {
-      "code": "AG",
-      "name": "ఆంటిగ్వా మరియు బార్బుడా"
-    },
-    {
-      "code": "AR",
-      "name": "అర్జెంటీనా"
-    },
-    {
-      "code": "AM",
-      "name": "ఆర్మేనియా"
-    },
-    {
-      "code": "AW",
-      "name": "అరుబా"
-    },
-    {
-      "code": "AU",
-      "name": "ఆస్ట్రేలియా"
-    },
-    {
-      "code": "AT",
-      "name": "ఆస్ట్రియా"
-    },
-    {
-      "code": "AZ",
-      "name": "అజర్బైజాన్"
-    },
-    {
-      "code": "BS",
-      "name": "బహామాస్"
-    },
-    {
-      "code": "BH",
-      "name": "బహ్రెయిన్"
-    },
-    {
-      "code": "BD",
-      "name": "బంగ్లాదేశ్"
-    },
-    {
-      "code": "BB",
-      "name": "బార్బడోస్"
-    },
-    {
-      "code": "BY",
-      "name": "బెలారస్"
-    },
-    {
-      "code": "BE",
-      "name": "బెల్జియం"
-    },
-    {
-      "code": "BZ",
-      "name": "బెలిజ్"
-    },
-    {
-      "code": "BJ",
-      "name": "బెనిన్"
-    },
-    {
-      "code": "BM",
-      "name": "బెర్ముడా"
-    },
-    {
-      "code": "BT",
-      "name": "భూటాన్"
-    },
-    {
-      "code": "BO",
-      "name": "బొలీవియా"
-    },
-    {
-      "code": "BA",
-      "name": "బోస్నియా మరియు హెర్జెగోవినా"
-    },
-    {
-      "code": "BW",
-      "name": "బోట్స్వానా"
-    },
-    {
-      "code": "BR",
-      "name": "బ్రెజిల్"
-    },
-    {
-      "code": "IO",
-      "name": "బ్రిటిష్ ఇండియన్ ఓషన్ టెరిటరీ"
-    },
-    {
-      "code": "VG",
-      "name": "బ్రిటిష్ వర్జిన్ ఐలాండ్స్"
-    },
-    {
-      "code": "BN",
-      "name": "బ్రూనై"
-    },
-    {
-      "code": "BG",
-      "name": "బల్గేరియా"
-    },
-    {
-      "code": "BF",
-      "name": "బుర్కినా ఫాసో"
-    },
-    {
-      "code": "BI",
-      "name": "బురుండి"
-    },
-    {
-      "code": "KH",
-      "name": "కాంబోడియా"
-    },
-    {
-      "code": "CM",
-      "name": "కెమెరూన్"
-    },
-    {
-      "code": "CA",
-      "name": "కెనడా"
-    },
-    {
-      "code": "CV",
-      "name": "కేప్ వెర్డే"
-    },
-    {
-      "code": "KY",
-      "name": "కేమాన్ ఐలాండ్స్"
-    },
-    {
-      "code": "CF",
-      "name": "సెంట్రల్ ఆఫ్రికన్ రిపబ్లిక్"
-    },
-    {
-      "code": "TD",
-      "name": "చాద్"
-    },
-    {
-      "code": "CL",
-      "name": "చిలీ"
-    },
-    {
-      "code": "CN",
-      "name": "చైనా"
-    },
-    {
-      "code": "CX",
-      "name": "క్రిస్మస్ ఐలాండ్"
-    },
-    {
-      "code": "CC",
-      "name": "కోకోస్ (కీలింగ్) ఐలాండ్స్"
-    },
-    {
-      "code": "CO",
-      "name": "కొలంబియా"
-    },
-    {
-      "code": "KM",
-      "name": "కొమొరోస్"
-    },
-    {
-      "code": "CG",
-      "name": "కాంగో - బ్రజావిల్లి"
-    },
-    {
-      "code": "CD",
-      "name": "కాంగో - కిన్షాసా"
-    },
-    {
-      "code": "CK",
-      "name": "కుక్ ఐలాండ్స్"
-    },
-    {
-      "code": "CR",
-      "name": "కోస్టారికా"
-    },
-    {
-      "code": "CI",
-      "name": "కోట్ డి ఐవోర్"
-    },
-    {
-      "code": "HR",
-      "name": "క్రొయేషియా"
-    },
-    {
-      "code": "CU",
-      "name": "క్యూబా"
-    },
-    {
-      "code": "CY",
-      "name": "సైప్రస్"
-    },
-    {
-      "code": "CZ",
-      "name": "చెక్ రిపబ్లిక్"
-    },
-    {
-      "code": "DK",
-      "name": "డెన్మార్క్"
-    },
-    {
-      "code": "DJ",
-      "name": "జిబౌటి"
-    },
-    {
-      "code": "DM",
-      "name": "డొమినికా"
-    },
-    {
-      "code": "DO",
-      "name": "డొమినికన్ రిపబ్లిక్"
-    },
-    {
-      "code": "EC",
-      "name": "ఈక్వడార్"
-    },
-    {
-      "code": "EG",
-      "name": "ఈజిప్ట్"
-    },
-    {
-      "code": "SV",
-      "name": "ఎల్ సాల్వడార్"
-    },
-    {
-      "code": "GQ",
-      "name": "ఈక్వటోరియల్ గినియా"
-    },
-    {
-      "code": "ER",
-      "name": "ఎరిత్రియా"
-    },
-    {
-      "code": "EE",
-      "name": "ఎస్టోనియా"
-    },
-    {
-      "code": "SZ",
-      "name": "ఈస్వాతిని"
-    },
-    {
-      "code": "ET",
-      "name": "ఇథియోపియా"
-    },
-    {
-      "code": "FJ",
-      "name": "ఫిజీ"
-    },
-    {
-      "code": "FI",
-      "name": "ఫిన్లాండ్"
-    },
-    {
-      "code": "FR",
-      "name": "ఫ్రాన్స్"
-    },
-    {
-      "code": "GA",
-      "name": "గాబన్"
-    },
-    {
-      "code": "GM",
-      "name": "గాంబియా"
-    },
-    {
-      "code": "GE",
-      "name": "జార్జియా"
-    },
-    {
-      "code": "DE",
-      "name": "జర్మనీ"
-    },
-    {
-      "code": "GH",
-      "name": "ఘనా"
-    },
-    {
-      "code": "GR",
-      "name": "గ్రీస్"
-    },
-    {
-      "code": "GT",
-      "name": "గ్వాటెమాల"
-    },
-    {
-      "code": "GN",
-      "name": "గినియా"
-    },
-    {
-      "code": "GY",
-      "name": "గయానా"
-    },
-    {
-      "code": "HT",
-      "name": "హైతీ"
-    },
-    {
-      "code": "HN",
-      "name": "హోండురాస్"
-    },
-    {
-      "code": "HK",
-      "name": "హాంకాంగ్"
-    },
-    {
-      "code": "HU",
-      "name": "హంగేరి"
-    },
-    {
-      "code": "IS",
-      "name": "ఐస్లాండ్"
-    },
-    {
-      "code": "IN",
-      "name": "భారతదేశం"
-    },
-    {
-      "code": "ID",
-      "name": "ఇండోనేషియా"
-    },
-    {
-      "code": "IR",
-      "name": "ఇరాన్"
-    },
-    {
-      "code": "IQ",
-      "name": "ఇరాక్"
-    },
-    {
-      "code": "IE",
-      "name": "ఐర్లాండ్"
-    },
-    {
-      "code": "IL",
-      "name": "ఇజ్రాయిల్"
-    },
-    {
-      "code": "IT",
-      "name": "ఇటలీ"
-    },
-    {
-      "code": "JM",
-      "name": "జమైకా"
-    },
-    {
-      "code": "JP",
-      "name": "జపాన్"
-    },
-    {
-      "code": "JO",
-      "name": "జోర్డాన్"
-    },
-    {
-      "code": "KZ",
-      "name": "కజకిస్తాన్"
-    },
-    {
-      "code": "KE",
-      "name": "కెన్యా"
-    },
-    {
-      "code": "KR",
-      "name": "దక్షిణ కొరియా"
-    },
-    {
-      "code": "KW",
-      "name": "కువైట్"
-    },
-    {
-      "code": "KG",
-      "name": "కిర్గిజిస్తాన్"
-    },
-    {
-      "code": "LA",
-      "name": "లావోస్"
-    },
-    {
-      "code": "LV",
-      "name": "లాట్వియా"
-    },
-    {
-      "code": "LB",
-      "name": "లెబనాన్"
-    },
-    {
-      "code": "LS",
-      "name": "లెసోతో"
-    },
-    {
-      "code": "LR",
-      "name": "లైబీరియా"
-    },
-    {
-      "code": "LY",
-      "name": "లిబియా"
-    },
-    {
-      "code": "LI",
-      "name": "లిక్టెన్స్టెయిన్"
-    },
-    {
-      "code": "LT",
-      "name": "లిథువేనియా"
-    },
-    {
-      "code": "LU",
-      "name": "లక్సెంబర్గ్"
-    },
-    {
-      "code": "MG",
-      "name": "మడగాస్కర్"
-    },
-    {
-      "code": "MW",
-      "name": "మలావి"
-    },
-    {
-      "code": "MY",
-      "name": "మలేషియా"
-    },
-    {
-      "code": "MV",
-      "name": "మాల్దీవులు"
-    },
-    {
-      "code": "ML",
-      "name": "మాలి"
-    },
-    {
-      "code": "MT",
-      "name": "మాల్టా"
-    },
-    {
-      "code": "MX",
-      "name": "మెక్సికో"
-    },
-    {
-      "code": "MD",
-      "name": "మోల్డోవా"
-    },
-    {
-      "code": "MC",
-      "name": "మొనాకో"
-    },
-    {
-      "code": "MN",
-      "name": "మంగోలియా"
-    },
-    {
-      "code": "ME",
-      "name": "మోంటెనెగ్రో"
-    },
-    {
-      "code": "MA",
-      "name": "మొరాకో"
-    },
-    {
-      "code": "MZ",
-      "name": "మెజాంబిక్"
-    },
-    {
-      "code": "MM",
-      "name": "మయన్మార్"
-    },
-    {
-      "code": "NA",
-      "name": "నమీబియా"
-    },
-    {
-      "code": "NP",
-      "name": "నేపాల్"
-    },
-    {
-      "code": "NL",
-      "name": "నెదర్లాండ్స్"
-    },
-    {
-      "code": "NZ",
-      "name": "న్యూజిలాండ్"
-    },
-    {
-      "code": "NI",
-      "name": "నికర్గువా"
-    },
-    {
-      "code": "NE",
-      "name": "నైజర్"
-    },
-    {
-      "code": "NG",
-      "name": "నైజీరియా"
-    },
-    {
-      "code": "MK",
-      "name": "నార్త్ మాసిడోనియా"
-    },
-    {
-      "code": "NO",
-      "name": "నార్వే"
-    },
-    {
-      "code": "OM",
-      "name": "ఒమన్"
-    },
-    {
-      "code": "PK",
-      "name": "పాకిస్తాన్"
-    },
-    {
-      "code": "PA",
-      "name": "పనామా"
-    },
-    {
-      "code": "PG",
-      "name": "పాపువా న్యూ గినియా"
-    },
-    {
-      "code": "PY",
-      "name": "పరాగ్వే"
-    },
-    {
-      "code": "PE",
-      "name": "పెరూ"
-    },
-    {
-      "code": "PH",
-      "name": "ఫిలిప్పీన్స్"
-    },
-    {
-      "code": "PL",
-      "name": "పోలాండ్"
-    },
-    {
-      "code": "PT",
-      "name": "పోర్చుగల్"
-    },
-    {
-      "code": "QA",
-      "name": "ఖతార్"
-    },
-    {
-      "code": "RO",
-      "name": "రోమేనియా"
-    },
-    {
-      "code": "RU",
-      "name": "రష్యా"
-    },
-    {
-      "code": "RW",
-      "name": "రువాండా"
-    },
-    {
-      "code": "SA",
-      "name": "సౌదీ అరేబియా"
-    },
-    {
-      "code": "SN",
-      "name": "సెనెగల్"
-    },
-    {
-      "code": "RS",
-      "name": "సెర్బియా"
-    },
-    {
-      "code": "SG",
-      "name": "సింగపూర్"
-    },
-    {
-      "code": "SK",
-      "name": "స్లోవేకియా"
-    },
-    {
-      "code": "SI",
-      "name": "స్లోవేనియా"
-    },
-    {
-      "code": "ZA",
-      "name": "దక్షిణాఫ్రికా"
-    },
-    {
-      "code": "ES",
-      "name": "స్పెయిన్"
-    },
-    {
-      "code": "LK",
-      "name": "శ్రీలంక"
-    },
-    {
-      "code": "SE",
-      "name": "స్వీడన్"
-    },
-    {
-      "code": "CH",
-      "name": "స్విట్జర్లాండ్"
-    },
-    {
-      "code": "TW",
-      "name": "తైవాన్"
-    },
-    {
-      "code": "TH",
-      "name": "థాయిలాండ్"
-    },
-    {
-      "code": "TR",
-      "name": "టర్కీ"
-    },
-    {
-      "code": "UG",
-      "name": "ఉగాండా"
-    },
-    {
-      "code": "UA",
-      "name": "ఉక్రెయిన్"
-    },
-    {
-      "code": "AE",
-      "name": "యునైటెడ్ అరబ్ ఎమిరేట్స్"
-    },
-    {
-      "code": "GB",
-      "name": "యునైటెడ్ కింగ్‌డమ్"
-    },
-    {
-      "code": "US",
-      "name": "యునైటెడ్ స్టేట్స్"
-    },
-    {
-      "code": "UY",
-      "name": "ఉరుగ్వే"
-    },
-    {
-      "code": "UZ",
-      "name": "ఉజ్బెకిస్తాన్"
-    },
-    {
-      "code": "VE",
-      "name": "వెనిజులా"
-    },
-    {
-      "code": "VN",
-      "name": "వియత్నాం"
-    },
-    {
-      "code": "YE",
-      "name": "యెమెన్"
-    },
-    {
-      "code": "ZM",
-      "name": "జాంబియా"
-    },
-    {
-      "code": "ZW",
-      "name": "జింబాబ్వే"
-    }
-  ]
+  }
 };

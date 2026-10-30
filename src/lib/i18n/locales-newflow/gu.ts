@@ -1,5 +1,5 @@
-// gu strings for locales-newflow. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale gu
+// gu (Gujarati) strings for locales-newflow. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "onboarding": {
     "progress": "પગલું {current} / {total}",
@@ -116,6 +116,9 @@ export default {
       "dayLabel": "દિવસ",
       "timeLabel": "સમય",
       "timeHint": "તમારા સ્થાનિક સમય મુજબ.",
+      "summaryDaily": "દરરોજ {time} વાગે, તમારા સમય પ્રમાણે ({zone}).",
+      "summaryWeekly": "દર {day} {time} વાગે, તમારા સમય પ્રમાણે ({zone}).",
+      "summaryMonthly": "દર મહિનાની 1મી તારીખે {time} વાગે, તમારા સમય પ્રમાણે ({zone}).",
       "recipeTitle": "નવા અંકો ઓટોમેટિક મોકલો",
       "recipeBody": "ઉપરના શેડ્યૂલ મુજબ અમે તમારો શ્રેષ્ઠ નવો આર્ટિકલ પસંદ કરીએ છીએ, તમારી શૈલીમાં લખીએ છીએ, દરેક વાચક માટે અનુવાદ કરીએ છીએ અને ઇમેઇલ કરીએ છીએ.",
       "recipeOn": "ચાલુ",

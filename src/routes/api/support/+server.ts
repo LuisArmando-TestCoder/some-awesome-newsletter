@@ -1,9 +1,8 @@
 /**
  * Support / higher-limits request (HelpForm, WS2).
  * POST JSON with the HelpForm fields. Validated and rate limited here, then
- * forwarded to the backend POST /support (requested from WS7), which emails
- * the team. Until that endpoint exists this answers 501 and the form keeps
- * its email fallback.
+ * forwarded to the backend POST /support, which stores it in supportRequests
+ * for the admin team. On any failure the form keeps its email fallback.
  */
 import { json } from '@sveltejs/kit';
 import { z } from 'zod';
@@ -40,9 +39,27 @@ export const POST: RequestHandler = async ({ request, url, fetch, getClientAddre
 	if (!parsed.success) return jsonError(400, 'Some details are missing. Check the form and try again.');
 
 	try {
-		await apiRequest('/support', { method: 'POST', auth: 'none', origin: url.origin, fetch, body: { kind: 'higher_limits', ...parsed.data }, retries: 0 });
+		const d = parsed.data;
+		// The backend contract (POST /support) needs `message`; the form's own fields travel as extras.
+		const body = {
+			kind: 'sales',
+			subject: 'Higher limits request',
+			name: d.name,
+			email: d.email,
+			message: `What they need: ${d.desiredLimits}\n\nHow they use AIBAN: ${d.useCase}`,
+			page: '/help',
+			company: d.company ?? '',
+			expectedSpend: d.expectedSpend,
+			urgency: d.urgency,
+			contact: d.contact,
+			payAsYouGo: d.payAsYouGo
+		};
+		await apiRequest('/support', { method: 'POST', auth: 'none', origin: url.origin, fetch, body, retries: 0 });
 		return json({ success: true, message: 'Thanks. We will reply by email.' });
 	} catch (e) {
+		if (isApiError(e) && e.status === 429) {
+			return jsonError(429, 'You already sent a few requests. We will reply by email.');
+		}
 		if (isApiError(e) && (e.status === 404 || e.status === 501)) {
 			return jsonError(501, 'Sending from this form is not available yet. Use the email option instead.');
 		}

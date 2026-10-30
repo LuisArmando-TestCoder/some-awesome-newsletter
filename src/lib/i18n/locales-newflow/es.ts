@@ -1,5 +1,5 @@
-// es strings for locales-newflow. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale es
+// es (Spanish (neutral, for Latin America and Spain)) strings for locales-newflow. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "onboarding": {
     "progress": "Paso {current} de {total}",
@@ -116,6 +116,9 @@ export default {
       "dayLabel": "Día",
       "timeLabel": "Hora",
       "timeHint": "En tu hora local.",
+      "summaryDaily": "Todos los días a las {time}, tu hora ({zone}).",
+      "summaryWeekly": "Cada {day} a las {time}, tu hora ({zone}).",
+      "summaryMonthly": "El día 1 de cada mes a las {time}, tu hora ({zone}).",
       "recipeTitle": "Enviar nuevas ediciones automáticamente",
       "recipeBody": "Con la frecuencia de arriba, elegimos tu mejor artículo nuevo, lo escribimos con tu voz, lo traducimos para cada lector y lo enviamos por correo.",
       "recipeOn": "Activado",

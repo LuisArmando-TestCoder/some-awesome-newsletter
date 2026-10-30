@@ -1,5 +1,5 @@
-// yue strings for locales-newflow. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale yue
+// yue (Cantonese (written Cantonese, Hong Kong)) strings for locales-newflow. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "onboarding": {
     "progress": "第 {current} 步，共 {total} 步",
@@ -116,6 +116,9 @@ export default {
       "dayLabel": "日子",
       "timeLabel": "時間",
       "timeHint": "用你嘅本地時間。",
+      "summaryDaily": "每日 {time}，你嘅時間（{zone}）。",
+      "summaryWeekly": "每{day} {time}，你嘅時間（{zone}）。",
+      "summaryMonthly": "每月1號 {time}，你嘅時間（{zone}）。",
       "recipeTitle": "自動寄出新一期",
       "recipeBody": "按上面嘅時間表，我哋會揀你最好嘅新文章，用你嘅語氣寫，為每位讀者翻譯，再用電郵寄出。",
       "recipeOn": "開啟",

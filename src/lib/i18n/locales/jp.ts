@@ -1,5 +1,5 @@
-// jp strings for locales. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale jp
+// jp (Japanese) strings for locales. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "auth": {
     "logo": "/icons/logo.png",
@@ -35,6 +35,82 @@ export default {
       "ogImageAlt": "AIBAN のロゴ"
     },
     "skipLink": "メインコンテンツへスキップ",
+    "display": {
+      "title": "あなたのウェブサイトがニュースレターになります。",
+      "kicker": "AIBAN"
+    },
+    "statement": {
+      "lines": [
+        "あなたはすでに良いコンテンツを公開しています。",
+        "あなたのクライアントは複数の言語でそれを読んでいます。",
+        "AIBANは新しい記事をそれぞれの号に変え、",
+        "すべての読者にそれぞれの言語のバージョンを送信します。"
+      ]
+    },
+    "history": {
+      "eyebrow": "仕組み",
+      "title": "1つの号のライフサイクル。",
+      "lead": "あなたのスケジュールが開始する瞬間から、次に開始する瞬間までの1つの号の流れを追います。これは一度設定するだけです。",
+      "note": "スケジュールの例です。曜日、時間、頻度はあなたが選択します。",
+      "progressLabel": "1つの号のステップ",
+      "items": [
+        {
+          "mark": "9:00",
+          "title": "あなたのスケジュールが実行を開始",
+          "body": "この例では毎週月曜日の9:00です。毎日、毎週、毎月から選択できます。"
+        },
+        {
+          "mark": "読む",
+          "title": "AIBANがあなたのウェブサイトを読み込みます",
+          "body": "最新の記事を見つけ、あなたの理想的な読者が最も気にかける部分を選びます。"
+        },
+        {
+          "mark": "書く",
+          "title": "あなたの声で号を書きます",
+          "body": "テキストはあなたのサイトの書き方に従うので、あなたの声のように聞こえます。"
+        },
+        {
+          "mark": "翻訳",
+          "title": "各読者は自分の言語で受け取ります",
+          "body": "1つの号が、あなたの購読者が必要とするだけの数のバージョンになります。"
+        },
+        {
+          "mark": "送信",
+          "title": "あなたの名前で届きます",
+          "body": "あなたの名前とメール署名付きです。返信はあなたの受信箱に届きます。"
+        },
+        {
+          "mark": "公開",
+          "title": "あなたのブログ上の記事になります",
+          "body": "検索で見つけたり共有できる独自のリンクが付きます。"
+        },
+        {
+          "mark": "レポート",
+          "title": "何が起こったか確認できます",
+          "body": "ダッシュボードに、誰が参加したか、どのリンクがクリックされたかが表示されます。"
+        },
+        {
+          "mark": "繰り返し",
+          "title": "次の月曜日に再実行されます",
+          "body": "ダッシュボードでオフにするまで続きます。"
+        }
+      ]
+    },
+    "rail": {
+      "label": "ページの章",
+      "chapters": [
+        "開始",
+        "理由",
+        "言語",
+        "仕組み",
+        "あなたの名前",
+        "成長",
+        "対象者",
+        "料金",
+        "よくある質問",
+        "始める"
+      ]
+    },
     "hero": {
       "eyebrow": "サービス業のためのニュースレター",
       "title": "あなたのウェブサイトが、読者ごとの言語で届く週刊ニュースレターになります",
@@ -57,6 +133,26 @@ export default {
       "startCta": "{site} で無料で始める",
       "startCtaGeneric": "無料で始める",
       "liveRegion": "{site} のサンプルプレビューを更新しました。"
+    },
+    "live": {
+      "badge": "たった今作成",
+      "loadingTitle": "{site}からサンプル号を作成中",
+      "steps": [
+        "{site}を読み込み中",
+        "最新記事を検索中",
+        "{language}で執筆中",
+        "メールテンプレートに挿入中"
+      ],
+      "takes": "通常20〜40秒かかります。このままスクロールを続けられます。",
+      "readyNote": "AIBANは{site}の最新記事からこのサンプルを作成します。保存や送信は行われません。実際に始めるときは、ご自身の文体とスケジュールで実行されます。",
+      "readyAnnounce": "{site}からのサンプル号が完成しました。",
+      "languageLabel": "読者の言語",
+      "loadingLanguage": "{language}で執筆中",
+      "errorTitle": "{site}からのプレビューを作成できませんでした",
+      "retry": "再試行",
+      "showSample": "サンプルレイアウトを表示",
+      "frameTitle": "{site}から作成したサンプル号",
+      "openFull": "新しいタブで開く"
     },
     "chain": {
       "eyebrow": "仕組み",
@@ -494,8 +590,8 @@ export default {
     "yearlySave": "35% お得",
     "intervalLabel": "請求期間",
     "billedYearly": "年払いで請求",
-    "perMonthShort": "/mo",
-    "perYearShort": "/yr",
+    "perMonthShort": "/月",
+    "perYearShort": "/年",
     "freeCta": "無料で始める",
     "processing": "決済ページを開いています...",
     "askMore": "すべてのアカウントは無料プランから始まります。さらに必要な場合は {email} までご連絡ください。プランを変更します。",
@@ -587,6 +683,7 @@ export default {
       "suggestions": "候補",
       "recent": "最近の検索",
       "clearRecent": "最近の検索を消去",
+      "clear": "検索をクリア",
       "title": "検索結果",
       "resultsFor": "「{q}」の検索結果",
       "count": "{count} 件の記事が見つかりました",
@@ -691,6 +788,7 @@ export default {
   "legal": {
     "navLabel": "法的文書",
     "lastUpdated": "最終更新日：{date}",
+    "onThisPage": "このページの内容",
     "privacy": {
       "title": "プライバシーポリシー",
       "metaTitle": "プライバシーポリシー | AIBAN",
@@ -919,6 +1017,8 @@ export default {
     "codeSent": "メールにコードを送信しました。",
     "invalidCode": "コードが正しくありません。最新のメールを確認するか、コードを再送信してください。",
     "regenerateCode": "コードを再送する",
+    "codeAccepted": "コードが承認されました。ダッシュボードを開いています。",
+    "codeLabel": "6桁のコード",
     "back": "戻る",
     "byProceeding": "続行することで、以下に同意したことになります：",
     "termsOfService": "利用規約",
@@ -947,6 +1047,673 @@ export default {
       "title": "ニュースレターへようこそ。",
       "invitedBy": "{configuratorId} さんからの招待です。"
     }
+  },
+  "showcase": {
+    "sampleBadge": "サンプルデータ",
+    "exampleLabel": "サンプルビジネス",
+    "caption": "{business}は{kind}の例です。このビュー内の名前、記事、数字は、数週間後のダッシュボードの外観を示すプレースホルダーです。",
+    "pause": "アニメーションを一時停止",
+    "play": "アニメーションを再生",
+    "scenesLabel": "ダッシュボードのパーツ",
+    "examplesLabel": "サンプルビジネス",
+    "appUrl": "app.aiban.news",
+    "nav": {
+      "home": "ホーム",
+      "automations": "自動化",
+      "sources": "ソース",
+      "subscribers": "購読者",
+      "reports": "レポート",
+      "blog": "ブログ"
+    },
+    "scenes": {
+      "home": "概要",
+      "issue": "号外",
+      "reports": "クリック数",
+      "subscribers": "購読者",
+      "automation": "スケジュール",
+      "source": "あなたのウェブサイト",
+      "voice": "あなたの声",
+      "signup": "サインアップフォーム",
+      "blog": "ブログ",
+      "import": "インポート"
+    },
+    "ui": {
+      "hello": "こんにちは、{business}",
+      "narrative": "{subscribers} 人の読者が {languages} 言語で読んでいます。次の号は {schedule} に配信されます。",
+      "kpiSubscribers": "購読者",
+      "kpiLanguages": "言語",
+      "kpiClicks": "クリック数（過去7日間）",
+      "kpiAutomations": "自動化オン",
+      "kpiNew": "今週の新規 {count}",
+      "nextIssue": "次の号",
+      "ready": "準備完了",
+      "activity": "最近のアクティビティ",
+      "from": "送信元",
+      "subject": "件名",
+      "readMore": "記事全文を読む",
+      "readerLanguage": "読者の言語",
+      "clicksTitle": "クリック数（過去7日間）",
+      "mostClicked": "最もクリックされた",
+      "clicks": "クリック",
+      "days": [
+        "月",
+        "火",
+        "水",
+        "木",
+        "金",
+        "土",
+        "日"
+      ],
+      "subscribersTitle": "購読者",
+      "language": "言語",
+      "joinedVia": "参加方法",
+      "newSubscriber": "新規購読者",
+      "automationTitle": "週刊号",
+      "automationSentence": "{schedule}、最新の記事から号を作成し、すべての読者にそれぞれの言語で送信します。",
+      "on": "オン",
+      "off": "オフ",
+      "automationOn": "自動化がオンになりました",
+      "sourceLabel": "コンテンツの取得元",
+      "sourceButton": "サイトを読み込む",
+      "reading": "サイトを読み込み中",
+      "found": "{count} 件の記事が見つかりました",
+      "voiceReader": "理想の読者",
+      "voiceTone": "トーンの設定",
+      "signupHeading": "週刊ニュースレターを受け取る",
+      "signupEmail": "メールアドレス",
+      "signupLanguage": "言語",
+      "signupButton": "購読する",
+      "signupDone": "受信箱を確認して登録を完了してください。",
+      "blogTitle": "{business} の記事",
+      "importFile": "clients.csv",
+      "importing": "連絡先をインポート中",
+      "imported": "{count} 件の連絡先を追加しました",
+      "sources": {
+        "form": "登録フォーム",
+        "import": "インポート",
+        "manual": "手動で追加"
+      }
+    },
+    "examples": [
+      {
+        "business": "Northfield Studio",
+        "kind": "ウェブデザイン会社",
+        "site": "northfield.studio",
+        "schedule": "毎週月曜日 9:00",
+        "subscribers": 312,
+        "newThisWeek": 9,
+        "clicks7": 84,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "en",
+            "name": "英語",
+            "share": 58
+          },
+          {
+            "code": "es",
+            "name": "スペイン語",
+            "share": 31
+          },
+          {
+            "code": "pt",
+            "name": "ポルトガル語",
+            "share": 11
+          }
+        ],
+        "reader": "クライアントを集めるウェブサイトを求める、クリニック、ショップ、スタジオのオーナー。ポートフォリオ作品ではなく。",
+        "tones": [
+          "温かい",
+          "平易",
+          "実用的"
+        ],
+        "articles": [
+          "歯科クリニックのウェブサイトを6週間で再構築した方法",
+          "リデザイン前に修正すべき5つのポイント",
+          "予約ボタンがオレンジであるべき理由"
+        ],
+        "issue": {
+          "title": "歯科クリニックのウェブサイトを6週間で再構築した方法",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "A clinic website rebuilt in six weeks",
+              "summary": "We moved booking to the top of every page and cut the forms from nine fields to three. Here is what changed for the clinic."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "El sitio de una clínica, renovado en seis semanas",
+              "summary": "Pusimos la reserva arriba en cada página y redujimos los formularios de nueve campos a tres. Esto es lo que cambió para la clínica."
+            },
+            {
+              "code": "pt",
+              "name": "Português",
+              "subject": "O site de uma clínica, refeito em seis semanas",
+              "summary": "Colocamos o agendamento no topo de cada página e reduzimos os formulários de nove campos para três. Veja o que mudou para a clínica."
+            }
+          ]
+        },
+        "clicksByDay": [
+          21,
+          17,
+          12,
+          9,
+          11,
+          6,
+          8
+        ],
+        "topLinks": [
+          {
+            "title": "クリニックの事例紹介",
+            "clicks": 38
+          },
+          {
+            "title": "リデザイン前に修正すべき5つのポイント",
+            "clicks": 27
+          },
+          {
+            "title": "通話を予約",
+            "clicks": 19
+          }
+        ],
+        "people": [
+          {
+            "email": "lucia.r@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "mark@example.org",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "joana.s@example.net",
+            "lang": "PT",
+            "via": "form"
+          },
+          {
+            "email": "dr.chen@example.com",
+            "lang": "EN",
+            "via": "manual"
+          }
+        ],
+        "activity": [
+          "3言語で312人の読者に号を送信",
+          "クリニック事例紹介が38回クリックされました",
+          "Luciaがサインアップフォームから参加し、スペイン語で読んでいます"
+        ],
+        "importCount": 148
+      },
+      {
+        "business": "Brightline Software",
+        "kind": "ソフトウェア会社",
+        "site": "brightline.dev",
+        "schedule": "毎月1日10:00",
+        "subscribers": 1240,
+        "newThisWeek": 23,
+        "clicks7": 211,
+        "automationsOn": 1,
+        "languages": [
+          {
+            "code": "en",
+            "name": "英語",
+            "share": 64
+          },
+          {
+            "code": "de",
+            "name": "ドイツ語",
+            "share": 22
+          },
+          {
+            "code": "fr",
+            "name": "フランス語",
+            "share": 14
+          }
+        ],
+        "reader": "当社の予約ソフトウェアを毎日使用するクライアントのオフィスマネージャーとITリーダー。",
+        "tones": [
+          "明確",
+          "簡潔",
+          "親しみやすい"
+        ],
+        "articles": [
+          "リリース4.2：定期的な予約",
+          "大規模チーム向けの高速レポート",
+          "スプレッドシートからカレンダーを移行する方法"
+        ],
+        "issue": {
+          "title": "リリース4.2：定期的な予約",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "New this month: recurring appointments",
+              "summary": "You can now repeat any appointment weekly or monthly. Reports for teams over 50 people also load faster."
+            },
+            {
+              "code": "de",
+              "name": "Deutsch",
+              "subject": "Neu diesen Monat: wiederkehrende Termine",
+              "summary": "Sie können jetzt jeden Termin wöchentlich oder monatlich wiederholen. Berichte für Teams ab 50 Personen laden außerdem schneller."
+            },
+            {
+              "code": "fr",
+              "name": "Français",
+              "subject": "Nouveau ce mois-ci : les rendez-vous récurrents",
+              "summary": "Vous pouvez désormais répéter un rendez-vous chaque semaine ou chaque mois. Les rapports des équipes de plus de 50 personnes s'affichent aussi plus vite."
+            }
+          ]
+        },
+        "clicksByDay": [
+          64,
+          48,
+          33,
+          25,
+          19,
+          9,
+          13
+        ],
+        "topLinks": [
+          {
+            "title": "定期的な予約ガイド",
+            "clicks": 96
+          },
+          {
+            "title": "リリースノート4.2",
+            "clicks": 71
+          },
+          {
+            "title": "スプレッドシートからの移行",
+            "clicks": 44
+          }
+        ],
+        "people": [
+          {
+            "email": "it@example.de",
+            "lang": "DE",
+            "via": "import"
+          },
+          {
+            "email": "sophie.m@example.fr",
+            "lang": "FR",
+            "via": "form"
+          },
+          {
+            "email": "ops@example.com",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "k.weber@example.de",
+            "lang": "DE",
+            "via": "form"
+          }
+        ],
+        "activity": [
+          "3言語で1240人の読者に号を送信",
+          "定期的な予約ガイドへの96クリック",
+          "clients.csvから23件の連絡先をインポート"
+        ],
+        "importCount": 412
+      },
+      {
+        "business": "Casa Verde Realty",
+        "kind": "不動産会社",
+        "site": "casaverde.homes",
+        "schedule": "毎週木曜日8:00",
+        "subscribers": 586,
+        "newThisWeek": 14,
+        "clicks7": 163,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "es",
+            "name": "スペイン語",
+            "share": 47
+          },
+          {
+            "code": "en",
+            "name": "英語",
+            "share": 41
+          },
+          {
+            "code": "fr",
+            "name": "フランス語",
+            "share": 12
+          }
+        ],
+        "reader": "海岸近くの家を探している海外からの家族や退職者、売却する可能性のある所有者。",
+        "tones": [
+          "温かい",
+          "地域密着",
+          "落ち着いた"
+        ],
+        "articles": [
+          "今週のビーチ近くの3つの新物件",
+          "外国人買い手のための決済費用の内訳",
+          "旧市街の価格、秋のアップデート"
+        ],
+        "issue": {
+          "title": "今週のビーチ近くの3つの新物件",
+          "langs": [
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tres casas nuevas cerca de la playa",
+              "summary": "Una casa de dos habitaciones con jardín, un apartamento con vista al mar y una casa para reformar a diez minutos del centro."
+            },
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Three new homes near the beach",
+              "summary": "A two bedroom house with a garden, a flat with a sea view and a house to renovate ten minutes from the center."
+            },
+            {
+              "code": "fr",
+              "name": "Français",
+              "subject": "Trois nouvelles maisons près de la plage",
+              "summary": "Une maison de deux chambres avec jardin, un appartement avec vue sur la mer et une maison à rénover à dix minutes du centre."
+            }
+          ]
+        },
+        "clicksByDay": [
+          12,
+          9,
+          15,
+          52,
+          38,
+          21,
+          16
+        ],
+        "topLinks": [
+          {
+            "title": "海の見えるフラット",
+            "clicks": 71
+          },
+          {
+            "title": "庭付き2ベッドルームハウス",
+            "clicks": 54
+          },
+          {
+            "title": "外国人買い手のための決済費用",
+            "clicks": 38
+          }
+        ],
+        "people": [
+          {
+            "email": "familia.ortiz@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "j.dupont@example.fr",
+            "lang": "FR",
+            "via": "form"
+          },
+          {
+            "email": "tom.and.ann@example.org",
+            "lang": "EN",
+            "via": "manual"
+          },
+          {
+            "email": "rmora@example.net",
+            "lang": "ES",
+            "via": "import"
+          }
+        ],
+        "activity": [
+          "3言語で586人の読者に号を送信",
+          "海の見えるフラットへの71クリック",
+          "フランスの読者がサインアップフォームから参加"
+        ],
+        "importCount": 203
+      },
+      {
+        "business": "Mora and Partners",
+        "kind": "会計事務所",
+        "site": "morapartners.co",
+        "schedule": "隔週火曜日 7:30",
+        "subscribers": 428,
+        "newThisWeek": 6,
+        "clicks7": 97,
+        "automationsOn": 1,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 52
+          },
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 38
+          },
+          {
+            "code": "it",
+            "name": "Italian",
+            "share": 10
+          }
+        ],
+        "reader": "税金と給与の変更を知りたいが専門用語は避けたい小企業のオーナー向け。",
+        "tones": [
+          "落ち着いた",
+          "正確な",
+          "平易な"
+        ],
+        "articles": [
+          "四半期ごとの税金の締切日が15日に変更",
+          "初めて従業員を雇う際に守るべきこと",
+          "領収書：紙か写真か？"
+        ],
+        "issue": {
+          "title": "四半期ごとの税金の締切日が15日に変更",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Your quarterly deadline moves to the 15th",
+              "summary": "The filing date for the next quarter moves five days later. Here is what to send us and when, so nothing is late."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tu plazo trimestral pasa al día 15",
+              "summary": "La fecha de presentación del próximo trimestre se mueve cinco días. Esto es lo que debes enviarnos y cuándo, para que nada llegue tarde."
+            },
+            {
+              "code": "it",
+              "name": "Italiano",
+              "subject": "La scadenza trimestrale passa al 15",
+              "summary": "La data di presentazione del prossimo trimestre slitta di cinque giorni. Ecco cosa inviarci e quando, perché nulla arrivi in ritardo."
+            }
+          ]
+        },
+        "clicksByDay": [
+          33,
+          24,
+          14,
+          8,
+          7,
+          4,
+          7
+        ],
+        "topLinks": [
+          {
+            "title": "15日のチェックリスト",
+            "clicks": 46
+          },
+          {
+            "title": "初めての従業員雇用",
+            "clicks": 29
+          },
+          {
+            "title": "レビュー通話を予約",
+            "clicks": 22
+          }
+        ],
+        "people": [
+          {
+            "email": "bakery.owner@example.com",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "c.rossi@example.it",
+            "lang": "IT",
+            "via": "form"
+          },
+          {
+            "email": "taller.luna@example.net",
+            "lang": "ES",
+            "via": "import"
+          },
+          {
+            "email": "finance@example.org",
+            "lang": "EN",
+            "via": "manual"
+          }
+        ],
+        "activity": [
+          "3言語で428人の読者に号を送信",
+          "15日のチェックリストが46クリック",
+          "今週6人の新規読者"
+        ],
+        "importCount": 97
+      },
+      {
+        "business": "Run Better Coaching",
+        "kind": "ランニングコーチ",
+        "site": "runbetter.coach",
+        "schedule": "毎週日曜日 18:00",
+        "subscribers": 907,
+        "newThisWeek": 31,
+        "clicks7": 248,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 49
+          },
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 33
+          },
+          {
+            "code": "de",
+            "name": "German",
+            "share": 18
+          }
+        ],
+        "reader": "週3回仕事前に走り、初めてのハーフマラソンに挑戦する大人向け。",
+        "tones": [
+          "励みになる",
+          "直接的",
+          "簡潔"
+        ],
+        "articles": [
+          "今週のテーマ：ロングランは思っているよりゆっくりと",
+          "500キロ走った後のシューズ",
+          "20分の筋力トレーニングルーティン"
+        ],
+        "issue": {
+          "title": "今週のテーマ：ロングランは思っているよりゆっくりと",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Your long run should feel too easy",
+              "summary": "Keep it slow enough to talk. This week's plan adds ten minutes and one short hill session."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tu tirada larga debería sentirse demasiado fácil",
+              "summary": "Mantén un ritmo que te deje hablar. El plan de esta semana suma diez minutos y una sesión corta de cuestas."
+            },
+            {
+              "code": "de",
+              "name": "Deutsch",
+              "subject": "Dein langer Lauf sollte sich zu leicht anfühlen",
+              "summary": "Lauf so langsam, dass du noch reden kannst. Der Plan dieser Woche bringt zehn Minuten mehr und eine kurze Bergeinheit."
+            }
+          ]
+        },
+        "clicksByDay": [
+          18,
+          22,
+          26,
+          31,
+          35,
+          49,
+          67
+        ],
+        "topLinks": [
+          {
+            "title": "今週のトレーニング計画",
+            "clicks": 121
+          },
+          {
+            "title": "20分の筋力トレーニングルーティン",
+            "clicks": 78
+          },
+          {
+            "title": "500キロ走った後のシューズ",
+            "clicks": 49
+          }
+        ],
+        "people": [
+          {
+            "email": "ana.runs@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "felix.k@example.de",
+            "lang": "DE",
+            "via": "form"
+          },
+          {
+            "email": "sam@example.org",
+            "lang": "EN",
+            "via": "form"
+          },
+          {
+            "email": "club.secretary@example.net",
+            "lang": "EN",
+            "via": "import"
+          }
+        ],
+        "activity": [
+          "3言語で907人の読者に号を送信",
+          "今週のトレーニング計画が121クリック",
+          "今週31人の新規読者（ほとんどが申し込みフォームから）"
+        ],
+        "importCount": 260
+      }
+    ]
+  },
+  "errorPage": {
+    "notFoundEyebrow": "エラー 404",
+    "notFoundTitle": "このページは見つかりませんでした",
+    "notFoundBody": "リンクが古いか、タイプミスの可能性があります。以下のページから続けることをお勧めします。",
+    "serverEyebrow": "エラー {status}",
+    "serverTitle": "サーバー側で問題が発生しました",
+    "serverBody": "このページを読み込めませんでした。1分後に再度お試しください。引き続き発生する場合は、info@aiban.newsまでご連絡ください。",
+    "retry": "再試行",
+    "home": "ホームページへ移動",
+    "popularTitle": "人気ページ",
+    "links": {
+      "howItWorks": "AIBANの仕組み",
+      "pricing": "料金",
+      "help": "ヘルプセンター",
+      "login": "ダッシュボードにログイン"
+    },
+    "report": "当サイトのリンクからこのページにアクセスした場合は、info@aiban.newsまでご連絡いただけると修正いたします。"
   },
   "header": {
     "goToWorkspace": "ダッシュボードを開く",
@@ -982,1429 +1749,5 @@ export default {
     "monthly": "月払い",
     "yearly": "年払い",
     "loadingPlan": "プラン情報を読み込み中..."
-  },
-  "languages": [
-    {
-      "code": "ab",
-      "name": "アブハズ語"
-    },
-    {
-      "code": "aa",
-      "name": "アファル語"
-    },
-    {
-      "code": "af",
-      "name": "アフリカーンス語"
-    },
-    {
-      "code": "ak",
-      "name": "アカン語"
-    },
-    {
-      "code": "sq",
-      "name": "アルバニア語"
-    },
-    {
-      "code": "am",
-      "name": "アムハラ語"
-    },
-    {
-      "code": "ar",
-      "name": "アラビア語"
-    },
-    {
-      "code": "an",
-      "name": "アラゴン語"
-    },
-    {
-      "code": "hy",
-      "name": "アルメニア語"
-    },
-    {
-      "code": "as",
-      "name": "アッサム語"
-    },
-    {
-      "code": "av",
-      "name": "アヴァル語"
-    },
-    {
-      "code": "ae",
-      "name": "アヴェスタ語"
-    },
-    {
-      "code": "ay",
-      "name": "アイマラ語"
-    },
-    {
-      "code": "az",
-      "name": "アゼルバイジャン語"
-    },
-    {
-      "code": "bm",
-      "name": "バンバラ語"
-    },
-    {
-      "code": "ba",
-      "name": "バシキール語"
-    },
-    {
-      "code": "eu",
-      "name": "バスク語"
-    },
-    {
-      "code": "be",
-      "name": "ベラルーシ語"
-    },
-    {
-      "code": "bn",
-      "name": "ベンガル語"
-    },
-    {
-      "code": "bi",
-      "name": "ビスラマ語"
-    },
-    {
-      "code": "bs",
-      "name": "ボスニア語"
-    },
-    {
-      "code": "br",
-      "name": "ブルトン語"
-    },
-    {
-      "code": "bg",
-      "name": "ブルガリア語"
-    },
-    {
-      "code": "my",
-      "name": "ビルマ語"
-    },
-    {
-      "code": "ca",
-      "name": "カタルーニャ語"
-    },
-    {
-      "code": "ch",
-      "name": "チャモロ語"
-    },
-    {
-      "code": "ce",
-      "name": "チェチェン語"
-    },
-    {
-      "code": "ny",
-      "name": "チェワ語"
-    },
-    {
-      "code": "zh",
-      "name": "中国語"
-    },
-    {
-      "code": "cu",
-      "name": "教会スラブ語"
-    },
-    {
-      "code": "cv",
-      "name": "チュヴァシ語"
-    },
-    {
-      "code": "kw",
-      "name": "コーンウォール語"
-    },
-    {
-      "code": "co",
-      "name": "コルシカ語"
-    },
-    {
-      "code": "cr",
-      "name": "クリー語"
-    },
-    {
-      "code": "hr",
-      "name": "クロアチア語"
-    },
-    {
-      "code": "cs",
-      "name": "チェコ語"
-    },
-    {
-      "code": "da",
-      "name": "デンマーク語"
-    },
-    {
-      "code": "dv",
-      "name": "ディベヒ語"
-    },
-    {
-      "code": "nl",
-      "name": "オランダ語"
-    },
-    {
-      "code": "dz",
-      "name": "ゾンカ語"
-    },
-    {
-      "code": "en",
-      "name": "英語"
-    },
-    {
-      "code": "eo",
-      "name": "エスペラント語"
-    },
-    {
-      "code": "et",
-      "name": "エストニア語"
-    },
-    {
-      "code": "ee",
-      "name": "エウェ語"
-    },
-    {
-      "code": "fo",
-      "name": "フェロー語"
-    },
-    {
-      "code": "fj",
-      "name": "フィジー語"
-    },
-    {
-      "code": "fi",
-      "name": "フィンランド語"
-    },
-    {
-      "code": "fr",
-      "name": "フランス語"
-    },
-    {
-      "code": "fy",
-      "name": "西フリジア語"
-    },
-    {
-      "code": "ff",
-      "name": "フラニ語"
-    },
-    {
-      "code": "gd",
-      "name": "スコットランド・ゲール語"
-    },
-    {
-      "code": "gl",
-      "name": "ガリシア語"
-    },
-    {
-      "code": "lg",
-      "name": "ガンダ語"
-    },
-    {
-      "code": "ka",
-      "name": "グルジア語"
-    },
-    {
-      "code": "de",
-      "name": "ドイツ語"
-    },
-    {
-      "code": "el",
-      "name": "ギリシャ語"
-    },
-    {
-      "code": "kl",
-      "name": "グリーンランド語"
-    },
-    {
-      "code": "gn",
-      "name": "グアラニー語"
-    },
-    {
-      "code": "gu",
-      "name": "グジャラート語"
-    },
-    {
-      "code": "ht",
-      "name": "ハイチ語"
-    },
-    {
-      "code": "ha",
-      "name": "ハウサ語"
-    },
-    {
-      "code": "he",
-      "name": "ヘブライ語"
-    },
-    {
-      "code": "hz",
-      "name": "ヘレロ語"
-    },
-    {
-      "code": "hi",
-      "name": "ヒンディー語"
-    },
-    {
-      "code": "ho",
-      "name": "ヒリモツ語"
-    },
-    {
-      "code": "hu",
-      "name": "ハンガリー語"
-    },
-    {
-      "code": "is",
-      "name": "アイスランド語"
-    },
-    {
-      "code": "io",
-      "name": "イド語"
-    },
-    {
-      "code": "ig",
-      "name": "イボ語"
-    },
-    {
-      "code": "id",
-      "name": "インドネシア語"
-    },
-    {
-      "code": "ia",
-      "name": "インターリングア"
-    },
-    {
-      "code": "ie",
-      "name": "インターリング"
-    },
-    {
-      "code": "iu",
-      "name": "イヌクティトゥット語"
-    },
-    {
-      "code": "ik",
-      "name": "イヌピアック語"
-    },
-    {
-      "code": "ga",
-      "name": "アイルランド語"
-    },
-    {
-      "code": "it",
-      "name": "イタリア語"
-    },
-    {
-      "code": "ja",
-      "name": "日本語"
-    },
-    {
-      "code": "jv",
-      "name": "ジャワ語"
-    },
-    {
-      "code": "kn",
-      "name": "カンナダ語"
-    },
-    {
-      "code": "kr",
-      "name": "カヌリ語"
-    },
-    {
-      "code": "ks",
-      "name": "カシミール語"
-    },
-    {
-      "code": "kk",
-      "name": "カザフ語"
-    },
-    {
-      "code": "km",
-      "name": "クメール語"
-    },
-    {
-      "code": "ki",
-      "name": "キクユ語"
-    },
-    {
-      "code": "rw",
-      "name": "ルワンダ語"
-    },
-    {
-      "code": "ky",
-      "name": "キルギス語"
-    },
-    {
-      "code": "kv",
-      "name": "コミ語"
-    },
-    {
-      "code": "kg",
-      "name": "コンゴ語"
-    },
-    {
-      "code": "ko",
-      "name": "韓国語"
-    },
-    {
-      "code": "kj",
-      "name": "クアニャマ語"
-    },
-    {
-      "code": "ku",
-      "name": "クルド語"
-    },
-    {
-      "code": "lo",
-      "name": "ラオ語"
-    },
-    {
-      "code": "la",
-      "name": "ラテン語"
-    },
-    {
-      "code": "lv",
-      "name": "ラトビア語"
-    },
-    {
-      "code": "li",
-      "name": "リンブルフ語"
-    },
-    {
-      "code": "ln",
-      "name": "リンガラ語"
-    },
-    {
-      "code": "lt",
-      "name": "リトアニア語"
-    },
-    {
-      "code": "lu",
-      "name": "ルバ・カタンガ語"
-    },
-    {
-      "code": "lb",
-      "name": "ルクセンブルク語"
-    },
-    {
-      "code": "mk",
-      "name": "マケドニア語"
-    },
-    {
-      "code": "mg",
-      "name": "マダガスカル語"
-    },
-    {
-      "code": "ms",
-      "name": "マレー語"
-    },
-    {
-      "code": "ml",
-      "name": "マラヤーラム語"
-    },
-    {
-      "code": "mt",
-      "name": "マルタ語"
-    },
-    {
-      "code": "gv",
-      "name": "マン島語"
-    },
-    {
-      "code": "mi",
-      "name": "マオリ語"
-    },
-    {
-      "code": "mr",
-      "name": "マラーティー語"
-    },
-    {
-      "code": "mh",
-      "name": "マーシャル語"
-    },
-    {
-      "code": "mn",
-      "name": "モンゴル語"
-    },
-    {
-      "code": "na",
-      "name": "ナウル語"
-    },
-    {
-      "code": "nv",
-      "name": "ナバホ語"
-    },
-    {
-      "code": "nd",
-      "name": "北ンデベレ語"
-    },
-    {
-      "code": "nr",
-      "name": "南ンデベレ語"
-    },
-    {
-      "code": "ng",
-      "name": "ンドンガ語"
-    },
-    {
-      "code": "ne",
-      "name": "ネパール語"
-    },
-    {
-      "code": "no",
-      "name": "ノルウェー語"
-    },
-    {
-      "code": "nb",
-      "name": "ノルウェー語（ブークモール）"
-    },
-    {
-      "code": "nn",
-      "name": "ノルウェー語（ニーノシュク）"
-    },
-    {
-      "code": "oc",
-      "name": "オック語"
-    },
-    {
-      "code": "oj",
-      "name": "オジブウェー語"
-    },
-    {
-      "code": "or",
-      "name": "オリヤー語"
-    },
-    {
-      "code": "om",
-      "name": "オロモ語"
-    },
-    {
-      "code": "os",
-      "name": "オセト語"
-    },
-    {
-      "code": "pi",
-      "name": "パーリ語"
-    },
-    {
-      "code": "ps",
-      "name": "パシュトー語"
-    },
-    {
-      "code": "fa",
-      "name": "ペルシャ語"
-    },
-    {
-      "code": "pl",
-      "name": "ポーランド語"
-    },
-    {
-      "code": "pt",
-      "name": "ポルトガル語"
-    },
-    {
-      "code": "pa",
-      "name": "パンジャブ語"
-    },
-    {
-      "code": "qu",
-      "name": "ケチュア語"
-    },
-    {
-      "code": "ro",
-      "name": "ルーマニア語"
-    },
-    {
-      "code": "rm",
-      "name": "ロマンシュ語"
-    },
-    {
-      "code": "rn",
-      "name": "ルンディ語"
-    },
-    {
-      "code": "ru",
-      "name": "ロシア語"
-    },
-    {
-      "code": "se",
-      "name": "北サーミ語"
-    },
-    {
-      "code": "sm",
-      "name": "サモア語"
-    },
-    {
-      "code": "sg",
-      "name": "サンゴ語"
-    },
-    {
-      "code": "sa",
-      "name": "サンスクリット語"
-    },
-    {
-      "code": "sc",
-      "name": "サルデーニャ語"
-    },
-    {
-      "code": "sr",
-      "name": "セルビア語"
-    },
-    {
-      "code": "sn",
-      "name": "ショナ語"
-    },
-    {
-      "code": "ii",
-      "name": "四川彝語"
-    },
-    {
-      "code": "sd",
-      "name": "シンド語"
-    },
-    {
-      "code": "si",
-      "name": "シンハラ語"
-    },
-    {
-      "code": "sk",
-      "name": "スロバキア語"
-    },
-    {
-      "code": "sl",
-      "name": "スロベニア語"
-    },
-    {
-      "code": "so",
-      "name": "ソマリ語"
-    },
-    {
-      "code": "st",
-      "name": "南ソト語"
-    },
-    {
-      "code": "es",
-      "name": "スペイン語"
-    },
-    {
-      "code": "su",
-      "name": "スンダ語"
-    },
-    {
-      "code": "sw",
-      "name": "スワヒリ語"
-    },
-    {
-      "code": "ss",
-      "name": "スワジ語"
-    },
-    {
-      "code": "sv",
-      "name": "スウェーデン語"
-    },
-    {
-      "code": "tl",
-      "name": "タガログ語"
-    },
-    {
-      "code": "ty",
-      "name": "タヒチ語"
-    },
-    {
-      "code": "tg",
-      "name": "タジク語"
-    },
-    {
-      "code": "ta",
-      "name": "タミル語"
-    },
-    {
-      "code": "tt",
-      "name": "タタール語"
-    },
-    {
-      "code": "te",
-      "name": "テルグ語"
-    },
-    {
-      "code": "th",
-      "name": "タイ語"
-    },
-    {
-      "code": "bo",
-      "name": "チベット語"
-    },
-    {
-      "code": "ti",
-      "name": "ティグリニャ語"
-    },
-    {
-      "code": "to",
-      "name": "トンガ語"
-    },
-    {
-      "code": "ts",
-      "name": "ツォンガ語"
-    },
-    {
-      "code": "tn",
-      "name": "ツワナ語"
-    },
-    {
-      "code": "tr",
-      "name": "トルコ語"
-    },
-    {
-      "code": "tk",
-      "name": "トルクメン語"
-    },
-    {
-      "code": "tw",
-      "name": "トウィ語"
-    },
-    {
-      "code": "ug",
-      "name": "ウイグル語"
-    },
-    {
-      "code": "uk",
-      "name": "ウクライナ語"
-    },
-    {
-      "code": "ur",
-      "name": "ウルドゥー語"
-    },
-    {
-      "code": "uz",
-      "name": "ウズベク語"
-    },
-    {
-      "code": "ve",
-      "name": "ベンダ語"
-    },
-    {
-      "code": "vi",
-      "name": "ベトナム語"
-    },
-    {
-      "code": "vo",
-      "name": "ヴォラピュク"
-    },
-    {
-      "code": "wa",
-      "name": "ワロン語"
-    },
-    {
-      "code": "cy",
-      "name": "ウェールズ語"
-    },
-    {
-      "code": "wo",
-      "name": "ウォロフ語"
-    },
-    {
-      "code": "xh",
-      "name": "コサ語"
-    },
-    {
-      "code": "yi",
-      "name": "イディッシュ語"
-    },
-    {
-      "code": "yo",
-      "name": "ヨルバ語"
-    },
-    {
-      "code": "za",
-      "name": "チワン語"
-    },
-    {
-      "code": "zu",
-      "name": "ズールー語"
-    }
-  ],
-  "countries": [
-    {
-      "code": "AF",
-      "name": "アフガニスタン"
-    },
-    {
-      "code": "AL",
-      "name": "アルバニア"
-    },
-    {
-      "code": "DZ",
-      "name": "アルジェリア"
-    },
-    {
-      "code": "AS",
-      "name": "米領サモア"
-    },
-    {
-      "code": "AD",
-      "name": "アンドラ"
-    },
-    {
-      "code": "AO",
-      "name": "アンゴラ"
-    },
-    {
-      "code": "AI",
-      "name": "アンギラ"
-    },
-    {
-      "code": "AQ",
-      "name": "南極"
-    },
-    {
-      "code": "AG",
-      "name": "アンティグア・バーブーダ"
-    },
-    {
-      "code": "AR",
-      "name": "アルゼンチン"
-    },
-    {
-      "code": "AM",
-      "name": "アルメニア"
-    },
-    {
-      "code": "AW",
-      "name": "アルバ"
-    },
-    {
-      "code": "AU",
-      "name": "オーストラリア"
-    },
-    {
-      "code": "AT",
-      "name": "オーストリア"
-    },
-    {
-      "code": "AZ",
-      "name": "アゼルバイジャン"
-    },
-    {
-      "code": "BS",
-      "name": "バハマ"
-    },
-    {
-      "code": "BH",
-      "name": "バーレーン"
-    },
-    {
-      "code": "BD",
-      "name": "バングラデシュ"
-    },
-    {
-      "code": "BB",
-      "name": "バルバドス"
-    },
-    {
-      "code": "BY",
-      "name": "ベラルーシ"
-    },
-    {
-      "code": "BE",
-      "name": "ベルギー"
-    },
-    {
-      "code": "BZ",
-      "name": "ベリーズ"
-    },
-    {
-      "code": "BJ",
-      "name": "ベナン"
-    },
-    {
-      "code": "BM",
-      "name": "バミューダ"
-    },
-    {
-      "code": "BT",
-      "name": "ブータン"
-    },
-    {
-      "code": "BO",
-      "name": "ボリビア"
-    },
-    {
-      "code": "BA",
-      "name": "ボスニア・ヘルツェゴビナ"
-    },
-    {
-      "code": "BW",
-      "name": "ボツワナ"
-    },
-    {
-      "code": "BR",
-      "name": "ブラジル"
-    },
-    {
-      "code": "IO",
-      "name": "英領インド洋地域"
-    },
-    {
-      "code": "VG",
-      "name": "英領ヴァージン諸島"
-    },
-    {
-      "code": "BN",
-      "name": "ブルネイ"
-    },
-    {
-      "code": "BG",
-      "name": "ブルガリア"
-    },
-    {
-      "code": "BF",
-      "name": "ブルキナファソ"
-    },
-    {
-      "code": "BI",
-      "name": "ブルンジ"
-    },
-    {
-      "code": "KH",
-      "name": "カンボジア"
-    },
-    {
-      "code": "CM",
-      "name": "カメルーン"
-    },
-    {
-      "code": "CA",
-      "name": "カナダ"
-    },
-    {
-      "code": "CV",
-      "name": "カーボベルデ"
-    },
-    {
-      "code": "KY",
-      "name": "ケイマン諸島"
-    },
-    {
-      "code": "CF",
-      "name": "中央アフリカ共和国"
-    },
-    {
-      "code": "TD",
-      "name": "チャド"
-    },
-    {
-      "code": "CL",
-      "name": "チリ"
-    },
-    {
-      "code": "CN",
-      "name": "中国"
-    },
-    {
-      "code": "CX",
-      "name": "クリスマス島"
-    },
-    {
-      "code": "CC",
-      "name": "ココス（キーリング）諸島"
-    },
-    {
-      "code": "CO",
-      "name": "コロンビア"
-    },
-    {
-      "code": "KM",
-      "name": "コモロ"
-    },
-    {
-      "code": "CG",
-      "name": "コンゴ共和国（ブラザビル）"
-    },
-    {
-      "code": "CD",
-      "name": "コンゴ民主共和国（キンシャサ）"
-    },
-    {
-      "code": "CK",
-      "name": "クック諸島"
-    },
-    {
-      "code": "CR",
-      "name": "コスタリカ"
-    },
-    {
-      "code": "CI",
-      "name": "コートジボワール"
-    },
-    {
-      "code": "HR",
-      "name": "クロアチア"
-    },
-    {
-      "code": "CU",
-      "name": "キューバ"
-    },
-    {
-      "code": "CY",
-      "name": "キプロス"
-    },
-    {
-      "code": "CZ",
-      "name": "チェコ"
-    },
-    {
-      "code": "DK",
-      "name": "デンマーク"
-    },
-    {
-      "code": "DJ",
-      "name": "ジブチ"
-    },
-    {
-      "code": "DM",
-      "name": "ドミニカ国"
-    },
-    {
-      "code": "DO",
-      "name": "ドミニカ共和国"
-    },
-    {
-      "code": "EC",
-      "name": "エクアドル"
-    },
-    {
-      "code": "EG",
-      "name": "エジプト"
-    },
-    {
-      "code": "SV",
-      "name": "エルサルバドル"
-    },
-    {
-      "code": "GQ",
-      "name": "赤道ギニア"
-    },
-    {
-      "code": "ER",
-      "name": "エリトリア"
-    },
-    {
-      "code": "EE",
-      "name": "エストニア"
-    },
-    {
-      "code": "SZ",
-      "name": "エスワティニ"
-    },
-    {
-      "code": "ET",
-      "name": "エチオピア"
-    },
-    {
-      "code": "FJ",
-      "name": "フィジー"
-    },
-    {
-      "code": "FI",
-      "name": "フィンランド"
-    },
-    {
-      "code": "FR",
-      "name": "フランス"
-    },
-    {
-      "code": "GA",
-      "name": "ガボン"
-    },
-    {
-      "code": "GM",
-      "name": "ガンビア"
-    },
-    {
-      "code": "GE",
-      "name": "ジョージア"
-    },
-    {
-      "code": "DE",
-      "name": "ドイツ"
-    },
-    {
-      "code": "GH",
-      "name": "ガーナ"
-    },
-    {
-      "code": "GR",
-      "name": "ギリシャ"
-    },
-    {
-      "code": "GT",
-      "name": "グアテマラ"
-    },
-    {
-      "code": "GN",
-      "name": "ギニア"
-    },
-    {
-      "code": "GY",
-      "name": "ガイアナ"
-    },
-    {
-      "code": "HT",
-      "name": "ハイチ"
-    },
-    {
-      "code": "HN",
-      "name": "ホンジュラス"
-    },
-    {
-      "code": "HK",
-      "name": "香港"
-    },
-    {
-      "code": "HU",
-      "name": "ハンガリー"
-    },
-    {
-      "code": "IS",
-      "name": "アイスランド"
-    },
-    {
-      "code": "IN",
-      "name": "インド"
-    },
-    {
-      "code": "ID",
-      "name": "インドネシア"
-    },
-    {
-      "code": "IR",
-      "name": "イラン"
-    },
-    {
-      "code": "IQ",
-      "name": "イラク"
-    },
-    {
-      "code": "IE",
-      "name": "アイルランド"
-    },
-    {
-      "code": "IL",
-      "name": "イスラエル"
-    },
-    {
-      "code": "IT",
-      "name": "イタリア"
-    },
-    {
-      "code": "JM",
-      "name": "ジャマイカ"
-    },
-    {
-      "code": "JP",
-      "name": "日本"
-    },
-    {
-      "code": "JO",
-      "name": "ヨルダン"
-    },
-    {
-      "code": "KZ",
-      "name": "カザフスタン"
-    },
-    {
-      "code": "KE",
-      "name": "ケニア"
-    },
-    {
-      "code": "KR",
-      "name": "韓国"
-    },
-    {
-      "code": "KW",
-      "name": "クウェート"
-    },
-    {
-      "code": "KG",
-      "name": "キルギス"
-    },
-    {
-      "code": "LA",
-      "name": "ラオス"
-    },
-    {
-      "code": "LV",
-      "name": "ラトビア"
-    },
-    {
-      "code": "LB",
-      "name": "レバノン"
-    },
-    {
-      "code": "LS",
-      "name": "レソト"
-    },
-    {
-      "code": "LR",
-      "name": "リベリア"
-    },
-    {
-      "code": "LY",
-      "name": "リビア"
-    },
-    {
-      "code": "LI",
-      "name": "リヒテンシュタイン"
-    },
-    {
-      "code": "LT",
-      "name": "リトアニア"
-    },
-    {
-      "code": "LU",
-      "name": "ルクセンブルク"
-    },
-    {
-      "code": "MG",
-      "name": "マダガスカル"
-    },
-    {
-      "code": "MW",
-      "name": "マラウイ"
-    },
-    {
-      "code": "MY",
-      "name": "マレーシア"
-    },
-    {
-      "code": "MV",
-      "name": "モルディブ"
-    },
-    {
-      "code": "ML",
-      "name": "マリ"
-    },
-    {
-      "code": "MT",
-      "name": "マルタ"
-    },
-    {
-      "code": "MX",
-      "name": "メキシコ"
-    },
-    {
-      "code": "MD",
-      "name": "モルドバ"
-    },
-    {
-      "code": "MC",
-      "name": "モナコ"
-    },
-    {
-      "code": "MN",
-      "name": "モンゴル"
-    },
-    {
-      "code": "ME",
-      "name": "モンテネグロ"
-    },
-    {
-      "code": "MA",
-      "name": "モロッコ"
-    },
-    {
-      "code": "MZ",
-      "name": "モザンビーク"
-    },
-    {
-      "code": "MM",
-      "name": "ミャンマー"
-    },
-    {
-      "code": "NA",
-      "name": "ナミビア"
-    },
-    {
-      "code": "NP",
-      "name": "ネパール"
-    },
-    {
-      "code": "NL",
-      "name": "オランダ"
-    },
-    {
-      "code": "NZ",
-      "name": "ニュージーランド"
-    },
-    {
-      "code": "NI",
-      "name": "ニカラグア"
-    },
-    {
-      "code": "NE",
-      "name": "ニジェール"
-    },
-    {
-      "code": "NG",
-      "name": "ナイジェリア"
-    },
-    {
-      "code": "MK",
-      "name": "北マケドニア"
-    },
-    {
-      "code": "NO",
-      "name": "ノルウェー"
-    },
-    {
-      "code": "OM",
-      "name": "オマーン"
-    },
-    {
-      "code": "PK",
-      "name": "パキスタン"
-    },
-    {
-      "code": "PA",
-      "name": "パナマ"
-    },
-    {
-      "code": "PG",
-      "name": "パプアニューギニア"
-    },
-    {
-      "code": "PY",
-      "name": "パラグアイ"
-    },
-    {
-      "code": "PE",
-      "name": "ペルー"
-    },
-    {
-      "code": "PH",
-      "name": "フィリピン"
-    },
-    {
-      "code": "PL",
-      "name": "ポーランド"
-    },
-    {
-      "code": "PT",
-      "name": "ポルトガル"
-    },
-    {
-      "code": "QA",
-      "name": "カタール"
-    },
-    {
-      "code": "RO",
-      "name": "ルーマニア"
-    },
-    {
-      "code": "RU",
-      "name": "ロシア"
-    },
-    {
-      "code": "RW",
-      "name": "ルワンダ"
-    },
-    {
-      "code": "SA",
-      "name": "サウジアラビア"
-    },
-    {
-      "code": "SN",
-      "name": "セネガル"
-    },
-    {
-      "code": "RS",
-      "name": "セルビア"
-    },
-    {
-      "code": "SG",
-      "name": "シンガポール"
-    },
-    {
-      "code": "SK",
-      "name": "スロバキア"
-    },
-    {
-      "code": "SI",
-      "name": "スロベニア"
-    },
-    {
-      "code": "ZA",
-      "name": "南アフリカ"
-    },
-    {
-      "code": "ES",
-      "name": "スペイン"
-    },
-    {
-      "code": "LK",
-      "name": "スリランカ"
-    },
-    {
-      "code": "SE",
-      "name": "スウェーデン"
-    },
-    {
-      "code": "CH",
-      "name": "スイス"
-    },
-    {
-      "code": "TW",
-      "name": "台湾"
-    },
-    {
-      "code": "TH",
-      "name": "タイ"
-    },
-    {
-      "code": "TR",
-      "name": "トルコ"
-    },
-    {
-      "code": "UG",
-      "name": "ウガンダ"
-    },
-    {
-      "code": "UA",
-      "name": "ウクライナ"
-    },
-    {
-      "code": "AE",
-      "name": "アラブ首長国連邦"
-    },
-    {
-      "code": "GB",
-      "name": "イギリス"
-    },
-    {
-      "code": "US",
-      "name": "アメリカ合衆国"
-    },
-    {
-      "code": "UY",
-      "name": "ウルグアイ"
-    },
-    {
-      "code": "UZ",
-      "name": "ウズベキスタン"
-    },
-    {
-      "code": "VE",
-      "name": "ベネズエラ"
-    },
-    {
-      "code": "VN",
-      "name": "ベトナム"
-    },
-    {
-      "code": "YE",
-      "name": "イエメン"
-    },
-    {
-      "code": "ZM",
-      "name": "ザンビア"
-    },
-    {
-      "code": "ZW",
-      "name": "ジンバブエ"
-    }
-  ]
+  }
 };

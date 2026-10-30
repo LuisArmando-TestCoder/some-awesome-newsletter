@@ -1,5 +1,5 @@
-// am strings for locales-newflow. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale am
+// am (Amharic) strings for locales-newflow. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "onboarding": {
     "progress": "ደረጃ {current} ከ{total}",
@@ -116,6 +116,9 @@ export default {
       "dayLabel": "ቀን",
       "timeLabel": "ሰዓት",
       "timeHint": "በአካባቢዎ ሰዓት።",
+      "summaryDaily": "ዕለት ዕለት በ{time}፣ በእርስዎ ሰዓት ({zone})።",
+      "summaryWeekly": "የ{day} በየሳምንቱ በ{time}፣ በእርስዎ ሰዓት ({zone})።",
+      "summaryMonthly": "በየወሩ በ1 ቀን በ{time}፣ በእርስዎ ሰዓት ({zone})።",
       "recipeTitle": "አዳዲስ እትሞችን በራስ ሰር ላክ",
       "recipeBody": "ከላይ ባለው መርሐ ግብር ምርጡን አዲስ ጽሑፍዎን እንመርጣለን፣ በእርስዎ አጻጻፍ እንጽፋለን፣ ለእያንዳንዱ አንባቢ እንተረጉማለን እና በኢሜል እንልካለን።",
       "recipeOn": "በርቷል",

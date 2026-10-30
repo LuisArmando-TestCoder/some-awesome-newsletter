@@ -1,5 +1,5 @@
-// vi strings for locales. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale vi
+// vi (Vietnamese) strings for locales. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "auth": {
     "logo": "/icons/logo.png",
@@ -35,6 +35,82 @@ export default {
       "ogImageAlt": "Logo AIBAN"
     },
     "skipLink": "Chuyển đến nội dung chính",
+    "display": {
+      "title": "Trang web của bạn, được viết dưới dạng bản tin.",
+      "kicker": "AIBAN"
+    },
+    "statement": {
+      "lines": [
+        "Bạn đã xuất bản những nội dung tốt.",
+        "Khách hàng của bạn đọc nó bằng nhiều ngôn ngữ.",
+        "AIBAN biến mỗi bài viết mới thành một số báo",
+        "và gửi cho mỗi độc giả phiên bản bằng ngôn ngữ của họ."
+      ]
+    },
+    "history": {
+      "eyebrow": "Cách thức hoạt động",
+      "title": "Vòng đời của một số báo.",
+      "lead": "Theo dõi một số báo từ khi lịch trình của bạn khởi chạy cho đến khi nó bắt đầu lại. Bạn chỉ cần thiết lập một lần.",
+      "note": "Lịch trình ví dụ. Bạn chọn ngày, giờ và tần suất.",
+      "progressLabel": "Các bước của một số báo",
+      "items": [
+        {
+          "mark": "9:00",
+          "title": "Lịch trình của bạn khởi chạy",
+          "body": "Mỗi thứ Hai lúc 9:00 trong ví dụ này. Bạn chọn hàng ngày, hàng tuần hoặc hàng tháng."
+        },
+        {
+          "mark": "Đọc",
+          "title": "AIBAN đọc trang web của bạn",
+          "body": "Nó tìm bài viết mới nhất và chọn phần mà độc giả lý tưởng của bạn quan tâm nhất."
+        },
+        {
+          "mark": "Viết",
+          "title": "Nó viết số báo bằng giọng điệu của bạn",
+          "body": "Văn bản tuân theo cách trang web của bạn được viết, vì vậy nghe giống như bạn."
+        },
+        {
+          "mark": "Dịch",
+          "title": "Mỗi độc giả nhận được ngôn ngữ của họ",
+          "body": "Một số báo trở thành nhiều phiên bản theo nhu cầu của người đăng ký."
+        },
+        {
+          "mark": "Gửi",
+          "title": "Nó đến dưới tên của bạn",
+          "body": "Với tên và chữ ký email của bạn. Phản hồi được gửi đến hộp thư của bạn."
+        },
+        {
+          "mark": "Xuất bản",
+          "title": "Nó trở thành một bài viết trên blog của bạn",
+          "body": "Với liên kết riêng mà mọi người có thể tìm thấy trong tìm kiếm và chia sẻ."
+        },
+        {
+          "mark": "Báo cáo",
+          "title": "Bạn thấy điều gì đã xảy ra",
+          "body": "Bảng điều khiển của bạn liệt kê ai đã tham gia và liên kết nào người đọc đã nhấp."
+        },
+        {
+          "mark": "Lặp lại",
+          "title": "Thứ Hai tới, nó chạy lại",
+          "body": "Nó tiếp tục cho đến khi bạn tắt trong bảng điều khiển."
+        }
+      ]
+    },
+    "rail": {
+      "label": "Chương trang",
+      "chapters": [
+        "Bắt đầu",
+        "Tại sao",
+        "Ngôn ngữ",
+        "Cách thức hoạt động",
+        "Tên của bạn",
+        "Phát triển",
+        "Dành cho ai",
+        "Giá cả",
+        "Câu hỏi",
+        "Bắt đầu"
+      ]
+    },
     "hero": {
       "eyebrow": "Bản tin cho doanh nghiệp dịch vụ",
       "title": "Website của bạn thành bản tin hằng tuần, bằng ngôn ngữ của từng người đọc",
@@ -57,6 +133,26 @@ export default {
       "startCta": "Bắt đầu miễn phí với {site}",
       "startCtaGeneric": "Bắt đầu miễn phí",
       "liveRegion": "Bản xem trước mẫu đã cập nhật cho {site}."
+    },
+    "live": {
+      "badge": "Vừa viết xong",
+      "loadingTitle": "Đang viết một số mẫu từ {site}",
+      "steps": [
+        "Đang đọc {site}",
+        "Đang tìm bài viết mới nhất của bạn",
+        "Đang viết bằng {language}",
+        "Đang đặt vào mẫu email của bạn"
+      ],
+      "takes": "Việc này thường mất 20 đến 40 giây. Bạn có thể tiếp tục cuộn xuống.",
+      "readyNote": "AIBAN viết mẫu này từ bài viết mới nhất trên {site}. Không có gì được lưu hoặc gửi đi. Khi bạn bắt đầu, nó sẽ sử dụng giọng điệu và lịch trình của riêng bạn.",
+      "readyAnnounce": "Số mẫu từ {site} của bạn đã sẵn sàng.",
+      "languageLabel": "Ngôn ngữ người đọc",
+      "loadingLanguage": "Đang viết bằng {language}",
+      "errorTitle": "Chúng tôi không thể viết bản xem trước từ {site}",
+      "retry": "Thử lại",
+      "showSample": "Hiển thị bố cục mẫu",
+      "frameTitle": "Số mẫu được viết từ {site}",
+      "openFull": "Mở trong tab mới"
     },
     "chain": {
       "eyebrow": "Cách hoạt động",
@@ -494,8 +590,8 @@ export default {
     "yearlySave": "Tiết kiệm 35%",
     "intervalLabel": "Chu kỳ thanh toán",
     "billedYearly": "thanh toán hằng năm",
-    "perMonthShort": "/mo",
-    "perYearShort": "/yr",
+    "perMonthShort": "/tháng",
+    "perYearShort": "/năm",
     "freeCta": "Bắt đầu miễn phí",
     "processing": "Đang mở trang thanh toán...",
     "askMore": "Mọi tài khoản đều bắt đầu với gói Miễn phí. Nếu cần nhiều hơn, hãy viết cho chúng tôi tại {email} và chúng tôi sẽ đổi gói cho bạn.",
@@ -587,6 +683,7 @@ export default {
       "suggestions": "Gợi ý",
       "recent": "Tìm kiếm gần đây",
       "clearRecent": "Xóa tìm kiếm gần đây",
+      "clear": "Xóa tìm kiếm",
       "title": "Kết quả tìm kiếm",
       "resultsFor": "Kết quả cho \"{q}\"",
       "count": "Tìm thấy {count} bài viết",
@@ -691,6 +788,7 @@ export default {
   "legal": {
     "navLabel": "Văn bản pháp lý",
     "lastUpdated": "Cập nhật lần cuối: {date}",
+    "onThisPage": "Trên trang này",
     "privacy": {
       "title": "Chính sách quyền riêng tư",
       "metaTitle": "Chính sách quyền riêng tư | AIBAN",
@@ -919,6 +1017,8 @@ export default {
     "codeSent": "Chúng tôi đã gửi mã tới email của bạn.",
     "invalidCode": "Mã đó không đúng. Hãy xem email mới nhất chúng tôi gửi, hoặc gửi lại mã.",
     "regenerateCode": "Gửi lại mã",
+    "codeAccepted": "Mã được chấp nhận. Đang mở bảng điều khiển của bạn.",
+    "codeLabel": "Mã 6 chữ số",
     "back": "Quay lại",
     "byProceeding": "Bằng cách tiếp tục, bạn đồng ý với",
     "termsOfService": "Điều khoản dịch vụ",
@@ -935,7 +1035,7 @@ export default {
     "title": "Biến người đăng ký thành khách truy cập",
     "recommendation": "Giúp AI hiểu thương hiệu của bạn bằng cách kết nối trang web.",
     "question": "Bạn có website không? (không bắt buộc, bạn có thể thêm sau)",
-    "placeholder": "https://trang-web-cua-ban.com"
+    "placeholder": "https://your-site.com"
   },
   "newsSource": {
     "title": "Kết nối nguồn nội dung",
@@ -947,6 +1047,673 @@ export default {
       "title": "Chào mừng bạn đến với bản tin.",
       "invitedBy": "Bạn đã được mời bởi {configuratorId}."
     }
+  },
+  "showcase": {
+    "sampleBadge": "Dữ liệu mẫu",
+    "exampleLabel": "Doanh nghiệp ví dụ",
+    "caption": "{business} là một ví dụ về {kind}. Tên, bài viết và số liệu trong chế độ xem này là các trình giữ chỗ cho thấy bảng điều khiển của bạn trông như thế nào sau vài tuần.",
+    "pause": "Tạm dừng hoạt ảnh",
+    "play": "Phát hoạt ảnh",
+    "scenesLabel": "Các phần của bảng điều khiển",
+    "examplesLabel": "Doanh nghiệp ví dụ",
+    "appUrl": "app.aiban.news",
+    "nav": {
+      "home": "Trang chủ",
+      "automations": "Tự động hóa",
+      "sources": "Nguồn",
+      "subscribers": "Người đăng ký",
+      "reports": "Báo cáo",
+      "blog": "Blog"
+    },
+    "scenes": {
+      "home": "Tổng quan",
+      "issue": "Số báo",
+      "reports": "Lượt nhấp",
+      "subscribers": "Người đăng ký",
+      "automation": "Lịch trình",
+      "source": "Trang web của bạn",
+      "voice": "Giọng điệu của bạn",
+      "signup": "Biểu mẫu đăng ký",
+      "blog": "Blog",
+      "import": "Nhập"
+    },
+    "ui": {
+      "hello": "Xin chào, {business}",
+      "narrative": "{subscribers} độc giả bằng {languages} ngôn ngữ. Số báo tiếp theo sẽ được gửi {schedule}.",
+      "kpiSubscribers": "Người đăng ký",
+      "kpiLanguages": "Ngôn ngữ",
+      "kpiClicks": "Lượt nhấp, 7 ngày qua",
+      "kpiAutomations": "Tự động hóa bật",
+      "kpiNew": "{count} mới trong tuần này",
+      "nextIssue": "Số báo tiếp theo",
+      "ready": "Sẵn sàng",
+      "activity": "Hoạt động gần đây",
+      "from": "Từ",
+      "subject": "Chủ đề",
+      "readMore": "Đọc bài viết đầy đủ",
+      "readerLanguage": "Ngôn ngữ của người đọc",
+      "clicksTitle": "Lượt nhấp, 7 ngày qua",
+      "mostClicked": "Được nhấp nhiều nhất",
+      "clicks": "lượt nhấp",
+      "days": [
+        "Thứ Hai",
+        "Thứ Ba",
+        "Thứ Tư",
+        "Thứ Năm",
+        "Thứ Sáu",
+        "Thứ Bảy",
+        "Chủ Nhật"
+      ],
+      "subscribersTitle": "Người đăng ký",
+      "language": "Ngôn ngữ",
+      "joinedVia": "Tham gia qua",
+      "newSubscriber": "Người đăng ký mới",
+      "automationTitle": "Số báo hàng tuần",
+      "automationSentence": "{schedule}, viết một số báo từ bài viết mới nhất và gửi đến mọi độc giả bằng ngôn ngữ của họ.",
+      "on": "Bật",
+      "off": "Tắt",
+      "automationOn": "Tự động hóa đã bật",
+      "sourceLabel": "Nguồn nội dung của bạn",
+      "sourceButton": "Đọc trang web của tôi",
+      "reading": "Đang đọc trang web của bạn",
+      "found": "Đã tìm thấy {count} bài viết",
+      "voiceReader": "Độc giả lý tưởng của bạn",
+      "voiceTone": "Cách nó nên nghe",
+      "signupHeading": "Nhận ghi chú hàng tuần của chúng tôi",
+      "signupEmail": "Địa chỉ email",
+      "signupLanguage": "Ngôn ngữ",
+      "signupButton": "Đăng ký",
+      "signupDone": "Kiểm tra hộp thư đến để xác nhận.",
+      "blogTitle": "Bài viết từ {business}",
+      "importFile": "clients.csv",
+      "importing": "Đang nhập danh bạ",
+      "imported": "Đã thêm {count} danh bạ",
+      "sources": {
+        "form": "Biểu mẫu đăng ký",
+        "import": "Nhập",
+        "manual": "Thêm thủ công"
+      }
+    },
+    "examples": [
+      {
+        "business": "Northfield Studio",
+        "kind": "công ty thiết kế web",
+        "site": "northfield.studio",
+        "schedule": "mỗi thứ Hai lúc 9:00",
+        "subscribers": 312,
+        "newThisWeek": 9,
+        "clicks7": 84,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 58
+          },
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 31
+          },
+          {
+            "code": "pt",
+            "name": "Portuguese",
+            "share": 11
+          }
+        ],
+        "reader": "Chủ phòng khám, cửa hàng và studio muốn có một trang web thu hút khách hàng, không phải một bản portfolio.",
+        "tones": [
+          "Ấm áp",
+          "Đơn giản",
+          "Thực tế"
+        ],
+        "articles": [
+          "Cách chúng tôi xây dựng lại trang web phòng khám nha khoa trong sáu tuần",
+          "Năm điều cần sửa trước khi bạn thiết kế lại",
+          "Tại sao nút đặt lịch của bạn nên có màu cam"
+        ],
+        "issue": {
+          "title": "Cách chúng tôi xây dựng lại trang web phòng khám nha khoa trong sáu tuần",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "A clinic website rebuilt in six weeks",
+              "summary": "We moved booking to the top of every page and cut the forms from nine fields to three. Here is what changed for the clinic."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "El sitio de una clínica, renovado en seis semanas",
+              "summary": "Pusimos la reserva arriba en cada página y redujimos los formularios de nueve campos a tres. Esto es lo que cambió para la clínica."
+            },
+            {
+              "code": "pt",
+              "name": "Português",
+              "subject": "O site de uma clínica, refeito em seis semanas",
+              "summary": "Colocamos o agendamento no topo de cada página e reduzimos os formulários de nove campos para três. Veja o que mudou para a clínica."
+            }
+          ]
+        },
+        "clicksByDay": [
+          21,
+          17,
+          12,
+          9,
+          11,
+          6,
+          8
+        ],
+        "topLinks": [
+          {
+            "title": "Nghiên cứu trường hợp phòng khám",
+            "clicks": 38
+          },
+          {
+            "title": "Năm điều cần sửa trước khi bạn thiết kế lại",
+            "clicks": 27
+          },
+          {
+            "title": "Đặt lịch gọi",
+            "clicks": 19
+          }
+        ],
+        "people": [
+          {
+            "email": "lucia.r@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "mark@example.org",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "joana.s@example.net",
+            "lang": "PT",
+            "via": "form"
+          },
+          {
+            "email": "dr.chen@example.com",
+            "lang": "EN",
+            "via": "manual"
+          }
+        ],
+        "activity": [
+          "Đã gửi số báo tới 312 độc giả bằng 3 ngôn ngữ",
+          "38 lượt nhấp vào nghiên cứu trường hợp phòng khám",
+          "Lucia đã tham gia từ biểu mẫu đăng ký và đọc bằng tiếng Tây Ban Nha"
+        ],
+        "importCount": 148
+      },
+      {
+        "business": "Brightline Software",
+        "kind": "công ty phần mềm",
+        "site": "brightline.dev",
+        "schedule": "vào ngày 1 hàng tháng lúc 10:00",
+        "subscribers": 1240,
+        "newThisWeek": 23,
+        "clicks7": 211,
+        "automationsOn": 1,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 64
+          },
+          {
+            "code": "de",
+            "name": "German",
+            "share": 22
+          },
+          {
+            "code": "fr",
+            "name": "French",
+            "share": 14
+          }
+        ],
+        "reader": "Quản lý văn phòng và trưởng bộ phận IT tại các khách hàng sử dụng phần mềm đặt lịch của chúng tôi hàng ngày.",
+        "tones": [
+          "Rõ ràng",
+          "Ngắn gọn",
+          "Thân thiện"
+        ],
+        "articles": [
+          "Phiên bản 4.2: cuộc hẹn định kỳ",
+          "Báo cáo nhanh hơn cho nhóm lớn",
+          "Cách chuyển lịch của bạn từ bảng tính"
+        ],
+        "issue": {
+          "title": "Phiên bản 4.2: cuộc hẹn định kỳ",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "New this month: recurring appointments",
+              "summary": "You can now repeat any appointment weekly or monthly. Reports for teams over 50 people also load faster."
+            },
+            {
+              "code": "de",
+              "name": "Deutsch",
+              "subject": "Neu diesen Monat: wiederkehrende Termine",
+              "summary": "Sie können jetzt jeden Termin wöchentlich oder monatlich wiederholen. Berichte für Teams ab 50 Personen laden außerdem schneller."
+            },
+            {
+              "code": "fr",
+              "name": "Français",
+              "subject": "Nouveau ce mois-ci : les rendez-vous récurrents",
+              "summary": "Vous pouvez désormais répéter un rendez-vous chaque semaine ou chaque mois. Les rapports des équipes de plus de 50 personnes s'affichent aussi plus vite."
+            }
+          ]
+        },
+        "clicksByDay": [
+          64,
+          48,
+          33,
+          25,
+          19,
+          9,
+          13
+        ],
+        "topLinks": [
+          {
+            "title": "Hướng dẫn cuộc hẹn định kỳ",
+            "clicks": 96
+          },
+          {
+            "title": "Ghi chú phát hành 4.2",
+            "clicks": 71
+          },
+          {
+            "title": "Chuyển từ bảng tính",
+            "clicks": 44
+          }
+        ],
+        "people": [
+          {
+            "email": "it@example.de",
+            "lang": "DE",
+            "via": "import"
+          },
+          {
+            "email": "sophie.m@example.fr",
+            "lang": "FR",
+            "via": "form"
+          },
+          {
+            "email": "ops@example.com",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "k.weber@example.de",
+            "lang": "DE",
+            "via": "form"
+          }
+        ],
+        "activity": [
+          "Số bản tin đã gửi đến 1240 độc giả bằng 3 ngôn ngữ",
+          "96 lượt nhấp vào hướng dẫn cuộc hẹn định kỳ",
+          "23 liên hệ được nhập từ clients.csv"
+        ],
+        "importCount": 412
+      },
+      {
+        "business": "Casa Verde Realty",
+        "kind": "công ty bất động sản",
+        "site": "casaverde.homes",
+        "schedule": "mỗi thứ Năm lúc 8:00",
+        "subscribers": 586,
+        "newThisWeek": 14,
+        "clicks7": 163,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 47
+          },
+          {
+            "code": "en",
+            "name": "English",
+            "share": 41
+          },
+          {
+            "code": "fr",
+            "name": "French",
+            "share": 12
+          }
+        ],
+        "reader": "Gia đình và người về hưu từ nước ngoài tìm kiếm nhà gần bờ biển, và chủ sở hữu có thể bán.",
+        "tones": [
+          "Ấm áp",
+          "Địa phương",
+          "Bình tĩnh"
+        ],
+        "articles": [
+          "Ba ngôi nhà mới gần bãi biển tuần này",
+          "Chi phí đóng cửa trông như thế nào đối với người mua nước ngoài",
+          "Giá tại khu phố cổ, cập nhật mùa thu"
+        ],
+        "issue": {
+          "title": "Ba ngôi nhà mới gần bãi biển tuần này",
+          "langs": [
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tres casas nuevas cerca de la playa",
+              "summary": "Una casa de dos habitaciones con jardín, un apartamento con vista al mar y una casa para reformar a diez minutos del centro."
+            },
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Three new homes near the beach",
+              "summary": "A two bedroom house with a garden, a flat with a sea view and a house to renovate ten minutes from the center."
+            },
+            {
+              "code": "fr",
+              "name": "Français",
+              "subject": "Trois nouvelles maisons près de la plage",
+              "summary": "Une maison de deux chambres avec jardin, un appartement avec vue sur la mer et une maison à rénover à dix minutes du centre."
+            }
+          ]
+        },
+        "clicksByDay": [
+          12,
+          9,
+          15,
+          52,
+          38,
+          21,
+          16
+        ],
+        "topLinks": [
+          {
+            "title": "Căn hộ có view biển",
+            "clicks": 71
+          },
+          {
+            "title": "Nhà hai phòng ngủ có vườn",
+            "clicks": 54
+          },
+          {
+            "title": "Chi phí đóng cửa cho người mua nước ngoài",
+            "clicks": 38
+          }
+        ],
+        "people": [
+          {
+            "email": "familia.ortiz@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "j.dupont@example.fr",
+            "lang": "FR",
+            "via": "form"
+          },
+          {
+            "email": "tom.and.ann@example.org",
+            "lang": "EN",
+            "via": "manual"
+          },
+          {
+            "email": "rmora@example.net",
+            "lang": "ES",
+            "via": "import"
+          }
+        ],
+        "activity": [
+          "Số bản tin đã gửi đến 586 độc giả bằng 3 ngôn ngữ",
+          "71 lượt nhấp vào căn hộ có view biển",
+          "Một độc giả ở Pháp đã tham gia từ biểu mẫu đăng ký"
+        ],
+        "importCount": 203
+      },
+      {
+        "business": "Mora and Partners",
+        "kind": "công ty kế toán",
+        "site": "morapartners.co",
+        "schedule": "mỗi thứ Ba cách tuần lúc 7:30",
+        "subscribers": 428,
+        "newThisWeek": 6,
+        "clicks7": 97,
+        "automationsOn": 1,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 52
+          },
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 38
+          },
+          {
+            "code": "it",
+            "name": "Italian",
+            "share": 10
+          }
+        ],
+        "reader": "Chủ sở hữu các công ty nhỏ muốn biết những thay đổi về thuế và bảng lương mà không cần thuật ngữ phức tạp.",
+        "tones": [
+          "Bình tĩnh",
+          "Chính xác",
+          "Đơn giản"
+        ],
+        "articles": [
+          "Hạn nộp thuế hàng quý chuyển sang ngày 15",
+          "Những gì cần giữ khi thuê nhân viên đầu tiên",
+          "Hóa đơn: giấy hay ảnh chụp?"
+        ],
+        "issue": {
+          "title": "Hạn nộp thuế hàng quý chuyển sang ngày 15",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Your quarterly deadline moves to the 15th",
+              "summary": "The filing date for the next quarter moves five days later. Here is what to send us and when, so nothing is late."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tu plazo trimestral pasa al día 15",
+              "summary": "La fecha de presentación del próximo trimestre se mueve cinco días. Esto es lo que debes enviarnos y cuándo, para que nada llegue tarde."
+            },
+            {
+              "code": "it",
+              "name": "Italiano",
+              "subject": "La scadenza trimestrale passa al 15",
+              "summary": "La data di presentazione del prossimo trimestre slitta di cinque giorni. Ecco cosa inviarci e quando, perché nulla arrivi in ritardo."
+            }
+          ]
+        },
+        "clicksByDay": [
+          33,
+          24,
+          14,
+          8,
+          7,
+          4,
+          7
+        ],
+        "topLinks": [
+          {
+            "title": "Danh sách kiểm tra cho ngày 15",
+            "clicks": 46
+          },
+          {
+            "title": "Thuê nhân viên đầu tiên",
+            "clicks": 29
+          },
+          {
+            "title": "Đặt lịch gọi đánh giá",
+            "clicks": 22
+          }
+        ],
+        "people": [
+          {
+            "email": "bakery.owner@example.com",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "c.rossi@example.it",
+            "lang": "IT",
+            "via": "form"
+          },
+          {
+            "email": "taller.luna@example.net",
+            "lang": "ES",
+            "via": "import"
+          },
+          {
+            "email": "finance@example.org",
+            "lang": "EN",
+            "via": "manual"
+          }
+        ],
+        "activity": [
+          "Số báo đã gửi đến 428 độc giả bằng 3 ngôn ngữ",
+          "46 lượt nhấp vào danh sách kiểm tra cho ngày 15",
+          "6 độc giả mới trong tuần này"
+        ],
+        "importCount": 97
+      },
+      {
+        "business": "Run Better Coaching",
+        "kind": "huấn luyện viên chạy bộ",
+        "site": "runbetter.coach",
+        "schedule": "mỗi Chủ nhật lúc 18:00",
+        "subscribers": 907,
+        "newThisWeek": 31,
+        "clicks7": 248,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 49
+          },
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 33
+          },
+          {
+            "code": "de",
+            "name": "German",
+            "share": 18
+          }
+        ],
+        "reader": "Người lớn tập luyện cho cuộc chạy marathon bán đầu tiên, chạy ba lần một tuần trước giờ làm.",
+        "tones": [
+          "Khích lệ",
+          "Trực tiếp",
+          "Ngắn gọn"
+        ],
+        "articles": [
+          "Tuần này: chạy dài, chậm hơn bạn nghĩ",
+          "Giày sau 500 kilômét",
+          "Thói quen rèn luyện sức mạnh 20 phút"
+        ],
+        "issue": {
+          "title": "Tuần này: chạy dài, chậm hơn bạn nghĩ",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Your long run should feel too easy",
+              "summary": "Keep it slow enough to talk. This week's plan adds ten minutes and one short hill session."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tu tirada larga debería sentirse demasiado fácil",
+              "summary": "Mantén un ritmo que te deje hablar. El plan de esta semana suma diez minutos y una sesión corta de cuestas."
+            },
+            {
+              "code": "de",
+              "name": "Deutsch",
+              "subject": "Dein langer Lauf sollte sich zu leicht anfühlen",
+              "summary": "Lauf so langsam, dass du noch reden kannst. Der Plan dieser Woche bringt zehn Minuten mehr und eine kurze Bergeinheit."
+            }
+          ]
+        },
+        "clicksByDay": [
+          18,
+          22,
+          26,
+          31,
+          35,
+          49,
+          67
+        ],
+        "topLinks": [
+          {
+            "title": "Kế hoạch tập luyện tuần này",
+            "clicks": 121
+          },
+          {
+            "title": "Thói quen rèn luyện sức mạnh 20 phút",
+            "clicks": 78
+          },
+          {
+            "title": "Giày sau 500 kilômét",
+            "clicks": 49
+          }
+        ],
+        "people": [
+          {
+            "email": "ana.runs@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "felix.k@example.de",
+            "lang": "DE",
+            "via": "form"
+          },
+          {
+            "email": "sam@example.org",
+            "lang": "EN",
+            "via": "form"
+          },
+          {
+            "email": "club.secretary@example.net",
+            "lang": "EN",
+            "via": "import"
+          }
+        ],
+        "activity": [
+          "Số báo đã gửi đến 907 độc giả bằng 3 ngôn ngữ",
+          "121 lượt nhấp vào kế hoạch tập luyện tuần này",
+          "31 độc giả mới trong tuần này, hầu hết từ biểu mẫu đăng ký"
+        ],
+        "importCount": 260
+      }
+    ]
+  },
+  "errorPage": {
+    "notFoundEyebrow": "Lỗi 404",
+    "notFoundTitle": "Chúng tôi không thể tìm thấy trang này",
+    "notFoundBody": "Liên kết có thể đã cũ hoặc có lỗi đánh máy. Những trang này là nơi tốt để tiếp tục.",
+    "serverEyebrow": "Lỗi {status}",
+    "serverTitle": "Đã xảy ra lỗi từ phía chúng tôi",
+    "serverBody": "Chúng tôi không thể tải trang này. Hãy thử lại sau một phút. Nếu tình trạng này tiếp diễn, hãy viết thư cho info@aiban.news.",
+    "retry": "Thử lại",
+    "home": "Về trang chủ",
+    "popularTitle": "Trang phổ biến",
+    "links": {
+      "howItWorks": "Cách AIBAN hoạt động",
+      "pricing": "Bảng giá",
+      "help": "Trung tâm trợ giúp",
+      "login": "Đăng nhập vào bảng điều khiển"
+    },
+    "report": "Nếu một liên kết trên trang web của chúng tôi đưa bạn đến đây, hãy cho chúng tôi biết tại info@aiban.news để chúng tôi có thể sửa lỗi."
   },
   "header": {
     "goToWorkspace": "Mở bảng điều khiển",
@@ -966,7 +1733,7 @@ export default {
     "currentPlanTitle": "Gói hiện tại của bạn",
     "upgradePlanTitle": "Đổi gói",
     "manageSubscription": "Quản lý gói đăng ký",
-    "vipPlanName": "VIP Partner",
+    "vipPlanName": "Đối tác VIP",
     "vipPlanDescription": "Quyền truy cập không giới hạn do AIBAN tặng.",
     "perMonth": "mỗi tháng",
     "perYear": "mỗi năm",
@@ -982,1429 +1749,5 @@ export default {
     "monthly": "Hàng tháng",
     "yearly": "Hàng năm",
     "loadingPlan": "Đang tải dữ liệu gói..."
-  },
-  "languages": [
-    {
-      "code": "ab",
-      "name": "Tiếng Abkhaz"
-    },
-    {
-      "code": "aa",
-      "name": "Tiếng Afar"
-    },
-    {
-      "code": "af",
-      "name": "Tiếng Afrikaans"
-    },
-    {
-      "code": "ak",
-      "name": "Tiếng Akan"
-    },
-    {
-      "code": "sq",
-      "name": "Tiếng Albania"
-    },
-    {
-      "code": "am",
-      "name": "Tiếng Amharic"
-    },
-    {
-      "code": "ar",
-      "name": "Tiếng Ả Rập"
-    },
-    {
-      "code": "an",
-      "name": "Tiếng Aragonese"
-    },
-    {
-      "code": "hy",
-      "name": "Tiếng Armenia"
-    },
-    {
-      "code": "as",
-      "name": "Tiếng Assamese"
-    },
-    {
-      "code": "av",
-      "name": "Tiếng Avaric"
-    },
-    {
-      "code": "ae",
-      "name": "Tiếng Avestan"
-    },
-    {
-      "code": "ay",
-      "name": "Tiếng Aymara"
-    },
-    {
-      "code": "az",
-      "name": "Tiếng Azerbaijani"
-    },
-    {
-      "code": "bm",
-      "name": "Tiếng Bambara"
-    },
-    {
-      "code": "ba",
-      "name": "Tiếng Bashkir"
-    },
-    {
-      "code": "eu",
-      "name": "Tiếng Basque"
-    },
-    {
-      "code": "be",
-      "name": "Tiếng Belarus"
-    },
-    {
-      "code": "bn",
-      "name": "Tiếng Bengali"
-    },
-    {
-      "code": "bi",
-      "name": "Tiếng Bislama"
-    },
-    {
-      "code": "bs",
-      "name": "Tiếng Bosnia"
-    },
-    {
-      "code": "br",
-      "name": "Tiếng Breton"
-    },
-    {
-      "code": "bg",
-      "name": "Tiếng Bulgaria"
-    },
-    {
-      "code": "my",
-      "name": "Tiếng Miến Điện"
-    },
-    {
-      "code": "ca",
-      "name": "Tiếng Catalan"
-    },
-    {
-      "code": "ch",
-      "name": "Tiếng Chamorro"
-    },
-    {
-      "code": "ce",
-      "name": "Tiếng Chechen"
-    },
-    {
-      "code": "ny",
-      "name": "Tiếng Chichewa"
-    },
-    {
-      "code": "zh",
-      "name": "Tiếng Trung"
-    },
-    {
-      "code": "cu",
-      "name": "Tiếng Slavonic nhà thờ"
-    },
-    {
-      "code": "cv",
-      "name": "Tiếng Chuvash"
-    },
-    {
-      "code": "kw",
-      "name": "Tiếng Cornish"
-    },
-    {
-      "code": "co",
-      "name": "Tiếng Corsican"
-    },
-    {
-      "code": "cr",
-      "name": "Tiếng Cree"
-    },
-    {
-      "code": "hr",
-      "name": "Tiếng Croatia"
-    },
-    {
-      "code": "cs",
-      "name": "Tiếng Séc"
-    },
-    {
-      "code": "da",
-      "name": "Tiếng Đan Mạch"
-    },
-    {
-      "code": "dv",
-      "name": "Tiếng Divehi"
-    },
-    {
-      "code": "nl",
-      "name": "Tiếng Hà Lan"
-    },
-    {
-      "code": "dz",
-      "name": "Tiếng Dzongkha"
-    },
-    {
-      "code": "en",
-      "name": "Tiếng Anh"
-    },
-    {
-      "code": "eo",
-      "name": "Tiếng Esperanto"
-    },
-    {
-      "code": "et",
-      "name": "Tiếng Estonia"
-    },
-    {
-      "code": "ee",
-      "name": "Tiếng Ewe"
-    },
-    {
-      "code": "fo",
-      "name": "Tiếng Faroe"
-    },
-    {
-      "code": "fj",
-      "name": "Tiếng Fiji"
-    },
-    {
-      "code": "fi",
-      "name": "Tiếng Phần Lan"
-    },
-    {
-      "code": "fr",
-      "name": "Tiếng Pháp"
-    },
-    {
-      "code": "fy",
-      "name": "Tiếng Frisian phương Tây"
-    },
-    {
-      "code": "ff",
-      "name": "Tiếng Fulah"
-    },
-    {
-      "code": "gd",
-      "name": "Tiếng Gaelic Scotland"
-    },
-    {
-      "code": "gl",
-      "name": "Tiếng Galicia"
-    },
-    {
-      "code": "lg",
-      "name": "Tiếng Ganda"
-    },
-    {
-      "code": "ka",
-      "name": "Tiếng Gruzia"
-    },
-    {
-      "code": "de",
-      "name": "Tiếng Đức"
-    },
-    {
-      "code": "el",
-      "name": "Tiếng Hy Lạp"
-    },
-    {
-      "code": "kl",
-      "name": "Tiếng Kalaallisut (Greenlandic)"
-    },
-    {
-      "code": "gn",
-      "name": "Tiếng Guarani"
-    },
-    {
-      "code": "gu",
-      "name": "Tiếng Gujarati"
-    },
-    {
-      "code": "ht",
-      "name": "Tiếng Creole Haiti"
-    },
-    {
-      "code": "ha",
-      "name": "Tiếng Hausa"
-    },
-    {
-      "code": "he",
-      "name": "Tiếng Do Thái"
-    },
-    {
-      "code": "hz",
-      "name": "Tiếng Herero"
-    },
-    {
-      "code": "hi",
-      "name": "Tiếng Hindi"
-    },
-    {
-      "code": "ho",
-      "name": "Hiri Motu"
-    },
-    {
-      "code": "hu",
-      "name": "Tiếng Hungary"
-    },
-    {
-      "code": "is",
-      "name": "Tiếng Iceland"
-    },
-    {
-      "code": "io",
-      "name": "Tiếng Ido"
-    },
-    {
-      "code": "ig",
-      "name": "Tiếng Igbo"
-    },
-    {
-      "code": "id",
-      "name": "Tiếng Indonesia"
-    },
-    {
-      "code": "ia",
-      "name": "Tiếng Interlingua"
-    },
-    {
-      "code": "ie",
-      "name": "Tiếng Interlingue"
-    },
-    {
-      "code": "iu",
-      "name": "Tiếng Inuktitut"
-    },
-    {
-      "code": "ik",
-      "name": "Tiếng Inupiaq"
-    },
-    {
-      "code": "ga",
-      "name": "Tiếng Ireland"
-    },
-    {
-      "code": "it",
-      "name": "Tiếng Ý"
-    },
-    {
-      "code": "ja",
-      "name": "Tiếng Nhật"
-    },
-    {
-      "code": "jv",
-      "name": "Tiếng Java"
-    },
-    {
-      "code": "kn",
-      "name": "Tiếng Kannada"
-    },
-    {
-      "code": "kr",
-      "name": "Tiếng Kanuri"
-    },
-    {
-      "code": "ks",
-      "name": "Tiếng Kashmiri"
-    },
-    {
-      "code": "kk",
-      "name": "Tiếng Kazakh"
-    },
-    {
-      "code": "km",
-      "name": "Tiếng Khmer"
-    },
-    {
-      "code": "ki",
-      "name": "Tiếng Kikuyu"
-    },
-    {
-      "code": "rw",
-      "name": "Tiếng Kinyarwanda"
-    },
-    {
-      "code": "ky",
-      "name": "Tiếng Kyrgyz"
-    },
-    {
-      "code": "kv",
-      "name": "Tiếng Komi"
-    },
-    {
-      "code": "kg",
-      "name": "Tiếng Kongo"
-    },
-    {
-      "code": "ko",
-      "name": "Tiếng Hàn"
-    },
-    {
-      "code": "kj",
-      "name": "Tiếng Kuanyama"
-    },
-    {
-      "code": "ku",
-      "name": "Tiếng Kurd"
-    },
-    {
-      "code": "lo",
-      "name": "Tiếng Lào"
-    },
-    {
-      "code": "la",
-      "name": "Tiếng Latinh"
-    },
-    {
-      "code": "lv",
-      "name": "Tiếng Latvia"
-    },
-    {
-      "code": "li",
-      "name": "Tiếng Limburgish"
-    },
-    {
-      "code": "ln",
-      "name": "Tiếng Lingala"
-    },
-    {
-      "code": "lt",
-      "name": "Tiếng Litva"
-    },
-    {
-      "code": "lu",
-      "name": "Tiếng Luba-Katanga"
-    },
-    {
-      "code": "lb",
-      "name": "Tiếng Luxembourg"
-    },
-    {
-      "code": "mk",
-      "name": "Tiếng Macedonia"
-    },
-    {
-      "code": "mg",
-      "name": "Tiếng Malagasy"
-    },
-    {
-      "code": "ms",
-      "name": "Tiếng Mã Lai"
-    },
-    {
-      "code": "ml",
-      "name": "Tiếng Malayalam"
-    },
-    {
-      "code": "mt",
-      "name": "Tiếng Malta"
-    },
-    {
-      "code": "gv",
-      "name": "Tiếng Manx"
-    },
-    {
-      "code": "mi",
-      "name": "Tiếng Maori"
-    },
-    {
-      "code": "mr",
-      "name": "Tiếng Marathi"
-    },
-    {
-      "code": "mh",
-      "name": "Tiếng Marshallese"
-    },
-    {
-      "code": "mn",
-      "name": "Tiếng Mông Cổ"
-    },
-    {
-      "code": "na",
-      "name": "Tiếng Nauru"
-    },
-    {
-      "code": "nv",
-      "name": "Tiếng Navajo"
-    },
-    {
-      "code": "nd",
-      "name": "Tiếng Ndebele Bắc"
-    },
-    {
-      "code": "nr",
-      "name": "Tiếng Ndebele Nam"
-    },
-    {
-      "code": "ng",
-      "name": "Tiếng Ndonga"
-    },
-    {
-      "code": "ne",
-      "name": "Tiếng Nepal"
-    },
-    {
-      "code": "no",
-      "name": "Tiếng Na Uy"
-    },
-    {
-      "code": "nb",
-      "name": "Tiếng Na Uy Bokmål"
-    },
-    {
-      "code": "nn",
-      "name": "Tiếng Na Uy Nynorsk"
-    },
-    {
-      "code": "oc",
-      "name": "Tiếng Occitan"
-    },
-    {
-      "code": "oj",
-      "name": "Tiếng Ojibwa"
-    },
-    {
-      "code": "or",
-      "name": "Tiếng Oriya"
-    },
-    {
-      "code": "om",
-      "name": "Tiếng Oromo"
-    },
-    {
-      "code": "os",
-      "name": "Tiếng Ossetian"
-    },
-    {
-      "code": "pi",
-      "name": "Tiếng Pali"
-    },
-    {
-      "code": "ps",
-      "name": "Tiếng Pashto"
-    },
-    {
-      "code": "fa",
-      "name": "Tiếng Ba Tư (Farsi)"
-    },
-    {
-      "code": "pl",
-      "name": "Tiếng Ba Lan"
-    },
-    {
-      "code": "pt",
-      "name": "Tiếng Bồ Đào Nha"
-    },
-    {
-      "code": "pa",
-      "name": "Tiếng Punjabi"
-    },
-    {
-      "code": "qu",
-      "name": "Tiếng Quechua"
-    },
-    {
-      "code": "ro",
-      "name": "Tiếng Romania"
-    },
-    {
-      "code": "rm",
-      "name": "Tiếng Romansh"
-    },
-    {
-      "code": "rn",
-      "name": "Tiếng Rundi"
-    },
-    {
-      "code": "ru",
-      "name": "Tiếng Nga"
-    },
-    {
-      "code": "se",
-      "name": "Tiếng Sami Bắc"
-    },
-    {
-      "code": "sm",
-      "name": "Tiếng Samoa"
-    },
-    {
-      "code": "sg",
-      "name": "Tiếng Sango"
-    },
-    {
-      "code": "sa",
-      "name": "Tiếng Phạn"
-    },
-    {
-      "code": "sc",
-      "name": "Tiếng Sardinia"
-    },
-    {
-      "code": "sr",
-      "name": "Tiếng Serbia"
-    },
-    {
-      "code": "sn",
-      "name": "Tiếng Shona"
-    },
-    {
-      "code": "ii",
-      "name": "Tiếng Di Tứ Xuyên"
-    },
-    {
-      "code": "sd",
-      "name": "Tiếng Sindhi"
-    },
-    {
-      "code": "si",
-      "name": "Tiếng Sinhala"
-    },
-    {
-      "code": "sk",
-      "name": "Tiếng Slovak"
-    },
-    {
-      "code": "sl",
-      "name": "Tiếng Slovenia"
-    },
-    {
-      "code": "so",
-      "name": "Tiếng Somali"
-    },
-    {
-      "code": "st",
-      "name": "Tiếng Sotho Nam"
-    },
-    {
-      "code": "es",
-      "name": "Tiếng Tây Ban Nha"
-    },
-    {
-      "code": "su",
-      "name": "Tiếng Sundanese"
-    },
-    {
-      "code": "sw",
-      "name": "Tiếng Swahili"
-    },
-    {
-      "code": "ss",
-      "name": "Tiếng Swati"
-    },
-    {
-      "code": "sv",
-      "name": "Tiếng Thụy Điển"
-    },
-    {
-      "code": "tl",
-      "name": "Tiếng Tagalog (Filipino)"
-    },
-    {
-      "code": "ty",
-      "name": "Tiếng Tahiti"
-    },
-    {
-      "code": "tg",
-      "name": "Tiếng Tajik"
-    },
-    {
-      "code": "ta",
-      "name": "Tiếng Tamil"
-    },
-    {
-      "code": "tt",
-      "name": "Tiếng Tatar"
-    },
-    {
-      "code": "te",
-      "name": "Tiếng Telugu"
-    },
-    {
-      "code": "th",
-      "name": "Tiếng Thái"
-    },
-    {
-      "code": "bo",
-      "name": "Tiếng Tây Tạng"
-    },
-    {
-      "code": "ti",
-      "name": "Tiếng Tigrinya"
-    },
-    {
-      "code": "to",
-      "name": "Tiếng Tonga"
-    },
-    {
-      "code": "ts",
-      "name": "Tiếng Tsonga"
-    },
-    {
-      "code": "tn",
-      "name": "Tiếng Tswana"
-    },
-    {
-      "code": "tr",
-      "name": "Tiếng Thổ Nhĩ Kỳ"
-    },
-    {
-      "code": "tk",
-      "name": "Tiếng Turkmen"
-    },
-    {
-      "code": "tw",
-      "name": "Tiếng Twi"
-    },
-    {
-      "code": "ug",
-      "name": "Tiếng Duy Ngô Nhĩ"
-    },
-    {
-      "code": "uk",
-      "name": "Tiếng Ukraina"
-    },
-    {
-      "code": "ur",
-      "name": "Tiếng Urdu"
-    },
-    {
-      "code": "uz",
-      "name": "Tiếng Uzbek"
-    },
-    {
-      "code": "ve",
-      "name": "Tiếng Venda"
-    },
-    {
-      "code": "vi",
-      "name": "Tiếng Việt"
-    },
-    {
-      "code": "vo",
-      "name": "Tiếng Volapük"
-    },
-    {
-      "code": "wa",
-      "name": "Tiếng Walloon"
-    },
-    {
-      "code": "cy",
-      "name": "Tiếng Wales"
-    },
-    {
-      "code": "wo",
-      "name": "Tiếng Wolof"
-    },
-    {
-      "code": "xh",
-      "name": "Tiếng Xhosa"
-    },
-    {
-      "code": "yi",
-      "name": "Tiếng Yiddish"
-    },
-    {
-      "code": "yo",
-      "name": "Tiếng Yoruba"
-    },
-    {
-      "code": "za",
-      "name": "Tiếng Zhuang"
-    },
-    {
-      "code": "zu",
-      "name": "Tiếng Zulu"
-    }
-  ],
-  "countries": [
-    {
-      "code": "AF",
-      "name": "Afghanistan"
-    },
-    {
-      "code": "AL",
-      "name": "Albania"
-    },
-    {
-      "code": "DZ",
-      "name": "Algeria"
-    },
-    {
-      "code": "AS",
-      "name": "Samoa thuộc Mỹ"
-    },
-    {
-      "code": "AD",
-      "name": "Andorra"
-    },
-    {
-      "code": "AO",
-      "name": "Angola"
-    },
-    {
-      "code": "AI",
-      "name": "Anguilla"
-    },
-    {
-      "code": "AQ",
-      "name": "Nam Cực"
-    },
-    {
-      "code": "AG",
-      "name": "Antigua và Barbuda"
-    },
-    {
-      "code": "AR",
-      "name": "Argentina"
-    },
-    {
-      "code": "AM",
-      "name": "Armenia"
-    },
-    {
-      "code": "AW",
-      "name": "Aruba"
-    },
-    {
-      "code": "AU",
-      "name": "Úc"
-    },
-    {
-      "code": "AT",
-      "name": "Áo"
-    },
-    {
-      "code": "AZ",
-      "name": "Azerbaijan"
-    },
-    {
-      "code": "BS",
-      "name": "Bahamas"
-    },
-    {
-      "code": "BH",
-      "name": "Bahrain"
-    },
-    {
-      "code": "BD",
-      "name": "Bangladesh"
-    },
-    {
-      "code": "BB",
-      "name": "Barbados"
-    },
-    {
-      "code": "BY",
-      "name": "Belarus"
-    },
-    {
-      "code": "BE",
-      "name": "Bỉ"
-    },
-    {
-      "code": "BZ",
-      "name": "Belize"
-    },
-    {
-      "code": "BJ",
-      "name": "Benin"
-    },
-    {
-      "code": "BM",
-      "name": "Bermuda"
-    },
-    {
-      "code": "BT",
-      "name": "Bhutan"
-    },
-    {
-      "code": "BO",
-      "name": "Bolivia"
-    },
-    {
-      "code": "BA",
-      "name": "Bosnia và Herzegovina"
-    },
-    {
-      "code": "BW",
-      "name": "Botswana"
-    },
-    {
-      "code": "BR",
-      "name": "Brazil"
-    },
-    {
-      "code": "IO",
-      "name": "Lãnh thổ Ấn Độ Dương thuộc Anh"
-    },
-    {
-      "code": "VG",
-      "name": "Quần đảo Virgin thuộc Anh"
-    },
-    {
-      "code": "BN",
-      "name": "Brunei"
-    },
-    {
-      "code": "BG",
-      "name": "Bulgaria"
-    },
-    {
-      "code": "BF",
-      "name": "Burkina Faso"
-    },
-    {
-      "code": "BI",
-      "name": "Burundi"
-    },
-    {
-      "code": "KH",
-      "name": "Campuchia"
-    },
-    {
-      "code": "CM",
-      "name": "Cameroon"
-    },
-    {
-      "code": "CA",
-      "name": "Canada"
-    },
-    {
-      "code": "CV",
-      "name": "Cabo Verde"
-    },
-    {
-      "code": "KY",
-      "name": "Quần đảo Cayman"
-    },
-    {
-      "code": "CF",
-      "name": "Cộng hòa Trung Phi"
-    },
-    {
-      "code": "TD",
-      "name": "Chad"
-    },
-    {
-      "code": "CL",
-      "name": "Chile"
-    },
-    {
-      "code": "CN",
-      "name": "Trung Quốc"
-    },
-    {
-      "code": "CX",
-      "name": "Đảo Giáng sinh"
-    },
-    {
-      "code": "CC",
-      "name": "Quần đảo Cocos (Keeling)"
-    },
-    {
-      "code": "CO",
-      "name": "Colombia"
-    },
-    {
-      "code": "KM",
-      "name": "Comoros"
-    },
-    {
-      "code": "CG",
-      "name": "Congo - Brazzaville"
-    },
-    {
-      "code": "CD",
-      "name": "Congo - Kinshasa"
-    },
-    {
-      "code": "CK",
-      "name": "Quần đảo Cook"
-    },
-    {
-      "code": "CR",
-      "name": "Costa Rica"
-    },
-    {
-      "code": "CI",
-      "name": "Bờ Biển Ngà"
-    },
-    {
-      "code": "HR",
-      "name": "Croatia"
-    },
-    {
-      "code": "CU",
-      "name": "Cuba"
-    },
-    {
-      "code": "CY",
-      "name": "Síp"
-    },
-    {
-      "code": "CZ",
-      "name": "Séc"
-    },
-    {
-      "code": "DK",
-      "name": "Đan Mạch"
-    },
-    {
-      "code": "DJ",
-      "name": "Djibouti"
-    },
-    {
-      "code": "DM",
-      "name": "Dominica"
-    },
-    {
-      "code": "DO",
-      "name": "Cộng hòa Dominica"
-    },
-    {
-      "code": "EC",
-      "name": "Ecuador"
-    },
-    {
-      "code": "EG",
-      "name": "Ai Cập"
-    },
-    {
-      "code": "SV",
-      "name": "El Salvador"
-    },
-    {
-      "code": "GQ",
-      "name": "Guinea Xích đạo"
-    },
-    {
-      "code": "ER",
-      "name": "Eritrea"
-    },
-    {
-      "code": "EE",
-      "name": "Estonia"
-    },
-    {
-      "code": "SZ",
-      "name": "Eswatini"
-    },
-    {
-      "code": "ET",
-      "name": "Ethiopia"
-    },
-    {
-      "code": "FJ",
-      "name": "Fiji"
-    },
-    {
-      "code": "FI",
-      "name": "Phần Lan"
-    },
-    {
-      "code": "FR",
-      "name": "Pháp"
-    },
-    {
-      "code": "GA",
-      "name": "Gabon"
-    },
-    {
-      "code": "GM",
-      "name": "Gambia"
-    },
-    {
-      "code": "GE",
-      "name": "Gruzia"
-    },
-    {
-      "code": "DE",
-      "name": "Đức"
-    },
-    {
-      "code": "GH",
-      "name": "Ghana"
-    },
-    {
-      "code": "GR",
-      "name": "Hy Lạp"
-    },
-    {
-      "code": "GT",
-      "name": "Guatemala"
-    },
-    {
-      "code": "GN",
-      "name": "Guinea"
-    },
-    {
-      "code": "GY",
-      "name": "Guyana"
-    },
-    {
-      "code": "HT",
-      "name": "Haiti"
-    },
-    {
-      "code": "HN",
-      "name": "Honduras"
-    },
-    {
-      "code": "HK",
-      "name": "Hồng Kông"
-    },
-    {
-      "code": "HU",
-      "name": "Hungary"
-    },
-    {
-      "code": "IS",
-      "name": "Iceland"
-    },
-    {
-      "code": "IN",
-      "name": "Ấn Độ"
-    },
-    {
-      "code": "ID",
-      "name": "Indonesia"
-    },
-    {
-      "code": "IR",
-      "name": "Iran"
-    },
-    {
-      "code": "IQ",
-      "name": "Iraq"
-    },
-    {
-      "code": "IE",
-      "name": "Ireland"
-    },
-    {
-      "code": "IL",
-      "name": "Israel"
-    },
-    {
-      "code": "IT",
-      "name": "Ý"
-    },
-    {
-      "code": "JM",
-      "name": "Jamaica"
-    },
-    {
-      "code": "JP",
-      "name": "Nhật Bản"
-    },
-    {
-      "code": "JO",
-      "name": "Jordan"
-    },
-    {
-      "code": "KZ",
-      "name": "Kazakhstan"
-    },
-    {
-      "code": "KE",
-      "name": "Kenya"
-    },
-    {
-      "code": "KR",
-      "name": "Hàn Quốc"
-    },
-    {
-      "code": "KW",
-      "name": "Kuwait"
-    },
-    {
-      "code": "KG",
-      "name": "Kyrgyzstan"
-    },
-    {
-      "code": "LA",
-      "name": "Lào"
-    },
-    {
-      "code": "LV",
-      "name": "Latvia"
-    },
-    {
-      "code": "LB",
-      "name": "Lebanon"
-    },
-    {
-      "code": "LS",
-      "name": "Lesotho"
-    },
-    {
-      "code": "LR",
-      "name": "Liberia"
-    },
-    {
-      "code": "LY",
-      "name": "Libya"
-    },
-    {
-      "code": "LI",
-      "name": "Liechtenstein"
-    },
-    {
-      "code": "LT",
-      "name": "Litva"
-    },
-    {
-      "code": "LU",
-      "name": "Luxembourg"
-    },
-    {
-      "code": "MG",
-      "name": "Madagascar"
-    },
-    {
-      "code": "MW",
-      "name": "Malawi"
-    },
-    {
-      "code": "MY",
-      "name": "Malaysia"
-    },
-    {
-      "code": "MV",
-      "name": "Maldives"
-    },
-    {
-      "code": "ML",
-      "name": "Mali"
-    },
-    {
-      "code": "MT",
-      "name": "Malta"
-    },
-    {
-      "code": "MX",
-      "name": "Mexico"
-    },
-    {
-      "code": "MD",
-      "name": "Moldova"
-    },
-    {
-      "code": "MC",
-      "name": "Monaco"
-    },
-    {
-      "code": "MN",
-      "name": "Mông Cổ"
-    },
-    {
-      "code": "ME",
-      "name": "Montenegro"
-    },
-    {
-      "code": "MA",
-      "name": "Ma-rốc"
-    },
-    {
-      "code": "MZ",
-      "name": "Mozambique"
-    },
-    {
-      "code": "MM",
-      "name": "Myanmar"
-    },
-    {
-      "code": "NA",
-      "name": "Namibia"
-    },
-    {
-      "code": "NP",
-      "name": "Nepal"
-    },
-    {
-      "code": "NL",
-      "name": "Hà Lan"
-    },
-    {
-      "code": "NZ",
-      "name": "New Zealand"
-    },
-    {
-      "code": "NI",
-      "name": "Nicaragua"
-    },
-    {
-      "code": "NE",
-      "name": "Niger"
-    },
-    {
-      "code": "NG",
-      "name": "Nigeria"
-    },
-    {
-      "code": "MK",
-      "name": "Bắc Macedonia"
-    },
-    {
-      "code": "NO",
-      "name": "Na Uy"
-    },
-    {
-      "code": "OM",
-      "name": "Oman"
-    },
-    {
-      "code": "PK",
-      "name": "Pakistan"
-    },
-    {
-      "code": "PA",
-      "name": "Panama"
-    },
-    {
-      "code": "PG",
-      "name": "Papua New Guinea"
-    },
-    {
-      "code": "PY",
-      "name": "Paraguay"
-    },
-    {
-      "code": "PE",
-      "name": "Peru"
-    },
-    {
-      "code": "PH",
-      "name": "Philippines"
-    },
-    {
-      "code": "PL",
-      "name": "Ba Lan"
-    },
-    {
-      "code": "PT",
-      "name": "Bồ Đào Nha"
-    },
-    {
-      "code": "QA",
-      "name": "Qatar"
-    },
-    {
-      "code": "RO",
-      "name": "Romania"
-    },
-    {
-      "code": "RU",
-      "name": "Nga"
-    },
-    {
-      "code": "RW",
-      "name": "Rwanda"
-    },
-    {
-      "code": "SA",
-      "name": "Ả Rập Saudi"
-    },
-    {
-      "code": "SN",
-      "name": "Senegal"
-    },
-    {
-      "code": "RS",
-      "name": "Serbia"
-    },
-    {
-      "code": "SG",
-      "name": "Singapore"
-    },
-    {
-      "code": "SK",
-      "name": "Slovakia"
-    },
-    {
-      "code": "SI",
-      "name": "Slovenia"
-    },
-    {
-      "code": "ZA",
-      "name": "Nam Phi"
-    },
-    {
-      "code": "ES",
-      "name": "Tây Ban Nha"
-    },
-    {
-      "code": "LK",
-      "name": "Sri Lanka"
-    },
-    {
-      "code": "SE",
-      "name": "Thụy Điển"
-    },
-    {
-      "code": "CH",
-      "name": "Thụy Sĩ"
-    },
-    {
-      "code": "TW",
-      "name": "Đài Loan"
-    },
-    {
-      "code": "TH",
-      "name": "Thái Lan"
-    },
-    {
-      "code": "TR",
-      "name": "Thổ Nhĩ Kỳ"
-    },
-    {
-      "code": "UG",
-      "name": "Uganda"
-    },
-    {
-      "code": "UA",
-      "name": "Ukraina"
-    },
-    {
-      "code": "AE",
-      "name": "Các Tiểu vương quốc Ả Rập Thống nhất"
-    },
-    {
-      "code": "GB",
-      "name": "Vương quốc Anh"
-    },
-    {
-      "code": "US",
-      "name": "Hoa Kỳ"
-    },
-    {
-      "code": "UY",
-      "name": "Uruguay"
-    },
-    {
-      "code": "UZ",
-      "name": "Uzbekistan"
-    },
-    {
-      "code": "VE",
-      "name": "Venezuela"
-    },
-    {
-      "code": "VN",
-      "name": "Việt Nam"
-    },
-    {
-      "code": "YE",
-      "name": "Yemen"
-    },
-    {
-      "code": "ZM",
-      "name": "Zambia"
-    },
-    {
-      "code": "ZW",
-      "name": "Zimbabwe"
-    }
-  ]
+  }
 };

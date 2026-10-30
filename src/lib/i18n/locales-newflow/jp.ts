@@ -1,5 +1,5 @@
-// jp strings for locales-newflow. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale jp
+// jp (Japanese) strings for locales-newflow. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "onboarding": {
     "progress": "ステップ {current}/{total}",
@@ -116,6 +116,9 @@ export default {
       "dayLabel": "曜日",
       "timeLabel": "時刻",
       "timeHint": "現地時間です。",
+      "summaryDaily": "毎日 {time}、あなたの時間帯（{zone}）に配信します。",
+      "summaryWeekly": "毎週 {day} の {time}、あなたの時間帯（{zone}）に配信します。",
+      "summaryMonthly": "毎月1日の {time}、あなたの時間帯（{zone}）に配信します。",
       "recipeTitle": "新しい号を自動で送信",
       "recipeBody": "上記のスケジュールで、新しい記事から最適なものを選び、あなたの文体で書き、読者ごとに翻訳して、メールで送ります。",
       "recipeOn": "オン",

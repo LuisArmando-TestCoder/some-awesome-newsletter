@@ -1,5 +1,5 @@
-// kn strings for locales-newflow. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale kn
+// kn (Kannada) strings for locales-newflow. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "onboarding": {
     "progress": "ಹಂತ {current}/{total}",
@@ -116,6 +116,9 @@ export default {
       "dayLabel": "ದಿನ",
       "timeLabel": "ಸಮಯ",
       "timeHint": "ನಿಮ್ಮ ಸ್ಥಳೀಯ ಸಮಯದಲ್ಲಿ.",
+      "summaryDaily": "ಪ್ರತಿದಿನ {time} ಗಂಟೆಗೆ, ನಿಮ್ಮ ಸಮಯದಲ್ಲಿ ({zone}).",
+      "summaryWeekly": "ಪ್ರತಿ {day} {time} ಗಂಟೆಗೆ, ನಿಮ್ಮ ಸಮಯದಲ್ಲಿ ({zone}).",
+      "summaryMonthly": "ಪ್ರತಿ ತಿಂಗಳ 1ನೇ ತಾರೀಕು {time} ಗಂಟೆಗೆ, ನಿಮ್ಮ ಸಮಯದಲ್ಲಿ ({zone}).",
       "recipeTitle": "ಹೊಸ ಸಂಚಿಕೆಗಳನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಕಳುಹಿಸಿ",
       "recipeBody": "ಮೇಲಿನ ವೇಳಾಪಟ್ಟಿಯಂತೆ ನಾವು ನಿಮ್ಮ ಉತ್ತಮ ಹೊಸ ಲೇಖನವನ್ನು ಆರಿಸಿ, ನಿಮ್ಮ ಶೈಲಿಯಲ್ಲಿ ಬರೆದು, ಪ್ರತಿ ಓದುಗರಿಗಾಗಿ ಅನುವಾದಿಸಿ ಇಮೇಲ್ ಮಾಡುತ್ತೇವೆ.",
       "recipeOn": "ಆನ್",

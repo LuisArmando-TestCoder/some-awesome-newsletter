@@ -30,3 +30,4 @@ _ws4_tmp
 _aiban_backups/
 _deprecated/
 _ws*_tmp/
+test-results/

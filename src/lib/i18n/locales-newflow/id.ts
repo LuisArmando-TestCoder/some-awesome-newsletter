@@ -1,5 +1,5 @@
-// id strings for locales-newflow. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale id
+// id (Indonesian) strings for locales-newflow. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "onboarding": {
     "progress": "Langkah {current} dari {total}",
@@ -116,6 +116,9 @@ export default {
       "dayLabel": "Hari",
       "timeLabel": "Jam",
       "timeHint": "Dalam waktu setempat Anda.",
+      "summaryDaily": "Setiap hari pukul {time}, waktu Anda ({zone}).",
+      "summaryWeekly": "Setiap {day} pukul {time}, waktu Anda ({zone}).",
+      "summaryMonthly": "Pada tanggal 1 setiap bulan pukul {time}, waktu Anda ({zone}).",
       "recipeTitle": "Kirim edisi baru secara otomatis",
       "recipeBody": "Sesuai jadwal di atas, kami memilih artikel baru terbaik Anda, menulisnya dengan gaya bahasa Anda, menerjemahkannya untuk setiap pembaca, lalu mengirimkannya lewat email.",
       "recipeOn": "Aktif",

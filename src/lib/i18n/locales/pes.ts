@@ -1,5 +1,5 @@
-// pes strings for locales. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale pes
+// pes (Persian (Iran)) strings for locales. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "auth": {
     "logo": "/icons/logo.png",
@@ -35,6 +35,82 @@ export default {
       "ogImageAlt": "لوگوی AIBAN"
     },
     "skipLink": "رفتن به محتوای اصلی",
+    "display": {
+      "title": "وب‌سایت شما، به صورت خبرنامه نوشته شده.",
+      "kicker": "AIBAN"
+    },
+    "statement": {
+      "lines": [
+        "شما از قبل کار خوبی منتشر می‌کنید.",
+        "مشتریان شما آن را به بیش از یک زبان می‌خوانند.",
+        "AIBAN هر مقاله جدید را به یک شماره تبدیل می‌کند",
+        "و نسخه مربوط به زبان هر خواننده را برایش ارسال می‌کند."
+      ]
+    },
+    "history": {
+      "eyebrow": "چگونه کار می‌کند",
+      "title": "زندگی یک شماره.",
+      "lead": "یک شماره را از لحظه‌ای که برنامه‌ریزی شما آن را شروع می‌کند تا زمانی که دوباره شروع می‌شود دنبال کنید. شما این را یک بار تنظیم می‌کنید.",
+      "note": "برنامه نمونه. شما روز، زمان و تعداد دفعات را انتخاب می‌کنید.",
+      "progressLabel": "مراحل یک شماره",
+      "items": [
+        {
+          "mark": "9:00",
+          "title": "برنامه‌ریزی شما اجرا را شروع می‌کند",
+          "body": "هر دوشنبه ساعت ۹:۰۰ در این مثال. شما روزانه، هفتگی یا ماهانه انتخاب می‌کنید."
+        },
+        {
+          "mark": "خواندن",
+          "title": "AIBAN وب‌سایت شما را می‌خواند",
+          "body": "جدیدترین مقاله شما را پیدا می‌کند و بخشی را انتخاب می‌کند که خواننده ایده‌آل شما بیشترین اهمیت را به آن می‌دهد."
+        },
+        {
+          "mark": "نوشتن",
+          "title": "شماره را با صدای شما می‌نویسد",
+          "body": "متن به شیوه نوشته شدن سایت شما پیروی می‌کند، بنابراین صدای شما را دارد."
+        },
+        {
+          "mark": "ترجمه",
+          "title": "هر خواننده زبان خود را دریافت می‌کند",
+          "body": "یک شماره به تعداد نسخه‌هایی تبدیل می‌شود که مشترکین شما نیاز دارند."
+        },
+        {
+          "mark": "ارسال",
+          "title": "تحت نام شما می‌رسد",
+          "body": "با نام شما و امضای ایمیل شما. پاسخ‌ها به صندوق ورودی شما می‌روند."
+        },
+        {
+          "mark": "انتشار",
+          "title": "به مقاله‌ای در وبلاگ شما تبدیل می‌شود",
+          "body": "با لینک مخصوص خود که مردم می‌توانند در جستجو پیدا کنند و به اشتراک بگذارند."
+        },
+        {
+          "mark": "گزارش",
+          "title": "می‌بینید چه اتفاقی افتاده",
+          "body": "داشبورد شما فهرست می‌کند که چه کسانی پیوسته‌اند و خوانندگان روی کدام لینک‌ها کلیک کرده‌اند."
+        },
+        {
+          "mark": "دوباره",
+          "title": "دوشنبه بعد، دوباره اجرا می‌شود",
+          "body": "ادامه می‌یابد تا زمانی که در داشبورد خود آن را خاموش کنید."
+        }
+      ]
+    },
+    "rail": {
+      "label": "فصل‌های صفحه",
+      "chapters": [
+        "شروع",
+        "چرا",
+        "زبان‌ها",
+        "چگونه کار می‌کند",
+        "نام شما",
+        "رشد",
+        "برای چه کسانی است",
+        "قیمت‌گذاری",
+        "سوالات",
+        "شروع"
+      ]
+    },
     "hero": {
       "eyebrow": "خبرنامه برای کسب‌وکارهای خدماتی",
       "title": "وب‌سایت شما به خبرنامه‌ای هفتگی تبدیل می‌شود، به زبان هر خواننده",
@@ -57,6 +133,26 @@ export default {
       "startCta": "شروع رایگان با {site}",
       "startCtaGeneric": "شروع رایگان",
       "liveRegion": "پیش‌نمایش نمونه برای {site} به‌روز شد."
+    },
+    "live": {
+      "badge": "همین حالا نوشته شد",
+      "loadingTitle": "در حال نوشتن یک شماره نمونه از {site}",
+      "steps": [
+        "در حال خواندن {site}",
+        "در حال پیدا کردن جدیدترین مقاله شما",
+        "در حال نوشتن آن به {language}",
+        "در حال قرار دادن آن در قالب ایمیل شما"
+      ],
+      "takes": "این کار معمولاً ۲۰ تا ۴۰ ثانیه طول می‌کشد. می‌توانید به اسکرول کردن ادامه دهید.",
+      "readyNote": "AIBAN این نمونه را از جدیدترین مقاله در {site} می‌نویسد. هیچ چیز ذخیره یا ارسال نمی‌شود. وقتی شروع می‌کنید، از صدای خودتان و برنامه زمانی خودتان استفاده می‌کند.",
+      "readyAnnounce": "شماره نمونه شما از {site} آماده است.",
+      "languageLabel": "زبان خواننده",
+      "loadingLanguage": "در حال نوشتن آن به {language}",
+      "errorTitle": "نتوانستیم پیش‌نمایشی از {site} بنویسیم",
+      "retry": "دوباره تلاش کنید",
+      "showSample": "نمایش طرح نمونه",
+      "frameTitle": "شماره نمونه نوشته شده از {site}",
+      "openFull": "باز کردن در تب جدید"
     },
     "chain": {
       "eyebrow": "چطور کار می‌کند",
@@ -494,8 +590,8 @@ export default {
     "yearlySave": "35% صرفه‌جویی",
     "intervalLabel": "دوره پرداخت",
     "billedYearly": "پرداخت سالانه",
-    "perMonthShort": "/mo",
-    "perYearShort": "/yr",
+    "perMonthShort": "/ماه",
+    "perYearShort": "/سال",
     "freeCta": "شروع رایگان",
     "processing": "در حال باز کردن صفحه پرداخت...",
     "askMore": "همهٔ حساب‌ها با طرح رایگان شروع می‌شوند. اگر به بیشتر نیاز دارید، به {email} بنویسید تا طرحتان را تغییر دهیم.",
@@ -587,6 +683,7 @@ export default {
       "suggestions": "پیشنهادها",
       "recent": "جستجوهای اخیر",
       "clearRecent": "پاک کردن جستجوهای اخیر",
+      "clear": "پاک کردن جستجو",
       "title": "نتایج جستجو",
       "resultsFor": "نتایج برای «{q}»",
       "count": "{count} مقاله پیدا شد",
@@ -691,6 +788,7 @@ export default {
   "legal": {
     "navLabel": "اسناد حقوقی",
     "lastUpdated": "آخرین به‌روزرسانی: {date}",
+    "onThisPage": "در این صفحه",
     "privacy": {
       "title": "سیاست حریم خصوصی",
       "metaTitle": "سیاست حریم خصوصی | AIBAN",
@@ -919,6 +1017,8 @@ export default {
     "codeSent": "یک کد به ایمیل شما فرستادیم.",
     "invalidCode": "این کد درست نیست. آخرین ایمیلی را که فرستادیم بررسی کنید یا کد را دوباره بفرستید.",
     "regenerateCode": "ارسال مجدد کد",
+    "codeAccepted": "کد پذیرفته شد. در حال باز کردن داشبورد شما.",
+    "codeLabel": "کد ۶ رقمی",
     "back": "بازگشت",
     "byProceeding": "با ادامه دادن، شما با این موارد موافقت می‌کنید:",
     "termsOfService": "شرایط خدمات",
@@ -948,10 +1048,677 @@ export default {
       "invitedBy": "شما توسط {configuratorId} دعوت شده‌اید."
     }
   },
+  "showcase": {
+    "sampleBadge": "داده نمونه",
+    "exampleLabel": "کسب‌وکار نمونه",
+    "caption": "{business} یک نمونه {kind} است. نام‌ها، مقالات و اعداد در این نما، جای‌نگه‌دارهایی هستند که نشان می‌دهند داشبورد شما پس از چند هفته چگونه به نظر می‌رسد.",
+    "pause": "توقف انیمیشن",
+    "play": "پخش انیمیشن",
+    "scenesLabel": "بخش‌های داشبورد",
+    "examplesLabel": "کسب‌وکارهای نمونه",
+    "appUrl": "app.aiban.news",
+    "nav": {
+      "home": "خانه",
+      "automations": "اتوماسیون‌ها",
+      "sources": "منابع",
+      "subscribers": "مشترکان",
+      "reports": "گزارش‌ها",
+      "blog": "وبلاگ"
+    },
+    "scenes": {
+      "home": "نمای کلی",
+      "issue": "شماره",
+      "reports": "کلیک‌ها",
+      "subscribers": "مشترکان",
+      "automation": "برنامه‌ریزی",
+      "source": "وبسایت شما",
+      "voice": "صدای شما",
+      "signup": "فرم ثبت‌نام",
+      "blog": "وبلاگ",
+      "import": "وارد کردن"
+    },
+    "ui": {
+      "hello": "سلام، {business}",
+      "narrative": "{subscribers} خواننده به {languages} زبان. شماره بعدی {schedule} ارسال می‌شود.",
+      "kpiSubscribers": "مشترکین",
+      "kpiLanguages": "زبان‌ها",
+      "kpiClicks": "کلیک‌ها، ۷ روز گذشته",
+      "kpiAutomations": "اتوماسیون‌ها روشن",
+      "kpiNew": "{count} مورد جدید این هفته",
+      "nextIssue": "شماره بعدی",
+      "ready": "آماده",
+      "activity": "فعالیت اخیر",
+      "from": "از",
+      "subject": "موضوع",
+      "readMore": "مطالعه مقاله کامل",
+      "readerLanguage": "زبان خواننده",
+      "clicksTitle": "کلیک‌ها، ۷ روز گذشته",
+      "mostClicked": "بیشترین کلیک",
+      "clicks": "کلیک",
+      "days": [
+        "دوشنبه",
+        "سه‌شنبه",
+        "چهارشنبه",
+        "پنجشنبه",
+        "جمعه",
+        "شنبه",
+        "یکشنبه"
+      ],
+      "subscribersTitle": "مشترکین",
+      "language": "زبان",
+      "joinedVia": "عضو شده از طریق",
+      "newSubscriber": "مشترک جدید",
+      "automationTitle": "شماره هفتگی",
+      "automationSentence": "{schedule}، یک شماره از جدیدترین مقاله بنویس و به هر خواننده به زبان خودش ارسال کن.",
+      "on": "روشن",
+      "off": "خاموش",
+      "automationOn": "اتوماسیون روشن شد",
+      "sourceLabel": "محتوای شما از کجا می‌آید",
+      "sourceButton": "سایت من را بخوان",
+      "reading": "در حال خواندن سایت شما",
+      "found": "{count} مقاله پیدا شد",
+      "voiceReader": "خواننده ایده‌آل شما",
+      "voiceTone": "چگونه باید به نظر برسد",
+      "signupHeading": "یادداشت‌های هفتگی ما را دریافت کنید",
+      "signupEmail": "آدرس ایمیل",
+      "signupLanguage": "زبان",
+      "signupButton": "اشتراک",
+      "signupDone": "صندوق ورودی خود را برای تأیید بررسی کنید.",
+      "blogTitle": "مقالات از {business}",
+      "importFile": "clients.csv",
+      "importing": "در حال وارد کردن مخاطبین",
+      "imported": "{count} مخاطب اضافه شد",
+      "sources": {
+        "form": "فرم ثبت‌نام",
+        "import": "وارد کردن",
+        "manual": "اضافه شده دستی"
+      }
+    },
+    "examples": [
+      {
+        "business": "Northfield Studio",
+        "kind": "آژانس طراحی وب",
+        "site": "northfield.studio",
+        "schedule": "هر دوشنبه ساعت 9:00",
+        "subscribers": 312,
+        "newThisWeek": 9,
+        "clicks7": 84,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 58
+          },
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 31
+          },
+          {
+            "code": "pt",
+            "name": "Portuguese",
+            "share": 11
+          }
+        ],
+        "reader": "صاحبان کلینیک‌ها، فروشگاه‌ها و استودیوها که می‌خواهند وب‌سایتی داشته باشند که مشتری جذب کند، نه یک نمونه کار.",
+        "tones": [
+          "گرم",
+          "ساده",
+          "عملی"
+        ],
+        "articles": [
+          "چگونه وب‌سایت یک کلینیک دندانپزشکی را در شش هفته بازسازی کردیم",
+          "پنج چیزی که قبل از طراحی مجدد باید اصلاح کنید",
+          "چرا دکمه رزرو شما باید نارنجی باشد"
+        ],
+        "issue": {
+          "title": "چگونه وب‌سایت یک کلینیک دندانپزشکی را در شش هفته بازسازی کردیم",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "A clinic website rebuilt in six weeks",
+              "summary": "We moved booking to the top of every page and cut the forms from nine fields to three. Here is what changed for the clinic."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "El sitio de una clínica, renovado en seis semanas",
+              "summary": "Pusimos la reserva arriba en cada página y redujimos los formularios de nueve campos a tres. Esto es lo que cambió para la clínica."
+            },
+            {
+              "code": "pt",
+              "name": "Português",
+              "subject": "O site de uma clínica, refeito em seis semanas",
+              "summary": "Colocamos o agendamento no topo de cada página e reduzimos os formulários de nove campos para três. Veja o que mudou para a clínica."
+            }
+          ]
+        },
+        "clicksByDay": [
+          21,
+          17,
+          12,
+          9,
+          11,
+          6,
+          8
+        ],
+        "topLinks": [
+          {
+            "title": "مطالعه موردی کلینیک",
+            "clicks": 38
+          },
+          {
+            "title": "پنج چیزی که قبل از طراحی مجدد باید اصلاح کنید",
+            "clicks": 27
+          },
+          {
+            "title": "تماس رزرو کنید",
+            "clicks": 19
+          }
+        ],
+        "people": [
+          {
+            "email": "lucia.r@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "mark@example.org",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "joana.s@example.net",
+            "lang": "PT",
+            "via": "form"
+          },
+          {
+            "email": "dr.chen@example.com",
+            "lang": "EN",
+            "via": "manual"
+          }
+        ],
+        "activity": [
+          "نسخه برای 312 خواننده به 3 زبان ارسال شد",
+          "38 کلیک روی مطالعه موردی کلینیک",
+          "Lucia از فرم ثبت‌نام اضافه شد و به اسپانیایی می‌خواند"
+        ],
+        "importCount": 148
+      },
+      {
+        "business": "Brightline Software",
+        "kind": "شرکت نرم‌افزاری",
+        "site": "brightline.dev",
+        "schedule": "اول هر ماه ساعت 10:00",
+        "subscribers": 1240,
+        "newThisWeek": 23,
+        "clicks7": 211,
+        "automationsOn": 1,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 64
+          },
+          {
+            "code": "de",
+            "name": "German",
+            "share": 22
+          },
+          {
+            "code": "fr",
+            "name": "French",
+            "share": 14
+          }
+        ],
+        "reader": "مدیران دفتر و مسئولان فناوری اطلاعات در مشتریانی که هر روز از نرم‌افزار رزرو ما استفاده می‌کنند.",
+        "tones": [
+          "شفاف",
+          "کوتاه",
+          "دوستانه"
+        ],
+        "articles": [
+          "نسخه 4.2: قرارهای ملاقات تکراری",
+          "گزارش‌های سریع‌تر برای تیم‌های بزرگ",
+          "چگونه تقویم خود را از صفحه‌گسترده منتقل کنید"
+        ],
+        "issue": {
+          "title": "نسخه 4.2: قرارهای ملاقات تکراری",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "New this month: recurring appointments",
+              "summary": "You can now repeat any appointment weekly or monthly. Reports for teams over 50 people also load faster."
+            },
+            {
+              "code": "de",
+              "name": "Deutsch",
+              "subject": "Neu diesen Monat: wiederkehrende Termine",
+              "summary": "Sie können jetzt jeden Termin wöchentlich oder monatlich wiederholen. Berichte für Teams ab 50 Personen laden außerdem schneller."
+            },
+            {
+              "code": "fr",
+              "name": "Français",
+              "subject": "Nouveau ce mois-ci : les rendez-vous récurrents",
+              "summary": "Vous pouvez désormais répéter un rendez-vous chaque semaine ou chaque mois. Les rapports des équipes de plus de 50 personnes s'affichent aussi plus vite."
+            }
+          ]
+        },
+        "clicksByDay": [
+          64,
+          48,
+          33,
+          25,
+          19,
+          9,
+          13
+        ],
+        "topLinks": [
+          {
+            "title": "راهنمای قرارهای ملاقات تکراری",
+            "clicks": 96
+          },
+          {
+            "title": "یادداشت‌های انتشار نسخه 4.2",
+            "clicks": 71
+          },
+          {
+            "title": "انتقال از صفحه‌گسترده",
+            "clicks": 44
+          }
+        ],
+        "people": [
+          {
+            "email": "it@example.de",
+            "lang": "DE",
+            "via": "import"
+          },
+          {
+            "email": "sophie.m@example.fr",
+            "lang": "FR",
+            "via": "form"
+          },
+          {
+            "email": "ops@example.com",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "k.weber@example.de",
+            "lang": "DE",
+            "via": "form"
+          }
+        ],
+        "activity": [
+          "نسخه برای 1240 خواننده به 3 زبان ارسال شد",
+          "96 کلیک روی راهنمای قرارهای ملاقات تکراری",
+          "23 مخاطب از clients.csv وارد شد"
+        ],
+        "importCount": 412
+      },
+      {
+        "business": "Casa Verde Realty",
+        "kind": "آژانس املاک",
+        "site": "casaverde.homes",
+        "schedule": "هر پنج‌شنبه ساعت 8:00",
+        "subscribers": 586,
+        "newThisWeek": 14,
+        "clicks7": 163,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "es",
+            "name": "اسپانیایی",
+            "share": 47
+          },
+          {
+            "code": "en",
+            "name": "انگلیسی",
+            "share": 41
+          },
+          {
+            "code": "fr",
+            "name": "فرانسوی",
+            "share": 12
+          }
+        ],
+        "reader": "خانواده‌ها و بازنشستگان خارجی که به دنبال خانه‌ای نزدیک ساحل هستند، و مالکانی که ممکن است بفروشند.",
+        "tones": [
+          "گرم",
+          "محلی",
+          "آرام"
+        ],
+        "articles": [
+          "سه خانه جدید نزدیک ساحل این هفته",
+          "هزینه‌های پایانی برای خریداران خارجی چگونه است",
+          "قیمت‌ها در شهر قدیمی، به‌روزرسانی پاییز"
+        ],
+        "issue": {
+          "title": "سه خانه جدید نزدیک ساحل این هفته",
+          "langs": [
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tres casas nuevas cerca de la playa",
+              "summary": "Una casa de dos habitaciones con jardín, un apartamento con vista al mar y una casa para reformar a diez minutos del centro."
+            },
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Three new homes near the beach",
+              "summary": "A two bedroom house with a garden, a flat with a sea view and a house to renovate ten minutes from the center."
+            },
+            {
+              "code": "fr",
+              "name": "Français",
+              "subject": "Trois nouvelles maisons près de la plage",
+              "summary": "Une maison de deux chambres avec jardin, un appartement avec vue sur la mer et une maison à rénover à dix minutes du centre."
+            }
+          ]
+        },
+        "clicksByDay": [
+          12,
+          9,
+          15,
+          52,
+          38,
+          21,
+          16
+        ],
+        "topLinks": [
+          {
+            "title": "آپارتمان با منظره دریا",
+            "clicks": 71
+          },
+          {
+            "title": "خانه دو خوابه با باغ",
+            "clicks": 54
+          },
+          {
+            "title": "هزینه‌های پایانی برای خریداران خارجی",
+            "clicks": 38
+          }
+        ],
+        "people": [
+          {
+            "email": "familia.ortiz@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "j.dupont@example.fr",
+            "lang": "FR",
+            "via": "form"
+          },
+          {
+            "email": "tom.and.ann@example.org",
+            "lang": "EN",
+            "via": "manual"
+          },
+          {
+            "email": "rmora@example.net",
+            "lang": "ES",
+            "via": "import"
+          }
+        ],
+        "activity": [
+          "نسخه برای 586 خواننده به 3 زبان ارسال شد",
+          "71 کلیک روی آپارتمان با منظره دریا",
+          "یک خواننده در فرانسه از فرم ثبت‌نام اضافه شد"
+        ],
+        "importCount": 203
+      },
+      {
+        "business": "Mora and Partners",
+        "kind": "شرکت حسابداری",
+        "site": "morapartners.co",
+        "schedule": "هر دو هفته یک‌بار سه‌شنبه ساعت 7:30",
+        "subscribers": 428,
+        "newThisWeek": 6,
+        "clicks7": 97,
+        "automationsOn": 1,
+        "languages": [
+          {
+            "code": "en",
+            "name": "انگلیسی",
+            "share": 52
+          },
+          {
+            "code": "es",
+            "name": "اسپانیایی",
+            "share": 38
+          },
+          {
+            "code": "it",
+            "name": "ایتالیایی",
+            "share": 10
+          }
+        ],
+        "reader": "مالکان شرکت‌های کوچک که می‌خواهند بدون اصطلاحات فنی از تغییرات مالیات و حقوق و دستمزد مطلع شوند.",
+        "tones": [
+          "آرام",
+          "دقیق",
+          "ساده"
+        ],
+        "articles": [
+          "مهلت مالیات فصلی به پانزدهم منتقل شد",
+          "چه چیزهایی را هنگام استخدام اولین کارمند خود نگه دارید",
+          "رسیدها: کاغذی یا عکس؟"
+        ],
+        "issue": {
+          "title": "مهلت مالیات فصلی به پانزدهم منتقل شد",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Your quarterly deadline moves to the 15th",
+              "summary": "The filing date for the next quarter moves five days later. Here is what to send us and when, so nothing is late."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tu plazo trimestral pasa al día 15",
+              "summary": "La fecha de presentación del próximo trimestre se mueve cinco días. Esto es lo que debes enviarnos y cuándo, para que nada llegue tarde."
+            },
+            {
+              "code": "it",
+              "name": "Italiano",
+              "subject": "La scadenza trimestrale passa al 15",
+              "summary": "La data di presentazione del prossimo trimestre slitta di cinque giorni. Ecco cosa inviarci e quando, perché nulla arrivi in ritardo."
+            }
+          ]
+        },
+        "clicksByDay": [
+          33,
+          24,
+          14,
+          8,
+          7,
+          4,
+          7
+        ],
+        "topLinks": [
+          {
+            "title": "چک‌لیست برای پانزدهم",
+            "clicks": 46
+          },
+          {
+            "title": "استخدام اولین کارمند شما",
+            "clicks": 29
+          },
+          {
+            "title": "تماس مرور رزرو کنید",
+            "clicks": 22
+          }
+        ],
+        "people": [
+          {
+            "email": "bakery.owner@example.com",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "c.rossi@example.it",
+            "lang": "IT",
+            "via": "form"
+          },
+          {
+            "email": "taller.luna@example.net",
+            "lang": "ES",
+            "via": "import"
+          },
+          {
+            "email": "finance@example.org",
+            "lang": "EN",
+            "via": "manual"
+          }
+        ],
+        "activity": [
+          "نسخه برای ۴۲۸ خواننده به ۳ زبان ارسال شد",
+          "۴۶ کلیک روی چک‌لیست برای پانزدهم",
+          "۶ خواننده جدید این هفته"
+        ],
+        "importCount": 97
+      },
+      {
+        "business": "Run Better Coaching",
+        "kind": "مربی دویدن",
+        "site": "runbetter.coach",
+        "schedule": "هر یکشنبه ساعت ۱۸:۰۰",
+        "subscribers": 907,
+        "newThisWeek": 31,
+        "clicks7": 248,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 49
+          },
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 33
+          },
+          {
+            "code": "de",
+            "name": "German",
+            "share": 18
+          }
+        ],
+        "reader": "بزرگسالانی که برای اولین نیمه‌ماراتن خود تمرین می‌کنند و سه بار در هفته قبل از کار می‌دوند.",
+        "tones": [
+          "تشویق‌کننده",
+          "مستقیم",
+          "کوتاه"
+        ],
+        "articles": [
+          "این هفته: دویدن طولانی، کندتر از آنچه فکر می‌کنید",
+          "کفش‌ها بعد از ۵۰۰ کیلومتر",
+          "یک روال قدرتی ۲۰ دقیقه‌ای"
+        ],
+        "issue": {
+          "title": "این هفته: دویدن طولانی، کندتر از آنچه فکر می‌کنید",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Your long run should feel too easy",
+              "summary": "Keep it slow enough to talk. This week's plan adds ten minutes and one short hill session."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tu tirada larga debería sentirse demasiado fácil",
+              "summary": "Mantén un ritmo que te deje hablar. El plan de esta semana suma diez minutos y una sesión corta de cuestas."
+            },
+            {
+              "code": "de",
+              "name": "Deutsch",
+              "subject": "Dein langer Lauf sollte sich zu leicht anfühlen",
+              "summary": "Lauf so langsam, dass du noch reden kannst. Der Plan dieser Woche bringt zehn Minuten mehr und eine kurze Bergeinheit."
+            }
+          ]
+        },
+        "clicksByDay": [
+          18,
+          22,
+          26,
+          31,
+          35,
+          49,
+          67
+        ],
+        "topLinks": [
+          {
+            "title": "برنامه تمرینی این هفته",
+            "clicks": 121
+          },
+          {
+            "title": "روال قدرتی ۲۰ دقیقه‌ای",
+            "clicks": 78
+          },
+          {
+            "title": "کفش‌ها بعد از ۵۰۰ کیلومتر",
+            "clicks": 49
+          }
+        ],
+        "people": [
+          {
+            "email": "ana.runs@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "felix.k@example.de",
+            "lang": "DE",
+            "via": "form"
+          },
+          {
+            "email": "sam@example.org",
+            "lang": "EN",
+            "via": "form"
+          },
+          {
+            "email": "club.secretary@example.net",
+            "lang": "EN",
+            "via": "import"
+          }
+        ],
+        "activity": [
+          "نسخه برای ۹۰۷ خواننده به ۳ زبان ارسال شد",
+          "۱۲۱ کلیک روی برنامه تمرینی این هفته",
+          "۳۱ خواننده جدید این هفته، بیشتر از فرم ثبت‌نام"
+        ],
+        "importCount": 260
+      }
+    ]
+  },
+  "errorPage": {
+    "notFoundEyebrow": "خطای ۴۰۴",
+    "notFoundTitle": "این صفحه را پیدا نکردیم",
+    "notFoundBody": "ممکن است لینک قدیمی باشد یا تایپی داشته باشد. این صفحات جای خوبی برای ادامه هستند.",
+    "serverEyebrow": "خطای {status}",
+    "serverTitle": "مشکلی از سمت ما پیش آمد",
+    "serverBody": "نتوانستیم این صفحه را بارگذاری کنیم. یک دقیقه دیگر دوباره تلاش کنید. اگر ادامه داشت، به info@aiban.news بنویسید.",
+    "retry": "دوباره تلاش کنید",
+    "home": "برو به صفحه اصلی",
+    "popularTitle": "صفحات محبوب",
+    "links": {
+      "howItWorks": "چگونه AIBAN کار می‌کند",
+      "pricing": "تعرفه‌ها",
+      "help": "مرکز راهنمایی",
+      "login": "ورود به داشبورد شما"
+    },
+    "report": "اگر پیوندی در سایت ما شما را به اینجا آورده است، به info@aiban.news اطلاع دهید تا آن را برطرف کنیم."
+  },
   "header": {
     "goToWorkspace": "باز کردن داشبورد",
     "inBilling": "قیمت‌ها",
-    "vip": "VIP",
+    "vip": "ویژه",
     "plan": "پکیج {planName}",
     "logIn": "ورود",
     "getStarted": "شروع رایگان"
@@ -982,1429 +1749,5 @@ export default {
     "monthly": "ماهانه",
     "yearly": "سالانه",
     "loadingPlan": "در حال دریافت داده‌های پکیج..."
-  },
-  "languages": [
-    {
-      "code": "ab",
-      "name": "آبخازی"
-    },
-    {
-      "code": "aa",
-      "name": "عفار"
-    },
-    {
-      "code": "af",
-      "name": "آفریکانس"
-    },
-    {
-      "code": "ak",
-      "name": "آکانی"
-    },
-    {
-      "code": "sq",
-      "name": "آلبانیایی"
-    },
-    {
-      "code": "am",
-      "name": "آمهاری"
-    },
-    {
-      "code": "ar",
-      "name": "عربی"
-    },
-    {
-      "code": "an",
-      "name": "آراگونی"
-    },
-    {
-      "code": "hy",
-      "name": "ارمنی"
-    },
-    {
-      "code": "as",
-      "name": "آسامی"
-    },
-    {
-      "code": "av",
-      "name": "آواری"
-    },
-    {
-      "code": "ae",
-      "name": "اوستایی"
-    },
-    {
-      "code": "ay",
-      "name": "آیمارا"
-    },
-    {
-      "code": "az",
-      "name": "آذربایجانی"
-    },
-    {
-      "code": "bm",
-      "name": "بامبارایی"
-    },
-    {
-      "code": "ba",
-      "name": "باشقیری"
-    },
-    {
-      "code": "eu",
-      "name": "باسکی"
-    },
-    {
-      "code": "be",
-      "name": "بلاروسی"
-    },
-    {
-      "code": "bn",
-      "name": "بنگالی"
-    },
-    {
-      "code": "bi",
-      "name": "بیسلاما"
-    },
-    {
-      "code": "bs",
-      "name": "بوسنیایی"
-    },
-    {
-      "code": "br",
-      "name": "برتون"
-    },
-    {
-      "code": "bg",
-      "name": "بلغاری"
-    },
-    {
-      "code": "my",
-      "name": "برمه‌ای"
-    },
-    {
-      "code": "ca",
-      "name": "کاتالان"
-    },
-    {
-      "code": "ch",
-      "name": "چامورو"
-    },
-    {
-      "code": "ce",
-      "name": "چچنی"
-    },
-    {
-      "code": "ny",
-      "name": "چیچوا"
-    },
-    {
-      "code": "zh",
-      "name": "چینی"
-    },
-    {
-      "code": "cu",
-      "name": "اسلاوی کلیسایی"
-    },
-    {
-      "code": "cv",
-      "name": "چوواشی"
-    },
-    {
-      "code": "kw",
-      "name": "کورنیش"
-    },
-    {
-      "code": "co",
-      "name": "کورسی"
-    },
-    {
-      "code": "cr",
-      "name": "کری"
-    },
-    {
-      "code": "hr",
-      "name": "کرواتی"
-    },
-    {
-      "code": "cs",
-      "name": "چکی"
-    },
-    {
-      "code": "da",
-      "name": "دانمارکی"
-    },
-    {
-      "code": "dv",
-      "name": "دیوهی"
-    },
-    {
-      "code": "nl",
-      "name": "هلندی"
-    },
-    {
-      "code": "dz",
-      "name": "دزونگخا"
-    },
-    {
-      "code": "en",
-      "name": "انگلیسی"
-    },
-    {
-      "code": "eo",
-      "name": "اسپرانتو"
-    },
-    {
-      "code": "et",
-      "name": "استونیایی"
-    },
-    {
-      "code": "ee",
-      "name": "اوه‌ای"
-    },
-    {
-      "code": "fo",
-      "name": "فارویی"
-    },
-    {
-      "code": "fj",
-      "name": "فیجیایی"
-    },
-    {
-      "code": "fi",
-      "name": "فنلاندی"
-    },
-    {
-      "code": "fr",
-      "name": "فرانسوی"
-    },
-    {
-      "code": "fy",
-      "name": "فریزی غربی"
-    },
-    {
-      "code": "ff",
-      "name": "فولانی"
-    },
-    {
-      "code": "gd",
-      "name": "گیلیک اسکاتلندی"
-    },
-    {
-      "code": "gl",
-      "name": "گالیسیایی"
-    },
-    {
-      "code": "lg",
-      "name": "گاندایی"
-    },
-    {
-      "code": "ka",
-      "name": "گرجی"
-    },
-    {
-      "code": "de",
-      "name": "آلمانی"
-    },
-    {
-      "code": "el",
-      "name": "یونانی"
-    },
-    {
-      "code": "kl",
-      "name": "گرینلندی"
-    },
-    {
-      "code": "gn",
-      "name": "گوارانی"
-    },
-    {
-      "code": "gu",
-      "name": "گجراتی"
-    },
-    {
-      "code": "ht",
-      "name": "کریول هائیتی"
-    },
-    {
-      "code": "ha",
-      "name": "هوسا"
-    },
-    {
-      "code": "he",
-      "name": "عبری"
-    },
-    {
-      "code": "hz",
-      "name": "هررو"
-    },
-    {
-      "code": "hi",
-      "name": "هندی"
-    },
-    {
-      "code": "ho",
-      "name": "هیری موتو"
-    },
-    {
-      "code": "hu",
-      "name": "مجاری"
-    },
-    {
-      "code": "is",
-      "name": "ایسلندی"
-    },
-    {
-      "code": "io",
-      "name": "ایدو"
-    },
-    {
-      "code": "ig",
-      "name": "ایگبو"
-    },
-    {
-      "code": "id",
-      "name": "اندونزیایی"
-    },
-    {
-      "code": "ia",
-      "name": "اینترلینگوا"
-    },
-    {
-      "code": "ie",
-      "name": "اینترلینگوه"
-    },
-    {
-      "code": "iu",
-      "name": "اینوکتیتوت"
-    },
-    {
-      "code": "ik",
-      "name": "اینوپیاک"
-    },
-    {
-      "code": "ga",
-      "name": "ایرلندی"
-    },
-    {
-      "code": "it",
-      "name": "ایتالیایی"
-    },
-    {
-      "code": "ja",
-      "name": "ژاپنی"
-    },
-    {
-      "code": "jv",
-      "name": "جاوه‌ای"
-    },
-    {
-      "code": "kn",
-      "name": "کانارا"
-    },
-    {
-      "code": "kr",
-      "name": "کانوری"
-    },
-    {
-      "code": "ks",
-      "name": "کشمیری"
-    },
-    {
-      "code": "kk",
-      "name": "قزاقی"
-    },
-    {
-      "code": "km",
-      "name": "خمر"
-    },
-    {
-      "code": "ki",
-      "name": "کیکویو"
-    },
-    {
-      "code": "rw",
-      "name": "کینیارواندا"
-    },
-    {
-      "code": "ky",
-      "name": "قرقیزی"
-    },
-    {
-      "code": "kv",
-      "name": "کومی"
-    },
-    {
-      "code": "kg",
-      "name": "کنگویی"
-    },
-    {
-      "code": "ko",
-      "name": "کره‌ای"
-    },
-    {
-      "code": "kj",
-      "name": "کوان‌یاما"
-    },
-    {
-      "code": "ku",
-      "name": "کردی"
-    },
-    {
-      "code": "lo",
-      "name": "لائو"
-    },
-    {
-      "code": "la",
-      "name": "لاتین"
-    },
-    {
-      "code": "lv",
-      "name": "لتونیایی"
-    },
-    {
-      "code": "li",
-      "name": "لیمبورگی"
-    },
-    {
-      "code": "ln",
-      "name": "لینگالا"
-    },
-    {
-      "code": "lt",
-      "name": "لیتوانیایی"
-    },
-    {
-      "code": "lu",
-      "name": "لوبا-کاتانگا"
-    },
-    {
-      "code": "lb",
-      "name": "لوکزامبورگی"
-    },
-    {
-      "code": "mk",
-      "name": "مقدونی"
-    },
-    {
-      "code": "mg",
-      "name": "مالاگاسی"
-    },
-    {
-      "code": "ms",
-      "name": "مالایی"
-    },
-    {
-      "code": "ml",
-      "name": "مالایالم"
-    },
-    {
-      "code": "mt",
-      "name": "مالتی"
-    },
-    {
-      "code": "gv",
-      "name": "مانکس"
-    },
-    {
-      "code": "mi",
-      "name": "مائوری"
-    },
-    {
-      "code": "mr",
-      "name": "ماراتی"
-    },
-    {
-      "code": "mh",
-      "name": "مارشالی"
-    },
-    {
-      "code": "mn",
-      "name": "مغولی"
-    },
-    {
-      "code": "na",
-      "name": "نائورویی"
-    },
-    {
-      "code": "nv",
-      "name": "ناواهو"
-    },
-    {
-      "code": "nd",
-      "name": "ندبله شمالی"
-    },
-    {
-      "code": "nr",
-      "name": "ندبله جنوبی"
-    },
-    {
-      "code": "ng",
-      "name": "ندونگا"
-    },
-    {
-      "code": "ne",
-      "name": "نپالی"
-    },
-    {
-      "code": "no",
-      "name": "نروژی"
-    },
-    {
-      "code": "nb",
-      "name": "بوکمال نروژی"
-    },
-    {
-      "code": "nn",
-      "name": "نروژی نینورسک"
-    },
-    {
-      "code": "oc",
-      "name": "اکسیتان"
-    },
-    {
-      "code": "oj",
-      "name": "اوجیبوا"
-    },
-    {
-      "code": "or",
-      "name": "اوریه"
-    },
-    {
-      "code": "om",
-      "name": "اورومو"
-    },
-    {
-      "code": "os",
-      "name": "آسی"
-    },
-    {
-      "code": "pi",
-      "name": "پالی"
-    },
-    {
-      "code": "ps",
-      "name": "پشتو"
-    },
-    {
-      "code": "fa",
-      "name": "فارسی"
-    },
-    {
-      "code": "pl",
-      "name": "لهستانی"
-    },
-    {
-      "code": "pt",
-      "name": "پرتغالی"
-    },
-    {
-      "code": "pa",
-      "name": "پنجابی"
-    },
-    {
-      "code": "qu",
-      "name": "کچوا"
-    },
-    {
-      "code": "ro",
-      "name": "رومانیایی"
-    },
-    {
-      "code": "rm",
-      "name": "رومانش"
-    },
-    {
-      "code": "rn",
-      "name": "روندی"
-    },
-    {
-      "code": "ru",
-      "name": "روسی"
-    },
-    {
-      "code": "se",
-      "name": "سامی شمالی"
-    },
-    {
-      "code": "sm",
-      "name": "ساموآیی"
-    },
-    {
-      "code": "sg",
-      "name": "سانگو"
-    },
-    {
-      "code": "sa",
-      "name": "سانسکریت"
-    },
-    {
-      "code": "sc",
-      "name": "ساردنیایی"
-    },
-    {
-      "code": "sr",
-      "name": "صربی"
-    },
-    {
-      "code": "sn",
-      "name": "شونا"
-    },
-    {
-      "code": "ii",
-      "name": "سیچوان یی"
-    },
-    {
-      "code": "sd",
-      "name": "سندی"
-    },
-    {
-      "code": "si",
-      "name": "سینهالی"
-    },
-    {
-      "code": "sk",
-      "name": "اسلواکی"
-    },
-    {
-      "code": "sl",
-      "name": "اسلوونیایی"
-    },
-    {
-      "code": "so",
-      "name": "سومالیایی"
-    },
-    {
-      "code": "st",
-      "name": "سوتو جنوبی"
-    },
-    {
-      "code": "es",
-      "name": "اسپانیایی"
-    },
-    {
-      "code": "su",
-      "name": "سوندایی"
-    },
-    {
-      "code": "sw",
-      "name": "سواحیلی"
-    },
-    {
-      "code": "ss",
-      "name": "سواتی"
-    },
-    {
-      "code": "sv",
-      "name": "سوئدی"
-    },
-    {
-      "code": "tl",
-      "name": "تاگالوگ"
-    },
-    {
-      "code": "ty",
-      "name": "تاهیتیایی"
-    },
-    {
-      "code": "tg",
-      "name": "تاجیکی"
-    },
-    {
-      "code": "ta",
-      "name": "تامیلی"
-    },
-    {
-      "code": "tt",
-      "name": "تاتاری"
-    },
-    {
-      "code": "te",
-      "name": "تلوگو"
-    },
-    {
-      "code": "th",
-      "name": "تایلندی"
-    },
-    {
-      "code": "bo",
-      "name": "تبتی"
-    },
-    {
-      "code": "ti",
-      "name": "تیگرینیا"
-    },
-    {
-      "code": "to",
-      "name": "تونیایی"
-    },
-    {
-      "code": "ts",
-      "name": "تسونگا"
-    },
-    {
-      "code": "tn",
-      "name": "تسوانا"
-    },
-    {
-      "code": "tr",
-      "name": "ترکی استانبولی"
-    },
-    {
-      "code": "tk",
-      "name": "ترکمنی"
-    },
-    {
-      "code": "tw",
-      "name": "تویی"
-    },
-    {
-      "code": "ug",
-      "name": "ایغوری"
-    },
-    {
-      "code": "uk",
-      "name": "اوکراینی"
-    },
-    {
-      "code": "ur",
-      "name": "اردو"
-    },
-    {
-      "code": "uz",
-      "name": "ازبکی"
-    },
-    {
-      "code": "ve",
-      "name": "وندا"
-    },
-    {
-      "code": "vi",
-      "name": "ویتنامی"
-    },
-    {
-      "code": "vo",
-      "name": "ولاپوک"
-    },
-    {
-      "code": "wa",
-      "name": "والونی"
-    },
-    {
-      "code": "cy",
-      "name": "ولزی"
-    },
-    {
-      "code": "wo",
-      "name": "ولوف"
-    },
-    {
-      "code": "xh",
-      "name": "خوسایی"
-    },
-    {
-      "code": "yi",
-      "name": "ییدیش"
-    },
-    {
-      "code": "yo",
-      "name": "یوروبایی"
-    },
-    {
-      "code": "za",
-      "name": "ژوانگ"
-    },
-    {
-      "code": "zu",
-      "name": "زولو"
-    }
-  ],
-  "countries": [
-    {
-      "code": "AF",
-      "name": "افغانستان"
-    },
-    {
-      "code": "AL",
-      "name": "آلبانی"
-    },
-    {
-      "code": "DZ",
-      "name": "الجزایر"
-    },
-    {
-      "code": "AS",
-      "name": "ساموآی آمریکا"
-    },
-    {
-      "code": "AD",
-      "name": "آندورا"
-    },
-    {
-      "code": "AO",
-      "name": "آنگولا"
-    },
-    {
-      "code": "AI",
-      "name": "آنگویلا"
-    },
-    {
-      "code": "AQ",
-      "name": "آنتارکتیکا"
-    },
-    {
-      "code": "AG",
-      "name": "آنتیگوا و باربودا"
-    },
-    {
-      "code": "AR",
-      "name": "آرژانتین"
-    },
-    {
-      "code": "AM",
-      "name": "ارمنستان"
-    },
-    {
-      "code": "AW",
-      "name": "آروبا"
-    },
-    {
-      "code": "AU",
-      "name": "استرالیا"
-    },
-    {
-      "code": "AT",
-      "name": "اتریش"
-    },
-    {
-      "code": "AZ",
-      "name": "آذربایجان"
-    },
-    {
-      "code": "BS",
-      "name": "باهاما"
-    },
-    {
-      "code": "BH",
-      "name": "بحرین"
-    },
-    {
-      "code": "BD",
-      "name": "بنگلادش"
-    },
-    {
-      "code": "BB",
-      "name": "باربادوس"
-    },
-    {
-      "code": "BY",
-      "name": "بلاروس"
-    },
-    {
-      "code": "BE",
-      "name": "بلژیک"
-    },
-    {
-      "code": "BZ",
-      "name": "بلیز"
-    },
-    {
-      "code": "BJ",
-      "name": "بنین"
-    },
-    {
-      "code": "BM",
-      "name": "برمودا"
-    },
-    {
-      "code": "BT",
-      "name": "بوتان"
-    },
-    {
-      "code": "BO",
-      "name": "بولیوی"
-    },
-    {
-      "code": "BA",
-      "name": "بوسنی و هرزگوین"
-    },
-    {
-      "code": "BW",
-      "name": "بوتسوانا"
-    },
-    {
-      "code": "BR",
-      "name": "برزیل"
-    },
-    {
-      "code": "IO",
-      "name": "قلمرو بریتانیا در اقیانوس هند"
-    },
-    {
-      "code": "VG",
-      "name": "جزایر ویرجین بریتانیا"
-    },
-    {
-      "code": "BN",
-      "name": "برونئی"
-    },
-    {
-      "code": "BG",
-      "name": "بلغارستان"
-    },
-    {
-      "code": "BF",
-      "name": "بورکینافاسو"
-    },
-    {
-      "code": "BI",
-      "name": "بوروندی"
-    },
-    {
-      "code": "KH",
-      "name": "کامبوج"
-    },
-    {
-      "code": "CM",
-      "name": "کامرون"
-    },
-    {
-      "code": "CA",
-      "name": "کانادا"
-    },
-    {
-      "code": "CV",
-      "name": "کیپ ورد"
-    },
-    {
-      "code": "KY",
-      "name": "جزایر کیمن"
-    },
-    {
-      "code": "CF",
-      "name": "جمهوری آفریقای مرکزی"
-    },
-    {
-      "code": "TD",
-      "name": "چاد"
-    },
-    {
-      "code": "CL",
-      "name": "شیلی"
-    },
-    {
-      "code": "CN",
-      "name": "چین"
-    },
-    {
-      "code": "CX",
-      "name": "جزیره کریسمس"
-    },
-    {
-      "code": "CC",
-      "name": "جزایر کوکوس"
-    },
-    {
-      "code": "CO",
-      "name": "کلمبیا"
-    },
-    {
-      "code": "KM",
-      "name": "کومور"
-    },
-    {
-      "code": "CG",
-      "name": "کنگو - برازاویل"
-    },
-    {
-      "code": "CD",
-      "name": "کنگو - کینشاسا"
-    },
-    {
-      "code": "CK",
-      "name": "جزایر کوک"
-    },
-    {
-      "code": "CR",
-      "name": "کاستاریکا"
-    },
-    {
-      "code": "CI",
-      "name": "ساحل عاج"
-    },
-    {
-      "code": "HR",
-      "name": "کرواسی"
-    },
-    {
-      "code": "CU",
-      "name": "کوبا"
-    },
-    {
-      "code": "CY",
-      "name": "قبرس"
-    },
-    {
-      "code": "CZ",
-      "name": "جمهوری چک"
-    },
-    {
-      "code": "DK",
-      "name": "دانمارک"
-    },
-    {
-      "code": "DJ",
-      "name": "جیبوتی"
-    },
-    {
-      "code": "DM",
-      "name": "دومینیکا"
-    },
-    {
-      "code": "DO",
-      "name": "جمهوری دومینیکن"
-    },
-    {
-      "code": "EC",
-      "name": "اکوادور"
-    },
-    {
-      "code": "EG",
-      "name": "مصر"
-    },
-    {
-      "code": "SV",
-      "name": "السالوادور"
-    },
-    {
-      "code": "GQ",
-      "name": "گینه استوایی"
-    },
-    {
-      "code": "ER",
-      "name": "اریتره"
-    },
-    {
-      "code": "EE",
-      "name": "استونی"
-    },
-    {
-      "code": "SZ",
-      "name": "اسواتینی"
-    },
-    {
-      "code": "ET",
-      "name": "اتیوپی"
-    },
-    {
-      "code": "FJ",
-      "name": "فیجی"
-    },
-    {
-      "code": "FI",
-      "name": "فنلاند"
-    },
-    {
-      "code": "FR",
-      "name": "فرانسه"
-    },
-    {
-      "code": "GA",
-      "name": "گابن"
-    },
-    {
-      "code": "GM",
-      "name": "گامبیا"
-    },
-    {
-      "code": "GE",
-      "name": "گرجستان"
-    },
-    {
-      "code": "DE",
-      "name": "آلمان"
-    },
-    {
-      "code": "GH",
-      "name": "غنا"
-    },
-    {
-      "code": "GR",
-      "name": "یونان"
-    },
-    {
-      "code": "GT",
-      "name": "گواتمالا"
-    },
-    {
-      "code": "GN",
-      "name": "گینه"
-    },
-    {
-      "code": "GY",
-      "name": "گویان"
-    },
-    {
-      "code": "HT",
-      "name": "هائیتی"
-    },
-    {
-      "code": "HN",
-      "name": "هندوراس"
-    },
-    {
-      "code": "HK",
-      "name": "هنگ‌کنگ"
-    },
-    {
-      "code": "HU",
-      "name": "مجارستان"
-    },
-    {
-      "code": "IS",
-      "name": "ایسلند"
-    },
-    {
-      "code": "IN",
-      "name": "هند"
-    },
-    {
-      "code": "ID",
-      "name": "اندونزی"
-    },
-    {
-      "code": "IR",
-      "name": "ایران"
-    },
-    {
-      "code": "IQ",
-      "name": "عراق"
-    },
-    {
-      "code": "IE",
-      "name": "ایرلند"
-    },
-    {
-      "code": "IL",
-      "name": "اسرائیل"
-    },
-    {
-      "code": "IT",
-      "name": "ایتالیا"
-    },
-    {
-      "code": "JM",
-      "name": "جامائیکا"
-    },
-    {
-      "code": "JP",
-      "name": "ژاپن"
-    },
-    {
-      "code": "JO",
-      "name": "اردن"
-    },
-    {
-      "code": "KZ",
-      "name": "قزاقستان"
-    },
-    {
-      "code": "KE",
-      "name": "کنیا"
-    },
-    {
-      "code": "KR",
-      "name": "کره جنوبی"
-    },
-    {
-      "code": "KW",
-      "name": "کویت"
-    },
-    {
-      "code": "KG",
-      "name": "قرقیزستان"
-    },
-    {
-      "code": "LA",
-      "name": "لائوس"
-    },
-    {
-      "code": "LV",
-      "name": "لتونی"
-    },
-    {
-      "code": "LB",
-      "name": "لبنان"
-    },
-    {
-      "code": "LS",
-      "name": "لسوتو"
-    },
-    {
-      "code": "LR",
-      "name": "لیبریا"
-    },
-    {
-      "code": "LY",
-      "name": "لیبی"
-    },
-    {
-      "code": "LI",
-      "name": "لیختن‌اشتاین"
-    },
-    {
-      "code": "LT",
-      "name": "لیتوانی"
-    },
-    {
-      "code": "LU",
-      "name": "لوکزامبورگ"
-    },
-    {
-      "code": "MG",
-      "name": "ماداگاسکار"
-    },
-    {
-      "code": "MW",
-      "name": "مالاوی"
-    },
-    {
-      "code": "MY",
-      "name": "مالزی"
-    },
-    {
-      "code": "MV",
-      "name": "مالدیو"
-    },
-    {
-      "code": "ML",
-      "name": "مالی"
-    },
-    {
-      "code": "MT",
-      "name": "مالت"
-    },
-    {
-      "code": "MX",
-      "name": "مکزیک"
-    },
-    {
-      "code": "MD",
-      "name": "مولداوی"
-    },
-    {
-      "code": "MC",
-      "name": "موناکو"
-    },
-    {
-      "code": "MN",
-      "name": "مغولستان"
-    },
-    {
-      "code": "ME",
-      "name": "مونته‌نگرو"
-    },
-    {
-      "code": "MA",
-      "name": "مراکش"
-    },
-    {
-      "code": "MZ",
-      "name": "موزامبیک"
-    },
-    {
-      "code": "MM",
-      "name": "میانمار"
-    },
-    {
-      "code": "NA",
-      "name": "نامیبیا"
-    },
-    {
-      "code": "NP",
-      "name": "نپال"
-    },
-    {
-      "code": "NL",
-      "name": "هلند"
-    },
-    {
-      "code": "NZ",
-      "name": "نیوزیلند"
-    },
-    {
-      "code": "NI",
-      "name": "نیکاراگوئه"
-    },
-    {
-      "code": "NE",
-      "name": "نیجر"
-    },
-    {
-      "code": "NG",
-      "name": "نیجریه"
-    },
-    {
-      "code": "MK",
-      "name": "مقدونیه شمالی"
-    },
-    {
-      "code": "NO",
-      "name": "نروژ"
-    },
-    {
-      "code": "OM",
-      "name": "عمان"
-    },
-    {
-      "code": "PK",
-      "name": "پاکستان"
-    },
-    {
-      "code": "PA",
-      "name": "پاناما"
-    },
-    {
-      "code": "PG",
-      "name": "پاپوآ گینه نو"
-    },
-    {
-      "code": "PY",
-      "name": "پاراگوئه"
-    },
-    {
-      "code": "PE",
-      "name": "پرو"
-    },
-    {
-      "code": "PH",
-      "name": "فیلیپین"
-    },
-    {
-      "code": "PL",
-      "name": "لهستان"
-    },
-    {
-      "code": "PT",
-      "name": "پرتغال"
-    },
-    {
-      "code": "QA",
-      "name": "قطر"
-    },
-    {
-      "code": "RO",
-      "name": "رومانی"
-    },
-    {
-      "code": "RU",
-      "name": "روسیه"
-    },
-    {
-      "code": "RW",
-      "name": "رواندا"
-    },
-    {
-      "code": "SA",
-      "name": "عربستان سعودی"
-    },
-    {
-      "code": "SN",
-      "name": "سنگال"
-    },
-    {
-      "code": "RS",
-      "name": "صربستان"
-    },
-    {
-      "code": "SG",
-      "name": "سنگاپور"
-    },
-    {
-      "code": "SK",
-      "name": "اسلواکی"
-    },
-    {
-      "code": "SI",
-      "name": "اسلوونی"
-    },
-    {
-      "code": "ZA",
-      "name": "آفریقای جنوبی"
-    },
-    {
-      "code": "ES",
-      "name": "اسپانیا"
-    },
-    {
-      "code": "LK",
-      "name": "سری‌لانکا"
-    },
-    {
-      "code": "SE",
-      "name": "سوئد"
-    },
-    {
-      "code": "CH",
-      "name": "سوئیس"
-    },
-    {
-      "code": "TW",
-      "name": "تایوان"
-    },
-    {
-      "code": "TH",
-      "name": "تایلند"
-    },
-    {
-      "code": "TR",
-      "name": "ترکیه"
-    },
-    {
-      "code": "UG",
-      "name": "اوگاندا"
-    },
-    {
-      "code": "UA",
-      "name": "اوکراین"
-    },
-    {
-      "code": "AE",
-      "name": "امارات متحده عربی"
-    },
-    {
-      "code": "GB",
-      "name": "بریتانیا"
-    },
-    {
-      "code": "US",
-      "name": "ایالات متحده"
-    },
-    {
-      "code": "UY",
-      "name": "اروگوئه"
-    },
-    {
-      "code": "UZ",
-      "name": "ازبکستان"
-    },
-    {
-      "code": "VE",
-      "name": "ونزوئلا"
-    },
-    {
-      "code": "VN",
-      "name": "ویتنام"
-    },
-    {
-      "code": "YE",
-      "name": "یمن"
-    },
-    {
-      "code": "ZM",
-      "name": "زامبیا"
-    },
-    {
-      "code": "ZW",
-      "name": "زیمبابوه"
-    }
-  ]
+  }
 };

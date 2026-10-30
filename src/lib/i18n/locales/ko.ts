@@ -1,5 +1,5 @@
-// ko strings for locales. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale ko
+// ko (Korean) strings for locales. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "auth": {
     "logo": "/icons/logo.png",
@@ -35,6 +35,82 @@ export default {
       "ogImageAlt": "AIBAN 로고"
     },
     "skipLink": "본문으로 건너뛰기",
+    "display": {
+      "title": "웹사이트를 뉴스레터로 작성합니다.",
+      "kicker": "AIBAN"
+    },
+    "statement": {
+      "lines": [
+        "이미 좋은 콘텐츠를 발행하고 계십니다.",
+        "고객님들은 여러 언어로 읽습니다.",
+        "AIBAN은 각각의 새 글을 호로 변환합니다",
+        "그리고 모든 구독자에게 그들의 언어로 된 버전을 보냅니다."
+      ]
+    },
+    "history": {
+      "eyebrow": "작동 방식",
+      "title": "한 호의 생애.",
+      "lead": "스케줄이 시작하는 순간부터 다시 시작할 때까지 한 호를 따라가 보세요. 한 번만 설정하면 됩니다.",
+      "note": "예시 스케줄입니다. 요일, 시간, 빈도를 선택하세요.",
+      "progressLabel": "한 호의 단계",
+      "items": [
+        {
+          "mark": "9:00",
+          "title": "스케줄이 실행을 시작합니다",
+          "body": "이 예시에서는 매주 월요일 9:00입니다. 매일, 매주, 매월 중 선택하세요."
+        },
+        {
+          "mark": "읽기",
+          "title": "AIBAN이 웹사이트를 읽습니다",
+          "body": "최신 글을 찾고 이상적인 독자가 가장 관심 가질 부분을 선택합니다."
+        },
+        {
+          "mark": "작성",
+          "title": "여러분의 목소리로 호를 작성합니다",
+          "body": "텍스트는 웹사이트 작성 방식을 따르므로 여러분처럼 들립니다."
+        },
+        {
+          "mark": "번역",
+          "title": "각 구독자는 자신의 언어로 받습니다",
+          "body": "한 호가 구독자가 필요한 만큼의 버전으로 변합니다."
+        },
+        {
+          "mark": "발송",
+          "title": "여러분의 이름으로 도착합니다",
+          "body": "여러분의 이름과 이메일 서명과 함께. 답장은 여러분의 수신함으로 갑니다."
+        },
+        {
+          "mark": "게시",
+          "title": "블로그의 글이 됩니다",
+          "body": "검색에서 찾고 공유할 수 있는 고유한 링크와 함께."
+        },
+        {
+          "mark": "보고",
+          "title": "무슨 일이 있었는지 확인합니다",
+          "body": "대시보드에 누가 가입했고 어떤 링크를 클릭했는지 나열됩니다."
+        },
+        {
+          "mark": "다시",
+          "title": "다음 월요일에 다시 실행됩니다",
+          "body": "대시보드에서 끌 때까지 계속됩니다."
+        }
+      ]
+    },
+    "rail": {
+      "label": "페이지 챕터",
+      "chapters": [
+        "시작",
+        "이유",
+        "언어",
+        "작동 방식",
+        "회사명",
+        "성장",
+        "적합한 대상",
+        "가격",
+        "질문",
+        "시작하기"
+      ]
+    },
     "hero": {
       "eyebrow": "서비스 업종을 위한 뉴스레터",
       "title": "내 웹사이트가 독자마다 자신의 언어로 받는 주간 뉴스레터가 됩니다",
@@ -57,6 +133,26 @@ export default {
       "startCta": "{site}(으)로 무료 시작",
       "startCtaGeneric": "무료로 시작하기",
       "liveRegion": "{site}의 샘플 미리 보기를 업데이트했습니다."
+    },
+    "live": {
+      "badge": "방금 작성됨",
+      "loadingTitle": "{site}에서 샘플 호 작성 중",
+      "steps": [
+        "{site} 읽는 중",
+        "최신 글 찾는 중",
+        "{language}로 작성 중",
+        "이메일 템플릿에 넣는 중"
+      ],
+      "takes": "보통 20~40초 정도 걸립니다. 계속 스크롤하셔도 됩니다.",
+      "readyNote": "AIBAN은 {site}의 최신 글에서 이 샘플을 작성합니다. 아무것도 저장되거나 전송되지 않습니다. 시작하면 여러분만의 목소리와 일정으로 작동합니다.",
+      "readyAnnounce": "{site}의 샘플 호가 준비되었습니다.",
+      "languageLabel": "독자 언어",
+      "loadingLanguage": "{language}로 작성 중",
+      "errorTitle": "{site}에서 미리보기를 작성할 수 없었습니다",
+      "retry": "다시 시도",
+      "showSample": "샘플 레이아웃 보기",
+      "frameTitle": "{site}에서 작성된 샘플 호",
+      "openFull": "새 탭에서 열기"
     },
     "chain": {
       "eyebrow": "작동 방식",
@@ -242,7 +338,7 @@ export default {
         "cookies": "쿠키 정책"
       },
       "contactLabel": "문의",
-      "rights": "All rights reserved."
+      "rights": "모든 권리 보유."
     }
   },
   "help": {
@@ -494,8 +590,8 @@ export default {
     "yearlySave": "35% 할인",
     "intervalLabel": "결제 주기",
     "billedYearly": "연간 청구",
-    "perMonthShort": "/mo",
-    "perYearShort": "/yr",
+    "perMonthShort": "/월",
+    "perYearShort": "/년",
     "freeCta": "무료로 시작하기",
     "processing": "결제 페이지를 여는 중...",
     "askMore": "모든 계정은 무료 요금제로 시작합니다. 더 필요하면 {email}로 연락해 주세요. 요금제를 변경해 드립니다.",
@@ -587,6 +683,7 @@ export default {
       "suggestions": "추천 검색어",
       "recent": "최근 검색",
       "clearRecent": "최근 검색 지우기",
+      "clear": "검색 지우기",
       "title": "검색 결과",
       "resultsFor": "\"{q}\" 검색 결과",
       "count": "글 {count}개를 찾았습니다",
@@ -691,6 +788,7 @@ export default {
   "legal": {
     "navLabel": "법적 문서",
     "lastUpdated": "최종 업데이트: {date}",
+    "onThisPage": "이 페이지에서",
     "privacy": {
       "title": "개인정보처리방침",
       "metaTitle": "개인정보처리방침 | AIBAN",
@@ -919,6 +1017,8 @@ export default {
     "codeSent": "이메일로 코드를 보냈습니다.",
     "invalidCode": "코드가 올바르지 않습니다. 가장 최근에 보내 드린 이메일을 확인하거나 코드를 다시 보내세요.",
     "regenerateCode": "코드 재전송",
+    "codeAccepted": "코드가 승인되었습니다. 대시보드를 엽니다.",
+    "codeLabel": "6자리 코드",
     "back": "뒤로",
     "byProceeding": "계속 진행하면 다음에 동의하게 됩니다:",
     "termsOfService": "서비스 이용 약관",
@@ -947,6 +1047,673 @@ export default {
       "title": "뉴스레터 구독을 환영합니다.",
       "invitedBy": "{configuratorId} 님으로부터 초대받으셨습니다."
     }
+  },
+  "showcase": {
+    "sampleBadge": "샘플 데이터",
+    "exampleLabel": "예시 비즈니스",
+    "caption": "{business}는 예시 {kind}입니다. 이 화면의 이름, 기사 및 숫자는 몇 주 후 대시보드가 어떻게 보이는지 보여주는 예시입니다.",
+    "pause": "애니메이션 일시 정지",
+    "play": "애니메이션 재생",
+    "scenesLabel": "대시보드 구성 요소",
+    "examplesLabel": "예시 비즈니스",
+    "appUrl": "app.aiban.news",
+    "nav": {
+      "home": "홈",
+      "automations": "자동화",
+      "sources": "소스",
+      "subscribers": "구독자",
+      "reports": "리포트",
+      "blog": "블로그"
+    },
+    "scenes": {
+      "home": "개요",
+      "issue": "이슈",
+      "reports": "클릭",
+      "subscribers": "구독자",
+      "automation": "일정",
+      "source": "귀하의 웹사이트",
+      "voice": "귀하의 목소리",
+      "signup": "가입 양식",
+      "blog": "블로그",
+      "import": "가져오기"
+    },
+    "ui": {
+      "hello": "안녕하세요, {business}",
+      "narrative": "{languages}개 언어로 {subscribers}명의 독자. 다음 이슈는 {schedule}에 발송됩니다.",
+      "kpiSubscribers": "구독자",
+      "kpiLanguages": "언어",
+      "kpiClicks": "클릭, 지난 7일",
+      "kpiAutomations": "자동화 켜짐",
+      "kpiNew": "이번 주 {count}명 신규",
+      "nextIssue": "다음 이슈",
+      "ready": "준비됨",
+      "activity": "최근 활동",
+      "from": "발신자",
+      "subject": "제목",
+      "readMore": "전체 글 읽기",
+      "readerLanguage": "독자 언어",
+      "clicksTitle": "클릭, 지난 7일",
+      "mostClicked": "가장 많이 클릭됨",
+      "clicks": "클릭",
+      "days": [
+        "월",
+        "화",
+        "수",
+        "목",
+        "금",
+        "토",
+        "일"
+      ],
+      "subscribersTitle": "구독자",
+      "language": "언어",
+      "joinedVia": "가입 경로",
+      "newSubscriber": "신규 구독자",
+      "automationTitle": "주간 발행",
+      "automationSentence": "{schedule}에 최신 글을 바탕으로 발행물을 작성하여 모든 독자의 언어로 발송합니다.",
+      "on": "켜짐",
+      "off": "꺼짐",
+      "automationOn": "자동화가 켜져 있습니다",
+      "sourceLabel": "콘텐츠 출처",
+      "sourceButton": "내 사이트 읽기",
+      "reading": "사이트 읽는 중",
+      "found": "글 {count}개 발견",
+      "voiceReader": "이상적인 독자",
+      "voiceTone": "어떤 느낌으로 쓸까요",
+      "signupHeading": "주간 소식 받아보기",
+      "signupEmail": "이메일 주소",
+      "signupLanguage": "언어",
+      "signupButton": "구독하기",
+      "signupDone": "확인을 위해 이메일을 확인해 주세요.",
+      "blogTitle": "{business}의 글",
+      "importFile": "clients.csv",
+      "importing": "연락처 가져오는 중",
+      "imported": "연락처 {count}개 추가됨",
+      "sources": {
+        "form": "가입 양식",
+        "import": "가져오기",
+        "manual": "수동 추가"
+      }
+    },
+    "examples": [
+      {
+        "business": "Northfield Studio",
+        "kind": "웹 디자인 에이전시",
+        "site": "northfield.studio",
+        "schedule": "매주 월요일 9:00",
+        "subscribers": 312,
+        "newThisWeek": 9,
+        "clicks7": 84,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 58
+          },
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 31
+          },
+          {
+            "code": "pt",
+            "name": "Portuguese",
+            "share": 11
+          }
+        ],
+        "reader": "포트폴리오가 아닌 고객을 유치하는 웹사이트를 원하는 클리닉, 매장, 스튜디오의 사장님들.",
+        "tones": [
+          "따뜻한",
+          "간결한",
+          "실용적인"
+        ],
+        "articles": [
+          "6주 만에 치과 클리닉 웹사이트를 재구축한 방법",
+          "리디자인 전에 고쳐야 할 다섯 가지",
+          "예약 버튼을 주황색으로 해야 하는 이유"
+        ],
+        "issue": {
+          "title": "6주 만에 치과 클리닉 웹사이트를 재구축한 방법",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "A clinic website rebuilt in six weeks",
+              "summary": "We moved booking to the top of every page and cut the forms from nine fields to three. Here is what changed for the clinic."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "El sitio de una clínica, renovado en seis semanas",
+              "summary": "Pusimos la reserva arriba en cada página y redujimos los formularios de nueve campos a tres. Esto es lo que cambió para la clínica."
+            },
+            {
+              "code": "pt",
+              "name": "Português",
+              "subject": "O site de uma clínica, refeito em seis semanas",
+              "summary": "Colocamos o agendamento no topo de cada página e reduzimos os formulários de nove campos para três. Veja o que mudou para a clínica."
+            }
+          ]
+        },
+        "clicksByDay": [
+          21,
+          17,
+          12,
+          9,
+          11,
+          6,
+          8
+        ],
+        "topLinks": [
+          {
+            "title": "클리닉 사례 연구",
+            "clicks": 38
+          },
+          {
+            "title": "리디자인 전에 고쳐야 할 다섯 가지",
+            "clicks": 27
+          },
+          {
+            "title": "통화 예약",
+            "clicks": 19
+          }
+        ],
+        "people": [
+          {
+            "email": "lucia.r@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "mark@example.org",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "joana.s@example.net",
+            "lang": "PT",
+            "via": "form"
+          },
+          {
+            "email": "dr.chen@example.com",
+            "lang": "EN",
+            "via": "manual"
+          }
+        ],
+        "activity": [
+          "3개 언어로 312명의 독자에게 발행물 발송",
+          "클리닉 사례 연구에 38회 클릭",
+          "Lucia가 가입 양식에서 참여하여 스페인어로 읽습니다"
+        ],
+        "importCount": 148
+      },
+      {
+        "business": "Brightline Software",
+        "kind": "소프트웨어 회사",
+        "site": "brightline.dev",
+        "schedule": "매월 1일 10:00에",
+        "subscribers": 1240,
+        "newThisWeek": 23,
+        "clicks7": 211,
+        "automationsOn": 1,
+        "languages": [
+          {
+            "code": "en",
+            "name": "영어",
+            "share": 64
+          },
+          {
+            "code": "de",
+            "name": "독일어",
+            "share": 22
+          },
+          {
+            "code": "fr",
+            "name": "프랑스어",
+            "share": 14
+          }
+        ],
+        "reader": "예약 소프트웨어를 매일 사용하는 고객의 사무 관리자와 IT 담당자입니다.",
+        "tones": [
+          "명확함",
+          "간결함",
+          "친근함"
+        ],
+        "articles": [
+          "릴리스 4.2: 반복 예약",
+          "대규모 팀을 위한 더 빠른 보고서",
+          "스프레드시트에서 캘린더를 이동하는 방법"
+        ],
+        "issue": {
+          "title": "릴리스 4.2: 반복 예약",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "New this month: recurring appointments",
+              "summary": "You can now repeat any appointment weekly or monthly. Reports for teams over 50 people also load faster."
+            },
+            {
+              "code": "de",
+              "name": "Deutsch",
+              "subject": "Neu diesen Monat: wiederkehrende Termine",
+              "summary": "Sie können jetzt jeden Termin wöchentlich oder monatlich wiederholen. Berichte für Teams ab 50 Personen laden außerdem schneller."
+            },
+            {
+              "code": "fr",
+              "name": "Français",
+              "subject": "Nouveau ce mois-ci : les rendez-vous récurrents",
+              "summary": "Vous pouvez désormais répéter un rendez-vous chaque semaine ou chaque mois. Les rapports des équipes de plus de 50 personnes s'affichent aussi plus vite."
+            }
+          ]
+        },
+        "clicksByDay": [
+          64,
+          48,
+          33,
+          25,
+          19,
+          9,
+          13
+        ],
+        "topLinks": [
+          {
+            "title": "반복 예약 가이드",
+            "clicks": 96
+          },
+          {
+            "title": "릴리스 노트 4.2",
+            "clicks": 71
+          },
+          {
+            "title": "스프레드시트에서 이동하기",
+            "clicks": 44
+          }
+        ],
+        "people": [
+          {
+            "email": "it@example.de",
+            "lang": "DE",
+            "via": "import"
+          },
+          {
+            "email": "sophie.m@example.fr",
+            "lang": "FR",
+            "via": "form"
+          },
+          {
+            "email": "ops@example.com",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "k.weber@example.de",
+            "lang": "DE",
+            "via": "form"
+          }
+        ],
+        "activity": [
+          "3개 언어로 1240명의 독자에게 발행호 전송됨",
+          "반복 예약 가이드에 96회 클릭",
+          "clients.csv에서 23개 연락처 가져옴"
+        ],
+        "importCount": 412
+      },
+      {
+        "business": "Casa Verde Realty",
+        "kind": "부동산 중개업체",
+        "site": "casaverde.homes",
+        "schedule": "매주 목요일 8:00에",
+        "subscribers": 586,
+        "newThisWeek": 14,
+        "clicks7": 163,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "es",
+            "name": "스페인어",
+            "share": 47
+          },
+          {
+            "code": "en",
+            "name": "영어",
+            "share": 41
+          },
+          {
+            "code": "fr",
+            "name": "프랑스어",
+            "share": 12
+          }
+        ],
+        "reader": "해안가 근처 주택을 찾는 해외 가족 및 은퇴자, 매각을 고려하는 소유주입니다.",
+        "tones": [
+          "따뜻함",
+          "지역적",
+          "차분함"
+        ],
+        "articles": [
+          "이번 주 해변 근처 새 주택 3채",
+          "외국인 구매자를 위한 마감 비용 현황",
+          "구시가지 가격, 가을 업데이트"
+        ],
+        "issue": {
+          "title": "이번 주 해변 근처 새 주택 3채",
+          "langs": [
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tres casas nuevas cerca de la playa",
+              "summary": "Una casa de dos habitaciones con jardín, un apartamento con vista al mar y una casa para reformar a diez minutos del centro."
+            },
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Three new homes near the beach",
+              "summary": "A two bedroom house with a garden, a flat with a sea view and a house to renovate ten minutes from the center."
+            },
+            {
+              "code": "fr",
+              "name": "Français",
+              "subject": "Trois nouvelles maisons près de la plage",
+              "summary": "Une maison de deux chambres avec jardin, un appartement avec vue sur la mer et une maison à rénover à dix minutes du centre."
+            }
+          ]
+        },
+        "clicksByDay": [
+          12,
+          9,
+          15,
+          52,
+          38,
+          21,
+          16
+        ],
+        "topLinks": [
+          {
+            "title": "바다 전망 아파트",
+            "clicks": 71
+          },
+          {
+            "title": "정원이 있는 2베드룹 주택",
+            "clicks": 54
+          },
+          {
+            "title": "외국인 구매자를 위한 마감 비용",
+            "clicks": 38
+          }
+        ],
+        "people": [
+          {
+            "email": "familia.ortiz@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "j.dupont@example.fr",
+            "lang": "FR",
+            "via": "form"
+          },
+          {
+            "email": "tom.and.ann@example.org",
+            "lang": "EN",
+            "via": "manual"
+          },
+          {
+            "email": "rmora@example.net",
+            "lang": "ES",
+            "via": "import"
+          }
+        ],
+        "activity": [
+          "3개 언어로 586명의 독자에게 발행호 전송됨",
+          "바다 전망 아파트에 71회 클릭",
+          "프랑스 독자가 가입 양식에서 참여함"
+        ],
+        "importCount": 203
+      },
+      {
+        "business": "Mora and Partners",
+        "kind": "회계 법인",
+        "site": "morapartners.co",
+        "schedule": "격주 화요일 7시 30분",
+        "subscribers": 428,
+        "newThisWeek": 6,
+        "clicks7": 97,
+        "automationsOn": 1,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 52
+          },
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 38
+          },
+          {
+            "code": "it",
+            "name": "Italian",
+            "share": 10
+          }
+        ],
+        "reader": "복잡한 용어 없이 세금 및 급여 변경 사항을 알고 싶은 소규모 기업의 소유자들",
+        "tones": [
+          "차분한",
+          "정확한",
+          "간결한"
+        ],
+        "articles": [
+          "분기별 세금 신고 마감일이 15일로 변경됩니다",
+          "첫 직원을 고용할 때 준비해야 할 것들",
+          "영수증: 종이 또는 사진?"
+        ],
+        "issue": {
+          "title": "분기별 세금 신고 마감일이 15일로 변경됩니다",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Your quarterly deadline moves to the 15th",
+              "summary": "The filing date for the next quarter moves five days later. Here is what to send us and when, so nothing is late."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tu plazo trimestral pasa al día 15",
+              "summary": "La fecha de presentación del próximo trimestre se mueve cinco días. Esto es lo que debes enviarnos y cuándo, para que nada llegue tarde."
+            },
+            {
+              "code": "it",
+              "name": "Italiano",
+              "subject": "La scadenza trimestrale passa al 15",
+              "summary": "La data di presentazione del prossimo trimestre slitta di cinque giorni. Ecco cosa inviarci e quando, perché nulla arrivi in ritardo."
+            }
+          ]
+        },
+        "clicksByDay": [
+          33,
+          24,
+          14,
+          8,
+          7,
+          4,
+          7
+        ],
+        "topLinks": [
+          {
+            "title": "15일 체크리스트",
+            "clicks": 46
+          },
+          {
+            "title": "첫 직원 고용하기",
+            "clicks": 29
+          },
+          {
+            "title": "검토 통화 예약하기",
+            "clicks": 22
+          }
+        ],
+        "people": [
+          {
+            "email": "bakery.owner@example.com",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "c.rossi@example.it",
+            "lang": "IT",
+            "via": "form"
+          },
+          {
+            "email": "taller.luna@example.net",
+            "lang": "ES",
+            "via": "import"
+          },
+          {
+            "email": "finance@example.org",
+            "lang": "EN",
+            "via": "manual"
+          }
+        ],
+        "activity": [
+          "3개 언어로 428명의 독자에게 발행호 전송됨",
+          "15일 체크리스트 클릭 46회",
+          "이번 주 신규 독자 6명"
+        ],
+        "importCount": 97
+      },
+      {
+        "business": "Run Better Coaching",
+        "kind": "러닝 코치",
+        "site": "runbetter.coach",
+        "schedule": "매주 일요일 18시",
+        "subscribers": 907,
+        "newThisWeek": 31,
+        "clicks7": 248,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 49
+          },
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 33
+          },
+          {
+            "code": "de",
+            "name": "German",
+            "share": 18
+          }
+        ],
+        "reader": "주 3회 출근 전 러닝을 하며 첫 하프 마라톤을 준비하는 성인들",
+        "tones": [
+          "격려하는",
+          "직설적인",
+          "짧은"
+        ],
+        "articles": [
+          "이번 주: 생각보다 느린 장거리 러닝",
+          "500km 이후의 러닝화",
+          "20분 근력 운동 루틴"
+        ],
+        "issue": {
+          "title": "이번 주: 생각보다 느린 장거리 러닝",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Your long run should feel too easy",
+              "summary": "Keep it slow enough to talk. This week's plan adds ten minutes and one short hill session."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tu tirada larga debería sentirse demasiado fácil",
+              "summary": "Mantén un ritmo que te deje hablar. El plan de esta semana suma diez minutos y una sesión corta de cuestas."
+            },
+            {
+              "code": "de",
+              "name": "Deutsch",
+              "subject": "Dein langer Lauf sollte sich zu leicht anfühlen",
+              "summary": "Lauf so langsam, dass du noch reden kannst. Der Plan dieser Woche bringt zehn Minuten mehr und eine kurze Bergeinheit."
+            }
+          ]
+        },
+        "clicksByDay": [
+          18,
+          22,
+          26,
+          31,
+          35,
+          49,
+          67
+        ],
+        "topLinks": [
+          {
+            "title": "이번 주 훈련 계획",
+            "clicks": 121
+          },
+          {
+            "title": "20분 근력 운동 루틴",
+            "clicks": 78
+          },
+          {
+            "title": "500km 이후의 러닝화",
+            "clicks": 49
+          }
+        ],
+        "people": [
+          {
+            "email": "ana.runs@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "felix.k@example.de",
+            "lang": "DE",
+            "via": "form"
+          },
+          {
+            "email": "sam@example.org",
+            "lang": "EN",
+            "via": "form"
+          },
+          {
+            "email": "club.secretary@example.net",
+            "lang": "EN",
+            "via": "import"
+          }
+        ],
+        "activity": [
+          "3개 언어로 907명의 독자에게 발행호 전송됨",
+          "이번 주 훈련 계획 클릭 121회",
+          "이번 주 신규 독자 31명 (대부분 가입 양식에서 유입)"
+        ],
+        "importCount": 260
+      }
+    ]
+  },
+  "errorPage": {
+    "notFoundEyebrow": "오류 404",
+    "notFoundTitle": "페이지를 찾을 수 없습니다",
+    "notFoundBody": "링크가 오래되었거나 오타가 있을 수 있습니다. 여기서 계속하시면 좋습니다.",
+    "serverEyebrow": "오류 {status}",
+    "serverTitle": "저희 쪽에서 문제가 발생했습니다",
+    "serverBody": "이 페이지를 불러올 수 없습니다. 1분 후에 다시 시도해 보세요. 계속 발생하면 info@aiban.news로 문의해 주세요.",
+    "retry": "다시 시도",
+    "home": "홈페이지로 이동",
+    "popularTitle": "인기 페이지",
+    "links": {
+      "howItWorks": "AIBAN 작동 방식",
+      "pricing": "가격",
+      "help": "도움말 센터",
+      "login": "대시보드 로그인"
+    },
+    "report": "저희 사이트의 링크를 통해 이 페이지로 오셨다면, 수정할 수 있도록 info@aiban.news로 알려 주세요."
   },
   "header": {
     "goToWorkspace": "대시보드 열기",
@@ -982,1429 +1749,5 @@ export default {
     "monthly": "월간 결제",
     "yearly": "연간 결제",
     "loadingPlan": "요금제 데이터를 불러오는 중..."
-  },
-  "languages": [
-    {
-      "code": "ab",
-      "name": "압하스어"
-    },
-    {
-      "code": "aa",
-      "name": "아파르어"
-    },
-    {
-      "code": "af",
-      "name": "아프리칸스어"
-    },
-    {
-      "code": "ak",
-      "name": "아칸어"
-    },
-    {
-      "code": "sq",
-      "name": "알바니아어"
-    },
-    {
-      "code": "am",
-      "name": "암하라어"
-    },
-    {
-      "code": "ar",
-      "name": "아랍어"
-    },
-    {
-      "code": "an",
-      "name": "아라곤어"
-    },
-    {
-      "code": "hy",
-      "name": "아르메니아어"
-    },
-    {
-      "code": "as",
-      "name": "아삼어"
-    },
-    {
-      "code": "av",
-      "name": "아바르어"
-    },
-    {
-      "code": "ae",
-      "name": "아베스타어"
-    },
-    {
-      "code": "ay",
-      "name": "아이마라어"
-    },
-    {
-      "code": "az",
-      "name": "아제르바이잔어"
-    },
-    {
-      "code": "bm",
-      "name": "밤바라어"
-    },
-    {
-      "code": "ba",
-      "name": "바시키르어"
-    },
-    {
-      "code": "eu",
-      "name": "바스크어"
-    },
-    {
-      "code": "be",
-      "name": "벨라루스어"
-    },
-    {
-      "code": "bn",
-      "name": "뱅골어"
-    },
-    {
-      "code": "bi",
-      "name": "비스라마어"
-    },
-    {
-      "code": "bs",
-      "name": "보스니아어"
-    },
-    {
-      "code": "br",
-      "name": "브르타뉴어"
-    },
-    {
-      "code": "bg",
-      "name": "불가리아어"
-    },
-    {
-      "code": "my",
-      "name": "미얀마어"
-    },
-    {
-      "code": "ca",
-      "name": "카탈루냐어"
-    },
-    {
-      "code": "ch",
-      "name": "차모로어"
-    },
-    {
-      "code": "ce",
-      "name": "체첸어"
-    },
-    {
-      "code": "ny",
-      "name": "치체와어"
-    },
-    {
-      "code": "zh",
-      "name": "중국어"
-    },
-    {
-      "code": "cu",
-      "name": "교회 슬라브어"
-    },
-    {
-      "code": "cv",
-      "name": "추바시어"
-    },
-    {
-      "code": "kw",
-      "name": "콘월어"
-    },
-    {
-      "code": "co",
-      "name": "코르시카어"
-    },
-    {
-      "code": "cr",
-      "name": "크리어"
-    },
-    {
-      "code": "hr",
-      "name": "크로아티아어"
-    },
-    {
-      "code": "cs",
-      "name": "체코어"
-    },
-    {
-      "code": "da",
-      "name": "덴마크어"
-    },
-    {
-      "code": "dv",
-      "name": "디베히어"
-    },
-    {
-      "code": "nl",
-      "name": "네덜란드어"
-    },
-    {
-      "code": "dz",
-      "name": "종카어"
-    },
-    {
-      "code": "en",
-      "name": "영어"
-    },
-    {
-      "code": "eo",
-      "name": "에스페란토어"
-    },
-    {
-      "code": "et",
-      "name": "에스토니아어"
-    },
-    {
-      "code": "ee",
-      "name": "에웨어"
-    },
-    {
-      "code": "fo",
-      "name": "페로어"
-    },
-    {
-      "code": "fj",
-      "name": "피지어"
-    },
-    {
-      "code": "fi",
-      "name": "핀란드어"
-    },
-    {
-      "code": "fr",
-      "name": "프랑스어"
-    },
-    {
-      "code": "fy",
-      "name": "서프리슬란드어"
-    },
-    {
-      "code": "ff",
-      "name": "풀라어"
-    },
-    {
-      "code": "gd",
-      "name": "스코트 게일어"
-    },
-    {
-      "code": "gl",
-      "name": "갈리시아어"
-    },
-    {
-      "code": "lg",
-      "name": "간다어"
-    },
-    {
-      "code": "ka",
-      "name": "조지아어"
-    },
-    {
-      "code": "de",
-      "name": "독일어"
-    },
-    {
-      "code": "el",
-      "name": "그리스어"
-    },
-    {
-      "code": "kl",
-      "name": "그린란드어"
-    },
-    {
-      "code": "gn",
-      "name": "과라니어"
-    },
-    {
-      "code": "gu",
-      "name": "구자라트어"
-    },
-    {
-      "code": "ht",
-      "name": "아이티 크리올어"
-    },
-    {
-      "code": "ha",
-      "name": "하우사어"
-    },
-    {
-      "code": "he",
-      "name": "히브리어"
-    },
-    {
-      "code": "hz",
-      "name": "헤레로어"
-    },
-    {
-      "code": "hi",
-      "name": "힌디어"
-    },
-    {
-      "code": "ho",
-      "name": "히리 모투어"
-    },
-    {
-      "code": "hu",
-      "name": "헝가리어"
-    },
-    {
-      "code": "is",
-      "name": "아이슬란드어"
-    },
-    {
-      "code": "io",
-      "name": "이도어"
-    },
-    {
-      "code": "ig",
-      "name": "이보어"
-    },
-    {
-      "code": "id",
-      "name": "인도네시아어"
-    },
-    {
-      "code": "ia",
-      "name": "인테르링구아"
-    },
-    {
-      "code": "ie",
-      "name": "인테르링구에"
-    },
-    {
-      "code": "iu",
-      "name": "이누이트어"
-    },
-    {
-      "code": "ik",
-      "name": "이누피아크어"
-    },
-    {
-      "code": "ga",
-      "name": "아일랜드어"
-    },
-    {
-      "code": "it",
-      "name": "이탈리아어"
-    },
-    {
-      "code": "ja",
-      "name": "일본어"
-    },
-    {
-      "code": "jv",
-      "name": "자바어"
-    },
-    {
-      "code": "kn",
-      "name": "칸나다어"
-    },
-    {
-      "code": "kr",
-      "name": "카누리어"
-    },
-    {
-      "code": "ks",
-      "name": "카슈미르어"
-    },
-    {
-      "code": "kk",
-      "name": "카자흐어"
-    },
-    {
-      "code": "km",
-      "name": "크메르어"
-    },
-    {
-      "code": "ki",
-      "name": "키쿠유어"
-    },
-    {
-      "code": "rw",
-      "name": "키냐르완다어"
-    },
-    {
-      "code": "ky",
-      "name": "키르기스어"
-    },
-    {
-      "code": "kv",
-      "name": "코미어"
-    },
-    {
-      "code": "kg",
-      "name": "콩고어"
-    },
-    {
-      "code": "ko",
-      "name": "한국어"
-    },
-    {
-      "code": "kj",
-      "name": "쿠아냐마어"
-    },
-    {
-      "code": "ku",
-      "name": "쿠르드어"
-    },
-    {
-      "code": "lo",
-      "name": "라오어"
-    },
-    {
-      "code": "la",
-      "name": "라틴어"
-    },
-    {
-      "code": "lv",
-      "name": "라트비아어"
-    },
-    {
-      "code": "li",
-      "name": "림뷔르흐어"
-    },
-    {
-      "code": "ln",
-      "name": "링갈라어"
-    },
-    {
-      "code": "lt",
-      "name": "리투아니아어"
-    },
-    {
-      "code": "lu",
-      "name": "루바카탕가어"
-    },
-    {
-      "code": "lb",
-      "name": "룩셈부르크어"
-    },
-    {
-      "code": "mk",
-      "name": "마케도니아어"
-    },
-    {
-      "code": "mg",
-      "name": "마다가스카르어"
-    },
-    {
-      "code": "ms",
-      "name": "말레이어"
-    },
-    {
-      "code": "ml",
-      "name": "말라얄람어"
-    },
-    {
-      "code": "mt",
-      "name": "몰타어"
-    },
-    {
-      "code": "gv",
-      "name": "맨섬어"
-    },
-    {
-      "code": "mi",
-      "name": "마오리어"
-    },
-    {
-      "code": "mr",
-      "name": "마라티어"
-    },
-    {
-      "code": "mh",
-      "name": "마셜어"
-    },
-    {
-      "code": "mn",
-      "name": "몽골어"
-    },
-    {
-      "code": "na",
-      "name": "나우루어"
-    },
-    {
-      "code": "nv",
-      "name": "나바호어"
-    },
-    {
-      "code": "nd",
-      "name": "북부 은데벨레어"
-    },
-    {
-      "code": "nr",
-      "name": "남부 은데벨레어"
-    },
-    {
-      "code": "ng",
-      "name": "은동가어"
-    },
-    {
-      "code": "ne",
-      "name": "네팔어"
-    },
-    {
-      "code": "no",
-      "name": "노르웨이어"
-    },
-    {
-      "code": "nb",
-      "name": "노르웨이 보크몰"
-    },
-    {
-      "code": "nn",
-      "name": "노르웨이 니노르스크"
-    },
-    {
-      "code": "oc",
-      "name": "옥시탄어"
-    },
-    {
-      "code": "oj",
-      "name": "오지브웨이어"
-    },
-    {
-      "code": "or",
-      "name": "오리야어"
-    },
-    {
-      "code": "om",
-      "name": "오로모어"
-    },
-    {
-      "code": "os",
-      "name": "오세트어"
-    },
-    {
-      "code": "pi",
-      "name": "팔리어"
-    },
-    {
-      "code": "ps",
-      "name": "파슈토어"
-    },
-    {
-      "code": "fa",
-      "name": "페르시아어"
-    },
-    {
-      "code": "pl",
-      "name": "폴란드어"
-    },
-    {
-      "code": "pt",
-      "name": "포르투갈어"
-    },
-    {
-      "code": "pa",
-      "name": "펀자브어"
-    },
-    {
-      "code": "qu",
-      "name": "케추아어"
-    },
-    {
-      "code": "ro",
-      "name": "루마니아어"
-    },
-    {
-      "code": "rm",
-      "name": "로만슈어"
-    },
-    {
-      "code": "rn",
-      "name": "룬디어"
-    },
-    {
-      "code": "ru",
-      "name": "러시아어"
-    },
-    {
-      "code": "se",
-      "name": "북부 사미어"
-    },
-    {
-      "code": "sm",
-      "name": "사모아어"
-    },
-    {
-      "code": "sg",
-      "name": "상고어"
-    },
-    {
-      "code": "sa",
-      "name": "산스크리트어"
-    },
-    {
-      "code": "sc",
-      "name": "사르데냐어"
-    },
-    {
-      "code": "sr",
-      "name": "세르비아어"
-    },
-    {
-      "code": "sn",
-      "name": "쇼나어"
-    },
-    {
-      "code": "ii",
-      "name": "쓰촨 이어"
-    },
-    {
-      "code": "sd",
-      "name": "신디어"
-    },
-    {
-      "code": "si",
-      "name": "싱할라어"
-    },
-    {
-      "code": "sk",
-      "name": "슬로바키아어"
-    },
-    {
-      "code": "sl",
-      "name": "슬로베니아어"
-    },
-    {
-      "code": "so",
-      "name": "소말리어"
-    },
-    {
-      "code": "st",
-      "name": "남부 소토어"
-    },
-    {
-      "code": "es",
-      "name": "스페인어"
-    },
-    {
-      "code": "su",
-      "name": "순다어"
-    },
-    {
-      "code": "sw",
-      "name": "스와힐리어"
-    },
-    {
-      "code": "ss",
-      "name": "스와티어"
-    },
-    {
-      "code": "sv",
-      "name": "스웨덴어"
-    },
-    {
-      "code": "tl",
-      "name": "타갈로그어"
-    },
-    {
-      "code": "ty",
-      "name": "타히티어"
-    },
-    {
-      "code": "tg",
-      "name": "타지크어"
-    },
-    {
-      "code": "ta",
-      "name": "타밀어"
-    },
-    {
-      "code": "tt",
-      "name": "타타르어"
-    },
-    {
-      "code": "te",
-      "name": "텔루구어"
-    },
-    {
-      "code": "th",
-      "name": "태국어"
-    },
-    {
-      "code": "bo",
-      "name": "티베트어"
-    },
-    {
-      "code": "ti",
-      "name": "티그리냐어"
-    },
-    {
-      "code": "to",
-      "name": "통가어"
-    },
-    {
-      "code": "ts",
-      "name": "총가어"
-    },
-    {
-      "code": "tn",
-      "name": "츠와나어"
-    },
-    {
-      "code": "tr",
-      "name": "터키어"
-    },
-    {
-      "code": "tk",
-      "name": "투르크멘어"
-    },
-    {
-      "code": "tw",
-      "name": "트위어"
-    },
-    {
-      "code": "ug",
-      "name": "위구르어"
-    },
-    {
-      "code": "uk",
-      "name": "우크라이나어"
-    },
-    {
-      "code": "ur",
-      "name": "우르두어"
-    },
-    {
-      "code": "uz",
-      "name": "우즈베크어"
-    },
-    {
-      "code": "ve",
-      "name": "벤다어"
-    },
-    {
-      "code": "vi",
-      "name": "베트남어"
-    },
-    {
-      "code": "vo",
-      "name": "볼라퓌크어"
-    },
-    {
-      "code": "wa",
-      "name": "왈롱어"
-    },
-    {
-      "code": "cy",
-      "name": "웨일스어"
-    },
-    {
-      "code": "wo",
-      "name": "월로프어"
-    },
-    {
-      "code": "xh",
-      "name": "코사어"
-    },
-    {
-      "code": "yi",
-      "name": "이디시어"
-    },
-    {
-      "code": "yo",
-      "name": "요루바어"
-    },
-    {
-      "code": "za",
-      "name": "좡어"
-    },
-    {
-      "code": "zu",
-      "name": "줄루어"
-    }
-  ],
-  "countries": [
-    {
-      "code": "AF",
-      "name": "아프가니스탄"
-    },
-    {
-      "code": "AL",
-      "name": "알바니아"
-    },
-    {
-      "code": "DZ",
-      "name": "알제리"
-    },
-    {
-      "code": "AS",
-      "name": "아메리칸사모아"
-    },
-    {
-      "code": "AD",
-      "name": "안도라"
-    },
-    {
-      "code": "AO",
-      "name": "앙골라"
-    },
-    {
-      "code": "AI",
-      "name": "앵귈라"
-    },
-    {
-      "code": "AQ",
-      "name": "남극대륙"
-    },
-    {
-      "code": "AG",
-      "name": "안티구아 바부다"
-    },
-    {
-      "code": "AR",
-      "name": "아르헨티나"
-    },
-    {
-      "code": "AM",
-      "name": "아르메니아"
-    },
-    {
-      "code": "AW",
-      "name": "아루바"
-    },
-    {
-      "code": "AU",
-      "name": "호주"
-    },
-    {
-      "code": "AT",
-      "name": "오스트리아"
-    },
-    {
-      "code": "AZ",
-      "name": "아제르바이잔"
-    },
-    {
-      "code": "BS",
-      "name": "바하마"
-    },
-    {
-      "code": "BH",
-      "name": "바레인"
-    },
-    {
-      "code": "BD",
-      "name": "방글라데시"
-    },
-    {
-      "code": "BB",
-      "name": "바베이도스"
-    },
-    {
-      "code": "BY",
-      "name": "벨라루스"
-    },
-    {
-      "code": "BE",
-      "name": "벨기에"
-    },
-    {
-      "code": "BZ",
-      "name": "벨리즈"
-    },
-    {
-      "code": "BJ",
-      "name": "베냉"
-    },
-    {
-      "code": "BM",
-      "name": "버뮤다"
-    },
-    {
-      "code": "BT",
-      "name": "부탄"
-    },
-    {
-      "code": "BO",
-      "name": "볼리비아"
-    },
-    {
-      "code": "BA",
-      "name": "보스니아 헤르체고비나"
-    },
-    {
-      "code": "BW",
-      "name": "보츠와나"
-    },
-    {
-      "code": "BR",
-      "name": "브라질"
-    },
-    {
-      "code": "IO",
-      "name": "영국령 인도양 지역"
-    },
-    {
-      "code": "VG",
-      "name": "영국령 버진아일랜드"
-    },
-    {
-      "code": "BN",
-      "name": "브루나이"
-    },
-    {
-      "code": "BG",
-      "name": "불가리아"
-    },
-    {
-      "code": "BF",
-      "name": "부르키나파소"
-    },
-    {
-      "code": "BI",
-      "name": "부룬디"
-    },
-    {
-      "code": "KH",
-      "name": "캄보디아"
-    },
-    {
-      "code": "CM",
-      "name": "카메룬"
-    },
-    {
-      "code": "CA",
-      "name": "캐나다"
-    },
-    {
-      "code": "CV",
-      "name": "카보베르데"
-    },
-    {
-      "code": "KY",
-      "name": "케이맨 제도"
-    },
-    {
-      "code": "CF",
-      "name": "중앙아프리카 공화국"
-    },
-    {
-      "code": "TD",
-      "name": "차드"
-    },
-    {
-      "code": "CL",
-      "name": "칠레"
-    },
-    {
-      "code": "CN",
-      "name": "중국"
-    },
-    {
-      "code": "CX",
-      "name": "크리스마스섬"
-    },
-    {
-      "code": "CC",
-      "name": "코코스 제도"
-    },
-    {
-      "code": "CO",
-      "name": "콜롬비아"
-    },
-    {
-      "code": "KM",
-      "name": "코모로"
-    },
-    {
-      "code": "CG",
-      "name": "콩고 - 브라자빌"
-    },
-    {
-      "code": "CD",
-      "name": "콩고 - 킨샤사"
-    },
-    {
-      "code": "CK",
-      "name": "쿡 제도"
-    },
-    {
-      "code": "CR",
-      "name": "코스타리카"
-    },
-    {
-      "code": "CI",
-      "name": "코트디부아르"
-    },
-    {
-      "code": "HR",
-      "name": "크로아티아"
-    },
-    {
-      "code": "CU",
-      "name": "쿠바"
-    },
-    {
-      "code": "CY",
-      "name": "사이프러스"
-    },
-    {
-      "code": "CZ",
-      "name": "체코"
-    },
-    {
-      "code": "DK",
-      "name": "덴마크"
-    },
-    {
-      "code": "DJ",
-      "name": "지부티"
-    },
-    {
-      "code": "DM",
-      "name": "도미니카"
-    },
-    {
-      "code": "DO",
-      "name": "도미니카 공화국"
-    },
-    {
-      "code": "EC",
-      "name": "에콰도르"
-    },
-    {
-      "code": "EG",
-      "name": "이집트"
-    },
-    {
-      "code": "SV",
-      "name": "엘살바도르"
-    },
-    {
-      "code": "GQ",
-      "name": "적도 기니"
-    },
-    {
-      "code": "ER",
-      "name": "에리트레아"
-    },
-    {
-      "code": "EE",
-      "name": "에스토니아"
-    },
-    {
-      "code": "SZ",
-      "name": "에스와티니"
-    },
-    {
-      "code": "ET",
-      "name": "에티오피아"
-    },
-    {
-      "code": "FJ",
-      "name": "피지"
-    },
-    {
-      "code": "FI",
-      "name": "핀란드"
-    },
-    {
-      "code": "FR",
-      "name": "프랑스"
-    },
-    {
-      "code": "GA",
-      "name": "가봉"
-    },
-    {
-      "code": "GM",
-      "name": "감비아"
-    },
-    {
-      "code": "GE",
-      "name": "조지아"
-    },
-    {
-      "code": "DE",
-      "name": "독일"
-    },
-    {
-      "code": "GH",
-      "name": "가나"
-    },
-    {
-      "code": "GR",
-      "name": "그리스"
-    },
-    {
-      "code": "GT",
-      "name": "과테말라"
-    },
-    {
-      "code": "GN",
-      "name": "기니"
-    },
-    {
-      "code": "GY",
-      "name": "가이아나"
-    },
-    {
-      "code": "HT",
-      "name": "아이티"
-    },
-    {
-      "code": "HN",
-      "name": "온두라스"
-    },
-    {
-      "code": "HK",
-      "name": "홍콩"
-    },
-    {
-      "code": "HU",
-      "name": "헝가리"
-    },
-    {
-      "code": "IS",
-      "name": "아이슬란드"
-    },
-    {
-      "code": "IN",
-      "name": "인도"
-    },
-    {
-      "code": "ID",
-      "name": "인도네시아"
-    },
-    {
-      "code": "IR",
-      "name": "이란"
-    },
-    {
-      "code": "IQ",
-      "name": "이라크"
-    },
-    {
-      "code": "IE",
-      "name": "아일랜드"
-    },
-    {
-      "code": "IL",
-      "name": "이스라엘"
-    },
-    {
-      "code": "IT",
-      "name": "이탈리아"
-    },
-    {
-      "code": "JM",
-      "name": "자메이카"
-    },
-    {
-      "code": "JP",
-      "name": "일본"
-    },
-    {
-      "code": "JO",
-      "name": "요르단"
-    },
-    {
-      "code": "KZ",
-      "name": "카자흐스탄"
-    },
-    {
-      "code": "KE",
-      "name": "케냐"
-    },
-    {
-      "code": "KR",
-      "name": "대한민국"
-    },
-    {
-      "code": "KW",
-      "name": "쿠웨이트"
-    },
-    {
-      "code": "KG",
-      "name": "키르기스스탄"
-    },
-    {
-      "code": "LA",
-      "name": "라오스"
-    },
-    {
-      "code": "LV",
-      "name": "라트비아"
-    },
-    {
-      "code": "LB",
-      "name": "레바논"
-    },
-    {
-      "code": "LS",
-      "name": "레소토"
-    },
-    {
-      "code": "LR",
-      "name": "라이베리아"
-    },
-    {
-      "code": "LY",
-      "name": "리비아"
-    },
-    {
-      "code": "LI",
-      "name": "리히텐슈타인"
-    },
-    {
-      "code": "LT",
-      "name": "리투아니아"
-    },
-    {
-      "code": "LU",
-      "name": "룩셈부르크"
-    },
-    {
-      "code": "MG",
-      "name": "마다가스카르"
-    },
-    {
-      "code": "MW",
-      "name": "말라위"
-    },
-    {
-      "code": "MY",
-      "name": "말레이시아"
-    },
-    {
-      "code": "MV",
-      "name": "몰디브"
-    },
-    {
-      "code": "ML",
-      "name": "말리"
-    },
-    {
-      "code": "MT",
-      "name": "몰타"
-    },
-    {
-      "code": "MX",
-      "name": "멕시코"
-    },
-    {
-      "code": "MD",
-      "name": "몰도바"
-    },
-    {
-      "code": "MC",
-      "name": "모나코"
-    },
-    {
-      "code": "MN",
-      "name": "몽골"
-    },
-    {
-      "code": "ME",
-      "name": "몬테네그로"
-    },
-    {
-      "code": "MA",
-      "name": "모로코"
-    },
-    {
-      "code": "MZ",
-      "name": "모잠비크"
-    },
-    {
-      "code": "MM",
-      "name": "미얀마"
-    },
-    {
-      "code": "NA",
-      "name": "나미비아"
-    },
-    {
-      "code": "NP",
-      "name": "네팔"
-    },
-    {
-      "code": "NL",
-      "name": "네덜란드"
-    },
-    {
-      "code": "NZ",
-      "name": "뉴질랜드"
-    },
-    {
-      "code": "NI",
-      "name": "니카라과"
-    },
-    {
-      "code": "NE",
-      "name": "니제르"
-    },
-    {
-      "code": "NG",
-      "name": "나이지리아"
-    },
-    {
-      "code": "MK",
-      "name": "북마케도니아"
-    },
-    {
-      "code": "NO",
-      "name": "노르웨이"
-    },
-    {
-      "code": "OM",
-      "name": "오만"
-    },
-    {
-      "code": "PK",
-      "name": "파키스탄"
-    },
-    {
-      "code": "PA",
-      "name": "파나마"
-    },
-    {
-      "code": "PG",
-      "name": "파푸아뉴기니"
-    },
-    {
-      "code": "PY",
-      "name": "파라과이"
-    },
-    {
-      "code": "PE",
-      "name": "페루"
-    },
-    {
-      "code": "PH",
-      "name": "필리핀"
-    },
-    {
-      "code": "PL",
-      "name": "폴란드"
-    },
-    {
-      "code": "PT",
-      "name": "포르투갈"
-    },
-    {
-      "code": "QA",
-      "name": "카타르"
-    },
-    {
-      "code": "RO",
-      "name": "루마니아"
-    },
-    {
-      "code": "RU",
-      "name": "러시아"
-    },
-    {
-      "code": "RW",
-      "name": "르완다"
-    },
-    {
-      "code": "SA",
-      "name": "사우디아라비아"
-    },
-    {
-      "code": "SN",
-      "name": "세네갈"
-    },
-    {
-      "code": "RS",
-      "name": "세르비아"
-    },
-    {
-      "code": "SG",
-      "name": "싱가포르"
-    },
-    {
-      "code": "SK",
-      "name": "슬로바키아"
-    },
-    {
-      "code": "SI",
-      "name": "슬로베니아"
-    },
-    {
-      "code": "ZA",
-      "name": "남아프리카 공화국"
-    },
-    {
-      "code": "ES",
-      "name": "스페인"
-    },
-    {
-      "code": "LK",
-      "name": "스리랑카"
-    },
-    {
-      "code": "SE",
-      "name": "스웨덴"
-    },
-    {
-      "code": "CH",
-      "name": "스위스"
-    },
-    {
-      "code": "TW",
-      "name": "대만"
-    },
-    {
-      "code": "TH",
-      "name": "태국"
-    },
-    {
-      "code": "TR",
-      "name": "튀르키예"
-    },
-    {
-      "code": "UG",
-      "name": "우간다"
-    },
-    {
-      "code": "UA",
-      "name": "우크라이나"
-    },
-    {
-      "code": "AE",
-      "name": "아랍에미리트"
-    },
-    {
-      "code": "GB",
-      "name": "영국"
-    },
-    {
-      "code": "US",
-      "name": "미국"
-    },
-    {
-      "code": "UY",
-      "name": "우루과이"
-    },
-    {
-      "code": "UZ",
-      "name": "우즈베키스탄"
-    },
-    {
-      "code": "VE",
-      "name": "베네수엘라"
-    },
-    {
-      "code": "VN",
-      "name": "베트남"
-    },
-    {
-      "code": "YE",
-      "name": "예멘"
-    },
-    {
-      "code": "ZM",
-      "name": "잠비아"
-    },
-    {
-      "code": "ZW",
-      "name": "짐바브웨"
-    }
-  ]
+  }
 };

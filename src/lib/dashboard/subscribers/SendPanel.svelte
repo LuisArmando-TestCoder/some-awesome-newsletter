@@ -8,7 +8,28 @@
   import { confirmAction } from "../ui/confirm";
   import { toast } from "$lib/ui/components/toast";
   import sendCustomContent from "../../../components/systems/requests/sendCustomContent";
-  import triggerNewsSourceSend from "../../../components/systems/requests/triggerNewsSourceSend";
+  import { triggerSend } from "../../../components/systems/requests/triggerNewsSourceSend";
+  import { on as onSocket } from "$lib/api/socket";
+  import { onDestroy } from "svelte";
+  import { toUserMessage } from "$lib/api/errors";
+
+  // Follow a queued send on the live connection, so the message says what really happened.
+  let watchedRun = "";
+  const offRun = onSocket("automation:run", (run) => {
+    if (!watchedRun || run.id !== watchedRun) return;
+    if (run.status === "ok" || run.status === "partial") {
+      const n = run.counts?.sent ?? 0;
+      nextMsg = { tone: "success", text: $dt(n === 1 ? "dash.subs.send.nextSent.one" : "dash.subs.send.nextSent.other", { count: n }) };
+      watchedRun = "";
+    } else if (run.status === "skipped") {
+      nextMsg = { tone: "info", text: $dt("dash.subs.send.nextSkipped") };
+      watchedRun = "";
+    } else if (run.status === "failed") {
+      nextMsg = { tone: "danger", text: run.error || $dt("dash.subs.send.nextFailed") };
+      watchedRun = "";
+    }
+  });
+  onDestroy(offRun);
   import { subscriberData } from "./data";
   import { goTo } from "../nav";
   import { dt, plural } from "../i18n";
@@ -22,7 +43,7 @@
   let writing = false;
   let sendingNext = false;
   let writeMsg: { tone: "success" | "danger"; text: string } | null = null;
-  let nextMsg: { tone: "success" | "danger"; text: string } | null = null;
+  let nextMsg: { tone: "info" | "success" | "danger"; text: string } | null = null;
 
   $: sources = $subscriberData.sources;
   $: if (sources.length && !sources.some((s) => s.id === sourceId)) sourceId = sources[0].id;
@@ -56,7 +77,7 @@
     try {
       const configId = $store.configuratorEmail;
       const sent = await sendCustomContent(configId, sourceId, content.trim());
-      if (!sent) throw new Error($dt("dash.subs.send.writeFailed"));
+      if (sent !== true) throw new Error(sent || $dt("dash.subs.send.writeFailed"));
       writeMsg = { tone: "success", text: $dt("dash.subs.send.writeDone") };
       toast.success(writeMsg.text);
       content = "";
@@ -83,12 +104,20 @@
     if (!ok) return;
     sendingNext = true;
     try {
-      const r = await triggerNewsSourceSend(sourceId);
-      if (r !== true) throw new Error(typeof r === "string" ? r : $dt("dash.subs.send.nextFailed"));
-      nextMsg = { tone: "success", text: $dt("dash.subs.send.nextDone") };
-      toast.success(nextMsg.text);
+      const r = await triggerSend(sourceId);
+      if (r.state === "skipped") {
+        nextMsg = { tone: "info", text: r.message || $dt("dash.subs.send.nextSkipped") };
+        toast.info(nextMsg.text);
+      } else if (r.state === "queued") {
+        watchedRun = r.runId ?? "";
+        nextMsg = { tone: "info", text: $dt("dash.subs.send.nextQueued") };
+        toast.success(nextMsg.text);
+      } else {
+        nextMsg = { tone: "success", text: $dt("dash.subs.send.nextDone") };
+        toast.success(nextMsg.text);
+      }
     } catch (e) {
-      nextMsg = { tone: "danger", text: e instanceof Error ? e.message : $dt("dash.subs.send.nextFailed") };
+      nextMsg = { tone: "danger", text: toUserMessage(e, $dt("dash.subs.send.nextFailed")) };
       toast.error(nextMsg.text);
     } finally {
       sendingNext = false;

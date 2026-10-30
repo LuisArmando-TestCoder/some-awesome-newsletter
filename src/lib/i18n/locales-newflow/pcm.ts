@@ -1,5 +1,5 @@
-// pcm strings for locales-newflow. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale pcm
+// pcm (Nigerian Pidgin) strings for locales-newflow. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "onboarding": {
     "progress": "Step {current} of {total}",
@@ -116,6 +116,9 @@ export default {
       "dayLabel": "Day",
       "timeLabel": "Time",
       "timeHint": "For your local time.",
+      "summaryDaily": "Every day at {time}, your time ({zone}).",
+      "summaryWeekly": "Every {day} at {time}, your time ({zone}).",
+      "summaryMonthly": "On the 1st of each month at {time}, your time ({zone}).",
       "recipeTitle": "Send new issues automatically",
       "recipeBody": "For the schedule wey dey up, we go pick your best new article, write am for your own style, translate am for every reader, and email am.",
       "recipeOn": "On",

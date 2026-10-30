@@ -1,5 +1,5 @@
-// ar strings for locales-newflow. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale ar
+// ar (Arabic (Modern Standard Arabic)) strings for locales-newflow. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "onboarding": {
     "progress": "الخطوة {current} من {total}",
@@ -116,6 +116,9 @@ export default {
       "dayLabel": "اليوم",
       "timeLabel": "الوقت",
       "timeHint": "بتوقيتك المحلي.",
+      "summaryDaily": "كل يوم في الساعة {time}، حسب توقيتك ({zone}).",
+      "summaryWeekly": "كل {day} في الساعة {time}، حسب توقيتك ({zone}).",
+      "summaryMonthly": "في الأول من كل شهر في الساعة {time}، حسب توقيتك ({zone}).",
       "recipeTitle": "إرسال الأعداد الجديدة تلقائيًا",
       "recipeBody": "حسب الجدول أعلاه، نختار أفضل مقال جديد لديك، ونكتبه بأسلوبك، ونترجمه لكل قارئ، ثم نرسله بالبريد.",
       "recipeOn": "مفعّل",

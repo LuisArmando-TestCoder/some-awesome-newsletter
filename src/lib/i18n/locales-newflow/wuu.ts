@@ -1,5 +1,5 @@
-// wuu strings for locales-newflow. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale wuu
+// wuu (Wu Chinese (Shanghainese)) strings for locales-newflow. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "onboarding": {
     "progress": "第 {current} 步，共 {total} 步",
@@ -22,7 +22,7 @@ export default {
       "skipNote": "如果侬还呒没网站，请选择一个主题，阿拉会使用相关个新闻网站。",
       "label": "网站地址",
       "hint": "例如 yourcompany.com 或 yourcompany.com/blog",
-      "placeholder": "yourcompany.com",
+      "placeholder": "侬公司个网址",
       "submit": "继续",
       "checking": "正在读取侬个网站...",
       "noWebsite": "我呒没网站",
@@ -98,7 +98,7 @@ export default {
       "rolePlaceholder": "创始人，Silva Studio",
       "linkLabel": "链接",
       "linkHint": "侬个网站或社交媒体主页。可选。",
-      "linkPlaceholder": "yourcompany.com",
+      "linkPlaceholder": "侬公司个网址",
       "previewLabel": "在邮件末尾个样子",
       "previewBody": "感谢阅读，下期再见。",
       "save": "保存签名",
@@ -116,6 +116,9 @@ export default {
       "dayLabel": "日期",
       "timeLabel": "时间",
       "timeHint": "使用侬个当地时间。",
+      "summaryDaily": "每日{time}，侬个辰光（{zone}）。",
+      "summaryWeekly": "每{day}{time}，侬个辰光（{zone}）。",
+      "summaryMonthly": "每月一号{time}，侬个辰光（{zone}）。",
       "recipeTitle": "自动发送新一期新闻信",
       "recipeBody": "按照上面个时间表，阿拉会挑选侬最好个新文章，用侬个口吻撰写，为每位读者翻译，然后通过邮件发送。",
       "recipeOn": "开启",

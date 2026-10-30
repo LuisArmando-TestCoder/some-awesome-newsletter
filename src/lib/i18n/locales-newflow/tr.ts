@@ -1,5 +1,5 @@
-// tr strings for locales-newflow. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale tr
+// tr (Turkish) strings for locales-newflow. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "onboarding": {
     "progress": "Adım {current}/{total}",
@@ -116,6 +116,9 @@ export default {
       "dayLabel": "Gün",
       "timeLabel": "Saat",
       "timeHint": "Yerel saatinizle.",
+      "summaryDaily": "Her gün {time}, sizin saat diliminizde ({zone}).",
+      "summaryWeekly": "Her {day} {time}, sizin saat diliminizde ({zone}).",
+      "summaryMonthly": "Her ayın 1'inde {time}, sizin saat diliminizde ({zone}).",
       "recipeTitle": "Yeni sayıları otomatik gönder",
       "recipeBody": "Yukarıdaki takvimde en iyi yeni makalenizi seçer, sizin üslubunuzla yazar, her okur için çevirir ve e-postayla göndeririz.",
       "recipeOn": "Açık",

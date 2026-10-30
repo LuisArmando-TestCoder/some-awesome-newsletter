@@ -1,5 +1,5 @@
-// ha strings for locales. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale ha
+// ha (Hausa) strings for locales. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "auth": {
     "logo": "/icons/logo.png",
@@ -35,6 +35,82 @@ export default {
       "ogImageAlt": "Tambarin AIBAN"
     },
     "skipLink": "Tsallaka zuwa babban abun ciki",
+    "display": {
+      "title": "Gidan yanar gizonku, an rubuta shi azaman wasiƙar labarai.",
+      "kicker": "AIBAN"
+    },
+    "statement": {
+      "lines": [
+        "Kun riga kun buga aiki mai kyau.",
+        "Abokan cinikin ku suna karanta shi cikin fiye da harshe ɗaya.",
+        "AIBAN yana mai da kowane sabon labazi zuwa fitowa",
+        "kuma yana aika wa kowane mai karatu sigar a cikin harshensu."
+      ]
+    },
+    "history": {
+      "eyebrow": "Yadda yake aiki",
+      "title": "Rayuwar fitowa ɗaya.",
+      "lead": "Bi fitowa ɗaya daga lokacin da jadawalinku ya fara shi har zuwa lokacin da ya sake farawa. Kun saita wannan sau ɗaya.",
+      "note": "Misalin jadawali. Kun zaɓi ranar, lokaci da yawan sau.",
+      "progressLabel": "Matakan fitowa ɗaya",
+      "items": [
+        {
+          "mark": "9:00",
+          "title": "Jadawalinku ya fara gudana",
+          "body": "Kowane Litinin da karfe 9:00 a wannan misali. Kun zaɓi kowace rana, mako-mako ko wata-wata."
+        },
+        {
+          "mark": "Karanta",
+          "title": "AIBAN yana karanta gidan yanar gizonku",
+          "body": "Yana samun sabon labazinku kuma yana zaɓar ɓangaren da mai karatun ku na musamman zai damu da shi sosai."
+        },
+        {
+          "mark": "Rubuta",
+          "title": "Yana rubuta fitowa cikin muryar ku",
+          "body": "Rubutun yana bin yadda gidan yanar gizonku aka rubuta, don haka yana sauti kamar ku."
+        },
+        {
+          "mark": "Fassara",
+          "title": "Kowane mai karatu yana samun harshensu",
+          "body": "Fitowa ɗaya ta zama sigogi da yawa kamar yadda masu biyan kuɗaɗen ku ke buƙata."
+        },
+        {
+          "mark": "Aika",
+          "title": "Yana isa ƙarƙashin sunan ku",
+          "body": "Tare da sunan ku da sa hannun imel ɗin ku. Amsoshi suna zuwa akwatin saƙonku."
+        },
+        {
+          "mark": "Buga",
+          "title": "Ya zama labazi a kan shafinku na blog",
+          "body": "Tare da nasa hanyar haɗi wanda mutane zasu iya samu a cikin bincike da rabawa."
+        },
+        {
+          "mark": "Rahoto",
+          "title": "Kuna ganin abin da ya faru",
+          "body": "Dashboard ɗinku yana jera waɗanda suka shiga da kuma waɗanne hanyoyin haɗi masu karatu suka danna."
+        },
+        {
+          "mark": "Sake",
+          "title": "Litinin na gaba, zai sake gudana",
+          "body": "Yana ci gaba har sai kun kashe shi a cikin dashboard ɗinku."
+        }
+      ]
+    },
+    "rail": {
+      "label": "Babban labarai na shafi",
+      "chapters": [
+        "Fara",
+        "Dalili",
+        "Harsuna",
+        "Yadda yake aiki",
+        "Sunan ku",
+        "Girma",
+        "Wanda yake nufi",
+        "Farashi",
+        "Tambayoyi",
+        "Fara"
+      ]
+    },
     "hero": {
       "eyebrow": "Wasiƙun labarai don kasuwancin bayar da sabis",
       "title": "Gidan yanar gizonku ya zama wasiƙar labarai ta mako-mako, a harshen kowane mai karatu",
@@ -57,6 +133,26 @@ export default {
       "startCta": "Fara kyauta da {site}",
       "startCtaGeneric": "Fara kyauta",
       "liveRegion": "An sabunta samfurin gani don {site}."
+    },
+    "live": {
+      "badge": "An rubuta yanzu",
+      "loadingTitle": "Ana rubuta samfurin fitowa daga {site}",
+      "steps": [
+        "Ana karanta {site}",
+        "Ana nemo sabon labarin ku",
+        "Ana rubuta shi cikin {language}",
+        "Ana sanya shi a cikin samfurin imel ɗin ku"
+      ],
+      "takes": "Wannan yakan ɗauki dakika 20 zuwa 40. Kuna iya ci gaba da mirgina.",
+      "readyNote": "AIBAN yana rubuta wannan samfurin daga sabon labarin akan {site}. Ba a adana ko aika komai ba. Lokacin da kuka fara, yana amfani da muryar ku da jadawalin ku.",
+      "readyAnnounce": "Samfurin fitowar ku daga {site} yana shirye.",
+      "languageLabel": "Harshen mai karatu",
+      "loadingLanguage": "Ana rubuta shi cikin {language}",
+      "errorTitle": "Ba za mu iya rubuta samfoti daga {site} ba",
+      "retry": "Ƙoƙari kuma",
+      "showSample": "Nuna tsarin samfuri",
+      "frameTitle": "Samfurin fitowa da aka rubuta daga {site}",
+      "openFull": "Bude a cikin sabon shafi"
     },
     "chain": {
       "eyebrow": "Yadda yake aiki",
@@ -587,6 +683,7 @@ export default {
       "suggestions": "Shawarwari",
       "recent": "Bincike na kwanan nan",
       "clearRecent": "Share bincike na kwanan nan",
+      "clear": "Share fayyace bincike",
       "title": "Sakamakon bincike",
       "resultsFor": "Sakamako don \"{q}\"",
       "count": "An sami maƙaloli {count}",
@@ -691,6 +788,7 @@ export default {
   "legal": {
     "navLabel": "Takardun doka",
     "lastUpdated": "An sabunta ƙarshe: {date}",
+    "onThisPage": "A kan wannan shafi",
     "privacy": {
       "title": "Manufar sirri",
       "metaTitle": "Manufar sirri | AIBAN",
@@ -919,6 +1017,8 @@ export default {
     "codeSent": "Mun aika lamba zuwa imel ɗinku.",
     "invalidCode": "Wannan lambar ba daidai ba ce. Duba sabon imel ɗin da muka aiko muku, ko ku sake aika lambar.",
     "regenerateCode": "Sake aika lamba",
+    "codeAccepted": "An karɓi lambar. Ana buɗe dashboard ɗinka.",
+    "codeLabel": "Lambar lambobi 6",
     "back": "Koma baya",
     "byProceeding": "Ta hanyar ci gaba, kun amince da",
     "termsOfService": "Sharuɗɗan sabis",
@@ -935,7 +1035,7 @@ export default {
     "title": "Maida masu biyan kuɗi zuwa masu ziyara",
     "recommendation": "Taimaka wa AI namu ya fahimci alamarku ta hanyar haɗa rukunin yanar gizonku.",
     "question": "Kuna da gidan yanar gizo? (na zaɓi, kuna iya ƙara shi daga baya)",
-    "placeholder": "https://shafinka.com"
+    "placeholder": "https://your-site.com"
   },
   "newsSource": {
     "title": "Haɗa hanyar abun cikin ku",
@@ -947,6 +1047,673 @@ export default {
       "title": "Barka da zuwa wasiƙar labarai.",
       "invitedBy": "{configuratorId} ne ya gayyace ku."
     }
+  },
+  "showcase": {
+    "sampleBadge": "Bayanan samfuri",
+    "exampleLabel": "Misalin kasuwanci",
+    "caption": "{business} misali ne na {kind}. Sunaye, labarai da lambobi a cikin wannan ra'ayi wuraren wakilci ne waɗanda ke nuna yadda dashboard ɗinka yake bayan 'yan makonni.",
+    "pause": "Dakatar da motsi",
+    "play": "Kunna motsi",
+    "scenesLabel": "Sassan dashboard",
+    "examplesLabel": "Misalan kasuwancin",
+    "appUrl": "app.aiban.news",
+    "nav": {
+      "home": "Gida",
+      "automations": "Ayyuka ta atomatik",
+      "sources": "Tushe",
+      "subscribers": "Masu biyan kuɗi",
+      "reports": "Rahotanni",
+      "blog": "Blog"
+    },
+    "scenes": {
+      "home": "Bayyani",
+      "issue": "Batun",
+      "reports": "Danna",
+      "subscribers": "Masu biyan kuɗi",
+      "automation": "Jadawali",
+      "source": "Gidan yanar gizonku",
+      "voice": "Muryar ku",
+      "signup": "Fom ɗin rajista",
+      "blog": "Blog",
+      "import": "Shigo da"
+    },
+    "ui": {
+      "hello": "Sannu, {business}",
+      "narrative": "Masu karatu {subscribers} a cikin harsuna {languages}. Batun na gaba zai fita {schedule}.",
+      "kpiSubscribers": "Masu biyan kuɗi",
+      "kpiLanguages": "Harsuna",
+      "kpiClicks": "Danna, kwanaki 7 da suka gabata",
+      "kpiAutomations": "Ayyukan kai a kan",
+      "kpiNew": "{count} sabo a wannan makon",
+      "nextIssue": "Batun na gaba",
+      "ready": "Shirye",
+      "activity": "Ayyukan kwanan nan",
+      "from": "Daga",
+      "subject": "Batun",
+      "readMore": "Karanta cikakken labarin",
+      "readerLanguage": "Harshen mai karatu",
+      "clicksTitle": "Danna, kwanaki 7 da suka gabata",
+      "mostClicked": "Mafi yawan danna",
+      "clicks": "danna",
+      "days": [
+        "Lit",
+        "Tal",
+        "Lar",
+        "Alh",
+        "Jum",
+        "Asa",
+        "Lah"
+      ],
+      "subscribersTitle": "Masu biyan kuɗi",
+      "language": "Harshe",
+      "joinedVia": "Shiga ta",
+      "newSubscriber": "Sabon mai biyan kuɗi",
+      "automationTitle": "Batun na mako-mako",
+      "automationSentence": "{schedule}, rubuta batun daga sabon labari kuma aika shi ga kowane mai karatu a cikin harshensu.",
+      "on": "Kunna",
+      "off": "Kashe",
+      "automationOn": "An kunna sarrafa kai",
+      "sourceLabel": "Inda abun cikin ku ke fitowa",
+      "sourceButton": "Karanta shafina",
+      "reading": "Ana karanta shafinku",
+      "found": "An sami labarai {count}",
+      "voiceReader": "Mai karatunku da ya dace",
+      "voiceTone": "Yadda ya kamata ya yi sauti",
+      "signupHeading": "Samu bayananmu na mako-mako",
+      "signupEmail": "Adireshin imel",
+      "signupLanguage": "Harshe",
+      "signupButton": "Yi rajista",
+      "signupDone": "Duba akwatin imel ɗinku don tabbatarwa.",
+      "blogTitle": "Labarai daga {business}",
+      "importFile": "clients.csv",
+      "importing": "Ana shigo da lambobin tuntuɓar",
+      "imported": "An ƙara lambobin tuntuɓar {count}",
+      "sources": {
+        "form": "Fom na rajista",
+        "import": "Shigo da",
+        "manual": "An ƙara da hannu"
+      }
+    },
+    "examples": [
+      {
+        "business": "Northfield Studio",
+        "kind": "kamfanin ƙirar gidan yanar gizo",
+        "site": "northfield.studio",
+        "schedule": "kowane Litinin da karfe 9:00",
+        "subscribers": 312,
+        "newThisWeek": 9,
+        "clicks7": 84,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 58
+          },
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 31
+          },
+          {
+            "code": "pt",
+            "name": "Portuguese",
+            "share": 11
+          }
+        ],
+        "reader": "Masu asibitoci, shaguna da ɗakunan aiki waɗanda ke son gidan yanar gizo da ke kawo abokan ciniki, ba abin ajiya ba.",
+        "tones": [
+          "Dumi",
+          "A fili",
+          "Aiki"
+        ],
+        "articles": [
+          "Yadda muka sake gina gidan yanar gizon asibitin hakora cikin makonni shida",
+          "Abubuwa biyar da za a gyara kafin ka sake ƙira",
+          "Dalilin da ya sa maɓallin yin rajista ya kamata ya zama ruwan lemo"
+        ],
+        "issue": {
+          "title": "Yadda muka sake gina gidan yanar gizon asibitin hakora cikin makonni shida",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "A clinic website rebuilt in six weeks",
+              "summary": "We moved booking to the top of every page and cut the forms from nine fields to three. Here is what changed for the clinic."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "El sitio de una clínica, renovado en seis semanas",
+              "summary": "Pusimos la reserva arriba en cada página y redujimos los formularios de nueve campos a tres. Esto es lo que cambió para la clínica."
+            },
+            {
+              "code": "pt",
+              "name": "Português",
+              "subject": "O site de uma clínica, refeito em seis semanas",
+              "summary": "Colocamos o agendamento no topo de cada página e reduzimos os formulários de nove campos para três. Veja o que mudou para a clínica."
+            }
+          ]
+        },
+        "clicksByDay": [
+          21,
+          17,
+          12,
+          9,
+          11,
+          6,
+          8
+        ],
+        "topLinks": [
+          {
+            "title": "Nazarin asibiti",
+            "clicks": 38
+          },
+          {
+            "title": "Abubuwa biyar da za a gyara kafin ka sake ƙira",
+            "clicks": 27
+          },
+          {
+            "title": "Yi kira",
+            "clicks": 19
+          }
+        ],
+        "people": [
+          {
+            "email": "lucia.r@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "mark@example.org",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "joana.s@example.net",
+            "lang": "PT",
+            "via": "form"
+          },
+          {
+            "email": "dr.chen@example.com",
+            "lang": "EN",
+            "via": "manual"
+          }
+        ],
+        "activity": [
+          "An aika batun zuwa masu karatu 312 cikin harsuna 3",
+          "Danna 38 akan nazarin asibiti",
+          "Lucia ta shiga daga fom na rajista kuma tana karatu cikin Spanish"
+        ],
+        "importCount": 148
+      },
+      {
+        "business": "Brightline Software",
+        "kind": "kamfanin software",
+        "site": "brightline.dev",
+        "schedule": "a ranar 1 ga kowane wata da karfe 10:00",
+        "subscribers": 1240,
+        "newThisWeek": 23,
+        "clicks7": 211,
+        "automationsOn": 1,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 64
+          },
+          {
+            "code": "de",
+            "name": "German",
+            "share": 22
+          },
+          {
+            "code": "fr",
+            "name": "French",
+            "share": 14
+          }
+        ],
+        "reader": "Manajojin ofis da shugabannin IT a abokan ciniki waɗanda ke amfani da software ɗin mu na yin rajista kowace rana.",
+        "tones": [
+          "Bayyananne",
+          "Gajere",
+          "Abokantaka"
+        ],
+        "articles": [
+          "Saki 4.2: alƙawura masu maimaitawa",
+          "Rahotanni masu sauri ga manyan ƙungiyoyi",
+          "Yadda ake motsa kalanda ɗin ku daga spreadsheet"
+        ],
+        "issue": {
+          "title": "Saki 4.2: alƙawura masu maimaitawa",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "New this month: recurring appointments",
+              "summary": "You can now repeat any appointment weekly or monthly. Reports for teams over 50 people also load faster."
+            },
+            {
+              "code": "de",
+              "name": "Deutsch",
+              "subject": "Neu diesen Monat: wiederkehrende Termine",
+              "summary": "Sie können jetzt jeden Termin wöchentlich oder monatlich wiederholen. Berichte für Teams ab 50 Personen laden außerdem schneller."
+            },
+            {
+              "code": "fr",
+              "name": "Français",
+              "subject": "Nouveau ce mois-ci : les rendez-vous récurrents",
+              "summary": "Vous pouvez désormais répéter un rendez-vous chaque semaine ou chaque mois. Les rapports des équipes de plus de 50 personnes s'affichent aussi plus vite."
+            }
+          ]
+        },
+        "clicksByDay": [
+          64,
+          48,
+          33,
+          25,
+          19,
+          9,
+          13
+        ],
+        "topLinks": [
+          {
+            "title": "Jagorar alƙawuran maimaitawa",
+            "clicks": 96
+          },
+          {
+            "title": "Bayanan saki 4.2",
+            "clicks": 71
+          },
+          {
+            "title": "Motsawa daga spreadsheet",
+            "clicks": 44
+          }
+        ],
+        "people": [
+          {
+            "email": "it@example.de",
+            "lang": "DE",
+            "via": "import"
+          },
+          {
+            "email": "sophie.m@example.fr",
+            "lang": "FR",
+            "via": "form"
+          },
+          {
+            "email": "ops@example.com",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "k.weber@example.de",
+            "lang": "DE",
+            "via": "form"
+          }
+        ],
+        "activity": [
+          "An aika batun zuwa masu karatu 1240 cikin harsuna 3",
+          "Danna 96 akan jagorar alƙawuran maimaitawa",
+          "An shigo da lambobin waya 23 daga clients.csv"
+        ],
+        "importCount": 412
+      },
+      {
+        "business": "Casa Verde Realty",
+        "kind": "kamfanin dukiyar ƙasa",
+        "site": "casaverde.homes",
+        "schedule": "kowace Alhamis da karfe 8:00",
+        "subscribers": 586,
+        "newThisWeek": 14,
+        "clicks7": 163,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 47
+          },
+          {
+            "code": "en",
+            "name": "English",
+            "share": 41
+          },
+          {
+            "code": "fr",
+            "name": "French",
+            "share": 12
+          }
+        ],
+        "reader": "Iyali da masu ritaya daga ƙasashen waje waɗanda ke neman gida kusa da bakin teku, da masu shi waɗanda za su iya sayarwa.",
+        "tones": [
+          "Dumi",
+          "Na gida",
+          "Natsuwa"
+        ],
+        "articles": [
+          "Gidaje uku sababbi kusa da bakin teku a wannan makon",
+          "Yadda farashin rufewa yake ga masu saye daga ƙasashen waje",
+          "Farashin a tsohon gari, sabuntawa na kaka"
+        ],
+        "issue": {
+          "title": "Gidaje uku sababbi kusa da bakin teku a wannan makon",
+          "langs": [
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tres casas nuevas cerca de la playa",
+              "summary": "Una casa de dos habitaciones con jardín, un apartamento con vista al mar y una casa para reformar a diez minutos del centro."
+            },
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Three new homes near the beach",
+              "summary": "A two bedroom house with a garden, a flat with a sea view and a house to renovate ten minutes from the center."
+            },
+            {
+              "code": "fr",
+              "name": "Français",
+              "subject": "Trois nouvelles maisons près de la plage",
+              "summary": "Une maison de deux chambres avec jardin, un appartement avec vue sur la mer et une maison à rénover à dix minutes du centre."
+            }
+          ]
+        },
+        "clicksByDay": [
+          12,
+          9,
+          15,
+          52,
+          38,
+          21,
+          16
+        ],
+        "topLinks": [
+          {
+            "title": "Gida mai kallon teku",
+            "clicks": 71
+          },
+          {
+            "title": "Gida mai ɗaki biyu tare da lambu",
+            "clicks": 54
+          },
+          {
+            "title": "Farashin rufewa ga masu saye daga ƙasashen waje",
+            "clicks": 38
+          }
+        ],
+        "people": [
+          {
+            "email": "familia.ortiz@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "j.dupont@example.fr",
+            "lang": "FR",
+            "via": "form"
+          },
+          {
+            "email": "tom.and.ann@example.org",
+            "lang": "EN",
+            "via": "manual"
+          },
+          {
+            "email": "rmora@example.net",
+            "lang": "ES",
+            "via": "import"
+          }
+        ],
+        "activity": [
+          "An aika batun zuwa masu karatu 586 cikin harsuna 3",
+          "Danna 71 akan gidan mai kallon teku",
+          "Wani mai karatu a Faransa ya shiga daga fom ɗin rajista"
+        ],
+        "importCount": 203
+      },
+      {
+        "business": "Mora and Partners",
+        "kind": "kamfanin lissafin kuɗi",
+        "site": "morapartners.co",
+        "schedule": "kowace Talata biyu da karfe 7:30",
+        "subscribers": 428,
+        "newThisWeek": 6,
+        "clicks7": 97,
+        "automationsOn": 1,
+        "languages": [
+          {
+            "code": "en",
+            "name": "Turanci",
+            "share": 52
+          },
+          {
+            "code": "es",
+            "name": "Sifenish",
+            "share": 38
+          },
+          {
+            "code": "it",
+            "name": "Italiyanci",
+            "share": 10
+          }
+        ],
+        "reader": "Masu kamfanoni ƙanana waɗanda suke son sanin abin da ke canzawa a cikin haraji da albashi, ba tare da kalmomin da ba su da ma'ana ba.",
+        "tones": [
+          "Natsuwa",
+          "Madaidaici",
+          "Sauƙi"
+        ],
+        "articles": [
+          "Ranar ƙarshe na haraji na kwata yana motsawa zuwa 15",
+          "Abin da za a riƙe lokacin da ka ɗauki ma'aikacinka na farko",
+          "Rasit: takarda ko hoto?"
+        ],
+        "issue": {
+          "title": "Ranar ƙarshe na haraji na kwata yana motsawa zuwa 15",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Your quarterly deadline moves to the 15th",
+              "summary": "The filing date for the next quarter moves five days later. Here is what to send us and when, so nothing is late."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tu plazo trimestral pasa al día 15",
+              "summary": "La fecha de presentación del próximo trimestre se mueve cinco días. Esto es lo que debes enviarnos y cuándo, para que nada llegue tarde."
+            },
+            {
+              "code": "it",
+              "name": "Italiano",
+              "subject": "La scadenza trimestrale passa al 15",
+              "summary": "La data di presentazione del prossimo trimestre slitta di cinque giorni. Ecco cosa inviarci e quando, perché nulla arrivi in ritardo."
+            }
+          ]
+        },
+        "clicksByDay": [
+          33,
+          24,
+          14,
+          8,
+          7,
+          4,
+          7
+        ],
+        "topLinks": [
+          {
+            "title": "Jerin abubuwan da za a bincika na 15",
+            "clicks": 46
+          },
+          {
+            "title": "Ɗaukar ma'aikacinka na farko",
+            "clicks": 29
+          },
+          {
+            "title": "Yi kiran bita",
+            "clicks": 22
+          }
+        ],
+        "people": [
+          {
+            "email": "bakery.owner@example.com",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "c.rossi@example.it",
+            "lang": "IT",
+            "via": "form"
+          },
+          {
+            "email": "taller.luna@example.net",
+            "lang": "ES",
+            "via": "import"
+          },
+          {
+            "email": "finance@example.org",
+            "lang": "EN",
+            "via": "manual"
+          }
+        ],
+        "activity": [
+          "An aika batun zuwa masu karatu 428 a cikin harsuna 3",
+          "Danna 46 akan jerin abubuwan da za a bincika na 15",
+          "Sabbin masu karatu 6 a wannan makon"
+        ],
+        "importCount": 97
+      },
+      {
+        "business": "Run Better Coaching",
+        "kind": "kocin gudu",
+        "site": "runbetter.coach",
+        "schedule": "kowane Lahadi da 18:00",
+        "subscribers": 907,
+        "newThisWeek": 31,
+        "clicks7": 248,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "en",
+            "name": "Turanci",
+            "share": 49
+          },
+          {
+            "code": "es",
+            "name": "Sifenish",
+            "share": 33
+          },
+          {
+            "code": "de",
+            "name": "Jamusanci",
+            "share": 18
+          }
+        ],
+        "reader": "Manyan da ke horar da su don gudun rabin marathon na farko waɗanda ke gudu sau uku a mako kafin aiki.",
+        "tones": [
+          "Ƙarfafawa",
+          "Kai tsaye",
+          "Gajere"
+        ],
+        "articles": [
+          "Wannan makon: dogon gudu, ya fi kanku tunani a hankali",
+          "Takalmi bayan kilomita 500",
+          "Tsarin ƙarfi na mintuna 20"
+        ],
+        "issue": {
+          "title": "Wannan makon: dogon gudu, ya fi kanku tunani a hankali",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Your long run should feel too easy",
+              "summary": "Keep it slow enough to talk. This week's plan adds ten minutes and one short hill session."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tu tirada larga debería sentirse demasiado fácil",
+              "summary": "Mantén un ritmo que te deje hablar. El plan de esta semana suma diez minutos y una sesión corta de cuestas."
+            },
+            {
+              "code": "de",
+              "name": "Deutsch",
+              "subject": "Dein langer Lauf sollte sich zu leicht anfühlen",
+              "summary": "Lauf so langsam, dass du noch reden kannst. Der Plan dieser Woche bringt zehn Minuten mehr und eine kurze Bergeinheit."
+            }
+          ]
+        },
+        "clicksByDay": [
+          18,
+          22,
+          26,
+          31,
+          35,
+          49,
+          67
+        ],
+        "topLinks": [
+          {
+            "title": "Tsarin horo na wannan makon",
+            "clicks": 121
+          },
+          {
+            "title": "Tsarin ƙarfi na mintuna 20",
+            "clicks": 78
+          },
+          {
+            "title": "Takalmi bayan kilomita 500",
+            "clicks": 49
+          }
+        ],
+        "people": [
+          {
+            "email": "ana.runs@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "felix.k@example.de",
+            "lang": "DE",
+            "via": "form"
+          },
+          {
+            "email": "sam@example.org",
+            "lang": "EN",
+            "via": "form"
+          },
+          {
+            "email": "club.secretary@example.net",
+            "lang": "EN",
+            "via": "import"
+          }
+        ],
+        "activity": [
+          "An aika batun zuwa masu karatu 907 a cikin harsuna 3",
+          "Danna 121 akan tsarin horo na wannan makon",
+          "Sabbin masu karatu 31 a wannan makon, yawancin daga fom ɗin rajista"
+        ],
+        "importCount": 260
+      }
+    ]
+  },
+  "errorPage": {
+    "notFoundEyebrow": "Kuskure 404",
+    "notFoundTitle": "Ba mu sami wannan shafin ba",
+    "notFoundBody": "Hanyar haɗin yana iya zama tsohuwar ko kuma tana da kuskuren rubutu. Waɗannan shafuffuka wuri ne mai kyau don ci gaba.",
+    "serverEyebrow": "Kuskure {status}",
+    "serverTitle": "Wani abu ya faru a gefenmu",
+    "serverBody": "Ba mu iya loda wannan shafin ba. Sake gwadawa cikin minti daya. Idan ya ci gaba da faruwa, rubuta zuwa info@aiban.news.",
+    "retry": "Sake gwadawa",
+    "home": "Je shafin gida",
+    "popularTitle": "Shafukan da suka fi farin jini",
+    "links": {
+      "howItWorks": "Yadda AIBAN ke aiki",
+      "pricing": "Farashi",
+      "help": "Cibiyar taimako",
+      "login": "Shiga cikin dashboard ɗinka"
+    },
+    "report": "Idan wani hanyar haɗi a shafinmu ya kawo ku nan, gaya mana a info@aiban.news don mu gyara shi."
   },
   "header": {
     "goToWorkspace": "Buɗe dashboard",
@@ -982,1429 +1749,5 @@ export default {
     "monthly": "Wata-wata",
     "yearly": "Shekara-shekara",
     "loadingPlan": "Ana loda bayanan tsari..."
-  },
-  "languages": [
-    {
-      "code": "ab",
-      "name": "Abkhaziyanci"
-    },
-    {
-      "code": "aa",
-      "name": "Afanci"
-    },
-    {
-      "code": "af",
-      "name": "Afirkanci"
-    },
-    {
-      "code": "ak",
-      "name": "Akanci"
-    },
-    {
-      "code": "sq",
-      "name": "Albaniyanci"
-    },
-    {
-      "code": "am",
-      "name": "Amharanci"
-    },
-    {
-      "code": "ar",
-      "name": "Larabci"
-    },
-    {
-      "code": "an",
-      "name": "Aragonanci"
-    },
-    {
-      "code": "hy",
-      "name": "Armeniyanci"
-    },
-    {
-      "code": "as",
-      "name": "Assamanci"
-    },
-    {
-      "code": "av",
-      "name": "Avaranci"
-    },
-    {
-      "code": "ae",
-      "name": "Avestanci"
-    },
-    {
-      "code": "ay",
-      "name": "Aymaranci"
-    },
-    {
-      "code": "az",
-      "name": "Azerbaijanci"
-    },
-    {
-      "code": "bm",
-      "name": "Bambaranci"
-    },
-    {
-      "code": "ba",
-      "name": "Bashkiranci"
-    },
-    {
-      "code": "eu",
-      "name": "Baskanci"
-    },
-    {
-      "code": "be",
-      "name": "Belarusanci"
-    },
-    {
-      "code": "bn",
-      "name": "Bengali"
-    },
-    {
-      "code": "bi",
-      "name": "Bislama"
-    },
-    {
-      "code": "bs",
-      "name": "Bosniyanci"
-    },
-    {
-      "code": "br",
-      "name": "Bretonci"
-    },
-    {
-      "code": "bg",
-      "name": "Bulgariyanci"
-    },
-    {
-      "code": "my",
-      "name": "Burmanci"
-    },
-    {
-      "code": "ca",
-      "name": "Katalanci"
-    },
-    {
-      "code": "ch",
-      "name": "Chamorro"
-    },
-    {
-      "code": "ce",
-      "name": "Chechenci"
-    },
-    {
-      "code": "ny",
-      "name": "Chichewa"
-    },
-    {
-      "code": "zh",
-      "name": "Sinanci"
-    },
-    {
-      "code": "cu",
-      "name": "Silaubanci na Coci"
-    },
-    {
-      "code": "cv",
-      "name": "Chuvash"
-    },
-    {
-      "code": "kw",
-      "name": "Kornish"
-    },
-    {
-      "code": "co",
-      "name": "Korsikanci"
-    },
-    {
-      "code": "cr",
-      "name": "Cree"
-    },
-    {
-      "code": "hr",
-      "name": "Krowashiyanci"
-    },
-    {
-      "code": "cs",
-      "name": "Yaren Czech"
-    },
-    {
-      "code": "da",
-      "name": "Danish"
-    },
-    {
-      "code": "dv",
-      "name": "Divehi"
-    },
-    {
-      "code": "nl",
-      "name": "Yaren mutanen Holland"
-    },
-    {
-      "code": "dz",
-      "name": "Dzongkha"
-    },
-    {
-      "code": "en",
-      "name": "Turanci"
-    },
-    {
-      "code": "eo",
-      "name": "Esperanto"
-    },
-    {
-      "code": "et",
-      "name": "Estoniyanci"
-    },
-    {
-      "code": "ee",
-      "name": "Ewe"
-    },
-    {
-      "code": "fo",
-      "name": "Faroese"
-    },
-    {
-      "code": "fj",
-      "name": "Fijian"
-    },
-    {
-      "code": "fi",
-      "name": "Finnish"
-    },
-    {
-      "code": "fr",
-      "name": "Faransanci"
-    },
-    {
-      "code": "fy",
-      "name": "Frisiyanci ta Yamma"
-    },
-    {
-      "code": "ff",
-      "name": "Fulfulde"
-    },
-    {
-      "code": "gd",
-      "name": "Gaelic na Scotland"
-    },
-    {
-      "code": "gl",
-      "name": "Galiciyanci"
-    },
-    {
-      "code": "lg",
-      "name": "Gandanci"
-    },
-    {
-      "code": "ka",
-      "name": "Jojiyanci"
-    },
-    {
-      "code": "de",
-      "name": "Jamusanci"
-    },
-    {
-      "code": "el",
-      "name": "Girkanci"
-    },
-    {
-      "code": "kl",
-      "name": "Greenlandic"
-    },
-    {
-      "code": "gn",
-      "name": "Guaranci"
-    },
-    {
-      "code": "gu",
-      "name": "Gujarati"
-    },
-    {
-      "code": "ht",
-      "name": "Kiriyol na Haiti"
-    },
-    {
-      "code": "ha",
-      "name": "Hausa"
-    },
-    {
-      "code": "he",
-      "name": "Ibrananci"
-    },
-    {
-      "code": "hz",
-      "name": "Hereranci"
-    },
-    {
-      "code": "hi",
-      "name": "Hindustanci"
-    },
-    {
-      "code": "ho",
-      "name": "Hiri Motu"
-    },
-    {
-      "code": "hu",
-      "name": "Hungariyanci"
-    },
-    {
-      "code": "is",
-      "name": "Icelandic"
-    },
-    {
-      "code": "io",
-      "name": "Ido"
-    },
-    {
-      "code": "ig",
-      "name": "Inyamuranci"
-    },
-    {
-      "code": "id",
-      "name": "Indonusiyanci"
-    },
-    {
-      "code": "ia",
-      "name": "Interlingua"
-    },
-    {
-      "code": "ie",
-      "name": "Interlingue"
-    },
-    {
-      "code": "iu",
-      "name": "Inuktitut"
-    },
-    {
-      "code": "ik",
-      "name": "Inupiaq"
-    },
-    {
-      "code": "ga",
-      "name": "Irish"
-    },
-    {
-      "code": "it",
-      "name": "Italiyanci"
-    },
-    {
-      "code": "ja",
-      "name": "Japananci"
-    },
-    {
-      "code": "jv",
-      "name": "Jafanci"
-    },
-    {
-      "code": "kn",
-      "name": "Kannadanci"
-    },
-    {
-      "code": "kr",
-      "name": "Kanuranci"
-    },
-    {
-      "code": "ks",
-      "name": "Kashmiranci"
-    },
-    {
-      "code": "kk",
-      "name": "Kazakh"
-    },
-    {
-      "code": "km",
-      "name": "Khmer"
-    },
-    {
-      "code": "ki",
-      "name": "Kikuyu"
-    },
-    {
-      "code": "rw",
-      "name": "Kinyarwanda"
-    },
-    {
-      "code": "ky",
-      "name": "Kyrgyz"
-    },
-    {
-      "code": "kv",
-      "name": "Komi"
-    },
-    {
-      "code": "kg",
-      "name": "Kwangwanci"
-    },
-    {
-      "code": "ko",
-      "name": "Harshen Koriya"
-    },
-    {
-      "code": "kj",
-      "name": "Kuanyama"
-    },
-    {
-      "code": "ku",
-      "name": "Kurdanci"
-    },
-    {
-      "code": "lo",
-      "name": "Laoci"
-    },
-    {
-      "code": "la",
-      "name": "Latin"
-    },
-    {
-      "code": "lv",
-      "name": "Latviyanci"
-    },
-    {
-      "code": "li",
-      "name": "Limburgish"
-    },
-    {
-      "code": "ln",
-      "name": "Lingala"
-    },
-    {
-      "code": "lt",
-      "name": "Lithuaniyanci"
-    },
-    {
-      "code": "lu",
-      "name": "Luba-Katanga"
-    },
-    {
-      "code": "lb",
-      "name": "Luxembourgish"
-    },
-    {
-      "code": "mk",
-      "name": "Macedoniyanci"
-    },
-    {
-      "code": "mg",
-      "name": "Malagasy"
-    },
-    {
-      "code": "ms",
-      "name": "Malayanci"
-    },
-    {
-      "code": "ml",
-      "name": "Malayalam"
-    },
-    {
-      "code": "mt",
-      "name": "Maltanci"
-    },
-    {
-      "code": "gv",
-      "name": "Manx"
-    },
-    {
-      "code": "mi",
-      "name": "Maoranci"
-    },
-    {
-      "code": "mr",
-      "name": "Marathanci"
-    },
-    {
-      "code": "mh",
-      "name": "Marshallese"
-    },
-    {
-      "code": "mn",
-      "name": "Mongoliyanci"
-    },
-    {
-      "code": "na",
-      "name": "Nauron"
-    },
-    {
-      "code": "nv",
-      "name": "Navajo"
-    },
-    {
-      "code": "nd",
-      "name": "Ndebele na Arewa"
-    },
-    {
-      "code": "nr",
-      "name": "Ndebele na Kudu"
-    },
-    {
-      "code": "ng",
-      "name": "Ndonga"
-    },
-    {
-      "code": "ne",
-      "name": "Nepalanci"
-    },
-    {
-      "code": "no",
-      "name": "Norveciyanci"
-    },
-    {
-      "code": "nb",
-      "name": "Bokmål na Norway"
-    },
-    {
-      "code": "nn",
-      "name": "Nynorsk na Norway"
-    },
-    {
-      "code": "oc",
-      "name": "Occitan"
-    },
-    {
-      "code": "oj",
-      "name": "Ojibwa"
-    },
-    {
-      "code": "or",
-      "name": "Oriya"
-    },
-    {
-      "code": "om",
-      "name": "Oromo"
-    },
-    {
-      "code": "os",
-      "name": "Ossetian"
-    },
-    {
-      "code": "pi",
-      "name": "Pali"
-    },
-    {
-      "code": "ps",
-      "name": "Pashtanci"
-    },
-    {
-      "code": "fa",
-      "name": "Farshanci"
-    },
-    {
-      "code": "pl",
-      "name": "Yaren mutanen Poland"
-    },
-    {
-      "code": "pt",
-      "name": "Harshen Portugal"
-    },
-    {
-      "code": "pa",
-      "name": "Punjabi"
-    },
-    {
-      "code": "qu",
-      "name": "Quechua"
-    },
-    {
-      "code": "ro",
-      "name": "Romaniyanci"
-    },
-    {
-      "code": "rm",
-      "name": "Romansh"
-    },
-    {
-      "code": "rn",
-      "name": "Rundi"
-    },
-    {
-      "code": "ru",
-      "name": "Rashanci"
-    },
-    {
-      "code": "se",
-      "name": "Sami na Arewa"
-    },
-    {
-      "code": "sm",
-      "name": "Samoan"
-    },
-    {
-      "code": "sg",
-      "name": "Sango"
-    },
-    {
-      "code": "sa",
-      "name": "Sanskrit"
-    },
-    {
-      "code": "sc",
-      "name": "Sardiniyanci"
-    },
-    {
-      "code": "sr",
-      "name": "Sarbiyanci"
-    },
-    {
-      "code": "sn",
-      "name": "Shonanci"
-    },
-    {
-      "code": "ii",
-      "name": "Sichuan Yi"
-    },
-    {
-      "code": "sd",
-      "name": "Sindhi"
-    },
-    {
-      "code": "si",
-      "name": "Sinhalanci"
-    },
-    {
-      "code": "sk",
-      "name": "Slovak"
-    },
-    {
-      "code": "sl",
-      "name": "Sloveniyanci"
-    },
-    {
-      "code": "so",
-      "name": "Somaliye"
-    },
-    {
-      "code": "st",
-      "name": "Sotho na Kudu"
-    },
-    {
-      "code": "es",
-      "name": "Sipaniyanci"
-    },
-    {
-      "code": "su",
-      "name": "Sudananci"
-    },
-    {
-      "code": "sw",
-      "name": "Swahili"
-    },
-    {
-      "code": "ss",
-      "name": "Swati"
-    },
-    {
-      "code": "sv",
-      "name": "Harshen Sweden"
-    },
-    {
-      "code": "tl",
-      "name": "Tagalog"
-    },
-    {
-      "code": "ty",
-      "name": "Tahiti"
-    },
-    {
-      "code": "tg",
-      "name": "Tajikanci"
-    },
-    {
-      "code": "ta",
-      "name": "Tamil"
-    },
-    {
-      "code": "tt",
-      "name": "Tataranci"
-    },
-    {
-      "code": "te",
-      "name": "Teluganci"
-    },
-    {
-      "code": "th",
-      "name": "Thaanci"
-    },
-    {
-      "code": "bo",
-      "name": "Tibetanci"
-    },
-    {
-      "code": "ti",
-      "name": "Tigrinya"
-    },
-    {
-      "code": "to",
-      "name": "Tongan"
-    },
-    {
-      "code": "ts",
-      "name": "Tsonga"
-    },
-    {
-      "code": "tn",
-      "name": "Tswana"
-    },
-    {
-      "code": "tr",
-      "name": "Harshen Turkiyya"
-    },
-    {
-      "code": "tk",
-      "name": "Turkmen"
-    },
-    {
-      "code": "tw",
-      "name": "Twanci"
-    },
-    {
-      "code": "ug",
-      "name": "Uighur"
-    },
-    {
-      "code": "uk",
-      "name": "Ukrainiyanci"
-    },
-    {
-      "code": "ur",
-      "name": "Urdu"
-    },
-    {
-      "code": "uz",
-      "name": "Uzbek"
-    },
-    {
-      "code": "ve",
-      "name": "Vendanci"
-    },
-    {
-      "code": "vi",
-      "name": "Biyetnamanci"
-    },
-    {
-      "code": "vo",
-      "name": "Volapük"
-    },
-    {
-      "code": "wa",
-      "name": "Walloon"
-    },
-    {
-      "code": "cy",
-      "name": "Welsh"
-    },
-    {
-      "code": "wo",
-      "name": "Wolof"
-    },
-    {
-      "code": "xh",
-      "name": "Xhosa"
-    },
-    {
-      "code": "yi",
-      "name": "Yiddish"
-    },
-    {
-      "code": "yo",
-      "name": "Yarbanci"
-    },
-    {
-      "code": "za",
-      "name": "Zhuang"
-    },
-    {
-      "code": "zu",
-      "name": "Zulunci"
-    }
-  ],
-  "countries": [
-    {
-      "code": "AF",
-      "name": "Afganistan"
-    },
-    {
-      "code": "AL",
-      "name": "Albaniya"
-    },
-    {
-      "code": "DZ",
-      "name": "Aljeriya"
-    },
-    {
-      "code": "AS",
-      "name": "Samowa na Amurka"
-    },
-    {
-      "code": "AD",
-      "name": "Andora"
-    },
-    {
-      "code": "AO",
-      "name": "Angola"
-    },
-    {
-      "code": "AI",
-      "name": "Anguila"
-    },
-    {
-      "code": "AQ",
-      "name": "Antatika"
-    },
-    {
-      "code": "AG",
-      "name": "Antigwa da Barbuda"
-    },
-    {
-      "code": "AR",
-      "name": "Arjantini"
-    },
-    {
-      "code": "AM",
-      "name": "Armeniya"
-    },
-    {
-      "code": "AW",
-      "name": "Aruba"
-    },
-    {
-      "code": "AU",
-      "name": "Ostareliya"
-    },
-    {
-      "code": "AT",
-      "name": "Ostiriya"
-    },
-    {
-      "code": "AZ",
-      "name": "Azerbaijan"
-    },
-    {
-      "code": "BS",
-      "name": "Bahamas"
-    },
-    {
-      "code": "BH",
-      "name": "Bahrain"
-    },
-    {
-      "code": "BD",
-      "name": "Bangiladash"
-    },
-    {
-      "code": "BB",
-      "name": "Barbados"
-    },
-    {
-      "code": "BY",
-      "name": "Belarut"
-    },
-    {
-      "code": "BE",
-      "name": "Beljiyam"
-    },
-    {
-      "code": "BZ",
-      "name": "Beliz"
-    },
-    {
-      "code": "BJ",
-      "name": "Benin"
-    },
-    {
-      "code": "BM",
-      "name": "Barmuda"
-    },
-    {
-      "code": "BT",
-      "name": "Butan"
-    },
-    {
-      "code": "BO",
-      "name": "Bolibiya"
-    },
-    {
-      "code": "BA",
-      "name": "Bosniya da Harzagobina"
-    },
-    {
-      "code": "BW",
-      "name": "Botswana"
-    },
-    {
-      "code": "BR",
-      "name": "Burazil"
-    },
-    {
-      "code": "IO",
-      "name": "Yankin Birtaniya na Tekun Indiya"
-    },
-    {
-      "code": "VG",
-      "name": "Tsibirin Birjin na Birtaniya"
-    },
-    {
-      "code": "BN",
-      "name": "Burune"
-    },
-    {
-      "code": "BG",
-      "name": "Bulgariya"
-    },
-    {
-      "code": "BF",
-      "name": "Burkina Faso"
-    },
-    {
-      "code": "BI",
-      "name": "Burundi"
-    },
-    {
-      "code": "KH",
-      "name": "Kambodiya"
-    },
-    {
-      "code": "CM",
-      "name": "Kamaru"
-    },
-    {
-      "code": "CA",
-      "name": "Kanada"
-    },
-    {
-      "code": "CV",
-      "name": "Cape Verde"
-    },
-    {
-      "code": "KY",
-      "name": "Tsibirin Kaiman"
-    },
-    {
-      "code": "CF",
-      "name": "Jamhuriyar Afirka ta Tsakiya"
-    },
-    {
-      "code": "TD",
-      "name": "Sadi"
-    },
-    {
-      "code": "CL",
-      "name": "Sili"
-    },
-    {
-      "code": "CN",
-      "name": "Sin"
-    },
-    {
-      "code": "CX",
-      "name": "Tsibirin Kirsimeti"
-    },
-    {
-      "code": "CC",
-      "name": "Tsibirai Cocos"
-    },
-    {
-      "code": "CO",
-      "name": "Kolambiya"
-    },
-    {
-      "code": "KM",
-      "name": "Kwamoras"
-    },
-    {
-      "code": "CG",
-      "name": "Kongo - Brazzaville"
-    },
-    {
-      "code": "CD",
-      "name": "Kongo - Kinshasa"
-    },
-    {
-      "code": "CK",
-      "name": "Tsibirai Cook"
-    },
-    {
-      "code": "CR",
-      "name": "Kosta Rika"
-    },
-    {
-      "code": "CI",
-      "name": "Côte d'Ivoire"
-    },
-    {
-      "code": "HR",
-      "name": "Krowashiya"
-    },
-    {
-      "code": "CU",
-      "name": "Kyuba"
-    },
-    {
-      "code": "CY",
-      "name": "Saipuras"
-    },
-    {
-      "code": "CZ",
-      "name": "Jamhuriyar Czech"
-    },
-    {
-      "code": "DK",
-      "name": "Danmark"
-    },
-    {
-      "code": "DJ",
-      "name": "Jibuti"
-    },
-    {
-      "code": "DM",
-      "name": "Dominika"
-    },
-    {
-      "code": "DO",
-      "name": "Jamhuriyar Dominika"
-    },
-    {
-      "code": "EC",
-      "name": "Ekwador"
-    },
-    {
-      "code": "EG",
-      "name": "Misra"
-    },
-    {
-      "code": "SV",
-      "name": "El Salbador"
-    },
-    {
-      "code": "GQ",
-      "name": "Gini Ta Tsakiya"
-    },
-    {
-      "code": "ER",
-      "name": "Eritreiya"
-    },
-    {
-      "code": "EE",
-      "name": "Estoniya"
-    },
-    {
-      "code": "SZ",
-      "name": "Eswatini"
-    },
-    {
-      "code": "ET",
-      "name": "Ethiyobiya"
-    },
-    {
-      "code": "FJ",
-      "name": "Fiji"
-    },
-    {
-      "code": "FI",
-      "name": "Finlan"
-    },
-    {
-      "code": "FR",
-      "name": "Faransa"
-    },
-    {
-      "code": "GA",
-      "name": "Gabon"
-    },
-    {
-      "code": "GM",
-      "name": "Gambiya"
-    },
-    {
-      "code": "GE",
-      "name": "Jojiya"
-    },
-    {
-      "code": "DE",
-      "name": "Jamus"
-    },
-    {
-      "code": "GH",
-      "name": "Gana"
-    },
-    {
-      "code": "GR",
-      "name": "Girka"
-    },
-    {
-      "code": "GT",
-      "name": "Gwatimala"
-    },
-    {
-      "code": "GN",
-      "name": "Gini"
-    },
-    {
-      "code": "GY",
-      "name": "Gayana"
-    },
-    {
-      "code": "HT",
-      "name": "Haiti"
-    },
-    {
-      "code": "HN",
-      "name": "Honduras"
-    },
-    {
-      "code": "HK",
-      "name": "Hong Kong"
-    },
-    {
-      "code": "HU",
-      "name": "Hungariya"
-    },
-    {
-      "code": "IS",
-      "name": "Aisalan"
-    },
-    {
-      "code": "IN",
-      "name": "Indiya"
-    },
-    {
-      "code": "ID",
-      "name": "Indunusiya"
-    },
-    {
-      "code": "IR",
-      "name": "Iran"
-    },
-    {
-      "code": "IQ",
-      "name": "Iraƙi"
-    },
-    {
-      "code": "IE",
-      "name": "Ayalan"
-    },
-    {
-      "code": "IL",
-      "name": "Isra'ila"
-    },
-    {
-      "code": "IT",
-      "name": "Italiya"
-    },
-    {
-      "code": "JM",
-      "name": "Jamaika"
-    },
-    {
-      "code": "JP",
-      "name": "Japan"
-    },
-    {
-      "code": "JO",
-      "name": "Jordan"
-    },
-    {
-      "code": "KZ",
-      "name": "Kazakistan"
-    },
-    {
-      "code": "KE",
-      "name": "Kenya"
-    },
-    {
-      "code": "KR",
-      "name": "Koriya ta Kudu"
-    },
-    {
-      "code": "KW",
-      "name": "Kuwait"
-    },
-    {
-      "code": "KG",
-      "name": "Kirgizistan"
-    },
-    {
-      "code": "LA",
-      "name": "Lawas"
-    },
-    {
-      "code": "LV",
-      "name": "Latbiya"
-    },
-    {
-      "code": "LB",
-      "name": "Labanon"
-    },
-    {
-      "code": "LS",
-      "name": "Lesoto"
-    },
-    {
-      "code": "LR",
-      "name": "Laberiya"
-    },
-    {
-      "code": "LY",
-      "name": "Libiya"
-    },
-    {
-      "code": "LI",
-      "name": "Lichtenstein"
-    },
-    {
-      "code": "LT",
-      "name": "Lituweniya"
-    },
-    {
-      "code": "LU",
-      "name": "Lukusambur"
-    },
-    {
-      "code": "MG",
-      "name": "Madagaskar"
-    },
-    {
-      "code": "MW",
-      "name": "Malawi"
-    },
-    {
-      "code": "MY",
-      "name": "Malaysiya"
-    },
-    {
-      "code": "MV",
-      "name": "Maldibi"
-    },
-    {
-      "code": "ML",
-      "name": "Mali"
-    },
-    {
-      "code": "MT",
-      "name": "Malta"
-    },
-    {
-      "code": "MX",
-      "name": "Mekisiko"
-    },
-    {
-      "code": "MD",
-      "name": "Moldoba"
-    },
-    {
-      "code": "MC",
-      "name": "Monako"
-    },
-    {
-      "code": "MN",
-      "name": "Mangoliya"
-    },
-    {
-      "code": "ME",
-      "name": "Montenegro"
-    },
-    {
-      "code": "MA",
-      "name": "Maroko"
-    },
-    {
-      "code": "MZ",
-      "name": "Mozambik"
-    },
-    {
-      "code": "MM",
-      "name": "Myanmar"
-    },
-    {
-      "code": "NA",
-      "name": "Namibiya"
-    },
-    {
-      "code": "NP",
-      "name": "Nepal"
-    },
-    {
-      "code": "NL",
-      "name": "Yaren mutanen Holland"
-    },
-    {
-      "code": "NZ",
-      "name": "Nuzilan"
-    },
-    {
-      "code": "NI",
-      "name": "Nikaraguwa"
-    },
-    {
-      "code": "NE",
-      "name": "Nijar"
-    },
-    {
-      "code": "NG",
-      "name": "Nijeriya"
-    },
-    {
-      "code": "MK",
-      "name": "Masedoniya ta Arewa"
-    },
-    {
-      "code": "NO",
-      "name": "Norwe"
-    },
-    {
-      "code": "OM",
-      "name": "Oman"
-    },
-    {
-      "code": "PK",
-      "name": "Pakistan"
-    },
-    {
-      "code": "PA",
-      "name": "Panama"
-    },
-    {
-      "code": "PG",
-      "name": "Papua Sabon Gini"
-    },
-    {
-      "code": "PY",
-      "name": "Paraguwai"
-    },
-    {
-      "code": "PE",
-      "name": "Peru"
-    },
-    {
-      "code": "PH",
-      "name": "Filipin"
-    },
-    {
-      "code": "PL",
-      "name": "Polan"
-    },
-    {
-      "code": "PT",
-      "name": "Portugal"
-    },
-    {
-      "code": "QA",
-      "name": "Katar"
-    },
-    {
-      "code": "RO",
-      "name": "Romaniya"
-    },
-    {
-      "code": "RU",
-      "name": "Rasha"
-    },
-    {
-      "code": "RW",
-      "name": "Ruwanda"
-    },
-    {
-      "code": "SA",
-      "name": "Saudi Arabiya"
-    },
-    {
-      "code": "SN",
-      "name": "Senegal"
-    },
-    {
-      "code": "RS",
-      "name": "Serbiya"
-    },
-    {
-      "code": "SG",
-      "name": "Singapur"
-    },
-    {
-      "code": "SK",
-      "name": "Sulobakiya"
-    },
-    {
-      "code": "SI",
-      "name": "Sulobeniya"
-    },
-    {
-      "code": "ZA",
-      "name": "Afirka ta Kudu"
-    },
-    {
-      "code": "ES",
-      "name": "Sipaniya"
-    },
-    {
-      "code": "LK",
-      "name": "Siri Lanka"
-    },
-    {
-      "code": "SE",
-      "name": "Sweden"
-    },
-    {
-      "code": "CH",
-      "name": "Suwizalan"
-    },
-    {
-      "code": "TW",
-      "name": "Taiwan"
-    },
-    {
-      "code": "TH",
-      "name": "Tailan"
-    },
-    {
-      "code": "TR",
-      "name": "Turkiyya"
-    },
-    {
-      "code": "UG",
-      "name": "Yuganda"
-    },
-    {
-      "code": "UA",
-      "name": "Ukrain"
-    },
-    {
-      "code": "AE",
-      "name": "Haɗaɗɗiyar Daular Larabawa"
-    },
-    {
-      "code": "GB",
-      "name": "Birtaniya"
-    },
-    {
-      "code": "US",
-      "name": "Amurka"
-    },
-    {
-      "code": "UY",
-      "name": "Urugwai"
-    },
-    {
-      "code": "UZ",
-      "name": "Uzbekistan"
-    },
-    {
-      "code": "VE",
-      "name": "Benezuwela"
-    },
-    {
-      "code": "VN",
-      "name": "Biyetnam"
-    },
-    {
-      "code": "YE",
-      "name": "Yemen"
-    },
-    {
-      "code": "ZM",
-      "name": "Zambiya"
-    },
-    {
-      "code": "ZW",
-      "name": "Zimbabuwe"
-    }
-  ]
+  }
 };

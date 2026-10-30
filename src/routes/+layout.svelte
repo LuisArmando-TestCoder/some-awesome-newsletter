@@ -7,6 +7,21 @@
   import SiteFooter from "$lib/ui/organisms/SiteFooter.svelte";
   import { beforeNavigate, afterNavigate } from "$app/navigation";
   import { page } from "$app/stores";
+  import { browser } from "$app/environment";
+  import { language } from "$lib/stores/language.store";
+  import { locales } from "$lib/i18n/translations";
+  import { detectLanguage } from "$lib/i18n/detect";
+  import { htmlLang } from "$lib/i18n/lazy";
+  import { isRtl } from "../components/systems/widgets/Subscribe/subscribe";
+
+  // Language for every page (admin and dashboard included), before anything renders on
+  // the client: the visitor's pick, else the browser's preferred languages, else English.
+  if (browser) {
+    const { code } = detectLanguage(locales);
+    language.set(code);
+    document.documentElement.lang = htmlLang(code);
+    document.documentElement.dir = isRtl(code) ? "rtl" : "ltr";
+  }
 
 
   // The signup widget runs inside other sites in an iframe: no site header or language picker there (WS5 request).

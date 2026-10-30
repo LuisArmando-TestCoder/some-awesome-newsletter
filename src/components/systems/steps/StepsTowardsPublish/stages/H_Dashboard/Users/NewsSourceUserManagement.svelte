@@ -108,11 +108,11 @@
         newsSource.id, 
         customEmailContent
       );
-      if (success) {
+      if (success === true) {
         setFeedback("success", $t['messages.customSendSuccess'].replace('{source}', sourceName));
         customEmailContent = "";
       } else {
-        setFeedback("error", $t['errors.customSendFailed'].replace('{source}', sourceName));
+        setFeedback("error", success || $t['errors.customSendFailed'].replace('{source}', sourceName));
       }
     } catch (error) {
       setFeedback("error", errorMessage(error) || $t['errors.unexpectedError']);

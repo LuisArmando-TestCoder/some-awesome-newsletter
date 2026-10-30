@@ -1,5 +1,5 @@
-// wuu strings for locales. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale wuu
+// wuu (Wu Chinese (Shanghainese)) strings for locales. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "auth": {
     "logo": "/icons/logo.png",
@@ -35,6 +35,82 @@ export default {
       "ogImageAlt": "AIBAN 标志"
     },
     "skipLink": "跳到主要内容",
+    "display": {
+      "title": "侬个网站，写成一份新闻信。",
+      "kicker": "AIBAN"
+    },
+    "statement": {
+      "lines": [
+        "侬已经发表好个内容。",
+        "侬个客户用勿止一种语言读伊。",
+        "AIBAN拿每篇新文章变成一期",
+        "然后拨每个读者自家语言个版本。"
+      ]
+    },
+    "history": {
+      "eyebrow": "哪能运作",
+      "title": "一期个生命周期。",
+      "lead": "从侬个日程开始到伊重新开始，跟踪一期。侬只要设置一趟。",
+      "note": "示例日程。侬选日脚、辰光搭频率。",
+      "progressLabel": "一期个步骤",
+      "items": [
+        {
+          "mark": "9:00",
+          "title": "侬个日程开始运行",
+          "body": "比方讲每个礼拜一9:00。侬可以选每日、每周或者每月。"
+        },
+        {
+          "mark": "读",
+          "title": "AIBAN读侬个网站",
+          "body": "伊寻着侬最新个文章，拣出侬理想读者最关心个部分。"
+        },
+        {
+          "mark": "写",
+          "title": "伊用侬个语气写一期",
+          "body": "文字跟牢侬网站个写法，所以听起来像侬。"
+        },
+        {
+          "mark": "翻译",
+          "title": "每个读者得到自家语言",
+          "body": "一期变成侬订阅者需要个各种版本。"
+        },
+        {
+          "mark": "发送",
+          "title": "伊用侬个名义到达",
+          "body": "用侬个名字搭侬个邮件签名。回复会到侬个收件箱。"
+        },
+        {
+          "mark": "发布",
+          "title": "伊变成侬博客浪个一篇文章",
+          "body": "有自家个链接，人家好勒搜索搭分享里向寻着。"
+        },
+        {
+          "mark": "报告",
+          "title": "侬看到发生啥事体",
+          "body": "侬个仪表盘列出啥人加入搭读者点过啥链接。"
+        },
+        {
+          "mark": "再来",
+          "title": "下个礼拜一，伊再运行",
+          "body": "伊会一直继续，直到侬勒仪表盘关脱伊。"
+        }
+      ]
+    },
+    "rail": {
+      "label": "页面章节",
+      "chapters": [
+        "开始",
+        "为啥",
+        "语言",
+        "工作原理",
+        "您的名称",
+        "增长",
+        "适用对象",
+        "价格",
+        "问题",
+        "开始"
+      ]
+    },
     "hero": {
       "eyebrow": "为服务型企业打造个新闻信",
       "title": "侬个网站变成每周新闻信，用每位读者个语言送达",
@@ -57,6 +133,26 @@ export default {
       "startCta": "用 {site} 免费开始",
       "startCtaGeneric": "免费开始",
       "liveRegion": "已为 {site} 更新示例预览。"
+    },
+    "live": {
+      "badge": "刚刚写好",
+      "loadingTitle": "正在根据{site}写一份样例",
+      "steps": [
+        "正在读取{site}",
+        "寻找侬最新个文章",
+        "用{language}写出来",
+        "放到侬个邮件模板里向"
+      ],
+      "takes": "通常需要20到40秒钟。侬可以继续往下看。",
+      "readyNote": "AIBAN根据{site}浪最新个文章写搿份样例。呒没保存或者发送。开始用个辰光，会用侬自家个语气搭仔时间表。",
+      "readyAnnounce": "侬个{site}样例已经准备好了。",
+      "languageLabel": "读者语言",
+      "loadingLanguage": "正在用{language}写",
+      "errorTitle": "阿拉无法从{site}生成预览",
+      "retry": "再试一次",
+      "showSample": "显示样例布局",
+      "frameTitle": "根据{site}写个样例",
+      "openFull": "新开窗口打开"
     },
     "chain": {
       "eyebrow": "运作方式",
@@ -494,8 +590,8 @@ export default {
     "yearlySave": "节省 35%",
     "intervalLabel": "计费周期",
     "billedYearly": "按年计费",
-    "perMonthShort": "/mo",
-    "perYearShort": "/yr",
+    "perMonthShort": "/月",
+    "perYearShort": "/年",
     "freeCta": "免费开始",
     "processing": "正在打开结账页面...",
     "askMore": "每个账户侪从免费方案开始。要更多个话，写信到 {email}，阿拉会帮侬换方案。",
@@ -587,6 +683,7 @@ export default {
       "suggestions": "建议",
       "recent": "最近搜索",
       "clearRecent": "清除最近搜索",
+      "clear": "清除搜索",
       "title": "搜索结果",
       "resultsFor": "“{q}”个搜索结果",
       "count": "寻到 {count} 篇文章",
@@ -691,6 +788,7 @@ export default {
   "legal": {
     "navLabel": "法律文件",
     "lastUpdated": "最后更新：{date}",
+    "onThisPage": "本页内容",
     "privacy": {
       "title": "隐私政策",
       "metaTitle": "隐私政策 | AIBAN",
@@ -919,6 +1017,8 @@ export default {
     "codeSent": "阿拉已经拿验证码发到侬个邮箱了。",
     "invalidCode": "验证码勿对。请看看阿拉最近发拨侬个邮件，或者重新发验证码。",
     "regenerateCode": "重发验证码",
+    "codeAccepted": "代码已接受。正在打开您的仪表板。",
+    "codeLabel": "6位代码",
     "back": "转去",
     "byProceeding": "继续操作代表侬同意",
     "termsOfService": "服务条款",
@@ -947,6 +1047,673 @@ export default {
       "title": "欢迎订阅迭份新闻信。",
       "invitedBy": "{configuratorId} 邀请了侬。"
     }
+  },
+  "showcase": {
+    "sampleBadge": "示例数据",
+    "exampleLabel": "示例业务",
+    "caption": "{business} 是一个示例 {kind}。此视图中的名称、文章和数字是占位符，显示您的仪表板在几周后的外观。",
+    "pause": "暂停动画",
+    "play": "播放动画",
+    "scenesLabel": "仪表板部分",
+    "examplesLabel": "示例业务",
+    "appUrl": "app.aiban.news",
+    "nav": {
+      "home": "首页",
+      "automations": "自动化",
+      "sources": "来源",
+      "subscribers": "订阅者",
+      "reports": "报告",
+      "blog": "博客"
+    },
+    "scenes": {
+      "home": "概览",
+      "issue": "问题",
+      "reports": "点击",
+      "subscribers": "订阅者",
+      "automation": "安排",
+      "source": "侬个网站",
+      "voice": "侬个声音",
+      "signup": "注册表格",
+      "blog": "博客",
+      "import": "导入"
+    },
+    "ui": {
+      "hello": "侬好，{business}",
+      "narrative": "{subscribers} 位读者，用 {languages} 种语言。下一期 {schedule} 发出。",
+      "kpiSubscribers": "订阅者",
+      "kpiLanguages": "语言",
+      "kpiClicks": "点击，最近7天",
+      "kpiAutomations": "自动化开启",
+      "kpiNew": "搿周新来 {count} 位",
+      "nextIssue": "下一期",
+      "ready": "准备好了",
+      "activity": "最近活动",
+      "from": "来自",
+      "subject": "主题",
+      "readMore": "阅读全文",
+      "readerLanguage": "读者语言",
+      "clicksTitle": "点击，最近7天",
+      "mostClicked": "点击最多",
+      "clicks": "点击",
+      "days": [
+        "周一",
+        "周二",
+        "周三",
+        "周四",
+        "周五",
+        "周六",
+        "周日"
+      ],
+      "subscribersTitle": "订阅者",
+      "language": "语言",
+      "joinedVia": "通过加入",
+      "newSubscriber": "新订阅者",
+      "automationTitle": "每周一期",
+      "automationSentence": "{schedule}，根据最新文章写一期，用每位读者个语言发送拨伊拉。",
+      "on": "开",
+      "off": "关",
+      "automationOn": "自动化已开启",
+      "sourceLabel": "内容来源",
+      "sourceButton": "阅读我个网站",
+      "reading": "正在读取侬个网站",
+      "found": "找到了 {count} 篇文章",
+      "voiceReader": "侬个理想读者",
+      "voiceTone": "应该啥个腔调",
+      "signupHeading": "订阅阿拉个每周简报",
+      "signupEmail": "邮箱地址",
+      "signupLanguage": "语言",
+      "signupButton": "订阅",
+      "signupDone": "请检查邮箱确认订阅。",
+      "blogTitle": "{business} 个文章",
+      "importFile": "clients.csv",
+      "importing": "正在导入联系人",
+      "imported": "添加了 {count} 个联系人",
+      "sources": {
+        "form": "订阅表单",
+        "import": "导入",
+        "manual": "手动添加"
+      }
+    },
+    "examples": [
+      {
+        "business": "Northfield Studio",
+        "kind": "网页设计公司",
+        "site": "northfield.studio",
+        "schedule": "每礼拜一 9:00",
+        "subscribers": 312,
+        "newThisWeek": 9,
+        "clicks7": 84,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 58
+          },
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 31
+          },
+          {
+            "code": "pt",
+            "name": "Portuguese",
+            "share": 11
+          }
+        ],
+        "reader": "诊所、商店搭工作室个老板，希望网站能带来客户，而弗是仅仅做个作品集。",
+        "tones": [
+          "温暖",
+          "平实",
+          "实用"
+        ],
+        "articles": [
+          "阿拉哪能六礼拜里向重建一家牙科诊所网站",
+          "重新设计前要修好个五样物事",
+          "为啥侬个预约按钮应该是橙色个"
+        ],
+        "issue": {
+          "title": "阿拉哪能六礼拜里向重建一家牙科诊所网站",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "A clinic website rebuilt in six weeks",
+              "summary": "We moved booking to the top of every page and cut the forms from nine fields to three. Here is what changed for the clinic."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "El sitio de una clínica, renovado en seis semanas",
+              "summary": "Pusimos la reserva arriba en cada página y redujimos los formularios de nueve campos a tres. Esto es lo que cambió para la clínica."
+            },
+            {
+              "code": "pt",
+              "name": "Português",
+              "subject": "O site de uma clínica, refeito em seis semanas",
+              "summary": "Colocamos o agendamento no topo de cada página e reduzimos os formulários de nove campos para três. Veja o que mudou para a clínica."
+            }
+          ]
+        },
+        "clicksByDay": [
+          21,
+          17,
+          12,
+          9,
+          11,
+          6,
+          8
+        ],
+        "topLinks": [
+          {
+            "title": "诊所案例研究",
+            "clicks": 38
+          },
+          {
+            "title": "重新设计前要修好个五样物事",
+            "clicks": 27
+          },
+          {
+            "title": "预约通话",
+            "clicks": 19
+          }
+        ],
+        "people": [
+          {
+            "email": "lucia.r@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "mark@example.org",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "joana.s@example.net",
+            "lang": "PT",
+            "via": "form"
+          },
+          {
+            "email": "dr.chen@example.com",
+            "lang": "EN",
+            "via": "manual"
+          }
+        ],
+        "activity": [
+          "简报发送拨 312 位读者，3 种语言",
+          "诊所案例研究有 38 次点击",
+          "Lucia 通过订阅表单加入，用西班牙语阅读"
+        ],
+        "importCount": 148
+      },
+      {
+        "business": "Brightline Software",
+        "kind": "软件公司",
+        "site": "brightline.dev",
+        "schedule": "每月 1 号 10:00",
+        "subscribers": 1240,
+        "newThisWeek": 23,
+        "clicks7": 211,
+        "automationsOn": 1,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 64
+          },
+          {
+            "code": "de",
+            "name": "德语",
+            "share": 22
+          },
+          {
+            "code": "fr",
+            "name": "法语",
+            "share": 14
+          }
+        ],
+        "reader": "使用阿拉预订软件个客户个办公室经理搭IT负责人。",
+        "tones": [
+          "清楚",
+          "简短",
+          "友好"
+        ],
+        "articles": [
+          "4.2版发布：重复预约功能",
+          "大团队报告生成更快",
+          "哪能从电子表格迁移日历"
+        ],
+        "issue": {
+          "title": "4.2版发布：重复预约功能",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "New this month: recurring appointments",
+              "summary": "You can now repeat any appointment weekly or monthly. Reports for teams over 50 people also load faster."
+            },
+            {
+              "code": "de",
+              "name": "Deutsch",
+              "subject": "Neu diesen Monat: wiederkehrende Termine",
+              "summary": "Sie können jetzt jeden Termin wöchentlich oder monatlich wiederholen. Berichte für Teams ab 50 Personen laden außerdem schneller."
+            },
+            {
+              "code": "fr",
+              "name": "Français",
+              "subject": "Nouveau ce mois-ci : les rendez-vous récurrents",
+              "summary": "Vous pouvez désormais répéter un rendez-vous chaque semaine ou chaque mois. Les rapports des équipes de plus de 50 personnes s'affichent aussi plus vite."
+            }
+          ]
+        },
+        "clicksByDay": [
+          64,
+          48,
+          33,
+          25,
+          19,
+          9,
+          13
+        ],
+        "topLinks": [
+          {
+            "title": "重复预约指南",
+            "clicks": 96
+          },
+          {
+            "title": "4.2版发布说明",
+            "clicks": 71
+          },
+          {
+            "title": "从电子表格迁移",
+            "clicks": 44
+          }
+        ],
+        "people": [
+          {
+            "email": "it@example.de",
+            "lang": "DE",
+            "via": "import"
+          },
+          {
+            "email": "sophie.m@example.fr",
+            "lang": "FR",
+            "via": "form"
+          },
+          {
+            "email": "ops@example.com",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "k.weber@example.de",
+            "lang": "DE",
+            "via": "form"
+          }
+        ],
+        "activity": [
+          "期刊发送拨1240位读者，3种语言",
+          "重复预约指南有96次点击",
+          "从clients.csv导入23个联系人"
+        ],
+        "importCount": 412
+      },
+      {
+        "business": "Casa Verde Realty",
+        "kind": "房地产中介",
+        "site": "casaverde.homes",
+        "schedule": "每礼拜四8:00",
+        "subscribers": 586,
+        "newThisWeek": 14,
+        "clicks7": 163,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "es",
+            "name": "西班牙语",
+            "share": 47
+          },
+          {
+            "code": "en",
+            "name": "英语",
+            "share": 41
+          },
+          {
+            "code": "fr",
+            "name": "法语",
+            "share": 12
+          }
+        ],
+        "reader": "海外寻海边住房个家庭搭退休人员，还有可能卖房个业主。",
+        "tones": [
+          "温馨",
+          "本地化",
+          "平静"
+        ],
+        "articles": [
+          "搿礼拜海滩附近三套新房源",
+          "海外买家个过户费用情况",
+          "老城区房价，秋季更新"
+        ],
+        "issue": {
+          "title": "搿礼拜海滩附近三套新房源",
+          "langs": [
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tres casas nuevas cerca de la playa",
+              "summary": "Una casa de dos habitaciones con jardín, un apartamento con vista al mar y una casa para reformar a diez minutos del centro."
+            },
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Three new homes near the beach",
+              "summary": "A two bedroom house with a garden, a flat with a sea view and a house to renovate ten minutes from the center."
+            },
+            {
+              "code": "fr",
+              "name": "Français",
+              "subject": "Trois nouvelles maisons près de la plage",
+              "summary": "Une maison de deux chambres avec jardin, un appartement avec vue sur la mer et une maison à rénover à dix minutes du centre."
+            }
+          ]
+        },
+        "clicksByDay": [
+          12,
+          9,
+          15,
+          52,
+          38,
+          21,
+          16
+        ],
+        "topLinks": [
+          {
+            "title": "海景公寓",
+            "clicks": 71
+          },
+          {
+            "title": "带花园个两卧室房子",
+            "clicks": 54
+          },
+          {
+            "title": "海外买家个过户费用",
+            "clicks": 38
+          }
+        ],
+        "people": [
+          {
+            "email": "familia.ortiz@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "j.dupont@example.fr",
+            "lang": "FR",
+            "via": "form"
+          },
+          {
+            "email": "tom.and.ann@example.org",
+            "lang": "EN",
+            "via": "manual"
+          },
+          {
+            "email": "rmora@example.net",
+            "lang": "ES",
+            "via": "import"
+          }
+        ],
+        "activity": [
+          "期刊发送拨586位读者，3种语言",
+          "海景公寓有71次点击",
+          "法国个一位读者通过注册表单加入"
+        ],
+        "importCount": 203
+      },
+      {
+        "business": "Mora and Partners",
+        "kind": "会计事务所",
+        "site": "morapartners.co",
+        "schedule": "每两礼拜礼拜二7:30",
+        "subscribers": 428,
+        "newThisWeek": 6,
+        "clicks7": 97,
+        "automationsOn": 1,
+        "languages": [
+          {
+            "code": "en",
+            "name": "英语",
+            "share": 52
+          },
+          {
+            "code": "es",
+            "name": "西班牙语",
+            "share": 38
+          },
+          {
+            "code": "it",
+            "name": "意大利语",
+            "share": 10
+          }
+        ],
+        "reader": "小公司老板想了解税收搭工资单变化，勿用专业术语。",
+        "tones": [
+          "平静",
+          "精确",
+          "简明"
+        ],
+        "articles": [
+          "季度税截止日期改到15号",
+          "雇第一个员工辰光要保留啥",
+          "发票：纸头还是照片？"
+        ],
+        "issue": {
+          "title": "季度税截止日期改到15号",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Your quarterly deadline moves to the 15th",
+              "summary": "The filing date for the next quarter moves five days later. Here is what to send us and when, so nothing is late."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tu plazo trimestral pasa al día 15",
+              "summary": "La fecha de presentación del próximo trimestre se mueve cinco días. Esto es lo que debes enviarnos y cuándo, para que nada llegue tarde."
+            },
+            {
+              "code": "it",
+              "name": "Italiano",
+              "subject": "La scadenza trimestrale passa al 15",
+              "summary": "La data di presentazione del prossimo trimestre slitta di cinque giorni. Ecco cosa inviarci e quando, perché nulla arrivi in ritardo."
+            }
+          ]
+        },
+        "clicksByDay": [
+          33,
+          24,
+          14,
+          8,
+          7,
+          4,
+          7
+        ],
+        "topLinks": [
+          {
+            "title": "15号检查清单",
+            "clicks": 46
+          },
+          {
+            "title": "雇第一个员工",
+            "clicks": 29
+          },
+          {
+            "title": "预约咨询电话",
+            "clicks": 22
+          }
+        ],
+        "people": [
+          {
+            "email": "bakery.owner@example.com",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "c.rossi@example.it",
+            "lang": "IT",
+            "via": "form"
+          },
+          {
+            "email": "taller.luna@example.net",
+            "lang": "ES",
+            "via": "import"
+          },
+          {
+            "email": "finance@example.org",
+            "lang": "EN",
+            "via": "manual"
+          }
+        ],
+        "activity": [
+          "期刊发送拨428位读者，3种语言",
+          "15号检查清单有46次点击",
+          "搿礼拜有6位新读者"
+        ],
+        "importCount": 97
+      },
+      {
+        "business": "Run Better Coaching",
+        "kind": "跑步教练",
+        "site": "runbetter.coach",
+        "schedule": "每礼拜日18:00",
+        "subscribers": 907,
+        "newThisWeek": 31,
+        "clicks7": 248,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 49
+          },
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 33
+          },
+          {
+            "code": "de",
+            "name": "German",
+            "share": 18
+          }
+        ],
+        "reader": "为第一次半马训练个成年人，上班前一个礼拜跑三趟。",
+        "tones": [
+          "鼓励性",
+          "直接",
+          "简短"
+        ],
+        "articles": [
+          "搿礼拜：长跑要比侬想个再慢眼",
+          "跑500公里以后个鞋子",
+          "20分钟力量训练"
+        ],
+        "issue": {
+          "title": "搿礼拜：长跑要比侬想个再慢眼",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Your long run should feel too easy",
+              "summary": "Keep it slow enough to talk. This week's plan adds ten minutes and one short hill session."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tu tirada larga debería sentirse demasiado fácil",
+              "summary": "Mantén un ritmo que te deje hablar. El plan de esta semana suma diez minutos y una sesión corta de cuestas."
+            },
+            {
+              "code": "de",
+              "name": "Deutsch",
+              "subject": "Dein langer Lauf sollte sich zu leicht anfühlen",
+              "summary": "Lauf so langsam, dass du noch reden kannst. Der Plan dieser Woche bringt zehn Minuten mehr und eine kurze Bergeinheit."
+            }
+          ]
+        },
+        "clicksByDay": [
+          18,
+          22,
+          26,
+          31,
+          35,
+          49,
+          67
+        ],
+        "topLinks": [
+          {
+            "title": "搿礼拜训练计划",
+            "clicks": 121
+          },
+          {
+            "title": "20分钟力量训练",
+            "clicks": 78
+          },
+          {
+            "title": "跑500公里以后个鞋子",
+            "clicks": 49
+          }
+        ],
+        "people": [
+          {
+            "email": "ana.runs@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "felix.k@example.de",
+            "lang": "DE",
+            "via": "form"
+          },
+          {
+            "email": "sam@example.org",
+            "lang": "EN",
+            "via": "form"
+          },
+          {
+            "email": "club.secretary@example.net",
+            "lang": "EN",
+            "via": "import"
+          }
+        ],
+        "activity": [
+          "期刊发送拨907位读者，3种语言",
+          "搿礼拜训练计划有121次点击",
+          "搿礼拜有31位新读者，大部分从注册表格来"
+        ],
+        "importCount": 260
+      }
+    ]
+  },
+  "errorPage": {
+    "notFoundEyebrow": "错误404",
+    "notFoundTitle": "阿拉寻勿到搿页",
+    "notFoundBody": "链接可能老早过期或者有打字错误。下头搿眼页面好继续看。",
+    "serverEyebrow": "错误{status}",
+    "serverTitle": "阿拉搿边出问题了",
+    "serverBody": "阿拉加载勿了搿页。过一分钟再试试。假使一直搿能，写信拨info@aiban.news。",
+    "retry": "再试试",
+    "home": "去首页",
+    "popularTitle": "热门页面",
+    "links": {
+      "howItWorks": "AIBAN 哪能工作",
+      "pricing": "价格",
+      "help": "帮助中心",
+      "login": "登录仪表板"
+    },
+    "report": "要是阿拉网站浪个链接拨侬带到搿搭，请告诉阿拉 info@aiban.news，阿拉好修好伊。"
   },
   "header": {
     "goToWorkspace": "打开控制台",
@@ -982,1429 +1749,5 @@ export default {
     "monthly": "按月",
     "yearly": "按年",
     "loadingPlan": "加载计划数据中..."
-  },
-  "languages": [
-    {
-      "code": "ab",
-      "name": "阿布哈兹语"
-    },
-    {
-      "code": "aa",
-      "name": "阿法尔语"
-    },
-    {
-      "code": "af",
-      "name": "南非荷兰语"
-    },
-    {
-      "code": "ak",
-      "name": "阿肯语"
-    },
-    {
-      "code": "sq",
-      "name": "阿尔巴尼亚语"
-    },
-    {
-      "code": "am",
-      "name": "阿姆哈拉语"
-    },
-    {
-      "code": "ar",
-      "name": "阿拉伯语"
-    },
-    {
-      "code": "an",
-      "name": "阿拉贡语"
-    },
-    {
-      "code": "hy",
-      "name": "亚美尼亚语"
-    },
-    {
-      "code": "as",
-      "name": "阿萨姆语"
-    },
-    {
-      "code": "av",
-      "name": "阿瓦尔语"
-    },
-    {
-      "code": "ae",
-      "name": "阿维斯陀语"
-    },
-    {
-      "code": "ay",
-      "name": "艾马拉语"
-    },
-    {
-      "code": "az",
-      "name": "阿塞拜疆语"
-    },
-    {
-      "code": "bm",
-      "name": "班巴拉语"
-    },
-    {
-      "code": "ba",
-      "name": "巴什基尔语"
-    },
-    {
-      "code": "eu",
-      "name": "巴斯克语"
-    },
-    {
-      "code": "be",
-      "name": "白俄罗斯语"
-    },
-    {
-      "code": "bn",
-      "name": "孟加拉语"
-    },
-    {
-      "code": "bi",
-      "name": "比斯拉马语"
-    },
-    {
-      "code": "bs",
-      "name": "波斯尼亚语"
-    },
-    {
-      "code": "br",
-      "name": "布列塔尼语"
-    },
-    {
-      "code": "bg",
-      "name": "保加利亚语"
-    },
-    {
-      "code": "my",
-      "name": "缅甸语"
-    },
-    {
-      "code": "ca",
-      "name": "加泰罗尼亚语"
-    },
-    {
-      "code": "ch",
-      "name": "查莫罗语"
-    },
-    {
-      "code": "ce",
-      "name": "车臣语"
-    },
-    {
-      "code": "ny",
-      "name": "齐切瓦语"
-    },
-    {
-      "code": "zh",
-      "name": "中文"
-    },
-    {
-      "code": "cu",
-      "name": "教会斯拉夫语"
-    },
-    {
-      "code": "cv",
-      "name": "楚瓦什语"
-    },
-    {
-      "code": "kw",
-      "name": "康沃尔语"
-    },
-    {
-      "code": "co",
-      "name": "科西嘉语"
-    },
-    {
-      "code": "cr",
-      "name": "克里语"
-    },
-    {
-      "code": "hr",
-      "name": "克罗地亚语"
-    },
-    {
-      "code": "cs",
-      "name": "捷克语"
-    },
-    {
-      "code": "da",
-      "name": "丹麦语"
-    },
-    {
-      "code": "dv",
-      "name": "迪维希语"
-    },
-    {
-      "code": "nl",
-      "name": "荷兰语"
-    },
-    {
-      "code": "dz",
-      "name": "宗卡语"
-    },
-    {
-      "code": "en",
-      "name": "英语"
-    },
-    {
-      "code": "eo",
-      "name": "世界语"
-    },
-    {
-      "code": "et",
-      "name": "爱沙尼亚语"
-    },
-    {
-      "code": "ee",
-      "name": "埃维语"
-    },
-    {
-      "code": "fo",
-      "name": "法罗语"
-    },
-    {
-      "code": "fj",
-      "name": "斐济语"
-    },
-    {
-      "code": "fi",
-      "name": "芬兰语"
-    },
-    {
-      "code": "fr",
-      "name": "法语"
-    },
-    {
-      "code": "fy",
-      "name": "西弗里西亚语"
-    },
-    {
-      "code": "ff",
-      "name": "富拉语"
-    },
-    {
-      "code": "gd",
-      "name": "苏格兰盖尔语"
-    },
-    {
-      "code": "gl",
-      "name": "加利西亚语"
-    },
-    {
-      "code": "lg",
-      "name": "干达语"
-    },
-    {
-      "code": "ka",
-      "name": "格鲁吉亚语"
-    },
-    {
-      "code": "de",
-      "name": "德语"
-    },
-    {
-      "code": "el",
-      "name": "希腊语"
-    },
-    {
-      "code": "kl",
-      "name": "格陵兰语"
-    },
-    {
-      "code": "gn",
-      "name": "瓜拉尼语"
-    },
-    {
-      "code": "gu",
-      "name": "古吉拉特语"
-    },
-    {
-      "code": "ht",
-      "name": "海地克里奥尔语"
-    },
-    {
-      "code": "ha",
-      "name": "豪萨语"
-    },
-    {
-      "code": "he",
-      "name": "希伯来语"
-    },
-    {
-      "code": "hz",
-      "name": "赫雷罗语"
-    },
-    {
-      "code": "hi",
-      "name": "印地语"
-    },
-    {
-      "code": "ho",
-      "name": "希里莫图语"
-    },
-    {
-      "code": "hu",
-      "name": "匈牙利语"
-    },
-    {
-      "code": "is",
-      "name": "冰岛语"
-    },
-    {
-      "code": "io",
-      "name": "伊多语"
-    },
-    {
-      "code": "ig",
-      "name": "伊博语"
-    },
-    {
-      "code": "id",
-      "name": "印度尼西亚语"
-    },
-    {
-      "code": "ia",
-      "name": "国际语A"
-    },
-    {
-      "code": "ie",
-      "name": "国际语E"
-    },
-    {
-      "code": "iu",
-      "name": "因纽特语"
-    },
-    {
-      "code": "ik",
-      "name": "依努皮亚克语"
-    },
-    {
-      "code": "ga",
-      "name": "爱尔兰语"
-    },
-    {
-      "code": "it",
-      "name": "意大利语"
-    },
-    {
-      "code": "ja",
-      "name": "日语"
-    },
-    {
-      "code": "jv",
-      "name": "爪哇语"
-    },
-    {
-      "code": "kn",
-      "name": "卡纳达语"
-    },
-    {
-      "code": "kr",
-      "name": "卡努里语"
-    },
-    {
-      "code": "ks",
-      "name": "克什米尔语"
-    },
-    {
-      "code": "kk",
-      "name": "哈萨克语"
-    },
-    {
-      "code": "km",
-      "name": "高棉语"
-    },
-    {
-      "code": "ki",
-      "name": "基库尤语"
-    },
-    {
-      "code": "rw",
-      "name": "卢旺达语"
-    },
-    {
-      "code": "ky",
-      "name": "吉尔吉斯语"
-    },
-    {
-      "code": "kv",
-      "name": "科米语"
-    },
-    {
-      "code": "kg",
-      "name": "刚果语"
-    },
-    {
-      "code": "ko",
-      "name": "韩语"
-    },
-    {
-      "code": "kj",
-      "name": "库瓦尼亚马语"
-    },
-    {
-      "code": "ku",
-      "name": "库尔德语"
-    },
-    {
-      "code": "lo",
-      "name": "老挝语"
-    },
-    {
-      "code": "la",
-      "name": "拉丁语"
-    },
-    {
-      "code": "lv",
-      "name": "拉脱维亚语"
-    },
-    {
-      "code": "li",
-      "name": "林堡语"
-    },
-    {
-      "code": "ln",
-      "name": "林加拉语"
-    },
-    {
-      "code": "lt",
-      "name": "立陶宛语"
-    },
-    {
-      "code": "lu",
-      "name": "卢巴-加丹加语"
-    },
-    {
-      "code": "lb",
-      "name": "卢森堡语"
-    },
-    {
-      "code": "mk",
-      "name": "马其顿语"
-    },
-    {
-      "code": "mg",
-      "name": "马达加斯加语"
-    },
-    {
-      "code": "ms",
-      "name": "马来语"
-    },
-    {
-      "code": "ml",
-      "name": "马拉雅拉姆语"
-    },
-    {
-      "code": "mt",
-      "name": "马耳他语"
-    },
-    {
-      "code": "gv",
-      "name": "马恩岛语"
-    },
-    {
-      "code": "mi",
-      "name": "毛利语"
-    },
-    {
-      "code": "mr",
-      "name": "马拉地语"
-    },
-    {
-      "code": "mh",
-      "name": "马绍尔语"
-    },
-    {
-      "code": "mn",
-      "name": "蒙古语"
-    },
-    {
-      "code": "na",
-      "name": "瑙鲁语"
-    },
-    {
-      "code": "nv",
-      "name": "纳瓦霍语"
-    },
-    {
-      "code": "nd",
-      "name": "北恩德贝勒语"
-    },
-    {
-      "code": "nr",
-      "name": "南恩德贝勒语"
-    },
-    {
-      "code": "ng",
-      "name": "恩东加语"
-    },
-    {
-      "code": "ne",
-      "name": "尼泊尔语"
-    },
-    {
-      "code": "no",
-      "name": "挪威语"
-    },
-    {
-      "code": "nb",
-      "name": "挪威书面语"
-    },
-    {
-      "code": "nn",
-      "name": "挪威新挪威语"
-    },
-    {
-      "code": "oc",
-      "name": "奥克西坦语"
-    },
-    {
-      "code": "oj",
-      "name": "奥吉布瓦语"
-    },
-    {
-      "code": "or",
-      "name": "奥里亚语"
-    },
-    {
-      "code": "om",
-      "name": "奥罗莫语"
-    },
-    {
-      "code": "os",
-      "name": "奥塞梯语"
-    },
-    {
-      "code": "pi",
-      "name": "巴利语"
-    },
-    {
-      "code": "ps",
-      "name": "普什图语"
-    },
-    {
-      "code": "fa",
-      "name": "波斯语"
-    },
-    {
-      "code": "pl",
-      "name": "波兰语"
-    },
-    {
-      "code": "pt",
-      "name": "葡萄牙语"
-    },
-    {
-      "code": "pa",
-      "name": "旁遮普语"
-    },
-    {
-      "code": "qu",
-      "name": "盖丘亚语"
-    },
-    {
-      "code": "ro",
-      "name": "罗马尼亚语"
-    },
-    {
-      "code": "rm",
-      "name": "罗曼什语"
-    },
-    {
-      "code": "rn",
-      "name": "隆迪语"
-    },
-    {
-      "code": "ru",
-      "name": "俄语"
-    },
-    {
-      "code": "se",
-      "name": "北萨米语"
-    },
-    {
-      "code": "sm",
-      "name": "萨摩亚语"
-    },
-    {
-      "code": "sg",
-      "name": "桑戈语"
-    },
-    {
-      "code": "sa",
-      "name": "梵语"
-    },
-    {
-      "code": "sc",
-      "name": "萨丁尼亚语"
-    },
-    {
-      "code": "sr",
-      "name": "塞尔维亚语"
-    },
-    {
-      "code": "sn",
-      "name": "绍纳语"
-    },
-    {
-      "code": "ii",
-      "name": "四川彝语"
-    },
-    {
-      "code": "sd",
-      "name": "信德语"
-    },
-    {
-      "code": "si",
-      "name": "僧伽罗语"
-    },
-    {
-      "code": "sk",
-      "name": "斯洛伐克语"
-    },
-    {
-      "code": "sl",
-      "name": "斯洛文尼亚语"
-    },
-    {
-      "code": "so",
-      "name": "索马里语"
-    },
-    {
-      "code": "st",
-      "name": "南索托语"
-    },
-    {
-      "code": "es",
-      "name": "西班牙语"
-    },
-    {
-      "code": "su",
-      "name": "巽他语"
-    },
-    {
-      "code": "sw",
-      "name": "斯瓦希里语"
-    },
-    {
-      "code": "ss",
-      "name": "斯瓦蒂语"
-    },
-    {
-      "code": "sv",
-      "name": "瑞典语"
-    },
-    {
-      "code": "tl",
-      "name": "他加禄语（菲律宾语）"
-    },
-    {
-      "code": "ty",
-      "name": "塔希提语"
-    },
-    {
-      "code": "tg",
-      "name": "塔吉克语"
-    },
-    {
-      "code": "ta",
-      "name": "泰米尔语"
-    },
-    {
-      "code": "tt",
-      "name": "鞑靼语"
-    },
-    {
-      "code": "te",
-      "name": "泰卢固语"
-    },
-    {
-      "code": "th",
-      "name": "泰语"
-    },
-    {
-      "code": "bo",
-      "name": "藏语"
-    },
-    {
-      "code": "ti",
-      "name": "提格里尼亚语"
-    },
-    {
-      "code": "to",
-      "name": "汤加语"
-    },
-    {
-      "code": "ts",
-      "name": "聪加语"
-    },
-    {
-      "code": "tn",
-      "name": "茨瓦纳语"
-    },
-    {
-      "code": "tr",
-      "name": "土耳其语"
-    },
-    {
-      "code": "tk",
-      "name": "土库曼语"
-    },
-    {
-      "code": "tw",
-      "name": "契维语"
-    },
-    {
-      "code": "ug",
-      "name": "维吾尔语"
-    },
-    {
-      "code": "uk",
-      "name": "乌克兰语"
-    },
-    {
-      "code": "ur",
-      "name": "乌尔都语"
-    },
-    {
-      "code": "uz",
-      "name": "乌兹别克语"
-    },
-    {
-      "code": "ve",
-      "name": "文达语"
-    },
-    {
-      "code": "vi",
-      "name": "越南语"
-    },
-    {
-      "code": "vo",
-      "name": "沃拉普克语"
-    },
-    {
-      "code": "wa",
-      "name": "瓦隆语"
-    },
-    {
-      "code": "cy",
-      "name": "威尔士语"
-    },
-    {
-      "code": "wo",
-      "name": "沃洛夫语"
-    },
-    {
-      "code": "xh",
-      "name": "科萨语"
-    },
-    {
-      "code": "yi",
-      "name": "意第绪语"
-    },
-    {
-      "code": "yo",
-      "name": "约鲁巴语"
-    },
-    {
-      "code": "za",
-      "name": "壮语"
-    },
-    {
-      "code": "zu",
-      "name": "祖鲁语"
-    }
-  ],
-  "countries": [
-    {
-      "code": "AF",
-      "name": "阿富汗"
-    },
-    {
-      "code": "AL",
-      "name": "阿尔巴尼亚"
-    },
-    {
-      "code": "DZ",
-      "name": "阿尔及利亚"
-    },
-    {
-      "code": "AS",
-      "name": "美属萨摩亚"
-    },
-    {
-      "code": "AD",
-      "name": "安道尔"
-    },
-    {
-      "code": "AO",
-      "name": "安哥拉"
-    },
-    {
-      "code": "AI",
-      "name": "安圭拉"
-    },
-    {
-      "code": "AQ",
-      "name": "南极洲"
-    },
-    {
-      "code": "AG",
-      "name": "安提瓜和巴布达"
-    },
-    {
-      "code": "AR",
-      "name": "阿根廷"
-    },
-    {
-      "code": "AM",
-      "name": "亚美尼亚"
-    },
-    {
-      "code": "AW",
-      "name": "阿鲁巴"
-    },
-    {
-      "code": "AU",
-      "name": "澳大利亚"
-    },
-    {
-      "code": "AT",
-      "name": "奥地利"
-    },
-    {
-      "code": "AZ",
-      "name": "阿塞拜疆"
-    },
-    {
-      "code": "BS",
-      "name": "巴哈马"
-    },
-    {
-      "code": "BH",
-      "name": "巴林"
-    },
-    {
-      "code": "BD",
-      "name": "孟加拉国"
-    },
-    {
-      "code": "BB",
-      "name": "巴巴多斯"
-    },
-    {
-      "code": "BY",
-      "name": "白俄罗斯"
-    },
-    {
-      "code": "BE",
-      "name": "比利时"
-    },
-    {
-      "code": "BZ",
-      "name": "伯利兹"
-    },
-    {
-      "code": "BJ",
-      "name": "贝宁"
-    },
-    {
-      "code": "BM",
-      "name": "百慕大"
-    },
-    {
-      "code": "BT",
-      "name": "不丹"
-    },
-    {
-      "code": "BO",
-      "name": "玻利维亚"
-    },
-    {
-      "code": "BA",
-      "name": "波斯尼亚和黑塞哥维那"
-    },
-    {
-      "code": "BW",
-      "name": "博茨瓦纳"
-    },
-    {
-      "code": "BR",
-      "name": "巴西"
-    },
-    {
-      "code": "IO",
-      "name": "英属印度洋领地"
-    },
-    {
-      "code": "VG",
-      "name": "英属维尔京群岛"
-    },
-    {
-      "code": "BN",
-      "name": "文莱"
-    },
-    {
-      "code": "BG",
-      "name": "保加利亚"
-    },
-    {
-      "code": "BF",
-      "name": "布基纳法索"
-    },
-    {
-      "code": "BI",
-      "name": "布隆迪"
-    },
-    {
-      "code": "KH",
-      "name": "柬埔寨"
-    },
-    {
-      "code": "CM",
-      "name": "喀麦隆"
-    },
-    {
-      "code": "CA",
-      "name": "加拿大"
-    },
-    {
-      "code": "CV",
-      "name": "佛得角"
-    },
-    {
-      "code": "KY",
-      "name": "开曼群岛"
-    },
-    {
-      "code": "CF",
-      "name": "中非共和国"
-    },
-    {
-      "code": "TD",
-      "name": "乍得"
-    },
-    {
-      "code": "CL",
-      "name": "智利"
-    },
-    {
-      "code": "CN",
-      "name": "中国"
-    },
-    {
-      "code": "CX",
-      "name": "圣诞岛"
-    },
-    {
-      "code": "CC",
-      "name": "科科斯（基林）群岛"
-    },
-    {
-      "code": "CO",
-      "name": "哥伦比亚"
-    },
-    {
-      "code": "KM",
-      "name": "科摩罗"
-    },
-    {
-      "code": "CG",
-      "name": "刚果（布）"
-    },
-    {
-      "code": "CD",
-      "name": "刚果（金）"
-    },
-    {
-      "code": "CK",
-      "name": "库克群岛"
-    },
-    {
-      "code": "CR",
-      "name": "哥斯达黎加"
-    },
-    {
-      "code": "CI",
-      "name": "科特迪瓦"
-    },
-    {
-      "code": "HR",
-      "name": "克罗地亚"
-    },
-    {
-      "code": "CU",
-      "name": "古巴"
-    },
-    {
-      "code": "CY",
-      "name": "塞浦路斯"
-    },
-    {
-      "code": "CZ",
-      "name": "捷克"
-    },
-    {
-      "code": "DK",
-      "name": "丹麦"
-    },
-    {
-      "code": "DJ",
-      "name": "吉布提"
-    },
-    {
-      "code": "DM",
-      "name": "多米尼克"
-    },
-    {
-      "code": "DO",
-      "name": "多米尼加共和国"
-    },
-    {
-      "code": "EC",
-      "name": "厄瓜多尔"
-    },
-    {
-      "code": "EG",
-      "name": "埃及"
-    },
-    {
-      "code": "SV",
-      "name": "萨尔瓦多"
-    },
-    {
-      "code": "GQ",
-      "name": "赤道几内亚"
-    },
-    {
-      "code": "ER",
-      "name": "厄立特里亚"
-    },
-    {
-      "code": "EE",
-      "name": "爱沙尼亚"
-    },
-    {
-      "code": "SZ",
-      "name": "斯威士兰"
-    },
-    {
-      "code": "ET",
-      "name": "埃塞俄比亚"
-    },
-    {
-      "code": "FJ",
-      "name": "斐济"
-    },
-    {
-      "code": "FI",
-      "name": "芬兰"
-    },
-    {
-      "code": "FR",
-      "name": "法国"
-    },
-    {
-      "code": "GA",
-      "name": "加蓬"
-    },
-    {
-      "code": "GM",
-      "name": "冈比亚"
-    },
-    {
-      "code": "GE",
-      "name": "格鲁吉亚"
-    },
-    {
-      "code": "DE",
-      "name": "德国"
-    },
-    {
-      "code": "GH",
-      "name": "加纳"
-    },
-    {
-      "code": "GR",
-      "name": "希腊"
-    },
-    {
-      "code": "GT",
-      "name": "危地马拉"
-    },
-    {
-      "code": "GN",
-      "name": "几内亚"
-    },
-    {
-      "code": "GY",
-      "name": "圭亚那"
-    },
-    {
-      "code": "HT",
-      "name": "海地"
-    },
-    {
-      "code": "HN",
-      "name": "洪都拉斯"
-    },
-    {
-      "code": "HK",
-      "name": "香港"
-    },
-    {
-      "code": "HU",
-      "name": "匈牙利"
-    },
-    {
-      "code": "IS",
-      "name": "冰岛"
-    },
-    {
-      "code": "IN",
-      "name": "印度"
-    },
-    {
-      "code": "ID",
-      "name": "印度尼西亚"
-    },
-    {
-      "code": "IR",
-      "name": "伊朗"
-    },
-    {
-      "code": "IQ",
-      "name": "伊拉克"
-    },
-    {
-      "code": "IE",
-      "name": "爱尔兰"
-    },
-    {
-      "code": "IL",
-      "name": "以色列"
-    },
-    {
-      "code": "IT",
-      "name": "意大利"
-    },
-    {
-      "code": "JM",
-      "name": "牙买加"
-    },
-    {
-      "code": "JP",
-      "name": "日本"
-    },
-    {
-      "code": "JO",
-      "name": "约旦"
-    },
-    {
-      "code": "KZ",
-      "name": "哈萨克斯坦"
-    },
-    {
-      "code": "KE",
-      "name": "肯尼亚"
-    },
-    {
-      "code": "KR",
-      "name": "韩国"
-    },
-    {
-      "code": "KW",
-      "name": "科威特"
-    },
-    {
-      "code": "KG",
-      "name": "吉尔吉斯斯坦"
-    },
-    {
-      "code": "LA",
-      "name": "老挝"
-    },
-    {
-      "code": "LV",
-      "name": "拉脱维亚"
-    },
-    {
-      "code": "LB",
-      "name": "黎巴嫩"
-    },
-    {
-      "code": "LS",
-      "name": "莱索托"
-    },
-    {
-      "code": "LR",
-      "name": "利比里亚"
-    },
-    {
-      "code": "LY",
-      "name": "利比亚"
-    },
-    {
-      "code": "LI",
-      "name": "列支敦士登"
-    },
-    {
-      "code": "LT",
-      "name": "立陶宛"
-    },
-    {
-      "code": "LU",
-      "name": "卢森堡"
-    },
-    {
-      "code": "MG",
-      "name": "马达加斯加"
-    },
-    {
-      "code": "MW",
-      "name": "马拉维"
-    },
-    {
-      "code": "MY",
-      "name": "马来西亚"
-    },
-    {
-      "code": "MV",
-      "name": "马尔代夫"
-    },
-    {
-      "code": "ML",
-      "name": "马里"
-    },
-    {
-      "code": "MT",
-      "name": "马耳他"
-    },
-    {
-      "code": "MX",
-      "name": "墨西哥"
-    },
-    {
-      "code": "MD",
-      "name": "摩尔多瓦"
-    },
-    {
-      "code": "MC",
-      "name": "摩纳哥"
-    },
-    {
-      "code": "MN",
-      "name": "蒙古"
-    },
-    {
-      "code": "ME",
-      "name": "黑山"
-    },
-    {
-      "code": "MA",
-      "name": "摩洛哥"
-    },
-    {
-      "code": "MZ",
-      "name": "莫桑比克"
-    },
-    {
-      "code": "MM",
-      "name": "缅甸"
-    },
-    {
-      "code": "NA",
-      "name": "纳米比亚"
-    },
-    {
-      "code": "NP",
-      "name": "尼泊尔"
-    },
-    {
-      "code": "NL",
-      "name": "荷兰"
-    },
-    {
-      "code": "NZ",
-      "name": "新西兰"
-    },
-    {
-      "code": "NI",
-      "name": "尼加拉瓜"
-    },
-    {
-      "code": "NE",
-      "name": "尼日尔"
-    },
-    {
-      "code": "NG",
-      "name": "尼日利亚"
-    },
-    {
-      "code": "MK",
-      "name": "北马其顿"
-    },
-    {
-      "code": "NO",
-      "name": "挪威"
-    },
-    {
-      "code": "OM",
-      "name": "阿曼"
-    },
-    {
-      "code": "PK",
-      "name": "巴基斯坦"
-    },
-    {
-      "code": "PA",
-      "name": "巴拿马"
-    },
-    {
-      "code": "PG",
-      "name": "巴布亚新几内亚"
-    },
-    {
-      "code": "PY",
-      "name": "巴拉圭"
-    },
-    {
-      "code": "PE",
-      "name": "秘鲁"
-    },
-    {
-      "code": "PH",
-      "name": "菲律宾"
-    },
-    {
-      "code": "PL",
-      "name": "波兰"
-    },
-    {
-      "code": "PT",
-      "name": "葡萄牙"
-    },
-    {
-      "code": "QA",
-      "name": "卡塔尔"
-    },
-    {
-      "code": "RO",
-      "name": "罗马尼亚"
-    },
-    {
-      "code": "RU",
-      "name": "俄罗斯"
-    },
-    {
-      "code": "RW",
-      "name": "卢旺达"
-    },
-    {
-      "code": "SA",
-      "name": "沙特阿拉伯"
-    },
-    {
-      "code": "SN",
-      "name": "塞内加尔"
-    },
-    {
-      "code": "RS",
-      "name": "塞尔维亚"
-    },
-    {
-      "code": "SG",
-      "name": "新加坡"
-    },
-    {
-      "code": "SK",
-      "name": "斯洛伐克"
-    },
-    {
-      "code": "SI",
-      "name": "斯洛文尼亚"
-    },
-    {
-      "code": "ZA",
-      "name": "南非"
-    },
-    {
-      "code": "ES",
-      "name": "西班牙"
-    },
-    {
-      "code": "LK",
-      "name": "斯里兰卡"
-    },
-    {
-      "code": "SE",
-      "name": "瑞典"
-    },
-    {
-      "code": "CH",
-      "name": "瑞士"
-    },
-    {
-      "code": "TW",
-      "name": "台湾"
-    },
-    {
-      "code": "TH",
-      "name": "泰国"
-    },
-    {
-      "code": "TR",
-      "name": "土耳其"
-    },
-    {
-      "code": "UG",
-      "name": "乌干达"
-    },
-    {
-      "code": "UA",
-      "name": "乌克兰"
-    },
-    {
-      "code": "AE",
-      "name": "阿拉伯联合酋长国"
-    },
-    {
-      "code": "GB",
-      "name": "英国"
-    },
-    {
-      "code": "US",
-      "name": "美国"
-    },
-    {
-      "code": "UY",
-      "name": "乌拉圭"
-    },
-    {
-      "code": "UZ",
-      "name": "乌兹别克斯坦"
-    },
-    {
-      "code": "VE",
-      "name": "委内瑞拉"
-    },
-    {
-      "code": "VN",
-      "name": "越南"
-    },
-    {
-      "code": "YE",
-      "name": "也门"
-    },
-    {
-      "code": "ZM",
-      "name": "赞比亚"
-    },
-    {
-      "code": "ZW",
-      "name": "津巴布韦"
-    }
-  ]
+  }
 };

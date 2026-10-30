@@ -3,6 +3,10 @@ import type { NewsletterUser } from "../../types";
 
 export interface AddNewsletterUserResponse {
   message: string;
+  /** "pending" until the person confirms by email; "active" when confirmed (or confirmation is off). */
+  status?: "pending" | "active" | string;
+  alreadySubscribed?: boolean;
+  confirmationEmailSent?: boolean;
 }
 
 /**

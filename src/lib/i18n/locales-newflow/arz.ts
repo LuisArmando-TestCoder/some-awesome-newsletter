@@ -1,5 +1,5 @@
-// arz strings for locales-newflow. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale arz
+// arz (Egyptian Arabic) strings for locales-newflow. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "onboarding": {
     "progress": "الخطوة {current} من {total}",
@@ -116,6 +116,9 @@ export default {
       "dayLabel": "اليوم",
       "timeLabel": "الوقت",
       "timeHint": "بتوقيتك المحلي.",
+      "summaryDaily": "كل يوم في {time}, بتوقيتك ({zone}).",
+      "summaryWeekly": "كل {day} في {time}, بتوقيتك ({zone}).",
+      "summaryMonthly": "يوم 1 من كل شهر في {time}, بتوقيتك ({zone}).",
       "recipeTitle": "ابعت الأعداد الجديدة أوتوماتيك",
       "recipeBody": "في المواعيد اللي فوق، بنختار أحسن مقال جديد عندك، ونكتبه بأسلوبك، ونترجمه لكل قارئ، ونبعته بالإيميل.",
       "recipeOn": "مفعّل",

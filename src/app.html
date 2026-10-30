@@ -4,18 +4,18 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" href="/logo/favicon.ico" type="image/x-icon" />
-		<meta name="theme-color" content="#faf8f4" media="(prefers-color-scheme: light)" />
-		<meta name="theme-color" content="#121311" media="(prefers-color-scheme: dark)" />
+		<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+		<meta name="theme-color" content="#0a0a0b" media="(prefers-color-scheme: dark)" />
 		<link rel="preload" href="/fonts/aiban/Inter-Regular.core.woff" as="font" type="font/woff" crossorigin />
-		<link rel="preload" href="/fonts/aiban/Lora-Variable.core.woff" as="font" type="font/woff" crossorigin />
-		<script>
+		<script nonce="%sveltekit.nonce%">
 			// Apply the saved theme before first paint to avoid a light/dark flash. Values: light, dark, system.
 			try {
 				var t = localStorage.getItem('theme');
 				if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
 				var d = localStorage.getItem('density');
 				if (d === 'compact') document.documentElement.setAttribute('data-density', 'compact');
-				var l = localStorage.getItem('lang');
+				// Language: the visitor's pick, else the browser's first language (see src/lib/i18n/detect.ts).
+				var l = localStorage.getItem('lang.chosen') === '1' ? localStorage.getItem('lang') : (navigator.languages && navigator.languages[0]) || navigator.language;
 				if (l && /^[a-z]{2,3}([-_][A-Za-z]{2,4})?$/.test(l)) {
 					document.documentElement.lang = l;
 					if (/^(ar|fa|ur|he|ps|sd|ug|yi|dv|ks|ku|arz|apc|apd|pes|pnb)([-_]|$)/.test(l)) document.documentElement.dir = 'rtl';

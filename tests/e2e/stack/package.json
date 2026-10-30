@@ -1,0 +1,14 @@
+{
+  "name": "aiban-e2e-stack",
+  "private": true,
+  "description": "Local stack for the AIBAN end-to-end suite: Firestore emulator and a fake SMTP inbox.",
+  "scripts": {
+    "emulator": "firebase emulators:start --only firestore --project ai-translated-newsletter",
+    "inbox": "node inbox.cjs"
+  },
+  "dependencies": {
+    "firebase-tools": "^13.35.1",
+    "mailparser": "^3.14.1",
+    "smtp-server": "^3.21.3"
+  }
+}

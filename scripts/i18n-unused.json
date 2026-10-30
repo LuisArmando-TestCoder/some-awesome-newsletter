@@ -3,7 +3,9 @@
   "locales": [
     "mainContent",
     "imageInput",
-    "publishToWebsite"
+    "publishToWebsite",
+    "languages",
+    "countries"
   ],
   "locales-newflow": [
     "step01",

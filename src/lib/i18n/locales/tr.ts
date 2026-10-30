@@ -1,5 +1,5 @@
-// tr strings for locales. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale tr
+// tr (Turkish) strings for locales. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "auth": {
     "logo": "/icons/logo.png",
@@ -35,6 +35,82 @@ export default {
       "ogImageAlt": "AIBAN logosu"
     },
     "skipLink": "Ana içeriğe geç",
+    "display": {
+      "title": "Web siteniz, bülten olarak yazılmış.",
+      "kicker": "AIBAN"
+    },
+    "statement": {
+      "lines": [
+        "Zaten iyi işler yayınlıyorsunuz.",
+        "Müşterileriniz bunu birden fazla dilde okuyor.",
+        "AIBAN her yeni makaleyi bir sayıya dönüştürür",
+        "ve her okuyucuya kendi dilindeki versiyonu gönderir."
+      ]
+    },
+    "history": {
+      "eyebrow": "Nasıl çalışır",
+      "title": "Bir sayının yaşam döngüsü.",
+      "lead": "Planlamanızın başlattığı andan tekrar başlayacağı ana kadar tek bir sayıyı takip edin. Bunu bir kez kurarsınız.",
+      "note": "Örnek planlama. Günü, saati ve sıklığı siz seçersiniz.",
+      "progressLabel": "Bir sayının adımları",
+      "items": [
+        {
+          "mark": "9:00",
+          "title": "Planlamanız çalıştırmayı başlatır",
+          "body": "Bu örnekte her Pazartesi saat 9:00. Günlük, haftalık veya aylık seçebilirsiniz."
+        },
+        {
+          "mark": "Oku",
+          "title": "AIBAN web sitenizi okur",
+          "body": "En yeni makalenizi bulur ve ideal okuyucunuzun en çok ilgileneceği parçayı seçer."
+        },
+        {
+          "mark": "Yaz",
+          "title": "Sizin sesinizle sayıyı yazar",
+          "body": "Metin sitenizin yazım tarzını takip eder, böylece sizin gibi ses çıkarır."
+        },
+        {
+          "mark": "Çevir",
+          "title": "Her okuyucu kendi dilini alır",
+          "body": "Bir sayı, abonelerinizin ihtiyaç duyduğu kadar çok versiyona dönüşür."
+        },
+        {
+          "mark": "Gönder",
+          "title": "Sizin adınızla ulaşır",
+          "body": "Sizin adınız ve e-posta imzanızla. Yanıtlar gelen kutunuza gider."
+        },
+        {
+          "mark": "Yayınla",
+          "title": "Blogunuzda bir makale olur",
+          "body": "Arama motorlarında bulunabilen ve paylaşılabilen kendi bağlantısıyla."
+        },
+        {
+          "mark": "Raporla",
+          "title": "Ne olduğunu görürsünüz",
+          "body": "Gösterge paneliniz kimlerin katıldığını ve okuyucuların hangi bağlantılara tıkladığını listeler."
+        },
+        {
+          "mark": "Tekrar",
+          "title": "Gelecek Pazartesi tekrar çalışır",
+          "body": "Gösterge panelinizde kapatana kadar devam eder."
+        }
+      ]
+    },
+    "rail": {
+      "label": "Sayfa bölümleri",
+      "chapters": [
+        "Başlangıç",
+        "Neden",
+        "Diller",
+        "Nasıl çalışır",
+        "Sizin adınız",
+        "Büyütün",
+        "Kimler için",
+        "Fiyatlandırma",
+        "Sorular",
+        "Başlayın"
+      ]
+    },
     "hero": {
       "eyebrow": "Hizmet işletmeleri için bültenler",
       "title": "Web siteniz, her okurun kendi dilinde haftalık bir bültene dönüşür",
@@ -57,6 +133,26 @@ export default {
       "startCta": "{site} ile ücretsiz başlayın",
       "startCtaGeneric": "Ücretsiz başlayın",
       "liveRegion": "Örnek önizleme {site} için güncellendi."
+    },
+    "live": {
+      "badge": "Şimdi yazıldı",
+      "loadingTitle": "{site} sitesinden örnek bir sayı yazılıyor",
+      "steps": [
+        "{site} okunuyor",
+        "En yeni makaleniz bulunuyor",
+        "{language} dilinde yazılıyor",
+        "E-posta şablonunuza yerleştiriliyor"
+      ],
+      "takes": "Bu genellikle 20 ila 40 saniye sürer. Kaydırmaya devam edebilirsiniz.",
+      "readyNote": "AIBAN bu örneği {site} sitesindeki en yeni makaleden yazar. Hiçbir şey kaydedilmez veya gönderilmez. Başladığınızda, kendi sesinizi ve programınızı kullanır.",
+      "readyAnnounce": "{site} sitesinden örnek sayınız hazır.",
+      "languageLabel": "Okuyucu dili",
+      "loadingLanguage": "{language} dilinde yazılıyor",
+      "errorTitle": "{site} sitesinden bir önizleme yazamadık",
+      "retry": "Tekrar dene",
+      "showSample": "Örnek düzeni göster",
+      "frameTitle": "{site} sitesinden yazılan örnek sayı",
+      "openFull": "Yeni sekmede aç"
     },
     "chain": {
       "eyebrow": "Nasıl çalışır",
@@ -494,8 +590,8 @@ export default {
     "yearlySave": "%35 tasarruf",
     "intervalLabel": "Fatura dönemi",
     "billedYearly": "yıllık faturalandırılır",
-    "perMonthShort": "/mo",
-    "perYearShort": "/yr",
+    "perMonthShort": "/ay",
+    "perYearShort": "/yıl",
     "freeCta": "Ücretsiz başlayın",
     "processing": "Ödeme sayfası açılıyor...",
     "askMore": "Her hesap Ücretsiz planla başlar. Daha fazlasına ihtiyacınız varsa {email} adresinden bize yazın, planınızı değiştirelim.",
@@ -587,6 +683,7 @@ export default {
       "suggestions": "Öneriler",
       "recent": "Son aramalar",
       "clearRecent": "Son aramaları temizle",
+      "clear": "Aramayı temizle",
       "title": "Arama sonuçları",
       "resultsFor": "\"{q}\" için sonuçlar",
       "count": "{count} makale bulundu",
@@ -691,6 +788,7 @@ export default {
   "legal": {
     "navLabel": "Yasal belgeler",
     "lastUpdated": "Son güncelleme: {date}",
+    "onThisPage": "Bu sayfada",
     "privacy": {
       "title": "Gizlilik politikası",
       "metaTitle": "Gizlilik politikası | AIBAN",
@@ -919,6 +1017,8 @@ export default {
     "codeSent": "E-posta adresinize bir kod gönderdik.",
     "invalidCode": "Bu kod doğru değil. Size gönderdiğimiz en son e-postayı kontrol edin veya kodu yeniden gönderin.",
     "regenerateCode": "Kodu tekrar gönder",
+    "codeAccepted": "Kod kabul edildi. Kontrol paneliniz açılıyor.",
+    "codeLabel": "6 haneli kod",
     "back": "Geri",
     "byProceeding": "Devam ederek şunları kabul etmiş olursunuz:",
     "termsOfService": "Hizmet şartları",
@@ -935,7 +1035,7 @@ export default {
     "title": "Aboneleri ziyaretçiye dönüştürün",
     "recommendation": "Web sitenizi bağlayarak yapay zekamızın markanızı anlamasına yardımcı olun.",
     "question": "Web siteniz var mı? (isteğe bağlı, daha sonra ekleyebilirsiniz)",
-    "placeholder": "https://siteniz.com"
+    "placeholder": "https://your-site.com"
   },
   "newsSource": {
     "title": "İçerik kaynağınızı bağlayın",
@@ -947,6 +1047,673 @@ export default {
       "title": "Bültene hoş geldiniz.",
       "invitedBy": "{configuratorId} tarafından davet edildiniz."
     }
+  },
+  "showcase": {
+    "sampleBadge": "Örnek veri",
+    "exampleLabel": "Örnek işletme",
+    "caption": "{business}, örnek bir {kind} işletmesidir. Bu görünümdeki isimler, makaleler ve sayılar, kontrol panelinizin birkaç hafta sonra nasıl görüneceğini gösteren yer tutuculardır.",
+    "pause": "Animasyonu duraklat",
+    "play": "Animasyonu oynat",
+    "scenesLabel": "Kontrol panelinin bölümleri",
+    "examplesLabel": "Örnek işletmeler",
+    "appUrl": "app.aiban.news",
+    "nav": {
+      "home": "Ana Sayfa",
+      "automations": "Otomasyonlar",
+      "sources": "Kaynaklar",
+      "subscribers": "Aboneler",
+      "reports": "Raporlar",
+      "blog": "Blog"
+    },
+    "scenes": {
+      "home": "Genel Bakış",
+      "issue": "Sayı",
+      "reports": "Tıklamalar",
+      "subscribers": "Aboneler",
+      "automation": "Zamanlama",
+      "source": "Web siteniz",
+      "voice": "Sesiniz",
+      "signup": "Kayıt formu",
+      "blog": "Blog",
+      "import": "İçe aktar"
+    },
+    "ui": {
+      "hello": "Merhaba, {business}",
+      "narrative": "{subscribers} okuyucu, {languages} dilde. Bir sonraki sayı {schedule} gönderilecek.",
+      "kpiSubscribers": "Aboneler",
+      "kpiLanguages": "Diller",
+      "kpiClicks": "Tıklamalar, son 7 gün",
+      "kpiAutomations": "Otomasyonlar açık",
+      "kpiNew": "Bu hafta {count} yeni",
+      "nextIssue": "Sonraki sayı",
+      "ready": "Hazır",
+      "activity": "Son etkinlikler",
+      "from": "Kimden",
+      "subject": "Konu",
+      "readMore": "Yazının tamamını oku",
+      "readerLanguage": "Okuyucu dili",
+      "clicksTitle": "Tıklamalar, son 7 gün",
+      "mostClicked": "En çok tıklanan",
+      "clicks": "tıklama",
+      "days": [
+        "Pzt",
+        "Sal",
+        "Çar",
+        "Per",
+        "Cum",
+        "Cmt",
+        "Paz"
+      ],
+      "subscribersTitle": "Aboneler",
+      "language": "Dil",
+      "joinedVia": "Katılma yolu",
+      "newSubscriber": "Yeni abone",
+      "automationTitle": "Haftalık sayı",
+      "automationSentence": "{schedule}, en yeni makaleden bir sayı yazın ve her okuyucuya kendi dilinde gönderin.",
+      "on": "Açık",
+      "off": "Kapalı",
+      "automationOn": "Otomasyon açıldı",
+      "sourceLabel": "İçeriğinizin geldiği yer",
+      "sourceButton": "Sitemi oku",
+      "reading": "Siteniz okunuyor",
+      "found": "{count} makale bulundu",
+      "voiceReader": "İdeal okuyucunuz",
+      "voiceTone": "Nasıl bir tonda olmalı",
+      "signupHeading": "Haftalık notlarımızı alın",
+      "signupEmail": "E-posta adresi",
+      "signupLanguage": "Dil",
+      "signupButton": "Abone ol",
+      "signupDone": "Onaylamak için gelen kutunuzu kontrol edin.",
+      "blogTitle": "{business} makaleleri",
+      "importFile": "clients.csv",
+      "importing": "Kişiler içe aktarılıyor",
+      "imported": "{count} kişi eklendi",
+      "sources": {
+        "form": "Kayıt formu",
+        "import": "İçe aktar",
+        "manual": "Elle eklendi"
+      }
+    },
+    "examples": [
+      {
+        "business": "Northfield Studio",
+        "kind": "web tasarım ajansı",
+        "site": "northfield.studio",
+        "schedule": "her Pazartesi 9:00'da",
+        "subscribers": 312,
+        "newThisWeek": 9,
+        "clicks7": 84,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "en",
+            "name": "İngilizce",
+            "share": 58
+          },
+          {
+            "code": "es",
+            "name": "İspanyolca",
+            "share": 31
+          },
+          {
+            "code": "pt",
+            "name": "Portekizce",
+            "share": 11
+          }
+        ],
+        "reader": "Portföy parçası değil, müşteri getiren bir web sitesi isteyen klinik, mağaza ve stüdyo sahipleri.",
+        "tones": [
+          "Sıcak",
+          "Sade",
+          "Pratik"
+        ],
+        "articles": [
+          "Bir diş kliniği web sitesini altı haftada nasıl yeniden inşa ettik",
+          "Yeniden tasarlamadan önce düzeltmeniz gereken beş şey",
+          "Rezervasyon butonunuz neden turuncu olmalı"
+        ],
+        "issue": {
+          "title": "Bir diş kliniği web sitesini altı haftada nasıl yeniden inşa ettik",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "A clinic website rebuilt in six weeks",
+              "summary": "We moved booking to the top of every page and cut the forms from nine fields to three. Here is what changed for the clinic."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "El sitio de una clínica, renovado en seis semanas",
+              "summary": "Pusimos la reserva arriba en cada página y redujimos los formularios de nueve campos a tres. Esto es lo que cambió para la clínica."
+            },
+            {
+              "code": "pt",
+              "name": "Português",
+              "subject": "O site de uma clínica, refeito em seis semanas",
+              "summary": "Colocamos o agendamento no topo de cada página e reduzimos os formulários de nove campos para três. Veja o que mudou para a clínica."
+            }
+          ]
+        },
+        "clicksByDay": [
+          21,
+          17,
+          12,
+          9,
+          11,
+          6,
+          8
+        ],
+        "topLinks": [
+          {
+            "title": "Klinik vaka çalışması",
+            "clicks": 38
+          },
+          {
+            "title": "Yeniden tasarlamadan önce düzeltmeniz gereken beş şey",
+            "clicks": 27
+          },
+          {
+            "title": "Görüşme ayırın",
+            "clicks": 19
+          }
+        ],
+        "people": [
+          {
+            "email": "lucia.r@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "mark@example.org",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "joana.s@example.net",
+            "lang": "PT",
+            "via": "form"
+          },
+          {
+            "email": "dr.chen@example.com",
+            "lang": "EN",
+            "via": "manual"
+          }
+        ],
+        "activity": [
+          "Sayı 3 dilde 312 okuyucuya gönderildi",
+          "Klinik vaka çalışmasında 38 tıklama",
+          "Lucia kayıt formundan katıldı ve İspanyolca okuyor"
+        ],
+        "importCount": 148
+      },
+      {
+        "business": "Brightline Software",
+        "kind": "yazılım şirketi",
+        "site": "brightline.dev",
+        "schedule": "her ayın 1'inde saat 10:00",
+        "subscribers": 1240,
+        "newThisWeek": 23,
+        "clicks7": 211,
+        "automationsOn": 1,
+        "languages": [
+          {
+            "code": "en",
+            "name": "İngilizce",
+            "share": 64
+          },
+          {
+            "code": "de",
+            "name": "Almanca",
+            "share": 22
+          },
+          {
+            "code": "fr",
+            "name": "Fransızca",
+            "share": 14
+          }
+        ],
+        "reader": "Randevu yazılımımızı her gün kullanan müşterilerdeki ofis yöneticileri ve BT liderleri.",
+        "tones": [
+          "Net",
+          "Kısa",
+          "Dostane"
+        ],
+        "articles": [
+          "Sürüm 4.2: tekrarlayan randevular",
+          "Büyük ekipler için daha hızlı raporlar",
+          "Takviminizi bir elektronik tablodan nasıl taşırsınız"
+        ],
+        "issue": {
+          "title": "Sürüm 4.2: tekrarlayan randevular",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "New this month: recurring appointments",
+              "summary": "You can now repeat any appointment weekly or monthly. Reports for teams over 50 people also load faster."
+            },
+            {
+              "code": "de",
+              "name": "Deutsch",
+              "subject": "Neu diesen Monat: wiederkehrende Termine",
+              "summary": "Sie können jetzt jeden Termin wöchentlich oder monatlich wiederholen. Berichte für Teams ab 50 Personen laden außerdem schneller."
+            },
+            {
+              "code": "fr",
+              "name": "Français",
+              "subject": "Nouveau ce mois-ci : les rendez-vous récurrents",
+              "summary": "Vous pouvez désormais répéter un rendez-vous chaque semaine ou chaque mois. Les rapports des équipes de plus de 50 personnes s'affichent aussi plus vite."
+            }
+          ]
+        },
+        "clicksByDay": [
+          64,
+          48,
+          33,
+          25,
+          19,
+          9,
+          13
+        ],
+        "topLinks": [
+          {
+            "title": "Tekrarlayan randevular kılavuzu",
+            "clicks": 96
+          },
+          {
+            "title": "Sürüm notları 4.2",
+            "clicks": 71
+          },
+          {
+            "title": "Elektronik tablodan taşıma",
+            "clicks": 44
+          }
+        ],
+        "people": [
+          {
+            "email": "it@example.de",
+            "lang": "DE",
+            "via": "import"
+          },
+          {
+            "email": "sophie.m@example.fr",
+            "lang": "FR",
+            "via": "form"
+          },
+          {
+            "email": "ops@example.com",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "k.weber@example.de",
+            "lang": "DE",
+            "via": "form"
+          }
+        ],
+        "activity": [
+          "Sayı 3 dilde 1240 okuyucuya gönderildi",
+          "Tekrarlayan randevular kılavuzunda 96 tıklama",
+          "clients.csv dosyasından 23 kişi içe aktarıldı"
+        ],
+        "importCount": 412
+      },
+      {
+        "business": "Casa Verde Realty",
+        "kind": "emlak ofisi",
+        "site": "casaverde.homes",
+        "schedule": "her perşembe saat 8:00",
+        "subscribers": 586,
+        "newThisWeek": 14,
+        "clicks7": 163,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "es",
+            "name": "İspanyolca",
+            "share": 47
+          },
+          {
+            "code": "en",
+            "name": "İngilizce",
+            "share": 41
+          },
+          {
+            "code": "fr",
+            "name": "Fransızca",
+            "share": 12
+          }
+        ],
+        "reader": "Sahil yakınında ev arayan yurtdışından aileler ve emekliler ile satış yapabilecek ev sahipleri.",
+        "tones": [
+          "Sıcak",
+          "Yerel",
+          "Sakin"
+        ],
+        "articles": [
+          "Bu hafta sahile yakın üç yeni ev",
+          "Yabancı alıcılar için kapanış maliyetleri nasıl görünüyor",
+          "Eski şehirdeki fiyatlar, sonbahar güncellemesi"
+        ],
+        "issue": {
+          "title": "Bu hafta sahile yakın üç yeni ev",
+          "langs": [
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tres casas nuevas cerca de la playa",
+              "summary": "Una casa de dos habitaciones con jardín, un apartamento con vista al mar y una casa para reformar a diez minutos del centro."
+            },
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Three new homes near the beach",
+              "summary": "A two bedroom house with a garden, a flat with a sea view and a house to renovate ten minutes from the center."
+            },
+            {
+              "code": "fr",
+              "name": "Français",
+              "subject": "Trois nouvelles maisons près de la plage",
+              "summary": "Une maison de deux chambres avec jardin, un appartement avec vue sur la mer et une maison à rénover à dix minutes du centre."
+            }
+          ]
+        },
+        "clicksByDay": [
+          12,
+          9,
+          15,
+          52,
+          38,
+          21,
+          16
+        ],
+        "topLinks": [
+          {
+            "title": "Deniz manzaralı daire",
+            "clicks": 71
+          },
+          {
+            "title": "Bahçeli iki yatak odalı ev",
+            "clicks": 54
+          },
+          {
+            "title": "Yabancı alıcılar için kapanış maliyetleri",
+            "clicks": 38
+          }
+        ],
+        "people": [
+          {
+            "email": "familia.ortiz@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "j.dupont@example.fr",
+            "lang": "FR",
+            "via": "form"
+          },
+          {
+            "email": "tom.and.ann@example.org",
+            "lang": "EN",
+            "via": "manual"
+          },
+          {
+            "email": "rmora@example.net",
+            "lang": "ES",
+            "via": "import"
+          }
+        ],
+        "activity": [
+          "Sayı 3 dilde 586 okuyucuya gönderildi",
+          "Deniz manzaralı dairede 71 tıklama",
+          "Fransa'dan bir okuyucu kayıt formundan katıldı"
+        ],
+        "importCount": 203
+      },
+      {
+        "business": "Mora and Partners",
+        "kind": "muhasebe firması",
+        "site": "morapartners.co",
+        "schedule": "her iki haftada bir Salı günü saat 7:30",
+        "subscribers": 428,
+        "newThisWeek": 6,
+        "clicks7": 97,
+        "automationsOn": 1,
+        "languages": [
+          {
+            "code": "en",
+            "name": "İngilizce",
+            "share": 52
+          },
+          {
+            "code": "es",
+            "name": "İspanyolca",
+            "share": 38
+          },
+          {
+            "code": "it",
+            "name": "İtalyanca",
+            "share": 10
+          }
+        ],
+        "reader": "Vergi ve bordrodaki değişiklikleri jargon olmadan öğrenmek isteyen küçük şirket sahipleri.",
+        "tones": [
+          "Sakin",
+          "Kesin",
+          "Sade"
+        ],
+        "articles": [
+          "Üç aylık vergi son tarihi 15'ine taşındı",
+          "İlk çalışanınızı işe aldığınızda neyi saklamalısınız",
+          "Fişler: kağıt mı fotoğraf mı?"
+        ],
+        "issue": {
+          "title": "Üç aylık vergi son tarihi 15'ine taşındı",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Your quarterly deadline moves to the 15th",
+              "summary": "The filing date for the next quarter moves five days later. Here is what to send us and when, so nothing is late."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tu plazo trimestral pasa al día 15",
+              "summary": "La fecha de presentación del próximo trimestre se mueve cinco días. Esto es lo que debes enviarnos y cuándo, para que nada llegue tarde."
+            },
+            {
+              "code": "it",
+              "name": "Italiano",
+              "subject": "La scadenza trimestrale passa al 15",
+              "summary": "La data di presentazione del prossimo trimestre slitta di cinque giorni. Ecco cosa inviarci e quando, perché nulla arrivi in ritardo."
+            }
+          ]
+        },
+        "clicksByDay": [
+          33,
+          24,
+          14,
+          8,
+          7,
+          4,
+          7
+        ],
+        "topLinks": [
+          {
+            "title": "15'i için kontrol listesi",
+            "clicks": 46
+          },
+          {
+            "title": "İlk çalışanınızı işe almak",
+            "clicks": 29
+          },
+          {
+            "title": "Bir değerlendirme görüşmesi ayırtın",
+            "clicks": 22
+          }
+        ],
+        "people": [
+          {
+            "email": "bakery.owner@example.com",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "c.rossi@example.it",
+            "lang": "IT",
+            "via": "form"
+          },
+          {
+            "email": "taller.luna@example.net",
+            "lang": "ES",
+            "via": "import"
+          },
+          {
+            "email": "finance@example.org",
+            "lang": "EN",
+            "via": "manual"
+          }
+        ],
+        "activity": [
+          "Sayı 3 dilde 428 okuyucuya gönderildi",
+          "15'i için kontrol listesine 46 tıklama",
+          "Bu hafta 6 yeni okuyucu"
+        ],
+        "importCount": 97
+      },
+      {
+        "business": "Run Better Coaching",
+        "kind": "koşu koçu",
+        "site": "runbetter.coach",
+        "schedule": "her Pazar saat 18:00",
+        "subscribers": 907,
+        "newThisWeek": 31,
+        "clicks7": 248,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "en",
+            "name": "İngilizce",
+            "share": 49
+          },
+          {
+            "code": "es",
+            "name": "İspanyolca",
+            "share": 33
+          },
+          {
+            "code": "de",
+            "name": "Almanca",
+            "share": 18
+          }
+        ],
+        "reader": "İşten önce haftada üç kez koşan ve ilk yarı maratonları için antrenman yapan yetişkinler.",
+        "tones": [
+          "Teşvik edici",
+          "Doğrudan",
+          "Kısa"
+        ],
+        "articles": [
+          "Bu hafta: uzun koşu, düşündüğünüzden daha yavaş",
+          "500 kilometre sonra ayakkabılar",
+          "20 dakikalık bir kuvvet rutini"
+        ],
+        "issue": {
+          "title": "Bu hafta: uzun koşu, düşündüğünüzden daha yavaş",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Your long run should feel too easy",
+              "summary": "Keep it slow enough to talk. This week's plan adds ten minutes and one short hill session."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tu tirada larga debería sentirse demasiado fácil",
+              "summary": "Mantén un ritmo que te deje hablar. El plan de esta semana suma diez minutos y una sesión corta de cuestas."
+            },
+            {
+              "code": "de",
+              "name": "Deutsch",
+              "subject": "Dein langer Lauf sollte sich zu leicht anfühlen",
+              "summary": "Lauf so langsam, dass du noch reden kannst. Der Plan dieser Woche bringt zehn Minuten mehr und eine kurze Bergeinheit."
+            }
+          ]
+        },
+        "clicksByDay": [
+          18,
+          22,
+          26,
+          31,
+          35,
+          49,
+          67
+        ],
+        "topLinks": [
+          {
+            "title": "Bu haftanın antrenman planı",
+            "clicks": 121
+          },
+          {
+            "title": "20 dakikalık kuvvet rutini",
+            "clicks": 78
+          },
+          {
+            "title": "500 kilometre sonra ayakkabılar",
+            "clicks": 49
+          }
+        ],
+        "people": [
+          {
+            "email": "ana.runs@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "felix.k@example.de",
+            "lang": "DE",
+            "via": "form"
+          },
+          {
+            "email": "sam@example.org",
+            "lang": "EN",
+            "via": "form"
+          },
+          {
+            "email": "club.secretary@example.net",
+            "lang": "EN",
+            "via": "import"
+          }
+        ],
+        "activity": [
+          "Sayı 3 dilde 907 okuyucuya gönderildi",
+          "Bu haftanın antrenman planına 121 tıklama",
+          "Bu hafta kayıt formundan gelen 31 yeni okuyucu"
+        ],
+        "importCount": 260
+      }
+    ]
+  },
+  "errorPage": {
+    "notFoundEyebrow": "Hata 404",
+    "notFoundTitle": "Bu sayfayı bulamadık",
+    "notFoundBody": "Bağlantı eski olabilir veya yazım hatası içerebilir. Bu sayfalar devam etmek için iyi bir başlangıç noktasıdır.",
+    "serverEyebrow": "Hata {status}",
+    "serverTitle": "Bizim tarafımızda bir sorun oluştu",
+    "serverBody": "Bu sayfayı yükleyemedik. Bir dakika sonra tekrar deneyin. Sorun devam ederse info@aiban.news adresine yazın.",
+    "retry": "Tekrar dene",
+    "home": "Ana sayfaya git",
+    "popularTitle": "Popüler sayfalar",
+    "links": {
+      "howItWorks": "AIBAN nasıl çalışır",
+      "pricing": "Fiyatlandırma",
+      "help": "Yardım merkezi",
+      "login": "Panonuza giriş yapın"
+    },
+    "report": "Sitemizdeki bir bağlantı sizi buraya getirdiyse, düzeltebilmemiz için info@aiban.news adresinden bize bildirin."
   },
   "header": {
     "goToWorkspace": "Paneli aç",
@@ -982,1429 +1749,5 @@ export default {
     "monthly": "Aylık",
     "yearly": "Yıllık",
     "loadingPlan": "Plan verileri yükleniyor..."
-  },
-  "languages": [
-    {
-      "code": "ab",
-      "name": "Abhazca"
-    },
-    {
-      "code": "aa",
-      "name": "Afarca"
-    },
-    {
-      "code": "af",
-      "name": "Afrikaanca"
-    },
-    {
-      "code": "ak",
-      "name": "Akanca"
-    },
-    {
-      "code": "sq",
-      "name": "Arnavutça"
-    },
-    {
-      "code": "am",
-      "name": "Amharca"
-    },
-    {
-      "code": "ar",
-      "name": "Arapça"
-    },
-    {
-      "code": "an",
-      "name": "Aragonca"
-    },
-    {
-      "code": "hy",
-      "name": "Ermenice"
-    },
-    {
-      "code": "as",
-      "name": "Assamca"
-    },
-    {
-      "code": "av",
-      "name": "Avarca"
-    },
-    {
-      "code": "ae",
-      "name": "Avestçe"
-    },
-    {
-      "code": "ay",
-      "name": "Aymaraca"
-    },
-    {
-      "code": "az",
-      "name": "Azerice"
-    },
-    {
-      "code": "bm",
-      "name": "Bambaraca"
-    },
-    {
-      "code": "ba",
-      "name": "Başkurtça"
-    },
-    {
-      "code": "eu",
-      "name": "Baskça"
-    },
-    {
-      "code": "be",
-      "name": "Belarusça"
-    },
-    {
-      "code": "bn",
-      "name": "Bengalce"
-    },
-    {
-      "code": "bi",
-      "name": "Bislama"
-    },
-    {
-      "code": "bs",
-      "name": "Boşnakça"
-    },
-    {
-      "code": "br",
-      "name": "Bretonca"
-    },
-    {
-      "code": "bg",
-      "name": "Bulgarca"
-    },
-    {
-      "code": "my",
-      "name": "Birmanca"
-    },
-    {
-      "code": "ca",
-      "name": "Katalanca"
-    },
-    {
-      "code": "ch",
-      "name": "Çamorroca"
-    },
-    {
-      "code": "ce",
-      "name": "Çeçence"
-    },
-    {
-      "code": "ny",
-      "name": "Nyanja"
-    },
-    {
-      "code": "zh",
-      "name": "Çince"
-    },
-    {
-      "code": "cu",
-      "name": "Kilise Slavcası"
-    },
-    {
-      "code": "cv",
-      "name": "Çuvaşça"
-    },
-    {
-      "code": "kw",
-      "name": "Kernevekçe"
-    },
-    {
-      "code": "co",
-      "name": "Korsikaca"
-    },
-    {
-      "code": "cr",
-      "name": "Krice"
-    },
-    {
-      "code": "hr",
-      "name": "Hırvatça"
-    },
-    {
-      "code": "cs",
-      "name": "Çekçe"
-    },
-    {
-      "code": "da",
-      "name": "Danca"
-    },
-    {
-      "code": "dv",
-      "name": "Divehice"
-    },
-    {
-      "code": "nl",
-      "name": "Felemekçe"
-    },
-    {
-      "code": "dz",
-      "name": "Dzongka"
-    },
-    {
-      "code": "en",
-      "name": "İngilizce"
-    },
-    {
-      "code": "eo",
-      "name": "Esperanto"
-    },
-    {
-      "code": "et",
-      "name": "Estonca"
-    },
-    {
-      "code": "ee",
-      "name": "Evece"
-    },
-    {
-      "code": "fo",
-      "name": "Faroece"
-    },
-    {
-      "code": "fj",
-      "name": "Ficice"
-    },
-    {
-      "code": "fi",
-      "name": "Fince"
-    },
-    {
-      "code": "fr",
-      "name": "Fransızca"
-    },
-    {
-      "code": "fy",
-      "name": "Batı Frizcesi"
-    },
-    {
-      "code": "ff",
-      "name": "Fula dili"
-    },
-    {
-      "code": "gd",
-      "name": "İskoç Galcesi"
-    },
-    {
-      "code": "gl",
-      "name": "Galiçyaca"
-    },
-    {
-      "code": "lg",
-      "name": "Luganda"
-    },
-    {
-      "code": "ka",
-      "name": "Gürcüce"
-    },
-    {
-      "code": "de",
-      "name": "Almanca"
-    },
-    {
-      "code": "el",
-      "name": "Yunanca"
-    },
-    {
-      "code": "kl",
-      "name": "Grönlandca"
-    },
-    {
-      "code": "gn",
-      "name": "Guaranice"
-    },
-    {
-      "code": "gu",
-      "name": "Guceratça"
-    },
-    {
-      "code": "ht",
-      "name": "Haiti Kreyolu"
-    },
-    {
-      "code": "ha",
-      "name": "Hausaca"
-    },
-    {
-      "code": "he",
-      "name": "İbranice"
-    },
-    {
-      "code": "hz",
-      "name": "Hereroca"
-    },
-    {
-      "code": "hi",
-      "name": "Hintçe"
-    },
-    {
-      "code": "ho",
-      "name": "Hiri Motu"
-    },
-    {
-      "code": "hu",
-      "name": "Macarca"
-    },
-    {
-      "code": "is",
-      "name": "İzlandaca"
-    },
-    {
-      "code": "io",
-      "name": "İdo"
-    },
-    {
-      "code": "ig",
-      "name": "İgbo dili"
-    },
-    {
-      "code": "id",
-      "name": "Endonezce"
-    },
-    {
-      "code": "ia",
-      "name": "İnterlingua"
-    },
-    {
-      "code": "ie",
-      "name": "Interlingue"
-    },
-    {
-      "code": "iu",
-      "name": "İnuitçe"
-    },
-    {
-      "code": "ik",
-      "name": "İnupiaq"
-    },
-    {
-      "code": "ga",
-      "name": "İrlandaca"
-    },
-    {
-      "code": "it",
-      "name": "İtalyanca"
-    },
-    {
-      "code": "ja",
-      "name": "Japonca"
-    },
-    {
-      "code": "jv",
-      "name": "Cava dili"
-    },
-    {
-      "code": "kn",
-      "name": "Kannada"
-    },
-    {
-      "code": "kr",
-      "name": "Kanuri"
-    },
-    {
-      "code": "ks",
-      "name": "Keşmirce"
-    },
-    {
-      "code": "kk",
-      "name": "Kazakça"
-    },
-    {
-      "code": "km",
-      "name": "Kmerce"
-    },
-    {
-      "code": "ki",
-      "name": "Kikuyu"
-    },
-    {
-      "code": "rw",
-      "name": "Kinyarwanda"
-    },
-    {
-      "code": "ky",
-      "name": "Kırgızca"
-    },
-    {
-      "code": "kv",
-      "name": "Komice"
-    },
-    {
-      "code": "kg",
-      "name": "Kongoca"
-    },
-    {
-      "code": "ko",
-      "name": "Korece"
-    },
-    {
-      "code": "kj",
-      "name": "Kuanyama"
-    },
-    {
-      "code": "ku",
-      "name": "Kürtçe"
-    },
-    {
-      "code": "lo",
-      "name": "Laoca"
-    },
-    {
-      "code": "la",
-      "name": "Latince"
-    },
-    {
-      "code": "lv",
-      "name": "Letonca"
-    },
-    {
-      "code": "li",
-      "name": "Limburgca"
-    },
-    {
-      "code": "ln",
-      "name": "Lingala"
-    },
-    {
-      "code": "lt",
-      "name": "Litvanca"
-    },
-    {
-      "code": "lu",
-      "name": "Luba-Katanga"
-    },
-    {
-      "code": "lb",
-      "name": "Lüksemburgca"
-    },
-    {
-      "code": "mk",
-      "name": "Makedonca"
-    },
-    {
-      "code": "mg",
-      "name": "Malgaşça"
-    },
-    {
-      "code": "ms",
-      "name": "Malayca"
-    },
-    {
-      "code": "ml",
-      "name": "Malayalam"
-    },
-    {
-      "code": "mt",
-      "name": "Maltaca"
-    },
-    {
-      "code": "gv",
-      "name": "Manks"
-    },
-    {
-      "code": "mi",
-      "name": "Maori dili"
-    },
-    {
-      "code": "mr",
-      "name": "Marathi"
-    },
-    {
-      "code": "mh",
-      "name": "Marshallca"
-    },
-    {
-      "code": "mn",
-      "name": "Moğolca"
-    },
-    {
-      "code": "na",
-      "name": "Nauruca"
-    },
-    {
-      "code": "nv",
-      "name": "Navahoca"
-    },
-    {
-      "code": "nd",
-      "name": "Kuzey Ndebele"
-    },
-    {
-      "code": "nr",
-      "name": "Güney Ndebele"
-    },
-    {
-      "code": "ng",
-      "name": "Ndonga"
-    },
-    {
-      "code": "ne",
-      "name": "Nepalce"
-    },
-    {
-      "code": "no",
-      "name": "Norveççe"
-    },
-    {
-      "code": "nb",
-      "name": "Bokmål Norveççe"
-    },
-    {
-      "code": "nn",
-      "name": "Nynorsk Norveççe"
-    },
-    {
-      "code": "oc",
-      "name": "Oksitanca"
-    },
-    {
-      "code": "oj",
-      "name": "Ojibwa"
-    },
-    {
-      "code": "or",
-      "name": "Oriya dili"
-    },
-    {
-      "code": "om",
-      "name": "Oromca"
-    },
-    {
-      "code": "os",
-      "name": "Osetçe"
-    },
-    {
-      "code": "pi",
-      "name": "Palice"
-    },
-    {
-      "code": "ps",
-      "name": "Peştuca"
-    },
-    {
-      "code": "fa",
-      "name": "Farsça"
-    },
-    {
-      "code": "pl",
-      "name": "Polonyaca"
-    },
-    {
-      "code": "pt",
-      "name": "Portekizce"
-    },
-    {
-      "code": "pa",
-      "name": "Pencapça"
-    },
-    {
-      "code": "qu",
-      "name": "Keçuva dili"
-    },
-    {
-      "code": "ro",
-      "name": "Rumence"
-    },
-    {
-      "code": "rm",
-      "name": "Romanşça"
-    },
-    {
-      "code": "rn",
-      "name": "Kirundi"
-    },
-    {
-      "code": "ru",
-      "name": "Rusça"
-    },
-    {
-      "code": "se",
-      "name": "Kuzey Laponca"
-    },
-    {
-      "code": "sm",
-      "name": "Samoaca"
-    },
-    {
-      "code": "sg",
-      "name": "Sango"
-    },
-    {
-      "code": "sa",
-      "name": "Sanskritçe"
-    },
-    {
-      "code": "sc",
-      "name": "Sardunyaca"
-    },
-    {
-      "code": "sr",
-      "name": "Sırpça"
-    },
-    {
-      "code": "sn",
-      "name": "Şonaca"
-    },
-    {
-      "code": "ii",
-      "name": "Siçuan Yi"
-    },
-    {
-      "code": "sd",
-      "name": "Sindhi"
-    },
-    {
-      "code": "si",
-      "name": "Sinhali dili"
-    },
-    {
-      "code": "sk",
-      "name": "Slovakça"
-    },
-    {
-      "code": "sl",
-      "name": "Slovence"
-    },
-    {
-      "code": "so",
-      "name": "Somalice"
-    },
-    {
-      "code": "st",
-      "name": "Güney Sotho"
-    },
-    {
-      "code": "es",
-      "name": "İspanyolca"
-    },
-    {
-      "code": "su",
-      "name": "Sundaca"
-    },
-    {
-      "code": "sw",
-      "name": "Svahili"
-    },
-    {
-      "code": "ss",
-      "name": "Swati"
-    },
-    {
-      "code": "sv",
-      "name": "İsveççe"
-    },
-    {
-      "code": "tl",
-      "name": "Tagalogca"
-    },
-    {
-      "code": "ty",
-      "name": "Tahiti dili"
-    },
-    {
-      "code": "tg",
-      "name": "Tacikçe"
-    },
-    {
-      "code": "ta",
-      "name": "Tamilce"
-    },
-    {
-      "code": "tt",
-      "name": "Tatarca"
-    },
-    {
-      "code": "te",
-      "name": "Teluguca"
-    },
-    {
-      "code": "th",
-      "name": "Tayca"
-    },
-    {
-      "code": "bo",
-      "name": "Tibetçe"
-    },
-    {
-      "code": "ti",
-      "name": "Tigrinya dili"
-    },
-    {
-      "code": "to",
-      "name": "Tongaca"
-    },
-    {
-      "code": "ts",
-      "name": "Tsongaca"
-    },
-    {
-      "code": "tn",
-      "name": "Tsvana dili"
-    },
-    {
-      "code": "tr",
-      "name": "Türkçe"
-    },
-    {
-      "code": "tk",
-      "name": "Türkmence"
-    },
-    {
-      "code": "tw",
-      "name": "Twi dili"
-    },
-    {
-      "code": "ug",
-      "name": "Uygurca"
-    },
-    {
-      "code": "uk",
-      "name": "Ukraynaca"
-    },
-    {
-      "code": "ur",
-      "name": "Urduca"
-    },
-    {
-      "code": "uz",
-      "name": "Özbekçe"
-    },
-    {
-      "code": "ve",
-      "name": "Vendaca"
-    },
-    {
-      "code": "vi",
-      "name": "Vietnamca"
-    },
-    {
-      "code": "vo",
-      "name": "Volapük"
-    },
-    {
-      "code": "wa",
-      "name": "Valonca"
-    },
-    {
-      "code": "cy",
-      "name": "Galce"
-    },
-    {
-      "code": "wo",
-      "name": "Wolof dili"
-    },
-    {
-      "code": "xh",
-      "name": "Xhosa dili"
-    },
-    {
-      "code": "yi",
-      "name": "Yidiş"
-    },
-    {
-      "code": "yo",
-      "name": "Yorubaca"
-    },
-    {
-      "code": "za",
-      "name": "Zhuangca"
-    },
-    {
-      "code": "zu",
-      "name": "Zuluca"
-    }
-  ],
-  "countries": [
-    {
-      "code": "AF",
-      "name": "Afganistan"
-    },
-    {
-      "code": "AL",
-      "name": "Arnavutluk"
-    },
-    {
-      "code": "DZ",
-      "name": "Cezayir"
-    },
-    {
-      "code": "AS",
-      "name": "Amerikan Samoası"
-    },
-    {
-      "code": "AD",
-      "name": "Andorra"
-    },
-    {
-      "code": "AO",
-      "name": "Angola"
-    },
-    {
-      "code": "AI",
-      "name": "Anguilla"
-    },
-    {
-      "code": "AQ",
-      "name": "Antarktika"
-    },
-    {
-      "code": "AG",
-      "name": "Antigua ve Barbuda"
-    },
-    {
-      "code": "AR",
-      "name": "Arjantin"
-    },
-    {
-      "code": "AM",
-      "name": "Ermenistan"
-    },
-    {
-      "code": "AW",
-      "name": "Aruba"
-    },
-    {
-      "code": "AU",
-      "name": "Avustralya"
-    },
-    {
-      "code": "AT",
-      "name": "Avusturya"
-    },
-    {
-      "code": "AZ",
-      "name": "Azerbaycan"
-    },
-    {
-      "code": "BS",
-      "name": "Bahamalar"
-    },
-    {
-      "code": "BH",
-      "name": "Bahreyn"
-    },
-    {
-      "code": "BD",
-      "name": "Bangladeş"
-    },
-    {
-      "code": "BB",
-      "name": "Barbados"
-    },
-    {
-      "code": "BY",
-      "name": "Beyaz Rusya"
-    },
-    {
-      "code": "BE",
-      "name": "Belçika"
-    },
-    {
-      "code": "BZ",
-      "name": "Belize"
-    },
-    {
-      "code": "BJ",
-      "name": "Benin"
-    },
-    {
-      "code": "BM",
-      "name": "Bermuda"
-    },
-    {
-      "code": "BT",
-      "name": "Butan"
-    },
-    {
-      "code": "BO",
-      "name": "Bolivya"
-    },
-    {
-      "code": "BA",
-      "name": "Bosna-Hersek"
-    },
-    {
-      "code": "BW",
-      "name": "Botsvana"
-    },
-    {
-      "code": "BR",
-      "name": "Brezilya"
-    },
-    {
-      "code": "IO",
-      "name": "Britanya Hint Okyanusu Toprakları"
-    },
-    {
-      "code": "VG",
-      "name": "Britanya Virjin Adaları"
-    },
-    {
-      "code": "BN",
-      "name": "Brunei"
-    },
-    {
-      "code": "BG",
-      "name": "Bulgaristan"
-    },
-    {
-      "code": "BF",
-      "name": "Burkina Faso"
-    },
-    {
-      "code": "BI",
-      "name": "Burundi"
-    },
-    {
-      "code": "KH",
-      "name": "Kamboçya"
-    },
-    {
-      "code": "CM",
-      "name": "Kamerun"
-    },
-    {
-      "code": "CA",
-      "name": "Kanada"
-    },
-    {
-      "code": "CV",
-      "name": "Yeşil Burun Adaları"
-    },
-    {
-      "code": "KY",
-      "name": "Cayman Adaları"
-    },
-    {
-      "code": "CF",
-      "name": "Orta Afrika Cumhuriyeti"
-    },
-    {
-      "code": "TD",
-      "name": "Çad"
-    },
-    {
-      "code": "CL",
-      "name": "Şili"
-    },
-    {
-      "code": "CN",
-      "name": "Çin"
-    },
-    {
-      "code": "CX",
-      "name": "Christmas Adası"
-    },
-    {
-      "code": "CC",
-      "name": "Cocos (Keeling) Adaları"
-    },
-    {
-      "code": "CO",
-      "name": "Kolombiya"
-    },
-    {
-      "code": "KM",
-      "name": "Komorlar"
-    },
-    {
-      "code": "CG",
-      "name": "Kongo - Brazzaville"
-    },
-    {
-      "code": "CD",
-      "name": "Kongo - Kinşasa"
-    },
-    {
-      "code": "CK",
-      "name": "Cook Adaları"
-    },
-    {
-      "code": "CR",
-      "name": "Kosta Rika"
-    },
-    {
-      "code": "CI",
-      "name": "Fildişi Sahili"
-    },
-    {
-      "code": "HR",
-      "name": "Hırvatistan"
-    },
-    {
-      "code": "CU",
-      "name": "Küba"
-    },
-    {
-      "code": "CY",
-      "name": "Kıbrıs"
-    },
-    {
-      "code": "CZ",
-      "name": "Çekya"
-    },
-    {
-      "code": "DK",
-      "name": "Danimarka"
-    },
-    {
-      "code": "DJ",
-      "name": "Cibuti"
-    },
-    {
-      "code": "DM",
-      "name": "Dominika"
-    },
-    {
-      "code": "DO",
-      "name": "Dominik Cumhuriyeti"
-    },
-    {
-      "code": "EC",
-      "name": "Ekvador"
-    },
-    {
-      "code": "EG",
-      "name": "Mısır"
-    },
-    {
-      "code": "SV",
-      "name": "El Salvador"
-    },
-    {
-      "code": "GQ",
-      "name": "Ekvator Ginesi"
-    },
-    {
-      "code": "ER",
-      "name": "Eritre"
-    },
-    {
-      "code": "EE",
-      "name": "Estonya"
-    },
-    {
-      "code": "SZ",
-      "name": "Esvatini"
-    },
-    {
-      "code": "ET",
-      "name": "Etiyopya"
-    },
-    {
-      "code": "FJ",
-      "name": "Fiji"
-    },
-    {
-      "code": "FI",
-      "name": "Finlandiya"
-    },
-    {
-      "code": "FR",
-      "name": "Fransa"
-    },
-    {
-      "code": "GA",
-      "name": "Gabon"
-    },
-    {
-      "code": "GM",
-      "name": "Gambiya"
-    },
-    {
-      "code": "GE",
-      "name": "Gürcistan"
-    },
-    {
-      "code": "DE",
-      "name": "Almanya"
-    },
-    {
-      "code": "GH",
-      "name": "Gana"
-    },
-    {
-      "code": "GR",
-      "name": "Yunanistan"
-    },
-    {
-      "code": "GT",
-      "name": "Guatemala"
-    },
-    {
-      "code": "GN",
-      "name": "Gine"
-    },
-    {
-      "code": "GY",
-      "name": "Guyana"
-    },
-    {
-      "code": "HT",
-      "name": "Haiti"
-    },
-    {
-      "code": "HN",
-      "name": "Honduras"
-    },
-    {
-      "code": "HK",
-      "name": "Hong Kong"
-    },
-    {
-      "code": "HU",
-      "name": "Macaristan"
-    },
-    {
-      "code": "IS",
-      "name": "İzlanda"
-    },
-    {
-      "code": "IN",
-      "name": "Hindistan"
-    },
-    {
-      "code": "ID",
-      "name": "Endonezya"
-    },
-    {
-      "code": "IR",
-      "name": "İran"
-    },
-    {
-      "code": "IQ",
-      "name": "Irak"
-    },
-    {
-      "code": "IE",
-      "name": "İrlanda"
-    },
-    {
-      "code": "IL",
-      "name": "İsrail"
-    },
-    {
-      "code": "IT",
-      "name": "İtalya"
-    },
-    {
-      "code": "JM",
-      "name": "Jamaika"
-    },
-    {
-      "code": "JP",
-      "name": "Japonya"
-    },
-    {
-      "code": "JO",
-      "name": "Ürdün"
-    },
-    {
-      "code": "KZ",
-      "name": "Kazakistan"
-    },
-    {
-      "code": "KE",
-      "name": "Kenya"
-    },
-    {
-      "code": "KR",
-      "name": "Güney Kore"
-    },
-    {
-      "code": "KW",
-      "name": "Kuveyt"
-    },
-    {
-      "code": "KG",
-      "name": "Kırgızistan"
-    },
-    {
-      "code": "LA",
-      "name": "Laos"
-    },
-    {
-      "code": "LV",
-      "name": "Letonya"
-    },
-    {
-      "code": "LB",
-      "name": "Lübnan"
-    },
-    {
-      "code": "LS",
-      "name": "Lesotho"
-    },
-    {
-      "code": "LR",
-      "name": "Liberya"
-    },
-    {
-      "code": "LY",
-      "name": "Libya"
-    },
-    {
-      "code": "LI",
-      "name": "Liechtenstein"
-    },
-    {
-      "code": "LT",
-      "name": "Litvanya"
-    },
-    {
-      "code": "LU",
-      "name": "Lüksemburg"
-    },
-    {
-      "code": "MG",
-      "name": "Madagaskar"
-    },
-    {
-      "code": "MW",
-      "name": "Malavi"
-    },
-    {
-      "code": "MY",
-      "name": "Malezya"
-    },
-    {
-      "code": "MV",
-      "name": "Maldivler"
-    },
-    {
-      "code": "ML",
-      "name": "Mali"
-    },
-    {
-      "code": "MT",
-      "name": "Malta"
-    },
-    {
-      "code": "MX",
-      "name": "Meksika"
-    },
-    {
-      "code": "MD",
-      "name": "Moldova"
-    },
-    {
-      "code": "MC",
-      "name": "Monako"
-    },
-    {
-      "code": "MN",
-      "name": "Moğolistan"
-    },
-    {
-      "code": "ME",
-      "name": "Karadağ"
-    },
-    {
-      "code": "MA",
-      "name": "Fas"
-    },
-    {
-      "code": "MZ",
-      "name": "Mozambik"
-    },
-    {
-      "code": "MM",
-      "name": "Myanmar"
-    },
-    {
-      "code": "NA",
-      "name": "Namibya"
-    },
-    {
-      "code": "NP",
-      "name": "Nepal"
-    },
-    {
-      "code": "NL",
-      "name": "Hollanda"
-    },
-    {
-      "code": "NZ",
-      "name": "Yeni Zelanda"
-    },
-    {
-      "code": "NI",
-      "name": "Nikaragua"
-    },
-    {
-      "code": "NE",
-      "name": "Nijer"
-    },
-    {
-      "code": "NG",
-      "name": "Nijerya"
-    },
-    {
-      "code": "MK",
-      "name": "Kuzey Makedonya"
-    },
-    {
-      "code": "NO",
-      "name": "Norveç"
-    },
-    {
-      "code": "OM",
-      "name": "Umman"
-    },
-    {
-      "code": "PK",
-      "name": "Pakistan"
-    },
-    {
-      "code": "PA",
-      "name": "Panama"
-    },
-    {
-      "code": "PG",
-      "name": "Papua Yeni Gine"
-    },
-    {
-      "code": "PY",
-      "name": "Paraguay"
-    },
-    {
-      "code": "PE",
-      "name": "Peru"
-    },
-    {
-      "code": "PH",
-      "name": "Filipinler"
-    },
-    {
-      "code": "PL",
-      "name": "Polonya"
-    },
-    {
-      "code": "PT",
-      "name": "Portekiz"
-    },
-    {
-      "code": "QA",
-      "name": "Katar"
-    },
-    {
-      "code": "RO",
-      "name": "Romanya"
-    },
-    {
-      "code": "RU",
-      "name": "Rusya"
-    },
-    {
-      "code": "RW",
-      "name": "Ruanda"
-    },
-    {
-      "code": "SA",
-      "name": "Suudi Arabistan"
-    },
-    {
-      "code": "SN",
-      "name": "Senegal"
-    },
-    {
-      "code": "RS",
-      "name": "Sırbistan"
-    },
-    {
-      "code": "SG",
-      "name": "Singapur"
-    },
-    {
-      "code": "SK",
-      "name": "Slovakya"
-    },
-    {
-      "code": "SI",
-      "name": "Slovenya"
-    },
-    {
-      "code": "ZA",
-      "name": "Güney Afrika"
-    },
-    {
-      "code": "ES",
-      "name": "İspanya"
-    },
-    {
-      "code": "LK",
-      "name": "Sri Lanka"
-    },
-    {
-      "code": "SE",
-      "name": "İsveç"
-    },
-    {
-      "code": "CH",
-      "name": "İsviçre"
-    },
-    {
-      "code": "TW",
-      "name": "Tayvan"
-    },
-    {
-      "code": "TH",
-      "name": "Tayland"
-    },
-    {
-      "code": "TR",
-      "name": "Türkiye"
-    },
-    {
-      "code": "UG",
-      "name": "Uganda"
-    },
-    {
-      "code": "UA",
-      "name": "Ukrayna"
-    },
-    {
-      "code": "AE",
-      "name": "Birleşik Arap Emirlikleri"
-    },
-    {
-      "code": "GB",
-      "name": "Birleşik Krallık"
-    },
-    {
-      "code": "US",
-      "name": "Amerika Birleşik Devletleri"
-    },
-    {
-      "code": "UY",
-      "name": "Uruguay"
-    },
-    {
-      "code": "UZ",
-      "name": "Özbekistan"
-    },
-    {
-      "code": "VE",
-      "name": "Venezuela"
-    },
-    {
-      "code": "VN",
-      "name": "Vietnam"
-    },
-    {
-      "code": "YE",
-      "name": "Yemen"
-    },
-    {
-      "code": "ZM",
-      "name": "Zambiya"
-    },
-    {
-      "code": "ZW",
-      "name": "Zimbabve"
-    }
-  ]
+  }
 };

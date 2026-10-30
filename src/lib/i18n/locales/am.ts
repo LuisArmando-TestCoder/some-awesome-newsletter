@@ -1,5 +1,5 @@
-// am strings for locales. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale am
+// am (Amharic) strings for locales. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "auth": {
     "logo": "/icons/logo.png",
@@ -35,6 +35,82 @@ export default {
       "ogImageAlt": "የAIBAN አርማ"
     },
     "skipLink": "ወደ ዋናው ይዘት ይዝለሉ",
+    "display": {
+      "title": "የእርስዎ ድር ጣቢያ፣ እንደ ዜና የተጻፈ።",
+      "kicker": "AIBAN"
+    },
+    "statement": {
+      "lines": [
+        "እርስዎ ቀድሞውኑ ጥሩ ሥራ ያትማሉ።",
+        "ደንበኞችዎ በአንድ በላይ ቋንቋ ያነባሉ።",
+        "AIBAN እያንዳንዱን አዲስ ጽሑፍ ወደ መጽሔት ቁጥር ይቀይራል",
+        "እና ለእያንዳንዱ አንባቢ በራሳቸው ቋንቋ የተጻፈውን ስሪት ይልካል።"
+      ]
+    },
+    "history": {
+      "eyebrow": "እንዴት እንደሚሰራ",
+      "title": "የአንድ መጽሔት ቁጥር ሕይወት።",
+      "lead": "አንድ ቁጥር ከሚጀምረው ጊዜ እስከ እንደገና እስኪጀምር ድረስ ይከተሉ። ይህንን አንድ ጊዜ ያዘጋጃሉ።",
+      "note": "የምሳሌ መርሐግብር። ቀን፣ ሰዓት እና ብዙ ጊዜ ይመርጣሉ።",
+      "progressLabel": "የአንድ ቁጥር ደረጃዎች",
+      "items": [
+        {
+          "mark": "9:00",
+          "title": "መርሐግብርዎ ሥራውን ይጀምራል",
+          "body": "በዚህ ምሳሌ እያንዳንዱ ሰኞ በ 9:00። ዕለታዊ፣ ሳምንታዊ ወይም ወርሃዊ ትመርጣለህ።"
+        },
+        {
+          "mark": "አንብብ",
+          "title": "AIBAN ድር ጣቢያዎን ያነባል",
+          "body": "አዲሱን ጽሑፍዎን ያገኛል እና ተስማሚ አንባቢዎ በጣም የሚጨነቀውን ክፍል ይመርጣል።"
+        },
+        {
+          "mark": "ጻፍ",
+          "title": "በእርስዎ ድምጽ ያጽፋል",
+          "body": "ጽሑፉ ድር ጣቢያዎ እንዴት እንደተጻፈ ይከተላል፣ ስለዚህ እንደ እርስዎ ይመስላል።"
+        },
+        {
+          "mark": "ተርጉም",
+          "title": "እያንዳንዱ አንባቢ ቋንቋውን ያገኛል",
+          "body": "አንድ ቁጥር ለተመዝጋቢዎችዎ በሚያስፈልጉት ቋንቋዎች ይሆናል።"
+        },
+        {
+          "mark": "ላክ",
+          "title": "በስምዎ ስር ይደርሳል",
+          "body": "በስምዎ እና በኢሜይል ፊርማዎ። መልሶች ወደ የእርስዎ መግቢያ ሳጥን ይሄዳሉ።"
+        },
+        {
+          "mark": "አትም",
+          "title": "በብሎግዎ ላይ ጽሑፍ ይሆናል",
+          "body": "በፍለጋ እና በማጋራት ሊገኝ የሚችል የራሱ አገናኝ ያለው።"
+        },
+        {
+          "mark": "ሪፖርት",
+          "title": "ምን እንደተደረገ ታያለህ",
+          "body": "ዳሽቦርድዎ ማን እንደተቀላቀለ እና አንባቢዎች የትኞቹን አገናኞች እንዳጫኑ ያሳያል።"
+        },
+        {
+          "mark": "እንደገና",
+          "title": "ቀጣዩ ሰኞ እንደገና ይሰራል",
+          "body": "በዳሽቦርድዎ እስኪጠፉት ድረስ ይቀጥላል።"
+        }
+      ]
+    },
+    "rail": {
+      "label": "የገጽ ምዕራፎች",
+      "chapters": [
+        "ጀምር",
+        "ለምን",
+        "ቋንቋዎች",
+        "እንዴት እንደሚሰራ",
+        "ስምህ",
+        "አድግ",
+        "ለማን ነው",
+        "ዋጋ",
+        "ጥያቄዎች",
+        "ጀምር"
+      ]
+    },
     "hero": {
       "eyebrow": "ለአገልግሎት ሰጪ ንግዶች የሚሆኑ ጋዜጣዎች",
       "title": "ድረ ገጽዎ በእያንዳንዱ አንባቢ ቋንቋ ሳምንታዊ ጋዜጣ ይሆናል",
@@ -57,6 +133,26 @@ export default {
       "startCta": "በ{site} በነጻ ይጀምሩ",
       "startCtaGeneric": "በነጻ ይጀምሩ",
       "liveRegion": "የናሙና ቅድመ እይታው ለ{site} ተዘምኗል።"
+    },
+    "live": {
+      "badge": "አሁን ተጽፏል",
+      "loadingTitle": "ከ{site} ለምሳሌ አንቀጽ በመጻፍ ላይ",
+      "steps": [
+        "{site} በማንበብ ላይ",
+        "አዲሱ ጽሑፍህን በማግኘት ላይ",
+        "በ{language} በመጻፍ ላይ",
+        "በኢሜል አብነትህ ውስጥ በማስገባት ላይ"
+      ],
+      "takes": "ይህ ብዙውን ጊዜ 20 እስከ 40 ሰከንድ ይወስዳል። መቀጠል ትችላለህ።",
+      "readyNote": "AIBAN ይህን ምሳሌ ከ{site} ላይ ካለው አዲስ ጽሑፍ ይጽፋል። ምንም ነገር አይቀመጥም አይላክም። ስትጀምር፣ የራስህን ድምጽ እና መርሃ ግብር ይጠቀማል።",
+      "readyAnnounce": "ከ{site} የሆነው ምሳሌ አንቀጽህ ዝግጁ ነው።",
+      "languageLabel": "የአንባቢ ቋንቋ",
+      "loadingLanguage": "በ{language} በመጻፍ ላይ",
+      "errorTitle": "ከ{site} ቅድመ እይታ ማውጣት አልተቻለም",
+      "retry": "እንደገና ሞክር",
+      "showSample": "የምሳሌ አቀማመጥ አሳይ",
+      "frameTitle": "ከ{site} የተጻፈ ምሳሌ አንቀጽ",
+      "openFull": "በአዲስ ትር ክፈት"
     },
     "chain": {
       "eyebrow": "እንዴት እንደሚሰራ",
@@ -587,6 +683,7 @@ export default {
       "suggestions": "ጥቆማዎች",
       "recent": "የቅርብ ጊዜ ፍለጋዎች",
       "clearRecent": "የቅርብ ጊዜ ፍለጋዎችን ያጽዱ",
+      "clear": "ፍለጋ አጽዳ",
       "title": "የፍለጋ ውጤቶች",
       "resultsFor": "ለ\"{q}\" የተገኙ ውጤቶች",
       "count": "{count} ጽሑፎች ተገኝተዋል",
@@ -691,6 +788,7 @@ export default {
   "legal": {
     "navLabel": "ሕጋዊ ሰነዶች",
     "lastUpdated": "ለመጨረሻ ጊዜ የተዘመነው፦ {date}",
+    "onThisPage": "በዚህ ገጽ ላይ",
     "privacy": {
       "title": "የግላዊነት ፖሊሲ",
       "metaTitle": "የግላዊነት ፖሊሲ | AIBAN",
@@ -919,6 +1017,8 @@ export default {
     "codeSent": "ወደ ኢሜልዎ ኮድ ልከናል።",
     "invalidCode": "ያ ኮድ ትክክል አይደለም። የላክንልዎትን የቅርብ ጊዜ ኢሜል ይፈትሹ፣ ወይም ኮዱን እንደገና ያስልኩ።",
     "regenerateCode": "ኮዱን እንደገና ላክ",
+    "codeAccepted": "ኮድ ተቀባይነት አገኘ። ዳሽቦርድህ እየተከፈተ ነው።",
+    "codeLabel": "6-አሃዝ ኮድ",
     "back": "ተመለስ",
     "byProceeding": "በመቀጠልዎ የሚከተሉትን ይቀበላሉ፡",
     "termsOfService": "የአገልግሎት ውሎች",
@@ -947,6 +1047,673 @@ export default {
       "title": "ወደ ጋዜጣው እንኳን ደህና መጡ።",
       "invitedBy": "የተጋበዙት በ {configuratorId} ነው።"
     }
+  },
+  "showcase": {
+    "sampleBadge": "ናሙና ውሂብ",
+    "exampleLabel": "ምሳሌ ንግድ",
+    "caption": "{business} ምሳሌ {kind} ነው። በዚህ እይታ ውስጥ ያሉ ስሞች፣ ጽሑፎች እና ቁጥሮች የሚያሳዩት ዳሽቦርድህ ከጥቂት ሳምንታት በኋላ ምን እንደሚመስል የሚያሳዩ ቦታ ያዙ ናቸው።",
+    "pause": "አኒሜሽኑን አቁም",
+    "play": "አኒሜሽኑን አጫውት",
+    "scenesLabel": "የዳሽቦርድ ክፍሎች",
+    "examplesLabel": "ምሳሌ ንግዶች",
+    "appUrl": "app.aiban.news",
+    "nav": {
+      "home": "ቤት",
+      "automations": "ራስ-ሰር ስራዎች",
+      "sources": "ምንጮች",
+      "subscribers": "ተመዝጋቢዎች",
+      "reports": "ሪፖርቶች",
+      "blog": "ብሎግ"
+    },
+    "scenes": {
+      "home": "አጠቃላይ እይታ",
+      "issue": "የዜና መጽሔቱ",
+      "reports": "ጠቅታዎች",
+      "subscribers": "የደንበኞች ብዛት",
+      "automation": "ስሌት",
+      "source": "የእርስዎ ድር ጣቢያ",
+      "voice": "የእርስዎ ድምጽ",
+      "signup": "የምዝገባ ፎርም",
+      "blog": "ብሎግ",
+      "import": "ማስገባት"
+    },
+    "ui": {
+      "hello": "ሰላም፣ {business}",
+      "narrative": "{subscribers} አንባቢዎች በ{languages} ቋንቋዎች። ቀጣዩ ዜና መጽሔት ይለቀቃል {schedule}።",
+      "kpiSubscribers": "የደንበኞች ብዛት",
+      "kpiLanguages": "ቋንቋዎች",
+      "kpiClicks": "ጠቅታዎች፣ ያለፉት 7 ቀናት",
+      "kpiAutomations": "ራስ-ሰር ሂደቶች በር",
+      "kpiNew": "{count} አዲስ በዚህ ሳምንት",
+      "nextIssue": "ቀጣዩ ዜና መጽሔት",
+      "ready": "ዝግጁ",
+      "activity": "የቅርብ ጊዜ እንቅስቃሴ",
+      "from": "ከ",
+      "subject": "ርዕስ",
+      "readMore": "ሙሉውን ጽሑፍ አንብብ",
+      "readerLanguage": "የአንባቢ ቋንቋ",
+      "clicksTitle": "ጠቅታዎች፣ ያለፉት 7 ቀናት",
+      "mostClicked": "በጣም ብዙ የተጠቀሰ",
+      "clicks": "ጠቅታዎች",
+      "days": [
+        "ሰኞ",
+        "ማክሰኞ",
+        "ረቡዕ",
+        "ሐሙስ",
+        "ዓርብ",
+        "ቅዳሜ",
+        "እሁድ"
+      ],
+      "subscribersTitle": "የደንበኞች ብዛት",
+      "language": "ቋንቋ",
+      "joinedVia": "በተጠቀሰው መንገድ ተጠቃሚ ሆኗል",
+      "newSubscriber": "አዲስ ደንበኛ",
+      "automationTitle": "የሳምንት ዜና መጽሔት",
+      "automationSentence": "{schedule}፣ ከአዲሱ ጽሑፍ ዜና መጽሔት ጻፍ እና ለእያንዳንዱ አንባቢ በራሱ ቋንቋ ላክ።",
+      "on": "በርቷል",
+      "off": "ጠፍቷል",
+      "automationOn": "ራስ-ሰር ተብራርቷል",
+      "sourceLabel": "ይዘትዎ የሚመጣበት ምንጭ",
+      "sourceButton": "ጣቢያዬን አንብብ",
+      "reading": "ጣቢያዎን በማንበብ ላይ",
+      "found": "{count} ጽሑፎች ተገኝተዋል",
+      "voiceReader": "የእርስዎ ተስማሚ አንባቢ",
+      "voiceTone": "እንዴት እንደሚያሰማ",
+      "signupHeading": "የሳምንቱን ማስታወሻችን ያግኙ",
+      "signupEmail": "የኢሜል አድራሻ",
+      "signupLanguage": "ቋንቋ",
+      "signupButton": "ይመዝገቡ",
+      "signupDone": "ለማረጋገጥ የኢሜል ሳጥንዎን ያረጋግጡ።",
+      "blogTitle": "ከ{business} የተወሰዱ ጽሑፎች",
+      "importFile": "clients.csv",
+      "importing": "እውቂያዎች በማስገባት ላይ",
+      "imported": "{count} እውቂያዎች ታክለዋል",
+      "sources": {
+        "form": "የመመዝገቢያ ፎርም",
+        "import": "አስገባ",
+        "manual": "በእጅ ታክሏል"
+      }
+    },
+    "examples": [
+      {
+        "business": "Northfield Studio",
+        "kind": "የድር ጣቢያ ዲዛይን አገልግሎት",
+        "site": "northfield.studio",
+        "schedule": "በየሳምንቱ ሰኞ ሰዓት 9:00",
+        "subscribers": 312,
+        "newThisWeek": 9,
+        "clicks7": 84,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 58
+          },
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 31
+          },
+          {
+            "code": "pt",
+            "name": "Portuguese",
+            "share": 11
+          }
+        ],
+        "reader": "ፖርትፎሊዮ ሳይሆን ደንበኞችን የሚጎትት ድር ጣቢያ የሚፈልጉ የክሊኒኮች፣ ሱቆች እና ስቱዲዮዎች ባለቤቶች።",
+        "tones": [
+          "ሞቅ ያለ",
+          "ቀላል",
+          "ግብርጊዜ"
+        ],
+        "articles": [
+          "የጥርስ ህክምና ክሊኒክ ድር ጣቢያን በስድስት ሳምንት ውስጥ እንዴት እንደገነባነው",
+          "እንደገና ከማዘጋጀትዎ በፊት ማረም ያለባቸው አምስት ነገሮች",
+          "የቦታ ማስያዝ ቁልፍዎ ብርቱካንማ ለምን መሆን አለበት"
+        ],
+        "issue": {
+          "title": "የጥርስ ህክምና ክሊኒክ ድር ጣቢያን በስድስት ሳምንት ውስጥ እንዴት እንደገነባነው",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "A clinic website rebuilt in six weeks",
+              "summary": "We moved booking to the top of every page and cut the forms from nine fields to three. Here is what changed for the clinic."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "El sitio de una clínica, renovado en seis semanas",
+              "summary": "Pusimos la reserva arriba en cada página y redujimos los formularios de nueve campos a tres. Esto es lo que cambió para la clínica."
+            },
+            {
+              "code": "pt",
+              "name": "Português",
+              "subject": "O site de uma clínica, refeito em seis semanas",
+              "summary": "Colocamos o agendamento no topo de cada página e reduzimos os formulários de nove campos para três. Veja o que mudou para a clínica."
+            }
+          ]
+        },
+        "clicksByDay": [
+          21,
+          17,
+          12,
+          9,
+          11,
+          6,
+          8
+        ],
+        "topLinks": [
+          {
+            "title": "የክሊኒክ ጉዳይ ጥናት",
+            "clicks": 38
+          },
+          {
+            "title": "እንደገና ከማዘጋጀትዎ በፊት ማረም ያለባቸው አምስት ነገሮች",
+            "clicks": 27
+          },
+          {
+            "title": "የድምፅ ጥሪ ያስይዙ",
+            "clicks": 19
+          }
+        ],
+        "people": [
+          {
+            "email": "lucia.r@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "mark@example.org",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "joana.s@example.net",
+            "lang": "PT",
+            "via": "form"
+          },
+          {
+            "email": "dr.chen@example.com",
+            "lang": "EN",
+            "via": "manual"
+          }
+        ],
+        "activity": [
+          "የተላከ ጉዳይ ለ312 አንባቢዎች በ3 ቋንቋዎች",
+          "38 ጠቅታዎች በክሊኒክ ጉዳይ ጥናት ላይ",
+          "ሉሲያ ከመመዝገቢያ ፎርም ተጨምራ በስፔኒሽ ትነበባለች"
+        ],
+        "importCount": 148
+      },
+      {
+        "business": "Brightline Software",
+        "kind": "የሶፍትዌር ኩባንያ",
+        "site": "brightline.dev",
+        "schedule": "በየወሩ በ1 ቀን ላይ ከጠዋት 10:00",
+        "subscribers": 1240,
+        "newThisWeek": 23,
+        "clicks7": 211,
+        "automationsOn": 1,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 64
+          },
+          {
+            "code": "de",
+            "name": "German",
+            "share": 22
+          },
+          {
+            "code": "fr",
+            "name": "French",
+            "share": 14
+          }
+        ],
+        "reader": "በየቀኑ የእኛን የቦታ ማስያዣ ሶፍትዌር የሚጠቀሙ በደንበኞች ውስጥ የሚገኙ የቢሮ አስተዳዳሪዎች እና የአይቲ መሪዎች።",
+        "tones": [
+          "ግልጽ",
+          "አጭር",
+          "ወዳጃዊ"
+        ],
+        "articles": [
+          "ሪሊዝ 4.2: ተደጋጋሚ ቀጠሮዎች",
+          "ለትላልቅ ቡድኖች ፈጣን ሪፖርቶች",
+          "የቀን መቁጠሪያዎን ከስፔሪድሺት እንዴት ማንቀሳቀስ እንደሚችሉ"
+        ],
+        "issue": {
+          "title": "ሪሊዝ 4.2: ተደጋጋሚ ቀጠሮዎች",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "New this month: recurring appointments",
+              "summary": "You can now repeat any appointment weekly or monthly. Reports for teams over 50 people also load faster."
+            },
+            {
+              "code": "de",
+              "name": "Deutsch",
+              "subject": "Neu diesen Monat: wiederkehrende Termine",
+              "summary": "Sie können jetzt jeden Termin wöchentlich oder monatlich wiederholen. Berichte für Teams ab 50 Personen laden außerdem schneller."
+            },
+            {
+              "code": "fr",
+              "name": "Français",
+              "subject": "Nouveau ce mois-ci : les rendez-vous récurrents",
+              "summary": "Vous pouvez désormais répéter un rendez-vous chaque semaine ou chaque mois. Les rapports des équipes de plus de 50 personnes s'affichent aussi plus vite."
+            }
+          ]
+        },
+        "clicksByDay": [
+          64,
+          48,
+          33,
+          25,
+          19,
+          9,
+          13
+        ],
+        "topLinks": [
+          {
+            "title": "የተደጋጋሚ ቀጠሮዎች መመሪያ",
+            "clicks": 96
+          },
+          {
+            "title": "የሪሊዝ ማስታወሻዎች 4.2",
+            "clicks": 71
+          },
+          {
+            "title": "ከስፔሪድሺት መቀየር",
+            "clicks": 44
+          }
+        ],
+        "people": [
+          {
+            "email": "it@example.de",
+            "lang": "DE",
+            "via": "import"
+          },
+          {
+            "email": "sophie.m@example.fr",
+            "lang": "FR",
+            "via": "form"
+          },
+          {
+            "email": "ops@example.com",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "k.weber@example.de",
+            "lang": "DE",
+            "via": "form"
+          }
+        ],
+        "activity": [
+          "በ3 ቋንቋዎች ለ1240 አንባቢዎች የተላከ መጽሔት",
+          "96 ጠቅታዎች በተደጋጋሚ ቀጠሮዎች መመሪያ",
+          "23 እውቂያዎች ከclients.csv ተጭነዋል"
+        ],
+        "importCount": 412
+      },
+      {
+        "business": "Casa Verde Realty",
+        "kind": "የንግድ ንብረት ድርጅት",
+        "site": "casaverde.homes",
+        "schedule": "በየሳምንቱ ሐሙስ ከጠዋት 8:00",
+        "subscribers": 586,
+        "newThisWeek": 14,
+        "clicks7": 163,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 47
+          },
+          {
+            "code": "en",
+            "name": "English",
+            "share": 41
+          },
+          {
+            "code": "fr",
+            "name": "French",
+            "share": 12
+          }
+        ],
+        "reader": "ከውጭ የሚመጡ በባሕር ዳርቻ ቤት የሚፈልጉ ቤተሰቦች እና ጡረተኞች፣ እንዲሁም ሊሸጡ የሚችሉ ባለቤቶች።",
+        "tones": [
+          "ሞቅ ያለ",
+          "አገር አቀፍ",
+          "ሰላምታ ያለው"
+        ],
+        "articles": [
+          "በዚህ ሳምንት በባሕር ዳርቻ ሶስት አዳዲስ ቤቶች",
+          "ለውጭ ሀገር ተገዢዎች የመዝጋት ወጪዎች እንዴት ይመስላሉ",
+          "በአሮጌው ከተማ ውስጥ ዋጋዎች፣ የበጋ ማዘመኛ"
+        ],
+        "issue": {
+          "title": "በዚህ ሳምንት በባሕር ዳርቻ ሶስት አዳዲስ ቤቶች",
+          "langs": [
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tres casas nuevas cerca de la playa",
+              "summary": "Una casa de dos habitaciones con jardín, un apartamento con vista al mar y una casa para reformar a diez minutos del centro."
+            },
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Three new homes near the beach",
+              "summary": "A two bedroom house with a garden, a flat with a sea view and a house to renovate ten minutes from the center."
+            },
+            {
+              "code": "fr",
+              "name": "Français",
+              "subject": "Trois nouvelles maisons près de la plage",
+              "summary": "Une maison de deux chambres avec jardin, un appartement avec vue sur la mer et une maison à rénover à dix minutes du centre."
+            }
+          ]
+        },
+        "clicksByDay": [
+          12,
+          9,
+          15,
+          52,
+          38,
+          21,
+          16
+        ],
+        "topLinks": [
+          {
+            "title": "ከባሕር እይታ ያለው አፓርታማ",
+            "clicks": 71
+          },
+          {
+            "title": "ከበቂታ ያለው ሁለት ክፍል ቤት",
+            "clicks": 54
+          },
+          {
+            "title": "ለውጭ ሀገር ተገዢዎች የመዝጋት ወጪዎች",
+            "clicks": 38
+          }
+        ],
+        "people": [
+          {
+            "email": "familia.ortiz@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "j.dupont@example.fr",
+            "lang": "FR",
+            "via": "form"
+          },
+          {
+            "email": "tom.and.ann@example.org",
+            "lang": "EN",
+            "via": "manual"
+          },
+          {
+            "email": "rmora@example.net",
+            "lang": "ES",
+            "via": "import"
+          }
+        ],
+        "activity": [
+          "በ3 ቋንቋዎች ለ586 አንባቢዎች የተላከ መጽሔት",
+          "71 ጠቅታዎች በከባሕር እይታ ያለው አፓርታማ",
+          "አንድ አንባቢ ከፈረንሳይ በምዝገባ ፎርም ተጨምሯል"
+        ],
+        "importCount": 203
+      },
+      {
+        "business": "Mora and Partners",
+        "kind": "የሂሳብ ቢሮ",
+        "site": "morapartners.co",
+        "schedule": "በየሁለት ሳምንቱ ማክሰኞ ከጠዋት 7:30",
+        "subscribers": 428,
+        "newThisWeek": 6,
+        "clicks7": 97,
+        "automationsOn": 1,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 52
+          },
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 38
+          },
+          {
+            "code": "it",
+            "name": "Italian",
+            "share": 10
+          }
+        ],
+        "reader": "የትናንሽ ኩባንያዎች ባለቤቶች የግብር እና የደመወዝ ለውጦችን ያለ የባለሙያ ቋንቋ ለማወቅ የሚፈልጉ።",
+        "tones": [
+          "ሀዘን የሌለው",
+          "ትክክለኛ",
+          "ቀላል"
+        ],
+        "articles": [
+          "የሩብ ዓመቱ የግብር መጨረሻ ቀን ወደ 15 ቀን ተዛወረ",
+          "የመጀመሪያ ሰራተኛህን ሲቀጥር ማንኛውንም ነገር ማቆየት አለብህ",
+          "ረሺቶች፡ ወረቀት ወይስ ፎቶ?"
+        ],
+        "issue": {
+          "title": "የሩብ ዓመቱ የግብር መጨረሻ ቀን ወደ 15 ቀን ተዛወረ",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Your quarterly deadline moves to the 15th",
+              "summary": "The filing date for the next quarter moves five days later. Here is what to send us and when, so nothing is late."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tu plazo trimestral pasa al día 15",
+              "summary": "La fecha de presentación del próximo trimestre se mueve cinco días. Esto es lo que debes enviarnos y cuándo, para que nada llegue tarde."
+            },
+            {
+              "code": "it",
+              "name": "Italiano",
+              "subject": "La scadenza trimestrale passa al 15",
+              "summary": "La data di presentazione del prossimo trimestre slitta di cinque giorni. Ecco cosa inviarci e quando, perché nulla arrivi in ritardo."
+            }
+          ]
+        },
+        "clicksByDay": [
+          33,
+          24,
+          14,
+          8,
+          7,
+          4,
+          7
+        ],
+        "topLinks": [
+          {
+            "title": "ለ15 ቀን የቼክሊስት ዝርዝር",
+            "clicks": 46
+          },
+          {
+            "title": "የመጀመሪያ ሰራተኛህን ማቀጠል",
+            "clicks": 29
+          },
+          {
+            "title": "የግምገማ የዶስ ጥሪ ያስቀምጡ",
+            "clicks": 22
+          }
+        ],
+        "people": [
+          {
+            "email": "bakery.owner@example.com",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "c.rossi@example.it",
+            "lang": "IT",
+            "via": "form"
+          },
+          {
+            "email": "taller.luna@example.net",
+            "lang": "ES",
+            "via": "import"
+          },
+          {
+            "email": "finance@example.org",
+            "lang": "EN",
+            "via": "manual"
+          }
+        ],
+        "activity": [
+          "የተላከ መጽሔት ለ428 አንባቢዎች በ3 ቋንቋዎች",
+          "46 ጠቅሎች በለ15 ቀን የቼክሊስት ዝርዝር",
+          "6 አዲስ አንባቢዎች በዚህ ሳምንት"
+        ],
+        "importCount": 97
+      },
+      {
+        "business": "Run Better Coaching",
+        "kind": "running coach",
+        "site": "runbetter.coach",
+        "schedule": "የሁሉንም እሁድ በ18:00",
+        "subscribers": 907,
+        "newThisWeek": 31,
+        "clicks7": 248,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 49
+          },
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 33
+          },
+          {
+            "code": "de",
+            "name": "German",
+            "share": 18
+          }
+        ],
+        "reader": "ለመጀመሪያ ግማሽ ማራቶን የሚሰለጥኑ አዋቂዎች በሥራ በፊት ሳምንት ሦስት ጊዜ የሚሮጡ።",
+        "tones": [
+          "ማበረታቻ",
+          "ቀጥተኛ",
+          "አጭር"
+        ],
+        "articles": [
+          "በዚህ ሳምንት፡ ረጅሙ ሩጫ፣ ከምታስበው ያነሰ",
+          "ጫማዎች ከ500 ኪሎሜትር በኋላ",
+          "የ20 ደቂቃ የኃይል ሥልጠና"
+        ],
+        "issue": {
+          "title": "በዚህ ሳምንት፡ ረጅሙ ሩጫ፣ ከምታስበው ያነሰ",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Your long run should feel too easy",
+              "summary": "Keep it slow enough to talk. This week's plan adds ten minutes and one short hill session."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tu tirada larga debería sentirse demasiado fácil",
+              "summary": "Mantén un ritmo que te deje hablar. El plan de esta semana suma diez minutos y una sesión corta de cuestas."
+            },
+            {
+              "code": "de",
+              "name": "Deutsch",
+              "subject": "Dein langer Lauf sollte sich zu leicht anfühlen",
+              "summary": "Lauf so langsam, dass du noch reden kannst. Der Plan dieser Woche bringt zehn Minuten mehr und eine kurze Bergeinheit."
+            }
+          ]
+        },
+        "clicksByDay": [
+          18,
+          22,
+          26,
+          31,
+          35,
+          49,
+          67
+        ],
+        "topLinks": [
+          {
+            "title": "የዚህ ሳምንት የሥልጠና ዕቅድ",
+            "clicks": 121
+          },
+          {
+            "title": "20 ደቂቃ የኃይል ሥልጠና",
+            "clicks": 78
+          },
+          {
+            "title": "ጫማዎች ከ500 ኪሎሜትር በኋላ",
+            "clicks": 49
+          }
+        ],
+        "people": [
+          {
+            "email": "ana.runs@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "felix.k@example.de",
+            "lang": "DE",
+            "via": "form"
+          },
+          {
+            "email": "sam@example.org",
+            "lang": "EN",
+            "via": "form"
+          },
+          {
+            "email": "club.secretary@example.net",
+            "lang": "EN",
+            "via": "import"
+          }
+        ],
+        "activity": [
+          "የተላከ መጽሔት ለ907 አንባቢዎች በ3 ቋንቋዎች",
+          "121 ጠቅሎች በዚህ ሳምንት የሥልጠና ዕቅድ",
+          "31 አዲስ አንባቢዎች በዚህ ሳምንት፣ አብዛኛዎቹ ከየገቡበት ፎርም ናቸው"
+        ],
+        "importCount": 260
+      }
+    ]
+  },
+  "errorPage": {
+    "notFoundEyebrow": "ስህተት 404",
+    "notFoundTitle": "ይህን ገጽ ማግኘት አልቻልንም",
+    "notFoundBody": "አገናኙ የቆየ ወይም የትየባ ስህተት ሊኖረው ይችላል። እነዚህ ገጾች ለመቀጠል ጥሩ ቦታ ናቸው።",
+    "serverEyebrow": "ስህተት {status}",
+    "serverTitle": "በእኛ በኩል አንድ ችግር ተፈጥሯል",
+    "serverBody": "ይህን ገጽ ማስገባት አልተቻለንም። ከአንድ ደቂቃ በኋላ ይሞክሩ። ቀጥሎ ቢከሰት፣ ወደ info@aiban.news ይጻፉ።",
+    "retry": "እንደገና ሞክር",
+    "home": "ወደ መነሻ ገጽ ይሂዱ",
+    "popularTitle": "ታዋቂ ገጾች",
+    "links": {
+      "howItWorks": "AIBAN እንዴት እንደሚሰራ",
+      "pricing": "የዋጋ አሰጣጥ",
+      "help": "የእገዛ ማዕከል",
+      "login": "ወደ ዳሽቦርድዎ ይግቡ"
+    },
+    "report": "በድረ-ገጻችን ላይ ያለ አገናኝ እዚህ ካመጣዎት፣ ልንጠጋው ወደ info@aiban.news ያሳውቁን።"
   },
   "header": {
     "goToWorkspace": "የቁጥጥር ፓነሉን ይክፈቱ",
@@ -982,1429 +1749,5 @@ export default {
     "monthly": "ወርሃዊ",
     "yearly": "ዓመታዊ",
     "loadingPlan": "መረጃ በመጫን ላይ..."
-  },
-  "languages": [
-    {
-      "code": "ab",
-      "name": "አብካዝኛ"
-    },
-    {
-      "code": "aa",
-      "name": "አፋርኛ"
-    },
-    {
-      "code": "af",
-      "name": "አፍሪካንስ"
-    },
-    {
-      "code": "ak",
-      "name": "አካን"
-    },
-    {
-      "code": "sq",
-      "name": "አልባኒያን"
-    },
-    {
-      "code": "am",
-      "name": "አማርኛ"
-    },
-    {
-      "code": "ar",
-      "name": "አረብኛ"
-    },
-    {
-      "code": "an",
-      "name": "አራጎኒዝ"
-    },
-    {
-      "code": "hy",
-      "name": "አርመንኛ"
-    },
-    {
-      "code": "as",
-      "name": "አሳሜዝኛ"
-    },
-    {
-      "code": "av",
-      "name": "አቫሪክ"
-    },
-    {
-      "code": "ae",
-      "name": "አቬስታን"
-    },
-    {
-      "code": "ay",
-      "name": "አይማራ"
-    },
-    {
-      "code": "az",
-      "name": "አዘርባጃኒ"
-    },
-    {
-      "code": "bm",
-      "name": "ባምባራ"
-    },
-    {
-      "code": "ba",
-      "name": "ባሽኪር"
-    },
-    {
-      "code": "eu",
-      "name": "ባስክ"
-    },
-    {
-      "code": "be",
-      "name": "ቤላሩስኛ"
-    },
-    {
-      "code": "bn",
-      "name": "ቤንጋሊ"
-    },
-    {
-      "code": "bi",
-      "name": "ቢስላማ"
-    },
-    {
-      "code": "bs",
-      "name": "ቦስኒያኛ"
-    },
-    {
-      "code": "br",
-      "name": "ብሬቶን"
-    },
-    {
-      "code": "bg",
-      "name": "ቡልጋርኛ"
-    },
-    {
-      "code": "my",
-      "name": "በርማኛ"
-    },
-    {
-      "code": "ca",
-      "name": "ካታላን"
-    },
-    {
-      "code": "ch",
-      "name": "ቻሞሮ"
-    },
-    {
-      "code": "ce",
-      "name": "ቼቼን"
-    },
-    {
-      "code": "ny",
-      "name": "ቺቼዋ"
-    },
-    {
-      "code": "zh",
-      "name": "ቻይንኛ"
-    },
-    {
-      "code": "cu",
-      "name": "የቤተክርስቲያን ስላቪክ"
-    },
-    {
-      "code": "cv",
-      "name": "ቹቫሽ"
-    },
-    {
-      "code": "kw",
-      "name": "ኮርኒሽ"
-    },
-    {
-      "code": "co",
-      "name": "ኮርሲካን"
-    },
-    {
-      "code": "cr",
-      "name": "ክሪ"
-    },
-    {
-      "code": "hr",
-      "name": "ክሮሺያኛ"
-    },
-    {
-      "code": "cs",
-      "name": "ቼክ"
-    },
-    {
-      "code": "da",
-      "name": "ዳኒሽ"
-    },
-    {
-      "code": "dv",
-      "name": "ዲቬሂ"
-    },
-    {
-      "code": "nl",
-      "name": "ደች"
-    },
-    {
-      "code": "dz",
-      "name": "ድዞንግካ"
-    },
-    {
-      "code": "en",
-      "name": "እንግሊዝኛ"
-    },
-    {
-      "code": "eo",
-      "name": "ኤስፔራንቶ"
-    },
-    {
-      "code": "et",
-      "name": "ኢስቶኒያኛ"
-    },
-    {
-      "code": "ee",
-      "name": "ኢዌ"
-    },
-    {
-      "code": "fo",
-      "name": "ፋሮይስ"
-    },
-    {
-      "code": "fj",
-      "name": "ፊጂኛ"
-    },
-    {
-      "code": "fi",
-      "name": "ፊኒሽ"
-    },
-    {
-      "code": "fr",
-      "name": "ፈረንሳይኛ"
-    },
-    {
-      "code": "fy",
-      "name": "ምዕራባዊ ፍሪስያን"
-    },
-    {
-      "code": "ff",
-      "name": "ፉላህ"
-    },
-    {
-      "code": "gd",
-      "name": "ስኮትላንዳዊ ጌሊክ"
-    },
-    {
-      "code": "gl",
-      "name": "ጋሊሺያን"
-    },
-    {
-      "code": "lg",
-      "name": "ጋንዳ"
-    },
-    {
-      "code": "ka",
-      "name": "ጆርጂያኛ"
-    },
-    {
-      "code": "de",
-      "name": "ጀርመንኛ"
-    },
-    {
-      "code": "el",
-      "name": "ግሪክ"
-    },
-    {
-      "code": "kl",
-      "name": "ካላሊሱት (ግሪንላንድኛ)"
-    },
-    {
-      "code": "gn",
-      "name": "ጓራኒ"
-    },
-    {
-      "code": "gu",
-      "name": "ጉጃራቲ"
-    },
-    {
-      "code": "ht",
-      "name": "የሃይቲ ክሪኦል"
-    },
-    {
-      "code": "ha",
-      "name": "ሃውሳ"
-    },
-    {
-      "code": "he",
-      "name": "ዕብራይስጥ"
-    },
-    {
-      "code": "hz",
-      "name": "ሄሬሮ"
-    },
-    {
-      "code": "hi",
-      "name": "ሂንዲ"
-    },
-    {
-      "code": "ho",
-      "name": "ሂሪ ሞቱ"
-    },
-    {
-      "code": "hu",
-      "name": "ሀንጋሪኛ"
-    },
-    {
-      "code": "is",
-      "name": "አይስላንድኛ"
-    },
-    {
-      "code": "io",
-      "name": "ኢዶ"
-    },
-    {
-      "code": "ig",
-      "name": "ኢግቦ"
-    },
-    {
-      "code": "id",
-      "name": "ኢንዶኔዥያኛ"
-    },
-    {
-      "code": "ia",
-      "name": "ኢንተርሊንጓ"
-    },
-    {
-      "code": "ie",
-      "name": "ኢንተርሊንግ"
-    },
-    {
-      "code": "iu",
-      "name": "ኢኑክቲቱት"
-    },
-    {
-      "code": "ik",
-      "name": "ኢኑፒያክ"
-    },
-    {
-      "code": "ga",
-      "name": "አይሪሽ"
-    },
-    {
-      "code": "it",
-      "name": "ጣሊያንኛ"
-    },
-    {
-      "code": "ja",
-      "name": "ጃፓንኛ"
-    },
-    {
-      "code": "jv",
-      "name": "ጃቫኒዝ"
-    },
-    {
-      "code": "kn",
-      "name": "ካናዳ"
-    },
-    {
-      "code": "kr",
-      "name": "ካኑሪ"
-    },
-    {
-      "code": "ks",
-      "name": "ካሽሚሪ"
-    },
-    {
-      "code": "kk",
-      "name": "ካዛክ"
-    },
-    {
-      "code": "km",
-      "name": "ខ្መር"
-    },
-    {
-      "code": "ki",
-      "name": "ኪኩዩ"
-    },
-    {
-      "code": "rw",
-      "name": "ኪንያርዋንዳ"
-    },
-    {
-      "code": "ky",
-      "name": "ኪርጊዝ"
-    },
-    {
-      "code": "kv",
-      "name": "ኮሚ"
-    },
-    {
-      "code": "kg",
-      "name": "ኮንጎ"
-    },
-    {
-      "code": "ko",
-      "name": "ኮሪያኛ"
-    },
-    {
-      "code": "kj",
-      "name": "ኩዋንያማ"
-    },
-    {
-      "code": "ku",
-      "name": "ኩርድሽ"
-    },
-    {
-      "code": "lo",
-      "name": "ላኦ"
-    },
-    {
-      "code": "la",
-      "name": "ላቲን"
-    },
-    {
-      "code": "lv",
-      "name": "ላትቪያኛ"
-    },
-    {
-      "code": "li",
-      "name": "ሊምበርግሽ"
-    },
-    {
-      "code": "ln",
-      "name": "ሊንጋላ"
-    },
-    {
-      "code": "lt",
-      "name": "ሊቱዌኒያኛ"
-    },
-    {
-      "code": "lu",
-      "name": "ሉባ-ካታንጋ"
-    },
-    {
-      "code": "lb",
-      "name": "ሉክሰምበርግኛ"
-    },
-    {
-      "code": "mk",
-      "name": "መቄዶንያኛ"
-    },
-    {
-      "code": "mg",
-      "name": "ማላጋሲ"
-    },
-    {
-      "code": "ms",
-      "name": "ማላይ"
-    },
-    {
-      "code": "ml",
-      "name": "ማላያላም"
-    },
-    {
-      "code": "mt",
-      "name": "ማልቲዝ"
-    },
-    {
-      "code": "gv",
-      "name": "ማንክስ"
-    },
-    {
-      "code": "mi",
-      "name": "ማኦሪ"
-    },
-    {
-      "code": "mr",
-      "name": "ማራቲ"
-    },
-    {
-      "code": "mh",
-      "name": "ማርሻሊዝ"
-    },
-    {
-      "code": "mn",
-      "name": "ሞንጎሊያኛ"
-    },
-    {
-      "code": "na",
-      "name": "ናኡሩ"
-    },
-    {
-      "code": "nv",
-      "name": "ናቫሆ"
-    },
-    {
-      "code": "nd",
-      "name": "ሰሜን ንዴቤሌ"
-    },
-    {
-      "code": "nr",
-      "name": "ደቡብ ንዴቤሌ"
-    },
-    {
-      "code": "ng",
-      "name": "ንዶንጋ"
-    },
-    {
-      "code": "ne",
-      "name": "ኔፓሊ"
-    },
-    {
-      "code": "no",
-      "name": "ኖርዌጂያን"
-    },
-    {
-      "code": "nb",
-      "name": "ኖርዌጂያን ቦክማል"
-    },
-    {
-      "code": "nn",
-      "name": "ኖርዌጂያን ናይኖርስክ"
-    },
-    {
-      "code": "oc",
-      "name": "ኦሲታን"
-    },
-    {
-      "code": "oj",
-      "name": "ኦጂብዋ"
-    },
-    {
-      "code": "or",
-      "name": "ኦሪያ"
-    },
-    {
-      "code": "om",
-      "name": "ኦሮሞ"
-    },
-    {
-      "code": "os",
-      "name": "ኦሴቲክ"
-    },
-    {
-      "code": "pi",
-      "name": "ፓሊ"
-    },
-    {
-      "code": "ps",
-      "name": "ፓሽቶ"
-    },
-    {
-      "code": "fa",
-      "name": "ፋርስኛ (ፋርሲ)"
-    },
-    {
-      "code": "pl",
-      "name": "ፖሊሽ"
-    },
-    {
-      "code": "pt",
-      "name": "ፖርቱጋልኛ"
-    },
-    {
-      "code": "pa",
-      "name": "ፑንጃቢ"
-    },
-    {
-      "code": "qu",
-      "name": "ኬቹዋ"
-    },
-    {
-      "code": "ro",
-      "name": "ሮማኒያን"
-    },
-    {
-      "code": "rm",
-      "name": "ሮማንሽ"
-    },
-    {
-      "code": "rn",
-      "name": "ሩንዲ"
-    },
-    {
-      "code": "ru",
-      "name": "ራሽኛ"
-    },
-    {
-      "code": "se",
-      "name": "ሰሜናዊ ሳሚ"
-    },
-    {
-      "code": "sm",
-      "name": "ሳሞአን"
-    },
-    {
-      "code": "sg",
-      "name": "ሳንጎ"
-    },
-    {
-      "code": "sa",
-      "name": "ሳንስክሪት"
-    },
-    {
-      "code": "sc",
-      "name": "ሳርዲኒያን"
-    },
-    {
-      "code": "sr",
-      "name": "ሰርቢያኛ"
-    },
-    {
-      "code": "sn",
-      "name": "ሾና"
-    },
-    {
-      "code": "ii",
-      "name": "ሲቹዋን ዪ"
-    },
-    {
-      "code": "sd",
-      "name": "ሲንዲ"
-    },
-    {
-      "code": "si",
-      "name": "ሲንሃላ"
-    },
-    {
-      "code": "sk",
-      "name": "ስሎቫክ"
-    },
-    {
-      "code": "sl",
-      "name": "ስሎቪኛ"
-    },
-    {
-      "code": "so",
-      "name": "ሶማሊ"
-    },
-    {
-      "code": "st",
-      "name": "ደቡባዊ ሶቶ"
-    },
-    {
-      "code": "es",
-      "name": "ስፓኒሽ"
-    },
-    {
-      "code": "su",
-      "name": "ሱዳኒዝ"
-    },
-    {
-      "code": "sw",
-      "name": "ስዋሂሊ"
-    },
-    {
-      "code": "ss",
-      "name": "ስዋቲ"
-    },
-    {
-      "code": "sv",
-      "name": "ስዊድንኛ"
-    },
-    {
-      "code": "tl",
-      "name": "ታጋሎግ (ፊሊፒኖ)"
-    },
-    {
-      "code": "ty",
-      "name": "ታሂቲያን"
-    },
-    {
-      "code": "tg",
-      "name": "ታጂክ"
-    },
-    {
-      "code": "ta",
-      "name": "ታሚል"
-    },
-    {
-      "code": "tt",
-      "name": "ታታር"
-    },
-    {
-      "code": "te",
-      "name": "ቴሉጉ"
-    },
-    {
-      "code": "th",
-      "name": "ታይ"
-    },
-    {
-      "code": "bo",
-      "name": "ቲቤታን"
-    },
-    {
-      "code": "ti",
-      "name": "ትግርኛ"
-    },
-    {
-      "code": "to",
-      "name": "ቶንጋ"
-    },
-    {
-      "code": "ts",
-      "name": "ሶንጋ"
-    },
-    {
-      "code": "tn",
-      "name": "ጽዋና"
-    },
-    {
-      "code": "tr",
-      "name": "ቱርክኛ"
-    },
-    {
-      "code": "tk",
-      "name": "ቱርክመን"
-    },
-    {
-      "code": "tw",
-      "name": "ትዊ"
-    },
-    {
-      "code": "ug",
-      "name": "ኡይጉር"
-    },
-    {
-      "code": "uk",
-      "name": "ዩክሬንኛ"
-    },
-    {
-      "code": "ur",
-      "name": "ኡርዱ"
-    },
-    {
-      "code": "uz",
-      "name": "ኡዝቤክ"
-    },
-    {
-      "code": "ve",
-      "name": "ቬንዳ"
-    },
-    {
-      "code": "vi",
-      "name": "ቪትናምኛ"
-    },
-    {
-      "code": "vo",
-      "name": "ቮላፑክ"
-    },
-    {
-      "code": "wa",
-      "name": "ዋሎን"
-    },
-    {
-      "code": "cy",
-      "name": "ዌልሽ"
-    },
-    {
-      "code": "wo",
-      "name": "ዎሎፍ"
-    },
-    {
-      "code": "xh",
-      "name": "ዞሳ"
-    },
-    {
-      "code": "yi",
-      "name": "ዪዲሽ"
-    },
-    {
-      "code": "yo",
-      "name": "ዮሩባ"
-    },
-    {
-      "code": "za",
-      "name": "ዡዋንግ"
-    },
-    {
-      "code": "zu",
-      "name": "ዙሉ"
-    }
-  ],
-  "countries": [
-    {
-      "code": "AF",
-      "name": "አፍጋኒስታን"
-    },
-    {
-      "code": "AL",
-      "name": "አልባኒያ"
-    },
-    {
-      "code": "DZ",
-      "name": "አልጄሪያ"
-    },
-    {
-      "code": "AS",
-      "name": "የአሜሪካ ሳሞአ"
-    },
-    {
-      "code": "AD",
-      "name": "አንዶራ"
-    },
-    {
-      "code": "AO",
-      "name": "አንጎላ"
-    },
-    {
-      "code": "AI",
-      "name": "አንጉዪላ"
-    },
-    {
-      "code": "AQ",
-      "name": "አንታርክቲካ"
-    },
-    {
-      "code": "AG",
-      "name": "አንቲጓ እና ባርቡዳ"
-    },
-    {
-      "code": "AR",
-      "name": "አርጀንቲና"
-    },
-    {
-      "code": "AM",
-      "name": "አርሜኒያ"
-    },
-    {
-      "code": "AW",
-      "name": "አሩባ"
-    },
-    {
-      "code": "AU",
-      "name": "አውስትራሊያ"
-    },
-    {
-      "code": "AT",
-      "name": "ኦስትሪያ"
-    },
-    {
-      "code": "AZ",
-      "name": "አዘርባጃን"
-    },
-    {
-      "code": "BS",
-      "name": "ባሃማስ"
-    },
-    {
-      "code": "BH",
-      "name": "ባህሬን"
-    },
-    {
-      "code": "BD",
-      "name": "ባንግላዴሽ"
-    },
-    {
-      "code": "BB",
-      "name": "ባርባዶስ"
-    },
-    {
-      "code": "BY",
-      "name": "ቤላሩስ"
-    },
-    {
-      "code": "BE",
-      "name": "ቤልጂየም"
-    },
-    {
-      "code": "BZ",
-      "name": "ቤሊዝ"
-    },
-    {
-      "code": "BJ",
-      "name": "ቤኒን"
-    },
-    {
-      "code": "BM",
-      "name": "ቤርሙዳ"
-    },
-    {
-      "code": "BT",
-      "name": "ቡታን"
-    },
-    {
-      "code": "BO",
-      "name": "ቦሊቪያ"
-    },
-    {
-      "code": "BA",
-      "name": "ቦስኒያ እና ሄርዞጎቪኒያ"
-    },
-    {
-      "code": "BW",
-      "name": "ቦትስዋና"
-    },
-    {
-      "code": "BR",
-      "name": "ብራዚል"
-    },
-    {
-      "code": "IO",
-      "name": "የብሪቲሽ ህንድ ውቅያኖስ ግዛት"
-    },
-    {
-      "code": "VG",
-      "name": "የብሪቲሽ ቨርጂን ደሴቶች"
-    },
-    {
-      "code": "BN",
-      "name": "ብሩኒ"
-    },
-    {
-      "code": "BG",
-      "name": "ቡልጋሪያ"
-    },
-    {
-      "code": "BF",
-      "name": "ቡርኪና ፋሶ"
-    },
-    {
-      "code": "BI",
-      "name": "ቡሩንዲ"
-    },
-    {
-      "code": "KH",
-      "name": "ካምቦዲያ"
-    },
-    {
-      "code": "CM",
-      "name": "ካሜሩን"
-    },
-    {
-      "code": "CA",
-      "name": "ካናዳ"
-    },
-    {
-      "code": "CV",
-      "name": "ኬፕ ቨርዴ"
-    },
-    {
-      "code": "KY",
-      "name": "የኬይማን ደሴቶች"
-    },
-    {
-      "code": "CF",
-      "name": "የመካከለኛው አፍሪካ ሪፐብሊክ"
-    },
-    {
-      "code": "TD",
-      "name": "ቻድ"
-    },
-    {
-      "code": "CL",
-      "name": "ቺሊ"
-    },
-    {
-      "code": "CN",
-      "name": "ቻይና"
-    },
-    {
-      "code": "CX",
-      "name": "የገና ደሴት"
-    },
-    {
-      "code": "CC",
-      "name": "ኮኮስ (ኬሊንግ) ደሴቶች"
-    },
-    {
-      "code": "CO",
-      "name": "ኮሎምቢያ"
-    },
-    {
-      "code": "KM",
-      "name": "ኮሞሮስ"
-    },
-    {
-      "code": "CG",
-      "name": "ኮንጎ - ብራዛቪል"
-    },
-    {
-      "code": "CD",
-      "name": "ኮንጎ - ኪንሻሳ"
-    },
-    {
-      "code": "CK",
-      "name": "የኩክ ደሴቶች"
-    },
-    {
-      "code": "CR",
-      "name": "ኮስታ ሪካ"
-    },
-    {
-      "code": "CI",
-      "name": "ኮት ዲቯር"
-    },
-    {
-      "code": "HR",
-      "name": "ክሮኤሺያ"
-    },
-    {
-      "code": "CU",
-      "name": "ኩባ"
-    },
-    {
-      "code": "CY",
-      "name": "ቆጵሮስ"
-    },
-    {
-      "code": "CZ",
-      "name": "ቼኪያ"
-    },
-    {
-      "code": "DK",
-      "name": "ዴንማርክ"
-    },
-    {
-      "code": "DJ",
-      "name": "ጅቡቲ"
-    },
-    {
-      "code": "DM",
-      "name": "ዶሚኒካ"
-    },
-    {
-      "code": "DO",
-      "name": "የዶሚኒካን ሪፐብሊክ"
-    },
-    {
-      "code": "EC",
-      "name": "ኢኳዶር"
-    },
-    {
-      "code": "EG",
-      "name": "ግብፅ"
-    },
-    {
-      "code": "SV",
-      "name": "ኤል ሳልቫዶር"
-    },
-    {
-      "code": "GQ",
-      "name": "ኢኳቶሪያል ጊኒ"
-    },
-    {
-      "code": "ER",
-      "name": "ኤርትራ"
-    },
-    {
-      "code": "EE",
-      "name": "ኢስቶኒያ"
-    },
-    {
-      "code": "SZ",
-      "name": "ኤስዋቲኒ"
-    },
-    {
-      "code": "ET",
-      "name": "ኢትዮጵያ"
-    },
-    {
-      "code": "FJ",
-      "name": "ፊጂ"
-    },
-    {
-      "code": "FI",
-      "name": "ፊንላንድ"
-    },
-    {
-      "code": "FR",
-      "name": "ፈረንሳይ"
-    },
-    {
-      "code": "GA",
-      "name": "ጋቦን"
-    },
-    {
-      "code": "GM",
-      "name": "ጋምቢያ"
-    },
-    {
-      "code": "GE",
-      "name": "ጆርጂያ"
-    },
-    {
-      "code": "DE",
-      "name": "ጀርመን"
-    },
-    {
-      "code": "GH",
-      "name": "ጋና"
-    },
-    {
-      "code": "GR",
-      "name": "ግሪክ"
-    },
-    {
-      "code": "GT",
-      "name": "ጓቲማላ"
-    },
-    {
-      "code": "GN",
-      "name": "ጊኒ"
-    },
-    {
-      "code": "GY",
-      "name": "ጉያና"
-    },
-    {
-      "code": "HT",
-      "name": "ሃይቲ"
-    },
-    {
-      "code": "HN",
-      "name": "ሆንዱራስ"
-    },
-    {
-      "code": "HK",
-      "name": "ሆንግ ኮንግ"
-    },
-    {
-      "code": "HU",
-      "name": "ሃንጋሪ"
-    },
-    {
-      "code": "IS",
-      "name": "አይስላንድ"
-    },
-    {
-      "code": "IN",
-      "name": "ህንድ"
-    },
-    {
-      "code": "ID",
-      "name": "ኢንዶኔዥያ"
-    },
-    {
-      "code": "IR",
-      "name": "ኢራን"
-    },
-    {
-      "code": "IQ",
-      "name": "ኢራቅ"
-    },
-    {
-      "code": "IE",
-      "name": "አየርላንድ"
-    },
-    {
-      "code": "IL",
-      "name": "እስራኤል"
-    },
-    {
-      "code": "IT",
-      "name": "ጣሊያን"
-    },
-    {
-      "code": "JM",
-      "name": "ጃማይካ"
-    },
-    {
-      "code": "JP",
-      "name": "ጃፓን"
-    },
-    {
-      "code": "JO",
-      "name": "ዮርዳኖስ"
-    },
-    {
-      "code": "KZ",
-      "name": "ካዛክስታን"
-    },
-    {
-      "code": "KE",
-      "name": "ኬንያ"
-    },
-    {
-      "code": "KR",
-      "name": "ደቡብ ኮሪያ"
-    },
-    {
-      "code": "KW",
-      "name": "ኩዌት"
-    },
-    {
-      "code": "KG",
-      "name": "ኪርጊስታን"
-    },
-    {
-      "code": "LA",
-      "name": "ላኦስ"
-    },
-    {
-      "code": "LV",
-      "name": "ላትቪያ"
-    },
-    {
-      "code": "LB",
-      "name": "ሊባኖስ"
-    },
-    {
-      "code": "LS",
-      "name": "ሌሶቶ"
-    },
-    {
-      "code": "LR",
-      "name": "ላይቤሪያ"
-    },
-    {
-      "code": "LY",
-      "name": "ሊቢያ"
-    },
-    {
-      "code": "LI",
-      "name": "ሊችተንስታይን"
-    },
-    {
-      "code": "LT",
-      "name": "ሊቱዌኒያ"
-    },
-    {
-      "code": "LU",
-      "name": "ሉክሰምበርግ"
-    },
-    {
-      "code": "MG",
-      "name": "ማዳጋስካር"
-    },
-    {
-      "code": "MW",
-      "name": "ማላዊ"
-    },
-    {
-      "code": "MY",
-      "name": "ማሌዥያ"
-    },
-    {
-      "code": "MV",
-      "name": "ማልዲቭስ"
-    },
-    {
-      "code": "ML",
-      "name": "ማሊ"
-    },
-    {
-      "code": "MT",
-      "name": "ማልታ"
-    },
-    {
-      "code": "MX",
-      "name": "ሜክሲኮ"
-    },
-    {
-      "code": "MD",
-      "name": "ሞልዶቫ"
-    },
-    {
-      "code": "MC",
-      "name": "ሞናኮ"
-    },
-    {
-      "code": "MN",
-      "name": "ሞንጎሊያ"
-    },
-    {
-      "code": "ME",
-      "name": "ሞንቴኔግሮ"
-    },
-    {
-      "code": "MA",
-      "name": "ሞሮኮ"
-    },
-    {
-      "code": "MZ",
-      "name": "ሞዛምቢክ"
-    },
-    {
-      "code": "MM",
-      "name": "ምያንማር"
-    },
-    {
-      "code": "NA",
-      "name": "ናሚቢያ"
-    },
-    {
-      "code": "NP",
-      "name": "ኔፓል"
-    },
-    {
-      "code": "NL",
-      "name": "ኔዘርላንድስ"
-    },
-    {
-      "code": "NZ",
-      "name": "ኒውዚላንድ"
-    },
-    {
-      "code": "NI",
-      "name": "ኒካራጓ"
-    },
-    {
-      "code": "NE",
-      "name": "ኒጀር"
-    },
-    {
-      "code": "NG",
-      "name": "ናይጄሪያ"
-    },
-    {
-      "code": "MK",
-      "name": "ሰሜን መቄዶንያ"
-    },
-    {
-      "code": "NO",
-      "name": "ኖርዌይ"
-    },
-    {
-      "code": "OM",
-      "name": "ኦማን"
-    },
-    {
-      "code": "PK",
-      "name": "ፓኪስታን"
-    },
-    {
-      "code": "PA",
-      "name": "ፓናማ"
-    },
-    {
-      "code": "PG",
-      "name": "ፓፑዋ ኒው ጊኒ"
-    },
-    {
-      "code": "PY",
-      "name": "ፓራጓይ"
-    },
-    {
-      "code": "PE",
-      "name": "ፔሩ"
-    },
-    {
-      "code": "PH",
-      "name": "ፊሊፒንስ"
-    },
-    {
-      "code": "PL",
-      "name": "ፖላንድ"
-    },
-    {
-      "code": "PT",
-      "name": "ፖርቱጋል"
-    },
-    {
-      "code": "QA",
-      "name": "ኳታር"
-    },
-    {
-      "code": "RO",
-      "name": "ሮማኒያ"
-    },
-    {
-      "code": "RU",
-      "name": "ራሽያ"
-    },
-    {
-      "code": "RW",
-      "name": "ሩዋንዳ"
-    },
-    {
-      "code": "SA",
-      "name": "ሳውዲ አረቢያ"
-    },
-    {
-      "code": "SN",
-      "name": "ሴኔጋል"
-    },
-    {
-      "code": "RS",
-      "name": "ሰርቢያ"
-    },
-    {
-      "code": "SG",
-      "name": "ሲንጋፖር"
-    },
-    {
-      "code": "SK",
-      "name": "ስሎቫኪያ"
-    },
-    {
-      "code": "SI",
-      "name": "ስሎቬኒያ"
-    },
-    {
-      "code": "ZA",
-      "name": "ደቡብ አፍሪካ"
-    },
-    {
-      "code": "ES",
-      "name": "ስፔን"
-    },
-    {
-      "code": "LK",
-      "name": "ሲሪላንካ"
-    },
-    {
-      "code": "SE",
-      "name": "ስዊድን"
-    },
-    {
-      "code": "CH",
-      "name": "ስዊዘርላንድ"
-    },
-    {
-      "code": "TW",
-      "name": "ታይዋን"
-    },
-    {
-      "code": "TH",
-      "name": "ታይላንድ"
-    },
-    {
-      "code": "TR",
-      "name": "ቱርክ"
-    },
-    {
-      "code": "UG",
-      "name": "ኡጋንዳ"
-    },
-    {
-      "code": "UA",
-      "name": "ዩክሬን"
-    },
-    {
-      "code": "AE",
-      "name": "የተባበሩት አረብ ኤምሬትስ"
-    },
-    {
-      "code": "GB",
-      "name": "የተባበሩት የንጉሥ ግዛት"
-    },
-    {
-      "code": "US",
-      "name": "የተባበሩት መንግስታት"
-    },
-    {
-      "code": "UY",
-      "name": "ኡራጓይ"
-    },
-    {
-      "code": "UZ",
-      "name": "ኡዝቤኪስታን"
-    },
-    {
-      "code": "VE",
-      "name": "ቬንዙዌላ"
-    },
-    {
-      "code": "VN",
-      "name": "ቪትናም"
-    },
-    {
-      "code": "YE",
-      "name": "የመን"
-    },
-    {
-      "code": "ZM",
-      "name": "ዛምቢያ"
-    },
-    {
-      "code": "ZW",
-      "name": "ዝምባቡዌ"
-    }
-  ]
+  }
 };

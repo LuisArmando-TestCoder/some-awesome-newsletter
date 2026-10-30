@@ -1,5 +1,5 @@
-// sw strings for locales. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale sw
+// sw (Swahili) strings for locales. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "auth": {
     "logo": "/icons/logo.png",
@@ -35,6 +35,82 @@ export default {
       "ogImageAlt": "Nembo ya AIBAN"
     },
     "skipLink": "Ruka hadi maudhui makuu",
+    "display": {
+      "title": "Tovuti yako, imeandikwa kama jarida la habari.",
+      "kicker": "AIBAN"
+    },
+    "statement": {
+      "lines": [
+        "Tayari unachapisha kazi nzuri.",
+        "Wateja wako wanasoma kwa lugha zaidi ya moja.",
+        "AIBAN hubadilisha kila makala mpya kuwa toleo",
+        "na hutuma kila msomaji toleo katika lugha yao."
+      ]
+    },
+    "history": {
+      "eyebrow": "Inafanyaje kazi",
+      "title": "Maisha ya toleo moja.",
+      "lead": "Fuata toleo moja kutoka wakati ratiba yako inaanza hadi wakati inaanza tena. Unaweka hii mara moja.",
+      "note": "Mfano wa ratiba. Unachagua siku, saa na mara ngapi.",
+      "progressLabel": "Hatua za toleo moja",
+      "items": [
+        {
+          "mark": "9:00",
+          "title": "Ratiba yako inaanza kukimbia",
+          "body": "Kila Jumatatu saa 9:00 kwa mfano huu. Unachagua kila siku, kila wiki au kila mwezi."
+        },
+        {
+          "mark": "Soma",
+          "title": "AIBAN inasoma tovuti yako",
+          "body": "Inapata makala yako mpya zaidi na kuchagua kipande ambacho msomaji wako bora atavutiwa zaidi."
+        },
+        {
+          "mark": "Andika",
+          "title": "Inaandika toleo kwa sauti yako",
+          "body": "Maandishi yanafuata jinsi tovuti yako imeandikwa, kwa hivyo inasikika kama wewe."
+        },
+        {
+          "mark": "Tafsiri",
+          "title": "Kila msomaji anapata lugha yake",
+          "body": "Toleo moja linakuwa matoleo mengi kama wanachama wako wanavyohitaji."
+        },
+        {
+          "mark": "Tuma",
+          "title": "Inafika chini ya jina lako",
+          "body": "Kwa jina lako na saini yako ya barua pepe. Majibu yanaenda kwenye kikasha chako cha barua pepe."
+        },
+        {
+          "mark": "Chapisha",
+          "title": "Inakuwa makala kwenye blogu yako",
+          "body": "Kwa kiungo chake ambacho watu wanaweza kupata kwenye utafutaji na kushiriki."
+        },
+        {
+          "mark": "Ripoti",
+          "title": "Unaona kilichotokea",
+          "body": "Dashibodi yako inaorodhesha nani alijiunga na viungo gani wasomaji walibofya."
+        },
+        {
+          "mark": "Tena",
+          "title": "Jumatatu ijayo, inakimbia tena",
+          "body": "Inaendelea hadi uizime kwenye dashibodi yako."
+        }
+      ]
+    },
+    "rail": {
+      "label": "Sura za ukurasa",
+      "chapters": [
+        "Anza",
+        "Kwa nini",
+        "Lugha",
+        "Inafanyaje kazi",
+        "Jina lako",
+        "Kua",
+        "Ni kwa ajili ya nani",
+        "Bei",
+        "Maswali",
+        "Anza"
+      ]
+    },
     "hero": {
       "eyebrow": "Majarida kwa biashara za huduma",
       "title": "Tovuti yako inakuwa jarida la kila wiki, kwa lugha ya kila msomaji",
@@ -57,6 +133,26 @@ export default {
       "startCta": "Anza bure na {site}",
       "startCtaGeneric": "Anza bure",
       "liveRegion": "Onyesho la mfano limesasishwa kwa {site}."
+    },
+    "live": {
+      "badge": "Imeandikwa sasa hivi",
+      "loadingTitle": "Inaandika toleo la sampuli kutoka {site}",
+      "steps": [
+        "Inasoma {site}",
+        "Inatafuta makala yako ya karibuni",
+        "Inaiandika kwa {language}",
+        "Inaiweka kwa kiolezo chako cha barua pepe"
+      ],
+      "takes": "Hii kawaida inachukua sekunde 20 hadi 40. Unaweza kuendelea kusonga.",
+      "readyNote": "AIBAN huandika sampuli hii kutoka kwa makala ya karibuni kwenye {site}. Hakuna kitu kinachohifadhiwa au kutuma. Unapoanza, hutumia sauti yako mwenyewe na ratiba.",
+      "readyAnnounce": "Toleo lako la sampuli kutoka {site} limo tayari.",
+      "languageLabel": "Lugha ya msomaji",
+      "loadingLanguage": "Inaiandika kwa {language}",
+      "errorTitle": "Hatukuweza kuandika hakiki kutoka {site}",
+      "retry": "Jaribu tena",
+      "showSample": "Onyesha muundo wa sampuli",
+      "frameTitle": "Toleo la sampuli liliandikwa kutoka {site}",
+      "openFull": "Fungua kwenye kichupo kipya"
     },
     "chain": {
       "eyebrow": "Jinsi inavyofanya kazi",
@@ -587,6 +683,7 @@ export default {
       "suggestions": "Mapendekezo",
       "recent": "Utafutaji wa hivi karibuni",
       "clearRecent": "Futa utafutaji wa hivi karibuni",
+      "clear": "Futa utafutaji",
       "title": "Matokeo ya utafutaji",
       "resultsFor": "Matokeo ya \"{q}\"",
       "count": "Makala {count} zimepatikana",
@@ -691,6 +788,7 @@ export default {
   "legal": {
     "navLabel": "Nyaraka za kisheria",
     "lastUpdated": "Ilisasishwa mwisho: {date}",
+    "onThisPage": "Kwenye ukurasa huu",
     "privacy": {
       "title": "Sera ya faragha",
       "metaTitle": "Sera ya faragha | AIBAN",
@@ -919,6 +1017,8 @@ export default {
     "codeSent": "Tumetuma msimbo kwenye barua pepe yako.",
     "invalidCode": "Msimbo huo si sahihi. Angalia barua pepe ya hivi karibuni tuliyokutumia, au tuma msimbo tena.",
     "regenerateCode": "Tuma msimbo tena",
+    "codeAccepted": "Nambari imekubaliwa. Inafungua dashibodi yako.",
+    "codeLabel": "Nambari ya tarakimu 6",
     "back": "Rudi",
     "byProceeding": "Kwa kuendelea, unakubali",
     "termsOfService": "Masharti ya huduma",
@@ -935,7 +1035,7 @@ export default {
     "title": "Geuza waliojisajili kuwa wageni wa tovuti",
     "recommendation": "Saidia AI yetu kuelewa chapa yako kwa kuunganisha tovuti yako.",
     "question": "Una tovuti? (si lazima, unaweza kuiongeza baadaye)",
-    "placeholder": "https://tovuti-yako.com"
+    "placeholder": "https://your-site.com"
   },
   "newsSource": {
     "title": "Unganisha chanzo chako cha maudhui",
@@ -947,6 +1047,673 @@ export default {
       "title": "Karibu kwenye jarida.",
       "invitedBy": "Umealikwa na {configuratorId}."
     }
+  },
+  "showcase": {
+    "sampleBadge": "Data ya mfano",
+    "exampleLabel": "Mfano wa biashara",
+    "caption": "{business} ni mfano wa {kind}. Majina, makala na nambari katika maonyesho haya ni nafasi zilizoonyesha jinsi dashibodi yako inavyoonekana baada ya wiki chache.",
+    "pause": "Sitisha uhuishaji",
+    "play": "Cheza uhuishaji",
+    "scenesLabel": "Sehemu za dashibodi",
+    "examplesLabel": "Mifano ya biashara",
+    "appUrl": "app.aiban.news",
+    "nav": {
+      "home": "Nyumbani",
+      "automations": "Otomatiki",
+      "sources": "Vyanzo",
+      "subscribers": "Wanaojiandikisha",
+      "reports": "Ripoti",
+      "blog": "Blogu"
+    },
+    "scenes": {
+      "home": "Maelezo jumla",
+      "issue": "Toleo",
+      "reports": "Vibofyo",
+      "subscribers": "Wanaosajili",
+      "automation": "Ratiba",
+      "source": "Tovuti yako",
+      "voice": "Sauti yako",
+      "signup": "Fomu ya kujiandikisha",
+      "blog": "Blogu",
+      "import": "Ingiza"
+    },
+    "ui": {
+      "hello": "Habari, {business}",
+      "narrative": "Wasomaji {subscribers} katika lugha {languages}. Toleo linalofuata litatolewa {schedule}.",
+      "kpiSubscribers": "Wanaosajili",
+      "kpiLanguages": "Lugha",
+      "kpiClicks": "Vibofyo, siku 7 zilizopita",
+      "kpiAutomations": "Otomatiki imewashwa",
+      "kpiNew": "{count} mpya wiki hii",
+      "nextIssue": "Toleo linalofuata",
+      "ready": "Tayari",
+      "activity": "Shughuli za hivi karibuni",
+      "from": "Kutoka",
+      "subject": "Mada",
+      "readMore": "Soma makala kamili",
+      "readerLanguage": "Lugha ya msomaji",
+      "clicksTitle": "Vibofyo, siku 7 zilizopita",
+      "mostClicked": "Imebofywa zaidi",
+      "clicks": "vibofyo",
+      "days": [
+        "Jumatatu",
+        "Jumanne",
+        "Jumatano",
+        "Alhamisi",
+        "Ijumaa",
+        "Jumamosi",
+        "Jumapili"
+      ],
+      "subscribersTitle": "Wanaosajili",
+      "language": "Lugha",
+      "joinedVia": "Alijiunga kupitia",
+      "newSubscriber": "Mwanachama mpya",
+      "automationTitle": "Toleo la kila wiki",
+      "automationSentence": "{schedule}, andika toleo kutoka kwa makala mpya zaidi na ulitumie kwa kila msomaji kwa lugha yake.",
+      "on": "Imewashwa",
+      "off": "Imezimwa",
+      "automationOn": "Otomatiki imewashwa",
+      "sourceLabel": "Maudhui yako yanatoka wapi",
+      "sourceButton": "Soma tovuti yangu",
+      "reading": "Inasoma tovuti yako",
+      "found": "Imepata makala {count}",
+      "voiceReader": "Msomaji wako bora",
+      "voiceTone": "Inapaswa kuwa na sauti gani",
+      "signupHeading": "Pata vidokezi vyetu vya kila wiki",
+      "signupEmail": "Anwani ya barua pepe",
+      "signupLanguage": "Lugha",
+      "signupButton": "Jiandikishe",
+      "signupDone": "Angalia kikasha chako kuthibitisha.",
+      "blogTitle": "Makala kutoka {business}",
+      "importFile": "wateja.csv",
+      "importing": "Inaingiza anwani",
+      "imported": "Anwani {count} zimeongezwa",
+      "sources": {
+        "form": "Fomu ya kujiandikisha",
+        "import": "Ingiza",
+        "manual": "Imeongezwa kwa mkono"
+      }
+    },
+    "examples": [
+      {
+        "business": "Northfield Studio",
+        "kind": "kampuni ya kubuni tovuti",
+        "site": "northfield.studio",
+        "schedule": "kila Jumatatu saa 9:00",
+        "subscribers": 312,
+        "newThisWeek": 9,
+        "clicks7": 84,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 58
+          },
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 31
+          },
+          {
+            "code": "pt",
+            "name": "Portuguese",
+            "share": 11
+          }
+        ],
+        "reader": "Wenye kliniki, maduka na studio ambao wanataka tovuti inayowaletea wateja, sio kazi ya portfolio.",
+        "tones": [
+          "Joto",
+          "Wazi",
+          "Vitendo"
+        ],
+        "articles": [
+          "Jinsi tulivyojenga upya tovuti ya kliniki ya meno kwa wiki sita",
+          "Mambo matano ya kurekebisha kabla ya kubuni upya",
+          "Kwa nini kitufe chako cha kuhifadhi nafasi kinapaswa kuwa rangi ya machungwa"
+        ],
+        "issue": {
+          "title": "Jinsi tulivyojenga upya tovuti ya kliniki ya meno kwa wiki sita",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "A clinic website rebuilt in six weeks",
+              "summary": "We moved booking to the top of every page and cut the forms from nine fields to three. Here is what changed for the clinic."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "El sitio de una clínica, renovado en seis semanas",
+              "summary": "Pusimos la reserva arriba en cada página y redujimos los formularios de nueve campos a tres. Esto es lo que cambió para la clínica."
+            },
+            {
+              "code": "pt",
+              "name": "Português",
+              "subject": "O site de uma clínica, refeito em seis semanas",
+              "summary": "Colocamos o agendamento no topo de cada página e reduzimos os formulários de nove campos para três. Veja o que mudou para a clínica."
+            }
+          ]
+        },
+        "clicksByDay": [
+          21,
+          17,
+          12,
+          9,
+          11,
+          6,
+          8
+        ],
+        "topLinks": [
+          {
+            "title": "Utafiti wa kesi ya kliniki",
+            "clicks": 38
+          },
+          {
+            "title": "Mambo matano ya kurekebisha kabla ya kubuni upya",
+            "clicks": 27
+          },
+          {
+            "title": "Hifadhi wito",
+            "clicks": 19
+          }
+        ],
+        "people": [
+          {
+            "email": "lucia.r@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "mark@example.org",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "joana.s@example.net",
+            "lang": "PT",
+            "via": "form"
+          },
+          {
+            "email": "dr.chen@example.com",
+            "lang": "EN",
+            "via": "manual"
+          }
+        ],
+        "activity": [
+          "Toleo limetumwa kwa wasomaji 312 katika lugha 3",
+          "Mibofyo 38 kwenye utafiti wa kesi ya kliniki",
+          "Lucia alijiunga kutoka kwa fomu ya kujiandikisha na anasoma kwa Kihispania"
+        ],
+        "importCount": 148
+      },
+      {
+        "business": "Brightline Software",
+        "kind": "kampuni ya programu",
+        "site": "brightline.dev",
+        "schedule": "tarehe 1 ya kila mwezi saa 10:00",
+        "subscribers": 1240,
+        "newThisWeek": 23,
+        "clicks7": 211,
+        "automationsOn": 1,
+        "languages": [
+          {
+            "code": "en",
+            "name": "Kiingereza",
+            "share": 64
+          },
+          {
+            "code": "de",
+            "name": "Kijerumani",
+            "share": 22
+          },
+          {
+            "code": "fr",
+            "name": "Kifaransa",
+            "share": 14
+          }
+        ],
+        "reader": "Meneja wa ofisi na viongozi wa IT kwa wateja wanaotumia programu yetu ya kuhifadhi kukaribisha kila siku.",
+        "tones": [
+          "Wazi",
+          "Fupi",
+          "Kirafiki"
+        ],
+        "articles": [
+          "Toleo 4.2: miadi ya kurudia",
+          "Ripoti za haraka kwa timu kubwa",
+          "Jinsi ya kuhamisha kalenda yako kutoka kwenye spreadsheet"
+        ],
+        "issue": {
+          "title": "Toleo 4.2: miadi ya kurudia",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "New this month: recurring appointments",
+              "summary": "You can now repeat any appointment weekly or monthly. Reports for teams over 50 people also load faster."
+            },
+            {
+              "code": "de",
+              "name": "Deutsch",
+              "subject": "Neu diesen Monat: wiederkehrende Termine",
+              "summary": "Sie können jetzt jeden Termin wöchentlich oder monatlich wiederholen. Berichte für Teams ab 50 Personen laden außerdem schneller."
+            },
+            {
+              "code": "fr",
+              "name": "Français",
+              "subject": "Nouveau ce mois-ci : les rendez-vous récurrents",
+              "summary": "Vous pouvez désormais répéter un rendez-vous chaque semaine ou chaque mois. Les rapports des équipes de plus de 50 personnes s'affichent aussi plus vite."
+            }
+          ]
+        },
+        "clicksByDay": [
+          64,
+          48,
+          33,
+          25,
+          19,
+          9,
+          13
+        ],
+        "topLinks": [
+          {
+            "title": "Mwongozo wa miadi ya kurudia",
+            "clicks": 96
+          },
+          {
+            "title": "Vidokezo vya toleo 4.2",
+            "clicks": 71
+          },
+          {
+            "title": "Kuhamia kutoka kwenye spreadsheet",
+            "clicks": 44
+          }
+        ],
+        "people": [
+          {
+            "email": "it@example.de",
+            "lang": "DE",
+            "via": "import"
+          },
+          {
+            "email": "sophie.m@example.fr",
+            "lang": "FR",
+            "via": "form"
+          },
+          {
+            "email": "ops@example.com",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "k.weber@example.de",
+            "lang": "DE",
+            "via": "form"
+          }
+        ],
+        "activity": [
+          "Toleo lilitumwa kwa wasomaji 1240 katika lugha 3",
+          "Mibofyo 96 kwenye mwongozo wa miadi ya kurudia",
+          "Mawasiliano 23 yaliyoingizwa kutoka clients.csv"
+        ],
+        "importCount": 412
+      },
+      {
+        "business": "Casa Verde Realty",
+        "kind": "wakala wa mali isiyohamishika",
+        "site": "casaverde.homes",
+        "schedule": "kila Alhamisi saa 8:00",
+        "subscribers": 586,
+        "newThisWeek": 14,
+        "clicks7": 163,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "es",
+            "name": "Kihispania",
+            "share": 47
+          },
+          {
+            "code": "en",
+            "name": "Kiingereza",
+            "share": 41
+          },
+          {
+            "code": "fr",
+            "name": "Kifaransa",
+            "share": 12
+          }
+        ],
+        "reader": "Familia na wazee walioacha kazi kutoka nje ya nchi wanaotafuta nyumba karibu na pwani, na wamiliki wanaoweza kuuza.",
+        "tones": [
+          "Joto",
+          "Kienyeji",
+          "Tulivu"
+        ],
+        "articles": [
+          "Nyumba tatu mpya karibu na pwani wiki hii",
+          "Gharama za kufunga zinavyoonekana kwa wanunuzi wa kigeni",
+          "Bei katika mji wa kale, sasisho la vuli"
+        ],
+        "issue": {
+          "title": "Nyumba tatu mpya karibu na pwani wiki hii",
+          "langs": [
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tres casas nuevas cerca de la playa",
+              "summary": "Una casa de dos habitaciones con jardín, un apartamento con vista al mar y una casa para reformar a diez minutos del centro."
+            },
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Three new homes near the beach",
+              "summary": "A two bedroom house with a garden, a flat with a sea view and a house to renovate ten minutes from the center."
+            },
+            {
+              "code": "fr",
+              "name": "Français",
+              "subject": "Trois nouvelles maisons près de la plage",
+              "summary": "Une maison de deux chambres avec jardin, un appartement avec vue sur la mer et une maison à rénover à dix minutes du centre."
+            }
+          ]
+        },
+        "clicksByDay": [
+          12,
+          9,
+          15,
+          52,
+          38,
+          21,
+          16
+        ],
+        "topLinks": [
+          {
+            "title": "Ghorofa yenye mtazamo wa bahari",
+            "clicks": 71
+          },
+          {
+            "title": "Nyumba ya vyumba viili na bustani",
+            "clicks": 54
+          },
+          {
+            "title": "Gharama za kufunga kwa wanunuzi wa kigeni",
+            "clicks": 38
+          }
+        ],
+        "people": [
+          {
+            "email": "familia.ortiz@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "j.dupont@example.fr",
+            "lang": "FR",
+            "via": "form"
+          },
+          {
+            "email": "tom.and.ann@example.org",
+            "lang": "EN",
+            "via": "manual"
+          },
+          {
+            "email": "rmora@example.net",
+            "lang": "ES",
+            "via": "import"
+          }
+        ],
+        "activity": [
+          "Toleo lilitumwa kwa wasomaji 586 katika lugha 3",
+          "Mibofyo 71 kwenye ghorofa yenye mtazamo wa bahari",
+          "Msomaji nchini Ufaransa alijiunga kutoka kwa fomu ya kujiandikisha"
+        ],
+        "importCount": 203
+      },
+      {
+        "business": "Mora and Partners",
+        "kind": "kampuni ya uhasibu",
+        "site": "morapartners.co",
+        "schedule": "kila Jumanne mbadala saa 7:30",
+        "subscribers": 428,
+        "newThisWeek": 6,
+        "clicks7": 97,
+        "automationsOn": 1,
+        "languages": [
+          {
+            "code": "en",
+            "name": "Kiingereza",
+            "share": 52
+          },
+          {
+            "code": "es",
+            "name": "Kihispania",
+            "share": 38
+          },
+          {
+            "code": "it",
+            "name": "Kiitaliano",
+            "share": 10
+          }
+        ],
+        "reader": "Wamiliki wa kampuni ndogo wanaotaka kujua mabadiliko katika ushuru na malipo ya wafanyikazi, bila maneno magumu.",
+        "tones": [
+          "Utulivu",
+          "Makini",
+          "Wazi"
+        ],
+        "articles": [
+          "Muda wa malipo ya ushuru wa robo mwaka umeahirishwa hadi tarehe 15",
+          "Nini cha kuhifadhi unapowaajiri mwafanyakazi wako wa kwanza",
+          "Risiti: karatasi au picha?"
+        ],
+        "issue": {
+          "title": "Muda wa malipo ya ushuru wa robo mwaka umeahirishwa hadi tarehe 15",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Your quarterly deadline moves to the 15th",
+              "summary": "The filing date for the next quarter moves five days later. Here is what to send us and when, so nothing is late."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tu plazo trimestral pasa al día 15",
+              "summary": "La fecha de presentación del próximo trimestre se mueve cinco días. Esto es lo que debes enviarnos y cuándo, para que nada llegue tarde."
+            },
+            {
+              "code": "it",
+              "name": "Italiano",
+              "subject": "La scadenza trimestrale passa al 15",
+              "summary": "La data di presentazione del prossimo trimestre slitta di cinque giorni. Ecco cosa inviarci e quando, perché nulla arrivi in ritardo."
+            }
+          ]
+        },
+        "clicksByDay": [
+          33,
+          24,
+          14,
+          8,
+          7,
+          4,
+          7
+        ],
+        "topLinks": [
+          {
+            "title": "Orodha ya kukagua kwa tarehe 15",
+            "clicks": 46
+          },
+          {
+            "title": "Kuajiri mwafanyakazi wako wa kwanza",
+            "clicks": 29
+          },
+          {
+            "title": "Piga simu ya ukaguzi",
+            "clicks": 22
+          }
+        ],
+        "people": [
+          {
+            "email": "bakery.owner@example.com",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "c.rossi@example.it",
+            "lang": "IT",
+            "via": "form"
+          },
+          {
+            "email": "taller.luna@example.net",
+            "lang": "ES",
+            "via": "import"
+          },
+          {
+            "email": "finance@example.org",
+            "lang": "EN",
+            "via": "manual"
+          }
+        ],
+        "activity": [
+          "Toleo lilitumwa kwa wasomaji 428 katika lugha 3",
+          "Mibofyo 46 kwenye orodha ya kukagua kwa tarehe 15",
+          "Wasomaji wapya 6 wiki hii"
+        ],
+        "importCount": 97
+      },
+      {
+        "business": "Run Better Coaching",
+        "kind": "kocha wa mbio",
+        "site": "runbetter.coach",
+        "schedule": "kila Jumapili saa 18:00",
+        "subscribers": 907,
+        "newThisWeek": 31,
+        "clicks7": 248,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "en",
+            "name": "Kiingereza",
+            "share": 49
+          },
+          {
+            "code": "es",
+            "name": "Kihispania",
+            "share": 33
+          },
+          {
+            "code": "de",
+            "name": "Kijerumani",
+            "share": 18
+          }
+        ],
+        "reader": "Watu wazima wanaojitayarisha kwa nusu marathoni yao ya kwanza ambao wanakimbia mara tatu kwa wiki kabla ya kazi.",
+        "tones": [
+          "Inayoihimiza",
+          "Moja kwa moja",
+          "Fupi"
+        ],
+        "articles": [
+          "Wiki hii: mkimbio mrefu, polepole zaidi unavyofikiria",
+          "Viatu baada ya kilomita 500",
+          "Mazoezi ya nguvu ya dakika 20"
+        ],
+        "issue": {
+          "title": "Wiki hii: mkimbio mrefu, polepole zaidi unavyofikiria",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Your long run should feel too easy",
+              "summary": "Keep it slow enough to talk. This week's plan adds ten minutes and one short hill session."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tu tirada larga debería sentirse demasiado fácil",
+              "summary": "Mantén un ritmo que te deje hablar. El plan de esta semana suma diez minutos y una sesión corta de cuestas."
+            },
+            {
+              "code": "de",
+              "name": "Deutsch",
+              "subject": "Dein langer Lauf sollte sich zu leicht anfühlen",
+              "summary": "Lauf so langsam, dass du noch reden kannst. Der Plan dieser Woche bringt zehn Minuten mehr und eine kurze Bergeinheit."
+            }
+          ]
+        },
+        "clicksByDay": [
+          18,
+          22,
+          26,
+          31,
+          35,
+          49,
+          67
+        ],
+        "topLinks": [
+          {
+            "title": "Mpango wa mafunzo ya wiki hii",
+            "clicks": 121
+          },
+          {
+            "title": "Mazoezi ya nguvu ya dakika 20",
+            "clicks": 78
+          },
+          {
+            "title": "Viatu baada ya kilomita 500",
+            "clicks": 49
+          }
+        ],
+        "people": [
+          {
+            "email": "ana.runs@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "felix.k@example.de",
+            "lang": "DE",
+            "via": "form"
+          },
+          {
+            "email": "sam@example.org",
+            "lang": "EN",
+            "via": "form"
+          },
+          {
+            "email": "club.secretary@example.net",
+            "lang": "EN",
+            "via": "import"
+          }
+        ],
+        "activity": [
+          "Toleo lilitumwa kwa wasomaji 907 katika lugha 3",
+          "Mibofyo 121 kwenye mpango wa mafunzo ya wiki hii",
+          "Wasomaji wapya 31 wiki hii, wengi kutoka kwa fomu ya usajili"
+        ],
+        "importCount": 260
+      }
+    ]
+  },
+  "errorPage": {
+    "notFoundEyebrow": "Hitilafu 404",
+    "notFoundTitle": "Hatukuweza kupata ukurasa huu",
+    "notFoundBody": "Kiunga kinaweza kuwa cha zamani au kuwa na makosa ya herufi. Kurasa hizi ni sehemu nzuri ya kuendelea.",
+    "serverEyebrow": "Hitilafu {status}",
+    "serverTitle": "Kitu kilikosea upande wetu",
+    "serverBody": "Hatukuweza kupakia ukurasa huu. Jaribu tena baada ya dakika moja. Ikiwa inaendelea kutokea, andika kwa info@aiban.news.",
+    "retry": "Jaribu tena",
+    "home": "Nenda kwenye ukurasa wa nyumbani",
+    "popularTitle": "Kurasa maarufu",
+    "links": {
+      "howItWorks": "Jinsi AIBAN inavyofanya kazi",
+      "pricing": "Bei",
+      "help": "Kituo cha usaidizi",
+      "login": "Ingia kwenye dashibodi yako"
+    },
+    "report": "Ikiwa kiunga kwenye tovuti yetu kilipeleka hapa, tueleze kwa info@aiban.news ili tuweze kurekebisha."
   },
   "header": {
     "goToWorkspace": "Fungua dashibodi",
@@ -982,1429 +1749,5 @@ export default {
     "monthly": "Kila mwezi",
     "yearly": "Kila mwaka",
     "loadingPlan": "Inapakia taarifa za mpango..."
-  },
-  "languages": [
-    {
-      "code": "ab",
-      "name": "Kiaabkhazi"
-    },
-    {
-      "code": "aa",
-      "name": "Kiafar"
-    },
-    {
-      "code": "af",
-      "name": "Kiafrikana"
-    },
-    {
-      "code": "ak",
-      "name": "Kiakani"
-    },
-    {
-      "code": "sq",
-      "name": "Kialbania"
-    },
-    {
-      "code": "am",
-      "name": "Kiamhari"
-    },
-    {
-      "code": "ar",
-      "name": "Kiarabu"
-    },
-    {
-      "code": "an",
-      "name": "Kiaragoni"
-    },
-    {
-      "code": "hy",
-      "name": "Kiarmenia"
-    },
-    {
-      "code": "as",
-      "name": "Kiassam"
-    },
-    {
-      "code": "av",
-      "name": "Kiavari"
-    },
-    {
-      "code": "ae",
-      "name": "Kiavesta"
-    },
-    {
-      "code": "ay",
-      "name": "Kiaimara"
-    },
-    {
-      "code": "az",
-      "name": "Kiazeri"
-    },
-    {
-      "code": "bm",
-      "name": "Kibambara"
-    },
-    {
-      "code": "ba",
-      "name": "Kibashkir"
-    },
-    {
-      "code": "eu",
-      "name": "Kibasque"
-    },
-    {
-      "code": "be",
-      "name": "Kibelarusi"
-    },
-    {
-      "code": "bn",
-      "name": "Kibengali"
-    },
-    {
-      "code": "bi",
-      "name": "Kibislama"
-    },
-    {
-      "code": "bs",
-      "name": "Kibosnia"
-    },
-    {
-      "code": "br",
-      "name": "Kibretoni"
-    },
-    {
-      "code": "bg",
-      "name": "Kibulgaria"
-    },
-    {
-      "code": "my",
-      "name": "Kiburma"
-    },
-    {
-      "code": "ca",
-      "name": "Kikatalani"
-    },
-    {
-      "code": "ch",
-      "name": "Kichamorro"
-    },
-    {
-      "code": "ce",
-      "name": "Kichechen"
-    },
-    {
-      "code": "ny",
-      "name": "Kichewa"
-    },
-    {
-      "code": "zh",
-      "name": "Kichina"
-    },
-    {
-      "code": "cu",
-      "name": "Kislavoni cha Kanisa"
-    },
-    {
-      "code": "cv",
-      "name": "Kichuvash"
-    },
-    {
-      "code": "kw",
-      "name": "Kikorni"
-    },
-    {
-      "code": "co",
-      "name": "Kikosikani"
-    },
-    {
-      "code": "cr",
-      "name": "Kikri"
-    },
-    {
-      "code": "hr",
-      "name": "Kikroeshia"
-    },
-    {
-      "code": "cs",
-      "name": "Kicheki"
-    },
-    {
-      "code": "da",
-      "name": "Kidenmaki"
-    },
-    {
-      "code": "dv",
-      "name": "Kidivehi"
-    },
-    {
-      "code": "nl",
-      "name": "Kiholanzi"
-    },
-    {
-      "code": "dz",
-      "name": "Kidzongkha"
-    },
-    {
-      "code": "en",
-      "name": "Kiingereza"
-    },
-    {
-      "code": "eo",
-      "name": "Kiesperanto"
-    },
-    {
-      "code": "et",
-      "name": "Kiestonia"
-    },
-    {
-      "code": "ee",
-      "name": "Kiewe"
-    },
-    {
-      "code": "fo",
-      "name": "Kifaroe"
-    },
-    {
-      "code": "fj",
-      "name": "Kifiji"
-    },
-    {
-      "code": "fi",
-      "name": "Kifini"
-    },
-    {
-      "code": "fr",
-      "name": "Kifaransa"
-    },
-    {
-      "code": "fy",
-      "name": "Kifrisia cha Magharibi"
-    },
-    {
-      "code": "ff",
-      "name": "Kifulah"
-    },
-    {
-      "code": "gd",
-      "name": "Kigaeli cha Uskoti"
-    },
-    {
-      "code": "gl",
-      "name": "Kigalicia"
-    },
-    {
-      "code": "lg",
-      "name": "Kiganda"
-    },
-    {
-      "code": "ka",
-      "name": "Kijojia"
-    },
-    {
-      "code": "de",
-      "name": "Kijerumani"
-    },
-    {
-      "code": "el",
-      "name": "Kigiriki"
-    },
-    {
-      "code": "kl",
-      "name": "Kikalaallisut (Kigrinlandi)"
-    },
-    {
-      "code": "gn",
-      "name": "Kiguarani"
-    },
-    {
-      "code": "gu",
-      "name": "Kigujarati"
-    },
-    {
-      "code": "ht",
-      "name": "Kikrioli cha Haiti"
-    },
-    {
-      "code": "ha",
-      "name": "Kihausa"
-    },
-    {
-      "code": "he",
-      "name": "Kiebrania"
-    },
-    {
-      "code": "hz",
-      "name": "Kiherero"
-    },
-    {
-      "code": "hi",
-      "name": "Kihindi"
-    },
-    {
-      "code": "ho",
-      "name": "Kihiri Motu"
-    },
-    {
-      "code": "hu",
-      "name": "Kihungari"
-    },
-    {
-      "code": "is",
-      "name": "Kiaislandi"
-    },
-    {
-      "code": "io",
-      "name": "Kiido"
-    },
-    {
-      "code": "ig",
-      "name": "Kiigbo"
-    },
-    {
-      "code": "id",
-      "name": "Kiindonesia"
-    },
-    {
-      "code": "ia",
-      "name": "Kiinterlingua"
-    },
-    {
-      "code": "ie",
-      "name": "Kiinterlingue"
-    },
-    {
-      "code": "iu",
-      "name": "Kiinuktitut"
-    },
-    {
-      "code": "ik",
-      "name": "Kiinupiaq"
-    },
-    {
-      "code": "ga",
-      "name": "Kiayalandi"
-    },
-    {
-      "code": "it",
-      "name": "Kiitaliano"
-    },
-    {
-      "code": "ja",
-      "name": "Kijapani"
-    },
-    {
-      "code": "jv",
-      "name": "Kijava"
-    },
-    {
-      "code": "kn",
-      "name": "Kikannada"
-    },
-    {
-      "code": "kr",
-      "name": "Kikanuri"
-    },
-    {
-      "code": "ks",
-      "name": "Kikashmiri"
-    },
-    {
-      "code": "kk",
-      "name": "Kikazaki"
-    },
-    {
-      "code": "km",
-      "name": "Kikhmer"
-    },
-    {
-      "code": "ki",
-      "name": "Kikikuyu"
-    },
-    {
-      "code": "rw",
-      "name": "Kinyarwanda"
-    },
-    {
-      "code": "ky",
-      "name": "Kikirigizi"
-    },
-    {
-      "code": "kv",
-      "name": "Kikomi"
-    },
-    {
-      "code": "kg",
-      "name": "Kikongo"
-    },
-    {
-      "code": "ko",
-      "name": "Kikorea"
-    },
-    {
-      "code": "kj",
-      "name": "Kikuanyama"
-    },
-    {
-      "code": "ku",
-      "name": "Kikurdi"
-    },
-    {
-      "code": "lo",
-      "name": "Kilaosi"
-    },
-    {
-      "code": "la",
-      "name": "Kilatini"
-    },
-    {
-      "code": "lv",
-      "name": "Kilatvia"
-    },
-    {
-      "code": "li",
-      "name": "Kilimburgi"
-    },
-    {
-      "code": "ln",
-      "name": "Kilingala"
-    },
-    {
-      "code": "lt",
-      "name": "Kilithuania"
-    },
-    {
-      "code": "lu",
-      "name": "Kiluba-Katanga"
-    },
-    {
-      "code": "lb",
-      "name": "Kilasembagi"
-    },
-    {
-      "code": "mk",
-      "name": "Kimasedonia"
-    },
-    {
-      "code": "mg",
-      "name": "Kimalagasi"
-    },
-    {
-      "code": "ms",
-      "name": "Kimalay"
-    },
-    {
-      "code": "ml",
-      "name": "Kimalayalam"
-    },
-    {
-      "code": "mt",
-      "name": "Kimalta"
-    },
-    {
-      "code": "gv",
-      "name": "Kimanx"
-    },
-    {
-      "code": "mi",
-      "name": "Kimaori"
-    },
-    {
-      "code": "mr",
-      "name": "Kimarathi"
-    },
-    {
-      "code": "mh",
-      "name": "Kimashale"
-    },
-    {
-      "code": "mn",
-      "name": "Kimongolia"
-    },
-    {
-      "code": "na",
-      "name": "Kinauru"
-    },
-    {
-      "code": "nv",
-      "name": "Kinavajo"
-    },
-    {
-      "code": "nd",
-      "name": "Kindebele cha Kaskazini"
-    },
-    {
-      "code": "nr",
-      "name": "Kindebele cha Kusini"
-    },
-    {
-      "code": "ng",
-      "name": "Kindonga"
-    },
-    {
-      "code": "ne",
-      "name": "Kinepali"
-    },
-    {
-      "code": "no",
-      "name": "Kinorwe"
-    },
-    {
-      "code": "nb",
-      "name": "Kinorwe cha Bokmål"
-    },
-    {
-      "code": "nn",
-      "name": "Kinorwe cha Nynorsk"
-    },
-    {
-      "code": "oc",
-      "name": "Kiokitani"
-    },
-    {
-      "code": "oj",
-      "name": "Kiojibwa"
-    },
-    {
-      "code": "or",
-      "name": "Kioriya"
-    },
-    {
-      "code": "om",
-      "name": "Kioromo"
-    },
-    {
-      "code": "os",
-      "name": "Kiosetia"
-    },
-    {
-      "code": "pi",
-      "name": "Kipali"
-    },
-    {
-      "code": "ps",
-      "name": "Kipashto"
-    },
-    {
-      "code": "fa",
-      "name": "Kiajemi (Kifarsi)"
-    },
-    {
-      "code": "pl",
-      "name": "Kipolandi"
-    },
-    {
-      "code": "pt",
-      "name": "Kireno"
-    },
-    {
-      "code": "pa",
-      "name": "Kipunjabi"
-    },
-    {
-      "code": "qu",
-      "name": "Kiquechua"
-    },
-    {
-      "code": "ro",
-      "name": "Kiromania"
-    },
-    {
-      "code": "rm",
-      "name": "Kiromanshi"
-    },
-    {
-      "code": "rn",
-      "name": "Kirundi"
-    },
-    {
-      "code": "ru",
-      "name": "Kirusi"
-    },
-    {
-      "code": "se",
-      "name": "Kisami cha Kaskazini"
-    },
-    {
-      "code": "sm",
-      "name": "Kisamoa"
-    },
-    {
-      "code": "sg",
-      "name": "Kisango"
-    },
-    {
-      "code": "sa",
-      "name": "Kisanskriti"
-    },
-    {
-      "code": "sc",
-      "name": "Kisardinia"
-    },
-    {
-      "code": "sr",
-      "name": "Kiserbia"
-    },
-    {
-      "code": "sn",
-      "name": "Kishona"
-    },
-    {
-      "code": "ii",
-      "name": "Kiyi cha Sichuan"
-    },
-    {
-      "code": "sd",
-      "name": "Kisindhi"
-    },
-    {
-      "code": "si",
-      "name": "Kisinhala"
-    },
-    {
-      "code": "sk",
-      "name": "Kislovakia"
-    },
-    {
-      "code": "sl",
-      "name": "Kislovenia"
-    },
-    {
-      "code": "so",
-      "name": "Kisomali"
-    },
-    {
-      "code": "st",
-      "name": "Kisotho cha Kusini"
-    },
-    {
-      "code": "es",
-      "name": "Kihispania"
-    },
-    {
-      "code": "su",
-      "name": "Kisunda"
-    },
-    {
-      "code": "sw",
-      "name": "Kiswahili"
-    },
-    {
-      "code": "ss",
-      "name": "Kiswati"
-    },
-    {
-      "code": "sv",
-      "name": "Kiswidi"
-    },
-    {
-      "code": "tl",
-      "name": "Kitagalogi (Kifilipino)"
-    },
-    {
-      "code": "ty",
-      "name": "Kitahiti"
-    },
-    {
-      "code": "tg",
-      "name": "Kitajiki"
-    },
-    {
-      "code": "ta",
-      "name": "Kitamil"
-    },
-    {
-      "code": "tt",
-      "name": "Kitatari"
-    },
-    {
-      "code": "te",
-      "name": "Kitelugu"
-    },
-    {
-      "code": "th",
-      "name": "Kithai"
-    },
-    {
-      "code": "bo",
-      "name": "Kitibeti"
-    },
-    {
-      "code": "ti",
-      "name": "Kitigrinya"
-    },
-    {
-      "code": "to",
-      "name": "Kitonga"
-    },
-    {
-      "code": "ts",
-      "name": "Kitsonga"
-    },
-    {
-      "code": "tn",
-      "name": "Kitswana"
-    },
-    {
-      "code": "tr",
-      "name": "Kituruki"
-    },
-    {
-      "code": "tk",
-      "name": "Kiturukimeni"
-    },
-    {
-      "code": "tw",
-      "name": "Kitwi"
-    },
-    {
-      "code": "ug",
-      "name": "Kiuiguri"
-    },
-    {
-      "code": "uk",
-      "name": "Kiukreni"
-    },
-    {
-      "code": "ur",
-      "name": "Kiurdu"
-    },
-    {
-      "code": "uz",
-      "name": "Kiuzbeki"
-    },
-    {
-      "code": "ve",
-      "name": "Kivenda"
-    },
-    {
-      "code": "vi",
-      "name": "Kivietinamu"
-    },
-    {
-      "code": "vo",
-      "name": "Kivolapük"
-    },
-    {
-      "code": "wa",
-      "name": "Kiwaloon"
-    },
-    {
-      "code": "cy",
-      "name": "Kiwelisi"
-    },
-    {
-      "code": "wo",
-      "name": "Kiwolofu"
-    },
-    {
-      "code": "xh",
-      "name": "Kixhosa"
-    },
-    {
-      "code": "yi",
-      "name": "Kiyidi"
-    },
-    {
-      "code": "yo",
-      "name": "Kiyoruba"
-    },
-    {
-      "code": "za",
-      "name": "Kizhuang"
-    },
-    {
-      "code": "zu",
-      "name": "Kizulu"
-    }
-  ],
-  "countries": [
-    {
-      "code": "AF",
-      "name": "Afghanistan"
-    },
-    {
-      "code": "AL",
-      "name": "Albania"
-    },
-    {
-      "code": "DZ",
-      "name": "Aljeria"
-    },
-    {
-      "code": "AS",
-      "name": "Samoa ya Marekani"
-    },
-    {
-      "code": "AD",
-      "name": "Andora"
-    },
-    {
-      "code": "AO",
-      "name": "Angola"
-    },
-    {
-      "code": "AI",
-      "name": "Anguilla"
-    },
-    {
-      "code": "AQ",
-      "name": "Antaktika"
-    },
-    {
-      "code": "AG",
-      "name": "Antigua na Barbuda"
-    },
-    {
-      "code": "AR",
-      "name": "Ajentina"
-    },
-    {
-      "code": "AM",
-      "name": "Armenia"
-    },
-    {
-      "code": "AW",
-      "name": "Aruba"
-    },
-    {
-      "code": "AU",
-      "name": "Australia"
-    },
-    {
-      "code": "AT",
-      "name": "Austria"
-    },
-    {
-      "code": "AZ",
-      "name": "Azerbaijani"
-    },
-    {
-      "code": "BS",
-      "name": "Bahama"
-    },
-    {
-      "code": "BH",
-      "name": "Bahraini"
-    },
-    {
-      "code": "BD",
-      "name": "Bangladeshi"
-    },
-    {
-      "code": "BB",
-      "name": "Babadosi"
-    },
-    {
-      "code": "BY",
-      "name": "Belarusi"
-    },
-    {
-      "code": "BE",
-      "name": "Ubelgiji"
-    },
-    {
-      "code": "BZ",
-      "name": "Belize"
-    },
-    {
-      "code": "BJ",
-      "name": "Benin"
-    },
-    {
-      "code": "BM",
-      "name": "Bermuda"
-    },
-    {
-      "code": "BT",
-      "name": "Bhutani"
-    },
-    {
-      "code": "BO",
-      "name": "Bolivia"
-    },
-    {
-      "code": "BA",
-      "name": "Bosnia na Herzegovina"
-    },
-    {
-      "code": "BW",
-      "name": "Botswana"
-    },
-    {
-      "code": "BR",
-      "name": "Brazili"
-    },
-    {
-      "code": "IO",
-      "name": "Eneo la Uingereza katika Bahari Hindi"
-    },
-    {
-      "code": "VG",
-      "name": "Visiwa vya Virgin vya Uingereza"
-    },
-    {
-      "code": "BN",
-      "name": "Brunei"
-    },
-    {
-      "code": "BG",
-      "name": "Bulgaria"
-    },
-    {
-      "code": "BF",
-      "name": "Burkina Faso"
-    },
-    {
-      "code": "BI",
-      "name": "Burundi"
-    },
-    {
-      "code": "KH",
-      "name": "Kambodia"
-    },
-    {
-      "code": "CM",
-      "name": "Kameruni"
-    },
-    {
-      "code": "CA",
-      "name": "Kanada"
-    },
-    {
-      "code": "CV",
-      "name": "Cape Verde"
-    },
-    {
-      "code": "KY",
-      "name": "Visiwa vya Cayman"
-    },
-    {
-      "code": "CF",
-      "name": "Jamhuri ya Afrika ya Kati"
-    },
-    {
-      "code": "TD",
-      "name": "Chadi"
-    },
-    {
-      "code": "CL",
-      "name": "Chile"
-    },
-    {
-      "code": "CN",
-      "name": "Uchina"
-    },
-    {
-      "code": "CX",
-      "name": "Kisiwa cha Krismasi"
-    },
-    {
-      "code": "CC",
-      "name": "Visiwa vya Cocos (Keeling)"
-    },
-    {
-      "code": "CO",
-      "name": "Kolombia"
-    },
-    {
-      "code": "KM",
-      "name": "Komoro"
-    },
-    {
-      "code": "CG",
-      "name": "Kongo - Brazzaville"
-    },
-    {
-      "code": "CD",
-      "name": "Kongo - Kinshasa"
-    },
-    {
-      "code": "CK",
-      "name": "Visiwa vya Cook"
-    },
-    {
-      "code": "CR",
-      "name": "Kostarika"
-    },
-    {
-      "code": "CI",
-      "name": "Côte d'Ivoire"
-    },
-    {
-      "code": "HR",
-      "name": "Kroeshia"
-    },
-    {
-      "code": "CU",
-      "name": "Kuba"
-    },
-    {
-      "code": "CY",
-      "name": "Saiprasi"
-    },
-    {
-      "code": "CZ",
-      "name": "Ucheki"
-    },
-    {
-      "code": "DK",
-      "name": "Denmaki"
-    },
-    {
-      "code": "DJ",
-      "name": "Jibuti"
-    },
-    {
-      "code": "DM",
-      "name": "Dominika"
-    },
-    {
-      "code": "DO",
-      "name": "Jamhuri ya Dominika"
-    },
-    {
-      "code": "EC",
-      "name": "Ekwado"
-    },
-    {
-      "code": "EG",
-      "name": "Misri"
-    },
-    {
-      "code": "SV",
-      "name": "El Salvador"
-    },
-    {
-      "code": "GQ",
-      "name": "Ginekweta"
-    },
-    {
-      "code": "ER",
-      "name": "Eritrea"
-    },
-    {
-      "code": "EE",
-      "name": "Estonia"
-    },
-    {
-      "code": "SZ",
-      "name": "Eswatini"
-    },
-    {
-      "code": "ET",
-      "name": "Ethiopia"
-    },
-    {
-      "code": "FJ",
-      "name": "Fiji"
-    },
-    {
-      "code": "FI",
-      "name": "Ufini"
-    },
-    {
-      "code": "FR",
-      "name": "Ufaransa"
-    },
-    {
-      "code": "GA",
-      "name": "Gabon"
-    },
-    {
-      "code": "GM",
-      "name": "Gambia"
-    },
-    {
-      "code": "GE",
-      "name": "Jojia"
-    },
-    {
-      "code": "DE",
-      "name": "Ujerumani"
-    },
-    {
-      "code": "GH",
-      "name": "Ghana"
-    },
-    {
-      "code": "GR",
-      "name": "Ugiriki"
-    },
-    {
-      "code": "GT",
-      "name": "Gwatemala"
-    },
-    {
-      "code": "GN",
-      "name": "Gine"
-    },
-    {
-      "code": "GY",
-      "name": "Guyana"
-    },
-    {
-      "code": "HT",
-      "name": "Haiti"
-    },
-    {
-      "code": "HN",
-      "name": "Hondurasi"
-    },
-    {
-      "code": "HK",
-      "name": "Hong Kong"
-    },
-    {
-      "code": "HU",
-      "name": "Hungaria"
-    },
-    {
-      "code": "IS",
-      "name": "Aisilandi"
-    },
-    {
-      "code": "IN",
-      "name": "India"
-    },
-    {
-      "code": "ID",
-      "name": "Indonesia"
-    },
-    {
-      "code": "IR",
-      "name": "Iran"
-    },
-    {
-      "code": "IQ",
-      "name": "Iraki"
-    },
-    {
-      "code": "IE",
-      "name": "Ayalandi"
-    },
-    {
-      "code": "IL",
-      "name": "Israeli"
-    },
-    {
-      "code": "IT",
-      "name": "Italia"
-    },
-    {
-      "code": "JM",
-      "name": "Jamaika"
-    },
-    {
-      "code": "JP",
-      "name": "Japani"
-    },
-    {
-      "code": "JO",
-      "name": "Yordani"
-    },
-    {
-      "code": "KZ",
-      "name": "Kazakistani"
-    },
-    {
-      "code": "KE",
-      "name": "Kenya"
-    },
-    {
-      "code": "KR",
-      "name": "Korea Kusini"
-    },
-    {
-      "code": "KW",
-      "name": "Kuwaiti"
-    },
-    {
-      "code": "KG",
-      "name": "Kirigizistani"
-    },
-    {
-      "code": "LA",
-      "name": "Laosi"
-    },
-    {
-      "code": "LV",
-      "name": "Lativia"
-    },
-    {
-      "code": "LB",
-      "name": "Lebanoni"
-    },
-    {
-      "code": "LS",
-      "name": "Lesotho"
-    },
-    {
-      "code": "LR",
-      "name": "Liberia"
-    },
-    {
-      "code": "LY",
-      "name": "Libya"
-    },
-    {
-      "code": "LI",
-      "name": "Liechtenstein"
-    },
-    {
-      "code": "LT",
-      "name": "Lithuania"
-    },
-    {
-      "code": "LU",
-      "name": "Lasembagi"
-    },
-    {
-      "code": "MG",
-      "name": "Madagaska"
-    },
-    {
-      "code": "MW",
-      "name": "Malawi"
-    },
-    {
-      "code": "MY",
-      "name": "Malesia"
-    },
-    {
-      "code": "MV",
-      "name": "Maldivi"
-    },
-    {
-      "code": "ML",
-      "name": "Mali"
-    },
-    {
-      "code": "MT",
-      "name": "Malta"
-    },
-    {
-      "code": "MX",
-      "name": "Meksiko"
-    },
-    {
-      "code": "MD",
-      "name": "Moldova"
-    },
-    {
-      "code": "MC",
-      "name": "Monako"
-    },
-    {
-      "code": "MN",
-      "name": "Mongolia"
-    },
-    {
-      "code": "ME",
-      "name": "Montenegro"
-    },
-    {
-      "code": "MA",
-      "name": "Moroko"
-    },
-    {
-      "code": "MZ",
-      "name": "Msumbiji"
-    },
-    {
-      "code": "MM",
-      "name": "Myama"
-    },
-    {
-      "code": "NA",
-      "name": "Namibia"
-    },
-    {
-      "code": "NP",
-      "name": "Nepali"
-    },
-    {
-      "code": "NL",
-      "name": "Uholanzi"
-    },
-    {
-      "code": "NZ",
-      "name": "Nyuzilandi"
-    },
-    {
-      "code": "NI",
-      "name": "Nikaragwa"
-    },
-    {
-      "code": "NE",
-      "name": "Nijeri"
-    },
-    {
-      "code": "NG",
-      "name": "Nijeria"
-    },
-    {
-      "code": "MK",
-      "name": "Masedonia Kaskazini"
-    },
-    {
-      "code": "NO",
-      "name": "Norwe"
-    },
-    {
-      "code": "OM",
-      "name": "Omani"
-    },
-    {
-      "code": "PK",
-      "name": "Pakistani"
-    },
-    {
-      "code": "PA",
-      "name": "Panama"
-    },
-    {
-      "code": "PG",
-      "name": "Papua Guinea Mpya"
-    },
-    {
-      "code": "PY",
-      "name": "Paragwai"
-    },
-    {
-      "code": "PE",
-      "name": "Peru"
-    },
-    {
-      "code": "PH",
-      "name": "Ufilipino"
-    },
-    {
-      "code": "PL",
-      "name": "Polandi"
-    },
-    {
-      "code": "PT",
-      "name": "Ureno"
-    },
-    {
-      "code": "QA",
-      "name": "Katari"
-    },
-    {
-      "code": "RO",
-      "name": "Romania"
-    },
-    {
-      "code": "RU",
-      "name": "Urusi"
-    },
-    {
-      "code": "RW",
-      "name": "Rwanda"
-    },
-    {
-      "code": "SA",
-      "name": "Saudi"
-    },
-    {
-      "code": "SN",
-      "name": "Senegali"
-    },
-    {
-      "code": "RS",
-      "name": "Serbia"
-    },
-    {
-      "code": "SG",
-      "name": "Singapoo"
-    },
-    {
-      "code": "SK",
-      "name": "Slovakia"
-    },
-    {
-      "code": "SI",
-      "name": "Slovenia"
-    },
-    {
-      "code": "ZA",
-      "name": "Afrika Kusini"
-    },
-    {
-      "code": "ES",
-      "name": "Hispania"
-    },
-    {
-      "code": "LK",
-      "name": "Sri Lanka"
-    },
-    {
-      "code": "SE",
-      "name": "Uswidi"
-    },
-    {
-      "code": "CH",
-      "name": "Uswisi"
-    },
-    {
-      "code": "TW",
-      "name": "Taiwani"
-    },
-    {
-      "code": "TH",
-      "name": "Thailandi"
-    },
-    {
-      "code": "TR",
-      "name": "Uturuki"
-    },
-    {
-      "code": "UG",
-      "name": "Uganda"
-    },
-    {
-      "code": "UA",
-      "name": "Ukreni"
-    },
-    {
-      "code": "AE",
-      "name": "Falme za Kiarabu"
-    },
-    {
-      "code": "GB",
-      "name": "Ufalme wa Muungano"
-    },
-    {
-      "code": "US",
-      "name": "Marekani"
-    },
-    {
-      "code": "UY",
-      "name": "Urugwai"
-    },
-    {
-      "code": "UZ",
-      "name": "Uzibekistani"
-    },
-    {
-      "code": "VE",
-      "name": "Venezuela"
-    },
-    {
-      "code": "VN",
-      "name": "Vietnamu"
-    },
-    {
-      "code": "YE",
-      "name": "Yemeni"
-    },
-    {
-      "code": "ZM",
-      "name": "Zambia"
-    },
-    {
-      "code": "ZW",
-      "name": "Zimbabwe"
-    }
-  ]
+  }
 };

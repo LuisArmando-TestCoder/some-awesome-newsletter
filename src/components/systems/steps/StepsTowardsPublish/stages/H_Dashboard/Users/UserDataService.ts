@@ -5,7 +5,7 @@ import { get } from "svelte/store";
 // Import Request Functions
 import store, { saveToStore } from "../../../../../../store";
 import type { NewsletterUser } from "../../../../../../types";
-import { addNewsletterUser } from "../../../../../requests/addNewsletterUserEndpoint";
+import { addNewsletterUser, type AddNewsletterUserResponse } from "../../../../../requests/addNewsletterUserEndpoint";
 import subscribeNewsletterUser from "../../../../../requests/subscribeNewsletterUser";
 import { request, seg } from "$lib/api/client";
 import { errorMessage } from "$lib/api/errors";
@@ -141,7 +141,7 @@ export async function addUserAndSubscribe(
     "name" | "email" | "bio" | "language"
   >,
   newsSourceId: string
-): Promise<void> {
+): Promise<AddNewsletterUserResponse | undefined> {
   console.log(`[UserDataService] addUserAndSubscribe: Starting for user ${userData.email} and newsSourceId ${newsSourceId}.`);
   const configId = getConfigId();
   if (!configId) {
@@ -165,7 +165,7 @@ export async function addUserAndSubscribe(
 
   try {
     console.log(`[UserDataService] addUserAndSubscribe: Calling addNewsletterUser for ${userData.email}...`);
-    await addNewsletterUser(newUserForApi, configId, newsSourceId);
+    const result = await addNewsletterUser(newUserForApi, configId, newsSourceId);
     console.log(`[UserDataService] addUserAndSubscribe: addNewsletterUser successful for ${userData.email}.`);
 
     console.log("[UserDataService] addUserAndSubscribe: Updating local store...");
@@ -195,6 +195,7 @@ export async function addUserAndSubscribe(
       console.log(`[UserDataService] addUserAndSubscribe: User ${userData.email} already in local store for ${newsSourceId}.`);
     }
     console.log(`[UserDataService] addUserAndSubscribe: Finished successfully for user ${userData.email}.`);
+    return result;
 
   } catch (err) {
     console.error(

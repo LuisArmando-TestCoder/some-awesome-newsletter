@@ -1,5 +1,5 @@
-// ta strings for locales-newflow. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale ta
+// ta (Tamil) strings for locales-newflow. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "onboarding": {
     "progress": "படி {current} / {total}",
@@ -116,6 +116,9 @@ export default {
       "dayLabel": "நாள்",
       "timeLabel": "நேரம்",
       "timeHint": "உங்கள் உள்ளூர் நேரப்படி.",
+      "summaryDaily": "ஒவ்வொரு நாளும் {time} மணிக்கு, உங்கள் நேரம் ({zone}).",
+      "summaryWeekly": "ஒவ்வொரு {day} {time} மணிக்கு, உங்கள் நேரம் ({zone}).",
+      "summaryMonthly": "ஒவ்வொரு மாதமும் முதல் தேதி {time} மணிக்கு, உங்கள் நேரம் ({zone}).",
       "recipeTitle": "புதிய இதழ்களைத் தானாக அனுப்பவும்",
       "recipeBody": "மேலே உள்ள அட்டவணைப்படி, உங்கள் சிறந்த புதிய கட்டுரையைத் தேர்ந்தெடுத்து, உங்கள் பாணியில் எழுதி, ஒவ்வொரு வாசகருக்கும் மொழிபெயர்த்து, மின்னஞ்சலில் அனுப்புகிறோம்.",
       "recipeOn": "இயக்கத்தில்",

@@ -1,5 +1,5 @@
-// ru strings for locales. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale ru
+// ru (Russian) strings for locales. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "auth": {
     "logo": "/icons/logo.png",
@@ -35,6 +35,82 @@ export default {
       "ogImageAlt": "Логотип AIBAN"
     },
     "skipLink": "Перейти к основному содержанию",
+    "display": {
+      "title": "Ваш сайт в формате рассылки.",
+      "kicker": "AIBAN"
+    },
+    "statement": {
+      "lines": [
+        "Вы уже публикуете хорошие материалы.",
+        "Ваши клиенты читают их более чем на одном языке.",
+        "AIBAN превращает каждую новую статью в выпуск",
+        "и отправляет каждому читателю версию на его языке."
+      ]
+    },
+    "history": {
+      "eyebrow": "Как это работает",
+      "title": "Жизнь одного выпуска.",
+      "lead": "Проследите за одним выпуском от момента запуска по расписанию до момента, когда он запускается снова. Вы настраиваете это один раз.",
+      "note": "Пример расписания. Вы выбираете день, время и частоту.",
+      "progressLabel": "Этапы одного выпуска",
+      "items": [
+        {
+          "mark": "9:00",
+          "title": "Ваше расписание запускает процесс",
+          "body": "Каждый понедельник в 9:00 в этом примере. Вы выбираете ежедневно, еженедельно или ежемесячно."
+        },
+        {
+          "mark": "Читает",
+          "title": "AIBAN читает ваш сайт",
+          "body": "Он находит вашу новую статью и выбирает часть, которая больше всего заинтересует вашего идеального читателя."
+        },
+        {
+          "mark": "Пишет",
+          "title": "Он пишет выпуск вашим голосом",
+          "body": "Текст соответствует стилю вашего сайта, поэтому звучит как вы."
+        },
+        {
+          "mark": "Переводит",
+          "title": "Каждый читатель получает свой язык",
+          "body": "Один выпуск превращается в столько версий, сколько нужно вашим подписчикам."
+        },
+        {
+          "mark": "Отправляет",
+          "title": "Он приходит от вашего имени",
+          "body": "С вашим именем и вашей подписью в письме. Ответы приходят в ваш почтовый ящик."
+        },
+        {
+          "mark": "Публикует",
+          "title": "Он становится статьей в вашем блоге",
+          "body": "Со своей ссылкой, которую люди могут найти в поиске и поделиться."
+        },
+        {
+          "mark": "Отчитывается",
+          "title": "Вы видите, что произошло",
+          "body": "Ваша панель управления показывает, кто присоединился и по каким ссылкам перешли читатели."
+        },
+        {
+          "mark": "Снова",
+          "title": "В следующий понедельник процесс повторяется",
+          "body": "Он продолжается, пока вы не отключите его в панели управления."
+        }
+      ]
+    },
+    "rail": {
+      "label": "Разделы страницы",
+      "chapters": [
+        "Начало",
+        "Зачем",
+        "Языки",
+        "Как это работает",
+        "Ваше имя",
+        "Рост",
+        "Для кого это",
+        "Цены",
+        "Вопросы",
+        "Начать"
+      ]
+    },
     "hero": {
       "eyebrow": "Рассылки для компаний сферы услуг",
       "title": "Ваш сайт становится еженедельной рассылкой на языке каждого читателя",
@@ -57,6 +133,26 @@ export default {
       "startCta": "Начать бесплатно с {site}",
       "startCtaGeneric": "Начать бесплатно",
       "liveRegion": "Пример обновлен для {site}."
+    },
+    "live": {
+      "badge": "Только что написано",
+      "loadingTitle": "Пишем пример выпуска с {site}",
+      "steps": [
+        "Читаем {site}",
+        "Ищем вашу новейшую статью",
+        "Пишем её на {language}",
+        "Помещаем в ваш шаблон письма"
+      ],
+      "takes": "Обычно это занимает от 20 до 40 секунд. Вы можете продолжать прокрутку.",
+      "readyNote": "AIBAN пишет этот пример на основе новейшей статьи с {site}. Ничего не сохраняется и не отправляется. Когда вы начнёте, он будет использовать ваш собственный стиль и расписание.",
+      "readyAnnounce": "Ваш пример выпуска с {site} готов.",
+      "languageLabel": "Язык читателя",
+      "loadingLanguage": "Пишем на {language}",
+      "errorTitle": "Не удалось создать превью с {site}",
+      "retry": "Попробовать снова",
+      "showSample": "Показать макет примера",
+      "frameTitle": "Пример выпуска, написанного с {site}",
+      "openFull": "Открыть в новой вкладке"
     },
     "chain": {
       "eyebrow": "Как это работает",
@@ -494,8 +590,8 @@ export default {
     "yearlySave": "Скидка 35%",
     "intervalLabel": "Период оплаты",
     "billedYearly": "при оплате за год",
-    "perMonthShort": "/mo",
-    "perYearShort": "/yr",
+    "perMonthShort": "/мес",
+    "perYearShort": "/год",
     "freeCta": "Начать бесплатно",
     "processing": "Открываем оплату...",
     "askMore": "Каждый аккаунт начинается с тарифа «Бесплатный». Если нужно больше, напишите нам на {email}, и мы изменим тариф.",
@@ -587,6 +683,7 @@ export default {
       "suggestions": "Подсказки",
       "recent": "Недавние запросы",
       "clearRecent": "Очистить недавние запросы",
+      "clear": "Очистить поиск",
       "title": "Результаты поиска",
       "resultsFor": "Результаты по запросу «{q}»",
       "count": "Найдено статей: {count}",
@@ -691,6 +788,7 @@ export default {
   "legal": {
     "navLabel": "Юридические документы",
     "lastUpdated": "Последнее обновление: {date}",
+    "onThisPage": "На этой странице",
     "privacy": {
       "title": "Политика конфиденциальности",
       "metaTitle": "Политика конфиденциальности | AIBAN",
@@ -919,6 +1017,8 @@ export default {
     "codeSent": "Мы отправили код на ваш email.",
     "invalidCode": "Код неверный. Проверьте последнее письмо от нас или запросите код повторно.",
     "regenerateCode": "Отправить код повторно",
+    "codeAccepted": "Код принят. Открываем вашу панель управления.",
+    "codeLabel": "6-значный код",
     "back": "Назад",
     "byProceeding": "Продолжая, вы соглашаетесь с",
     "termsOfService": "Условиями использования",
@@ -947,6 +1047,673 @@ export default {
       "title": "Добро пожаловать в рассылку.",
       "invitedBy": "Вас пригласил {configuratorId}."
     }
+  },
+  "showcase": {
+    "sampleBadge": "Пример данных",
+    "exampleLabel": "Пример бизнеса",
+    "caption": "{business}, это пример {kind}. Названия, статьи и цифры в этом представлении, это заполнители, которые показывают, как выглядит ваша панель управления через несколько недель.",
+    "pause": "Приостановить анимацию",
+    "play": "Запустить анимацию",
+    "scenesLabel": "Части панели управления",
+    "examplesLabel": "Примеры бизнесов",
+    "appUrl": "app.aiban.news",
+    "nav": {
+      "home": "Главная",
+      "automations": "Автоматизации",
+      "sources": "Источники",
+      "subscribers": "Подписчики",
+      "reports": "Отчёты",
+      "blog": "Блог"
+    },
+    "scenes": {
+      "home": "Обзор",
+      "issue": "Выпуск",
+      "reports": "Клики",
+      "subscribers": "Подписчики",
+      "automation": "Расписание",
+      "source": "Ваш сайт",
+      "voice": "Ваш стиль",
+      "signup": "Форма подписки",
+      "blog": "Блог",
+      "import": "Импорт"
+    },
+    "ui": {
+      "hello": "Здравствуйте, {business}",
+      "narrative": "{subscribers} читателей на {languages} языках. Следующий выпуск выйдет {schedule}.",
+      "kpiSubscribers": "Подписчики",
+      "kpiLanguages": "Языки",
+      "kpiClicks": "Клики за 7 дней",
+      "kpiAutomations": "Автоматизация включена",
+      "kpiNew": "{count} новых на этой неделе",
+      "nextIssue": "Следующий выпуск",
+      "ready": "Готово",
+      "activity": "Недавняя активность",
+      "from": "От",
+      "subject": "Тема",
+      "readMore": "Читать статью полностью",
+      "readerLanguage": "Язык читателя",
+      "clicksTitle": "Клики за 7 дней",
+      "mostClicked": "Самые популярные",
+      "clicks": "кликов",
+      "days": [
+        "Пн",
+        "Вт",
+        "Ср",
+        "Чт",
+        "Пт",
+        "Сб",
+        "Вс"
+      ],
+      "subscribersTitle": "Подписчики",
+      "language": "Язык",
+      "joinedVia": "Присоединился через",
+      "newSubscriber": "Новый подписчик",
+      "automationTitle": "Еженедельный выпуск",
+      "automationSentence": "{schedule}, написать выпуск из самой новой статьи и отправить каждому читателю на его языке.",
+      "on": "Вкл",
+      "off": "Выкл",
+      "automationOn": "Автоматизация включена",
+      "sourceLabel": "Откуда берётся ваш контент",
+      "sourceButton": "Читать мой сайт",
+      "reading": "Читаем ваш сайт",
+      "found": "Найдено {count} статей",
+      "voiceReader": "Ваш идеальный читатель",
+      "voiceTone": "Как это должно звучать",
+      "signupHeading": "Получайте наши еженедельные заметки",
+      "signupEmail": "Адрес электронной почты",
+      "signupLanguage": "Язык",
+      "signupButton": "Подписаться",
+      "signupDone": "Проверьте почту, чтобы подтвердить.",
+      "blogTitle": "Статьи от {business}",
+      "importFile": "clients.csv",
+      "importing": "Импортируем контакты",
+      "imported": "Добавлено {count} контактов",
+      "sources": {
+        "form": "Форма подписки",
+        "import": "Импорт",
+        "manual": "Добавлены вручную"
+      }
+    },
+    "examples": [
+      {
+        "business": "Northfield Studio",
+        "kind": "веб-дизайн агентство",
+        "site": "northfield.studio",
+        "schedule": "каждый понедельник в 9:00",
+        "subscribers": 312,
+        "newThisWeek": 9,
+        "clicks7": 84,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 58
+          },
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 31
+          },
+          {
+            "code": "pt",
+            "name": "Portuguese",
+            "share": 11
+          }
+        ],
+        "reader": "Владельцы клиник, магазинов и студий, которые хотят сайт, привлекающий клиентов, а не портфолио.",
+        "tones": [
+          "Тёплый",
+          "Простой",
+          "Практичный"
+        ],
+        "articles": [
+          "Как мы переделали сайт стоматологической клиники за шесть недель",
+          "Пять вещей, которые нужно исправить перед редизайном",
+          "Почему ваша кнопка бронирования должна быть оранжевой"
+        ],
+        "issue": {
+          "title": "Как мы переделали сайт стоматологической клиники за шесть недель",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "A clinic website rebuilt in six weeks",
+              "summary": "We moved booking to the top of every page and cut the forms from nine fields to three. Here is what changed for the clinic."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "El sitio de una clínica, renovado en seis semanas",
+              "summary": "Pusimos la reserva arriba en cada página y redujimos los formularios de nueve campos a tres. Esto es lo que cambió para la clínica."
+            },
+            {
+              "code": "pt",
+              "name": "Português",
+              "subject": "O site de uma clínica, refeito em seis semanas",
+              "summary": "Colocamos o agendamento no topo de cada página e reduzimos os formulários de nove campos para três. Veja o que mudou para a clínica."
+            }
+          ]
+        },
+        "clicksByDay": [
+          21,
+          17,
+          12,
+          9,
+          11,
+          6,
+          8
+        ],
+        "topLinks": [
+          {
+            "title": "Кейс клиники",
+            "clicks": 38
+          },
+          {
+            "title": "Пять вещей, которые нужно исправить перед редизайном",
+            "clicks": 27
+          },
+          {
+            "title": "Записаться на звонок",
+            "clicks": 19
+          }
+        ],
+        "people": [
+          {
+            "email": "lucia.r@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "mark@example.org",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "joana.s@example.net",
+            "lang": "PT",
+            "via": "form"
+          },
+          {
+            "email": "dr.chen@example.com",
+            "lang": "EN",
+            "via": "manual"
+          }
+        ],
+        "activity": [
+          "Выпуск отправлен 312 читателям на 3 языках",
+          "38 кликов по кейсу клиники",
+          "Люсия присоединилась через форму регистрации и читает на испанском"
+        ],
+        "importCount": 148
+      },
+      {
+        "business": "Brightline Software",
+        "kind": "компания-разработчик ПО",
+        "site": "brightline.dev",
+        "schedule": "1-го числа каждого месяца в 10:00",
+        "subscribers": 1240,
+        "newThisWeek": 23,
+        "clicks7": 211,
+        "automationsOn": 1,
+        "languages": [
+          {
+            "code": "en",
+            "name": "Английский",
+            "share": 64
+          },
+          {
+            "code": "de",
+            "name": "Немецкий",
+            "share": 22
+          },
+          {
+            "code": "fr",
+            "name": "Французский",
+            "share": 14
+          }
+        ],
+        "reader": "Офис-менеджеры и IT-руководители клиентов, которые ежедневно используют наше программное обеспечение для бронирования.",
+        "tones": [
+          "Четкий",
+          "Краткий",
+          "Дружелюбный"
+        ],
+        "articles": [
+          "Релиз 4.2: повторяющиеся встречи",
+          "Более быстрые отчеты для больших команд",
+          "Как перенести календарь из электронной таблицы"
+        ],
+        "issue": {
+          "title": "Релиз 4.2: повторяющиеся встречи",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "New this month: recurring appointments",
+              "summary": "You can now repeat any appointment weekly or monthly. Reports for teams over 50 people also load faster."
+            },
+            {
+              "code": "de",
+              "name": "Deutsch",
+              "subject": "Neu diesen Monat: wiederkehrende Termine",
+              "summary": "Sie können jetzt jeden Termin wöchentlich oder monatlich wiederholen. Berichte für Teams ab 50 Personen laden außerdem schneller."
+            },
+            {
+              "code": "fr",
+              "name": "Français",
+              "subject": "Nouveau ce mois-ci : les rendez-vous récurrents",
+              "summary": "Vous pouvez désormais répéter un rendez-vous chaque semaine ou chaque mois. Les rapports des équipes de plus de 50 personnes s'affichent aussi plus vite."
+            }
+          ]
+        },
+        "clicksByDay": [
+          64,
+          48,
+          33,
+          25,
+          19,
+          9,
+          13
+        ],
+        "topLinks": [
+          {
+            "title": "Руководство по повторяющимся встречам",
+            "clicks": 96
+          },
+          {
+            "title": "Примечания к релизу 4.2",
+            "clicks": 71
+          },
+          {
+            "title": "Переход с электронной таблицы",
+            "clicks": 44
+          }
+        ],
+        "people": [
+          {
+            "email": "it@example.de",
+            "lang": "DE",
+            "via": "import"
+          },
+          {
+            "email": "sophie.m@example.fr",
+            "lang": "FR",
+            "via": "form"
+          },
+          {
+            "email": "ops@example.com",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "k.weber@example.de",
+            "lang": "DE",
+            "via": "form"
+          }
+        ],
+        "activity": [
+          "Выпуск отправлен 1240 читателям на 3 языках",
+          "96 кликов по руководству по повторяющимся встречам",
+          "23 контакта импортировано из clients.csv"
+        ],
+        "importCount": 412
+      },
+      {
+        "business": "Casa Verde Realty",
+        "kind": "агентство недвижимости",
+        "site": "casaverde.homes",
+        "schedule": "каждый четверг в 8:00",
+        "subscribers": 586,
+        "newThisWeek": 14,
+        "clicks7": 163,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "es",
+            "name": "Испанский",
+            "share": 47
+          },
+          {
+            "code": "en",
+            "name": "Английский",
+            "share": 41
+          },
+          {
+            "code": "fr",
+            "name": "Французский",
+            "share": 12
+          }
+        ],
+        "reader": "Семьи и пенсионеры из-за рубежа, ищущие дом у побережья, и владельцы, которые могут продавать.",
+        "tones": [
+          "Теплый",
+          "Локальный",
+          "Спокойный"
+        ],
+        "articles": [
+          "Три новых дома у пляжа на этой неделе",
+          "Каковы затраты на закрытие сделки для иностранных покупателей",
+          "Цены в старом городе, осеннее обновление"
+        ],
+        "issue": {
+          "title": "Три новых дома у пляжа на этой неделе",
+          "langs": [
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tres casas nuevas cerca de la playa",
+              "summary": "Una casa de dos habitaciones con jardín, un apartamento con vista al mar y una casa para reformar a diez minutos del centro."
+            },
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Three new homes near the beach",
+              "summary": "A two bedroom house with a garden, a flat with a sea view and a house to renovate ten minutes from the center."
+            },
+            {
+              "code": "fr",
+              "name": "Français",
+              "subject": "Trois nouvelles maisons près de la plage",
+              "summary": "Une maison de deux chambres avec jardin, un appartement avec vue sur la mer et une maison à rénover à dix minutes du centre."
+            }
+          ]
+        },
+        "clicksByDay": [
+          12,
+          9,
+          15,
+          52,
+          38,
+          21,
+          16
+        ],
+        "topLinks": [
+          {
+            "title": "Квартира с видом на море",
+            "clicks": 71
+          },
+          {
+            "title": "Двухкомнатный дом с садом",
+            "clicks": 54
+          },
+          {
+            "title": "Затраты на закрытие сделки для иностранных покупателей",
+            "clicks": 38
+          }
+        ],
+        "people": [
+          {
+            "email": "familia.ortiz@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "j.dupont@example.fr",
+            "lang": "FR",
+            "via": "form"
+          },
+          {
+            "email": "tom.and.ann@example.org",
+            "lang": "EN",
+            "via": "manual"
+          },
+          {
+            "email": "rmora@example.net",
+            "lang": "ES",
+            "via": "import"
+          }
+        ],
+        "activity": [
+          "Выпуск отправлен 586 читателям на 3 языках",
+          "71 клик по квартире с видом на море",
+          "Читатель из Франции присоединился через форму регистрации"
+        ],
+        "importCount": 203
+      },
+      {
+        "business": "Mora and Partners",
+        "kind": "бухгалтерская фирма",
+        "site": "morapartners.co",
+        "schedule": "каждый второй вторник в 7:30",
+        "subscribers": 428,
+        "newThisWeek": 6,
+        "clicks7": 97,
+        "automationsOn": 1,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 52
+          },
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 38
+          },
+          {
+            "code": "it",
+            "name": "Italian",
+            "share": 10
+          }
+        ],
+        "reader": "Владельцы малого бизнеса, которые хотят знать об изменениях в налогах и зарплате без сложных терминов.",
+        "tones": [
+          "Спокойный",
+          "Точный",
+          "Простой"
+        ],
+        "articles": [
+          "Срок сдачи квартальных налогов перенесен на 15-е число",
+          "Что нужно учитывать при найме первого сотрудника",
+          "Чеки: бумажные или фото?"
+        ],
+        "issue": {
+          "title": "Срок сдачи квартальных налогов перенесен на 15-е число",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Your quarterly deadline moves to the 15th",
+              "summary": "The filing date for the next quarter moves five days later. Here is what to send us and when, so nothing is late."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tu plazo trimestral pasa al día 15",
+              "summary": "La fecha de presentación del próximo trimestre se mueve cinco días. Esto es lo que debes enviarnos y cuándo, para que nada llegue tarde."
+            },
+            {
+              "code": "it",
+              "name": "Italiano",
+              "subject": "La scadenza trimestrale passa al 15",
+              "summary": "La data di presentazione del prossimo trimestre slitta di cinque giorni. Ecco cosa inviarci e quando, perché nulla arrivi in ritardo."
+            }
+          ]
+        },
+        "clicksByDay": [
+          33,
+          24,
+          14,
+          8,
+          7,
+          4,
+          7
+        ],
+        "topLinks": [
+          {
+            "title": "Чек-лист на 15-е число",
+            "clicks": 46
+          },
+          {
+            "title": "Найм первого сотрудника",
+            "clicks": 29
+          },
+          {
+            "title": "Записаться на консультацию",
+            "clicks": 22
+          }
+        ],
+        "people": [
+          {
+            "email": "bakery.owner@example.com",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "c.rossi@example.it",
+            "lang": "IT",
+            "via": "form"
+          },
+          {
+            "email": "taller.luna@example.net",
+            "lang": "ES",
+            "via": "import"
+          },
+          {
+            "email": "finance@example.org",
+            "lang": "EN",
+            "via": "manual"
+          }
+        ],
+        "activity": [
+          "Выпуск отправлен 428 читателям на 3 языках",
+          "46 переходов по чек-листу на 15-е число",
+          "6 новых читателей на этой неделе"
+        ],
+        "importCount": 97
+      },
+      {
+        "business": "Run Better Coaching",
+        "kind": "тренер по бегу",
+        "site": "runbetter.coach",
+        "schedule": "каждое воскресенье в 18:00",
+        "subscribers": 907,
+        "newThisWeek": 31,
+        "clicks7": 248,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 49
+          },
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 33
+          },
+          {
+            "code": "de",
+            "name": "German",
+            "share": 18
+          }
+        ],
+        "reader": "Взрослые, готовящиеся к своему первому полумарафону, которые бегают три раза в неделю до работы.",
+        "tones": [
+          "Поддерживающий",
+          "Прямой",
+          "Короткий"
+        ],
+        "articles": [
+          "На этой неделе: длительная пробежка, медленнее, чем вы думаете",
+          "Обувь после 500 километров",
+          "20-минутная силовая тренировка"
+        ],
+        "issue": {
+          "title": "На этой неделе: длительная пробежка, медленнее, чем вы думаете",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Your long run should feel too easy",
+              "summary": "Keep it slow enough to talk. This week's plan adds ten minutes and one short hill session."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tu tirada larga debería sentirse demasiado fácil",
+              "summary": "Mantén un ritmo que te deje hablar. El plan de esta semana suma diez minutos y una sesión corta de cuestas."
+            },
+            {
+              "code": "de",
+              "name": "Deutsch",
+              "subject": "Dein langer Lauf sollte sich zu leicht anfühlen",
+              "summary": "Lauf so langsam, dass du noch reden kannst. Der Plan dieser Woche bringt zehn Minuten mehr und eine kurze Bergeinheit."
+            }
+          ]
+        },
+        "clicksByDay": [
+          18,
+          22,
+          26,
+          31,
+          35,
+          49,
+          67
+        ],
+        "topLinks": [
+          {
+            "title": "План тренировок на этой неделе",
+            "clicks": 121
+          },
+          {
+            "title": "20-минутная силовая тренировка",
+            "clicks": 78
+          },
+          {
+            "title": "Обувь после 500 километров",
+            "clicks": 49
+          }
+        ],
+        "people": [
+          {
+            "email": "ana.runs@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "felix.k@example.de",
+            "lang": "DE",
+            "via": "form"
+          },
+          {
+            "email": "sam@example.org",
+            "lang": "EN",
+            "via": "form"
+          },
+          {
+            "email": "club.secretary@example.net",
+            "lang": "EN",
+            "via": "import"
+          }
+        ],
+        "activity": [
+          "Выпуск отправлен 907 читателям на 3 языках",
+          "121 переход по плану тренировок на этой неделе",
+          "31 новый читатель на этой неделе, большинство из формы регистрации"
+        ],
+        "importCount": 260
+      }
+    ]
+  },
+  "errorPage": {
+    "notFoundEyebrow": "Ошибка 404",
+    "notFoundTitle": "Мы не смогли найти эту страницу",
+    "notFoundBody": "Возможно, ссылка устарела или содержит опечатку. Эти страницы, хорошее место для продолжения.",
+    "serverEyebrow": "Ошибка {status}",
+    "serverTitle": "Что-то пошло не так на нашей стороне",
+    "serverBody": "Не удалось загрузить эту страницу. Попробуйте через минуту. Если проблема повторяется, напишите на info@aiban.news.",
+    "retry": "Попробовать снова",
+    "home": "Перейти на главную страницу",
+    "popularTitle": "Популярные страницы",
+    "links": {
+      "howItWorks": "Как работает AIBAN",
+      "pricing": "Цены",
+      "help": "Центр помощи",
+      "login": "Войти в панель управления"
+    },
+    "report": "Если вы попали сюда по ссылке с нашего сайта, сообщите нам на info@aiban.news, чтобы мы могли это исправить."
   },
   "header": {
     "goToWorkspace": "Открыть панель управления",
@@ -982,1429 +1749,5 @@ export default {
     "monthly": "Ежемесячно",
     "yearly": "Ежегодно",
     "loadingPlan": "Загрузка данных плана..."
-  },
-  "languages": [
-    {
-      "code": "ab",
-      "name": "Абхазский"
-    },
-    {
-      "code": "aa",
-      "name": "Афарский"
-    },
-    {
-      "code": "af",
-      "name": "Африкаанс"
-    },
-    {
-      "code": "ak",
-      "name": "Акан"
-    },
-    {
-      "code": "sq",
-      "name": "Албанский"
-    },
-    {
-      "code": "am",
-      "name": "Амхарский"
-    },
-    {
-      "code": "ar",
-      "name": "Арабский"
-    },
-    {
-      "code": "an",
-      "name": "Арагонский"
-    },
-    {
-      "code": "hy",
-      "name": "Армянский"
-    },
-    {
-      "code": "as",
-      "name": "Ассамский"
-    },
-    {
-      "code": "av",
-      "name": "Аварский"
-    },
-    {
-      "code": "ae",
-      "name": "Авестийский"
-    },
-    {
-      "code": "ay",
-      "name": "Аймара"
-    },
-    {
-      "code": "az",
-      "name": "Азербайджанский"
-    },
-    {
-      "code": "bm",
-      "name": "Бамбара"
-    },
-    {
-      "code": "ba",
-      "name": "Башкирский"
-    },
-    {
-      "code": "eu",
-      "name": "Баскский"
-    },
-    {
-      "code": "be",
-      "name": "Белорусский"
-    },
-    {
-      "code": "bn",
-      "name": "Бенгальский"
-    },
-    {
-      "code": "bi",
-      "name": "Бислама"
-    },
-    {
-      "code": "bs",
-      "name": "Боснийский"
-    },
-    {
-      "code": "br",
-      "name": "Бретонский"
-    },
-    {
-      "code": "bg",
-      "name": "Болгарский"
-    },
-    {
-      "code": "my",
-      "name": "Бирманский"
-    },
-    {
-      "code": "ca",
-      "name": "Каталанский"
-    },
-    {
-      "code": "ch",
-      "name": "Чаморро"
-    },
-    {
-      "code": "ce",
-      "name": "Чеченский"
-    },
-    {
-      "code": "ny",
-      "name": "Чичева"
-    },
-    {
-      "code": "zh",
-      "name": "Китайский"
-    },
-    {
-      "code": "cu",
-      "name": "Церковнославянский"
-    },
-    {
-      "code": "cv",
-      "name": "Чувашский"
-    },
-    {
-      "code": "kw",
-      "name": "Корнский"
-    },
-    {
-      "code": "co",
-      "name": "Корсиканский"
-    },
-    {
-      "code": "cr",
-      "name": "Кри"
-    },
-    {
-      "code": "hr",
-      "name": "Хорватский"
-    },
-    {
-      "code": "cs",
-      "name": "Чешский"
-    },
-    {
-      "code": "da",
-      "name": "Датский"
-    },
-    {
-      "code": "dv",
-      "name": "Дивехи"
-    },
-    {
-      "code": "nl",
-      "name": "Голландский"
-    },
-    {
-      "code": "dz",
-      "name": "Дзонг-кэ"
-    },
-    {
-      "code": "en",
-      "name": "Английский"
-    },
-    {
-      "code": "eo",
-      "name": "Эсперанто"
-    },
-    {
-      "code": "et",
-      "name": "Эстонский"
-    },
-    {
-      "code": "ee",
-      "name": "Эве"
-    },
-    {
-      "code": "fo",
-      "name": "Фарерский"
-    },
-    {
-      "code": "fj",
-      "name": "Фиджийский"
-    },
-    {
-      "code": "fi",
-      "name": "Финский"
-    },
-    {
-      "code": "fr",
-      "name": "Французский"
-    },
-    {
-      "code": "fy",
-      "name": "Западнофризский"
-    },
-    {
-      "code": "ff",
-      "name": "Фулах"
-    },
-    {
-      "code": "gd",
-      "name": "Шотландский гэльский"
-    },
-    {
-      "code": "gl",
-      "name": "Галисийский"
-    },
-    {
-      "code": "lg",
-      "name": "Ганда"
-    },
-    {
-      "code": "ka",
-      "name": "Грузинский"
-    },
-    {
-      "code": "de",
-      "name": "Немецкий"
-    },
-    {
-      "code": "el",
-      "name": "Греческий"
-    },
-    {
-      "code": "kl",
-      "name": "Гренландский"
-    },
-    {
-      "code": "gn",
-      "name": "Гуарани"
-    },
-    {
-      "code": "gu",
-      "name": "Гуджарати"
-    },
-    {
-      "code": "ht",
-      "name": "Гаитянский креольский"
-    },
-    {
-      "code": "ha",
-      "name": "Хауса"
-    },
-    {
-      "code": "he",
-      "name": "Иврит"
-    },
-    {
-      "code": "hz",
-      "name": "Гереро"
-    },
-    {
-      "code": "hi",
-      "name": "Хинди"
-    },
-    {
-      "code": "ho",
-      "name": "Хири-моту"
-    },
-    {
-      "code": "hu",
-      "name": "Венгерский"
-    },
-    {
-      "code": "is",
-      "name": "Исландский"
-    },
-    {
-      "code": "io",
-      "name": "Идо"
-    },
-    {
-      "code": "ig",
-      "name": "Игбо"
-    },
-    {
-      "code": "id",
-      "name": "Индонезийский"
-    },
-    {
-      "code": "ia",
-      "name": "Интерлингва"
-    },
-    {
-      "code": "ie",
-      "name": "Интерлингве"
-    },
-    {
-      "code": "iu",
-      "name": "Инуктитут"
-    },
-    {
-      "code": "ik",
-      "name": "Инупиак"
-    },
-    {
-      "code": "ga",
-      "name": "Ирландский"
-    },
-    {
-      "code": "it",
-      "name": "Итальянский"
-    },
-    {
-      "code": "ja",
-      "name": "Японский"
-    },
-    {
-      "code": "jv",
-      "name": "Яванский"
-    },
-    {
-      "code": "kn",
-      "name": "Каннада"
-    },
-    {
-      "code": "kr",
-      "name": "Канури"
-    },
-    {
-      "code": "ks",
-      "name": "Кашмирский"
-    },
-    {
-      "code": "kk",
-      "name": "Казахский"
-    },
-    {
-      "code": "km",
-      "name": "Кхмерский"
-    },
-    {
-      "code": "ki",
-      "name": "Кикуйю"
-    },
-    {
-      "code": "rw",
-      "name": "Киньяруанда"
-    },
-    {
-      "code": "ky",
-      "name": "Киргизский"
-    },
-    {
-      "code": "kv",
-      "name": "Коми"
-    },
-    {
-      "code": "kg",
-      "name": "Конго"
-    },
-    {
-      "code": "ko",
-      "name": "Корейский"
-    },
-    {
-      "code": "kj",
-      "name": "Кваньяма"
-    },
-    {
-      "code": "ku",
-      "name": "Курдский"
-    },
-    {
-      "code": "lo",
-      "name": "Лаосский"
-    },
-    {
-      "code": "la",
-      "name": "Латинский"
-    },
-    {
-      "code": "lv",
-      "name": "Латышский"
-    },
-    {
-      "code": "li",
-      "name": "Лимбургский"
-    },
-    {
-      "code": "ln",
-      "name": "Лингала"
-    },
-    {
-      "code": "lt",
-      "name": "Литовский"
-    },
-    {
-      "code": "lu",
-      "name": "Луба-катанга"
-    },
-    {
-      "code": "lb",
-      "name": "Люксембургский"
-    },
-    {
-      "code": "mk",
-      "name": "Македонский"
-    },
-    {
-      "code": "mg",
-      "name": "Малагасийский"
-    },
-    {
-      "code": "ms",
-      "name": "Малайский"
-    },
-    {
-      "code": "ml",
-      "name": "Малаялам"
-    },
-    {
-      "code": "mt",
-      "name": "Мальтийский"
-    },
-    {
-      "code": "gv",
-      "name": "Мэнский"
-    },
-    {
-      "code": "mi",
-      "name": "Маори"
-    },
-    {
-      "code": "mr",
-      "name": "Маратхи"
-    },
-    {
-      "code": "mh",
-      "name": "Маршалльский"
-    },
-    {
-      "code": "mn",
-      "name": "Монгольский"
-    },
-    {
-      "code": "na",
-      "name": "Науру"
-    },
-    {
-      "code": "nv",
-      "name": "Навахо"
-    },
-    {
-      "code": "nd",
-      "name": "Северный ндебеле"
-    },
-    {
-      "code": "nr",
-      "name": "Южный ндебеле"
-    },
-    {
-      "code": "ng",
-      "name": "Ндонга"
-    },
-    {
-      "code": "ne",
-      "name": "Непальский"
-    },
-    {
-      "code": "no",
-      "name": "Норвежский"
-    },
-    {
-      "code": "nb",
-      "name": "Норвежский (букмол)"
-    },
-    {
-      "code": "nn",
-      "name": "Норвежский (нюнорск)"
-    },
-    {
-      "code": "oc",
-      "name": "Окситанский"
-    },
-    {
-      "code": "oj",
-      "name": "Оджибве"
-    },
-    {
-      "code": "or",
-      "name": "Ория"
-    },
-    {
-      "code": "om",
-      "name": "Оромо"
-    },
-    {
-      "code": "os",
-      "name": "Осетинский"
-    },
-    {
-      "code": "pi",
-      "name": "Пали"
-    },
-    {
-      "code": "ps",
-      "name": "Пушту"
-    },
-    {
-      "code": "fa",
-      "name": "Персидский"
-    },
-    {
-      "code": "pl",
-      "name": "Польский"
-    },
-    {
-      "code": "pt",
-      "name": "Португальский"
-    },
-    {
-      "code": "pa",
-      "name": "Панджаби"
-    },
-    {
-      "code": "qu",
-      "name": "Кечуа"
-    },
-    {
-      "code": "ro",
-      "name": "Румынский"
-    },
-    {
-      "code": "rm",
-      "name": "Романшский"
-    },
-    {
-      "code": "rn",
-      "name": "Рунди"
-    },
-    {
-      "code": "ru",
-      "name": "Русский"
-    },
-    {
-      "code": "se",
-      "name": "Северносаамский"
-    },
-    {
-      "code": "sm",
-      "name": "Самоанский"
-    },
-    {
-      "code": "sg",
-      "name": "Санго"
-    },
-    {
-      "code": "sa",
-      "name": "Санскрит"
-    },
-    {
-      "code": "sc",
-      "name": "Сардинский"
-    },
-    {
-      "code": "sr",
-      "name": "Сербский"
-    },
-    {
-      "code": "sn",
-      "name": "Шона"
-    },
-    {
-      "code": "ii",
-      "name": "Сычуаньский и"
-    },
-    {
-      "code": "sd",
-      "name": "Синдхи"
-    },
-    {
-      "code": "si",
-      "name": "Сингальский"
-    },
-    {
-      "code": "sk",
-      "name": "Словацкий"
-    },
-    {
-      "code": "sl",
-      "name": "Словенский"
-    },
-    {
-      "code": "so",
-      "name": "Сомалийский"
-    },
-    {
-      "code": "st",
-      "name": "Южный сото"
-    },
-    {
-      "code": "es",
-      "name": "Испанский"
-    },
-    {
-      "code": "su",
-      "name": "Сунданский"
-    },
-    {
-      "code": "sw",
-      "name": "Суахили"
-    },
-    {
-      "code": "ss",
-      "name": "Свати"
-    },
-    {
-      "code": "sv",
-      "name": "Шведский"
-    },
-    {
-      "code": "tl",
-      "name": "Тагальский"
-    },
-    {
-      "code": "ty",
-      "name": "Таитянский"
-    },
-    {
-      "code": "tg",
-      "name": "Таджикский"
-    },
-    {
-      "code": "ta",
-      "name": "Тамильский"
-    },
-    {
-      "code": "tt",
-      "name": "Татарский"
-    },
-    {
-      "code": "te",
-      "name": "Телугу"
-    },
-    {
-      "code": "th",
-      "name": "Тайский"
-    },
-    {
-      "code": "bo",
-      "name": "Тибетский"
-    },
-    {
-      "code": "ti",
-      "name": "Тигринья"
-    },
-    {
-      "code": "to",
-      "name": "Тонганский"
-    },
-    {
-      "code": "ts",
-      "name": "Тсонга"
-    },
-    {
-      "code": "tn",
-      "name": "Тсвана"
-    },
-    {
-      "code": "tr",
-      "name": "Турецкий"
-    },
-    {
-      "code": "tk",
-      "name": "Туркменский"
-    },
-    {
-      "code": "tw",
-      "name": "Тви"
-    },
-    {
-      "code": "ug",
-      "name": "Уйгурский"
-    },
-    {
-      "code": "uk",
-      "name": "Украинский"
-    },
-    {
-      "code": "ur",
-      "name": "Урду"
-    },
-    {
-      "code": "uz",
-      "name": "Узбекский"
-    },
-    {
-      "code": "ve",
-      "name": "Венда"
-    },
-    {
-      "code": "vi",
-      "name": "Вьетнамский"
-    },
-    {
-      "code": "vo",
-      "name": "Волапюк"
-    },
-    {
-      "code": "wa",
-      "name": "Валлонский"
-    },
-    {
-      "code": "cy",
-      "name": "Валлийский"
-    },
-    {
-      "code": "wo",
-      "name": "Волоф"
-    },
-    {
-      "code": "xh",
-      "name": "Коса"
-    },
-    {
-      "code": "yi",
-      "name": "Идиш"
-    },
-    {
-      "code": "yo",
-      "name": "Йоруба"
-    },
-    {
-      "code": "za",
-      "name": "Чжуанский"
-    },
-    {
-      "code": "zu",
-      "name": "Зулу"
-    }
-  ],
-  "countries": [
-    {
-      "code": "AF",
-      "name": "Афганистан"
-    },
-    {
-      "code": "AL",
-      "name": "Албания"
-    },
-    {
-      "code": "DZ",
-      "name": "Алжир"
-    },
-    {
-      "code": "AS",
-      "name": "Американское Самоа"
-    },
-    {
-      "code": "AD",
-      "name": "Андорра"
-    },
-    {
-      "code": "AO",
-      "name": "Ангола"
-    },
-    {
-      "code": "AI",
-      "name": "Ангилья"
-    },
-    {
-      "code": "AQ",
-      "name": "Антарктида"
-    },
-    {
-      "code": "AG",
-      "name": "Антигуа и Барбуда"
-    },
-    {
-      "code": "AR",
-      "name": "Аргентина"
-    },
-    {
-      "code": "AM",
-      "name": "Армения"
-    },
-    {
-      "code": "AW",
-      "name": "Аруба"
-    },
-    {
-      "code": "AU",
-      "name": "Австралия"
-    },
-    {
-      "code": "AT",
-      "name": "Австрия"
-    },
-    {
-      "code": "AZ",
-      "name": "Азербайджан"
-    },
-    {
-      "code": "BS",
-      "name": "Багамы"
-    },
-    {
-      "code": "BH",
-      "name": "Бахрейн"
-    },
-    {
-      "code": "BD",
-      "name": "Бангладеш"
-    },
-    {
-      "code": "BB",
-      "name": "Барбадос"
-    },
-    {
-      "code": "BY",
-      "name": "Беларусь"
-    },
-    {
-      "code": "BE",
-      "name": "Бельгия"
-    },
-    {
-      "code": "BZ",
-      "name": "Белиз"
-    },
-    {
-      "code": "BJ",
-      "name": "Бенин"
-    },
-    {
-      "code": "BM",
-      "name": "Бермуды"
-    },
-    {
-      "code": "BT",
-      "name": "Бутан"
-    },
-    {
-      "code": "BO",
-      "name": "Боливия"
-    },
-    {
-      "code": "BA",
-      "name": "Босния и Герцеговина"
-    },
-    {
-      "code": "BW",
-      "name": "Ботсвана"
-    },
-    {
-      "code": "BR",
-      "name": "Бразилия"
-    },
-    {
-      "code": "IO",
-      "name": "Британская территория в Индийском океане"
-    },
-    {
-      "code": "VG",
-      "name": "Британские Виргинские острова"
-    },
-    {
-      "code": "BN",
-      "name": "Бруней"
-    },
-    {
-      "code": "BG",
-      "name": "Болгария"
-    },
-    {
-      "code": "BF",
-      "name": "Буркина-Фасо"
-    },
-    {
-      "code": "BI",
-      "name": "Бурунди"
-    },
-    {
-      "code": "KH",
-      "name": "Камбоджа"
-    },
-    {
-      "code": "CM",
-      "name": "Камерун"
-    },
-    {
-      "code": "CA",
-      "name": "Канада"
-    },
-    {
-      "code": "CV",
-      "name": "Кабо-Верде"
-    },
-    {
-      "code": "KY",
-      "name": "Каймановы острова"
-    },
-    {
-      "code": "CF",
-      "name": "Центральноафриканская Республика"
-    },
-    {
-      "code": "TD",
-      "name": "Чад"
-    },
-    {
-      "code": "CL",
-      "name": "Чили"
-    },
-    {
-      "code": "CN",
-      "name": "Китай"
-    },
-    {
-      "code": "CX",
-      "name": "Остров Рождества"
-    },
-    {
-      "code": "CC",
-      "name": "Кокосовые (Килинг) острова"
-    },
-    {
-      "code": "CO",
-      "name": "Колумбия"
-    },
-    {
-      "code": "KM",
-      "name": "Коморы"
-    },
-    {
-      "code": "CG",
-      "name": "Конго - Браззавиль"
-    },
-    {
-      "code": "CD",
-      "name": "Конго - Киншаса"
-    },
-    {
-      "code": "CK",
-      "name": "Острова Кука"
-    },
-    {
-      "code": "CR",
-      "name": "Коста-Рика"
-    },
-    {
-      "code": "CI",
-      "name": "Кот-д'Ивуар"
-    },
-    {
-      "code": "HR",
-      "name": "Хорватия"
-    },
-    {
-      "code": "CU",
-      "name": "Куба"
-    },
-    {
-      "code": "CY",
-      "name": "Кипр"
-    },
-    {
-      "code": "CZ",
-      "name": "Чехия"
-    },
-    {
-      "code": "DK",
-      "name": "Дания"
-    },
-    {
-      "code": "DJ",
-      "name": "Джибути"
-    },
-    {
-      "code": "DM",
-      "name": "Доминика"
-    },
-    {
-      "code": "DO",
-      "name": "Доминиканская Республика"
-    },
-    {
-      "code": "EC",
-      "name": "Эквадор"
-    },
-    {
-      "code": "EG",
-      "name": "Египет"
-    },
-    {
-      "code": "SV",
-      "name": "Сальвадор"
-    },
-    {
-      "code": "GQ",
-      "name": "Экваториальная Гвинея"
-    },
-    {
-      "code": "ER",
-      "name": "Эритрея"
-    },
-    {
-      "code": "EE",
-      "name": "Эстония"
-    },
-    {
-      "code": "SZ",
-      "name": "Эсватини"
-    },
-    {
-      "code": "ET",
-      "name": "Эфиопия"
-    },
-    {
-      "code": "FJ",
-      "name": "Фиджи"
-    },
-    {
-      "code": "FI",
-      "name": "Финляндия"
-    },
-    {
-      "code": "FR",
-      "name": "Франция"
-    },
-    {
-      "code": "GA",
-      "name": "Габон"
-    },
-    {
-      "code": "GM",
-      "name": "Гамбия"
-    },
-    {
-      "code": "GE",
-      "name": "Грузия"
-    },
-    {
-      "code": "DE",
-      "name": "Германия"
-    },
-    {
-      "code": "GH",
-      "name": "Гана"
-    },
-    {
-      "code": "GR",
-      "name": "Греция"
-    },
-    {
-      "code": "GT",
-      "name": "Гватемала"
-    },
-    {
-      "code": "GN",
-      "name": "Гвинея"
-    },
-    {
-      "code": "GY",
-      "name": "Гайана"
-    },
-    {
-      "code": "HT",
-      "name": "Гаити"
-    },
-    {
-      "code": "HN",
-      "name": "Гондурас"
-    },
-    {
-      "code": "HK",
-      "name": "Гонконг"
-    },
-    {
-      "code": "HU",
-      "name": "Венгрия"
-    },
-    {
-      "code": "IS",
-      "name": "Исландия"
-    },
-    {
-      "code": "IN",
-      "name": "Индия"
-    },
-    {
-      "code": "ID",
-      "name": "Индонезия"
-    },
-    {
-      "code": "IR",
-      "name": "Иран"
-    },
-    {
-      "code": "IQ",
-      "name": "Ирак"
-    },
-    {
-      "code": "IE",
-      "name": "Ирландия"
-    },
-    {
-      "code": "IL",
-      "name": "Израиль"
-    },
-    {
-      "code": "IT",
-      "name": "Италия"
-    },
-    {
-      "code": "JM",
-      "name": "Ямайка"
-    },
-    {
-      "code": "JP",
-      "name": "Япония"
-    },
-    {
-      "code": "JO",
-      "name": "Иордания"
-    },
-    {
-      "code": "KZ",
-      "name": "Казахстан"
-    },
-    {
-      "code": "KE",
-      "name": "Кения"
-    },
-    {
-      "code": "KR",
-      "name": "Южная Корея"
-    },
-    {
-      "code": "KW",
-      "name": "Кувейт"
-    },
-    {
-      "code": "KG",
-      "name": "Киргизия"
-    },
-    {
-      "code": "LA",
-      "name": "Лаос"
-    },
-    {
-      "code": "LV",
-      "name": "Латвия"
-    },
-    {
-      "code": "LB",
-      "name": "Ливан"
-    },
-    {
-      "code": "LS",
-      "name": "Лесото"
-    },
-    {
-      "code": "LR",
-      "name": "Либерия"
-    },
-    {
-      "code": "LY",
-      "name": "Ливия"
-    },
-    {
-      "code": "LI",
-      "name": "Лихтенштейн"
-    },
-    {
-      "code": "LT",
-      "name": "Литва"
-    },
-    {
-      "code": "LU",
-      "name": "Люксембург"
-    },
-    {
-      "code": "MG",
-      "name": "Мадагаскар"
-    },
-    {
-      "code": "MW",
-      "name": "Малави"
-    },
-    {
-      "code": "MY",
-      "name": "Малайзия"
-    },
-    {
-      "code": "MV",
-      "name": "Мальдивы"
-    },
-    {
-      "code": "ML",
-      "name": "Мали"
-    },
-    {
-      "code": "MT",
-      "name": "Мальта"
-    },
-    {
-      "code": "MX",
-      "name": "Мексика"
-    },
-    {
-      "code": "MD",
-      "name": "Молдова"
-    },
-    {
-      "code": "MC",
-      "name": "Монако"
-    },
-    {
-      "code": "MN",
-      "name": "Монголия"
-    },
-    {
-      "code": "ME",
-      "name": "Черногория"
-    },
-    {
-      "code": "MA",
-      "name": "Марокко"
-    },
-    {
-      "code": "MZ",
-      "name": "Мозамбик"
-    },
-    {
-      "code": "MM",
-      "name": "Мьянма"
-    },
-    {
-      "code": "NA",
-      "name": "Намибия"
-    },
-    {
-      "code": "NP",
-      "name": "Непал"
-    },
-    {
-      "code": "NL",
-      "name": "Нидерланды"
-    },
-    {
-      "code": "NZ",
-      "name": "Новая Зеландия"
-    },
-    {
-      "code": "NI",
-      "name": "Никарагуа"
-    },
-    {
-      "code": "NE",
-      "name": "Нигер"
-    },
-    {
-      "code": "NG",
-      "name": "Нигерия"
-    },
-    {
-      "code": "MK",
-      "name": "Северная Македония"
-    },
-    {
-      "code": "NO",
-      "name": "Норвегия"
-    },
-    {
-      "code": "OM",
-      "name": "Оман"
-    },
-    {
-      "code": "PK",
-      "name": "Пакистан"
-    },
-    {
-      "code": "PA",
-      "name": "Панама"
-    },
-    {
-      "code": "PG",
-      "name": "Папуа - Новая Гвинея"
-    },
-    {
-      "code": "PY",
-      "name": "Парагвай"
-    },
-    {
-      "code": "PE",
-      "name": "Перу"
-    },
-    {
-      "code": "PH",
-      "name": "Филиппины"
-    },
-    {
-      "code": "PL",
-      "name": "Польша"
-    },
-    {
-      "code": "PT",
-      "name": "Португалия"
-    },
-    {
-      "code": "QA",
-      "name": "Катар"
-    },
-    {
-      "code": "RO",
-      "name": "Румыния"
-    },
-    {
-      "code": "RU",
-      "name": "Россия"
-    },
-    {
-      "code": "RW",
-      "name": "Руанда"
-    },
-    {
-      "code": "SA",
-      "name": "Саудовская Аравия"
-    },
-    {
-      "code": "SN",
-      "name": "Сенегал"
-    },
-    {
-      "code": "RS",
-      "name": "Сербия"
-    },
-    {
-      "code": "SG",
-      "name": "Сингапур"
-    },
-    {
-      "code": "SK",
-      "name": "Словакия"
-    },
-    {
-      "code": "SI",
-      "name": "Словения"
-    },
-    {
-      "code": "ZA",
-      "name": "Южная Африка"
-    },
-    {
-      "code": "ES",
-      "name": "Испания"
-    },
-    {
-      "code": "LK",
-      "name": "Шри-Ланка"
-    },
-    {
-      "code": "SE",
-      "name": "Швеция"
-    },
-    {
-      "code": "CH",
-      "name": "Швейцария"
-    },
-    {
-      "code": "TW",
-      "name": "Тайвань"
-    },
-    {
-      "code": "TH",
-      "name": "Таиланд"
-    },
-    {
-      "code": "TR",
-      "name": "Турция"
-    },
-    {
-      "code": "UG",
-      "name": "Уганда"
-    },
-    {
-      "code": "UA",
-      "name": "Украина"
-    },
-    {
-      "code": "AE",
-      "name": "Объединенные Арабские Эмираты"
-    },
-    {
-      "code": "GB",
-      "name": "Великобритания"
-    },
-    {
-      "code": "US",
-      "name": "США"
-    },
-    {
-      "code": "UY",
-      "name": "Уругвай"
-    },
-    {
-      "code": "UZ",
-      "name": "Узбекистан"
-    },
-    {
-      "code": "VE",
-      "name": "Венесуэла"
-    },
-    {
-      "code": "VN",
-      "name": "Вьетнам"
-    },
-    {
-      "code": "YE",
-      "name": "Йемен"
-    },
-    {
-      "code": "ZM",
-      "name": "Замбия"
-    },
-    {
-      "code": "ZW",
-      "name": "Зимбабве"
-    }
-  ]
+  }
 };

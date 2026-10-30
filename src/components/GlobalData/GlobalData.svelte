@@ -11,7 +11,7 @@
     let cancelled = false;
     let chosen: string | null = null;
     try {
-      chosen = localStorage.getItem("lang");
+      chosen = localStorage.getItem("lang.chosen") === "1" ? localStorage.getItem("lang") : null;
     } catch {
       // Storage blocked (private mode): use the browser language below.
     }

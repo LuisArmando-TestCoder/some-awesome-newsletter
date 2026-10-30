@@ -1,5 +1,5 @@
-// pnb strings for locales-newflow. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale pnb
+// pnb (Western Punjabi) strings for locales-newflow. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "onboarding": {
     "progress": "{total} وچوں قدم {current}",
@@ -116,6 +116,9 @@ export default {
       "dayLabel": "دن",
       "timeLabel": "ویلا",
       "timeHint": "تہاڈے مقامی ویلے دے حساب نال۔",
+      "summaryDaily": "ہر روز {time} بجے، آپ کے وقت کے مطابق ({zone})۔",
+      "summaryWeekly": "ہر {day} کو {time} بجے، آپ کے وقت کے مطابق ({zone})۔",
+      "summaryMonthly": "ہر مہینے کی پہلی تاریخ کو {time} بجے، آپ کے وقت کے مطابق ({zone})۔",
       "recipeTitle": "نویں شمارے آپے بھیجو",
       "recipeBody": "اتے دتے شیڈول تے اسیں تہاڈا سب توں ودھیا نواں مضمون چندے آں، ایہنوں تہاڈے انداز وچ لکھدے آں، ہر پڑھن والے لئی ترجمہ کردے آں تے ای میل کر دیندے آں۔",
       "recipeOn": "آن",

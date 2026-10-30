@@ -1,5 +1,5 @@
-// te strings for locales-newflow. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale te
+// te (Telugu) strings for locales-newflow. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "onboarding": {
     "progress": "దశ {current} / {total}",
@@ -78,7 +78,7 @@ export default {
       "skipNote": "మీరు దాటవేస్తే, పంపినవారు AIBAN గా కనిపిస్తుంది. పేరును తర్వాత సెట్టింగ్‌లలో మార్చవచ్చు.",
       "label": "పంపినవారి పేరు",
       "hint": "మీ పేరు, మీ కంపెనీ లేదా న్యూస్‌లెటర్ పేరు. 60 అక్షరాల వరకు.",
-      "placeholder": "Silva Studio",
+      "placeholder": "సిల్వా స్టూడియో",
       "previewLabel": "ఇన్‌బాక్స్‌లో ఇది ఎలా కనిపిస్తుంది",
       "previewBody": "మీ సంచిక ఈ పంపినవారి పేరుతో కనిపిస్తుంది. ఇది AIBAN పంపే చిరునామా నుండి పంపబడుతుంది.",
       "save": "సేవ్ చేసి కొనసాగించండి",
@@ -93,7 +93,7 @@ export default {
       "why": "మీ సంతకం ప్రతి సంచిక చివర వస్తుంది, కాబట్టి ఎవరు రాశారో, మిమ్మల్ని ఎలా సంప్రదించాలో పాఠకులకు తెలుస్తుంది.",
       "skipNote": "మీరు దాటవేస్తే, సంచికలు మీ న్యూస్‌లెటర్ పేరుతో మాత్రమే ముగుస్తాయి.",
       "nameLabel": "మీ పేరు",
-      "namePlaceholder": "Ana Silva",
+      "namePlaceholder": "అనా సిల్వా",
       "roleLabel": "హోదా లేదా కంపెనీ",
       "rolePlaceholder": "వ్యవస్థాపకురాలు, Silva Studio",
       "linkLabel": "లింక్",
@@ -116,6 +116,9 @@ export default {
       "dayLabel": "రోజు",
       "timeLabel": "సమయం",
       "timeHint": "మీ స్థానిక సమయం ప్రకారం.",
+      "summaryDaily": "ప్రతి రోజు {time}కి, మీ సమయం ({zone}).",
+      "summaryWeekly": "ప్రతి {day} {time}కి, మీ సమయం ({zone}).",
+      "summaryMonthly": "ప్రతి నెల 1వ తేదీ {time}కి, మీ సమయం ({zone}).",
       "recipeTitle": "కొత్త సంచికలను ఆటోమేటిక్‌గా పంపండి",
       "recipeBody": "పై షెడ్యూల్ ప్రకారం, మీ ఉత్తమ కొత్త ఆర్టికల్‌ను ఎంచుకుని, మీ శైలిలో రాసి, ప్రతి పాఠకుడి కోసం అనువదించి, ఈమెయిల్ చేస్తాం.",
       "recipeOn": "ఆన్",

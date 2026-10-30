@@ -8,7 +8,8 @@
     // locale file when the language store changes (src/lib/i18n/lazy.ts), so this
     // component no longer bundles every language of every namespace.
     import { locales as availableCodes, t as t2 } from "$lib/i18n/translations";
-    import { htmlLang, normalizeCode } from "$lib/i18n/lazy";
+    import { htmlLang } from "$lib/i18n/lazy";
+    import { detectLanguage, rememberChoice } from "$lib/i18n/detect";
     import languagesData from "../../../components/systems/inputs/Language/languages";
     import { isRtl } from "../../../components/systems/widgets/Subscribe/subscribe";
     import { dashboardMode } from "$lib/dashboard/nav";
@@ -120,7 +121,7 @@
         tucked = hit;
     }
 
-    function setLanguage(code: string) {
+    function setLanguage(code: string, chosen = false) {
         // 1. Update the standalone store
         language.set(code);
         
@@ -144,28 +145,16 @@
             document.documentElement.dir = isRtl(code) ? "rtl" : "ltr";
         }
 
-        // 5. Persistence
-        if (typeof localStorage !== 'undefined') {
-            localStorage.setItem('lang', code);
-        }
+        // 5. Persistence: only an explicit pick in this menu is saved. Detection is not,
+        // so it follows the browser language next time (src/lib/i18n/detect.ts).
+        if (chosen) rememberChoice(code);
 
         closeMenu(isOpen);
     }
 
     onMount(() => {
-        let saved: string | null = null;
-        try {
-            saved = typeof localStorage !== "undefined" ? localStorage.getItem("lang") : null;
-        } catch {
-            saved = null;
-        }
-        // Browser language: match the base code ("pt-BR" is "pt", "ja" is the app's "jp").
-        const browser = typeof navigator !== "undefined" ? normalizeCode(navigator.language) : "";
-        const detected =
-            (saved && availableCodes.includes(saved) ? saved : "") ||
-            (availableCodes.includes(browser) ? browser : "") ||
-            "en";
-        setLanguage(detected);
+        // Saved pick first, then the browser's preferred languages in order, then English.
+        setLanguage(detectLanguage(availableCodes).code);
         scheduleOverlapCheck();
         return () => {
             if (raf) cancelAnimationFrame(raf);
@@ -204,7 +193,7 @@
                         aria-checked={selected}
                         tabindex={selected ? 0 : -1}
                         lang={lang.code}
-                        on:click={() => setLanguage(lang.code)}
+                        on:click={() => setLanguage(lang.code, true)}
                     >
                         <span class="lang-picker__check" aria-hidden="true">
                             {#if selected}

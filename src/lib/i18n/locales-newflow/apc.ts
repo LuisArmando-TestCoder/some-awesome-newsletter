@@ -1,5 +1,5 @@
-// apc strings for locales-newflow. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale apc
+// apc (Levantine Arabic) strings for locales-newflow. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "onboarding": {
     "progress": "الخطوة {current} من {total}",
@@ -116,6 +116,9 @@ export default {
       "dayLabel": "اليوم",
       "timeLabel": "الوقت",
       "timeHint": "حسب توقيتك المحلي.",
+      "summaryDaily": "كل يوم على {time}، حسب وقتك ({zone}).",
+      "summaryWeekly": "كل {day} على {time}، حسب وقتك ({zone}).",
+      "summaryMonthly": "في الأول من كل شهر على {time}، حسب وقتك ({zone}).",
       "recipeTitle": "ابعت الأعداد الجديدة أوتوماتيك",
       "recipeBody": "بالمواعيد يلي فوق، منختار أحسن مقال جديد عندك، ومنكتبو بأسلوبك، ومنترجمو لكل قارئ، ومنبعتو بالإيميل.",
       "recipeOn": "مفعّل",

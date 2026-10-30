@@ -1,5 +1,5 @@
-// mr strings for locales. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale mr
+// mr (Marathi) strings for locales. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "auth": {
     "logo": "/icons/logo.png",
@@ -35,6 +35,82 @@ export default {
       "ogImageAlt": "AIBAN लोगो"
     },
     "skipLink": "मुख्य मजकुरावर जा",
+    "display": {
+      "title": "तुमची वेबसाइट, न्यूजलेटर म्हणून लिहिली.",
+      "kicker": "AIBAN"
+    },
+    "statement": {
+      "lines": [
+        "तुम्ही आधीच चांगले काम प्रकाशित करता.",
+        "तुमचे क्लायंट एकापेक्षा जास्त भाषेत ते वाचतात.",
+        "AIBAN प्रत्येक नवीन लेखाला एक अंक बनवते",
+        "आणि प्रत्येक वाचकाला त्यांच्या भाषेतील आवृत्ती पाठवते."
+      ]
+    },
+    "history": {
+      "eyebrow": "हे कसे काम करते",
+      "title": "एका अंकाचे जीवनचक्र.",
+      "lead": "एका अंकाचा मार्ग तुमच्या वेळापत्रकाने सुरू केल्यापासून तो पुन्हा सुरू होईपर्यंत पहा. तुम्ही हे एकदा सेट करता.",
+      "note": "उदाहरण वेळापत्रक. तुम्ही दिवस, वेळ आणि वारंवारता निवडता.",
+      "progressLabel": "एका अंकाच्या पायऱ्या",
+      "items": [
+        {
+          "mark": "9:00",
+          "title": "तुमचे वेळापत्रक रन सुरू करते",
+          "body": "या उदाहरणात प्रत्येक सोमवारी सकाळी ९:०० वाजता. तुम्ही दैनिक, साप्ताहिक किंवा मासिक निवडता."
+        },
+        {
+          "mark": "वाचा",
+          "title": "AIBAN तुमची वेबसाइट वाचते",
+          "body": "ते तुमचा नवीनतम लेख शोधते आणि तुमच्या आदर्श वाचकासाठी सर्वात महत्त्वाचा भाग निवडते."
+        },
+        {
+          "mark": "लिहा",
+          "title": "ते तुमच्या आवाजात अंक लिहिते",
+          "body": "मजकूर तुमच्या साइटप्रमाणे लिहिला जातो, म्हणून तो तुमच्यासारखा वाटतो."
+        },
+        {
+          "mark": "भाषांतर",
+          "title": "प्रत्येक वाचकाला त्यांची भाषा मिळते",
+          "body": "एक अंक तुमच्या सदस्यांना लागणाऱ्या इतक्या आवृत्त्या बनतो."
+        },
+        {
+          "mark": "पाठवा",
+          "title": "ते तुमच्या नावाखाली येते",
+          "body": "तुमच्या नावाने आणि तुमच्या ईमेल सहीसह. प्रतिसाद तुमच्या इनबॉक्समध्ये जातात."
+        },
+        {
+          "mark": "प्रकाशित",
+          "title": "ते तुमच्या ब्लॉगवर एक लेख बनते",
+          "body": "त्याच्या स्वतःच्या लिंकसह जे लोक शोधू शकतात आणि शेअर करू शकतात."
+        },
+        {
+          "mark": "अहवाल",
+          "title": "तुम्हाला काय झाले ते दिसते",
+          "body": "तुमचे डॅशबोर्ड कोण सामील झाले आणि वाचकांनी कोणती लिंके क्लिक केली याची यादी दाखवते."
+        },
+        {
+          "mark": "पुन्हा",
+          "title": "पुढच्या सोमवारी ते पुन्हा चालते",
+          "body": "तुम्ही ते तुमच्या डॅशबोर्डवर बंद करेपर्यंत ते चालू राहते."
+        }
+      ]
+    },
+    "rail": {
+      "label": "पृष्ठ अध्याय",
+      "chapters": [
+        "सुरुवात",
+        "का",
+        "भाषा",
+        "हे कसे काम करते",
+        "तुमचे नाव",
+        "वाढ",
+        "हे कोणासाठी आहे",
+        "किंमत",
+        "प्रश्न",
+        "सुरू करा"
+      ]
+    },
     "hero": {
       "eyebrow": "सेवा व्यवसायांसाठी न्यूजलेटर",
       "title": "तुमची वेबसाइट प्रत्येक वाचकाच्या भाषेत साप्ताहिक न्यूजलेटर बनते",
@@ -57,6 +133,26 @@ export default {
       "startCta": "{site} सह मोफत सुरू करा",
       "startCtaGeneric": "मोफत सुरू करा",
       "liveRegion": "{site} साठी नमुना प्रीव्ह्यू अपडेट झाला."
+    },
+    "live": {
+      "badge": "नुकतेच लिहिले",
+      "loadingTitle": "{site} वरून नमुना अंक लिहीत आहे",
+      "steps": [
+        "{site} वाचत आहे",
+        "तुमचा नवीनतम लेख शोधत आहे",
+        "ते {language} मध्ये लिहीत आहे",
+        "तुमच्या ईमेल टेम्पलेटमध्ये ठेवत आहे"
+      ],
+      "takes": "यास साधारणपणे २० ते ४० सेकंद लागतात. तुम्ही स्क्रोल करत राहू शकता.",
+      "readyNote": "AIBAN हा नमुना {site} वरील नवीनतम लेखावरून लिहितो. काहीही सेव्ह केले जात नाही किंवा पाठवले जात नाही. जेव्हा तुम्ही सुरू करता, तेव्हा ते तुमच्या स्वतःच्या आवाजात आणि वेळापत्रकानुसार कार्य करते.",
+      "readyAnnounce": "{site} वरून तुमचा नमुना अंक तयार आहे.",
+      "languageLabel": "वाचक भाषा",
+      "loadingLanguage": "ते {language} मध्ये लिहीत आहे",
+      "errorTitle": "आम्ही {site} वरून पूर्वावलोकन लिहू शकलो नाही",
+      "retry": "पुन्हा प्रयत्न करा",
+      "showSample": "नमुना लेआउट दाखवा",
+      "frameTitle": "{site} वरून लिहिलेला नमुना अंक",
+      "openFull": "नवीन टॅबमध्ये उघडा"
     },
     "chain": {
       "eyebrow": "हे कसे काम करते",
@@ -587,6 +683,7 @@ export default {
       "suggestions": "सूचना",
       "recent": "अलीकडचे शोध",
       "clearRecent": "अलीकडचे शोध पुसा",
+      "clear": "शोध साफ करा",
       "title": "शोध निकाल",
       "resultsFor": "\"{q}\" साठी निकाल",
       "count": "{count} लेख सापडले",
@@ -691,6 +788,7 @@ export default {
   "legal": {
     "navLabel": "कायदेशीर कागदपत्रे",
     "lastUpdated": "शेवटचे अपडेट: {date}",
+    "onThisPage": "या पृष्ठावर",
     "privacy": {
       "title": "गोपनीयता धोरण",
       "metaTitle": "गोपनीयता धोरण | AIBAN",
@@ -919,6 +1017,8 @@ export default {
     "codeSent": "आम्ही तुमच्या ईमेलवर एक कोड पाठवला आहे.",
     "invalidCode": "हा कोड बरोबर नाही. आम्ही पाठवलेला सर्वात नवा ईमेल पाहा, किंवा कोड पुन्हा पाठवा.",
     "regenerateCode": "कोड पुन्हा पाठवा",
+    "codeAccepted": "कोड स्वीकारला. तुमचे डॅशबोर्ड उघडत आहे.",
+    "codeLabel": "6-अंकी कोड",
     "back": "मागे",
     "byProceeding": "पुढे जाऊन, तुम्ही सहमत आहात",
     "termsOfService": "सेवा अटी",
@@ -947,6 +1047,673 @@ export default {
       "title": "न्यूजलेटरमध्ये तुमचे स्वागत आहे.",
       "invitedBy": "तुम्हाला {configuratorId} यांनी आमंत्रित केले आहे."
     }
+  },
+  "showcase": {
+    "sampleBadge": "नमुना डेटा",
+    "exampleLabel": "उदाहरण व्यवसाय",
+    "caption": "{business} हे एक उदाहरण {kind} आहे. या दृश्यातील नावे, लेख आणि संख्या प्लेसहोल्डर आहेत जे दर्शवतात की काही आठवड्यांनंतर तुमचे डॅशबोर्ड कसे दिसते.",
+    "pause": "अ‍ॅनिमेशन थांबवा",
+    "play": "अ‍ॅनिमेशन चालू करा",
+    "scenesLabel": "डॅशबोर्डचे भाग",
+    "examplesLabel": "उदाहरण व्यवसाय",
+    "appUrl": "app.aiban.news",
+    "nav": {
+      "home": "होम",
+      "automations": "ऑटोमेशन्स",
+      "sources": "स्रोत",
+      "subscribers": "सदस्य",
+      "reports": "अहवाल",
+      "blog": "ब्लॉग"
+    },
+    "scenes": {
+      "home": "ओव्हरव्ह्यू",
+      "issue": "अंक",
+      "reports": "क्लिक्स",
+      "subscribers": "सदस्य",
+      "automation": "वेळापत्रक",
+      "source": "तुमची वेबसाइट",
+      "voice": "तुमचा आवाज",
+      "signup": "साइनअप फॉर्म",
+      "blog": "ब्लॉग",
+      "import": "आयात करा"
+    },
+    "ui": {
+      "hello": "नमस्कार, {business}",
+      "narrative": "{subscribers} वाचक {languages} भाषांमध्ये. पुढचा अंक {schedule} प्रकाशित होईल.",
+      "kpiSubscribers": "सदस्य",
+      "kpiLanguages": "भाषा",
+      "kpiClicks": "क्लिक्स, गेल्या ७ दिवसांत",
+      "kpiAutomations": "ऑटोमेशन चालू आहे",
+      "kpiNew": "या आठवड्यात {count} नवीन",
+      "nextIssue": "पुढचा अंक",
+      "ready": "तयार",
+      "activity": "अलीकडील क्रियाकलाप",
+      "from": "कडून",
+      "subject": "विषय",
+      "readMore": "संपूर्ण लेख वाचा",
+      "readerLanguage": "वाचक भाषा",
+      "clicksTitle": "क्लिक्स, गेल्या ७ दिवसांत",
+      "mostClicked": "सर्वाधिक क्लिक केलेले",
+      "clicks": "क्लिक्स",
+      "days": [
+        "सोम",
+        "मंगळ",
+        "बुध",
+        "गुरु",
+        "शुक्र",
+        "शनि",
+        "रवि"
+      ],
+      "subscribersTitle": "सदस्य",
+      "language": "भाषा",
+      "joinedVia": "याद्वारे सामील झाले",
+      "newSubscriber": "नवीन सदस्य",
+      "automationTitle": "साप्ताहिक अंक",
+      "automationSentence": "{schedule}, नवीनतम लेखातून एक अंक लिहा आणि प्रत्येक वाचकाला त्यांच्या भाषेत पाठवा.",
+      "on": "चालू",
+      "off": "बंद",
+      "automationOn": "ऑटोमेशन चालू केले",
+      "sourceLabel": "तुमची सामग्री कोठून येते",
+      "sourceButton": "माझी साइट वाचा",
+      "reading": "तुमची साइट वाचत आहे",
+      "found": "{count} लेख सापडले",
+      "voiceReader": "तुमचा आदर्श वाचक",
+      "voiceTone": "त्याचा आवाज कसा असावा",
+      "signupHeading": "आमचे साप्ताहिक नोट्स मिळवा",
+      "signupEmail": "ईमेल पत्ता",
+      "signupLanguage": "भाषा",
+      "signupButton": "सदस्यता घ्या",
+      "signupDone": "पुष्टी करण्यासाठी तुमचा इनबॉक्स तपासा.",
+      "blogTitle": "{business} कडून लेख",
+      "importFile": "clients.csv",
+      "importing": "संपर्क आयात करत आहे",
+      "imported": "{count} संपर्क जोडले गेले",
+      "sources": {
+        "form": "साइनअप फॉर्म",
+        "import": "आयात करा",
+        "manual": "हाताने जोडले"
+      }
+    },
+    "examples": [
+      {
+        "business": "Northfield Studio",
+        "kind": "वेब डिझाईन एजन्सी",
+        "site": "northfield.studio",
+        "schedule": "प्रत्येक सोमवारी सकाळी 9:00 वाजता",
+        "subscribers": 312,
+        "newThisWeek": 9,
+        "clicks7": 84,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 58
+          },
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 31
+          },
+          {
+            "code": "pt",
+            "name": "Portuguese",
+            "share": 11
+          }
+        ],
+        "reader": "क्लिनिक, दुकाने आणि स्टुडिओचे मालक ज्यांना क्लायंट आणणारी वेबसाइट हवी आहे, पोर्टफोलिओ नाही.",
+        "tones": [
+          "उबदार",
+          "साधे",
+          "व्यावहारिक"
+        ],
+        "articles": [
+          "आम्ही सहा आठवड्यांत दंतचिकित्सा क्लिनिक वेबसाइट कशी पुन्हा बनवली",
+          "पुनर्डिझाईन करण्यापूर्वी दुरुस्त करण्यासाठी पाच गोष्टी",
+          "तुमची बुकिंग बटण का नारिंगी असावे"
+        ],
+        "issue": {
+          "title": "आम्ही सहा आठवड्यांत दंतचिकित्सा क्लिनिक वेबसाइट कशी पुन्हा बनवली",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "A clinic website rebuilt in six weeks",
+              "summary": "We moved booking to the top of every page and cut the forms from nine fields to three. Here is what changed for the clinic."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "El sitio de una clínica, renovado en seis semanas",
+              "summary": "Pusimos la reserva arriba en cada página y redujimos los formularios de nueve campos a tres. Esto es lo que cambió para la clínica."
+            },
+            {
+              "code": "pt",
+              "name": "Português",
+              "subject": "O site de uma clínica, refeito em seis semanas",
+              "summary": "Colocamos o agendamento no topo de cada página e reduzimos os formulários de nove campos para três. Veja o que mudou para a clínica."
+            }
+          ]
+        },
+        "clicksByDay": [
+          21,
+          17,
+          12,
+          9,
+          11,
+          6,
+          8
+        ],
+        "topLinks": [
+          {
+            "title": "क्लिनिक केस स्टडी",
+            "clicks": 38
+          },
+          {
+            "title": "पुनर्डिझाईन करण्यापूर्वी दुरुस्त करण्यासाठी पाच गोष्टी",
+            "clicks": 27
+          },
+          {
+            "title": "कॉल बुक करा",
+            "clicks": 19
+          }
+        ],
+        "people": [
+          {
+            "email": "lucia.r@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "mark@example.org",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "joana.s@example.net",
+            "lang": "PT",
+            "via": "form"
+          },
+          {
+            "email": "dr.chen@example.com",
+            "lang": "EN",
+            "via": "manual"
+          }
+        ],
+        "activity": [
+          "३ भाषांमध्ये ३१२ वाचकांना अंक पाठवला",
+          "क्लिनिक केस स्टडीवर ३८ क्लिक",
+          "लुसिया साइनअप फॉर्मवरून सामील झाली आणि स्पॅनिशमध्ये वाचते"
+        ],
+        "importCount": 148
+      },
+      {
+        "business": "Brightline Software",
+        "kind": "सॉफ्टवेअर कंपनी",
+        "site": "brightline.dev",
+        "schedule": "प्रत्येक महिन्याच्या पहिल्या तारखेस सकाळी 10:00 वाजता",
+        "subscribers": 1240,
+        "newThisWeek": 23,
+        "clicks7": 211,
+        "automationsOn": 1,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 64
+          },
+          {
+            "code": "de",
+            "name": "जर्मन",
+            "share": 22
+          },
+          {
+            "code": "fr",
+            "name": "फ्रेंच",
+            "share": 14
+          }
+        ],
+        "reader": "आमच्या बुकिंग सॉफ्टवेअरचा दररोज वापर करणाऱ्या क्लायंट्सचे ऑफिस मॅनेजर्स आणि आयटी लीड्स.",
+        "tones": [
+          "स्पष्ट",
+          "लहान",
+          "मैत्रीपूर्ण"
+        ],
+        "articles": [
+          "रिलीज 4.2: पुनरावृत्तीचे अपॉइंटमेंट्स",
+          "मोठ्या संघांसाठी वेगवान अहवाल",
+          "तुमचे कॅलेंडर स्प्रेडशीटमधून कसे हलवायचे"
+        ],
+        "issue": {
+          "title": "रिलीज 4.2: पुनरावृत्तीचे अपॉइंटमेंट्स",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "New this month: recurring appointments",
+              "summary": "You can now repeat any appointment weekly or monthly. Reports for teams over 50 people also load faster."
+            },
+            {
+              "code": "de",
+              "name": "Deutsch",
+              "subject": "Neu diesen Monat: wiederkehrende Termine",
+              "summary": "Sie können jetzt jeden Termin wöchentlich oder monatlich wiederholen. Berichte für Teams ab 50 Personen laden außerdem schneller."
+            },
+            {
+              "code": "fr",
+              "name": "Français",
+              "subject": "Nouveau ce mois-ci : les rendez-vous récurrents",
+              "summary": "Vous pouvez désormais répéter un rendez-vous chaque semaine ou chaque mois. Les rapports des équipes de plus de 50 personnes s'affichent aussi plus vite."
+            }
+          ]
+        },
+        "clicksByDay": [
+          64,
+          48,
+          33,
+          25,
+          19,
+          9,
+          13
+        ],
+        "topLinks": [
+          {
+            "title": "पुनरावृत्तीचे अपॉइंटमेंट्स मार्गदर्शक",
+            "clicks": 96
+          },
+          {
+            "title": "रिलीज नोट्स 4.2",
+            "clicks": 71
+          },
+          {
+            "title": "स्प्रेडशीटमधून हलवणे",
+            "clicks": 44
+          }
+        ],
+        "people": [
+          {
+            "email": "it@example.de",
+            "lang": "DE",
+            "via": "import"
+          },
+          {
+            "email": "sophie.m@example.fr",
+            "lang": "FR",
+            "via": "form"
+          },
+          {
+            "email": "ops@example.com",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "k.weber@example.de",
+            "lang": "DE",
+            "via": "form"
+          }
+        ],
+        "activity": [
+          "३ भाषांमध्ये १२४० वाचकांना अंक पाठवला",
+          "पुनरावृत्तीचे अपॉइंटमेंट्स मार्गदर्शकावर ९६ क्लिक",
+          "clients.csv मधून २३ संपर्क आयात केले"
+        ],
+        "importCount": 412
+      },
+      {
+        "business": "Casa Verde Realty",
+        "kind": "रिअल इस्टेट एजन्सी",
+        "site": "casaverde.homes",
+        "schedule": "प्रत्येक गुरुवारी सकाळी ८:०० वाजता",
+        "subscribers": 586,
+        "newThisWeek": 14,
+        "clicks7": 163,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "es",
+            "name": "स्पॅनिश",
+            "share": 47
+          },
+          {
+            "code": "en",
+            "name": "इंग्रजी",
+            "share": 41
+          },
+          {
+            "code": "fr",
+            "name": "फ्रेंच",
+            "share": 12
+          }
+        ],
+        "reader": "किनाऱ्याजवळ घर शोधणाऱ्या परदेशातील कुटुंबे आणि निवृत्त वृद्ध, आणि विकणारे मालक.",
+        "tones": [
+          "उबदार",
+          "स्थानिक",
+          "शांत"
+        ],
+        "articles": [
+          "या आठवड्यात समुद्रकिनाऱ्याजवळ तीन नवीन घरे",
+          "परदेशी खरेदीदारांसाठी बंद होणारे खर्च कसे दिसतात",
+          "जुन्या शहरातील किमती, शरद ऋतूतील अद्यतन"
+        ],
+        "issue": {
+          "title": "या आठवड्यात समुद्रकिनाऱ्याजवळ तीन नवीन घरे",
+          "langs": [
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tres casas nuevas cerca de la playa",
+              "summary": "Una casa de dos habitaciones con jardín, un apartamento con vista al mar y una casa para reformar a diez minutos del centro."
+            },
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Three new homes near the beach",
+              "summary": "A two bedroom house with a garden, a flat with a sea view and a house to renovate ten minutes from the center."
+            },
+            {
+              "code": "fr",
+              "name": "Français",
+              "subject": "Trois nouvelles maisons près de la plage",
+              "summary": "Une maison de deux chambres avec jardin, un appartement avec vue sur la mer et une maison à rénover à dix minutes du centre."
+            }
+          ]
+        },
+        "clicksByDay": [
+          12,
+          9,
+          15,
+          52,
+          38,
+          21,
+          16
+        ],
+        "topLinks": [
+          {
+            "title": "समुद्रदृश्य असलेले फ्लॅट",
+            "clicks": 71
+          },
+          {
+            "title": "बाग असलेले दोन बेडरूम घर",
+            "clicks": 54
+          },
+          {
+            "title": "परदेशी खरेदीदारांसाठी बंद होणारे खर्च",
+            "clicks": 38
+          }
+        ],
+        "people": [
+          {
+            "email": "familia.ortiz@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "j.dupont@example.fr",
+            "lang": "FR",
+            "via": "form"
+          },
+          {
+            "email": "tom.and.ann@example.org",
+            "lang": "EN",
+            "via": "manual"
+          },
+          {
+            "email": "rmora@example.net",
+            "lang": "ES",
+            "via": "import"
+          }
+        ],
+        "activity": [
+          "३ भाषांमध्ये ५८६ वाचकांना अंक पाठवला",
+          "समुद्रदृश्य असलेल्या फ्लॅटवर ७१ क्लिक",
+          "फ्रान्समधील एक वाचक साइनअप फॉर्ममधून सामील झाला"
+        ],
+        "importCount": 203
+      },
+      {
+        "business": "Mora and Partners",
+        "kind": "अकाउंटिंग फर्म",
+        "site": "morapartners.co",
+        "schedule": "दर दुसऱ्या मंगळवारी सकाळी ७:३० वाजता",
+        "subscribers": 428,
+        "newThisWeek": 6,
+        "clicks7": 97,
+        "automationsOn": 1,
+        "languages": [
+          {
+            "code": "en",
+            "name": "इंग्रजी",
+            "share": 52
+          },
+          {
+            "code": "es",
+            "name": "स्पॅनिश",
+            "share": 38
+          },
+          {
+            "code": "it",
+            "name": "इटालियन",
+            "share": 10
+          }
+        ],
+        "reader": "लहान कंपन्यांचे मालक ज्यांना कर आणि पेरोलमध्ये होणारे बदल, जार्गनशिवाय जाणून घ्यायचे आहेत.",
+        "tones": [
+          "शांत",
+          "अचूक",
+          "साधे"
+        ],
+        "articles": [
+          "तिमाही कर अंतिम मुदत 15 तारखेला हलवली",
+          "पहिला कर्मचारी नियुक्त करताना काय ठेवावे",
+          "पावत्या: कागद किंवा फोटो?"
+        ],
+        "issue": {
+          "title": "तिमाही कर अंतिम मुदत 15 तारखेला हलवली",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Your quarterly deadline moves to the 15th",
+              "summary": "The filing date for the next quarter moves five days later. Here is what to send us and when, so nothing is late."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tu plazo trimestral pasa al día 15",
+              "summary": "La fecha de presentación del próximo trimestre se mueve cinco días. Esto es lo que debes enviarnos y cuándo, para que nada llegue tarde."
+            },
+            {
+              "code": "it",
+              "name": "Italiano",
+              "subject": "La scadenza trimestrale passa al 15",
+              "summary": "La data di presentazione del prossimo trimestre slitta di cinque giorni. Ecco cosa inviarci e quando, perché nulla arrivi in ritardo."
+            }
+          ]
+        },
+        "clicksByDay": [
+          33,
+          24,
+          14,
+          8,
+          7,
+          4,
+          7
+        ],
+        "topLinks": [
+          {
+            "title": "15 तारखेसाठी चेकलिस्ट",
+            "clicks": 46
+          },
+          {
+            "title": "पहिला कर्मचारी नियुक्त करणे",
+            "clicks": 29
+          },
+          {
+            "title": "रिव्ह्यू कॉल बुक करा",
+            "clicks": 22
+          }
+        ],
+        "people": [
+          {
+            "email": "bakery.owner@example.com",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "c.rossi@example.it",
+            "lang": "IT",
+            "via": "form"
+          },
+          {
+            "email": "taller.luna@example.net",
+            "lang": "ES",
+            "via": "import"
+          },
+          {
+            "email": "finance@example.org",
+            "lang": "EN",
+            "via": "manual"
+          }
+        ],
+        "activity": [
+          "अंक 3 भाषांमध्ये 428 वाचकांना पाठवला",
+          "15 तारखेसाठीच्या चेकलिस्टवर 46 क्लिक",
+          "या आठवड्यात 6 नवीन वाचक"
+        ],
+        "importCount": 97
+      },
+      {
+        "business": "Run Better Coaching",
+        "kind": "रनिंग कोच",
+        "site": "runbetter.coach",
+        "schedule": "प्रत्येक रविवारी 18:00 वाजता",
+        "subscribers": 907,
+        "newThisWeek": 31,
+        "clicks7": 248,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 49
+          },
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 33
+          },
+          {
+            "code": "de",
+            "name": "German",
+            "share": 18
+          }
+        ],
+        "reader": "प्रौढ जे त्यांच्या पहिल्या हाफ मॅरेथॉनसाठी प्रशिक्षण घेत आहेत आणि कामापूर्वी आठवड्यातून तीन वेळा धावतात.",
+        "tones": [
+          "प्रोत्साहन देणारे",
+          "थेट",
+          "लहान"
+        ],
+        "articles": [
+          "ह्या आठवड्यात: लांब धाव, तुम्हाला वाटते त्यापेक्षा हळू",
+          "500 किलोमीटरनंतरचे शूज",
+          "20 मिनिटांची स्ट्रेंथ रुटीन"
+        ],
+        "issue": {
+          "title": "ह्या आठवड्यात: लांब धाव, तुम्हाला वाटते त्यापेक्षा हळू",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Your long run should feel too easy",
+              "summary": "Keep it slow enough to talk. This week's plan adds ten minutes and one short hill session."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tu tirada larga debería sentirse demasiado fácil",
+              "summary": "Mantén un ritmo que te deje hablar. El plan de esta semana suma diez minutos y una sesión corta de cuestas."
+            },
+            {
+              "code": "de",
+              "name": "Deutsch",
+              "subject": "Dein langer Lauf sollte sich zu leicht anfühlen",
+              "summary": "Lauf so langsam, dass du noch reden kannst. Der Plan dieser Woche bringt zehn Minuten mehr und eine kurze Bergeinheit."
+            }
+          ]
+        },
+        "clicksByDay": [
+          18,
+          22,
+          26,
+          31,
+          35,
+          49,
+          67
+        ],
+        "topLinks": [
+          {
+            "title": "या आठवड्याचे प्रशिक्षण योजना",
+            "clicks": 121
+          },
+          {
+            "title": "20 मिनिटांची स्ट्रेंथ रुटीन",
+            "clicks": 78
+          },
+          {
+            "title": "500 किलोमीटरनंतरचे शूज",
+            "clicks": 49
+          }
+        ],
+        "people": [
+          {
+            "email": "ana.runs@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "felix.k@example.de",
+            "lang": "DE",
+            "via": "form"
+          },
+          {
+            "email": "sam@example.org",
+            "lang": "EN",
+            "via": "form"
+          },
+          {
+            "email": "club.secretary@example.net",
+            "lang": "EN",
+            "via": "import"
+          }
+        ],
+        "activity": [
+          "अंक 3 भाषांमध्ये 907 वाचकांना पाठवला",
+          "या आठवड्याच्या प्रशिक्षण योजनेवर 121 क्लिक",
+          "या आठवड्यात 31 नवीन वाचक, बहुतेक साइनअप फॉर्मवरून"
+        ],
+        "importCount": 260
+      }
+    ]
+  },
+  "errorPage": {
+    "notFoundEyebrow": "त्रुटी 404",
+    "notFoundTitle": "आम्हाला हे पृष्ठ सापडले नाही",
+    "notFoundBody": "लिंक जुने असू शकते किंवा त्यात टायपो असू शकते. पुढे जाण्यासाठी ही पृष्ठे चांगली आहेत.",
+    "serverEyebrow": "त्रुटी {status}",
+    "serverTitle": "आमच्या बाजूला काहीतरी चूक झाली",
+    "serverBody": "आम्ही हे पृष्ठ लोड करू शकलो नाही. एक मिनिटात पुन्हा प्रयत्न करा. जर ते चालू राहिले तर info@aiban.news येथे लिहा.",
+    "retry": "पुन्हा प्रयत्न करा",
+    "home": "मुख्यपृष्ठावर जा",
+    "popularTitle": "लोकप्रिय पृष्ठे",
+    "links": {
+      "howItWorks": "AIBAN कसे काम करते",
+      "pricing": "किंमत",
+      "help": "सहाय्य केंद्र",
+      "login": "तुमच्या डॅशबोर्डमध्ये लॉग इन करा"
+    },
+    "report": "जर आमच्या साइटवरील कोणताही लिंक तुम्हाला इथे आणला असेल, तर info@aiban.news येथे आम्हाला कळवा जेणेकरून आम्ही ते दुरुस्त करू शकू."
   },
   "header": {
     "goToWorkspace": "डॅशबोर्ड उघडा",
@@ -982,1429 +1749,5 @@ export default {
     "monthly": "मासिक",
     "yearly": "वार्षिक",
     "loadingPlan": "प्लॅनचा डेटा लोड होत आहे..."
-  },
-  "languages": [
-    {
-      "code": "ab",
-      "name": "अबखाझियन"
-    },
-    {
-      "code": "aa",
-      "name": "अफार"
-    },
-    {
-      "code": "af",
-      "name": "आफ्रिकान्स"
-    },
-    {
-      "code": "ak",
-      "name": "अकान"
-    },
-    {
-      "code": "sq",
-      "name": "अल्बेनियन"
-    },
-    {
-      "code": "am",
-      "name": "अम्हारिक"
-    },
-    {
-      "code": "ar",
-      "name": "अरबी"
-    },
-    {
-      "code": "an",
-      "name": "अॅरागोनीज"
-    },
-    {
-      "code": "hy",
-      "name": "आर्मेनियन"
-    },
-    {
-      "code": "as",
-      "name": "आसामी"
-    },
-    {
-      "code": "av",
-      "name": "अवारिक"
-    },
-    {
-      "code": "ae",
-      "name": "अवेस्तन"
-    },
-    {
-      "code": "ay",
-      "name": "आयमारा"
-    },
-    {
-      "code": "az",
-      "name": "अझरबैजानी"
-    },
-    {
-      "code": "bm",
-      "name": "बांबारा"
-    },
-    {
-      "code": "ba",
-      "name": "बष्किर"
-    },
-    {
-      "code": "eu",
-      "name": "बास्क"
-    },
-    {
-      "code": "be",
-      "name": "बेलारूसी"
-    },
-    {
-      "code": "bn",
-      "name": "बंगाली"
-    },
-    {
-      "code": "bi",
-      "name": "बिस्लामा"
-    },
-    {
-      "code": "bs",
-      "name": "बोस्नियन"
-    },
-    {
-      "code": "br",
-      "name": "ब्रेटन"
-    },
-    {
-      "code": "bg",
-      "name": "बल्गेरियन"
-    },
-    {
-      "code": "my",
-      "name": "बर्मी"
-    },
-    {
-      "code": "ca",
-      "name": "कॅटलान"
-    },
-    {
-      "code": "ch",
-      "name": "चमोरो"
-    },
-    {
-      "code": "ce",
-      "name": "चेचन"
-    },
-    {
-      "code": "ny",
-      "name": "चिचेवा"
-    },
-    {
-      "code": "zh",
-      "name": "चीनी"
-    },
-    {
-      "code": "cu",
-      "name": "चर्च स्लाव्हिक"
-    },
-    {
-      "code": "cv",
-      "name": "चुवाश"
-    },
-    {
-      "code": "kw",
-      "name": "कॉर्निश"
-    },
-    {
-      "code": "co",
-      "name": "कॉर्सिकन"
-    },
-    {
-      "code": "cr",
-      "name": "क्री"
-    },
-    {
-      "code": "hr",
-      "name": "क्रोएशियन"
-    },
-    {
-      "code": "cs",
-      "name": "झेक"
-    },
-    {
-      "code": "da",
-      "name": "डॅनिश"
-    },
-    {
-      "code": "dv",
-      "name": "दिवेही"
-    },
-    {
-      "code": "nl",
-      "name": "डच"
-    },
-    {
-      "code": "dz",
-      "name": "झोंगखा"
-    },
-    {
-      "code": "en",
-      "name": "इंग्रजी"
-    },
-    {
-      "code": "eo",
-      "name": "एस्पेरांतो"
-    },
-    {
-      "code": "et",
-      "name": "एस्टोनियन"
-    },
-    {
-      "code": "ee",
-      "name": "ईवे"
-    },
-    {
-      "code": "fo",
-      "name": "फेरोइज"
-    },
-    {
-      "code": "fj",
-      "name": "फिजीयन"
-    },
-    {
-      "code": "fi",
-      "name": "फिन्निश"
-    },
-    {
-      "code": "fr",
-      "name": "फ्रेंच"
-    },
-    {
-      "code": "fy",
-      "name": "पश्चिम फ्रिशियन"
-    },
-    {
-      "code": "ff",
-      "name": "फुलाह"
-    },
-    {
-      "code": "gd",
-      "name": "स्कॉटिश गेलिक"
-    },
-    {
-      "code": "gl",
-      "name": "गॅलिशियन"
-    },
-    {
-      "code": "lg",
-      "name": "गांडा"
-    },
-    {
-      "code": "ka",
-      "name": "जॉर्जियन"
-    },
-    {
-      "code": "de",
-      "name": "जर्मन"
-    },
-    {
-      "code": "el",
-      "name": "ग्रीक"
-    },
-    {
-      "code": "kl",
-      "name": "कलालिसुत (ग्रीनलँडिक)"
-    },
-    {
-      "code": "gn",
-      "name": "ग्वारानी"
-    },
-    {
-      "code": "gu",
-      "name": "गुजराती"
-    },
-    {
-      "code": "ht",
-      "name": "हैतीयन क्रेओल"
-    },
-    {
-      "code": "ha",
-      "name": "हौसा"
-    },
-    {
-      "code": "he",
-      "name": "हिब्रू"
-    },
-    {
-      "code": "hz",
-      "name": "हेरेरो"
-    },
-    {
-      "code": "hi",
-      "name": "हिंदी"
-    },
-    {
-      "code": "ho",
-      "name": "हिरी मोटू"
-    },
-    {
-      "code": "hu",
-      "name": "हंगेरियन"
-    },
-    {
-      "code": "is",
-      "name": "आईसलँडिक"
-    },
-    {
-      "code": "io",
-      "name": "इडो"
-    },
-    {
-      "code": "ig",
-      "name": "इग्बो"
-    },
-    {
-      "code": "id",
-      "name": "इंडोनेशियन"
-    },
-    {
-      "code": "ia",
-      "name": "इंटरlingua"
-    },
-    {
-      "code": "ie",
-      "name": "इंटरlingue"
-    },
-    {
-      "code": "iu",
-      "name": "इनुक्टिटुट"
-    },
-    {
-      "code": "ik",
-      "name": "इनुपियाक"
-    },
-    {
-      "code": "ga",
-      "name": "आयरिश"
-    },
-    {
-      "code": "it",
-      "name": "इटालियन"
-    },
-    {
-      "code": "ja",
-      "name": "जपानी"
-    },
-    {
-      "code": "jv",
-      "name": "जावानीज"
-    },
-    {
-      "code": "kn",
-      "name": "कन्नड"
-    },
-    {
-      "code": "kr",
-      "name": "कनुरी"
-    },
-    {
-      "code": "ks",
-      "name": "काश्मिरी"
-    },
-    {
-      "code": "kk",
-      "name": "कझाक"
-    },
-    {
-      "code": "km",
-      "name": "ख्मेर"
-    },
-    {
-      "code": "ki",
-      "name": "किकुयू"
-    },
-    {
-      "code": "rw",
-      "name": "किन्यार्वान्डा"
-    },
-    {
-      "code": "ky",
-      "name": "किर्गिझ"
-    },
-    {
-      "code": "kv",
-      "name": "कोमी"
-    },
-    {
-      "code": "kg",
-      "name": "काँगो"
-    },
-    {
-      "code": "ko",
-      "name": "कोरियन"
-    },
-    {
-      "code": "kj",
-      "name": "कुआन्यामा"
-    },
-    {
-      "code": "ku",
-      "name": "कुर्दिश"
-    },
-    {
-      "code": "lo",
-      "name": "लाओ"
-    },
-    {
-      "code": "la",
-      "name": "लॅटिन"
-    },
-    {
-      "code": "lv",
-      "name": "लाट्वियन"
-    },
-    {
-      "code": "li",
-      "name": "लिंबर्गिश"
-    },
-    {
-      "code": "ln",
-      "name": "लिंगाला"
-    },
-    {
-      "code": "lt",
-      "name": "लिथुआनियन"
-    },
-    {
-      "code": "lu",
-      "name": "लुबा-कटंगा"
-    },
-    {
-      "code": "lb",
-      "name": "लक्झेंबर्गिश"
-    },
-    {
-      "code": "mk",
-      "name": "मॅसेडोनियन"
-    },
-    {
-      "code": "mg",
-      "name": "मालागासी"
-    },
-    {
-      "code": "ms",
-      "name": "मलय"
-    },
-    {
-      "code": "ml",
-      "name": "मल्याळम"
-    },
-    {
-      "code": "mt",
-      "name": "माल्टीज"
-    },
-    {
-      "code": "gv",
-      "name": "मांक्स"
-    },
-    {
-      "code": "mi",
-      "name": "माओरी"
-    },
-    {
-      "code": "mr",
-      "name": "मराठी"
-    },
-    {
-      "code": "mh",
-      "name": "मार्शलीज"
-    },
-    {
-      "code": "mn",
-      "name": "मंगोलियन"
-    },
-    {
-      "code": "na",
-      "name": "नाउरू"
-    },
-    {
-      "code": "nv",
-      "name": "नावाजो"
-    },
-    {
-      "code": "nd",
-      "name": "उत्तर देबेले"
-    },
-    {
-      "code": "nr",
-      "name": "दक्षिण देबेले"
-    },
-    {
-      "code": "ng",
-      "name": "दोंगा"
-    },
-    {
-      "code": "ne",
-      "name": "नेपाळी"
-    },
-    {
-      "code": "no",
-      "name": "नॉर्वेजियन"
-    },
-    {
-      "code": "nb",
-      "name": "नॉर्वेजियन बोकमाल"
-    },
-    {
-      "code": "nn",
-      "name": "नॉर्वेजियन निनोर्स्क"
-    },
-    {
-      "code": "oc",
-      "name": "ऑक्सिटन"
-    },
-    {
-      "code": "oj",
-      "name": "ओजिबवा"
-    },
-    {
-      "code": "or",
-      "name": "ओरिया"
-    },
-    {
-      "code": "om",
-      "name": "ओरोमो"
-    },
-    {
-      "code": "os",
-      "name": "ओसेटिक"
-    },
-    {
-      "code": "pi",
-      "name": "पाली"
-    },
-    {
-      "code": "ps",
-      "name": "पश्तो"
-    },
-    {
-      "code": "fa",
-      "name": "पर्शियन (फारसी)"
-    },
-    {
-      "code": "pl",
-      "name": "पोलिश"
-    },
-    {
-      "code": "pt",
-      "name": "पोर्तुगीज"
-    },
-    {
-      "code": "pa",
-      "name": "पंजाबी"
-    },
-    {
-      "code": "qu",
-      "name": "क्वेचुआ"
-    },
-    {
-      "code": "ro",
-      "name": "रोमानियन"
-    },
-    {
-      "code": "rm",
-      "name": "रोमान्श"
-    },
-    {
-      "code": "rn",
-      "name": "रुंडी"
-    },
-    {
-      "code": "ru",
-      "name": "रशियन"
-    },
-    {
-      "code": "se",
-      "name": "उत्तर सामी"
-    },
-    {
-      "code": "sm",
-      "name": "सामोअन"
-    },
-    {
-      "code": "sg",
-      "name": "सांगो"
-    },
-    {
-      "code": "sa",
-      "name": "संस्कृत"
-    },
-    {
-      "code": "sc",
-      "name": "सार्डिनियन"
-    },
-    {
-      "code": "sr",
-      "name": "सर्बियन"
-    },
-    {
-      "code": "sn",
-      "name": "शोना"
-    },
-    {
-      "code": "ii",
-      "name": "सिचुआन यी"
-    },
-    {
-      "code": "sd",
-      "name": "सिंधी"
-    },
-    {
-      "code": "si",
-      "name": "सिंहला"
-    },
-    {
-      "code": "sk",
-      "name": "स्लोव्हाक"
-    },
-    {
-      "code": "sl",
-      "name": "स्लोव्हेनियन"
-    },
-    {
-      "code": "so",
-      "name": "सोमाली"
-    },
-    {
-      "code": "st",
-      "name": "दक्षिण सोथो"
-    },
-    {
-      "code": "es",
-      "name": "स्पॅनिश"
-    },
-    {
-      "code": "su",
-      "name": "सुंदानीज"
-    },
-    {
-      "code": "sw",
-      "name": "स्वाहिली"
-    },
-    {
-      "code": "ss",
-      "name": "स्वाती"
-    },
-    {
-      "code": "sv",
-      "name": "स्वीडिश"
-    },
-    {
-      "code": "tl",
-      "name": "तागालोग (फिलिपिनो)"
-    },
-    {
-      "code": "ty",
-      "name": "ताहिती"
-    },
-    {
-      "code": "tg",
-      "name": "ताजिक"
-    },
-    {
-      "code": "ta",
-      "name": "तमिळ"
-    },
-    {
-      "code": "tt",
-      "name": "तातार"
-    },
-    {
-      "code": "te",
-      "name": "तेलुगू"
-    },
-    {
-      "code": "th",
-      "name": "थाई"
-    },
-    {
-      "code": "bo",
-      "name": "तिबेटी"
-    },
-    {
-      "code": "ti",
-      "name": "तिग्रिन्या"
-    },
-    {
-      "code": "to",
-      "name": "टोंगा"
-    },
-    {
-      "code": "ts",
-      "name": "सोंगा"
-    },
-    {
-      "code": "tn",
-      "name": "त्स्वाना"
-    },
-    {
-      "code": "tr",
-      "name": "तुर्की"
-    },
-    {
-      "code": "tk",
-      "name": "तुर्कमेन"
-    },
-    {
-      "code": "tw",
-      "name": "ट्वी"
-    },
-    {
-      "code": "ug",
-      "name": "उइघुर"
-    },
-    {
-      "code": "uk",
-      "name": "युक्रेनियन"
-    },
-    {
-      "code": "ur",
-      "name": "उर्दू"
-    },
-    {
-      "code": "uz",
-      "name": "उझ्बेक"
-    },
-    {
-      "code": "ve",
-      "name": "वेंदा"
-    },
-    {
-      "code": "vi",
-      "name": "व्हिएतनामी"
-    },
-    {
-      "code": "vo",
-      "name": "व्होलापुक"
-    },
-    {
-      "code": "wa",
-      "name": "वालून"
-    },
-    {
-      "code": "cy",
-      "name": "वेल्श"
-    },
-    {
-      "code": "wo",
-      "name": "वोलोफ"
-    },
-    {
-      "code": "xh",
-      "name": "झोसा"
-    },
-    {
-      "code": "yi",
-      "name": "यिद्दिश"
-    },
-    {
-      "code": "yo",
-      "name": "योरूबा"
-    },
-    {
-      "code": "za",
-      "name": "झुआंग"
-    },
-    {
-      "code": "zu",
-      "name": "झुलू"
-    }
-  ],
-  "countries": [
-    {
-      "code": "AF",
-      "name": "अफगाणिस्तान"
-    },
-    {
-      "code": "AL",
-      "name": "अल्बेनिया"
-    },
-    {
-      "code": "DZ",
-      "name": "अल्जेरिया"
-    },
-    {
-      "code": "AS",
-      "name": "अमेरिकन सामोआ"
-    },
-    {
-      "code": "AD",
-      "name": "अँडोरा"
-    },
-    {
-      "code": "AO",
-      "name": "अंगोला"
-    },
-    {
-      "code": "AI",
-      "name": "अँग्विला"
-    },
-    {
-      "code": "AQ",
-      "name": "अंटार्क्टिका"
-    },
-    {
-      "code": "AG",
-      "name": "अँटिग्वा आणि बारबुडा"
-    },
-    {
-      "code": "AR",
-      "name": "अर्जेंटिना"
-    },
-    {
-      "code": "AM",
-      "name": "आर्मेनिया"
-    },
-    {
-      "code": "AW",
-      "name": "अरूबा"
-    },
-    {
-      "code": "AU",
-      "name": "ऑस्ट्रेलिया"
-    },
-    {
-      "code": "AT",
-      "name": "ऑस्ट्रिया"
-    },
-    {
-      "code": "AZ",
-      "name": "अझरबैजान"
-    },
-    {
-      "code": "BS",
-      "name": "बहामास"
-    },
-    {
-      "code": "BH",
-      "name": "बहरैन"
-    },
-    {
-      "code": "BD",
-      "name": "बांगलादेश"
-    },
-    {
-      "code": "BB",
-      "name": "बार्बाडोस"
-    },
-    {
-      "code": "BY",
-      "name": "बेलारूस"
-    },
-    {
-      "code": "BE",
-      "name": "बेल्जियम"
-    },
-    {
-      "code": "BZ",
-      "name": "बेलिझ"
-    },
-    {
-      "code": "BJ",
-      "name": "बेनिन"
-    },
-    {
-      "code": "BM",
-      "name": "बर्म्युडा"
-    },
-    {
-      "code": "BT",
-      "name": "भूतान"
-    },
-    {
-      "code": "BO",
-      "name": "बोलिव्हिया"
-    },
-    {
-      "code": "BA",
-      "name": "बोस्निया आणि हर्जेगोविना"
-    },
-    {
-      "code": "BW",
-      "name": "बोत्सवाना"
-    },
-    {
-      "code": "BR",
-      "name": "ब्राझील"
-    },
-    {
-      "code": "IO",
-      "name": "ब्रिटिश हिंद महासागर क्षेत्र"
-    },
-    {
-      "code": "VG",
-      "name": "ब्रिटिश व्हर्जिन बेटे"
-    },
-    {
-      "code": "BN",
-      "name": "ब्रुनेई"
-    },
-    {
-      "code": "BG",
-      "name": "बल्गेरिया"
-    },
-    {
-      "code": "BF",
-      "name": "बुर्किना फासो"
-    },
-    {
-      "code": "BI",
-      "name": "बुरुंडी"
-    },
-    {
-      "code": "KH",
-      "name": "कंबोडिया"
-    },
-    {
-      "code": "CM",
-      "name": "कॅमेरून"
-    },
-    {
-      "code": "CA",
-      "name": "कॅनडा"
-    },
-    {
-      "code": "CV",
-      "name": "केप वर्दे"
-    },
-    {
-      "code": "KY",
-      "name": "केमन बेटे"
-    },
-    {
-      "code": "CF",
-      "name": "मध्य आफ्रिकन प्रजासत्ताक"
-    },
-    {
-      "code": "TD",
-      "name": "चाड"
-    },
-    {
-      "code": "CL",
-      "name": "चिली"
-    },
-    {
-      "code": "CN",
-      "name": "चीन"
-    },
-    {
-      "code": "CX",
-      "name": "ख्रिसमस बेट"
-    },
-    {
-      "code": "CC",
-      "name": "कोकोस (कीलिंग) बेटे"
-    },
-    {
-      "code": "CO",
-      "name": "कोलंबिया"
-    },
-    {
-      "code": "KM",
-      "name": "कोमोरोस"
-    },
-    {
-      "code": "CG",
-      "name": "काँगो - ब्राझाव्हिल"
-    },
-    {
-      "code": "CD",
-      "name": "काँगो - किंशासा"
-    },
-    {
-      "code": "CK",
-      "name": "कुक बेटे"
-    },
-    {
-      "code": "CR",
-      "name": "कोस्टा रिका"
-    },
-    {
-      "code": "CI",
-      "name": "कोट डी आयव्हर"
-    },
-    {
-      "code": "HR",
-      "name": "क्रोएशिया"
-    },
-    {
-      "code": "CU",
-      "name": "क्युबा"
-    },
-    {
-      "code": "CY",
-      "name": "सायप्रस"
-    },
-    {
-      "code": "CZ",
-      "name": "झेकिया"
-    },
-    {
-      "code": "DK",
-      "name": "डेन्मार्क"
-    },
-    {
-      "code": "DJ",
-      "name": "जिबूती"
-    },
-    {
-      "code": "DM",
-      "name": "डॉमिनिका"
-    },
-    {
-      "code": "DO",
-      "name": "डॉमिनिकन प्रजासत्ताक"
-    },
-    {
-      "code": "EC",
-      "name": "इक्वेडोर"
-    },
-    {
-      "code": "EG",
-      "name": "इजिप्त"
-    },
-    {
-      "code": "SV",
-      "name": "एल साल्वाडोर"
-    },
-    {
-      "code": "GQ",
-      "name": "इक्वेटोरियल गिनी"
-    },
-    {
-      "code": "ER",
-      "name": "इरिट्रिया"
-    },
-    {
-      "code": "EE",
-      "name": "एस्टोनिया"
-    },
-    {
-      "code": "SZ",
-      "name": "एस्वाटिनी"
-    },
-    {
-      "code": "ET",
-      "name": "इथिओपिया"
-    },
-    {
-      "code": "FJ",
-      "name": "फिजी"
-    },
-    {
-      "code": "FI",
-      "name": "फिनलंड"
-    },
-    {
-      "code": "FR",
-      "name": "फ्रान्स"
-    },
-    {
-      "code": "GA",
-      "name": "गॅबॉन"
-    },
-    {
-      "code": "GM",
-      "name": "गांबिया"
-    },
-    {
-      "code": "GE",
-      "name": "जॉर्जिया"
-    },
-    {
-      "code": "DE",
-      "name": "जर्मनी"
-    },
-    {
-      "code": "GH",
-      "name": "घाना"
-    },
-    {
-      "code": "GR",
-      "name": "ग्रीस"
-    },
-    {
-      "code": "GT",
-      "name": "ग्वाटेमाला"
-    },
-    {
-      "code": "GN",
-      "name": "गिनी"
-    },
-    {
-      "code": "GY",
-      "name": "गयाना"
-    },
-    {
-      "code": "HT",
-      "name": "हैती"
-    },
-    {
-      "code": "HN",
-      "name": "होंडुरास"
-    },
-    {
-      "code": "HK",
-      "name": "हाँगकाँग"
-    },
-    {
-      "code": "HU",
-      "name": "हंगेरी"
-    },
-    {
-      "code": "IS",
-      "name": "आईसलँड"
-    },
-    {
-      "code": "IN",
-      "name": "भारत"
-    },
-    {
-      "code": "ID",
-      "name": "इंडोनेशिया"
-    },
-    {
-      "code": "IR",
-      "name": "इराण"
-    },
-    {
-      "code": "IQ",
-      "name": "इराक"
-    },
-    {
-      "code": "IE",
-      "name": "आयर्लंड"
-    },
-    {
-      "code": "IL",
-      "name": "इस्रायल"
-    },
-    {
-      "code": "IT",
-      "name": "इटली"
-    },
-    {
-      "code": "JM",
-      "name": "जमैका"
-    },
-    {
-      "code": "JP",
-      "name": "जपान"
-    },
-    {
-      "code": "JO",
-      "name": "जॉर्डन"
-    },
-    {
-      "code": "KZ",
-      "name": "कझाकस्तान"
-    },
-    {
-      "code": "KE",
-      "name": "केनिया"
-    },
-    {
-      "code": "KR",
-      "name": "दक्षिण कोरिया"
-    },
-    {
-      "code": "KW",
-      "name": "कुवेत"
-    },
-    {
-      "code": "KG",
-      "name": "किर्गिझस्तान"
-    },
-    {
-      "code": "LA",
-      "name": "लाओस"
-    },
-    {
-      "code": "LV",
-      "name": "लाटव्हिया"
-    },
-    {
-      "code": "LB",
-      "name": "लेबनॉन"
-    },
-    {
-      "code": "LS",
-      "name": "लेसोथो"
-    },
-    {
-      "code": "LR",
-      "name": "लायबेरिया"
-    },
-    {
-      "code": "LY",
-      "name": "लिबिया"
-    },
-    {
-      "code": "LI",
-      "name": "लिक्टेनस्टाईन"
-    },
-    {
-      "code": "LT",
-      "name": "लिथुआनिया"
-    },
-    {
-      "code": "LU",
-      "name": "लक्झेंबर्ग"
-    },
-    {
-      "code": "MG",
-      "name": "मादागास्कर"
-    },
-    {
-      "code": "MW",
-      "name": "मलावी"
-    },
-    {
-      "code": "MY",
-      "name": "मलेशिया"
-    },
-    {
-      "code": "MV",
-      "name": "मालदीव"
-    },
-    {
-      "code": "ML",
-      "name": "माली"
-    },
-    {
-      "code": "MT",
-      "name": "माल्टा"
-    },
-    {
-      "code": "MX",
-      "name": "मेक्सिको"
-    },
-    {
-      "code": "MD",
-      "name": "मोल्दोव्हा"
-    },
-    {
-      "code": "MC",
-      "name": "मोनॅको"
-    },
-    {
-      "code": "MN",
-      "name": "मंगोलिया"
-    },
-    {
-      "code": "ME",
-      "name": "माँटेनिग्रो"
-    },
-    {
-      "code": "MA",
-      "name": "मोरोक्को"
-    },
-    {
-      "code": "MZ",
-      "name": "मोझांबिक"
-    },
-    {
-      "code": "MM",
-      "name": "म्यानमार"
-    },
-    {
-      "code": "NA",
-      "name": "नामिबिया"
-    },
-    {
-      "code": "NP",
-      "name": "नेपाळ"
-    },
-    {
-      "code": "NL",
-      "name": "नेदरलँड्स"
-    },
-    {
-      "code": "NZ",
-      "name": "न्यूझीलंड"
-    },
-    {
-      "code": "NI",
-      "name": "निकाराग्वा"
-    },
-    {
-      "code": "NE",
-      "name": "नायजर"
-    },
-    {
-      "code": "NG",
-      "name": "नायजेरिया"
-    },
-    {
-      "code": "MK",
-      "name": "उत्तर मॅसेडोनिया"
-    },
-    {
-      "code": "NO",
-      "name": "नॉर्वे"
-    },
-    {
-      "code": "OM",
-      "name": "ओमान"
-    },
-    {
-      "code": "PK",
-      "name": "पाकिस्तान"
-    },
-    {
-      "code": "PA",
-      "name": "पनामा"
-    },
-    {
-      "code": "PG",
-      "name": "पापुआ न्यू गिनी"
-    },
-    {
-      "code": "PY",
-      "name": "पॅराग्वे"
-    },
-    {
-      "code": "PE",
-      "name": "पेरू"
-    },
-    {
-      "code": "PH",
-      "name": "फिलिपिन्स"
-    },
-    {
-      "code": "PL",
-      "name": "पोलंड"
-    },
-    {
-      "code": "PT",
-      "name": "पोर्तुगाल"
-    },
-    {
-      "code": "QA",
-      "name": "कतार"
-    },
-    {
-      "code": "RO",
-      "name": "रोमानिया"
-    },
-    {
-      "code": "RU",
-      "name": "रशिया"
-    },
-    {
-      "code": "RW",
-      "name": "रवांडा"
-    },
-    {
-      "code": "SA",
-      "name": "सौदी अरेबिया"
-    },
-    {
-      "code": "SN",
-      "name": "सेनेगल"
-    },
-    {
-      "code": "RS",
-      "name": "सर्बिया"
-    },
-    {
-      "code": "SG",
-      "name": "सिंगापूर"
-    },
-    {
-      "code": "SK",
-      "name": "स्लोव्हाकिया"
-    },
-    {
-      "code": "SI",
-      "name": "स्लोव्हेनिया"
-    },
-    {
-      "code": "ZA",
-      "name": "दक्षिण आफ्रिका"
-    },
-    {
-      "code": "ES",
-      "name": "स्पेन"
-    },
-    {
-      "code": "LK",
-      "name": "श्रीलंका"
-    },
-    {
-      "code": "SE",
-      "name": "स्वीडन"
-    },
-    {
-      "code": "CH",
-      "name": "स्वित्झर्लंड"
-    },
-    {
-      "code": "TW",
-      "name": "तैवान"
-    },
-    {
-      "code": "TH",
-      "name": "थायलंड"
-    },
-    {
-      "code": "TR",
-      "name": "तुर्की"
-    },
-    {
-      "code": "UG",
-      "name": "युगांडा"
-    },
-    {
-      "code": "UA",
-      "name": "युक्रेन"
-    },
-    {
-      "code": "AE",
-      "name": "संयुक्त अरब अमिराती"
-    },
-    {
-      "code": "GB",
-      "name": "युनायटेड किंगडम"
-    },
-    {
-      "code": "US",
-      "name": "युनायटेड स्टेट्स"
-    },
-    {
-      "code": "UY",
-      "name": "उरुग्वे"
-    },
-    {
-      "code": "UZ",
-      "name": "उझबेकिस्तान"
-    },
-    {
-      "code": "VE",
-      "name": "व्हेनेझुएला"
-    },
-    {
-      "code": "VN",
-      "name": "व्हिएतनाम"
-    },
-    {
-      "code": "YE",
-      "name": "येमेन"
-    },
-    {
-      "code": "ZM",
-      "name": "झांबिया"
-    },
-    {
-      "code": "ZW",
-      "name": "झिम्बाब्वे"
-    }
-  ]
+  }
 };

@@ -1,5 +1,5 @@
-// th strings for locales. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale th
+// th (Thai) strings for locales. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "auth": {
     "logo": "/icons/logo.png",
@@ -35,6 +35,82 @@ export default {
       "ogImageAlt": "โลโก้ AIBAN"
     },
     "skipLink": "ข้ามไปยังเนื้อหาหลัก",
+    "display": {
+      "title": "เว็บไซต์ของคุณ เขียนเป็นจดหมายข่าว",
+      "kicker": "AIBAN"
+    },
+    "statement": {
+      "lines": [
+        "คุณเผยแพร่งานดีอยู่แล้ว",
+        "ลูกค้าของคุณอ่านมันได้มากกว่าหนึ่งภาษา",
+        "AIBAN เปลี่ยนบทความใหม่แต่ละบทความเป็นฉบับ",
+        "และส่งเวอร์ชันในภาษาของพวกเขาให้กับทุกผู้อ่าน"
+      ]
+    },
+    "history": {
+      "eyebrow": "วิธีการทำงาน",
+      "title": "ชีวิตของหนึ่งฉบับ",
+      "lead": "ติดตามหนึ่งฉบับตั้งแต่ช่วงเวลาที่กำหนดการของคุณเริ่มต้นจนถึงช่วงเวลาที่มันเริ่มต้นอีกครั้ง คุณตั้งค่านี้เพียงครั้งเดียว",
+      "note": "ตัวอย่างกำหนดการ คุณเลือกวัน เวลา และความถี่",
+      "progressLabel": "ขั้นตอนของหนึ่งฉบับ",
+      "items": [
+        {
+          "mark": "9:00",
+          "title": "กำหนดการของคุณเริ่มการทำงาน",
+          "body": "ทุกวันจันทร์เวลา 9:00 ในตัวอย่างนี้ คุณเลือกรายวัน รายสัปดาห์ หรือรายเดือน"
+        },
+        {
+          "mark": "อ่าน",
+          "title": "AIBAN อ่านเว็บไซต์ของคุณ",
+          "body": "มันค้นหาบทความล่าสุดของคุณและเลือกส่วนที่ผู้อ่านในอุดมคติของคุณจะสนใจมากที่สุด"
+        },
+        {
+          "mark": "เขียน",
+          "title": "มันเขียนฉบับด้วยเสียงของคุณ",
+          "body": "ข้อความสอดคล้องกับวิธีการเขียนเว็บไซต์ของคุณ ดังนั้นมันจึงฟังดูเหมือนคุณ"
+        },
+        {
+          "mark": "แปล",
+          "title": "แต่ละผู้อ่านได้รับภาษาของพวกเขา",
+          "body": "หนึ่งฉบับกลายเป็นหลายเวอร์ชันตามที่สมาชิกของคุณต้องการ"
+        },
+        {
+          "mark": "ส่ง",
+          "title": "มันมาถึงภายใต้ชื่อของคุณ",
+          "body": "ด้วยชื่อของคุณและลายเซ็นอีเมลของคุณ คำตอบไปยังกล่องจดหมายของคุณ"
+        },
+        {
+          "mark": "เผยแพร่",
+          "title": "มันกลายเป็นบทความในบล็อกของคุณ",
+          "body": "พร้อมลิงก์ของตัวเองที่ผู้คนสามารถค้นหาในเครื่องมือค้นหาและแชร์ได้"
+        },
+        {
+          "mark": "รายงาน",
+          "title": "คุณเห็นสิ่งที่เกิดขึ้น",
+          "body": "แดชบอร์ดของคุณแสดงรายชื่อผู้ที่เข้าร่วมและลิงก์ที่ผู้อ่านคลิก"
+        },
+        {
+          "mark": "อีกครั้ง",
+          "title": "วันจันทร์ถัดไป มันทำงานอีกครั้ง",
+          "body": "มันดำเนินต่อไปจนกว่าคุณจะปิดมันในแดชบอร์ดของคุณ"
+        }
+      ]
+    },
+    "rail": {
+      "label": "บทของหน้า",
+      "chapters": [
+        "เริ่มต้น",
+        "ทำไม",
+        "ภาษา",
+        "วิธีการทำงาน",
+        "ชื่อของคุณ",
+        "เติบโต",
+        "เหมาะสำหรับใคร",
+        "ราคา",
+        "คำถาม",
+        "เริ่มต้น"
+      ]
+    },
     "hero": {
       "eyebrow": "จดหมายข่าวสำหรับธุรกิจบริการ",
       "title": "เว็บไซต์ของคุณกลายเป็นจดหมายข่าวรายสัปดาห์ ในภาษาของผู้อ่านแต่ละคน",
@@ -57,6 +133,26 @@ export default {
       "startCta": "เริ่มใช้ฟรีด้วย {site}",
       "startCtaGeneric": "เริ่มใช้ฟรี",
       "liveRegion": "อัปเดตตัวอย่างสำหรับ {site} แล้ว"
+    },
+    "live": {
+      "badge": "เขียนเมื่อสักครู่",
+      "loadingTitle": "กำลังเขียนตัวอย่างฉบับจาก {site}",
+      "steps": [
+        "กำลังอ่าน {site}",
+        "กำลังหาบทความล่าสุดของคุณ",
+        "กำลังเขียนเป็นภาษา {language}",
+        "กำลังใส่ลงในเทมเพลตอีเมลของคุณ"
+      ],
+      "takes": "โดยปกติใช้เวลา 20 ถึง 40 วินาที คุณสามารถเลื่อนดูต่อไปได้",
+      "readyNote": "AIBAN เขียนตัวอย่างนี้จากบทความล่าสุดบน {site} ไม่มีการบันทึกหรือส่งข้อมูลใดๆ เมื่อคุณเริ่มใช้งาน มันจะใช้เสียงและตารางเวลาของคุณเอง",
+      "readyAnnounce": "ตัวอย่างฉบับจาก {site} ของคุณพร้อมแล้ว",
+      "languageLabel": "ภาษาของผู้อ่าน",
+      "loadingLanguage": "กำลังเขียนเป็นภาษา {language}",
+      "errorTitle": "เราไม่สามารถเขียนตัวอย่างจาก {site} ได้",
+      "retry": "ลองอีกครั้ง",
+      "showSample": "แสดงตัวอย่างเลย์เอาต์",
+      "frameTitle": "ตัวอย่างฉบับที่เขียนจาก {site}",
+      "openFull": "เปิดในแท็บใหม่"
     },
     "chain": {
       "eyebrow": "วิธีการทำงาน",
@@ -494,8 +590,8 @@ export default {
     "yearlySave": "ประหยัด 35%",
     "intervalLabel": "รอบการเรียกเก็บเงิน",
     "billedYearly": "เรียกเก็บรายปี",
-    "perMonthShort": "/mo",
-    "perYearShort": "/yr",
+    "perMonthShort": "/เดือน",
+    "perYearShort": "/ปี",
     "freeCta": "เริ่มใช้ฟรี",
     "processing": "กำลังเปิดหน้าชำระเงิน...",
     "askMore": "ทุกบัญชีเริ่มต้นที่แพ็กเกจฟรี ถ้าต้องการมากกว่านี้ เขียนถึงเราที่ {email} แล้วเราจะเปลี่ยนแพ็กเกจให้",
@@ -587,6 +683,7 @@ export default {
       "suggestions": "คำแนะนำ",
       "recent": "การค้นหาล่าสุด",
       "clearRecent": "ล้างการค้นหาล่าสุด",
+      "clear": "ล้างการค้นหา",
       "title": "ผลการค้นหา",
       "resultsFor": "ผลการค้นหาสำหรับ \"{q}\"",
       "count": "พบ {count} บทความ",
@@ -691,6 +788,7 @@ export default {
   "legal": {
     "navLabel": "เอกสารทางกฎหมาย",
     "lastUpdated": "อัปเดตล่าสุด: {date}",
+    "onThisPage": "ในหน้านี้",
     "privacy": {
       "title": "นโยบายความเป็นส่วนตัว",
       "metaTitle": "นโยบายความเป็นส่วนตัว | AIBAN",
@@ -919,6 +1017,8 @@ export default {
     "codeSent": "เราส่งรหัสไปที่อีเมลของคุณแล้ว",
     "invalidCode": "รหัสไม่ถูกต้อง ดูอีเมลล่าสุดที่เราส่งให้ หรือส่งรหัสอีกครั้ง",
     "regenerateCode": "ส่งรหัสอีกครั้ง",
+    "codeAccepted": "ยอมรับรหัสแล้ว กำลังเปิดแดชบอร์ดของคุณ",
+    "codeLabel": "รหัส 6 หลัก",
     "back": "กลับ",
     "byProceeding": "การดำเนินการต่อแสดงว่าคุณยอมรับ",
     "termsOfService": "ข้อกำหนดการให้บริการ",
@@ -947,6 +1047,673 @@ export default {
       "title": "ยินดีต้อนรับสู่จดหมายข่าว",
       "invitedBy": "คุณได้รับคำเชิญจาก {configuratorId}"
     }
+  },
+  "showcase": {
+    "sampleBadge": "ข้อมูลตัวอย่าง",
+    "exampleLabel": "ธุรกิจตัวอย่าง",
+    "caption": "{business} เป็นตัวอย่าง {kind} ชื่อ บทความ และตัวเลขในมุมมองนี้เป็นตัวยึดที่แสดงว่าแดชบอร์ดของคุณจะมีลักษณะอย่างไรหลังจากผ่านไปสองสามสัปดาห์",
+    "pause": "หยุดแอนิเมชันชั่วคราว",
+    "play": "เล่นแอนิเมชัน",
+    "scenesLabel": "ส่วนต่างๆ ของแดชบอร์ด",
+    "examplesLabel": "ธุรกิจตัวอย่าง",
+    "appUrl": "app.aiban.news",
+    "nav": {
+      "home": "หน้าแรก",
+      "automations": "ระบบอัตโนมัติ",
+      "sources": "แหล่งที่มา",
+      "subscribers": "สมาชิก",
+      "reports": "รายงาน",
+      "blog": "บล็อก"
+    },
+    "scenes": {
+      "home": "ภาพรวม",
+      "issue": "ฉบับ",
+      "reports": "คลิก",
+      "subscribers": "สมาชิก",
+      "automation": "กำหนดเวลา",
+      "source": "เว็บไซต์ของคุณ",
+      "voice": "เสียงของคุณ",
+      "signup": "ฟอร์มสมัครสมาชิก",
+      "blog": "บล็อก",
+      "import": "นำเข้า"
+    },
+    "ui": {
+      "hello": "สวัสดี, {business}",
+      "narrative": "ผู้อ่าน {subscribers} คน ใน {languages} ภาษา ฉบับถัดไปจะออก {schedule}",
+      "kpiSubscribers": "ผู้ติดตาม",
+      "kpiLanguages": "ภาษา",
+      "kpiClicks": "คลิก, 7 วันที่ผ่านมา",
+      "kpiAutomations": "ระบบอัตโนมัติเปิดอยู่",
+      "kpiNew": "ใหม่ {count} รายการในสัปดาห์นี้",
+      "nextIssue": "ฉบับถัดไป",
+      "ready": "พร้อม",
+      "activity": "กิจกรรมล่าสุด",
+      "from": "จาก",
+      "subject": "หัวเรื่อง",
+      "readMore": "อ่านบทความเต็ม",
+      "readerLanguage": "ภาษาของผู้อ่าน",
+      "clicksTitle": "คลิก, 7 วันที่ผ่านมา",
+      "mostClicked": "คลิกมากที่สุด",
+      "clicks": "คลิก",
+      "days": [
+        "จ.",
+        "อ.",
+        "พ.",
+        "พฤ.",
+        "ศ.",
+        "ส.",
+        "อา."
+      ],
+      "subscribersTitle": "ผู้ติดตาม",
+      "language": "ภาษา",
+      "joinedVia": "เข้าร่วมผ่าน",
+      "newSubscriber": "ผู้ติดตามใหม่",
+      "automationTitle": "ฉบับรายสัปดาห์",
+      "automationSentence": "{schedule}, เขียนฉบับจากบทความล่าสุดและส่งให้ผู้อ่านทุกคนในภาษาของพวกเขา",
+      "on": "เปิด",
+      "off": "ปิด",
+      "automationOn": "เปิดระบบอัตโนมัติแล้ว",
+      "sourceLabel": "ที่มาของเนื้อหาของคุณ",
+      "sourceButton": "อ่านเว็บไซต์ของฉัน",
+      "reading": "กำลังอ่านเว็บไซต์ของคุณ",
+      "found": "พบบทความ {count} บทความ",
+      "voiceReader": "ผู้อ่านในอุดมคติของคุณ",
+      "voiceTone": "ควรฟังดูเป็นอย่างไร",
+      "signupHeading": "รับบันทึกประจำสัปดาห์ของเรา",
+      "signupEmail": "ที่อยู่อีเมล",
+      "signupLanguage": "ภาษา",
+      "signupButton": "สมัครสมาชิก",
+      "signupDone": "ตรวจสอบกล่องจดหมายของคุณเพื่อยืนยัน",
+      "blogTitle": "บทความจาก {business}",
+      "importFile": "clients.csv",
+      "importing": "กำลังนำเข้าผู้ติดต่อ",
+      "imported": "เพิ่มผู้ติดต่อ {count} ราย",
+      "sources": {
+        "form": "ฟอร์มสมัครสมาชิก",
+        "import": "นำเข้า",
+        "manual": "เพิ่มด้วยมือ"
+      }
+    },
+    "examples": [
+      {
+        "business": "Northfield Studio",
+        "kind": "เอเจนซี่ออกแบบเว็บ",
+        "site": "northfield.studio",
+        "schedule": "ทุกวันจันทร์เวลา 9:00 น.",
+        "subscribers": 312,
+        "newThisWeek": 9,
+        "clicks7": 84,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 58
+          },
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 31
+          },
+          {
+            "code": "pt",
+            "name": "Portuguese",
+            "share": 11
+          }
+        ],
+        "reader": "เจ้าของคลินิก ร้านค้า และสตูดิโอที่ต้องการเว็บไซต์ที่ดึงดูดลูกค้า ไม่ใช่งานพอร์ตโฟลิโอ",
+        "tones": [
+          "อบอุ่น",
+          "เรียบง่าย",
+          "ปฏิบัติได้จริง"
+        ],
+        "articles": [
+          "วิธีที่เราสร้างเว็บไซต์คลินิกทันตกรรมใหม่ในหกสัปดาห์",
+          "ห้าสิ่งที่ต้องแก้ไขก่อนออกแบบใหม่",
+          "ทำไมปุ่มจองของคุณควรเป็นสีส้ม"
+        ],
+        "issue": {
+          "title": "วิธีที่เราสร้างเว็บไซต์คลินิกทันตกรรมใหม่ในหกสัปดาห์",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "A clinic website rebuilt in six weeks",
+              "summary": "We moved booking to the top of every page and cut the forms from nine fields to three. Here is what changed for the clinic."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "El sitio de una clínica, renovado en seis semanas",
+              "summary": "Pusimos la reserva arriba en cada página y redujimos los formularios de nueve campos a tres. Esto es lo que cambió para la clínica."
+            },
+            {
+              "code": "pt",
+              "name": "Português",
+              "subject": "O site de uma clínica, refeito em seis semanas",
+              "summary": "Colocamos o agendamento no topo de cada página e reduzimos os formulários de nove campos para três. Veja o que mudou para a clínica."
+            }
+          ]
+        },
+        "clicksByDay": [
+          21,
+          17,
+          12,
+          9,
+          11,
+          6,
+          8
+        ],
+        "topLinks": [
+          {
+            "title": "เคสศึกษาคลินิก",
+            "clicks": 38
+          },
+          {
+            "title": "ห้าสิ่งที่ต้องแก้ไขก่อนออกแบบใหม่",
+            "clicks": 27
+          },
+          {
+            "title": "จองการโทร",
+            "clicks": 19
+          }
+        ],
+        "people": [
+          {
+            "email": "lucia.r@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "mark@example.org",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "joana.s@example.net",
+            "lang": "PT",
+            "via": "form"
+          },
+          {
+            "email": "dr.chen@example.com",
+            "lang": "EN",
+            "via": "manual"
+          }
+        ],
+        "activity": [
+          "ส่งจดหมายข่าวถึงผู้อ่าน 312 คนใน 3 ภาษา",
+          "38 การคลิกที่เคสศึกษาคลินิก",
+          "Lucia สมัครจากฟอร์มและอ่านเป็นภาษาสเปน"
+        ],
+        "importCount": 148
+      },
+      {
+        "business": "Brightline Software",
+        "kind": "บริษัทซอฟต์แวร์",
+        "site": "brightline.dev",
+        "schedule": "วันที่ 1 ของทุกเดือนเวลา 10:00 น.",
+        "subscribers": 1240,
+        "newThisWeek": 23,
+        "clicks7": 211,
+        "automationsOn": 1,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 64
+          },
+          {
+            "code": "de",
+            "name": "German",
+            "share": 22
+          },
+          {
+            "code": "fr",
+            "name": "French",
+            "share": 14
+          }
+        ],
+        "reader": "ผู้จัดการสำนักงานและหัวหน้าฝ่ายไอทีของลูกค้าที่ใช้ซอฟต์แวร์การจองของเราทุกวัน",
+        "tones": [
+          "ชัดเจน",
+          "สั้น",
+          "เป็นมิตร"
+        ],
+        "articles": [
+          "รุ่น 4.2: การนัดหมายแบบวนซ้ำ",
+          "รายงานที่เร็วขึ้นสำหรับทีมขนาดใหญ่",
+          "วิธีย้ายปฏิทินของคุณจากสเปรดชีต"
+        ],
+        "issue": {
+          "title": "รุ่น 4.2: การนัดหมายแบบวนซ้ำ",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "New this month: recurring appointments",
+              "summary": "You can now repeat any appointment weekly or monthly. Reports for teams over 50 people also load faster."
+            },
+            {
+              "code": "de",
+              "name": "Deutsch",
+              "subject": "Neu diesen Monat: wiederkehrende Termine",
+              "summary": "Sie können jetzt jeden Termin wöchentlich oder monatlich wiederholen. Berichte für Teams ab 50 Personen laden außerdem schneller."
+            },
+            {
+              "code": "fr",
+              "name": "Français",
+              "subject": "Nouveau ce mois-ci : les rendez-vous récurrents",
+              "summary": "Vous pouvez désormais répéter un rendez-vous chaque semaine ou chaque mois. Les rapports des équipes de plus de 50 personnes s'affichent aussi plus vite."
+            }
+          ]
+        },
+        "clicksByDay": [
+          64,
+          48,
+          33,
+          25,
+          19,
+          9,
+          13
+        ],
+        "topLinks": [
+          {
+            "title": "คู่มือการนัดหมายแบบวนซ้ำ",
+            "clicks": 96
+          },
+          {
+            "title": "บันทึกประจำรุ่น 4.2",
+            "clicks": 71
+          },
+          {
+            "title": "การย้ายจากสเปรดชีต",
+            "clicks": 44
+          }
+        ],
+        "people": [
+          {
+            "email": "it@example.de",
+            "lang": "DE",
+            "via": "import"
+          },
+          {
+            "email": "sophie.m@example.fr",
+            "lang": "FR",
+            "via": "form"
+          },
+          {
+            "email": "ops@example.com",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "k.weber@example.de",
+            "lang": "DE",
+            "via": "form"
+          }
+        ],
+        "activity": [
+          "ส่งจดหมายข่าวไปยังผู้อ่าน 1240 คนใน 3 ภาษา",
+          "คลิก 96 ครั้งบนคู่มือการนัดหมายแบบวนซ้ำ",
+          "นำเข้าผู้ติดต่อ 23 รายจาก clients.csv"
+        ],
+        "importCount": 412
+      },
+      {
+        "business": "Casa Verde Realty",
+        "kind": "บริษัทอสังหาริมทรัพย์",
+        "site": "casaverde.homes",
+        "schedule": "ทุกวันพฤหัสบดีเวลา 8:00",
+        "subscribers": 586,
+        "newThisWeek": 14,
+        "clicks7": 163,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 47
+          },
+          {
+            "code": "en",
+            "name": "English",
+            "share": 41
+          },
+          {
+            "code": "fr",
+            "name": "French",
+            "share": 12
+          }
+        ],
+        "reader": "ครอบครัวและผู้เกษียณอายุจากต่างประเทศที่กำลังมองหาบ้านใกล้ชายฝั่ง และเจ้าของที่อาจจะขาย",
+        "tones": [
+          "อบอุ่น",
+          "ท้องถิ่น",
+          "สงบ"
+        ],
+        "articles": [
+          "บ้านใหม่สามหลังใกล้ชายหาดในสัปดาห์นี้",
+          "ค่าใช้จ่ายปิดการขายสำหรับผู้ซื้อต่างประเทศเป็นอย่างไร",
+          "ราคาในเมืองเก่า อัปเดตฤดูใบไม้ร่วง"
+        ],
+        "issue": {
+          "title": "บ้านใหม่สามหลังใกล้ชายหาดในสัปดาห์นี้",
+          "langs": [
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tres casas nuevas cerca de la playa",
+              "summary": "Una casa de dos habitaciones con jardín, un apartamento con vista al mar y una casa para reformar a diez minutos del centro."
+            },
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Three new homes near the beach",
+              "summary": "A two bedroom house with a garden, a flat with a sea view and a house to renovate ten minutes from the center."
+            },
+            {
+              "code": "fr",
+              "name": "Français",
+              "subject": "Trois nouvelles maisons près de la plage",
+              "summary": "Une maison de deux chambres avec jardin, un appartement avec vue sur la mer et une maison à rénover à dix minutes du centre."
+            }
+          ]
+        },
+        "clicksByDay": [
+          12,
+          9,
+          15,
+          52,
+          38,
+          21,
+          16
+        ],
+        "topLinks": [
+          {
+            "title": "อพาร์ตเมนต์วิวทะเล",
+            "clicks": 71
+          },
+          {
+            "title": "บ้านสองห้องนอนพร้อมสวน",
+            "clicks": 54
+          },
+          {
+            "title": "ค่าใช้จ่ายปิดการขายสำหรับผู้ซื้อต่างประเทศ",
+            "clicks": 38
+          }
+        ],
+        "people": [
+          {
+            "email": "familia.ortiz@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "j.dupont@example.fr",
+            "lang": "FR",
+            "via": "form"
+          },
+          {
+            "email": "tom.and.ann@example.org",
+            "lang": "EN",
+            "via": "manual"
+          },
+          {
+            "email": "rmora@example.net",
+            "lang": "ES",
+            "via": "import"
+          }
+        ],
+        "activity": [
+          "ส่งจดหมายข่าวไปยังผู้อ่าน 586 คนใน 3 ภาษา",
+          "คลิก 71 ครั้งบนอพาร์ตเมนต์วิวทะเล",
+          "ผู้อ่านในฝรั่งเศสเข้าร่วมจากฟอร์มสมัครสมาชิก"
+        ],
+        "importCount": 203
+      },
+      {
+        "business": "Mora and Partners",
+        "kind": "บริษัทบัญชี",
+        "site": "morapartners.co",
+        "schedule": "ทุกๆ สองสัปดาห์ในวันอังคารเวลา 7:30",
+        "subscribers": 428,
+        "newThisWeek": 6,
+        "clicks7": 97,
+        "automationsOn": 1,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 52
+          },
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 38
+          },
+          {
+            "code": "it",
+            "name": "Italian",
+            "share": 10
+          }
+        ],
+        "reader": "เจ้าของบริษัทขนาดเล็กที่ต้องการรู้ว่ามีอะไรเปลี่ยนแปลงในเรื่องภาษีและเงินเดือน โดยไม่มีศัพท์เทคนิค",
+        "tones": [
+          "สงบนิ่ง",
+          "แม่นยำ",
+          "เรียบง่าย"
+        ],
+        "articles": [
+          "กำหนดเวลายื่นภาษีไตรมาสเลื่อนไปเป็นวันที่ 15",
+          "สิ่งที่ต้องเก็บไว้เมื่อจ้างพนักงานคนแรก",
+          "ใบเสร็จ: กระดาษหรือรูปถ่าย?"
+        ],
+        "issue": {
+          "title": "กำหนดเวลายื่นภาษีไตรมาสเลื่อนไปเป็นวันที่ 15",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Your quarterly deadline moves to the 15th",
+              "summary": "The filing date for the next quarter moves five days later. Here is what to send us and when, so nothing is late."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tu plazo trimestral pasa al día 15",
+              "summary": "La fecha de presentación del próximo trimestre se mueve cinco días. Esto es lo que debes enviarnos y cuándo, para que nada llegue tarde."
+            },
+            {
+              "code": "it",
+              "name": "Italiano",
+              "subject": "La scadenza trimestrale passa al 15",
+              "summary": "La data di presentazione del prossimo trimestre slitta di cinque giorni. Ecco cosa inviarci e quando, perché nulla arrivi in ritardo."
+            }
+          ]
+        },
+        "clicksByDay": [
+          33,
+          24,
+          14,
+          8,
+          7,
+          4,
+          7
+        ],
+        "topLinks": [
+          {
+            "title": "รายการตรวจสอบสำหรับวันที่ 15",
+            "clicks": 46
+          },
+          {
+            "title": "การจ้างพนักงานคนแรก",
+            "clicks": 29
+          },
+          {
+            "title": "จองการโทรทบทวน",
+            "clicks": 22
+          }
+        ],
+        "people": [
+          {
+            "email": "bakery.owner@example.com",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "c.rossi@example.it",
+            "lang": "IT",
+            "via": "form"
+          },
+          {
+            "email": "taller.luna@example.net",
+            "lang": "ES",
+            "via": "import"
+          },
+          {
+            "email": "finance@example.org",
+            "lang": "EN",
+            "via": "manual"
+          }
+        ],
+        "activity": [
+          "ส่งจดหมายข่าวไปยังผู้อ่าน 428 คนใน 3 ภาษา",
+          "46 การคลิกที่รายการตรวจสอบสำหรับวันที่ 15",
+          "ผู้อ่านใหม่ 6 คนในสัปดาห์นี้"
+        ],
+        "importCount": 97
+      },
+      {
+        "business": "Run Better Coaching",
+        "kind": "โค้ชวิ่ง",
+        "site": "runbetter.coach",
+        "schedule": "ทุกวันอาทิตย์เวลา 18:00",
+        "subscribers": 907,
+        "newThisWeek": 31,
+        "clicks7": 248,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 49
+          },
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 33
+          },
+          {
+            "code": "de",
+            "name": "German",
+            "share": 18
+          }
+        ],
+        "reader": "ผู้ใหญ่ที่ฝึกซ้อมสำหรับฮาล์ฟมาราธอนครั้งแรกและวิ่งสามครั้งต่อสัปดาห์ก่อนทำงาน",
+        "tones": [
+          "ให้กำลังใจ",
+          "ตรงไปตรงมา",
+          "สั้น"
+        ],
+        "articles": [
+          "สัปดาห์นี้: การวิ่งระยะยาว ช้ากว่าที่คุณคิด",
+          "รองเท้าหลังจาก 500 กิโลเมตร",
+          "ตารางฝึกความแข็งแรง 20 นาที"
+        ],
+        "issue": {
+          "title": "สัปดาห์นี้: การวิ่งระยะยาว ช้ากว่าที่คุณคิด",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Your long run should feel too easy",
+              "summary": "Keep it slow enough to talk. This week's plan adds ten minutes and one short hill session."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tu tirada larga debería sentirse demasiado fácil",
+              "summary": "Mantén un ritmo que te deje hablar. El plan de esta semana suma diez minutos y una sesión corta de cuestas."
+            },
+            {
+              "code": "de",
+              "name": "Deutsch",
+              "subject": "Dein langer Lauf sollte sich zu leicht anfühlen",
+              "summary": "Lauf so langsam, dass du noch reden kannst. Der Plan dieser Woche bringt zehn Minuten mehr und eine kurze Bergeinheit."
+            }
+          ]
+        },
+        "clicksByDay": [
+          18,
+          22,
+          26,
+          31,
+          35,
+          49,
+          67
+        ],
+        "topLinks": [
+          {
+            "title": "แผนการฝึกสัปดาห์นี้",
+            "clicks": 121
+          },
+          {
+            "title": "ตารางฝึกความแข็งแรง 20 นาที",
+            "clicks": 78
+          },
+          {
+            "title": "รองเท้าหลังจาก 500 กิโลเมตร",
+            "clicks": 49
+          }
+        ],
+        "people": [
+          {
+            "email": "ana.runs@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "felix.k@example.de",
+            "lang": "DE",
+            "via": "form"
+          },
+          {
+            "email": "sam@example.org",
+            "lang": "EN",
+            "via": "form"
+          },
+          {
+            "email": "club.secretary@example.net",
+            "lang": "EN",
+            "via": "import"
+          }
+        ],
+        "activity": [
+          "ส่งจดหมายข่าวไปยังผู้อ่าน 907 คนใน 3 ภาษา",
+          "121 การคลิกที่แผนการฝึกสัปดาห์นี้",
+          "ผู้อ่านใหม่ 31 คนในสัปดาห์นี้ ส่วนใหญ่มาจากฟอร์มสมัคร"
+        ],
+        "importCount": 260
+      }
+    ]
+  },
+  "errorPage": {
+    "notFoundEyebrow": "ข้อผิดพลาด 404",
+    "notFoundTitle": "เราไม่พบหน้านี้",
+    "notFoundBody": "ลิงก์อาจเก่าหรือมีข้อผิดพลาดในการพิมพ์ หน้าเหล่านี้เป็นจุดเริ่มต้นที่ดีในการดำเนินการต่อ",
+    "serverEyebrow": "ข้อผิดพลาด {status}",
+    "serverTitle": "เกิดข้อผิดพลาดบนฝั่งเรา",
+    "serverBody": "เราไม่สามารถโหลดหน้านี้ได้ ลองอีกครั้งในหนึ่งนาที หากยังเกิดขึ้นอีก โปรดเขียนถึง info@aiban.news",
+    "retry": "ลองอีกครั้ง",
+    "home": "ไปที่หน้าแรก",
+    "popularTitle": "หน้าที่ยอดนิยม",
+    "links": {
+      "howItWorks": "วิธีทำงานของ AIBAN",
+      "pricing": "ราคา",
+      "help": "ศูนย์ช่วยเหลือ",
+      "login": "เข้าสู่ระบบแดชบอร์ด"
+    },
+    "report": "หากลิงก์บนเว็บไซต์ของเราพาคุณมาที่นี่ โปรดแจ้งเราที่ info@aiban.news เพื่อให้เราแก้ไขได้"
   },
   "header": {
     "goToWorkspace": "เปิดแดชบอร์ด",
@@ -982,1429 +1749,5 @@ export default {
     "monthly": "รายเดือน",
     "yearly": "รายปี",
     "loadingPlan": "กำลังโหลดข้อมูลแผน..."
-  },
-  "languages": [
-    {
-      "code": "ab",
-      "name": "อับคาซ"
-    },
-    {
-      "code": "aa",
-      "name": "อะฟาร์"
-    },
-    {
-      "code": "af",
-      "name": "แอฟริกันส์"
-    },
-    {
-      "code": "ak",
-      "name": "อาคัน"
-    },
-    {
-      "code": "sq",
-      "name": "แอลเบเนีย"
-    },
-    {
-      "code": "am",
-      "name": "อัมฮาริก"
-    },
-    {
-      "code": "ar",
-      "name": "อาหรับ"
-    },
-    {
-      "code": "an",
-      "name": "อารากอน"
-    },
-    {
-      "code": "hy",
-      "name": "อาร์เมเนีย"
-    },
-    {
-      "code": "as",
-      "name": "อัสสัม"
-    },
-    {
-      "code": "av",
-      "name": "อาวาร์"
-    },
-    {
-      "code": "ae",
-      "name": "อเวสตะ"
-    },
-    {
-      "code": "ay",
-      "name": "ไอย์มารา"
-    },
-    {
-      "code": "az",
-      "name": "อาเซอร์ไบจาน"
-    },
-    {
-      "code": "bm",
-      "name": "บัมบารา"
-    },
-    {
-      "code": "ba",
-      "name": "บัชคีร์"
-    },
-    {
-      "code": "eu",
-      "name": "บาสก์"
-    },
-    {
-      "code": "be",
-      "name": "เบลารุส"
-    },
-    {
-      "code": "bn",
-      "name": "เบงกาลี"
-    },
-    {
-      "code": "bi",
-      "name": "บิสลามา"
-    },
-    {
-      "code": "bs",
-      "name": "บอสเนีย"
-    },
-    {
-      "code": "br",
-      "name": "เบรตัน"
-    },
-    {
-      "code": "bg",
-      "name": "บัลแกเรีย"
-    },
-    {
-      "code": "my",
-      "name": "พม่า"
-    },
-    {
-      "code": "ca",
-      "name": "คาตาลัน"
-    },
-    {
-      "code": "ch",
-      "name": "ชามอร์โร"
-    },
-    {
-      "code": "ce",
-      "name": "เชเชน"
-    },
-    {
-      "code": "ny",
-      "name": "ชิเชวา"
-    },
-    {
-      "code": "zh",
-      "name": "จีน"
-    },
-    {
-      "code": "cu",
-      "name": "เชิร์ชสลาโวนิก"
-    },
-    {
-      "code": "cv",
-      "name": "ชูวัช"
-    },
-    {
-      "code": "kw",
-      "name": "คอร์นิช"
-    },
-    {
-      "code": "co",
-      "name": "คอร์ซิกา"
-    },
-    {
-      "code": "cr",
-      "name": "ครี"
-    },
-    {
-      "code": "hr",
-      "name": "โครเอเชีย"
-    },
-    {
-      "code": "cs",
-      "name": "เช็ก"
-    },
-    {
-      "code": "da",
-      "name": "เดนมาร์ก"
-    },
-    {
-      "code": "dv",
-      "name": "ดิเวฮิ"
-    },
-    {
-      "code": "nl",
-      "name": "ดัตช์"
-    },
-    {
-      "code": "dz",
-      "name": "ซองคา"
-    },
-    {
-      "code": "en",
-      "name": "อังกฤษ"
-    },
-    {
-      "code": "eo",
-      "name": "เอสเปรันโต"
-    },
-    {
-      "code": "et",
-      "name": "เอสโตเนีย"
-    },
-    {
-      "code": "ee",
-      "name": "เอเว"
-    },
-    {
-      "code": "fo",
-      "name": "แฟโร"
-    },
-    {
-      "code": "fj",
-      "name": "ฟิจิ"
-    },
-    {
-      "code": "fi",
-      "name": "ฟินแลนด์"
-    },
-    {
-      "code": "fr",
-      "name": "ฝรั่งเศส"
-    },
-    {
-      "code": "fy",
-      "name": "ฟรีเซียนตะวันตก"
-    },
-    {
-      "code": "ff",
-      "name": "ฟูลาห์"
-    },
-    {
-      "code": "gd",
-      "name": "แกลิกสกอต"
-    },
-    {
-      "code": "gl",
-      "name": "กาลิเซีย"
-    },
-    {
-      "code": "lg",
-      "name": "กันดา"
-    },
-    {
-      "code": "ka",
-      "name": "จอร์เจีย"
-    },
-    {
-      "code": "de",
-      "name": "เยอรมัน"
-    },
-    {
-      "code": "el",
-      "name": "กรีก"
-    },
-    {
-      "code": "kl",
-      "name": "กรีนแลนด์"
-    },
-    {
-      "code": "gn",
-      "name": "กวารานี"
-    },
-    {
-      "code": "gu",
-      "name": "คุชราต"
-    },
-    {
-      "code": "ht",
-      "name": "ครีโอลเฮติ"
-    },
-    {
-      "code": "ha",
-      "name": "เฮาซา"
-    },
-    {
-      "code": "he",
-      "name": "ฮีบรู"
-    },
-    {
-      "code": "hz",
-      "name": "เฮเรโร"
-    },
-    {
-      "code": "hi",
-      "name": "ฮินดี"
-    },
-    {
-      "code": "ho",
-      "name": "ฮีรีโมตู"
-    },
-    {
-      "code": "hu",
-      "name": "ฮังการี"
-    },
-    {
-      "code": "is",
-      "name": "ไอซ์แลนด์"
-    },
-    {
-      "code": "io",
-      "name": "อิโด"
-    },
-    {
-      "code": "ig",
-      "name": "อิกโบ"
-    },
-    {
-      "code": "id",
-      "name": "อินโดนีเซีย"
-    },
-    {
-      "code": "ia",
-      "name": "อินเตอร์ลิงกวา"
-    },
-    {
-      "code": "ie",
-      "name": "อินเตอร์ลิงกวี"
-    },
-    {
-      "code": "iu",
-      "name": "อินุกติตุต"
-    },
-    {
-      "code": "ik",
-      "name": "อินูเปียก"
-    },
-    {
-      "code": "ga",
-      "name": "ไอริช"
-    },
-    {
-      "code": "it",
-      "name": "อิตาลี"
-    },
-    {
-      "code": "ja",
-      "name": "ญี่ปุ่น"
-    },
-    {
-      "code": "jv",
-      "name": "ชวา"
-    },
-    {
-      "code": "kn",
-      "name": "กันนาดา"
-    },
-    {
-      "code": "kr",
-      "name": "คานูรี"
-    },
-    {
-      "code": "ks",
-      "name": "กัศมีรี"
-    },
-    {
-      "code": "kk",
-      "name": "คาซัค"
-    },
-    {
-      "code": "km",
-      "name": "เขมร"
-    },
-    {
-      "code": "ki",
-      "name": "กีกูยู"
-    },
-    {
-      "code": "rw",
-      "name": "คินยาร์วันดา"
-    },
-    {
-      "code": "ky",
-      "name": "คีร์กีซ"
-    },
-    {
-      "code": "kv",
-      "name": "โคมิ"
-    },
-    {
-      "code": "kg",
-      "name": "คองโก"
-    },
-    {
-      "code": "ko",
-      "name": "เกาหลี"
-    },
-    {
-      "code": "kj",
-      "name": "กวันยามา"
-    },
-    {
-      "code": "ku",
-      "name": "เคิร์ด"
-    },
-    {
-      "code": "lo",
-      "name": "ลาว"
-    },
-    {
-      "code": "la",
-      "name": "ละติน"
-    },
-    {
-      "code": "lv",
-      "name": "ลัตเวีย"
-    },
-    {
-      "code": "li",
-      "name": "ลิมบูร์ก"
-    },
-    {
-      "code": "ln",
-      "name": "ลิงกาลา"
-    },
-    {
-      "code": "lt",
-      "name": "ลิทัวเนีย"
-    },
-    {
-      "code": "lu",
-      "name": "ลูบา-คาตังกา"
-    },
-    {
-      "code": "lb",
-      "name": "ลักเซมเบิร์ก"
-    },
-    {
-      "code": "mk",
-      "name": "มาซิโดเนีย"
-    },
-    {
-      "code": "mg",
-      "name": "มาลากาซี"
-    },
-    {
-      "code": "ms",
-      "name": "มลายู"
-    },
-    {
-      "code": "ml",
-      "name": "มลยาฬัม"
-    },
-    {
-      "code": "mt",
-      "name": "มอลตา"
-    },
-    {
-      "code": "gv",
-      "name": "มานซ์"
-    },
-    {
-      "code": "mi",
-      "name": "เมาลี"
-    },
-    {
-      "code": "mr",
-      "name": "มราฐี"
-    },
-    {
-      "code": "mh",
-      "name": "มาร์แชลล์"
-    },
-    {
-      "code": "mn",
-      "name": "มองโกเลีย"
-    },
-    {
-      "code": "na",
-      "name": "นาอูรู"
-    },
-    {
-      "code": "nv",
-      "name": "นาวาโฮ"
-    },
-    {
-      "code": "nd",
-      "name": "เอ็นเดเบเลเหนือ"
-    },
-    {
-      "code": "nr",
-      "name": "เอ็นเดเบเลใต้"
-    },
-    {
-      "code": "ng",
-      "name": "เอ็นดองกา"
-    },
-    {
-      "code": "ne",
-      "name": "เนปาล"
-    },
-    {
-      "code": "no",
-      "name": "นอร์เวย์"
-    },
-    {
-      "code": "nb",
-      "name": "นอร์เวย์บุ๊กมอล"
-    },
-    {
-      "code": "nn",
-      "name": "นอร์เวย์นีนอสก์"
-    },
-    {
-      "code": "oc",
-      "name": "อ็อกซิตัน"
-    },
-    {
-      "code": "oj",
-      "name": "โอจิบวา"
-    },
-    {
-      "code": "or",
-      "name": "โอริยา"
-    },
-    {
-      "code": "om",
-      "name": "โอโรโม"
-    },
-    {
-      "code": "os",
-      "name": "ออสเซเชีย"
-    },
-    {
-      "code": "pi",
-      "name": "บาลี"
-    },
-    {
-      "code": "ps",
-      "name": "พัชโต"
-    },
-    {
-      "code": "fa",
-      "name": "เปอร์เซีย"
-    },
-    {
-      "code": "pl",
-      "name": "โปแลนด์"
-    },
-    {
-      "code": "pt",
-      "name": "โปรตุเกส"
-    },
-    {
-      "code": "pa",
-      "name": "ปัญจาบ"
-    },
-    {
-      "code": "qu",
-      "name": "เกชัว"
-    },
-    {
-      "code": "ro",
-      "name": "โรมาเนีย"
-    },
-    {
-      "code": "rm",
-      "name": "โรแมนซ์"
-    },
-    {
-      "code": "rn",
-      "name": "รุนดี"
-    },
-    {
-      "code": "ru",
-      "name": "รัสเซีย"
-    },
-    {
-      "code": "se",
-      "name": "ซามิเหนือ"
-    },
-    {
-      "code": "sm",
-      "name": "ซามัว"
-    },
-    {
-      "code": "sg",
-      "name": "ซังโก"
-    },
-    {
-      "code": "sa",
-      "name": "สันสกฤต"
-    },
-    {
-      "code": "sc",
-      "name": "ซาร์ดิเนีย"
-    },
-    {
-      "code": "sr",
-      "name": "เซอร์เบีย"
-    },
-    {
-      "code": "sn",
-      "name": "โชนา"
-    },
-    {
-      "code": "ii",
-      "name": "อี้เสฉวน"
-    },
-    {
-      "code": "sd",
-      "name": "สินธ์"
-    },
-    {
-      "code": "si",
-      "name": "สิงหล"
-    },
-    {
-      "code": "sk",
-      "name": "สโลวัก"
-    },
-    {
-      "code": "sl",
-      "name": "สโลวีเนีย"
-    },
-    {
-      "code": "so",
-      "name": "โซมาลี"
-    },
-    {
-      "code": "st",
-      "name": "โซโทใต้"
-    },
-    {
-      "code": "es",
-      "name": "สเปน"
-    },
-    {
-      "code": "su",
-      "name": "ซุนดา"
-    },
-    {
-      "code": "sw",
-      "name": "สวาฮีลี"
-    },
-    {
-      "code": "ss",
-      "name": "สวาตี"
-    },
-    {
-      "code": "sv",
-      "name": "สวีเดน"
-    },
-    {
-      "code": "tl",
-      "name": "ตากาล็อก"
-    },
-    {
-      "code": "ty",
-      "name": "ตาฮีตี"
-    },
-    {
-      "code": "tg",
-      "name": "ทาจิก"
-    },
-    {
-      "code": "ta",
-      "name": "ทมิฬ"
-    },
-    {
-      "code": "tt",
-      "name": "ตาตาร์"
-    },
-    {
-      "code": "te",
-      "name": "เตลูกู"
-    },
-    {
-      "code": "th",
-      "name": "ไทย"
-    },
-    {
-      "code": "bo",
-      "name": "ทิเบต"
-    },
-    {
-      "code": "ti",
-      "name": "ทิกรินยา"
-    },
-    {
-      "code": "to",
-      "name": "ตองกา"
-    },
-    {
-      "code": "ts",
-      "name": "ซองกา"
-    },
-    {
-      "code": "tn",
-      "name": "ซวานา"
-    },
-    {
-      "code": "tr",
-      "name": "ตุรกี"
-    },
-    {
-      "code": "tk",
-      "name": "เติร์กเมน"
-    },
-    {
-      "code": "tw",
-      "name": "ทวิ"
-    },
-    {
-      "code": "ug",
-      "name": "อุยกูร์"
-    },
-    {
-      "code": "uk",
-      "name": "ยูเครน"
-    },
-    {
-      "code": "ur",
-      "name": "อูรดู"
-    },
-    {
-      "code": "uz",
-      "name": "อุซเบก"
-    },
-    {
-      "code": "ve",
-      "name": "เวนดา"
-    },
-    {
-      "code": "vi",
-      "name": "เวียดนาม"
-    },
-    {
-      "code": "vo",
-      "name": "โวลาพึค"
-    },
-    {
-      "code": "wa",
-      "name": "วัลลูน"
-    },
-    {
-      "code": "cy",
-      "name": "เวลส์"
-    },
-    {
-      "code": "wo",
-      "name": "โวลอฟ"
-    },
-    {
-      "code": "xh",
-      "name": "โคซา"
-    },
-    {
-      "code": "yi",
-      "name": "ยิดดิช"
-    },
-    {
-      "code": "yo",
-      "name": "โยรูบา"
-    },
-    {
-      "code": "za",
-      "name": "จ้วง"
-    },
-    {
-      "code": "zu",
-      "name": "ซูลู"
-    }
-  ],
-  "countries": [
-    {
-      "code": "AF",
-      "name": "อัฟกานิสถาน"
-    },
-    {
-      "code": "AL",
-      "name": "แอลเบเนีย"
-    },
-    {
-      "code": "DZ",
-      "name": "แอลจีเรีย"
-    },
-    {
-      "code": "AS",
-      "name": "อเมริกันซามัว"
-    },
-    {
-      "code": "AD",
-      "name": "อันดอร์รา"
-    },
-    {
-      "code": "AO",
-      "name": "แองโกลา"
-    },
-    {
-      "code": "AI",
-      "name": "แองกวิลลา"
-    },
-    {
-      "code": "AQ",
-      "name": "แอนตาร์กติกา"
-    },
-    {
-      "code": "AG",
-      "name": "แอนติกาและบาร์บูดา"
-    },
-    {
-      "code": "AR",
-      "name": "อาร์เจนตินา"
-    },
-    {
-      "code": "AM",
-      "name": "อาร์เมเนีย"
-    },
-    {
-      "code": "AW",
-      "name": "อารูบา"
-    },
-    {
-      "code": "AU",
-      "name": "ออสเตรเลีย"
-    },
-    {
-      "code": "AT",
-      "name": "ออสเตรีย"
-    },
-    {
-      "code": "AZ",
-      "name": "อาเซอร์ไบจาน"
-    },
-    {
-      "code": "BS",
-      "name": "บาฮามาส"
-    },
-    {
-      "code": "BH",
-      "name": "บาห์เรน"
-    },
-    {
-      "code": "BD",
-      "name": "บังกลาเทศ"
-    },
-    {
-      "code": "BB",
-      "name": "บาร์เบโดส"
-    },
-    {
-      "code": "BY",
-      "name": "เบลารุส"
-    },
-    {
-      "code": "BE",
-      "name": "เบลเยียม"
-    },
-    {
-      "code": "BZ",
-      "name": "เบลีซ"
-    },
-    {
-      "code": "BJ",
-      "name": "เบนิน"
-    },
-    {
-      "code": "BM",
-      "name": "เบอร์มิวดา"
-    },
-    {
-      "code": "BT",
-      "name": "ภูฏาน"
-    },
-    {
-      "code": "BO",
-      "name": "โบลิเวีย"
-    },
-    {
-      "code": "BA",
-      "name": "บอสเนียและเฮอร์เซโกวีนา"
-    },
-    {
-      "code": "BW",
-      "name": "บอตสวานา"
-    },
-    {
-      "code": "BR",
-      "name": "บราซิล"
-    },
-    {
-      "code": "IO",
-      "name": "บริติชอินเดียนโอเชียนเทร์ริทอรี"
-    },
-    {
-      "code": "VG",
-      "name": "หมู่เกาะบริติชเวอร์จิน"
-    },
-    {
-      "code": "BN",
-      "name": "บรูไน"
-    },
-    {
-      "code": "BG",
-      "name": "บัลแกเรีย"
-    },
-    {
-      "code": "BF",
-      "name": "บูร์กินาฟาโซ"
-    },
-    {
-      "code": "BI",
-      "name": "บุรุนดี"
-    },
-    {
-      "code": "KH",
-      "name": "กัมพูชา"
-    },
-    {
-      "code": "CM",
-      "name": "แคเมอรูน"
-    },
-    {
-      "code": "CA",
-      "name": "แคนาดา"
-    },
-    {
-      "code": "CV",
-      "name": "เคปเวิร์ด"
-    },
-    {
-      "code": "KY",
-      "name": "หมู่เกาะเคย์แมน"
-    },
-    {
-      "code": "CF",
-      "name": "สาธารณรัฐแอฟริกากลาง"
-    },
-    {
-      "code": "TD",
-      "name": "ชาด"
-    },
-    {
-      "code": "CL",
-      "name": "ชิลี"
-    },
-    {
-      "code": "CN",
-      "name": "จีน"
-    },
-    {
-      "code": "CX",
-      "name": "เกาะคริสต์มาส"
-    },
-    {
-      "code": "CC",
-      "name": "หมู่เกาะโคโคส (คีลิง)"
-    },
-    {
-      "code": "CO",
-      "name": "โคลอมเบีย"
-    },
-    {
-      "code": "KM",
-      "name": "คอโมโรส"
-    },
-    {
-      "code": "CG",
-      "name": "คองโก - บราซซาวิล"
-    },
-    {
-      "code": "CD",
-      "name": "คองโก - กินชาซา"
-    },
-    {
-      "code": "CK",
-      "name": "หมู่เกาะคุก"
-    },
-    {
-      "code": "CR",
-      "name": "คอสตาริกา"
-    },
-    {
-      "code": "CI",
-      "name": "โกตดิวัวร์"
-    },
-    {
-      "code": "HR",
-      "name": "โครเอเชีย"
-    },
-    {
-      "code": "CU",
-      "name": "คิวบา"
-    },
-    {
-      "code": "CY",
-      "name": "ไซปรัส"
-    },
-    {
-      "code": "CZ",
-      "name": "เช็กเกีย"
-    },
-    {
-      "code": "DK",
-      "name": "เดนมาร์ก"
-    },
-    {
-      "code": "DJ",
-      "name": "จิบูตี"
-    },
-    {
-      "code": "DM",
-      "name": "โดมินิกา"
-    },
-    {
-      "code": "DO",
-      "name": "สาธารณรัฐโดมินิกัน"
-    },
-    {
-      "code": "EC",
-      "name": "เอกวาดอร์"
-    },
-    {
-      "code": "EG",
-      "name": "อียิปต์"
-    },
-    {
-      "code": "SV",
-      "name": "เอลซัลวาดอร์"
-    },
-    {
-      "code": "GQ",
-      "name": "อิเควทอเรียลกินี"
-    },
-    {
-      "code": "ER",
-      "name": "เอริเทรีย"
-    },
-    {
-      "code": "EE",
-      "name": "เอสโตเนีย"
-    },
-    {
-      "code": "SZ",
-      "name": "เอสวาตินี"
-    },
-    {
-      "code": "ET",
-      "name": "เอธิโอเปีย"
-    },
-    {
-      "code": "FJ",
-      "name": "ฟิจิ"
-    },
-    {
-      "code": "FI",
-      "name": "ฟินแลนด์"
-    },
-    {
-      "code": "FR",
-      "name": "ฝรั่งเศส"
-    },
-    {
-      "code": "GA",
-      "name": "กาบอง"
-    },
-    {
-      "code": "GM",
-      "name": "แกมเบีย"
-    },
-    {
-      "code": "GE",
-      "name": "จอร์เจีย"
-    },
-    {
-      "code": "DE",
-      "name": "เยอรมนี"
-    },
-    {
-      "code": "GH",
-      "name": "กานา"
-    },
-    {
-      "code": "GR",
-      "name": "กรีซ"
-    },
-    {
-      "code": "GT",
-      "name": "กัวเตมาลา"
-    },
-    {
-      "code": "GN",
-      "name": "กินี"
-    },
-    {
-      "code": "GY",
-      "name": "กายอานา"
-    },
-    {
-      "code": "HT",
-      "name": "เฮติ"
-    },
-    {
-      "code": "HN",
-      "name": "ฮอนดูรัส"
-    },
-    {
-      "code": "HK",
-      "name": "ฮ่องกง"
-    },
-    {
-      "code": "HU",
-      "name": "ฮังการี"
-    },
-    {
-      "code": "IS",
-      "name": "ไอซ์แลนด์"
-    },
-    {
-      "code": "IN",
-      "name": "อินเดีย"
-    },
-    {
-      "code": "ID",
-      "name": "อินโดนีเซีย"
-    },
-    {
-      "code": "IR",
-      "name": "อิหร่าน"
-    },
-    {
-      "code": "IQ",
-      "name": "อิรัก"
-    },
-    {
-      "code": "IE",
-      "name": "ไอร์แลนด์"
-    },
-    {
-      "code": "IL",
-      "name": "อิสราเอล"
-    },
-    {
-      "code": "IT",
-      "name": "อิตาลี"
-    },
-    {
-      "code": "JM",
-      "name": "จาเมกา"
-    },
-    {
-      "code": "JP",
-      "name": "ญี่ปุ่น"
-    },
-    {
-      "code": "JO",
-      "name": "จอร์แดน"
-    },
-    {
-      "code": "KZ",
-      "name": "คาซัคสถาน"
-    },
-    {
-      "code": "KE",
-      "name": "เคนยา"
-    },
-    {
-      "code": "KR",
-      "name": "เกาหลีใต้"
-    },
-    {
-      "code": "KW",
-      "name": "คูเวต"
-    },
-    {
-      "code": "KG",
-      "name": "คีร์กีซสถาน"
-    },
-    {
-      "code": "LA",
-      "name": "ลาว"
-    },
-    {
-      "code": "LV",
-      "name": "ลัตเวีย"
-    },
-    {
-      "code": "LB",
-      "name": "เลบานอน"
-    },
-    {
-      "code": "LS",
-      "name": "เลโซโท"
-    },
-    {
-      "code": "LR",
-      "name": "ไลบีเรีย"
-    },
-    {
-      "code": "LY",
-      "name": "ลิเบีย"
-    },
-    {
-      "code": "LI",
-      "name": "ลิกเตนสไตน์"
-    },
-    {
-      "code": "LT",
-      "name": "ลิทัวเนีย"
-    },
-    {
-      "code": "LU",
-      "name": "ลักเซมเบิร์ก"
-    },
-    {
-      "code": "MG",
-      "name": "มาดากัสการ์"
-    },
-    {
-      "code": "MW",
-      "name": "มาลาวี"
-    },
-    {
-      "code": "MY",
-      "name": "มาเลเซีย"
-    },
-    {
-      "code": "MV",
-      "name": "มัลดีฟส์"
-    },
-    {
-      "code": "ML",
-      "name": "มาลี"
-    },
-    {
-      "code": "MT",
-      "name": "มอลตา"
-    },
-    {
-      "code": "MX",
-      "name": "เม็กซิโก"
-    },
-    {
-      "code": "MD",
-      "name": "มอลโดวา"
-    },
-    {
-      "code": "MC",
-      "name": "โมนาโก"
-    },
-    {
-      "code": "MN",
-      "name": "มองโกเลีย"
-    },
-    {
-      "code": "ME",
-      "name": "มอนเตเนโกร"
-    },
-    {
-      "code": "MA",
-      "name": "โมร็อกโก"
-    },
-    {
-      "code": "MZ",
-      "name": "โมซัมบิก"
-    },
-    {
-      "code": "MM",
-      "name": "เมียนมา"
-    },
-    {
-      "code": "NA",
-      "name": "นามิเบีย"
-    },
-    {
-      "code": "NP",
-      "name": "เนปาล"
-    },
-    {
-      "code": "NL",
-      "name": "เนเธอร์แลนด์"
-    },
-    {
-      "code": "NZ",
-      "name": "นิวซีแลนด์"
-    },
-    {
-      "code": "NI",
-      "name": "นิการากัว"
-    },
-    {
-      "code": "NE",
-      "name": "ไนเจอร์"
-    },
-    {
-      "code": "NG",
-      "name": "ไนจีเรีย"
-    },
-    {
-      "code": "MK",
-      "name": "มาซิโดเนียเหนือ"
-    },
-    {
-      "code": "NO",
-      "name": "นอร์เวย์"
-    },
-    {
-      "code": "OM",
-      "name": "โอมาน"
-    },
-    {
-      "code": "PK",
-      "name": "ปากีสถาน"
-    },
-    {
-      "code": "PA",
-      "name": "ปานามา"
-    },
-    {
-      "code": "PG",
-      "name": "ปาปัวนิวกินี"
-    },
-    {
-      "code": "PY",
-      "name": "ปารากวัย"
-    },
-    {
-      "code": "PE",
-      "name": "เปรู"
-    },
-    {
-      "code": "PH",
-      "name": "ฟิลิปปินส์"
-    },
-    {
-      "code": "PL",
-      "name": "โปแลนด์"
-    },
-    {
-      "code": "PT",
-      "name": "โปรตุเกส"
-    },
-    {
-      "code": "QA",
-      "name": "กาตาร์"
-    },
-    {
-      "code": "RO",
-      "name": "โรมาเนีย"
-    },
-    {
-      "code": "RU",
-      "name": "รัสเซีย"
-    },
-    {
-      "code": "RW",
-      "name": "รวันดา"
-    },
-    {
-      "code": "SA",
-      "name": "ซาอุดีอาระเบีย"
-    },
-    {
-      "code": "SN",
-      "name": "เซเนกัล"
-    },
-    {
-      "code": "RS",
-      "name": "เซอร์เบีย"
-    },
-    {
-      "code": "SG",
-      "name": "สิงคโปร์"
-    },
-    {
-      "code": "SK",
-      "name": "สโลวาเกีย"
-    },
-    {
-      "code": "SI",
-      "name": "สโลวีเนีย"
-    },
-    {
-      "code": "ZA",
-      "name": "แอฟริกาใต้"
-    },
-    {
-      "code": "ES",
-      "name": "สเปน"
-    },
-    {
-      "code": "LK",
-      "name": "ศรีลังกา"
-    },
-    {
-      "code": "SE",
-      "name": "สวีเดน"
-    },
-    {
-      "code": "CH",
-      "name": "สวิตเซอร์แลนด์"
-    },
-    {
-      "code": "TW",
-      "name": "ไต้หวัน"
-    },
-    {
-      "code": "TH",
-      "name": "ไทย"
-    },
-    {
-      "code": "TR",
-      "name": "ตุรกี"
-    },
-    {
-      "code": "UG",
-      "name": "ยูกันดา"
-    },
-    {
-      "code": "UA",
-      "name": "ยูเครน"
-    },
-    {
-      "code": "AE",
-      "name": "สหรัฐอาหรับเอมิเรตส์"
-    },
-    {
-      "code": "GB",
-      "name": "สหราชอาณาจักร"
-    },
-    {
-      "code": "US",
-      "name": "สหรัฐอเมริกา"
-    },
-    {
-      "code": "UY",
-      "name": "อุรุกวัย"
-    },
-    {
-      "code": "UZ",
-      "name": "อุซเบกิสถาน"
-    },
-    {
-      "code": "VE",
-      "name": "เวเนซุเอลา"
-    },
-    {
-      "code": "VN",
-      "name": "เวียดนาม"
-    },
-    {
-      "code": "YE",
-      "name": "เยเมน"
-    },
-    {
-      "code": "ZM",
-      "name": "แซมเบีย"
-    },
-    {
-      "code": "ZW",
-      "name": "ซิมบับเว"
-    }
-  ]
+  }
 };

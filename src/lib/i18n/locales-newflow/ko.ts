@@ -1,5 +1,5 @@
-// ko strings for locales-newflow. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale ko
+// ko (Korean) strings for locales-newflow. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "onboarding": {
     "progress": "{total}단계 중 {current}단계",
@@ -116,6 +116,9 @@ export default {
       "dayLabel": "요일",
       "timeLabel": "시간",
       "timeHint": "현지 시간 기준입니다.",
+      "summaryDaily": "매일 {time}에, 귀하의 시간대({zone}).",
+      "summaryWeekly": "매주 {day} {time}에, 귀하의 시간대({zone}).",
+      "summaryMonthly": "매월 1일 {time}에, 귀하의 시간대({zone}).",
       "recipeTitle": "새 호 자동 발송",
       "recipeBody": "위 일정에 따라 가장 좋은 새 글을 골라 내 문체로 쓰고, 독자마다 번역해 이메일로 보냅니다.",
       "recipeOn": "켜짐",

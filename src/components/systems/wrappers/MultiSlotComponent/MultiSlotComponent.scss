@@ -14,6 +14,9 @@
     &.inactive {
       z-index: -1;
       opacity: 0;
+      /* Hidden after the fade, so it is skipped by find-in-page and assistive tech too. */
+      visibility: hidden;
+      transition-property: opacity, transform, visibility;
       padding: 25px;
       pointer-events: none;
       transform: translate(0, -50px);

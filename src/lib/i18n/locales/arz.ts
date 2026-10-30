@@ -1,5 +1,5 @@
-// arz strings for locales. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale arz
+// arz (Egyptian Arabic) strings for locales. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "auth": {
     "logo": "/icons/logo.png",
@@ -35,6 +35,82 @@ export default {
       "ogImageAlt": "شعار AIBAN"
     },
     "skipLink": "الانتقال إلى المحتوى الرئيسي",
+    "display": {
+      "title": "موقعك الإلكتروني، مكتوب كنيوزليتر.",
+      "kicker": "AIBAN"
+    },
+    "statement": {
+      "lines": [
+        "أنت بالفعل تنشر عمل جيد.",
+        "عملاؤك يقرؤونه بأكثر من لغة.",
+        "AIBAN يحول كل مقال جديد إلى عدد",
+        "ويرسل لكل قارئ النسخة بلغته."
+      ]
+    },
+    "history": {
+      "eyebrow": "ازاي بيشتغل",
+      "title": "حياة عدد واحد.",
+      "lead": "اتبع عدد واحد من لحظة ما جدولك يبدأه لحد ما يبدأ تاني. انت هتضبط ده مرة واحدة.",
+      "note": "مثال لجدول. انت تختار اليوم، الوقت وكل قد ايه.",
+      "progressLabel": "خطوات عدد واحد",
+      "items": [
+        {
+          "mark": "9:00",
+          "title": "جدولك يبدأ التشغيل",
+          "body": "كل يوم اثنين الساعة 9:00 في المثال ده. انت تختار يومي، أسبوعي أو شهري."
+        },
+        {
+          "mark": "اقرأ",
+          "title": "AIBAN يقرأ موقعك الإلكتروني",
+          "body": "بيلاقي أحدث مقال ليك ويختار الجزء اللي القارئ المثالي ليك هيبالي عليه أكتر."
+        },
+        {
+          "mark": "اكتب",
+          "title": "بيكتب العدد بصوتك",
+          "body": "النص بيتبع طريقة كتابة موقعك، عشان يبقى صوتك."
+        },
+        {
+          "mark": "ترجم",
+          "title": "كل قارئ بياخد لغته",
+          "body": "عدد واحد بيبقى نسخ كتيرة قد ما مشتركينك محتاجين."
+        },
+        {
+          "mark": "ابعت",
+          "title": "بيوصل تحت اسمك",
+          "body": "باسمك وتوقيع بريدك الإلكتروني. الردود بتوصل على صندوق الوارد بتاعك."
+        },
+        {
+          "mark": "انشر",
+          "title": "بيبقى مقال على مدونتك",
+          "body": "بلينك خاص بيه الناس تقدر تلاقيه في البحث وتشاركه."
+        },
+        {
+          "mark": "تقرير",
+          "title": "انت شايف اللي حصل",
+          "body": "داشبوردك بيوضح مين انضم وأي لينكات القراء ضغطوا عليها."
+        },
+        {
+          "mark": "تاني",
+          "title": "يوم الاثنين الجاي، بيشتغل تاني",
+          "body": "بيكمل لحد ما تقفله في داشبوردك."
+        }
+      ]
+    },
+    "rail": {
+      "label": "فصول الصفحة",
+      "chapters": [
+        "البداية",
+        "ليه",
+        "اللغات",
+        "ازاي بتشتغل",
+        "اسمك",
+        "نمو",
+        "لمين",
+        "الأسعار",
+        "أسئلة",
+        "ابدأ"
+      ]
+    },
     "hero": {
       "eyebrow": "نشرات بريدية لشركات الخدمات",
       "title": "موقعك يبقى نشرة أسبوعية بلغة كل قارئ",
@@ -57,6 +133,26 @@ export default {
       "startCta": "ابدأ مجانًا مع {site}",
       "startCtaGeneric": "ابدأ مجانًا",
       "liveRegion": "المعاينة التجريبية اتحدثت لـ {site}."
+    },
+    "live": {
+      "badge": "اتكتبت دلوقتي",
+      "loadingTitle": "بنكتب عينة من {site}",
+      "steps": [
+        "بنقرا {site}",
+        "بنلاقي أحدث مقال ليك",
+        "بنكتبه بـ {language}",
+        "بنحطه في قالب الإيميل بتاعك"
+      ],
+      "takes": "دي عادة بتاخد من 20 لـ 40 ثانية. تقدّر تكمل تقرأ.",
+      "readyNote": "AIBAN بيكتب العينة دي من أحدث مقال على {site}. مفيش حاجة بتتسجّل أو تتساب. لما تبدأ، بيستخدم صوتك وجدولك.",
+      "readyAnnounce": "العينة بتاعتك من {site} جاهزة.",
+      "languageLabel": "لغة القارئ",
+      "loadingLanguage": "بنكتبها بـ {language}",
+      "errorTitle": "مقدّرناش نكتب معاينة من {site}",
+      "retry": "جرب تاني",
+      "showSample": "اعرض شكل العينة",
+      "frameTitle": "عينة اتنكتبت من {site}",
+      "openFull": "افتح في تاب جديد"
     },
     "chain": {
       "eyebrow": "بيشتغل إزاي",
@@ -494,8 +590,8 @@ export default {
     "yearlySave": "وفّر 35%",
     "intervalLabel": "فترة الفوترة",
     "billedYearly": "يُدفع سنويًا",
-    "perMonthShort": "/mo",
-    "perYearShort": "/yr",
+    "perMonthShort": "/شهر",
+    "perYearShort": "/سنة",
     "freeCta": "ابدأ ببلاش",
     "processing": "بنفتح صفحة الدفع...",
     "askMore": "كل حساب بيبدأ بالخطة المجانية. ولو محتاج أكتر، ابعتلنا على {email} وهنغيّرلك خطتك.",
@@ -587,6 +683,7 @@ export default {
       "suggestions": "اقتراحات",
       "recent": "عمليات البحث الأخيرة",
       "clearRecent": "مسح عمليات البحث الأخيرة",
+      "clear": "امسح البحث",
       "title": "نتائج البحث",
       "resultsFor": "نتائج البحث عن \"{q}\"",
       "count": "عدد المقالات التي وُجدت: {count}",
@@ -691,6 +788,7 @@ export default {
   "legal": {
     "navLabel": "المستندات القانونية",
     "lastUpdated": "آخر تحديث: {date}",
+    "onThisPage": "على هذه الصفحة",
     "privacy": {
       "title": "سياسة الخصوصية",
       "metaTitle": "سياسة الخصوصية | AIBAN",
@@ -919,6 +1017,8 @@ export default {
     "codeSent": "بعتنالك كود على إيميلك.",
     "invalidCode": "الكود ده مش صح. بص على آخر إيميل بعتناهولك، أو ابعت الكود تاني.",
     "regenerateCode": "ابعت الكود تاني",
+    "codeAccepted": "الكود اتقبل. بنفتح لوحة التحكم بتاعتك.",
+    "codeLabel": "كود 6 أرقام",
     "back": "ارجع",
     "byProceeding": "لما بتكمل، إنت بتوافق على",
     "termsOfService": "شروط الخدمة",
@@ -947,6 +1047,673 @@ export default {
       "title": "أهلًا بيك في النشرة.",
       "invitedBy": "إنت جيت بدعوة من {configuratorId}."
     }
+  },
+  "showcase": {
+    "sampleBadge": "بيانات تجريبية",
+    "exampleLabel": "مثال لنشاط تجاري",
+    "caption": "{business} هو مثال {kind}. الأسماء والمقالات والأرقام في هذا العرض هي بيانات وهمية بتوضح شكل لوحة التحكم بتاعتك بعد كام أسبوع.",
+    "pause": "اوقف التحريك",
+    "play": "شغل التحريك",
+    "scenesLabel": "أجزاء من لوحة التحكم",
+    "examplesLabel": "أمثلة لنشاطات تجارية",
+    "appUrl": "app.aiban.news",
+    "nav": {
+      "home": "الرئيسية",
+      "automations": "الأتمتة",
+      "sources": "المصادر",
+      "subscribers": "المشتركين",
+      "reports": "التقارير",
+      "blog": "المدونة"
+    },
+    "scenes": {
+      "home": "نظرة عامة",
+      "issue": "الإصدار",
+      "reports": "النقرات",
+      "subscribers": "المشتركين",
+      "automation": "الجدول",
+      "source": "موقعك",
+      "voice": "صوتك",
+      "signup": "نموذج الاشتراك",
+      "blog": "المدونة",
+      "import": "استيراد"
+    },
+    "ui": {
+      "hello": "أهلاً، {business}",
+      "narrative": "{subscribers} قارئ بـ {languages} لغة. الإصدار الجاي هيطلع {schedule}.",
+      "kpiSubscribers": "المشتركين",
+      "kpiLanguages": "اللغات",
+      "kpiClicks": "النقرات، آخر 7 أيام",
+      "kpiAutomations": "الأتمتة شغالة",
+      "kpiNew": "{count} جديد الأسبوع ده",
+      "nextIssue": "الإصدار الجاي",
+      "ready": "جاهز",
+      "activity": "النشاط الأخير",
+      "from": "من",
+      "subject": "الموضوع",
+      "readMore": "اقرأ المقال كله",
+      "readerLanguage": "لغة القارئ",
+      "clicksTitle": "النقرات، آخر 7 أيام",
+      "mostClicked": "الأكثر نقراً",
+      "clicks": "نقرات",
+      "days": [
+        "الاثنين",
+        "الثلاثاء",
+        "الأربعاء",
+        "الخميس",
+        "الجمعة",
+        "السبت",
+        "الأحد"
+      ],
+      "subscribersTitle": "المشتركين",
+      "language": "اللغة",
+      "joinedVia": "انضم عن طريق",
+      "newSubscriber": "مشترك جديد",
+      "automationTitle": "الإصدار الأسبوعي",
+      "automationSentence": "{schedule}، اكتب إصدار من أحدث مقال وابعت لكل قارئ بلغته.",
+      "on": "شغال",
+      "off": "مطفى",
+      "automationOn": "الأتمتة شغالة",
+      "sourceLabel": "المحتوى بتاعك بيجى منين",
+      "sourceButton": "اقرأ موقعي",
+      "reading": "بنقرأ موقعك",
+      "found": "لاقينا {count} مقال",
+      "voiceReader": "القارئ المثالي بتاعك",
+      "voiceTone": "ازاي المفروض يبقى صوته",
+      "signupHeading": "خد النوتات الأسبوعية بتاعتنا",
+      "signupEmail": "الإيميل",
+      "signupLanguage": "اللغة",
+      "signupButton": "اشترك",
+      "signupDone": "افحص صندوق الوارد عشان تؤكد.",
+      "blogTitle": "مقالات من {business}",
+      "importFile": "clients.csv",
+      "importing": "بنستورد جهات الاتصال",
+      "imported": "اتضاف {count} جهة اتصال",
+      "sources": {
+        "form": "فورم الاشتراك",
+        "import": "استيراد",
+        "manual": "اتضافوا باليد"
+      }
+    },
+    "examples": [
+      {
+        "business": "Northfield Studio",
+        "kind": "وكالة تصميم مواقع",
+        "site": "northfield.studio",
+        "schedule": "كل يوم اثنين الساعة 9:00",
+        "subscribers": 312,
+        "newThisWeek": 9,
+        "clicks7": 84,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 58
+          },
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 31
+          },
+          {
+            "code": "pt",
+            "name": "Portuguese",
+            "share": 11
+          }
+        ],
+        "reader": "أصحاب العيادات والمحلات والاستوديوهات اللي عايزين موقع يجيب لهم عملاء، مش بس يعرض أعمالهم.",
+        "tones": [
+          "دافئ",
+          "عادي",
+          "عملي"
+        ],
+        "articles": [
+          "ازاي بنينا تاني موقع عيادة أسنان في ست أسابيع",
+          "خمس حاجات لازم تصلحها قبل ما تعيد التصميم",
+          "ليه زرار الحجز المفروض يبقى لونه برتقالي"
+        ],
+        "issue": {
+          "title": "ازاي بنينا تاني موقع عيادة أسنان في ست أسابيع",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "A clinic website rebuilt in six weeks",
+              "summary": "We moved booking to the top of every page and cut the forms from nine fields to three. Here is what changed for the clinic."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "El sitio de una clínica, renovado en seis semanas",
+              "summary": "Pusimos la reserva arriba en cada página y redujimos los formularios de nueve campos a tres. Esto es lo que cambió para la clínica."
+            },
+            {
+              "code": "pt",
+              "name": "Português",
+              "subject": "O site de uma clínica, refeito em seis semanas",
+              "summary": "Colocamos o agendamento no topo de cada página e reduzimos os formulários de nove campos para três. Veja o que mudou para a clínica."
+            }
+          ]
+        },
+        "clicksByDay": [
+          21,
+          17,
+          12,
+          9,
+          11,
+          6,
+          8
+        ],
+        "topLinks": [
+          {
+            "title": "دراسة حالة العيادة",
+            "clicks": 38
+          },
+          {
+            "title": "خمس حاجات لازم تصلحها قبل ما تعيد التصميم",
+            "clicks": 27
+          },
+          {
+            "title": "احجز مكالمة",
+            "clicks": 19
+          }
+        ],
+        "people": [
+          {
+            "email": "lucia.r@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "mark@example.org",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "joana.s@example.net",
+            "lang": "PT",
+            "via": "form"
+          },
+          {
+            "email": "dr.chen@example.com",
+            "lang": "EN",
+            "via": "manual"
+          }
+        ],
+        "activity": [
+          "العدد اترسل لـ 312 قارئ بـ 3 لغات",
+          "38 ضغطة على دراسة حالة العيادة",
+          "Lucia انضمت من فورم الاشتراك وبتقرأ بالإسباني"
+        ],
+        "importCount": 148
+      },
+      {
+        "business": "Brightline Software",
+        "kind": "شركة برمجيات",
+        "site": "brightline.dev",
+        "schedule": "في الأول من كل شهر الساعة 10:00",
+        "subscribers": 1240,
+        "newThisWeek": 23,
+        "clicks7": 211,
+        "automationsOn": 1,
+        "languages": [
+          {
+            "code": "en",
+            "name": "الإنجليزية",
+            "share": 64
+          },
+          {
+            "code": "de",
+            "name": "الألمانية",
+            "share": 22
+          },
+          {
+            "code": "fr",
+            "name": "الفرنسية",
+            "share": 14
+          }
+        ],
+        "reader": "مديري المكاتب ومسؤولي تكنولوجيا المعلومات في العملاء الذين يستخدمون برنامج الحجز الخاص بنا كل يوم.",
+        "tones": [
+          "واضح",
+          "قصير",
+          "ودود"
+        ],
+        "articles": [
+          "الإصدار 4.2: المواعيد المتكررة",
+          "تقارير أسرع للفرق الكبيرة",
+          "كيف تنقل تقويمك من جدول بيانات"
+        ],
+        "issue": {
+          "title": "الإصدار 4.2: المواعيد المتكررة",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "New this month: recurring appointments",
+              "summary": "You can now repeat any appointment weekly or monthly. Reports for teams over 50 people also load faster."
+            },
+            {
+              "code": "de",
+              "name": "Deutsch",
+              "subject": "Neu diesen Monat: wiederkehrende Termine",
+              "summary": "Sie können jetzt jeden Termin wöchentlich oder monatlich wiederholen. Berichte für Teams ab 50 Personen laden außerdem schneller."
+            },
+            {
+              "code": "fr",
+              "name": "Français",
+              "subject": "Nouveau ce mois-ci : les rendez-vous récurrents",
+              "summary": "Vous pouvez désormais répéter un rendez-vous chaque semaine ou chaque mois. Les rapports des équipes de plus de 50 personnes s'affichent aussi plus vite."
+            }
+          ]
+        },
+        "clicksByDay": [
+          64,
+          48,
+          33,
+          25,
+          19,
+          9,
+          13
+        ],
+        "topLinks": [
+          {
+            "title": "دليل المواعيد المتكررة",
+            "clicks": 96
+          },
+          {
+            "title": "ملاحظات الإصدار 4.2",
+            "clicks": 71
+          },
+          {
+            "title": "الانتقال من جدول بيانات",
+            "clicks": 44
+          }
+        ],
+        "people": [
+          {
+            "email": "it@example.de",
+            "lang": "DE",
+            "via": "import"
+          },
+          {
+            "email": "sophie.m@example.fr",
+            "lang": "FR",
+            "via": "form"
+          },
+          {
+            "email": "ops@example.com",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "k.weber@example.de",
+            "lang": "DE",
+            "via": "form"
+          }
+        ],
+        "activity": [
+          "تم إرسال العدد إلى 1240 قارئ بـ 3 لغات",
+          "96 نقرة على دليل المواعيد المتكررة",
+          "23 جهة اتصال مستوردة من clients.csv"
+        ],
+        "importCount": 412
+      },
+      {
+        "business": "Casa Verde Realty",
+        "kind": "وكالة عقارات",
+        "site": "casaverde.homes",
+        "schedule": "كل خميس الساعة 8:00",
+        "subscribers": 586,
+        "newThisWeek": 14,
+        "clicks7": 163,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "es",
+            "name": "الإسبانية",
+            "share": 47
+          },
+          {
+            "code": "en",
+            "name": "الإنجليزية",
+            "share": 41
+          },
+          {
+            "code": "fr",
+            "name": "الفرنسية",
+            "share": 12
+          }
+        ],
+        "reader": "العائلات والمتقاعدين من الخارج الباحثين عن منزل بالقرب من الساحل، والملاك الذين قد يبيعون.",
+        "tones": [
+          "دافئ",
+          "محلي",
+          "هادئ"
+        ],
+        "articles": [
+          "ثلاثة منازل جديدة بالقرب من الشاطئ هذا الأسبوع",
+          "كيف تبدو تكاليف الإغلاق للمشترين الأجانب",
+          "الأسعار في المدينة القديمة، تحديث الخريف"
+        ],
+        "issue": {
+          "title": "ثلاثة منازل جديدة بالقرب من الشاطئ هذا الأسبوع",
+          "langs": [
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tres casas nuevas cerca de la playa",
+              "summary": "Una casa de dos habitaciones con jardín, un apartamento con vista al mar y una casa para reformar a diez minutos del centro."
+            },
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Three new homes near the beach",
+              "summary": "A two bedroom house with a garden, a flat with a sea view and a house to renovate ten minutes from the center."
+            },
+            {
+              "code": "fr",
+              "name": "Français",
+              "subject": "Trois nouvelles maisons près de la plage",
+              "summary": "Une maison de deux chambres avec jardin, un appartement avec vue sur la mer et une maison à rénover à dix minutes du centre."
+            }
+          ]
+        },
+        "clicksByDay": [
+          12,
+          9,
+          15,
+          52,
+          38,
+          21,
+          16
+        ],
+        "topLinks": [
+          {
+            "title": "شقة بإطلالة على البحر",
+            "clicks": 71
+          },
+          {
+            "title": "منزل بغرفتين نوم مع حديقة",
+            "clicks": 54
+          },
+          {
+            "title": "تكاليف الإغلاق للمشترين الأجانب",
+            "clicks": 38
+          }
+        ],
+        "people": [
+          {
+            "email": "familia.ortiz@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "j.dupont@example.fr",
+            "lang": "FR",
+            "via": "form"
+          },
+          {
+            "email": "tom.and.ann@example.org",
+            "lang": "EN",
+            "via": "manual"
+          },
+          {
+            "email": "rmora@example.net",
+            "lang": "ES",
+            "via": "import"
+          }
+        ],
+        "activity": [
+          "تم إرسال العدد إلى 586 قارئ بـ 3 لغات",
+          "71 نقرة على الشقة بإطلالة على البحر",
+          "انضم قارئ من فرنسا من خلال نموذج الاشتراك"
+        ],
+        "importCount": 203
+      },
+      {
+        "business": "Mora and Partners",
+        "kind": "شركة محاسبة",
+        "site": "morapartners.co",
+        "schedule": "كل يوم ثلاثاء آخر الساعة 7:30",
+        "subscribers": 428,
+        "newThisWeek": 6,
+        "clicks7": 97,
+        "automationsOn": 1,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 52
+          },
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 38
+          },
+          {
+            "code": "it",
+            "name": "Italian",
+            "share": 10
+          }
+        ],
+        "reader": "أصحاب الشركات الصغيرة اللي عايزين يعرفوا التغييرات في الضرايب والمرتبات من غير مصطلحات معقدة.",
+        "tones": [
+          "هادئ",
+          "دقيق",
+          "بسيط"
+        ],
+        "articles": [
+          "موعد ضريبة الربع سنوي بيتحول لـ15",
+          "إيه اللي تمسكه لما تشغل أول موظف عندك",
+          "الإيصالات: ورق ولا صورة؟"
+        ],
+        "issue": {
+          "title": "موعد ضريبة الربع سنوي بيتحول لـ15",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Your quarterly deadline moves to the 15th",
+              "summary": "The filing date for the next quarter moves five days later. Here is what to send us and when, so nothing is late."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tu plazo trimestral pasa al día 15",
+              "summary": "La fecha de presentación del próximo trimestre se mueve cinco días. Esto es lo que debes enviarnos y cuándo, para que nada llegue tarde."
+            },
+            {
+              "code": "it",
+              "name": "Italiano",
+              "subject": "La scadenza trimestrale passa al 15",
+              "summary": "La data di presentazione del prossimo trimestre slitta di cinque giorni. Ecco cosa inviarci e quando, perché nulla arrivi in ritardo."
+            }
+          ]
+        },
+        "clicksByDay": [
+          33,
+          24,
+          14,
+          8,
+          7,
+          4,
+          7
+        ],
+        "topLinks": [
+          {
+            "title": "قائمة مراجعة لـ15",
+            "clicks": 46
+          },
+          {
+            "title": "تشغيل أول موظف عندك",
+            "clicks": 29
+          },
+          {
+            "title": "احجز مكالمة مراجعة",
+            "clicks": 22
+          }
+        ],
+        "people": [
+          {
+            "email": "bakery.owner@example.com",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "c.rossi@example.it",
+            "lang": "IT",
+            "via": "form"
+          },
+          {
+            "email": "taller.luna@example.net",
+            "lang": "ES",
+            "via": "import"
+          },
+          {
+            "email": "finance@example.org",
+            "lang": "EN",
+            "via": "manual"
+          }
+        ],
+        "activity": [
+          "العدد اتأرسل لـ428 قارئ بـ3 لغات",
+          "46 ضغطة على قائمة المراجعة لـ15",
+          "6 قرّاء جدد الأسبوع ده"
+        ],
+        "importCount": 97
+      },
+      {
+        "business": "Run Better Coaching",
+        "kind": "مدرب ركض",
+        "site": "runbetter.coach",
+        "schedule": "كل حد الساعة 18:00",
+        "subscribers": 907,
+        "newThisWeek": 31,
+        "clicks7": 248,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 49
+          },
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 33
+          },
+          {
+            "code": "de",
+            "name": "German",
+            "share": 18
+          }
+        ],
+        "reader": "كبار بيتمرنوا لأول ماراثون نصفي وبيعملوا جري تلات مرات في الأسبوع قبل الشغل.",
+        "tones": [
+          "مشجع",
+          "مباشر",
+          "قصير"
+        ],
+        "articles": [
+          "الأسبوع ده: الجري الطويل، أبطأ مما تتخيل",
+          "الحذاء بعد 500 كيلومتر",
+          "روتين قوة 20 دقيقة"
+        ],
+        "issue": {
+          "title": "الأسبوع ده: الجري الطويل، أبطأ مما تتخيل",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Your long run should feel too easy",
+              "summary": "Keep it slow enough to talk. This week's plan adds ten minutes and one short hill session."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tu tirada larga debería sentirse demasiado fácil",
+              "summary": "Mantén un ritmo que te deje hablar. El plan de esta semana suma diez minutos y una sesión corta de cuestas."
+            },
+            {
+              "code": "de",
+              "name": "Deutsch",
+              "subject": "Dein langer Lauf sollte sich zu leicht anfühlen",
+              "summary": "Lauf so langsam, dass du noch reden kannst. Der Plan dieser Woche bringt zehn Minuten mehr und eine kurze Bergeinheit."
+            }
+          ]
+        },
+        "clicksByDay": [
+          18,
+          22,
+          26,
+          31,
+          35,
+          49,
+          67
+        ],
+        "topLinks": [
+          {
+            "title": "خطة التدريب للأسبوع ده",
+            "clicks": 121
+          },
+          {
+            "title": "روتين قوة 20 دقيقة",
+            "clicks": 78
+          },
+          {
+            "title": "الحذاء بعد 500 كيلومتر",
+            "clicks": 49
+          }
+        ],
+        "people": [
+          {
+            "email": "ana.runs@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "felix.k@example.de",
+            "lang": "DE",
+            "via": "form"
+          },
+          {
+            "email": "sam@example.org",
+            "lang": "EN",
+            "via": "form"
+          },
+          {
+            "email": "club.secretary@example.net",
+            "lang": "EN",
+            "via": "import"
+          }
+        ],
+        "activity": [
+          "العدد اتأرسل لـ907 قارئ بـ3 لغات",
+          "121 ضغطة على خطة التدريب للأسبوع ده",
+          "31 قارئ جديد الأسبوع ده، معظمهم من استمارة التسجيل"
+        ],
+        "importCount": 260
+      }
+    ]
+  },
+  "errorPage": {
+    "notFoundEyebrow": "خطأ 404",
+    "notFoundTitle": "ماقدرناش نلاقي الصفحة دي",
+    "notFoundBody": "اللينك ممكن يكون قديم أو فيه غلطة. الصفحات دي مكان كويس عشان تكمل.",
+    "serverEyebrow": "خطأ {status}",
+    "serverTitle": "حصل حاجة غلط عندنا",
+    "serverBody": "مقدرناش نفتح الصفحة دي. جرب تاني بعد شوية. لو فضلت متكررة، ابعتلنا على info@aiban.news.",
+    "retry": "جرب تاني",
+    "home": "روح للصفحة الرئيسية",
+    "popularTitle": "الصفحات المشهورة",
+    "links": {
+      "howItWorks": "ازاي AIBAN شغالة",
+      "pricing": "الأسعار",
+      "help": "مركز المساعدة",
+      "login": "ادخل على لوحة التحكم بتاعتك"
+    },
+    "report": "لو رابط في موقعنا جابك هنا، قوللنا على info@aiban.news عشان نقدر نصلحه."
   },
   "header": {
     "goToWorkspace": "فتح لوحة التحكم",
@@ -982,1429 +1749,5 @@ export default {
     "monthly": "شهري",
     "yearly": "سنوي",
     "loadingPlan": "بيحمل بيانات الخطة..."
-  },
-  "languages": [
-    {
-      "code": "ab",
-      "name": "الأبخازية"
-    },
-    {
-      "code": "aa",
-      "name": "العفارية"
-    },
-    {
-      "code": "af",
-      "name": "الأفريكانية"
-    },
-    {
-      "code": "ak",
-      "name": "الأكانية"
-    },
-    {
-      "code": "sq",
-      "name": "الألبانية"
-    },
-    {
-      "code": "am",
-      "name": "الأمهرية"
-    },
-    {
-      "code": "ar",
-      "name": "العربية"
-    },
-    {
-      "code": "an",
-      "name": "الأراغونية"
-    },
-    {
-      "code": "hy",
-      "name": "الأرمنية"
-    },
-    {
-      "code": "as",
-      "name": "الأسامية"
-    },
-    {
-      "code": "av",
-      "name": "الأفاريكية"
-    },
-    {
-      "code": "ae",
-      "name": "الأفستية"
-    },
-    {
-      "code": "ay",
-      "name": "الأيمارا"
-    },
-    {
-      "code": "az",
-      "name": "الأذربيجانية"
-    },
-    {
-      "code": "bm",
-      "name": "البامبارا"
-    },
-    {
-      "code": "ba",
-      "name": "الباشكيرية"
-    },
-    {
-      "code": "eu",
-      "name": "الباسكية"
-    },
-    {
-      "code": "be",
-      "name": "البيلاروسية"
-    },
-    {
-      "code": "bn",
-      "name": "البنغالية"
-    },
-    {
-      "code": "bi",
-      "name": "البيسلاما"
-    },
-    {
-      "code": "bs",
-      "name": "البوسنية"
-    },
-    {
-      "code": "br",
-      "name": "البريتونية"
-    },
-    {
-      "code": "bg",
-      "name": "البلغارية"
-    },
-    {
-      "code": "my",
-      "name": "البورمية"
-    },
-    {
-      "code": "ca",
-      "name": "الكتالونية"
-    },
-    {
-      "code": "ch",
-      "name": "التشامورو"
-    },
-    {
-      "code": "ce",
-      "name": "الشيشانية"
-    },
-    {
-      "code": "ny",
-      "name": "الشيشيوا"
-    },
-    {
-      "code": "zh",
-      "name": "الصينية"
-    },
-    {
-      "code": "cu",
-      "name": "السلافية الكنسية"
-    },
-    {
-      "code": "cv",
-      "name": "التشوفاشية"
-    },
-    {
-      "code": "kw",
-      "name": "الكورنية"
-    },
-    {
-      "code": "co",
-      "name": "الكورسيكية"
-    },
-    {
-      "code": "cr",
-      "name": "الكري"
-    },
-    {
-      "code": "hr",
-      "name": "الكرواتية"
-    },
-    {
-      "code": "cs",
-      "name": "التشيكية"
-    },
-    {
-      "code": "da",
-      "name": "الدنماركية"
-    },
-    {
-      "code": "dv",
-      "name": "الديفيهي"
-    },
-    {
-      "code": "nl",
-      "name": "الهولندية"
-    },
-    {
-      "code": "dz",
-      "name": "الزونخا"
-    },
-    {
-      "code": "en",
-      "name": "الإنجليزية"
-    },
-    {
-      "code": "eo",
-      "name": "الإسبرانتو"
-    },
-    {
-      "code": "et",
-      "name": "الإستونية"
-    },
-    {
-      "code": "ee",
-      "name": "الإيوي"
-    },
-    {
-      "code": "fo",
-      "name": "الفاروية"
-    },
-    {
-      "code": "fj",
-      "name": "الفيجية"
-    },
-    {
-      "code": "fi",
-      "name": "الفنلندية"
-    },
-    {
-      "code": "fr",
-      "name": "الفرنسية"
-    },
-    {
-      "code": "fy",
-      "name": "الفريزية الغربية"
-    },
-    {
-      "code": "ff",
-      "name": "الفولانية"
-    },
-    {
-      "code": "gd",
-      "name": "الغيلية الأسكتلندية"
-    },
-    {
-      "code": "gl",
-      "name": "الجاليكية"
-    },
-    {
-      "code": "lg",
-      "name": "الغاندا"
-    },
-    {
-      "code": "ka",
-      "name": "الجورجية"
-    },
-    {
-      "code": "de",
-      "name": "الألمانية"
-    },
-    {
-      "code": "el",
-      "name": "اليونانية"
-    },
-    {
-      "code": "kl",
-      "name": "الكالاليست (الجرينلاندية)"
-    },
-    {
-      "code": "gn",
-      "name": "الغوارانية"
-    },
-    {
-      "code": "gu",
-      "name": "الغوجاراتية"
-    },
-    {
-      "code": "ht",
-      "name": "الكريولية الهايتية"
-    },
-    {
-      "code": "ha",
-      "name": "الهوسا"
-    },
-    {
-      "code": "he",
-      "name": "العبرية"
-    },
-    {
-      "code": "hz",
-      "name": "الهيريرو"
-    },
-    {
-      "code": "hi",
-      "name": "الهندية"
-    },
-    {
-      "code": "ho",
-      "name": "الهيري موتو"
-    },
-    {
-      "code": "hu",
-      "name": "المجرية"
-    },
-    {
-      "code": "is",
-      "name": "الآيسلندية"
-    },
-    {
-      "code": "io",
-      "name": "الإيدو"
-    },
-    {
-      "code": "ig",
-      "name": "الإيجبو"
-    },
-    {
-      "code": "id",
-      "name": "الإندونيسية"
-    },
-    {
-      "code": "ia",
-      "name": "الإنترلينجوا"
-    },
-    {
-      "code": "ie",
-      "name": "الإنترلينج"
-    },
-    {
-      "code": "iu",
-      "name": "الإينكتيتت"
-    },
-    {
-      "code": "ik",
-      "name": "الإينبياك"
-    },
-    {
-      "code": "ga",
-      "name": "الأيرلندية"
-    },
-    {
-      "code": "it",
-      "name": "الإيطالية"
-    },
-    {
-      "code": "ja",
-      "name": "اليابانية"
-    },
-    {
-      "code": "jv",
-      "name": "الجاوية"
-    },
-    {
-      "code": "kn",
-      "name": "الكنادية"
-    },
-    {
-      "code": "kr",
-      "name": "الكانورية"
-    },
-    {
-      "code": "ks",
-      "name": "الكشميرية"
-    },
-    {
-      "code": "kk",
-      "name": "الكازاخستانية"
-    },
-    {
-      "code": "km",
-      "name": "الخميرية"
-    },
-    {
-      "code": "ki",
-      "name": "الكيكويو"
-    },
-    {
-      "code": "rw",
-      "name": "الكينيارواندا"
-    },
-    {
-      "code": "ky",
-      "name": "القيرغيزية"
-    },
-    {
-      "code": "kv",
-      "name": "الكومي"
-    },
-    {
-      "code": "kg",
-      "name": "الكونغو"
-    },
-    {
-      "code": "ko",
-      "name": "الكورية"
-    },
-    {
-      "code": "kj",
-      "name": "الكوانياما"
-    },
-    {
-      "code": "ku",
-      "name": "الكردية"
-    },
-    {
-      "code": "lo",
-      "name": "اللاوية"
-    },
-    {
-      "code": "la",
-      "name": "اللاتينية"
-    },
-    {
-      "code": "lv",
-      "name": "اللاتفية"
-    },
-    {
-      "code": "li",
-      "name": "الليمبورغية"
-    },
-    {
-      "code": "ln",
-      "name": "اللينغالا"
-    },
-    {
-      "code": "lt",
-      "name": "الليتوانية"
-    },
-    {
-      "code": "lu",
-      "name": "اللوبا-كاتانجا"
-    },
-    {
-      "code": "lb",
-      "name": "اللوكسمبرجية"
-    },
-    {
-      "code": "mk",
-      "name": "المقدونية"
-    },
-    {
-      "code": "mg",
-      "name": "المالاجاشية"
-    },
-    {
-      "code": "ms",
-      "name": "الملايو"
-    },
-    {
-      "code": "ml",
-      "name": "المالايالامية"
-    },
-    {
-      "code": "mt",
-      "name": "المالطية"
-    },
-    {
-      "code": "gv",
-      "name": "المانكس"
-    },
-    {
-      "code": "mi",
-      "name": "الماورية"
-    },
-    {
-      "code": "mr",
-      "name": "الماراثية"
-    },
-    {
-      "code": "mh",
-      "name": "المارشالية"
-    },
-    {
-      "code": "mn",
-      "name": "المنغولية"
-    },
-    {
-      "code": "na",
-      "name": "الناورونية"
-    },
-    {
-      "code": "nv",
-      "name": "النافاجو"
-    },
-    {
-      "code": "nd",
-      "name": "النديبيلي الشمالية"
-    },
-    {
-      "code": "nr",
-      "name": "النديبيلي الجنوبية"
-    },
-    {
-      "code": "ng",
-      "name": "الندونجا"
-    },
-    {
-      "code": "ne",
-      "name": "النيبالية"
-    },
-    {
-      "code": "no",
-      "name": "النرويجية"
-    },
-    {
-      "code": "nb",
-      "name": "النرويجية بوكمول"
-    },
-    {
-      "code": "nn",
-      "name": "النرويجية نينورسك"
-    },
-    {
-      "code": "oc",
-      "name": "الأوكيتانية"
-    },
-    {
-      "code": "oj",
-      "name": "الأوجيبوا"
-    },
-    {
-      "code": "or",
-      "name": "الأوريا"
-    },
-    {
-      "code": "om",
-      "name": "الأورومو"
-    },
-    {
-      "code": "os",
-      "name": "الأوسيتية"
-    },
-    {
-      "code": "pi",
-      "name": "البالية"
-    },
-    {
-      "code": "ps",
-      "name": "الباشتو"
-    },
-    {
-      "code": "fa",
-      "name": "الفارسية"
-    },
-    {
-      "code": "pl",
-      "name": "البولندية"
-    },
-    {
-      "code": "pt",
-      "name": "البرتغالية"
-    },
-    {
-      "code": "pa",
-      "name": "البنجابية"
-    },
-    {
-      "code": "qu",
-      "name": "الكيتشوا"
-    },
-    {
-      "code": "ro",
-      "name": "الرومانية"
-    },
-    {
-      "code": "rm",
-      "name": "الرومانشية"
-    },
-    {
-      "code": "rn",
-      "name": "الرندي"
-    },
-    {
-      "code": "ru",
-      "name": "الروسية"
-    },
-    {
-      "code": "se",
-      "name": "السامي الشمالية"
-    },
-    {
-      "code": "sm",
-      "name": "الساموية"
-    },
-    {
-      "code": "sg",
-      "name": "السانجو"
-    },
-    {
-      "code": "sa",
-      "name": "السنسكريتية"
-    },
-    {
-      "code": "sc",
-      "name": "السردينية"
-    },
-    {
-      "code": "sr",
-      "name": "الصربية"
-    },
-    {
-      "code": "sn",
-      "name": "الشونا"
-    },
-    {
-      "code": "ii",
-      "name": "السيتشوان يي"
-    },
-    {
-      "code": "sd",
-      "name": "السندية"
-    },
-    {
-      "code": "si",
-      "name": "السنهالية"
-    },
-    {
-      "code": "sk",
-      "name": "السلوفاكية"
-    },
-    {
-      "code": "sl",
-      "name": "السلوفينية"
-    },
-    {
-      "code": "so",
-      "name": "الصومالية"
-    },
-    {
-      "code": "st",
-      "name": "السوتو الجنوبية"
-    },
-    {
-      "code": "es",
-      "name": "الإسبانية"
-    },
-    {
-      "code": "su",
-      "name": "السوندانية"
-    },
-    {
-      "code": "sw",
-      "name": "السواحيلية"
-    },
-    {
-      "code": "ss",
-      "name": "السواتي"
-    },
-    {
-      "code": "sv",
-      "name": "السويدية"
-    },
-    {
-      "code": "tl",
-      "name": "التاغالوغية (الفلبينية)"
-    },
-    {
-      "code": "ty",
-      "name": "التاهيتية"
-    },
-    {
-      "code": "tg",
-      "name": "الطاجيكية"
-    },
-    {
-      "code": "ta",
-      "name": "التاميلية"
-    },
-    {
-      "code": "tt",
-      "name": "التتارية"
-    },
-    {
-      "code": "te",
-      "name": "التيلجو"
-    },
-    {
-      "code": "th",
-      "name": "التايلاندية"
-    },
-    {
-      "code": "bo",
-      "name": "التبتية"
-    },
-    {
-      "code": "ti",
-      "name": "التيغرينية"
-    },
-    {
-      "code": "to",
-      "name": "التونغية"
-    },
-    {
-      "code": "ts",
-      "name": "التسونجا"
-    },
-    {
-      "code": "tn",
-      "name": "التسوانا"
-    },
-    {
-      "code": "tr",
-      "name": "التركية"
-    },
-    {
-      "code": "tk",
-      "name": "التركمانية"
-    },
-    {
-      "code": "tw",
-      "name": "التوي"
-    },
-    {
-      "code": "ug",
-      "name": "الأويغورية"
-    },
-    {
-      "code": "uk",
-      "name": "الأوكرانية"
-    },
-    {
-      "code": "ur",
-      "name": "الأردية"
-    },
-    {
-      "code": "uz",
-      "name": "الأوزبكية"
-    },
-    {
-      "code": "ve",
-      "name": "الفيندا"
-    },
-    {
-      "code": "vi",
-      "name": "الفيتنامية"
-    },
-    {
-      "code": "vo",
-      "name": "الفولابوك"
-    },
-    {
-      "code": "wa",
-      "name": "الوالون"
-    },
-    {
-      "code": "cy",
-      "name": "الويلزية"
-    },
-    {
-      "code": "wo",
-      "name": "الولوف"
-    },
-    {
-      "code": "xh",
-      "name": "الخوسا"
-    },
-    {
-      "code": "yi",
-      "name": "اليديشية"
-    },
-    {
-      "code": "yo",
-      "name": "اليوربا"
-    },
-    {
-      "code": "za",
-      "name": "الزهوانغ"
-    },
-    {
-      "code": "zu",
-      "name": "الزولو"
-    }
-  ],
-  "countries": [
-    {
-      "code": "AF",
-      "name": "أفغانستان"
-    },
-    {
-      "code": "AL",
-      "name": "ألبانيا"
-    },
-    {
-      "code": "DZ",
-      "name": "الجزائر"
-    },
-    {
-      "code": "AS",
-      "name": "ساموا الأمريكية"
-    },
-    {
-      "code": "AD",
-      "name": "أندورا"
-    },
-    {
-      "code": "AO",
-      "name": "أنغولا"
-    },
-    {
-      "code": "AI",
-      "name": "أنغويلا"
-    },
-    {
-      "code": "AQ",
-      "name": "القارة القطبية الجنوبية"
-    },
-    {
-      "code": "AG",
-      "name": "أنتيغوا وبربودا"
-    },
-    {
-      "code": "AR",
-      "name": "الأرجنتين"
-    },
-    {
-      "code": "AM",
-      "name": "أرمينيا"
-    },
-    {
-      "code": "AW",
-      "name": "أروبا"
-    },
-    {
-      "code": "AU",
-      "name": "أستراليا"
-    },
-    {
-      "code": "AT",
-      "name": "النمسا"
-    },
-    {
-      "code": "AZ",
-      "name": "أذربيجان"
-    },
-    {
-      "code": "BS",
-      "name": "جزر البهاما"
-    },
-    {
-      "code": "BH",
-      "name": "البحرين"
-    },
-    {
-      "code": "BD",
-      "name": "بنغلاديش"
-    },
-    {
-      "code": "BB",
-      "name": "بربادوس"
-    },
-    {
-      "code": "BY",
-      "name": "بيلاروسيا"
-    },
-    {
-      "code": "BE",
-      "name": "بلجيكا"
-    },
-    {
-      "code": "BZ",
-      "name": "بليز"
-    },
-    {
-      "code": "BJ",
-      "name": "بنين"
-    },
-    {
-      "code": "BM",
-      "name": "برمودا"
-    },
-    {
-      "code": "BT",
-      "name": "بوتان"
-    },
-    {
-      "code": "BO",
-      "name": "بوليفيا"
-    },
-    {
-      "code": "BA",
-      "name": "البوسنة والهرسك"
-    },
-    {
-      "code": "BW",
-      "name": "بوتسوانا"
-    },
-    {
-      "code": "BR",
-      "name": "البرازيل"
-    },
-    {
-      "code": "IO",
-      "name": "إقليم المحيط الهندي البريطاني"
-    },
-    {
-      "code": "VG",
-      "name": "جزر فيرجن البريطانية"
-    },
-    {
-      "code": "BN",
-      "name": "بروناي"
-    },
-    {
-      "code": "BG",
-      "name": "بلغاريا"
-    },
-    {
-      "code": "BF",
-      "name": "بوركينا فاسو"
-    },
-    {
-      "code": "BI",
-      "name": "بوروندي"
-    },
-    {
-      "code": "KH",
-      "name": "كمبوديا"
-    },
-    {
-      "code": "CM",
-      "name": "الكاميرون"
-    },
-    {
-      "code": "CA",
-      "name": "كندا"
-    },
-    {
-      "code": "CV",
-      "name": "الرأس الأخضر"
-    },
-    {
-      "code": "KY",
-      "name": "جزر كايمان"
-    },
-    {
-      "code": "CF",
-      "name": "جمهورية أفريقيا الوسطى"
-    },
-    {
-      "code": "TD",
-      "name": "تشاد"
-    },
-    {
-      "code": "CL",
-      "name": "تشيلي"
-    },
-    {
-      "code": "CN",
-      "name": "الصين"
-    },
-    {
-      "code": "CX",
-      "name": "جزيرة الكريسماس"
-    },
-    {
-      "code": "CC",
-      "name": "جزر كوكوس (كيلينغ)"
-    },
-    {
-      "code": "CO",
-      "name": "كولومبيا"
-    },
-    {
-      "code": "KM",
-      "name": "جزر القمر"
-    },
-    {
-      "code": "CG",
-      "name": "الكونغو - برازافيل"
-    },
-    {
-      "code": "CD",
-      "name": "الكونغو - كينشاسا"
-    },
-    {
-      "code": "CK",
-      "name": "جزر كوك"
-    },
-    {
-      "code": "CR",
-      "name": "كوستاريكا"
-    },
-    {
-      "code": "CI",
-      "name": "ساحل العاج"
-    },
-    {
-      "code": "HR",
-      "name": "كرواتيا"
-    },
-    {
-      "code": "CU",
-      "name": "كوبا"
-    },
-    {
-      "code": "CY",
-      "name": "قبرص"
-    },
-    {
-      "code": "CZ",
-      "name": "التشيك"
-    },
-    {
-      "code": "DK",
-      "name": "الدنمارك"
-    },
-    {
-      "code": "DJ",
-      "name": "جيبوتي"
-    },
-    {
-      "code": "DM",
-      "name": "دومينيكا"
-    },
-    {
-      "code": "DO",
-      "name": "جمهورية الدومينيكان"
-    },
-    {
-      "code": "EC",
-      "name": "الإكوادور"
-    },
-    {
-      "code": "EG",
-      "name": "مصر"
-    },
-    {
-      "code": "SV",
-      "name": "السلفادور"
-    },
-    {
-      "code": "GQ",
-      "name": "غينيا الاستوائية"
-    },
-    {
-      "code": "ER",
-      "name": "إريتريا"
-    },
-    {
-      "code": "EE",
-      "name": "إستونيا"
-    },
-    {
-      "code": "SZ",
-      "name": "إسواتيني"
-    },
-    {
-      "code": "ET",
-      "name": "إثيوبيا"
-    },
-    {
-      "code": "FJ",
-      "name": "فيجي"
-    },
-    {
-      "code": "FI",
-      "name": "فنلندا"
-    },
-    {
-      "code": "FR",
-      "name": "فرنسا"
-    },
-    {
-      "code": "GA",
-      "name": "الغابون"
-    },
-    {
-      "code": "GM",
-      "name": "غامبيا"
-    },
-    {
-      "code": "GE",
-      "name": "جورجيا"
-    },
-    {
-      "code": "DE",
-      "name": "ألمانيا"
-    },
-    {
-      "code": "GH",
-      "name": "غانا"
-    },
-    {
-      "code": "GR",
-      "name": "اليونان"
-    },
-    {
-      "code": "GT",
-      "name": "غواتيمالا"
-    },
-    {
-      "code": "GN",
-      "name": "غينيا"
-    },
-    {
-      "code": "GY",
-      "name": "غيانا"
-    },
-    {
-      "code": "HT",
-      "name": "هايتي"
-    },
-    {
-      "code": "HN",
-      "name": "هندوراس"
-    },
-    {
-      "code": "HK",
-      "name": "هونغ كونغ"
-    },
-    {
-      "code": "HU",
-      "name": "المجر"
-    },
-    {
-      "code": "IS",
-      "name": "آيسلندا"
-    },
-    {
-      "code": "IN",
-      "name": "الهند"
-    },
-    {
-      "code": "ID",
-      "name": "إندونيسيا"
-    },
-    {
-      "code": "IR",
-      "name": "إيران"
-    },
-    {
-      "code": "IQ",
-      "name": "العراق"
-    },
-    {
-      "code": "IE",
-      "name": "أيرلندا"
-    },
-    {
-      "code": "IL",
-      "name": "إسرائيل"
-    },
-    {
-      "code": "IT",
-      "name": "إيطاليا"
-    },
-    {
-      "code": "JM",
-      "name": "جامايكا"
-    },
-    {
-      "code": "JP",
-      "name": "اليابان"
-    },
-    {
-      "code": "JO",
-      "name": "الأردن"
-    },
-    {
-      "code": "KZ",
-      "name": "كازاخستان"
-    },
-    {
-      "code": "KE",
-      "name": "كينيا"
-    },
-    {
-      "code": "KR",
-      "name": "كوريا الجنوبية"
-    },
-    {
-      "code": "KW",
-      "name": "الكويت"
-    },
-    {
-      "code": "KG",
-      "name": "قيرغيزستان"
-    },
-    {
-      "code": "LA",
-      "name": "لاوس"
-    },
-    {
-      "code": "LV",
-      "name": "لاتفيا"
-    },
-    {
-      "code": "LB",
-      "name": "لبنان"
-    },
-    {
-      "code": "LS",
-      "name": "ليسوتو"
-    },
-    {
-      "code": "LR",
-      "name": "ليبيريا"
-    },
-    {
-      "code": "LY",
-      "name": "ليبيا"
-    },
-    {
-      "code": "LI",
-      "name": "ليختنشتاين"
-    },
-    {
-      "code": "LT",
-      "name": "ليتوانيا"
-    },
-    {
-      "code": "LU",
-      "name": "لوكسمبورغ"
-    },
-    {
-      "code": "MG",
-      "name": "مدغشقر"
-    },
-    {
-      "code": "MW",
-      "name": "مالاوي"
-    },
-    {
-      "code": "MY",
-      "name": "ماليزيا"
-    },
-    {
-      "code": "MV",
-      "name": "جزر المالديف"
-    },
-    {
-      "code": "ML",
-      "name": "مالي"
-    },
-    {
-      "code": "MT",
-      "name": "مالطا"
-    },
-    {
-      "code": "MX",
-      "name": "المكسيك"
-    },
-    {
-      "code": "MD",
-      "name": "مولدوفا"
-    },
-    {
-      "code": "MC",
-      "name": "موناكو"
-    },
-    {
-      "code": "MN",
-      "name": "منغوليا"
-    },
-    {
-      "code": "ME",
-      "name": "الجبل الأسود"
-    },
-    {
-      "code": "MA",
-      "name": "المغرب"
-    },
-    {
-      "code": "MZ",
-      "name": "موزمبيق"
-    },
-    {
-      "code": "MM",
-      "name": "ميانمار"
-    },
-    {
-      "code": "NA",
-      "name": "ناميبيا"
-    },
-    {
-      "code": "NP",
-      "name": "نيبال"
-    },
-    {
-      "code": "NL",
-      "name": "هولندا"
-    },
-    {
-      "code": "NZ",
-      "name": "نيوزيلندا"
-    },
-    {
-      "code": "NI",
-      "name": "نيكاراغوا"
-    },
-    {
-      "code": "NE",
-      "name": "النيجر"
-    },
-    {
-      "code": "NG",
-      "name": "نيجيريا"
-    },
-    {
-      "code": "MK",
-      "name": "مقدونيا الشمالية"
-    },
-    {
-      "code": "NO",
-      "name": "النرويج"
-    },
-    {
-      "code": "OM",
-      "name": "عمان"
-    },
-    {
-      "code": "PK",
-      "name": "باكستان"
-    },
-    {
-      "code": "PA",
-      "name": "بنما"
-    },
-    {
-      "code": "PG",
-      "name": "بابوا غينيا الجديدة"
-    },
-    {
-      "code": "PY",
-      "name": "باراغواي"
-    },
-    {
-      "code": "PE",
-      "name": "بيرو"
-    },
-    {
-      "code": "PH",
-      "name": "الفلبين"
-    },
-    {
-      "code": "PL",
-      "name": "بولندا"
-    },
-    {
-      "code": "PT",
-      "name": "البرتغال"
-    },
-    {
-      "code": "QA",
-      "name": "قطر"
-    },
-    {
-      "code": "RO",
-      "name": "رومانيا"
-    },
-    {
-      "code": "RU",
-      "name": "روسيا"
-    },
-    {
-      "code": "RW",
-      "name": "رواندا"
-    },
-    {
-      "code": "SA",
-      "name": "المملكة العربية السعودية"
-    },
-    {
-      "code": "SN",
-      "name": "السنغال"
-    },
-    {
-      "code": "RS",
-      "name": "صربيا"
-    },
-    {
-      "code": "SG",
-      "name": "سنغافورة"
-    },
-    {
-      "code": "SK",
-      "name": "سلوفاكيا"
-    },
-    {
-      "code": "SI",
-      "name": "سلوفينيا"
-    },
-    {
-      "code": "ZA",
-      "name": "جنوب أفريقيا"
-    },
-    {
-      "code": "ES",
-      "name": "إسبانيا"
-    },
-    {
-      "code": "LK",
-      "name": "سريلانكا"
-    },
-    {
-      "code": "SE",
-      "name": "السويد"
-    },
-    {
-      "code": "CH",
-      "name": "سويسرا"
-    },
-    {
-      "code": "TW",
-      "name": "تايوان"
-    },
-    {
-      "code": "TH",
-      "name": "تايلاند"
-    },
-    {
-      "code": "TR",
-      "name": "تركيا"
-    },
-    {
-      "code": "UG",
-      "name": "أوغندا"
-    },
-    {
-      "code": "UA",
-      "name": "أوكرانيا"
-    },
-    {
-      "code": "AE",
-      "name": "الإمارات العربية المتحدة"
-    },
-    {
-      "code": "GB",
-      "name": "المملكة المتحدة"
-    },
-    {
-      "code": "US",
-      "name": "الولايات المتحدة"
-    },
-    {
-      "code": "UY",
-      "name": "أوروغواي"
-    },
-    {
-      "code": "UZ",
-      "name": "أوزبكستان"
-    },
-    {
-      "code": "VE",
-      "name": "فنزويلا"
-    },
-    {
-      "code": "VN",
-      "name": "فيتنام"
-    },
-    {
-      "code": "YE",
-      "name": "اليمن"
-    },
-    {
-      "code": "ZM",
-      "name": "زامبيا"
-    },
-    {
-      "code": "ZW",
-      "name": "زيمبابوي"
-    }
-  ]
+  }
 };

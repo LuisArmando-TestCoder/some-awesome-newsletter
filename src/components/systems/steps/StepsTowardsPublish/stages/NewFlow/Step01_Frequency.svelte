@@ -33,7 +33,13 @@
   }
 
   $: schedule = buildCron(frequency, day, hour);
-  $: human = safeHuman(schedule);
+  // Plain summary in the visitor's words: "Every Monday at 9:00 AM, your time (America/Costa_Rica)."
+  $: human = (() => {
+    const time = hourNames[hour] ?? "";
+    const zone = localTimeZone();
+    const tpl = frequency === "daily" ? $ob.schedule.summaryDaily : frequency === "monthly" ? $ob.schedule.summaryMonthly : $ob.schedule.summaryWeekly;
+    return tpl ? tpl.replace("{time}", time).replace("{zone}", zone).replace("{day}", dayNames[day] ?? "") : safeHuman(schedule);
+  })();
   const locale = typeof navigator !== "undefined" ? navigator.language : "en";
   const dayNames = [0, 1, 2, 3, 4, 5, 6].map((d) => new Date(Date.UTC(2024, 0, 7 + d, 12)).toLocaleDateString(locale, { weekday: "long", timeZone: "UTC" }));
   const hourNames = Array.from({ length: 24 }, (_, h) => new Date(2024, 0, 1, h, 0).toLocaleTimeString(locale, { hour: "numeric", minute: "2-digit" }));
@@ -45,11 +51,26 @@
     }
   }
 
+  // "example.com/blog/" and "https://www.example.com/blog" are the same website.
+  const siteKey = (u: string | undefined) =>
+    String(u ?? "").trim().toLowerCase().replace(/^https?:\/\//, "").replace(/^www\./, "").replace(/\/+$/, "");
+
+  /** A source for this website that already exists (a save that finished after a reload, a double click). */
+  function existingSourceId(): string {
+    const list = ($store.config?.newsSources ?? []) as Array<{ id?: string; url?: string }>;
+    return list.find((ns) => ns?.id && siteKey(ns.url) === siteKey($onboarding.url))?.id ?? "";
+  }
+
   async function save() {
     error = "";
     saving = true;
     try {
-      let id = $onboarding.newsSourceId;
+      let id = $onboarding.newsSourceId || existingSourceId();
+      if (id && !$onboarding.newsSourceId) {
+        updateOnboarding({ newsSourceId: id });
+        saveToStore({ createdNewsSourceId: id });
+        updateStepStore({ createdNewsSourceId: id });
+      }
       if (!id) {
         const created = await createNewsSource({
           type: "website",
@@ -125,7 +146,7 @@
       </select>
     </div>
   </div>
-  <p class="ob-hint" id="ob-hour-hint">{$ob.schedule.timeHint}{human ? " " + human : ""}</p>
+  <p class="ob-hint" id="ob-hour-hint">{human || $ob.schedule.timeHint}</p>
 
   <div class="recipe" class:off={!automationOn}>
     <div class="recipe__text">

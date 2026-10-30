@@ -1,5 +1,5 @@
-// pes strings for locales-newflow. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale pes
+// pes (Persian (Iran)) strings for locales-newflow. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "onboarding": {
     "progress": "مرحله {current} از {total}",
@@ -116,6 +116,9 @@ export default {
       "dayLabel": "روز",
       "timeLabel": "ساعت",
       "timeHint": "به وقت محلی شما.",
+      "summaryDaily": "هر روز در ساعت {time}، به وقت شما ({zone}).",
+      "summaryWeekly": "هر {day} در ساعت {time}، به وقت شما ({zone}).",
+      "summaryMonthly": "در اول هر ماه در ساعت {time}، به وقت شما ({zone}).",
       "recipeTitle": "ارسال خودکار شماره‌های جدید",
       "recipeBody": "طبق زمان‌بندی بالا، بهترین مقاله جدید شما را انتخاب می‌کنیم، با لحن شما می‌نویسیم، برای هر خواننده ترجمه می‌کنیم و ایمیل می‌کنیم.",
       "recipeOn": "روشن",

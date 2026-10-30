@@ -1,5 +1,5 @@
-// gu strings for locales. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale gu
+// gu (Gujarati) strings for locales. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "auth": {
     "logo": "/icons/logo.png",
@@ -35,6 +35,82 @@ export default {
       "ogImageAlt": "AIBAN લોગો"
     },
     "skipLink": "મુખ્ય કન્ટેન્ટ પર જાઓ",
+    "display": {
+      "title": "તમારી વેબસાઇટ, ન્યૂઝલેટર તરીકે લખાયેલ.",
+      "kicker": "AIBAN"
+    },
+    "statement": {
+      "lines": [
+        "તમે પહેલેથી જ સારું કામ પ્રકાશિત કરો છો.",
+        "તમારા ક્લાયન્ટ્સ તેને એક કરતાં વધુ ભાષામાં વાંચે છે.",
+        "AIBAN દરેક નવા લેખને એક અંકમાં ફેરવે છે",
+        "અને દરેક વાચકને તેમની ભાષામાં સંસ્કરણ મોકલે છે."
+      ]
+    },
+    "history": {
+      "eyebrow": "તે કેવી રીતે કામ કરે છે",
+      "title": "એક અંકનું જીવનચરિત્ર.",
+      "lead": "તમારું શેડ્યૂલ તેને શરૂ કરે તે ક્ષણથી લઈને તે ફરીથી શરૂ થાય તે ક્ષણ સુધી એક અંકને અનુસરો. તમે આને એકવાર સેટ કરો.",
+      "note": "ઉદાહરણ શેડ્યૂલ. તમે દિવસ, સમય અને કેટલી વાર તે પસંદ કરો.",
+      "progressLabel": "એક અંકના પગલાં",
+      "items": [
+        {
+          "mark": "9:00",
+          "title": "તમારું શેડ્યૂલ રન શરૂ કરે છે",
+          "body": "આ ઉદાહરણમાં દર સોમવારે સવારે 9:00 વાગ્યે. તમે દૈનિક, સાપ્તાહિક અથવા માસિક પસંદ કરો."
+        },
+        {
+          "mark": "વાંચો",
+          "title": "AIBAN તમારી વેબસાઇટ વાંચે છે",
+          "body": "તે તમારો નવીનતમ લેખ શોધે છે અને તે ભાગ પસંદ કરે છે જે તમારા આદર્શ વાચકને સૌથી વધુ ચિંતા કરશે."
+        },
+        {
+          "mark": "લખો",
+          "title": "તે તમારા અવાજમાં અંક લખે છે",
+          "body": "ટેક્સ્ટ તમારી સાઇટ કેવી રીતે લખાયેલી છે તે અનુસરે છે, તેથી તે તમારા જેવું લાગે છે."
+        },
+        {
+          "mark": "અનુવાદ કરો",
+          "title": "દરેક વાચકને તેમની ભાષા મળે છે",
+          "body": "એક અંક તમારા સબ્સ્ક્રાઇબર્સને જરૂરી હોય તેટલા સંસ્કરણો બને છે."
+        },
+        {
+          "mark": "મોકલો",
+          "title": "તે તમારા નામ હેઠળ આવે છે",
+          "body": "તમારા નામ અને તમારા ઇમેઇલ સહી સાથે. જવાબો તમારા ઇનબોક્સમાં જાય છે."
+        },
+        {
+          "mark": "પ્રકાશિત કરો",
+          "title": "તે તમારા બ્લોગ પર એક લેખ બને છે",
+          "body": "તેની પોતાની લિંક સાથે જે લોકો શોધ અને શેર કરી શકે છે."
+        },
+        {
+          "mark": "રિપોર્ટ કરો",
+          "title": "તમે જુઓ છો કે શું થયું",
+          "body": "તમારું ડેશબોર્ડ સૂચિબદ્ધ કરે છે કે કોણ જોડાયું અને વાચકોએ કઈ લિંક્સ ક્લિક કરી."
+        },
+        {
+          "mark": "ફરીથી",
+          "title": "આગામી સોમવારે, તે ફરીથી ચાલે છે",
+          "body": "તમે તેને તમારા ડેશબોર્ડમાં બંધ કરો ત્યાં સુધી તે ચાલુ રહે છે."
+        }
+      ]
+    },
+    "rail": {
+      "label": "પૃષ્ઠ અધ્યાયો",
+      "chapters": [
+        "શરૂઆત",
+        "શા માટે",
+        "ભાષાઓ",
+        "તે કેવી રીતે કામ કરે છે",
+        "તમારું નામ",
+        "વૃદ્ધિ",
+        "તે કોના માટે છે",
+        "કિંમત",
+        "પ્રશ્નો",
+        "શરૂ કરો"
+      ]
+    },
     "hero": {
       "eyebrow": "સર્વિસ બિઝનેસ માટે ન્યૂઝલેટર",
       "title": "તમારી વેબસાઇટ સાપ્તાહિક ન્યૂઝલેટર બને છે, દરેક વાચકની ભાષામાં",
@@ -57,6 +133,26 @@ export default {
       "startCta": "{site} સાથે મફતમાં શરૂ કરો",
       "startCtaGeneric": "મફતમાં શરૂ કરો",
       "liveRegion": "{site} માટે નમૂનાનું પ્રિવ્યૂ અપડેટ થયું."
+    },
+    "live": {
+      "badge": "હમણાં જ લખાયું",
+      "loadingTitle": "{site}માંથી નમૂના અંક લખી રહ્યા છે",
+      "steps": [
+        "{site} વાંચી રહ્યા છે",
+        "તમારો નવોત્તમ લેખ શોધી રહ્યા છે",
+        "તેને {language}માં લખી રહ્યા છે",
+        "તેને તમારા ઇમેલ ટેમ્પલેટમાં મૂકી રહ્યા છે"
+      ],
+      "takes": "આ સામાન્ય રીતે 20 થી 40 સેકન્ડ લે છે. તમે સ્ક્રોલ કરતા રહી શકો છો.",
+      "readyNote": "AIBAN {site} પરના નવોત્તમ લેખમાંથી આ નમૂના લખે છે. કંઈપણ સેવ કે મોકલાયેલું નથી. જ્યારે તમે શરૂ કરો છો, ત્યારે તે તમારા પોતાના અવાજ અને શેડ્યૂલનો ઉપયોગ કરે છે.",
+      "readyAnnounce": "{site}માંથી તમારો નમૂના અંક તૈયાર છે.",
+      "languageLabel": "વાચક ભાષા",
+      "loadingLanguage": "તેને {language}માં લખી રહ્યા છે",
+      "errorTitle": "અમે {site}માંથી પૂર્વાવલોકન લખી શક્યા નથી",
+      "retry": "ફરીથી પ્રયાસ કરો",
+      "showSample": "નમૂના લેઆઉટ બતાવો",
+      "frameTitle": "{site}માંથી લખાયેલ નમૂના અંક",
+      "openFull": "નવી ટેબમાં ખોલો"
     },
     "chain": {
       "eyebrow": "તે કેવી રીતે કામ કરે છે",
@@ -587,6 +683,7 @@ export default {
       "suggestions": "સૂચનો",
       "recent": "તાજેતરની શોધ",
       "clearRecent": "તાજેતરની શોધ સાફ કરો",
+      "clear": "શોધ સાફ કરો",
       "title": "શોધનાં પરિણામો",
       "resultsFor": "\"{q}\" માટે પરિણામો",
       "count": "{count} આર્ટિકલ મળ્યા",
@@ -691,6 +788,7 @@ export default {
   "legal": {
     "navLabel": "કાનૂની દસ્તાવેજો",
     "lastUpdated": "છેલ્લે અપડેટ: {date}",
+    "onThisPage": "આ પૃષ્ઠ પર",
     "privacy": {
       "title": "પ્રાઇવસી પોલિસી",
       "metaTitle": "પ્રાઇવસી પોલિસી | AIBAN",
@@ -919,6 +1017,8 @@ export default {
     "codeSent": "અમે તમારા ઇમેઇલ પર એક કોડ મોકલ્યો છે.",
     "invalidCode": "આ કોડ સાચો નથી. અમે મોકલેલો સૌથી નવો ઇમેઇલ જુઓ, અથવા કોડ ફરી મોકલો.",
     "regenerateCode": "કોડ ફરીથી મોકલો",
+    "codeAccepted": "કોડ સ્વીકાર્યો. તમારું ડેશબોર્ડ ખોલી રહ્યું છે.",
+    "codeLabel": "6-અંકનો કોડ",
     "back": "પાછા",
     "byProceeding": "આગળ વધીને, તમે આના માટે સંમત થાઓ છો",
     "termsOfService": "સેવાની શરતો",
@@ -947,6 +1047,673 @@ export default {
       "title": "ન્યૂઝલેટરમાં તમારું સ્વાગત છે.",
       "invitedBy": "તમને {configuratorId} દ્વારા આમંત્રિત કરવામાં આવ્યા છે."
     }
+  },
+  "showcase": {
+    "sampleBadge": "નમૂના ડેટા",
+    "exampleLabel": "ઉદાહરણ વ્યવસાય",
+    "caption": "{business} એક ઉદાહરણ {kind} છે. આ દૃશ્યમાં નામો, લેખો અને નંબરો પ્લેસહોલ્ડર છે જે દર્શાવે છે કે થોડા અઠવાડિયા પછી તમારું ડેશબોર્ડ કેવું દેખાય છે.",
+    "pause": "એનિમેશન રોકો",
+    "play": "એનિમેશન ચલાવો",
+    "scenesLabel": "ડેશબોર્ડના ભાગો",
+    "examplesLabel": "ઉદાહરણ વ્યવસાયો",
+    "appUrl": "app.aiban.news",
+    "nav": {
+      "home": "હોમ",
+      "automations": "ઓટોમેશન",
+      "sources": "સ્ત્રોતો",
+      "subscribers": "સબ્સ્ક્રાઇબર્સ",
+      "reports": "રિપોર્ટ્સ",
+      "blog": "બ્લોગ"
+    },
+    "scenes": {
+      "home": "અવલોકન",
+      "issue": "આઈશ્યુ",
+      "reports": "ક્લિક્સ",
+      "subscribers": "સબ્સ્ક્રાઇબર્સ",
+      "automation": "શેડ્યૂલ",
+      "source": "તમારી વેબસાઇટ",
+      "voice": "તમારો અવાજ",
+      "signup": "સાઇનઅપ ફોર્મ",
+      "blog": "બ્લોગ",
+      "import": "ઇમ્પોર્ટ"
+    },
+    "ui": {
+      "hello": "હેલો, {business}",
+      "narrative": "{subscribers} વાચકો {languages} ભાષાઓમાં. આગામી આઈશ્યુ {schedule} પ્રકાશિત થશે.",
+      "kpiSubscribers": "સબ્સ્ક્રાઇબર્સ",
+      "kpiLanguages": "ભાષાઓ",
+      "kpiClicks": "ક્લિક્સ, છેલ્લા 7 દિવસ",
+      "kpiAutomations": "ઓટોમેશન ચાલુ છે",
+      "kpiNew": "આ અઠવાડિયે {count} નવા",
+      "nextIssue": "આગામી આઈશ્યુ",
+      "ready": "તૈયાર",
+      "activity": "તાજેતરની પ્રવૃત્તિ",
+      "from": "માંથી",
+      "subject": "વિષય",
+      "readMore": "સંપૂર્ણ લેખ વાંચો",
+      "readerLanguage": "વાચક ભાષા",
+      "clicksTitle": "ક્લિક્સ, છેલ્લા 7 દિવસ",
+      "mostClicked": "સૌથી વધુ ક્લિક કરાયેલ",
+      "clicks": "ક્લિક્સ",
+      "days": [
+        "સોમ",
+        "મંગળ",
+        "બુધ",
+        "ગુરુ",
+        "શુક્ર",
+        "શનિ",
+        "રવિ"
+      ],
+      "subscribersTitle": "સબ્સ્ક્રાઇબર્સ",
+      "language": "ભાષા",
+      "joinedVia": "જોડાયા મારફતે",
+      "newSubscriber": "નવા સબ્સ્ક્રાઇબર",
+      "automationTitle": "સાપ્તાહિક આઈશ્યુ",
+      "automationSentence": "{schedule}, નવીનતમ લેખમાંથી એક અંક લખો અને દરેક વાચકને તેમની ભાષામાં મોકલો.",
+      "on": "ચાલુ",
+      "off": "બંધ",
+      "automationOn": "ઓટોમેશન ચાલુ થયું",
+      "sourceLabel": "તમારી સામગ્રી ક્યાંથી આવે છે",
+      "sourceButton": "મારી સાઇટ વાંચો",
+      "reading": "તમારી સાઇટ વાંચી રહ્યા છીએ",
+      "found": "{count} લેખ મળ્યા",
+      "voiceReader": "તમારા આદર્શ વાચક",
+      "voiceTone": "તે કેવું લાગવું જોઈએ",
+      "signupHeading": "અમારા સાપ્તાહિક નોંધો મેળવો",
+      "signupEmail": "ઇમેઇલ સરનામું",
+      "signupLanguage": "ભાષા",
+      "signupButton": "સબ્સ્ક્રાઇબ કરો",
+      "signupDone": "કન્ફર્મ કરવા માટે તમારા ઇનબોક્સ તપાસો.",
+      "blogTitle": "{business} થી લેખો",
+      "importFile": "clients.csv",
+      "importing": "સંપર્કો આયાત કરી રહ્યા છીએ",
+      "imported": "{count} સંપર્કો ઉમેરાયા",
+      "sources": {
+        "form": "સાઇનઅપ ફોર્મ",
+        "import": "આયાત કરો",
+        "manual": "હાથથી ઉમેરેલ"
+      }
+    },
+    "examples": [
+      {
+        "business": "Northfield Studio",
+        "kind": "વેબ ડિઝાઇન એજન્સી",
+        "site": "northfield.studio",
+        "schedule": "દર સોમવારે સવારે 9:00 વાગ્યે",
+        "subscribers": 312,
+        "newThisWeek": 9,
+        "clicks7": 84,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 58
+          },
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 31
+          },
+          {
+            "code": "pt",
+            "name": "Portuguese",
+            "share": 11
+          }
+        ],
+        "reader": "ક્લિનિક, દુકાનો અને સ્ટુડિયોના માલિકો જેમને ક્લાયંટ્સ લાવનારી વેબસાઇટ જોઈએ છે, પોર્ટફોલિયો નહીં.",
+        "tones": [
+          "ગરમાગરમ",
+          "સાદું",
+          "વ્યવહારુ"
+        ],
+        "articles": [
+          "છ અઠવાડિયામાં અમે ડેન્ટલ ક્લિનિક વેબસાઇટ કેવી રીતે ફરીથી બનાવી",
+          "રિડિઝાઇન કરતા પહેલા સુધારવા માટેની પાંચ વસ્તુઓ",
+          "તમારું બુકિંગ બટન નારંગી રંગનું કેમ હોવું જોઈએ"
+        ],
+        "issue": {
+          "title": "છ અઠવાડિયામાં અમે ડેન્ટલ ક્લિનિક વેબસાઇટ કેવી રીતે ફરીથી બનાવી",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "A clinic website rebuilt in six weeks",
+              "summary": "We moved booking to the top of every page and cut the forms from nine fields to three. Here is what changed for the clinic."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "El sitio de una clínica, renovado en seis semanas",
+              "summary": "Pusimos la reserva arriba en cada página y redujimos los formularios de nueve campos a tres. Esto es lo que cambió para la clínica."
+            },
+            {
+              "code": "pt",
+              "name": "Português",
+              "subject": "O site de uma clínica, refeito em seis semanas",
+              "summary": "Colocamos o agendamento no topo de cada página e reduzimos os formulários de nove campos para três. Veja o que mudou para a clínica."
+            }
+          ]
+        },
+        "clicksByDay": [
+          21,
+          17,
+          12,
+          9,
+          11,
+          6,
+          8
+        ],
+        "topLinks": [
+          {
+            "title": "ક્લિનિક કેસ સ્ટડી",
+            "clicks": 38
+          },
+          {
+            "title": "રિડિઝાઇન કરતા પહેલા સુધારવા માટેની પાંચ વસ્તુઓ",
+            "clicks": 27
+          },
+          {
+            "title": "કોલ બુક કરો",
+            "clicks": 19
+          }
+        ],
+        "people": [
+          {
+            "email": "lucia.r@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "mark@example.org",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "joana.s@example.net",
+            "lang": "PT",
+            "via": "form"
+          },
+          {
+            "email": "dr.chen@example.com",
+            "lang": "EN",
+            "via": "manual"
+          }
+        ],
+        "activity": [
+          "3 ભાષાઓમાં 312 વાચકોને અંક મોકલાયો",
+          "ક્લિનિક કેસ સ્ટડી પર 38 ક્લિક્સ",
+          "લુસિયા સાઇનઅપ ફોર્મમાંથી જોડાયા અને સ્પેનિશમાં વાંચે છે"
+        ],
+        "importCount": 148
+      },
+      {
+        "business": "Brightline Software",
+        "kind": "સોફ્ટવેર કંપની",
+        "site": "brightline.dev",
+        "schedule": "દર મહિનાની 1મી તારીખે 10:00 વાગ્યે",
+        "subscribers": 1240,
+        "newThisWeek": 23,
+        "clicks7": 211,
+        "automationsOn": 1,
+        "languages": [
+          {
+            "code": "en",
+            "name": "અંગ્રેજી",
+            "share": 64
+          },
+          {
+            "code": "de",
+            "name": "જર્મન",
+            "share": 22
+          },
+          {
+            "code": "fr",
+            "name": "ફ્રેન્ચ",
+            "share": 14
+          }
+        ],
+        "reader": "ઓફિસ મેનેજર્સ અને આઇટી લીડ્સ અમારા ક્લાયન્ટ્સ પાસે જે દરરોજ અમારી બુકિંગ સોફ્ટવેરનો ઉપયોગ કરે છે.",
+        "tones": [
+          "સ્પષ્ટ",
+          "ટૂંકું",
+          "મૈત્રીપૂર્ણ"
+        ],
+        "articles": [
+          "રિલીઝ 4.2: પુનરાવર્તિત એપોઇન્ટમેન્ટ્સ",
+          "મોટી ટીમો માટે ઝડપી રિપોર્ટ્સ",
+          "તમારા કેલેન્ડરને સ્પ્રેડશીટમાંથી કેવી રીતે ખસેડવું"
+        ],
+        "issue": {
+          "title": "રિલીઝ 4.2: પુનરાવર્તિત એપોઇન્ટમેન્ટ્સ",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "New this month: recurring appointments",
+              "summary": "You can now repeat any appointment weekly or monthly. Reports for teams over 50 people also load faster."
+            },
+            {
+              "code": "de",
+              "name": "Deutsch",
+              "subject": "Neu diesen Monat: wiederkehrende Termine",
+              "summary": "Sie können jetzt jeden Termin wöchentlich oder monatlich wiederholen. Berichte für Teams ab 50 Personen laden außerdem schneller."
+            },
+            {
+              "code": "fr",
+              "name": "Français",
+              "subject": "Nouveau ce mois-ci : les rendez-vous récurrents",
+              "summary": "Vous pouvez désormais répéter un rendez-vous chaque semaine ou chaque mois. Les rapports des équipes de plus de 50 personnes s'affichent aussi plus vite."
+            }
+          ]
+        },
+        "clicksByDay": [
+          64,
+          48,
+          33,
+          25,
+          19,
+          9,
+          13
+        ],
+        "topLinks": [
+          {
+            "title": "પુનરાવર્તિત એપોઇન્ટમેન્ટ્સ માર્ગદર્શિકા",
+            "clicks": 96
+          },
+          {
+            "title": "રિલીઝ નોંધો 4.2",
+            "clicks": 71
+          },
+          {
+            "title": "સ્પ્રેડશીટમાંથી ખસેડવું",
+            "clicks": 44
+          }
+        ],
+        "people": [
+          {
+            "email": "it@example.de",
+            "lang": "DE",
+            "via": "import"
+          },
+          {
+            "email": "sophie.m@example.fr",
+            "lang": "FR",
+            "via": "form"
+          },
+          {
+            "email": "ops@example.com",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "k.weber@example.de",
+            "lang": "DE",
+            "via": "form"
+          }
+        ],
+        "activity": [
+          "આઇશ્યુ 3 ભાષાઓમાં 1240 વાચકોને મોકલાયું",
+          "પુનરાવર્તિત એપોઇન્ટમેન્ટ્સ માર્ગદર્શિકા પર 96 ક્લિક્સ",
+          "clients.csv માંથી 23 સંપર્કો આયાત કરાયા"
+        ],
+        "importCount": 412
+      },
+      {
+        "business": "Casa Verde Realty",
+        "kind": "રિયલ એસ્ટેટ એજન્સી",
+        "site": "casaverde.homes",
+        "schedule": "દર ગુરુવારે 8:00 વાગ્યે",
+        "subscribers": 586,
+        "newThisWeek": 14,
+        "clicks7": 163,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "es",
+            "name": "સ્પેનિશ",
+            "share": 47
+          },
+          {
+            "code": "en",
+            "name": "અંગ્રેજી",
+            "share": 41
+          },
+          {
+            "code": "fr",
+            "name": "ફ્રેન્ચ",
+            "share": 12
+          }
+        ],
+        "reader": "વિદેશથી આવતા કુટુંબો અને નિવૃત્ત લોકો જે કિનારા નજીક ઘર શોધી રહ્યા છે, અને માલિકો જે વેચી શકે છે.",
+        "tones": [
+          "ગરમાગરમ",
+          "સ્થાનિક",
+          "શાંત"
+        ],
+        "articles": [
+          "આ અઠવાડિયે સમુદ્ર કિનારે ત્રણ નવાં ઘરો",
+          "વિદેશી ખરીદદારો માટે બંધ કરવાની ખર્ચ કેવી દેખાય છે",
+          "જૂનાં શહેરમાં કિંમતો, પતઝડ અપડેટ"
+        ],
+        "issue": {
+          "title": "આ અઠવાડિયે સમુદ્ર કિનારે ત્રણ નવાં ઘરો",
+          "langs": [
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tres casas nuevas cerca de la playa",
+              "summary": "Una casa de dos habitaciones con jardín, un apartamento con vista al mar y una casa para reformar a diez minutos del centro."
+            },
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Three new homes near the beach",
+              "summary": "A two bedroom house with a garden, a flat with a sea view and a house to renovate ten minutes from the center."
+            },
+            {
+              "code": "fr",
+              "name": "Français",
+              "subject": "Trois nouvelles maisons près de la plage",
+              "summary": "Une maison de deux chambres avec jardin, un appartement avec vue sur la mer et une maison à rénover à dix minutes du centre."
+            }
+          ]
+        },
+        "clicksByDay": [
+          12,
+          9,
+          15,
+          52,
+          38,
+          21,
+          16
+        ],
+        "topLinks": [
+          {
+            "title": "સમુદ્ર દૃશ્ય સાથે ફ્લેટ",
+            "clicks": 71
+          },
+          {
+            "title": "બે બેડરૂમનું ઘર બગીચા સાથે",
+            "clicks": 54
+          },
+          {
+            "title": "વિદેશી ખરીદદારો માટે બંધ કરવાની ખર્ચ",
+            "clicks": 38
+          }
+        ],
+        "people": [
+          {
+            "email": "familia.ortiz@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "j.dupont@example.fr",
+            "lang": "FR",
+            "via": "form"
+          },
+          {
+            "email": "tom.and.ann@example.org",
+            "lang": "EN",
+            "via": "manual"
+          },
+          {
+            "email": "rmora@example.net",
+            "lang": "ES",
+            "via": "import"
+          }
+        ],
+        "activity": [
+          "આઇશ્યુ 3 ભાષાઓમાં 586 વાચકોને મોકલાયું",
+          "સમુદ્ર દૃશ્ય સાથે ફ્લેટ પર 71 ક્લિક્સ",
+          "ફ્રાન્સમાં એક વાચક સાઇનઅપ ફોર્મમાંથી જોડાયો"
+        ],
+        "importCount": 203
+      },
+      {
+        "business": "Mora and Partners",
+        "kind": "એકાઉન્ટિંગ ફર્મ",
+        "site": "morapartners.co",
+        "schedule": "દર બીજા મંગળવારે સવારે 7:30 વાગ્યે",
+        "subscribers": 428,
+        "newThisWeek": 6,
+        "clicks7": 97,
+        "automationsOn": 1,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 52
+          },
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 38
+          },
+          {
+            "code": "it",
+            "name": "Italian",
+            "share": 10
+          }
+        ],
+        "reader": "નાની કંપનીઓના માલિકો જે કર અને પેરોલમાં થતા ફેરફારો વિશે જાણવા માંગે છે, પરંતુ જાર્ગન વિના.",
+        "tones": [
+          "શાંત",
+          "ચોક્કસ",
+          "સરળ"
+        ],
+        "articles": [
+          "ત્રિમાસિક કરની અંતિમ તારીખ 15મી તારીખે ખસેડાઈ છે",
+          "પ્રથમ કર્મચારીને નોકરી પર રાખતી વખતે શું રાખવું",
+          "રસીદો: કાગળ કે ફોટો?"
+        ],
+        "issue": {
+          "title": "ત્રિમાસિક કરની અંતિમ તારીખ 15મી તારીખે ખસેડાઈ છે",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Your quarterly deadline moves to the 15th",
+              "summary": "The filing date for the next quarter moves five days later. Here is what to send us and when, so nothing is late."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tu plazo trimestral pasa al día 15",
+              "summary": "La fecha de presentación del próximo trimestre se mueve cinco días. Esto es lo que debes enviarnos y cuándo, para que nada llegue tarde."
+            },
+            {
+              "code": "it",
+              "name": "Italiano",
+              "subject": "La scadenza trimestrale passa al 15",
+              "summary": "La data di presentazione del prossimo trimestre slitta di cinque giorni. Ecco cosa inviarci e quando, perché nulla arrivi in ritardo."
+            }
+          ]
+        },
+        "clicksByDay": [
+          33,
+          24,
+          14,
+          8,
+          7,
+          4,
+          7
+        ],
+        "topLinks": [
+          {
+            "title": "15મી તારીખ માટે ચેકલિસ્ટ",
+            "clicks": 46
+          },
+          {
+            "title": "તમારા પ્રથમ કર્મચારીને નોકરી પર રાખવા",
+            "clicks": 29
+          },
+          {
+            "title": "રિવ્યૂ કોલ બુક કરો",
+            "clicks": 22
+          }
+        ],
+        "people": [
+          {
+            "email": "bakery.owner@example.com",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "c.rossi@example.it",
+            "lang": "IT",
+            "via": "form"
+          },
+          {
+            "email": "taller.luna@example.net",
+            "lang": "ES",
+            "via": "import"
+          },
+          {
+            "email": "finance@example.org",
+            "lang": "EN",
+            "via": "manual"
+          }
+        ],
+        "activity": [
+          "આઈશ્યુ 3 ભાષાઓમાં 428 વાચકોને મોકલાયું",
+          "15મી તારીખ માટેની ચેકલિસ્ટ પર 46 ક્લિક્સ",
+          "આ અઠવાડિયે 6 નવા વાચકો"
+        ],
+        "importCount": 97
+      },
+      {
+        "business": "Run Better Coaching",
+        "kind": "રનિંગ કોચ",
+        "site": "runbetter.coach",
+        "schedule": "દર રવિવારે સાંજે 6:00 વાગ્યે",
+        "subscribers": 907,
+        "newThisWeek": 31,
+        "clicks7": 248,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 49
+          },
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 33
+          },
+          {
+            "code": "de",
+            "name": "German",
+            "share": 18
+          }
+        ],
+        "reader": "પ્રથમ હાફ મેરેથોન માટે તાલીમ લેતા પુખ્ત વ્યક્તિઓ જે કામ પહેલાં અઠવાડિયામાં ત્રણ વખત દોડે છે.",
+        "tones": [
+          "પ્રોત્સાહન આપનાર",
+          "સીધું",
+          "ટૂંકું"
+        ],
+        "articles": [
+          "આ અઠવાડિયે: લાંબી દોડ, તમારા વિચારથી ધીમી",
+          "500 કિલોમીટર પછીના જૂતા",
+          "20 મિનિટની સ્ટ્રેંથ રુટીન"
+        ],
+        "issue": {
+          "title": "આ અઠવાડિયે: લાંબી દોડ, તમારા વિચારથી ધીમી",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Your long run should feel too easy",
+              "summary": "Keep it slow enough to talk. This week's plan adds ten minutes and one short hill session."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tu tirada larga debería sentirse demasiado fácil",
+              "summary": "Mantén un ritmo que te deje hablar. El plan de esta semana suma diez minutos y una sesión corta de cuestas."
+            },
+            {
+              "code": "de",
+              "name": "Deutsch",
+              "subject": "Dein langer Lauf sollte sich zu leicht anfühlen",
+              "summary": "Lauf so langsam, dass du noch reden kannst. Der Plan dieser Woche bringt zehn Minuten mehr und eine kurze Bergeinheit."
+            }
+          ]
+        },
+        "clicksByDay": [
+          18,
+          22,
+          26,
+          31,
+          35,
+          49,
+          67
+        ],
+        "topLinks": [
+          {
+            "title": "આ અઠવાડિયાની તાલીમ યોજના",
+            "clicks": 121
+          },
+          {
+            "title": "20 મિનિટની સ્ટ્રેંથ રુટીન",
+            "clicks": 78
+          },
+          {
+            "title": "500 કિલોમીટર પછીના જૂતા",
+            "clicks": 49
+          }
+        ],
+        "people": [
+          {
+            "email": "ana.runs@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "felix.k@example.de",
+            "lang": "DE",
+            "via": "form"
+          },
+          {
+            "email": "sam@example.org",
+            "lang": "EN",
+            "via": "form"
+          },
+          {
+            "email": "club.secretary@example.net",
+            "lang": "EN",
+            "via": "import"
+          }
+        ],
+        "activity": [
+          "આઈશ્યુ 3 ભાષાઓમાં 907 વાચકોને મોકલાયું",
+          "આ અઠવાડિયાની તાલીમ યોજના પર 121 ક્લિક્સ",
+          "આ અઠવાડિયે 31 નવા વાચકો, મોટાભાગના સાઇનઅપ ફોર્મથી"
+        ],
+        "importCount": 260
+      }
+    ]
+  },
+  "errorPage": {
+    "notFoundEyebrow": "ભૂલ 404",
+    "notFoundTitle": "અમે આ પૃષ્ઠ શોધી શક્યા નથી",
+    "notFoundBody": "લિંક જૂની હોઈ શકે છે અથવા તેમાં ટાઇપો હોઈ શકે છે. આ પૃષ્ઠો આગળ વધવા માટે સારી જગ્યા છે.",
+    "serverEyebrow": "ભૂલ {status}",
+    "serverTitle": "અમારી તરફથી કંઈક ખોટું થયું છે",
+    "serverBody": "અમે આ પૃષ્ઠ લોડ કરી શક્યા નથી. એક મિનિટમાં ફરીથી પ્રયાસ કરો. જો તે ચાલુ રહે છે, તો info@aiban.news પર લખો.",
+    "retry": "ફરીથી પ્રયાસ કરો",
+    "home": "હોમ પેજ પર જાઓ",
+    "popularTitle": "લોકપ્રિય પૃષ્ઠો",
+    "links": {
+      "howItWorks": "AIBAN કેવી રીતે કામ કરે છે",
+      "pricing": "કિંમત",
+      "help": "હેલ્પ સેન્ટર",
+      "login": "તમારા ડેશબોર્ડમાં લોગ ઇન કરો"
+    },
+    "report": "જો અમારી સાઇટ પરની લિંક તમને અહીં લાવી છે, તો info@aiban.news પર અમને જણાવો જેથી અમે તેને ઠીક કરી શકીએ."
   },
   "header": {
     "goToWorkspace": "ડેશબોર્ડ ખોલો",
@@ -982,1429 +1749,5 @@ export default {
     "monthly": "માસિક",
     "yearly": "વાર્ષિક",
     "loadingPlan": "પ્લાન ડેટા લોડ થઈ રહ્યો છે..."
-  },
-  "languages": [
-    {
-      "code": "ab",
-      "name": "અબખાસિયન"
-    },
-    {
-      "code": "aa",
-      "name": "અફાર"
-    },
-    {
-      "code": "af",
-      "name": "આફ્રિકાન્સ"
-    },
-    {
-      "code": "ak",
-      "name": "અકાન"
-    },
-    {
-      "code": "sq",
-      "name": "અલ્બેનિયન"
-    },
-    {
-      "code": "am",
-      "name": "અમહારિક"
-    },
-    {
-      "code": "ar",
-      "name": "અરબી"
-    },
-    {
-      "code": "an",
-      "name": "એરાગોનીઝ"
-    },
-    {
-      "code": "hy",
-      "name": "આર્મેનિયન"
-    },
-    {
-      "code": "as",
-      "name": "આસામી"
-    },
-    {
-      "code": "av",
-      "name": "અવારિક"
-    },
-    {
-      "code": "ae",
-      "name": "અવેસ્તન"
-    },
-    {
-      "code": "ay",
-      "name": "આયમારા"
-    },
-    {
-      "code": "az",
-      "name": "અઝરબૈજાની"
-    },
-    {
-      "code": "bm",
-      "name": "બંબારા"
-    },
-    {
-      "code": "ba",
-      "name": "બશ્કીર"
-    },
-    {
-      "code": "eu",
-      "name": "બાસ્ક"
-    },
-    {
-      "code": "be",
-      "name": "બેલારુસિયન"
-    },
-    {
-      "code": "bn",
-      "name": "બંગાળી"
-    },
-    {
-      "code": "bi",
-      "name": "બિસ્લામા"
-    },
-    {
-      "code": "bs",
-      "name": "બોસ્નિયન"
-    },
-    {
-      "code": "br",
-      "name": "બ્રેટોન"
-    },
-    {
-      "code": "bg",
-      "name": "બલ્ગેરિયન"
-    },
-    {
-      "code": "my",
-      "name": "બર્મીઝ"
-    },
-    {
-      "code": "ca",
-      "name": "કાતલાન"
-    },
-    {
-      "code": "ch",
-      "name": "ચમોરો"
-    },
-    {
-      "code": "ce",
-      "name": "ચેચન"
-    },
-    {
-      "code": "ny",
-      "name": "ચિચેવા"
-    },
-    {
-      "code": "zh",
-      "name": "ચીની"
-    },
-    {
-      "code": "cu",
-      "name": "ચર્ચ સ્લેવિક"
-    },
-    {
-      "code": "cv",
-      "name": "ચુવાશ"
-    },
-    {
-      "code": "kw",
-      "name": "કોર્નિશ"
-    },
-    {
-      "code": "co",
-      "name": "કોર્સિકન"
-    },
-    {
-      "code": "cr",
-      "name": "ક્રી"
-    },
-    {
-      "code": "hr",
-      "name": "ક્રોએશિયન"
-    },
-    {
-      "code": "cs",
-      "name": "ચેક"
-    },
-    {
-      "code": "da",
-      "name": "ડેનિશ"
-    },
-    {
-      "code": "dv",
-      "name": "દિવેહી"
-    },
-    {
-      "code": "nl",
-      "name": "ડચ"
-    },
-    {
-      "code": "dz",
-      "name": "જોંગખા"
-    },
-    {
-      "code": "en",
-      "name": "અંગ્રેજી"
-    },
-    {
-      "code": "eo",
-      "name": "એસ્પેરન્ટો"
-    },
-    {
-      "code": "et",
-      "name": "એસ્ટોનિયન"
-    },
-    {
-      "code": "ee",
-      "name": "ઈવી"
-    },
-    {
-      "code": "fo",
-      "name": "ફેરોઝ"
-    },
-    {
-      "code": "fj",
-      "name": "ફિજિયન"
-    },
-    {
-      "code": "fi",
-      "name": "ફિનિશ"
-    },
-    {
-      "code": "fr",
-      "name": "ફ્રેન્ચ"
-    },
-    {
-      "code": "fy",
-      "name": "પશ્ચિમ ફ્રિશિયન"
-    },
-    {
-      "code": "ff",
-      "name": "ફુલાહ"
-    },
-    {
-      "code": "gd",
-      "name": "સ્કોટિશ ગેલિક"
-    },
-    {
-      "code": "gl",
-      "name": "ગેલિશિયન"
-    },
-    {
-      "code": "lg",
-      "name": "ગાંડા"
-    },
-    {
-      "code": "ka",
-      "name": "જ્યોર્જિયન"
-    },
-    {
-      "code": "de",
-      "name": "જર્મન"
-    },
-    {
-      "code": "el",
-      "name": "ગ્રીક"
-    },
-    {
-      "code": "kl",
-      "name": "કલાલીસુત"
-    },
-    {
-      "code": "gn",
-      "name": "ગુઆરાની"
-    },
-    {
-      "code": "gu",
-      "name": "ગુજરાતી"
-    },
-    {
-      "code": "ht",
-      "name": "હૈતીયન ક્રેઓલ"
-    },
-    {
-      "code": "ha",
-      "name": "હૌસા"
-    },
-    {
-      "code": "he",
-      "name": "હિબ્રુ"
-    },
-    {
-      "code": "hz",
-      "name": "હેરેરો"
-    },
-    {
-      "code": "hi",
-      "name": "હિન્દી"
-    },
-    {
-      "code": "ho",
-      "name": "હિરી મોટુ"
-    },
-    {
-      "code": "hu",
-      "name": "હંગેરિયન"
-    },
-    {
-      "code": "is",
-      "name": "આઇસલેન્ડિક"
-    },
-    {
-      "code": "io",
-      "name": "ઇડો"
-    },
-    {
-      "code": "ig",
-      "name": "ઇગ્બો"
-    },
-    {
-      "code": "id",
-      "name": "ઇન્ડોનેશિયન"
-    },
-    {
-      "code": "ia",
-      "name": "ઇન્ટરલિંગુઆ"
-    },
-    {
-      "code": "ie",
-      "name": "ઇન્ટરલિંગ્યુ"
-    },
-    {
-      "code": "iu",
-      "name": "ઇનુકિટટુટ"
-    },
-    {
-      "code": "ik",
-      "name": "ઇનુપિયાક"
-    },
-    {
-      "code": "ga",
-      "name": "આઇરિશ"
-    },
-    {
-      "code": "it",
-      "name": "ઇટાલિયન"
-    },
-    {
-      "code": "ja",
-      "name": "જાપાનીઝ"
-    },
-    {
-      "code": "jv",
-      "name": "જાવાનીઝ"
-    },
-    {
-      "code": "kn",
-      "name": "કન્નડ"
-    },
-    {
-      "code": "kr",
-      "name": "કાનુરી"
-    },
-    {
-      "code": "ks",
-      "name": "કાશ્મીરી"
-    },
-    {
-      "code": "kk",
-      "name": "કઝાખ"
-    },
-    {
-      "code": "km",
-      "name": "ખ્મેર"
-    },
-    {
-      "code": "ki",
-      "name": "કિકુયુ"
-    },
-    {
-      "code": "rw",
-      "name": "કિન્યારવાન્ડા"
-    },
-    {
-      "code": "ky",
-      "name": "કિર્ગીઝ"
-    },
-    {
-      "code": "kv",
-      "name": "કોમી"
-    },
-    {
-      "code": "kg",
-      "name": "કોંગો"
-    },
-    {
-      "code": "ko",
-      "name": "કોરિયન"
-    },
-    {
-      "code": "kj",
-      "name": "કુઆન્યામા"
-    },
-    {
-      "code": "ku",
-      "name": "કુર્દિશ"
-    },
-    {
-      "code": "lo",
-      "name": "લાઓ"
-    },
-    {
-      "code": "la",
-      "name": "લેટિન"
-    },
-    {
-      "code": "lv",
-      "name": "લાતવિયન"
-    },
-    {
-      "code": "li",
-      "name": "લિમ્બર્ગિશ"
-    },
-    {
-      "code": "ln",
-      "name": "લિંગાલા"
-    },
-    {
-      "code": "lt",
-      "name": "લિથુઆનિયન"
-    },
-    {
-      "code": "lu",
-      "name": "લુબા-કાટાંગા"
-    },
-    {
-      "code": "lb",
-      "name": "લક્ઝમબર્ગિશ"
-    },
-    {
-      "code": "mk",
-      "name": "મેસેડોનિયન"
-    },
-    {
-      "code": "mg",
-      "name": "માલાગાસી"
-    },
-    {
-      "code": "ms",
-      "name": "મલય"
-    },
-    {
-      "code": "ml",
-      "name": "મલયાલમ"
-    },
-    {
-      "code": "mt",
-      "name": "માલ્ટિઝ"
-    },
-    {
-      "code": "gv",
-      "name": "મેન્ક્સ"
-    },
-    {
-      "code": "mi",
-      "name": "માઓરી"
-    },
-    {
-      "code": "mr",
-      "name": "મરાઠી"
-    },
-    {
-      "code": "mh",
-      "name": "માર્શલીઝ"
-    },
-    {
-      "code": "mn",
-      "name": "મંગોલિયન"
-    },
-    {
-      "code": "na",
-      "name": "નાઉરુ"
-    },
-    {
-      "code": "nv",
-      "name": "નવાજો"
-    },
-    {
-      "code": "nd",
-      "name": "ઉત્તર ન્ડેબેલે"
-    },
-    {
-      "code": "nr",
-      "name": "દક્ષિણ ન્ડેબેલે"
-    },
-    {
-      "code": "ng",
-      "name": "નડોન્ગા"
-    },
-    {
-      "code": "ne",
-      "name": "નેપાળી"
-    },
-    {
-      "code": "no",
-      "name": "નોર્વેજીયન"
-    },
-    {
-      "code": "nb",
-      "name": "નોર્વેજીયન બોકમોલ"
-    },
-    {
-      "code": "nn",
-      "name": "નોર્વેજીયન નાયનોસ્ક"
-    },
-    {
-      "code": "oc",
-      "name": "ઓક્સિટન"
-    },
-    {
-      "code": "oj",
-      "name": "ઓજીબ્વા"
-    },
-    {
-      "code": "or",
-      "name": "ઓડિયા"
-    },
-    {
-      "code": "om",
-      "name": "ઓરોમો"
-    },
-    {
-      "code": "os",
-      "name": "ઓસેટિયન"
-    },
-    {
-      "code": "pi",
-      "name": "પાલી"
-    },
-    {
-      "code": "ps",
-      "name": "પશ્તો"
-    },
-    {
-      "code": "fa",
-      "name": "પર્શિયન"
-    },
-    {
-      "code": "pl",
-      "name": "પોલિશ"
-    },
-    {
-      "code": "pt",
-      "name": "પોર્ટુગીઝ"
-    },
-    {
-      "code": "pa",
-      "name": "પંજાબી"
-    },
-    {
-      "code": "qu",
-      "name": "ક્વેચુઆ"
-    },
-    {
-      "code": "ro",
-      "name": "રોમાનિયન"
-    },
-    {
-      "code": "rm",
-      "name": "રોમાન્શ"
-    },
-    {
-      "code": "rn",
-      "name": "રુન્ડી"
-    },
-    {
-      "code": "ru",
-      "name": "રશિયન"
-    },
-    {
-      "code": "se",
-      "name": "ઉત્તરી સામી"
-    },
-    {
-      "code": "sm",
-      "name": "સમોઆન"
-    },
-    {
-      "code": "sg",
-      "name": "સાંગો"
-    },
-    {
-      "code": "sa",
-      "name": "સંસ્કૃત"
-    },
-    {
-      "code": "sc",
-      "name": "સાર્ડિનિયન"
-    },
-    {
-      "code": "sr",
-      "name": "સર્બિયન"
-    },
-    {
-      "code": "sn",
-      "name": "શોના"
-    },
-    {
-      "code": "ii",
-      "name": "સિચુઆન યી"
-    },
-    {
-      "code": "sd",
-      "name": "સિંધી"
-    },
-    {
-      "code": "si",
-      "name": "સિંહાલી"
-    },
-    {
-      "code": "sk",
-      "name": "સ્લોવાક"
-    },
-    {
-      "code": "sl",
-      "name": "સ્લોવેનિયન"
-    },
-    {
-      "code": "so",
-      "name": "સોમાલી"
-    },
-    {
-      "code": "st",
-      "name": "દક્ષિણી સોથો"
-    },
-    {
-      "code": "es",
-      "name": "સ્પેનિશ"
-    },
-    {
-      "code": "su",
-      "name": "સુન્ડનીઝ"
-    },
-    {
-      "code": "sw",
-      "name": "સ્વાહિલી"
-    },
-    {
-      "code": "ss",
-      "name": "સ્વાતી"
-    },
-    {
-      "code": "sv",
-      "name": "સ્વીડિશ"
-    },
-    {
-      "code": "tl",
-      "name": "ટાગાલોગ"
-    },
-    {
-      "code": "ty",
-      "name": "તાહિતિયન"
-    },
-    {
-      "code": "tg",
-      "name": "તાજિક"
-    },
-    {
-      "code": "ta",
-      "name": "તમિલ"
-    },
-    {
-      "code": "tt",
-      "name": "તતાર"
-    },
-    {
-      "code": "te",
-      "name": "તેલુગુ"
-    },
-    {
-      "code": "th",
-      "name": "થાઈ"
-    },
-    {
-      "code": "bo",
-      "name": "તિબેટીયન"
-    },
-    {
-      "code": "ti",
-      "name": "તિગ્રિન્યા"
-    },
-    {
-      "code": "to",
-      "name": "ટોંગા"
-    },
-    {
-      "code": "ts",
-      "name": "ત્સોંગા"
-    },
-    {
-      "code": "tn",
-      "name": "ત્સ્વાના"
-    },
-    {
-      "code": "tr",
-      "name": "તુર્કી"
-    },
-    {
-      "code": "tk",
-      "name": "તુર્કમેન"
-    },
-    {
-      "code": "tw",
-      "name": "ટ્વી"
-    },
-    {
-      "code": "ug",
-      "name": "ઉઇગુર"
-    },
-    {
-      "code": "uk",
-      "name": "યુક્રેનિયન"
-    },
-    {
-      "code": "ur",
-      "name": "ઉર્દૂ"
-    },
-    {
-      "code": "uz",
-      "name": "ઉઝબેક"
-    },
-    {
-      "code": "ve",
-      "name": "વેન્ડા"
-    },
-    {
-      "code": "vi",
-      "name": "વિયેતનામીસ"
-    },
-    {
-      "code": "vo",
-      "name": "વોલાપુક"
-    },
-    {
-      "code": "wa",
-      "name": "વોલૂન"
-    },
-    {
-      "code": "cy",
-      "name": "વેલ્શ"
-    },
-    {
-      "code": "wo",
-      "name": "વોલોફ"
-    },
-    {
-      "code": "xh",
-      "name": "ખોસા"
-    },
-    {
-      "code": "yi",
-      "name": "યિદ્દિશ"
-    },
-    {
-      "code": "yo",
-      "name": "યોરૂબા"
-    },
-    {
-      "code": "za",
-      "name": "ઝુઆંગ"
-    },
-    {
-      "code": "zu",
-      "name": "ઝુલુ"
-    }
-  ],
-  "countries": [
-    {
-      "code": "AF",
-      "name": "અફઘાનિસ્તાન"
-    },
-    {
-      "code": "AL",
-      "name": "અલ્બેનિયા"
-    },
-    {
-      "code": "DZ",
-      "name": "અલ્જીરિયા"
-    },
-    {
-      "code": "AS",
-      "name": "અમેરિકન સમોઆ"
-    },
-    {
-      "code": "AD",
-      "name": "અંડોરા"
-    },
-    {
-      "code": "AO",
-      "name": "અંગોલા"
-    },
-    {
-      "code": "AI",
-      "name": "એન્ગ્વિલા"
-    },
-    {
-      "code": "AQ",
-      "name": "એન્ટાર્કટિકા"
-    },
-    {
-      "code": "AG",
-      "name": "એન્ટિગુઆ અને બાર્બુડા"
-    },
-    {
-      "code": "AR",
-      "name": "આર્જેન્ટિના"
-    },
-    {
-      "code": "AM",
-      "name": "આર્મેનિયા"
-    },
-    {
-      "code": "AW",
-      "name": "અરુબા"
-    },
-    {
-      "code": "AU",
-      "name": "ઓસ્ટ્રેલિયા"
-    },
-    {
-      "code": "AT",
-      "name": "ઓસ્ટ્રિયા"
-    },
-    {
-      "code": "AZ",
-      "name": "અઝરબૈજાન"
-    },
-    {
-      "code": "BS",
-      "name": "બહામાસ"
-    },
-    {
-      "code": "BH",
-      "name": "બહેરીન"
-    },
-    {
-      "code": "BD",
-      "name": "બાંગ્લાદેશ"
-    },
-    {
-      "code": "BB",
-      "name": "બાર્બાડોસ"
-    },
-    {
-      "code": "BY",
-      "name": "બેલારુસ"
-    },
-    {
-      "code": "BE",
-      "name": "બેલ્જિયમ"
-    },
-    {
-      "code": "BZ",
-      "name": "બેલીઝ"
-    },
-    {
-      "code": "BJ",
-      "name": "બેનિન"
-    },
-    {
-      "code": "BM",
-      "name": "બર્મુડા"
-    },
-    {
-      "code": "BT",
-      "name": "ભૂતાન"
-    },
-    {
-      "code": "BO",
-      "name": "બોલિવિયા"
-    },
-    {
-      "code": "BA",
-      "name": "બોસ્નિયા અને હર્ઝેગોવિના"
-    },
-    {
-      "code": "BW",
-      "name": "બોત્સ્વાના"
-    },
-    {
-      "code": "BR",
-      "name": "બ્રાઝિલ"
-    },
-    {
-      "code": "IO",
-      "name": "બ્રિટિશ હિંદ મહાસાગર પ્રદેશ"
-    },
-    {
-      "code": "VG",
-      "name": "બ્રિટિશ વર્જિન આઇલેન્ડ્સ"
-    },
-    {
-      "code": "BN",
-      "name": "બ્રુનેઈ"
-    },
-    {
-      "code": "BG",
-      "name": "બલ્ગેરિયા"
-    },
-    {
-      "code": "BF",
-      "name": "બુર્કિના ફાસો"
-    },
-    {
-      "code": "BI",
-      "name": "બુરુન્ડી"
-    },
-    {
-      "code": "KH",
-      "name": "કંબોડિયા"
-    },
-    {
-      "code": "CM",
-      "name": "કેમરૂન"
-    },
-    {
-      "code": "CA",
-      "name": "કેનેડા"
-    },
-    {
-      "code": "CV",
-      "name": "કેપ વર્ડે"
-    },
-    {
-      "code": "KY",
-      "name": "કેમેન આઇલેન્ડ્સ"
-    },
-    {
-      "code": "CF",
-      "name": "સેન્ટ્રલ આફ્રિકન રિપબ્લિક"
-    },
-    {
-      "code": "TD",
-      "name": "ચાડ"
-    },
-    {
-      "code": "CL",
-      "name": "ચિલી"
-    },
-    {
-      "code": "CN",
-      "name": "ચીન"
-    },
-    {
-      "code": "CX",
-      "name": "ક્રિસમસ આઇલેન્ડ"
-    },
-    {
-      "code": "CC",
-      "name": "કોકોસ (કીલિંગ) આઇલેન્ડ્સ"
-    },
-    {
-      "code": "CO",
-      "name": "કોલંબિયા"
-    },
-    {
-      "code": "KM",
-      "name": "કોમોરોસ"
-    },
-    {
-      "code": "CG",
-      "name": "કોંગો - બ્રાઝાવિલ"
-    },
-    {
-      "code": "CD",
-      "name": "કોંગો - કિન્શાસા"
-    },
-    {
-      "code": "CK",
-      "name": "કુક આઇલેન્ડ્સ"
-    },
-    {
-      "code": "CR",
-      "name": "કોસ્ટા રિકા"
-    },
-    {
-      "code": "CI",
-      "name": "કોટ ડી'આઇવોર"
-    },
-    {
-      "code": "HR",
-      "name": "ક્રોએશિયા"
-    },
-    {
-      "code": "CU",
-      "name": "ક્યુબા"
-    },
-    {
-      "code": "CY",
-      "name": "સાયપ્રસ"
-    },
-    {
-      "code": "CZ",
-      "name": "ચેકિયા"
-    },
-    {
-      "code": "DK",
-      "name": "ડેનમાર્ક"
-    },
-    {
-      "code": "DJ",
-      "name": "જીબુટી"
-    },
-    {
-      "code": "DM",
-      "name": "ડોમિનિકા"
-    },
-    {
-      "code": "DO",
-      "name": "ડોમિનિકન રિપબ્લિક"
-    },
-    {
-      "code": "EC",
-      "name": "ઇક્વાડોર"
-    },
-    {
-      "code": "EG",
-      "name": "ઇજિપ્ત"
-    },
-    {
-      "code": "SV",
-      "name": "અલ સાલ્વાડોર"
-    },
-    {
-      "code": "GQ",
-      "name": "ઇક્વેટોરિયલ ગિની"
-    },
-    {
-      "code": "ER",
-      "name": "એરિટ્રિયા"
-    },
-    {
-      "code": "EE",
-      "name": "એસ્ટોનિયા"
-    },
-    {
-      "code": "SZ",
-      "name": "એસ્વાતિની"
-    },
-    {
-      "code": "ET",
-      "name": "ઇથોપિયા"
-    },
-    {
-      "code": "FJ",
-      "name": "ફીજી"
-    },
-    {
-      "code": "FI",
-      "name": "ફિનલેન્ડ"
-    },
-    {
-      "code": "FR",
-      "name": "ફ્રાન્સ"
-    },
-    {
-      "code": "GA",
-      "name": "ગેબોન"
-    },
-    {
-      "code": "GM",
-      "name": "ગેમ્બિયા"
-    },
-    {
-      "code": "GE",
-      "name": "જ્યોર્જિયા"
-    },
-    {
-      "code": "DE",
-      "name": "જર્મની"
-    },
-    {
-      "code": "GH",
-      "name": "ઘાના"
-    },
-    {
-      "code": "GR",
-      "name": "ગ્રીસ"
-    },
-    {
-      "code": "GT",
-      "name": "ગ્વાટેમાલા"
-    },
-    {
-      "code": "GN",
-      "name": "ગિની"
-    },
-    {
-      "code": "GY",
-      "name": "ગયાના"
-    },
-    {
-      "code": "HT",
-      "name": "હૈતી"
-    },
-    {
-      "code": "HN",
-      "name": "હોન્ડુરાસ"
-    },
-    {
-      "code": "HK",
-      "name": "હોંગકોંગ"
-    },
-    {
-      "code": "HU",
-      "name": "હંગેરી"
-    },
-    {
-      "code": "IS",
-      "name": "આઇસલેન્ડ"
-    },
-    {
-      "code": "IN",
-      "name": "ભારત"
-    },
-    {
-      "code": "ID",
-      "name": "ઇન્ડોનેશિયા"
-    },
-    {
-      "code": "IR",
-      "name": "ઈરાન"
-    },
-    {
-      "code": "IQ",
-      "name": "ઇરાક"
-    },
-    {
-      "code": "IE",
-      "name": "આયર્લેન્ડ"
-    },
-    {
-      "code": "IL",
-      "name": "ઇઝરાયેલ"
-    },
-    {
-      "code": "IT",
-      "name": "ઇટાલી"
-    },
-    {
-      "code": "JM",
-      "name": "જમૈકા"
-    },
-    {
-      "code": "JP",
-      "name": "જાપાન"
-    },
-    {
-      "code": "JO",
-      "name": "જોર્ડન"
-    },
-    {
-      "code": "KZ",
-      "name": "કઝાકિસ્તાન"
-    },
-    {
-      "code": "KE",
-      "name": "કેન્યા"
-    },
-    {
-      "code": "KR",
-      "name": "દક્ષિણ કોરિયા"
-    },
-    {
-      "code": "KW",
-      "name": "કુવૈત"
-    },
-    {
-      "code": "KG",
-      "name": "કિર્ગિસ્તાન"
-    },
-    {
-      "code": "LA",
-      "name": "લાઓસ"
-    },
-    {
-      "code": "LV",
-      "name": "લાતવિયા"
-    },
-    {
-      "code": "LB",
-      "name": "લેબનોન"
-    },
-    {
-      "code": "LS",
-      "name": "લેસોથો"
-    },
-    {
-      "code": "LR",
-      "name": "લાઇબેરિયા"
-    },
-    {
-      "code": "LY",
-      "name": "લિબિયા"
-    },
-    {
-      "code": "LI",
-      "name": "લિચટેન્સ્ટેઇન"
-    },
-    {
-      "code": "LT",
-      "name": "લિથુઆનિયા"
-    },
-    {
-      "code": "LU",
-      "name": "લક્ઝમબર્ગ"
-    },
-    {
-      "code": "MG",
-      "name": "મેડાગાસ્કર"
-    },
-    {
-      "code": "MW",
-      "name": "માલાવી"
-    },
-    {
-      "code": "MY",
-      "name": "મલેશિયા"
-    },
-    {
-      "code": "MV",
-      "name": "માલદીવ"
-    },
-    {
-      "code": "ML",
-      "name": "માલી"
-    },
-    {
-      "code": "MT",
-      "name": "માલ્ટા"
-    },
-    {
-      "code": "MX",
-      "name": "મેક્સિકો"
-    },
-    {
-      "code": "MD",
-      "name": "મોલ્ડોવા"
-    },
-    {
-      "code": "MC",
-      "name": "મોનાકો"
-    },
-    {
-      "code": "MN",
-      "name": "મંગોલિયા"
-    },
-    {
-      "code": "ME",
-      "name": "મોન્ટેનેગ્રો"
-    },
-    {
-      "code": "MA",
-      "name": "મોરોક્કો"
-    },
-    {
-      "code": "MZ",
-      "name": "મોઝામ્બિક"
-    },
-    {
-      "code": "MM",
-      "name": "મ્યાનમાર"
-    },
-    {
-      "code": "NA",
-      "name": "નામીબિયા"
-    },
-    {
-      "code": "NP",
-      "name": "નેપાળ"
-    },
-    {
-      "code": "NL",
-      "name": "નેધરલેન્ડ"
-    },
-    {
-      "code": "NZ",
-      "name": "ન્યુઝીલેન્ડ"
-    },
-    {
-      "code": "NI",
-      "name": "નિકારાગુઆ"
-    },
-    {
-      "code": "NE",
-      "name": "નાઈજર"
-    },
-    {
-      "code": "NG",
-      "name": "નાઈજીરીયા"
-    },
-    {
-      "code": "MK",
-      "name": "નોર્થ મેસેડોનિયા"
-    },
-    {
-      "code": "NO",
-      "name": "નોર્વે"
-    },
-    {
-      "code": "OM",
-      "name": "ઓમાન"
-    },
-    {
-      "code": "PK",
-      "name": "પાકિસ્તાન"
-    },
-    {
-      "code": "PA",
-      "name": "પનામા"
-    },
-    {
-      "code": "PG",
-      "name": "પાપુઆ ન્યુ ગિની"
-    },
-    {
-      "code": "PY",
-      "name": "પારાગ્વે"
-    },
-    {
-      "code": "PE",
-      "name": "પેરુ"
-    },
-    {
-      "code": "PH",
-      "name": "ફિલિપાઇન્સ"
-    },
-    {
-      "code": "PL",
-      "name": "પોલેન્ડ"
-    },
-    {
-      "code": "PT",
-      "name": "પોર્ટુગલ"
-    },
-    {
-      "code": "QA",
-      "name": "કતાર"
-    },
-    {
-      "code": "RO",
-      "name": "રોમાનિયા"
-    },
-    {
-      "code": "RU",
-      "name": "રશિયા"
-    },
-    {
-      "code": "RW",
-      "name": "રવાન્ડા"
-    },
-    {
-      "code": "SA",
-      "name": "સાઉદી અરેબિયા"
-    },
-    {
-      "code": "SN",
-      "name": "સેનેગલ"
-    },
-    {
-      "code": "RS",
-      "name": "સર્બિયા"
-    },
-    {
-      "code": "SG",
-      "name": "સિંગાપોર"
-    },
-    {
-      "code": "SK",
-      "name": "સ્લોવાકિયા"
-    },
-    {
-      "code": "SI",
-      "name": "સ્લોવેનિયા"
-    },
-    {
-      "code": "ZA",
-      "name": "દક્ષિણ આફ્રિકા"
-    },
-    {
-      "code": "ES",
-      "name": "સ્પેન"
-    },
-    {
-      "code": "LK",
-      "name": "શ્રીલંકા"
-    },
-    {
-      "code": "SE",
-      "name": "સ્વીડન"
-    },
-    {
-      "code": "CH",
-      "name": "સ્વિત્ઝરલેન્ડ"
-    },
-    {
-      "code": "TW",
-      "name": "તાઇવાન"
-    },
-    {
-      "code": "TH",
-      "name": "થાઈલેન્ડ"
-    },
-    {
-      "code": "TR",
-      "name": "તુર્કી"
-    },
-    {
-      "code": "UG",
-      "name": "યુગાન્ડા"
-    },
-    {
-      "code": "UA",
-      "name": "યુક્રેન"
-    },
-    {
-      "code": "AE",
-      "name": "યુનાઇટેડ આરબ અમીરાત"
-    },
-    {
-      "code": "GB",
-      "name": "યુનાઇટેડ કિંગડમ"
-    },
-    {
-      "code": "US",
-      "name": "યુનાઇટેડ સ્ટેટ્સ"
-    },
-    {
-      "code": "UY",
-      "name": "ઉરુગ્વે"
-    },
-    {
-      "code": "UZ",
-      "name": "ઉઝબેકિસ્તાન"
-    },
-    {
-      "code": "VE",
-      "name": "વેનેઝુએલા"
-    },
-    {
-      "code": "VN",
-      "name": "વિયેતનામ"
-    },
-    {
-      "code": "YE",
-      "name": "યમન"
-    },
-    {
-      "code": "ZM",
-      "name": "ઝામ્બિયા"
-    },
-    {
-      "code": "ZW",
-      "name": "ઝિમ્બાબ્વે"
-    }
-  ]
+  }
 };

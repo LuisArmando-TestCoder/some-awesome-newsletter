@@ -89,6 +89,26 @@ export default {
       "startCtaGeneric": "Start free",
       "liveRegion": "Sample preview updated for {site}."
     },
+    "live": {
+      "badge": "Written just now",
+      "loadingTitle": "Writing a sample issue from {site}",
+      "steps": [
+        "Reading {site}",
+        "Finding your newest article",
+        "Writing it in {language}",
+        "Putting it in your email template"
+      ],
+      "takes": "This usually takes 20 to 40 seconds. You can keep scrolling.",
+      "readyNote": "AIBAN writes this sample from the newest article on {site}. Nothing is saved or sent. When you start, it uses your own voice and schedule.",
+      "readyAnnounce": "Your sample issue from {site} is ready.",
+      "languageLabel": "Reader language",
+      "loadingLanguage": "Writing it in {language}",
+      "errorTitle": "We could not write a preview from {site}",
+      "retry": "Try again",
+      "showSample": "Show the sample layout",
+      "frameTitle": "Sample issue written from {site}",
+      "openFull": "Open in a new tab"
+    },
     "chain": {
       "eyebrow": "How it works",
       "title": "One input, then it runs by itself",

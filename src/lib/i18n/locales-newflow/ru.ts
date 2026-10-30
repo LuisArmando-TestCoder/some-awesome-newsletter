@@ -1,5 +1,5 @@
-// ru strings for locales-newflow. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale ru
+// ru (Russian) strings for locales-newflow. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "onboarding": {
     "progress": "Шаг {current} из {total}",
@@ -116,6 +116,9 @@ export default {
       "dayLabel": "День",
       "timeLabel": "Время",
       "timeHint": "По вашему местному времени.",
+      "summaryDaily": "Каждый день в {time}, ваше время ({zone}).",
+      "summaryWeekly": "Каждый {day} в {time}, ваше время ({zone}).",
+      "summaryMonthly": "Первого числа каждого месяца в {time}, ваше время ({zone}).",
       "recipeTitle": "Отправлять новые выпуски автоматически",
       "recipeBody": "По расписанию выше мы выбираем вашу лучшую новую статью, пишем выпуск вашим голосом, переводим его для каждого читателя и отправляем по email.",
       "recipeOn": "Включено",

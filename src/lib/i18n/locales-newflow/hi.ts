@@ -1,5 +1,5 @@
-// hi strings for locales-newflow. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale hi
+// hi (Hindi) strings for locales-newflow. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "onboarding": {
     "progress": "चरण {current} / {total}",
@@ -116,6 +116,9 @@ export default {
       "dayLabel": "दिन",
       "timeLabel": "समय",
       "timeHint": "आपके स्थानीय समय में।",
+      "summaryDaily": "हर दिन {time} बजे, आपके समयानुसार ({zone})।",
+      "summaryWeekly": "हर {day} को {time} बजे, आपके समयानुसार ({zone})।",
+      "summaryMonthly": "हर महीने की 1 तारीख को {time} बजे, आपके समयानुसार ({zone})।",
       "recipeTitle": "नए अंक अपने आप भेजें",
       "recipeBody": "ऊपर दिए शेड्यूल पर हम आपका सबसे अच्छा नया लेख चुनते हैं, उसे आपकी शैली में लिखते हैं, हर पाठक के लिए अनुवाद करते हैं और ईमेल करते हैं।",
       "recipeOn": "चालू",

@@ -1,5 +1,5 @@
-// jv strings for locales-newflow. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale jv
+// jv (Javanese) strings for locales-newflow. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "onboarding": {
     "progress": "Langkah {current} saka {total}",
@@ -116,6 +116,9 @@ export default {
       "dayLabel": "Dina",
       "timeLabel": "Jam",
       "timeHint": "Miturut wektu lokal sampeyan.",
+      "summaryDaily": "Saben dina jam {time}, wektu sampeyan ({zone}).",
+      "summaryWeekly": "Saben {day} jam {time}, wektu sampeyan ({zone}).",
+      "summaryMonthly": "Tanggal 1 saben sasi jam {time}, wektu sampeyan ({zone}).",
       "recipeTitle": "Kirim edisi anyar kanthi otomatis",
       "recipeBody": "Miturut jadwal ing ndhuwur, kita milih artikel anyar sing paling apik, nulis nganggo gaya sampeyan, nerjemahake kanggo saben pamaca, lan ngirim liwat email.",
       "recipeOn": "Urip",

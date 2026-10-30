@@ -26,6 +26,8 @@
       class="multi-slot-component--component-slot"
       class:active={!!callback($storeValue)}
       class:inactive={!callback($storeValue)}
+      inert={!callback($storeValue) || undefined}
+      aria-hidden={!callback($storeValue) || undefined}
     >
       <div>
         <!-- Always render the component, but toggle classes -->

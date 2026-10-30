@@ -1,5 +1,5 @@
-// es strings for locales. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale es
+// es (Spanish (neutral, for Latin America and Spain)) strings for locales. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "auth": {
     "logo": "/icons/logo.png",
@@ -35,6 +35,82 @@ export default {
       "ogImageAlt": "Logo de AIBAN"
     },
     "skipLink": "Saltar al contenido principal",
+    "display": {
+      "title": "Tu sitio web, escrito como un boletín.",
+      "kicker": "AIBAN"
+    },
+    "statement": {
+      "lines": [
+        "Ya publicas buen contenido.",
+        "Tus clientes lo leen en más de un idioma.",
+        "AIBAN convierte cada artículo nuevo en una edición",
+        "y envía a cada lector la versión en su idioma."
+      ]
+    },
+    "history": {
+      "eyebrow": "Cómo funciona",
+      "title": "La vida de una edición.",
+      "lead": "Sigue una sola edición desde que tu programación la inicia hasta que comienza de nuevo. Configuras esto una vez.",
+      "note": "Programación de ejemplo. Tú eliges el día, la hora y la frecuencia.",
+      "progressLabel": "Pasos de una edición",
+      "items": [
+        {
+          "mark": "9:00",
+          "title": "Tu programación inicia el proceso",
+          "body": "Cada lunes a las 9:00 en este ejemplo. Tú eliges diario, semanal o mensual."
+        },
+        {
+          "mark": "Lee",
+          "title": "AIBAN lee tu sitio web",
+          "body": "Encuentra tu artículo más reciente y selecciona la parte que más le importará a tu lector ideal."
+        },
+        {
+          "mark": "Escribe",
+          "title": "Escribe la edición con tu voz",
+          "body": "El texto sigue cómo está escrito tu sitio, así que suena como tú."
+        },
+        {
+          "mark": "Traduce",
+          "title": "Cada lector recibe su idioma",
+          "body": "Una edición se convierte en tantas versiones como necesiten tus suscriptores."
+        },
+        {
+          "mark": "Envía",
+          "title": "Llega bajo tu nombre",
+          "body": "Con tu nombre y tu firma de correo. Las respuestas van a tu bandeja de entrada."
+        },
+        {
+          "mark": "Publica",
+          "title": "Se convierte en un artículo en tu blog",
+          "body": "Con su propio enlace que la gente puede encontrar en búsquedas y compartir."
+        },
+        {
+          "mark": "Informa",
+          "title": "Ves lo que sucedió",
+          "body": "Tu panel enumera quién se unió y qué enlaces hicieron clic los lectores."
+        },
+        {
+          "mark": "De nuevo",
+          "title": "El próximo lunes, se ejecuta de nuevo",
+          "body": "Sigue funcionando hasta que lo desactives en tu panel."
+        }
+      ]
+    },
+    "rail": {
+      "label": "Capítulos de la página",
+      "chapters": [
+        "Inicio",
+        "Por qué",
+        "Idiomas",
+        "Cómo funciona",
+        "Tu nombre",
+        "Crecer",
+        "Para quién es",
+        "Precios",
+        "Preguntas",
+        "Comenzar"
+      ]
+    },
     "hero": {
       "eyebrow": "Newsletters para empresas de servicios",
       "title": "Tu sitio web se convierte en un newsletter semanal, en el idioma de cada lector",
@@ -57,6 +133,26 @@ export default {
       "startCta": "Empieza gratis con {site}",
       "startCtaGeneric": "Empieza gratis",
       "liveRegion": "Vista previa de muestra actualizada para {site}."
+    },
+    "live": {
+      "badge": "Escrito hace un momento",
+      "loadingTitle": "Escribiendo un número de muestra de {site}",
+      "steps": [
+        "Leyendo {site}",
+        "Buscando tu artículo más reciente",
+        "Escribiéndolo en {language}",
+        "Colocándolo en tu plantilla de correo"
+      ],
+      "takes": "Esto suele tardar entre 20 y 40 segundos. Puedes seguir desplazándote.",
+      "readyNote": "AIBAN escribe esta muestra a partir del artículo más reciente de {site}. No se guarda ni envía nada. Cuando comiences, usará tu propia voz y horario.",
+      "readyAnnounce": "Tu número de muestra de {site} está listo.",
+      "languageLabel": "Idioma del lector",
+      "loadingLanguage": "Escribiéndolo en {language}",
+      "errorTitle": "No pudimos escribir una vista previa de {site}",
+      "retry": "Intentar de nuevo",
+      "showSample": "Mostrar el diseño de muestra",
+      "frameTitle": "Número de muestra escrito de {site}",
+      "openFull": "Abrir en una pestaña nueva"
     },
     "chain": {
       "eyebrow": "Cómo funciona",
@@ -494,8 +590,8 @@ export default {
     "yearlySave": "Ahorra 35%",
     "intervalLabel": "Periodo de facturación",
     "billedYearly": "facturado anualmente",
-    "perMonthShort": "/mo",
-    "perYearShort": "/yr",
+    "perMonthShort": "/mes",
+    "perYearShort": "/año",
     "freeCta": "Empieza gratis",
     "processing": "Abriendo el pago...",
     "askMore": "Todas las cuentas empiezan en el plan Gratis. Si necesitas más, escríbenos a {email} y cambiaremos tu plan.",
@@ -587,6 +683,7 @@ export default {
       "suggestions": "Sugerencias",
       "recent": "Búsquedas recientes",
       "clearRecent": "Borrar búsquedas recientes",
+      "clear": "Borrar búsqueda",
       "title": "Resultados de búsqueda",
       "resultsFor": "Resultados para \"{q}\"",
       "count": "{count} artículos encontrados",
@@ -691,6 +788,7 @@ export default {
   "legal": {
     "navLabel": "Documentos legales",
     "lastUpdated": "Última actualización: {date}",
+    "onThisPage": "En esta página",
     "privacy": {
       "title": "Política de privacidad",
       "metaTitle": "Política de privacidad | AIBAN",
@@ -919,6 +1017,8 @@ export default {
     "codeSent": "Te enviamos un código a tu correo.",
     "invalidCode": "Ese código no es correcto. Revisa el último correo que te enviamos o pide que te reenviemos el código.",
     "regenerateCode": "Reenviar código",
+    "codeAccepted": "Código aceptado. Abriendo tu panel de control.",
+    "codeLabel": "Código de 6 dígitos",
     "back": "Volver",
     "byProceeding": "Al proceder, aceptas los",
     "termsOfService": "Términos del servicio",
@@ -935,7 +1035,7 @@ export default {
     "title": "Convierte suscriptores en visitantes",
     "recommendation": "Ayuda a nuestra IA a entender tu marca conectando tu sitio web.",
     "question": "¿Tienes un sitio web? (opcional, puedes agregarlo después)",
-    "placeholder": "https://tu-sitio.com"
+    "placeholder": "https://your-site.com"
   },
   "newsSource": {
     "title": "Conecta tu fuente de contenido",
@@ -947,6 +1047,673 @@ export default {
       "title": "Te damos la bienvenida al newsletter.",
       "invitedBy": "Has sido invitado por {configuratorId}."
     }
+  },
+  "showcase": {
+    "sampleBadge": "Datos de ejemplo",
+    "exampleLabel": "Empresa de ejemplo",
+    "caption": "{business} es un ejemplo de {kind}. Los nombres, artículos y números en esta vista son marcadores de posición que muestran cómo se ve tu panel de control después de algunas semanas.",
+    "pause": "Pausar la animación",
+    "play": "Reproducir la animación",
+    "scenesLabel": "Partes del panel de control",
+    "examplesLabel": "Empresas de ejemplo",
+    "appUrl": "app.aiban.news",
+    "nav": {
+      "home": "Inicio",
+      "automations": "Automatizaciones",
+      "sources": "Fuentes",
+      "subscribers": "Suscriptores",
+      "reports": "Informes",
+      "blog": "Blog"
+    },
+    "scenes": {
+      "home": "Resumen",
+      "issue": "El número",
+      "reports": "Clics",
+      "subscribers": "Suscriptores",
+      "automation": "Programación",
+      "source": "Tu sitio web",
+      "voice": "Tu voz",
+      "signup": "Formulario de registro",
+      "blog": "Blog",
+      "import": "Importar"
+    },
+    "ui": {
+      "hello": "Hola, {business}",
+      "narrative": "{subscribers} lectores en {languages} idiomas. El próximo número se enviará {schedule}.",
+      "kpiSubscribers": "Suscriptores",
+      "kpiLanguages": "Idiomas",
+      "kpiClicks": "Clics, últimos 7 días",
+      "kpiAutomations": "Automatizaciones activas",
+      "kpiNew": "{count} nuevos esta semana",
+      "nextIssue": "Próximo número",
+      "ready": "Listo",
+      "activity": "Actividad reciente",
+      "from": "De",
+      "subject": "Asunto",
+      "readMore": "Leer el artículo completo",
+      "readerLanguage": "Idioma del lector",
+      "clicksTitle": "Clics, últimos 7 días",
+      "mostClicked": "Más clics",
+      "clicks": "clics",
+      "days": [
+        "Lun",
+        "Mar",
+        "Mié",
+        "Jue",
+        "Vie",
+        "Sáb",
+        "Dom"
+      ],
+      "subscribersTitle": "Suscriptores",
+      "language": "Idioma",
+      "joinedVia": "Se unió mediante",
+      "newSubscriber": "Nuevo suscriptor",
+      "automationTitle": "Edición semanal",
+      "automationSentence": "{schedule}, escribe una edición con el artículo más reciente y envíala a cada lector en su idioma.",
+      "on": "Activado",
+      "off": "Desactivado",
+      "automationOn": "Automatización activada",
+      "sourceLabel": "De dónde viene tu contenido",
+      "sourceButton": "Lee mi sitio",
+      "reading": "Leyendo tu sitio",
+      "found": "Se encontraron {count} artículos",
+      "voiceReader": "Tu lector ideal",
+      "voiceTone": "Cómo debería sonar",
+      "signupHeading": "Recibe nuestras notas semanales",
+      "signupEmail": "Dirección de correo electrónico",
+      "signupLanguage": "Idioma",
+      "signupButton": "Suscribirse",
+      "signupDone": "Revisa tu bandeja de entrada para confirmar.",
+      "blogTitle": "Artículos de {business}",
+      "importFile": "clientes.csv",
+      "importing": "Importando contactos",
+      "imported": "{count} contactos añadidos",
+      "sources": {
+        "form": "Formulario de suscripción",
+        "import": "Importar",
+        "manual": "Añadidos manualmente"
+      }
+    },
+    "examples": [
+      {
+        "business": "Northfield Studio",
+        "kind": "agencia de diseño web",
+        "site": "northfield.studio",
+        "schedule": "todos los lunes a las 9:00",
+        "subscribers": 312,
+        "newThisWeek": 9,
+        "clicks7": 84,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 58
+          },
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 31
+          },
+          {
+            "code": "pt",
+            "name": "Portuguese",
+            "share": 11
+          }
+        ],
+        "reader": "Dueños de clínicas, tiendas y estudios que quieren un sitio web que atraiga clientes, no una pieza de portafolio.",
+        "tones": [
+          "Cálido",
+          "Sencillo",
+          "Práctico"
+        ],
+        "articles": [
+          "Cómo reconstruimos el sitio web de una clínica dental en seis semanas",
+          "Cinco cosas que arreglar antes de rediseñar",
+          "Por qué tu botón de reserva debería ser naranja"
+        ],
+        "issue": {
+          "title": "Cómo reconstruimos el sitio web de una clínica dental en seis semanas",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "A clinic website rebuilt in six weeks",
+              "summary": "We moved booking to the top of every page and cut the forms from nine fields to three. Here is what changed for the clinic."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "El sitio de una clínica, renovado en seis semanas",
+              "summary": "Pusimos la reserva arriba en cada página y redujimos los formularios de nueve campos a tres. Esto es lo que cambió para la clínica."
+            },
+            {
+              "code": "pt",
+              "name": "Português",
+              "subject": "O site de uma clínica, refeito em seis semanas",
+              "summary": "Colocamos o agendamento no topo de cada página e reduzimos os formulários de nove campos para três. Veja o que mudou para a clínica."
+            }
+          ]
+        },
+        "clicksByDay": [
+          21,
+          17,
+          12,
+          9,
+          11,
+          6,
+          8
+        ],
+        "topLinks": [
+          {
+            "title": "Caso de estudio de clínica",
+            "clicks": 38
+          },
+          {
+            "title": "Cinco cosas que arreglar antes de rediseñar",
+            "clicks": 27
+          },
+          {
+            "title": "Reserva una llamada",
+            "clicks": 19
+          }
+        ],
+        "people": [
+          {
+            "email": "lucia.r@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "mark@example.org",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "joana.s@example.net",
+            "lang": "PT",
+            "via": "form"
+          },
+          {
+            "email": "dr.chen@example.com",
+            "lang": "EN",
+            "via": "manual"
+          }
+        ],
+        "activity": [
+          "Número enviado a 312 lectores en 3 idiomas",
+          "38 clics en el estudio de caso de la clínica",
+          "Lucia se unió desde el formulario de registro y lee en español"
+        ],
+        "importCount": 148
+      },
+      {
+        "business": "Brightline Software",
+        "kind": "empresa de software",
+        "site": "brightline.dev",
+        "schedule": "el día 1 de cada mes a las 10:00",
+        "subscribers": 1240,
+        "newThisWeek": 23,
+        "clicks7": 211,
+        "automationsOn": 1,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 64
+          },
+          {
+            "code": "de",
+            "name": "German",
+            "share": 22
+          },
+          {
+            "code": "fr",
+            "name": "French",
+            "share": 14
+          }
+        ],
+        "reader": "Gerentes de oficina y responsables de TI en clientes que usan nuestro software de reservas todos los días.",
+        "tones": [
+          "Claro",
+          "Breve",
+          "Amigable"
+        ],
+        "articles": [
+          "Lanzamiento 4.2: citas recurrentes",
+          "Informes más rápidos para equipos grandes",
+          "Cómo trasladar tu calendario desde una hoja de cálculo"
+        ],
+        "issue": {
+          "title": "Lanzamiento 4.2: citas recurrentes",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "New this month: recurring appointments",
+              "summary": "You can now repeat any appointment weekly or monthly. Reports for teams over 50 people also load faster."
+            },
+            {
+              "code": "de",
+              "name": "Deutsch",
+              "subject": "Neu diesen Monat: wiederkehrende Termine",
+              "summary": "Sie können jetzt jeden Termin wöchentlich oder monatlich wiederholen. Berichte für Teams ab 50 Personen laden außerdem schneller."
+            },
+            {
+              "code": "fr",
+              "name": "Français",
+              "subject": "Nouveau ce mois-ci : les rendez-vous récurrents",
+              "summary": "Vous pouvez désormais répéter un rendez-vous chaque semaine ou chaque mois. Les rapports des équipes de plus de 50 personnes s'affichent aussi plus vite."
+            }
+          ]
+        },
+        "clicksByDay": [
+          64,
+          48,
+          33,
+          25,
+          19,
+          9,
+          13
+        ],
+        "topLinks": [
+          {
+            "title": "Guía de citas recurrentes",
+            "clicks": 96
+          },
+          {
+            "title": "Notas de la versión 4.2",
+            "clicks": 71
+          },
+          {
+            "title": "Trasladar desde una hoja de cálculo",
+            "clicks": 44
+          }
+        ],
+        "people": [
+          {
+            "email": "it@example.de",
+            "lang": "DE",
+            "via": "import"
+          },
+          {
+            "email": "sophie.m@example.fr",
+            "lang": "FR",
+            "via": "form"
+          },
+          {
+            "email": "ops@example.com",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "k.weber@example.de",
+            "lang": "DE",
+            "via": "form"
+          }
+        ],
+        "activity": [
+          "Número enviado a 1240 lectores en 3 idiomas",
+          "96 clics en la guía de citas recurrentes",
+          "23 contactos importados desde clients.csv"
+        ],
+        "importCount": 412
+      },
+      {
+        "business": "Casa Verde Realty",
+        "kind": "agencia inmobiliaria",
+        "site": "casaverde.homes",
+        "schedule": "todos los jueves a las 8:00",
+        "subscribers": 586,
+        "newThisWeek": 14,
+        "clicks7": 163,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 47
+          },
+          {
+            "code": "en",
+            "name": "English",
+            "share": 41
+          },
+          {
+            "code": "fr",
+            "name": "French",
+            "share": 12
+          }
+        ],
+        "reader": "Familias y jubilados del extranjero que buscan una casa cerca de la costa, y propietarios que pueden vender.",
+        "tones": [
+          "Cálido",
+          "Local",
+          "Tranquilo"
+        ],
+        "articles": [
+          "Tres casas nuevas cerca de la playa esta semana",
+          "Cómo son los costes de cierre para compradores extranjeros",
+          "Precios en el casco antiguo, actualización de otoño"
+        ],
+        "issue": {
+          "title": "Tres casas nuevas cerca de la playa esta semana",
+          "langs": [
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tres casas nuevas cerca de la playa",
+              "summary": "Una casa de dos habitaciones con jardín, un apartamento con vista al mar y una casa para reformar a diez minutos del centro."
+            },
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Three new homes near the beach",
+              "summary": "A two bedroom house with a garden, a flat with a sea view and a house to renovate ten minutes from the center."
+            },
+            {
+              "code": "fr",
+              "name": "Français",
+              "subject": "Trois nouvelles maisons près de la plage",
+              "summary": "Une maison de deux chambres avec jardin, un appartement avec vue sur la mer et une maison à rénover à dix minutes du centre."
+            }
+          ]
+        },
+        "clicksByDay": [
+          12,
+          9,
+          15,
+          52,
+          38,
+          21,
+          16
+        ],
+        "topLinks": [
+          {
+            "title": "Piso con vistas al mar",
+            "clicks": 71
+          },
+          {
+            "title": "Casa de dos dormitorios con jardín",
+            "clicks": 54
+          },
+          {
+            "title": "Costes de cierre para compradores extranjeros",
+            "clicks": 38
+          }
+        ],
+        "people": [
+          {
+            "email": "familia.ortiz@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "j.dupont@example.fr",
+            "lang": "FR",
+            "via": "form"
+          },
+          {
+            "email": "tom.and.ann@example.org",
+            "lang": "EN",
+            "via": "manual"
+          },
+          {
+            "email": "rmora@example.net",
+            "lang": "ES",
+            "via": "import"
+          }
+        ],
+        "activity": [
+          "Número enviado a 586 lectores en 3 idiomas",
+          "71 clics en el apartamento con vista al mar",
+          "Un lector en Francia se unió desde el formulario de registro"
+        ],
+        "importCount": 203
+      },
+      {
+        "business": "Mora and Partners",
+        "kind": "firma de contabilidad",
+        "site": "morapartners.co",
+        "schedule": "cada dos martes a las 7:30",
+        "subscribers": 428,
+        "newThisWeek": 6,
+        "clicks7": 97,
+        "automationsOn": 1,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 52
+          },
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 38
+          },
+          {
+            "code": "it",
+            "name": "Italian",
+            "share": 10
+          }
+        ],
+        "reader": "Dueños de pequeñas empresas que quieren saber qué cambia en impuestos y nómina, sin la jerga.",
+        "tones": [
+          "Calmado",
+          "Preciso",
+          "Sencillo"
+        ],
+        "articles": [
+          "La fecha límite de impuestos trimestrales se mueve al 15",
+          "Qué conservar cuando contratas a tu primer empleado",
+          "Recibos: ¿papel o foto?"
+        ],
+        "issue": {
+          "title": "La fecha límite de impuestos trimestrales se mueve al 15",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Your quarterly deadline moves to the 15th",
+              "summary": "The filing date for the next quarter moves five days later. Here is what to send us and when, so nothing is late."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tu plazo trimestral pasa al día 15",
+              "summary": "La fecha de presentación del próximo trimestre se mueve cinco días. Esto es lo que debes enviarnos y cuándo, para que nada llegue tarde."
+            },
+            {
+              "code": "it",
+              "name": "Italiano",
+              "subject": "La scadenza trimestrale passa al 15",
+              "summary": "La data di presentazione del prossimo trimestre slitta di cinque giorni. Ecco cosa inviarci e quando, perché nulla arrivi in ritardo."
+            }
+          ]
+        },
+        "clicksByDay": [
+          33,
+          24,
+          14,
+          8,
+          7,
+          4,
+          7
+        ],
+        "topLinks": [
+          {
+            "title": "Lista de verificación para el 15",
+            "clicks": 46
+          },
+          {
+            "title": "Contratar a tu primer empleado",
+            "clicks": 29
+          },
+          {
+            "title": "Reserva una llamada de revisión",
+            "clicks": 22
+          }
+        ],
+        "people": [
+          {
+            "email": "bakery.owner@example.com",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "c.rossi@example.it",
+            "lang": "IT",
+            "via": "form"
+          },
+          {
+            "email": "taller.luna@example.net",
+            "lang": "ES",
+            "via": "import"
+          },
+          {
+            "email": "finance@example.org",
+            "lang": "EN",
+            "via": "manual"
+          }
+        ],
+        "activity": [
+          "Número enviado a 428 lectores en 3 idiomas",
+          "46 clics en la lista de verificación para el 15",
+          "6 nuevos lectores esta semana"
+        ],
+        "importCount": 97
+      },
+      {
+        "business": "Run Better Coaching",
+        "kind": "entrenador de running",
+        "site": "runbetter.coach",
+        "schedule": "cada domingo a las 18:00",
+        "subscribers": 907,
+        "newThisWeek": 31,
+        "clicks7": 248,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 49
+          },
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 33
+          },
+          {
+            "code": "de",
+            "name": "German",
+            "share": 18
+          }
+        ],
+        "reader": "Adultos que entrenan para su primera media maratón y corren tres veces por semana antes del trabajo.",
+        "tones": [
+          "Alentador",
+          "Directo",
+          "Breve"
+        ],
+        "articles": [
+          "Esta semana: la carrera larga, más lenta de lo que crees",
+          "Zapatillas después de 500 kilómetros",
+          "Una rutina de fuerza de 20 minutos"
+        ],
+        "issue": {
+          "title": "Esta semana: la carrera larga, más lenta de lo que crees",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Your long run should feel too easy",
+              "summary": "Keep it slow enough to talk. This week's plan adds ten minutes and one short hill session."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tu tirada larga debería sentirse demasiado fácil",
+              "summary": "Mantén un ritmo que te deje hablar. El plan de esta semana suma diez minutos y una sesión corta de cuestas."
+            },
+            {
+              "code": "de",
+              "name": "Deutsch",
+              "subject": "Dein langer Lauf sollte sich zu leicht anfühlen",
+              "summary": "Lauf so langsam, dass du noch reden kannst. Der Plan dieser Woche bringt zehn Minuten mehr und eine kurze Bergeinheit."
+            }
+          ]
+        },
+        "clicksByDay": [
+          18,
+          22,
+          26,
+          31,
+          35,
+          49,
+          67
+        ],
+        "topLinks": [
+          {
+            "title": "Plan de entrenamiento de esta semana",
+            "clicks": 121
+          },
+          {
+            "title": "Rutina de fuerza de 20 minutos",
+            "clicks": 78
+          },
+          {
+            "title": "Zapatillas después de 500 kilómetros",
+            "clicks": 49
+          }
+        ],
+        "people": [
+          {
+            "email": "ana.runs@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "felix.k@example.de",
+            "lang": "DE",
+            "via": "form"
+          },
+          {
+            "email": "sam@example.org",
+            "lang": "EN",
+            "via": "form"
+          },
+          {
+            "email": "club.secretary@example.net",
+            "lang": "EN",
+            "via": "import"
+          }
+        ],
+        "activity": [
+          "Número enviado a 907 lectores en 3 idiomas",
+          "121 clics en el plan de entrenamiento de esta semana",
+          "31 nuevos lectores esta semana, la mayoría del formulario de registro"
+        ],
+        "importCount": 260
+      }
+    ]
+  },
+  "errorPage": {
+    "notFoundEyebrow": "Error 404",
+    "notFoundTitle": "No pudimos encontrar esta página",
+    "notFoundBody": "Es posible que el enlace sea antiguo o tenga un error tipográfico. Estas páginas son un buen lugar para continuar.",
+    "serverEyebrow": "Error {status}",
+    "serverTitle": "Algo salió mal de nuestro lado",
+    "serverBody": "No pudimos cargar esta página. Intenta de nuevo en un minuto. Si sigue sucediendo, escribe a info@aiban.news.",
+    "retry": "Intentar de nuevo",
+    "home": "Ir a la página de inicio",
+    "popularTitle": "Páginas populares",
+    "links": {
+      "howItWorks": "Cómo funciona AIBAN",
+      "pricing": "Precios",
+      "help": "Centro de ayuda",
+      "login": "Iniciar sesión en tu panel"
+    },
+    "report": "Si un enlace de nuestro sitio te trajo aquí, avísanos a info@aiban.news para que podamos solucionarlo."
   },
   "header": {
     "goToWorkspace": "Abrir panel",
@@ -982,1429 +1749,5 @@ export default {
     "monthly": "Mensual",
     "yearly": "Anual",
     "loadingPlan": "Cargando datos del plan..."
-  },
-  "languages": [
-    {
-      "code": "ab",
-      "name": "Abjasio"
-    },
-    {
-      "code": "aa",
-      "name": "Afar"
-    },
-    {
-      "code": "af",
-      "name": "Afrikáans"
-    },
-    {
-      "code": "ak",
-      "name": "Akán"
-    },
-    {
-      "code": "sq",
-      "name": "Albanés"
-    },
-    {
-      "code": "am",
-      "name": "Amárico"
-    },
-    {
-      "code": "ar",
-      "name": "Árabe"
-    },
-    {
-      "code": "an",
-      "name": "Aragonés"
-    },
-    {
-      "code": "hy",
-      "name": "Armenio"
-    },
-    {
-      "code": "as",
-      "name": "Asamés"
-    },
-    {
-      "code": "av",
-      "name": "Avar"
-    },
-    {
-      "code": "ae",
-      "name": "Avéstico"
-    },
-    {
-      "code": "ay",
-      "name": "Aimara"
-    },
-    {
-      "code": "az",
-      "name": "Azerí"
-    },
-    {
-      "code": "bm",
-      "name": "Bambara"
-    },
-    {
-      "code": "ba",
-      "name": "Baskir"
-    },
-    {
-      "code": "eu",
-      "name": "Vasco"
-    },
-    {
-      "code": "be",
-      "name": "Bielorruso"
-    },
-    {
-      "code": "bn",
-      "name": "Bengalí"
-    },
-    {
-      "code": "bi",
-      "name": "Bislama"
-    },
-    {
-      "code": "bs",
-      "name": "Bosnio"
-    },
-    {
-      "code": "br",
-      "name": "Bretón"
-    },
-    {
-      "code": "bg",
-      "name": "Búlgaro"
-    },
-    {
-      "code": "my",
-      "name": "Birmano"
-    },
-    {
-      "code": "ca",
-      "name": "Catalán"
-    },
-    {
-      "code": "ch",
-      "name": "Chamorro"
-    },
-    {
-      "code": "ce",
-      "name": "Checheno"
-    },
-    {
-      "code": "ny",
-      "name": "Chichewa"
-    },
-    {
-      "code": "zh",
-      "name": "Chino"
-    },
-    {
-      "code": "cu",
-      "name": "Eslavo Eclesiástico"
-    },
-    {
-      "code": "cv",
-      "name": "Chuvasio"
-    },
-    {
-      "code": "kw",
-      "name": "Córnico"
-    },
-    {
-      "code": "co",
-      "name": "Corso"
-    },
-    {
-      "code": "cr",
-      "name": "Cree"
-    },
-    {
-      "code": "hr",
-      "name": "Croata"
-    },
-    {
-      "code": "cs",
-      "name": "Checo"
-    },
-    {
-      "code": "da",
-      "name": "Danés"
-    },
-    {
-      "code": "dv",
-      "name": "Divehi"
-    },
-    {
-      "code": "nl",
-      "name": "Neerlandés"
-    },
-    {
-      "code": "dz",
-      "name": "Dzongkha"
-    },
-    {
-      "code": "en",
-      "name": "Inglés"
-    },
-    {
-      "code": "eo",
-      "name": "Esperanto"
-    },
-    {
-      "code": "et",
-      "name": "Estonio"
-    },
-    {
-      "code": "ee",
-      "name": "Ewe"
-    },
-    {
-      "code": "fo",
-      "name": "Feroés"
-    },
-    {
-      "code": "fj",
-      "name": "Fiyiano"
-    },
-    {
-      "code": "fi",
-      "name": "Finlandés"
-    },
-    {
-      "code": "fr",
-      "name": "Francés"
-    },
-    {
-      "code": "fy",
-      "name": "Frisón Occidental"
-    },
-    {
-      "code": "ff",
-      "name": "Fula"
-    },
-    {
-      "code": "gd",
-      "name": "Gaélico Escocés"
-    },
-    {
-      "code": "gl",
-      "name": "Gallego"
-    },
-    {
-      "code": "lg",
-      "name": "Ganda"
-    },
-    {
-      "code": "ka",
-      "name": "Georgiano"
-    },
-    {
-      "code": "de",
-      "name": "Alemán"
-    },
-    {
-      "code": "el",
-      "name": "Griego"
-    },
-    {
-      "code": "kl",
-      "name": "Kalaallisut (Groenlandés)"
-    },
-    {
-      "code": "gn",
-      "name": "Guaraní"
-    },
-    {
-      "code": "gu",
-      "name": "Guyaratí"
-    },
-    {
-      "code": "ht",
-      "name": "Criollo Haitiano"
-    },
-    {
-      "code": "ha",
-      "name": "Hausa"
-    },
-    {
-      "code": "he",
-      "name": "Hebreo"
-    },
-    {
-      "code": "hz",
-      "name": "Herero"
-    },
-    {
-      "code": "hi",
-      "name": "Hindi"
-    },
-    {
-      "code": "ho",
-      "name": "Hiri motu"
-    },
-    {
-      "code": "hu",
-      "name": "Húngaro"
-    },
-    {
-      "code": "is",
-      "name": "Islandés"
-    },
-    {
-      "code": "io",
-      "name": "Ido"
-    },
-    {
-      "code": "ig",
-      "name": "Igbo"
-    },
-    {
-      "code": "id",
-      "name": "Indonesio"
-    },
-    {
-      "code": "ia",
-      "name": "Interlingua"
-    },
-    {
-      "code": "ie",
-      "name": "Interlingue"
-    },
-    {
-      "code": "iu",
-      "name": "Inuktitut"
-    },
-    {
-      "code": "ik",
-      "name": "Inupiaq"
-    },
-    {
-      "code": "ga",
-      "name": "Irlandés"
-    },
-    {
-      "code": "it",
-      "name": "Italiano"
-    },
-    {
-      "code": "ja",
-      "name": "Japonés"
-    },
-    {
-      "code": "jv",
-      "name": "Javanés"
-    },
-    {
-      "code": "kn",
-      "name": "Canarés"
-    },
-    {
-      "code": "kr",
-      "name": "Kanuri"
-    },
-    {
-      "code": "ks",
-      "name": "Cachemiro"
-    },
-    {
-      "code": "kk",
-      "name": "Kazajo"
-    },
-    {
-      "code": "km",
-      "name": "Jemer"
-    },
-    {
-      "code": "ki",
-      "name": "Kikuyu"
-    },
-    {
-      "code": "rw",
-      "name": "Kinyarwanda"
-    },
-    {
-      "code": "ky",
-      "name": "Kirguís"
-    },
-    {
-      "code": "kv",
-      "name": "Komi"
-    },
-    {
-      "code": "kg",
-      "name": "Kongo"
-    },
-    {
-      "code": "ko",
-      "name": "Coreano"
-    },
-    {
-      "code": "kj",
-      "name": "Kuanyama"
-    },
-    {
-      "code": "ku",
-      "name": "Kurdo"
-    },
-    {
-      "code": "lo",
-      "name": "Lao"
-    },
-    {
-      "code": "la",
-      "name": "Latín"
-    },
-    {
-      "code": "lv",
-      "name": "Letón"
-    },
-    {
-      "code": "li",
-      "name": "Limburgués"
-    },
-    {
-      "code": "ln",
-      "name": "Lingala"
-    },
-    {
-      "code": "lt",
-      "name": "Lituano"
-    },
-    {
-      "code": "lu",
-      "name": "Luba-Katanga"
-    },
-    {
-      "code": "lb",
-      "name": "Luxemburgués"
-    },
-    {
-      "code": "mk",
-      "name": "Macedonio"
-    },
-    {
-      "code": "mg",
-      "name": "Malgache"
-    },
-    {
-      "code": "ms",
-      "name": "Malayo"
-    },
-    {
-      "code": "ml",
-      "name": "Malayalam"
-    },
-    {
-      "code": "mt",
-      "name": "Maltés"
-    },
-    {
-      "code": "gv",
-      "name": "Manés"
-    },
-    {
-      "code": "mi",
-      "name": "Maorí"
-    },
-    {
-      "code": "mr",
-      "name": "Maratí"
-    },
-    {
-      "code": "mh",
-      "name": "Marshalés"
-    },
-    {
-      "code": "mn",
-      "name": "Mongol"
-    },
-    {
-      "code": "na",
-      "name": "Nauruano"
-    },
-    {
-      "code": "nv",
-      "name": "Navajo"
-    },
-    {
-      "code": "nd",
-      "name": "Ndebele del Norte"
-    },
-    {
-      "code": "nr",
-      "name": "Ndebele del Sur"
-    },
-    {
-      "code": "ng",
-      "name": "Ndonga"
-    },
-    {
-      "code": "ne",
-      "name": "Nepalí"
-    },
-    {
-      "code": "no",
-      "name": "Noruego"
-    },
-    {
-      "code": "nb",
-      "name": "Noruego Bokmål"
-    },
-    {
-      "code": "nn",
-      "name": "Noruego Nynorsk"
-    },
-    {
-      "code": "oc",
-      "name": "Occitano"
-    },
-    {
-      "code": "oj",
-      "name": "Ojibwa"
-    },
-    {
-      "code": "or",
-      "name": "Oriya"
-    },
-    {
-      "code": "om",
-      "name": "Oromo"
-    },
-    {
-      "code": "os",
-      "name": "Osetio"
-    },
-    {
-      "code": "pi",
-      "name": "Pali"
-    },
-    {
-      "code": "ps",
-      "name": "Pastún"
-    },
-    {
-      "code": "fa",
-      "name": "Persa (Farsi)"
-    },
-    {
-      "code": "pl",
-      "name": "Polaco"
-    },
-    {
-      "code": "pt",
-      "name": "Portugués"
-    },
-    {
-      "code": "pa",
-      "name": "Punyabí"
-    },
-    {
-      "code": "qu",
-      "name": "Quechua"
-    },
-    {
-      "code": "ro",
-      "name": "Rumano"
-    },
-    {
-      "code": "rm",
-      "name": "Romanche"
-    },
-    {
-      "code": "rn",
-      "name": "Rundi"
-    },
-    {
-      "code": "ru",
-      "name": "Ruso"
-    },
-    {
-      "code": "se",
-      "name": "Sami Septentrional"
-    },
-    {
-      "code": "sm",
-      "name": "Samoano"
-    },
-    {
-      "code": "sg",
-      "name": "Sango"
-    },
-    {
-      "code": "sa",
-      "name": "Sánscrito"
-    },
-    {
-      "code": "sc",
-      "name": "Sardo"
-    },
-    {
-      "code": "sr",
-      "name": "Serbio"
-    },
-    {
-      "code": "sn",
-      "name": "Shona"
-    },
-    {
-      "code": "ii",
-      "name": "Yi de Sichuán"
-    },
-    {
-      "code": "sd",
-      "name": "Sindhi"
-    },
-    {
-      "code": "si",
-      "name": "Cingalés"
-    },
-    {
-      "code": "sk",
-      "name": "Eslovaco"
-    },
-    {
-      "code": "sl",
-      "name": "Esloveno"
-    },
-    {
-      "code": "so",
-      "name": "Somalí"
-    },
-    {
-      "code": "st",
-      "name": "Sesotho del Sur"
-    },
-    {
-      "code": "es",
-      "name": "Español"
-    },
-    {
-      "code": "su",
-      "name": "Sundanés"
-    },
-    {
-      "code": "sw",
-      "name": "Suajili"
-    },
-    {
-      "code": "ss",
-      "name": "Swati"
-    },
-    {
-      "code": "sv",
-      "name": "Sueco"
-    },
-    {
-      "code": "tl",
-      "name": "Tagalo (Filipino)"
-    },
-    {
-      "code": "ty",
-      "name": "Tahitiano"
-    },
-    {
-      "code": "tg",
-      "name": "Tayiko"
-    },
-    {
-      "code": "ta",
-      "name": "Tamil"
-    },
-    {
-      "code": "tt",
-      "name": "Tártaro"
-    },
-    {
-      "code": "te",
-      "name": "Telugu"
-    },
-    {
-      "code": "th",
-      "name": "Tailandés"
-    },
-    {
-      "code": "bo",
-      "name": "Tibetano"
-    },
-    {
-      "code": "ti",
-      "name": "Tigriña"
-    },
-    {
-      "code": "to",
-      "name": "Tongano"
-    },
-    {
-      "code": "ts",
-      "name": "Tsonga"
-    },
-    {
-      "code": "tn",
-      "name": "Tswana"
-    },
-    {
-      "code": "tr",
-      "name": "Turco"
-    },
-    {
-      "code": "tk",
-      "name": "Turcomano"
-    },
-    {
-      "code": "tw",
-      "name": "Twi"
-    },
-    {
-      "code": "ug",
-      "name": "Uigur"
-    },
-    {
-      "code": "uk",
-      "name": "Ucraniano"
-    },
-    {
-      "code": "ur",
-      "name": "Urdu"
-    },
-    {
-      "code": "uz",
-      "name": "Uzbeko"
-    },
-    {
-      "code": "ve",
-      "name": "Venda"
-    },
-    {
-      "code": "vi",
-      "name": "Vietnamita"
-    },
-    {
-      "code": "vo",
-      "name": "Volapük"
-    },
-    {
-      "code": "wa",
-      "name": "Valón"
-    },
-    {
-      "code": "cy",
-      "name": "Galés"
-    },
-    {
-      "code": "wo",
-      "name": "Wolof"
-    },
-    {
-      "code": "xh",
-      "name": "Xhosa"
-    },
-    {
-      "code": "yi",
-      "name": "Yidis"
-    },
-    {
-      "code": "yo",
-      "name": "Yoruba"
-    },
-    {
-      "code": "za",
-      "name": "Zhuang"
-    },
-    {
-      "code": "zu",
-      "name": "Zulú"
-    }
-  ],
-  "countries": [
-    {
-      "code": "AF",
-      "name": "Afganistán"
-    },
-    {
-      "code": "AL",
-      "name": "Albania"
-    },
-    {
-      "code": "DZ",
-      "name": "Argelia"
-    },
-    {
-      "code": "AS",
-      "name": "Samoa Americana"
-    },
-    {
-      "code": "AD",
-      "name": "Andorra"
-    },
-    {
-      "code": "AO",
-      "name": "Angola"
-    },
-    {
-      "code": "AI",
-      "name": "Anguila"
-    },
-    {
-      "code": "AQ",
-      "name": "Antártida"
-    },
-    {
-      "code": "AG",
-      "name": "Antigua y Barbuda"
-    },
-    {
-      "code": "AR",
-      "name": "Argentina"
-    },
-    {
-      "code": "AM",
-      "name": "Armenia"
-    },
-    {
-      "code": "AW",
-      "name": "Aruba"
-    },
-    {
-      "code": "AU",
-      "name": "Australia"
-    },
-    {
-      "code": "AT",
-      "name": "Austria"
-    },
-    {
-      "code": "AZ",
-      "name": "Azerbaiyán"
-    },
-    {
-      "code": "BS",
-      "name": "Bahamas"
-    },
-    {
-      "code": "BH",
-      "name": "Baréin"
-    },
-    {
-      "code": "BD",
-      "name": "Bangladés"
-    },
-    {
-      "code": "BB",
-      "name": "Barbados"
-    },
-    {
-      "code": "BY",
-      "name": "Bielorrusia"
-    },
-    {
-      "code": "BE",
-      "name": "Bélgica"
-    },
-    {
-      "code": "BZ",
-      "name": "Belice"
-    },
-    {
-      "code": "BJ",
-      "name": "Benín"
-    },
-    {
-      "code": "BM",
-      "name": "Bermudas"
-    },
-    {
-      "code": "BT",
-      "name": "Bután"
-    },
-    {
-      "code": "BO",
-      "name": "Bolivia"
-    },
-    {
-      "code": "BA",
-      "name": "Bosnia y Herzegovina"
-    },
-    {
-      "code": "BW",
-      "name": "Botsuana"
-    },
-    {
-      "code": "BR",
-      "name": "Brasil"
-    },
-    {
-      "code": "IO",
-      "name": "Territorio Británico del Océano Índico"
-    },
-    {
-      "code": "VG",
-      "name": "Islas Vírgenes Británicas"
-    },
-    {
-      "code": "BN",
-      "name": "Brunéi"
-    },
-    {
-      "code": "BG",
-      "name": "Bulgaria"
-    },
-    {
-      "code": "BF",
-      "name": "Burkina Faso"
-    },
-    {
-      "code": "BI",
-      "name": "Burundi"
-    },
-    {
-      "code": "KH",
-      "name": "Camboya"
-    },
-    {
-      "code": "CM",
-      "name": "Camerún"
-    },
-    {
-      "code": "CA",
-      "name": "Canadá"
-    },
-    {
-      "code": "CV",
-      "name": "Cabo Verde"
-    },
-    {
-      "code": "KY",
-      "name": "Islas Caimán"
-    },
-    {
-      "code": "CF",
-      "name": "República Centroafricana"
-    },
-    {
-      "code": "TD",
-      "name": "Chad"
-    },
-    {
-      "code": "CL",
-      "name": "Chile"
-    },
-    {
-      "code": "CN",
-      "name": "China"
-    },
-    {
-      "code": "CX",
-      "name": "Isla de Navidad"
-    },
-    {
-      "code": "CC",
-      "name": "Islas Cocos (Keeling)"
-    },
-    {
-      "code": "CO",
-      "name": "Colombia"
-    },
-    {
-      "code": "KM",
-      "name": "Comoras"
-    },
-    {
-      "code": "CG",
-      "name": "Congo - Brazzaville"
-    },
-    {
-      "code": "CD",
-      "name": "Congo - Kinshasa"
-    },
-    {
-      "code": "CK",
-      "name": "Islas Cook"
-    },
-    {
-      "code": "CR",
-      "name": "Costa Rica"
-    },
-    {
-      "code": "CI",
-      "name": "Costa de Marfil"
-    },
-    {
-      "code": "HR",
-      "name": "Croacia"
-    },
-    {
-      "code": "CU",
-      "name": "Cuba"
-    },
-    {
-      "code": "CY",
-      "name": "Chipre"
-    },
-    {
-      "code": "CZ",
-      "name": "Chequia"
-    },
-    {
-      "code": "DK",
-      "name": "Dinamarca"
-    },
-    {
-      "code": "DJ",
-      "name": "Yibuti"
-    },
-    {
-      "code": "DM",
-      "name": "Dominica"
-    },
-    {
-      "code": "DO",
-      "name": "República Dominicana"
-    },
-    {
-      "code": "EC",
-      "name": "Ecuador"
-    },
-    {
-      "code": "EG",
-      "name": "Egipto"
-    },
-    {
-      "code": "SV",
-      "name": "El Salvador"
-    },
-    {
-      "code": "GQ",
-      "name": "Guinea Ecuatorial"
-    },
-    {
-      "code": "ER",
-      "name": "Eritrea"
-    },
-    {
-      "code": "EE",
-      "name": "Estonia"
-    },
-    {
-      "code": "SZ",
-      "name": "Esuatini"
-    },
-    {
-      "code": "ET",
-      "name": "Etiopía"
-    },
-    {
-      "code": "FJ",
-      "name": "Fiyi"
-    },
-    {
-      "code": "FI",
-      "name": "Finlandia"
-    },
-    {
-      "code": "FR",
-      "name": "Francia"
-    },
-    {
-      "code": "GA",
-      "name": "Gabón"
-    },
-    {
-      "code": "GM",
-      "name": "Gambia"
-    },
-    {
-      "code": "GE",
-      "name": "Georgia"
-    },
-    {
-      "code": "DE",
-      "name": "Alemania"
-    },
-    {
-      "code": "GH",
-      "name": "Ghana"
-    },
-    {
-      "code": "GR",
-      "name": "Grecia"
-    },
-    {
-      "code": "GT",
-      "name": "Guatemala"
-    },
-    {
-      "code": "GN",
-      "name": "Guinea"
-    },
-    {
-      "code": "GY",
-      "name": "Guyana"
-    },
-    {
-      "code": "HT",
-      "name": "Haití"
-    },
-    {
-      "code": "HN",
-      "name": "Honduras"
-    },
-    {
-      "code": "HK",
-      "name": "Hong Kong"
-    },
-    {
-      "code": "HU",
-      "name": "Hungría"
-    },
-    {
-      "code": "IS",
-      "name": "Islandia"
-    },
-    {
-      "code": "IN",
-      "name": "India"
-    },
-    {
-      "code": "ID",
-      "name": "Indonesia"
-    },
-    {
-      "code": "IR",
-      "name": "Irán"
-    },
-    {
-      "code": "IQ",
-      "name": "Irak"
-    },
-    {
-      "code": "IE",
-      "name": "Irlanda"
-    },
-    {
-      "code": "IL",
-      "name": "Israel"
-    },
-    {
-      "code": "IT",
-      "name": "Italia"
-    },
-    {
-      "code": "JM",
-      "name": "Jamaica"
-    },
-    {
-      "code": "JP",
-      "name": "Japón"
-    },
-    {
-      "code": "JO",
-      "name": "Jordania"
-    },
-    {
-      "code": "KZ",
-      "name": "Kazajistán"
-    },
-    {
-      "code": "KE",
-      "name": "Kenia"
-    },
-    {
-      "code": "KR",
-      "name": "Corea del Sur"
-    },
-    {
-      "code": "KW",
-      "name": "Kuwait"
-    },
-    {
-      "code": "KG",
-      "name": "Kirguistán"
-    },
-    {
-      "code": "LA",
-      "name": "Laos"
-    },
-    {
-      "code": "LV",
-      "name": "Letonia"
-    },
-    {
-      "code": "LB",
-      "name": "Líbano"
-    },
-    {
-      "code": "LS",
-      "name": "Lesoto"
-    },
-    {
-      "code": "LR",
-      "name": "Liberia"
-    },
-    {
-      "code": "LY",
-      "name": "Libia"
-    },
-    {
-      "code": "LI",
-      "name": "Liechtenstein"
-    },
-    {
-      "code": "LT",
-      "name": "Lituania"
-    },
-    {
-      "code": "LU",
-      "name": "Luxemburgo"
-    },
-    {
-      "code": "MG",
-      "name": "Madagascar"
-    },
-    {
-      "code": "MW",
-      "name": "Malaui"
-    },
-    {
-      "code": "MY",
-      "name": "Malasia"
-    },
-    {
-      "code": "MV",
-      "name": "Maldivas"
-    },
-    {
-      "code": "ML",
-      "name": "Malí"
-    },
-    {
-      "code": "MT",
-      "name": "Malta"
-    },
-    {
-      "code": "MX",
-      "name": "México"
-    },
-    {
-      "code": "MD",
-      "name": "Moldavia"
-    },
-    {
-      "code": "MC",
-      "name": "Mónaco"
-    },
-    {
-      "code": "MN",
-      "name": "Mongolia"
-    },
-    {
-      "code": "ME",
-      "name": "Montenegro"
-    },
-    {
-      "code": "MA",
-      "name": "Marruecos"
-    },
-    {
-      "code": "MZ",
-      "name": "Mozambique"
-    },
-    {
-      "code": "MM",
-      "name": "Myanmar"
-    },
-    {
-      "code": "NA",
-      "name": "Namibia"
-    },
-    {
-      "code": "NP",
-      "name": "Nepal"
-    },
-    {
-      "code": "NL",
-      "name": "Países Bajos"
-    },
-    {
-      "code": "NZ",
-      "name": "Nueva Zelanda"
-    },
-    {
-      "code": "NI",
-      "name": "Nicaragua"
-    },
-    {
-      "code": "NE",
-      "name": "Níger"
-    },
-    {
-      "code": "NG",
-      "name": "Nigeria"
-    },
-    {
-      "code": "MK",
-      "name": "Macedonia del Norte"
-    },
-    {
-      "code": "NO",
-      "name": "Noruega"
-    },
-    {
-      "code": "OM",
-      "name": "Omán"
-    },
-    {
-      "code": "PK",
-      "name": "Pakistán"
-    },
-    {
-      "code": "PA",
-      "name": "Panamá"
-    },
-    {
-      "code": "PG",
-      "name": "Papúa Nueva Guinea"
-    },
-    {
-      "code": "PY",
-      "name": "Paraguay"
-    },
-    {
-      "code": "PE",
-      "name": "Perú"
-    },
-    {
-      "code": "PH",
-      "name": "Filipinas"
-    },
-    {
-      "code": "PL",
-      "name": "Polonia"
-    },
-    {
-      "code": "PT",
-      "name": "Portugal"
-    },
-    {
-      "code": "QA",
-      "name": "Catar"
-    },
-    {
-      "code": "RO",
-      "name": "Rumania"
-    },
-    {
-      "code": "RU",
-      "name": "Rusia"
-    },
-    {
-      "code": "RW",
-      "name": "Ruanda"
-    },
-    {
-      "code": "SA",
-      "name": "Arabia Saudita"
-    },
-    {
-      "code": "SN",
-      "name": "Senegal"
-    },
-    {
-      "code": "RS",
-      "name": "Serbia"
-    },
-    {
-      "code": "SG",
-      "name": "Singapur"
-    },
-    {
-      "code": "SK",
-      "name": "Eslovaquia"
-    },
-    {
-      "code": "SI",
-      "name": "Eslovenia"
-    },
-    {
-      "code": "ZA",
-      "name": "Sudáfrica"
-    },
-    {
-      "code": "ES",
-      "name": "España"
-    },
-    {
-      "code": "LK",
-      "name": "Sri Lanka"
-    },
-    {
-      "code": "SE",
-      "name": "Suecia"
-    },
-    {
-      "code": "CH",
-      "name": "Suiza"
-    },
-    {
-      "code": "TW",
-      "name": "Taiwán"
-    },
-    {
-      "code": "TH",
-      "name": "Tailandia"
-    },
-    {
-      "code": "TR",
-      "name": "Turquía"
-    },
-    {
-      "code": "UG",
-      "name": "Uganda"
-    },
-    {
-      "code": "UA",
-      "name": "Ucrania"
-    },
-    {
-      "code": "AE",
-      "name": "Emiratos Árabes Unidos"
-    },
-    {
-      "code": "GB",
-      "name": "Reino Unido"
-    },
-    {
-      "code": "US",
-      "name": "Estados Unidos"
-    },
-    {
-      "code": "UY",
-      "name": "Uruguay"
-    },
-    {
-      "code": "UZ",
-      "name": "Uzbekistán"
-    },
-    {
-      "code": "VE",
-      "name": "Venezuela"
-    },
-    {
-      "code": "VN",
-      "name": "Vietnam"
-    },
-    {
-      "code": "YE",
-      "name": "Yemen"
-    },
-    {
-      "code": "ZM",
-      "name": "Zambia"
-    },
-    {
-      "code": "ZW",
-      "name": "Zimbabue"
-    }
-  ]
+  }
 };

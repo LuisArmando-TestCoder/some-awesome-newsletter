@@ -8,6 +8,8 @@
 	import Faq from '$lib/ui/organisms/Faq.svelte';
 	import Pricing from '$lib/ui/organisms/Pricing.svelte';
 	import IssuePreview from '$lib/content/landing/IssuePreview.svelte';
+	import LivePreview from '$lib/content/landing/LivePreview.svelte';
+	import { language as uiLanguage } from '$lib/stores/language.store';
 	import HistoryTimeline from '$lib/content/landing/HistoryTimeline.svelte';
 	import ChapterRail from '$lib/content/landing/ChapterRail.svelte';
 	import DashboardShowcase from '$lib/content/showcase/DashboardShowcase.svelte';
@@ -66,6 +68,10 @@
 	let announce = $state('');
 	let previewLanguage = $state<SampleLanguage>('en');
 	let previewEl = $state<HTMLElement | null>(null);
+	// After a site is entered the hero shows a real issue written from it (LivePreview);
+	// the placeholder layout comes back only if the visitor asks for it after an error.
+	let showSampleLayout = $state(false);
+	const LIVE = $derived(L.live ?? en.landing.live);
 
 	const fill = (s: string, site: string) => s.replaceAll('{site}', site);
 	const brandName = $derived(host ? brandFromHost(host) : '');
@@ -83,9 +89,11 @@
 		}
 		formError = '';
 		host = next;
-		announce = fill(L.preview.liveRegion, next);
+		showSampleLayout = false;
+		announce = fill(LIVE.loadingTitle, next);
 		await tick();
-		if (previewEl && window.matchMedia('(max-width: 60rem)').matches) {
+		// Always bring the preview into view: it sits below the fold on every screen size.
+		if (previewEl) {
 			const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 			previewEl.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
 		}
@@ -190,11 +198,21 @@
 			</div>
 
 			<div class="wrap open__stage" bind:this={previewEl}>
-				<div class="open__device">
-					<IssuePreview host={host} labels={L.preview} bind:language={previewLanguage} idPrefix="hero" />
+				<div class="open__device" class:is-live={host && !showSampleLayout}>
+					{#if host && !showSampleLayout}
+						<LivePreview
+							{host}
+							labels={LIVE}
+							meta={L.preview}
+							uiLanguage={$uiLanguage}
+							onfallback={() => (showSampleLayout = true)}
+						/>
+					{:else}
+						<IssuePreview host={host} labels={L.preview} bind:language={previewLanguage} idPrefix="hero" />
+					{/if}
 				</div>
 				<div class="open__after">
-					<p class="open__note">{L.preview.note}</p>
+					<p class="open__note">{host && !showSampleLayout ? fill(LIVE.readyNote, host) : L.preview.note}</p>
 					<a class="btn btn--primary" href={startHref} onclick={onStart}>
 						{host ? fill(L.preview.startCta, host) : L.preview.startCtaGeneric}
 					</a>
@@ -648,6 +666,11 @@
 		width: 100%;
 		max-width: 44rem;
 		transform-origin: 50% 0%;
+	}
+	/* The live issue is read, not admired: no scroll effect on it. */
+	.open__device.is-live {
+		max-width: 46rem;
+		animation: none !important;
 	}
 	.open__after {
 		display: grid;

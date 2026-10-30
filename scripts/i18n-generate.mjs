@@ -164,7 +164,13 @@ async function loadEnglish(ns) {
   return mod.default;
 }
 
+// Text that must stay as written in every locale: the sample issue of the dashboard
+// showcase is already written in three languages on purpose, and sample sites and
+// emails are identifiers.
+const NEVER_TRANSLATE = [/^\/showcase\/examples\/\d+\/(issue\/langs\/|site$|people\/|business$)/];
+
 function isNonText(parts, value) {
+  if (NEVER_TRANSLATE.some((re) => re.test(pointer(parts)))) return true;
   const last = String(parts[parts.length - 1]);
   if (!value.trim()) return true;
   if (!/\p{L}/u.test(value)) return true; // numbers, symbols only

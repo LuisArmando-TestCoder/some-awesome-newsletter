@@ -1,5 +1,5 @@
-// tl strings for locales-newflow. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale tl
+// tl (Tagalog (Filipino)) strings for locales-newflow. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "onboarding": {
     "progress": "Hakbang {current} ng {total}",
@@ -55,7 +55,7 @@ export default {
       "generating": "Isinusulat ang unang isyu mo mula sa pinakabago mong artikulo. Karaniwang wala pang isang minuto ito.",
       "inboxFrom": "Mula kay",
       "inboxTo": "Para kay",
-      "inboxSubject": "Subject",
+      "inboxSubject": "Paksa",
       "defaultSubject": "Ang unang isyu mo",
       "sendTest": "Padalhan ako ng test",
       "sendingTest": "Ipinapadala...",
@@ -116,6 +116,9 @@ export default {
       "dayLabel": "Araw",
       "timeLabel": "Oras",
       "timeHint": "Sa lokal mong oras.",
+      "summaryDaily": "Araw-araw sa {time}, sa iyong oras ({zone}).",
+      "summaryWeekly": "Tuwing {day} sa {time}, sa iyong oras ({zone}).",
+      "summaryMonthly": "Sa unang araw ng bawat buwan sa {time}, sa iyong oras ({zone}).",
       "recipeTitle": "Awtomatikong ipadala ang mga bagong isyu",
       "recipeBody": "Ayon sa iskedyul sa itaas, pipiliin namin ang pinakamahusay mong bagong artikulo, isusulat ito sa boses mo, isasalin para sa bawat mambabasa, at ipapadala sa email.",
       "recipeOn": "Naka-on",
@@ -166,7 +169,7 @@ export default {
       "planLine": "Kasalukuyang plan: {plan}",
       "changePlan": "Tingnan ang mga plan",
       "toDashboard": "Pumunta sa dashboard",
-      "summarySource": "Source: {url}",
+      "summarySource": "Pinagmulan: {url}",
       "summarySchedule": "Iskedyul: {schedule}",
       "summaryAutomation": "Awtomatikong pagpapadala: {state}",
       "on": "naka-on",

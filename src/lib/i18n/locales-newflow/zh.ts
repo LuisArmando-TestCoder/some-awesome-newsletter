@@ -1,5 +1,5 @@
-// zh strings for locales-newflow. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale zh
+// zh (Chinese (Simplified, Mainland China)) strings for locales-newflow. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "onboarding": {
     "progress": "第 {current} 步，共 {total} 步",
@@ -116,6 +116,9 @@ export default {
       "dayLabel": "日期",
       "timeLabel": "时间",
       "timeHint": "使用您的当地时间。",
+      "summaryDaily": "每天 {time}，您所在时区 ({zone})。",
+      "summaryWeekly": "每周{day} {time}，您所在时区 ({zone})。",
+      "summaryMonthly": "每月1日 {time}，您所在时区 ({zone})。",
       "recipeTitle": "自动发送新一期简报",
       "recipeBody": "按照上面的时间表，我们会挑选您最好的新文章，用您的口吻撰写，为每位读者翻译，然后通过邮件发送。",
       "recipeOn": "开启",

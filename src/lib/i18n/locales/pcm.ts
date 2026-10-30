@@ -1,5 +1,5 @@
-// pcm strings for locales. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale pcm
+// pcm (Nigerian Pidgin) strings for locales. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "auth": {
     "logo": "/icons/logo.png",
@@ -35,6 +35,82 @@ export default {
       "ogImageAlt": "AIBAN logo"
     },
     "skipLink": "Jump go main content",
+    "display": {
+      "title": "Your website, written as a newsletter.",
+      "kicker": "AIBAN"
+    },
+    "statement": {
+      "lines": [
+        "You already publish good work.",
+        "Your clients read it in more than one language.",
+        "AIBAN turns each new article into an issue",
+        "and sends every reader the version in their language."
+      ]
+    },
+    "history": {
+      "eyebrow": "How it works",
+      "title": "The life of one issue.",
+      "lead": "Follow a single issue from the moment your schedule starts it to the moment it starts again. You set this up once.",
+      "note": "Example schedule. You choose the day, the time and how often.",
+      "progressLabel": "Steps of one issue",
+      "items": [
+        {
+          "mark": "9:00",
+          "title": "Your schedule starts the run",
+          "body": "Every Monday at 9:00 in this example. You pick daily, weekly or monthly."
+        },
+        {
+          "mark": "Read",
+          "title": "AIBAN reads your website",
+          "body": "It finds your newest article and picks the piece your ideal reader will care about most."
+        },
+        {
+          "mark": "Write",
+          "title": "It writes the issue in your voice",
+          "body": "The text follows how your site is written, so it sounds like you."
+        },
+        {
+          "mark": "Translate",
+          "title": "Each reader gets their language",
+          "body": "One issue becomes as many versions as your subscribers need."
+        },
+        {
+          "mark": "Send",
+          "title": "It arrives under your name",
+          "body": "With your name and your email signature. Replies go to your inbox."
+        },
+        {
+          "mark": "Publish",
+          "title": "E turn to article for your blog",
+          "body": "With im own link wey people fit see for search and share."
+        },
+        {
+          "mark": "Report",
+          "title": "You go see wetin happen",
+          "body": "Your dashboard dey show who join and which links readers click."
+        },
+        {
+          "mark": "Again",
+          "title": "Next Monday, e go run again",
+          "body": "E dey continue until you off am for your dashboard."
+        }
+      ]
+    },
+    "rail": {
+      "label": "Page chapters",
+      "chapters": [
+        "Start",
+        "Why",
+        "Languages",
+        "How e dey work",
+        "Your name",
+        "Grow",
+        "Who e be for",
+        "Pricing",
+        "Questions",
+        "Begin"
+      ]
+    },
     "hero": {
       "eyebrow": "Newsletter for business wey dey give service",
       "title": "Your website go turn weekly newsletter, for every reader own language",
@@ -57,6 +133,26 @@ export default {
       "startCta": "Start free with {site}",
       "startCtaGeneric": "Start free",
       "liveRegion": "Sample preview don update for {site}."
+    },
+    "live": {
+      "badge": "Just write now",
+      "loadingTitle": "Dey write sample issue from {site}",
+      "steps": [
+        "Dey read {site}",
+        "Dey find your latest article",
+        "Dey write am for {language}",
+        "Dey put am for your email template"
+      ],
+      "takes": "Dis one dey take like 20 to 40 seconds. You fit continue to scroll.",
+      "readyNote": "AIBAN write dis sample from di latest article for {site}. Dem no save am or send am. When you start, e go use your own voice and schedule.",
+      "readyAnnounce": "Your sample issue from {site} don ready.",
+      "languageLabel": "Reader language",
+      "loadingLanguage": "Dey write am for {language}",
+      "errorTitle": "We no fit write preview from {site}",
+      "retry": "Try again",
+      "showSample": "Show di sample layout",
+      "frameTitle": "Sample issue wey dem write from {site}",
+      "openFull": "Open for new tab"
     },
     "chain": {
       "eyebrow": "How e dey work",
@@ -587,6 +683,7 @@ export default {
       "suggestions": "Suggestions",
       "recent": "Recent searches",
       "clearRecent": "Clear recent searches",
+      "clear": "Clear search",
       "title": "Search results",
       "resultsFor": "Results for \"{q}\"",
       "count": "We find {count} articles",
@@ -691,6 +788,7 @@ export default {
   "legal": {
     "navLabel": "Legal documents",
     "lastUpdated": "Last update: {date}",
+    "onThisPage": "For dis page",
     "privacy": {
       "title": "Privacy policy",
       "metaTitle": "Privacy policy | AIBAN",
@@ -919,6 +1017,8 @@ export default {
     "codeSent": "We don send code to your email.",
     "invalidCode": "That code no correct. Check the latest email wey we send you, or send the code again.",
     "regenerateCode": "Resend code",
+    "codeAccepted": "Code don accept. We dey open your dashboard.",
+    "codeLabel": "6-digit code",
     "back": "Back",
     "byProceeding": "As you dey go front, you gree for",
     "termsOfService": "Terms of service",
@@ -948,6 +1048,673 @@ export default {
       "invitedBy": "{configuratorId} invite you come."
     }
   },
+  "showcase": {
+    "sampleBadge": "Sample data",
+    "exampleLabel": "Example business",
+    "caption": "{business} na example {kind}. Names, articles and numbers for this view na placeholders wey dey show wetin your dashboard go look like after some weeks.",
+    "pause": "Pause the animation",
+    "play": "Play the animation",
+    "scenesLabel": "Parts of the dashboard",
+    "examplesLabel": "Example businesses",
+    "appUrl": "app.aiban.news",
+    "nav": {
+      "home": "Home",
+      "automations": "Automations",
+      "sources": "Sources",
+      "subscribers": "Subscribers",
+      "reports": "Reports",
+      "blog": "Blog"
+    },
+    "scenes": {
+      "home": "Overview",
+      "issue": "The issue",
+      "reports": "Clicks",
+      "subscribers": "Subscribers",
+      "automation": "Schedule",
+      "source": "Your website",
+      "voice": "Your voice",
+      "signup": "Signup form",
+      "blog": "Blog",
+      "import": "Import"
+    },
+    "ui": {
+      "hello": "Hello, {business}",
+      "narrative": "{subscribers} readers for {languages} languages. The next issue go go out {schedule}.",
+      "kpiSubscribers": "Subscribers",
+      "kpiLanguages": "Languages",
+      "kpiClicks": "Clicks, last 7 days",
+      "kpiAutomations": "Automations on",
+      "kpiNew": "{count} new this week",
+      "nextIssue": "Next issue",
+      "ready": "Ready",
+      "activity": "Recent activity",
+      "from": "From",
+      "subject": "Subject",
+      "readMore": "Read the full article",
+      "readerLanguage": "Reader language",
+      "clicksTitle": "Clicks, last 7 days",
+      "mostClicked": "Most clicked",
+      "clicks": "clicks",
+      "days": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri",
+        "Sat",
+        "Sun"
+      ],
+      "subscribersTitle": "Subscribers",
+      "language": "Language",
+      "joinedVia": "Joined via",
+      "newSubscriber": "New subscriber",
+      "automationTitle": "Weekly issue",
+      "automationSentence": "{schedule}, write an issue from the newest article and send it to every reader in their language.",
+      "on": "On",
+      "off": "Off",
+      "automationOn": "Automation turned on",
+      "sourceLabel": "Where your content comes from",
+      "sourceButton": "Read my site",
+      "reading": "Reading your site",
+      "found": "Found {count} articles",
+      "voiceReader": "Your ideal reader",
+      "voiceTone": "How it should sound",
+      "signupHeading": "Get our weekly notes",
+      "signupEmail": "Email address",
+      "signupLanguage": "Language",
+      "signupButton": "Subscribe",
+      "signupDone": "Check your inbox to confirm.",
+      "blogTitle": "Articles from {business}",
+      "importFile": "clients.csv",
+      "importing": "Importing contacts",
+      "imported": "{count} contacts added",
+      "sources": {
+        "form": "Signup form",
+        "import": "Import",
+        "manual": "Add by hand"
+      }
+    },
+    "examples": [
+      {
+        "business": "Northfield Studio",
+        "kind": "web design agency",
+        "site": "northfield.studio",
+        "schedule": "every Monday at 9:00",
+        "subscribers": 312,
+        "newThisWeek": 9,
+        "clicks7": 84,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 58
+          },
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 31
+          },
+          {
+            "code": "pt",
+            "name": "Portuguese",
+            "share": 11
+          }
+        ],
+        "reader": "Owners of clinics, shops and studios who want a website that brings in clients, not a portfolio piece.",
+        "tones": [
+          "Warm",
+          "Plain",
+          "Practical"
+        ],
+        "articles": [
+          "How we rebuilt a dental clinic website in six weeks",
+          "Five things to fix before you redesign",
+          "Why your booking button should be orange"
+        ],
+        "issue": {
+          "title": "How we rebuilt a dental clinic website in six weeks",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "A clinic website rebuilt in six weeks",
+              "summary": "We moved booking to the top of every page and cut the forms from nine fields to three. Here is what changed for the clinic."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "El sitio de una clínica, renovado en seis semanas",
+              "summary": "Pusimos la reserva arriba en cada página y redujimos los formularios de nueve campos a tres. Esto es lo que cambió para la clínica."
+            },
+            {
+              "code": "pt",
+              "name": "Português",
+              "subject": "O site de uma clínica, refeito em seis semanas",
+              "summary": "Colocamos o agendamento no topo de cada página e reduzimos os formulários de nove campos para três. Veja o que mudou para a clínica."
+            }
+          ]
+        },
+        "clicksByDay": [
+          21,
+          17,
+          12,
+          9,
+          11,
+          6,
+          8
+        ],
+        "topLinks": [
+          {
+            "title": "Clinic case study",
+            "clicks": 38
+          },
+          {
+            "title": "Five things to fix before you redesign",
+            "clicks": 27
+          },
+          {
+            "title": "Book a call",
+            "clicks": 19
+          }
+        ],
+        "people": [
+          {
+            "email": "lucia.r@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "mark@example.org",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "joana.s@example.net",
+            "lang": "PT",
+            "via": "form"
+          },
+          {
+            "email": "dr.chen@example.com",
+            "lang": "EN",
+            "via": "manual"
+          }
+        ],
+        "activity": [
+          "Issue sent to 312 readers in 3 languages",
+          "38 clicks on the clinic case study",
+          "Lucia joined from the signup form and reads in Spanish"
+        ],
+        "importCount": 148
+      },
+      {
+        "business": "Brightline Software",
+        "kind": "software company",
+        "site": "brightline.dev",
+        "schedule": "on the 1st of each month at 10:00",
+        "subscribers": 1240,
+        "newThisWeek": 23,
+        "clicks7": 211,
+        "automationsOn": 1,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 64
+          },
+          {
+            "code": "de",
+            "name": "German",
+            "share": 22
+          },
+          {
+            "code": "fr",
+            "name": "French",
+            "share": 14
+          }
+        ],
+        "reader": "Office managers and IT leads at clients who use our booking software every day.",
+        "tones": [
+          "Clear",
+          "Short",
+          "Friendly"
+        ],
+        "articles": [
+          "Release 4.2: recurring appointments",
+          "Faster reports for large teams",
+          "How to move your calendar from a spreadsheet"
+        ],
+        "issue": {
+          "title": "Release 4.2: recurring appointments",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "New this month: recurring appointments",
+              "summary": "You can now repeat any appointment weekly or monthly. Reports for teams over 50 people also load faster."
+            },
+            {
+              "code": "de",
+              "name": "Deutsch",
+              "subject": "Neu diesen Monat: wiederkehrende Termine",
+              "summary": "Sie können jetzt jeden Termin wöchentlich oder monatlich wiederholen. Berichte für Teams ab 50 Personen laden außerdem schneller."
+            },
+            {
+              "code": "fr",
+              "name": "Français",
+              "subject": "Nouveau ce mois-ci : les rendez-vous récurrents",
+              "summary": "Vous pouvez désormais répéter un rendez-vous chaque semaine ou chaque mois. Les rapports des équipes de plus de 50 personnes s'affichent aussi plus vite."
+            }
+          ]
+        },
+        "clicksByDay": [
+          64,
+          48,
+          33,
+          25,
+          19,
+          9,
+          13
+        ],
+        "topLinks": [
+          {
+            "title": "Recurring appointments guide",
+            "clicks": 96
+          },
+          {
+            "title": "Release notes 4.2",
+            "clicks": 71
+          },
+          {
+            "title": "Moving from a spreadsheet",
+            "clicks": 44
+          }
+        ],
+        "people": [
+          {
+            "email": "it@example.de",
+            "lang": "DE",
+            "via": "import"
+          },
+          {
+            "email": "sophie.m@example.fr",
+            "lang": "FR",
+            "via": "form"
+          },
+          {
+            "email": "ops@example.com",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "k.weber@example.de",
+            "lang": "DE",
+            "via": "form"
+          }
+        ],
+        "activity": [
+          "Issue sent to 1240 readers in 3 languages",
+          "96 clicks on the recurring appointments guide",
+          "23 contacts imported from clients.csv"
+        ],
+        "importCount": 412
+      },
+      {
+        "business": "Casa Verde Realty",
+        "kind": "real estate agency",
+        "site": "casaverde.homes",
+        "schedule": "every Thursday at 8:00",
+        "subscribers": 586,
+        "newThisWeek": 14,
+        "clicks7": 163,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 47
+          },
+          {
+            "code": "en",
+            "name": "English",
+            "share": 41
+          },
+          {
+            "code": "fr",
+            "name": "French",
+            "share": 12
+          }
+        ],
+        "reader": "Families and retirees from abroad looking for a home near the coast, and owners who may sell.",
+        "tones": [
+          "Warm",
+          "Local",
+          "Calm"
+        ],
+        "articles": [
+          "Three new homes near the beach this week",
+          "What closing costs look like for foreign buyers",
+          "Prices in the old town, autumn update"
+        ],
+        "issue": {
+          "title": "Three new homes near the beach this week",
+          "langs": [
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tres casas nuevas cerca de la playa",
+              "summary": "Una casa de dos habitaciones con jardín, un apartamento con vista al mar y una casa para reformar a diez minutos del centro."
+            },
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Three new homes near the beach",
+              "summary": "A two bedroom house with a garden, a flat with a sea view and a house to renovate ten minutes from the center."
+            },
+            {
+              "code": "fr",
+              "name": "Français",
+              "subject": "Trois nouvelles maisons près de la plage",
+              "summary": "Une maison de deux chambres avec jardin, un appartement avec vue sur la mer et une maison à rénover à dix minutes du centre."
+            }
+          ]
+        },
+        "clicksByDay": [
+          12,
+          9,
+          15,
+          52,
+          38,
+          21,
+          16
+        ],
+        "topLinks": [
+          {
+            "title": "Flat with a sea view",
+            "clicks": 71
+          },
+          {
+            "title": "Two bedroom house with a garden",
+            "clicks": 54
+          },
+          {
+            "title": "Closing costs for foreign buyers",
+            "clicks": 38
+          }
+        ],
+        "people": [
+          {
+            "email": "familia.ortiz@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "j.dupont@example.fr",
+            "lang": "FR",
+            "via": "form"
+          },
+          {
+            "email": "tom.and.ann@example.org",
+            "lang": "EN",
+            "via": "manual"
+          },
+          {
+            "email": "rmora@example.net",
+            "lang": "ES",
+            "via": "import"
+          }
+        ],
+        "activity": [
+          "Issue sent to 586 readers in 3 languages",
+          "71 clicks on the flat with a sea view",
+          "A reader in France joined from the signup form"
+        ],
+        "importCount": 203
+      },
+      {
+        "business": "Mora and Partners",
+        "kind": "accounting firm",
+        "site": "morapartners.co",
+        "schedule": "every other Tuesday at 7:30",
+        "subscribers": 428,
+        "newThisWeek": 6,
+        "clicks7": 97,
+        "automationsOn": 1,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 52
+          },
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 38
+          },
+          {
+            "code": "it",
+            "name": "Italian",
+            "share": 10
+          }
+        ],
+        "reader": "Owners of small companies who want to know what changes in taxes and payroll, without the jargon.",
+        "tones": [
+          "Calm",
+          "Precise",
+          "Plain"
+        ],
+        "articles": [
+          "The quarterly tax deadline moves to the 15th",
+          "What to keep when you hire your first employee",
+          "Receipts: paper or photo?"
+        ],
+        "issue": {
+          "title": "The quarterly tax deadline moves to the 15th",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Your quarterly deadline moves to the 15th",
+              "summary": "The filing date for the next quarter moves five days later. Here is what to send us and when, so nothing is late."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tu plazo trimestral pasa al día 15",
+              "summary": "La fecha de presentación del próximo trimestre se mueve cinco días. Esto es lo que debes enviarnos y cuándo, para que nada llegue tarde."
+            },
+            {
+              "code": "it",
+              "name": "Italiano",
+              "subject": "La scadenza trimestrale passa al 15",
+              "summary": "La data di presentazione del prossimo trimestre slitta di cinque giorni. Ecco cosa inviarci e quando, perché nulla arrivi in ritardo."
+            }
+          ]
+        },
+        "clicksByDay": [
+          33,
+          24,
+          14,
+          8,
+          7,
+          4,
+          7
+        ],
+        "topLinks": [
+          {
+            "title": "Checklist for the 15th",
+            "clicks": 46
+          },
+          {
+            "title": "Hiring your first employee",
+            "clicks": 29
+          },
+          {
+            "title": "Book a review call",
+            "clicks": 22
+          }
+        ],
+        "people": [
+          {
+            "email": "bakery.owner@example.com",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "c.rossi@example.it",
+            "lang": "IT",
+            "via": "form"
+          },
+          {
+            "email": "taller.luna@example.net",
+            "lang": "ES",
+            "via": "import"
+          },
+          {
+            "email": "finance@example.org",
+            "lang": "EN",
+            "via": "manual"
+          }
+        ],
+        "activity": [
+          "Issue sent to 428 readers in 3 languages",
+          "46 clicks on the checklist for the 15th",
+          "6 new readers this week"
+        ],
+        "importCount": 97
+      },
+      {
+        "business": "Run Better Coaching",
+        "kind": "running coach",
+        "site": "runbetter.coach",
+        "schedule": "every Sunday at 18:00",
+        "subscribers": 907,
+        "newThisWeek": 31,
+        "clicks7": 248,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 49
+          },
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 33
+          },
+          {
+            "code": "de",
+            "name": "German",
+            "share": 18
+          }
+        ],
+        "reader": "Adults wey de train for dia first half marathon wey de run three times a week before work.",
+        "tones": [
+          "Encouraging",
+          "Direct",
+          "Short"
+        ],
+        "articles": [
+          "This week: the long run, slower than you think",
+          "Shoes after 500 kilometers",
+          "A 20 minute strength routine"
+        ],
+        "issue": {
+          "title": "This week: the long run, slower than you think",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Your long run should feel too easy",
+              "summary": "Keep it slow enough to talk. This week's plan adds ten minutes and one short hill session."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tu tirada larga debería sentirse demasiado fácil",
+              "summary": "Mantén un ritmo que te deje hablar. El plan de esta semana suma diez minutos y una sesión corta de cuestas."
+            },
+            {
+              "code": "de",
+              "name": "Deutsch",
+              "subject": "Dein langer Lauf sollte sich zu leicht anfühlen",
+              "summary": "Lauf so langsam, dass du noch reden kannst. Der Plan dieser Woche bringt zehn Minuten mehr und eine kurze Bergeinheit."
+            }
+          ]
+        },
+        "clicksByDay": [
+          18,
+          22,
+          26,
+          31,
+          35,
+          49,
+          67
+        ],
+        "topLinks": [
+          {
+            "title": "This week's training plan",
+            "clicks": 121
+          },
+          {
+            "title": "20 minute strength routine",
+            "clicks": 78
+          },
+          {
+            "title": "Shoes after 500 kilometers",
+            "clicks": 49
+          }
+        ],
+        "people": [
+          {
+            "email": "ana.runs@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "felix.k@example.de",
+            "lang": "DE",
+            "via": "form"
+          },
+          {
+            "email": "sam@example.org",
+            "lang": "EN",
+            "via": "form"
+          },
+          {
+            "email": "club.secretary@example.net",
+            "lang": "EN",
+            "via": "import"
+          }
+        ],
+        "activity": [
+          "Issue send to 907 readers for 3 languages",
+          "121 clicks on this week's training plan",
+          "31 new readers this week, most from the signup form"
+        ],
+        "importCount": 260
+      }
+    ]
+  },
+  "errorPage": {
+    "notFoundEyebrow": "Error 404",
+    "notFoundTitle": "We no see dis page",
+    "notFoundBody": "The link fit don old or get mistake. Dis pages na good place to continue.",
+    "serverEyebrow": "Error {status}",
+    "serverTitle": "Something bad happen for our side",
+    "serverBody": "We no fit load dis page. Try again for one minute. If e still dey happen, write to info@aiban.news.",
+    "retry": "Try again",
+    "home": "Go to the home page",
+    "popularTitle": "Popular pages",
+    "links": {
+      "howItWorks": "How AIBAN works",
+      "pricing": "Pricing",
+      "help": "Help center",
+      "login": "Log in to your dashboard"
+    },
+    "report": "If link for our site bring you come here, tell us for info@aiban.news so we fit fix am."
+  },
   "header": {
     "goToWorkspace": "Open dashboard",
     "inBilling": "Price",
@@ -968,1443 +1735,19 @@ export default {
     "manageSubscription": "Manage subscription",
     "vipPlanName": "VIP partner",
     "vipPlanDescription": "Access without limit, from AIBAN.",
-    "perMonth": "per month",
-    "perYear": "per year",
-    "monthAbbreviation": "mo",
+    "perMonth": "for every month",
+    "perYear": "for every year",
+    "monthAbbreviation": "month",
     "equivalentTo": "be like",
     "mostPopular": "Na im people like pass",
     "upgradeTo": "Upgrade to",
-    "downgradeTo": "Switch to",
+    "downgradeTo": "Change to",
     "currentPlanButton": "Your plan",
-    "youSave": "You save",
+    "youSave": "You dey save",
     "users": "users",
     "newsSources": "news sources",
     "monthly": "Monthly",
     "yearly": "Yearly",
     "loadingPlan": "Dey load plan data..."
-  },
-  "languages": [
-    {
-      "code": "ab",
-      "name": "Abkhazian"
-    },
-    {
-      "code": "aa",
-      "name": "Afar"
-    },
-    {
-      "code": "af",
-      "name": "Afrikaans"
-    },
-    {
-      "code": "ak",
-      "name": "Akan"
-    },
-    {
-      "code": "sq",
-      "name": "Albanian"
-    },
-    {
-      "code": "am",
-      "name": "Amharic"
-    },
-    {
-      "code": "ar",
-      "name": "Arabic"
-    },
-    {
-      "code": "an",
-      "name": "Aragonese"
-    },
-    {
-      "code": "hy",
-      "name": "Armenian"
-    },
-    {
-      "code": "as",
-      "name": "Assamese"
-    },
-    {
-      "code": "av",
-      "name": "Avaric"
-    },
-    {
-      "code": "ae",
-      "name": "Avestan"
-    },
-    {
-      "code": "ay",
-      "name": "Aymara"
-    },
-    {
-      "code": "az",
-      "name": "Azerbaijani"
-    },
-    {
-      "code": "bm",
-      "name": "Bambara"
-    },
-    {
-      "code": "ba",
-      "name": "Bashkir"
-    },
-    {
-      "code": "eu",
-      "name": "Basque"
-    },
-    {
-      "code": "be",
-      "name": "Belarusian"
-    },
-    {
-      "code": "bn",
-      "name": "Bengali"
-    },
-    {
-      "code": "bi",
-      "name": "Bislama"
-    },
-    {
-      "code": "bs",
-      "name": "Bosnian"
-    },
-    {
-      "code": "br",
-      "name": "Breton"
-    },
-    {
-      "code": "bg",
-      "name": "Bulgarian"
-    },
-    {
-      "code": "my",
-      "name": "Burmese"
-    },
-    {
-      "code": "ca",
-      "name": "Catalan"
-    },
-    {
-      "code": "ch",
-      "name": "Chamorro"
-    },
-    {
-      "code": "ce",
-      "name": "Chechen"
-    },
-    {
-      "code": "ny",
-      "name": "Chichewa"
-    },
-    {
-      "code": "zh",
-      "name": "Chinese"
-    },
-    {
-      "code": "cu",
-      "name": "Church Slavic"
-    },
-    {
-      "code": "cv",
-      "name": "Chuvash"
-    },
-    {
-      "code": "kw",
-      "name": "Cornish"
-    },
-    {
-      "code": "co",
-      "name": "Corsican"
-    },
-    {
-      "code": "cr",
-      "name": "Cree"
-    },
-    {
-      "code": "hr",
-      "name": "Croatian"
-    },
-    {
-      "code": "cs",
-      "name": "Czech"
-    },
-    {
-      "code": "da",
-      "name": "Danish"
-    },
-    {
-      "code": "dv",
-      "name": "Divehi"
-    },
-    {
-      "code": "nl",
-      "name": "Dutch"
-    },
-    {
-      "code": "dz",
-      "name": "Dzongkha"
-    },
-    {
-      "code": "en",
-      "name": "English"
-    },
-    {
-      "code": "eo",
-      "name": "Esperanto"
-    },
-    {
-      "code": "et",
-      "name": "Estonian"
-    },
-    {
-      "code": "ee",
-      "name": "Ewe"
-    },
-    {
-      "code": "fo",
-      "name": "Faroese"
-    },
-    {
-      "code": "fj",
-      "name": "Fijian"
-    },
-    {
-      "code": "fi",
-      "name": "Finnish"
-    },
-    {
-      "code": "fr",
-      "name": "French"
-    },
-    {
-      "code": "fy",
-      "name": "West Frisian"
-    },
-    {
-      "code": "ff",
-      "name": "Fulah"
-    },
-    {
-      "code": "gd",
-      "name": "Scottish Gaelic"
-    },
-    {
-      "code": "gl",
-      "name": "Galician"
-    },
-    {
-      "code": "lg",
-      "name": "Ganda"
-    },
-    {
-      "code": "ka",
-      "name": "Georgian"
-    },
-    {
-      "code": "de",
-      "name": "German"
-    },
-    {
-      "code": "el",
-      "name": "Greek"
-    },
-    {
-      "code": "kl",
-      "name": "Kalaallisut"
-    },
-    {
-      "code": "gn",
-      "name": "Guarani"
-    },
-    {
-      "code": "gu",
-      "name": "Gujarati"
-    },
-    {
-      "code": "ht",
-      "name": "Haitian Creole"
-    },
-    {
-      "code": "ha",
-      "name": "Hausa"
-    },
-    {
-      "code": "he",
-      "name": "Hebrew"
-    },
-    {
-      "code": "hz",
-      "name": "Herero"
-    },
-    {
-      "code": "hi",
-      "name": "Hindi"
-    },
-    {
-      "code": "ho",
-      "name": "Hiri Motu"
-    },
-    {
-      "code": "hu",
-      "name": "Hungarian"
-    },
-    {
-      "code": "is",
-      "name": "Icelandic"
-    },
-    {
-      "code": "io",
-      "name": "Ido"
-    },
-    {
-      "code": "ig",
-      "name": "Igbo"
-    },
-    {
-      "code": "id",
-      "name": "Indonesian"
-    },
-    {
-      "code": "ia",
-      "name": "Interlingua"
-    },
-    {
-      "code": "ie",
-      "name": "Interlingue"
-    },
-    {
-      "code": "iu",
-      "name": "Inuktitut"
-    },
-    {
-      "code": "ik",
-      "name": "Inupiaq"
-    },
-    {
-      "code": "ga",
-      "name": "Irish"
-    },
-    {
-      "code": "it",
-      "name": "Italian"
-    },
-    {
-      "code": "ja",
-      "name": "Japanese"
-    },
-    {
-      "code": "jv",
-      "name": "Javanese"
-    },
-    {
-      "code": "kn",
-      "name": "Kannada"
-    },
-    {
-      "code": "kr",
-      "name": "Kanuri"
-    },
-    {
-      "code": "ks",
-      "name": "Kashmiri"
-    },
-    {
-      "code": "kk",
-      "name": "Kazakh"
-    },
-    {
-      "code": "km",
-      "name": "Khmer"
-    },
-    {
-      "code": "ki",
-      "name": "Kikuyu"
-    },
-    {
-      "code": "rw",
-      "name": "Kinyarwanda"
-    },
-    {
-      "code": "ky",
-      "name": "Kirghiz"
-    },
-    {
-      "code": "kv",
-      "name": "Komi"
-    },
-    {
-      "code": "kg",
-      "name": "Kongo"
-    },
-    {
-      "code": "ko",
-      "name": "Korean"
-    },
-    {
-      "code": "kj",
-      "name": "Kuanyama"
-    },
-    {
-      "code": "ku",
-      "name": "Kurdish"
-    },
-    {
-      "code": "lo",
-      "name": "Lao"
-    },
-    {
-      "code": "la",
-      "name": "Latin"
-    },
-    {
-      "code": "lv",
-      "name": "Latvian"
-    },
-    {
-      "code": "li",
-      "name": "Limburgish"
-    },
-    {
-      "code": "ln",
-      "name": "Lingala"
-    },
-    {
-      "code": "lt",
-      "name": "Lithuanian"
-    },
-    {
-      "code": "lu",
-      "name": "Luba-Katanga"
-    },
-    {
-      "code": "lb",
-      "name": "Luxembourgish"
-    },
-    {
-      "code": "mk",
-      "name": "Macedonian"
-    },
-    {
-      "code": "mg",
-      "name": "Malagasy"
-    },
-    {
-      "code": "ms",
-      "name": "Malay"
-    },
-    {
-      "code": "ml",
-      "name": "Malayalam"
-    },
-    {
-      "code": "mt",
-      "name": "Maltese"
-    },
-    {
-      "code": "gv",
-      "name": "Manx"
-    },
-    {
-      "code": "mi",
-      "name": "Maori"
-    },
-    {
-      "code": "mr",
-      "name": "Marathi"
-    },
-    {
-      "code": "mh",
-      "name": "Marshallese"
-    },
-    {
-      "code": "mn",
-      "name": "Mongolian"
-    },
-    {
-      "code": "na",
-      "name": "Nauru"
-    },
-    {
-      "code": "nv",
-      "name": "Navajo"
-    },
-    {
-      "code": "nd",
-      "name": "North Ndebele"
-    },
-    {
-      "code": "nr",
-      "name": "South Ndebele"
-    },
-    {
-      "code": "ng",
-      "name": "Ndonga"
-    },
-    {
-      "code": "ne",
-      "name": "Nepali"
-    },
-    {
-      "code": "no",
-      "name": "Norwegian"
-    },
-    {
-      "code": "nb",
-      "name": "Norwegian Bokmål"
-    },
-    {
-      "code": "nn",
-      "name": "Norwegian Nynorsk"
-    },
-    {
-      "code": "oc",
-      "name": "Occitan"
-    },
-    {
-      "code": "oj",
-      "name": "Ojibwa"
-    },
-    {
-      "code": "or",
-      "name": "Oriya"
-    },
-    {
-      "code": "om",
-      "name": "Oromo"
-    },
-    {
-      "code": "os",
-      "name": "Ossetic"
-    },
-    {
-      "code": "pi",
-      "name": "Pali"
-    },
-    {
-      "code": "ps",
-      "name": "Pashto"
-    },
-    {
-      "code": "fa",
-      "name": "Persian"
-    },
-    {
-      "code": "pl",
-      "name": "Polish"
-    },
-    {
-      "code": "pt",
-      "name": "Portuguese"
-    },
-    {
-      "code": "pa",
-      "name": "Punjabi"
-    },
-    {
-      "code": "qu",
-      "name": "Quechua"
-    },
-    {
-      "code": "ro",
-      "name": "Romanian"
-    },
-    {
-      "code": "rm",
-      "name": "Romansh"
-    },
-    {
-      "code": "rn",
-      "name": "Rundi"
-    },
-    {
-      "code": "ru",
-      "name": "Russian"
-    },
-    {
-      "code": "se",
-      "name": "North Sami"
-    },
-    {
-      "code": "sm",
-      "name": "Samoan"
-    },
-    {
-      "code": "sg",
-      "name": "Sango"
-    },
-    {
-      "code": "sa",
-      "name": "Sanskrit"
-    },
-    {
-      "code": "sc",
-      "name": "Sardinian"
-    },
-    {
-      "code": "sr",
-      "name": "Serbian"
-    },
-    {
-      "code": "sn",
-      "name": "Shona"
-    },
-    {
-      "code": "ii",
-      "name": "Sichuan Yi"
-    },
-    {
-      "code": "sd",
-      "name": "Sindhi"
-    },
-    {
-      "code": "si",
-      "name": "Sinhala"
-    },
-    {
-      "code": "sk",
-      "name": "Slovak"
-    },
-    {
-      "code": "sl",
-      "name": "Slovenian"
-    },
-    {
-      "code": "so",
-      "name": "Somali"
-    },
-    {
-      "code": "st",
-      "name": "Southern Sotho"
-    },
-    {
-      "code": "es",
-      "name": "Spanish"
-    },
-    {
-      "code": "su",
-      "name": "Sundanese"
-    },
-    {
-      "code": "sw",
-      "name": "Swahili"
-    },
-    {
-      "code": "ss",
-      "name": "Swati"
-    },
-    {
-      "code": "sv",
-      "name": "Swedish"
-    },
-    {
-      "code": "tl",
-      "name": "Tagalog"
-    },
-    {
-      "code": "ty",
-      "name": "Tahitian"
-    },
-    {
-      "code": "tg",
-      "name": "Tajik"
-    },
-    {
-      "code": "ta",
-      "name": "Tamil"
-    },
-    {
-      "code": "tt",
-      "name": "Tatar"
-    },
-    {
-      "code": "te",
-      "name": "Telugu"
-    },
-    {
-      "code": "th",
-      "name": "Thai"
-    },
-    {
-      "code": "bo",
-      "name": "Tibetan"
-    },
-    {
-      "code": "ti",
-      "name": "Tigrinya"
-    },
-    {
-      "code": "to",
-      "name": "Tonga"
-    },
-    {
-      "code": "ts",
-      "name": "Tsonga"
-    },
-    {
-      "code": "tn",
-      "name": "Tswana"
-    },
-    {
-      "code": "tr",
-      "name": "Turkish"
-    },
-    {
-      "code": "tk",
-      "name": "Turkmen"
-    },
-    {
-      "code": "tw",
-      "name": "Twi"
-    },
-    {
-      "code": "ug",
-      "name": "Uighur"
-    },
-    {
-      "code": "uk",
-      "name": "Ukrainian"
-    },
-    {
-      "code": "ur",
-      "name": "Urdu"
-    },
-    {
-      "code": "uz",
-      "name": "Uzbek"
-    },
-    {
-      "code": "ve",
-      "name": "Venda"
-    },
-    {
-      "code": "vi",
-      "name": "Vietnamese"
-    },
-    {
-      "code": "vo",
-      "name": "Volapük"
-    },
-    {
-      "code": "wa",
-      "name": "Walloon"
-    },
-    {
-      "code": "cy",
-      "name": "Welsh"
-    },
-    {
-      "code": "wo",
-      "name": "Wolof"
-    },
-    {
-      "code": "xh",
-      "name": "Xhosa"
-    },
-    {
-      "code": "yi",
-      "name": "Yiddish"
-    },
-    {
-      "code": "yo",
-      "name": "Yoruba"
-    },
-    {
-      "code": "za",
-      "name": "Zhuang"
-    },
-    {
-      "code": "zu",
-      "name": "Zulu"
-    }
-  ],
-  "countries": [
-    {
-      "code": "AF",
-      "name": "Afghanistan"
-    },
-    {
-      "code": "AL",
-      "name": "Albania"
-    },
-    {
-      "code": "DZ",
-      "name": "Algeria"
-    },
-    {
-      "code": "AS",
-      "name": "American Samoa"
-    },
-    {
-      "code": "AD",
-      "name": "Andorra"
-    },
-    {
-      "code": "AO",
-      "name": "Angola"
-    },
-    {
-      "code": "AI",
-      "name": "Anguilla"
-    },
-    {
-      "code": "AQ",
-      "name": "Antarctica"
-    },
-    {
-      "code": "AG",
-      "name": "Antigua and Barbuda"
-    },
-    {
-      "code": "AR",
-      "name": "Argentina"
-    },
-    {
-      "code": "AM",
-      "name": "Armenia"
-    },
-    {
-      "code": "AW",
-      "name": "Aruba"
-    },
-    {
-      "code": "AU",
-      "name": "Australia"
-    },
-    {
-      "code": "AT",
-      "name": "Austria"
-    },
-    {
-      "code": "AZ",
-      "name": "Azerbaijan"
-    },
-    {
-      "code": "BS",
-      "name": "Bahamas"
-    },
-    {
-      "code": "BH",
-      "name": "Bahrain"
-    },
-    {
-      "code": "BD",
-      "name": "Bangladesh"
-    },
-    {
-      "code": "BB",
-      "name": "Barbados"
-    },
-    {
-      "code": "BY",
-      "name": "Belarus"
-    },
-    {
-      "code": "BE",
-      "name": "Belgium"
-    },
-    {
-      "code": "BZ",
-      "name": "Belize"
-    },
-    {
-      "code": "BJ",
-      "name": "Benin"
-    },
-    {
-      "code": "BM",
-      "name": "Bermuda"
-    },
-    {
-      "code": "BT",
-      "name": "Bhutan"
-    },
-    {
-      "code": "BO",
-      "name": "Bolivia"
-    },
-    {
-      "code": "BA",
-      "name": "Bosnia and Herzegovina"
-    },
-    {
-      "code": "BW",
-      "name": "Botswana"
-    },
-    {
-      "code": "BR",
-      "name": "Brazil"
-    },
-    {
-      "code": "IO",
-      "name": "British Indian Ocean Territory"
-    },
-    {
-      "code": "VG",
-      "name": "British Virgin Islands"
-    },
-    {
-      "code": "BN",
-      "name": "Brunei"
-    },
-    {
-      "code": "BG",
-      "name": "Bulgaria"
-    },
-    {
-      "code": "BF",
-      "name": "Burkina Faso"
-    },
-    {
-      "code": "BI",
-      "name": "Burundi"
-    },
-    {
-      "code": "KH",
-      "name": "Cambodia"
-    },
-    {
-      "code": "CM",
-      "name": "Cameroon"
-    },
-    {
-      "code": "CA",
-      "name": "Canada"
-    },
-    {
-      "code": "CV",
-      "name": "Cape Verde"
-    },
-    {
-      "code": "KY",
-      "name": "Cayman Islands"
-    },
-    {
-      "code": "CF",
-      "name": "Central African Republic"
-    },
-    {
-      "code": "TD",
-      "name": "Chad"
-    },
-    {
-      "code": "CL",
-      "name": "Chile"
-    },
-    {
-      "code": "CN",
-      "name": "China"
-    },
-    {
-      "code": "CX",
-      "name": "Christmas Island"
-    },
-    {
-      "code": "CC",
-      "name": "Cocos (Keeling) Islands"
-    },
-    {
-      "code": "CO",
-      "name": "Colombia"
-    },
-    {
-      "code": "KM",
-      "name": "Comoros"
-    },
-    {
-      "code": "CG",
-      "name": "Congo - Brazzaville"
-    },
-    {
-      "code": "CD",
-      "name": "Congo - Kinshasa"
-    },
-    {
-      "code": "CK",
-      "name": "Cook Islands"
-    },
-    {
-      "code": "CR",
-      "name": "Costa Rica"
-    },
-    {
-      "code": "CI",
-      "name": "Côte d'Ivoire"
-    },
-    {
-      "code": "HR",
-      "name": "Croatia"
-    },
-    {
-      "code": "CU",
-      "name": "Cuba"
-    },
-    {
-      "code": "CY",
-      "name": "Cyprus"
-    },
-    {
-      "code": "CZ",
-      "name": "Czechia"
-    },
-    {
-      "code": "DK",
-      "name": "Denmark"
-    },
-    {
-      "code": "DJ",
-      "name": "Djibouti"
-    },
-    {
-      "code": "DM",
-      "name": "Dominica"
-    },
-    {
-      "code": "DO",
-      "name": "Dominican Republic"
-    },
-    {
-      "code": "EC",
-      "name": "Ecuador"
-    },
-    {
-      "code": "EG",
-      "name": "Egypt"
-    },
-    {
-      "code": "SV",
-      "name": "El Salvador"
-    },
-    {
-      "code": "GQ",
-      "name": "Equatorial Guinea"
-    },
-    {
-      "code": "ER",
-      "name": "Eritrea"
-    },
-    {
-      "code": "EE",
-      "name": "Estonia"
-    },
-    {
-      "code": "SZ",
-      "name": "Eswatini"
-    },
-    {
-      "code": "ET",
-      "name": "Ethiopia"
-    },
-    {
-      "code": "FJ",
-      "name": "Fiji"
-    },
-    {
-      "code": "FI",
-      "name": "Finland"
-    },
-    {
-      "code": "FR",
-      "name": "France"
-    },
-    {
-      "code": "GA",
-      "name": "Gabon"
-    },
-    {
-      "code": "GM",
-      "name": "Gambia"
-    },
-    {
-      "code": "GE",
-      "name": "Georgia"
-    },
-    {
-      "code": "DE",
-      "name": "Germany"
-    },
-    {
-      "code": "GH",
-      "name": "Ghana"
-    },
-    {
-      "code": "GR",
-      "name": "Greece"
-    },
-    {
-      "code": "GT",
-      "name": "Guatemala"
-    },
-    {
-      "code": "GN",
-      "name": "Guinea"
-    },
-    {
-      "code": "GY",
-      "name": "Guyana"
-    },
-    {
-      "code": "HT",
-      "name": "Haiti"
-    },
-    {
-      "code": "HN",
-      "name": "Honduras"
-    },
-    {
-      "code": "HK",
-      "name": "Hong Kong"
-    },
-    {
-      "code": "HU",
-      "name": "Hungary"
-    },
-    {
-      "code": "IS",
-      "name": "Iceland"
-    },
-    {
-      "code": "IN",
-      "name": "India"
-    },
-    {
-      "code": "ID",
-      "name": "Indonesia"
-    },
-    {
-      "code": "IR",
-      "name": "Iran"
-    },
-    {
-      "code": "IQ",
-      "name": "Iraq"
-    },
-    {
-      "code": "IE",
-      "name": "Ireland"
-    },
-    {
-      "code": "IL",
-      "name": "Israel"
-    },
-    {
-      "code": "IT",
-      "name": "Italy"
-    },
-    {
-      "code": "JM",
-      "name": "Jamaica"
-    },
-    {
-      "code": "JP",
-      "name": "Japan"
-    },
-    {
-      "code": "JO",
-      "name": "Jordan"
-    },
-    {
-      "code": "KZ",
-      "name": "Kazakhstan"
-    },
-    {
-      "code": "KE",
-      "name": "Kenya"
-    },
-    {
-      "code": "KR",
-      "name": "South Korea"
-    },
-    {
-      "code": "KW",
-      "name": "Kuwait"
-    },
-    {
-      "code": "KG",
-      "name": "Kyrgyzstan"
-    },
-    {
-      "code": "LA",
-      "name": "Laos"
-    },
-    {
-      "code": "LV",
-      "name": "Latvia"
-    },
-    {
-      "code": "LB",
-      "name": "Lebanon"
-    },
-    {
-      "code": "LS",
-      "name": "Lesotho"
-    },
-    {
-      "code": "LR",
-      "name": "Liberia"
-    },
-    {
-      "code": "LY",
-      "name": "Libya"
-    },
-    {
-      "code": "LI",
-      "name": "Liechtenstein"
-    },
-    {
-      "code": "LT",
-      "name": "Lithuania"
-    },
-    {
-      "code": "LU",
-      "name": "Luxembourg"
-    },
-    {
-      "code": "MG",
-      "name": "Madagascar"
-    },
-    {
-      "code": "MW",
-      "name": "Malawi"
-    },
-    {
-      "code": "MY",
-      "name": "Malaysia"
-    },
-    {
-      "code": "MV",
-      "name": "Maldives"
-    },
-    {
-      "code": "ML",
-      "name": "Mali"
-    },
-    {
-      "code": "MT",
-      "name": "Malta"
-    },
-    {
-      "code": "MX",
-      "name": "Mexico"
-    },
-    {
-      "code": "MD",
-      "name": "Moldova"
-    },
-    {
-      "code": "MC",
-      "name": "Monaco"
-    },
-    {
-      "code": "MN",
-      "name": "Mongolia"
-    },
-    {
-      "code": "ME",
-      "name": "Montenegro"
-    },
-    {
-      "code": "MA",
-      "name": "Morocco"
-    },
-    {
-      "code": "MZ",
-      "name": "Mozambique"
-    },
-    {
-      "code": "MM",
-      "name": "Myanmar"
-    },
-    {
-      "code": "NA",
-      "name": "Namibia"
-    },
-    {
-      "code": "NP",
-      "name": "Nepal"
-    },
-    {
-      "code": "NL",
-      "name": "Netherlands"
-    },
-    {
-      "code": "NZ",
-      "name": "New Zealand"
-    },
-    {
-      "code": "NI",
-      "name": "Nicaragua"
-    },
-    {
-      "code": "NE",
-      "name": "Niger"
-    },
-    {
-      "code": "NG",
-      "name": "Nigeria"
-    },
-    {
-      "code": "MK",
-      "name": "North Macedonia"
-    },
-    {
-      "code": "NO",
-      "name": "Norway"
-    },
-    {
-      "code": "OM",
-      "name": "Oman"
-    },
-    {
-      "code": "PK",
-      "name": "Pakistan"
-    },
-    {
-      "code": "PA",
-      "name": "Panama"
-    },
-    {
-      "code": "PG",
-      "name": "Papua New Guinea"
-    },
-    {
-      "code": "PY",
-      "name": "Paraguay"
-    },
-    {
-      "code": "PE",
-      "name": "Peru"
-    },
-    {
-      "code": "PH",
-      "name": "Philippines"
-    },
-    {
-      "code": "PL",
-      "name": "Poland"
-    },
-    {
-      "code": "PT",
-      "name": "Portugal"
-    },
-    {
-      "code": "QA",
-      "name": "Qatar"
-    },
-    {
-      "code": "RO",
-      "name": "Romania"
-    },
-    {
-      "code": "RU",
-      "name": "Russia"
-    },
-    {
-      "code": "RW",
-      "name": "Rwanda"
-    },
-    {
-      "code": "SA",
-      "name": "Saudi Arabia"
-    },
-    {
-      "code": "SN",
-      "name": "Senegal"
-    },
-    {
-      "code": "RS",
-      "name": "Serbia"
-    },
-    {
-      "code": "SG",
-      "name": "Singapore"
-    },
-    {
-      "code": "SK",
-      "name": "Slovakia"
-    },
-    {
-      "code": "SI",
-      "name": "Slovenia"
-    },
-    {
-      "code": "ZA",
-      "name": "South Africa"
-    },
-    {
-      "code": "ES",
-      "name": "Spain"
-    },
-    {
-      "code": "LK",
-      "name": "Sri Lanka"
-    },
-    {
-      "code": "SE",
-      "name": "Sweden"
-    },
-    {
-      "code": "CH",
-      "name": "Switzerland"
-    },
-    {
-      "code": "TW",
-      "name": "Taiwan"
-    },
-    {
-      "code": "TH",
-      "name": "Thailand"
-    },
-    {
-      "code": "TR",
-      "name": "Turkey"
-    },
-    {
-      "code": "UG",
-      "name": "Uganda"
-    },
-    {
-      "code": "UA",
-      "name": "Ukraine"
-    },
-    {
-      "code": "AE",
-      "name": "United Arab Emirates"
-    },
-    {
-      "code": "GB",
-      "name": "United Kingdom"
-    },
-    {
-      "code": "US",
-      "name": "United States"
-    },
-    {
-      "code": "UY",
-      "name": "Uruguay"
-    },
-    {
-      "code": "UZ",
-      "name": "Uzbekistan"
-    },
-    {
-      "code": "VE",
-      "name": "Venezuela"
-    },
-    {
-      "code": "VN",
-      "name": "Vietnam"
-    },
-    {
-      "code": "YE",
-      "name": "Yemen"
-    },
-    {
-      "code": "ZM",
-      "name": "Zambia"
-    },
-    {
-      "code": "ZW",
-      "name": "Zimbabwe"
-    }
-  ]
+  }
 };

@@ -52,3 +52,23 @@ export async function renderEmailPreview(input: EmailPreviewInput, signal?: Abor
 		errorMessage: 'We could not show the preview. Try again in a minute.'
 	});
 }
+
+export type PublicPreview = { html: string; subject: string; language: string; url: string; cached: boolean };
+
+/**
+ * Landing page preview, no account (POST /v1/public/preview-issue). The server reads the
+ * site, writes its newest article as an issue in `language` and renders it in the AIBAN
+ * template. Nothing is saved or sent. 5 new previews per hour per visitor; repeated
+ * requests for the same site and language are cached on the server.
+ */
+export function publicPreview(url: string, language: string, signal?: AbortSignal): Promise<PublicPreview> {
+	return request<PublicPreview>('/v1/public/preview-issue', {
+		method: 'POST',
+		auth: 'none',
+		body: { url, language },
+		timeoutMs: LLM_TIMEOUT_MS,
+		signal,
+		retries: 0,
+		errorMessage: 'We could not write a preview from that site. Check the address and try again.'
+	});
+}

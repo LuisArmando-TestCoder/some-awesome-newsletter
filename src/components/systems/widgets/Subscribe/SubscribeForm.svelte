@@ -110,7 +110,8 @@
     mountedAt = Date.now();
     let saved: string | null = null;
     try {
-      saved = localStorage.getItem('lang');
+      // Only a language the visitor picked in the menu counts; otherwise the browser decides.
+      saved = localStorage.getItem('lang.chosen') === '1' ? localStorage.getItem('lang') : null;
     } catch {
       saved = null;
     }

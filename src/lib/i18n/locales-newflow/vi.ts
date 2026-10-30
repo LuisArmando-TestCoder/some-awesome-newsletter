@@ -1,5 +1,5 @@
-// vi strings for locales-newflow. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale vi
+// vi (Vietnamese) strings for locales-newflow. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "onboarding": {
     "progress": "Bước {current}/{total}",
@@ -116,6 +116,9 @@ export default {
       "dayLabel": "Ngày",
       "timeLabel": "Giờ",
       "timeHint": "Theo giờ địa phương của bạn.",
+      "summaryDaily": "Mỗi ngày lúc {time}, giờ của bạn ({zone}).",
+      "summaryWeekly": "Mỗi {day} lúc {time}, giờ của bạn ({zone}).",
+      "summaryMonthly": "Vào ngày 1 mỗi tháng lúc {time}, giờ của bạn ({zone}).",
       "recipeTitle": "Tự động gửi các số mới",
       "recipeBody": "Theo lịch ở trên, chúng tôi chọn bài mới tốt nhất của bạn, viết theo giọng văn của bạn, dịch cho từng người đọc và gửi qua email.",
       "recipeOn": "Bật",

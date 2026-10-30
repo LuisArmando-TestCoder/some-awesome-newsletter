@@ -1,5 +1,5 @@
-// bho strings for locales-newflow. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale bho
+// bho (Bhojpuri) strings for locales-newflow. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "onboarding": {
     "progress": "चरण {current} / {total}",
@@ -116,6 +116,9 @@ export default {
       "dayLabel": "दिन",
       "timeLabel": "समय",
       "timeHint": "राउर स्थानीय समय में।",
+      "summaryDaily": "हर दिन {time} बजे, राउर समय ({zone}) में।",
+      "summaryWeekly": "हर {day} {time} बजे, राउर समय ({zone}) में।",
+      "summaryMonthly": "हर महीना के पहिला तारीख {time} बजे, राउर समय ({zone}) में।",
       "recipeTitle": "नया अंक अपने आप भेजीं",
       "recipeBody": "ऊपर दिहल शेड्यूल पर हमनी राउर सबसे बढ़िया नया लेख चुनीले, ओकरा के राउर अंदाज में लिखीले, हर पाठक खातिर अनुवाद करीले आ ईमेल करीले।",
       "recipeOn": "चालू",

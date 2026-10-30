@@ -1,5 +1,5 @@
-// bn strings for locales-newflow. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale bn
+// bn (Bangla) strings for locales-newflow. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "onboarding": {
     "progress": "ধাপ {current}/{total}",
@@ -116,6 +116,9 @@ export default {
       "dayLabel": "দিন",
       "timeLabel": "সময়",
       "timeHint": "আপনার স্থানীয় সময় অনুযায়ী।",
+      "summaryDaily": "প্রতিদিন {time} এ, আপনার সময় ({zone})।",
+      "summaryWeekly": "প্রতি {day} {time} এ, আপনার সময় ({zone})।",
+      "summaryMonthly": "প্রতি মাসের ১ তারিখে {time} এ, আপনার সময় ({zone})।",
       "recipeTitle": "নতুন ইস্যু অটোমেটিক পাঠান",
       "recipeBody": "ওপরের সময়সূচি অনুযায়ী আমরা আপনার সেরা নতুন আর্টিকেলটি বেছে নিই, আপনার ভঙ্গিতে লিখি, প্রত্যেক পাঠকের জন্য অনুবাদ করি এবং ইমেল করি।",
       "recipeOn": "চালু",

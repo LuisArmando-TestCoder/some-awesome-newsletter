@@ -1,5 +1,5 @@
-// mr strings for locales-newflow. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale mr
+// mr (Marathi) strings for locales-newflow. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "onboarding": {
     "progress": "पायरी {current} / {total}",
@@ -116,6 +116,9 @@ export default {
       "dayLabel": "दिवस",
       "timeLabel": "वेळ",
       "timeHint": "तुमच्या स्थानिक वेळेनुसार.",
+      "summaryDaily": "दर दिवशी {time} वाजता, तुमच्या वेळेनुसार ({zone}).",
+      "summaryWeekly": "दर {day} {time} वाजता, तुमच्या वेळेनुसार ({zone}).",
+      "summaryMonthly": "दर महिन्याच्या पहिल्या तारखेस {time} वाजता, तुमच्या वेळेनुसार ({zone}).",
       "recipeTitle": "नवीन अंक आपोआप पाठवा",
       "recipeBody": "वरील वेळापत्रकानुसार आम्ही तुमचा सर्वोत्तम नवीन लेख निवडतो, तो तुमच्या शैलीत लिहितो, प्रत्येक वाचकासाठी भाषांतर करतो आणि ईमेल करतो.",
       "recipeOn": "चालू",

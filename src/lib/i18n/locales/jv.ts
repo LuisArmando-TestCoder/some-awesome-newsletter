@@ -1,5 +1,5 @@
-// jv strings for locales. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale jv
+// jv (Javanese) strings for locales. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "auth": {
     "logo": "/icons/logo.png",
@@ -35,6 +35,82 @@ export default {
       "ogImageAlt": "Logo AIBAN"
     },
     "skipLink": "Langsung menyang isi utama",
+    "display": {
+      "title": "Situs web sampeyan, ditulis dadi newsletter.",
+      "kicker": "AIBAN"
+    },
+    "statement": {
+      "lines": [
+        "Sampeyan wis nerbitake karya sing apik.",
+        "Klien sampeyan maca ing luwih saka siji basa.",
+        "AIBAN ngowahi saben artikel anyar dadi edisi",
+        "lan ngirim saben macam versi ing basa dhewe-dhewe."
+      ]
+    },
+    "history": {
+      "eyebrow": "Cara kerjane",
+      "title": "Siklus siji edisi.",
+      "lead": "Lacak siji edisi wiwit jadwal sampeyan miwiti nganti miwiti maneh. Sampeyan nyetel iki sepisan.",
+      "note": "Conto jadwal. Sampeyan milih dina, wektu lan kerepane.",
+      "progressLabel": "Langkah-langkah siji edisi",
+      "items": [
+        {
+          "mark": "9:00",
+          "title": "Jadwal sampeyan miwiti proses",
+          "body": "Saben Senin jam 9:00 ing conto iki. Sampeyan milih saben dina, saben minggu utawa saben sasi."
+        },
+        {
+          "mark": "Maca",
+          "title": "AIBAN maca situs web sampeyan",
+          "body": "Nemokake artikel paling anyar lan milih bagean sing paling penting kanggo pamaca ideal sampeyan."
+        },
+        {
+          "mark": "Nulis",
+          "title": "Nulis edisi kanthi swara sampeyan",
+          "body": "Teks ngetutake cara nulis situs sampeyan, dadi kaya swara sampeyan."
+        },
+        {
+          "mark": "Nerjemahake",
+          "title": "Saben pamaca entuk basa dhewe",
+          "body": "Siji edisi dadi pirang-pirang versi sing dibutuhake pelanggan sampeyan."
+        },
+        {
+          "mark": "Ngirim",
+          "title": "Teka kanthi jeneng sampeyan",
+          "body": "Karo jeneng sampeyan lan tandha tangan email sampeyan. Balasan menyang inbox sampeyan."
+        },
+        {
+          "mark": "Nerbitake",
+          "title": "Dadi artikel ing blog sampeyan",
+          "body": "Karo link dhewe sing bisa ditemokake lan dibagikake wong."
+        },
+        {
+          "mark": "Lapor",
+          "title": "Sampeyan delok apa sing kedadeyan",
+          "body": "Dashboard sampeyan nuduhake sapa sing gabung lan link sing diklik pamaca."
+        },
+        {
+          "mark": "Maneh",
+          "title": "Senin sabanjure, mlaku maneh",
+          "body": "Terus mlaku nganti sampeyan mateni ing dashboard sampeyan."
+        }
+      ]
+    },
+    "rail": {
+      "label": "Bab kaca",
+      "chapters": [
+        "Miwiti",
+        "Napa",
+        "Basa",
+        "Cara kerjane",
+        "Jeneng sampeyan",
+        "Tuwuh",
+        "Kanggo sapa",
+        "Rega",
+        "Pitakon",
+        "Miwiti"
+      ]
+    },
     "hero": {
       "eyebrow": "Buletin kanggo bisnis jasa",
       "title": "Situs web sampeyan dadi buletin mingguan, ing basane saben pamaca",
@@ -57,6 +133,26 @@ export default {
       "startCta": "Miwiti gratis karo {site}",
       "startCtaGeneric": "Miwiti gratis",
       "liveRegion": "Conto pratinjau wis dianyari kanggo {site}."
+    },
+    "live": {
+      "badge": "Ditulis saiki",
+      "loadingTitle": "Nulis sampel edisi saka {site}",
+      "steps": [
+        "Maca {site}",
+        "Nggoleki artikel paling anyar",
+        "Nulis ing {language}",
+        "Masang ing template email sampeyan"
+      ],
+      "takes": "Biasane butuh 20 nganti 40 detik. Sampeyan bisa terus gulir.",
+      "readyNote": "AIBAN nulis sampel iki saka artikel paling anyar ing {site}. Ora ana sing disimpen utawa dikirim. Nalika sampeyan miwiti, AIBAN nggunakake swara lan jadwal sampeyan dhewe.",
+      "readyAnnounce": "Sampel edisi saka {site} wis siyap.",
+      "languageLabel": "Basa pamaca",
+      "loadingLanguage": "Nulis ing {language}",
+      "errorTitle": "Kita ora bisa nulis pratinjau saka {site}",
+      "retry": "Coba maneh",
+      "showSample": "Tampilake tata letak sampel",
+      "frameTitle": "Sampel edisi sing ditulis saka {site}",
+      "openFull": "Bukak ing tab anyar"
     },
     "chain": {
       "eyebrow": "Carane kerja",
@@ -483,7 +579,7 @@ export default {
     "errorFetching": "Kita ora bisa ngemot artikel iki. Muat ulang kaca sawise sedhela kanggo njajal maneh.",
     "noArticleSpecified": "Ora ana artikel sing ditemtokake.",
     "goBack": "Bali",
-    "loading": "Loading..."
+    "loading": "Ngemot..."
   },
   "pricing": {
     "eyebrow": "Rega",
@@ -494,8 +590,8 @@ export default {
     "yearlySave": "Irit 35%",
     "intervalLabel": "Periode tagihan",
     "billedYearly": "ditagih saben taun",
-    "perMonthShort": "/mo",
-    "perYearShort": "/yr",
+    "perMonthShort": "/sasi",
+    "perYearShort": "/taun",
     "freeCta": "Miwiti gratis",
     "processing": "Mbukak kaca pembayaran...",
     "askMore": "Saben akun diwiwiti nganggo paket Gratis. Yen butuh luwih akeh, kirim pesen marang kita ing {email} lan kita bakal ngganti paket sampeyan.",
@@ -587,6 +683,7 @@ export default {
       "suggestions": "Saran",
       "recent": "Panelusuran anyar",
       "clearRecent": "Busak panelusuran anyar",
+      "clear": "Bersihake panggolekan",
       "title": "Asil panelusuran",
       "resultsFor": "Asil kanggo \"{q}\"",
       "count": "{count} artikel ditemokake",
@@ -691,6 +788,7 @@ export default {
   "legal": {
     "navLabel": "Dokumen hukum",
     "lastUpdated": "Pungkasan dianyari: {date}",
+    "onThisPage": "Ing kaca iki",
     "privacy": {
       "title": "Kabijakan privasi",
       "metaTitle": "Kabijakan privasi | AIBAN",
@@ -919,6 +1017,8 @@ export default {
     "codeSent": "Kita wis ngirim kode menyang email sampeyan.",
     "invalidCode": "Kode kuwi ora bener. Priksa email paling anyar sing kita kirim, utawa kirim ulang kode.",
     "regenerateCode": "Kirim kode maneh",
+    "codeAccepted": "Kode ditampa. Mbukak dashboard sampeyan.",
+    "codeLabel": "Kode 6 digit",
     "back": "Bali",
     "byProceeding": "Kanthi nerusake, sampeyan setuju karo",
     "termsOfService": "Syarat layanan",
@@ -935,7 +1035,7 @@ export default {
     "title": "Owahi pelanggan dadi pengunjung",
     "recommendation": "Bantu AI kita mangerteni merek sampeyan kanthi nyambungake situs web sampeyan.",
     "question": "Apa sampeyan duwe situs web? (opsional, bisa ditambahake mengko)",
-    "placeholder": "https://situs-sampeyan.com"
+    "placeholder": "https://your-site.com"
   },
   "newsSource": {
     "title": "Sambungake sumber konten sampeyan",
@@ -947,6 +1047,673 @@ export default {
       "title": "Sugeng rawuh ing buletin.",
       "invitedBy": "Sampeyan wis diundang dening {configuratorId}."
     }
+  },
+  "showcase": {
+    "sampleBadge": "Data conto",
+    "exampleLabel": "Conto bisnis",
+    "caption": "{business} kuwi conto {kind}. Jeneng, artikel lan angka ing tampilan iki kuwi panggonane kanggo nuduhake kepiye dashboard sampeyan katon sawise sawetara minggu.",
+    "pause": "Jeda animasi",
+    "play": "Puter animasi",
+    "scenesLabel": "Bagian dashboard",
+    "examplesLabel": "Conto bisnis",
+    "appUrl": "app.aiban.news",
+    "nav": {
+      "home": "Omahe",
+      "automations": "Otomasi",
+      "sources": "Sumber",
+      "subscribers": "Pelanggan",
+      "reports": "Laporan",
+      "blog": "Blog"
+    },
+    "scenes": {
+      "home": "Ringkesan",
+      "issue": "Edisi",
+      "reports": "Klik",
+      "subscribers": "Pelanggan",
+      "automation": "Jadwal",
+      "source": "Situs web sampeyan",
+      "voice": "Suara sampeyan",
+      "signup": "Formulir pendaftaran",
+      "blog": "Blog",
+      "import": "Impor"
+    },
+    "ui": {
+      "hello": "Halo, {business}",
+      "narrative": "{subscribers} pamaca ing {languages} basa. Edisi sabanjure bakal dikirim {schedule}.",
+      "kpiSubscribers": "Pelanggan",
+      "kpiLanguages": "Basa",
+      "kpiClicks": "Klik, 7 dina pungkasan",
+      "kpiAutomations": "Otomasi aktif",
+      "kpiNew": "{count} anyar minggu iki",
+      "nextIssue": "Edisi sabanjure",
+      "ready": "Siap",
+      "activity": "Aktivitas anyar",
+      "from": "Saka",
+      "subject": "Subyek",
+      "readMore": "Waca artikel lengkap",
+      "readerLanguage": "Basa pamaca",
+      "clicksTitle": "Klik, 7 dina pungkasan",
+      "mostClicked": "Paling akeh diklik",
+      "clicks": "klik",
+      "days": [
+        "Sen",
+        "Sel",
+        "Reb",
+        "Kam",
+        "Jem",
+        "Set",
+        "Min"
+      ],
+      "subscribersTitle": "Pelanggan",
+      "language": "Basa",
+      "joinedVia": "Gabung liwat",
+      "newSubscriber": "Pelanggan anyar",
+      "automationTitle": "Edisi mingguan",
+      "automationSentence": "{schedule}, nulis edisi saka artikel paling anyar lan ngirim menyang saben maca ing basa dhewe-dhewe.",
+      "on": "Mati",
+      "off": "Mati",
+      "automationOn": "Otomasi diuripake",
+      "sourceLabel": "Sumber konten sampeyan",
+      "sourceButton": "Waca situsku",
+      "reading": "Maca situs sampeyan",
+      "found": "Ketemu {count} artikel",
+      "voiceReader": "Maca ideal sampeyan",
+      "voiceTone": "Kepiye swarané",
+      "signupHeading": "Entuk catetan mingguan kita",
+      "signupEmail": "Alamat email",
+      "signupLanguage": "Basa",
+      "signupButton": "Langganan",
+      "signupDone": "Cek inbox kanggo konfirmasi.",
+      "blogTitle": "Artikel saka {business}",
+      "importFile": "clients.csv",
+      "importing": "Ngimpor kontak",
+      "imported": "{count} kontak ditambahake",
+      "sources": {
+        "form": "Formulir pendaftaran",
+        "import": "Impor",
+        "manual": "Ditambah manual"
+      }
+    },
+    "examples": [
+      {
+        "business": "Northfield Studio",
+        "kind": "agen desain web",
+        "site": "northfield.studio",
+        "schedule": "saben Senin jam 9:00",
+        "subscribers": 312,
+        "newThisWeek": 9,
+        "clicks7": 84,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "en",
+            "name": "Inggris",
+            "share": 58
+          },
+          {
+            "code": "es",
+            "name": "Spanyol",
+            "share": 31
+          },
+          {
+            "code": "pt",
+            "name": "Portugis",
+            "share": 11
+          }
+        ],
+        "reader": "Pemilik klinik, toko lan studio sing pengin situs web sing nggawa klien, dudu portofolio.",
+        "tones": [
+          "Hangat",
+          "Biasa",
+          "Praktis"
+        ],
+        "articles": [
+          "Carane kita mbangun maneh situs web klinik gigi ing enem minggu",
+          "Lima perkara sing kudu dibenerake sadurunge redesain",
+          "Napa tombol pesen sampeyan kudu oranye"
+        ],
+        "issue": {
+          "title": "Carane kita mbangun maneh situs web klinik gigi ing enem minggu",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "A clinic website rebuilt in six weeks",
+              "summary": "We moved booking to the top of every page and cut the forms from nine fields to three. Here is what changed for the clinic."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "El sitio de una clínica, renovado en seis semanas",
+              "summary": "Pusimos la reserva arriba en cada página y redujimos los formularios de nueve campos a tres. Esto es lo que cambió para la clínica."
+            },
+            {
+              "code": "pt",
+              "name": "Português",
+              "subject": "O site de uma clínica, refeito em seis semanas",
+              "summary": "Colocamos o agendamento no topo de cada página e reduzimos os formulários de nove campos para três. Veja o que mudou para a clínica."
+            }
+          ]
+        },
+        "clicksByDay": [
+          21,
+          17,
+          12,
+          9,
+          11,
+          6,
+          8
+        ],
+        "topLinks": [
+          {
+            "title": "Studi kasus klinik",
+            "clicks": 38
+          },
+          {
+            "title": "Lima perkara sing kudu dibeneri sadurunge redesain",
+            "clicks": 27
+          },
+          {
+            "title": "Ndhaptar telpon",
+            "clicks": 19
+          }
+        ],
+        "people": [
+          {
+            "email": "lucia.r@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "mark@example.org",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "joana.s@example.net",
+            "lang": "PT",
+            "via": "form"
+          },
+          {
+            "email": "dr.chen@example.com",
+            "lang": "EN",
+            "via": "manual"
+          }
+        ],
+        "activity": [
+          "Edisi dikirim menyang 312 pamaca ing 3 basa",
+          "38 klik ing studi kasus klinik",
+          "Lucia gabung saka formulir ndhaptar lan maca ing basa Spanyol"
+        ],
+        "importCount": 148
+      },
+      {
+        "business": "Brightline Software",
+        "kind": "perusahaan piranti lunak",
+        "site": "brightline.dev",
+        "schedule": "tanggal 1 saben wulan jam 10:00",
+        "subscribers": 1240,
+        "newThisWeek": 23,
+        "clicks7": 211,
+        "automationsOn": 1,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 64
+          },
+          {
+            "code": "de",
+            "name": "German",
+            "share": 22
+          },
+          {
+            "code": "fr",
+            "name": "French",
+            "share": 14
+          }
+        ],
+        "reader": "Manajer kantor lan pimpinan IT ing klien sing nggunakake piranti lunak booking kita saben dina.",
+        "tones": [
+          "Jelas",
+          "Cekak",
+          "Ramah"
+        ],
+        "articles": [
+          "Rilis 4.2: janjian bola-bali",
+          "Laporan luwih cepet kanggo tim gedhe",
+          "Cara mindahake kalender saka spreadsheet"
+        ],
+        "issue": {
+          "title": "Rilis 4.2: janjian bola-bali",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "New this month: recurring appointments",
+              "summary": "You can now repeat any appointment weekly or monthly. Reports for teams over 50 people also load faster."
+            },
+            {
+              "code": "de",
+              "name": "Deutsch",
+              "subject": "Neu diesen Monat: wiederkehrende Termine",
+              "summary": "Sie können jetzt jeden Termin wöchentlich oder monatlich wiederholen. Berichte für Teams ab 50 Personen laden außerdem schneller."
+            },
+            {
+              "code": "fr",
+              "name": "Français",
+              "subject": "Nouveau ce mois-ci : les rendez-vous récurrents",
+              "summary": "Vous pouvez désormais répéter un rendez-vous chaque semaine ou chaque mois. Les rapports des équipes de plus de 50 personnes s'affichent aussi plus vite."
+            }
+          ]
+        },
+        "clicksByDay": [
+          64,
+          48,
+          33,
+          25,
+          19,
+          9,
+          13
+        ],
+        "topLinks": [
+          {
+            "title": "Panduan janjian bola-bali",
+            "clicks": 96
+          },
+          {
+            "title": "Catetan rilis 4.2",
+            "clicks": 71
+          },
+          {
+            "title": "Mindhah saka spreadsheet",
+            "clicks": 44
+          }
+        ],
+        "people": [
+          {
+            "email": "it@example.de",
+            "lang": "DE",
+            "via": "import"
+          },
+          {
+            "email": "sophie.m@example.fr",
+            "lang": "FR",
+            "via": "form"
+          },
+          {
+            "email": "ops@example.com",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "k.weber@example.de",
+            "lang": "DE",
+            "via": "form"
+          }
+        ],
+        "activity": [
+          "Edisi dikirim menyang 1240 pamaca ing 3 basa",
+          "96 klik ing panduan janjian bola-bali",
+          "23 kontak diimpor saka clients.csv"
+        ],
+        "importCount": 412
+      },
+      {
+        "business": "Casa Verde Realty",
+        "kind": "agen real estate",
+        "site": "casaverde.homes",
+        "schedule": "saben Kemis jam 8:00",
+        "subscribers": 586,
+        "newThisWeek": 14,
+        "clicks7": 163,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 47
+          },
+          {
+            "code": "en",
+            "name": "English",
+            "share": 41
+          },
+          {
+            "code": "fr",
+            "name": "French",
+            "share": 12
+          }
+        ],
+        "reader": "Kulawarga lan pensiunan saka luar negeri sing nggoleki omah cedhak pasisir, lan sing duwe omah sing bisa adol.",
+        "tones": [
+          "Hangat",
+          "Lokal",
+          "Tenang"
+        ],
+        "articles": [
+          "Telung omah anyar cedhak pantai minggu iki",
+          "Kaya apa biaya tutup kanggo pembeli manca",
+          "Rega ing kutha tuwa, pembaruan musim gugur"
+        ],
+        "issue": {
+          "title": "Telung omah anyar cedhak pantai minggu iki",
+          "langs": [
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tres casas nuevas cerca de la playa",
+              "summary": "Una casa de dos habitaciones con jardín, un apartamento con vista al mar y una casa para reformar a diez minutos del centro."
+            },
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Three new homes near the beach",
+              "summary": "A two bedroom house with a garden, a flat with a sea view and a house to renovate ten minutes from the center."
+            },
+            {
+              "code": "fr",
+              "name": "Français",
+              "subject": "Trois nouvelles maisons près de la plage",
+              "summary": "Une maison de deux chambres avec jardin, un appartement avec vue sur la mer et une maison à rénover à dix minutes du centre."
+            }
+          ]
+        },
+        "clicksByDay": [
+          12,
+          9,
+          15,
+          52,
+          38,
+          21,
+          16
+        ],
+        "topLinks": [
+          {
+            "title": "Apartemen kanthi pemandangan segara",
+            "clicks": 71
+          },
+          {
+            "title": "Omah rong kamar turu kanthi kebon",
+            "clicks": 54
+          },
+          {
+            "title": "Biaya penutupan kanggo pembeli manca",
+            "clicks": 38
+          }
+        ],
+        "people": [
+          {
+            "email": "familia.ortiz@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "j.dupont@example.fr",
+            "lang": "FR",
+            "via": "form"
+          },
+          {
+            "email": "tom.and.ann@example.org",
+            "lang": "EN",
+            "via": "manual"
+          },
+          {
+            "email": "rmora@example.net",
+            "lang": "ES",
+            "via": "import"
+          }
+        ],
+        "activity": [
+          "Edisi dikirim menyang 586 pamaca ing 3 basa",
+          "71 klik ing apartemen kanthi pemandangan segara",
+          "Pamaca ing Prancis gabung saka formulir pendaftaran"
+        ],
+        "importCount": 203
+      },
+      {
+        "business": "Mora and Partners",
+        "kind": "firma akuntansi",
+        "site": "morapartners.co",
+        "schedule": "saben Selasa liyane jam 7:30",
+        "subscribers": 428,
+        "newThisWeek": 6,
+        "clicks7": 97,
+        "automationsOn": 1,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 52
+          },
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 38
+          },
+          {
+            "code": "it",
+            "name": "Italian",
+            "share": 10
+          }
+        ],
+        "reader": "Pemilik perusahaan cilik sing pengin ngerti owah-owahan pajak lan gaji, tanpa istilah sing ruwet.",
+        "tones": [
+          "Tenang",
+          "Akurat",
+          "Sederhana"
+        ],
+        "articles": [
+          "Batas wektu pajak triwulanan pindah menyang tanggal 15",
+          "Apa sing kudu disimpen nalika nyewa karyawan pertama",
+          "Kwitansi: kertas utawa foto?"
+        ],
+        "issue": {
+          "title": "Batas wektu pajak triwulanan pindah menyang tanggal 15",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Your quarterly deadline moves to the 15th",
+              "summary": "The filing date for the next quarter moves five days later. Here is what to send us and when, so nothing is late."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tu plazo trimestral pasa al día 15",
+              "summary": "La fecha de presentación del próximo trimestre se mueve cinco días. Esto es lo que debes enviarnos y cuándo, para que nada llegue tarde."
+            },
+            {
+              "code": "it",
+              "name": "Italiano",
+              "subject": "La scadenza trimestrale passa al 15",
+              "summary": "La data di presentazione del prossimo trimestre slitta di cinque giorni. Ecco cosa inviarci e quando, perché nulla arrivi in ritardo."
+            }
+          ]
+        },
+        "clicksByDay": [
+          33,
+          24,
+          14,
+          8,
+          7,
+          4,
+          7
+        ],
+        "topLinks": [
+          {
+            "title": "Daftar periksa kanggo tanggal 15",
+            "clicks": 46
+          },
+          {
+            "title": "Nyewa karyawan pertama",
+            "clicks": 29
+          },
+          {
+            "title": "Resik telpon review",
+            "clicks": 22
+          }
+        ],
+        "people": [
+          {
+            "email": "bakery.owner@example.com",
+            "lang": "EN",
+            "via": "import"
+          },
+          {
+            "email": "c.rossi@example.it",
+            "lang": "IT",
+            "via": "form"
+          },
+          {
+            "email": "taller.luna@example.net",
+            "lang": "ES",
+            "via": "import"
+          },
+          {
+            "email": "finance@example.org",
+            "lang": "EN",
+            "via": "manual"
+          }
+        ],
+        "activity": [
+          "Edisi dikirim menyang 428 pamaca ing 3 basa",
+          "46 klik ing daftar periksa kanggo tanggal 15",
+          "6 pamaca anyar minggu iki"
+        ],
+        "importCount": 97
+      },
+      {
+        "business": "Run Better Coaching",
+        "kind": "pelatih lari",
+        "site": "runbetter.coach",
+        "schedule": "saben Minggu jam 18:00",
+        "subscribers": 907,
+        "newThisWeek": 31,
+        "clicks7": 248,
+        "automationsOn": 2,
+        "languages": [
+          {
+            "code": "en",
+            "name": "English",
+            "share": 49
+          },
+          {
+            "code": "es",
+            "name": "Spanish",
+            "share": 33
+          },
+          {
+            "code": "de",
+            "name": "German",
+            "share": 18
+          }
+        ],
+        "reader": "Dewasa sing latihan kanggo setengah maraton pertama sing mlaku kaping telu seminggu sadurunge kerja.",
+        "tones": [
+          "Menehi semangat",
+          "Langsung",
+          "Cekak"
+        ],
+        "articles": [
+          "Minggu iki: lari dawa, luwih alon tinimbang sing dikira",
+          "Sepatu sawise 500 kilometer",
+          "Rutinitas kekuatan 20 menit"
+        ],
+        "issue": {
+          "title": "Minggu iki: lari dawa, luwih alon tinimbang sing dikira",
+          "langs": [
+            {
+              "code": "en",
+              "name": "English",
+              "subject": "Your long run should feel too easy",
+              "summary": "Keep it slow enough to talk. This week's plan adds ten minutes and one short hill session."
+            },
+            {
+              "code": "es",
+              "name": "Español",
+              "subject": "Tu tirada larga debería sentirse demasiado fácil",
+              "summary": "Mantén un ritmo que te deje hablar. El plan de esta semana suma diez minutos y una sesión corta de cuestas."
+            },
+            {
+              "code": "de",
+              "name": "Deutsch",
+              "subject": "Dein langer Lauf sollte sich zu leicht anfühlen",
+              "summary": "Lauf so langsam, dass du noch reden kannst. Der Plan dieser Woche bringt zehn Minuten mehr und eine kurze Bergeinheit."
+            }
+          ]
+        },
+        "clicksByDay": [
+          18,
+          22,
+          26,
+          31,
+          35,
+          49,
+          67
+        ],
+        "topLinks": [
+          {
+            "title": "Rencana latihan minggu iki",
+            "clicks": 121
+          },
+          {
+            "title": "Rutinitas kekuatan 20 menit",
+            "clicks": 78
+          },
+          {
+            "title": "Sepatu sawise 500 kilometer",
+            "clicks": 49
+          }
+        ],
+        "people": [
+          {
+            "email": "ana.runs@example.com",
+            "lang": "ES",
+            "via": "form"
+          },
+          {
+            "email": "felix.k@example.de",
+            "lang": "DE",
+            "via": "form"
+          },
+          {
+            "email": "sam@example.org",
+            "lang": "EN",
+            "via": "form"
+          },
+          {
+            "email": "club.secretary@example.net",
+            "lang": "EN",
+            "via": "import"
+          }
+        ],
+        "activity": [
+          "Edisi dikirim menyang 907 pamaca ing 3 basa",
+          "121 klik ing rencana latihan minggu iki",
+          "31 pamaca anyar minggu iki, akèh-akèhé saka formulir ndaftar"
+        ],
+        "importCount": 260
+      }
+    ]
+  },
+  "errorPage": {
+    "notFoundEyebrow": "Kesalahan 404",
+    "notFoundTitle": "Kita ora bisa nemokake kaca iki",
+    "notFoundBody": "Tautan bisa uga wis lawas utawa ana salah ketik. Kaca-kaca iki papan sing apik kanggo nerusake.",
+    "serverEyebrow": "Kesalahan {status}",
+    "serverTitle": "Ana sing salah ing sisih kita",
+    "serverBody": "Kita ora bisa ngunggah kaca iki. Coba maneh sajrone sawetara menit. Yen terus kedadeyan, tulisen menyang info@aiban.news.",
+    "retry": "Coba maneh",
+    "home": "Menyang kaca utama",
+    "popularTitle": "Kaca sing populer",
+    "links": {
+      "howItWorks": "Cara AIBAN makarya",
+      "pricing": "Rega",
+      "help": "Pusat bantuan",
+      "login": "Mlebu menyang dashboard sampeyan"
+    },
+    "report": "Yen tautan ing situs kita nggawa sampeyan menyang kene, ngomongake menyang info@aiban.news supaya kita bisa ndandani."
   },
   "header": {
     "goToWorkspace": "Bukak dasbor",
@@ -982,1429 +1749,5 @@ export default {
     "monthly": "Saben sasi",
     "yearly": "Saben taun",
     "loadingPlan": "Loading data paket..."
-  },
-  "languages": [
-    {
-      "code": "ab",
-      "name": "Abkhazian"
-    },
-    {
-      "code": "aa",
-      "name": "Afar"
-    },
-    {
-      "code": "af",
-      "name": "Afrikaans"
-    },
-    {
-      "code": "ak",
-      "name": "Akan"
-    },
-    {
-      "code": "sq",
-      "name": "Albania"
-    },
-    {
-      "code": "am",
-      "name": "Amharik"
-    },
-    {
-      "code": "ar",
-      "name": "Arab"
-    },
-    {
-      "code": "an",
-      "name": "Aragon"
-    },
-    {
-      "code": "hy",
-      "name": "Armenia"
-    },
-    {
-      "code": "as",
-      "name": "Assam"
-    },
-    {
-      "code": "av",
-      "name": "Avaric"
-    },
-    {
-      "code": "ae",
-      "name": "Avestan"
-    },
-    {
-      "code": "ay",
-      "name": "Aymara"
-    },
-    {
-      "code": "az",
-      "name": "Azerbaijan"
-    },
-    {
-      "code": "bm",
-      "name": "Bambara"
-    },
-    {
-      "code": "ba",
-      "name": "Bashkir"
-    },
-    {
-      "code": "eu",
-      "name": "Basque"
-    },
-    {
-      "code": "be",
-      "name": "Belarus"
-    },
-    {
-      "code": "bn",
-      "name": "Bengali"
-    },
-    {
-      "code": "bi",
-      "name": "Bislama"
-    },
-    {
-      "code": "bs",
-      "name": "Bosnia"
-    },
-    {
-      "code": "br",
-      "name": "Breton"
-    },
-    {
-      "code": "bg",
-      "name": "Bulgaria"
-    },
-    {
-      "code": "my",
-      "name": "Burma"
-    },
-    {
-      "code": "ca",
-      "name": "Katalan"
-    },
-    {
-      "code": "ch",
-      "name": "Chamorro"
-    },
-    {
-      "code": "ce",
-      "name": "Chechen"
-    },
-    {
-      "code": "ny",
-      "name": "Chichewa"
-    },
-    {
-      "code": "zh",
-      "name": "Mandarin"
-    },
-    {
-      "code": "cu",
-      "name": "Slavia Gereja"
-    },
-    {
-      "code": "cv",
-      "name": "Chuvash"
-    },
-    {
-      "code": "kw",
-      "name": "Cornish"
-    },
-    {
-      "code": "co",
-      "name": "Korsika"
-    },
-    {
-      "code": "cr",
-      "name": "Cree"
-    },
-    {
-      "code": "hr",
-      "name": "Kroasia"
-    },
-    {
-      "code": "cs",
-      "name": "Ceko"
-    },
-    {
-      "code": "da",
-      "name": "Denmark"
-    },
-    {
-      "code": "dv",
-      "name": "Divehi"
-    },
-    {
-      "code": "nl",
-      "name": "Walanda"
-    },
-    {
-      "code": "dz",
-      "name": "Dzongkha"
-    },
-    {
-      "code": "en",
-      "name": "Inggris"
-    },
-    {
-      "code": "eo",
-      "name": "Esperanto"
-    },
-    {
-      "code": "et",
-      "name": "Estonia"
-    },
-    {
-      "code": "ee",
-      "name": "Ewe"
-    },
-    {
-      "code": "fo",
-      "name": "Faroe"
-    },
-    {
-      "code": "fj",
-      "name": "Fiji"
-    },
-    {
-      "code": "fi",
-      "name": "Finlandia"
-    },
-    {
-      "code": "fr",
-      "name": "Prancis"
-    },
-    {
-      "code": "fy",
-      "name": "Frisia Kulon"
-    },
-    {
-      "code": "ff",
-      "name": "Fula"
-    },
-    {
-      "code": "gd",
-      "name": "Gaelik Skotlandia"
-    },
-    {
-      "code": "gl",
-      "name": "Galisia"
-    },
-    {
-      "code": "lg",
-      "name": "Ganda"
-    },
-    {
-      "code": "ka",
-      "name": "Georgia"
-    },
-    {
-      "code": "de",
-      "name": "Jerman"
-    },
-    {
-      "code": "el",
-      "name": "Yunani"
-    },
-    {
-      "code": "kl",
-      "name": "Greenland"
-    },
-    {
-      "code": "gn",
-      "name": "Guarani"
-    },
-    {
-      "code": "gu",
-      "name": "Gujarati"
-    },
-    {
-      "code": "ht",
-      "name": "Kreol Haiti"
-    },
-    {
-      "code": "ha",
-      "name": "Hausa"
-    },
-    {
-      "code": "he",
-      "name": "Ibrani"
-    },
-    {
-      "code": "hz",
-      "name": "Herero"
-    },
-    {
-      "code": "hi",
-      "name": "Hindi"
-    },
-    {
-      "code": "ho",
-      "name": "Hiri Motu"
-    },
-    {
-      "code": "hu",
-      "name": "Hungaria"
-    },
-    {
-      "code": "is",
-      "name": "Islandia"
-    },
-    {
-      "code": "io",
-      "name": "Ido"
-    },
-    {
-      "code": "ig",
-      "name": "Igbo"
-    },
-    {
-      "code": "id",
-      "name": "Indonesia"
-    },
-    {
-      "code": "ia",
-      "name": "Interlingua"
-    },
-    {
-      "code": "ie",
-      "name": "Interlingue"
-    },
-    {
-      "code": "iu",
-      "name": "Inuktitut"
-    },
-    {
-      "code": "ik",
-      "name": "Inupiaq"
-    },
-    {
-      "code": "ga",
-      "name": "Irlandia"
-    },
-    {
-      "code": "it",
-      "name": "Italia"
-    },
-    {
-      "code": "ja",
-      "name": "Jepang"
-    },
-    {
-      "code": "jv",
-      "name": "Jawa"
-    },
-    {
-      "code": "kn",
-      "name": "Kannada"
-    },
-    {
-      "code": "kr",
-      "name": "Kanuri"
-    },
-    {
-      "code": "ks",
-      "name": "Kashmir"
-    },
-    {
-      "code": "kk",
-      "name": "Kazakh"
-    },
-    {
-      "code": "km",
-      "name": "Khmer"
-    },
-    {
-      "code": "ki",
-      "name": "Kikuyu"
-    },
-    {
-      "code": "rw",
-      "name": "Kinyarwanda"
-    },
-    {
-      "code": "ky",
-      "name": "Kirgiz"
-    },
-    {
-      "code": "kv",
-      "name": "Komi"
-    },
-    {
-      "code": "kg",
-      "name": "Kongo"
-    },
-    {
-      "code": "ko",
-      "name": "Korea"
-    },
-    {
-      "code": "kj",
-      "name": "Kuanyama"
-    },
-    {
-      "code": "ku",
-      "name": "Kurdi"
-    },
-    {
-      "code": "lo",
-      "name": "Lao"
-    },
-    {
-      "code": "la",
-      "name": "Latin"
-    },
-    {
-      "code": "lv",
-      "name": "Latvia"
-    },
-    {
-      "code": "li",
-      "name": "Limburg"
-    },
-    {
-      "code": "ln",
-      "name": "Lingala"
-    },
-    {
-      "code": "lt",
-      "name": "Lithuania"
-    },
-    {
-      "code": "lu",
-      "name": "Luba-Katanga"
-    },
-    {
-      "code": "lb",
-      "name": "Luksemburg"
-    },
-    {
-      "code": "mk",
-      "name": "Makedonia"
-    },
-    {
-      "code": "mg",
-      "name": "Malagasi"
-    },
-    {
-      "code": "ms",
-      "name": "Melayu"
-    },
-    {
-      "code": "ml",
-      "name": "Malayalam"
-    },
-    {
-      "code": "mt",
-      "name": "Malta"
-    },
-    {
-      "code": "gv",
-      "name": "Manx"
-    },
-    {
-      "code": "mi",
-      "name": "Maori"
-    },
-    {
-      "code": "mr",
-      "name": "Marathi"
-    },
-    {
-      "code": "mh",
-      "name": "Marshall"
-    },
-    {
-      "code": "mn",
-      "name": "Mongolia"
-    },
-    {
-      "code": "na",
-      "name": "Nauru"
-    },
-    {
-      "code": "nv",
-      "name": "Navajo"
-    },
-    {
-      "code": "nd",
-      "name": "Ndebele Lor"
-    },
-    {
-      "code": "nr",
-      "name": "Ndebele Kidul"
-    },
-    {
-      "code": "ng",
-      "name": "Ndonga"
-    },
-    {
-      "code": "ne",
-      "name": "Nepal"
-    },
-    {
-      "code": "no",
-      "name": "Norwegia"
-    },
-    {
-      "code": "nb",
-      "name": "Bokmål Norwegia"
-    },
-    {
-      "code": "nn",
-      "name": "Nynorsk Norwegia"
-    },
-    {
-      "code": "oc",
-      "name": "Oksitan"
-    },
-    {
-      "code": "oj",
-      "name": "Ojibwa"
-    },
-    {
-      "code": "or",
-      "name": "Odia"
-    },
-    {
-      "code": "om",
-      "name": "Oromo"
-    },
-    {
-      "code": "os",
-      "name": "Ossetia"
-    },
-    {
-      "code": "pi",
-      "name": "Pali"
-    },
-    {
-      "code": "ps",
-      "name": "Pashto"
-    },
-    {
-      "code": "fa",
-      "name": "Persia"
-    },
-    {
-      "code": "pl",
-      "name": "Polandia"
-    },
-    {
-      "code": "pt",
-      "name": "Portugis"
-    },
-    {
-      "code": "pa",
-      "name": "Punjabi"
-    },
-    {
-      "code": "qu",
-      "name": "Quechua"
-    },
-    {
-      "code": "ro",
-      "name": "Rumania"
-    },
-    {
-      "code": "rm",
-      "name": "Reto-Roman"
-    },
-    {
-      "code": "rn",
-      "name": "Rundi"
-    },
-    {
-      "code": "ru",
-      "name": "Rusia"
-    },
-    {
-      "code": "se",
-      "name": "Sami Lor"
-    },
-    {
-      "code": "sm",
-      "name": "Samoa"
-    },
-    {
-      "code": "sg",
-      "name": "Sango"
-    },
-    {
-      "code": "sa",
-      "name": "Sanskerta"
-    },
-    {
-      "code": "sc",
-      "name": "Sardinia"
-    },
-    {
-      "code": "sr",
-      "name": "Serbia"
-    },
-    {
-      "code": "sn",
-      "name": "Shona"
-    },
-    {
-      "code": "ii",
-      "name": "Sichuan Yi"
-    },
-    {
-      "code": "sd",
-      "name": "Sindhi"
-    },
-    {
-      "code": "si",
-      "name": "Sinhala"
-    },
-    {
-      "code": "sk",
-      "name": "Slovak"
-    },
-    {
-      "code": "sl",
-      "name": "Slovenia"
-    },
-    {
-      "code": "so",
-      "name": "Somalia"
-    },
-    {
-      "code": "st",
-      "name": "Sotho Kidul"
-    },
-    {
-      "code": "es",
-      "name": "Spanyol"
-    },
-    {
-      "code": "su",
-      "name": "Sunda"
-    },
-    {
-      "code": "sw",
-      "name": "Swahili"
-    },
-    {
-      "code": "ss",
-      "name": "Swati"
-    },
-    {
-      "code": "sv",
-      "name": "Swedia"
-    },
-    {
-      "code": "tl",
-      "name": "Tagalog"
-    },
-    {
-      "code": "ty",
-      "name": "Tahiti"
-    },
-    {
-      "code": "tg",
-      "name": "Tajik"
-    },
-    {
-      "code": "ta",
-      "name": "Tamil"
-    },
-    {
-      "code": "tt",
-      "name": "Tatar"
-    },
-    {
-      "code": "te",
-      "name": "Telugu"
-    },
-    {
-      "code": "th",
-      "name": "Thai"
-    },
-    {
-      "code": "bo",
-      "name": "Tibet"
-    },
-    {
-      "code": "ti",
-      "name": "Tigrinya"
-    },
-    {
-      "code": "to",
-      "name": "Tonga"
-    },
-    {
-      "code": "ts",
-      "name": "Tsonga"
-    },
-    {
-      "code": "tn",
-      "name": "Tswana"
-    },
-    {
-      "code": "tr",
-      "name": "Turki"
-    },
-    {
-      "code": "tk",
-      "name": "Turkmen"
-    },
-    {
-      "code": "tw",
-      "name": "Twi"
-    },
-    {
-      "code": "ug",
-      "name": "Uighur"
-    },
-    {
-      "code": "uk",
-      "name": "Ukraina"
-    },
-    {
-      "code": "ur",
-      "name": "Urdu"
-    },
-    {
-      "code": "uz",
-      "name": "Uzbek"
-    },
-    {
-      "code": "ve",
-      "name": "Venda"
-    },
-    {
-      "code": "vi",
-      "name": "Vietnam"
-    },
-    {
-      "code": "vo",
-      "name": "Volapük"
-    },
-    {
-      "code": "wa",
-      "name": "Walloon"
-    },
-    {
-      "code": "cy",
-      "name": "Wales"
-    },
-    {
-      "code": "wo",
-      "name": "Wolof"
-    },
-    {
-      "code": "xh",
-      "name": "Xhosa"
-    },
-    {
-      "code": "yi",
-      "name": "Yiddish"
-    },
-    {
-      "code": "yo",
-      "name": "Yoruba"
-    },
-    {
-      "code": "za",
-      "name": "Zhuang"
-    },
-    {
-      "code": "zu",
-      "name": "Zulu"
-    }
-  ],
-  "countries": [
-    {
-      "code": "AF",
-      "name": "Afganistan"
-    },
-    {
-      "code": "AL",
-      "name": "Albania"
-    },
-    {
-      "code": "DZ",
-      "name": "Aljazair"
-    },
-    {
-      "code": "AS",
-      "name": "Samoa Amerika"
-    },
-    {
-      "code": "AD",
-      "name": "Andorra"
-    },
-    {
-      "code": "AO",
-      "name": "Angola"
-    },
-    {
-      "code": "AI",
-      "name": "Anguilla"
-    },
-    {
-      "code": "AQ",
-      "name": "Antartika"
-    },
-    {
-      "code": "AG",
-      "name": "Antigua lan Barbuda"
-    },
-    {
-      "code": "AR",
-      "name": "Argentina"
-    },
-    {
-      "code": "AM",
-      "name": "Armenia"
-    },
-    {
-      "code": "AW",
-      "name": "Aruba"
-    },
-    {
-      "code": "AU",
-      "name": "Australia"
-    },
-    {
-      "code": "AT",
-      "name": "Austria"
-    },
-    {
-      "code": "AZ",
-      "name": "Azerbaijan"
-    },
-    {
-      "code": "BS",
-      "name": "Bahamas"
-    },
-    {
-      "code": "BH",
-      "name": "Bahrain"
-    },
-    {
-      "code": "BD",
-      "name": "Bangladesh"
-    },
-    {
-      "code": "BB",
-      "name": "Barbados"
-    },
-    {
-      "code": "BY",
-      "name": "Belarus"
-    },
-    {
-      "code": "BE",
-      "name": "Belgia"
-    },
-    {
-      "code": "BZ",
-      "name": "Belize"
-    },
-    {
-      "code": "BJ",
-      "name": "Benin"
-    },
-    {
-      "code": "BM",
-      "name": "Bermuda"
-    },
-    {
-      "code": "BT",
-      "name": "Bhutan"
-    },
-    {
-      "code": "BO",
-      "name": "Bolivia"
-    },
-    {
-      "code": "BA",
-      "name": "Bosnia lan Herzegovina"
-    },
-    {
-      "code": "BW",
-      "name": "Botswana"
-    },
-    {
-      "code": "BR",
-      "name": "Brasil"
-    },
-    {
-      "code": "IO",
-      "name": "Wilayah Inggris nang Samudra Hindia"
-    },
-    {
-      "code": "VG",
-      "name": "Kepulauan Virgin Britania"
-    },
-    {
-      "code": "BN",
-      "name": "Brunei"
-    },
-    {
-      "code": "BG",
-      "name": "Bulgaria"
-    },
-    {
-      "code": "BF",
-      "name": "Burkina Faso"
-    },
-    {
-      "code": "BI",
-      "name": "Burundi"
-    },
-    {
-      "code": "KH",
-      "name": "Kamboja"
-    },
-    {
-      "code": "CM",
-      "name": "Kamerun"
-    },
-    {
-      "code": "CA",
-      "name": "Kanada"
-    },
-    {
-      "code": "CV",
-      "name": "Tanjung Verde"
-    },
-    {
-      "code": "KY",
-      "name": "Kepulauan Cayman"
-    },
-    {
-      "code": "CF",
-      "name": "Republik Afrika Tengah"
-    },
-    {
-      "code": "TD",
-      "name": "Chad"
-    },
-    {
-      "code": "CL",
-      "name": "Chili"
-    },
-    {
-      "code": "CN",
-      "name": "Tiongkok"
-    },
-    {
-      "code": "CX",
-      "name": "Pulo Natal"
-    },
-    {
-      "code": "CC",
-      "name": "Kepulauan Cocos"
-    },
-    {
-      "code": "CO",
-      "name": "Kolombia"
-    },
-    {
-      "code": "KM",
-      "name": "Komoro"
-    },
-    {
-      "code": "CG",
-      "name": "Kongo - Brazzaville"
-    },
-    {
-      "code": "CD",
-      "name": "Kongo - Kinshasa"
-    },
-    {
-      "code": "CK",
-      "name": "Kepulauan Cook"
-    },
-    {
-      "code": "CR",
-      "name": "Kosta Rika"
-    },
-    {
-      "code": "CI",
-      "name": "Pantai Gadhing"
-    },
-    {
-      "code": "HR",
-      "name": "Kroasia"
-    },
-    {
-      "code": "CU",
-      "name": "Kuba"
-    },
-    {
-      "code": "CY",
-      "name": "Siprus"
-    },
-    {
-      "code": "CZ",
-      "name": "Ceko"
-    },
-    {
-      "code": "DK",
-      "name": "Denmark"
-    },
-    {
-      "code": "DJ",
-      "name": "Djibouti"
-    },
-    {
-      "code": "DM",
-      "name": "Dominika"
-    },
-    {
-      "code": "DO",
-      "name": "Republik Dominika"
-    },
-    {
-      "code": "EC",
-      "name": "Ekuador"
-    },
-    {
-      "code": "EG",
-      "name": "Mesir"
-    },
-    {
-      "code": "SV",
-      "name": "El Salvador"
-    },
-    {
-      "code": "GQ",
-      "name": "Guinea Khatulistiwa"
-    },
-    {
-      "code": "ER",
-      "name": "Eritrea"
-    },
-    {
-      "code": "EE",
-      "name": "Estonia"
-    },
-    {
-      "code": "SZ",
-      "name": "Eswatini"
-    },
-    {
-      "code": "ET",
-      "name": "Etiopia"
-    },
-    {
-      "code": "FJ",
-      "name": "Fiji"
-    },
-    {
-      "code": "FI",
-      "name": "Finlandia"
-    },
-    {
-      "code": "FR",
-      "name": "Prancis"
-    },
-    {
-      "code": "GA",
-      "name": "Gabon"
-    },
-    {
-      "code": "GM",
-      "name": "Gambia"
-    },
-    {
-      "code": "GE",
-      "name": "Georgia"
-    },
-    {
-      "code": "DE",
-      "name": "Jerman"
-    },
-    {
-      "code": "GH",
-      "name": "Ghana"
-    },
-    {
-      "code": "GR",
-      "name": "Yunani"
-    },
-    {
-      "code": "GT",
-      "name": "Guatemala"
-    },
-    {
-      "code": "GN",
-      "name": "Gini"
-    },
-    {
-      "code": "GY",
-      "name": "Guyana"
-    },
-    {
-      "code": "HT",
-      "name": "Haiti"
-    },
-    {
-      "code": "HN",
-      "name": "Honduras"
-    },
-    {
-      "code": "HK",
-      "name": "Hong Kong"
-    },
-    {
-      "code": "HU",
-      "name": "Hungaria"
-    },
-    {
-      "code": "IS",
-      "name": "Islandia"
-    },
-    {
-      "code": "IN",
-      "name": "India"
-    },
-    {
-      "code": "ID",
-      "name": "Indonesia"
-    },
-    {
-      "code": "IR",
-      "name": "Iran"
-    },
-    {
-      "code": "IQ",
-      "name": "Irak"
-    },
-    {
-      "code": "IE",
-      "name": "Irlandia"
-    },
-    {
-      "code": "IL",
-      "name": "Israel"
-    },
-    {
-      "code": "IT",
-      "name": "Italia"
-    },
-    {
-      "code": "JM",
-      "name": "Jamaika"
-    },
-    {
-      "code": "JP",
-      "name": "Jepang"
-    },
-    {
-      "code": "JO",
-      "name": "Yordania"
-    },
-    {
-      "code": "KZ",
-      "name": "Kazakhstan"
-    },
-    {
-      "code": "KE",
-      "name": "Kenya"
-    },
-    {
-      "code": "KR",
-      "name": "Korea Kidul"
-    },
-    {
-      "code": "KW",
-      "name": "Kuwait"
-    },
-    {
-      "code": "KG",
-      "name": "Kirgizstan"
-    },
-    {
-      "code": "LA",
-      "name": "Laos"
-    },
-    {
-      "code": "LV",
-      "name": "Latvia"
-    },
-    {
-      "code": "LB",
-      "name": "Lebanon"
-    },
-    {
-      "code": "LS",
-      "name": "Lesotho"
-    },
-    {
-      "code": "LR",
-      "name": "Liberia"
-    },
-    {
-      "code": "LY",
-      "name": "Libya"
-    },
-    {
-      "code": "LI",
-      "name": "Liechtenstein"
-    },
-    {
-      "code": "LT",
-      "name": "Lithuania"
-    },
-    {
-      "code": "LU",
-      "name": "Luksemburg"
-    },
-    {
-      "code": "MG",
-      "name": "Madagaskar"
-    },
-    {
-      "code": "MW",
-      "name": "Malawi"
-    },
-    {
-      "code": "MY",
-      "name": "Malaysia"
-    },
-    {
-      "code": "MV",
-      "name": "Maladewa"
-    },
-    {
-      "code": "ML",
-      "name": "Mali"
-    },
-    {
-      "code": "MT",
-      "name": "Malta"
-    },
-    {
-      "code": "MX",
-      "name": "Meksiko"
-    },
-    {
-      "code": "MD",
-      "name": "Moldova"
-    },
-    {
-      "code": "MC",
-      "name": "Monako"
-    },
-    {
-      "code": "MN",
-      "name": "Mongolia"
-    },
-    {
-      "code": "ME",
-      "name": "Montenegro"
-    },
-    {
-      "code": "MA",
-      "name": "Maroko"
-    },
-    {
-      "code": "MZ",
-      "name": "Mozambik"
-    },
-    {
-      "code": "MM",
-      "name": "Myanmar"
-    },
-    {
-      "code": "NA",
-      "name": "Namibia"
-    },
-    {
-      "code": "NP",
-      "name": "Nepal"
-    },
-    {
-      "code": "NL",
-      "name": "Walanda"
-    },
-    {
-      "code": "NZ",
-      "name": "Selandia Anyar"
-    },
-    {
-      "code": "NI",
-      "name": "Nikaragua"
-    },
-    {
-      "code": "NE",
-      "name": "Niger"
-    },
-    {
-      "code": "NG",
-      "name": "Nigeria"
-    },
-    {
-      "code": "MK",
-      "name": "Makedonia Lor"
-    },
-    {
-      "code": "NO",
-      "name": "Norwegia"
-    },
-    {
-      "code": "OM",
-      "name": "Oman"
-    },
-    {
-      "code": "PK",
-      "name": "Pakistan"
-    },
-    {
-      "code": "PA",
-      "name": "Panama"
-    },
-    {
-      "code": "PG",
-      "name": "Papua Nugini"
-    },
-    {
-      "code": "PY",
-      "name": "Paraguay"
-    },
-    {
-      "code": "PE",
-      "name": "Peru"
-    },
-    {
-      "code": "PH",
-      "name": "Filipina"
-    },
-    {
-      "code": "PL",
-      "name": "Polandia"
-    },
-    {
-      "code": "PT",
-      "name": "Portugal"
-    },
-    {
-      "code": "QA",
-      "name": "Qatar"
-    },
-    {
-      "code": "RO",
-      "name": "Rumania"
-    },
-    {
-      "code": "RU",
-      "name": "Rusia"
-    },
-    {
-      "code": "RW",
-      "name": "Rwanda"
-    },
-    {
-      "code": "SA",
-      "name": "Arab Saudi"
-    },
-    {
-      "code": "SN",
-      "name": "Senegal"
-    },
-    {
-      "code": "RS",
-      "name": "Serbia"
-    },
-    {
-      "code": "SG",
-      "name": "Singapura"
-    },
-    {
-      "code": "SK",
-      "name": "Slovakia"
-    },
-    {
-      "code": "SI",
-      "name": "Slovenia"
-    },
-    {
-      "code": "ZA",
-      "name": "Afrika Kidul"
-    },
-    {
-      "code": "ES",
-      "name": "Spanyol"
-    },
-    {
-      "code": "LK",
-      "name": "Sri Lanka"
-    },
-    {
-      "code": "SE",
-      "name": "Swedia"
-    },
-    {
-      "code": "CH",
-      "name": "Swiss"
-    },
-    {
-      "code": "TW",
-      "name": "Taiwan"
-    },
-    {
-      "code": "TH",
-      "name": "Thailand"
-    },
-    {
-      "code": "TR",
-      "name": "Turki"
-    },
-    {
-      "code": "UG",
-      "name": "Uganda"
-    },
-    {
-      "code": "UA",
-      "name": "Ukraina"
-    },
-    {
-      "code": "AE",
-      "name": "Uni Emirat Arab"
-    },
-    {
-      "code": "GB",
-      "name": "Britania Raya"
-    },
-    {
-      "code": "US",
-      "name": "Amerika Serikat"
-    },
-    {
-      "code": "UY",
-      "name": "Uruguay"
-    },
-    {
-      "code": "UZ",
-      "name": "Uzbekistan"
-    },
-    {
-      "code": "VE",
-      "name": "Venezuela"
-    },
-    {
-      "code": "VN",
-      "name": "Vietnam"
-    },
-    {
-      "code": "YE",
-      "name": "Yaman"
-    },
-    {
-      "code": "ZM",
-      "name": "Zambia"
-    },
-    {
-      "code": "ZW",
-      "name": "Zimbabwe"
-    }
-  ]
+  }
 };

@@ -1,5 +1,5 @@
-// ha strings for locales-newflow. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale ha
+// ha (Hausa) strings for locales-newflow. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "onboarding": {
     "progress": "Mataki {current} cikin {total}",
@@ -116,6 +116,9 @@ export default {
       "dayLabel": "Rana",
       "timeLabel": "Lokaci",
       "timeHint": "A lokacinku na gida.",
+      "summaryDaily": "Kowace rana da {time}, lokacinku ({zone}).",
+      "summaryWeekly": "Kowace {day} da {time}, lokacinku ({zone}).",
+      "summaryMonthly": "A ranar 1 ga kowane wata da {time}, lokacinku ({zone}).",
       "recipeTitle": "Aika sababbin fitowowi ta atomatik",
       "recipeBody": "A jadawalin da ke sama, muna zaɓar mafi kyawun sabuwar maƙalarku, mu rubuta ta a salonku, mu fassara ta ga kowane mai karatu, kuma mu aika ta ta imel.",
       "recipeOn": "A kunne",

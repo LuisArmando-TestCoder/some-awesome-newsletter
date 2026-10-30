@@ -4,7 +4,8 @@
   import { browser } from "$app/environment";
   import store, { saveToConfig } from "../../../store";
   import type { WebhookGroup } from "../../../types";
-  import getAuthHeaders from "../../requests/getAuthHeaders";
+  import { request, seg } from "$lib/api/client";
+  import { toUserMessage } from "$lib/api/errors";
   import PlainText from "../PlainText/PlainText.svelte";
   import SubmitButton from "../../buttons/SubmitButton/SubmitButton.svelte";
   import { t } from "$lib/i18n/dashboard-translations";
@@ -112,48 +113,78 @@
 
   /* ─── Security signature ─────────────────────────────────────────── */
   let newSharedSecret: string | null = null;
+  let secretBusy = false;
+  let secretError = "";
+
+  const account = () => get(store).configuratorEmail || "";
 
   async function createSharedSecret() {
-    newSharedSecret = null;
-    const authHeaders = await getAuthHeaders();
-    const configId = authHeaders["x-auth-email"];
-    const response = await fetch(`${get(store).apiURL()}/configurations/${configId}/secret`, {
-      method: "POST", headers: authHeaders,
-    });
-    newSharedSecret = (await response.json()).sharedSecret;
+    if (secretBusy) return;
+    newSharedSecret = null; secretError = ""; secretBusy = true;
+    try {
+      const res = await request<{ sharedSecret?: string }>(`/configurations/${seg(account())}/secret`, { method: "POST", retries: 0 });
+      newSharedSecret = res?.sharedSecret ?? null;
+      if (!newSharedSecret) secretError = $t['secrets.createError'];
+    } catch (e) {
+      secretError = toUserMessage(e, $t['secrets.createError']);
+    } finally {
+      secretBusy = false;
+    }
   }
 
   /* ─── API keys ───────────────────────────────────────────────────── */
   let apiKeys: { hash: string; createdAt: string }[] = [];
   let newApiKey: string | null = null;
   let confirmingDeleteHash: string | null = null;
+  let keyBusy = false;
+  let keyError = "";
+  let copiedValue: string | null = null;
 
   async function fetchApiKeys() {
-    const authHeaders = await getAuthHeaders();
-    const configId = authHeaders["x-auth-email"];
-    const r = await fetch(`${get(store).apiURL()}/apikeys/${configId}`, { headers: authHeaders });
-    apiKeys = (await r.json()).apiKeys || [];
+    try {
+      const res = await request<{ apiKeys?: { hash: string; createdAt: string }[] }>(`/apikeys/${seg(account())}`);
+      apiKeys = res?.apiKeys ?? [];
+    } catch (e) {
+      keyError = toUserMessage(e, $t['secrets.loadError']);
+    }
   }
 
   async function createApiKey() {
-    newApiKey = null;
-    const authHeaders = await getAuthHeaders();
-    const configId = authHeaders["x-auth-email"];
-    const r = await fetch(`${get(store).apiURL()}/apikeys/${configId}`, { method: "POST", headers: authHeaders });
-    newApiKey = (await r.json()).apiKey;
-    await fetchApiKeys();
+    if (keyBusy) return;
+    newApiKey = null; keyError = ""; keyBusy = true;
+    try {
+      const res = await request<{ apiKey?: string }>(`/apikeys/${seg(account())}`, { method: "POST", retries: 0 });
+      newApiKey = res?.apiKey ?? null;
+      if (!newApiKey) keyError = $t['secrets.createError'];
+      await fetchApiKeys();
+    } catch (e) {
+      keyError = toUserMessage(e, $t['secrets.createError']);
+    } finally {
+      keyBusy = false;
+    }
   }
 
   async function deleteApiKey(hash: string) {
-    const authHeaders = await getAuthHeaders();
-    const configId = authHeaders["x-auth-email"];
-    await fetch(`${get(store).apiURL()}/apikeys/${configId}/${encodeURIComponent(hash)}`, { method: "DELETE", headers: authHeaders });
-    await fetchApiKeys();
-    confirmingDeleteHash = null;
+    keyError = "";
+    try {
+      await request(`/apikeys/${seg(account())}/${seg(hash)}`, { method: "DELETE", retries: 0 });
+      await fetchApiKeys();
+    } catch (e) {
+      keyError = toUserMessage(e, $t['secrets.deleteError']);
+    } finally {
+      confirmingDeleteHash = null;
+    }
   }
 
-  function copyToClipboard(text: string) {
-    navigator.clipboard.writeText(text);
+  async function copyToClipboard(text: string) {
+    try {
+      await navigator.clipboard.writeText(text);
+      copiedValue = text;
+      setTimeout(() => { if (copiedValue === text) copiedValue = null; }, 2000);
+    } catch {
+      // Clipboard blocked (permissions or insecure context): the value stays visible to copy by hand.
+      copiedValue = null;
+    }
   }
 
   /* ─── onMount (SSR-safe browser-only init) ───────────────────────── */
@@ -318,11 +349,12 @@
         <p class="warning-text"><strong>{$t['secrets.copyNow']}</strong> {$t['secrets.wontShowAgain']}</p>
         <div class="new-api-key-wrapper">
           <code class="new-api-key-code">{newSharedSecret}</code>
-          <button type="button" class="copy-btn" on:click={() => newSharedSecret && copyToClipboard(newSharedSecret)}>{$t['secrets.copy']}</button>
+          <button type="button" class="copy-btn" on:click={() => newSharedSecret && copyToClipboard(newSharedSecret)}>{copiedValue && copiedValue === newSharedSecret ? $t['secrets.copied'] : $t['secrets.copy']}</button>
         </div>
       </div>
     {:else}
-      <button type="button" class="secondary-btn" on:click={createSharedSecret}>{$t['secrets.generateSignature']}</button>
+      <button type="button" class="secondary-btn" on:click={createSharedSecret} disabled={secretBusy} aria-busy={secretBusy}>{secretBusy ? $t['secrets.working'] : $t['secrets.generateSignature']}</button>
+      {#if secretError}<p class="inline-error" role="alert">{secretError}</p>{/if}
     {/if}
   </div>
 
@@ -337,12 +369,13 @@
         <p class="warning-text"><strong>{$t['secrets.keyGenerated']}</strong></p>
         <div class="new-api-key-wrapper">
           <code class="new-api-key-code">{newApiKey}</code>
-          <button type="button" class="copy-btn" on:click={() => newApiKey && copyToClipboard(newApiKey)}>{$t['secrets.copy']}</button>
+          <button type="button" class="copy-btn" on:click={() => newApiKey && copyToClipboard(newApiKey)}>{copiedValue && copiedValue === newApiKey ? $t['secrets.copied'] : $t['secrets.copy']}</button>
         </div>
         <p class="small-hint">{$t['secrets.storeSecurely']}</p>
       </div>
     {/if}
-    <button type="button" class="primary-btn" on:click={createApiKey}>{$t['secrets.createNewKey']}</button>
+    <button type="button" class="primary-btn" on:click={createApiKey} disabled={keyBusy} aria-busy={keyBusy}>{keyBusy ? $t['secrets.working'] : $t['secrets.createNewKey']}</button>
+    {#if keyError}<p class="inline-error" role="alert">{keyError}</p>{/if}
     <div class="table-container">
       <h4 class="sub-title">{$t['secrets.activeConnections']}</h4>
       <table class="api-key-table">
@@ -621,5 +654,10 @@
   @media (prefers-reduced-motion: reduce) {
     .btn-text, .btn-delete, .btn-cancel, .btn-confirm, .confirm-btn, .delete-btn, .btn-cancel-edit, .primary-btn, .secondary-btn, .copy-btn, .add-group-btn { &:active { transform: none; } }
     .add-group-btn:hover .icon-plus { transform: none; }
+  }
+  .inline-error {
+    margin: var(--space-2, 0.5rem) 0 0;
+    font-size: var(--fs-sm, 0.875rem);
+    color: var(--danger-text, var(--danger, #c4281c));
   }
 </style>

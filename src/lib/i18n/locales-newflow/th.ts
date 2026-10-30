@@ -1,5 +1,5 @@
-// th strings for locales-newflow. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale th
+// th (Thai) strings for locales-newflow. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "onboarding": {
     "progress": "ขั้นตอนที่ {current} จาก {total}",
@@ -116,6 +116,9 @@ export default {
       "dayLabel": "วัน",
       "timeLabel": "เวลา",
       "timeHint": "ตามเวลาท้องถิ่นของคุณ",
+      "summaryDaily": "ทุกวัน เวลา {time} ตามเวลาของคุณ ({zone})",
+      "summaryWeekly": "ทุก {day} เวลา {time} ตามเวลาของคุณ ({zone})",
+      "summaryMonthly": "วันที่ 1 ของทุกเดือน เวลา {time} ตามเวลาของคุณ ({zone})",
       "recipeTitle": "ส่งฉบับใหม่โดยอัตโนมัติ",
       "recipeBody": "ตามกำหนดเวลาด้านบน เราจะเลือกบทความใหม่ที่ดีที่สุด เขียนด้วยสำนวนของคุณ แปลให้ผู้อ่านแต่ละคน และส่งทางอีเมล",
       "recipeOn": "เปิด",

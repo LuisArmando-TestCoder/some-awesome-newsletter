@@ -1,5 +1,5 @@
-// pt strings for locales-newflow. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale pt
+// pt (Portuguese (Brazil)) strings for locales-newflow. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "onboarding": {
     "progress": "Etapa {current} de {total}",
@@ -116,6 +116,9 @@ export default {
       "dayLabel": "Dia",
       "timeLabel": "Horário",
       "timeHint": "No seu horário local.",
+      "summaryDaily": "Todos os dias às {time}, no seu horário ({zone}).",
+      "summaryWeekly": "Toda {day} às {time}, no seu horário ({zone}).",
+      "summaryMonthly": "No dia 1 de cada mês às {time}, no seu horário ({zone}).",
       "recipeTitle": "Enviar novas edições automaticamente",
       "recipeBody": "Na frequência acima, escolhemos seu melhor artigo novo, escrevemos com a sua voz, traduzimos para cada leitor e enviamos por e-mail.",
       "recipeOn": "Ativado",
@@ -134,7 +137,7 @@ export default {
       "youAreSubscribed": "Você já está inscrito como {email}.",
       "othersLabel": "Convidar pessoas (opcional)",
       "othersHint": "Cole endereços de e-mail separados por vírgulas ou quebras de linha. Cada pessoa recebe um convite pessoal seu. Elas só recebem edições se aceitarem, e excluímos os convites não aceitos após 30 dias.",
-      "othersPlaceholder": "ana@example.com, li@example.com",
+      "othersPlaceholder": "ana@exemplo.com, li@exemplo.com",
       "sendNow": "Enviar agora",
       "sending": "Enviando sua primeira edição...",
       "sentTitle": "Sua primeira edição está a caminho",

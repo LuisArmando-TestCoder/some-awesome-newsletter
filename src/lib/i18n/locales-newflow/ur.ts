@@ -1,5 +1,5 @@
-// ur strings for locales-newflow. English (en.ts) is the source. Key order and shape follow en.ts.
-// Maintained by WS9; check with: node --experimental-strip-types --no-warnings scripts/i18n-check.mjs --locale ur
+// ur (Urdu) strings for locales-newflow. GENERATED from en.ts by scripts/i18n-generate.mjs.
+// Do not edit by hand: change en.ts and run npm run i18n:generate. Missing items fall back to English.
 export default {
   "onboarding": {
     "progress": "{total} میں سے مرحلہ {current}",
@@ -116,6 +116,9 @@ export default {
       "dayLabel": "دن",
       "timeLabel": "وقت",
       "timeHint": "آپ کے مقامی وقت کے مطابق۔",
+      "summaryDaily": "ہر روز {time} بجے، آپ کے وقت کے مطابق ({zone})۔",
+      "summaryWeekly": "ہر {day} {time} بجے، آپ کے وقت کے مطابق ({zone})۔",
+      "summaryMonthly": "ہر مہینے کی پہلی تاریخ کو {time} بجے، آپ کے وقت کے مطابق ({zone})۔",
       "recipeTitle": "نئے شمارے خود بخود بھیجیں",
       "recipeBody": "اوپر دیے گئے شیڈول پر ہم آپ کا بہترین نیا مضمون چنتے ہیں، اسے آپ کے انداز میں لکھتے ہیں، ہر قاری کے لیے ترجمہ کرتے ہیں اور ای میل کر دیتے ہیں۔",
       "recipeOn": "آن",

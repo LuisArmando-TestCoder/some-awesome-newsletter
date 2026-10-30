@@ -7,8 +7,8 @@
   import Button from "$lib/dashboard/ui/Button.svelte";
   import { dt } from "$lib/dashboard/i18n";
 
-  export let canReveal = true;
-  $: canReveal;
+  // Passed by the step host; this view is always shown.
+  export const canReveal: boolean = true;
 
   $: newsSources = ($store.config?.newsSources || []) as NewsSource[];
   $: jsonString = JSON.stringify(newsSources.map((ns) => ({ id: ns.id, lead: ns.lead, url: ns.url })), null, 2);
@@ -32,7 +32,9 @@
       <Button variant="secondary" icon="download" onclick={downloadJson}>{$dt("dash.dev.exportButton")}</Button>
     </svelte:fragment>
     <p class="exports__text">{$dt("dash.dev.exportText")}</p>
-    <pre class="exports__code" tabindex="0" aria-label={$dt("dash.dev.exportPreview")}><code>{jsonString}</code></pre>
+    <!-- Scrollable region: keyboard users need focus to scroll it (WCAG 2.1.1, axe scrollable-region-focusable). -->
+    <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+    <pre class="exports__code" role="region" tabindex="0" aria-label={$dt("dash.dev.exportPreview")}><code>{jsonString}</code></pre>
   </Card>
 </div>
 

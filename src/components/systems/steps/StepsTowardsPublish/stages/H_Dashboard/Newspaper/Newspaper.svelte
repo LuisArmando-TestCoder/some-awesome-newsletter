@@ -1,5 +1,8 @@
 <script lang="ts">
   import { sanitizeHtml } from "$lib/utils/sanitizeHtml";
+
+  // Passed by the step host (MultiSlotComponent); this view is always shown.
+  export const canReveal: boolean = true;
   /* ─────────────────── imports ─────────────────── */
   import { onMount } from "svelte";
   import { writable } from "svelte/store";
@@ -42,18 +45,23 @@
   let noResults = false;
   let totalItems = 0;
 
-  const articlesCache = new Map<string, any>();
+  /** One page of articles for one language, as the API returns it. */
+  type ArticlesPage = { withImages: Article[]; withoutImages: Article[]; total: number };
+
+  // eslint-disable-next-line svelte/prefer-svelte-reactivity -- plain cache, never rendered
+  const articlesCache = new Map<string, ArticlesPage>();
 
   function getCacheKey(lang: string, page: number) {
     return `${$store.configuratorEmail}-${newsSourceId || ""}-${search}-${lang}-${page}`;
   }
 
-  async function fetchAndCachePage(lang: string, pageToFetch: number) {
+  async function fetchAndCachePage(lang: string, pageToFetch: number): Promise<ArticlesPage> {
     const cacheKey = getCacheKey(lang, pageToFetch);
     if (articlesCache.has(cacheKey) && pageToFetch !== 0) { // Always refetch page 0 on initial load
-      return articlesCache.get(cacheKey);
+      return articlesCache.get(cacheKey)!;
     }
 
+    // eslint-disable-next-line svelte/prefer-svelte-reactivity -- local temporary used to build a query string
     const pageParams = new URLSearchParams();
     pageParams.set("page", (pageToFetch + 1).toString()); // API is 1-based
     pageParams.set("lang", lang);
@@ -67,7 +75,7 @@
     }
 
     const data = await resp.json();
-    const articlesData = data.articles[lang] || {
+    const articlesData: ArticlesPage = data.articles[lang] || {
       withImages: [],
       withoutImages: [],
       total: 0,
@@ -77,7 +85,7 @@
     return articlesData;
   }
 
-  function displayPageContent(articlesData: any) {
+  function displayPageContent(articlesData: ArticlesPage) {
     articlesWithImages = articlesData.withImages;
     articlesWithoutImages = articlesData.withoutImages;
     totalItems = articlesData.total;
@@ -100,7 +108,7 @@
       if (page < totalPages - 1) {
         fetchAndCachePage(lang, page + 1).catch((e) => console.error("Prefetch next failed:", e));
       }
-    } catch (err) {
+    } catch {
       error = $t['newspaper.errorList'];
     } finally {
       loading = false;
@@ -110,6 +118,7 @@
   function handlePageChange(language: string, event: CustomEvent<{ page: number }>) {
     const newPage = event.detail.page;
     // New Map so Svelte sees the change and the pagination highlight moves.
+    // eslint-disable-next-line svelte/prefer-svelte-reactivity -- legacy component: reassigning a new Map triggers the update
     languagePages = new Map(languagePages).set(language, newPage);
     loadAndDisplayPage(language, newPage);
   }
@@ -145,6 +154,7 @@
       isStreaming = true;
       error = null;
       try {
+        // eslint-disable-next-line svelte/prefer-svelte-reactivity -- local temporary used to build a query string
         const qs = new URLSearchParams({ search });
         if (newsSourceId) qs.set("newsSourceId", newsSourceId);
         let searchUrl = `${$store.apiURL()}/articles/${encodeURIComponent($store.configuratorEmail)}?${qs.toString()}`;
@@ -189,7 +199,7 @@
         if (totalItems === 0) {
           noResults = true;
         }
-      } catch (err) {
+      } catch {
         error = $t['newspaper.errorSearch'];
       } finally {
         isStreaming = false;
@@ -227,6 +237,7 @@
     loading = true;
     error = null;
     try {
+      // eslint-disable-next-line svelte/prefer-svelte-reactivity -- local temporary used to build a query string
       const pageParams = new URLSearchParams();
       pageParams.set("newsSourceId", newsSourceId);
       
@@ -240,7 +251,7 @@
         allUserLanguages = Object.keys(data.articles);
         activeTab = allUserLanguages[0];
         
-        Object.entries(data.articles).forEach(([lang, langData]) => {
+        Object.entries(data.articles as Record<string, ArticlesPage>).forEach(([lang, langData]) => {
           articlesCache.set(getCacheKey(lang, 0), langData);
         });
 
@@ -251,7 +262,7 @@
         totalItems = 0;
         noResults = true;
       }
-    } catch (err) {
+    } catch {
       error = $t['newspaper.errorList'];
     } finally {
       loading = false;
@@ -333,7 +344,7 @@
 
       {#if articlesWithImages.length > 3}
         <section class="standard-grid-repeater">
-          {#each articlesWithImages.slice(3) as article, i}
+          {#each articlesWithImages.slice(3) as _article, i (i)}
             {#if i % 3 === 0}
               <FeaturedArticlesGrid
                 articles={articlesWithImages.slice(i + 3, i + 6)}
@@ -355,8 +366,10 @@
       {#if $isArticleOpen && $selectedArticle}
         <Container show={$isArticleOpen}>
           <div class="modal-content-inner">
+            <!-- eslint-disable-next-line svelte/no-at-html-tags -- content passes through sanitizeHtml -->
             <h2>{@html sanitizeHtml($selectedArticle.title)}</h2>
             <p><small>{$t['labels.created']}: {$selectedArticle.creation} | {$t['labels.language']}: {$selectedArticle.language}</small></p>
+            <!-- eslint-disable-next-line svelte/no-at-html-tags -- content passes through sanitizeHtml -->
             {@html sanitizeHtml($selectedArticle.content)}
           </div>
         </Container>
@@ -386,15 +399,6 @@
     margin-bottom: 2rem;
     gap: 1rem;
     flex-wrap: wrap;
-
-    label {
-      font-weight: bold;
-    }
-
-    select {
-      padding: 0.5rem;
-      border-radius: 8px;
-    }
   }
 
   .article-link {
@@ -413,10 +417,6 @@
 
   .controls__languages {
     padding: 1.5rem;
-  }
-
-  .standard-grid-repeater .featured-grid {
-    margin-bottom: 4rem;
   }
 
   .modal-content-inner {

@@ -1,8 +1,9 @@
 <script lang="ts">
+	import type { TagTreeNode } from "./types";
 	import { writable, type Writable } from 'svelte/store';
 	import CollapsibleTagNode from './CollapsibleTagNode.svelte';
 
-	export let tags: { name: string; children?: any[] }[] = [];
+	export let tags: TagTreeNode[] = [];
 	export let selectedTags: Writable<string[]> = writable([]);
 
 	function toggleTag(tag: string) {
@@ -17,7 +18,7 @@
 </script>
 
 <div class="tags-container">
-	{#each tags as node}
+	{#each tags as node (node.name)}
 		<CollapsibleTagNode {node} {selectedTags} {toggleTag} />
 	{/each}
 </div>

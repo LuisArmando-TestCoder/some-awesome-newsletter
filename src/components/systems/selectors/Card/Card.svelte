@@ -185,17 +185,4 @@
     max-height: 0;
     opacity: 0;
   }
-
-  /* Each child inside card-body will also transition its opacity and vertical position */
-  .card-body > * {
-    opacity: 0;
-    transform: translateY(10px);
-    transition:
-      opacity 0.4s ease,
-      transform 0.4s ease;
-  }
-  .card-body > *.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
 </style>

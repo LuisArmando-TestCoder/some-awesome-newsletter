@@ -1,7 +1,7 @@
 import { request, seg } from "$lib/api/client";
 import { LLM_TIMEOUT_MS } from "$lib/api/config";
 import { newsSourceEnvelope } from "$lib/api/schemas";
-import { replaceNewsSourceInStore } from "./_internal";
+import { asNewsSource, replaceNewsSourceInStore } from "./_internal";
 
 /** Re-detect selectors for a source (optionally with a new URL). Returns the source or null. */
 export default async function regenerateSelectors(configId: string, newsSourceId: string, newUrl?: string) {
@@ -12,8 +12,9 @@ export default async function regenerateSelectors(configId: string, newsSourceId
       timeoutMs: LLM_TIMEOUT_MS,
       schema: newsSourceEnvelope,
     });
-    await replaceNewsSourceInStore(json.newsSource as any);
-    return json.newsSource as any;
+    const updated = asNewsSource(json.newsSource);
+    await replaceNewsSourceInStore(updated);
+    return updated;
   } catch (e) {
     console.error("[regenerateSelectors] Failed", e);
     return null;

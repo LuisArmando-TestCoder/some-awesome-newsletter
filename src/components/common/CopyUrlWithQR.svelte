@@ -1,7 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import QRCode from "qrcode";
-    import MarkdownText from "../systems/texts/MarkdownText/MarkdownText.svelte";
     import { t } from "$lib/i18n/dashboard-translations";
 
     export let configuratorEmail: string = "";
@@ -132,15 +131,6 @@
         box-shadow: 0 0 10px -8.5px var(--color-background);
     }
 
-    .url-text {
-        word-wrap: break-word; /* Wrap long URLs */
-        font-size: 0.9em;
-        color: #333;
-        background-color: #eee;
-        padding: 8px;
-        border-radius: 4px;
-    }
-
     .controls {
         display: flex;
         flex-direction: column; /* Stack controls vertically */
@@ -180,11 +170,5 @@
         background-color: #e0e0e0;
     }
 
-    .copy-button {
-        /* Specific styles if needed */
-    }
 
-    .download-button {
-        /* Specific styles if needed */
-    }
 </style>

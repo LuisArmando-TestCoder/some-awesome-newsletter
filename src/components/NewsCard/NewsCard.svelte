@@ -5,7 +5,6 @@
   export let imageAlt: string;
   export let title: string;
   export let excerpt: string;
-  export let link: string | undefined = undefined;
   export let readMoreText: string = "Read more";
   export let loading: boolean = false;
 

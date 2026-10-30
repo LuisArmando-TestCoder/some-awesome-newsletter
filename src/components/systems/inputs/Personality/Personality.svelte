@@ -6,6 +6,7 @@
   import { writable } from "svelte/store";
   import SubmitButton from "../../buttons/SubmitButton/SubmitButton.svelte";
   import { t } from "$lib/i18n/dashboard-translations";
+  import { errorMessage } from "$lib/api/errors";
 
   // --- Props ---
   export let personality: string = "";
@@ -40,9 +41,9 @@
       const result = await generatePersonality(currentContent, newsSourceId);
       onChange(result.personality); // Update parent, which updates prop, which updates textarea
       latestMessage.set($t['personality.success']);
-    } catch (error: any) {
+    } catch (error) {
       const message =
-        error?.message || $t['personality.error'];
+        errorMessage(error) || $t['personality.error'];
       generationError.set(message);
       onError(message);
       latestMessage.set("");
@@ -52,6 +53,7 @@
 
     onSubmit();
   }
+  const textareaId = `personality-${Math.random().toString(36).slice(2, 9)}`;
 </script>
 
 <div class="personality-field">
@@ -71,7 +73,7 @@
 
   <!-- Label (only visible when textarea has content) -->
   {#if currentContent}
-    <label class="textarea-label">
+    <label class="textarea-label" for={textareaId}>
       {placeholderText}
     </label>
   {/if}
@@ -79,6 +81,7 @@
   <!-- Textarea Container (Optional - could be removed if no border needed) -->
   <div class="textarea-wrapper">
     <textarea
+      id={textareaId}
       class="personality-textarea"
       bind:value={currentContent}
       on:input={handleInput}
@@ -181,7 +184,4 @@
     }
   }
 
-  :global(.submit-button) {
-    // Specific styles if needed
-  }
 </style>

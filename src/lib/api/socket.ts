@@ -42,15 +42,17 @@ export type SocketStatus = 'idle' | 'connecting' | 'connected' | 'reconnecting' 
 const status = writable<SocketStatus>('idle');
 export const socketStatus: Readable<SocketStatus> = { subscribe: status.subscribe };
 
-let socket: Socket<ServerToClientEvents, ClientToServerEvents> | null = null;
+export type AppSocket = Socket<ServerToClientEvents, ClientToServerEvents>;
+
+let socket: AppSocket | null = null;
 let identity: { id: string; accessCode: string } | null = null;
 let pingTimer: ReturnType<typeof setInterval> | null = null;
 let connecting: Promise<void> | null = null;
-type AnyListener = (...args: any[]) => void;
+type AnyListener = (...args: never[]) => void;
 const listeners = new Map<keyof ServerToClientEvents, Set<AnyListener>>();
 
 function attach(s: Socket<ServerToClientEvents, ClientToServerEvents>) {
-	for (const [event, set] of listeners) for (const l of set) s.on(event, l as any);
+	for (const [event, set] of listeners) for (const l of set) s.on(event, l as ServerToClientEvents[typeof event]);
 }
 
 /** Connect (or switch user). Safe to call many times. */
@@ -111,10 +113,12 @@ export function on<E extends keyof ServerToClientEvents>(event: E, listener: Ser
 	let set = listeners.get(event);
 	if (!set) listeners.set(event, (set = new Set()));
 	set.add(listener as AnyListener);
-	socket?.on(event, listener as any);
+	// Widen E to the key union: socket.io cannot resolve its listener type for a generic key.
+	const key: keyof ServerToClientEvents = event;
+	socket?.on(key, listener as ServerToClientEvents[typeof key]);
 	return () => {
 		set!.delete(listener as AnyListener);
-		socket?.off(event, listener as any);
+		socket?.off(key, listener as ServerToClientEvents[typeof key]);
 	};
 }
 

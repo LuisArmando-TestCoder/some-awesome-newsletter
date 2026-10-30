@@ -1,18 +1,19 @@
 <script lang="ts">
-  import Date from "../../buttons/Date/Date.svelte";
+  import DateField from "../../buttons/Date/Date.svelte";
   import camelCaseToCapitalized from "../../helpers/camelCaseToCapitalized";
-  import Number from "../../inputs/Number/Number.svelte";
+  import NumberField from "../../inputs/Number/Number.svelte";
   import PlainText from "../../inputs/PlainText/PlainText.svelte";
   import MarkdownText from "../../texts/MarkdownText/MarkdownText.svelte";
   import Switch from "../Switch/Switch.svelte";
 
-  export let data: any;
+  export let data: unknown;
 
   import JsonViewer from "./JsonViewer.svelte";
 
   export let canReveal = false;
 
-  function isDate(val: any): boolean {
+  // The imported components no longer shadow the global Date, so this check works.
+  function isDate(val: unknown): val is Date {
     return val instanceof Date;
   }
 </script>
@@ -21,7 +22,7 @@
   {#if typeof data === "object" && data !== null}
     {#if Array.isArray(data)}
       <ul class="json-array">
-        {#each data as item, index}
+        {#each data as item, index (index)}
           <li>
             <span class="json-index">
               <MarkdownText {canReveal}>
@@ -35,7 +36,7 @@
       </ul>
     {:else}
       <div class="json-object">
-        {#each Object.entries(data) as [key, value]}
+        {#each Object.entries(data) as [key, value] (key)}
           <div class="json-property">
             <span class="json-key">
               <MarkdownText {canReveal}>
@@ -50,7 +51,7 @@
     {/if}
   {:else if typeof data === "number"}
     <span class="json-number">
-      <Number value={String(data)} />
+      <NumberField value={String(data)} />
     </span>
   {:else if typeof data === "string"}
     <span class="json-string">
@@ -61,7 +62,7 @@
       <Switch toggled={data} />
     </span>
   {:else if isDate(data)}
-    <Date value={data.toLocaleString()} />
+    <DateField value={data.toLocaleString()} />
   {:else if data === null}
     <span class="json-null">null</span>
   {:else}
@@ -103,9 +104,6 @@
   }
   .json-boolean {
     color: #2196f3;
-  }
-  .json-date {
-    color: #ff9800;
   }
   .json-null {
     color: red;

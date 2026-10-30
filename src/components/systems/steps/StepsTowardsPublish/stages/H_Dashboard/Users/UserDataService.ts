@@ -8,9 +8,9 @@ import type { NewsletterUser } from "../../../../../../types";
 import { addNewsletterUser } from "../../../../../requests/addNewsletterUserEndpoint";
 import subscribeNewsletterUser from "../../../../../requests/subscribeNewsletterUser";
 import { request, seg } from "$lib/api/client";
+import { errorMessage } from "$lib/api/errors";
 import unsubscribeUserToConfigNewsSource from "../../../../../requests/unsubscribeUserToConfigNewsSource";
 import getLeadsForConfigurator from "../../../../../requests/getLeadsForConfigurator";
-import getUsersFromRawFileOrText from "../../../../../requests/getUsersFromRawFileOrText";
 import { uploadUserFileChunked } from "../../../../../requests/uploadUserFileChunked";
 
 // --- Helper Function ---
@@ -31,7 +31,7 @@ export async function refreshSubscribers(): Promise<void> {
   let failed = 0;
 
   await Promise.all(
-    newsSources.map(async (source: any) => {
+    newsSources.map(async (source: { id?: string } | null) => {
       if (!source?.id) return;
       try {
         const data = await request<NewsletterUser[]>(`/newsletter/users/${seg(configId)}/${seg(source.id)}`);
@@ -75,7 +75,7 @@ export async function loadInitialData(): Promise<void> {
     ]);
     console.log("[UserDataService] loadInitialData: Fetched leads:", leadsResponse);
 
-    const updateData: { leads?: any } = {};
+    const updateData: { leads?: unknown } = {};
     if (leadsResponse && leadsResponse[configId]) {
        updateData.leads = leadsResponse[configId];
     } else {
@@ -93,7 +93,7 @@ export async function loadInitialData(): Promise<void> {
     if (configuratorEmail && currentNewsSources.length > 0) {
       for (const newsSource of currentNewsSources) {
         const sourceId = newsSource.id;
-        if (sourceId && currentSubscribers.hasOwnProperty(sourceId) && currentSubscribers[sourceId]?.length === 0) {
+        if (sourceId && Object.hasOwn(currentSubscribers, sourceId) && currentSubscribers[sourceId]?.length === 0) {
           console.log(`[UserDataService] loadInitialData: News source ${sourceId} has no subscribers. Attempting to add/subscribe configurator ${configuratorEmail}...`);
           try {
              await addNewsletterUser(
@@ -127,7 +127,7 @@ export async function loadInitialData(): Promise<void> {
       await refreshSubscribers();
     }
 
-  } catch (err: any) {
+  } catch (err) {
     console.error("[UserDataService] loadInitialData: Error during initial data load or post-check:", err);
     saveToStore({ subscribers: {}, leads: {} });
   } finally {
@@ -196,13 +196,13 @@ export async function addUserAndSubscribe(
     }
     console.log(`[UserDataService] addUserAndSubscribe: Finished successfully for user ${userData.email}.`);
 
-  } catch (err: any) {
+  } catch (err) {
     console.error(
       `[UserDataService] addUserAndSubscribe: Error adding/subscribing user ${userData.email} to ${newsSourceId}:`,
       err
     );
     throw new Error(
-      err.message || `Failed to add or subscribe user ${userData.email}.`
+      errorMessage(err) || `Failed to add or subscribe user ${userData.email}.`
     );
   }
 }
@@ -231,9 +231,9 @@ export async function processBulkUpload(
 
     return result;
 
-  } catch (err: any) {
+  } catch (err) {
     console.error("[UserDataService] processBulkUpload: Error during bulk add process:", err);
-    throw new Error(err.message || "Failed to process bulk upload file.");
+    throw new Error(errorMessage(err) || "Failed to process bulk upload file.");
   }
 }
 
@@ -274,11 +274,11 @@ export async function unsubscribeUserFromSource(
       console.log(`[UserDataService] unsubscribeUserFromSource: User ${userEmail} not found in central store for ${newsSourceId}, no update needed.`);
     }
     return true;
-  } catch (err: any) {
+  } catch (err) {
     console.error(
       `[UserDataService] unsubscribeUserFromSource: Error removing user ${userEmail} from ${newsSourceId}:`,
       err
     );
-    throw new Error(err.message || `Failed to unsubscribe ${userEmail}.`);
+    throw new Error(errorMessage(err) || `Failed to unsubscribe ${userEmail}.`);
   }
 }

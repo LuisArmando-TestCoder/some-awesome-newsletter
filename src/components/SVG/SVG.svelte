@@ -47,6 +47,7 @@
 {#if error}
   <p class="svg-loader--error">{error}</p>
 {:else if svgContent}
+  <!-- eslint-disable-next-line svelte/no-at-html-tags -- SVG markup from the app's own icon files -->
   {@html svgContent}
 {:else}
   <p class="svg-loader--loading"><span class="svg-loader--loading--dots"></span></p>

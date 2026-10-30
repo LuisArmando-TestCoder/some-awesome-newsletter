@@ -30,7 +30,7 @@
 
   {#if messages.length > 0}
     <div class="loading-text" aria-hidden="true">
-      {#each messages as message, i}
+      {#each messages as message, i (i)}
         <span class:visible={i === currentMessageIndex}>{message}</span>
       {/each}
     </div>

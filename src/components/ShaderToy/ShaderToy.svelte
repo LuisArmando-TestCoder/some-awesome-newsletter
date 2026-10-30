@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount, onDestroy } from "svelte";
+  import { onMount } from "svelte";
 
   // Shader code input
   export let shader;
@@ -39,14 +39,12 @@
     handleMouseMove(event);
   }
 
-  function handleMouseUp(event: MouseEvent) {
+  function handleMouseUp() {
     mouseDown = false;
   }
 
   // Handle window resize
   function handleResize() {
-    iResolution().x = canvas.parentElement?.clientWidth!;
-    iResolution().y = canvas.parentElement?.clientHeight!;
     canvas.width = iResolution().x;
     canvas.height = iResolution().y;
     if (gl) {
@@ -149,7 +147,7 @@
       `;
 
     // Compile shaders
-    function compileShader(type: GLenum, source: string) {
+    function compileShader(type: number, source: string) {
       const shader: WebGLShader = gl.createShader(type)!;
       gl.shaderSource(shader, source);
       gl.compileShader(shader);
@@ -253,24 +251,16 @@
     canvas.addEventListener("mousemove", handleMouseMove);
     canvas.addEventListener("mousedown", handleMouseDown);
     canvas.addEventListener("mouseup", handleMouseUp);
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      canvas.removeEventListener("mousemove", handleMouseMove);
+      canvas.removeEventListener("mousedown", handleMouseDown);
+      canvas.removeEventListener("mouseup", handleMouseUp);
+      window.removeEventListener("resize", handleResize);
+      if (gl && program) gl.deleteProgram(program);
+    };
   });
-
-  // Move onDestroy outside of onMount
-  //   onDestroy(() => {
-  //     // Cancel the animation frame
-  //     // cancelAnimationFrame(animationFrameId);
-
-  //     // Remove event listeners
-  //     canvas.removeEventListener("mousemove", handleMouseMove);
-  //     canvas.removeEventListener("mousedown", handleMouseDown);
-  //     canvas.removeEventListener("mouseup", handleMouseUp);
-  //     window.removeEventListener("resize", handleResize);
-
-  //     // Clean up WebGL resources if necessary
-  //     if (gl && program) {
-  //       gl.deleteProgram(program);
-  //     }
-  //   });
 </script>
 
 <!-- Canvas element where the shader will be rendered -->

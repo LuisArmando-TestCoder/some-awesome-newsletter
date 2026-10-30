@@ -18,11 +18,16 @@
 .tab__preview-note { margin: 0; font-size: var(--fs-xs); color: var(--text-3); line-height: var(--lh-normal); }
 .tab__error { margin-top: var(--space-4); }
 .stack { display: flex; flex-direction: column; gap: var(--space-4); }
-.row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
 @media (max-width: 960px) {
   .tab { grid-template-columns: minmax(0, 1fr); }
   .tab__preview { position: static; }
 }
-@media (max-width: 560px) {
-  .row { grid-template-columns: 1fr; }
+
+// Two-column field row (SendingTab). Include after the @use:
+//   @include settings.row;
+@mixin row {
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+  @media (max-width: 560px) {
+    .row { grid-template-columns: 1fr; }
+  }
 }

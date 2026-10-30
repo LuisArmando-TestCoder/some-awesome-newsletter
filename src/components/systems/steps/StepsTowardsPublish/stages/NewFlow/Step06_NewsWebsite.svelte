@@ -1,4 +1,5 @@
 <script lang="ts">
+  import type { TagTreeNode } from "../../../../selectors/Tags/types";
   // Onboarding slot 0: "What is your website?"
   // Validates only on submit (UX diagnostic item d). Nothing is created in the backend here.
   import { writable } from "svelte/store";
@@ -33,9 +34,11 @@
 
   // Topic picker for owners without a website.
   const selectedTags = writable<string[]>([]);
+  // eslint-disable-next-line svelte/prefer-svelte-reactivity -- lookup tables filled once while building the tag tree, never rendered
   const tagUrlMap = new Map<string, string[]>();
+  // eslint-disable-next-line svelte/prefer-svelte-reactivity -- lookup tables filled once while building the tag tree, never rendered
   const tagPathMap = new Map<string, string>();
-  function buildTags(obj: Record<string, unknown>, parentPath = ""): { name: string; children?: unknown[] }[] {
+  function buildTags(obj: Record<string, unknown>, parentPath = ""): TagTreeNode[] {
     return Object.keys(obj).map((key) => {
       const path = parentPath ? `${parentPath} / ${key}` : key;
       const v = obj[key];

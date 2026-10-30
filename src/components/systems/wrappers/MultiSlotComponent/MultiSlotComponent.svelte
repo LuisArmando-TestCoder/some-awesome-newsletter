@@ -1,15 +1,14 @@
 <script lang="ts">
-    import { collapsed } from "$lib/stores/sidebar.store";
   import { onDestroy } from "svelte";
   import { writable, type Writable } from "svelte/store";
     import store from "../../../store";
+  import type { StepComponent, StepValidator, Store } from "../../../types";
 
-  type Callback = (state: any) => boolean;
+  export let steps: [StepValidator, StepComponent][];
+  export let sharedStore: Writable<Store>;
 
-  export let steps: [Callback, any][];
-  export let sharedStore: Writable<any>;
-
-  let storeValue: any = writable();
+  // Filled synchronously by the subscription below.
+  const storeValue = writable<Store>({});
 
   const unsubscribe = sharedStore.subscribe((value) => {
     storeValue.set(value);
@@ -21,7 +20,7 @@
 </script>
 
 <div class="multi-slot-component">
-  {#each steps as [callback, Component]}
+  {#each steps as [callback, Component], itemIndex (itemIndex)}
     <div
       class:collapsed={$store.header}
       class="multi-slot-component--component-slot"

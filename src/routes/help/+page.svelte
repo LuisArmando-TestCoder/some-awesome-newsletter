@@ -7,8 +7,8 @@
 
   const CANONICAL = 'https://aibanewsletter.club/help';
 
-  $: hc = ($t as any)?.helpCenter ?? {};
-  $: helpContent = ($t as any)?.help ?? {};
+  $: hc = $t?.helpCenter ?? {};
+  $: helpContent = $t?.help ?? {};
   $: groups = hc.groups ?? [];
   $: metaTitle = hc.metaTitle ?? 'Help | AIBAN';
   $: metaDescription = hc.metaDescription ?? '';

@@ -3,14 +3,17 @@
      on Free, and the team changes plans by hand when an owner writes to support. Limits unchanged. -->
 <script lang="ts">
     import { onMount } from "svelte";
-    import plansStore, { loadPlansContent, computeFeatures, planChangeMailto, SUPPORT_EMAIL } from "$lib/config/plans.config";
+    import plansStore, { loadPlansContent, computeFeatures, planChangeMailto, SUPPORT_EMAIL, type PlanId } from "$lib/config/plans.config";
     import store, { globalLanguage } from "../../../../../../store";
     import Button from "$lib/dashboard/ui/Button.svelte";
     import Icon from "$lib/dashboard/ui/Icon.svelte";
     import { dt } from "$lib/dashboard/i18n";
 
+    // Passed by the step host (MultiSlotComponent); this view is always shown.
+    export const canReveal: boolean = true;
+
     // Monthly prices in USD, shown for reference only. Same numbers as before; do not change here.
-    const PLAN_ORDER = [
+    const PLAN_ORDER: { id: PlanId; mo: number }[] = [
         { id: "free", mo: 0 },
         { id: "starter", mo: 17 },
         { id: "growth", mo: 35 },
@@ -20,7 +23,7 @@
 
     $: if ($globalLanguage) loadPlansContent();
     $: state = $plansStore;
-    $: current = ($store.config as any)?.pricingPlan || "free";
+    $: current = $store.config?.pricingPlan || "free";
     $: mailto = planChangeMailto($store.configuratorEmail);
 
     onMount(() => {
@@ -48,7 +51,7 @@
                             <span class="plan__period">{$dt("dash.billing.perMonth")}</span>
                         </p>
                         <ul class="plan__features">
-                            {#each computeFeatures(state.content, tier.id as any) as feature}
+                            {#each computeFeatures(state.content, tier.id) as feature, itemIndex (itemIndex)}
                                 <li><Icon name="check" size={16} />{feature}</li>
                             {/each}
                         </ul>

@@ -6,7 +6,7 @@
   import { onMount, onDestroy, tick } from "svelte";
   import { writable } from "svelte/store";
   import fuzzysort from "fuzzysort";
-  import { fade, slide } from "svelte/transition";
+  import { slide } from "svelte/transition";
   import { t } from "$lib/i18n/dashboard-translations";
 
   // Assuming languages.ts is in the same directory
@@ -40,7 +40,6 @@
   let selectedLanguage: Language | null = null;
   export const selectedLanguageStore = writable<Language | null>(null);
   let open = false;
-  let showInput = false;
   let dropdownRef: HTMLElement;
   let inputRef: HTMLInputElement;
   let buttonRef: HTMLButtonElement;
@@ -99,7 +98,6 @@
   // Event Handlers
   function toggleOpen() {
     open = !open;
-    showInput = open; // Input visibility tied to dropdown state
     if (open) {
       typeahead = "";
       highlightedIndex = selectedLanguage
@@ -121,7 +119,6 @@
     selectedLanguageStore.set(language);
     lastValidHighlightedIndex = findIndexByCode(language.code);
     open = false;
-    showInput = false;
     typeahead = "";
     highlightedIndex = -1;
     onSelect(language.code);
@@ -131,7 +128,6 @@
   function handleClickOutside(event: MouseEvent) {
     if (open && dropdownRef && !dropdownRef.contains(event.target as Node)) {
       open = false;
-      showInput = false;
       typeahead = "";
       buttonRef?.focus();
     }
@@ -188,14 +184,12 @@
         case "Escape":
           event.preventDefault();
           open = false;
-          showInput = false;
           typeahead = "";
           buttonRef?.focus();
           return;
 
         case "Tab":
           open = false;
-          showInput = false;
           typeahead = "";
           return;
       }
@@ -339,6 +333,12 @@
           aria-selected={selectedLanguage?.code === language.code}
           tabindex="-1"
           on:click={() => selectLanguage(language)}
+          on:keydown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              selectLanguage(language);
+            }
+          }}
           on:mouseenter={() => {
             highlightedIndex = index;
           }}
@@ -360,4 +360,5 @@
 
 <style lang="scss">
   @use "../../../../lib/styles/custom-select-styles.scss";
+  @include custom-select-styles.flag-parts;
 </style>

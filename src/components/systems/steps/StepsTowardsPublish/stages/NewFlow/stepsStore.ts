@@ -5,7 +5,7 @@ export interface StepsStore {
   lead: string;
   personality: string;
   linkSelector: string;
-  config: any; // Using any for now to be flexible with the config structure
+  config: Record<string, unknown>; // Loosely shaped on purpose: any config fields may be kept here
   generatedHtml: string;
   createdNewsSourceId: string;
   isRegeneratingSelector: boolean;

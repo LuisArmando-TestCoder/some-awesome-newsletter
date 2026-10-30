@@ -2,20 +2,23 @@
   let searchSelectorCount = 0;
 </script>
 
-<script lang="ts">
+<script lang="ts" generics="Value">
   import { onMount, onDestroy, tick } from "svelte";
   import { writable } from "svelte/store";
   import fuzzysort from "fuzzysort";
   import { t } from "$lib/i18n/dashboard-translations";
   import { slide } from "svelte/transition";
 
+  /** One option; `valueFieldName` and `displayFieldName` pick its fields. */
+  type Item = Record<string, unknown>;
+
   // Props
-  export let items: any[] = [];
+  export let items: Item[] = [];
   export let valueFieldName: string = "id";
   export let displayFieldName: string = "name";
-  export let defaultSelectedValue: any | null = null;
+  export let defaultSelectedValue: Value | null = null;
   export let label = "Select an option";
-  export let onSelect: (selectedValue: any | null) => void = () => {};
+  export let onSelect: (selectedValue: Value) => void = () => {};
   export let disabled: boolean = false;
 
   // Unique ids per instance so several selectors can share a page.
@@ -30,10 +33,9 @@
       : undefined;
 
   // State
-  let selectedItem: any | null = null;
-  export const selectedItemStore = writable<any | null>(null);
+  let selectedItem: Item | null = null;
+  export const selectedItemStore = writable<Item | null>(null);
   let open = false;
-  let showInput = false;
   let dropdownRef: HTMLElement;
   let inputRef: HTMLInputElement;
   let buttonRef: HTMLButtonElement;
@@ -75,18 +77,17 @@
   });
 
   // Utility
-  function findItemByValue(value: any): any | null {
+  function findItemByValue(value: unknown): Item | null {
     return items.find((item) => item[valueFieldName] === value) || null;
   }
 
-  function findIndexByValue(value: any): number {
+  function findIndexByValue(value: unknown): number {
     return items.findIndex((item) => item[valueFieldName] === value);
   }
 
   // Event Handlers
   function toggleOpen() {
     open = !open;
-    showInput = open; // Input visibility tied to dropdown state
     if (open) {
       typeahead = "";
       highlightedIndex = selectedItem
@@ -103,22 +104,20 @@
     }
   }
 
-  function selectOption(item: any) {
+  function selectOption(item: Item) {
     selectedItem = item;
     selectedItemStore.set(item);
     lastValidHighlightedIndex = findIndexByValue(item[valueFieldName]);
     open = false;
-    showInput = false;
     typeahead = "";
     highlightedIndex = -1;
-    onSelect(item[valueFieldName]);
+    onSelect(item[valueFieldName] as Value);
     buttonRef?.focus();
   }
 
   function handleClickOutside(event: MouseEvent) {
     if (open && dropdownRef && !dropdownRef.contains(event.target as Node)) {
       open = false;
-      showInput = false;
       typeahead = "";
       buttonRef?.focus();
     }
@@ -175,14 +174,12 @@
         case "Escape":
           event.preventDefault();
           open = false;
-          showInput = false;
           typeahead = "";
           buttonRef?.focus();
           return;
 
         case "Tab":
           open = false;
-          showInput = false;
           typeahead = "";
           return;
       }
@@ -320,6 +317,12 @@
           aria-selected={!!selectedItem && selectedItem[valueFieldName] === item[valueFieldName]}
           tabindex="-1"
           on:click={() => selectOption(item)}
+          on:keydown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              selectOption(item);
+            }
+          }}
           on:mouseenter={() => {
             highlightedIndex = index;
           }}

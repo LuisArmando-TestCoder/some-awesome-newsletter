@@ -5,10 +5,10 @@
 
   const CANONICAL = 'https://aibanewsletter.club/pricing';
 
-  $: p = ($t as any)?.pricing ?? {};
+  $: p = $t?.pricing ?? {};
   $: metaTitle = p.pageMetaTitle ?? 'Pricing | AIBAN';
   $: metaDescription = p.pageMetaDescription ?? '';
-  $: billingFaq = (($t as any)?.helpCenter?.groups ?? []).find((g: { id: string }) => g.id === 'billing')?.items ?? [];
+  $: billingFaq = ($t?.helpCenter?.groups ?? []).find((g: { id: string }) => g.id === 'billing')?.items ?? [];
 </script>
 
 <svelte:head>

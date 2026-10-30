@@ -2,7 +2,7 @@ import { get } from "svelte/store";
 import store from "../../store";
 import { request, seg } from "$lib/api/client";
 import { newsSourceEnvelope } from "$lib/api/schemas";
-import { replaceNewsSourceInStore } from "./_internal";
+import { asNewsSource, replaceNewsSourceInStore } from "./_internal";
 
 /**
  * Update one news source. Returns the updated source, or null on failure
@@ -34,6 +34,7 @@ export async function updateNewsSourceOrThrow(
     schema: newsSourceEnvelope,
     errorMessage: "We could not save this source. Try again.",
   });
-  await replaceNewsSourceInStore(json.newsSource as any);
-  return json.newsSource as any;
+  const updated = asNewsSource(json.newsSource);
+  await replaceNewsSourceInStore(updated);
+  return updated;
 }

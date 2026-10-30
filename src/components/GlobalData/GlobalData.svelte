@@ -12,7 +12,9 @@
     let chosen: string | null = null;
     try {
       chosen = localStorage.getItem("lang");
-    } catch {}
+    } catch {
+      // Storage blocked (private mode): use the browser language below.
+    }
     const currentLang = getFromStore("appLanguage");
     if (!chosen && (!currentLang || currentLang === "en")) {
       getGeoIpLanguage().then((detected) => {

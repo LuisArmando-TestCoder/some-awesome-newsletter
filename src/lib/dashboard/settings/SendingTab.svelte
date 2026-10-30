@@ -33,7 +33,16 @@
     return { senderName: "", postalAddress: "", showSignature: false, sig: { ...EMPTY_SIGNATURE } };
   }
 
-  function fromConfig(cfg: any): Draft {
+  /** Config fields this tab reads (older accounts keep the sender name under `email`). */
+  type SendingConfig = {
+    emailSignatureFields?: unknown;
+    senderName?: string;
+    email?: { senderName?: string };
+    postalAddress?: string;
+    showEmailSignature?: boolean;
+  };
+
+  function fromConfig(cfg: SendingConfig | null | undefined): Draft {
     const fields = cfg?.emailSignatureFields;
     return {
       senderName: cfg?.senderName || cfg?.email?.senderName || "",
@@ -44,7 +53,7 @@
   }
 
   function load() {
-    const cfg = $store.config as any;
+    const cfg = $store.config;
     saved = fromConfig(cfg);
     draft = structuredClone(saved);
     legacySignature = cfg?.emailSignature && !cfg?.emailSignatureFields ? String(cfg.emailSignature) : "";
@@ -55,7 +64,7 @@
   $: if ($store.config && $store.config !== lastConfig && !dirty && !saving) load();
 
   $: dirty = JSON.stringify(draft) !== JSON.stringify(saved);
-  $: brandColor = normalizeHex(($store.config as any)?.brandColor);
+  $: brandColor = normalizeHex($store.config?.brandColor);
   $: sigFilled = Object.values(draft.sig).some((v) => String(v).trim());
   $: signatureHtml = sigFilled ? buildSignature(draft.sig, brandColor || undefined) : legacySignature;
   $: replyTo = String($store.configuratorEmail || "").trim();
@@ -80,7 +89,7 @@
     const sig = Object.fromEntries(Object.entries(draft.sig).map(([k, v]) => [k, String(v).trim()])) as SignatureFields;
     const patch: Record<string, unknown> = {
       senderName,
-      email: { ...(($store.config as any)?.email ?? {}), senderName },
+      email: { ...($store.config?.email ?? {}), senderName },
       postalAddress: draft.postalAddress.trim(),
       showEmailSignature: draft.showSignature,
     };
@@ -180,6 +189,7 @@
 
 <style lang="scss">
   @use "./settings.scss";
+  @include settings.row;
   .own { display: flex; flex-direction: column; gap: var(--space-3); padding-top: var(--space-2); border-top: 1px solid var(--border-1); }
   .own__explain { margin: 0; font-size: var(--fs-sm); color: var(--text-2); line-height: var(--lh-normal); }
   .own__reply { margin: 0; font-size: var(--fs-sm); color: var(--text-2); overflow-wrap: anywhere; strong { color: var(--text-1); font-weight: var(--fw-semibold); } }

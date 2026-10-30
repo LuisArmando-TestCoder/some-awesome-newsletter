@@ -1,14 +1,14 @@
 <script lang="ts">
-  import { onMount, type SvelteComponent } from "svelte";
+  import { onMount } from "svelte";
   import MultiSlotComponent from "../wrappers/MultiSlotComponent/MultiSlotComponent.svelte";
   import TransitionSteps from "./TransitionSteps/TransitionSteps.svelte";
   import store from "../../store";
-  import type { ComponentSteps, Store } from "../../types";
+  import type { ComponentSteps, StepComponent, StepValidator, Store } from "../../types";
   import { writable } from "svelte/store";
   import { ONBOARDING_STEP_COUNT as ONBOARDING_SLOTS } from "$lib/tutorial/onboardingState";
 
   export let components: ComponentSteps;
-  let steps = writable<[(store: Store) => boolean, SvelteComponent][]>([]);
+  let steps = writable<[StepValidator, StepComponent][]>([]);
 
   onMount(() => {
     steps.set(

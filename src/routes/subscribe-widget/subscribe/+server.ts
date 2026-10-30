@@ -36,7 +36,9 @@ export const POST: RequestHandler = async ({ request, url, fetch, getClientAddre
 	let ip = 'unknown';
 	try {
 		ip = getClientAddress();
-	} catch {}
+	} catch {
+		// Some adapters cannot report the client address: keep "unknown".
+	}
 	const ipCheck = perIp(ip);
 	if (!ipCheck.ok) return jsonError(429, 'Too many attempts in a short time. Wait a moment and try again.', { retryAfter: ipCheck.retryAfter });
 

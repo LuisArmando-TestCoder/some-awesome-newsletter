@@ -3,7 +3,11 @@
 // finish a login in someone else's browser (login CSRF). Nothing secret is logged.
 import { redirect } from '@sveltejs/kit';
 import { OAuth2Client } from 'google-auth-library';
-import { SECRET_CLIENT_ID, SECRET_CLIENT_SECRET } from '$env/static/private';
+import { env } from '$env/dynamic/private';
+
+// Read at runtime so builds do not need the OAuth secrets and rotating them only needs a restart.
+const SECRET_CLIENT_ID = env.SECRET_CLIENT_ID ?? '';
+const SECRET_CLIENT_SECRET = env.SECRET_CLIENT_SECRET ?? '';
 
 export const OAUTH_STATE_COOKIE = 'aiban_oauth_state';
 

@@ -11,15 +11,16 @@
   import PostExplanation from "../../../components/systems/steps/StepsTowardsPublish/stages/H_Dashboard/NewsSource/PostExplanation.svelte";
   import regenerateSelectors from "../../../components/systems/requests/regenerateSelectors";
   import store from "../../../components/store";
+  import type { NewsSource } from "../../../components/types";
   import { toast } from "$lib/ui/components/toast";
   import { goTo } from "../nav";
-  import { dt } from "../i18n";
+  import { dt as dtx } from "../i18n";
 
   let selectedId = "";
   let detecting = false;
   let detectError = "";
 
-  $: sources = ($store.config?.newsSources ?? []) as any[];
+  $: sources = ($store.config?.newsSources ?? []) as NewsSource[];
   $: loading = $store.config?.newsSources === undefined;
   $: if (sources.length && !sources.some((s) => s.id === selectedId)) selectedId = sources[sources.length - 1].id;
   $: source = sources.find((s) => s.id === selectedId);
@@ -38,8 +39,8 @@
     detectError = "";
     const result = await regenerateSelectors($store.configuratorEmail, source.id, source.url);
     detecting = false;
-    if (result) toast.success($dt("dash.dev.detectDone"));
-    else detectError = $dt("dash.dev.detectError");
+    if (result) toast.success($dtx("dash.dev.detectDone"));
+    else detectError = $dtx("dash.dev.detectError");
   }
 
   function downloadJson() {
@@ -57,17 +58,17 @@
 
 <div class="dev">
   {#if loading}
-    <Card><Skeleton lines={4} label={$dt("dash.dev.loading")} /></Card>
+    <Card><Skeleton lines={4} label={$dtx("dash.dev.loading")} /></Card>
   {:else if !sources.length}
     <Card>
-      <EmptyState icon="code" title={$dt("dash.dev.emptyTitle")} body={$dt("dash.dev.emptyBody")}>
-        <Button variant="primary" icon="plus" onclick={() => goTo("sources")}>{$dt("dash.dev.emptyAction")}</Button>
+      <EmptyState icon="code" title={$dtx("dash.dev.emptyTitle")} body={$dtx("dash.dev.emptyBody")}>
+        <Button variant="primary" icon="plus" onclick={() => goTo("sources")}>{$dtx("dash.dev.emptyAction")}</Button>
       </EmptyState>
     </Card>
   {:else}
-    <Card title={$dt("dash.dev.sourceTitle")} subtitle={$dt("dash.dev.sourceSub")}>
+    <Card title={$dtx("dash.dev.sourceTitle")} subtitle={$dtx("dash.dev.sourceSub")}>
       <div class="stack">
-        <Field id="dev-source" label={$dt("dash.dev.pickLabel")}>
+        <Field id="dev-source" label={$dtx("dash.dev.pickLabel")}>
           <select id="dev-source" bind:value={selectedId}>
             {#each sources as ns (ns.id)}
               <option value={ns.id}>{host(ns.url)}</option>
@@ -77,38 +78,38 @@
 
         {#if source}
           <dl class="ids">
-            <div><dt>{$dt("dash.dev.sourceId")}</dt><dd><code>{source.id}</code></dd></div>
-            <div><dt>{$dt("dash.dev.accountId")}</dt><dd><code>{$store.configuratorEmail}</code></dd></div>
+            <div><dt>{$dtx("dash.dev.sourceId")}</dt><dd><code>{source.id}</code></dd></div>
+            <div><dt>{$dtx("dash.dev.accountId")}</dt><dd><code>{$store.configuratorEmail}</code></dd></div>
           </dl>
 
           <section class="block" aria-labelledby="dev-link-title">
-            <h3 class="block__title" id="dev-link-title">{$dt("dash.dev.linkTitle")}</h3>
-            <p class="block__text">{$dt("dash.dev.linkText")}</p>
+            <h3 class="block__title" id="dev-link-title">{$dtx("dash.dev.linkTitle")}</h3>
+            <p class="block__text">{$dtx("dash.dev.linkText")}</p>
             {#key source.id}
-              <CopyUrlWithQR configuratorEmail={$store.configuratorEmail} newsSourceId={source.id} lead={source.lead} label={$dt("dash.dev.linkLabel")} />
+              <CopyUrlWithQR configuratorEmail={$store.configuratorEmail} newsSourceId={source.id} lead={source.lead} label={$dtx("dash.dev.linkLabel")} />
             {/key}
           </section>
 
           <section class="block" aria-labelledby="dev-pattern-title">
-            <h3 class="block__title" id="dev-pattern-title">{$dt("dash.dev.patternTitle")}</h3>
-            <p class="block__text">{$dt("dash.dev.patternText")}</p>
+            <h3 class="block__title" id="dev-pattern-title">{$dtx("dash.dev.patternTitle")}</h3>
+            <p class="block__text">{$dtx("dash.dev.patternText")}</p>
             <div class="pattern">
-              <Field id="dev-pattern" label={$dt("dash.dev.patternLabel")} hint={$dt("dash.dev.patternHint")}>
-                <input id="dev-pattern" type="text" readonly value={source.linkSelector || ""} placeholder={$dt("dash.dev.patternEmpty")} aria-describedby="dev-pattern-hint" />
+              <Field id="dev-pattern" label={$dtx("dash.dev.patternLabel")} hint={$dtx("dash.dev.patternHint")}>
+                <input id="dev-pattern" type="text" readonly value={source.linkSelector || ""} placeholder={$dtx("dash.dev.patternEmpty")} aria-describedby="dev-pattern-hint" />
               </Field>
               <div class="pattern__action">
-                <Button variant="secondary" icon="refresh" loading={detecting} onclick={detect}>{$dt("dash.dev.detect")}</Button>
+                <Button variant="secondary" icon="refresh" loading={detecting} onclick={detect}>{$dtx("dash.dev.detect")}</Button>
               </div>
             </div>
             <div aria-live="polite">
-              {#if detecting}<p class="block__text">{$dt("dash.dev.detecting")}</p>{/if}
+              {#if detecting}<p class="block__text">{$dtx("dash.dev.detecting")}</p>{/if}
               {#if detectError}<Notice tone="danger">{detectError}</Notice>{/if}
             </div>
           </section>
 
           <section class="block" aria-labelledby="dev-api-title">
-            <h3 class="block__title" id="dev-api-title">{$dt("dash.dev.apiTitle")}</h3>
-            <p class="block__text">{$dt("dash.dev.apiText")}</p>
+            <h3 class="block__title" id="dev-api-title">{$dtx("dash.dev.apiTitle")}</h3>
+            <p class="block__text">{$dtx("dash.dev.apiText")}</p>
             {#key source.id}
               <PostExplanation newsSource={source} />
             {/key}
@@ -117,12 +118,14 @@
       </div>
     </Card>
 
-    <Card title={$dt("dash.dev.exportTitle")} subtitle={$dt("dash.dev.exportSub")}>
+    <Card title={$dtx("dash.dev.exportTitle")} subtitle={$dtx("dash.dev.exportSub")}>
       <svelte:fragment slot="actions">
-        <Button variant="secondary" icon="download" onclick={downloadJson}>{$dt("dash.dev.exportButton")}</Button>
+        <Button variant="secondary" icon="download" onclick={downloadJson}>{$dtx("dash.dev.exportButton")}</Button>
       </svelte:fragment>
-      <p class="block__text">{$dt("dash.dev.exportText")}</p>
-      <pre class="code" tabindex="0" aria-label={$dt("dash.dev.exportPreview")}><code>{jsonString}</code></pre>
+      <p class="block__text">{$dtx("dash.dev.exportText")}</p>
+      <!-- Scrollable region: keyboard users need focus to scroll it (WCAG 2.1.1, axe scrollable-region-focusable). -->
+      <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+      <pre class="code" role="region" tabindex="0" aria-label={$dtx("dash.dev.exportPreview")}><code>{jsonString}</code></pre>
     </Card>
   {/if}
 </div>

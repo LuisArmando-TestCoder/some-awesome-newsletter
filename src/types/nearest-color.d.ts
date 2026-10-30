@@ -16,12 +16,9 @@ declare module 'nearest-color' {
   // Define the function returned by 'from'
   type NearestColorFunction = (color: ColorSpec) => ColorMatch | undefined;
 
-  // Define the 'from' function itself
-  function from(colors: Colors): NearestColorFunction;
-
   // Define the main export of the module, including STANDARD_COLORS
   const nearestColor: {
-    from: typeof from;
+    from: (colors: Colors) => NearestColorFunction;
     STANDARD_COLORS: Record<string, string>; // Add the missing property definition
   };
 

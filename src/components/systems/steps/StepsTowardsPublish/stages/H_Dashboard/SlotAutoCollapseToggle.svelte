@@ -71,8 +71,6 @@
     };
   }
 
-  /** Reactive dependency (ensures component updates if autoCollapse changes) */
-  $: autoCollapse;
 </script>
 
 {#if canReveal}
@@ -106,12 +104,6 @@
 {/if}
 
 <style lang="scss">
-  .horizontal-controls {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
-    padding: 0.5rem;
-  }
   .pad-right {
     margin-right: 0.75rem;
   }

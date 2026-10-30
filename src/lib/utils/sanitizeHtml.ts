@@ -11,9 +11,12 @@ const DROP_TAGS = new Set(['script', 'style', 'iframe', 'frame', 'frameset', 'ob
 const URL_ATTRS = new Set(['href', 'src', 'xlink:href', 'action', 'formaction', 'poster', 'background', 'srcset', 'cite']);
 const SAFE_URL = /^(https?:|mailto:|tel:|#|\/(?!\/)|\.{0,2}\/|[^:]*$)/i;
 const SAFE_DATA_IMAGE = /^data:image\/(png|gif|jpe?g|webp|avif);base64,/i;
+// Browsers skip control characters and spaces inside URLs ("java\0script:"), so strip them before the check.
+// eslint-disable-next-line no-control-regex -- matching control characters is the purpose of this pattern
+const URL_IGNORED_CHARS = /[\u0000- ]+/g;
 
 function safeUrl(value: string, attr: string, tag: string): boolean {
-	const v = value.replace(/[\u0000- ]+/g, '').trim();
+	const v = value.replace(URL_IGNORED_CHARS, '').trim();
 	if (attr === 'srcset') return v.split(',').every((part) => SAFE_URL.test(part.trim().split(/\s+/)[0] ?? ''));
 	if (SAFE_DATA_IMAGE.test(v) && (tag === 'img' || attr === 'src')) return true;
 	return SAFE_URL.test(v);
@@ -51,7 +54,7 @@ function sanitizeString(html: string): string {
 	out = out.replace(/\s(on[a-z]+|srcdoc|formaction)\s*=\s*("[^"]*"|'[^']*'|[^\s>]+)/gi, '');
 	out = out.replace(/\s(href|src|xlink:href|action|poster|background|cite)\s*=\s*("([^"]*)"|'([^']*)'|([^\s>]+))/gi, (m, _a, _q, d, s, u) => {
 		const v = String(d ?? s ?? u ?? '');
-		return SAFE_URL.test(v.replace(/[\u0000- ]+/g, '')) || SAFE_DATA_IMAGE.test(v) ? m : '';
+		return SAFE_URL.test(v.replace(URL_IGNORED_CHARS, '')) || SAFE_DATA_IMAGE.test(v) ? m : '';
 	});
 	out = out.replace(/\sstyle\s*=\s*("[^"]*(expression\s*\(|javascript:)[^"]*"|'[^']*(expression\s*\(|javascript:)[^']*')/gi, '');
 	return out;
@@ -75,7 +78,9 @@ export function htmlToText(html: string | null | undefined): string {
 	if (typeof DOMParser !== 'undefined') {
 		try {
 			return new DOMParser().parseFromString(String(html), 'text/html').body.textContent?.replace(/\s+/g, ' ').trim() ?? '';
-		} catch {}
+		} catch {
+			// Parser failed: use the regex fallback below.
+		}
 	}
 	return String(html).replace(/<style[\s\S]*?<\/style>|<script[\s\S]*?<\/script>/gi, ' ').replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim();
 }

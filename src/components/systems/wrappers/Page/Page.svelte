@@ -1,6 +1,5 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import askIsAuthCodeValid from "../../requests/askIsAuthCodeValid";
   import setStorageFromKeysToSave from "../../helpers/setStorageFromKeysToSave";
 
   onMount(async () => {

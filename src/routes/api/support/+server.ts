@@ -30,7 +30,9 @@ export const POST: RequestHandler = async ({ request, url, fetch, getClientAddre
 	let ip = 'unknown';
 	try {
 		ip = getClientAddress();
-	} catch {}
+	} catch {
+		// Some adapters cannot report the client address: keep "unknown".
+	}
 	const rl = limiter(ip);
 	if (!rl.ok) return jsonError(429, 'You already sent a few requests. We will reply by email.', { retryAfter: rl.retryAfter });
 

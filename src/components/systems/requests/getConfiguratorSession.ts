@@ -20,9 +20,9 @@ export async function getConfigFetchResponse(authHeaders: Record<string, string>
   });
 }
 
-async function fetchConfigJson(): Promise<any | null> {
+async function fetchConfigJson(): Promise<Record<string, unknown> | null> {
   try {
-    return await request("/config", { auth: "user", retries: 2 });
+    return await request<Record<string, unknown>>("/config", { auth: "user", retries: 2 });
   } catch {
     return null;
   }
@@ -44,7 +44,8 @@ export default async () => {
 
   saveToStore({ config: json });
 
-  if (get(store).newsSource && (!json.newsSources || json.newsSources.length === 0)) {
+  const savedSources = Array.isArray(json.newsSources) ? json.newsSources : [];
+  if (get(store).newsSource && savedSources.length === 0) {
     try {
       await createNewsSource({
         type: "website",

@@ -64,7 +64,10 @@ export function scheduleWords(cron: string | null | undefined, tr: Translate, tz
 export type SourceUsage = { used: number; limit: number; unlimited: boolean; atLimit: boolean; overLimit: boolean };
 
 /** Plan usage for sources, computed from the live store (reactive when called with $store values). */
-export function sourceUsage(config: any, subscribers: any): SourceUsage {
+export function sourceUsage(
+  config: Parameters<typeof computeUsage>[0],
+  subscribers: Parameters<typeof computeUsage>[1]
+): SourceUsage {
   const u = computeUsage(config, subscribers).newsSources;
   return { used: u.used, limit: u.limit, unlimited: u.unlimited, atLimit: u.atLimit, overLimit: !u.unlimited && u.used > u.limit };
 }

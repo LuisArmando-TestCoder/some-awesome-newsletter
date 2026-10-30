@@ -60,7 +60,7 @@
   <section>
     <h2>Color</h2>
     <ul class="swatches">
-      {#each swatches as s}
+      {#each swatches as s, itemIndex (itemIndex)}
         <li><span class="chip" style={`background: var(--${s})`}></span><code>--{s}</code></li>
       {/each}
     </ul>
@@ -68,7 +68,7 @@
 
   <section>
     <h2>Type</h2>
-    {#each sizes as s}
+    {#each sizes as s, itemIndex (itemIndex)}
       <p class="type-row" style={`font-size: var(--${s})`}><code>--{s}</code> Your readers get every issue in their own language.</p>
     {/each}
     <p class="type-row display">Lora for headlines. Inter for everything you click, read in a form or scan in a table.</p>

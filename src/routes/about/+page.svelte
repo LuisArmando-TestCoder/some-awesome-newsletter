@@ -4,7 +4,7 @@
   const CANONICAL = 'https://aibanewsletter.club/about';
   const GITHUB = 'https://github.com/LuisArmando-TestCoder';
 
-  $: a = ($t as any)?.about ?? {};
+  $: a = $t?.about ?? {};
   $: metaTitle = a.metaTitle ?? 'About | AIBAN';
   $: metaDescription = a.metaDescription ?? '';
 </script>
@@ -29,7 +29,7 @@
 
   <section class="section" aria-labelledby="what-title">
     <h2 id="what-title" class="section__title">{a.whatTitle ?? 'What AIBAN does'}</h2>
-    {#each a.whatBody ?? [] as paragraph}
+    {#each a.whatBody ?? [] as paragraph, itemIndex (itemIndex)}
       <p>{paragraph}</p>
     {/each}
     <div class="actions">
@@ -40,7 +40,7 @@
 
   <section class="section" aria-labelledby="who-title">
     <h2 id="who-title" class="section__title">{a.whoTitle ?? 'Who makes it'}</h2>
-    {#each a.whoBody ?? [] as paragraph}
+    {#each a.whoBody ?? [] as paragraph, itemIndex (itemIndex)}
       <p>{paragraph}</p>
     {/each}
     <a class="btn btn--tertiary" href={GITHUB} target="_blank" rel="noopener noreferrer">
@@ -52,7 +52,7 @@
     <section class="section" aria-labelledby="projects-title">
       <h2 id="projects-title" class="section__title">{a.projectsTitle ?? 'Open source work by the founder'}</h2>
       <ul class="projects">
-        {#each a.projects as project}
+        {#each a.projects as project, itemIndex (itemIndex)}
           <li class="project">
             <h3 class="project__name">
               <a href={project.url} target="_blank" rel="noopener noreferrer">
@@ -166,8 +166,7 @@
     }
   }
 
-  a:focus-visible,
-  button:focus-visible {
+  a:focus-visible {
     outline: 2px solid var(--focus-color, #6366f1);
     outline-offset: 2px;
   }

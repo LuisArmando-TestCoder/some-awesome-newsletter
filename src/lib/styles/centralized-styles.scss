@@ -12,78 +12,88 @@
   color: var(--text-1);
 }
 
-.required-mark {
-  margin-left: var(--space-1);
-  color: var(--danger);
+// Optional label parts. Include where the markup renders them:
+//   @include centralized-styles.label-extras;
+@mixin label-extras {
+  .required-mark {
+    margin-left: var(--space-1);
+    color: var(--danger);
+  }
+
+  .input-hint {
+    margin: 0 0 var(--space-2);
+    font-family: var(--font-body);
+    font-size: var(--fs-sm);
+    line-height: var(--lh-normal);
+    color: var(--text-2);
+  }
 }
 
-.input-hint {
-  margin: 0 0 var(--space-2);
-  font-family: var(--font-body);
-  font-size: var(--fs-sm);
-  line-height: var(--lh-normal);
-  color: var(--text-2);
+// Control styles shared by <input> and <textarea>.
+// Only <input> rules are emitted by default; components that render a
+// <textarea> add `@include centralized-styles.textarea-control;` right after the @use.
+@mixin field-control($sel) {
+  #{$sel} {
+    width: 100%;
+    box-sizing: border-box;
+    min-height: var(--control-h);
+    padding: 0 var(--control-pad-x);
+    background: var(--surface-1);
+    border: 1px solid var(--border-2);
+    border-radius: var(--radius-md);
+    box-shadow: none;
+    font-family: var(--font-body);
+    font-size: var(--fs-md);
+    line-height: var(--lh-normal);
+    color: var(--text-1);
+    transition:
+      border-color var(--dur-fast) var(--ease-out),
+      box-shadow var(--dur-fast) var(--ease-out);
+  }
+
+  @if $sel == textarea {
+    textarea {
+      padding: var(--space-3) var(--control-pad-x);
+      resize: vertical;
+    }
+  }
+
+  #{$sel}::placeholder {
+    color: var(--text-3);
+    opacity: 1;
+  }
+
+  #{$sel}:hover:not(:disabled):not(:focus) {
+    border-color: var(--text-2);
+  }
+
+  // The token focus ring replaces the default outline.
+  #{$sel}:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: var(--focus-ring);
+  }
+
+  #{$sel}.invalid {
+    border-color: var(--danger);
+  }
+
+  #{$sel}.invalid:focus {
+    border-color: var(--danger);
+  }
+
+  #{$sel}:disabled {
+    background: var(--surface-2);
+    color: var(--text-3);
+    cursor: not-allowed;
+  }
 }
 
-input,
-textarea {
-  width: 100%;
-  box-sizing: border-box;
-  min-height: var(--control-h);
-  padding: 0 var(--control-pad-x);
-  background: var(--surface-1);
-  border: 1px solid var(--border-2);
-  border-radius: var(--radius-md);
-  box-shadow: none;
-  font-family: var(--font-body);
-  font-size: var(--fs-md);
-  line-height: var(--lh-normal);
-  color: var(--text-1);
-  transition:
-    border-color var(--dur-fast) var(--ease-out),
-    box-shadow var(--dur-fast) var(--ease-out);
+@mixin textarea-control {
+  @include field-control(textarea);
 }
 
-textarea {
-  padding: var(--space-3) var(--control-pad-x);
-  resize: vertical;
-}
-
-input::placeholder,
-textarea::placeholder {
-  color: var(--text-3);
-  opacity: 1;
-}
-
-input:hover:not(:disabled):not(:focus),
-textarea:hover:not(:disabled):not(:focus) {
-  border-color: var(--text-2);
-}
-
-// The token focus ring replaces the default outline.
-input:focus,
-textarea:focus {
-  outline: none;
-  border-color: var(--accent);
-  box-shadow: var(--focus-ring);
-}
-
-input.invalid,
-textarea.invalid {
-  border-color: var(--danger);
-}
-
-input.invalid:focus,
-textarea.invalid:focus {
-  border-color: var(--danger);
-}
-
-input:disabled,
-textarea:disabled {
-  background: var(--surface-2);
-  color: var(--text-3);
-  cursor: not-allowed;
-}
+@include field-control(input);
 
 .error-message {
   margin: var(--space-1) 0 0;

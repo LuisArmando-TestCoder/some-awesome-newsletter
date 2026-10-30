@@ -98,11 +98,11 @@
 </div>
 
 <div class="markdown-text" use:reveal={canReveal}>
-  {#each blocks as block}
+  {#each blocks as block, itemIndex (itemIndex)}
     {#if block.kind === "title" || block.kind === "subtitle"}
       <div class="md-heading md-heading--{block.kind}">
         <TextTypes type={block.kind}>
-          {#each block.segments as seg}
+          {#each block.segments as seg, itemIndex (itemIndex)}
             {#if seg.kind === "text"}{seg.text}{:else if seg.kind === "emphasis"}<em
                 class="md-inline md-inline--{seg.kind}">{seg.text}</em
               >{:else}<strong class="md-inline md-inline--{seg.kind}">{seg.text}</strong
@@ -112,7 +112,7 @@
       </div>
     {:else}
       <p class="md-paragraph">
-        {#each block.segments as seg}
+        {#each block.segments as seg, itemIndex (itemIndex)}
           {#if seg.kind === "text"}{seg.text}{:else if seg.kind === "emphasis"}<em
               class="md-inline md-inline--{seg.kind}">{seg.text}</em
             >{:else}<strong class="md-inline md-inline--{seg.kind}">{seg.text}</strong

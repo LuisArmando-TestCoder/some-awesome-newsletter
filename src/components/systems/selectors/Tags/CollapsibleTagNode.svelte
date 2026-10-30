@@ -1,7 +1,8 @@
 <script lang="ts">
+	import type { TagTreeNode } from "./types";
 	import { writable, type Writable } from 'svelte/store';
 
-	export let node: { name: string; children?: any[] };
+	export let node: TagTreeNode;
 	export let selectedTags: Writable<string[]>;
 	export let toggleTag: (tag: string) => void;
 
@@ -34,7 +35,7 @@
 	</div>
 	{#if node.children && $expanded}
 		<div class="children">
-			{#each node.children as child}
+			{#each node.children as child (child.name)}
 				<svelte:self node={child} {selectedTags} {toggleTag} />
 			{/each}
 		</div>

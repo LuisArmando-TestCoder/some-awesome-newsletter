@@ -1,18 +1,14 @@
 <!-- src/components/systems/steps/StepsTowardsPublish/stages/H_Dashboard/Users/Users.svelte -->
 <script lang="ts">
-  import { onMount } from "svelte";
   import { writable } from "svelte/store"; // ADDED writable
-  import type { NewsSource, NewsletterUser } from "../../../../../../types.js"; // Import NewsSource type if not already implicitly available - ADDED .js
+  import type { NewsletterUser } from "../../../../../../types.js"; // Import NewsSource type if not already implicitly available - ADDED .js
 
   // Central Store and Types
   import store from "../../../../../../store"; // Adjust path
 
-  // Data Service (Handles state and API calls)
-  import * as UserDataService from "./UserDataService"; // Adjust path
 
   // Child Components
   import NewsSourceUserManagement from "./NewsSourceUserManagement.svelte";
-  import UserAnalytics from "../Reports/UserAnalytics.svelte";
 
   // UI Wrappers/Components
   import Page from "../../../../../wrappers/Page/Page.svelte"; // Adjust path
@@ -33,8 +29,6 @@ const pageSize = 5;
 
 // --- Reactive Data Access ---
   // Access data directly from the central store
-  $: config = $store.config;
-  $: newsSources = $store.config?.newsSources || []; // Use $store directly
   $: newsSourcesReversed = $store.config?.newsSources
     ? [...$store.config.newsSources].reverse()
     : [];
@@ -69,7 +63,6 @@ const pageSize = 5;
     currentPage = event.detail.page;
   }
   // $: brandColor = $store.config?.brandColor; // Use $store directly
-  $: complementaryColor = $store.complementaryColor; // Assuming this is separate in the main store
   $: isRefreshing = $store.isRefreshingSubscribers; // Subscribe to the refresh flag
 
   // Removed loading state logic tied to UserDataService stores
@@ -131,9 +124,8 @@ const pageSize = 5;
 <!-- Import the necessary layout and shared styles -->
 <!-- Component-specific styles are now within their respective component files -->
 <style lang="scss">
-  // These imports define the overall page structure and potentially shared variables/mixins
-  @use "../Dashboard.scss"; // Main dashboard layout styles if applicable
-  @use "./Users.scss"; // Styles specific to the Users page layout (e.g., .users-page-layout, .column)
+  @use "./Users.scss";
+  @include Users.layout-column;
 
   // Add any styles *only* relevant to the main Users.svelte shell here
   .title-container {
@@ -150,7 +142,6 @@ const pageSize = 5;
   }
 
   .loading-message,
-  .error-message,
   .no-data-message {
     margin-top: 1rem;
     padding: 1rem;
@@ -159,10 +150,5 @@ const pageSize = 5;
   .loading-message,
   .no-data-message {
     color: var(--color-text-secondary, #666);
-  }
-  .error-message {
-    background-color: var(--color-error-light, #ffebee);
-    border: 1px solid var(--color-error, #f44336);
-    color: var(--color-error-dark, #c62828);
   }
 </style>

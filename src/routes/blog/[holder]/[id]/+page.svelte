@@ -77,6 +77,7 @@
     <meta name="twitter:title" content={data.article.title} />
     <meta name="twitter:description" content={data.article.description} />
     {#if data.article.image}<meta name="twitter:image" content={data.article.image} />{/if}
+    <!-- eslint-disable-next-line svelte/no-at-html-tags -- JSON-LD with "<" escaped, so it cannot close the script tag -->
     {@html jsonLd}
   {:else}
     <title>{data.status === "notfound" ? $t.blog.article.notFoundTitle : $t.blog.article.errorTitle} | {blogName}</title>
@@ -112,6 +113,7 @@
       </header>
 
       <div class="prose">
+        <!-- eslint-disable-next-line svelte/no-at-html-tags -- content passes through sanitizeHtml -->
         {@html sanitizeHtml(data.article.content)}
       </div>
 

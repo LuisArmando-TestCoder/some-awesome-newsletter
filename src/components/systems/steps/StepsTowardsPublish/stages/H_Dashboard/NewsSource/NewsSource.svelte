@@ -1,10 +1,8 @@
 <script lang="ts">
-  import CardComponent from "../../../../../selectors/Card/Card.svelte";
   import ToggleCard from "../../../../../buttons/ToggleCard/ToggleCard.svelte";
   import TextTypes from "../../../../../texts/TextTypes/TextTypes.svelte";
   import SlotAutoCollapseToggle from "../SlotAutoCollapseToggle.svelte"; // <--- Import the wrapper
 
-  import type { NewsSource } from "../../../../../../types";
   import store, { latestMessage } from "../../../../../../store";
 
   import AddNewsSourceForm from "./AddNewsSourceForm.svelte";
@@ -20,7 +18,6 @@
   let currentPage = 0;
   const pageSize = 3;
   let searchTerm = "";
-  let cardTitle: string;
 
   // Local error messages for each update form
   let updateErrorMessages: Record<string, string> = {};
@@ -145,9 +142,4 @@
     /* Add styles as needed */
   }
 
-  /* Optional: If you need specific styling for the list *within* the toggle group */
-  /* This targets the default slot content area */
-  :global(.toggle-group > div:not(.horizontal-controls)) {
-    /* Your list-specific styles here if needed */
-  }
 </style>

@@ -23,7 +23,10 @@
 
   function setParams(patch: Record<string, string | null>) {
     const u = new URL($page.url);
-    for (const [k, v] of Object.entries(patch)) (v === null || v === "" ? u.searchParams.delete(k) : u.searchParams.set(k, v));
+    for (const [k, v] of Object.entries(patch)) {
+      if (v === null || v === "") u.searchParams.delete(k);
+      else u.searchParams.set(k, v);
+    }
     if (!("page" in patch)) u.searchParams.delete("page");
     goto(`${u.pathname}${u.search}`, { replaceState: true, keepFocus: true, noScroll: true });
   }

@@ -43,7 +43,10 @@ export function hostOf(url: string | undefined | null): string {
 
 const EMPTY: SubscriberData = { rows: [], loadedSourceIds: new Set(), sources: [], languages: [], possiblyCut: [], countBySource: {} };
 
-function build(subsBySource: Record<string, any[]>, newsSources: NewsSource[]): SubscriberData {
+/** Subscriber fields read here; the API may send more. */
+type RawSubscriber = { email?: unknown; name?: unknown; language?: unknown } | null;
+
+function build(subsBySource: Record<string, RawSubscriber[]>, newsSources: NewsSource[]): SubscriberData {
   const sources: SourceRef[] = newsSources.filter((ns) => ns?.id).map((ns) => ({ id: ns.id as string, host: hostOf(ns.url) || (ns.id as string) }));
   const byId = new Map(sources.map((s) => [s.id, s]));
   const unique = new Map<string, SubscriberRow>();
@@ -59,7 +62,8 @@ function build(subsBySource: Record<string, any[]>, newsSources: NewsSource[]): 
     countBySource[sourceId] = list.length;
     if (list.length === BACKEND_LIMIT) possiblyCut.push(ref);
     for (const u of list) {
-      const email = String(u?.email ?? "").trim();
+      if (!u) continue;
+      const email = String(u.email ?? "").trim();
       if (!email) continue;
       const key = email.toLowerCase();
       const existing = unique.get(key);
@@ -94,7 +98,7 @@ export const subscriberData: Readable<SubscriberData> = derived(store, ($s, set)
   if (subs === lastSubs && ns === lastSources) return;
   lastSubs = subs;
   lastSources = ns;
-  cached = build(subs as Record<string, any[]>, ns);
+  cached = build(subs as Record<string, RawSubscriber[]>, ns);
   set(cached);
 }, EMPTY);
 

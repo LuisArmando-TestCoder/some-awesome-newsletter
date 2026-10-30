@@ -10,8 +10,8 @@
   import store from "../../../components/store";
 
   $: sources = $subscriberData.sources;
-  $: configuratorId = (($store.config as any)?.configuratorId as string) || $store.configuratorEmail || null;
-  $: brandColor = (($store.config as any)?.brandColor as string) || null;
+  $: configuratorId = ($store.config?.configuratorId as string) || $store.configuratorEmail || null;
+  $: brandColor = ($store.config?.brandColor as string) || null;
 </script>
 
 {#if sources.length === 0}

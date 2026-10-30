@@ -2,13 +2,8 @@
     import { onMount } from "svelte";
     import { writable } from "svelte/store";
 
-    export let scaleSpeed = 1;
     export let videoURL =
         "https://videos.pexels.com/video-files/31196472/13325298_2560_1440_25fps.mp4";
-    export let direction = 1;
-    export let offset = 0;
-    export let pushToRead = false;
-    export let z = false;
     let w = writable({});
     let d = writable({});
     let random = writable("");
@@ -34,14 +29,14 @@
         loop
         class="video"
         src={videoURL}
-    />
+    ></video>
     <h1 class="title">
-        <o id={random}>
+        <o id={$random}>
             {text}
         </o>
     </h1>
 </div>
-<div />
+<div></div>
 
 <style lang="scss">
     .soft {

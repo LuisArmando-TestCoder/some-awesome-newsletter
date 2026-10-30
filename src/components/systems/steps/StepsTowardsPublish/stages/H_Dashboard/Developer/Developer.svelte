@@ -3,8 +3,8 @@
   import IntegrationsTab from "$lib/dashboard/settings/IntegrationsTab.svelte";
   import DeveloperTab from "$lib/dashboard/settings/DeveloperTab.svelte";
 
-  export let canReveal = true;
-  $: canReveal;
+  // Passed by the step host; this view is always shown.
+  export const canReveal: boolean = true;
 </script>
 
 <div class="legacy-dev">

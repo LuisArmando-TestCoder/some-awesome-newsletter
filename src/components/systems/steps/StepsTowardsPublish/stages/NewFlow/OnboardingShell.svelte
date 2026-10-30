@@ -30,7 +30,7 @@
   let heading: HTMLHeadingElement;
   let wasRevealed = false;
 
-  $: total = ONBOARDING_STEP_COUNT;
+  const total = ONBOARDING_STEP_COUNT;
   $: percent = Math.round(((index + 1) / total) * 100);
 
   $: if (canReveal && !wasRevealed) {

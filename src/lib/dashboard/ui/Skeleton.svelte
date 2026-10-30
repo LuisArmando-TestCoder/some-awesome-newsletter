@@ -10,7 +10,7 @@
   {#if height}
     <div class="skel__block" style="height: {height}"></div>
   {:else}
-    {#each Array(lines) as _, i}
+    {#each Array(lines) as _, i (i)}
       <div class="skel__line" style="width: {i === lines - 1 ? 60 : 100}%"></div>
     {/each}
   {/if}

@@ -1,12 +1,11 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import AuthForm from '$lib/ui/organisms/AuthForm.svelte';
+  import AuthForm, { type AuthCopy } from '$lib/ui/organisms/AuthForm.svelte';
   import { runtime } from '$lib/config/runtime';
-    import { writable } from 'svelte/store';
+    import { writable, type Writable } from 'svelte/store';
     import { globalLanguage } from '../../components/store';
     import { t } from '$lib/i18n/translations';
-  let copy: any = writable({});// Writable store for the copy content
-  export let data;
+  let copy: Writable<AuthCopy> = writable({}); // Writable store for the copy content
 
   // Load JSON copy at runtime (kept simple; could be done in +page.ts too)
   onMount(async () => {
@@ -14,7 +13,7 @@
     copy.set($t.auth.login);
   });
 
-  $: $globalLanguage && copy.set($t.auth.login);
+  $: if ($globalLanguage) copy.set($t.auth.login);
 </script>
 
 <svelte:head>

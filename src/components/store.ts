@@ -1,14 +1,15 @@
 import { get, writable } from "svelte/store";
-import type { Config, Populator, Store } from "./types";
-import type { Socket } from "socket.io-client";
+import type { Populator, Store } from "./types";
+import type { AppSocket } from "$lib/api/socket";
 import { getApiBaseUrl } from "$lib/api/config";
 import { saveStatus } from "$lib/stores/saveStatus";
+import { isApiError } from "$lib/api/errors";
 
 export const latestMessage = writable<string>("");
 
 export const topic = writable<string>("");
 
-export const socket = writable<Socket | null>(null);
+export const socket = writable<AppSocket | null>(null);
 export const isScrollingDown = writable<boolean>(false);
 
 const colorPalette = [
@@ -148,7 +149,7 @@ export const emptyStoreSnapshot = JSON.parse(JSON.stringify(get(store)));
 
 export default store;
 
-export function saveToStore(objectValue: { [index: string]: any }) {
+export function saveToStore(objectValue: Record<string, unknown>) {
   store.set({
     ...get(store),
     ...objectValue,
@@ -156,7 +157,7 @@ export function saveToStore(objectValue: { [index: string]: any }) {
   setAllKeysToSaveInLocalStorage();
 }
 
-export function populateToStore(propertyPath: string, value: any) {
+export function populateToStore(propertyPath: string, value: unknown) {
   store.set({
     ...createObjectPopulator(get(store))(propertyPath, value),
   });
@@ -174,11 +175,11 @@ export function getFromStore(propertyPath: string) {
  * Pass `false` as the second argument to update the store only.
  */
 export const AUTOSAVE_DELAY_MS = 600;
-let pendingPatch: Record<string, any> = {};
+let pendingPatch: Record<string, unknown> = {};
 let pendingTimer: ReturnType<typeof setTimeout> | null = null;
-let pendingWaiters: Array<(v: Config | null) => void> = [];
+let pendingWaiters: Array<(v: Record<string, unknown> | null) => void> = [];
 
-export async function saveToConfig(config: { [index: string]: any }, shouldUpdateConfiguration: boolean = true): Promise<Config | null> {
+export async function saveToConfig(config: Record<string, unknown>, shouldUpdateConfiguration: boolean = true): Promise<Record<string, unknown> | null> {
   if (!get(store).isAuthCodeValid) return null;
 
   saveToStore({
@@ -193,14 +194,14 @@ export async function saveToConfig(config: { [index: string]: any }, shouldUpdat
   pendingPatch = { ...pendingPatch, ...config };
   saveStatus.markDirty();
   if (pendingTimer) clearTimeout(pendingTimer);
-  return new Promise<Config | null>((resolve) => {
+  return new Promise<Record<string, unknown> | null>((resolve) => {
     pendingWaiters.push(resolve);
     pendingTimer = setTimeout(flushConfigSave, AUTOSAVE_DELAY_MS);
   });
 }
 
 /** Save pending config changes now (for example before navigating away). */
-export async function flushConfigSave(): Promise<Config | null> {
+export async function flushConfigSave(): Promise<Record<string, unknown> | null> {
   if (pendingTimer) clearTimeout(pendingTimer);
   pendingTimer = null;
   const waiters = pendingWaiters;
@@ -210,24 +211,26 @@ export async function flushConfigSave(): Promise<Config | null> {
   pendingPatch = {};
   if (waiters.length === 0 && Object.keys(body).length === 0) return null;
   saveStatus.markSaving();
-  let result: Config | null = null;
+  let result: Record<string, unknown> | null = null;
   try {
     const { updateConfigurationOrThrow } = await import("./systems/requests/updateConfiguration");
     result = await updateConfigurationOrThrow(body);
     saveStatus.markSaved();
-  } catch (e: any) {
-    saveStatus.markError(e?.userMessage || "We could not save your changes. Check your connection and try again.", () => saveToConfig({}, true));
+  } catch (e) {
+    saveStatus.markError((isApiError(e) && e.userMessage) || "We could not save your changes. Check your connection and try again.", () => saveToConfig({}, true));
     result = null;
   }
   waiters.forEach((w) => w(result));
   return result;
 }
 
+type Bag = Record<string, unknown>;
+
 function createObjectPopulator<T extends object>(obj: T): Populator<T> {
-  return function (propertyPath: string, value: any): T {
+  return function (propertyPath: string, value: unknown): T {
     const keys = propertyPath.split(".");
 
-    const updateNested = (current: any, keys: string[]): any => {
+    const updateNested = (current: Bag, keys: string[]): Bag => {
       const [first, ...rest] = keys;
 
       if (rest.length === 0) {
@@ -239,34 +242,35 @@ function createObjectPopulator<T extends object>(obj: T): Populator<T> {
       return {
         ...current,
         [first]: updateNested(
-          current && current[first] ? current[first] : {},
+          current && current[first] ? (current[first] as Bag) : {},
           rest
         ),
       };
     };
 
-    return updateNested(obj, keys);
+    return updateNested(obj as Bag, keys) as T;
   };
 }
 
 function createObjectGetter<T extends object>(
   obj: T
-): (propertyPath: string) => any {
-  return function (propertyPath: string): any {
+): (propertyPath: string) => unknown {
+  return function (propertyPath: string): unknown {
     const keys = propertyPath.split(".");
 
-    const getNested = (current: any, keys: string[]): any => {
+    const getNested = (current: unknown, keys: string[]): unknown => {
       const [first, ...rest] = keys;
 
-      if (current == null || !(first in current)) {
+      if (current == null || typeof current !== "object" || !(first in current)) {
         return undefined;
       }
 
+      const next = (current as Bag)[first];
       if (rest.length === 0) {
-        return current[first];
+        return next;
       }
 
-      return getNested(current[first], rest);
+      return getNested(next, rest);
     };
 
     return getNested(obj, keys);
@@ -312,13 +316,17 @@ function expireLegacyCookies() {
   try {
     localStorage.removeItem("subscribers");
     localStorage.removeItem("leads");
-  } catch {}
+  } catch {
+    // Storage blocked: nothing to clear.
+  }
   try {
     const existing = document.cookie.split(";").map((c) => c.split("=")[0].trim());
     for (const key of new Set([...LEGACY_COOKIE_KEYS, ...get(store).keysToSave])) {
       if (existing.includes(key)) document.cookie = `${key}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
     }
-  } catch {}
+  } catch {
+    // Cookies blocked: nothing to clear.
+  }
 }
 
 function setAllKeysToSaveInLocalStorage() {
@@ -333,12 +341,14 @@ function setAllKeysToSaveInLocalStorage() {
       // Falsy values keep the stored value (historical behavior: the store starts
       // with empty defaults before hydration). Sign out clears storage explicitly.
       localStorage.setItem(key, JSON.stringify(value || JSON.parse(localStorage.getItem(key) || "")));
-    } catch {}
+    } catch {
+      // Storage full or blocked: keep the in-memory value.
+    }
   }
 }
 
 export function saveAllKeysToSaveInLocalStorage() {
-  store.subscribe((currentStore: Store) => {
+  store.subscribe(() => {
     setAllKeysToSaveInLocalStorage();
   });
 }

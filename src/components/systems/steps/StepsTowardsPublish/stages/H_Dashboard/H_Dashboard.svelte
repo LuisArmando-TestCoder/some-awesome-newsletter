@@ -7,7 +7,6 @@
 
   export let canReveal = true;
 
-  $: canReveal;
 </script>
 
 <div class="dashboard">

@@ -36,7 +36,7 @@
 
     // Billing providers are off (Luis, 2026-10-30). Nobody pays in the app: every account starts on
     // Free and the team changes plans by hand when an owner writes to support.
-    $: askLine = (($t as any)?.pricing?.askMore ?? 'Every account starts on the Free plan. If you need more, write to us at {email} and we will change your plan.').replace('{email}', SUPPORT_EMAIL);
+    $: askLine = ($t?.pricing?.askMore ?? 'Every account starts on the Free plan. If you need more, write to us at {email} and we will change your plan.').replace('{email}', SUPPORT_EMAIL);
 
     onDestroy(() => unsub());
 
@@ -86,7 +86,7 @@
 
         <div class="pricing__grid">
             {#if state?.content?.plans}
-                {#each state.content.plans.filter((p) => p.id === 'free') as plan}
+                {#each state.content.plans.filter((p) => p.id === 'free') as plan (plan.id)}
                     <article class="pricing__card" aria-labelledby="plan-{plan.id}-name">
                         <div class="pricing__card-header">
                             <svelte:element this={`h${headingLevel + 1}`} id="plan-{plan.id}-name" class="pricing__card-name">{plan.name}</svelte:element>
@@ -101,7 +101,7 @@
                         </p>
 
                         <ul class="pricing__features" aria-label={$t?.pricing?.includes ?? 'Includes'}>
-                            {#each computeFeatures(state.content, plan.id) as feature}
+                            {#each computeFeatures(state.content, plan.id) as feature, itemIndex (itemIndex)}
                                 <li class="pricing__feature-item">
                                     <svg class="pricing__check" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7" /></svg>
                                     {feature}
@@ -117,7 +117,7 @@
                     </article>
                 {/each}
 
-                {#each PLANS_CONFIG as tier}
+                {#each PLANS_CONFIG as tier (tier.id)}
                     {@const planData = state.content.plans.find((p) => p.id === tier.id)}
                     {@const isFeatured = tier.id === 'growth'}
                     {#if planData}
@@ -152,7 +152,7 @@
                             </p>
 
                             <ul class="pricing__features" aria-label={$t?.pricing?.includes ?? 'Includes'}>
-                                {#each computeFeatures(state.content, tier.id) as feature}
+                                {#each computeFeatures(state.content, tier.id) as feature, itemIndex (itemIndex)}
                                     <li class="pricing__feature-item">
                                         <svg class="pricing__check" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7" /></svg>
                                         {feature}
@@ -172,7 +172,7 @@
                                         class:pricing__button--primary={isFeatured}
                                         class:pricing__button--secondary={!isFeatured}
                                     >
-                                        {(($t as any)?.pricing?.askFor ?? 'Ask for {planName}').replace('{planName}', planData.name)}
+                                        {($t?.pricing?.askFor ?? 'Ask for {planName}').replace('{planName}', planData.name)}
                                     </a>
                                 {/if}
                             </div>
@@ -184,7 +184,7 @@
 
         <p class="pricing__ask">
             {askLine}
-            <a href={planChangeMailto($store?.configuratorEmail)} class="pricing__ask-link">{($t as any)?.pricing?.askAction ?? 'Write to us'}</a>
+            <a href={planChangeMailto($store?.configuratorEmail)} class="pricing__ask-link">{$t?.pricing?.askAction ?? 'Write to us'}</a>
         </p>
     </div>
 </section>
@@ -301,8 +301,6 @@
         gap: var(--space-4, 16px);
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
         align-items: stretch;
-
-        &[aria-busy='true'] { opacity: 0.7; }
     }
 
     .pricing__card {

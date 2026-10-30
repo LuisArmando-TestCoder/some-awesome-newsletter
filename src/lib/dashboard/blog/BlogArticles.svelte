@@ -58,6 +58,7 @@
     page = 1;
     lang = "";
     clearSearch(false);
+    // eslint-disable-next-line svelte/infinite-reactive-loop -- guarded by lastKey: reloads only when holder or source change
     load();
   }
 
@@ -70,6 +71,7 @@
       if (my !== token) return;
       if (!meta.ok) throw new Error("meta");
       languages = meta.languages.filter((l) => l.total > 0);
+      // eslint-disable-next-line svelte/infinite-reactive-loop -- lang is not a dependency of the reactive block that calls load()
       if (!languages.some((l) => l.code === lang)) lang = languages[0]?.code ?? "";
       if (!lang) {
         cards = [];

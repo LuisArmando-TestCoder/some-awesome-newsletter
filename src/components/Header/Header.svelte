@@ -21,47 +21,53 @@
   <nav class="nav" style:top={$headerVisible ? '0' : '-72px'}>
     <div class="menu {menuOpen ? 'open' : ''}">
       <section class="menu-section left">
-        <a
+        <button
+          type="button"
           class="menu-item hide-on-mobile"
           onclick={() => {
             saveToStore({ stepsIndex: 13 });
-          }}>Settings</a
+          }}>Settings</button
         >
-        <a
+        <button
+          type="button"
           class="menu-item hide-on-mobile"
           onclick={() => {
             saveToStore({ stepsIndex: 14 });
-          }}>Sources</a
+          }}>Sources</button
         >
-        <a
+        <button
+          type="button"
           class="menu-item hide-on-mobile"
           onclick={() => {
             saveToStore({ stepsIndex: 15 });
-          }}>Users</a
+          }}>Users</button
         >
         <section class="menu-x hide-on-desktop interactive">
           <ThemeChanger visible={true} />
         </section>
       </section>
       <section class="menu-section center">
-        <a
+        <button
+          type="button"
+          aria-label="Home"
           onclick={() => {
             saveToStore({ stepsIndex: 0, directionsThatShouldDisappear: [] });
           }}
         >
           <SVG src="./icons/AIBA.svg" />
-        </a>
+        </button>
       </section>
       <section class="menu-section right">
         <div class="menu-x hide-on-desktop interactive">
           <MenuHalf />
         </div>
         <section class="menu-x hide-on-mobile interactive">
-          <a
+          <button
+            type="button"
             class="menu-half--anchor menu-half--logout"
             onclick={() => {  
               logout();
-            }}>Log out</a
+            }}>Log out</button
           >
         </section>
 

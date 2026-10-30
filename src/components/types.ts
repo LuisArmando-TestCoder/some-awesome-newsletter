@@ -1,4 +1,4 @@
-import type { SvelteComponent } from "svelte";
+import type { Component } from "svelte";
 
 export type TextType =
   | "paragraph"
@@ -26,6 +26,9 @@ export type Block = {
   segments?: TextNode[];
 };
 
+// The legacy app store holds many loosely shaped fields that are read all over the UI.
+// Typing every field is a larger refactor; until then its values stay `any` on purpose.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- see the comment above
 export type Store = { [index: string]: any };
 
 export interface Country {
@@ -46,7 +49,10 @@ export interface Card {
   selected: boolean;
 }
 
-export type ComponentSteps = [(store: Store) => boolean, SvelteComponent][];
+/** A step view; step hosts pass `canReveal` to every step. */
+export type StepComponent = Component<{ canReveal?: boolean }>;
+export type StepValidator = (store: Store) => boolean;
+export type ComponentSteps = ReadonlyArray<readonly [StepValidator, StepComponent]>;
 
 export interface Article {
   title: string;
@@ -99,6 +105,8 @@ export interface NewsSource {
   /** Paid newsletter flag, stored in the database and edited from /admin. No charging while payments are off. */
   isPaidNewsletter?: boolean;
   newsletterTitle?: string;
+  /** When the owner last sent an issue by hand (set by the backend). */
+  lastManualSendTimestamp?: string | number;
 }
 
 export interface EmailAuth {
@@ -182,7 +190,7 @@ export interface MailConfigPack {
   senderName: string;
   senderEmail: string;
   newsletterSubject: string;
-  transporter: any;
+  transporter: unknown;
 }
 
 export interface SystemConfig {
@@ -192,14 +200,14 @@ export interface SystemConfig {
 
 export type Populator<T extends object> = (
   propertyPath: string,
-  value: any
+  value: unknown
 ) => T;
 
 export type StepsKey = "News Sources" | "Users" | "Reports" | "Profile" | "Billing" | "Exports" | "Newspaper" | "Secrets/Developer";
 
 export type SideLinkType = {
   url?: string;
-  callback?: Function;
+  callback?: () => void;
   name: string;
   key?: StepsKey;
   children?: SideLinkType[]

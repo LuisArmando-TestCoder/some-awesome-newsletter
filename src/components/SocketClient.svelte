@@ -14,7 +14,7 @@
     const unsubscribe = store.subscribe((value) => {
       const { isAuthCodeValid, configuratorEmail, authCode } = value;
       if (isAuthCodeValid && configuratorEmail && authCode) {
-        connectSocket(configuratorEmail, authCode).then(() => socket.set(getSocket() as any));
+        connectSocket(configuratorEmail, authCode).then(() => socket.set(getSocket()));
       }
     });
 

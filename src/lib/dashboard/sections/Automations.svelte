@@ -16,7 +16,9 @@
   import store from "../../../components/store";
 
   $: sources = $store.config?.newsSources ?? [];
-  $: urlOf = (id?: string) => sources.find((s: any) => s.id === id)?.url ?? "";
+  function urlOf(list: { id?: string; url?: string }[], id?: string): string {
+    return list.find((s) => s.id === id)?.url ?? "";
+  }
   $: present = new Set($automations.items.map((a) => a.recipeId));
   // Presets not yet turned on. When the backend is not live, the ones that do not exist yet show as "Coming soon".
   $: more = RECIPES.filter((r) => r.id !== "daily_issue" && !present.has(r.id));
@@ -44,7 +46,7 @@
   {:else}
     <div class="stack">
       {#each $automations.items as a (a.id)}
-        <AutomationCard automation={a} sourceUrl={urlOf(a.newsSourceIds?.[0])} />
+        <AutomationCard automation={a} sourceUrl={urlOf(sources, a.newsSourceIds?.[0])} />
       {/each}
     </div>
   {/if}

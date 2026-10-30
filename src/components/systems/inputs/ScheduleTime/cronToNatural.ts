@@ -150,9 +150,9 @@ function parseSegment(
       );
     }
 
-    let start =
+    const start =
       (names && map ? map.get(startStr.toUpperCase()) : undefined) ?? startNum;
-    let end =
+    const end =
       (names && map ? map.get(endStr.toUpperCase()) : undefined) ?? endNum;
 
     if (isNaN(start) || isNaN(end) || start > end) {
@@ -255,7 +255,7 @@ function parseField(
   const parts = field.split(",");
   const descriptions: string[] = [];
   let isRange = false;
-  let step: number | undefined = undefined;
+  const step: number | undefined = undefined;
 
   for (const part of parts) {
     const parsed = parseSegment(part, min, max, names, map);
@@ -368,8 +368,6 @@ export default function cronToSentence(cronString: string): string {
 
     // 2. Date Part (DayOfMonth, Month, DayOfWeek)
 
-    // Store date constraint clauses
-    const dateClauses: string[] = [];
     let dayOfMonthClause = "";
     let dayOfWeekClause = "";
 
@@ -461,10 +459,10 @@ export default function cronToSentence(cronString: string): string {
     }
 
     return sentence + ".";
-  } catch (e: any) {
+  } catch (e) {
     // Re-throw parsing errors with more context
     throw new Error(
-      `Failed to parse cron string "${cronString}": ${e.message}`
+      `Failed to parse cron string "${cronString}": ${(e instanceof Error ? e.message : String(e))}`
     );
   }
 }

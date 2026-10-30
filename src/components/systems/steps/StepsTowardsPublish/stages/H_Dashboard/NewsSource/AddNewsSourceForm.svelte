@@ -11,6 +11,7 @@
   import Switch from "$lib/ui/components/Switch.svelte";
 
   import createNewsSource from "../../../../../requests/createNewsSource";
+  import type { NewsSource } from "../../../../../../types";
   import { processNewsSourceAction } from "./newsSourceActions";
   import { validateFields } from "./validation";
   import getConfiguratorSession from "../../../../../requests/getConfiguratorSession";
@@ -22,7 +23,7 @@
   import { goTo } from "$lib/dashboard/nav";
   import { sourceUsage } from "$lib/dashboard/sources/sourceUtils";
 
-  export const addedNewsSource = writable<any>(null);
+  export const addedNewsSource = writable<NewsSource | null>(null);
 
   let addNewsSourceUrl = "";
   let addNewsSourceLead = "";

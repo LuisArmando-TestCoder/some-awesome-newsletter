@@ -12,7 +12,7 @@
   let copied: "" | "link" | "embed" = "";
   let timer: ReturnType<typeof setTimeout> | undefined;
 
-  $: origin = typeof window !== "undefined" ? window.location.origin : "https://aibanewsletter.club";
+  const origin = typeof window !== "undefined" ? window.location.origin : "https://aibanewsletter.club";
   $: configuratorId = $store.configuratorEmail || "";
   $: newsSourceId = $onboarding.newsSourceId || $store.createdNewsSourceId || "";
   $: lead = $store.config?.lead || ($onboarding.noWebsite ? "" : $onboarding.url) || "";

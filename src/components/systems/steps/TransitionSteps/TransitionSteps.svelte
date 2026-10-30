@@ -1,12 +1,13 @@
 <script lang="ts">
   import store, { saveToStore } from "../../../store";
   import TransitionButton from "../../buttons/TransitionButton/TransitionButton.svelte";
+  import type { ComponentSteps } from "../../../types";
 
-  export let components: any[];
+  export let components: ComponentSteps;
 
   const canShow = (
     direction: -1 | 0 | 1,
-    isComingFromValidStep?: (v: any) => boolean
+    isComingFromValidStep?: boolean
   ) =>
     components[$store.stepsIndex + direction]?.[0]?.({
       ...$store,
@@ -14,7 +15,7 @@
     });
 </script>
 
-{#each [-1, 1] as direction}
+{#each [-1, 1] as direction (direction)}
   <TransitionButton
     active={!$store.directionsThatShouldDisappear?.includes(direction) && canShow(direction as -1 | 1)}
     direction={direction as -1 | 1}

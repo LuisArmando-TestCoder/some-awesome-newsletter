@@ -60,7 +60,9 @@
     <div class="main-article" class:selected={mainArticle.id === $selectedArticle?.id} role="button" tabindex="0" on:click={() => openArticle(mainArticle)} on:keydown={(e) => onKey(e, mainArticle)}>
       <div class="image-container"><img src={getImage(mainArticle.content)?.src} alt={mainArticle.title} /></div>
       <div class="text-content">
+        <!-- eslint-disable-next-line svelte/no-at-html-tags -- content passes through sanitizeHtml -->
         <h2>{@html sanitizeHtml(mainArticle.title)}</h2>
+        <!-- eslint-disable-next-line svelte/no-at-html-tags -- content passes through sanitizeHtml -->
         <p class="preview-text">{@html sanitizeHtml(getPreview(noH1(mainArticle.content)))}</p>
       </div>
     </div>
@@ -70,7 +72,9 @@
       <div class="secondary-article" class:selected={secondaryArticle1.id === $selectedArticle?.id} role="button" tabindex="0" on:click={() => openArticle(secondaryArticle1)} on:keydown={(e) => onKey(e, secondaryArticle1)}>
         <div class="image-container"><img src={getImage(secondaryArticle1.content)?.src} alt={secondaryArticle1.title} /></div>
         <div class="text-content">
+          <!-- eslint-disable-next-line svelte/no-at-html-tags -- content passes through sanitizeHtml -->
           <h3>{@html sanitizeHtml(secondaryArticle1.title)}</h3>
+          <!-- eslint-disable-next-line svelte/no-at-html-tags -- content passes through sanitizeHtml -->
           <p class="preview-text">{@html sanitizeHtml(getPreview(noH1(secondaryArticle1.content)))}</p>
         </div>
       </div>
@@ -79,7 +83,9 @@
       <div class="secondary-article" class:selected={secondaryArticle2.id === $selectedArticle?.id} role="button" tabindex="0" on:click={() => openArticle(secondaryArticle2)} on:keydown={(e) => onKey(e, secondaryArticle2)}>
         <div class="image-container"><img src={getImage(secondaryArticle2.content)?.src} alt={secondaryArticle2.title} /></div>
         <div class="text-content">
+          <!-- eslint-disable-next-line svelte/no-at-html-tags -- content passes through sanitizeHtml -->
           <h3>{@html sanitizeHtml(secondaryArticle2.title)}</h3>
+          <!-- eslint-disable-next-line svelte/no-at-html-tags -- content passes through sanitizeHtml -->
           <p class="preview-text">{@html sanitizeHtml(getPreview(noH1(secondaryArticle2.content)))}</p>
         </div>
       </div>

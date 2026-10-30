@@ -70,7 +70,7 @@
     {:else if state === 'ready' || state === 'confirming'}
       <h1 class="confirm__title" tabindex="-1" bind:this={heading}>{$ts.confirm.title}</h1>
       <p class="confirm__text">
-        {#each parts($ts.confirm.body) as part, i}{#if i > 0}<strong dir="ltr">{userEmail}</strong>{/if}{part}{/each}
+        {#each parts($ts.confirm.body) as part, i (i)}{#if i > 0}<strong dir="ltr">{userEmail}</strong>{/if}{part}{/each}
       </p>
       <button class="confirm__button" type="button" on:click={confirm} disabled={state === 'confirming'} aria-busy={state === 'confirming'}>
         {state === 'confirming' ? $ts.confirm.confirming : $ts.confirm.button}
@@ -85,7 +85,7 @@
       </div>
       <h1 class="confirm__title" tabindex="-1" bind:this={heading}>{$ts.confirm.successTitle}</h1>
       <p class="confirm__text">
-        {#each parts($ts.confirm.successBody) as part, i}{#if i > 0}<strong dir="ltr">{userEmail}</strong>{/if}{part}{/each}
+        {#each parts($ts.confirm.successBody) as part, i (i)}{#if i > 0}<strong dir="ltr">{userEmail}</strong>{/if}{part}{/each}
       </p>
       <p class="confirm__hint">{$ts.confirm.successTip}</p>
     {:else}

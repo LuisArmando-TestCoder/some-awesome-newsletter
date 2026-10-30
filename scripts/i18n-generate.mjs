@@ -143,7 +143,9 @@ function langName(code) {
   try {
     const n = new Intl.DisplayNames(['en'], { type: 'language' }).of(code);
     if (n && n !== code) return n;
-  } catch {}
+  } catch {
+    // Intl.DisplayNames is missing or rejects the code: fall back to the code.
+  }
   return code;
 }
 const langNote = (code) => (LANGS[code] ? LANGS[code][1] : '');

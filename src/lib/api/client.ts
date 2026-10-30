@@ -100,7 +100,7 @@ async function parseBody(res: Response): Promise<unknown> {
 	const text = await res.text();
 	if (!text) return null;
 	const type = res.headers.get('content-type') ?? '';
-	if (type.includes('json') || /^[\[{"]/.test(text.trim())) {
+	if (type.includes('json') || /^[[{"]/.test(text.trim())) {
 		try {
 			return JSON.parse(text);
 		} catch {

@@ -57,6 +57,7 @@
   {:else if article}
     <article class="fallback" lang={article.language || undefined}>
       <h1>{article.title}</h1>
+      <!-- eslint-disable-next-line svelte/no-at-html-tags -- content passes through sanitizeHtml -->
       <div class="prose">{@html sanitizeHtml(article.content)}</div>
     </article>
   {/if}

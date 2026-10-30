@@ -90,7 +90,7 @@
       {rows}
       {disabled}
       {required}
-    />
+    ></textarea>
   {:else}
     <input
       id={inputId}
@@ -120,6 +120,8 @@
 
 <style lang="scss">
   @use "../../../../lib/styles/centralized-styles.scss";
+  @include centralized-styles.label-extras;
+  @include centralized-styles.textarea-control;
 
   .text-input-wrapper {
     display: flex;

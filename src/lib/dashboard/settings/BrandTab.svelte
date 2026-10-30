@@ -22,7 +22,16 @@
   let colorError = "";
   let lastConfig: unknown = null;
 
-  function fromConfig(cfg: any): Draft {
+  /** Config fields this tab reads (older accounts keep some of them under `email`). */
+  type BrandConfig = {
+    logo?: string;
+    newsletterTitle?: string;
+    newsletterSubject?: string;
+    brandColor?: string;
+    email?: { newsletterTitle?: string; newsletterSubject?: string };
+  };
+
+  function fromConfig(cfg: BrandConfig | null | undefined): Draft {
     return {
       logo: cfg?.logo || "",
       title: cfg?.newsletterTitle || cfg?.email?.newsletterTitle || "",

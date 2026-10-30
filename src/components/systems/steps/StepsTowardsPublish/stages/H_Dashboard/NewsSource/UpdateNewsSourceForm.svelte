@@ -1,18 +1,15 @@
 <script lang="ts">
-  import { writable, get } from "svelte/store";
+  import { writable } from "svelte/store";
   import type { NewsSource } from "../../../../../../types";
   import PlainText from "../../../../../inputs/PlainText/PlainText.svelte";
   import ScheduleTime from "../../../../../inputs/ScheduleTime/ScheduleTime.svelte";
   import SubmitButton from "../../../../../buttons/SubmitButton/SubmitButton.svelte";
   import ToggleCard from "../../../../../buttons/ToggleCard/ToggleCard.svelte";
-  import Switch from "../../../../../selectors/Switch/Switch.svelte";
   import updateNewsSource from "../../../../../requests/updateNewsSource";
   import { processNewsSourceAction } from "./newsSourceActions";
   import Link from "../../../../../inputs/Link/Link.svelte";
-  import store, { latestMessage } from "../../../../../../store";
-  import { generatePersonality } from "../../../../../requests/generatePersonality";
+  import store from "../../../../../../store";
   import Personality from "../../../../../inputs/Personality/Personality.svelte";
-  import MarkdownText from "../../../../../texts/MarkdownText/MarkdownText.svelte";
   import { onMount } from "svelte";
   import { browser } from "$app/environment";
   import { ping } from "../../../../../../Notification/notificationStore";
@@ -80,11 +77,12 @@
       try {
         const raw = localStorage.getItem(SESSION_KEY);
         if (raw) sessionChangedIds = new Set(JSON.parse(raw));
-      } catch {}
+      } catch {
+        // Storage blocked or corrupt marker list: start with an empty set.
+      }
     }
   });
 
-  let rawContent: string = "";
 
   async function handleUpdate() {
     // In-flight guard: one PUT at a time (the button and the form used to both fire).
@@ -276,69 +274,6 @@
     margin: 1rem 0;
     display: grid;
     gap: 25px;
-  }
-  .switch-container {
-    display: flex;
-    align-items: center;
-    gap: 1rem; /* Adds space between label and switch */
-  }
-  .switch-container label {
-    /* Optional: style the label */
-    font-weight: bold;
-  }
-  .personality-section {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  .input-row {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  /* El input ocupa la mayor parte del ancho */
-  .input-row :global(.plain-text-input) {
-    flex: 1;
-  }
-  .generate-btn {
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
-    cursor: pointer;
-    border: none;
-    background-color: var(--color-x-gradient-inversion);
-    color: var(--color-background);
-    border-radius: 5px;
-    transition: background 0.3s ease;
-  }
-  .generate-btn:hover {
-    background-color: var(--color-x-gradient);
-  }
-  /* Área glassmorphic para rawContent */
-  .raw-content-area {
-    position: relative;
-    margin-top: 0.5rem;
-    padding: 1rem;
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 8px;
-  }
-  .raw-content-area textarea {
-    width: 100%;
-    height: 100px;
-    padding: 0.5rem;
-    font-size: 1rem;
-    background: transparent;
-    border: none;
-    color: var(--color-foreground);
-    resize: vertical;
-    outline: none;
-  }
-  /* IconButton posicionado en la esquina superior derecha */
-  .raw-content-area :global(.icon-button) {
-    position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
   }
   .error-message {
     color: red;

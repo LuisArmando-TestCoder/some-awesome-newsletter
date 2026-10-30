@@ -1,6 +1,10 @@
 // src/lib/newsSourceActions.ts
 
 import { validateFields } from "./validation";
+import { errorMessage as messageOf } from "$lib/api/errors";
+
+/** Fields every create/update payload carries. */
+export type NewsSourcePayload = { url?: string; lead?: string; id?: string };
 
 /**
  * Generic helper function for create/update news source actions.
@@ -11,13 +15,13 @@ import { validateFields } from "./validation";
  * @param errorMessage Fallback error message
  * @param onSuccess Callback to invoke if successful
  */
-export async function processNewsSourceAction<T>(
+export async function processNewsSourceAction<T, P extends NewsSourcePayload, R>(
   fields: T,
-  transform: (fields: T) => any,
-  apiCall: (payload: any, id?: string) => Promise<any>,
+  transform: (fields: T) => P,
+  apiCall: (payload: P, id?: string) => Promise<R>,
   setError: (msg: string) => void,
   errorMessage: string,
-  onSuccess: (result: any) => void
+  onSuccess: (result: NonNullable<R>) => void
 ): Promise<void> {
   const payload = transform(fields);
   console.log("[newsSourceActions.ts] Payload:", payload);
@@ -33,12 +37,12 @@ export async function processNewsSourceAction<T>(
 
   setError("");
 
-  let result;
+  let result: R;
   try {
     result = await apiCall(payload, payload.id);
-  } catch (e: any) {
+  } catch (e) {
     console.error("[NEWS-SOURCE-ERROR]", e);
-    setError(e.message || errorMessage);
+    setError(messageOf(e) || errorMessage);
     return;
   }
 

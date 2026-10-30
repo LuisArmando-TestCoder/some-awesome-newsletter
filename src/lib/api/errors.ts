@@ -87,9 +87,10 @@ const V1_CODES: Record<string, ApiErrorCode> = {
 
 function backendCode(body: unknown): string | undefined {
 	if (!body || typeof body !== 'object') return undefined;
-	const b = body as Record<string, any>;
+	const b = body as Record<string, unknown>;
 	if (typeof b.code === 'string') return b.code;
-	if (b.error && typeof b.error === 'object' && typeof b.error.code === 'string') return b.error.code;
+	const err = b.error as Record<string, unknown> | null | undefined;
+	if (err && typeof err === 'object' && typeof err.code === 'string') return err.code;
 	return undefined;
 }
 
@@ -123,18 +124,27 @@ function extractText(body: unknown): string {
 		for (const key of ['error', 'message', 'details', 'detail']) {
 			const v = b[key];
 			if (typeof v === 'string' && v.trim()) return v.trim();
-			if (v && typeof v === 'object' && typeof (v as any).message === 'string') return (v as any).message;
+			const nested = v && typeof v === 'object' ? (v as { message?: unknown }).message : undefined;
+			if (typeof nested === 'string') return nested;
 		}
 	}
 	return '';
 }
+
+/** Fields read from an error response body (legacy and /v1 shapes). */
+type ErrorBody = {
+	retryAfter?: unknown;
+	// A string in legacy bodies, an object in /v1 ones; only the object form is read here.
+	error?: { details?: { retryAfterSeconds?: unknown } };
+	details?: { retryAfterSeconds?: unknown };
+};
 
 /** Build an ApiError from an HTTP response body (already parsed if JSON). */
 export function errorFromResponse(status: number, body: unknown, headers?: Headers, fallback?: string): ApiError {
 	const text = extractText(body);
 	const code = V1_CODES[backendCode(body) ?? ''] ?? codeForStatus(status, text);
 	const retryHeader = headers?.get('retry-after');
-	const b = body && typeof body === 'object' ? (body as any) : null;
+	const b = body && typeof body === 'object' ? (body as ErrorBody) : null;
 	const retryBody = b ? Number(b.retryAfter ?? b.error?.details?.retryAfterSeconds ?? b.details?.retryAfterSeconds) : NaN;
 	const retryAfter = Number.isFinite(retryBody) ? retryBody : retryHeader ? Number(retryHeader) || undefined : undefined;
 	// Plan limit, validation and conflict messages from the backend are specific and useful.
@@ -149,6 +159,13 @@ export function errorFromResponse(status: number, body: unknown, headers?: Heade
 		retryAfter,
 		body
 	});
+}
+
+/** The message of any thrown value, or "" when it has none. */
+export function errorMessage(e: unknown): string {
+	if (e instanceof Error) return e.message;
+	if (typeof e === 'string') return e;
+	return '';
 }
 
 /** Message to show for any thrown value. */

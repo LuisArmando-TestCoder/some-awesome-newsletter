@@ -1,10 +1,20 @@
+<script lang="ts" module>
+  type Strings = { [key: string]: string | undefined };
+  /** Copy for the form ($t.help). Every field has an English fallback in the markup. */
+  export type HelpFormContent = {
+    form?: { [key: string]: string | Strings | undefined; errors?: Strings; spend?: Strings; urgency?: Strings; reply?: Strings };
+    questions?: Strings;
+    contact?: Strings;
+  };
+</script>
+
 <script lang="ts">
   import { z } from 'zod';
 
   /** Signed-in user, used to prefill name and email. May be null for visitors. */
   export let user: { name?: string; email?: string; company?: string } | null = null;
   /** `help` translation block (title, contact, questions). */
-  export let content: any = {};
+  export let content: HelpFormContent = {};
   /** Where the request is sent. */
   export let contactEmail = 'info@aiban.news';
 
@@ -170,7 +180,7 @@
     <div class="help-form__group">
       <label for="help-expectedSpend" class="help-form__label">{f.spendLabel ?? 'Expected monthly spend'}</label>
       <select id="help-expectedSpend" bind:value={formData.expectedSpend} class="help-form__input" aria-describedby="help-expectedSpend-hint">
-        {#each Object.entries(spendLabels) as [value, label]}
+        {#each Object.entries(spendLabels) as [value, label] (value)}
           <option {value}>{label}</option>
         {/each}
       </select>

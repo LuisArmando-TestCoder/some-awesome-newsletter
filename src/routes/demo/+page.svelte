@@ -6,7 +6,7 @@
   // Walkthrough video that the previous demo page already embedded.
   const VIDEO_ID = 'zPOFU2QY_HA';
 
-  $: d = ($t as any)?.demoPage ?? {};
+  $: d = $t?.demoPage ?? {};
   $: metaTitle = d.metaTitle ?? 'Demo | AIBAN';
   $: metaDescription = d.metaDescription ?? '';
 </script>
@@ -38,7 +38,7 @@
   <section class="section" aria-labelledby="steps-title">
     <h2 id="steps-title" class="section__title">{d.stepsTitle ?? 'What happens after you sign up'}</h2>
     <ol class="steps">
-      {#each d.steps ?? [] as step, i}
+      {#each d.steps ?? [] as step, i (i)}
         <li class="step">
           <span class="step__num" aria-hidden="true">{i + 1}</span>
           <div>
@@ -145,16 +145,9 @@
       border-color: var(--border-2, #cbd5e1);
       &:hover { background: var(--surface-2, #f1f5f9); }
     }
-
-    &--tertiary {
-      padding-inline: var(--space-2, 8px);
-      color: var(--text-link, #4338ca);
-      &:hover { text-decoration: underline; }
-    }
   }
 
-  a:focus-visible,
-  button:focus-visible {
+  a:focus-visible {
     outline: 2px solid var(--focus-color, #6366f1);
     outline-offset: 2px;
   }

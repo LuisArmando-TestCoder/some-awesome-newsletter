@@ -7,8 +7,8 @@
   }
 </script>
 
-<div class="menu-half-trigger" class:open={$isMobileMenuOpen} on:click={toggleMenu}>
-  <X isChecked={$isMobileMenuOpen} trigger={() => {}} />
+<div class="menu-half-trigger" class:open={$isMobileMenuOpen}>
+  <X isChecked={$isMobileMenuOpen} trigger={toggleMenu} />
 </div>
 
 <style lang="scss">

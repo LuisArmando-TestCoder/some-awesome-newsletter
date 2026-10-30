@@ -29,6 +29,7 @@
       getGeoIpLanguage()
         .then((geo) => {
           if (geo && !$onboarding.language && !browserLanguage()) {
+            // eslint-disable-next-line svelte/infinite-reactive-loop -- runs once: the block above is guarded by `seeded`
             language = geo;
             languageKey++;
           }

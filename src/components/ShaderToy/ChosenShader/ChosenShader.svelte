@@ -4,7 +4,7 @@
 </script>
 
 <div class="shader">
-  <ShaderToy {shader} iChannel0={"./Texto Latino Negativo.jpg"} />
+  <ShaderToy {shader} iChannel0="./Texto Latino Negativo.jpg" />
 </div>
 
 <style>

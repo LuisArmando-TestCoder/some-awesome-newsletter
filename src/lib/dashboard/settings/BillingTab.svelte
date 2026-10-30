@@ -11,7 +11,7 @@
   import store from "../../../components/store";
   import { dt } from "../i18n";
 
-  $: usage = computeUsage($store.config as any, $store.subscribers as any);
+  $: usage = computeUsage($store.config, $store.subscribers);
   $: planName = $plansStore.content?.plans?.find((p) => p.id === usage.plan)?.name || usage.plan.charAt(0).toUpperCase() + usage.plan.slice(1);
   $: isPaid = !["free", "vipfree"].includes(usage.plan);
   $: meters = [usage.newsSources, usage.subscribers];

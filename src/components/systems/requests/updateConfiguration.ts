@@ -1,5 +1,4 @@
 import store from "../../store";
-import type { Config } from "../../types";
 import { request } from "$lib/api/client";
 import { getCredentials } from "$lib/api/credentials";
 
@@ -42,7 +41,7 @@ const patchStoreConfig = (cfg: Record<string, unknown>) =>
  */
 export default async function updateConfiguration(
   partialConfig: Record<string, unknown>
-): Promise<Config | null> {
+): Promise<Record<string, unknown> | null> {
   try {
     return await updateConfigurationOrThrow(partialConfig);
   } catch (err) {
@@ -51,14 +50,14 @@ export default async function updateConfiguration(
   }
 }
 
-export async function updateConfigurationOrThrow(partialConfig: Record<string, unknown>): Promise<any> {
+export async function updateConfigurationOrThrow(partialConfig: Record<string, unknown>): Promise<Record<string, unknown> | null> {
   const documentId = getCredentials().email;
   const latest = await request<Record<string, unknown>>("/private-config", {
     query: { documentId },
     dedupe: false,
   });
   const merged = stripEmailCredentials({ ...(latest || {}), ...partialConfig });
-  const json = await request<any>("/config", {
+  const json = await request<{ config?: Record<string, unknown> } & Record<string, unknown>>("/config", {
     method: "PUT",
     query: { documentId },
     body: merged,

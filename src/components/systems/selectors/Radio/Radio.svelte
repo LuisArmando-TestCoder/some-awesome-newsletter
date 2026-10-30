@@ -2,10 +2,8 @@
   import { writable } from "svelte/store";
 
   // Props for the custom radio button.
-  export let selected: boolean = false; // (Not directly used; store drives state)
   export let label: string = "";
   export let value: string | number = "";
-  export let name: string = "";
 
   // Callback to be invoked when this radio button is activated.
   export let onChange: (newValue: string | number) => void = () => {};

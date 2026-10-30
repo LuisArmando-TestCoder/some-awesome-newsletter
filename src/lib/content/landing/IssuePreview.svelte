@@ -48,7 +48,7 @@
 
 	{#if switchable}
 		<div class="issue__tabs" role="tablist" aria-label={labels.languageLabel}>
-			{#each SAMPLE_LANGUAGES as code, i}
+			{#each SAMPLE_LANGUAGES as code, i (code)}
 				{@const name = buildSample(host, code).languageName}
 				<button
 					type="button"
@@ -87,7 +87,7 @@
 			<p class="issue__greeting">{issue.greeting}</p>
 			<p class="issue__headline">{issue.headline}</p>
 			<div class="issue__image" aria-hidden="true"></div>
-			{#each compact ? issue.paragraphs.slice(0, 1) : issue.paragraphs as p}
+			{#each compact ? issue.paragraphs.slice(0, 1) : issue.paragraphs as p, itemIndex (itemIndex)}
 				<p class="issue__p">{p}</p>
 			{/each}
 			<p class="issue__cta" aria-hidden="true">{issue.cta}</p>

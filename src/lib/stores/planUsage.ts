@@ -4,7 +4,7 @@
  * refreshPlanUsage() to replace the estimate with server numbers
  * (GET /v1/usage counts every subscriber, not only the loaded ones).
  */
-import { derived, writable } from 'svelte/store';
+import { derived, get, writable } from 'svelte/store';
 import store from '../../components/store';
 import { computeUsage, getUsage, type UsageWithMonth } from '$lib/api/usage';
 
@@ -19,8 +19,7 @@ export const planUsage = derived([store, server], ([$s, $server]) => {
 
 export async function refreshPlanUsage(): Promise<void> {
 	try {
-		let snapshot: any;
-		store.subscribe((v) => (snapshot = v))();
+		const snapshot = get(store);
 		server.set(await getUsage(() => computeUsage(snapshot?.config, snapshot?.subscribers)));
 	} catch {
 		/* keep the local estimate */

@@ -1,14 +1,14 @@
 <script lang="ts">
     import { fade } from 'svelte/transition';
-    import type { SvelteComponent } from 'svelte';
+    import type { Component } from 'svelte';
     // Animation for CSS transitions is not possible due to external re-rendering for state transitions, so use gsap or keyframes
 
     /**
      * Describes one step in the checklist.
      * `componentValue` is any Svelte component constructor that should render when the rule is met.
      */
-    interface CheckCondition<T = SvelteComponent> {
-        componentValue: new (...args: any) => T;
+    interface CheckCondition {
+        componentValue: Component;
         condition: () => boolean;   // purely primitive boolean for strict typing
         checkName: string;
         tooltip: string;
@@ -18,6 +18,8 @@
      * Array of conditions injected by the parent.
      */
     export let checkConditions: CheckCondition[] = [];
+
+    const tooltipPrefix = `check-tip-${Math.random().toString(36).slice(2, 9)}`;
 
     /**
      * Derive which <li> in the component list should be visible.
@@ -34,22 +36,24 @@
 
 <!-- Checklist with tooltips -->
 <ul class="checklist" role="list">
-    {#each checkConditions as { checkName, tooltip, condition }, idx}
-        <li
-            class="check"
-            class:checked={condition()}
-            aria-checked={condition()}
-            tabindex="0"
-        >
-            {checkName}
-            <span class="tooltip" role="tooltip">{tooltip}</span>
+    {#each checkConditions as { checkName, tooltip, condition }, idx (idx)}
+        <li class="check" class:checked={condition()}>
+            <span
+                class="check__label"
+                role="checkbox"
+                aria-checked={condition()}
+                aria-readonly="true"
+                aria-describedby={`${tooltipPrefix}-${idx}`}
+                tabindex="0">{checkName}</span
+            >
+            <span class="tooltip" role="tooltip" id={`${tooltipPrefix}-${idx}`}>{tooltip}</span>
         </li>
     {/each}
 </ul>
 
 <!-- Dynamic component host -->
 <ul class="component" aria-live="polite">
-    {#each checkConditions as { componentValue }, idx}
+    {#each checkConditions as { componentValue }, idx (idx)}
         <li class:show={showStates[idx]} transition:fade|local>
             <svelte:component this={componentValue} />
         </li>
@@ -117,7 +121,7 @@
             }
 
             &:hover .tooltip,
-            &:focus .tooltip {
+            &:focus-within .tooltip {
                 opacity: 1;
             }
         }

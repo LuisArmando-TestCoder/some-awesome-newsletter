@@ -142,7 +142,7 @@ on:dragenter={handleDragEnter}
 on:dragover={handleDragOver}
 on:dragleave={handleDragLeave}
 on:drop={handleDrop}
-aria-disabled={disabled || isSubmitting}
+role="presentation"
 >
 <button
     class="file-input-label"

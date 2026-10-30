@@ -17,7 +17,13 @@ type VerifyResponse = { success?: boolean; sessionToken?: string; sessionExpires
  *   onError is given, onFailure is called (previous behaviour).
  * `authError` in the store holds a user facing message.
  */
-export default async (onSuccessCallback?: Function, onFailureCallback?: Function, onErrorCallback?: Function) => {
+type AuthCallback = () => unknown;
+
+export default async (
+  onSuccessCallback?: AuthCallback,
+  onFailureCallback?: AuthCallback,
+  onErrorCallback?: AuthCallback
+) => {
   const c = getCredentials();
 
   if (!c.email || !c.code) {

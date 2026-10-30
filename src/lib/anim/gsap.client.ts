@@ -1,12 +1,14 @@
 import { gsap } from 'gsap';
+import type { ScrollSmoother as Smoother } from 'gsap/ScrollSmoother';
+import type { ScrollTrigger as Trigger } from 'gsap/ScrollTrigger';
 
 // GSAP helpers for the landing page only (WS1). Functional screens do not animate.
 // Plugins load on demand: ScrollTrigger when something needs a refresh, ScrollSmoother only when a smoother is created.
 // SplitText is no longer loaded (nothing uses it, and per-word text animation is not allowed on functional screens).
 
-let smoother: any = null;
-let ScrollSmoother: any = null;
-let ScrollTrigger: any = null;
+let smoother: Smoother | null = null;
+let ScrollSmoother: typeof Smoother | null = null;
+let ScrollTrigger: typeof Trigger | null = null;
 
 /** True when the person asked for less motion (OS setting or the Display settings menu). */
 export function prefersReducedMotion(): boolean {
@@ -33,7 +35,11 @@ async function loadScrollSmoother() {
 }
 
 /** Creates a ScrollSmoother. Returns null on the server or when reduced motion is on. */
-export async function createSmoother(wrapper: HTMLElement, content: HTMLElement) {
+export async function createSmoother(
+  wrapper: HTMLElement,
+  content: HTMLElement,
+  callbacks: { onUpdate?: (self: Smoother) => void; onStop?: (self: Smoother) => void } = {}
+): Promise<Smoother | null> {
   if (prefersReducedMotion()) return null;
   await loadScrollSmoother();
   if (!ScrollSmoother) return null;
@@ -45,7 +51,8 @@ export async function createSmoother(wrapper: HTMLElement, content: HTMLElement)
     smooth: 1,
     effects: true,
     smoothTouch: 0.1,
-    normalizeScroll: true
+    normalizeScroll: true,
+    ...callbacks
   });
   return smoother;
 }

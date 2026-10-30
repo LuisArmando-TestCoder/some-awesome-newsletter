@@ -29,14 +29,25 @@ export type ActivationState = {
   hasConfirmedReader: boolean;
 };
 
-type AnyRecord = Record<string, any>;
+type AnyRecord = Record<string, unknown>;
+type Subscription = { confirmedAt?: unknown; accepted?: unknown } | null;
+type SubscriberLike = { email?: unknown; confirmedAt?: unknown; subscriptions?: unknown } | null;
 
-function confirmedAt(u: AnyRecord): string {
+/** Store fields read here (the legacy store is loosely shaped). */
+export type ActivationStoreInput = {
+  configuratorEmail?: unknown;
+  config?: { newsSources?: ({ firstSentAt?: string; lastSentAt?: string } | null)[] } | null;
+  subscribers?: AnyRecord | null;
+};
+/** Onboarding fields read here. */
+export type ActivationOnboardingInput = { startedAt?: string | number | null; firstSendAt?: string | null };
+
+function confirmedAt(u: SubscriberLike): string {
   if (u?.confirmedAt) return String(u.confirmedAt);
   const subs = u?.subscriptions;
   if (subs && typeof subs === "object") {
     for (const byConfig of Object.values(subs as AnyRecord)) {
-      for (const s of Object.values((byConfig ?? {}) as AnyRecord)) {
+      for (const s of Object.values((byConfig ?? {}) as Record<string, Subscription>)) {
         if (s?.confirmedAt) return String(s.confirmedAt);
         if (s?.accepted === true) return "unknown";
       }
@@ -45,7 +56,11 @@ function confirmedAt(u: AnyRecord): string {
   return "";
 }
 
-export function computeActivation(s: AnyRecord, o: AnyRecord, now: Date = new Date()): ActivationState {
+export function computeActivation(
+  s: ActivationStoreInput | null | undefined,
+  o: ActivationOnboardingInput | null | undefined,
+  now: Date = new Date()
+): ActivationState {
   const owner = String(s?.configuratorEmail ?? "").toLowerCase();
   const started = o?.startedAt ? new Date(o.startedAt) : null;
   const end = started ? new Date(started.getTime() + ACTIVATION_WINDOW_DAYS * 86_400_000) : null;
@@ -55,14 +70,14 @@ export function computeActivation(s: AnyRecord, o: AnyRecord, now: Date = new Da
     return Number.isNaN(t) || t <= end.getTime();
   };
 
-  const sources: AnyRecord[] = s?.config?.newsSources ?? [];
+  const sources = s?.config?.newsSources ?? [];
   const sendTimes = [o?.firstSendAt, ...sources.map((ns) => ns?.firstSentAt || ns?.lastSentAt)].filter(Boolean) as string[];
   const hasFirstSend = sendTimes.some(within);
 
   let hasConfirmedReader = false;
   for (const list of Object.values((s?.subscribers ?? {}) as AnyRecord)) {
     if (!Array.isArray(list)) continue;
-    for (const u of list) {
+    for (const u of list as SubscriberLike[]) {
       const email = String(u?.email ?? "").toLowerCase();
       if (!email || email === owner) continue;
       const at = confirmedAt(u);
@@ -81,4 +96,4 @@ export function computeActivation(s: AnyRecord, o: AnyRecord, now: Date = new Da
   };
 }
 
-export const activation: Readable<ActivationState> = derived([store, onboarding], ([$s, $o]) => computeActivation($s as AnyRecord, $o as AnyRecord));
+export const activation: Readable<ActivationState> = derived([store, onboarding], ([$s, $o]) => computeActivation($s, $o));

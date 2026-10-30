@@ -65,7 +65,7 @@
 
 {#if tooltip && !disabled}
   <Tooltip text={label} placement={tooltipPlacement}>
-    {#snippet children()}{@render button()}{/snippet}
+    {@render button()}
   </Tooltip>
 {:else}
   {@render button()}

@@ -73,7 +73,7 @@ export function parseNaturalLanguageToCron(inputStr: string): CronParseResult {
   }
 
   const lowerInput = inputStr.toLowerCase().trim();
-  let parts = ["*", "*", "*", "*", "*"]; // min, hour, dom, month, dow
+  const parts = ["*", "*", "*", "*", "*"]; // min, hour, dom, month, dow
     let foundTime = false;
     let foundDow = false;
     let foundDom = false;
@@ -272,11 +272,11 @@ export function parseNaturalLanguageToCron(inputStr: string): CronParseResult {
     }
 
     return { success: true, cron: parts.join(" ") };
-  } catch (e: any) {
+  } catch (e) {
     console.error("Cron parsing error:", e); // Log the full error for debugging
     return {
       success: false,
-      error: e.message || "Could not understand the schedule format.",
+      error: (e instanceof Error ? e.message : String(e)) || "Could not understand the schedule format.",
     };
   }
 }
@@ -295,6 +295,6 @@ export function isCronString(value: string | null | undefined): boolean {
   // Basic validation: Check if parts contain allowed characters (*, -, /, ,, digits, L, W, #, ?)
   // This is a loose check; full validation is complex.
   // Added L, W, #, ? which are common in some cron variants (like Quartz) but might not be parsed correctly by cronToSentence.
-  const cronPattern = /^[0-9*\/,L W#?-]+$/i; // Case-insensitive for L, W
+  const cronPattern = /^[0-9*/,L W#?-]+$/i; // Case-insensitive for L, W
   return parts.every((part) => cronPattern.test(part));
 }

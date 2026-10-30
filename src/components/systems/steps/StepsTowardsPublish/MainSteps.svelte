@@ -103,4 +103,4 @@
   }
 </script>
 
-<StepsTowardsPublish components={components as any} />
+<StepsTowardsPublish {components} />

@@ -7,7 +7,12 @@ export type PublicConfig = Pick<Config, "logo" | "newsletterTitle" | "senderName
   newsSources: Array<{ id: string; url?: string; newsletterTitle?: string; active?: boolean; isPublic?: boolean; lead?: string }>;
 };
 
-function toPublic(raw: any): PublicConfig {
+type RawPublicSource = { id?: unknown; url?: string; newsletterTitle?: string; active?: boolean; isPublic?: boolean; lead?: string };
+type RawPublicConfig = Partial<Pick<PublicConfig, "logo" | "newsletterTitle" | "newsletterSubject" | "senderName" | "brandColor">> & {
+  newsSources?: unknown;
+};
+
+function toPublic(raw: RawPublicConfig | null | undefined): PublicConfig {
   return {
     logo: raw?.logo,
     newsletterTitle: raw?.newsletterTitle,
@@ -15,9 +20,9 @@ function toPublic(raw: any): PublicConfig {
     senderName: raw?.senderName,
     brandColor: raw?.brandColor,
     newsSources: Array.isArray(raw?.newsSources)
-      ? raw.newsSources
-          .filter((ns: any) => ns && typeof ns.id === "string")
-          .map((ns: any) => ({
+      ? (raw.newsSources as (RawPublicSource | null)[])
+          .filter((ns): ns is RawPublicSource & { id: string } => !!ns && typeof ns.id === "string")
+          .map((ns) => ({
             id: ns.id,
             url: ns.url,
             newsletterTitle: ns.newsletterTitle,
@@ -44,7 +49,7 @@ export default async function getPublicConfig(configuratorId: string): Promise<C
       () => request(`/public-config/${seg(configuratorId)}`, { auth: "none", retries: 1 }),
       () => request("/config", { auth: { headers: { "x-auth-email": configuratorId } }, retries: 1 })
     );
-    return toPublic(raw) as unknown as Config;
+    return toPublic(raw as RawPublicConfig | null) as unknown as Config;
   } catch (error) {
     console.error("[getPublicConfig] Failed", error);
     return null;

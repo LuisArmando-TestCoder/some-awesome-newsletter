@@ -53,7 +53,9 @@
     <div class="text-grid-wrapper grid-a">
       {#each textSlice1 as article (article.id)}
         <div class="text-card" class:selected={article.id === $selectedArticle?.id} role="button" tabindex="0" on:click={() => openArticle(article)} on:keydown={(e) => onKey(e, article)}>
+          <!-- eslint-disable-next-line svelte/no-at-html-tags -- content passes through sanitizeHtml -->
           <h3>{@html sanitizeHtml(article.title)}</h3>
+          <!-- eslint-disable-next-line svelte/no-at-html-tags -- content passes through sanitizeHtml -->
           <p class="preview-text">{@html sanitizeHtml(getPreview(noH1(article.content)))}</p>
         </div>
       {/each}
@@ -62,6 +64,7 @@
   {#if textSlice2.length > 0}
     <div class="text-grid-wrapper grid-b">
       {#each textSlice2 as article (article.id)}
+        <!-- eslint-disable-next-line svelte/no-at-html-tags -- content passes through sanitizeHtml -->
         <div class="text-card" class:selected={article.id === $selectedArticle?.id} role="button" tabindex="0" on:click={() => openArticle(article)} on:keydown={(e) => onKey(e, article)}><h4>{@html sanitizeHtml(article.title)}</h4></div>
       {/each}
     </div>
@@ -69,6 +72,7 @@
   {#if textSlice3.length > 0}
     <div class="text-grid-wrapper grid-c">
       {#each textSlice3 as article (article.id)}
+        <!-- eslint-disable-next-line svelte/no-at-html-tags -- content passes through sanitizeHtml -->
         <div class="text-card" class:selected={article.id === $selectedArticle?.id} role="button" tabindex="0" on:click={() => openArticle(article)} on:keydown={(e) => onKey(e, article)}><h4>{@html sanitizeHtml(article.title)}</h4></div>
       {/each}
     </div>
@@ -76,6 +80,7 @@
   {#if textSlice4.length > 0}
     <div class="text-grid-wrapper grid-d">
       {#each textSlice4 as article (article.id)}
+        <!-- eslint-disable-next-line svelte/no-at-html-tags -- content passes through sanitizeHtml -->
         <div class="text-card" class:selected={article.id === $selectedArticle?.id} role="button" tabindex="0" on:click={() => openArticle(article)} on:keydown={(e) => onKey(e, article)}><h4>{@html sanitizeHtml(article.title)}</h4></div>
       {/each}
     </div>

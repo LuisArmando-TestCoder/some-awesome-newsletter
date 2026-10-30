@@ -47,7 +47,8 @@
   $: showError = !loading && (loadError !== null || ($dashboardReady && neverLoaded));
   $: filtered = filter(rows, { query: debounced, language, source });
   // Back to the first page whenever the filters change.
-  $: debounced, language, source, (page = 1);
+  const firstPage = (..._filters: unknown[]) => 1;
+  $: page = firstPage(debounced, language, source);
   $: pages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   $: if (page > pages) page = pages;
   $: visible = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);

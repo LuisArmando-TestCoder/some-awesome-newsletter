@@ -1,22 +1,18 @@
 <!-- src/components/systems/steps/StepsTowardsPublish/stages/H_Dashboard/Users/UserAnalytics.svelte -->
 <script lang="ts">
-    import { get } from 'svelte/store'; // Only needed if accessing stores directly, prefer props
     import type { NewsletterUser, NewsSource } from '../../../../../../types.js'; // Adjust path
-    import type { Writable } from 'svelte/store'; // If passing stores as props
   
     // Define a type for the expected data item structure, matching Stat.svelte
     type StatDataItem = {
       name?: string;
       id?: string;
       total: number;
-      [key: string]: any;
+      [key: string]: unknown;
     };
 
     // Import UI Components (Adjust paths as needed)
     import TextTypes from '../../../../../texts/TextTypes/TextTypes.svelte';
     import Stat from '../../../../../stats/Stat.svelte'; // Ensure this path is correct
-    import LeadStat from '../../../../../stats/LeadStat.svelte';
-    import store from '../../../../../../store.js';
     import SubmitButton from '../../../../../buttons/SubmitButton/SubmitButton.svelte';
     import { t } from '$lib/i18n/dashboard-translations';
   
@@ -177,10 +173,6 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
-  }
-  .charts-column {
-    // Assuming this class is defined globally or in parent
-    /* Styles for the analytics column layout */
   }
   .stats-container {
     display: flex;

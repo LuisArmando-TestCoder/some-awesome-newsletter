@@ -1,6 +1,7 @@
 import { get } from "svelte/store";
 import store, { saveToStore } from "../../store";
 import { request, seg } from "$lib/api/client";
+import { isApiError } from "$lib/api/errors";
 
 /**
  * Ask the backend to email a sign in code to `configuratorEmail`.
@@ -15,10 +16,10 @@ export default async function ask() {
   try {
     await request(`/auth/${seg(email)}`, { method: "POST", auth: "none", retries: 0 });
     saveToStore({ hasNewEmailCodeBeenSent: false, hasAuthCodeAskFailed: true });
-  } catch (e: any) {
+  } catch (e) {
     saveToStore({
       hasNewEmailCodeBeenSent: false,
-      authCodeRequestError: e?.userMessage || "We could not send the code. Try again in a minute.",
+      authCodeRequestError: (isApiError(e) && e.userMessage) || "We could not send the code. Try again in a minute.",
     });
   }
 }

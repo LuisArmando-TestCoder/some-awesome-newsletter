@@ -7,7 +7,7 @@
   import { browser } from "$app/environment";
   import type { Writable } from "svelte/store";
   import fuzzysort from "fuzzysort";
-  import { fade, slide } from "svelte/transition";
+  import { slide } from "svelte/transition";
   import { t } from "$lib/i18n/dashboard-translations";
 
   interface Option {
@@ -35,7 +35,6 @@
   // State
   let selectedOption: Option | null = null;
   let open = false;
-  let showInput = false;
   let dropdownRef: HTMLElement;
   let inputRef: HTMLInputElement;
   let buttonRef: HTMLButtonElement;
@@ -86,7 +85,6 @@
   // Event Handlers
   function toggleOpen() {
     open = !open;
-    showInput = open; // Input visibility tied to dropdown state
     if (open) {
       typeahead = "";
       highlightedIndex = selectedOption
@@ -108,7 +106,6 @@
     store.set(option.value);
     lastValidHighlightedIndex = findIndexByValue(option.value);
     open = false;
-    showInput = false;
     typeahead = "";
     highlightedIndex = -1;
     buttonRef?.focus();
@@ -117,7 +114,6 @@
   function handleClickOutside(event: MouseEvent) {
     if (open && dropdownRef && !dropdownRef.contains(event.target as Node)) {
       open = false;
-      showInput = false;
       typeahead = "";
       buttonRef?.focus();
     }
@@ -174,14 +170,12 @@
         case "Escape":
           event.preventDefault();
           open = false;
-          showInput = false;
           typeahead = "";
           buttonRef?.focus();
           return;
 
         case "Tab":
           open = false;
-          showInput = false;
           typeahead = "";
           return;
       }
@@ -325,6 +319,12 @@
           aria-selected={selectedOption?.value === option.value}
           tabindex="-1"
           on:click={() => selectOption(option)}
+          on:keydown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              selectOption(option);
+            }
+          }}
           on:mouseenter={() => {
             highlightedIndex = index;
           }}

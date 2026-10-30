@@ -95,13 +95,13 @@
   {#if freq === "weekly"}
     <Field id="dow-{uid}" label={$dt("dash.automations.field.day")}>
       <select id="dow-{uid}" bind:value={dow}>
-        {#each days as d}<option value={d}>{dayName(d)}</option>{/each}
+        {#each days as d (d)}<option value={d}>{dayName(d)}</option>{/each}
       </select>
     </Field>
   {:else if freq === "monthly"}
     <Field id="dom-{uid}" label={$dt("dash.automations.field.dayOfMonth")} hint={dom > 28 ? $dt("dash.automations.field.dayOfMonthHint") : null}>
       <select id="dom-{uid}" bind:value={dom}>
-        {#each Array.from({ length: 31 }, (_, i) => i + 1) as d}<option value={d}>{d}</option>{/each}
+        {#each Array.from({ length: 31 }, (_, i) => i + 1) as d (d)}<option value={d}>{d}</option>{/each}
       </select>
     </Field>
   {/if}
@@ -110,7 +110,7 @@
   </Field>
   <Field id="tz-{uid}" label={$dt("dash.automations.field.timezone")} hint={$dt("dash.automations.field.timezoneHint")}>
     <select id="tz-{uid}" bind:value={tz}>
-      {#each zones as z}<option value={z}>{z.replace(/_/g, " ")}</option>{/each}
+      {#each zones as z (z)}<option value={z}>{z.replace(/_/g, " ")}</option>{/each}
     </select>
   </Field>
   <p class="sched__next" aria-live="polite">

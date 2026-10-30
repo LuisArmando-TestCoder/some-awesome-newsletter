@@ -1,6 +1,6 @@
 <!-- src/components/systems/stats/Stat.svelte -->
 <script lang="ts">
-  import { onMount, onDestroy, tick } from "svelte";
+  import { onMount } from "svelte";
   import { Chart, registerables } from "chart.js/auto";
   import type {
     ChartConfiguration,
@@ -13,7 +13,7 @@
     name?: string; // Optional name
     id?: string; // Optional id (fallback)
     total: number; // Required total value
-    [key: string]: any; // Allow other properties if needed
+    [key: string]: unknown; // Allow other properties if needed
   };
 
   // --- Props ---

@@ -132,12 +132,17 @@
     { value: "5", label: $t['cron.friday'] ?? "Friday" },
     { value: "6", label: $t['cron.saturday'] ?? "Saturday" },
   ];
+  const groupLabelId = `schedule-time-${Math.random().toString(36).slice(2, 9)}`;
 </script>
 
 {#if label}
-  <label>{label}</label>
+  <span class="cron-builder-label" id={groupLabelId}>{label}</span>
 {/if}
-<div class="cron-builder">
+<div
+  class="cron-builder"
+  role="group"
+  aria-labelledby={label ? groupLabelId : undefined}
+>
   {#if !exclude.includes("month")}
     <CustomSelect label={$t['scheduleTime.month'] ?? "Month"} options={months} store={monthStore} />
   {/if}

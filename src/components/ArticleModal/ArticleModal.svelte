@@ -40,6 +40,7 @@
                 <div class="modal-content-inner">
                     <h2>{getTitle(article.content)}</h2>
                     <p><small>{$t['articleModal.created']}: {article.creation} | {$t['articleModal.language']}: {article.language}</small></p>
+                    <!-- eslint-disable-next-line svelte/no-at-html-tags -- content passes through sanitizeHtml -->
                     {@html sanitizeHtml(article.content)}
                 </div>
             </div>

@@ -14,6 +14,14 @@
     }
   }
 
+  $: isActive =
+    $store.stepsIndex === stepsMapping[(link.key ?? link.name) as StepsKey];
+
+  function activate() {
+    link.callback?.();
+    toggle();
+  }
+
   function getInitials(name: string): string {
     if (!name) return "";
     const names = name?.split(" ");
@@ -25,26 +33,47 @@
 </script>
 
 <li
-  on:click={() => link.callback?.()}
   class="sidebar__nav-item"
   class:is-collapsed={isCollapsed}
   class:is-open={isOpen}
 >
-  <div class="link-container" on:click={toggle}>
-    <a
-      href={link.url}
-      class:has-children={hasChildren}
-      class="sidebar__nav-link"
-      class:underline={$store.stepsIndex ===
-        stepsMapping[(link.key ?? link.name) as StepsKey]}
-    >
-      <span class="link-initials" class:dashed-border={hasChildren}
-        >{getInitials(link.name)}</span
+  <div class="link-container">
+    {#if link.url}
+      <a
+        href={link.url}
+        class:has-children={hasChildren}
+        class="sidebar__nav-link"
+        class:underline={isActive}
+        on:click={activate}
       >
-      <span class="link-name">{link.name}</span>
-    </a>
+        <span class="link-initials" class:dashed-border={hasChildren}
+          >{getInitials(link.name)}</span
+        >
+        <span class="link-name">{link.name}</span>
+      </a>
+    {:else}
+      <button
+        type="button"
+        aria-expanded={hasChildren ? isOpen : undefined}
+        class:has-children={hasChildren}
+        class="sidebar__nav-link"
+        class:underline={isActive}
+        on:click={activate}
+      >
+        <span class="link-initials" class:dashed-border={hasChildren}
+          >{getInitials(link.name)}</span
+        >
+        <span class="link-name">{link.name}</span>
+      </button>
+    {/if}
     {#if hasChildren}
-      <span class="toggle-icon">{isOpen ? "-" : "+"}</span>
+      <button
+        type="button"
+        class="toggle-icon"
+        aria-expanded={isOpen}
+        aria-label={link.name}
+        on:click={toggle}>{isOpen ? "-" : "+"}</button
+      >
     {/if}
   </div>
   {#if hasChildren}
@@ -53,7 +82,7 @@
       class:collapsed={isCollapsed}
       class:is-open={isOpen}
     >
-      {#each [...(link.children ?? [])] as childLink}
+      {#each [...(link.children ?? [])] as childLink (childLink.name)}
         <svelte:self link={childLink} />
       {/each}
     </ul>
@@ -96,6 +125,12 @@
   }
 
   .sidebar__nav-link {
+    background: none;
+    border: 0;
+    padding: 0;
+    font: inherit;
+    text-align: start;
+    cursor: pointer;
     color: var(--c-text);
     text-decoration: none;
     font-weight: 600;
@@ -152,6 +187,12 @@
 
   .toggle-icon {
     margin-left: auto;
+    background: none;
+    border: 0;
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
   }
 
   .sidebar__nav-list--nested {

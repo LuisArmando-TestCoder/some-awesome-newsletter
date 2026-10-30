@@ -135,8 +135,20 @@ export function fmt(str: string | undefined, vars: Record<string, string | numbe
 
 /* ───────────── shapes ───────────── */
 
+/** Article fields read from the API (full articles and slim search hits). */
+export type RawArticle = {
+  id?: string | number;
+  title?: string;
+  content?: string;
+  excerpt?: string;
+  imageUrl?: string;
+  language?: string;
+  newsSourceId?: string;
+  creation?: string;
+};
+
 /** Accepts a full article ({content}) or a slim search hit ({excerpt,imageUrl}). */
-export function toCard(a: any): BlogCard {
+export function toCard(a: RawArticle | null | undefined): BlogCard {
   const content: string = a?.content ?? "";
   const text = content ? plainText(content) : decodeEntities(a?.excerpt ?? "");
   const iso = creationToIso(a?.creation ?? "");
@@ -158,9 +170,10 @@ export function byNewest(a: BlogCard, b: BlogCard): number {
 }
 
 /** The backend falls back to "Newsletter" / "Sender" when the owner left them empty. */
-export function cleanBranding(raw: any): BlogBranding {
-  const title = typeof raw?.newsletterTitle === "string" ? raw.newsletterTitle.trim() : "";
-  const sender = typeof raw?.senderName === "string" ? raw.senderName.trim() : "";
+export function cleanBranding(raw: unknown): BlogBranding {
+  const r = (raw && typeof raw === "object" ? raw : {}) as { newsletterTitle?: unknown; senderName?: unknown };
+  const title = typeof r.newsletterTitle === "string" ? r.newsletterTitle.trim() : "";
+  const sender = typeof r.senderName === "string" ? r.senderName.trim() : "";
   return {
     newsletterTitle: title === "Newsletter" ? "" : title,
     senderName: sender === "Sender" ? "" : sender,
@@ -242,7 +255,8 @@ export async function fetchArticlesPage(
     const data = await r.json();
     const byLang: ArticlesPage["byLang"] = {};
     const langs: BlogLanguageInfo[] = [];
-    for (const [code, ld] of Object.entries<any>(data?.articles ?? {})) {
+    type RawLanguagePage = { withImages?: RawArticle[]; withoutImages?: RawArticle[]; total?: unknown } | null;
+    for (const [code, ld] of Object.entries<RawLanguagePage>(data?.articles ?? {})) {
       byLang[code] = {
         withImages: (ld?.withImages ?? []).map(toCard),
         withoutImages: (ld?.withoutImages ?? []).map(toCard),

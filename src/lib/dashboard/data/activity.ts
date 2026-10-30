@@ -3,6 +3,7 @@
 import { get } from "svelte/store";
 import { getActivity, type ActivityItem as ApiActivityItem } from "$lib/api/activity";
 import store from "../../../components/store";
+import type { NewsSource } from "../../../components/types";
 import { dt } from "../i18n";
 
 export type ActivityItem = {
@@ -120,8 +121,8 @@ function hostOf(url: string): string {
 export function activityFromStore(limit = 12): ActivityItem[] {
   const s = get(store);
   const items: ActivityItem[] = [];
-  const sources = s.config?.newsSources ?? [];
-  const nameOf = (id: string) => hostOf(sources.find((n: any) => n.id === id)?.url ?? id);
+  const sources: NewsSource[] = s.config?.newsSources ?? [];
+  const nameOf = (id: string) => hostOf(sources.find((n) => n.id === id)?.url ?? id);
   const leads = (s.leads ?? {}) as Record<string, Record<string, Record<string, string>>>;
   for (const [nsId, byEmail] of Object.entries(leads)) {
     if (!byEmail || typeof byEmail !== "object") continue;
@@ -133,7 +134,7 @@ export function activityFromStore(limit = 12): ActivityItem[] {
       }
     }
   }
-  for (const ns of sources as any[]) {
+  for (const ns of sources) {
     if (ns.lastManualSendTimestamp) {
       const at = new Date(ns.lastManualSendTimestamp);
       if (!isNaN(at.getTime())) items.push({ id: `s-${ns.id}`, at: at.toISOString(), kind: "send", textKey: "dash.activity.manualSend", vars: { source: hostOf(ns.url) } });

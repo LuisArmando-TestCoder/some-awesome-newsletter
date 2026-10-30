@@ -8,7 +8,9 @@ export const POST: RequestHandler = async ({ request, getClientAddress }) => {
 	let ip = 'unknown';
 	try {
 		ip = getClientAddress();
-	} catch {}
+	} catch {
+		// Some adapters cannot report the client address: keep "unknown".
+	}
 	if (!limiter(ip).ok) return new Response(null, { status: 204 });
 	try {
 		const text = (await request.text()).slice(0, 4000);

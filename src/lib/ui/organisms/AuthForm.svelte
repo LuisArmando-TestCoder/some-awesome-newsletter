@@ -1,3 +1,16 @@
+<script lang="ts" module>
+  /** Page copy for the login and signup screens (from $t.auth.login / $t.auth.signup). */
+  export type AuthCopy = {
+    title?: string;
+    subtitle?: string;
+    emailPlaceholder?: string;
+    continueWithEmail?: string;
+    switchText?: string;
+    switchLink?: string;
+    switchHref?: string;
+  };
+</script>
+
 <script lang="ts">
   import { onMount, onDestroy, tick } from 'svelte';
   import { get, writable, type Writable } from 'svelte/store';
@@ -11,7 +24,7 @@
   import { at, fmt } from '$lib/tutorial/copy';
 
   export let mode: 'login' | 'signup' = 'login';
-  export let copy: any = writable({});
+  export let copy: Writable<AuthCopy> = writable({});
   export let legal: { termsUrl: string; privacyUrl: string } = { termsUrl: '/legal/terms', privacyUrl: '/legal/privacy' };
   /** Kept for backwards compatibility with existing callers. */
   export let canReveal = true;

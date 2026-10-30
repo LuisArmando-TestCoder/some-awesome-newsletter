@@ -3,7 +3,6 @@
   import UserCard from "./UserCard.svelte";
   import { userRemovalRequestStore, type UserRemovalPayload } from './userActions'; // Adjust path
   import type { NewsletterUser } from "../../../../../../types";
-  import { onDestroy } from 'svelte'; // Or use $: reactive statement
 
   export let users: NewsletterUser[];
   export let newsSourceId: string;

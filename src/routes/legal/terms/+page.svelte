@@ -3,7 +3,7 @@
   const lastUpdated = 'January 6, 2026';
   const contactEmail = 'info@aiban.news';
   const CANONICAL = 'https://aibanewsletter.club/legal/terms';
-  $: lg = ($t as any)?.legal ?? {};
+  $: lg = $t?.legal ?? {};
   $: TITLE = lg.terms?.metaTitle ?? 'Terms of service | AIBAN';
   $: DESCRIPTION = lg.terms?.metaDescription ?? 'The terms that apply when you create an account and use AIBAN.';
 </script>

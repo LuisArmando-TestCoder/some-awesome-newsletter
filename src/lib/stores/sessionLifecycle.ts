@@ -33,12 +33,16 @@ export function clearSession(): void {
 	} catch {
 		try {
 			ACCOUNT_KEYS.forEach((k) => localStorage.removeItem(k));
-		} catch {}
+		} catch {
+			// Storage blocked: nothing to clear.
+		}
 	}
 	try {
 		const names = document.cookie.split(';').map((c) => c.split('=')[0].trim()).filter(Boolean);
 		for (const n of names) document.cookie = `${n}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
-	} catch {}
+	} catch {
+		// Cookies blocked: nothing to clear.
+	}
 	// The in-memory store is left as is (previous behavior): callers that sign in
 	// again right away (dashboard entry) write fresh credentials over it, and a
 	// full sign out reloads the page.

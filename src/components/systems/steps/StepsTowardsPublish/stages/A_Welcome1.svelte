@@ -2,7 +2,6 @@
   import { fly } from 'svelte/transition';
   import { cubicOut } from 'svelte/easing';
   import Centered from "../../../wrappers/Centered/Centered.svelte";
-  import store from "../../../../store";
   import { t } from '$lib/i18n/translations';
 
   export let canReveal = false;

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { tick } from "svelte";
-  import { get, writable } from "svelte/store";
+  import { get } from "svelte/store";
   import type { Writable } from "svelte/store";
   import type { NewsSource, NewsletterUser } from "../../../../../../types";
   import store, { latestMessage } from "../../../../../../store";
@@ -27,6 +27,7 @@
   import triggerNewsSourceSend from "../../../../../requests/triggerNewsSourceSend.js";
   import sendCustomContent from "../../../../../requests/sendCustomContent";
   import { checkPlanLimit } from "$lib/utils/checkPlanLimits";
+  import { errorMessage } from "$lib/api/errors";
   
   // Import translation store
   import { t } from "$lib/i18n/dashboard-translations";
@@ -51,7 +52,8 @@
   $: isOpen = $openNewsSourceIdStore === newsSource.id;
   $: sourceName = newsSource.url?.split("//")[1]?.split("/")[0] ?? newsSource.id;
   
-  $: limitCheck = checkPlanLimit("users");
+  // Pass $store so the limit refreshes when subscribers change.
+  $: limitCheck = checkPlanLimit("users", $store);
   $: isLimitReached = !limitCheck.allowed;
 
   // Translated Titles
@@ -112,8 +114,8 @@
       } else {
         setFeedback("error", $t['errors.customSendFailed'].replace('{source}', sourceName));
       }
-    } catch (error: any) {
-      setFeedback("error", error.message || $t['errors.unexpectedError']);
+    } catch (error) {
+      setFeedback("error", errorMessage(error) || $t['errors.unexpectedError']);
     } finally {
       isSendingCustomContent = false;
       latestMessage.set("");
@@ -137,8 +139,8 @@
       } else {
         setFeedback("error", String(response));
        }
-     } catch (error: any) {
-       setFeedback("error", error.message || $t['errors.triggerFailed']);
+     } catch (error) {
+       setFeedback("error", errorMessage(error) || $t['errors.triggerFailed']);
      } finally {
        isTriggeringSend = false;
     }
@@ -173,8 +175,8 @@
       } else {
         setFeedback("error", $t['errors.updateStatusFailed']);
       }
-    } catch (error: any) {
-      setFeedback("error", error.message || $t['errors.updateStatusFailed']);
+    } catch (error) {
+      setFeedback("error", errorMessage(error) || $t['errors.updateStatusFailed']);
       await getConfiguratorSession();
     } finally {
       isUpdatingActive = false;
@@ -207,8 +209,8 @@
       await UserDataService.addUserAndSubscribe(formData, newsSource.id);
       setFeedback("success", $t['messages.userAddedSuccess'].replace('{email}', formData.email));
       isAddingFormVisible = false;
-    } catch (error: any) {
-      setFeedback("error", error.message || $t['errors.addUserFailed']);
+    } catch (error) {
+      setFeedback("error", errorMessage(error) || $t['errors.addUserFailed']);
     } finally {
       isPerformingAction = false;
     }
@@ -226,8 +228,8 @@
       
       setFeedback(feedbackType, message, 7000);
       isAddingFormVisible = false;
-    } catch (error: any) {
-      setFeedback("error", error.message || $t['errors.bulkUploadFailed']);
+    } catch (error) {
+      setFeedback("error", errorMessage(error) || $t['errors.bulkUploadFailed']);
     } finally {
       isPerformingAction = false;
     }
@@ -248,8 +250,8 @@
     try {
       await UserDataService.unsubscribeUserFromSource(email, newsSource.id);
       setFeedback("success", $t['messages.unsubscribeSuccess'].replace('{email}', email).replace('{source}', sourceName));
-    } catch (error: any) {
-      setFeedback("error", error.message || $t['errors.unsubscribeFailed']);
+    } catch (error) {
+      setFeedback("error", errorMessage(error) || $t['errors.unsubscribeFailed']);
     } finally {
       removingUserEmail = null;
     }
@@ -365,7 +367,7 @@
 
 <style lang="scss">
   @use "./Users.scss";
-  @use "../Dashboard.scss";
+  @include Users.user-list;
 
   .status-label {
     font-size: 0.8em; 

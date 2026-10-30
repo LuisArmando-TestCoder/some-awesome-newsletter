@@ -44,6 +44,7 @@
 
   const options = $derived.by<Option[]>(() => {
     if (value.trim().length === 0) return recent.map((term) => ({ kind: "recent", term }) as Option);
+    // eslint-disable-next-line svelte/prefer-svelte-reactivity -- local to this derived computation, never rendered
     const seen = new Set<string>();
     const out: Option[] = [];
     for (const card of [...localHits, ...serverHits]) {

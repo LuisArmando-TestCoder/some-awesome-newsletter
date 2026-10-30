@@ -147,6 +147,7 @@
 
 <style lang="scss">
   @use "../../../../lib/styles/centralized-styles.scss";
+  @include centralized-styles.label-extras;
 
   .url-input-wrapper {
     display: flex;

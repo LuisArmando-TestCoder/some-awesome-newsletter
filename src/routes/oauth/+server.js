@@ -2,7 +2,11 @@ import { redirect } from '@sveltejs/kit';
 import { OAuth2Client } from 'google-auth-library';
 
 
-import { SECRET_CLIENT_ID, SECRET_CLIENT_SECRET } from '$env/static/private';
+import { env } from '$env/dynamic/private';
+
+// Read at runtime so builds do not need the OAuth secrets and rotating them only needs a restart.
+const SECRET_CLIENT_ID = env.SECRET_CLIENT_ID ?? '';
+const SECRET_CLIENT_SECRET = env.SECRET_CLIENT_SECRET ?? '';
 import { getConfigFetchResponse } from '../../components/systems/requests/getConfiguratorSession';
 import createInitialConfiguratorConfig from '../../components/systems/requests/createInitialConfiguratorConfig';
 import { OAUTH_STATE_COOKIE } from './oauthState.server.js';

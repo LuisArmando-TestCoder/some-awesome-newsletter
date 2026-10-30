@@ -1,7 +1,6 @@
 import { writable, type Writable, get } from 'svelte/store';
 import { t } from '../i18n/translations';
 import { globalLanguage } from '../../components/store';
-import type en from '../i18n/locales/en';
 
 export interface HelpContent {
   title: string;

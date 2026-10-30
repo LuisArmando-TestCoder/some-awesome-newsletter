@@ -146,7 +146,7 @@
     </div>
   {:else}
     <div class="desktop-container">
-      {#each Array(length) as _, index}
+      {#each Array(length) as _, index (index)}
         <input
           class="digit-input"
           class:filled={digits[index] !== ""}
@@ -209,6 +209,7 @@
     
     /* Hide spinners */
     -moz-appearance: textfield;
+    appearance: textfield;
     &::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 
     &:hover { border-color: #cbd5e1; }

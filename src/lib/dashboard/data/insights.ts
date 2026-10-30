@@ -66,7 +66,11 @@ export const metrics = derived(store, ($s): Metrics => {
   const nextSend = earliestNextRun(active.map((ns) => ({ cron: ns.scheduleTime, tz: ns.scheduleTimezone })));
   let nextSendSource: NewsSource | null = null;
   if (nextSend) nextSendSource = active.find((ns) => earliestNextRun([{ cron: ns.scheduleTime, tz: ns.scheduleTimezone }])?.getTime() === nextSend.getTime()) ?? null;
-  const manual = sources.map((ns: any) => ns.lastManualSendTimestamp).filter(Boolean).map((v: any) => new Date(v)).filter((d) => !isNaN(d.getTime()));
+  const manual = sources
+    .map((ns) => ns.lastManualSendTimestamp)
+    .filter((v): v is string | number => !!v)
+    .map((v) => new Date(v))
+    .filter((d) => !isNaN(d.getTime()));
   const lastManualSend = manual.length ? new Date(Math.max(...manual.map((d) => d.getTime()))) : null;
 
   return {

@@ -10,6 +10,7 @@
   import { t } from "$lib/i18n/dashboard-translations";
 
   /* ─── Session change tracking (SSR-safe – populated in onMount) ─── */
+  // eslint-disable-next-line svelte/prefer-svelte-reactivity -- legacy component: updates reassign a new Set, which Svelte tracks
   let sessionChangedIds = new Set<string>();
   /* key stored in localStorage for the current browser tab session */
   const SESSION_KEY = "aiban_wh_session";
@@ -160,7 +161,9 @@
     // 1. Read session change markers from localStorage
     const raw = localStorage.getItem(SESSION_KEY);
     if (raw) {
-      try { sessionChangedIds = new Set(JSON.parse(raw)); } catch {}
+      try { sessionChangedIds = new Set(JSON.parse(raw)); } catch {
+        // Corrupt marker list: start with an empty set.
+      }
     }
     // 2. Fetch API keys (network call — client only)
     await fetchApiKeys();
@@ -254,8 +257,8 @@
             <!-- HOW -->
             <div class="sub-group">
               <div class="field-group">
-                <label class="input-label">{$t['webhook.postStatus']}</label>
-                <select class="status-select" bind:value={draft.postStatus}>
+                <label class="input-label" for={`post-status-${group.id}`}>{$t['webhook.postStatus']}</label>
+                <select id={`post-status-${group.id}`} class="status-select" bind:value={draft.postStatus}>
                   <option value="draft">{$t['webhook.postStatusDraft']}</option>
                   <option value="publish">{$t['webhook.postStatusPublish']}</option>
                 </select>
@@ -343,7 +346,7 @@
           </tr>
         </thead>
         <tbody>
-          {#each apiKeys as key}
+          {#each apiKeys as key (key.hash)}
             <tr>
               <td><code class="hash-preview">{key.hash.substring(0, 12)}…</code></td>
               <td>{new Date(key.createdAt).toLocaleDateString()}</td>

@@ -5,7 +5,7 @@ import subscribeNewsletterUser from "./subscribeNewsletterUser";
 import { request, seg } from "$lib/api/client";
 import { LLM_TIMEOUT_MS } from "$lib/api/config";
 import { newsSourceEnvelope } from "$lib/api/schemas";
-import { refreshSubscribersSafely, replaceNewsSourceInStore } from "./_internal";
+import { asNewsSource, refreshSubscribersSafely, replaceNewsSourceInStore } from "./_internal";
 
 /** Kept for existing importers. Prefer DEFAULT_SCHEDULE. */
 export function getRandomScheduleTime() {
@@ -27,7 +27,7 @@ export default async function createNewsSource(newsSource: {
   url: string;
   country?: string;
   community?: string;
-  lead: string;
+  lead?: string;
   scheduleTime?: string;
   /** IANA zone the cron is read in (missing = UTC). */
   scheduleTimezone?: string;
@@ -56,7 +56,7 @@ export default async function createNewsSource(newsSource: {
     schema: newsSourceEnvelope,
     errorMessage: "We could not add this source. Check the address and try again.",
   });
-  const created = json.newsSource as any;
+  const created = asNewsSource(json.newsSource);
 
   await replaceNewsSourceInStore(created);
 
@@ -89,7 +89,7 @@ export default async function createNewsSource(newsSource: {
 
   // Refresh the saved config so the store has the server's version.
   try {
-    const fresh = await request<any>("/config", { dedupe: false });
+    const fresh = await request<Record<string, unknown>>("/config", { dedupe: false });
     if (fresh) saveToStore({ config: { ...get(store).config, ...fresh } });
   } catch {
     /* the local copy is already updated */

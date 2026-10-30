@@ -112,8 +112,11 @@
 	<meta name="twitter:title" content={L.seo.title} />
 	<meta name="twitter:description" content={L.seo.description} />
 	<meta name="twitter:image" content={DEFAULT_OG_IMAGE} />
+	<!-- eslint-disable-next-line svelte/no-at-html-tags -- JSON-LD with "<" escaped, so it cannot close the script tag -->
 	{@html jsonLd(organizationLd)}
+	<!-- eslint-disable-next-line svelte/no-at-html-tags -- JSON-LD with "<" escaped, so it cannot close the script tag -->
 	{@html jsonLd(softwareLd)}
+	<!-- eslint-disable-next-line svelte/no-at-html-tags -- JSON-LD with "<" escaped, so it cannot close the script tag -->
 	{@html jsonLd(faqLd)}
 </svelte:head>
 
@@ -190,7 +193,7 @@
 				<div class="chain__actions">
 					<p class="chain__label">{L.chain.actionLabel}</p>
 					<ol class="steps">
-						{#each L.chain.steps as step, i}
+						{#each L.chain.steps as step, i (i)}
 							<li class="steps__item">
 								<span class="steps__num" aria-hidden="true">{i + 1}</span>
 								<div>
@@ -206,7 +209,7 @@
 			<div class="also">
 				<h3 class="also__title">{L.chain.alsoTitle}</h3>
 				<ul class="also__list">
-					{#each L.chain.also as item}
+					{#each L.chain.also as item, itemIndex (itemIndex)}
 						<li class="card">
 							<p class="card__title">{item.title}</p>
 							<p class="card__body">{item.body}</p>
@@ -226,7 +229,7 @@
 				<p class="section__lead">{L.languages.body}</p>
 			</header>
 			<div class="lang-grid">
-				{#each SAMPLE_LANGUAGES as code}
+				{#each SAMPLE_LANGUAGES as code (code)}
 					<IssuePreview
 						host={host}
 						labels={L.preview}
@@ -279,7 +282,7 @@
 				<h2 id="grow-title" class="section__title">{L.grow.title}</h2>
 			</header>
 			<ul class="grid-3">
-				{#each L.grow.items as item}
+				{#each L.grow.items as item, itemIndex (itemIndex)}
 					<li class="card">
 						<h3 class="card__title">{item.title}</h3>
 						<p class="card__body">{item.body}</p>
@@ -298,7 +301,7 @@
 				<p class="section__lead">{L.useCases.lead}</p>
 			</header>
 			<ul class="uses">
-				{#each L.useCases.items as item}
+				{#each L.useCases.items as item, itemIndex (itemIndex)}
 					<li class="uses__item">
 						<h3 class="uses__title">{item.title}</h3>
 						<p class="uses__body">{item.body}</p>

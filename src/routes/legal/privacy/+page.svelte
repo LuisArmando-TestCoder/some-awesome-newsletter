@@ -3,7 +3,7 @@
   const lastUpdated = 'October 24, 2023';
   const contactEmail = 'info@aiban.news';
   const CANONICAL = 'https://aibanewsletter.club/legal/privacy';
-  $: lg = ($t as any)?.legal ?? {};
+  $: lg = $t?.legal ?? {};
   $: TITLE = lg.privacy?.metaTitle ?? 'Privacy policy | AIBAN';
   $: DESCRIPTION = lg.privacy?.metaDescription ?? 'How AIBAN collects, uses and protects your data, and how to exercise your data rights.';
 </script>

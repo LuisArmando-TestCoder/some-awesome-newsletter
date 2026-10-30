@@ -1,12 +1,12 @@
 // WS4. Dashboard tour definition for WS3's GuidedTour ($lib/tutorial).
-import { get } from "svelte/store";
 import { startTour, resetTour, offerTourOnce, isOnboardingComplete, setChecklistHidden } from "$lib/tutorial";
 import type { Translate } from "./i18n";
+import type { TourDefinition } from "$lib/tutorial/tour";
 import { goTo, type SectionId } from "./nav";
 
 export const DASH_TOUR_ID = "dashboard-v1";
 
-export function dashTour(tr: Translate) {
+export function dashTour(tr: Translate): TourDefinition {
   // On phones the sidebar is hidden; point at the bottom bar instead ("More" holds the rest).
   const mobile = typeof window !== "undefined" && window.matchMedia?.("(max-width: 767px)").matches;
   const MOBILE_PRIMARY = ["nav-home", "nav-automations", "nav-subscribers", "nav-reports"];
@@ -21,7 +21,7 @@ export function dashTour(tr: Translate) {
 /** Offer the tour once, after onboarding is complete. */
 export function maybeOfferTour(tr: Translate, email?: string) {
   try {
-    if (isOnboardingComplete(email)) offerTourOnce(dashTour(tr) as any);
+    if (isOnboardingComplete(email)) offerTourOnce(dashTour(tr));
   } catch {
     /* tour is optional */
   }
@@ -30,7 +30,7 @@ export function maybeOfferTour(tr: Translate, email?: string) {
 export function replayTour(tr: Translate) {
   goTo("home");
   resetTour(DASH_TOUR_ID);
-  setTimeout(() => startTour(dashTour(tr) as any), 50);
+  setTimeout(() => startTour(dashTour(tr)), 50);
 }
 
 export function showChecklist() {

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { onMount, onDestroy, afterUpdate } from 'svelte';
+    import { onMount, afterUpdate } from 'svelte';
     import { writable } from 'svelte/store';
     import { smoothScrollTarget } from './store';
   
@@ -56,6 +56,12 @@
       ro = new ResizeObserver(syncHeight);
       ro.observe(contentEl);
       syncHeight();
+
+      return () => {
+        cancelAnimationFrame(raf);
+        window.removeEventListener('scroll', onScroll);
+        ro.disconnect();
+      };
     });
   
     // keep spacer updated if slot changes after first render
@@ -70,7 +76,6 @@
     will-change: transform;
     scroll-behavior: smooth;
   }
-  .spacer { /* width/height set dynamically */ }
   </style>
   
   <!-- ——— Render ——————————————————————————— -->

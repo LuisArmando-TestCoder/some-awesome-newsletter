@@ -22,17 +22,14 @@
 
   let results = $state<BlogCard[]>([]);
   let status = $state<"idle" | "loading" | "done" | "error">("idle");
-  let query = $state("");
+  // Follows the URL (?q=) and can still be edited locally.
+  let query = $derived(data.q);
   let attempt = $state(0);
 
   const name = $derived(ownerName(data.branding, data.holder));
   const blogName = $derived(data.ns && data.branding.newsletterTitle ? data.branding.newsletterTitle : name);
   const subscribeHref = $derived(subscribePath(data.holder, data.subscribeNs));
   const homeHref = $derived(blogPath(data.holder, { ns: data.ns, lang: data.lang }));
-
-  $effect(() => {
-    query = data.q;
-  });
 
   $effect(() => {
     const q = data.q;

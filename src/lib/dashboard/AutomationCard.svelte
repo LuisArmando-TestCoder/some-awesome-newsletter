@@ -12,7 +12,7 @@
   import { toast } from "$lib/ui/components/toast";
   import { setAutomationEnabled, runAutomationNow, loadRuns, saveLegacySchedule, canRunNow, RECIPES, type Automation, type RunRecord } from "./data/automations";
   import { formatDateTime, relativeTime, nextRun, parseCron } from "./data/schedule";
-  import { dt } from "./i18n";
+  import { dt as dtx } from "./i18n";
 
   export let automation: Automation;
   export let sourceUrl: string = "";
@@ -31,14 +31,14 @@
   $: cron = (automation.trigger?.params?.cron as string) || "";
   $: tz = (automation.trigger?.params?.tz as string) || "UTC";
   $: next = automation.nextRunAt ? new Date(automation.nextRunAt) : automation.enabled ? nextRun(cron, new Date(), tz) : null;
-  $: whenText = automation.recipeId === "daily_issue" || !automation.recipeId ? scheduleText(cron, tz) : $dt(`dash.recipe.${automation.recipeId}.when`);
+  $: whenText = automation.recipeId === "daily_issue" || !automation.recipeId ? scheduleText(cron, tz) : $dtx(`dash.recipe.${automation.recipeId}.when`);
   // One full-sentence key per recipe, so translators get the whole sentence (WS9).
-  $: sentence = $dt(`dash.recipe.${automation.recipeId ?? "daily_issue"}.sentence`, { schedule: whenText, source: host });
+  $: sentence = $dtx(`dash.recipe.${automation.recipeId ?? "daily_issue"}.sentence`, { schedule: whenText, source: host });
   // Recipe automations (built in or stored from a recipe) use the translated recipe name, not the engine summary.
   $: title = automation.source === "legacy"
-    ? `${$dt("dash.recipe.daily_issue.name")}: ${host}`
+    ? `${$dtx("dash.recipe.daily_issue.name")}: ${host}`
     : automation.source === "recipe" && automation.recipeId && automation.recipeId !== "daily_issue"
-      ? $dt(`dash.recipe.${automation.recipeId}.name`)
+      ? $dtx(`dash.recipe.${automation.recipeId}.name`)
       : automation.name;
   $: runnable = canRunNow(automation);
 
@@ -49,24 +49,23 @@
   function scheduleText(c: string, zone: string) {
     const p = parseCron(c);
     const n = nextRun(c, new Date(), zone);
-    if (!p || !n) return c ? $dt("dash.common.unknown") : $dt("dash.common.unknown");
+    if (!p || !n) return c ? $dtx("dash.common.unknown") : $dtx("dash.common.unknown");
     const time = formatDateTime(n, { hour: "2-digit", minute: "2-digit" });
-    if (!p.domStar) return $dt("dash.automations.sched.monthly", { day: n.getDate(), time });
-    if (p.dowStar) return $dt("dash.automations.sched.daily", { time });
-    if (p.dow.size === 1) return $dt("dash.automations.sched.weekly", { day: formatDateTime(n, { weekday: "long" }), time });
-    if (p.dow.size === 5) return $dt("dash.automations.sched.weekdays", { time });
-    return $dt("dash.automations.sched.custom", { next: formatDateTime(n, { weekday: "long", hour: "2-digit", minute: "2-digit" }) });
+    if (!p.domStar) return $dtx("dash.automations.sched.monthly", { day: n.getDate(), time });
+    if (p.dowStar) return $dtx("dash.automations.sched.daily", { time });
+    if (p.dow.size === 1) return $dtx("dash.automations.sched.weekly", { day: formatDateTime(n, { weekday: "long" }), time });
+    if (p.dow.size === 5) return $dtx("dash.automations.sched.weekdays", { time });
+    return $dtx("dash.automations.sched.custom", { next: formatDateTime(n, { weekday: "long", hour: "2-digit", minute: "2-digit" }) });
   }
-  function cap(s: string) { return s ? s[0].toUpperCase() + s.slice(1) : s; }
 
   async function toggle(v: boolean) {
     busy = true;
     try {
       await setAutomationEnabled(automation, v);
       const n = v ? nextRun(cron, new Date(), tz) : null;
-      toast.success(v ? (n ? $dt("dash.automations.turnedOn", { when: relativeTime(n) }) : $dt("dash.automations.turnedOnNoTime")) : (automation.newsSourceIds?.length ? $dt("dash.automations.turnedOff", { source: host }) : $dt("dash.automations.turnedOffPlain")));
+      toast.success(v ? (n ? $dtx("dash.automations.turnedOn", { when: relativeTime(n) }) : $dtx("dash.automations.turnedOnNoTime")) : (automation.newsSourceIds?.length ? $dtx("dash.automations.turnedOff", { source: host }) : $dtx("dash.automations.turnedOffPlain")));
     } catch {
-      toast.error($dt("dash.automations.toggleFailed"));
+      toast.error($dtx("dash.automations.toggleFailed"));
     } finally {
       busy = false;
     }
@@ -74,18 +73,18 @@
 
   async function runNow() {
     const ok = await confirmAction({
-      title: $dt("dash.automations.runNow"),
-      body: $dt("dash.automations.runConfirm", { source: host }),
-      confirmLabel: $dt("dash.automations.runNow"),
-      cancelLabel: $dt("dash.common.cancel"),
+      title: $dtx("dash.automations.runNow"),
+      body: $dtx("dash.automations.runConfirm", { source: host }),
+      confirmLabel: $dtx("dash.automations.runNow"),
+      cancelLabel: $dtx("dash.common.cancel"),
     });
     if (!ok) return;
     running = true;
     try {
       await runAutomationNow(automation);
-      toast.success($dt("dash.automations.runStarted"));
+      toast.success($dtx("dash.automations.runStarted"));
     } catch (e) {
-      toast.error($dt("dash.automations.runFailed", { reason: e instanceof Error ? e.message : String(e) }));
+      toast.error($dtx("dash.automations.runFailed", { reason: e instanceof Error ? e.message : String(e) }));
     } finally {
       running = false;
     }
@@ -98,10 +97,10 @@
     try {
       await saveLegacySchedule(nsId, newCron, newTz);
       const n = nextRun(newCron, new Date(), newTz);
-      toast.success(n ? $dt("dash.automations.scheduleSaved", { when: formatDateTime(n) }) : $dt("dash.automations.scheduleSavedNoTime"));
+      toast.success(n ? $dtx("dash.automations.scheduleSaved", { when: formatDateTime(n) }) : $dtx("dash.automations.scheduleSavedNoTime"));
       editing = false;
     } catch {
-      toast.error($dt("dash.state.saveFailed"));
+      toast.error($dtx("dash.state.saveFailed"));
     } finally {
       savingSchedule = false;
     }
@@ -123,39 +122,39 @@
     <div class="ac__body">
       <div class="ac__top">
         <h3 class="ac__title">{title}</h3>
-        <ToggleSwitch checked={automation.enabled} label={automation.enabled ? $dt("dash.common.on") : $dt("dash.common.off")} {busy} onchange={toggle} />
+        <ToggleSwitch checked={automation.enabled} label={automation.enabled ? $dtx("dash.common.on") : $dtx("dash.common.off")} {busy} onchange={toggle} />
       </div>
       <p class="ac__sentence">{sentence}</p>
       <dl class="ac__meta">
         <div>
-          <dt>{$dt("dash.automations.lastRun")}</dt>
+          <dt>{$dtx("dash.automations.lastRun")}</dt>
           <dd>
             {#if automation.lastRunAt}
-              <StatusPill status={automation.lastRunStatus ?? "none"} label={$dt(`dash.automations.status.${automation.lastRunStatus ?? "ok"}`)} />
+              <StatusPill status={automation.lastRunStatus ?? "none"} label={$dtx(`dash.automations.status.${automation.lastRunStatus ?? "ok"}`)} />
               <time datetime={automation.lastRunAt} title={formatDateTime(automation.lastRunAt, { dateStyle: "medium", timeStyle: "short" })}>{relativeTime(automation.lastRunAt)}</time>
-            {:else}{$dt("dash.common.notYet")}{/if}
+            {:else}{$dtx("dash.common.notYet")}{/if}
           </dd>
         </div>
         <div>
-          <dt>{$dt("dash.automations.nextRun")}</dt>
+          <dt>{$dtx("dash.automations.nextRun")}</dt>
           <dd>
-            {#if !automation.enabled}<StatusPill status="off" label={$dt("dash.automations.status.off")} />
+            {#if !automation.enabled}<StatusPill status="off" label={$dtx("dash.automations.status.off")} />
             {:else if next}<time datetime={next.toISOString()} title={formatDateTime(next, { dateStyle: "medium", timeStyle: "short" })}>{relativeTime(next)}</time>
-            {:else}{$dt("dash.common.unknown")}{/if}
+            {:else}{$dtx("dash.common.unknown")}{/if}
           </dd>
         </div>
         {#if automation.stats}
-          <div><dt>{$dt("dash.automations.runsCount")}</dt><dd>{automation.stats.runs}</dd></div>
+          <div><dt>{$dtx("dash.automations.runsCount")}</dt><dd>{automation.stats.runs}</dd></div>
         {/if}
       </dl>
       <div class="ac__actions">
         {#if runnable}
-          <Button size="sm" variant="secondary" icon="play" loading={running} onclick={runNow}>{$dt("dash.automations.runNow")}</Button>
+          <Button size="sm" variant="secondary" icon="play" loading={running} onclick={runNow}>{$dtx("dash.automations.runNow")}</Button>
         {/if}
         {#if automation.trigger?.type === "schedule" && automation.newsSourceIds?.length}
-          <Button size="sm" variant="tertiary" icon="clock" onclick={() => (editing = !editing)}>{$dt("dash.automations.schedule")}</Button>
+          <Button size="sm" variant="tertiary" icon="clock" onclick={() => (editing = !editing)}>{$dtx("dash.automations.schedule")}</Button>
         {/if}
-        <Button size="sm" variant="tertiary" onclick={toggleRuns}>{$dt("dash.automations.history")}</Button>
+        <Button size="sm" variant="tertiary" onclick={toggleRuns}>{$dtx("dash.automations.history")}</Button>
       </div>
       {#if editing}
         <div class="ac__panel">
@@ -167,14 +166,14 @@
           {#if runsState === "loading"}
             <Skeleton lines={3} />
           {:else if runs.length === 0}
-            <p class="muted">{$dt("dash.automations.historyEmpty")}</p>
+            <p class="muted">{$dtx("dash.automations.historyEmpty")}</p>
           {:else}
             <ul class="runs">
               {#each runs as r (r.id)}
                 <li>
-                  <StatusPill status={r.status} label={$dt(`dash.automations.status.${r.status}`)} />
-                  <span class="runs__what">{r.items?.[0]?.title ?? (r.skipReason ? $dt(`dash.automations.skip.${r.skipReason}`) : r.status === "failed" ? $dt("dash.automations.skip.failed") : "")}</span>
-                  {#if r.counts}<span class="runs__n">{$dt("dash.automations.sentTo", { count: r.counts.sent })}</span>{/if}
+                  <StatusPill status={r.status} label={$dtx(`dash.automations.status.${r.status}`)} />
+                  <span class="runs__what">{r.items?.[0]?.title ?? (r.skipReason ? $dtx(`dash.automations.skip.${r.skipReason}`) : r.status === "failed" ? $dtx("dash.automations.skip.failed") : "")}</span>
+                  {#if r.counts}<span class="runs__n">{$dtx("dash.automations.sentTo", { count: r.counts.sent })}</span>{/if}
                   <time datetime={r.startedAt}>{relativeTime(r.startedAt)}</time>
                 </li>
               {/each}

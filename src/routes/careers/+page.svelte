@@ -4,7 +4,7 @@
   const CANONICAL = 'https://aibanewsletter.club/careers';
   const EMAIL = 'info@aiban.news';
 
-  $: c = ($t as any)?.careers ?? {};
+  $: c = $t?.careers ?? {};
   $: metaTitle = c.metaTitle ?? 'Careers | AIBAN';
   $: metaDescription = c.metaDescription ?? '';
   $: mailto = `mailto:${EMAIL}?subject=${encodeURIComponent(c.emailSubject ?? 'Working on AIBAN')}`;
@@ -73,13 +73,6 @@
 
   .section { margin-bottom: var(--space-8, 64px); }
 
-  .section__title {
-    margin: 0 0 var(--space-4, 16px);
-    font-family: var(--font-display, inherit);
-    font-size: var(--fs-2xl, 1.75rem);
-    font-weight: var(--fw-bold, 700);
-    line-height: var(--lh-tight, 1.2);
-  }
 
   .section p {
     margin: 0 0 var(--space-4, 16px);
@@ -116,13 +109,6 @@
       &:hover { background: var(--accent-hover, #4338ca); }
     }
 
-    &--secondary {
-      background: var(--surface-1, #fff);
-      color: var(--text-1, #0f172a);
-      border-color: var(--border-2, #cbd5e1);
-      &:hover { background: var(--surface-2, #f1f5f9); }
-    }
-
     &--tertiary {
       padding-inline: var(--space-2, 8px);
       color: var(--text-link, #4338ca);
@@ -130,8 +116,7 @@
     }
   }
 
-  a:focus-visible,
-  button:focus-visible {
+  a:focus-visible {
     outline: 2px solid var(--focus-color, #6366f1);
     outline-offset: 2px;
   }

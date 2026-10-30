@@ -2,7 +2,7 @@
   import { page } from '$app/stores';
   import { t } from '$lib/i18n/translations';
 
-  $: lg = ($t as any)?.legal ?? {};
+  $: lg = $t?.legal ?? {};
   $: LINKS = [
     { href: '/legal/privacy', label: lg.privacy?.title ?? 'Privacy policy' },
     { href: '/legal/terms', label: lg.terms?.title ?? 'Terms of service' },
@@ -13,7 +13,7 @@
 <div class="legal">
   <nav class="legal__nav" aria-label={lg.navLabel ?? 'Legal documents'}>
     <ul>
-      {#each LINKS as link}
+      {#each LINKS as link (link.href)}
         {@const active = $page.url.pathname === link.href}
         <li>
           <a href={link.href} class:active aria-current={active ? 'page' : undefined}>{link.label}</a>

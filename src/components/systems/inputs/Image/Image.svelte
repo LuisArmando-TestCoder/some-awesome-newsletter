@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount, onDestroy } from 'svelte';
+  import { onDestroy } from 'svelte';
   import { writable } from 'svelte/store';
   import { t } from '$lib/i18n/dashboard-translations';
 
@@ -135,6 +135,7 @@
       on:dragover={handleDragOver}
       on:drop={handleDrop}
       on:click={handleButtonClick}
+      role="presentation"
     >
       <input
         type="file"

@@ -75,6 +75,7 @@
 
   onMount(() => {
     // Auth values may arrive in the query (old /oauth redirect) or in the fragment (new, keeps them out of server logs).
+    // eslint-disable-next-line svelte/prefer-svelte-reactivity -- local temporary used to read and rewrite the URL once on mount
     const params = new URLSearchParams($page.url.search);
     const hashParams = new URLSearchParams(window.location.hash.replace(/^#/, ""));
     for (const [k, v] of hashParams) if (!params.has(k)) params.set(k, v);
@@ -87,6 +88,7 @@
 
     // Drop auth params from the address bar but keep ?section= and ?tab=.
     if (params.has("x-auth-code") || params.has("x-auth-email") || params.has("x-auth-token-id") || hashParams.size > 0) {
+      // eslint-disable-next-line svelte/prefer-svelte-reactivity -- local temporary used to read and rewrite the URL once on mount
       const keep = new URLSearchParams();
       for (const k of ["section", "tab"]) if (params.get(k)) keep.set(k, params.get(k)!);
       const q = keep.toString();

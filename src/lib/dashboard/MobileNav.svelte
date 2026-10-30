@@ -10,8 +10,8 @@
   import logout from "../../components/systems/requests/logout";
 
   const PRIMARY: SectionId[] = ["home", "automations", "subscribers", "reports"];
-  $: primary = SECTIONS.filter((s) => PRIMARY.includes(s.id));
-  $: rest = SECTIONS.filter((s) => !PRIMARY.includes(s.id));
+  const primary = SECTIONS.filter((s) => PRIMARY.includes(s.id));
+  const rest = SECTIONS.filter((s) => !PRIMARY.includes(s.id));
   $: moreActive = rest.some((s) => s.id === $activeSection);
   let open = false;
   let sheet: HTMLDivElement;

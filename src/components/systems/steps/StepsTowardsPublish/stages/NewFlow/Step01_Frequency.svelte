@@ -34,9 +34,9 @@
 
   $: schedule = buildCron(frequency, day, hour);
   $: human = safeHuman(schedule);
-  $: locale = typeof navigator !== "undefined" ? navigator.language : "en";
-  $: dayNames = [0, 1, 2, 3, 4, 5, 6].map((d) => new Date(Date.UTC(2024, 0, 7 + d, 12)).toLocaleDateString(locale, { weekday: "long", timeZone: "UTC" }));
-  $: hourNames = Array.from({ length: 24 }, (_, h) => new Date(2024, 0, 1, h, 0).toLocaleTimeString(locale, { hour: "numeric", minute: "2-digit" }));
+  const locale = typeof navigator !== "undefined" ? navigator.language : "en";
+  const dayNames = [0, 1, 2, 3, 4, 5, 6].map((d) => new Date(Date.UTC(2024, 0, 7 + d, 12)).toLocaleDateString(locale, { weekday: "long", timeZone: "UTC" }));
+  const hourNames = Array.from({ length: 24 }, (_, h) => new Date(2024, 0, 1, h, 0).toLocaleTimeString(locale, { hour: "numeric", minute: "2-digit" }));
   function safeHuman(c: string) {
     try {
       return cronToNaturalLanguage(c);
@@ -97,7 +97,7 @@
   <fieldset class="ob-field freq">
     <legend class="ob-label">{$ob.schedule.frequencyLabel}</legend>
     <div class="chips">
-      {#each [["daily", $ob.schedule.daily], ["weekly", $ob.schedule.weekly], ["monthly", $ob.schedule.monthly]] as [value, label]}
+      {#each [["daily", $ob.schedule.daily], ["weekly", $ob.schedule.weekly], ["monthly", $ob.schedule.monthly]] as [value, label], itemIndex (itemIndex)}
         <label class="chip" class:on={frequency === value}>
           <input type="radio" name="ob-frequency" {value} bind:group={frequency} />
           <span>{label}</span>
@@ -111,14 +111,14 @@
       <div class="ob-field">
         <label class="ob-label" for="ob-day">{$ob.schedule.dayLabel}</label>
         <select id="ob-day" class="ob-select" bind:value={day}>
-          {#each dayNames as name, d}<option value={d}>{name}</option>{/each}
+          {#each dayNames as name, d (d)}<option value={d}>{name}</option>{/each}
         </select>
       </div>
     {/if}
     <div class="ob-field">
       <label class="ob-label" for="ob-hour">{$ob.schedule.timeLabel}</label>
       <select id="ob-hour" class="ob-select" bind:value={hour} aria-describedby="ob-hour-hint">
-        {#each hourNames as name, h}<option value={h}>{name}</option>{/each}
+        {#each hourNames as name, h (h)}<option value={h}>{name}</option>{/each}
       </select>
     </div>
   </div>

@@ -1,5 +1,6 @@
 import { onMount } from "svelte";
 import store from "../store";
+import type { Store } from "../types";
 import askIsAuthCodeValid from "./requests/askIsAuthCodeValid";
 import { get } from "svelte/store";
 
@@ -8,7 +9,7 @@ import { get } from "svelte/store";
  * logo changes. Checks the stored code once on mount (no polling loop), and
  * cleans up its subscription when the component unmounts.
  */
-export function useConfigurator(callback: Function) {
+export function useConfigurator(callback: (value: Store) => void) {
   onMount(() => {
     let lastLogo: string | null | undefined = undefined;
     let notifiedValid = false;

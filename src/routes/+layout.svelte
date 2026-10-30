@@ -7,7 +7,6 @@
   import { beforeNavigate, afterNavigate } from "$app/navigation";
   import { page } from "$app/stores";
 
-  export let data;
 
   // The signup widget runs inside other sites in an iframe: no site header or language picker there (WS5 request).
   $: embed = $page.url.pathname.startsWith("/subscribe-widget");

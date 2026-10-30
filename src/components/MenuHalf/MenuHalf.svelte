@@ -60,7 +60,7 @@
 >
   <nav id="sidebar-nav" class="sidebar__nav" aria-label="Sections">
     <ul class="sidebar__nav-list">
-      {#each links as link}
+      {#each links as link (link.name)}
         <SideLink isCollapsed={!$isMobileMenuOpen} {link} />
       {/each}
     </ul>
@@ -82,8 +82,10 @@
         <p class="sidebar__profile-name">
           {$store?.config.senderName || $store?.given_name}
         </p>
-        <a on:click={() => logout()} class="sidebar__profile-logout"
-          >{$t["menuHalf.logOut"]}</a
+        <button
+          type="button"
+          on:click={() => logout()}
+          class="sidebar__profile-logout">{$t["menuHalf.logOut"]}</button
         >
       </div>
     </div>
@@ -168,6 +170,11 @@
     margin: 0;
   }
   .sidebar__profile-logout {
+    background: none;
+    border: 0;
+    padding: 0;
+    font: inherit;
+    text-align: start;
     font-size: 0.9rem;
     color: var(--c-text-light);
     cursor: pointer;

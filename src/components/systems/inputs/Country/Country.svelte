@@ -6,7 +6,7 @@
   import { onMount, onDestroy, tick } from "svelte";
   import { writable } from "svelte/store";
   import fuzzysort from "fuzzysort";
-  import { fade, slide } from "svelte/transition";
+  import { slide } from "svelte/transition";
   import { t } from "$lib/i18n/dashboard-translations";
 
   import countriesData from "./countries";
@@ -45,7 +45,6 @@
   let selectedCountry: Country | null = null;
   export const selectedCountryStore = writable<Country | null>(null);
   let open = false;
-  let showInput = false;
   let dropdownRef: HTMLElement;
   let inputRef: HTMLInputElement;
   let buttonRef: HTMLButtonElement;
@@ -104,7 +103,6 @@
   // Event Handlers
   function toggleOpen() {
     open = !open;
-    showInput = open; // Input visibility tied to dropdown state
     if (open) {
       typeahead = "";
       highlightedIndex = selectedCountry
@@ -126,7 +124,6 @@
     selectedCountryStore.set(country);
     lastValidHighlightedIndex = findIndexByCode(country.code);
     open = false;
-    showInput = false;
     typeahead = "";
     highlightedIndex = -1;
     const newsSource = newsSourcesData[country.code as keyof typeof newsSourcesData];
@@ -137,7 +134,6 @@
   function handleClickOutside(event: MouseEvent) {
     if (open && dropdownRef && !dropdownRef.contains(event.target as Node)) {
       open = false;
-      showInput = false;
       typeahead = "";
       buttonRef?.focus();
     }
@@ -194,14 +190,12 @@
         case "Escape":
           event.preventDefault();
           open = false;
-          showInput = false;
           typeahead = "";
           buttonRef?.focus();
           return;
 
         case "Tab":
           open = false;
-          showInput = false;
           typeahead = "";
           return;
       }
@@ -345,6 +339,12 @@
           aria-selected={selectedCountry?.code === country.code}
           tabindex="-1"
           on:click={() => selectCountry(country)}
+          on:keydown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              selectCountry(country);
+            }
+          }}
           on:mouseenter={() => {
             highlightedIndex = index;
           }}
@@ -366,4 +366,5 @@
 
 <style lang="scss">
   @use "../../../../lib/styles/custom-select-styles.scss";
+  @include custom-select-styles.flag-parts;
 </style>

@@ -12,9 +12,9 @@
   import { SECTIONS, activeSection, goTo } from "$lib/dashboard/nav";
   import { dt } from "$lib/dashboard/i18n";
 
-  $: main = SECTIONS.filter((s) => s.group === "main");
-  $: audience = SECTIONS.filter((s) => s.group === "audience");
-  $: account = SECTIONS.filter((s) => s.group === "account");
+  const main = SECTIONS.filter((s) => s.group === "main");
+  const audience = SECTIONS.filter((s) => s.group === "audience");
+  const account = SECTIONS.filter((s) => s.group === "account");
   $: name = $store?.config?.senderName || $store?.given_name || $store?.configuratorEmail || "";
 
   function initials(n: string): string {

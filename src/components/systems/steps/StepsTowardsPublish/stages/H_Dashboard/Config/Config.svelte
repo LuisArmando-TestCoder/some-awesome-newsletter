@@ -6,8 +6,8 @@
   import Tabs from "$lib/dashboard/ui/Tabs.svelte";
   import { dt } from "$lib/dashboard/i18n";
 
-  export let canReveal = true;
-  $: canReveal;
+  // Passed by the step host; this view is always shown.
+  export const canReveal: boolean = true;
 
   let active = "brand";
   $: tabs = [

@@ -1,5 +1,6 @@
 import { browser } from '$app/environment';
 import { gsap } from 'gsap';
+import type { ScrollTrigger as Trigger } from 'gsap/ScrollTrigger';
 import { prefersReducedMotion } from './gsap.client';
 
 // Svelte action (WS1). Usage: <section use:useScrollSection={{ onActivate }}>
@@ -19,7 +20,7 @@ export function useScrollSection(node: HTMLElement, options: ScrollSectionOption
     if (!browser) return;
 
     const { onActivate, onDeactivate, pin, snap, start = 'top 80%', end = 'bottom top' } = options;
-    let trigger: any = null;
+    let trigger: Trigger | null = null;
     let timeline: gsap.core.Timeline | null = null;
     let destroyed = false;
 

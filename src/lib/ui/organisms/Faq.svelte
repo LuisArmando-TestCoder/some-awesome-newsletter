@@ -40,7 +40,7 @@
 
     {#if searchable}
         <div class="faq__search">
-            <label class="faq__search-label" for={`${idPrefix}-search`}>{($t as any)?.helpCenter?.faqFilterLabel ?? 'Filter questions'}</label>
+            <label class="faq__search-label" for={`${idPrefix}-search`}>{$t?.helpCenter?.faqFilterLabel ?? 'Filter questions'}</label>
             <input
                 id={`${idPrefix}-search`}
                 class="faq__search-input"
@@ -82,7 +82,7 @@
             {/each}
         </ul>
     {:else}
-        <p class="faq__empty" role="status">{($t as any)?.helpCenter?.faqNoMatch ?? 'No questions match your filter.'}</p>
+        <p class="faq__empty" role="status">{$t?.helpCenter?.faqNoMatch ?? 'No questions match your filter.'}</p>
     {/if}
 </section>
 

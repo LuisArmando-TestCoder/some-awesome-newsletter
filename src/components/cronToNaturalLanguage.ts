@@ -13,15 +13,11 @@ function getOrdinal(n: number): string {
  *
  * @param expression - The cron field expression.
  * @param unit - The name of the unit (e.g., "minute", "hour").
- * @param min - The minimum value for the unit.
- * @param max - The maximum value for the unit.
  * @returns A natural language description for that field.
  */
 function describeField(
   expression: string,
-  unit: string,
-  min: number,
-  max: number
+  unit: string
 ): string {
   // Wildcard or "any" indicator.
   if (expression === "*" || expression === "?") {
@@ -229,10 +225,10 @@ export function cronToNaturalLanguage(cron: string): string {
   }
 
   const secondsDesc = hasSeconds
-    ? describeField(secondsExpr, "second", 0, 59)
+    ? describeField(secondsExpr, "second")
     : "";
-  const minuteDesc = describeField(minuteExpr, "minute", 0, 59);
-  const hourDesc = describeField(hourExpr, "hour", 0, 23);
+  const minuteDesc = describeField(minuteExpr, "minute");
+  const hourDesc = describeField(hourExpr, "hour");
   const dayOfMonthDesc = describeDayOfMonth(dayOfMonthExpr);
   const monthDesc = describeMonth(monthExpr);
   const dayOfWeekDesc = describeDayOfWeek(dayOfWeekExpr);

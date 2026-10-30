@@ -125,6 +125,7 @@
         {#if html}
           <!-- svelte-ignore a11y_click_events_have_key_events -->
           <!-- svelte-ignore a11y_no_static_element_interactions -->
+          <!-- eslint-disable-next-line svelte/no-at-html-tags -- built by buildSignatureHtml, which escapes every field -->
           <div class="sig__render" class:sig__render--off={!enabled} onclick={onPreviewClick}>{@html previewHtml}</div>
         {:else}
           <p class="sig__empty">{$ts.signature.previewEmpty}</p>

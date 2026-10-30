@@ -41,7 +41,7 @@
   let showNavbar = true;
   let focusInside = false;
 
-  $: tx = ($t as any) ?? {};
+  $: tx = $t ?? {};
   $: nav = tx.nav ?? {};
   $: header = tx.header ?? {};
 

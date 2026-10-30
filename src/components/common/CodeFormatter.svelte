@@ -42,6 +42,7 @@
   </div>
   <pre class="code-formatter">
     <code>
+      <!-- eslint-disable-next-line svelte/no-at-html-tags -- highlight.js output, or escapeHtml for unknown languages -->
       {@html htmlFormattedCode}
     </code>
   </pre>

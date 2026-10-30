@@ -34,6 +34,7 @@
   // Generate once per website when the step becomes visible.
   $: if (canReveal && !html && !generating && $onboarding.url && requestedFor !== $onboarding.url) {
     requestedFor = $onboarding.url;
+    // eslint-disable-next-line svelte/infinite-reactive-loop -- guarded by requestedFor: one request per website
     generate();
   }
 
@@ -57,6 +58,7 @@
       console.error("[onboarding/preview]", e);
       error = $ob.preview.errors.generate;
     } finally {
+      // eslint-disable-next-line svelte/infinite-reactive-loop -- guarded by requestedFor in the caller
       generating = false;
     }
   }

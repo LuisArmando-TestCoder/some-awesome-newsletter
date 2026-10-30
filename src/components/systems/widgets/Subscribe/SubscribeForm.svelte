@@ -275,7 +275,7 @@
         <h2 class="sf__title" tabindex="-1" bind:this={successHeading}>{$ts.success.title}</h2>
       {/if}
       <p class="sf__text">
-        {#each fill($ts.success.body, { email: '\u0000' }).split('\u0000') as part, i}{#if i > 0}<strong dir="ltr">{submittedEmail}</strong>{/if}{part}{/each}
+        {#each fill($ts.success.body, { email: '\u0000' }).split('\u0000') as part, i (i)}{#if i > 0}<strong dir="ltr">{submittedEmail}</strong>{/if}{part}{/each}
       </p>
       <p class="sf__text">{fill($ts.success.next, { language: languageName })}</p>
       <p class="sf__hint">{$ts.success.spam}</p>

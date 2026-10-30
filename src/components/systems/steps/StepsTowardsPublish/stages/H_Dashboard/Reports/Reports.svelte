@@ -1,6 +1,5 @@
 <!-- src/components/systems/steps/StepsTowardsPublish/stages/H_Dashboard/Users/Users.svelte -->
 <script lang="ts">
-    import { writable } from "svelte/store"; // ADDED writable
   
     // Central Store and Types
     import store from "../../../../../../store"; // Adjust path
@@ -15,7 +14,7 @@
     import Page from "../../../../../wrappers/Page/Page.svelte"; // Adjust path
   
     // Props (if any remain - canReveal was one)
-  export let canReveal = true; // Keep props passed from parent
+  export const canReveal: boolean = true; // Passed by MainSteps; this view is always visible
   
   // --- Initialization ---
   // REMOVED onMount call - Data is loaded centrally via getConfiguratorSession -> refreshSubscribers
@@ -31,7 +30,6 @@
     // Consider adding global loading/error states to central store if needed
   
     // --- State for Auto-Collapse (Using Writable Store) ---
-    const openNewsSourceIdStore = writable<string | null>(null); // Store for the open card ID
   
   </script>
   
@@ -64,26 +62,10 @@
   <!-- Import the necessary layout and shared styles -->
   <!-- Component-specific styles are now within their respective component files -->
   <style lang="scss">
-    // These imports define the overall page structure and potentially shared variables/mixins
-    @use "../Dashboard.scss"; // Main dashboard layout styles if applicable
-    @use "./Reports.scss"; // Styles specific to the Users page layout (e.g., .users-page-layout, .column)
-  
-    // Add any styles *only* relevant to the main Users.svelte shell here
-    .title-container {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem; // Space between title and indicator
-      margin-bottom: 1rem; // Existing margin likely handled by TextTypes or parent styles
-    }
-  
-    .refresh-indicator {
-      font-size: var(--font-size-s); // Smaller text
-      color: var(--color-text-secondary); // Muted color
-      font-style: italic;
-    }
-  
+    @use "../Users/Users.scss";
+    @include Users.layout-column;
+
     .loading-message,
-    .error-message,
     .no-data-message {
       margin-top: 1rem;
       padding: 1rem;
@@ -92,10 +74,5 @@
     .loading-message,
     .no-data-message {
       color: var(--color-text-secondary, #666);
-    }
-    .error-message {
-      background-color: var(--color-error-light, #ffebee);
-      border: 1px solid var(--color-error, #f44336);
-      color: var(--color-error-dark, #c62828);
     }
   </style>

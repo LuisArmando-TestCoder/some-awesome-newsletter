@@ -3,7 +3,8 @@ import store from "../../store";
 import { request, seg } from "$lib/api/client";
 import { LLM_TIMEOUT_MS } from "$lib/api/config";
 import { newsSourceEnvelope } from "$lib/api/schemas";
-import { replaceNewsSourceInStore } from "./_internal";
+import type { NewsSource } from "../../types";
+import { asNewsSource, replaceNewsSourceInStore } from "./_internal";
 
 /**
  * Build the writing voice of a source from sample text.
@@ -13,7 +14,7 @@ import { replaceNewsSourceInStore } from "./_internal";
 export async function generatePersonality(
   rawContent: string,
   newsSourceId: string
-): Promise<{ message: string; newsSource: any; personality: string }> {
+): Promise<NewsSource> {
   const json = await request(`/news-source/personality/${seg(get(store).configuratorEmail)}/${seg(newsSourceId)}`, {
     method: "PUT",
     body: { rawContent },
@@ -21,6 +22,7 @@ export async function generatePersonality(
     schema: newsSourceEnvelope,
     errorMessage: "We could not build the writing voice from this text. Try a longer sample.",
   });
-  await replaceNewsSourceInStore(json.newsSource as any);
-  return json.newsSource as any;
+  const updated = asNewsSource(json.newsSource);
+  await replaceNewsSourceInStore(updated);
+  return updated;
 }

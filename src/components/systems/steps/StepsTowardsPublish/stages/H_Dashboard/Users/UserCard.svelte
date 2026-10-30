@@ -61,7 +61,7 @@
 
 <style lang="scss">
   @use "./Users.scss";
-  @use "../Dashboard.scss";
+  @include Users.user-card;
   .user-card {
     display: flex;
     justify-content: space-between;
@@ -108,10 +108,6 @@
     font-size: 0.8rem;
     color: var(--color-text-tertiary, #777);
     margin-top: 0.2rem;
-    span {
-      // Style individual meta parts if needed
-      // e.g., display: inline-block; margin-right: 0.5em;
-    }
   }
 
   .user-card-bio {
@@ -128,7 +124,4 @@
     padding-top: 0.1rem; // Minor adjustment to align visually with top text line
   }
 
-  :global(.icon-button) {
-    // Styles for IconButton if needed
-  }
 </style>

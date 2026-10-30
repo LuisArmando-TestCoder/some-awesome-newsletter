@@ -69,7 +69,7 @@ addUserToNewsletter({
 
   const codeSnippetForCreation = derived(
     [userEmail, userName, userBio, userLanguage],
-    ([$userEmail, $userName, $userBio, $userLanguage]) => `
+    () => `
 // You can tweak all this hardcoded parameters
 async function addUserToNewsletter({ email, name, bio, language }) {
   const user = {

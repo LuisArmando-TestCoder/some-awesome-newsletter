@@ -13,7 +13,7 @@
   let copied = false;
   let timer: ReturnType<typeof setTimeout> | undefined;
 
-  $: origin = typeof window !== "undefined" ? window.location.origin : SITE_ORIGIN;
+  const origin = typeof window !== "undefined" ? window.location.origin : SITE_ORIGIN;
   $: path = holder ? blogPath(holder, { ns: newsSourceId || null }) : "";
   $: url = path ? `${origin}${path}` : "";
 

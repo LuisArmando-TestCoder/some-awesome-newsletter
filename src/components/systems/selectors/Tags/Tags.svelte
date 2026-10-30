@@ -1,12 +1,14 @@
 <script lang="ts">
+	import type { TagTreeNode } from "./types";
 	import { writable, type Writable } from 'svelte/store';
 	import TagNode from './TagNode.svelte';
 
-	export let tags: { name: string; children?: any[] }[] = [];
+	export let tags: TagTreeNode[] = [];
 	export let selectedTags: Writable<string[]> = writable([]);
 
 	function toggleTag(tag: string) {
 		selectedTags.update((currentSelected) => {
+			// eslint-disable-next-line svelte/prefer-svelte-reactivity -- local temporary; the store gets a plain array
 			const newSelected = new Set(currentSelected);
 			if (newSelected.has(tag)) {
 				newSelected.delete(tag);
@@ -19,7 +21,7 @@
 </script>
 
 <div class="tags-container">
-	{#each tags as node}
+	{#each tags as node (node.name)}
 		<TagNode {node} {selectedTags} {toggleTag} />
 	{/each}
 </div>
@@ -32,31 +34,5 @@
 		padding: 10px;
 		border-radius: 8px;
 		background-color: #f0f2f5;
-	}
-
-	.tag-button {
-		padding: 8px 16px;
-		border-radius: 20px;
-		border: 1px solid #ccd0d5;
-		background-color: #ffffff;
-		color: #050505;
-		font-size: 14px;
-		font-weight: 600;
-		cursor: pointer;
-		transition: all 0.2s ease-in-out;
-
-		&:hover {
-			background-color: #e4e6eb;
-		}
-
-		&.selected {
-			background-color: #1877f2;
-			color: #ffffff;
-			border-color: #1877f2;
-
-			&:hover {
-				background-color: #166fe5;
-			}
-		}
 	}
 </style>

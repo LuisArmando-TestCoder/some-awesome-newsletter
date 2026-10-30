@@ -2,7 +2,7 @@
     import { onMount, tick } from "svelte";
     import { slide } from "svelte/transition";
     import { language } from "$lib/stores/language.store";
-    import store, { globalLanguage, saveToStore } from "../../../components/store";
+    import { globalLanguage, saveToStore } from "../../../components/store";
 
     // Only the code list comes from here. Each translation namespace loads its own
     // locale file when the language store changes (src/lib/i18n/lazy.ts), so this
@@ -125,7 +125,7 @@
             id={MENU_ID}
             class="lang-picker__menu"
             role="group"
-            aria-label={($t2 as any)?.nav?.chooseLanguage ?? "Choose a language"}
+            aria-label={$t2?.nav?.chooseLanguage ?? "Choose a language"}
             transition:slide={{ axis: "y", duration: 160 }}
         >
             <div class="lang-picker__scroll-area">
@@ -153,7 +153,7 @@
         on:click|stopPropagation={toggleMenu}
         aria-expanded={isOpen}
         aria-controls={isOpen ? MENU_ID : undefined}
-        aria-label={(($t2 as any)?.nav?.currentLanguage ?? "Language: {name}").replace("{name}", currentLang?.name ?? "English")}
+        aria-label={($t2?.nav?.currentLanguage ?? "Language: {name}").replace("{name}", currentLang?.name ?? "English")}
     >
         <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20" /></svg>
         <span class="lang-picker__current-code">{currentLang?.code.toUpperCase() ?? "EN"}</span>

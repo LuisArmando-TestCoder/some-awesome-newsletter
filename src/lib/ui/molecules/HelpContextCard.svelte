@@ -1,6 +1,8 @@
 <script lang="ts">
-  export let plan: any;
-  export let usage: any;
+  type Meter = { used: number; limit: number };
+
+  export let plan: { name: string; interval: string };
+  export let usage: { apiCallsPerDay: Meter; projects: Meter };
 </script>
 
 <div class="help-context-card">

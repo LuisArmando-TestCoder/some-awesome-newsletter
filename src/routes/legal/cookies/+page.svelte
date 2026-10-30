@@ -3,7 +3,7 @@
   const lastUpdated = 'January 6, 2026';
   const contactEmail = 'info@aiban.news';
   const CANONICAL = 'https://aibanewsletter.club/legal/cookies';
-  $: lg = ($t as any)?.legal ?? {};
+  $: lg = $t?.legal ?? {};
   $: TITLE = lg.cookies?.metaTitle ?? 'Cookie policy | AIBAN';
   $: DESCRIPTION = lg.cookies?.metaDescription ?? 'Which cookies AIBAN uses, what they do, how long they last and how you can control them.';
 

@@ -24,7 +24,24 @@ export type ChecklistState = {
   complete: boolean;
 };
 
-type AnyRecord = Record<string, any>;
+type AnyRecord = Record<string, unknown>;
+type SourceLike = {
+  lastSentAt?: unknown;
+  lastRunAt?: unknown;
+  firstSentAt?: unknown;
+  active?: boolean;
+  stats?: { sent?: number };
+} | null;
+
+/** Store fields read here (the legacy store is loosely shaped). */
+export type ChecklistStoreInput = {
+  config?: { newsSources?: SourceLike[]; senderName?: unknown } | null;
+  configuratorEmail?: unknown;
+  subscribers?: AnyRecord;
+  leads?: unknown;
+};
+/** Onboarding fields read here. */
+export type ChecklistOnboardingInput = { firstSendAt?: unknown; shareCopied?: unknown };
 
 function countSubscribersOtherThan(subscribers: AnyRecord | undefined, owner: string): number {
   const seen = new Set<string>();
@@ -49,9 +66,12 @@ function countLeads(leads: unknown): number {
 }
 
 /** Pure computation, exported for tests and for WS4 if it wants its own store. */
-export function computeChecklist(s: AnyRecord, o: AnyRecord): ChecklistState {
+export function computeChecklist(
+  s: ChecklistStoreInput | null | undefined,
+  o: ChecklistOnboardingInput | null | undefined
+): ChecklistState {
   const config = s?.config ?? {};
-  const sources: AnyRecord[] = config.newsSources ?? [];
+  const sources = config.newsSources ?? [];
   const owner = String(s?.configuratorEmail ?? "").toLowerCase();
   const anySent = sources.some((ns) => ns?.lastSentAt || ns?.lastRunAt || ns?.firstSentAt || (ns?.stats?.sent ?? 0) > 0);
   const items: ChecklistItem[] = [
@@ -67,7 +87,7 @@ export function computeChecklist(s: AnyRecord, o: AnyRecord): ChecklistState {
   return { items, done, total: items.length, complete: done === items.length };
 }
 
-export const checklist: Readable<ChecklistState> = derived([store, onboarding], ([$s, $o]) => computeChecklist($s as AnyRecord, $o as AnyRecord));
+export const checklist: Readable<ChecklistState> = derived([store, onboarding], ([$s, $o]) => computeChecklist($s, $o));
 
 const DISMISS_KEY = "aiban.checklist.hidden.v1";
 function readHidden(): boolean {

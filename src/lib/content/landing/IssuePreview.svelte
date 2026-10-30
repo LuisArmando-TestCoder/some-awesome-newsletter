@@ -75,7 +75,7 @@
 		aria-labelledby={switchable ? `${idPrefix}-tab-${language}` : undefined}
 	>
 		<dl class="issue__meta">
-			<div><dt>{labels.fromLabel}</dt><dd>{issue.brand} &lt;{issue.fromAddress}&gt;</dd></div>
+			<div><dt>{labels.fromLabel}</dt><dd>{issue.brand}</dd></div>
 			{#if !compact}
 				<div><dt>{labels.toLabel}</dt><dd>{issue.languageName}</dd></div>
 			{/if}

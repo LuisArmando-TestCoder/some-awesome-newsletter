@@ -33,6 +33,39 @@ export default {
       "ogImageAlt": "AIBAN logo"
     },
     "skipLink": "Skip to main content",
+    "display": {
+      "title": "Your website, written as a newsletter.",
+      "kicker": "AIBAN"
+    },
+    "statement": {
+      "lines": [
+        "You already publish good work.",
+        "Your clients read it in more than one language.",
+        "AIBAN turns each new article into an issue",
+        "and sends every reader the version in their language."
+      ]
+    },
+    "history": {
+      "eyebrow": "How it works",
+      "title": "The life of one issue.",
+      "lead": "Follow a single issue from the moment your schedule starts it to the moment it starts again. You set this up once.",
+      "note": "Example schedule. You choose the day, the time and how often.",
+      "progressLabel": "Steps of one issue",
+      "items": [
+        { "mark": "9:00", "title": "Your schedule starts the run", "body": "Every Monday at 9:00 in this example. You pick daily, weekly or monthly." },
+        { "mark": "Read", "title": "AIBAN reads your website", "body": "It finds your newest article and picks the piece your ideal reader will care about most." },
+        { "mark": "Write", "title": "It writes the issue in your voice", "body": "The text follows how your site is written, so it sounds like you." },
+        { "mark": "Translate", "title": "Each reader gets their language", "body": "One issue becomes as many versions as your subscribers need." },
+        { "mark": "Send", "title": "It arrives under your name", "body": "With your name and your email signature. Replies go to your inbox." },
+        { "mark": "Publish", "title": "It becomes an article on your blog", "body": "With its own link that people can find in search and share." },
+        { "mark": "Report", "title": "You see what happened", "body": "Your dashboard lists who joined and which links readers clicked." },
+        { "mark": "Again", "title": "Next Monday, it runs again", "body": "It keeps going until you turn it off in your dashboard." }
+      ]
+    },
+    "rail": {
+      "label": "Page chapters",
+      "chapters": ["Start", "Why", "Languages", "How it works", "Your name", "Grow", "Who it is for", "Pricing", "Questions", "Begin"]
+    },
     "hero": {
       "eyebrow": "Newsletters for service businesses",
       "title": "Your website becomes a weekly newsletter, in each reader's language",

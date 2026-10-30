@@ -111,3 +111,14 @@ Requests filed: `requests/6.md`, `requests/9.md`, `requests/10.md`.
 - WS6 6: noted, no change needed.
 - Fixed a type error in `LanguagePicker.svelte` caused by locale shape drift (casts to the English shape for t3, tSubscribe, tBillingForm, as t2 already had).
 - Final svelte-check: 29 errors in the app, 0 in WS2 files.
+
+## 2026-10-30, Luis's request: Apple-like white and black landing ("mono" direction)
+- Direction from Luis in chat: minimal, Apple-like "visual history" experience, white background, black ink and type, following his "Award-Grade Web Playbook 2026" (chapters as slides, one display face at large scale, restraint, motion only with meaning, reduced-motion path, performance budget).
+- Created `src/lib/content/landing/mono.scss` (landing-only theme mixin that remaps the shared token names: white surfaces, #1d1d1f ink, black pill primary, SF/Inter stack). WS1 asked to promote it to a named theme (requests/1.md).
+- Created `HistoryTimeline.svelte` (chapter "The life of one issue": eight eras with giant marks, 9:00, Read, Write, Translate, Send, Publish, Report, Again; pinned horizontal track that moves sideways while the page scrolls on desktop, plain vertical list on small screens and with reduced motion, progress bar) and `ChapterRail.svelte` (01 / 10 chapter index with links, desktop only), `reveal.ts` (one-time enter reveal, never hides content already on screen).
+- Rewrote the landing template and styles (v1 kept at `_deprecated/src/routes/+page.v1-broadsheet.svelte`): cold open with a 7-word display headline, pill URL field, sample issue that settles in on scroll; a statement chapter whose lines ink in as they reach the reading line; languages; the history chapter (id `how-it-works`, so header links still work); sender; grow; use cases; pricing (no scroll effects near money); FAQ; finale with an oversized wordmark. Logic, SEO tags and JSON-LD unchanged.
+- Motion uses CSS scroll-driven animations (compositor only, behind `@supports` and `prefers-reduced-motion: no-preference`) plus one rAF scroll handler for the horizontal track. No Lenis or GSAP added (no new dependencies, keeps initial JS small).
+- Header follows the mono theme on `/` and now sets its own font family (it was falling back to the browser serif).
+- en.ts `landing`: added `display`, `statement`, `history`, `rail`. The `chain.steps` keys are no longer shown (the history replaces them); kept for WS9.
+- Sample issue "From" line shows only the brand name, to match the current sender copy (AIBAN sends from its own verified address under the owner's name).
+- Verification: built in the cloud workspace this time (`npm install` + `vite build` pass on a copy of src/static), previewed with Playwright at 1440x900 and 390x844: no console errors, no horizontal overflow on mobile. svelte-check: 0 errors and 0 warnings in landing files.

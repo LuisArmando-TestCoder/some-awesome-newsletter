@@ -142,6 +142,9 @@
     focusInside = Boolean(next && wrapper.contains(next));
   }
 
+  // The landing uses the white and black "mono" theme; the header follows it there.
+  $: isMono = $page.url.pathname === '/';
+
   onDestroy(() => {
     if (isMobileMenuOpen && typeof document !== 'undefined') {
       document.body.style.overflow = previousBodyOverflow;
@@ -154,6 +157,7 @@
 {#if !isHidden}
   <div
     class="header-wrapper"
+    class:mono={isMono}
     class:hidden-nav={!showNavbar}
     on:focusin={onFocusIn}
     on:focusout={onFocusOut}
@@ -219,7 +223,7 @@
   </div>
 
   {#if isMobileMenuOpen}
-    <div class="mobile-menu-overlay" transition:fade={{ duration: reduceMotion ? 0 : 160 }}>
+    <div class="mobile-menu-overlay" class:mono={isMono} transition:fade={{ duration: reduceMotion ? 0 : 160 }}>
       <!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
       <div class="mobile-backdrop" on:click={() => closeMenu()}></div>
 
@@ -308,6 +312,20 @@
 {/if}
 
 <style lang="scss">
+  @use '../../content/landing/mono.scss' as mono;
+
+  .header-wrapper.mono,
+  .mobile-menu-overlay.mono {
+    @include mono.mono-theme;
+    background: transparent;
+    font-family: var(--font-body);
+    :global(a), :global(button) { font-family: inherit; }
+  }
+  .header-wrapper.mono .header {
+    background: color-mix(in srgb, #ffffff 80%, transparent);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+  }
   .desktop-only {
     @media (max-width: 1024px) { display: none !important; }
   }
@@ -315,6 +333,10 @@
     @media (min-width: 1025px) { display: none !important; }
   }
 
+  .header-wrapper,
+  .mobile-menu-overlay {
+    font-family: var(--font-body, system-ui, sans-serif);
+  }
   .header-wrapper {
     position: sticky;
     top: 0;

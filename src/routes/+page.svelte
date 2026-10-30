@@ -1,5 +1,6 @@
 <script lang="ts">
-	// AIBAN landing page. Owner: WS2. Previous version: _deprecated/src/routes/+page.svelte
+	// AIBAN landing page, "mono" direction: white page, black ink, chapters like a keynote.
+	// Owner: WS2. Previous versions: _deprecated/src/routes/+page.svelte, +page.v1-broadsheet.svelte
 	import { tick } from 'svelte';
 	import { goto } from '$app/navigation';
 	import { t } from '$lib/i18n/translations';
@@ -7,8 +8,12 @@
 	import Faq from '$lib/ui/organisms/Faq.svelte';
 	import Pricing from '$lib/ui/organisms/Pricing.svelte';
 	import IssuePreview from '$lib/content/landing/IssuePreview.svelte';
+	import HistoryTimeline from '$lib/content/landing/HistoryTimeline.svelte';
+	import ChapterRail from '$lib/content/landing/ChapterRail.svelte';
+	import { reveal } from '$lib/content/landing/reveal';
 	import {
 		normalizeSite,
+		brandFromHost,
 		PENDING_SITE_KEY,
 		SAMPLE_LANGUAGES,
 		type SampleLanguage
@@ -39,6 +44,7 @@
 	let previewEl = $state<HTMLElement | null>(null);
 
 	const fill = (s: string, site: string) => s.replaceAll('{site}', site);
+	const brandName = $derived(host ? brandFromHost(host) : '');
 
 	const startHref = $derived.by(() => {
 		return host ? `${START_HREF}?url=${encodeURIComponent(`https://${host}`)}` : START_HREF;
@@ -122,18 +128,20 @@
 
 <a href="#main-content" class="skip-link">{L.skipLink}</a>
 
-<main id="main-content" class="landing">
-	<!-- Hero with the website preview -->
-	<section class="hero" aria-labelledby="hero-title">
-		<div class="wrap hero__grid">
-			<div class="hero__copy">
-				<p class="eyebrow">{L.hero.eyebrow}</p>
-				<h1 id="hero-title" class="hero__title">{L.hero.title}</h1>
-				<p class="hero__lead">{L.hero.lead}</p>
+<div class="mono">
+	<ChapterRail labels={L.rail.chapters} navLabel={L.rail.label} />
+
+	<main id="main-content">
+		<!-- 01 Cold open -->
+		<section id="start" data-chapter class="open" aria-labelledby="hero-title">
+			<div class="wrap open__inner">
+				<p class="open__kicker">{L.hero.eyebrow}</p>
+				<h1 id="hero-title" class="open__title">{L.display.title}</h1>
+				<p class="open__lead">{L.hero.lead}</p>
 
 				<form class="site-form" novalidate onsubmit={onPreview}>
-					<label for="site-input" class="site-form__label">{L.hero.formLabel}</label>
-					<div class="site-form__row">
+					<label for="site-input" class="visually-hidden">{L.hero.formLabel}</label>
+					<div class="site-form__pill" class:has-error={!!formError}>
 						<input
 							id="site-input"
 							class="site-form__input"
@@ -155,239 +163,239 @@
 					<p id="site-hint" class="site-form__hint">{L.hero.formHint}</p>
 				</form>
 
-				<a class="link-tertiary" href="#how-it-works">{L.hero.secondaryCta}</a>
+				<a class="link-more" href="#how-it-works">{L.hero.secondaryCta} <span aria-hidden="true">&#8595;</span></a>
 			</div>
 
-			<div class="hero__preview" bind:this={previewEl}>
-				<IssuePreview host={host} labels={L.preview} bind:language={previewLanguage} idPrefix="hero" />
-				<p class="hero__note">{L.preview.note}</p>
-				<a class="btn btn--primary btn--block" href={startHref} onclick={onStart}>
-					{host ? fill(L.preview.startCta, host) : L.preview.startCtaGeneric}
-				</a>
+			<div class="wrap open__stage" bind:this={previewEl}>
+				<div class="open__device">
+					<IssuePreview host={host} labels={L.preview} bind:language={previewLanguage} idPrefix="hero" />
+				</div>
+				<div class="open__after">
+					<p class="open__note">{L.preview.note}</p>
+					<a class="btn btn--primary" href={startHref} onclick={onStart}>
+						{host ? fill(L.preview.startCta, host) : L.preview.startCtaGeneric}
+					</a>
+				</div>
 				<p class="visually-hidden" aria-live="polite">{announce}</p>
 			</div>
-		</div>
-	</section>
+		</section>
 
-	<!-- Trigger to action chain -->
-	<section id="how-it-works" class="section section--alt" aria-labelledby="chain-title">
-		<div class="wrap">
-			<header class="section__head">
-				<p class="eyebrow">{L.chain.eyebrow}</p>
-				<h2 id="chain-title" class="section__title">{L.chain.title}</h2>
-				<p class="section__lead">{L.chain.lead}</p>
-			</header>
-
-			<div class="chain">
-				<div class="chain__trigger">
-					<p class="chain__label">{L.chain.triggerLabel}</p>
-					<div class="card card--trigger">
-						<span class="chain__icon" aria-hidden="true">
-							<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
-						</span>
-						<h3 class="card__title">{L.chain.trigger.title}</h3>
-						<p class="card__body">{L.chain.trigger.body}</p>
-					</div>
-				</div>
-
-				<div class="chain__actions">
-					<p class="chain__label">{L.chain.actionLabel}</p>
-					<ol class="steps">
-						{#each L.chain.steps as step, i (i)}
-							<li class="steps__item">
-								<span class="steps__num" aria-hidden="true">{i + 1}</span>
-								<div>
-									<h3 class="steps__title">{step.title}</h3>
-									<p class="steps__body">{step.body}</p>
-								</div>
-							</li>
-						{/each}
-					</ol>
-				</div>
+		<!-- 02 Statement -->
+		<section id="why" data-chapter class="statement" aria-label={L.rail.chapters[1]}>
+			<div class="wrap">
+				<p class="statement__text">
+					{#each L.statement.lines as line}
+						<span class="statement__line">{line} </span>
+					{/each}
+				</p>
 			</div>
+		</section>
 
-			<div class="also">
-				<h3 class="also__title">{L.chain.alsoTitle}</h3>
+		<!-- 03 Languages -->
+		<section id="languages" data-chapter class="chapter" aria-labelledby="lang-title">
+			<div class="wrap">
+				<header class="chapter__head" use:reveal>
+					<p class="chapter__eyebrow">{L.languages.eyebrow}</p>
+					<h2 id="lang-title" class="chapter__title">{L.languages.title}</h2>
+					<p class="chapter__lead">{L.languages.body}</p>
+				</header>
+				<div class="lang-grid">
+					{#each SAMPLE_LANGUAGES as code, i}
+						<div class="lang-grid__item" use:reveal style:--i={i}>
+							<IssuePreview host={host} labels={L.preview} switchable={false} language={code} compact idPrefix="lang-{code}" />
+						</div>
+					{/each}
+				</div>
+				<p class="caption">{L.languages.sampleNote}</p>
+			</div>
+		</section>
+
+		<!-- 04 Visual history: the life of one issue -->
+		<div data-chapter id="how-it-works-chapter" class="chapter-anchor">
+			<HistoryTimeline
+				id="how-it-works"
+				eyebrow={L.history.eyebrow}
+				title={L.history.title}
+				lead={L.history.lead}
+				note={L.history.note}
+				items={L.history.items}
+				progressLabel={L.history.progressLabel}
+			/>
+		</div>
+
+		<section class="also" aria-labelledby="also-title">
+			<div class="wrap">
+				<h3 id="also-title" class="also__title">{L.chain.alsoTitle}</h3>
 				<ul class="also__list">
-					{#each L.chain.also as item, itemIndex (itemIndex)}
-						<li class="card">
-							<p class="card__title">{item.title}</p>
-							<p class="card__body">{item.body}</p>
+					{#each L.chain.also as item, i}
+						<li use:reveal style:--i={i}>
+							<p class="also__item-title">{item.title}</p>
+							<p class="also__item-body">{item.body}</p>
 						</li>
 					{/each}
 				</ul>
 			</div>
-		</div>
-	</section>
+		</section>
 
-	<!-- Languages -->
-	<section class="section" aria-labelledby="lang-title">
-		<div class="wrap">
-			<header class="section__head section__head--left">
-				<p class="eyebrow">{L.languages.eyebrow}</p>
-				<h2 id="lang-title" class="section__title">{L.languages.title}</h2>
-				<p class="section__lead">{L.languages.body}</p>
-			</header>
-			<div class="lang-grid">
-				{#each SAMPLE_LANGUAGES as code (code)}
-					<IssuePreview
-						host={host}
-						labels={L.preview}
-						switchable={false}
-						language={code}
-						compact
-						idPrefix="lang-{code}"
-					/>
-				{/each}
+		<!-- 05 Sender -->
+		<section id="sender" data-chapter class="chapter chapter--tint" aria-labelledby="sender-title">
+			<div class="wrap split">
+				<header class="chapter__head chapter__head--left" use:reveal>
+					<p class="chapter__eyebrow">{L.sender.eyebrow}</p>
+					<h2 id="sender-title" class="chapter__title">{L.sender.title}</h2>
+					<p class="chapter__lead">{L.sender.body}</p>
+				</header>
+				<figure class="inbox" use:reveal>
+					<figcaption class="inbox__caption">{L.sender.inboxLabel}</figcaption>
+					<ul class="inbox__list">
+						<li class="inbox__row inbox__row--dim" aria-hidden="true"><span class="bar bar--s"></span><span class="bar bar--l"></span></li>
+						<li class="inbox__row inbox__row--you">
+							<span class="inbox__avatar" aria-hidden="true">{(host ?? 'y').charAt(0).toUpperCase()}</span>
+							<div class="inbox__text">
+								<p class="inbox__from"><strong>{host ? brandName : L.sender.inboxFrom}</strong></p>
+								<p class="inbox__subject">{fill(L.sender.inboxSubject, host ?? 'yourcompany.com')}</p>
+								<p class="inbox__snippet">{L.sender.inboxSnippet}</p>
+							</div>
+							<span class="inbox__time">{L.sender.inboxTime}</span>
+						</li>
+						<li class="inbox__row inbox__row--dim" aria-hidden="true"><span class="bar bar--m"></span><span class="bar bar--l"></span></li>
+					</ul>
+				</figure>
 			</div>
-			<p class="caption">{L.languages.sampleNote}</p>
-		</div>
-	</section>
+		</section>
 
-	<!-- Sender -->
-	<section class="section section--alt" aria-labelledby="sender-title">
-		<div class="wrap split">
-			<header class="section__head section__head--left">
-				<p class="eyebrow">{L.sender.eyebrow}</p>
-				<h2 id="sender-title" class="section__title">{L.sender.title}</h2>
-				<p class="section__lead">{L.sender.body}</p>
-			</header>
-			<figure class="inbox">
-				<figcaption class="inbox__caption">{L.sender.inboxLabel}</figcaption>
-				<ul class="inbox__list">
-					<li class="inbox__row inbox__row--dim" aria-hidden="true"><span class="bar bar--s"></span><span class="bar bar--l"></span></li>
-					<li class="inbox__row inbox__row--you">
-						<span class="inbox__avatar" aria-hidden="true">{(host ?? 'y').charAt(0).toUpperCase()}</span>
-						<div class="inbox__text">
-							<p class="inbox__from">
-								<strong>{L.sender.inboxFrom}</strong>
-								<span>&lt;hello@{host ?? 'yourcompany.com'}&gt;</span>
-							</p>
-							<p class="inbox__subject">{fill(L.sender.inboxSubject, host ?? 'yourcompany.com')}</p>
-							<p class="inbox__snippet">{L.sender.inboxSnippet}</p>
-						</div>
-						<span class="inbox__time">{L.sender.inboxTime}</span>
-					</li>
-					<li class="inbox__row inbox__row--dim" aria-hidden="true"><span class="bar bar--m"></span><span class="bar bar--l"></span></li>
+		<!-- 06 Grow -->
+		<section id="grow" data-chapter class="chapter" aria-labelledby="grow-title">
+			<div class="wrap">
+				<header class="chapter__head" use:reveal>
+					<p class="chapter__eyebrow">{L.grow.eyebrow}</p>
+					<h2 id="grow-title" class="chapter__title">{L.grow.title}</h2>
+				</header>
+				<ul class="tiles">
+					{#each L.grow.items as item, i}
+						<li class="tile" use:reveal style:--i={i}>
+							<p class="tile__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</p>
+							<h3 class="tile__title">{item.title}</h3>
+							<p class="tile__body">{item.body}</p>
+						</li>
+					{/each}
 				</ul>
-			</figure>
-		</div>
-	</section>
-
-	<!-- Grow -->
-	<section class="section" aria-labelledby="grow-title">
-		<div class="wrap">
-			<header class="section__head">
-				<p class="eyebrow">{L.grow.eyebrow}</p>
-				<h2 id="grow-title" class="section__title">{L.grow.title}</h2>
-			</header>
-			<ul class="grid-3">
-				{#each L.grow.items as item, itemIndex (itemIndex)}
-					<li class="card">
-						<h3 class="card__title">{item.title}</h3>
-						<p class="card__body">{item.body}</p>
-					</li>
-				{/each}
-			</ul>
-		</div>
-	</section>
-
-	<!-- Use cases -->
-	<section class="section section--alt" aria-labelledby="uses-title">
-		<div class="wrap">
-			<header class="section__head">
-				<p class="eyebrow">{L.useCases.eyebrow}</p>
-				<h2 id="uses-title" class="section__title">{L.useCases.title}</h2>
-				<p class="section__lead">{L.useCases.lead}</p>
-			</header>
-			<ul class="uses">
-				{#each L.useCases.items as item, itemIndex (itemIndex)}
-					<li class="uses__item">
-						<h3 class="uses__title">{item.title}</h3>
-						<p class="uses__body">{item.body}</p>
-					</li>
-				{/each}
-			</ul>
-		</div>
-	</section>
-
-	<!-- Pricing (existing organism, prices unchanged) -->
-	<section id="pricing" class="section" aria-labelledby="pricing-title">
-		<div class="wrap">
-			<header class="section__head">
-				<p class="eyebrow">{L.pricingIntro.eyebrow}</p>
-				<h2 id="pricing-title" class="section__title">{L.pricingIntro.title}</h2>
-				<p class="section__lead">{L.pricingIntro.lead}</p>
-			</header>
-			<Pricing showHeader={false} headingLevel={2} />
-		</div>
-	</section>
-
-	<!-- FAQ -->
-	<section id="faq" class="section section--alt">
-		<div class="wrap wrap--narrow">
-			<Faq items={L.faq} title={L.faqTitle} idPrefix="landing-faq" />
-		</div>
-	</section>
-
-	<!-- Final CTA -->
-	<section class="final" aria-labelledby="final-title">
-		<div class="wrap final__box">
-			<h2 id="final-title" class="final__title">{L.finalCta.title}</h2>
-			<p class="final__body">{L.finalCta.body}</p>
-			<div class="final__actions">
-				<a class="btn btn--inverse" href={startHref} onclick={onStart}>{L.finalCta.cta}</a>
-				<a class="link-inverse" href="/help">{L.finalCta.secondary}</a>
 			</div>
-		</div>
-	</section>
-</main>
+		</section>
 
-<footer class="footer">
-	<div class="wrap footer__grid">
-		<div class="footer__about">
-			<a href="/" class="footer__logo" aria-label={($t as typeof en).nav?.home ?? 'AIBAN home'}>
-				<img src="/logo/logo.png" width="28" height="28" alt="" loading="lazy" decoding="async" />
-				<span>AIBAN</span>
-			</a>
-			<p class="footer__tagline">{L.footer.tagline}</p>
-			<p class="footer__contact">
-				{L.footer.contactLabel}: <a href="mailto:info@aiban.news">info@aiban.news</a>
-			</p>
+		<!-- 07 Use cases -->
+		<section id="who" data-chapter class="chapter chapter--tint" aria-labelledby="uses-title">
+			<div class="wrap">
+				<header class="chapter__head chapter__head--left" use:reveal>
+					<p class="chapter__eyebrow">{L.useCases.eyebrow}</p>
+					<h2 id="uses-title" class="chapter__title">{L.useCases.title}</h2>
+					<p class="chapter__lead">{L.useCases.lead}</p>
+				</header>
+				<ul class="uses">
+					{#each L.useCases.items as item}
+						<li class="uses__item" use:reveal>
+							<h3 class="uses__title">{item.title}</h3>
+							<p class="uses__body">{item.body}</p>
+						</li>
+					{/each}
+				</ul>
+			</div>
+		</section>
+
+		<!-- 08 Offer: calm, no scroll effects near money -->
+		<section id="pricing" data-chapter class="chapter offer" aria-labelledby="pricing-title">
+			<div class="wrap">
+				<header class="chapter__head">
+					<p class="chapter__eyebrow">{L.pricingIntro.eyebrow}</p>
+					<h2 id="pricing-title" class="chapter__title">{L.pricingIntro.title}</h2>
+					<p class="chapter__lead">{L.pricingIntro.lead}</p>
+				</header>
+				<Pricing showHeader={false} headingLevel={2} />
+			</div>
+		</section>
+
+		<!-- 09 FAQ -->
+		<section id="faq" data-chapter class="chapter chapter--tint">
+			<div class="wrap wrap--narrow">
+				<Faq items={L.faq} title={L.faqTitle} idPrefix="landing-faq" />
+			</div>
+		</section>
+
+		<!-- 10 Finale -->
+		<section id="begin" data-chapter class="finale" aria-labelledby="final-title">
+			<div class="wrap finale__inner">
+				<h2 id="final-title" class="finale__title">{L.finalCta.title}</h2>
+				<p class="finale__body">{L.finalCta.body}</p>
+				<div class="finale__actions">
+					<a class="btn btn--primary btn--lg" href={startHref} onclick={onStart}>{L.finalCta.cta}</a>
+					<a class="link-more" href="/help">{L.finalCta.secondary} <span aria-hidden="true">&#8250;</span></a>
+				</div>
+			</div>
+			<p class="finale__wordmark" aria-hidden="true">{L.display.kicker}</p>
+		</section>
+	</main>
+
+	<footer class="footer">
+		<div class="wrap footer__grid">
+			<div class="footer__about">
+				<a href="/" class="footer__logo" aria-label="AIBAN home">AIBAN</a>
+				<p class="footer__tagline">{L.footer.tagline}</p>
+				<p class="footer__contact">
+					{L.footer.contactLabel}: <a href="mailto:info@aiban.news">info@aiban.news</a>
+				</p>
+			</div>
+			<nav aria-label={L.footer.product}>
+				<h2 class="footer__h">{L.footer.product}</h2>
+				<ul>
+					<li><a href="/#how-it-works">{L.footer.links.howItWorks}</a></li>
+					<li><a href="/pricing">{L.footer.links.pricing}</a></li>
+					<li><a href="/demo">{L.footer.links.demo}</a></li>
+					<li><a href="/help">{L.footer.links.help}</a></li>
+				</ul>
+			</nav>
+			<nav aria-label={L.footer.company}>
+				<h2 class="footer__h">{L.footer.company}</h2>
+				<ul>
+					<li><a href="/about">{L.footer.links.about}</a></li>
+					<li><a href="/careers">{L.footer.links.careers}</a></li>
+				</ul>
+			</nav>
+			<nav aria-label={L.footer.legal}>
+				<h2 class="footer__h">{L.footer.legal}</h2>
+				<ul>
+					<li><a href="/legal/privacy">{L.footer.links.privacy}</a></li>
+					<li><a href="/legal/terms">{L.footer.links.terms}</a></li>
+					<li><a href="/legal/cookies">{L.footer.links.cookies}</a></li>
+				</ul>
+			</nav>
 		</div>
-		<nav aria-label={L.footer.product}>
-			<h2 class="footer__h">{L.footer.product}</h2>
-			<ul>
-				<li><a href="/#how-it-works">{L.footer.links.howItWorks}</a></li>
-				<li><a href="/pricing">{L.footer.links.pricing}</a></li>
-				<li><a href="/demo">{L.footer.links.demo}</a></li>
-				<li><a href="/help">{L.footer.links.help}</a></li>
-			</ul>
-		</nav>
-		<nav aria-label={L.footer.company}>
-			<h2 class="footer__h">{L.footer.company}</h2>
-			<ul>
-				<li><a href="/about">{L.footer.links.about}</a></li>
-				<li><a href="/careers">{L.footer.links.careers}</a></li>
-			</ul>
-		</nav>
-		<nav aria-label={L.footer.legal}>
-			<h2 class="footer__h">{L.footer.legal}</h2>
-			<ul>
-				<li><a href="/legal/privacy">{L.footer.links.privacy}</a></li>
-				<li><a href="/legal/terms">{L.footer.links.terms}</a></li>
-				<li><a href="/legal/cookies">{L.footer.links.cookies}</a></li>
-			</ul>
-		</nav>
-	</div>
-	<p class="wrap footer__rights">&copy; {year} AIBAN. {L.footer.rights}</p>
-</footer>
+		<p class="wrap footer__rights">&copy; {year} AIBAN. {L.footer.rights}</p>
+	</footer>
+</div>
 
 <style lang="scss">
-	.landing {
-		background: var(--surface-0, #faf8f4);
-		color: var(--text-1, #1a1a17);
-		font-family: var(--font-body, system-ui, sans-serif);
+	@use '../lib/content/landing/mono.scss' as mono;
+
+	.mono {
+		@include mono.mono-theme;
+		font-family: var(--font-body);
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		overflow-x: clip;
+		/* The root layout may be a flex or grid container: never let min-content widen the page. */
+		width: 100%;
+		min-width: 0;
+		max-width: 100vw;
+	}
+	.mono,
+	.mono :global(*),
+	.mono :global(*::before),
+	.mono :global(*::after) {
+		box-sizing: border-box;
+	}
+	/* The global reset does not zero the body margin yet (requests/1.md). */
+	:global(body:has(.mono)) {
+		margin: 0;
 	}
 	.wrap {
 		width: 100%;
@@ -404,9 +412,9 @@
 		top: calc(-1 * var(--space-10, 128px));
 		z-index: var(--z-toast, 100);
 		padding: var(--space-2, 8px) var(--space-4, 16px);
-		background: var(--surface-inverse, #1a1a17);
-		color: var(--text-inverse, #faf8f4);
-		border-radius: var(--radius-sm, 6px);
+		background: #1d1d1f;
+		color: #fff;
+		border-radius: var(--radius-full, 999px);
 		&:focus {
 			top: var(--space-4, 16px);
 		}
@@ -419,364 +427,326 @@
 		clip: rect(0 0 0 0);
 		white-space: nowrap;
 	}
-	.eyebrow {
-		margin: 0 0 var(--space-3, 12px);
-		font-size: var(--fs-sm, 0.875rem);
-		font-weight: var(--fw-semibold, 600);
-		letter-spacing: var(--tracking-caps, 0.06em);
-		text-transform: uppercase;
-		color: var(--accent, #1f5c4f);
-	}
 
-	/* Buttons: one primary, one inverse (on dark band), one tertiary link. */
+	/* Buttons: one primary (black pill), one tertiary text link. */
 	.btn {
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		gap: var(--space-2, 8px);
 		min-height: var(--control-h, 2.75rem);
 		padding: 0 var(--space-5, 24px);
-		border: 1px solid transparent;
-		border-radius: var(--radius-md, 10px);
+		border: 0;
+		border-radius: var(--radius-full, 999px);
 		font: inherit;
 		font-size: var(--fs-md, 1rem);
-		font-weight: var(--fw-semibold, 600);
+		font-weight: var(--fw-medium, 500);
+		letter-spacing: -0.01em;
 		text-decoration: none;
 		cursor: pointer;
 		white-space: nowrap;
 		transition:
-			background-color var(--dur-fast, 120ms) var(--ease-out, ease-out),
-			color var(--dur-fast, 120ms) var(--ease-out, ease-out);
+			background-color var(--dur-fast, 120ms) var(--ease-out),
+			transform var(--dur-base, 200ms) var(--ease-out);
 		&:focus-visible {
 			outline: none;
-			box-shadow: var(--focus-ring, 0 0 0 3px #1f5c4f);
+			box-shadow: var(--focus-ring);
+		}
+		&:active {
+			transform: scale(0.98);
 		}
 	}
 	.btn--primary {
-		background: var(--accent, #1f5c4f);
-		color: var(--accent-contrast, #fff);
+		background: var(--accent);
+		color: var(--accent-contrast);
 		&:hover {
-			background: var(--accent-hover, #174a3f);
+			background: var(--accent-hover);
 		}
 	}
-	.btn--inverse {
-		background: var(--surface-0, #faf8f4);
-		color: var(--text-1, #1a1a17);
+	.btn--lg {
+		min-height: 3.5rem;
+		padding-inline: var(--space-7, 48px);
+		font-size: var(--fs-lg, 1.125rem);
+	}
+	.link-more {
+		display: inline-flex;
+		gap: var(--space-1, 4px);
+		font-size: var(--fs-md, 1rem);
+		color: var(--text-1);
+		text-decoration: none;
 		&:hover {
-			background: var(--surface-2, #f2efe8);
+			text-decoration: underline;
+			text-underline-offset: 0.2em;
 		}
-	}
-	.btn--block {
-		width: 100%;
-		white-space: normal;
-		text-align: center;
-		padding-block: var(--space-2, 8px);
-	}
-	.link-tertiary,
-	.link-inverse {
-		font-weight: var(--fw-semibold, 600);
-		text-underline-offset: 0.2em;
 		&:focus-visible {
 			outline: none;
-			box-shadow: var(--focus-ring, 0 0 0 3px #1f5c4f);
+			box-shadow: var(--focus-ring);
 			border-radius: var(--radius-sm, 6px);
 		}
 	}
-	.link-tertiary {
-		color: var(--text-link, #1f5c4f);
-	}
-	.link-inverse {
-		color: var(--text-inverse, #faf8f4);
-	}
 
-	/* Hero */
-	.hero {
-		padding-block: calc(var(--header-h, 4rem) + var(--space-7, 48px)) var(--space-8, 64px);
+	/* 01 Cold open */
+	.open {
+		padding-top: calc(var(--header-h, 4rem) + clamp(3rem, 12vh, 8rem));
+		padding-bottom: clamp(4rem, 12vh, 8rem);
+		text-align: center;
 	}
-	.hero__grid {
-		display: grid;
-		gap: var(--space-7, 48px);
-		align-items: start;
-		@media (min-width: 60rem) {
-			grid-template-columns: 1.05fr 0.95fr;
-			gap: var(--space-8, 64px);
-		}
+	.open__inner {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
-	.hero__title {
+	.open__kicker {
 		margin: 0 0 var(--space-4, 16px);
-		font-family: var(--font-display, Georgia, serif);
-		font-size: var(--fs-4xl, 3rem);
-		line-height: var(--lh-tight, 1.15);
-		letter-spacing: var(--tracking-tight, -0.01em);
+		font-size: var(--fs-md, 1rem);
 		font-weight: var(--fw-semibold, 600);
+		color: var(--text-3);
+	}
+	.open__title {
+		margin: 0;
+		max-width: 13ch;
+		font-family: var(--font-display);
+		font-size: clamp(3rem, 8.4vw, 7.75rem);
+		font-weight: var(--fw-bold, 700);
+		line-height: 0.98;
+		letter-spacing: -0.045em;
+		color: var(--text-1);
 		text-wrap: balance;
 	}
-	.hero__lead {
-		margin: 0 0 var(--space-6, 32px);
-		font-size: var(--fs-lg, 1.125rem);
-		line-height: var(--lh-normal, 1.6);
-		color: var(--text-2, #4a4943);
-		max-width: var(--measure, 68ch);
+	.open__lead {
+		width: 100%;
+		margin: var(--space-6, 32px) 0 var(--space-7, 48px);
+		max-width: 38rem;
+		font-size: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
+		line-height: 1.5;
+		letter-spacing: -0.01em;
+		color: var(--text-2);
+		text-wrap: pretty;
 	}
-	.hero__preview {
-		display: grid;
-		gap: var(--space-4, 16px);
-		scroll-margin-top: calc(var(--header-h, 4rem) + var(--space-4, 16px));
-	}
-	.hero__note {
-		margin: 0;
-		font-size: var(--fs-sm, 0.875rem);
-		color: var(--text-2, #4a4943);
-		line-height: var(--lh-normal, 1.6);
-	}
-
 	.site-form {
+		width: 100%;
+		max-width: 34rem;
 		margin-bottom: var(--space-5, 24px);
-		max-width: 36rem;
 	}
-	.site-form__label {
-		display: block;
-		margin-bottom: var(--space-2, 8px);
-		font-weight: var(--fw-semibold, 600);
-		font-size: var(--fs-md, 1rem);
-	}
-	.site-form__row {
+	.site-form__pill {
 		display: flex;
-		flex-wrap: wrap;
+		align-items: center;
 		gap: var(--space-2, 8px);
+		padding: 0.375rem 0.375rem 0.375rem var(--space-5, 24px);
+		background: var(--surface-2);
+		border: 1px solid transparent;
+		border-radius: var(--radius-full, 999px);
+		transition:
+			border-color var(--dur-fast, 120ms) var(--ease-out),
+			background-color var(--dur-fast, 120ms) var(--ease-out);
+		&:focus-within {
+			background: var(--surface-0);
+			border-color: var(--border-2);
+			box-shadow: var(--shadow-2);
+		}
+		&.has-error {
+			border-color: var(--danger, #b42318);
+		}
+		@media (max-width: 30rem) {
+			flex-direction: column;
+			align-items: stretch;
+			border-radius: var(--radius-xl, 24px);
+			padding: var(--space-2, 8px);
+			.btn {
+				width: 100%;
+			}
+		}
 	}
 	.site-form__input {
-		flex: 1 1 14rem;
+		flex: 1;
 		min-width: 0;
 		min-height: var(--control-h, 2.75rem);
-		padding: 0 var(--space-4, 16px);
-		border: 1px solid var(--border-2, #8c887d);
-		border-radius: var(--radius-md, 10px);
-		background: var(--surface-1, #fff);
-		color: var(--text-1, #1a1a17);
+		border: 0;
+		background: transparent;
+		color: var(--text-1);
 		font: inherit;
-		font-size: var(--fs-md, 1rem);
+		font-size: var(--fs-lg, 1.125rem);
+		letter-spacing: -0.01em;
+		outline: none;
+		@media (max-width: 30rem) {
+			padding-inline: var(--space-3, 12px);
+			text-align: center;
+		}
 		&::placeholder {
-			color: var(--text-3, #6b6a63);
-			font-size: var(--fs-sm, 0.875rem);
-		}
-		&:focus-visible {
-			outline: none;
-			border-color: var(--accent, #1f5c4f);
-			box-shadow: var(--focus-ring, 0 0 0 3px #1f5c4f);
-		}
-		&[aria-invalid='true'] {
-			border-color: var(--danger, #b42318);
+			color: var(--text-3);
+			font-size: var(--fs-md, 1rem);
 		}
 	}
 	.site-form__error {
-		margin: var(--space-2, 8px) 0 0;
+		margin: var(--space-3, 12px) 0 0;
 		color: var(--danger, #b42318);
 		font-size: var(--fs-sm, 0.875rem);
 		font-weight: var(--fw-medium, 500);
 	}
 	.site-form__hint {
-		margin: var(--space-2, 8px) 0 0;
-		color: var(--text-3, #6b6a63);
+		margin: var(--space-3, 12px) 0 0;
+		color: var(--text-3);
 		font-size: var(--fs-sm, 0.875rem);
 	}
+	.open__stage {
+		margin-top: clamp(4rem, 10vh, 7rem);
+		display: grid;
+		justify-items: center;
+		gap: var(--space-6, 32px);
+		scroll-margin-top: calc(var(--header-h, 4rem) + var(--space-4, 16px));
+	}
+	.open__device {
+		width: 100%;
+		max-width: 44rem;
+		transform-origin: 50% 0%;
+	}
+	.open__after {
+		display: grid;
+		justify-items: center;
+		gap: var(--space-4, 16px);
+		max-width: 34rem;
+	}
+	.open__note {
+		margin: 0;
+		font-size: var(--fs-sm, 0.875rem);
+		line-height: 1.5;
+		color: var(--text-3);
+	}
 
-	/* Sections */
-	.section {
-		padding-block: var(--space-9, 96px);
-		@media (max-width: 40rem) {
-			padding-block: var(--space-8, 64px);
-		}
+	/* 02 Statement: lines light up as they scroll into the middle of the screen. */
+	.statement {
+		padding-block: clamp(6rem, 25vh, 16rem);
 	}
-	.section--alt {
-		background: var(--surface-1, #fff);
-		border-block: 1px solid var(--border-1, #e3dfd5);
+	.statement__line {
+		display: block;
 	}
-	.section__head {
-		max-width: var(--container-sm, 40rem);
-		margin: 0 auto var(--space-7, 48px);
+	.statement__text {
+		margin: 0;
+		max-width: 22ch;
+		font-family: var(--font-display);
+		font-size: clamp(2rem, 5.2vw, 4.5rem);
+		font-weight: var(--fw-semibold, 600);
+		line-height: 1.08;
+		letter-spacing: -0.035em;
+		color: var(--text-1);
+		text-wrap: balance;
+	}
+
+	/* Chapters */
+	.chapter {
+		padding-block: clamp(6rem, 18vh, 11rem);
+	}
+	.chapter--tint {
+		background: var(--surface-2);
+	}
+	.chapter__head {
+		max-width: 46rem;
+		margin: 0 auto clamp(3rem, 8vh, 5rem);
 		text-align: center;
 	}
-	.section__head--left {
+	.chapter__head--left {
 		margin-inline: 0;
 		text-align: left;
 	}
-	.section__title {
+	.chapter__eyebrow {
 		margin: 0 0 var(--space-3, 12px);
-		font-family: var(--font-display, Georgia, serif);
-		font-size: var(--fs-3xl, 2.25rem);
-		line-height: var(--lh-tight, 1.15);
+		font-size: var(--fs-md, 1rem);
 		font-weight: var(--fw-semibold, 600);
+		color: var(--text-3);
+	}
+	.chapter__title {
+		margin: 0 0 var(--space-5, 24px);
+		font-family: var(--font-display);
+		font-size: clamp(2.25rem, 5.4vw, 4.75rem);
+		font-weight: var(--fw-bold, 700);
+		line-height: 1.02;
+		letter-spacing: -0.04em;
+		color: var(--text-1);
 		text-wrap: balance;
 	}
-	.section__lead {
+	.chapter__lead {
 		margin: 0;
-		font-size: var(--fs-lg, 1.125rem);
-		line-height: var(--lh-normal, 1.6);
-		color: var(--text-2, #4a4943);
+		font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.3125rem);
+		line-height: 1.55;
+		letter-spacing: -0.01em;
+		color: var(--text-2);
+		text-wrap: pretty;
 	}
 	.caption {
-		margin: var(--space-4, 16px) 0 0;
+		margin: var(--space-5, 24px) 0 0;
+		text-align: center;
 		font-size: var(--fs-sm, 0.875rem);
-		color: var(--text-3, #6b6a63);
+		color: var(--text-3);
 	}
-
-	ul,
-	ol {
+	ul {
 		list-style: none;
 		margin: 0;
 		padding: 0;
 	}
-	.card {
-		background: var(--surface-0, #faf8f4);
-		border: 1px solid var(--border-1, #e3dfd5);
-		border-radius: var(--radius-lg, 16px);
-		padding: var(--space-5, 24px);
-	}
-	.section:not(.section--alt) .card {
-		background: var(--surface-1, #fff);
-	}
-	.card__title {
-		margin: 0 0 var(--space-2, 8px);
-		font-size: var(--fs-lg, 1.125rem);
-		font-weight: var(--fw-semibold, 600);
-		line-height: var(--lh-snug, 1.3);
-	}
-	.card__body {
-		margin: 0;
-		color: var(--text-2, #4a4943);
-		line-height: var(--lh-normal, 1.6);
-	}
 
-	/* Chain */
-	.chain {
-		display: grid;
-		gap: var(--space-6, 32px);
-		@media (min-width: 52rem) {
-			grid-template-columns: 18rem 1fr;
-			gap: var(--space-8, 64px);
-		}
-	}
-	.chain__trigger {
-		@media (min-width: 52rem) {
-			position: sticky;
-			top: calc(var(--header-h, 4rem) + var(--space-5, 24px));
-			align-self: start;
-		}
-	}
-	.chain__label {
-		margin: 0 0 var(--space-3, 12px);
-		font-size: var(--fs-sm, 0.875rem);
-		font-weight: var(--fw-semibold, 600);
-		color: var(--text-3, #6b6a63);
-		text-transform: uppercase;
-		letter-spacing: var(--tracking-caps, 0.06em);
-	}
-	.card--trigger {
-		border-color: var(--accent, #1f5c4f);
-		background: var(--accent-soft, #e6f0ec);
-	}
-	.chain__icon {
-		display: inline-flex;
-		margin-bottom: var(--space-3, 12px);
-		color: var(--accent, #1f5c4f);
-	}
-	.steps {
-		position: relative;
+	/* 03 Languages */
+	.lang-grid {
 		display: grid;
 		gap: var(--space-5, 24px);
-		&::before {
-			content: '';
-			position: absolute;
-			left: 1.125rem;
-			top: var(--space-2, 8px);
-			bottom: var(--space-2, 8px);
-			width: 2px;
-			background: var(--border-1, #e3dfd5);
+		@media (min-width: 56rem) {
+			grid-template-columns: repeat(3, 1fr);
 		}
 	}
-	.steps__item {
-		position: relative;
-		display: grid;
-		grid-template-columns: 2.25rem 1fr;
-		gap: var(--space-4, 16px);
-		align-items: start;
-	}
-	.steps__num {
-		position: relative;
-		display: grid;
-		place-items: center;
-		width: 2.25rem;
-		height: 2.25rem;
-		border-radius: var(--radius-full, 999px);
-		background: var(--surface-1, #fff);
-		border: 2px solid var(--accent, #1f5c4f);
-		color: var(--accent, #1f5c4f);
-		font-weight: var(--fw-bold, 700);
-		font-size: var(--fs-sm, 0.875rem);
-	}
-	.steps__title {
-		margin: var(--space-1, 4px) 0 var(--space-1, 4px);
-		font-size: var(--fs-lg, 1.125rem);
-		font-weight: var(--fw-semibold, 600);
-	}
-	.steps__body {
-		margin: 0;
-		color: var(--text-2, #4a4943);
-		line-height: var(--lh-normal, 1.6);
-		max-width: var(--measure, 68ch);
+
+	/* Also runs when */
+	.chapter-anchor {
+		scroll-margin-top: 0;
 	}
 	.also {
-		margin-top: var(--space-8, 64px);
+		padding-block: var(--space-8, 64px) clamp(6rem, 16vh, 10rem);
+		border-top: 1px solid var(--border-1);
 	}
 	.also__title {
-		margin: 0 0 var(--space-4, 16px);
-		font-size: var(--fs-xl, 1.3rem);
-		font-family: var(--font-display, Georgia, serif);
+		margin: 0 0 var(--space-6, 32px);
+		font-size: var(--fs-xl, 1.4rem);
 		font-weight: var(--fw-semibold, 600);
+		letter-spacing: -0.02em;
 	}
-	.also__list,
-	.grid-3 {
+	.also__list {
 		display: grid;
-		gap: var(--space-4, 16px);
+		gap: var(--space-6, 32px);
 		@media (min-width: 48rem) {
 			grid-template-columns: repeat(3, 1fr);
 		}
 	}
-
-	/* Languages */
-	.lang-grid {
-		display: grid;
-		gap: var(--space-4, 16px);
-		@media (min-width: 56rem) {
-			grid-template-columns: repeat(3, 1fr);
-		}
+	.also__item-title {
+		margin: 0 0 var(--space-2, 8px);
+		font-weight: var(--fw-semibold, 600);
+		font-size: var(--fs-lg, 1.125rem);
+	}
+	.also__item-body {
+		margin: 0;
+		color: var(--text-2);
+		line-height: 1.55;
 	}
 
-	/* Sender */
+	/* 05 Sender */
 	.split {
 		display: grid;
-		gap: var(--space-7, 48px);
+		gap: var(--space-8, 64px);
 		align-items: center;
 		@media (min-width: 56rem) {
-			grid-template-columns: 1fr 1fr;
+			grid-template-columns: 7fr 5fr;
 		}
-		.section__head {
+		.chapter__head {
 			margin-bottom: 0;
 		}
 	}
 	.inbox {
 		margin: 0;
-		background: var(--surface-0, #faf8f4);
-		border: 1px solid var(--border-1, #e3dfd5);
-		border-radius: var(--radius-lg, 16px);
-		padding: var(--space-4, 16px);
-		box-shadow: var(--shadow-2, 0 4px 16px rgb(0 0 0 / 0.06));
+		background: var(--surface-0);
+		border-radius: var(--radius-xl, 24px);
+		padding: var(--space-5, 24px);
+		box-shadow: var(--shadow-3);
 	}
 	.inbox__caption {
-		margin-bottom: var(--space-3, 12px);
+		margin-bottom: var(--space-4, 16px);
 		font-size: var(--fs-sm, 0.875rem);
-		color: var(--text-3, #6b6a63);
+		color: var(--text-3);
 	}
 	.inbox__list {
 		display: grid;
@@ -786,39 +756,38 @@
 		display: flex;
 		gap: var(--space-3, 12px);
 		align-items: flex-start;
-		padding: var(--space-3, 12px);
-		border-radius: var(--radius-md, 10px);
-		background: var(--surface-1, #fff);
-		border: 1px solid var(--border-1, #e3dfd5);
+		padding: var(--space-4, 16px);
+		border-radius: var(--radius-lg, 16px);
+		background: var(--surface-1);
 	}
 	.inbox__row--dim {
 		flex-direction: column;
 		gap: var(--space-2, 8px);
-		opacity: 0.6;
+		opacity: 0.55;
 	}
 	.bar {
 		display: block;
 		height: 0.5rem;
 		border-radius: var(--radius-full, 999px);
-		background: var(--surface-3, #e8e4da);
+		background: var(--surface-3);
 	}
 	.bar--s { width: 30%; }
 	.bar--m { width: 45%; }
 	.bar--l { width: 80%; }
 	.inbox__row--you {
-		border-color: var(--accent, #1f5c4f);
-		box-shadow: var(--shadow-1, 0 1px 2px rgb(0 0 0 / 0.06));
+		background: var(--surface-0);
+		box-shadow: 0 0 0 1px var(--border-1), var(--shadow-2);
 	}
 	.inbox__avatar {
 		flex: none;
 		display: grid;
 		place-items: center;
-		width: 2.25rem;
-		height: 2.25rem;
+		width: 2.5rem;
+		height: 2.5rem;
 		border-radius: var(--radius-full, 999px);
-		background: var(--accent, #1f5c4f);
-		color: var(--accent-contrast, #fff);
-		font-weight: var(--fw-bold, 700);
+		background: var(--surface-inverse);
+		color: var(--text-inverse);
+		font-weight: var(--fw-semibold, 600);
 	}
 	.inbox__text {
 		flex: 1;
@@ -832,98 +801,143 @@
 	}
 	.inbox__from {
 		font-size: var(--fs-sm, 0.875rem);
-		span {
-			color: var(--text-3, #6b6a63);
-			margin-left: var(--space-1, 4px);
-		}
 	}
 	.inbox__subject {
 		font-weight: var(--fw-semibold, 600);
 	}
 	.inbox__snippet {
 		font-size: var(--fs-sm, 0.875rem);
-		color: var(--text-2, #4a4943);
+		color: var(--text-2);
 	}
 	.inbox__time {
 		font-size: var(--fs-xs, 0.75rem);
-		color: var(--text-3, #6b6a63);
+		color: var(--text-3);
 	}
 
-	/* Use cases */
-	.uses {
+	/* 06 Grow */
+	.tiles {
 		display: grid;
-		gap: var(--space-1, 4px) var(--space-7, 48px);
+		gap: var(--space-5, 24px);
 		@media (min-width: 48rem) {
-			grid-template-columns: 1fr 1fr;
+			grid-template-columns: repeat(3, 1fr);
 		}
 	}
+	.tile {
+		background: var(--surface-2);
+		border-radius: var(--radius-xl, 24px);
+		padding: var(--space-7, 48px) var(--space-6, 32px);
+		min-height: 18rem;
+		display: flex;
+		flex-direction: column;
+	}
+	.tile__num {
+		margin: 0 0 auto;
+		font-size: var(--fs-sm, 0.875rem);
+		font-variant-numeric: tabular-nums;
+		color: var(--text-3);
+	}
+	.tile__title {
+		margin: var(--space-7, 48px) 0 var(--space-2, 8px);
+		font-family: var(--font-display);
+		font-size: var(--fs-2xl, 1.75rem);
+		font-weight: var(--fw-bold, 700);
+		letter-spacing: -0.03em;
+	}
+	.tile__body {
+		margin: 0;
+		color: var(--text-2);
+		line-height: 1.55;
+	}
+
+	/* 07 Use cases: an editorial list with type hanging left. */
 	.uses__item {
-		padding: var(--space-5, 24px) 0;
-		border-top: 1px solid var(--border-1, #e3dfd5);
+		display: grid;
+		gap: var(--space-2, 8px) var(--space-7, 48px);
+		padding-block: var(--space-6, 32px);
+		border-top: 1px solid var(--border-1);
+		@media (min-width: 48rem) {
+			grid-template-columns: 5fr 7fr;
+			align-items: baseline;
+		}
+		&:last-child {
+			border-bottom: 1px solid var(--border-1);
+		}
 	}
 	.uses__title {
-		margin: 0 0 var(--space-2, 8px);
-		font-family: var(--font-display, Georgia, serif);
-		font-size: var(--fs-xl, 1.3rem);
+		margin: 0;
+		font-family: var(--font-display);
+		font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.25rem);
 		font-weight: var(--fw-semibold, 600);
+		letter-spacing: -0.03em;
+		line-height: 1.1;
 	}
 	.uses__body {
 		margin: 0;
-		color: var(--text-2, #4a4943);
-		line-height: var(--lh-normal, 1.6);
+		font-size: var(--fs-lg, 1.125rem);
+		color: var(--text-2);
+		line-height: 1.55;
 	}
 
-	/* Final CTA */
-	.final {
-		padding-block: var(--space-9, 96px);
-	}
-	.final__box {
-		max-width: var(--container-md, 52rem);
-		background: var(--surface-inverse, #1a1a17);
-		color: var(--text-inverse, #faf8f4);
-		border-radius: var(--radius-xl, 24px);
-		padding: var(--space-8, 64px) var(--space-6, 32px);
+	/* 10 Finale */
+	.finale {
+		padding-top: clamp(7rem, 22vh, 14rem);
 		text-align: center;
+		overflow: hidden;
 	}
-	.final__title {
-		margin: 0 0 var(--space-3, 12px);
-		font-family: var(--font-display, Georgia, serif);
-		font-size: var(--fs-3xl, 2.25rem);
-		font-weight: var(--fw-semibold, 600);
-		line-height: var(--lh-tight, 1.15);
+	.finale__inner {
+		display: grid;
+		justify-items: center;
 	}
-	.final__body {
-		margin: 0 auto var(--space-6, 32px);
-		max-width: 34rem;
-		font-size: var(--fs-lg, 1.125rem);
-		line-height: var(--lh-normal, 1.6);
-		opacity: 0.85;
+	.finale__title {
+		margin: 0 0 var(--space-4, 16px);
+		font-family: var(--font-display);
+		font-size: clamp(2.5rem, 6vw, 5.5rem);
+		font-weight: var(--fw-bold, 700);
+		letter-spacing: -0.045em;
+		line-height: 1;
 	}
-	.final__actions {
+	.finale__body {
+		margin: 0 0 var(--space-7, 48px);
+		max-width: 32rem;
+		font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.3125rem);
+		line-height: 1.5;
+		color: var(--text-2);
+	}
+	.finale__actions {
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
 		align-items: center;
-		gap: var(--space-5, 24px);
+		gap: var(--space-6, 32px);
+	}
+	.finale__wordmark {
+		margin: clamp(4rem, 12vh, 8rem) 0 0;
+		font-family: var(--font-display);
+		font-size: 27vw;
+		font-weight: var(--fw-bold, 700);
+		letter-spacing: -0.07em;
+		line-height: 0.78;
+		color: var(--text-1);
+		user-select: none;
+		transform: translateY(0.08em);
 	}
 
 	/* Footer */
 	.footer {
-		background: var(--surface-1, #fff);
-		border-top: 1px solid var(--border-1, #e3dfd5);
+		background: var(--surface-2);
 		padding-block: var(--space-8, 64px) var(--space-6, 32px);
-		color: var(--text-2, #4a4943);
+		color: var(--text-2);
 		font-size: var(--fs-sm, 0.875rem);
 		a {
-			color: var(--text-2, #4a4943);
+			color: var(--text-2);
 			text-decoration: none;
 			&:hover {
-				color: var(--text-1, #1a1a17);
+				color: var(--text-1);
 				text-decoration: underline;
 			}
 			&:focus-visible {
 				outline: none;
-				box-shadow: var(--focus-ring, 0 0 0 3px #1f5c4f);
+				box-shadow: var(--focus-ring);
 				border-radius: var(--radius-sm, 6px);
 			}
 		}
@@ -945,16 +959,15 @@
 		}
 	}
 	.footer__logo {
-		display: inline-flex;
-		align-items: center;
-		gap: var(--space-2, 8px);
 		font-weight: var(--fw-bold, 700);
-		color: var(--text-1, #1a1a17) !important;
+		letter-spacing: -0.03em;
+		font-size: var(--fs-lg, 1.125rem);
+		color: var(--text-1) !important;
 	}
 	.footer__tagline {
 		margin: var(--space-3, 12px) 0;
 		max-width: 22rem;
-		line-height: var(--lh-normal, 1.6);
+		line-height: 1.55;
 	}
 	.footer__contact {
 		margin: 0;
@@ -963,11 +976,97 @@
 		margin: 0 0 var(--space-3, 12px);
 		font-size: var(--fs-sm, 0.875rem);
 		font-weight: var(--fw-semibold, 600);
-		color: var(--text-1, #1a1a17);
+		color: var(--text-1);
 	}
 	.footer__rights {
 		margin-top: var(--space-7, 48px);
-		color: var(--text-3, #6b6a63);
+		padding-top: var(--space-4, 16px);
+		border-top: 1px solid var(--border-1);
+		color: var(--text-3);
 		font-size: var(--fs-xs, 0.75rem);
+	}
+
+	/* ---------- Motion (decorative only, final states without it) ---------- */
+	@media (prefers-reduced-motion: no-preference) {
+		/* Reveal on enter: opacity and transform only, 60 ms stagger. */
+		.mono :global(.reveal-ready) {
+			opacity: 0;
+			transform: translate3d(0, 28px, 0);
+		}
+		.mono :global(.reveal-ready.is-in) {
+			opacity: 1;
+			transform: none;
+			transition:
+				opacity var(--dur-chapter) var(--ease-out),
+				transform var(--dur-chapter) var(--ease-out);
+			transition-delay: calc(var(--i, 0) * var(--stagger));
+		}
+
+		/* Hero text arrives once, as real HTML (no wait for LCP). */
+		.open__kicker,
+		.open__title,
+		.open__lead,
+		.site-form,
+		.link-more {
+			animation: rise var(--dur-chapter) var(--ease-out) both;
+		}
+		.open__title { animation-delay: 60ms; }
+		.open__lead { animation-delay: 120ms; }
+		.site-form { animation-delay: 180ms; }
+		.open__inner .link-more { animation-delay: 240ms; }
+
+		@supports (animation-timeline: view()) {
+			/* The issue rises and settles as it scrolls in, like a product reveal. */
+			.open__device {
+				animation: settle linear both;
+				animation-timeline: view();
+				animation-range: entry 0% cover 45%;
+			}
+			/* Statement lines go from grey to ink as they reach the reading line. */
+			.statement__line {
+				animation: ink linear both;
+				animation-timeline: view();
+				animation-range: entry 70% cover 55%;
+			}
+			.finale__wordmark {
+				animation: wordmark linear both;
+				animation-timeline: view();
+				animation-range: entry 0% entry 100%;
+			}
+		}
+	}
+	@keyframes rise {
+		from {
+			opacity: 0;
+			transform: translate3d(0, 18px, 0);
+		}
+	}
+	@keyframes settle {
+		from {
+			opacity: 0.4;
+			transform: translate3d(0, 48px, 0) scale(0.92);
+		}
+		to {
+			opacity: 1;
+			transform: none;
+		}
+	}
+	@keyframes ink {
+		from {
+			color: var(--text-muted-large);
+		}
+		to {
+			color: var(--text-1);
+		}
+	}
+	@keyframes wordmark {
+		from {
+			opacity: 0;
+			transform: translate3d(0, 0.35em, 0);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0.08em);
+		}
 	}
 </style>

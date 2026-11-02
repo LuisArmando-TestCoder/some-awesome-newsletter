@@ -11,7 +11,7 @@
 </script>
 
 <svelte:head>
-  <title>{metaTitle}</title>
+  <title>{metaTitle}</title> 
   <meta name="description" content={metaDescription} />
   <link rel="canonical" href={CANONICAL} />
   <meta property="og:title" content={metaTitle} />

@@ -75,14 +75,14 @@ export default {
           "body": "One issue becomes as many versions as your subscribers need."
         },
         {
-          "mark": "Send",
-          "title": "It arrives under your name",
-          "body": "With your name and your email signature. Replies go to your inbox."
-        },
-        {
           "mark": "Publish",
           "title": "E turn to article for your blog",
           "body": "With im own link wey people fit see for search and share."
+        },
+        {
+          "mark": "Send",
+          "title": "It arrives under your name",
+          "body": "With your name and your email signature. Replies go to your inbox."
         },
         {
           "mark": "Report",
@@ -101,6 +101,7 @@ export default {
       "chapters": [
         "Start",
         "Why",
+        "Your blog",
         "Languages",
         "How e dey work",
         "Your name",

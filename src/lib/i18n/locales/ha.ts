@@ -75,14 +75,14 @@ export default {
           "body": "Fitowa ɗaya ta zama sigogi da yawa kamar yadda masu biyan kuɗaɗen ku ke buƙata."
         },
         {
-          "mark": "Aika",
-          "title": "Yana isa ƙarƙashin sunan ku",
-          "body": "Tare da sunan ku da sa hannun imel ɗin ku. Amsoshi suna zuwa akwatin saƙonku."
-        },
-        {
           "mark": "Buga",
           "title": "Ya zama labazi a kan shafinku na blog",
           "body": "Tare da nasa hanyar haɗi wanda mutane zasu iya samu a cikin bincike da rabawa."
+        },
+        {
+          "mark": "Aika",
+          "title": "Yana isa ƙarƙashin sunan ku",
+          "body": "Tare da sunan ku da sa hannun imel ɗin ku. Amsoshi suna zuwa akwatin saƙonku."
         },
         {
           "mark": "Rahoto",
@@ -101,6 +101,7 @@ export default {
       "chapters": [
         "Fara",
         "Dalili",
+        "Your blog",
         "Harsuna",
         "Yadda yake aiki",
         "Sunan ku",

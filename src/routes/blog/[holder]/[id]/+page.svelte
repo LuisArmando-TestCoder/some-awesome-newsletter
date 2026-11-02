@@ -11,7 +11,6 @@
     formatDate,
     languageName,
     ownerName,
-    SITE_ORIGIN,
     subscribePath,
   } from "../../../../components/articles/blog";
 
@@ -19,9 +18,30 @@
 
   const name = $derived(ownerName(data.branding, data.holder));
   const blogName = $derived(data.branding.newsletterTitle || name);
-  const subscribeHref = $derived(subscribePath(data.holder, data.ns));
-  const homeHref = $derived(blogPath(data.holder, { ns: data.ns, lang: data.article?.language }));
-  const canonical = $derived(`${SITE_ORIGIN}${articlePath(data.holder, data.id)}`);
+  const subscribeHref = $derived(subscribePath(data.ref, data.ns));
+  const homeHref = $derived(blogPath(data.ref, { ns: data.ns, lang: data.article?.language }));
+  // On the owner's own domain the canonical address is that domain (WS15).
+  const canonical = $derived(`${data.ref.origin}${articlePath(data.ref, data.id)}`);
+  const blogHome = $derived(`${data.ref.origin}${blogPath(data.ref)}`);
+  // Each language version links to the others, so search engines show readers their own language.
+  const alternates = $derived(
+    data.article && data.article.translations.length
+      ? [
+          { language: data.article.language, href: canonical },
+          ...data.article.translations
+            .filter((x) => x.language)
+            .map((x) => ({ language: x.language, href: `${data.ref.origin}${articlePath(data.ref, x.id)}` })),
+        ].filter((x) => x.language)
+      : []
+  );
+  const translationFor = (code: string) => data.article?.translations.find((x) => x.language === code);
+  const sourceHost = $derived.by(() => {
+    try {
+      return data.article?.sourceUrl ? new URL(data.article.sourceUrl).hostname.replace(/^www\./, "") : "";
+    } catch {
+      return "";
+    }
+  });
   const date = $derived(data.article ? formatDate(data.article.isoDate, data.article.language || "en") : "");
 
   const jsonLd = $derived.by(() => {
@@ -38,7 +58,9 @@
       datePublished: a.isoDate || undefined,
       image: a.image ? [a.image] : undefined,
       author: data.branding.senderName ? { "@type": "Person", name: data.branding.senderName } : undefined,
-      publisher: { "@type": "Organization", name: "AIBAN", url: SITE_ORIGIN },
+      // The blog belongs to the owner: they are the publisher, not AIBAN.
+      publisher: { "@type": "Organization", name: blogName, url: blogHome },
+      isBasedOn: a.sourceUrl || undefined,
     };
     // Escape "<" so the JSON can never close the script tag.
     const json = JSON.stringify(ld).replace(/</g, "\\u003c");
@@ -65,6 +87,7 @@
     <title>{data.article.title} | {blogName}</title>
     <meta name="description" content={data.article.description} />
     <link rel="canonical" href={canonical} />
+    {#each alternates as alt (alt.href)}<link rel="alternate" hreflang={alt.language} href={alt.href} />{/each}
     <meta property="og:type" content="article" />
     <meta property="og:title" content={data.article.title} />
     <meta property="og:description" content={data.article.description} />
@@ -94,7 +117,7 @@
         </BlogNotice>
       {:else}
         <BlogNotice headingLevel={1} tone="error" title={$t.blog.article.errorTitle} body={$t.blog.article.errorBody}>
-          <a class="btn btn--primary" href={articlePath(data.holder, data.id)} data-sveltekit-reload>{$t.blog.reload}</a>
+          <a class="btn btn--primary" href={articlePath(data.ref, data.id)} data-sveltekit-reload>{$t.blog.reload}</a>
           <a class="btn btn--secondary" href={homeHref}>{$t.blog.article.goToBlog}</a>
         </BlogNotice>
       {/if}
@@ -110,6 +133,11 @@
           {#if date}<time datetime={data.article.isoDate}>{fmt($t.blog.article.published, { date })}</time>{/if}
           <span>{fmt($t.blog.minRead, { n: data.article.minutes })}</span>
         </p>
+        {#if data.article.sourceUrl && sourceHost}
+          <p class="post__source">
+            <span>{$t.blog.article.originalOn ?? "First published on"}</span> <a href={data.article.sourceUrl}>{sourceHost}</a>
+          </p>
+        {/if}
       </header>
 
       <div class="prose">
@@ -141,7 +169,7 @@
           <ul>
             {#each data.otherLanguages as l (l.code)}
               <li>
-                <a class="btn btn--secondary btn--sm" hreflang={l.code} href={blogPath(data.holder, { ns: data.ns, lang: l.code })}>
+                <a class="btn btn--secondary btn--sm" hreflang={l.code} href={translationFor(l.code) ? articlePath(data.ref, translationFor(l.code)!.id) : blogPath(data.ref, { ns: data.ns, lang: l.code })}>
                   {languageName(l.code)}
                 </a>
               </li>
@@ -163,6 +191,17 @@
   /* One reading column: 68ch body, the title allowed a little wider. */
   .post {
     max-width: calc(68ch + 2 * var(--gutter));
+  }
+
+  .post__source {
+    margin: var(--space-3) 0 0;
+    font-size: var(--fs-sm);
+    color: var(--text-2);
+    a {
+      color: var(--text-1);
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+    }
   }
 
   .back {

@@ -405,3 +405,42 @@ export function magnetic(node: HTMLElement, strength = 10) {
 export function words(text: string): string[] {
 	return text.split(/\s+/).filter(Boolean);
 }
+
+/* ------------------------------------------------------------------ 03 Your blog (WS15)
+   Growth counter: the blog's address types itself into the browser bar, then the weeks and
+   the pages on the site count up with the scroll while new articles fill the feed, one row
+   per language. The markup already holds the final numbers (no JS, reduced motion). */
+export const growthFx = effect(({ gsap }, node, { desktop }) => {
+	const fig = node.querySelector<HTMLElement>('.site');
+	if (!fig) return;
+	const typed = fig.querySelector('.site__typed');
+	const week = fig.querySelector<HTMLElement>('[data-week]');
+	const pages = fig.querySelector<HTMLElement>('[data-pages]');
+	const rows = $$(fig, '.site__row');
+	const weeks = Number(fig.dataset.weeks || 52);
+	const perWeek = Number(fig.dataset.perWeek || 3);
+	const label = fig.dataset.weekLabel || 'Week {n}';
+	const fmt = new Intl.NumberFormat(document.documentElement.lang || undefined);
+	const state = { w: 1 };
+	const paint = () => {
+		const n = Math.max(1, Math.round(state.w));
+		if (week) week.textContent = label.replace('{n}', fmt.format(n));
+		if (pages) pages.textContent = fmt.format(n * perWeek);
+	};
+	const tl = gsap.timeline({
+		defaults: { ease: 'none' },
+		scrollTrigger: { trigger: fig, start: desktop ? 'top 80%' : 'top 90%', end: desktop ? 'bottom 35%' : 'bottom 55%', scrub: 0.4 }
+	});
+	if (typed) tl.fromTo(typed, { clipPath: 'inset(0% 100% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.2 }, 0);
+	tl.fromTo(state, { w: 1 }, { w: weeks, duration: 0.8, onUpdate: paint }, 0.2);
+	tl.fromTo(
+		rows,
+		{ y: -18, opacity: 0, scale: 0.97 },
+		{ y: 0, opacity: 1, scale: 1, duration: 0.12, stagger: 0.68 / Math.max(1, rows.length) },
+		0.2
+	);
+	return () => {
+		state.w = weeks;
+		paint();
+	};
+});

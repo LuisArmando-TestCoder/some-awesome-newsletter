@@ -75,14 +75,14 @@ export default {
           "body": "Satu edisi menjadi sebanyak versi yang dibutuhkan pelanggan Anda."
         },
         {
-          "mark": "Kirim",
-          "title": "Tiba dengan nama Anda",
-          "body": "Dengan nama Anda dan tanda tangan email Anda. Balasan masuk ke kotak masuk Anda."
-        },
-        {
           "mark": "Terbitkan",
           "title": "Menjadi artikel di blog Anda",
           "body": "Dengan tautannya sendiri yang dapat ditemukan orang di pencarian dan dibagikan."
+        },
+        {
+          "mark": "Kirim",
+          "title": "Tiba dengan nama Anda",
+          "body": "Dengan nama Anda dan tanda tangan email Anda. Balasan masuk ke kotak masuk Anda."
         },
         {
           "mark": "Laporkan",
@@ -101,6 +101,7 @@ export default {
       "chapters": [
         "Mulai",
         "Mengapa",
+        "Your blog",
         "Bahasa",
         "Cara kerjanya",
         "Nama Anda",

@@ -75,14 +75,14 @@ export default {
           "body": "Một số báo trở thành nhiều phiên bản theo nhu cầu của người đăng ký."
         },
         {
-          "mark": "Gửi",
-          "title": "Nó đến dưới tên của bạn",
-          "body": "Với tên và chữ ký email của bạn. Phản hồi được gửi đến hộp thư của bạn."
-        },
-        {
           "mark": "Xuất bản",
           "title": "Nó trở thành một bài viết trên blog của bạn",
           "body": "Với liên kết riêng mà mọi người có thể tìm thấy trong tìm kiếm và chia sẻ."
+        },
+        {
+          "mark": "Gửi",
+          "title": "Nó đến dưới tên của bạn",
+          "body": "Với tên và chữ ký email của bạn. Phản hồi được gửi đến hộp thư của bạn."
         },
         {
           "mark": "Báo cáo",
@@ -101,6 +101,7 @@ export default {
       "chapters": [
         "Bắt đầu",
         "Tại sao",
+        "Your blog",
         "Ngôn ngữ",
         "Cách thức hoạt động",
         "Tên của bạn",

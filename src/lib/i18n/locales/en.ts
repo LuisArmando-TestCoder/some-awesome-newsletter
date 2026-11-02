@@ -28,8 +28,8 @@ export default {
   },
   "landing": {
     "seo": {
-      "title": "AIBAN | Your website, turned into a newsletter in every reader's language",
-      "description": "AIBAN reads what you already publish, writes a newsletter issue in your voice and sends it under your name. Each subscriber gets it in their own language.",
+      "title": "AIBAN | A blog that writes itself, on your website and in every language your clients read",
+      "description": "AIBAN adds a new article to your website every week, written in your voice and published in each language your clients read. The same article goes out as a newsletter under your name.",
       "ogImageAlt": "AIBAN logo"
     },
     "skipLink": "Skip to main content",
@@ -39,16 +39,40 @@ export default {
       "play": "Play"
     },
     "display": {
-      "title": "Your website, written as a newsletter.",
+      "title": "Your blog, written for you every week.",
       "kicker": "AIBAN"
     },
     "statement": {
       "lines": [
-        "You already publish good work.",
-        "Your clients read it in more than one language.",
-        "AIBAN turns each new article into an issue",
-        "and sends every reader the version in their language."
+        "Clients look you up before they call you.",
+        "A blog that keeps growing gives them more to find,",
+        "but writing it every week takes time you would rather spend on clients.",
+        "AIBAN writes it for you, in every language they read."
       ]
+    },
+    "blogSite": {
+      "eyebrow": "Your blog, on your domain",
+      "title": "A new article on your website every week",
+      "lead": "Each issue becomes an article on a domain you own, such as blog.yourcompany.com. AIBAN builds the pages, the sitemap and the language tags, so search engines can find every version and show readers the one in their language.",
+      "urlHost": "yourcompany.com",
+      "weekLabel": "Week {n}",
+      "pagesLabel": "pages on your site",
+      "exampleNote": "Example: one issue a week, in English, Spanish and German.",
+      "points": [
+        {
+          "title": "On your domain",
+          "body": "Readers and search engines see your address. Links to the old address send people to the new one."
+        },
+        {
+          "title": "In every language",
+          "body": "Each language version links to the others, so a reader in Madrid and a reader in Berlin each land on their own."
+        },
+        {
+          "title": "Ready for search",
+          "body": "Every page gets its sitemap entry, canonical link and article details. You do not touch any code."
+        }
+      ],
+      "cta": "See your first article"
     },
     "history": {
       "eyebrow": "How it works",
@@ -57,28 +81,72 @@ export default {
       "note": "Example schedule. You choose the day, the time and how often.",
       "progressLabel": "Steps of one issue",
       "items": [
-        { "mark": "9:00", "title": "Your schedule starts the run", "body": "Every Monday at 9:00 in this example. You pick daily, weekly or monthly." },
-        { "mark": "Read", "title": "AIBAN reads your website", "body": "It finds your newest article and picks the piece your ideal reader will care about most." },
-        { "mark": "Write", "title": "It writes the issue in your voice", "body": "The text follows how your site is written, so it sounds like you." },
-        { "mark": "Translate", "title": "Each reader gets their language", "body": "One issue becomes as many versions as your subscribers need." },
-        { "mark": "Send", "title": "It arrives under your name", "body": "With your name and your email signature. Replies go to your inbox." },
-        { "mark": "Publish", "title": "It becomes an article on your blog", "body": "With its own link that people can find in search and share." },
-        { "mark": "Report", "title": "You see what happened", "body": "Your dashboard lists who joined and which links readers clicked." },
-        { "mark": "Again", "title": "Next Monday, it runs again", "body": "It keeps going until you turn it off in your dashboard." }
+        {
+          "mark": "9:00",
+          "title": "Your schedule starts the run",
+          "body": "Every Monday at 9:00 in this example. You pick daily, weekly or monthly."
+        },
+        {
+          "mark": "Read",
+          "title": "AIBAN reads your website",
+          "body": "It finds your newest article and picks the piece your ideal reader will care about most."
+        },
+        {
+          "mark": "Write",
+          "title": "It writes the issue in your voice",
+          "body": "The text follows how your site is written, so it sounds like you."
+        },
+        {
+          "mark": "Translate",
+          "title": "Each reader gets their language",
+          "body": "One issue becomes as many versions as your subscribers need."
+        },
+        {
+          "mark": "Publish",
+          "title": "It becomes an article on your website",
+          "body": "On your own domain, in each language, with its own link that people can find in search and share."
+        },
+        {
+          "mark": "Send",
+          "title": "It arrives under your name",
+          "body": "With your name and your email signature. Replies go to your inbox."
+        },
+        {
+          "mark": "Report",
+          "title": "You see what happened",
+          "body": "Your dashboard lists who joined and which links readers clicked."
+        },
+        {
+          "mark": "Again",
+          "title": "Next Monday, it runs again",
+          "body": "It keeps going until you turn it off in your dashboard."
+        }
       ]
     },
     "rail": {
       "label": "Page chapters",
-      "chapters": ["Start", "Why", "Languages", "How it works", "Your name", "Grow", "Who it is for", "Pricing", "Questions", "Begin"]
+      "chapters": [
+        "Start",
+        "Why",
+        "Your blog",
+        "Languages",
+        "How it works",
+        "Your name",
+        "Grow",
+        "Who it is for",
+        "Pricing",
+        "Questions",
+        "Begin"
+      ]
     },
     "hero": {
-      "eyebrow": "Newsletters for service businesses",
+      "eyebrow": "For service businesses that want to be found",
       "title": "Your website becomes a weekly newsletter, in each reader's language",
-      "lead": "AIBAN reads the content you already publish, writes an issue in your voice and sends it under your name. Every subscriber gets it in the language they read. You set it up once and it keeps running.",
+      "lead": "AIBAN turns what you already publish into a new article on your own website each week, in every language your clients read. The same article also goes out as a newsletter under your name. You set it up once.",
       "formLabel": "Your website",
       "formPlaceholder": "yourcompany.com",
-      "formHint": "We build a sample issue from the address you enter. Starting is free and you do not need a card.",
-      "formSubmit": "Preview my newsletter",
+      "formHint": "We write a sample article from the address you enter. Starting is free and you do not need a card.",
+      "formSubmit": "Preview my first article",
       "formError": "Enter a web address such as yourcompany.com.",
       "secondaryCta": "See how it works"
     },
@@ -109,6 +177,14 @@ export default {
       "languageLabel": "Reader language",
       "loadingLanguage": "Writing it in {language}",
       "errorTitle": "We could not write a preview from {site}",
+      "errors": {
+        "noArticle": "We could not find articles on this site. Try the address of your blog or news page, for example {site}/blog.",
+        "badAddress": "This address does not look like a public website. Check it and try again.",
+        "tooMany": "You made several previews in a short time. Wait a few minutes and try again.",
+        "offline": "We could not reach AIBAN. Check your connection and try again.",
+        "slow": "Writing it took longer than expected. Try again in a minute.",
+        "generic": "Something went wrong while writing it. Try again in a minute."
+      },
       "retry": "Try again",
       "showSample": "Show the sample layout",
       "frameTitle": "Sample issue written from {site}",
@@ -120,26 +196,56 @@ export default {
       "lead": "You give AIBAN your website once. After that, each step below happens on its own, on the schedule you pick.",
       "triggerLabel": "When",
       "actionLabel": "Then",
-      "trigger": { "title": "It is Monday at 9:00", "body": "Or any schedule you choose: daily, weekly or monthly." },
+      "trigger": {
+        "title": "It is Monday at 9:00",
+        "body": "Or any schedule you choose: daily, weekly or monthly."
+      },
       "steps": [
-        { "title": "AIBAN finds your newest article", "body": "It checks your website and picks the piece your ideal reader will care about most." },
-        { "title": "It writes the issue in your voice", "body": "The text is rewritten to sound like you, based on how your site is written." },
-        { "title": "It translates the issue for each reader", "body": "Every subscriber receives the language they chose when they signed up." },
-        { "title": "It sends under your name", "body": "Readers see your name, and their replies arrive in your inbox." },
-        { "title": "It publishes the issue on your blog", "body": "Each issue also gets a public article page with its own link." },
-        { "title": "It shows you what happened", "body": "Your dashboard lists who joined and which links readers clicked." }
+        {
+          "title": "AIBAN finds your newest article",
+          "body": "It checks your website and picks the piece your ideal reader will care about most."
+        },
+        {
+          "title": "It writes the issue in your voice",
+          "body": "The text is rewritten to sound like you, based on how your site is written."
+        },
+        {
+          "title": "It translates the issue for each reader",
+          "body": "Every subscriber receives the language they chose when they signed up."
+        },
+        {
+          "title": "It sends under your name",
+          "body": "Readers see your name, and their replies arrive in your inbox."
+        },
+        {
+          "title": "It publishes the issue on your blog",
+          "body": "Each issue also gets a public article page with its own link."
+        },
+        {
+          "title": "It shows you what happened",
+          "body": "Your dashboard lists who joined and which links readers clicked."
+        }
       ],
       "alsoTitle": "It also runs when",
       "also": [
-        { "title": "Someone signs up on your site", "body": "They confirm by email and start receiving your issues." },
-        { "title": "You paste a link or a text", "body": "AIBAN writes and sends an issue about it through the same steps." },
-        { "title": "You upload a contact list", "body": "AIBAN cleans the list, removes duplicates and guesses each contact's language." }
+        {
+          "title": "Someone signs up on your site",
+          "body": "They confirm by email and start receiving your issues."
+        },
+        {
+          "title": "You paste a link or a text",
+          "body": "AIBAN writes and sends an issue about it through the same steps."
+        },
+        {
+          "title": "You upload a contact list",
+          "body": "AIBAN cleans the list, removes duplicates and guesses each contact's language."
+        }
       ]
     },
     "languages": {
       "eyebrow": "Every language",
-      "title": "Each reader gets the issue in their own language",
-      "body": "You do not write separate versions. AIBAN translates each issue into every language your subscribers read and keeps your tone in each one. The list includes Spanish, Portuguese, French, German, Hindi, Arabic, Japanese and many more.",
+      "title": "Found in the language your clients search in",
+      "body": "You do not write separate versions. AIBAN translates each article into every language your readers use and keeps your tone in each one. Each version gets its own page on your blog, and each subscriber gets the newsletter in their language.",
       "sampleNote": "The same sample issue, as three readers would receive it."
     },
     "sender": {
@@ -154,11 +260,20 @@ export default {
     },
     "grow": {
       "eyebrow": "Grow your list",
-      "title": "A signup form for your site and a blog that fills itself",
+      "title": "Readers who find an article can subscribe",
       "items": [
-        { "title": "Signup form", "body": "Add the AIBAN form to your website. New readers pick their language and confirm by email." },
-        { "title": "Automatic blog", "body": "Every issue becomes a public article page that people can find in search and share with a link." },
-        { "title": "Contact import", "body": "Bring the clients you already have from a CSV or Excel file, or paste a list." }
+        {
+          "title": "Signup form",
+          "body": "Add the AIBAN form to your website. New readers pick their language and confirm by email."
+        },
+        {
+          "title": "Subscribe on every article",
+          "body": "Someone who arrives from a search can subscribe on the same page, in their own language."
+        },
+        {
+          "title": "Contact import",
+          "body": "Bring the clients you already have from a CSV or Excel file, or paste a list."
+        }
       ]
     },
     "useCases": {
@@ -166,11 +281,26 @@ export default {
       "title": "Made for businesses that grow through relationships",
       "lead": "If your clients come from referrals and trust, a regular note from you keeps you in mind. AIBAN writes that note for you.",
       "items": [
-        { "title": "Agencies and web designers", "body": "Send clients and prospects your newest work and articles each week, and run the same setup for client sites." },
-        { "title": "IT and software firms", "body": "Turn release notes and blog posts into a short update that each client reads in their language." },
-        { "title": "Real estate", "body": "Share new listings and market posts with buyers and sellers who speak different languages." },
-        { "title": "Lawyers and accountants", "body": "Keep clients informed about the topics you already write about, in a calm and consistent format." },
-        { "title": "Coaches and trainers", "body": "Send your latest lesson or article to your community on a fixed day, without writing it again." }
+        {
+          "title": "Agencies and web designers",
+          "body": "Send clients and prospects your newest work and articles each week, and run the same setup for client sites."
+        },
+        {
+          "title": "IT and software firms",
+          "body": "Turn release notes and blog posts into a short update that each client reads in their language."
+        },
+        {
+          "title": "Real estate",
+          "body": "Share new listings and market posts with buyers and sellers who speak different languages."
+        },
+        {
+          "title": "Lawyers and accountants",
+          "body": "Keep clients informed about the topics you already write about, in a calm and consistent format."
+        },
+        {
+          "title": "Coaches and trainers",
+          "body": "Send your latest lesson or article to your community on a fixed day, without writing it again."
+        }
       ]
     },
     "pricingIntro": {
@@ -180,18 +310,60 @@ export default {
     },
     "faqTitle": "Questions people ask before starting",
     "faq": [
-      { "id": "what-do-i-need", "q": "What do I need to start?", "a": "Your website address and an email address. AIBAN reads your site to learn your topics and how you write." },
-      { "id": "do-i-write", "q": "Do I have to write anything?", "a": "You do not have to. AIBAN writes each issue from your content. When you want an issue about something specific, you can paste a link or a text." },
-      { "id": "languages", "q": "Which languages can my readers get?", "a": "AIBAN translates each issue into the language each subscriber reads. You can see the full list of languages when you set up your newsletter." },
-      { "id": "sender", "q": "Who do the emails come from?", "a": "From AIBAN's sending address, with your name as the sender. Replies go straight to your inbox. You never give us an email password." },
-      { "id": "contacts", "q": "Can I bring my existing contacts?", "a": "Yes. Upload a CSV or Excel file, or paste a list. AIBAN cleans it, removes duplicates and guesses each contact's language." },
-      { "id": "schedule", "q": "How often are issues sent?", "a": "You choose the schedule when you set up, and you can change it at any time in your dashboard." },
-      { "id": "free-plan", "q": "Is there a free plan?", "a": "Yes. The free plan includes 1 source and up to 100 subscribers. Paid plans add more sources and subscribers." },
-      { "id": "cancel", "q": "Can I cancel?", "a": "Yes. Write to info@aiban.news at any time and we will cancel your paid plan or move you back to the free plan." }
+      {
+        "id": "what-do-i-need",
+        "q": "What do I need to start?",
+        "a": "Your website address and an email address. AIBAN reads your site to learn your topics and how you write."
+      },
+      {
+        "id": "seo",
+        "q": "Will this help my website show up in Google?",
+        "a": "It adds a new article to your site every week, in each language your readers use, with the sitemap, language tags and canonical links already in place. Rankings depend on many things no tool controls, so we do not promise a position. What you get is a site that keeps growing with pages search engines can find."
+      },
+      {
+        "id": "domain",
+        "q": "Can the blog live on my own domain?",
+        "a": "Yes. In your dashboard, enter a subdomain such as blog.yourcompany.com and add the one DNS record we show you. Until then, your blog has its own address on AIBAN, and those links move to your domain when you connect it."
+      },
+      {
+        "id": "do-i-write",
+        "q": "Do I have to write anything?",
+        "a": "You do not have to. AIBAN writes each issue from your content. When you want an issue about something specific, you can paste a link or a text."
+      },
+      {
+        "id": "languages",
+        "q": "Which languages can my readers get?",
+        "a": "AIBAN translates each issue into the language each subscriber reads. You can see the full list of languages when you set up your newsletter."
+      },
+      {
+        "id": "sender",
+        "q": "Who do the emails come from?",
+        "a": "From AIBAN's sending address, with your name as the sender. Replies go straight to your inbox. You never give us an email password."
+      },
+      {
+        "id": "contacts",
+        "q": "Can I bring my existing contacts?",
+        "a": "Yes. Upload a CSV or Excel file, or paste a list. AIBAN cleans it, removes duplicates and guesses each contact's language."
+      },
+      {
+        "id": "schedule",
+        "q": "How often are issues sent?",
+        "a": "You choose the schedule when you set up, and you can change it at any time in your dashboard."
+      },
+      {
+        "id": "free-plan",
+        "q": "Is there a free plan?",
+        "a": "Yes. The free plan includes 1 source and up to 100 subscribers. Paid plans add more sources and subscribers."
+      },
+      {
+        "id": "cancel",
+        "q": "Can I cancel?",
+        "a": "Yes. Write to info@aiban.news at any time and we will cancel your paid plan or move you back to the free plan."
+      }
     ],
     "finalCta": {
       "title": "Start with your website",
-      "body": "Give AIBAN your website, check your first issue, then turn it on when you are ready.",
+      "body": "Give AIBAN your website, check your first article, then turn it on when you are ready.",
       "cta": "Start free",
       "secondary": "Read the help center"
     },
@@ -694,6 +866,7 @@ export default {
       "by": "By {name}",
       "otherLanguages": "Read more in other languages",
       "otherLanguagesHint": "This newsletter also publishes in these languages. Each link opens the blog in that language.",
+      "originalOn": "First published on",
       "share": "Share this article",
       "copyLink": "Copy link",
       "copied": "Link copied. You can paste it anywhere.",

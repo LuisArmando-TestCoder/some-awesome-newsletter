@@ -80,14 +80,14 @@ export default {
           "body": "Uma edição se torna tantas versões quantos forem necessárias para seus assinantes."
         },
         {
-          "mark": "Enviar",
-          "title": "Chega com seu nome",
-          "body": "Com seu nome e sua assinatura de email. As respostas vão para sua caixa de entrada."
-        },
-        {
           "mark": "Publicar",
           "title": "Torna-se um artigo em seu blog",
           "body": "Com seu próprio link que as pessoas podem encontrar em buscas e compartilhar."
+        },
+        {
+          "mark": "Enviar",
+          "title": "Chega com seu nome",
+          "body": "Com seu nome e sua assinatura de email. As respostas vão para sua caixa de entrada."
         },
         {
           "mark": "Relatar",
@@ -106,6 +106,7 @@ export default {
       "chapters": [
         "Início",
         "Por quê",
+        "Your blog",
         "Idiomas",
         "Como funciona",
         "Seu nome",
@@ -708,6 +709,7 @@ export default {
       "by": "Por {name}",
       "otherLanguages": "Leia mais em outros idiomas",
       "otherLanguagesHint": "Esta newsletter também publica nestes idiomas. Cada link abre o blog nesse idioma.",
+      "originalOn": "Publicado originalmente em",
       "share": "Compartilhar este artigo",
       "copyLink": "Copiar link",
       "copied": "Link copiado. Você pode colar onde quiser.",

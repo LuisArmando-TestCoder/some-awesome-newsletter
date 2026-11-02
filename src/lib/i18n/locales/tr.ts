@@ -75,14 +75,14 @@ export default {
           "body": "Bir sayı, abonelerinizin ihtiyaç duyduğu kadar çok versiyona dönüşür."
         },
         {
-          "mark": "Gönder",
-          "title": "Sizin adınızla ulaşır",
-          "body": "Sizin adınız ve e-posta imzanızla. Yanıtlar gelen kutunuza gider."
-        },
-        {
           "mark": "Yayınla",
           "title": "Blogunuzda bir makale olur",
           "body": "Arama motorlarında bulunabilen ve paylaşılabilen kendi bağlantısıyla."
+        },
+        {
+          "mark": "Gönder",
+          "title": "Sizin adınızla ulaşır",
+          "body": "Sizin adınız ve e-posta imzanızla. Yanıtlar gelen kutunuza gider."
         },
         {
           "mark": "Raporla",
@@ -101,6 +101,7 @@ export default {
       "chapters": [
         "Başlangıç",
         "Neden",
+        "Your blog",
         "Diller",
         "Nasıl çalışır",
         "Sizin adınız",

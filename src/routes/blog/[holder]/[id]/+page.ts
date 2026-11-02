@@ -1,3 +1,4 @@
+import { error } from "@sveltejs/kit";
 import type { PageLoad } from "./$types";
 import {
   apiBase,
@@ -19,8 +20,11 @@ export interface BlogArticle {
   title: string;
   content: string;
   language: string;
-  author: string;
   newsSourceId: string;
+  /** The original article on the owner's website, when the issue was written from one. */
+  sourceUrl: string;
+  /** Other language versions of the same issue (for hreflang and the language links). */
+  translations: Array<{ id: string; language: string }>;
   creation: string;
   isoDate: string;
   description: string;
@@ -28,8 +32,9 @@ export interface BlogArticle {
   minutes: number;
 }
 
-export const load: PageLoad = async ({ params, url, fetch }) => {
-  const holder = params.holder;
+export const load: PageLoad = async ({ params, url, fetch, parent }) => {
+  // The blog handle, resolved once by the layout (WS15).
+  const { holder } = await parent();
   const id = params.id;
   const base = apiBase(url.origin);
 
@@ -37,7 +42,8 @@ export const load: PageLoad = async ({ params, url, fetch }) => {
   let article: BlogArticle | null = null;
 
   try {
-    const r = await fetchWithTimeout(fetch, `${base}/article/${encodeURIComponent(id)}`);
+    // ?blog= makes the backend answer 404 when the article belongs to another blog.
+    const r = await fetchWithTimeout(fetch, `${base}/article/${encodeURIComponent(id)}?blog=${encodeURIComponent(holder)}`);
     if (r.status === 404) status = "notfound";
     else if (!r.ok) status = "error";
     else {
@@ -49,7 +55,10 @@ export const load: PageLoad = async ({ params, url, fetch }) => {
         title: plainText(raw?.title ?? "") || "Article",
         content,
         language: raw?.language ?? "",
-        author: raw?.author ?? "",
+        sourceUrl: typeof raw?.sourceUrl === "string" && /^https?:\/\//i.test(raw.sourceUrl) ? raw.sourceUrl : "",
+        translations: Array.isArray(raw?.translations)
+          ? raw.translations.filter((x: unknown): x is { id: string; language: string } => Boolean(x && typeof (x as { id?: unknown }).id === "string"))
+          : [],
         newsSourceId: raw?.newsSourceId ?? "",
         creation: raw?.creation ?? "",
         isoDate: creationToIso(raw?.creation ?? ""),
@@ -57,15 +66,13 @@ export const load: PageLoad = async ({ params, url, fetch }) => {
         image: firstImage(content),
         minutes: readingMinutes(text),
       };
-      // An article only belongs to the blog of its own author.
-      if (article.author && article.author.toLowerCase() !== holder.toLowerCase()) {
-        status = "notfound";
-        article = null;
-      }
     }
   } catch {
     status = "error";
   }
+
+  // A real 404 status, so search engines drop missing articles instead of indexing an error page.
+  if (status === "notfound") error(404, "Article not found");
 
   const ns = url.searchParams.get("ns") ?? article?.newsSourceId ?? "";
   const [branding, meta] = await Promise.all([
@@ -78,7 +85,7 @@ export const load: PageLoad = async ({ params, url, fetch }) => {
   return {
     holder,
     id,
-    status,
+    status: status as "ok" | "notfound" | "error",
     article,
     branding,
     ns,

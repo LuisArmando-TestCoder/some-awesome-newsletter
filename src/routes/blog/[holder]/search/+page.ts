@@ -4,8 +4,9 @@ import { apiBase, fetchArticlesPage, fetchBranding } from "../../../../component
 export const ssr = true;
 
 /** Loads only the blog branding. Results stream in the browser (NDJSON). */
-export const load: PageLoad = async ({ params, url, fetch }) => {
-  const holder = params.holder;
+export const load: PageLoad = async ({ url, fetch, parent }) => {
+  // The blog handle, resolved once by the layout (WS15).
+  const { holder } = await parent();
   const q = (url.searchParams.get("q") ?? "").trim();
   const ns = url.searchParams.get("ns") ?? "";
   const lang = url.searchParams.get("lang") ?? "";

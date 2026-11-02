@@ -27,6 +27,7 @@
 		convergeFx,
 		ruledFx,
 		irisFx,
+		growthFx,
 		magnetic,
 		words
 	} from '$lib/content/landing/scrollFx';
@@ -88,6 +89,11 @@
 	let showSampleLayout = $state(false);
 	const LIVE = $derived(L.live ?? en.landing.live);
 	const MARQUEE = $derived(L.marquee ?? en.landing.marquee);
+	// WS15: the automatic blog on the owner's domain is the main sale.
+	const BS = $derived(L.blogSite ?? en.landing.blogSite);
+	const BS_WEEKS = 52;
+	const BS_LANGS = ['EN', 'ES', 'DE'];
+	const bsHost = $derived(`blog.${host ?? BS.urlHost}`);
 	// Real space between split words, so the heading still reads as a sentence to screen readers.
 	const SP = ' ';
 
@@ -256,6 +262,53 @@
 		</section>
 
 		<LanguageMarquee label={MARQUEE.label} pause={MARQUEE.pause} play={MARQUEE.play} />
+
+		<!-- 03 Your blog, on your domain (WS15): the main sale -->
+		<section id="your-blog" data-chapter class="chapter blogsite" aria-labelledby="blogsite-title" use:growthFx>
+			<div class="wrap blogsite__grid">
+				<header class="chapter__head chapter__head--left blogsite__head" use:reveal>
+					<p class="chapter__eyebrow">{BS.eyebrow}</p>
+					<h2 id="blogsite-title" class="chapter__title">{BS.title}</h2>
+					<p class="chapter__lead">{BS.lead}</p>
+					<ul class="blogsite__points">
+						{#each BS.points as pt (pt.title)}
+							<li>
+								<h3 class="blogsite__point-title">{pt.title}</h3>
+								<p class="blogsite__point-body">{pt.body}</p>
+							</li>
+						{/each}
+					</ul>
+					<a class="link-more" href="#start">{BS.cta} <span aria-hidden="true">&#8593;</span></a>
+				</header>
+				<figure class="site" data-weeks={BS_WEEKS} data-per-week={BS_LANGS.length} data-week-label={BS.weekLabel}>
+					<div class="site__bar" aria-hidden="true">
+						<span class="site__dots"><span></span><span></span><span></span></span>
+						<span class="site__url">
+							<svg class="site__lock" viewBox="0 0 16 16" width="12" height="12"><path d="M4.5 7V5a3.5 3.5 0 0 1 7 0v2M3.5 7h9v6.5h-9z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" /></svg>
+							<span class="site__typed">{bsHost}</span>
+						</span>
+					</div>
+					<div class="site__body" aria-hidden="true">
+						<div class="site__stats">
+							<p class="site__week" data-week>{BS.weekLabel.replace('{n}', String(BS_WEEKS))}</p>
+							<p class="site__pages"><span class="site__count" data-pages>{BS_WEEKS * BS_LANGS.length}</span> <span>{BS.pagesLabel}</span></p>
+						</div>
+						<ol class="site__feed">
+							{#each Array.from({ length: 9 }, (_, i) => i) as i (i)}
+								<li class="site__row">
+									<span class="site__thumb"></span>
+									<span class="site__lines"><span class="bar bar--l"></span><span class="bar bar--m"></span></span>
+									<span class="site__lang">{BS_LANGS[i % BS_LANGS.length]}</span>
+								</li>
+							{/each}
+						</ol>
+					</div>
+					<figcaption class="caption site__caption">
+						<span class="visually-hidden">{BS.weekLabel.replace('{n}', String(BS_WEEKS))}: {BS_WEEKS * BS_LANGS.length} {BS.pagesLabel}. </span>{BS.exampleNote}
+					</figcaption>
+				</figure>
+			</div>
+		</section>
 
 		<!-- 03 Languages -->
 		<section id="languages" data-chapter class="chapter" aria-labelledby="lang-title" use:dealFx>
@@ -819,6 +872,165 @@
 		list-style: none;
 		margin: 0;
 		padding: 0;
+	}
+
+	/* 03 Your blog (WS15) */
+	.blogsite__grid {
+		display: grid;
+		gap: var(--space-8, 64px);
+		align-items: center;
+		@media (min-width: 56rem) {
+			grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
+		}
+	}
+	.blogsite__head {
+		margin-bottom: 0;
+	}
+	.blogsite__points {
+		display: grid;
+		gap: var(--space-5, 24px);
+		margin: var(--space-7, 48px) 0 var(--space-6, 32px);
+		li {
+			padding-left: var(--space-5, 24px);
+			border-left: 2px solid var(--text-1);
+		}
+	}
+	.blogsite__point-title {
+		margin: 0 0 var(--space-1, 4px);
+		font-size: var(--fs-lg, 1.125rem);
+		font-weight: var(--fw-semibold, 600);
+		letter-spacing: -0.01em;
+	}
+	.blogsite__point-body {
+		margin: 0;
+		color: var(--text-2);
+		line-height: 1.55;
+	}
+	.site {
+		margin: 0;
+		min-width: 0;
+	}
+	.site__bar {
+		display: flex;
+		align-items: center;
+		gap: var(--space-4, 16px);
+		padding: var(--space-3, 12px) var(--space-4, 16px);
+		background: var(--surface-2);
+		border: 1px solid var(--border-1);
+		border-bottom: 0;
+		border-radius: var(--radius-xl, 24px) var(--radius-xl, 24px) 0 0;
+	}
+	.site__dots {
+		display: flex;
+		gap: 6px;
+		span {
+			width: 10px;
+			height: 10px;
+			border-radius: 50%;
+			background: var(--surface-3);
+		}
+	}
+	.site__url {
+		flex: 1;
+		min-width: 0;
+		display: flex;
+		align-items: center;
+		gap: var(--space-2, 8px);
+		padding: 0.4rem var(--space-4, 16px);
+		background: var(--surface-0);
+		border-radius: var(--radius-full, 999px);
+		font-family: var(--font-mono, ui-monospace, monospace);
+		font-size: var(--fs-sm, 0.875rem);
+		color: var(--text-1);
+		overflow: hidden;
+	}
+	.site__lock {
+		flex: none;
+		color: var(--text-3);
+	}
+	.site__typed {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	.site__body {
+		padding: var(--space-6, 32px);
+		background: var(--surface-0);
+		border: 1px solid var(--border-1);
+		border-radius: 0 0 var(--radius-xl, 24px) var(--radius-xl, 24px);
+		box-shadow: var(--shadow-3);
+	}
+	.site__stats {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: var(--space-4, 16px);
+		flex-wrap: wrap;
+		padding-bottom: var(--space-5, 24px);
+		margin-bottom: var(--space-4, 16px);
+		border-bottom: 1px solid var(--border-1);
+	}
+	.site__week {
+		margin: 0;
+		font-size: var(--fs-sm, 0.875rem);
+		font-weight: var(--fw-semibold, 600);
+		font-variant-numeric: tabular-nums;
+		color: var(--text-3);
+	}
+	.site__pages {
+		margin: 0;
+		display: flex;
+		align-items: baseline;
+		gap: var(--space-2, 8px);
+		color: var(--text-2);
+	}
+	.site__count {
+		display: inline-block;
+		min-width: 3ch;
+		text-align: right;
+		font-family: var(--font-display);
+		font-size: clamp(2.5rem, 5vw, 4rem);
+		font-weight: var(--fw-bold, 700);
+		letter-spacing: -0.04em;
+		line-height: 1;
+		font-variant-numeric: tabular-nums;
+		color: var(--text-1);
+	}
+	.site__feed {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		gap: var(--space-2, 8px);
+	}
+	.site__row {
+		display: grid;
+		grid-template-columns: 2.75rem minmax(0, 1fr) auto;
+		align-items: center;
+		gap: var(--space-3, 12px);
+		padding: var(--space-2, 8px);
+		border-radius: var(--radius-md, 12px);
+		background: var(--surface-1);
+	}
+	.site__thumb {
+		height: 2rem;
+		border-radius: var(--radius-sm, 6px);
+		background: var(--surface-3);
+	}
+	.site__lines {
+		display: grid;
+		gap: 6px;
+	}
+	.site__lang {
+		padding: 0.15rem 0.5rem;
+		border: 1px solid var(--border-2);
+		border-radius: var(--radius-full, 999px);
+		font-size: var(--fs-xs, 0.75rem);
+		font-weight: var(--fw-semibold, 600);
+		color: var(--text-2);
+	}
+	.site__caption {
+		text-align: left;
 	}
 
 	/* 03 Languages */

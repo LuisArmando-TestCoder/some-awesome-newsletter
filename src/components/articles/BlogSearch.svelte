@@ -11,10 +11,13 @@
     searchPath,
     streamSearch,
     type BlogCard,
+    type BlogRef,
   } from "./blog";
 
   interface Props {
     holder: string;
+    /** Where links go (WS15): the owner's domain or /blog/<handle>. Defaults to /blog/<holder>. */
+    ref?: BlogRef;
     newsSourceId?: string;
     lang?: string;
     /** Articles already on the page, used for instant suggestions. */
@@ -24,7 +27,7 @@
     autofocus?: boolean;
   }
 
-  let { holder, newsSourceId = "", lang = "", localCards = [], value = $bindable(""), autofocus = false }: Props = $props();
+  let { holder, ref, newsSourceId = "", lang = "", localCards = [], value = $bindable(""), autofocus = false }: Props = $props();
 
   const uid = `blog-search-${Math.random().toString(36).slice(2, 8)}`;
   const MAX_SUGGESTIONS = 6;
@@ -108,7 +111,7 @@
     recent = saveRecent(holder, q);
     open = false;
     ctrl?.abort();
-    goto(searchPath(holder, q, { ns: newsSourceId, lang }));
+    goto(searchPath(ref ?? holder, q, { ns: newsSourceId, lang }));
   }
 
   function choose(opt: Option) {
@@ -118,7 +121,7 @@
     } else {
       if (value.trim()) recent = saveRecent(holder, value.trim());
       open = false;
-      goto(articlePath(holder, opt.card.id));
+      goto(articlePath(ref ?? holder, opt.card.id));
     }
   }
 

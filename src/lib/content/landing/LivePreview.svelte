@@ -10,7 +10,7 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
 	import { publicPreview, previewSrcdoc, type PublicPreview } from '$lib/api/preview';
-	import { toUserMessage } from '$lib/api/errors';
+	import { isApiError } from '$lib/api/errors';
 
 	type Labels = {
 		badge: string;
@@ -22,11 +22,14 @@
 		languageLabel: string;
 		loadingLanguage: string;
 		errorTitle: string;
+		/** One sentence per failure kind, in the page language. Older locales may lack it. */
+		errors?: Partial<Record<ErrorKind, string>>;
 		retry: string;
 		showSample: string;
 		frameTitle: string;
 		openFull: string;
 	};
+	type ErrorKind = 'noArticle' | 'badAddress' | 'tooMany' | 'offline' | 'slow' | 'generic';
 	type Meta = { fromLabel: string; subjectLabel: string };
 
 	interface Props {
@@ -42,7 +45,19 @@
 	type Entry =
 		| { state: 'loading'; started: number }
 		| { state: 'ready'; data: PublicPreview }
-		| { state: 'error'; message: string };
+		| { state: 'error'; kind: ErrorKind };
+
+	/** Failure kind from the API error, so the sentence is shown in the page language, never the raw backend text. */
+	function errorKind(e: unknown): ErrorKind {
+		if (!isApiError(e)) return 'generic';
+		const backend = (e.body as { error?: { code?: unknown } } | null)?.error?.code;
+		if (backend === 'UPSTREAM_FAILED') return 'noArticle';
+		if (e.code === 'validation') return 'badAddress';
+		if (e.code === 'rate_limited') return 'tooMany';
+		if (e.code === 'network') return 'offline';
+		if (e.code === 'timeout') return 'slow';
+		return 'generic';
+	}
 
 	const fill = (s: string, vars: Record<string, string>) => s.replace(/\{(\w+)\}/g, (_, k) => vars[k] ?? `{${k}}`);
 	const base = (c: string) => (c === 'jp' ? 'ja' : c).split('-')[0];
@@ -86,7 +101,7 @@
 			if (code === active) announce = fill(labels.readyAnnounce, { site: host });
 		} catch (e) {
 			if (ctl.signal.aborted) return;
-			entries[code] = { state: 'error', message: toUserMessage(e, '') };
+			entries[code] = { state: 'error', kind: errorKind(e) };
 		} finally {
 			if (!Object.values(entries).some((x) => x.state === 'loading') && ticker) {
 				clearInterval(ticker);
@@ -119,6 +134,11 @@
 		pick(next);
 		document.getElementById(`live-tab-${next}`)?.focus();
 	}
+
+	const errorText = (kind: ErrorKind) => {
+		const msg = labels.errors?.[kind] ?? labels.errors?.generic;
+		return msg ? fill(msg, { site: host }) : '';
+	};
 
 	const entry = $derived(entries[active]);
 	// Steps advance with time while the server works (it does not stream progress).
@@ -191,7 +211,7 @@
 		{:else}
 			<div class="live__error" role="alert">
 				<p class="live__error-title"><span class="ico" aria-hidden="true">!</span>{fill(labels.errorTitle, { site: host })}</p>
-				{#if entry.message}<p class="live__error-msg">{entry.message}</p>{/if}
+				{#if errorText(entry.kind)}<p class="live__error-msg">{errorText(entry.kind)}</p>{/if}
 				<div class="live__error-actions">
 					<button type="button" class="live__retry" onclick={() => load(active, true)}>{labels.retry}</button>
 					{#if onfallback}<button type="button" class="live__fallback" onclick={onfallback}>{labels.showSample}</button>{/if}

@@ -28,8 +28,8 @@
 
   const name = $derived(ownerName(data.branding, data.holder));
   const blogName = $derived(data.ns && data.branding.newsletterTitle ? data.branding.newsletterTitle : name);
-  const subscribeHref = $derived(subscribePath(data.holder, data.subscribeNs));
-  const homeHref = $derived(blogPath(data.holder, { ns: data.ns, lang: data.lang }));
+  const subscribeHref = $derived(subscribePath(data.ref, data.subscribeNs));
+  const homeHref = $derived(blogPath(data.ref, { ns: data.ns, lang: data.lang }));
 
   $effect(() => {
     const q = data.q;
@@ -72,7 +72,7 @@
     <a class="link back" href={homeHref}><span aria-hidden="true">&larr;</span> {$t.blog.search.browseAll}</a>
     <h1>{data.q ? fmt($t.blog.search.resultsFor, { q: data.q }) : $t.blog.search.title}</h1>
     <div class="search-row">
-      <BlogSearch holder={data.holder} newsSourceId={data.ns} lang={data.lang} localCards={results} bind:value={query} autofocus={!data.q} />
+      <BlogSearch holder={data.holder} ref={data.ref} newsSourceId={data.ns} lang={data.lang} localCards={results} bind:value={query} autofocus={!data.q} />
     </div>
 
     {#if data.q}
@@ -95,7 +95,7 @@
     {:else}
       <ul class="grid" aria-busy={status === "loading"}>
         {#each results as card (card.id)}
-          <li><BlogArticleCard {card} href={articlePath(data.holder, card.id)} headingLevel={2} /></li>
+          <li><BlogArticleCard {card} href={articlePath(data.ref, card.id)} headingLevel={2} /></li>
         {/each}
         {#if status === "loading"}
           {#each Array(results.length ? 1 : 3) as _, i (i)}

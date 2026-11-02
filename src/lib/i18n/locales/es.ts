@@ -30,8 +30,8 @@ export default {
   },
   "landing": {
     "seo": {
-      "title": "AIBAN | Tu sitio web convertido en un newsletter en el idioma de cada lector",
-      "description": "AIBAN lee lo que ya publicas, escribe una edición del newsletter con tu voz y la envía con tu nombre. Cada suscriptor la recibe en su propio idioma.",
+      "title": "AIBAN | Un blog que se escribe solo, en tu sitio web y en cada idioma de tus clientes",
+      "description": "AIBAN agrega un artículo nuevo a tu sitio web cada semana, escrito con tu voz y publicado en cada idioma que leen tus clientes. El mismo artículo sale como newsletter con tu nombre.",
       "ogImageAlt": "Logo de AIBAN"
     },
     "skipLink": "Saltar al contenido principal",
@@ -41,16 +41,40 @@ export default {
       "play": "Reproducir"
     },
     "display": {
-      "title": "Tu sitio web, escrito como un boletín.",
+      "title": "Tu blog, escrito para ti cada semana.",
       "kicker": "AIBAN"
     },
     "statement": {
       "lines": [
-        "Ya publicas buen contenido.",
-        "Tus clientes lo leen en más de un idioma.",
-        "AIBAN convierte cada artículo nuevo en una edición",
-        "y envía a cada lector la versión en su idioma."
+        "Tus clientes te buscan antes de llamarte.",
+        "Un blog que sigue creciendo les da más para encontrar,",
+        "pero escribirlo cada semana quita tiempo que prefieres dar a tus clientes.",
+        "AIBAN lo escribe por ti, en cada idioma que leen."
       ]
+    },
+    "blogSite": {
+      "eyebrow": "Tu blog, en tu dominio",
+      "title": "Un artículo nuevo en tu sitio web cada semana",
+      "lead": "Cada edición se convierte en un artículo en un dominio tuyo, como blog.tuempresa.com. AIBAN arma las páginas, el sitemap y las etiquetas de idioma, para que los buscadores encuentren cada versión y muestren a cada lector la de su idioma.",
+      "urlHost": "tuempresa.com",
+      "weekLabel": "Semana {n}",
+      "pagesLabel": "páginas en tu sitio",
+      "exampleNote": "Ejemplo: una edición por semana, en inglés, español y alemán.",
+      "points": [
+        {
+          "title": "En tu dominio",
+          "body": "Lectores y buscadores ven tu dirección. Los enlaces a la dirección anterior llevan a la nueva."
+        },
+        {
+          "title": "En cada idioma",
+          "body": "Cada versión enlaza a las demás, así un lector en Madrid y otro en Berlín llegan cada uno a la suya."
+        },
+        {
+          "title": "Listo para buscadores",
+          "body": "Cada página lleva su entrada en el sitemap, su enlace canónico y los datos del artículo. No tocas código."
+        }
+      ],
+      "cta": "Ver tu primer artículo"
     },
     "history": {
       "eyebrow": "Cómo funciona",
@@ -80,14 +104,14 @@ export default {
           "body": "Una edición se convierte en tantas versiones como necesiten tus suscriptores."
         },
         {
+          "mark": "Publica",
+          "title": "Se convierte en un artículo en tu sitio web",
+          "body": "En tu propio dominio, en cada idioma, con su propio enlace que la gente puede encontrar en búsquedas y compartir."
+        },
+        {
           "mark": "Envía",
           "title": "Llega bajo tu nombre",
           "body": "Con tu nombre y tu firma de correo. Las respuestas van a tu bandeja de entrada."
-        },
-        {
-          "mark": "Publica",
-          "title": "Se convierte en un artículo en tu blog",
-          "body": "Con su propio enlace que la gente puede encontrar en búsquedas y compartir."
         },
         {
           "mark": "Informa",
@@ -106,24 +130,25 @@ export default {
       "chapters": [
         "Inicio",
         "Por qué",
+        "Tu blog",
         "Idiomas",
         "Cómo funciona",
         "Tu nombre",
         "Crecer",
-        "Para quién es",
+        "Para quién",
         "Precios",
         "Preguntas",
-        "Comenzar"
+        "Empezar"
       ]
     },
     "hero": {
-      "eyebrow": "Newsletters para empresas de servicios",
+      "eyebrow": "Para negocios de servicios que quieren que los encuentren",
       "title": "Tu sitio web se convierte en un newsletter semanal, en el idioma de cada lector",
-      "lead": "AIBAN lee el contenido que ya publicas, escribe una edición con tu voz y la envía con tu nombre. Cada suscriptor la recibe en el idioma en que lee. Lo configuras una vez y sigue funcionando.",
+      "lead": "AIBAN convierte lo que ya publicas en un artículo nuevo en tu propio sitio web cada semana, en cada idioma que leen tus clientes. El mismo artículo también sale como newsletter con tu nombre. Lo configuras una vez.",
       "formLabel": "Tu sitio web",
       "formPlaceholder": "tuempresa.com",
-      "formHint": "Creamos una edición de muestra a partir de la dirección que escribas. Empezar es gratis y no necesitas tarjeta.",
-      "formSubmit": "Ver mi newsletter",
+      "formHint": "Escribimos un artículo de muestra a partir de la dirección que ingreses. Empezar es gratis y no necesitas tarjeta.",
+      "formSubmit": "Ver mi primer artículo",
       "formError": "Escribe una dirección web, por ejemplo tuempresa.com.",
       "secondaryCta": "Ver cómo funciona"
     },
@@ -154,6 +179,14 @@ export default {
       "languageLabel": "Idioma del lector",
       "loadingLanguage": "Escribiéndolo en {language}",
       "errorTitle": "No pudimos escribir una vista previa de {site}",
+      "errors": {
+        "noArticle": "No encontramos artículos en este sitio. Prueba con la dirección de tu blog o tu página de noticias, por ejemplo {site}/blog.",
+        "badAddress": "Esta dirección no parece un sitio web público. Revísala e inténtalo de nuevo.",
+        "tooMany": "Hiciste varias vistas previas en poco tiempo. Espera unos minutos e inténtalo de nuevo.",
+        "offline": "No pudimos conectar con AIBAN. Revisa tu conexión e inténtalo de nuevo.",
+        "slow": "Escribirla tardó más de lo esperado. Inténtalo de nuevo en un minuto.",
+        "generic": "Algo salió mal al escribirla. Inténtalo de nuevo en un minuto."
+      },
       "retry": "Intentar de nuevo",
       "showSample": "Mostrar el diseño de muestra",
       "frameTitle": "Número de muestra escrito de {site}",
@@ -212,9 +245,9 @@ export default {
       ]
     },
     "languages": {
-      "eyebrow": "Todos los idiomas",
-      "title": "Cada lector recibe la edición en su propio idioma",
-      "body": "No tienes que escribir versiones separadas. AIBAN traduce cada edición a todos los idiomas que leen tus suscriptores y mantiene tu tono en cada uno. La lista incluye español, portugués, francés, alemán, hindi, árabe, japonés y muchos más.",
+      "eyebrow": "Cada idioma",
+      "title": "Te encuentran en el idioma en que buscan",
+      "body": "No escribes versiones separadas. AIBAN traduce cada artículo a cada idioma que usan tus lectores y mantiene tu tono en cada uno. Cada versión tiene su propia página en tu blog, y cada suscriptor recibe el newsletter en su idioma.",
       "sampleNote": "La misma edición de muestra, tal como la recibirían tres lectores."
     },
     "sender": {
@@ -229,19 +262,19 @@ export default {
     },
     "grow": {
       "eyebrow": "Haz crecer tu lista",
-      "title": "Un formulario de suscripción para tu sitio y un blog que se llena solo",
+      "title": "Quien encuentra un artículo puede suscribirse",
       "items": [
         {
           "title": "Formulario de suscripción",
-          "body": "Agrega el formulario de AIBAN a tu sitio web. Los nuevos lectores eligen su idioma y confirman por correo."
+          "body": "Agrega el formulario de AIBAN a tu sitio web. Los lectores nuevos eligen su idioma y confirman por correo."
         },
         {
-          "title": "Blog automático",
-          "body": "Cada edición se convierte en una página pública de artículo que la gente puede encontrar en buscadores y compartir con un enlace."
+          "title": "Suscripción en cada artículo",
+          "body": "Quien llega desde una búsqueda puede suscribirse en la misma página, en su propio idioma."
         },
         {
-          "title": "Importación de contactos",
-          "body": "Trae a los clientes que ya tienes desde un archivo CSV o Excel, o pega una lista."
+          "title": "Importar contactos",
+          "body": "Trae los clientes que ya tienes desde un archivo CSV o Excel, o pega una lista."
         }
       ]
     },
@@ -285,6 +318,16 @@ export default {
         "a": "La dirección de tu sitio web y una dirección de correo. AIBAN lee tu sitio para conocer tus temas y tu forma de escribir."
       },
       {
+        "id": "seo",
+        "q": "¿Esto ayuda a que mi sitio aparezca en Google?",
+        "a": "Agrega un artículo nuevo a tu sitio cada semana, en cada idioma que usan tus lectores, con el sitemap, las etiquetas de idioma y los enlaces canónicos ya listos. El posicionamiento depende de muchas cosas que ninguna herramienta controla, así que no prometemos un lugar. Lo que obtienes es un sitio que sigue creciendo con páginas que los buscadores pueden encontrar."
+      },
+      {
+        "id": "domain",
+        "q": "¿El blog puede estar en mi propio dominio?",
+        "a": "Sí. En tu panel, escribe un subdominio como blog.tuempresa.com y agrega el registro DNS que te mostramos. Mientras tanto, tu blog tiene su propia dirección en AIBAN, y esos enlaces pasan a tu dominio cuando lo conectas."
+      },
+      {
         "id": "do-i-write",
         "q": "¿Tengo que escribir algo?",
         "a": "No es necesario. AIBAN escribe cada edición a partir de tu contenido. Si quieres una edición sobre algo concreto, puedes pegar un enlace o un texto."
@@ -322,7 +365,7 @@ export default {
     ],
     "finalCta": {
       "title": "Empieza con tu sitio web",
-      "body": "Dale a AIBAN tu sitio web, revisa tu primera edición y actívalo cuando estés listo.",
+      "body": "Dale a AIBAN tu sitio web, revisa tu primer artículo y actívalo cuando estés listo.",
       "cta": "Empieza gratis",
       "secondary": "Leer el centro de ayuda"
     },
@@ -708,6 +751,7 @@ export default {
       "by": "Por {name}",
       "otherLanguages": "Leer más en otros idiomas",
       "otherLanguagesHint": "Este newsletter también publica en estos idiomas. Cada enlace abre el blog en ese idioma.",
+      "originalOn": "Publicado originalmente en",
       "share": "Compartir este artículo",
       "copyLink": "Copiar enlace",
       "copied": "Enlace copiado. Puedes pegarlo donde quieras.",

@@ -10,8 +10,9 @@ import {
 
 export const ssr = true;
 
-export const load: PageLoad = async ({ params, url, fetch }) => {
-  const holder = params.holder;
+export const load: PageLoad = async ({ url, fetch, parent }) => {
+  // The blog handle, resolved once by the layout (WS15).
+  const { holder } = await parent();
   const ns = url.searchParams.get("ns") ?? url.searchParams.get("newsSourceId") ?? "";
   const langParam = url.searchParams.get("lang") ?? "";
   const page = Math.max(1, Number.parseInt(url.searchParams.get("page") ?? "1", 10) || 1);

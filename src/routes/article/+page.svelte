@@ -1,6 +1,6 @@
 <script lang="ts">
   import { sanitizeHtml } from '$lib/utils/sanitizeHtml';
-  // Legacy URL: /article?q=<id>. Forwards to /blog/<author>/<id>.
+  // Legacy URL: /article?q=<id>. Forwards to /blog/<handle>/<id>.
   // If the lookup fails, the article is rendered here so the old link still works.
   // The old page body lives in _deprecated/src/routes/article/+page.svelte.
   import { onMount } from "svelte";
@@ -30,8 +30,10 @@
         return;
       }
       const raw = await r.json();
-      if (raw?.author) {
-        await goto(articlePath(raw.author, id), { replaceState: true });
+      // WS15: the article names its blog by handle (older backends sent the owner's email).
+      const blog = typeof raw?.blog === "string" ? raw.blog : typeof raw?.author === "string" ? raw.author : "";
+      if (blog) {
+        await goto(articlePath(blog, id), { replaceState: true });
         return;
       }
       article = { title: plainText(raw?.title ?? ""), content: raw?.content ?? "", language: raw?.language ?? "" };

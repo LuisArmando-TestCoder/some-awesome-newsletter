@@ -13,6 +13,7 @@
   import { detectLanguage } from "$lib/i18n/detect";
   import { htmlLang } from "$lib/i18n/lazy";
   import { isRtl } from "../components/systems/widgets/Subscribe/subscribe";
+  import { isOwnHost } from "$lib/blog/hosts";
 
   // Language for every page (admin and dashboard included), before anything renders on
   // the client: the visitor's pick, else the browser's preferred languages, else English.
@@ -26,6 +27,8 @@
 
   // The signup widget runs inside other sites in an iframe: no site header or language picker there (WS5 request).
   $: embed = $page.url.pathname.startsWith("/subscribe-widget");
+  // An owner's blog on their own domain (WS15): their blog only, no AIBAN site chrome.
+  $: customBlog = !isOwnHost($page.url.hostname);
   // The platform admin area (/admin, WS6) has its own full-screen shell.
   $: appShell = $page.url.pathname === "/admin" || $page.url.pathname.startsWith("/admin/");
 
@@ -36,7 +39,7 @@
     list.some((p) => path === p || path.startsWith(p.endsWith("-") ? p : p + "/"));
   $: path = $page.url.pathname;
   $: footerVariant = (
-    embed || appShell || startsWithAny(path, NO_FOOTER)
+    embed || appShell || customBlog || startsWithAny(path, NO_FOOTER)
       ? null
       : startsWithAny(path, COMPACT_FOOTER)
         ? "compact"
@@ -55,7 +58,7 @@
 </script>
 
 <ThemeChanger visible={false} />
-{#if !embed && !appShell}
+{#if !embed && !appShell && !customBlog}
   <Header />
 {/if}
 
@@ -65,7 +68,7 @@
   <SiteFooter variant={footerVariant} />
 {/if}
 
-{#if !embed && !appShell}
+{#if !embed && !appShell && !customBlog}
   <LanguagePicker />
 {/if}
 

@@ -24,10 +24,10 @@
   const heroTitle = $derived(
     data.ns && data.branding.newsletterTitle ? data.branding.newsletterTitle : fmt($t.blog.heroFrom, { name })
   );
-  const subscribeHref = $derived(subscribePath(data.holder, data.subscribeNs));
-  const homeHref = $derived(blogPath(data.holder, { ns: data.ns }));
-  const pageHref = (p: number) => blogPath(data.holder, { ns: data.ns, lang: data.activeLang, page: p });
-  const langHref = (code: string) => blogPath(data.holder, { ns: data.ns, lang: code });
+  const subscribeHref = $derived(subscribePath(data.ref, data.subscribeNs));
+  const homeHref = $derived(blogPath(data.ref, { ns: data.ns }));
+  const pageHref = (p: number) => blogPath(data.ref, { ns: data.ns, lang: data.activeLang, page: p });
+  const langHref = (code: string) => blogPath(data.ref, { ns: data.ns, lang: code });
   const allCards = $derived(data.featured ? [data.featured, ...data.latest] : data.latest);
   const hasTextOnly = $derived(data.latest.some((c) => !c.imageUrl));
   const countLine = $derived(
@@ -39,7 +39,7 @@
       : ""
   );
   const canonical = $derived(
-    `${SITE_ORIGIN}${blogPath(data.holder, { ns: data.ns, lang: data.languages.length > 1 ? data.activeLang : "", page: data.page })}`
+    `${data.ref.origin}${blogPath(data.ref, { ns: data.ns, lang: data.languages.length > 1 ? data.activeLang : "", page: data.page })}`
   );
   const metaTitle = $derived(data.page > 1 ? `${fmt($t.blog.metaTitle, { name: blogName })} | ${fmt($t.blog.page, { page: data.page })}` : fmt($t.blog.metaTitle, { name: blogName }));
 </script>
@@ -67,7 +67,7 @@
       <h1 id="blog-title" class="rise rise-2">{heroTitle}</h1>
       <p class="hero__desc rise rise-3">{$t.blog.heroDescription}</p>
       <div class="hero__actions">
-        <BlogSearch holder={data.holder} newsSourceId={data.ns} lang={data.activeLang} localCards={allCards} />
+        <BlogSearch holder={data.holder} ref={data.ref} newsSourceId={data.ns} lang={data.activeLang} localCards={allCards} />
         <a class="btn btn--primary" href={subscribeHref}>{$t.blog.subscribe}</a>
       </div>
     </div>
@@ -95,7 +95,7 @@
           <section class="featured" aria-label={$t.blog.featured}>
             <BlogArticleCard
               card={data.featured}
-              href={articlePath(data.holder, data.featured.id)}
+              href={articlePath(data.ref, data.featured.id)}
               variant="featured"
               headingLevel={2}
               eager
@@ -111,7 +111,7 @@
             </div>
             <ul class="grid">
               {#each data.latest as card (card.id)}
-                <li><BlogArticleCard {card} href={articlePath(data.holder, card.id)} /></li>
+                <li><BlogArticleCard {card} href={articlePath(data.ref, card.id)} /></li>
               {/each}
             </ul>
           </section>

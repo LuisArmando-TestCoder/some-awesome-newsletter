@@ -75,14 +75,14 @@ export default {
           "body": "Toleo moja linakuwa matoleo mengi kama wanachama wako wanavyohitaji."
         },
         {
-          "mark": "Tuma",
-          "title": "Inafika chini ya jina lako",
-          "body": "Kwa jina lako na saini yako ya barua pepe. Majibu yanaenda kwenye kikasha chako cha barua pepe."
-        },
-        {
           "mark": "Chapisha",
           "title": "Inakuwa makala kwenye blogu yako",
           "body": "Kwa kiungo chake ambacho watu wanaweza kupata kwenye utafutaji na kushiriki."
+        },
+        {
+          "mark": "Tuma",
+          "title": "Inafika chini ya jina lako",
+          "body": "Kwa jina lako na saini yako ya barua pepe. Majibu yanaenda kwenye kikasha chako cha barua pepe."
         },
         {
           "mark": "Ripoti",
@@ -101,6 +101,7 @@ export default {
       "chapters": [
         "Anza",
         "Kwa nini",
+        "Your blog",
         "Lugha",
         "Inafanyaje kazi",
         "Jina lako",

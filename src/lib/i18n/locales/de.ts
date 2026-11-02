@@ -80,14 +80,14 @@ export default {
           "body": "Eine Ausgabe wird zu so vielen Versionen, wie Ihre Abonnenten benötigen."
         },
         {
-          "mark": "Senden",
-          "title": "Sie kommt unter Ihrem Namen an",
-          "body": "Mit Ihrem Namen und Ihrer E-Mail-Signatur. Antworten gehen an Ihren Posteingang."
-        },
-        {
           "mark": "Veröffentlichen",
           "title": "Sie wird ein Artikel in Ihrem Blog",
           "body": "Mit einem eigenen Link, den Menschen in der Suche finden und teilen können."
+        },
+        {
+          "mark": "Senden",
+          "title": "Sie kommt unter Ihrem Namen an",
+          "body": "Mit Ihrem Namen und Ihrer E-Mail-Signatur. Antworten gehen an Ihren Posteingang."
         },
         {
           "mark": "Bericht",
@@ -106,6 +106,7 @@ export default {
       "chapters": [
         "Start",
         "Warum",
+        "Your blog",
         "Sprachen",
         "So funktioniert es",
         "Ihr Name",
@@ -154,6 +155,14 @@ export default {
       "languageLabel": "Sprache der Leser",
       "loadingLanguage": "Schreibe es auf {language}",
       "errorTitle": "Wir konnten keine Vorschau von {site} erstellen",
+      "errors": {
+        "noArticle": "Wir haben auf dieser Website keine Artikel gefunden. Versuchen Sie die Adresse Ihres Blogs oder Ihrer Nachrichtenseite, zum Beispiel {site}/blog.",
+        "badAddress": "Diese Adresse sieht nicht nach einer öffentlichen Website aus. Prüfen Sie sie und versuchen Sie es noch einmal.",
+        "tooMany": "Sie haben in kurzer Zeit mehrere Vorschauen erstellt. Warten Sie ein paar Minuten und versuchen Sie es noch einmal.",
+        "offline": "Wir konnten AIBAN nicht erreichen. Prüfen Sie Ihre Verbindung und versuchen Sie es noch einmal.",
+        "slow": "Das Schreiben hat länger gedauert als erwartet. Versuchen Sie es in einer Minute noch einmal.",
+        "generic": "Beim Schreiben ist etwas schiefgelaufen. Versuchen Sie es in einer Minute noch einmal."
+      },
       "retry": "Erneut versuchen",
       "showSample": "Beispiellayout anzeigen",
       "frameTitle": "Beispielausgabe geschrieben von {site}",
@@ -708,6 +717,7 @@ export default {
       "by": "Von {name}",
       "otherLanguages": "In anderen Sprachen lesen",
       "otherLanguagesHint": "Dieser Newsletter erscheint auch in diesen Sprachen. Jeder Link öffnet den Blog in der jeweiligen Sprache.",
+      "originalOn": "Zuerst veröffentlicht auf",
       "share": "Diesen Artikel teilen",
       "copyLink": "Link kopieren",
       "copied": "Link kopiert. Sie können ihn überall einfügen.",

@@ -75,14 +75,14 @@ export default {
           "body": "Ang isang isyu ay nagiging maraming bersyon ayon sa pangangailangan ng iyong mga subscriber."
         },
         {
-          "mark": "Ipadala",
-          "title": "Ito ay dumarating sa ilalim ng iyong pangalan",
-          "body": "Kasama ang iyong pangalan at email signature. Ang mga reply ay papunta sa iyong inbox."
-        },
-        {
           "mark": "Ilathala",
           "title": "Ito ay nagiging artikulo sa iyong blog",
           "body": "May sariling link na makikita ng mga tao sa search at maaaring ibahagi."
+        },
+        {
+          "mark": "Ipadala",
+          "title": "Ito ay dumarating sa ilalim ng iyong pangalan",
+          "body": "Kasama ang iyong pangalan at email signature. Ang mga reply ay papunta sa iyong inbox."
         },
         {
           "mark": "Mag-ulat",
@@ -101,6 +101,7 @@ export default {
       "chapters": [
         "Simula",
         "Bakit",
+        "Your blog",
         "Mga wika",
         "Paano ito gumagana",
         "Ang iyong pangalan",

@@ -1,8 +1,8 @@
-<!-- WS4. Blog (replaces "Newspaper"): link to the public blog and the list of published articles. -->
+<!-- WS4. Blog (replaces "Newspaper"): the blog's address and domain (WS15) and the list of published articles. -->
 <script lang="ts">
   import SectionHeader from "../ui/SectionHeader.svelte";
   import Skeleton from "../ui/Skeleton.svelte";
-  import BlogLinkCard from "../blog/BlogLinkCard.svelte";
+  import BlogSiteCard from "../blog/BlogSiteCard.svelte";
   import BlogArticles from "../blog/BlogArticles.svelte";
   import { dt } from "../i18n";
   import store from "../../../components/store";
@@ -19,7 +19,7 @@
   {#if !holder}
     <Skeleton lines={4} label={$dt("dash.state.loading")} />
   {:else}
-    <BlogLinkCard {holder} {newsSourceId} />
+    <BlogSiteCard />
     <BlogArticles {holder} {sources} bind:newsSourceId />
   {/if}
 </div>

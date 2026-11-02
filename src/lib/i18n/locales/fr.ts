@@ -80,14 +80,14 @@ export default {
           "body": "Un numéro devient autant de versions que vos abonnés en ont besoin."
         },
         {
-          "mark": "Envoyer",
-          "title": "Il arrive sous votre nom",
-          "body": "Avec votre nom et votre signature email. Les réponses arrivent dans votre boîte de réception."
-        },
-        {
           "mark": "Publier",
           "title": "Il devient un article sur votre blog",
           "body": "Avec son propre lien que les gens peuvent trouver dans les recherches et partager."
+        },
+        {
+          "mark": "Envoyer",
+          "title": "Il arrive sous votre nom",
+          "body": "Avec votre nom et votre signature email. Les réponses arrivent dans votre boîte de réception."
         },
         {
           "mark": "Rapporter",
@@ -106,6 +106,7 @@ export default {
       "chapters": [
         "Début",
         "Pourquoi",
+        "Your blog",
         "Langues",
         "Comment ça marche",
         "Votre nom",
@@ -708,6 +709,7 @@ export default {
       "by": "Par {name}",
       "otherLanguages": "Lire dans d'autres langues",
       "otherLanguagesHint": "Cette newsletter publie aussi dans ces langues. Chaque lien ouvre le blog dans la langue correspondante.",
+      "originalOn": "Publié à l'origine sur",
       "share": "Partager cet article",
       "copyLink": "Copier le lien",
       "copied": "Lien copié. Vous pouvez le coller où vous voulez.",

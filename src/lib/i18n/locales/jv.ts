@@ -75,14 +75,14 @@ export default {
           "body": "Siji edisi dadi pirang-pirang versi sing dibutuhake pelanggan sampeyan."
         },
         {
-          "mark": "Ngirim",
-          "title": "Teka kanthi jeneng sampeyan",
-          "body": "Karo jeneng sampeyan lan tandha tangan email sampeyan. Balasan menyang inbox sampeyan."
-        },
-        {
           "mark": "Nerbitake",
           "title": "Dadi artikel ing blog sampeyan",
           "body": "Karo link dhewe sing bisa ditemokake lan dibagikake wong."
+        },
+        {
+          "mark": "Ngirim",
+          "title": "Teka kanthi jeneng sampeyan",
+          "body": "Karo jeneng sampeyan lan tandha tangan email sampeyan. Balasan menyang inbox sampeyan."
         },
         {
           "mark": "Lapor",
@@ -101,6 +101,7 @@ export default {
       "chapters": [
         "Miwiti",
         "Napa",
+        "Your blog",
         "Basa",
         "Cara kerjane",
         "Jeneng sampeyan",

@@ -5,6 +5,8 @@
 import { get } from "svelte/store";
 import store from "../store";
 import languages from "../systems/inputs/Language/languages";
+import { isOwnHost, type BlogRef, type PublicBlogSite } from "$lib/blog/hosts";
+export type { BlogRef, PublicBlogSite };
 
 export const BLOG_PAGE_SIZE = 20;
 export const SITE_ORIGIN = "https://aibanewsletter.club";
@@ -192,32 +194,49 @@ export function ownerName(branding: BlogBranding, holder: string): string {
 
 /* ───────────── URLs ───────────── */
 
-export function blogPath(holder: string, params: Record<string, string | number | null | undefined> = {}): string {
+/** A blog reference: the holder string (links under /blog/<holder>) or a BlogRef from the blog layout. */
+export type BlogRefLike = string | BlogRef;
+
+/** Path prefix for a blog: "/blog/<handle>" on AIBAN's site, "" on the owner's own domain. */
+export function blogBase(ref: BlogRefLike): string {
+  return typeof ref === "string" ? `/blog/${encodeURIComponent(ref)}` : ref.base;
+}
+
+/** Builds the BlogRef for a blog page from where it is being served. */
+export function blogRef(site: PublicBlogSite, pageUrl: URL): BlogRef {
+  const own = isOwnHost(pageUrl.hostname);
+  return {
+    handle: site.handle,
+    base: own ? `/blog/${encodeURIComponent(site.handle)}` : "",
+    origin: own ? (pageUrl.hostname === "localhost" || pageUrl.hostname === "127.0.0.1" ? pageUrl.origin : SITE_ORIGIN) : `https://${pageUrl.hostname}`,
+  };
+}
+
+export function blogPath(ref: BlogRefLike, params: Record<string, string | number | null | undefined> = {}): string {
   const qs = new URLSearchParams();
   for (const [k, v] of Object.entries(params)) {
     if (v !== null && v !== undefined && v !== "" && !(k === "page" && Number(v) <= 1)) qs.set(k, String(v));
   }
   const s = qs.toString();
-  return `/blog/${encodeURIComponent(holder)}${s ? `?${s}` : ""}`;
+  return `${blogBase(ref) || "/"}${s ? `?${s}` : ""}`;
 }
 
-export function articlePath(holder: string, id: string): string {
-  return `/blog/${encodeURIComponent(holder)}/${encodeURIComponent(id)}`;
+export function articlePath(ref: BlogRefLike, id: string): string {
+  return `${blogBase(ref)}/${encodeURIComponent(id)}`;
 }
 
-export function searchPath(holder: string, q: string, params: Record<string, string | null | undefined> = {}): string {
+export function searchPath(ref: BlogRefLike, q: string, params: Record<string, string | null | undefined> = {}): string {
   const qs = new URLSearchParams({ q });
   for (const [k, v] of Object.entries(params)) if (v) qs.set(k, v);
-  return `/blog/${encodeURIComponent(holder)}/search?${qs.toString()}`;
+  return `${blogBase(ref)}/search?${qs.toString()}`;
 }
 
-export function subscribePath(holder: string, newsSourceId: string): string {
-  const qs = new URLSearchParams({ configuratorId: holder });
+export function subscribePath(ref: BlogRefLike, newsSourceId: string): string {
+  // The backend accepts the blog handle here (WS15), so the owner's email is not in the link.
+  const qs = new URLSearchParams({ configuratorId: typeof ref === "string" ? ref : ref.handle });
   if (newsSourceId) qs.set("newsSourceId", newsSourceId);
   return `/subscribe?${qs.toString()}`;
 }
-
-/* ───────────── data loading ───────────── */
 
 export async function fetchBranding(f: typeof fetch, base: string, holder: string, newsSourceId: string): Promise<BlogBranding> {
   if (!holder || !newsSourceId) return { newsletterTitle: "", senderName: "" };

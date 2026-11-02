@@ -41,6 +41,12 @@ export function scheduleWords(cron: string | null | undefined, tr: Translate, tz
   } catch {
     time = `${String(first.getHours()).padStart(2, "0")}:${String(first.getMinutes()).padStart(2, "0")}`;
   }
+  // More than one run a day: say so plainly. "Every day at 12:00" for an hourly cron hid real sends.
+  const perDay = p.hours.size * p.minutes.size;
+  if (perDay > 1) {
+    if (perDay === 24 && p.minutes.size === 1) return tr("dash.sources.schedule.hourly");
+    return tr("dash.sources.schedule.timesPerDay", { count: perDay });
+  }
   if (!p.domStar) {
     const dom = [...p.dom][0] ?? 1;
     return tr("dash.sources.schedule.monthly", { day: dom, time });

@@ -12,7 +12,7 @@
   import ScheduleEditor from "../ScheduleEditor.svelte";
   import { dt, plural } from "../i18n";
   import { goTo } from "../nav";
-  import { nextRun, formatDateTime, parseCron } from "../data/schedule";
+  import { nextRun, formatDateTime, parseCron, runsPerDay } from "../data/schedule";
   import { toast } from "$lib/ui/components/toast";
   import { toUserMessage } from "$lib/api/errors";
   import store, { saveToConfig } from "../../../components/store";
@@ -121,6 +121,11 @@
     const cron = rawCron.trim().replace(/\s+/g, " ");
     if (!parseCron(cron) || cron.split(" ").length !== 5) {
       cronError = $dt("dash.sources.advanced.cronInvalid");
+      document.getElementById(`cron-${uid}`)?.focus();
+      return;
+    }
+    if (runsPerDay(cron) > 1) {
+      cronError = $dt("dash.sources.advanced.cronTooOften");
       document.getElementById(`cron-${uid}`)?.focus();
       return;
     }

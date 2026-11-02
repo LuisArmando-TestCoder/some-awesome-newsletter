@@ -25,8 +25,10 @@
     isParsing = true;
     const parts = cron?.split(" ");
     if (parts.length === 5) {
-      minuteStore.set(parts[0]);
-      hourStore.set(parts[1]);
+      // Issues go out at most once a day: a minute or hour that repeats ("*", "*/2", "9,17")
+      // from an older schedule becomes one fixed time.
+      minuteStore.set(/^\d+$/.test(parts[0]) ? parts[0] : "0");
+      hourStore.set(/^\d+$/.test(parts[1]) ? parts[1] : "8");
       dayOfMonthStore.set(parts[2]);
       monthStore.set(parts[3]);
       dayOfWeekStore.set(parts[4]);
@@ -83,15 +85,14 @@
     parseCron(value);
   }
 
+  // No "every minute" or "every hour": issues go out at most once a day.
   $: minutes = [
-    { value: "*", label: $t['scheduleTime.everyMinute'] ?? "Every Minute" },
     ...Array.from({ length: 60 }, (_, i) => ({
       value: i.toString(),
       label: i.toString().padStart(2, "0"),
     })),
   ];
   $: hours = [
-    { value: "*", label: $t['scheduleTime.everyHour'] ?? "Every Hour" },
     ...Array.from({ length: 24 }, (_, i) => ({
       value: i.toString(),
       label: i.toString().padStart(2, "0"),

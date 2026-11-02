@@ -37,6 +37,12 @@ export function parseCron(cron?: string | null): ParsedCron | null {
   return { minutes, hours, dom, months, dow, domStar: f[2] === "*" || f[2] === "?", dowStar: f[4] === "*" || f[4] === "?" };
 }
 
+/** Times a day the cron fires on a day it runs (0 when it is not a valid cron). Issues go out at most once a day. */
+export function runsPerDay(cron?: string | null): number {
+  const p = parseCron(cron);
+  return p ? p.minutes.size * p.hours.size : 0;
+}
+
 /** The viewer's IANA time zone, e.g. "America/Costa_Rica". */
 export function browserTimeZone(): string {
   try {
